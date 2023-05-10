@@ -75,7 +75,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds an instance fleet to a running cluster.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR versions\n            4.8.0 and later, excluding 5.0.x.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Adds an instance fleet to a running cluster.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and later, excluding 5.0.x.</p>\n         </note>"
             }
         },
         "com.amazonaws.emr#AddInstanceFleetInput": {
@@ -230,7 +230,7 @@
                 "ExecutionRoleArn": {
                     "target": "com.amazonaws.emr#ArnType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the runtime role for a step on the cluster. The\n         runtime role can be a cross-account IAM role. The runtime role ARN is a combination of\n         account ID, role name, and role type using the following format:\n            <code>arn:partition:service:region:account:resource</code>. </p>\n         <p>For example, <code>arn:aws:iam::1234567890:role/ReadOnly</code> is a correctly formatted\n         runtime role ARN.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the runtime role for a step on the cluster. The\n         runtime role can be a cross-account IAM role. The runtime role ARN is a\n         combination of account ID, role name, and role type using the following format:\n            <code>arn:partition:service:region:account:resource</code>. </p>\n         <p>For example, <code>arn:aws:IAM::1234567890:role/ReadOnly</code> is a correctly formatted\n         runtime role ARN.</p>"
                     }
                 }
             },
@@ -398,7 +398,7 @@
                 "Constraints": {
                     "target": "com.amazonaws.emr#ScalingConstraints",
                     "traits": {
-                        "smithy.api#documentation": "<p>The upper and lower EC2 instance limits for an automatic scaling policy. Automatic\n         scaling activity will not cause an instance group to grow above or below these\n         limits.</p>",
+                        "smithy.api#documentation": "<p>The upper and lower Amazon EC2 instance limits for an automatic scaling policy.\n         Automatic scaling activity will not cause an instance group to grow above or below these\n         limits.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -411,7 +411,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An automatic scaling policy for a core instance group or task instance group in an\n            Amazon EMR cluster. An automatic scaling policy defines how an instance group\n         dynamically adds and terminates EC2 instances in response to the value of a CloudWatch\n         metric. See <a>PutAutoScalingPolicy</a>.</p>"
+                "smithy.api#documentation": "<p>An automatic scaling policy for a core instance group or task instance group in an\n            Amazon EMR cluster. An automatic scaling policy defines how an instance group\n         dynamically adds and terminates Amazon EC2 instances in response to the value of a\n         CloudWatch metric. See <a>PutAutoScalingPolicy</a>.</p>"
             }
         },
         "com.amazonaws.emr#AutoScalingPolicyDescription": {
@@ -426,7 +426,7 @@
                 "Constraints": {
                     "target": "com.amazonaws.emr#ScalingConstraints",
                     "traits": {
-                        "smithy.api#documentation": "<p>The upper and lower EC2 instance limits for an automatic scaling policy. Automatic\n         scaling activity will not cause an instance group to grow above or below these\n         limits.</p>"
+                        "smithy.api#documentation": "<p>The upper and lower Amazon EC2 instance limits for an automatic scaling policy.\n         Automatic scaling activity will not cause an instance group to grow above or below these\n         limits.</p>"
                     }
                 },
                 "Rules": {
@@ -437,7 +437,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An automatic scaling policy for a core instance group or task instance group in an\n            Amazon EMR cluster. The automatic scaling policy defines how an instance group\n         dynamically adds and terminates EC2 instances in response to the value of a CloudWatch\n         metric. See <a>PutAutoScalingPolicy</a>.</p>"
+                "smithy.api#documentation": "<p>An automatic scaling policy for a core instance group or task instance group in an\n            Amazon EMR cluster. The automatic scaling policy defines how an instance group\n         dynamically adds and terminates Amazon EC2 instances in response to the value of a\n         CloudWatch metric. See <a>PutAutoScalingPolicy</a>.</p>"
             }
         },
         "com.amazonaws.emr#AutoScalingPolicyState": {
@@ -566,14 +566,14 @@
                     "target": "com.amazonaws.emr#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Indicates whether Amazon EMR block public access is enabled (<code>true</code>)\n         or disabled (<code>false</code>). By default, the value is <code>false</code> for accounts\n         that have created EMR clusters before July 2019. For accounts created after this, the\n         default is <code>true</code>.</p>",
+                        "smithy.api#documentation": "<p>Indicates whether Amazon EMR block public access is enabled (<code>true</code>)\n         or disabled (<code>false</code>). By default, the value is <code>false</code> for accounts\n         that have created Amazon EMR clusters before July 2019. For accounts created after\n         this, the default is <code>true</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "PermittedPublicSecurityGroupRuleRanges": {
                     "target": "com.amazonaws.emr#PortRanges",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies ports and port ranges that are permitted to have security group rules that\n         allow inbound traffic from all public sources. For example, if Port 23 (Telnet) is\n         specified for <code>PermittedPublicSecurityGroupRuleRanges</code>, Amazon EMR\n         allows cluster creation if a security group associated with the cluster has a rule that\n         allows inbound traffic on Port 23 from IPv4 0.0.0.0/0 or IPv6 port ::/0 as the\n         source.</p>\n         <p>By default, Port 22, which is used for SSH access to the cluster EC2 instances, is in\n         the list of <code>PermittedPublicSecurityGroupRuleRanges</code>.</p>"
+                        "smithy.api#documentation": "<p>Specifies ports and port ranges that are permitted to have security group rules that\n         allow inbound traffic from all public sources. For example, if Port 23 (Telnet) is\n         specified for <code>PermittedPublicSecurityGroupRuleRanges</code>, Amazon EMR\n         allows cluster creation if a security group associated with the cluster has a rule that\n         allows inbound traffic on Port 23 from IPv4 0.0.0.0/0 or IPv6 port ::/0 as the\n         source.</p>\n         <p>By default, Port 22, which is used for SSH access to the cluster Amazon EC2\n         instances, is in the list of <code>PermittedPublicSecurityGroupRuleRanges</code>.</p>"
                     }
                 },
                 "Classification": {
@@ -695,7 +695,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Cancels a pending step or steps in a running cluster. Available only in Amazon EMR versions 4.8.0 and later, excluding version 5.0.0. A maximum of 256 steps are allowed in\n         each CancelSteps request. CancelSteps is idempotent but asynchronous; it does not guarantee\n         that a step will be canceled, even if the request is successfully submitted. When you use\n            Amazon EMR versions 5.28.0 and later, you can cancel steps that are in a\n            <code>PENDING</code> or <code>RUNNING</code> state. In earlier versions of Amazon EMR, you can only cancel steps that are in a <code>PENDING</code> state. </p>"
+                "smithy.api#documentation": "<p>Cancels a pending step or steps in a running cluster. Available only in Amazon EMR versions 4.8.0 and later, excluding version 5.0.0. A maximum of 256 steps are allowed in\n         each CancelSteps request. CancelSteps is idempotent but asynchronous; it does not guarantee\n         that a step will be canceled, even if the request is successfully submitted. When you use\n            Amazon EMR releases 5.28.0 and later, you can cancel steps that are in a\n            <code>PENDING</code> or <code>RUNNING</code> state. In earlier versions of Amazon EMR, you can only cancel steps that are in a <code>PENDING</code> state. </p>"
             }
         },
         "com.amazonaws.emr#CancelStepsInfo": {
@@ -823,7 +823,7 @@
                 "Period": {
                     "target": "com.amazonaws.emr#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The period, in seconds, over which the statistic is applied. EMR CloudWatch metrics are\n         emitted every five minutes (300 seconds), so if an EMR CloudWatch metric is specified,\n         specify <code>300</code>.</p>",
+                        "smithy.api#documentation": "<p>The period, in seconds, over which the statistic is applied. CloudWatch metrics for\n            Amazon EMR are emitted every five minutes (300 seconds), so if you specify a\n         CloudWatch metric, specify <code>300</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -881,13 +881,13 @@
                 "Ec2InstanceAttributes": {
                     "target": "com.amazonaws.emr#Ec2InstanceAttributes",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides information about the EC2 instances in a cluster grouped by category. For\n         example, key name, subnet ID, IAM instance profile, and so on.</p>"
+                        "smithy.api#documentation": "<p>Provides information about the Amazon EC2 instances in a cluster grouped by\n         category. For example, key name, subnet ID, IAM instance profile, and so\n         on.</p>"
                     }
                 },
                 "InstanceCollectionType": {
                     "target": "com.amazonaws.emr#InstanceCollectionType",
                     "traits": {
-                        "smithy.api#documentation": "<note>\n            <p>The instance fleet configuration is available only in Amazon EMR versions\n            4.8.0 and later, excluding 5.0.x versions.</p>\n         </note>\n         <p>The instance group configuration of the cluster. A value of <code>INSTANCE_GROUP</code>\n         indicates a uniform instance group configuration. A value of <code>INSTANCE_FLEET</code>\n         indicates an instance fleets configuration.</p>"
+                        "smithy.api#documentation": "<note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and later, excluding 5.0.x versions.</p>\n         </note>\n         <p>The instance group configuration of the cluster. A value of <code>INSTANCE_GROUP</code>\n         indicates a uniform instance group configuration. A value of <code>INSTANCE_FLEET</code>\n         indicates an instance fleets configuration.</p>"
                     }
                 },
                 "LogUri": {
@@ -899,7 +899,7 @@
                 "LogEncryptionKmsKeyId": {
                     "target": "com.amazonaws.emr#String",
                     "traits": {
-                        "smithy.api#documentation": "<p> The KMS key used for encrypting log files. This attribute is only\n         available with EMR version 5.30.0 and later, excluding EMR 6.0.0. </p>"
+                        "smithy.api#documentation": "<p> The KMS key used for encrypting log files. This attribute is only\n         available with Amazon EMR 5.30.0 and later, excluding Amazon EMR 6.0.0.\n      </p>"
                     }
                 },
                 "RequestedAmiVersion": {
@@ -931,14 +931,14 @@
                     "target": "com.amazonaws.emr#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Indicates whether Amazon EMR will lock the cluster to prevent the EC2 instances\n         from being terminated by an API call or user intervention, or in the event of a cluster\n         error.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether Amazon EMR will lock the cluster to prevent the Amazon EC2 instances from being terminated by an API call or user intervention, or in\n         the event of a cluster error.</p>"
                     }
                 },
                 "VisibleToAllUsers": {
                     "target": "com.amazonaws.emr#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Indicates whether the cluster is visible to IAM principals in the Amazon Web Services account associated with the cluster. When <code>true</code>, IAM principals\n         in the Amazon Web Services account can perform EMR cluster actions on the cluster that their\n         IAM policies allow. When <code>false</code>, only the IAM principal that created the\n         cluster and the Amazon Web Services account root user can perform EMR actions, regardless of\n         IAM permissions policies attached to other IAM principals.</p>\n         <p>The default value is <code>true</code> if a value is not provided when creating a\n         cluster using the EMR API <a>RunJobFlow</a> command, the CLI\n         <a href=\"https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html\">create-cluster</a> command, or the Amazon Web Services Management Console.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether the cluster is visible to IAM principals in the Amazon Web Services account associated with the cluster. When <code>true</code>, IAM principals in the Amazon Web Services account can perform Amazon EMR cluster\n         actions on the cluster that their IAM policies allow. When\n            <code>false</code>, only the IAM principal that created the cluster and\n         the Amazon Web Services account root user can perform Amazon EMR actions, regardless\n         of IAM permissions policies attached to other IAM\n         principals.</p>\n         <p>The default value is <code>true</code> if a value is not provided when creating a\n         cluster using the Amazon EMR API <a>RunJobFlow</a> command, the CLI\n         <a href=\"https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html\">create-cluster</a> command, or the Amazon Web Services Management Console.</p>"
                     }
                 },
                 "Applications": {
@@ -956,13 +956,13 @@
                 "ServiceRole": {
                     "target": "com.amazonaws.emr#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IAM role that Amazon EMR assumes in order to access Amazon Web Services\n         resources on your behalf.</p>"
+                        "smithy.api#documentation": "<p>The IAM role that Amazon EMR assumes in order to access Amazon Web Services resources on your behalf.</p>"
                     }
                 },
                 "NormalizedInstanceHours": {
                     "target": "com.amazonaws.emr#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>An approximation of the cost of the cluster, represented in m1.small/hours. This value\n         is incremented one time for every hour an m1.small instance runs. Larger instances are\n         weighted more, so an EC2 instance that is roughly four times more expensive would result in\n         the normalized instance hours being incremented by four. This result is only an\n         approximation and does not reflect the actual billing rate.</p>"
+                        "smithy.api#documentation": "<p>An approximation of the cost of the cluster, represented in m1.small/hours. This value\n         is incremented one time for every hour an m1.small instance runs. Larger instances are\n         weighted more, so an Amazon EC2 instance that is roughly four times more expensive\n         would result in the normalized instance hours being incremented by four. This result is\n         only an approximation and does not reflect the actual billing rate.</p>"
                     }
                 },
                 "MasterPublicDnsName": {
@@ -974,7 +974,7 @@
                 "Configurations": {
                     "target": "com.amazonaws.emr#ConfigurationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Applies only to Amazon EMR releases 4.x and later. The list of Configurations\n         supplied to the EMR cluster.</p>"
+                        "smithy.api#documentation": "<p>Applies only to Amazon EMR releases 4.x and later. The list of configurations\n         that are supplied to the Amazon EMR cluster.</p>"
                     }
                 },
                 "SecurityConfiguration": {
@@ -986,31 +986,31 @@
                 "AutoScalingRole": {
                     "target": "com.amazonaws.emr#XmlString",
                     "traits": {
-                        "smithy.api#documentation": "<p>An IAM role for automatic scaling policies. The default role is\n            <code>EMR_AutoScaling_DefaultRole</code>. The IAM role provides permissions that the\n         automatic scaling feature requires to launch and terminate EC2 instances in an instance\n         group.</p>"
+                        "smithy.api#documentation": "<p>An IAM role for automatic scaling policies. The default role is\n            <code>EMR_AutoScaling_DefaultRole</code>. The IAM role provides\n         permissions that the automatic scaling feature requires to launch and terminate Amazon EC2 instances in an instance group.</p>"
                     }
                 },
                 "ScaleDownBehavior": {
                     "target": "com.amazonaws.emr#ScaleDownBehavior",
                     "traits": {
-                        "smithy.api#documentation": "<p>The way that individual Amazon EC2 instances terminate when an automatic\n         scale-in activity occurs or an instance group is resized.\n            <code>TERMINATE_AT_INSTANCE_HOUR</code> indicates that Amazon EMR terminates\n         nodes at the instance-hour boundary, regardless of when the request to terminate the\n         instance was submitted. This option is only available with Amazon EMR 5.1.0 and\n         later and is the default for clusters created using that version.\n            <code>TERMINATE_AT_TASK_COMPLETION</code> indicates that Amazon EMR adds nodes\n         to a deny list and drains tasks from nodes before terminating the Amazon EC2\n         instances, regardless of the instance-hour boundary. With either behavior, Amazon EMR removes the least active nodes first and blocks instance termination if it could lead to\n         HDFS corruption. <code>TERMINATE_AT_TASK_COMPLETION</code> is available only in Amazon EMR version 4.1.0 and later, and is the default for versions of Amazon EMR earlier than 5.1.0.</p>"
+                        "smithy.api#documentation": "<p>The way that individual Amazon EC2 instances terminate when an automatic\n         scale-in activity occurs or an instance group is resized.\n            <code>TERMINATE_AT_INSTANCE_HOUR</code> indicates that Amazon EMR terminates\n         nodes at the instance-hour boundary, regardless of when the request to terminate the\n         instance was submitted. This option is only available with Amazon EMR 5.1.0 and\n         later and is the default for clusters created using that version.\n            <code>TERMINATE_AT_TASK_COMPLETION</code> indicates that Amazon EMR adds nodes\n         to a deny list and drains tasks from nodes before terminating the Amazon EC2\n         instances, regardless of the instance-hour boundary. With either behavior, Amazon EMR removes the least active nodes first and blocks instance termination if it could lead to\n         HDFS corruption. <code>TERMINATE_AT_TASK_COMPLETION</code> is available only in Amazon EMR releases 4.1.0 and later, and is the default for versions of Amazon EMR earlier than 5.1.0.</p>"
                     }
                 },
                 "CustomAmiId": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256",
                     "traits": {
-                        "smithy.api#documentation": "<p>Available only in Amazon EMR version 5.7.0 and later. The ID of a custom Amazon\n         EBS-backed Linux AMI if the cluster uses a custom AMI.</p>"
+                        "smithy.api#documentation": "<p>Available only in Amazon EMR releases 5.7.0 and later. The ID of a custom Amazon\n         EBS-backed Linux AMI if the cluster uses a custom AMI.</p>"
                     }
                 },
                 "EbsRootVolumeSize": {
                     "target": "com.amazonaws.emr#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The size, in GiB, of the Amazon EBS root device volume of the Linux AMI that is\n         used for each EC2 instance. Available in Amazon EMR version 4.x and later.</p>"
+                        "smithy.api#documentation": "<p>The size, in GiB, of the Amazon EBS root device volume of the Linux AMI that is\n         used for each Amazon EC2 instance. Available in Amazon EMR releases 4.x and\n         later.</p>"
                     }
                 },
                 "RepoUpgradeOnBoot": {
                     "target": "com.amazonaws.emr#RepoUpgradeOnBoot",
                     "traits": {
-                        "smithy.api#documentation": "<p>Applies only when <code>CustomAmiID</code> is used. Specifies the type of updates that\n         are applied from the Amazon Linux AMI package repositories when an instance boots using the\n         AMI.</p>"
+                        "smithy.api#documentation": "<p>Applies only when <code>CustomAmiID</code> is used. Specifies the type of updates that\n         the Amazon Linux AMI package repositories apply when an instance boots using the\n         AMI.</p>"
                     }
                 },
                 "KerberosAttributes": {
@@ -1207,7 +1207,7 @@
                 "ErrorDetails": {
                     "target": "com.amazonaws.emr#ErrorDetailList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of tuples that provide information about the errors that caused a cluster termination. This structure may have up to 10 different <code>ErrorDetail</code> tuples.</p>"
+                        "smithy.api#documentation": "<p>A list of tuples that provides information about the errors that caused a cluster to\n         terminate. This structure can contain up to 10 different <code>ErrorDetail</code>\n         tuples.</p>"
                     }
                 }
             },
@@ -1239,7 +1239,7 @@
                 "NormalizedInstanceHours": {
                     "target": "com.amazonaws.emr#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>An approximation of the cost of the cluster, represented in m1.small/hours. This value\n         is incremented one time for every hour an m1.small instance runs. Larger instances are\n         weighted more, so an EC2 instance that is roughly four times more expensive would result in\n         the normalized instance hours being incremented by four. This result is only an\n         approximation and does not reflect the actual billing rate.</p>"
+                        "smithy.api#documentation": "<p>An approximation of the cost of the cluster, represented in m1.small/hours. This value\n         is incremented one time for every hour an m1.small instance runs. Larger instances are\n         weighted more, so an Amazon EC2 instance that is roughly four times more expensive\n         would result in the normalized instance hours being incremented by four. This result is\n         only an approximation and does not reflect the actual billing rate.</p>"
                     }
                 },
                 "ClusterArn": {
@@ -1365,32 +1365,32 @@
                 "MinimumCapacityUnits": {
                     "target": "com.amazonaws.emr#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p> The lower boundary of EC2 units. It is measured through vCPU cores or instances for\n         instance groups and measured through units for instance fleets. Managed scaling activities\n         are not allowed beyond this boundary. The limit only applies to the core and task nodes.\n         The master node cannot be scaled after initial configuration. </p>",
+                        "smithy.api#documentation": "<p> The lower boundary of Amazon EC2 units. It is measured through vCPU cores or\n         instances for instance groups and measured through units for instance fleets. Managed\n         scaling activities are not allowed beyond this boundary. The limit only applies to the core\n         and task nodes. The master node cannot be scaled after initial configuration. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "MaximumCapacityUnits": {
                     "target": "com.amazonaws.emr#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p> The upper boundary of EC2 units. It is measured through vCPU cores or instances for\n         instance groups and measured through units for instance fleets. Managed scaling activities\n         are not allowed beyond this boundary. The limit only applies to the core and task nodes.\n         The master node cannot be scaled after initial configuration. </p>",
+                        "smithy.api#documentation": "<p> The upper boundary of Amazon EC2 units. It is measured through vCPU cores or\n         instances for instance groups and measured through units for instance fleets. Managed\n         scaling activities are not allowed beyond this boundary. The limit only applies to the core\n         and task nodes. The master node cannot be scaled after initial configuration. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "MaximumOnDemandCapacityUnits": {
                     "target": "com.amazonaws.emr#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p> The upper boundary of On-Demand EC2 units. It is measured through vCPU cores or\n         instances for instance groups and measured through units for instance fleets. The On-Demand\n         units are not allowed to scale beyond this boundary. The parameter is used to split\n         capacity allocation between On-Demand and Spot Instances. </p>"
+                        "smithy.api#documentation": "<p> The upper boundary of On-Demand Amazon EC2 units. It is measured through vCPU\n         cores or instances for instance groups and measured through units for instance fleets. The\n         On-Demand units are not allowed to scale beyond this boundary. The parameter is used to\n         split capacity allocation between On-Demand and Spot Instances. </p>"
                     }
                 },
                 "MaximumCoreCapacityUnits": {
                     "target": "com.amazonaws.emr#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p> The upper boundary of EC2 units for core node type in a cluster. It is measured through\n         vCPU cores or instances for instance groups and measured through units for instance fleets.\n         The core units are not allowed to scale beyond this boundary. The parameter is used to\n         split capacity allocation between core and task nodes. </p>"
+                        "smithy.api#documentation": "<p> The upper boundary of Amazon EC2 units for core node type in a cluster. It is\n         measured through vCPU cores or instances for instance groups and measured through units for\n         instance fleets. The core units are not allowed to scale beyond this boundary. The\n         parameter is used to split capacity allocation between core and task nodes. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The EC2 unit limits for a managed scaling policy. The managed scaling activity of a\n         cluster can not be above or below these limits. The limit only applies to the core and task\n         nodes. The master node cannot be scaled after initial configuration. </p>"
+                "smithy.api#documentation": "<p> The Amazon EC2 unit limits for a managed scaling policy. The managed scaling\n         activity of a cluster can not be above or below these limits. The limit only applies to the\n         core and task nodes. The master node cannot be scaled after initial configuration. </p>"
             }
         },
         "com.amazonaws.emr#ComputeLimitsUnitType": {
@@ -1572,14 +1572,14 @@
                 "ServiceRole": {
                     "target": "com.amazonaws.emr#XmlString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IAM role that the Amazon EMR Studio assumes. The service role provides a way\n         for Amazon EMR Studio to interoperate with other Amazon Web Services\n         services.</p>",
+                        "smithy.api#documentation": "<p>The IAM role that the Amazon EMR Studio assumes. The service role\n         provides a way for Amazon EMR Studio to interoperate with other Amazon Web Services\n         services.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "UserRole": {
                     "target": "com.amazonaws.emr#XmlString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IAM user role that users and groups assume when logged in to an Amazon EMR\n         Studio. Only specify a <code>UserRole</code> when you use IAM Identity Center\n         authentication. The permissions attached to the <code>UserRole</code> can be scoped down\n         for each user or group using session policies.</p>"
+                        "smithy.api#documentation": "<p>The IAM user role that users and groups assume when logged in to an\n            Amazon EMR Studio. Only specify a <code>UserRole</code> when you use IAM Identity Center authentication. The permissions attached to the <code>UserRole</code> can be\n         scoped down for each user or group using session policies.</p>"
                     }
                 },
                 "WorkspaceSecurityGroupId": {
@@ -1698,7 +1698,7 @@
                 "SessionPolicyArn": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the session policy that will be applied to the user\n         or group. You should specify the ARN for the session policy that you want to apply, not the\n         ARN of your user role. For more information, see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-studio-user-role.html\">Create an EMR Studio User\n            Role with Session Policies</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the session policy that will be applied to the user\n         or group. You should specify the ARN for the session policy that you want to apply, not the\n         ARN of your user role. For more information, see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-studio-user-role.html\">Create an Amazon EMR\n            Studio User Role with Session Policies</a>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1718,7 +1718,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The credentials that you can use to connect to cluster endpoints. Credentials consist of a username and a password.</p>"
+                "smithy.api#documentation": "<p>The credentials that you can use to connect to cluster endpoints. Credentials consist of\n         a username and a password.</p>"
             }
         },
         "com.amazonaws.emr#Date": {
@@ -2120,7 +2120,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides EMR release label details, such as releases available the region where the API\n         request is run, and the available applications for a specific EMR release label. Can also\n         list EMR release versions that support a specified version of Spark.</p>"
+                "smithy.api#documentation": "<p>Provides Amazon EMR release label details, such as the releases available the\n         Region where the API request is run, and the available applications for a specific Amazon EMR release label. Can also list Amazon EMR releases that support a\n         specified version of Spark.</p>"
             }
         },
         "com.amazonaws.emr#DescribeReleaseLabelInput": {
@@ -2404,7 +2404,7 @@
                 "VolumeSpecification": {
                     "target": "com.amazonaws.emr#VolumeSpecification",
                     "traits": {
-                        "smithy.api#documentation": "<p>EBS volume specifications such as volume type, IOPS, size (GiB) and throughput (MiB/s)\n         that are requested for the EBS volume attached to an EC2 instance in the cluster.</p>"
+                        "smithy.api#documentation": "<p>EBS volume specifications such as volume type, IOPS, size (GiB) and throughput (MiB/s)\n         that are requested for the EBS volume attached to an Amazon EC2 instance in the\n         cluster.</p>"
                     }
                 },
                 "Device": {
@@ -2424,7 +2424,7 @@
                 "VolumeSpecification": {
                     "target": "com.amazonaws.emr#VolumeSpecification",
                     "traits": {
-                        "smithy.api#documentation": "<p>EBS volume specifications such as volume type, IOPS, size (GiB) and throughput (MiB/s)\n         that are requested for the EBS volume attached to an EC2 instance in the cluster.</p>",
+                        "smithy.api#documentation": "<p>EBS volume specifications such as volume type, IOPS, size (GiB) and throughput (MiB/s)\n         that are requested for the EBS volume attached to an Amazon EC2 instance in the\n         cluster.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2488,7 +2488,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>EBS block device that's attached to an EC2 instance.</p>"
+                "smithy.api#documentation": "<p>EBS block device that's attached to an Amazon EC2 instance.</p>"
             }
         },
         "com.amazonaws.emr#EbsVolumeList": {
@@ -2515,7 +2515,7 @@
                 "RequestedEc2SubnetIds": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256List",
                     "traits": {
-                        "smithy.api#documentation": "<p>Applies to clusters configured with the instance fleets option. Specifies the unique\n         identifier of one or more Amazon EC2 subnets in which to launch EC2 cluster\n         instances. Subnets must exist within the same VPC. Amazon EMR chooses the EC2\n         subnet with the best fit from among the list of <code>RequestedEc2SubnetIds</code>, and\n         then launches all cluster instances within that Subnet. If this value is not specified, and\n         the account and Region support EC2-Classic networks, the cluster launches instances in the\n         EC2-Classic network and uses <code>RequestedEc2AvailabilityZones</code> instead of this\n         setting. If EC2-Classic is not supported, and no Subnet is specified, Amazon EMR\n         chooses the subnet for you. <code>RequestedEc2SubnetIDs</code> and\n            <code>RequestedEc2AvailabilityZones</code> cannot be specified together.</p>"
+                        "smithy.api#documentation": "<p>Applies to clusters configured with the instance fleets option. Specifies the unique\n         identifier of one or more Amazon EC2 subnets in which to launch Amazon EC2\n         cluster instances. Subnets must exist within the same VPC. Amazon EMR chooses the\n            Amazon EC2 subnet with the best fit from among the list of\n            <code>RequestedEc2SubnetIds</code>, and then launches all cluster instances within that\n         Subnet. If this value is not specified, and the account and Region support EC2-Classic\n         networks, the cluster launches instances in the EC2-Classic network and uses\n            <code>RequestedEc2AvailabilityZones</code> instead of this setting. If EC2-Classic is\n         not supported, and no Subnet is specified, Amazon EMR chooses the subnet for you.\n            <code>RequestedEc2SubnetIDs</code> and <code>RequestedEc2AvailabilityZones</code> cannot\n         be specified together.</p>"
                     }
                 },
                 "Ec2AvailabilityZone": {
@@ -2527,13 +2527,13 @@
                 "RequestedEc2AvailabilityZones": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256List",
                     "traits": {
-                        "smithy.api#documentation": "<p>Applies to clusters configured with the instance fleets option. Specifies one or more\n         Availability Zones in which to launch EC2 cluster instances when the EC2-Classic network\n         configuration is supported. Amazon EMR chooses the Availability Zone with the best\n         fit from among the list of <code>RequestedEc2AvailabilityZones</code>, and then launches\n         all cluster instances within that Availability Zone. If you do not specify this value,\n            Amazon EMR chooses the Availability Zone for you.\n            <code>RequestedEc2SubnetIDs</code> and <code>RequestedEc2AvailabilityZones</code> cannot\n         be specified together.</p>"
+                        "smithy.api#documentation": "<p>Applies to clusters configured with the instance fleets option. Specifies one or more\n         Availability Zones in which to launch Amazon EC2 cluster instances when the\n         EC2-Classic network configuration is supported. Amazon EMR chooses the Availability\n         Zone with the best fit from among the list of <code>RequestedEc2AvailabilityZones</code>,\n         and then launches all cluster instances within that Availability Zone. If you do not\n         specify this value, Amazon EMR chooses the Availability Zone for you.\n            <code>RequestedEc2SubnetIDs</code> and <code>RequestedEc2AvailabilityZones</code> cannot\n         be specified together.</p>"
                     }
                 },
                 "IamInstanceProfile": {
                     "target": "com.amazonaws.emr#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IAM role that was specified when the cluster was launched. The EC2 instances of the\n         cluster assume this role.</p>"
+                        "smithy.api#documentation": "<p>The IAM role that was specified when the cluster was launched. The\n            Amazon EC2 instances of the cluster assume this role.</p>"
                     }
                 },
                 "EmrManagedMasterSecurityGroup": {
@@ -2568,7 +2568,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides information about the EC2 instances in a cluster grouped by category. For\n         example, key name, subnet ID, IAM instance profile, and so on.</p>"
+                "smithy.api#documentation": "<p>Provides information about the Amazon EC2 instances in a cluster grouped by\n         category. For example, key name, subnet ID, IAM instance profile, and so\n         on.</p>"
             }
         },
         "com.amazonaws.emr#ElasticMapReduce": {
@@ -3820,6 +3820,15 @@
                 }
             }
         },
+        "com.amazonaws.emr#EnvironmentVariablesMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.emr#XmlStringMaxLen256"
+            },
+            "value": {
+                "target": "com.amazonaws.emr#XmlString"
+            }
+        },
         "com.amazonaws.emr#ErrorCode": {
             "type": "string",
             "traits": {
@@ -3841,24 +3850,24 @@
                 "ErrorCode": {
                     "target": "com.amazonaws.emr#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name or code that's associated with the error.</p>"
+                        "smithy.api#documentation": "<p>The name or code associated with the error.</p>"
                     }
                 },
                 "ErrorData": {
                     "target": "com.amazonaws.emr#ErrorData",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of key value pairs that provide contextual information to explain why the error may have occured.</p>"
+                        "smithy.api#documentation": "<p>A list of key value pairs that provides contextual information about why an error\n         occured.</p>"
                     }
                 },
                 "ErrorMessage": {
                     "target": "com.amazonaws.emr#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A message describing the error that occured.</p>"
+                        "smithy.api#documentation": "<p>A message that describes the error.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A tuple that provides information about an error that caused a cluster to terminate.</p>"
+                "smithy.api#documentation": "<p>A tuple that provides information about an error that caused a cluster to\n         terminate.</p>"
             }
         },
         "com.amazonaws.emr#ErrorDetailList": {
@@ -3876,25 +3885,31 @@
                 "Id": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the execution engine. For an EMR cluster, this is the cluster\n         ID.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the execution engine. For an Amazon EMR cluster, this\n         is the cluster ID.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Type": {
                     "target": "com.amazonaws.emr#ExecutionEngineType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of execution engine. A value of <code>EMR</code> specifies an EMR\n         cluster.</p>"
+                        "smithy.api#documentation": "<p>The type of execution engine. A value of <code>EMR</code> specifies an Amazon EMR cluster.</p>"
                     }
                 },
                 "MasterInstanceSecurityGroupId": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional unique ID of an EC2 security group to associate with the master instance of\n         the EMR cluster for this notebook execution. For more information see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-managed-notebooks-security-groups.html\">Specifying\n            EC2 Security Groups for EMR Notebooks</a> in the <i>EMR Management\n            Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>An optional unique ID of an Amazon EC2 security group to associate with the\n         master instance of the Amazon EMR cluster for this notebook execution. For more\n         information see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-managed-notebooks-security-groups.html\">Specifying\n               Amazon EC2 Security Groups for Amazon EMR Notebooks</a> in the\n            <i>EMR Management Guide</i>.</p>"
+                    }
+                },
+                "ExecutionRoleArn": {
+                    "target": "com.amazonaws.emr#IAMRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The execution role ARN required for the notebook execution.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the execution engine (cluster) to run the notebook and perform the notebook\n         execution, for example, an EMR cluster.</p>"
+                "smithy.api#documentation": "<p>Specifies the execution engine (cluster) to run the notebook and perform the notebook\n         execution, for example, an Amazon EMR cluster.</p>"
             }
         },
         "com.amazonaws.emr#ExecutionEngineType": {
@@ -4008,7 +4023,7 @@
                 "BlockPublicAccessConfiguration": {
                     "target": "com.amazonaws.emr#BlockPublicAccessConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>A configuration for Amazon EMR block public access. The configuration applies to\n         all clusters created in your account for the current Region. The configuration specifies\n         whether block public access is enabled. If block public access is enabled, security groups\n         associated with the cluster cannot have rules that allow inbound traffic from 0.0.0.0/0 or\n         ::/0 on a port, unless the port is specified as an exception using\n            <code>PermittedPublicSecurityGroupRuleRanges</code> in the\n            <code>BlockPublicAccessConfiguration</code>. By default, Port 22 (SSH) is an exception,\n         and public access is allowed on this port. You can change this by updating the block public\n         access configuration to remove the exception.</p>\n         <note>\n            <p>For accounts that created clusters in a Region before November 25, 2019, block public\n            access is disabled by default in that Region. To use this feature, you must manually\n            enable and configure it. For accounts that did not create an EMR cluster in a Region\n            before this date, block public access is enabled by default in that Region.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>A configuration for Amazon EMR block public access. The configuration applies to\n         all clusters created in your account for the current Region. The configuration specifies\n         whether block public access is enabled. If block public access is enabled, security groups\n         associated with the cluster cannot have rules that allow inbound traffic from 0.0.0.0/0 or\n         ::/0 on a port, unless the port is specified as an exception using\n            <code>PermittedPublicSecurityGroupRuleRanges</code> in the\n            <code>BlockPublicAccessConfiguration</code>. By default, Port 22 (SSH) is an exception,\n         and public access is allowed on this port. You can change this by updating the block public\n         access configuration to remove the exception.</p>\n         <note>\n            <p>For accounts that created clusters in a Region before November 25, 2019, block public\n            access is disabled by default in that Region. To use this feature, you must manually\n            enable and configure it. For accounts that did not create an Amazon EMR cluster\n            in a Region before this date, block public access is enabled by default in that\n            Region.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4041,7 +4056,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides temporary, HTTP basic credentials that are associated with a given runtime IAM role \n         and used by a cluster with fine-grained access control activated. You can use these credentials to connect to cluster endpoints that support username and password authentication.</p>"
+                "smithy.api#documentation": "<p>Provides temporary, HTTP basic credentials that are associated with a given runtime\n            IAM role and used by a cluster with fine-grained access control\n         activated. You can use these credentials to connect to cluster endpoints that support\n         username and password authentication.</p>"
             }
         },
         "com.amazonaws.emr#GetClusterSessionCredentialsInput": {
@@ -4057,7 +4072,7 @@
                 "ExecutionRoleArn": {
                     "target": "com.amazonaws.emr#ArnType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the runtime role for interactive workload submission on the cluster. \n         The runtime role can be a cross-account IAM role. The runtime role ARN is a combination of account ID, role name, \n         and role type using the following format: <code>arn:partition:service:region:account:resource</code>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the runtime role for interactive workload submission\n         on the cluster. The runtime role can be a cross-account IAM role. The\n         runtime role ARN is a combination of account ID, role name, and role type using the\n         following format: <code>arn:partition:service:region:account:resource</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4072,13 +4087,13 @@
                 "Credentials": {
                     "target": "com.amazonaws.emr#Credentials",
                     "traits": {
-                        "smithy.api#documentation": "<p>The credentials that you can use to connect to cluster endpoints that support username and password authentication.</p>"
+                        "smithy.api#documentation": "<p>The credentials that you can use to connect to cluster endpoints that support username\n         and password authentication.</p>"
                     }
                 },
                 "ExpiresAt": {
                     "target": "com.amazonaws.emr#Date",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time when the credentials that are returned by the <code>GetClusterSessionCredentials</code> API expire.</p>"
+                        "smithy.api#documentation": "<p>The time when the credentials that are returned by the\n            <code>GetClusterSessionCredentials</code> API expire.</p>"
                     }
                 }
             },
@@ -4260,6 +4275,16 @@
                 "smithy.api#documentation": "<p>A cluster step consisting of a JAR file whose main function will be executed. The main\n         function submits a job for Hadoop to execute and waits for the job to finish or\n         fail.</p>"
             }
         },
+        "com.amazonaws.emr#IAMRoleArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:(aws[a-zA-Z0-9-]*):iam::(\\d{12})?:(role((\\u002F)|(\\u002F[\\u0021-\\u007F]+\\u002F))[\\w+=,.@-]+)$"
+            }
+        },
         "com.amazonaws.emr#IdentityType": {
             "type": "enum",
             "members": {
@@ -4331,7 +4356,7 @@
                 "InstanceFleetId": {
                     "target": "com.amazonaws.emr#InstanceFleetId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the instance fleet to which an EC2 instance belongs.</p>"
+                        "smithy.api#documentation": "<p>The unique identifier of the instance fleet to which an Amazon EC2 instance\n         belongs.</p>"
                     }
                 },
                 "Market": {
@@ -4343,7 +4368,7 @@
                 "InstanceType": {
                     "target": "com.amazonaws.emr#InstanceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The EC2 instance type, for example <code>m3.xlarge</code>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon EC2 instance type, for example <code>m3.xlarge</code>.</p>"
                     }
                 },
                 "EbsVolumes": {
@@ -4354,7 +4379,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents an EC2 instance provisioned as part of cluster.</p>"
+                "smithy.api#documentation": "<p>Represents an Amazon EC2 instance provisioned as part of cluster.</p>"
             }
         },
         "com.amazonaws.emr#InstanceCollectionType": {
@@ -4445,7 +4470,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes an instance fleet, which is a group of EC2 instances that host a particular\n         node type (master, core, or task) in an Amazon EMR cluster. Instance fleets can\n         consist of a mix of instance types and On-Demand and Spot Instances, which are provisioned\n         to meet a defined target capacity. </p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR versions\n            4.8.0 and later, excluding 5.0.x versions.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Describes an instance fleet, which is a group of Amazon EC2 instances that host\n         a particular node type (master, core, or task) in an Amazon EMR cluster. Instance\n         fleets can consist of a mix of instance types and On-Demand and Spot Instances, which are\n         provisioned to meet a defined target capacity. </p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and later, excluding 5.0.x versions.</p>\n         </note>"
             }
         },
         "com.amazonaws.emr#InstanceFleetConfig": {
@@ -4479,7 +4504,7 @@
                 "InstanceTypeConfigs": {
                     "target": "com.amazonaws.emr#InstanceTypeConfigList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The instance type configurations that define the EC2 instances in the instance\n         fleet.</p>"
+                        "smithy.api#documentation": "<p>The instance type configurations that define the Amazon EC2 instances in the\n         instance fleet.</p>"
                     }
                 },
                 "LaunchSpecifications": {
@@ -4496,7 +4521,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration that defines an instance fleet.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR versions\n            4.8.0 and later, excluding 5.0.x versions.</p>\n         </note>"
+                "smithy.api#documentation": "<p>The configuration that defines an instance fleet.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and later, excluding 5.0.x versions.</p>\n         </note>"
             }
         },
         "com.amazonaws.emr#InstanceFleetConfigList": {
@@ -4544,7 +4569,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configuration parameters for an instance fleet modification request.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR versions\n            4.8.0 and later, excluding 5.0.x versions.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Configuration parameters for an instance fleet modification request.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and later, excluding 5.0.x versions.</p>\n         </note>"
             }
         },
         "com.amazonaws.emr#InstanceFleetProvisioningSpecifications": {
@@ -4559,12 +4584,12 @@
                 "OnDemandSpecification": {
                     "target": "com.amazonaws.emr#OnDemandProvisioningSpecification",
                     "traits": {
-                        "smithy.api#documentation": "<p> The launch specification for On-Demand Instances in the instance fleet, which\n         determines the allocation strategy. </p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR versions\n            4.8.0 and later, excluding 5.0.x versions. On-Demand Instances allocation strategy is\n            available in Amazon EMR version 5.12.1 and later.</p>\n         </note>"
+                        "smithy.api#documentation": "<p> The launch specification for On-Demand Instances in the instance fleet, which\n         determines the allocation strategy. </p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and later, excluding 5.0.x versions. On-Demand Instances allocation strategy is\n            available in Amazon EMR releases 5.12.1 and later.</p>\n         </note>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The launch specification for Spot Instances in the fleet, which determines the defined\n         duration, provisioning timeout behavior, and allocation strategy.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR versions\n            4.8.0 and later, excluding 5.0.x versions. On-Demand and Spot instance allocation\n            strategies are available in Amazon EMR version 5.12.1 and later.</p>\n         </note>"
+                "smithy.api#documentation": "<p>The launch specification for Spot Instances in the fleet, which determines the defined\n         duration, provisioning timeout behavior, and allocation strategy.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and later, excluding 5.0.x versions. On-Demand and Spot instance allocation\n            strategies are available in Amazon EMR releases 5.12.1 and later.</p>\n         </note>"
             }
         },
         "com.amazonaws.emr#InstanceFleetResizingSpecifications": {
@@ -4651,7 +4676,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides status change reason details for the instance fleet.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR versions\n            4.8.0 and later, excluding 5.0.x versions.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Provides status change reason details for the instance fleet.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and later, excluding 5.0.x versions.</p>\n         </note>"
             }
         },
         "com.amazonaws.emr#InstanceFleetStateChangeReasonCode": {
@@ -4689,7 +4714,7 @@
                 "State": {
                     "target": "com.amazonaws.emr#InstanceFleetState",
                     "traits": {
-                        "smithy.api#documentation": "<p>A code representing the instance fleet status.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PROVISIONING</code>—The instance fleet is provisioning EC2 resources and is\n               not yet ready to run jobs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BOOTSTRAPPING</code>—EC2 instances and other resources have been provisioned\n               and the bootstrap actions specified for the instances are underway.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RUNNING</code>—EC2 instances and other resources are running. They are\n               either executing jobs or waiting to execute jobs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RESIZING</code>—A resize operation is underway. EC2 instances are either\n               being added or removed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUSPENDED</code>—A resize operation could not complete. Existing EC2\n               instances are running, but instances can't be added or removed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TERMINATING</code>—The instance fleet is terminating EC2 instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TERMINATED</code>—The instance fleet is no longer active, and all EC2\n               instances have been terminated.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A code representing the instance fleet status.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PROVISIONING</code>—The instance fleet is provisioning Amazon EC2\n               resources and is not yet ready to run jobs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BOOTSTRAPPING</code>—Amazon EC2 instances and other resources have\n               been provisioned and the bootstrap actions specified for the instances are\n               underway.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RUNNING</code>—Amazon EC2 instances and other resources are running.\n               They are either executing jobs or waiting to execute jobs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RESIZING</code>—A resize operation is underway. Amazon EC2 instances\n               are either being added or removed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUSPENDED</code>—A resize operation could not complete. Existing Amazon EC2 instances are running, but instances can't be added or removed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TERMINATING</code>—The instance fleet is terminating Amazon EC2\n               instances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TERMINATED</code>—The instance fleet is no longer active, and all Amazon EC2 instances have been terminated.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "StateChangeReason": {
@@ -4706,7 +4731,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The status of the instance fleet.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR versions\n            4.8.0 and later, excluding 5.0.x versions.</p>\n         </note>"
+                "smithy.api#documentation": "<p>The status of the instance fleet.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and later, excluding 5.0.x versions.</p>\n         </note>"
             }
         },
         "com.amazonaws.emr#InstanceFleetTimeline": {
@@ -4732,7 +4757,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides historical timestamps for the instance fleet, including the time of creation,\n         the time it became ready to run jobs, and the time of termination.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR versions\n            4.8.0 and later, excluding 5.0.x versions.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Provides historical timestamps for the instance fleet, including the time of creation,\n         the time it became ready to run jobs, and the time of termination.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and later, excluding 5.0.x versions.</p>\n         </note>"
             }
         },
         "com.amazonaws.emr#InstanceFleetType": {
@@ -4794,7 +4819,7 @@
                 "InstanceType": {
                     "target": "com.amazonaws.emr#InstanceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The EC2 instance type for all instances in the instance group.</p>"
+                        "smithy.api#documentation": "<p>The Amazon EC2 instance type for all instances in the instance group.</p>"
                     }
                 },
                 "RequestedInstanceCount": {
@@ -4862,7 +4887,7 @@
                 "AutoScalingPolicy": {
                     "target": "com.amazonaws.emr#AutoScalingPolicyDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>An automatic scaling policy for a core instance group or task instance group in an\n            Amazon EMR cluster. The automatic scaling policy defines how an instance group\n         dynamically adds and terminates EC2 instances in response to the value of a CloudWatch\n         metric. See PutAutoScalingPolicy.</p>"
+                        "smithy.api#documentation": "<p>An automatic scaling policy for a core instance group or task instance group in an\n            Amazon EMR cluster. The automatic scaling policy defines how an instance group\n         dynamically adds and terminates Amazon EC2 instances in response to the value of a\n         CloudWatch metric. See PutAutoScalingPolicy.</p>"
                     }
                 },
                 "CustomAmiId": {
@@ -4888,7 +4913,7 @@
                 "Market": {
                     "target": "com.amazonaws.emr#MarketType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Market type of the EC2 instances used to create a cluster node.</p>"
+                        "smithy.api#documentation": "<p>Market type of the Amazon EC2 instances used to create a cluster node.</p>"
                     }
                 },
                 "InstanceRole": {
@@ -4907,7 +4932,7 @@
                 "InstanceType": {
                     "target": "com.amazonaws.emr#InstanceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The EC2 instance type for all instances in the instance group.</p>",
+                        "smithy.api#documentation": "<p>The Amazon EC2 instance type for all instances in the instance group.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4921,19 +4946,19 @@
                 "Configurations": {
                     "target": "com.amazonaws.emr#ConfigurationList",
                     "traits": {
-                        "smithy.api#documentation": "<note>\n            <p>Amazon EMR releases 4.x or later.</p>\n         </note>\n         <p>The list of configurations supplied for an EMR cluster instance group. You can specify a\n         separate configuration for each instance group (master, core, and task).</p>"
+                        "smithy.api#documentation": "<note>\n            <p>Amazon EMR releases 4.x or later.</p>\n         </note>\n         <p>The list of configurations supplied for an Amazon EMR cluster instance group.\n         You can specify a separate configuration for each instance group (master, core, and\n         task).</p>"
                     }
                 },
                 "EbsConfiguration": {
                     "target": "com.amazonaws.emr#EbsConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>EBS configurations that will be attached to each EC2 instance in the instance\n         group.</p>"
+                        "smithy.api#documentation": "<p>EBS configurations that will be attached to each Amazon EC2 instance in the\n         instance group.</p>"
                     }
                 },
                 "AutoScalingPolicy": {
                     "target": "com.amazonaws.emr#AutoScalingPolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>An automatic scaling policy for a core instance group or task instance group in an\n            Amazon EMR cluster. The automatic scaling policy defines how an instance group\n         dynamically adds and terminates EC2 instances in response to the value of a CloudWatch\n         metric. See <a>PutAutoScalingPolicy</a>.</p>"
+                        "smithy.api#documentation": "<p>An automatic scaling policy for a core instance group or task instance group in an\n            Amazon EMR cluster. The automatic scaling policy defines how an instance group\n         dynamically adds and terminates Amazon EC2 instances in response to the value of a\n         CloudWatch metric. See <a>PutAutoScalingPolicy</a>.</p>"
                     }
                 },
                 "CustomAmiId": {
@@ -4971,7 +4996,7 @@
                 "Market": {
                     "target": "com.amazonaws.emr#MarketType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Market type of the EC2 instances used to create a cluster node.</p>",
+                        "smithy.api#documentation": "<p>Market type of the Amazon EC2 instances used to create a cluster node.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4991,7 +5016,7 @@
                 "InstanceType": {
                     "target": "com.amazonaws.emr#InstanceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>EC2 instance type.</p>",
+                        "smithy.api#documentation": "<p>Amazon EC2 instance type.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5098,7 +5123,7 @@
                 "EC2InstanceIdsToTerminate": {
                     "target": "com.amazonaws.emr#EC2InstanceIdsToTerminateList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The EC2 InstanceIds to terminate. After you terminate the instances, the instance group\n         will not return to its original requested size.</p>"
+                        "smithy.api#documentation": "<p>The Amazon EC2 InstanceIds to terminate. After you terminate the instances, the\n         instance group will not return to its original requested size.</p>"
                     }
                 },
                 "ShrinkPolicy": {
@@ -5553,7 +5578,7 @@
                 "InstanceType": {
                     "target": "com.amazonaws.emr#InstanceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>An EC2 instance type, such as <code>m3.xlarge</code>. </p>",
+                        "smithy.api#documentation": "<p>An Amazon EC2 instance type, such as <code>m3.xlarge</code>. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5566,13 +5591,13 @@
                 "BidPrice": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The bid price for each EC2 Spot Instance type as defined by <code>InstanceType</code>.\n         Expressed in USD. If neither <code>BidPrice</code> nor\n            <code>BidPriceAsPercentageOfOnDemandPrice</code> is provided,\n            <code>BidPriceAsPercentageOfOnDemandPrice</code> defaults to 100%. </p>"
+                        "smithy.api#documentation": "<p>The bid price for each Amazon EC2 Spot Instance type as defined by\n            <code>InstanceType</code>. Expressed in USD. If neither <code>BidPrice</code> nor\n            <code>BidPriceAsPercentageOfOnDemandPrice</code> is provided,\n            <code>BidPriceAsPercentageOfOnDemandPrice</code> defaults to 100%. </p>"
                     }
                 },
                 "BidPriceAsPercentageOfOnDemandPrice": {
                     "target": "com.amazonaws.emr#NonNegativeDouble",
                     "traits": {
-                        "smithy.api#documentation": "<p>The bid price, as a percentage of On-Demand price, for each EC2 Spot Instance as defined\n         by <code>InstanceType</code>. Expressed as a number (for example, 20 specifies 20%). If\n         neither <code>BidPrice</code> nor <code>BidPriceAsPercentageOfOnDemandPrice</code> is\n         provided, <code>BidPriceAsPercentageOfOnDemandPrice</code> defaults to 100%.</p>"
+                        "smithy.api#documentation": "<p>The bid price, as a percentage of On-Demand price, for each Amazon EC2 Spot\n         Instance as defined by <code>InstanceType</code>. Expressed as a number (for example, 20\n         specifies 20%). If neither <code>BidPrice</code> nor\n            <code>BidPriceAsPercentageOfOnDemandPrice</code> is provided,\n            <code>BidPriceAsPercentageOfOnDemandPrice</code> defaults to 100%.</p>"
                     }
                 },
                 "EbsConfiguration": {
@@ -5595,7 +5620,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An instance type configuration for each instance type in an instance fleet, which\n         determines the EC2 instances Amazon EMR attempts to provision to fulfill On-Demand\n         and Spot target capacities. When you use an allocation strategy, you can include a maximum\n         of 30 instance type configurations for a fleet. For more information about how to use an\n         allocation strategy, see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-instance-fleet.html\">Configure Instance\n            Fleets</a>. Without an allocation strategy, you may specify a maximum of five\n         instance type configurations for a fleet.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR versions\n            4.8.0 and later, excluding 5.0.x versions.</p>\n         </note>"
+                "smithy.api#documentation": "<p>An instance type configuration for each instance type in an instance fleet, which\n         determines the Amazon EC2 instances Amazon EMR attempts to provision to\n         fulfill On-Demand and Spot target capacities. When you use an allocation strategy, you can\n         include a maximum of 30 instance type configurations for a fleet. For more information\n         about how to use an allocation strategy, see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-instance-fleet.html\">Configure Instance\n            Fleets</a>. Without an allocation strategy, you may specify a maximum of five\n         instance type configurations for a fleet.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and later, excluding 5.0.x versions.</p>\n         </note>"
             }
         },
         "com.amazonaws.emr#InstanceTypeConfigList": {
@@ -5610,7 +5635,7 @@
                 "InstanceType": {
                     "target": "com.amazonaws.emr#InstanceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The EC2 instance type, for example <code>m3.xlarge</code>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon EC2 instance type, for example <code>m3.xlarge</code>.</p>"
                     }
                 },
                 "WeightedCapacity": {
@@ -5622,13 +5647,13 @@
                 "BidPrice": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The bid price for each EC2 Spot Instance type as defined by <code>InstanceType</code>.\n         Expressed in USD.</p>"
+                        "smithy.api#documentation": "<p>The bid price for each Amazon EC2 Spot Instance type as defined by\n            <code>InstanceType</code>. Expressed in USD.</p>"
                     }
                 },
                 "BidPriceAsPercentageOfOnDemandPrice": {
                     "target": "com.amazonaws.emr#NonNegativeDouble",
                     "traits": {
-                        "smithy.api#documentation": "<p>The bid price, as a percentage of On-Demand price, for each EC2 Spot Instance as defined\n         by <code>InstanceType</code>. Expressed as a number (for example, 20 specifies 20%).</p>"
+                        "smithy.api#documentation": "<p>The bid price, as a percentage of On-Demand price, for each Amazon EC2 Spot\n         Instance as defined by <code>InstanceType</code>. Expressed as a number (for example, 20\n         specifies 20%).</p>"
                     }
                 },
                 "Configurations": {
@@ -5657,7 +5682,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration specification for each instance type in an instance fleet.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR versions\n            4.8.0 and later, excluding 5.0.x versions.</p>\n         </note>"
+                "smithy.api#documentation": "<p>The configuration specification for each instance type in an instance fleet.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and later, excluding 5.0.x versions.</p>\n         </note>"
             }
         },
         "com.amazonaws.emr#InstanceTypeSpecificationList": {
@@ -5744,7 +5769,7 @@
                 "LogEncryptionKmsKeyId": {
                     "target": "com.amazonaws.emr#XmlString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The KMS key used for encrypting log files. This attribute is only\n         available with EMR version 5.30.0 and later, excluding EMR 6.0.0.</p>"
+                        "smithy.api#documentation": "<p>The KMS key used for encrypting log files. This attribute is only\n         available with Amazon EMR 5.30.0 and later, excluding 6.0.0.</p>"
                     }
                 },
                 "AmiVersion": {
@@ -5789,31 +5814,31 @@
                     "target": "com.amazonaws.emr#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Indicates whether the cluster is visible to IAM principals in the Amazon Web Services account associated with the cluster. When <code>true</code>, IAM principals\n         in the Amazon Web Services account can perform EMR cluster actions that their IAM policies\n         allow. When <code>false</code>, only the IAM principal that created the cluster and the\n            Amazon Web Services account root user can perform EMR actions, regardless of IAM\n         permissions policies attached to other IAM principals.</p>\n         <p>The default value is <code>true</code> if a value is not provided when creating a\n         cluster using the EMR API <a>RunJobFlow</a> command, the CLI\n         <a href=\"https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html\">create-cluster</a> command, or the Amazon Web Services Management Console.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether the cluster is visible to IAM principals in the Amazon Web Services account associated with the cluster. When <code>true</code>, IAM principals in the Amazon Web Services account can perform Amazon EMR cluster\n         actions that their IAM policies allow. When <code>false</code>, only the\n            IAM principal that created the cluster and the Amazon Web Services account\n         root user can perform Amazon EMR actions, regardless of IAM\n         permissions policies attached to other IAM principals.</p>\n         <p>The default value is <code>true</code> if a value is not provided when creating a\n         cluster using the Amazon EMR API <a>RunJobFlow</a> command, the CLI\n         <a href=\"https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html\">create-cluster</a> command, or the Amazon Web Services Management Console.</p>"
                     }
                 },
                 "JobFlowRole": {
                     "target": "com.amazonaws.emr#XmlString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IAM role that was specified when the job flow was launched. The EC2 instances of the\n         job flow assume this role.</p>"
+                        "smithy.api#documentation": "<p>The IAM role that was specified when the job flow was launched. The\n            Amazon EC2 instances of the job flow assume this role.</p>"
                     }
                 },
                 "ServiceRole": {
                     "target": "com.amazonaws.emr#XmlString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IAM role that is assumed by the Amazon EMR service to access Amazon Web Services resources on your behalf.</p>"
+                        "smithy.api#documentation": "<p>The IAM role that is assumed by the Amazon EMR service to access\n            Amazon Web Services resources on your behalf.</p>"
                     }
                 },
                 "AutoScalingRole": {
                     "target": "com.amazonaws.emr#XmlString",
                     "traits": {
-                        "smithy.api#documentation": "<p>An IAM role for automatic scaling policies. The default role is\n            <code>EMR_AutoScaling_DefaultRole</code>. The IAM role provides a way for the automatic\n         scaling feature to get the required permissions it needs to launch and terminate EC2\n         instances in an instance group.</p>"
+                        "smithy.api#documentation": "<p>An IAM role for automatic scaling policies. The default role is\n            <code>EMR_AutoScaling_DefaultRole</code>. The IAM role provides a way for\n         the automatic scaling feature to get the required permissions it needs to launch and\n         terminate Amazon EC2 instances in an instance group.</p>"
                     }
                 },
                 "ScaleDownBehavior": {
                     "target": "com.amazonaws.emr#ScaleDownBehavior",
                     "traits": {
-                        "smithy.api#documentation": "<p>The way that individual Amazon EC2 instances terminate when an automatic\n         scale-in activity occurs or an instance group is resized.\n            <code>TERMINATE_AT_INSTANCE_HOUR</code> indicates that Amazon EMR terminates\n         nodes at the instance-hour boundary, regardless of when the request to terminate the\n         instance was submitted. This option is only available with Amazon EMR 5.1.0 and\n         later and is the default for clusters created using that version.\n            <code>TERMINATE_AT_TASK_COMPLETION</code> indicates that Amazon EMR adds nodes\n         to a deny list and drains tasks from nodes before terminating the Amazon EC2\n         instances, regardless of the instance-hour boundary. With either behavior, Amazon EMR removes the least active nodes first and blocks instance termination if it could lead to\n         HDFS corruption. <code>TERMINATE_AT_TASK_COMPLETION</code> available only in Amazon EMR version 4.1.0 and later, and is the default for versions of Amazon EMR earlier than 5.1.0.</p>"
+                        "smithy.api#documentation": "<p>The way that individual Amazon EC2 instances terminate when an automatic\n         scale-in activity occurs or an instance group is resized.\n            <code>TERMINATE_AT_INSTANCE_HOUR</code> indicates that Amazon EMR terminates\n         nodes at the instance-hour boundary, regardless of when the request to terminate the\n         instance was submitted. This option is only available with Amazon EMR 5.1.0 and\n         later and is the default for clusters created using that version.\n            <code>TERMINATE_AT_TASK_COMPLETION</code> indicates that Amazon EMR adds nodes\n         to a deny list and drains tasks from nodes before terminating the Amazon EC2\n         instances, regardless of the instance-hour boundary. With either behavior, Amazon EMR removes the least active nodes first and blocks instance termination if it could lead to\n         HDFS corruption. <code>TERMINATE_AT_TASK_COMPLETION</code> available only in Amazon EMR releases 4.1.0 and later, and is the default for releases of Amazon EMR earlier than 5.1.0.</p>"
                     }
                 }
             },
@@ -5941,19 +5966,19 @@
                 "MasterInstanceType": {
                     "target": "com.amazonaws.emr#InstanceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The EC2 instance type of the master node.</p>"
+                        "smithy.api#documentation": "<p>The Amazon EC2 instance type of the master node.</p>"
                     }
                 },
                 "SlaveInstanceType": {
                     "target": "com.amazonaws.emr#InstanceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The EC2 instance type of the core and task nodes.</p>"
+                        "smithy.api#documentation": "<p>The Amazon EC2 instance type of the core and task nodes.</p>"
                     }
                 },
                 "InstanceCount": {
                     "target": "com.amazonaws.emr#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of EC2 instances in the cluster.</p>"
+                        "smithy.api#documentation": "<p>The number of Amazon EC2 instances in the cluster.</p>"
                     }
                 },
                 "InstanceGroups": {
@@ -5965,13 +5990,13 @@
                 "InstanceFleets": {
                     "target": "com.amazonaws.emr#InstanceFleetConfigList",
                     "traits": {
-                        "smithy.api#documentation": "<note>\n            <p>The instance fleet configuration is available only in Amazon EMR versions\n            4.8.0 and later, excluding 5.0.x versions.</p>\n         </note>\n         <p>Describes the EC2 instances and instance configurations for clusters that use the\n         instance fleet configuration.</p>"
+                        "smithy.api#documentation": "<note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and later, excluding 5.0.x versions.</p>\n         </note>\n         <p>Describes the Amazon EC2 instances and instance configurations for clusters that\n         use the instance fleet configuration.</p>"
                     }
                 },
                 "Ec2KeyName": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the EC2 key pair that can be used to connect to the master node using SSH as\n         the user called \"hadoop.\"</p>"
+                        "smithy.api#documentation": "<p>The name of the Amazon EC2 key pair that can be used to connect to the master\n         node using SSH as the user called \"hadoop.\"</p>"
                     }
                 },
                 "Placement": {
@@ -6009,7 +6034,7 @@
                 "Ec2SubnetIds": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256List",
                     "traits": {
-                        "smithy.api#documentation": "<p>Applies to clusters that use the instance fleet configuration. When multiple EC2 subnet\n         IDs are specified, Amazon EMR evaluates them and launches instances in the optimal\n         subnet.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR versions\n            4.8.0 and later, excluding 5.0.x versions.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Applies to clusters that use the instance fleet configuration. When multiple Amazon EC2 subnet IDs are specified, Amazon EMR evaluates them and launches\n         instances in the optimal subnet.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and later, excluding 5.0.x versions.</p>\n         </note>"
                     }
                 },
                 "EmrManagedMasterSecurityGroup": {
@@ -6368,7 +6393,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all available details about the instance fleets in a cluster.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR versions\n            4.8.0 and later, excluding 5.0.x versions.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Lists all available details about the instance fleets in a cluster.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and later, excluding 5.0.x versions.</p>\n         </note>",
                 "smithy.api#paginated": {
                     "inputToken": "Marker",
                     "outputToken": "Marker",
@@ -6502,7 +6527,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides information for all active EC2 instances and EC2 instances terminated in the\n         last 30 days, up to a maximum of 2,000. EC2 instances in any of the following states are\n         considered active: AWAITING_FULFILLMENT, PROVISIONING, BOOTSTRAPPING, RUNNING.</p>",
+                "smithy.api#documentation": "<p>Provides information for all active Amazon EC2 instances and Amazon EC2\n         instances terminated in the last 30 days, up to a maximum of 2,000. Amazon EC2\n         instances in any of the following states are considered active: AWAITING_FULFILLMENT,\n         PROVISIONING, BOOTSTRAPPING, RUNNING.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "Marker",
                     "outputToken": "Marker",
@@ -6600,7 +6625,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides summaries of all notebook executions. You can filter the list based on multiple\n         criteria such as status, time range, and editor id. Returns a maximum of 50 notebook\n         executions and a marker to track the paging of a longer notebook execution list across\n         multiple <code>ListNotebookExecution</code> calls.</p>",
+                "smithy.api#documentation": "<p>Provides summaries of all notebook executions. You can filter the list based on multiple\n         criteria such as status, time range, and editor id. Returns a maximum of 50 notebook\n         executions and a marker to track the paging of a longer notebook execution list across\n         multiple <code>ListNotebookExecutions</code> calls.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "Marker",
                     "outputToken": "Marker",
@@ -6639,6 +6664,12 @@
                     "target": "com.amazonaws.emr#Marker",
                     "traits": {
                         "smithy.api#documentation": "<p>The pagination token, returned by a previous <code>ListNotebookExecutions</code> call,\n         that indicates the start of the list for this <code>ListNotebookExecutions</code>\n         call.</p>"
+                    }
+                },
+                "ExecutionEngineId": {
+                    "target": "com.amazonaws.emr#XmlString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the execution engine.</p>"
                     }
                 }
             },
@@ -6683,7 +6714,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves release labels of EMR services in the region where the API is called.</p>",
+                "smithy.api#documentation": "<p>Retrieves release labels of Amazon EMR services in the Region where the API is\n         called.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -7018,7 +7049,7 @@
                 "ComputeLimits": {
                     "target": "com.amazonaws.emr#ComputeLimits",
                     "traits": {
-                        "smithy.api#documentation": "<p>The EC2 unit limits for a managed scaling policy. The managed scaling activity of a\n         cluster is not allowed to go above or below these limits. The limit only applies to the\n         core and task nodes. The master node cannot be scaled after initial configuration.</p>"
+                        "smithy.api#documentation": "<p>The Amazon EC2 unit limits for a managed scaling policy. The managed scaling\n         activity of a cluster is not allowed to go above or below these limits. The limit only\n         applies to the core and task nodes. The master node cannot be scaled after initial\n         configuration.</p>"
                     }
                 }
             },
@@ -7153,7 +7184,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Modifies the target On-Demand and target Spot capacities for the instance fleet with the\n         specified InstanceFleetID within the cluster specified using ClusterID. The call either\n         succeeds or fails atomically.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR versions\n            4.8.0 and later, excluding 5.0.x versions.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Modifies the target On-Demand and target Spot capacities for the instance fleet with the\n         specified InstanceFleetID within the cluster specified using ClusterID. The call either\n         succeeds or fails atomically.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and later, excluding 5.0.x versions.</p>\n         </note>"
             }
         },
         "com.amazonaws.emr#ModifyInstanceFleetInput": {
@@ -7242,13 +7273,13 @@
                 "EditorId": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the EMR Notebook that is used for the notebook\n         execution.</p>"
+                        "smithy.api#documentation": "<p>The unique identifier of the Amazon EMR Notebook that is used for the notebook\n         execution.</p>"
                     }
                 },
                 "ExecutionEngine": {
                     "target": "com.amazonaws.emr#ExecutionEngineConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The execution engine, such as an EMR cluster, used to run the EMR notebook and perform\n         the notebook execution.</p>"
+                        "smithy.api#documentation": "<p>The execution engine, such as an Amazon EMR cluster, used to run the Amazon EMR notebook and perform the notebook execution.</p>"
                     }
                 },
                 "NotebookExecutionName": {
@@ -7260,7 +7291,7 @@
                 "NotebookParams": {
                     "target": "com.amazonaws.emr#XmlString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Input parameters in JSON format passed to the EMR Notebook at runtime for\n         execution.</p>"
+                        "smithy.api#documentation": "<p>Input parameters in JSON format passed to the Amazon EMR Notebook at runtime for\n         execution.</p>"
                     }
                 },
                 "Status": {
@@ -7302,7 +7333,7 @@
                 "NotebookInstanceSecurityGroupId": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the EC2 security group associated with the EMR Notebook\n         instance. For more information see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-managed-notebooks-security-groups.html\">Specifying\n            EC2 Security Groups for EMR Notebooks</a> in the <i>EMR Management\n            Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The unique identifier of the Amazon EC2 security group associated with the\n            Amazon EMR Notebook instance. For more information see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-managed-notebooks-security-groups.html\">Specifying\n               Amazon EC2 Security Groups for Amazon EMR Notebooks</a> in the\n               <i>Amazon EMR Management Guide</i>.</p>"
                     }
                 },
                 "Tags": {
@@ -7310,10 +7341,34 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of tags associated with a notebook execution. Tags are user-defined key-value\n         pairs that consist of a required key string with a maximum of 128 characters and an\n         optional value string with a maximum of 256 characters.</p>"
                     }
+                },
+                "NotebookS3Location": {
+                    "target": "com.amazonaws.emr#NotebookS3LocationForOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 location that stores the notebook execution input.</p>"
+                    }
+                },
+                "OutputNotebookS3Location": {
+                    "target": "com.amazonaws.emr#OutputNotebookS3LocationForOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 location for the notebook execution output.</p>"
+                    }
+                },
+                "OutputNotebookFormat": {
+                    "target": "com.amazonaws.emr#OutputNotebookFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The output format for the notebook execution.</p>"
+                    }
+                },
+                "EnvironmentVariables": {
+                    "target": "com.amazonaws.emr#EnvironmentVariablesMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The environment variables associated with the notebook execution.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A notebook execution. An execution is a specific instance that an EMR Notebook is run\n         using the <code>StartNotebookExecution</code> action.</p>"
+                "smithy.api#documentation": "<p>A notebook execution. An execution is a specific instance that an Amazon EMR\n         Notebook is run using the <code>StartNotebookExecution</code> action.</p>"
             }
         },
         "com.amazonaws.emr#NotebookExecutionStatus": {
@@ -7419,6 +7474,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp when notebook execution started.</p>"
                     }
+                },
+                "NotebookS3Location": {
+                    "target": "com.amazonaws.emr#NotebookS3LocationForOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 location that stores the notebook execution input.</p>"
+                    }
+                },
+                "ExecutionEngineId": {
+                    "target": "com.amazonaws.emr#XmlString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the execution engine for the notebook execution.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7429,6 +7496,46 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.emr#NotebookExecutionSummary"
+            }
+        },
+        "com.amazonaws.emr#NotebookS3LocationForOutput": {
+            "type": "structure",
+            "members": {
+                "Bucket": {
+                    "target": "com.amazonaws.emr#XmlStringMaxLen256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 bucket that stores the notebook execution input.</p>"
+                    }
+                },
+                "Key": {
+                    "target": "com.amazonaws.emr#UriString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key to the Amazon S3 location that stores the notebook execution\n         input.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon S3 location that stores the notebook execution input.</p>"
+            }
+        },
+        "com.amazonaws.emr#NotebookS3LocationFromInput": {
+            "type": "structure",
+            "members": {
+                "Bucket": {
+                    "target": "com.amazonaws.emr#XmlStringMaxLen256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 bucket that stores the notebook execution input.</p>"
+                    }
+                },
+                "Key": {
+                    "target": "com.amazonaws.emr#UriString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key to the Amazon S3 location that stores the notebook execution\n         input.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon S3 location that stores the notebook execution input.</p>"
             }
         },
         "com.amazonaws.emr#OSRelease": {
@@ -7534,7 +7641,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The launch specification for On-Demand Instances in the instance fleet, which\n         determines the allocation strategy. </p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR versions\n            4.8.0 and later, excluding 5.0.x versions. On-Demand Instances allocation strategy is\n            available in Amazon EMR version 5.12.1 and later.</p>\n         </note>"
+                "smithy.api#documentation": "<p> The launch specification for On-Demand Instances in the instance fleet, which\n         determines the allocation strategy. </p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and later, excluding 5.0.x versions. On-Demand Instances allocation strategy is\n            available in Amazon EMR releases 5.12.1 and later.</p>\n         </note>"
             }
         },
         "com.amazonaws.emr#OnDemandResizingSpecification": {
@@ -7543,7 +7650,7 @@
                 "TimeoutDurationMinutes": {
                     "target": "com.amazonaws.emr#WholeNumber",
                     "traits": {
-                        "smithy.api#documentation": "<p>On-Demand resize timeout in minutes. If On-Demand Instances are not provisioned within\n         this time, the resize workflow stops. The minimum value is 5 minutes, and the maximum value\n         is 10,080 minutes (7 days). The timeout applies to all resize workflows on the Instance\n         Fleet. The resize could be triggered by Amazon EMR Managed Scaling\n         or by the customer (via Amazon EMR Console, Amazon EMR CLI\n         modify-instance-fleet or Amazon EMR SDK ModifyInstanceFleet API) or by Amazon EMR due to Amazon EC2 Spot Reclamation.</p>",
+                        "smithy.api#documentation": "<p>On-Demand resize timeout in minutes. If On-Demand Instances are not provisioned within\n         this time, the resize workflow stops. The minimum value is 5 minutes, and the maximum value\n         is 10,080 minutes (7 days). The timeout applies to all resize workflows on the Instance\n         Fleet. The resize could be triggered by Amazon EMR Managed Scaling or by the\n         customer (via Amazon EMR Console, Amazon EMR CLI modify-instance-fleet or\n            Amazon EMR SDK ModifyInstanceFleet API) or by Amazon EMR due to Amazon EC2 Spot Reclamation.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -7561,25 +7668,76 @@
                 }
             }
         },
+        "com.amazonaws.emr#OutputNotebookFormat": {
+            "type": "enum",
+            "members": {
+                "HTML": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTML"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.emr#OutputNotebookS3LocationForOutput": {
+            "type": "structure",
+            "members": {
+                "Bucket": {
+                    "target": "com.amazonaws.emr#XmlStringMaxLen256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 bucket that stores the notebook execution output.</p>"
+                    }
+                },
+                "Key": {
+                    "target": "com.amazonaws.emr#UriString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key to the Amazon S3 location that stores the notebook execution\n         output.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon S3 location that stores the notebook execution output.</p>"
+            }
+        },
+        "com.amazonaws.emr#OutputNotebookS3LocationFromInput": {
+            "type": "structure",
+            "members": {
+                "Bucket": {
+                    "target": "com.amazonaws.emr#XmlStringMaxLen256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 bucket that stores the notebook execution output.</p>"
+                    }
+                },
+                "Key": {
+                    "target": "com.amazonaws.emr#UriString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key to the Amazon S3 location that stores the notebook execution\n         output.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon S3 location that stores the notebook execution output.</p>"
+            }
+        },
         "com.amazonaws.emr#PlacementGroupConfig": {
             "type": "structure",
             "members": {
                 "InstanceRole": {
                     "target": "com.amazonaws.emr#InstanceRoleType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Role of the instance in the cluster.</p>\n         <p>Starting with Amazon EMR version 5.23.0, the only supported instance role is\n            <code>MASTER</code>.</p>",
+                        "smithy.api#documentation": "<p>Role of the instance in the cluster.</p>\n         <p>Starting with Amazon EMR release 5.23.0, the only supported instance role is\n            <code>MASTER</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "PlacementStrategy": {
                     "target": "com.amazonaws.emr#PlacementGroupStrategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>EC2 Placement Group strategy associated with instance role.</p>\n         <p>Starting with Amazon EMR version 5.23.0, the only supported placement strategy\n         is <code>SPREAD</code> for the <code>MASTER</code> instance role.</p>"
+                        "smithy.api#documentation": "<p>Amazon EC2 Placement Group strategy associated with instance role.</p>\n         <p>Starting with Amazon EMR release 5.23.0, the only supported placement strategy\n         is <code>SPREAD</code> for the <code>MASTER</code> instance role.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Placement group configuration for an Amazon EMR cluster. The configuration\n         specifies the placement strategy that can be applied to instance roles during cluster\n         creation.</p>\n         <p>To use this configuration, consider attaching managed policy\n         AmazonElasticMapReducePlacementGroupPolicy to the EMR role.</p>"
+                "smithy.api#documentation": "<p>Placement group configuration for an Amazon EMR cluster. The configuration\n         specifies the placement strategy that can be applied to instance roles during cluster\n         creation.</p>\n         <p>To use this configuration, consider attaching managed policy\n         AmazonElasticMapReducePlacementGroupPolicy to the Amazon EMR role.</p>"
             }
         },
         "com.amazonaws.emr#PlacementGroupConfigList": {
@@ -7629,7 +7787,7 @@
                 "AvailabilityZones": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256List",
                     "traits": {
-                        "smithy.api#documentation": "<p>When multiple Availability Zones are specified, Amazon EMR evaluates them and\n         launches instances in the optimal Availability Zone. <code>AvailabilityZones</code> is used\n         for instance fleets, while <code>AvailabilityZone</code> (singular) is used for uniform\n         instance groups.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR versions\n            4.8.0 and later, excluding 5.0.x versions.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>When multiple Availability Zones are specified, Amazon EMR evaluates them and\n         launches instances in the optimal Availability Zone. <code>AvailabilityZones</code> is used\n         for instance fleets, while <code>AvailabilityZone</code> (singular) is used for uniform\n         instance groups.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and later, excluding 5.0.x versions.</p>\n         </note>"
                     }
                 }
             },
@@ -7682,7 +7840,7 @@
                 "target": "com.amazonaws.emr#PutAutoScalingPolicyOutput"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates or updates an automatic scaling policy for a core instance group or task\n         instance group in an Amazon EMR cluster. The automatic scaling policy defines how\n         an instance group dynamically adds and terminates EC2 instances in response to the value of\n         a CloudWatch metric.</p>"
+                "smithy.api#documentation": "<p>Creates or updates an automatic scaling policy for a core instance group or task\n         instance group in an Amazon EMR cluster. The automatic scaling policy defines how\n         an instance group dynamically adds and terminates Amazon EC2 instances in response\n         to the value of a CloudWatch metric.</p>"
             }
         },
         "com.amazonaws.emr#PutAutoScalingPolicyInput": {
@@ -7755,7 +7913,7 @@
                 "target": "com.amazonaws.emr#PutAutoTerminationPolicyOutput"
             },
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>Auto-termination is supported in Amazon EMR versions 5.30.0 and 6.1.0 and\n            later. For more information, see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-auto-termination-policy.html\">Using an\n               auto-termination policy</a>.</p>\n         </note>\n         <p>Creates or updates an auto-termination policy for an Amazon EMR cluster. An\n         auto-termination policy defines the amount of idle time in seconds after which a cluster\n         automatically terminates. For alternative cluster termination options, see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-termination.html\">Control\n            cluster termination</a>.</p>"
+                "smithy.api#documentation": "<note>\n            <p>Auto-termination is supported in Amazon EMR releases 5.30.0 and 6.1.0 and\n            later. For more information, see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-auto-termination-policy.html\">Using an\n               auto-termination policy</a>.</p>\n         </note>\n         <p>Creates or updates an auto-termination policy for an Amazon EMR cluster. An\n         auto-termination policy defines the amount of idle time in seconds after which a cluster\n         automatically terminates. For alternative cluster termination options, see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-termination.html\">Control\n            cluster termination</a>.</p>"
             }
         },
         "com.amazonaws.emr#PutAutoTerminationPolicyInput": {
@@ -7812,7 +7970,7 @@
                 "BlockPublicAccessConfiguration": {
                     "target": "com.amazonaws.emr#BlockPublicAccessConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>A configuration for Amazon EMR block public access. The configuration applies to\n         all clusters created in your account for the current Region. The configuration specifies\n         whether block public access is enabled. If block public access is enabled, security groups\n         associated with the cluster cannot have rules that allow inbound traffic from 0.0.0.0/0 or\n         ::/0 on a port, unless the port is specified as an exception using\n            <code>PermittedPublicSecurityGroupRuleRanges</code> in the\n            <code>BlockPublicAccessConfiguration</code>. By default, Port 22 (SSH) is an exception,\n         and public access is allowed on this port. You can change this by updating\n            <code>BlockPublicSecurityGroupRules</code> to remove the exception.</p>\n         <note>\n            <p>For accounts that created clusters in a Region before November 25, 2019, block public\n            access is disabled by default in that Region. To use this feature, you must manually\n            enable and configure it. For accounts that did not create an EMR cluster in a Region\n            before this date, block public access is enabled by default in that Region.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>A configuration for Amazon EMR block public access. The configuration applies to\n         all clusters created in your account for the current Region. The configuration specifies\n         whether block public access is enabled. If block public access is enabled, security groups\n         associated with the cluster cannot have rules that allow inbound traffic from 0.0.0.0/0 or\n         ::/0 on a port, unless the port is specified as an exception using\n            <code>PermittedPublicSecurityGroupRuleRanges</code> in the\n            <code>BlockPublicAccessConfiguration</code>. By default, Port 22 (SSH) is an exception,\n         and public access is allowed on this port. You can change this by updating\n            <code>BlockPublicSecurityGroupRules</code> to remove the exception.</p>\n         <note>\n            <p>For accounts that created clusters in a Region before November 25, 2019, block public\n            access is disabled by default in that Region. To use this feature, you must manually\n            enable and configure it. For accounts that did not create an Amazon EMR cluster\n            in a Region before this date, block public access is enabled by default in that\n            Region.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 }
@@ -7837,7 +7995,7 @@
                 "target": "com.amazonaws.emr#PutManagedScalingPolicyOutput"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates or updates a managed scaling policy for an Amazon EMR cluster. The\n         managed scaling policy defines the limits for resources, such as EC2 instances that can be\n         added or terminated from a cluster. The policy only applies to the core and task nodes. The\n         master node cannot be scaled after initial configuration. </p>"
+                "smithy.api#documentation": "<p>Creates or updates a managed scaling policy for an Amazon EMR cluster. The\n         managed scaling policy defines the limits for resources, such as Amazon EC2\n         instances that can be added or terminated from a cluster. The policy only applies to the\n         core and task nodes. The master node cannot be scaled after initial configuration. </p>"
             }
         },
         "com.amazonaws.emr#PutManagedScalingPolicyInput": {
@@ -7846,7 +8004,7 @@
                 "ClusterId": {
                     "target": "com.amazonaws.emr#ClusterId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the ID of an EMR cluster where the managed scaling policy is attached. </p>",
+                        "smithy.api#documentation": "<p>Specifies the ID of an Amazon EMR cluster where the managed scaling policy is\n         attached. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7915,7 +8073,7 @@
                 "target": "com.amazonaws.emr#RemoveAutoScalingPolicyOutput"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Removes an automatic scaling policy from a specified instance group within an EMR\n         cluster.</p>"
+                "smithy.api#documentation": "<p>Removes an automatic scaling policy from a specified instance group within an Amazon EMR cluster.</p>"
             }
         },
         "com.amazonaws.emr#RemoveAutoScalingPolicyInput": {
@@ -7990,7 +8148,7 @@
                 "target": "com.amazonaws.emr#RemoveManagedScalingPolicyOutput"
             },
             "traits": {
-                "smithy.api#documentation": "<p> Removes a managed scaling policy from a specified EMR cluster. </p>"
+                "smithy.api#documentation": "<p> Removes a managed scaling policy from a specified Amazon EMR cluster. </p>"
             }
         },
         "com.amazonaws.emr#RemoveManagedScalingPolicyInput": {
@@ -8100,7 +8258,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>RunJobFlow creates and starts running a new cluster (job flow). The cluster runs the\n         steps specified. After the steps complete, the cluster stops and the HDFS partition is\n         lost. To prevent loss of data, configure the last step of the job flow to store results in\n            Amazon S3. If the <a>JobFlowInstancesConfig</a>\n            <code>KeepJobFlowAliveWhenNoSteps</code> parameter is set to <code>TRUE</code>, the cluster\n         transitions to the WAITING state rather than shutting down after the steps have completed. </p>\n         <p>For additional protection, you can set the <a>JobFlowInstancesConfig</a>\n            <code>TerminationProtected</code> parameter to <code>TRUE</code> to lock the cluster and\n         prevent it from being terminated by API call, user intervention, or in the event of a job\n         flow error.</p>\n         <p>A maximum of 256 steps are allowed in each job flow.</p>\n         <p>If your cluster is long-running (such as a Hive data warehouse) or complex, you may\n         require more than 256 steps to process your data. You can bypass the 256-step limitation in\n         various ways, including using the SSH shell to connect to the master node and submitting\n         queries directly to the software running on the master node, such as Hive and\n         Hadoop.</p>\n         <p>For long-running clusters, we recommend that you periodically store your results.</p>\n         <note>\n            <p>The instance fleets configuration is available only in Amazon EMR versions\n            4.8.0 and later, excluding 5.0.x versions. The RunJobFlow request can contain\n            InstanceFleets parameters or InstanceGroups parameters, but not both.</p>\n         </note>"
+                "smithy.api#documentation": "<p>RunJobFlow creates and starts running a new cluster (job flow). The cluster runs the\n         steps specified. After the steps complete, the cluster stops and the HDFS partition is\n         lost. To prevent loss of data, configure the last step of the job flow to store results in\n            Amazon S3. If the <a>JobFlowInstancesConfig</a>\n            <code>KeepJobFlowAliveWhenNoSteps</code> parameter is set to <code>TRUE</code>, the cluster\n         transitions to the WAITING state rather than shutting down after the steps have completed. </p>\n         <p>For additional protection, you can set the <a>JobFlowInstancesConfig</a>\n            <code>TerminationProtected</code> parameter to <code>TRUE</code> to lock the cluster and\n         prevent it from being terminated by API call, user intervention, or in the event of a job\n         flow error.</p>\n         <p>A maximum of 256 steps are allowed in each job flow.</p>\n         <p>If your cluster is long-running (such as a Hive data warehouse) or complex, you may\n         require more than 256 steps to process your data. You can bypass the 256-step limitation in\n         various ways, including using the SSH shell to connect to the master node and submitting\n         queries directly to the software running on the master node, such as Hive and\n         Hadoop.</p>\n         <p>For long-running clusters, we recommend that you periodically store your results.</p>\n         <note>\n            <p>The instance fleets configuration is available only in Amazon EMR releases\n            4.8.0 and later, excluding 5.0.x versions. The RunJobFlow request can contain\n            InstanceFleets parameters or InstanceGroups parameters, but not both.</p>\n         </note>"
             }
         },
         "com.amazonaws.emr#RunJobFlowInput": {
@@ -8122,7 +8280,7 @@
                 "LogEncryptionKmsKeyId": {
                     "target": "com.amazonaws.emr#XmlString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The KMS key used for encrypting log files. If a value is not\n         provided, the logs remain encrypted by AES-256. This attribute is only available with\n            Amazon EMR version 5.30.0 and later, excluding Amazon EMR 6.0.0.</p>"
+                        "smithy.api#documentation": "<p>The KMS key used for encrypting log files. If a value is not\n         provided, the logs remain encrypted by AES-256. This attribute is only available with\n            Amazon EMR releases 5.30.0 and later, excluding Amazon EMR 6.0.0.</p>"
                     }
                 },
                 "AdditionalInfo": {
@@ -8171,7 +8329,7 @@
                 "NewSupportedProducts": {
                     "target": "com.amazonaws.emr#NewSupportedProductsList",
                     "traits": {
-                        "smithy.api#documentation": "<note>\n            <p>For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and\n            later, use Applications.</p>\n         </note>\n         <p>A list of strings that indicates third-party software to use with the job flow that\n         accepts a user argument list. EMR accepts and forwards the argument list to the\n         corresponding installation script as bootstrap action arguments. For more information, see\n         \"Launch a Job Flow on the MapR Distribution for Hadoop\" in the <a href=\"https://docs.aws.amazon.com/emr/latest/DeveloperGuide/emr-dg.pdf\">Amazon EMR Developer Guide</a>.\n         Supported values are:</p>\n         <ul>\n            <li>\n               <p>\"mapr-m3\" - launch the cluster using MapR M3 Edition.</p>\n            </li>\n            <li>\n               <p>\"mapr-m5\" - launch the cluster using MapR M5 Edition.</p>\n            </li>\n            <li>\n               <p>\"mapr\" with the user arguments specifying \"--edition,m3\" or \"--edition,m5\" -\n               launch the job flow using MapR M3 or M5 Edition respectively.</p>\n            </li>\n            <li>\n               <p>\"mapr-m7\" - launch the cluster using MapR M7 Edition.</p>\n            </li>\n            <li>\n               <p>\"hunk\" - launch the cluster with the Hunk Big Data Analytics Platform.</p>\n            </li>\n            <li>\n               <p>\"hue\"- launch the cluster with Hue installed.</p>\n            </li>\n            <li>\n               <p>\"spark\" - launch the cluster with Apache Spark installed.</p>\n            </li>\n            <li>\n               <p>\"ganglia\" - launch the cluster with the Ganglia Monitoring System\n               installed.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<note>\n            <p>For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and\n            later, use Applications.</p>\n         </note>\n         <p>A list of strings that indicates third-party software to use with the job flow that\n         accepts a user argument list. Amazon EMR accepts and forwards the argument list to\n         the corresponding installation script as bootstrap action arguments. For more information,\n         see \"Launch a Job Flow on the MapR Distribution for Hadoop\" in the <a href=\"https://docs.aws.amazon.com/emr/latest/DeveloperGuide/emr-dg.pdf\">Amazon EMR\n            Developer Guide</a>. Supported values are:</p>\n         <ul>\n            <li>\n               <p>\"mapr-m3\" - launch the cluster using MapR M3 Edition.</p>\n            </li>\n            <li>\n               <p>\"mapr-m5\" - launch the cluster using MapR M5 Edition.</p>\n            </li>\n            <li>\n               <p>\"mapr\" with the user arguments specifying \"--edition,m3\" or \"--edition,m5\" -\n               launch the job flow using MapR M3 or M5 Edition respectively.</p>\n            </li>\n            <li>\n               <p>\"mapr-m7\" - launch the cluster using MapR M7 Edition.</p>\n            </li>\n            <li>\n               <p>\"hunk\" - launch the cluster with the Hunk Big Data Analytics Platform.</p>\n            </li>\n            <li>\n               <p>\"hue\"- launch the cluster with Hue installed.</p>\n            </li>\n            <li>\n               <p>\"spark\" - launch the cluster with Apache Spark installed.</p>\n            </li>\n            <li>\n               <p>\"ganglia\" - launch the cluster with the Ganglia Monitoring System\n               installed.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Applications": {
@@ -8183,26 +8341,26 @@
                 "Configurations": {
                     "target": "com.amazonaws.emr#ConfigurationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>For Amazon EMR releases 4.0 and later. The list of configurations supplied for\n         the EMR cluster you are creating.</p>"
+                        "smithy.api#documentation": "<p>For Amazon EMR releases 4.0 and later. The list of configurations supplied for\n         the Amazon EMR cluster that you are creating.</p>"
                     }
                 },
                 "VisibleToAllUsers": {
                     "target": "com.amazonaws.emr#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<important>\n            <p>The VisibleToAllUsers parameter is no longer supported. By default, the value is set\n            to <code>true</code>. Setting it to <code>false</code> now has no effect.</p>\n         </important>\n         <p>Set this value to <code>true</code> so that IAM principals in the Amazon Web Services account associated with the cluster can perform EMR actions on the cluster\n         that their IAM policies allow. This value defaults to <code>true</code> for clusters\n         created using the EMR API or the CLI\n         <a href=\"https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html\">create-cluster</a> command.</p>\n         <p>When set to <code>false</code>, only the IAM principal that created the cluster and the\n            Amazon Web Services account root user can perform EMR actions for the cluster, regardless\n         of the IAM permissions policies attached to other IAM principals. For more information, see\n            <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_iam_emr-with-iam.html#security_set_visible_to_all_users\">Understanding the EMR Cluster VisibleToAllUsers Setting</a> in the\n               <i>Amazon EMRManagement Guide</i>.</p>"
+                        "smithy.api#documentation": "<important>\n            <p>The VisibleToAllUsers parameter is no longer supported. By default, the value is set\n            to <code>true</code>. Setting it to <code>false</code> now has no effect.</p>\n         </important>\n         <p>Set this value to <code>true</code> so that IAM principals in the Amazon Web Services account associated with the cluster can perform Amazon EMR actions on\n         the cluster that their IAM policies allow. This value defaults to\n            <code>true</code> for clusters created using the Amazon EMR API or the CLI\n         <a href=\"https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html\">create-cluster</a> command.</p>\n         <p>When set to <code>false</code>, only the IAM principal that created the\n         cluster and the Amazon Web Services account root user can perform Amazon EMR actions\n         for the cluster, regardless of the IAM permissions policies attached to\n         other IAM principals. For more information, see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_IAM_emr-with-IAM.html#security_set_visible_to_all_users\">Understanding the Amazon EMR cluster VisibleToAllUsers setting</a> in the\n               <i>Amazon EMR Management Guide</i>.</p>"
                     }
                 },
                 "JobFlowRole": {
                     "target": "com.amazonaws.emr#XmlString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Also called instance profile and EC2 role. An IAM role for an EMR cluster. The EC2\n         instances of the cluster assume this role. The default role is\n            <code>EMR_EC2_DefaultRole</code>. In order to use the default role, you must have\n         already created it using the CLI or console.</p>"
+                        "smithy.api#documentation": "<p>Also called instance profile and Amazon EC2 role. An IAM role for\n         an Amazon EMR cluster. The Amazon EC2 instances of the cluster assume this\n         role. The default role is <code>EMR_EC2_DefaultRole</code>. In order to use the default\n         role, you must have already created it using the CLI or console.</p>"
                     }
                 },
                 "ServiceRole": {
                     "target": "com.amazonaws.emr#XmlString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IAM role that Amazon EMR assumes in order to access Amazon Web Services\n         resources on your behalf. If you've created a custom service role path, you must specify it\n         for the service role when you launch your cluster.</p>"
+                        "smithy.api#documentation": "<p>The IAM role that Amazon EMR assumes in order to access Amazon Web Services resources on your behalf. If you've created a custom service role path, you\n         must specify it for the service role when you launch your cluster.</p>"
                     }
                 },
                 "Tags": {
@@ -8220,25 +8378,25 @@
                 "AutoScalingRole": {
                     "target": "com.amazonaws.emr#XmlString",
                     "traits": {
-                        "smithy.api#documentation": "<p>An IAM role for automatic scaling policies. The default role is\n            <code>EMR_AutoScaling_DefaultRole</code>. The IAM role provides permissions that the\n         automatic scaling feature requires to launch and terminate EC2 instances in an instance\n         group.</p>"
+                        "smithy.api#documentation": "<p>An IAM role for automatic scaling policies. The default role is\n            <code>EMR_AutoScaling_DefaultRole</code>. The IAM role provides\n         permissions that the automatic scaling feature requires to launch and terminate Amazon EC2 instances in an instance group.</p>"
                     }
                 },
                 "ScaleDownBehavior": {
                     "target": "com.amazonaws.emr#ScaleDownBehavior",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the way that individual Amazon EC2 instances terminate when an\n         automatic scale-in activity occurs or an instance group is resized.\n            <code>TERMINATE_AT_INSTANCE_HOUR</code> indicates that Amazon EMR terminates\n         nodes at the instance-hour boundary, regardless of when the request to terminate the\n         instance was submitted. This option is only available with Amazon EMR 5.1.0 and\n         later and is the default for clusters created using that version.\n            <code>TERMINATE_AT_TASK_COMPLETION</code> indicates that Amazon EMR adds nodes\n         to a deny list and drains tasks from nodes before terminating the Amazon EC2\n         instances, regardless of the instance-hour boundary. With either behavior, Amazon EMR removes the least active nodes first and blocks instance termination if it could lead to\n         HDFS corruption. <code>TERMINATE_AT_TASK_COMPLETION</code> available only in Amazon EMR version 4.1.0 and later, and is the default for versions of Amazon EMR earlier than 5.1.0.</p>"
+                        "smithy.api#documentation": "<p>Specifies the way that individual Amazon EC2 instances terminate when an\n         automatic scale-in activity occurs or an instance group is resized.\n            <code>TERMINATE_AT_INSTANCE_HOUR</code> indicates that Amazon EMR terminates\n         nodes at the instance-hour boundary, regardless of when the request to terminate the\n         instance was submitted. This option is only available with Amazon EMR 5.1.0 and\n         later and is the default for clusters created using that version.\n            <code>TERMINATE_AT_TASK_COMPLETION</code> indicates that Amazon EMR adds nodes\n         to a deny list and drains tasks from nodes before terminating the Amazon EC2\n         instances, regardless of the instance-hour boundary. With either behavior, Amazon EMR removes the least active nodes first and blocks instance termination if it could lead to\n         HDFS corruption. <code>TERMINATE_AT_TASK_COMPLETION</code> available only in Amazon EMR releases 4.1.0 and later, and is the default for releases of Amazon EMR earlier than 5.1.0.</p>"
                     }
                 },
                 "CustomAmiId": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256",
                     "traits": {
-                        "smithy.api#documentation": "<p>Available only in Amazon EMR version 5.7.0 and later. The ID of a custom Amazon\n         EBS-backed Linux AMI. If specified, Amazon EMR uses this AMI when it launches\n         cluster EC2 instances. For more information about custom AMIs in Amazon EMR, see\n            <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-custom-ami.html\">Using a\n            Custom AMI</a> in the <i>Amazon EMR Management Guide</i>. If\n         omitted, the cluster uses the base Linux AMI for the <code>ReleaseLabel</code> specified.\n         For Amazon EMR versions 2.x and 3.x, use <code>AmiVersion</code> instead.</p>\n         <p>For information about creating a custom AMI, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html\">Creating an Amazon EBS-Backed Linux AMI</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux\n            Instances</i>. For information about finding an AMI ID, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html\">Finding a Linux\n            AMI</a>. </p>"
+                        "smithy.api#documentation": "<p>Available only in Amazon EMR releases 5.7.0 and later. The ID of a custom Amazon\n         EBS-backed Linux AMI. If specified, Amazon EMR uses this AMI when it launches\n         cluster Amazon EC2 instances. For more information about custom AMIs in Amazon EMR, see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-custom-ami.html\">Using a Custom AMI</a> in the\n               <i>Amazon EMR Management Guide</i>. If omitted, the cluster\n         uses the base Linux AMI for the <code>ReleaseLabel</code> specified. For Amazon EMR\n         releases 2.x and 3.x, use <code>AmiVersion</code> instead.</p>\n         <p>For information about creating a custom AMI, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html\">Creating an Amazon EBS-Backed Linux AMI</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux\n            Instances</i>. For information about finding an AMI ID, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html\">Finding a Linux\n            AMI</a>. </p>"
                     }
                 },
                 "EbsRootVolumeSize": {
                     "target": "com.amazonaws.emr#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The size, in GiB, of the Amazon EBS root device volume of the Linux AMI that is\n         used for each EC2 instance. Available in Amazon EMR version 4.x and later.</p>"
+                        "smithy.api#documentation": "<p>The size, in GiB, of the Amazon EBS root device volume of the Linux AMI that is\n         used for each Amazon EC2 instance. Available in Amazon EMR releases 4.x and\n         later.</p>"
                     }
                 },
                 "RepoUpgradeOnBoot": {
@@ -8351,20 +8509,20 @@
                 "MinCapacity": {
                     "target": "com.amazonaws.emr#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The lower boundary of EC2 instances in an instance group below which scaling activities\n         are not allowed to shrink. Scale-in activities will not terminate instances below this\n         boundary.</p>",
+                        "smithy.api#documentation": "<p>The lower boundary of Amazon EC2 instances in an instance group below which\n         scaling activities are not allowed to shrink. Scale-in activities will not terminate\n         instances below this boundary.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "MaxCapacity": {
                     "target": "com.amazonaws.emr#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The upper boundary of EC2 instances in an instance group beyond which scaling activities\n         are not allowed to grow. Scale-out activities will not add instances beyond this\n         boundary.</p>",
+                        "smithy.api#documentation": "<p>The upper boundary of Amazon EC2 instances in an instance group beyond which\n         scaling activities are not allowed to grow. Scale-out activities will not add instances\n         beyond this boundary.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The upper and lower EC2 instance limits for an automatic scaling policy. Automatic\n         scaling activities triggered by automatic scaling rules will not cause an instance group to\n         grow above or below these limits.</p>"
+                "smithy.api#documentation": "<p>The upper and lower Amazon EC2 instance limits for an automatic scaling policy.\n         Automatic scaling activities triggered by automatic scaling rules will not cause an\n         instance group to grow above or below these limits.</p>"
             }
         },
         "com.amazonaws.emr#ScalingRule": {
@@ -8399,7 +8557,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A scale-in or scale-out rule that defines scaling activity, including the CloudWatch\n         metric alarm that triggers activity, how EC2 instances are added or removed, and the\n         periodicity of adjustments. The automatic scaling policy for an instance group can comprise\n         one or more automatic scaling rules.</p>"
+                "smithy.api#documentation": "<p>A scale-in or scale-out rule that defines scaling activity, including the CloudWatch\n         metric alarm that triggers activity, how Amazon EC2 instances are added or removed,\n         and the periodicity of adjustments. The automatic scaling policy for an instance group can\n         comprise one or more automatic scaling rules.</p>"
             }
         },
         "com.amazonaws.emr#ScalingRuleList": {
@@ -8590,7 +8748,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>SetTerminationProtection locks a cluster (job flow) so the EC2 instances in the cluster\n         cannot be terminated by user intervention, an API call, or in the event of a job-flow\n         error. The cluster still terminates upon successful completion of the job flow. Calling\n            <code>SetTerminationProtection</code> on a cluster is similar to calling the Amazon EC2\n         <code>DisableAPITermination</code> API on all EC2 instances in a cluster.</p>\n         <p>\n            <code>SetTerminationProtection</code> is used to prevent accidental termination of a\n         cluster and to ensure that in the event of an error, the instances persist so that you can\n         recover any data stored in their ephemeral instance storage.</p>\n         <p> To terminate a cluster that has been locked by setting\n            <code>SetTerminationProtection</code> to <code>true</code>, you must first unlock the\n         job flow by a subsequent call to <code>SetTerminationProtection</code> in which you set the\n         value to <code>false</code>. </p>\n         <p> For more information, see<a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/UsingEMR_TerminationProtection.html\">Managing Cluster\n            Termination</a> in the <i>Amazon EMR Management Guide</i>. </p>"
+                "smithy.api#documentation": "<p>SetTerminationProtection locks a cluster (job flow) so the Amazon EC2 instances\n         in the cluster cannot be terminated by user intervention, an API call, or in the event of a\n         job-flow error. The cluster still terminates upon successful completion of the job flow.\n         Calling <code>SetTerminationProtection</code> on a cluster is similar to calling the\n            Amazon EC2\n         <code>DisableAPITermination</code> API on all Amazon EC2 instances in a\n         cluster.</p>\n         <p>\n            <code>SetTerminationProtection</code> is used to prevent accidental termination of a\n         cluster and to ensure that in the event of an error, the instances persist so that you can\n         recover any data stored in their ephemeral instance storage.</p>\n         <p> To terminate a cluster that has been locked by setting\n            <code>SetTerminationProtection</code> to <code>true</code>, you must first unlock the\n         job flow by a subsequent call to <code>SetTerminationProtection</code> in which you set the\n         value to <code>false</code>. </p>\n         <p> For more information, see<a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/UsingEMR_TerminationProtection.html\">Managing Cluster\n            Termination</a> in the <i>Amazon EMR Management Guide</i>. </p>"
             }
         },
         "com.amazonaws.emr#SetTerminationProtectionInput": {
@@ -8631,7 +8789,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<important>\n            <p>The SetVisibleToAllUsers parameter is no longer supported. Your cluster may be\n            visible to all users in your account. To restrict cluster access using an IAM policy, see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-access-iam.html\">Identity and Access\n               Management for EMR</a>. </p>\n         </important>\n         <p>Sets the <a>Cluster$VisibleToAllUsers</a> value for an EMR cluster. When\n            <code>true</code>, IAM principals in the Amazon Web Services account can perform EMR\n         cluster actions that their IAM policies allow. When <code>false</code>, only\n         the IAM principal that created the cluster and the Amazon Web Services account root user can\n         perform EMR actions on the cluster, regardless of IAM permissions policies attached to\n         other IAM principals.</p>\n         <p>This action works on running clusters. When you create a cluster, use the <a>RunJobFlowInput$VisibleToAllUsers</a> parameter.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_iam_emr-with-iam.html#security_set_visible_to_all_users\">Understanding the EMR Cluster VisibleToAllUsers Setting</a> in the\n               <i>Amazon EMRManagement Guide</i>.</p>"
+                "smithy.api#documentation": "<important>\n            <p>The SetVisibleToAllUsers parameter is no longer supported. Your cluster may be\n            visible to all users in your account. To restrict cluster access using an IAM policy, see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-access-IAM.html\">Identity and Access\n               Management for Amazon EMR</a>. </p>\n         </important>\n         <p>Sets the <a>Cluster$VisibleToAllUsers</a> value for an Amazon EMR\n         cluster. When <code>true</code>, IAM principals in the Amazon Web Services account can perform Amazon EMR cluster actions that their IAM policies allow. When <code>false</code>, only the IAM\n         principal that created the cluster and the Amazon Web Services account root user can perform\n            Amazon EMR actions on the cluster, regardless of IAM permissions\n         policies attached to other IAM principals.</p>\n         <p>This action works on running clusters. When you create a cluster, use the <a>RunJobFlowInput$VisibleToAllUsers</a> parameter.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_IAM_emr-with-IAM.html#security_set_visible_to_all_users\">Understanding the Amazon EMR Cluster VisibleToAllUsers Setting</a> in the\n               <i>Amazon EMR Management Guide</i>.</p>"
             }
         },
         "com.amazonaws.emr#SetVisibleToAllUsersInput": {
@@ -8648,7 +8806,7 @@
                     "target": "com.amazonaws.emr#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>A value of <code>true</code> indicates that an IAM principal in the Amazon Web Services account can perform EMR actions on the cluster that the IAM policies attached\n         to the principal allow. A value of <code>false</code> indicates that only the IAM principal\n         that created the cluster and the Amazon Web Services root user can perform EMR actions on\n         the cluster.</p>",
+                        "smithy.api#documentation": "<p>A value of <code>true</code> indicates that an IAM principal in the\n            Amazon Web Services account can perform Amazon EMR actions on the cluster that\n         the IAM policies attached to the principal allow. A value of\n            <code>false</code> indicates that only the IAM principal that created the\n         cluster and the Amazon Web Services root user can perform Amazon EMR actions on the\n         cluster.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -8684,13 +8842,13 @@
                 "AdjustmentType": {
                     "target": "com.amazonaws.emr#AdjustmentType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The way in which EC2 instances are added (if <code>ScalingAdjustment</code> is a\n         positive number) or terminated (if <code>ScalingAdjustment</code> is a negative number)\n         each time the scaling activity is triggered. <code>CHANGE_IN_CAPACITY</code> is the\n         default. <code>CHANGE_IN_CAPACITY</code> indicates that the EC2 instance count increments\n         or decrements by <code>ScalingAdjustment</code>, which should be expressed as an integer.\n            <code>PERCENT_CHANGE_IN_CAPACITY</code> indicates the instance count increments or\n         decrements by the percentage specified by <code>ScalingAdjustment</code>, which should be\n         expressed as an integer. For example, 20 indicates an increase in 20% increments of cluster\n         capacity. <code>EXACT_CAPACITY</code> indicates the scaling activity results in an instance\n         group with the number of EC2 instances specified by <code>ScalingAdjustment</code>, which\n         should be expressed as a positive integer.</p>"
+                        "smithy.api#documentation": "<p>The way in which Amazon EC2 instances are added (if\n            <code>ScalingAdjustment</code> is a positive number) or terminated (if\n            <code>ScalingAdjustment</code> is a negative number) each time the scaling activity is\n         triggered. <code>CHANGE_IN_CAPACITY</code> is the default. <code>CHANGE_IN_CAPACITY</code>\n         indicates that the Amazon EC2 instance count increments or decrements by\n            <code>ScalingAdjustment</code>, which should be expressed as an integer.\n            <code>PERCENT_CHANGE_IN_CAPACITY</code> indicates the instance count increments or\n         decrements by the percentage specified by <code>ScalingAdjustment</code>, which should be\n         expressed as an integer. For example, 20 indicates an increase in 20% increments of cluster\n         capacity. <code>EXACT_CAPACITY</code> indicates the scaling activity results in an instance\n         group with the number of Amazon EC2 instances specified by\n            <code>ScalingAdjustment</code>, which should be expressed as a positive integer.</p>"
                     }
                 },
                 "ScalingAdjustment": {
                     "target": "com.amazonaws.emr#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount by which to scale in or scale out, based on the specified\n            <code>AdjustmentType</code>. A positive value adds to the instance group's EC2 instance\n         count while a negative number removes instances. If <code>AdjustmentType</code> is set to\n            <code>EXACT_CAPACITY</code>, the number should only be a positive integer. If\n            <code>AdjustmentType</code> is set to <code>PERCENT_CHANGE_IN_CAPACITY</code>, the value\n         should express the percentage as an integer. For example, -20 indicates a decrease in 20%\n         increments of cluster capacity.</p>",
+                        "smithy.api#documentation": "<p>The amount by which to scale in or scale out, based on the specified\n            <code>AdjustmentType</code>. A positive value adds to the instance group's Amazon EC2 instance count while a negative number removes instances. If\n            <code>AdjustmentType</code> is set to <code>EXACT_CAPACITY</code>, the number should\n         only be a positive integer. If <code>AdjustmentType</code> is set to\n            <code>PERCENT_CHANGE_IN_CAPACITY</code>, the value should express the percentage as an\n         integer. For example, -20 indicates a decrease in 20% increments of cluster\n         capacity.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8702,7 +8860,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An automatic scaling configuration, which describes how the policy adds or removes\n         instances, the cooldown period, and the number of EC2 instances that will be added each\n         time the CloudWatch metric alarm condition is satisfied.</p>"
+                "smithy.api#documentation": "<p>An automatic scaling configuration, which describes how the policy adds or removes\n         instances, the cooldown period, and the number of Amazon EC2 instances that will be\n         added each time the CloudWatch metric alarm condition is satisfied.</p>"
             }
         },
         "com.amazonaws.emr#SimplifiedApplication": {
@@ -8773,7 +8931,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The launch specification for Spot Instances in the instance fleet, which determines the\n         defined duration, provisioning timeout behavior, and allocation strategy.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR versions\n            4.8.0 and later, excluding 5.0.x versions. Spot Instance allocation strategy is\n            available in Amazon EMR version 5.12.1 and later.</p>\n         </note>\n         <note>\n            <p>Spot Instances with a defined duration (also known as Spot blocks) are no longer\n            available to new customers from July 1, 2021. For customers who have previously used the\n            feature, we will continue to support Spot Instances with a defined duration until\n            December 31, 2022. </p>\n         </note>"
+                "smithy.api#documentation": "<p>The launch specification for Spot Instances in the instance fleet, which determines the\n         defined duration, provisioning timeout behavior, and allocation strategy.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR releases\n            4.8.0 and later, excluding 5.0.x versions. Spot Instance allocation strategy is\n            available in Amazon EMR releases 5.12.1 and later.</p>\n         </note>\n         <note>\n            <p>Spot Instances with a defined duration (also known as Spot blocks) are no longer\n            available to new customers from July 1, 2021. For customers who have previously used the\n            feature, we will continue to support Spot Instances with a defined duration until\n            December 31, 2022. </p>\n         </note>"
             }
         },
         "com.amazonaws.emr#SpotProvisioningTimeoutAction": {
@@ -8834,15 +8992,13 @@
                 "EditorId": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the EMR Notebook to use for notebook execution.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The unique identifier of the Amazon EMR Notebook to use for notebook\n         execution.</p>"
                     }
                 },
                 "RelativePath": {
                     "target": "com.amazonaws.emr#XmlString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The path and file name of the notebook file for this execution, relative to the path\n         specified for the EMR Notebook. For example, if you specify a path of\n            <code>s3://MyBucket/MyNotebooks</code> when you create an EMR Notebook for a notebook\n         with an ID of <code>e-ABCDEFGHIJK1234567890ABCD</code> (the <code>EditorID</code> of this\n         request), and you specify a <code>RelativePath</code> of\n            <code>my_notebook_executions/notebook_execution.ipynb</code>, the location of the file\n         for the notebook execution is\n            <code>s3://MyBucket/MyNotebooks/e-ABCDEFGHIJK1234567890ABCD/my_notebook_executions/notebook_execution.ipynb</code>.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The path and file name of the notebook file for this execution, relative to the path\n         specified for the Amazon EMR Notebook. For example, if you specify a path of\n            <code>s3://MyBucket/MyNotebooks</code> when you create an Amazon EMR Notebook\n         for a notebook with an ID of <code>e-ABCDEFGHIJK1234567890ABCD</code> (the\n            <code>EditorID</code> of this request), and you specify a <code>RelativePath</code> of\n            <code>my_notebook_executions/notebook_execution.ipynb</code>, the location of the file\n         for the notebook execution is\n            <code>s3://MyBucket/MyNotebooks/e-ABCDEFGHIJK1234567890ABCD/my_notebook_executions/notebook_execution.ipynb</code>.</p>"
                     }
                 },
                 "NotebookExecutionName": {
@@ -8854,7 +9010,7 @@
                 "NotebookParams": {
                     "target": "com.amazonaws.emr#XmlString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Input parameters in JSON format passed to the EMR Notebook at runtime for\n         execution.</p>"
+                        "smithy.api#documentation": "<p>Input parameters in JSON format passed to the Amazon EMR Notebook at runtime for\n         execution.</p>"
                     }
                 },
                 "ExecutionEngine": {
@@ -8867,20 +9023,44 @@
                 "ServiceRole": {
                     "target": "com.amazonaws.emr#XmlString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name or ARN of the IAM role that is used as the service role for Amazon EMR\n         (the EMR role) for the notebook execution.</p>",
+                        "smithy.api#documentation": "<p>The name or ARN of the IAM role that is used as the service role for\n            Amazon EMR (the Amazon EMR role) for the notebook execution.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "NotebookInstanceSecurityGroupId": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the Amazon EC2 security group to associate with the EMR\n         Notebook for this notebook execution.</p>"
+                        "smithy.api#documentation": "<p>The unique identifier of the Amazon EC2 security group to associate with the\n            Amazon EMR Notebook for this notebook execution.</p>"
                     }
                 },
                 "Tags": {
                     "target": "com.amazonaws.emr#TagList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of tags associated with a notebook execution. Tags are user-defined key-value\n         pairs that consist of a required key string with a maximum of 128 characters and an\n         optional value string with a maximum of 256 characters.</p>"
+                    }
+                },
+                "NotebookS3Location": {
+                    "target": "com.amazonaws.emr#NotebookS3LocationFromInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 location for the notebook execution input.</p>"
+                    }
+                },
+                "OutputNotebookS3Location": {
+                    "target": "com.amazonaws.emr#OutputNotebookS3LocationFromInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 location for the notebook execution output.</p>"
+                    }
+                },
+                "OutputNotebookFormat": {
+                    "target": "com.amazonaws.emr#OutputNotebookFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The output format for the notebook execution.</p>"
+                    }
+                },
+                "EnvironmentVariables": {
+                    "target": "com.amazonaws.emr#EnvironmentVariablesMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The environment variables associated with the notebook execution.</p>"
                     }
                 }
             },
@@ -8973,7 +9153,7 @@
                 "ExecutionRoleArn": {
                     "target": "com.amazonaws.emr#OptionalArnType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the runtime role for a step on the cluster. The\n         runtime role can be a cross-account IAM role. The runtime role ARN is a combination of\n         account ID, role name, and role type using the following format:\n            <code>arn:partition:service:region:account:resource</code>. </p>\n         <p>For example, <code>arn:aws:iam::1234567890:role/ReadOnly</code> is a correctly formatted\n         runtime role ARN.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the runtime role for a step on the cluster. The\n         runtime role can be a cross-account IAM role. The runtime role ARN is a\n         combination of account ID, role name, and role type using the following format:\n            <code>arn:partition:service:region:account:resource</code>. </p>\n         <p>For example, <code>arn:aws:IAM::1234567890:role/ReadOnly</code> is a correctly formatted\n         runtime role ARN.</p>"
                     }
                 }
             },
@@ -9425,7 +9605,7 @@
                 "AuthMode": {
                     "target": "com.amazonaws.emr#AuthMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the Amazon EMR Studio authenticates users using IAM or IAM Identity Center.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the Amazon EMR Studio authenticates users with IAM or IAM Identity Center.</p>"
                     }
                 },
                 "VpcId": {
@@ -9449,7 +9629,7 @@
                 "UserRole": {
                     "target": "com.amazonaws.emr#XmlString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the IAM role assumed by users logged in to the Amazon EMR Studio. A\n         Studio only requires a <code>UserRole</code> when you use IAM\n         authentication.</p>"
+                        "smithy.api#documentation": "<p>The name of the IAM role assumed by users logged in to the Amazon EMR Studio. A Studio only requires a <code>UserRole</code> when you use IAM authentication.</p>"
                     }
                 },
                 "WorkspaceSecurityGroupId": {
@@ -9552,7 +9732,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Details for an Amazon EMR Studio, including ID, Name, VPC, and Description. The\n         details do not include subnets, IAM roles, security groups, or tags associated with the\n         Studio.</p>"
+                "smithy.api#documentation": "<p>Details for an Amazon EMR Studio, including ID, Name, VPC, and Description. The\n         details do not include subnets, IAM roles, security groups, or tags\n         associated with the Studio.</p>"
             }
         },
         "com.amazonaws.emr#StudioSummaryList": {
@@ -9584,7 +9764,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The list of supported product configurations that allow user-supplied arguments. EMR\n         accepts these arguments and forwards them to the corresponding installation script as\n         bootstrap action arguments.</p>"
+                "smithy.api#documentation": "<p>The list of supported product configurations that allow user-supplied arguments. Amazon EMR accepts these arguments and forwards them to the corresponding installation\n         script as bootstrap action arguments.</p>"
             }
         },
         "com.amazonaws.emr#SupportedProductsList": {
@@ -9633,7 +9813,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>TerminateJobFlows shuts a list of clusters (job flows) down. When a job flow is shut\n         down, any step not yet completed is canceled and the EC2 instances on which the cluster is\n         running are stopped. Any log files not already saved are uploaded to Amazon S3 if a\n         LogUri was specified when the cluster was created.</p>\n         <p>The maximum number of clusters allowed is 10. The call to <code>TerminateJobFlows</code>\n         is asynchronous. Depending on the configuration of the cluster, it may take up to 1-5\n         minutes for the cluster to completely terminate and release allocated resources, such as\n            Amazon EC2 instances.</p>"
+                "smithy.api#documentation": "<p>TerminateJobFlows shuts a list of clusters (job flows) down. When a job flow is shut\n         down, any step not yet completed is canceled and the Amazon EC2 instances on which\n         the cluster is running are stopped. Any log files not already saved are uploaded to Amazon S3 if a LogUri was specified when the cluster was created.</p>\n         <p>The maximum number of clusters allowed is 10. The call to <code>TerminateJobFlows</code>\n         is asynchronous. Depending on the configuration of the cluster, it may take up to 1-5\n         minutes for the cluster to completely terminate and release allocated resources, such as\n            Amazon EC2 instances.</p>"
             }
         },
         "com.amazonaws.emr#TerminateJobFlowsInput": {
@@ -9947,19 +10127,29 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.emr#UriString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10280
+                },
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDBFF-\\uDC00\\uDFFF\\r\\n\\t]*$"
+            }
+        },
         "com.amazonaws.emr#UsernamePassword": {
             "type": "structure",
             "members": {
                 "Username": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The username associated with the temporary credentials that you use to connect to cluster endpoints.</p>"
+                        "smithy.api#documentation": "<p>The username associated with the temporary credentials that you use to connect to\n         cluster endpoints.</p>"
                     }
                 },
                 "Password": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The password associated with the temporary credentials that you use to connect to cluster endpoints.</p>"
+                        "smithy.api#documentation": "<p>The password associated with the temporary credentials that you use to connect to\n         cluster endpoints.</p>"
                     }
                 }
             },
@@ -9999,7 +10189,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>EBS volume specifications such as volume type, IOPS, size (GiB) and throughput (MiB/s)\n         that are requested for the EBS volume attached to an EC2 instance in the cluster.</p>"
+                "smithy.api#documentation": "<p>EBS volume specifications such as volume type, IOPS, size (GiB) and throughput (MiB/s)\n         that are requested for the EBS volume attached to an Amazon EC2 instance in the\n         cluster.</p>"
             }
         },
         "com.amazonaws.emr#WholeNumber": {

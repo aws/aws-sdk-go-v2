@@ -431,13 +431,13 @@
                 "defaultTaskHeartbeatTimeout": {
                     "target": "com.amazonaws.swf#DurationInSecondsOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The default maximum time, in seconds, before which a worker processing a task must report\n      progress by calling <a>RecordActivityTaskHeartbeat</a>.</p>\n         <p>You can specify this value only when <i>registering</i> an activity type. The registered default value can be\n      overridden when you schedule a task through the <code>ScheduleActivityTask</code> \n            <a>Decision</a>. If the activity\n      worker subsequently attempts to record a heartbeat or returns a result, the activity worker receives an\n      <code>UnknownResource</code> fault. In this case, Amazon SWF no longer considers the activity task to be valid;\n      the activity worker should clean up the activity task.</p>\n         <p>The duration is specified in seconds, an integer greater than or equal to <code>0</code>. You can use <code>NONE</code> to specify unlimited duration.</p>"
+                        "smithy.api#documentation": "<p>\n         The default maximum time, in seconds, before which a worker processing a task must report\n      progress by calling <a>RecordActivityTaskHeartbeat</a>.</p>\n         <p>You can specify this value only when <i>registering</i> an activity type. The registered default value can be\n      overridden when you schedule a task through the <code>ScheduleActivityTask</code>\n            <a>Decision</a>. If the activity\n      worker subsequently attempts to record a heartbeat or returns a result, the activity worker receives an\n      <code>UnknownResource</code> fault. In this case, Amazon SWF no longer considers the activity task to be valid;\n      the activity worker should clean up the activity task.</p>\n         <p>The duration is specified in seconds, an integer greater than or equal to <code>0</code>. You can use <code>NONE</code> to specify unlimited duration.</p>"
                     }
                 },
                 "defaultTaskList": {
                     "target": "com.amazonaws.swf#TaskList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The default task list specified for this activity type at registration. This default is used if\n      a task list isn't provided when a task is scheduled through the <code>ScheduleActivityTask</code>\n            <a>Decision</a>. You can override the default registered task list when scheduling a task through the\n      <code>ScheduleActivityTask</code> \n            <a>Decision</a>.</p>"
+                        "smithy.api#documentation": "<p>\n         The default task list specified for this activity type at registration. This default is used if\n      a task list isn't provided when a task is scheduled through the <code>ScheduleActivityTask</code>\n            <a>Decision</a>. You can override the default registered task list when scheduling a task through the\n      <code>ScheduleActivityTask</code>\n            <a>Decision</a>.</p>"
                     }
                 },
                 "defaultTaskPriority": {
@@ -449,7 +449,7 @@
                 "defaultTaskScheduleToStartTimeout": {
                     "target": "com.amazonaws.swf#DurationInSecondsOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The default maximum duration, specified when registering the activity type, that a task of an\n      activity type can wait before being assigned to a worker. You can override this default when scheduling a task\n      through the <code>ScheduleActivityTask</code> \n            <a>Decision</a>.</p>\n         <p>The duration is specified in seconds, an integer greater than or equal to <code>0</code>. You can use <code>NONE</code> to specify unlimited duration.</p>"
+                        "smithy.api#documentation": "<p>\n         The default maximum duration, specified when registering the activity type, that a task of an\n      activity type can wait before being assigned to a worker. You can override this default when scheduling a task\n      through the <code>ScheduleActivityTask</code>\n            <a>Decision</a>.</p>\n         <p>The duration is specified in seconds, an integer greater than or equal to <code>0</code>. You can use <code>NONE</code> to specify unlimited duration.</p>"
                     }
                 },
                 "defaultTaskScheduleToCloseTimeout": {
@@ -743,7 +743,7 @@
                     "target": "com.amazonaws.swf#EventId",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The ID of the <code>StartChildWorkflowExecutionInitiated</code> event corresponding to the\n      <code>StartChildWorkflowExecution</code> \n            <a>Decision</a> to start this child workflow execution.\n      This information can be useful for diagnosing problems by tracing back the chain of\n  events leading up to this event.</p>",
+                        "smithy.api#documentation": "<p>The ID of the <code>StartChildWorkflowExecutionInitiated</code> event corresponding to the\n      <code>StartChildWorkflowExecution</code>\n            <a>Decision</a> to start this child workflow execution.\n      This information can be useful for diagnosing problems by tracing back the chain of\n  events leading up to this event.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -787,7 +787,7 @@
                     "target": "com.amazonaws.swf#EventId",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The ID of the <code>StartChildWorkflowExecutionInitiated</code> event corresponding to the <code>StartChildWorkflowExecution</code> \n            <a>Decision</a> to start this child workflow execution. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>",
+                        "smithy.api#documentation": "<p>The ID of the <code>StartChildWorkflowExecutionInitiated</code> event corresponding to the <code>StartChildWorkflowExecution</code>\n            <a>Decision</a> to start this child workflow execution. This information can be useful for diagnosing problems by tracing back the chain of events leading up to this event.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -837,7 +837,7 @@
                     "target": "com.amazonaws.swf#EventId",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The ID of the <code>StartChildWorkflowExecutionInitiated</code> event corresponding to the\n      <code>StartChildWorkflowExecution</code> \n            <a>Decision</a> to start this child workflow execution.\n      This information can be useful for diagnosing problems by tracing back the chain of\n  events leading up to this event.</p>",
+                        "smithy.api#documentation": "<p>The ID of the <code>StartChildWorkflowExecutionInitiated</code> event corresponding to the\n      <code>StartChildWorkflowExecution</code>\n            <a>Decision</a> to start this child workflow execution.\n      This information can be useful for diagnosing problems by tracing back the chain of\n  events leading up to this event.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -875,7 +875,7 @@
                     "target": "com.amazonaws.swf#EventId",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The ID of the <code>StartChildWorkflowExecutionInitiated</code> event corresponding to the\n      <code>StartChildWorkflowExecution</code> \n            <a>Decision</a> to start this child workflow execution.\n      This information can be useful for diagnosing problems by tracing back the chain of\n  events leading up to this event.</p>",
+                        "smithy.api#documentation": "<p>The ID of the <code>StartChildWorkflowExecutionInitiated</code> event corresponding to the\n      <code>StartChildWorkflowExecution</code>\n            <a>Decision</a> to start this child workflow execution.\n      This information can be useful for diagnosing problems by tracing back the chain of\n  events leading up to this event.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -905,7 +905,7 @@
                     "target": "com.amazonaws.swf#EventId",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The ID of the <code>StartChildWorkflowExecutionInitiated</code> event corresponding to the\n      <code>StartChildWorkflowExecution</code> \n            <a>Decision</a> to start this child workflow execution.\n      This information can be useful for diagnosing problems by tracing back the chain of\n  events leading up to this event.</p>",
+                        "smithy.api#documentation": "<p>The ID of the <code>StartChildWorkflowExecutionInitiated</code> event corresponding to the\n      <code>StartChildWorkflowExecution</code>\n            <a>Decision</a> to start this child workflow execution.\n      This information can be useful for diagnosing problems by tracing back the chain of\n  events leading up to this event.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -950,7 +950,7 @@
                     "target": "com.amazonaws.swf#EventId",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The ID of the <code>StartChildWorkflowExecutionInitiated</code> event corresponding to the\n      <code>StartChildWorkflowExecution</code> \n            <a>Decision</a> to start this child workflow execution. This information can be useful for diagnosing problems by tracing back the chain of\n  events leading up to this event.</p>",
+                        "smithy.api#documentation": "<p>The ID of the <code>StartChildWorkflowExecutionInitiated</code> event corresponding to the\n      <code>StartChildWorkflowExecution</code>\n            <a>Decision</a> to start this child workflow execution. This information can be useful for diagnosing problems by tracing back the chain of\n  events leading up to this event.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1136,7 +1136,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides the details of the <code>ContinueAsNewWorkflowExecution</code> decision.</p>\n         <p>\n            <b>Access Control</b>\n         </p>\n         <p>You can use IAM policies to control this decision's access to Amazon SWF resources as follows:</p>\n         <ul>\n            <li>\n               <p>Use a <code>Resource</code> element with the domain name to limit the action to only\n  specified domains.</p>\n            </li>\n            <li>\n               <p>Use an <code>Action</code> element to allow or deny permission to call this action.</p>\n            </li>\n            <li>\n               <p>Constrain the following parameters by using a <code>Condition</code> element with the\n              appropriate keys.</p>\n              <ul>\n                  <li>\n                      <p>\n                        <code>tag</code> – A tag used to identify the workflow execution</p>\n                  </li>\n                  <li>\n                      <p>\n                        <code>taskList</code> – String constraint. The key is <code>swf:taskList.name</code>.</p>\n                  </li>\n                  <li>\n                      <p>\n                        <code>workflowType.version</code> – String constraint. The key is <code>swf:workflowType.version</code>.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>If the caller doesn't have sufficient permissions to invoke the action, or the\n  parameter values fall outside the specified constraints, the action fails. The associated event attribute's\n          <code>cause</code> parameter is set to <code>OPERATION_NOT_PERMITTED</code>. For details and example IAM policies, see\n          <a href=\"https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html\">Using IAM to Manage Access to Amazon SWF Workflows</a> in the <i>Amazon SWF Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Provides the details of the <code>ContinueAsNewWorkflowExecution</code> decision.</p>\n         <p>\n            <b>Access Control</b>\n         </p>\n         <p>You can use IAM policies to control this decision's access to Amazon SWF resources as follows:</p>\n         <ul>\n            <li>\n               <p>Use a <code>Resource</code> element with the domain name to limit the action to only\n  specified domains.</p>\n            </li>\n            <li>\n               <p>Use an <code>Action</code> element to allow or deny permission to call this action.</p>\n            </li>\n            <li>\n               <p>Constrain the following parameters by using a <code>Condition</code> element with the\n              appropriate keys.</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>tag</code> – A tag used to identify the workflow execution</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>taskList</code> – String constraint. The key is <code>swf:taskList.name</code>.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>workflowType.version</code> – String constraint. The key is <code>swf:workflowType.version</code>.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>If the caller doesn't have sufficient permissions to invoke the action, or the\n  parameter values fall outside the specified constraints, the action fails. The associated event attribute's\n          <code>cause</code> parameter is set to <code>OPERATION_NOT_PERMITTED</code>. For details and example IAM policies, see\n          <a href=\"https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html\">Using IAM to Manage Access to Amazon SWF Workflows</a> in the <i>Amazon SWF Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.swf#ContinueAsNewWorkflowExecutionFailedCause": {
@@ -1544,7 +1544,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies a decision made by the decider. A decision can be one of these types:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CancelTimer</code> – Cancels a previously started timer and records a <code>TimerCanceled</code> event in the\n        history.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CancelWorkflowExecution</code> – Closes the workflow execution and records a\n        <code>WorkflowExecutionCanceled</code> event in the history.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CompleteWorkflowExecution</code> – Closes the workflow execution and records a\n        <code>WorkflowExecutionCompleted</code> event in the history .</p>\n            </li>\n            <li>\n               <p>\n                  <code>ContinueAsNewWorkflowExecution</code> – Closes the workflow execution and starts a new workflow execution of the\n        same type using the same workflow ID and a unique run Id. A <code>WorkflowExecutionContinuedAsNew</code> event\n        is recorded in the history.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FailWorkflowExecution</code> – Closes the workflow execution and records a <code>WorkflowExecutionFailed</code>\n        event in the history.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RecordMarker</code> – Records a <code>MarkerRecorded</code> event in the history. Markers can be used for adding\n        custom information in the history for instance to let deciders know that they don't need to look at the history\n        beyond the marker event.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RequestCancelActivityTask</code> – Attempts to cancel a previously scheduled activity task. If the activity task\n        was scheduled but has not been assigned to a worker, then it is canceled. If the activity task was already\n        assigned to a worker, then the worker is informed that cancellation has been requested in the response to\n        <a>RecordActivityTaskHeartbeat</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RequestCancelExternalWorkflowExecution</code> – Requests that a request be made to cancel the specified external\n        workflow execution and records a <code>RequestCancelExternalWorkflowExecutionInitiated</code> event in the\n        history.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ScheduleActivityTask</code> – Schedules an activity task.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SignalExternalWorkflowExecution</code> – Requests a signal to be delivered to the specified external workflow\n        execution and records a <code>SignalExternalWorkflowExecutionInitiated</code> event in the history.</p>\n            </li>\n            <li>\n               <p>\n                  <code>StartChildWorkflowExecution</code> – Requests that a child workflow execution be started and records a\n        <code>StartChildWorkflowExecutionInitiated</code> event in the history. The child workflow execution is a\n        separate workflow execution with its own history.</p>\n            </li>\n            <li>\n               <p>\n                  <code>StartTimer</code> – Starts a timer for this workflow execution and records a <code>TimerStarted</code> event in\n        the history. This timer fires after the specified delay and record a <code>TimerFired</code> event.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Access Control</b>\n         </p>\n         <p>If you grant permission to use <code>RespondDecisionTaskCompleted</code>, you can use IAM policies to express\n      permissions for the list of decisions returned by this action as if they were members of the API. Treating\n      decisions as a pseudo API maintains a uniform conceptual model and helps keep policies readable. For details and\n      example IAM policies, see <a href=\"https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html\">Using IAM to Manage Access to Amazon SWF\n          Workflows</a> in the <i>Amazon SWF Developer Guide</i>.</p>\n\n         <p>\n            <b>Decision Failure</b>\n         </p>\n\n         <p>Decisions can fail for several reasons</p>\n\n         <ul>\n            <li>\n               <p>The ordering of decisions should follow a logical flow. Some decisions might not make sense in the current context of the workflow execution and therefore fails.</p>\n            </li>\n            <li>\n               <p>A limit on your account was reached.</p>\n            </li>\n            <li>\n               <p>The decision lacks sufficient permissions.</p>\n            </li>\n         </ul>\n\n         <p>One of the following events might be added to the history to indicate an error. The event attribute's\n          <code>cause</code> parameter indicates the cause. If <code>cause</code> is set to <code>OPERATION_NOT_PERMITTED</code>, the decision failed\n  because it lacked sufficient permissions. For details and example IAM policies, see <a href=\"https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html\">Using IAM to Manage Access to Amazon SWF Workflows</a>\n          in the <i>Amazon SWF Developer Guide</i>.</p>\n\n         <ul>\n            <li>\n               <p>\n                  <code>ScheduleActivityTaskFailed</code> – A <code>ScheduleActivityTask</code> decision failed. This could happen if the\n        activity type specified in the decision isn't registered, is in a deprecated state, or the decision isn't\n        properly configured.</p>\n            </li>\n            <li>\n               <p>\n                    <code>RequestCancelActivityTaskFailed</code> – A\n                        <code>RequestCancelActivityTask</code> decision failed. This could happen if\n                    there is no open activity task with the specified activityId.</p>\n            </li>\n            <li>\n               <p>\n                    <code>StartTimerFailed</code> – A <code>StartTimer</code> decision failed. This\n                    could happen if there is another open timer with the same timerId.</p>\n            </li>\n            <li>\n               <p>\n                    <code>CancelTimerFailed</code> – A <code>CancelTimer</code> decision failed.\n                    This could happen if there is no open timer with the specified\n                    timerId.</p>\n            </li>\n            <li>\n               <p>\n                    <code>StartChildWorkflowExecutionFailed</code> – A\n                        <code>StartChildWorkflowExecution</code> decision failed. This could happen\n                    if the workflow type specified isn't registered, is deprecated, or the decision\n                    isn't properly configured.</p>\n            </li>\n            <li>\n               <p>\n                    <code>SignalExternalWorkflowExecutionFailed</code> – A\n                        <code>SignalExternalWorkflowExecution</code> decision failed. This could\n                    happen if the <code>workflowID</code> specified in the decision was\n                    incorrect.</p>\n            </li>\n            <li>\n               <p>\n                    <code>RequestCancelExternalWorkflowExecutionFailed</code> – A\n                        <code>RequestCancelExternalWorkflowExecution</code> decision failed. This\n                    could happen if the <code>workflowID</code> specified in the decision was\n                    incorrect.</p>\n            </li>\n            <li>\n               <p>\n                    <code>CancelWorkflowExecutionFailed</code> – A\n                        <code>CancelWorkflowExecution</code> decision failed. This could happen if\n                    there is an unhandled decision task pending in the workflow execution.</p>\n            </li>\n            <li>\n               <p>\n                    <code>CompleteWorkflowExecutionFailed</code> – A\n                        <code>CompleteWorkflowExecution</code> decision failed. This could happen if\n                    there is an unhandled decision task pending in the workflow execution.</p>\n            </li>\n            <li>\n               <p>\n                    <code>ContinueAsNewWorkflowExecutionFailed</code> – A\n                        <code>ContinueAsNewWorkflowExecution</code> decision failed. This could\n                    happen if there is an unhandled decision task pending in the workflow execution\n                    or the ContinueAsNewWorkflowExecution decision was not configured\n                    correctly.</p>\n            </li>\n            <li>\n               <p>\n                    <code>FailWorkflowExecutionFailed</code> – A <code>FailWorkflowExecution</code>\n                    decision failed. This could happen if there is an unhandled decision task\n                    pending in the workflow execution.</p>\n            </li>\n         </ul>\n         <p>The preceding error events might occur due to an error in the decider logic, which might put the workflow execution in an unstable state The cause field in the event structure for the error event indicates the cause of the error.</p>\n         <note>\n            <p>A workflow execution may be closed by the decider by returning one of the following decisions when completing\n      a decision task: <code>CompleteWorkflowExecution</code>, <code>FailWorkflowExecution</code>,\n          <code>CancelWorkflowExecution</code> and <code>ContinueAsNewWorkflowExecution</code>. An <code>UnhandledDecision</code> fault\n      is returned if a workflow closing decision is specified and a signal or activity event had been added to the\n      history while the decision task was being performed by the decider. Unlike the above situations which are logic\n      issues, this fault is always possible because of race conditions in a distributed system. The right action here is\n      to call <a>RespondDecisionTaskCompleted</a>  without any decisions. This would result in another decision task\n      with these new events included in the history. The decider should handle the new events and may decide to close\n      the workflow execution.</p>\n         </note>\n         <p>\n            <b>How to Code a Decision</b>\n         </p>\n         <p>You code a decision by first setting the decision type field to one of the above decision values, and then set the corresponding attributes field shown below:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>\n                     <a>ScheduleActivityTaskDecisionAttributes</a>\n                    </code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\n                     <a>RequestCancelActivityTaskDecisionAttributes</a>\n                    </code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\n                     <a>CompleteWorkflowExecutionDecisionAttributes</a>\n                  </code>\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>\n                     <a>FailWorkflowExecutionDecisionAttributes</a>\n                  </code>\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>\n                     <a>CancelWorkflowExecutionDecisionAttributes</a>\n                  </code>\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>\n                     <a>ContinueAsNewWorkflowExecutionDecisionAttributes</a>\n                  </code>\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>\n                     <a>RecordMarkerDecisionAttributes</a>\n                  </code>\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>\n                     <a>StartTimerDecisionAttributes</a>\n                  </code>\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>\n                     <a>CancelTimerDecisionAttributes</a>\n                  </code>\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>\n                     <a>SignalExternalWorkflowExecutionDecisionAttributes</a>\n                  </code>\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>\n                     <a>RequestCancelExternalWorkflowExecutionDecisionAttributes</a>\n                  </code>\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>\n                     <a>StartChildWorkflowExecutionDecisionAttributes</a>\n                  </code>\n                </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Specifies a decision made by the decider. A decision can be one of these types:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CancelTimer</code> – Cancels a previously started timer and records a <code>TimerCanceled</code> event in the\n        history.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CancelWorkflowExecution</code> – Closes the workflow execution and records a\n        <code>WorkflowExecutionCanceled</code> event in the history.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CompleteWorkflowExecution</code> – Closes the workflow execution and records a\n        <code>WorkflowExecutionCompleted</code> event in the history .</p>\n            </li>\n            <li>\n               <p>\n                  <code>ContinueAsNewWorkflowExecution</code> – Closes the workflow execution and starts a new workflow execution of the\n        same type using the same workflow ID and a unique run Id. A <code>WorkflowExecutionContinuedAsNew</code> event\n        is recorded in the history.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FailWorkflowExecution</code> – Closes the workflow execution and records a <code>WorkflowExecutionFailed</code>\n        event in the history.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RecordMarker</code> – Records a <code>MarkerRecorded</code> event in the history. Markers can be used for adding\n        custom information in the history for instance to let deciders know that they don't need to look at the history\n        beyond the marker event.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RequestCancelActivityTask</code> – Attempts to cancel a previously scheduled activity task. If the activity task\n        was scheduled but has not been assigned to a worker, then it is canceled. If the activity task was already\n        assigned to a worker, then the worker is informed that cancellation has been requested in the response to\n        <a>RecordActivityTaskHeartbeat</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RequestCancelExternalWorkflowExecution</code> – Requests that a request be made to cancel the specified external\n        workflow execution and records a <code>RequestCancelExternalWorkflowExecutionInitiated</code> event in the\n        history.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ScheduleActivityTask</code> – Schedules an activity task.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SignalExternalWorkflowExecution</code> – Requests a signal to be delivered to the specified external workflow\n        execution and records a <code>SignalExternalWorkflowExecutionInitiated</code> event in the history.</p>\n            </li>\n            <li>\n               <p>\n                  <code>StartChildWorkflowExecution</code> – Requests that a child workflow execution be started and records a\n        <code>StartChildWorkflowExecutionInitiated</code> event in the history. The child workflow execution is a\n        separate workflow execution with its own history.</p>\n            </li>\n            <li>\n               <p>\n                  <code>StartTimer</code> – Starts a timer for this workflow execution and records a <code>TimerStarted</code> event in\n        the history. This timer fires after the specified delay and record a <code>TimerFired</code> event.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Access Control</b>\n         </p>\n         <p>If you grant permission to use <code>RespondDecisionTaskCompleted</code>, you can use IAM policies to express\n      permissions for the list of decisions returned by this action as if they were members of the API. Treating\n      decisions as a pseudo API maintains a uniform conceptual model and helps keep policies readable. For details and\n      example IAM policies, see <a href=\"https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html\">Using IAM to Manage Access to Amazon SWF\n          Workflows</a> in the <i>Amazon SWF Developer Guide</i>.</p>\n         <p>\n            <b>Decision Failure</b>\n         </p>\n         <p>Decisions can fail for several reasons</p>\n         <ul>\n            <li>\n               <p>The ordering of decisions should follow a logical flow. Some decisions might not make sense in the current context of the workflow execution and therefore fails.</p>\n            </li>\n            <li>\n               <p>A limit on your account was reached.</p>\n            </li>\n            <li>\n               <p>The decision lacks sufficient permissions.</p>\n            </li>\n         </ul>\n         <p>One of the following events might be added to the history to indicate an error. The event attribute's\n          <code>cause</code> parameter indicates the cause. If <code>cause</code> is set to <code>OPERATION_NOT_PERMITTED</code>, the decision failed\n  because it lacked sufficient permissions. For details and example IAM policies, see <a href=\"https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html\">Using IAM to Manage Access to Amazon SWF Workflows</a>\n          in the <i>Amazon SWF Developer Guide</i>.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ScheduleActivityTaskFailed</code> – A <code>ScheduleActivityTask</code> decision failed. This could happen if the\n        activity type specified in the decision isn't registered, is in a deprecated state, or the decision isn't\n        properly configured.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RequestCancelActivityTaskFailed</code> – A\n                        <code>RequestCancelActivityTask</code> decision failed. This could happen if\n                    there is no open activity task with the specified activityId.</p>\n            </li>\n            <li>\n               <p>\n                  <code>StartTimerFailed</code> – A <code>StartTimer</code> decision failed. This\n                    could happen if there is another open timer with the same timerId.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CancelTimerFailed</code> – A <code>CancelTimer</code> decision failed.\n                    This could happen if there is no open timer with the specified\n                    timerId.</p>\n            </li>\n            <li>\n               <p>\n                  <code>StartChildWorkflowExecutionFailed</code> – A\n                        <code>StartChildWorkflowExecution</code> decision failed. This could happen\n                    if the workflow type specified isn't registered, is deprecated, or the decision\n                    isn't properly configured.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SignalExternalWorkflowExecutionFailed</code> – A\n                        <code>SignalExternalWorkflowExecution</code> decision failed. This could\n                    happen if the <code>workflowID</code> specified in the decision was\n                    incorrect.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RequestCancelExternalWorkflowExecutionFailed</code> – A\n                        <code>RequestCancelExternalWorkflowExecution</code> decision failed. This\n                    could happen if the <code>workflowID</code> specified in the decision was\n                    incorrect.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CancelWorkflowExecutionFailed</code> – A\n                        <code>CancelWorkflowExecution</code> decision failed. This could happen if\n                    there is an unhandled decision task pending in the workflow execution.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CompleteWorkflowExecutionFailed</code> – A\n                        <code>CompleteWorkflowExecution</code> decision failed. This could happen if\n                    there is an unhandled decision task pending in the workflow execution.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ContinueAsNewWorkflowExecutionFailed</code> – A\n                        <code>ContinueAsNewWorkflowExecution</code> decision failed. This could\n                    happen if there is an unhandled decision task pending in the workflow execution\n                    or the ContinueAsNewWorkflowExecution decision was not configured\n                    correctly.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FailWorkflowExecutionFailed</code> – A <code>FailWorkflowExecution</code>\n                    decision failed. This could happen if there is an unhandled decision task\n                    pending in the workflow execution.</p>\n            </li>\n         </ul>\n         <p>The preceding error events might occur due to an error in the decider logic, which might put the workflow execution in an unstable state The cause field in the event structure for the error event indicates the cause of the error.</p>\n         <note>\n            <p>A workflow execution may be closed by the decider by returning one of the following decisions when completing\n      a decision task: <code>CompleteWorkflowExecution</code>, <code>FailWorkflowExecution</code>,\n          <code>CancelWorkflowExecution</code> and <code>ContinueAsNewWorkflowExecution</code>. An <code>UnhandledDecision</code> fault\n      is returned if a workflow closing decision is specified and a signal or activity event had been added to the\n      history while the decision task was being performed by the decider. Unlike the above situations which are logic\n      issues, this fault is always possible because of race conditions in a distributed system. The right action here is\n      to call <a>RespondDecisionTaskCompleted</a>  without any decisions. This would result in another decision task\n      with these new events included in the history. The decider should handle the new events and may decide to close\n      the workflow execution.</p>\n         </note>\n         <p>\n            <b>How to Code a Decision</b>\n         </p>\n         <p>You code a decision by first setting the decision type field to one of the above decision values, and then set the corresponding attributes field shown below:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>\n                     <a>ScheduleActivityTaskDecisionAttributes</a>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\n                     <a>RequestCancelActivityTaskDecisionAttributes</a>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\n                     <a>CompleteWorkflowExecutionDecisionAttributes</a>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\n                     <a>FailWorkflowExecutionDecisionAttributes</a>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\n                     <a>CancelWorkflowExecutionDecisionAttributes</a>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\n                     <a>ContinueAsNewWorkflowExecutionDecisionAttributes</a>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\n                     <a>RecordMarkerDecisionAttributes</a>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\n                     <a>StartTimerDecisionAttributes</a>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\n                     <a>CancelTimerDecisionAttributes</a>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\n                     <a>SignalExternalWorkflowExecutionDecisionAttributes</a>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\n                     <a>RequestCancelExternalWorkflowExecutionDecisionAttributes</a>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\n                     <a>StartChildWorkflowExecutionDecisionAttributes</a>\n                  </code>\n               </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.swf#DecisionList": {
@@ -2852,7 +2852,7 @@
                 "nextPageToken": {
                     "target": "com.amazonaws.swf#PageToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If <code>NextPageToken</code> is returned there are more results\n      available.  The value of <code>NextPageToken</code> is a unique pagination token for each page. Make the call again using \n      the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires \n      after 60 seconds. Using an expired pagination token will return a <code>400</code> error: \"<code>Specified token has \n      exceeded its maximum lifetime</code>\". </p>\n      \n         <p>The configured <code>maximumPageSize</code> determines how many results can be returned\n      in a single call. </p>"
+                        "smithy.api#documentation": "<p>If <code>NextPageToken</code> is returned there are more results\n      available.  The value of <code>NextPageToken</code> is a unique pagination token for each page. Make the call again using \n      the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires \n      after 24 hours. Using an expired pagination token will return a <code>400</code> error: \"<code>Specified token has \n      exceeded its maximum lifetime</code>\". </p>\n         <p>The configured <code>maximumPageSize</code> determines how many results can be returned\n      in a single call. </p>"
                     }
                 },
                 "maximumPageSize": {
@@ -3511,7 +3511,7 @@
                 "nextPageToken": {
                     "target": "com.amazonaws.swf#PageToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If <code>NextPageToken</code> is returned there are more results\n      available.  The value of <code>NextPageToken</code> is a unique pagination token for each page. Make the call again using \n      the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires \n      after 60 seconds. Using an expired pagination token will return a <code>400</code> error: \"<code>Specified token has \n      exceeded its maximum lifetime</code>\". </p>\n      \n         <p>The configured <code>maximumPageSize</code> determines how many results can be returned\n      in a single call. </p>"
+                        "smithy.api#documentation": "<p>If <code>NextPageToken</code> is returned there are more results\n      available.  The value of <code>NextPageToken</code> is a unique pagination token for each page. Make the call again using \n      the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires \n      after 24 hours. Using an expired pagination token will return a <code>400</code> error: \"<code>Specified token has \n      exceeded its maximum lifetime</code>\". </p>\n         <p>The configured <code>maximumPageSize</code> determines how many results can be returned\n      in a single call. </p>"
                     }
                 },
                 "maximumPageSize": {
@@ -3608,7 +3608,7 @@
                 "nextPageToken": {
                     "target": "com.amazonaws.swf#PageToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If <code>NextPageToken</code> is returned there are more results\n      available.  The value of <code>NextPageToken</code> is a unique pagination token for each page. Make the call again using \n      the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires \n      after 60 seconds. Using an expired pagination token will return a <code>400</code> error: \"<code>Specified token has \n      exceeded its maximum lifetime</code>\". </p>\n      \n         <p>The configured <code>maximumPageSize</code> determines how many results can be returned\n      in a single call. </p>"
+                        "smithy.api#documentation": "<p>If <code>NextPageToken</code> is returned there are more results\n      available.  The value of <code>NextPageToken</code> is a unique pagination token for each page. Make the call again using \n      the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires \n      after 24 hours. Using an expired pagination token will return a <code>400</code> error: \"<code>Specified token has \n      exceeded its maximum lifetime</code>\". </p>\n         <p>The configured <code>maximumPageSize</code> determines how many results can be returned\n      in a single call. </p>"
                     }
                 },
                 "maximumPageSize": {
@@ -3659,7 +3659,7 @@
                 "nextPageToken": {
                     "target": "com.amazonaws.swf#PageToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If <code>NextPageToken</code> is returned there are more results\n      available.  The value of <code>NextPageToken</code> is a unique pagination token for each page. Make the call again using \n      the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires \n      after 60 seconds. Using an expired pagination token will return a <code>400</code> error: \"<code>Specified token has \n      exceeded its maximum lifetime</code>\". </p>\n      \n         <p>The configured <code>maximumPageSize</code> determines how many results can be returned\n      in a single call. </p>"
+                        "smithy.api#documentation": "<p>If <code>NextPageToken</code> is returned there are more results\n      available.  The value of <code>NextPageToken</code> is a unique pagination token for each page. Make the call again using \n      the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires \n      after 24 hours. Using an expired pagination token will return a <code>400</code> error: \"<code>Specified token has \n      exceeded its maximum lifetime</code>\". </p>\n         <p>The configured <code>maximumPageSize</code> determines how many results can be returned\n      in a single call. </p>"
                     }
                 },
                 "registrationStatus": {
@@ -3746,7 +3746,7 @@
                 "nextPageToken": {
                     "target": "com.amazonaws.swf#PageToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If <code>NextPageToken</code> is returned there are more results\n      available.  The value of <code>NextPageToken</code> is a unique pagination token for each page. Make the call again using \n      the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires \n      after 60 seconds. Using an expired pagination token will return a <code>400</code> error: \"<code>Specified token has \n      exceeded its maximum lifetime</code>\". </p>\n      \n         <p>The configured <code>maximumPageSize</code> determines how many results can be returned\n      in a single call. </p>"
+                        "smithy.api#documentation": "<p>If <code>NextPageToken</code> is returned there are more results\n      available.  The value of <code>NextPageToken</code> is a unique pagination token for each page. Make the call again using \n      the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires \n      after 24 hours. Using an expired pagination token will return a <code>400</code> error: \"<code>Specified token has \n      exceeded its maximum lifetime</code>\". </p>\n         <p>The configured <code>maximumPageSize</code> determines how many results can be returned\n      in a single call. </p>"
                     }
                 },
                 "maximumPageSize": {
@@ -3878,7 +3878,7 @@
                 "nextPageToken": {
                     "target": "com.amazonaws.swf#PageToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If <code>NextPageToken</code> is returned there are more results\n      available.  The value of <code>NextPageToken</code> is a unique pagination token for each page. Make the call again using \n      the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires \n      after 60 seconds. Using an expired pagination token will return a <code>400</code> error: \"<code>Specified token has \n      exceeded its maximum lifetime</code>\". </p>\n      \n         <p>The configured <code>maximumPageSize</code> determines how many results can be returned\n      in a single call. </p>"
+                        "smithy.api#documentation": "<p>If <code>NextPageToken</code> is returned there are more results\n      available.  The value of <code>NextPageToken</code> is a unique pagination token for each page. Make the call again using \n      the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires \n      after 24 hours. Using an expired pagination token will return a <code>400</code> error: \"<code>Specified token has \n      exceeded its maximum lifetime</code>\". </p>\n         <p>The configured <code>maximumPageSize</code> determines how many results can be returned\n      in a single call. </p>"
                     }
                 },
                 "maximumPageSize": {
@@ -4050,7 +4050,7 @@
                 "taskList": {
                     "target": "com.amazonaws.swf#TaskList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the task list to poll for activity tasks.</p>\n    \n         <p>The specified string must not start or end with whitespace. It must not contain a\n        <code>:</code> (colon), <code>/</code> (slash), <code>|</code> (vertical bar), or any\n      control characters (<code>\\u0000-\\u001f</code> | <code>\\u007f-\\u009f</code>). Also, it must\n      not <i>be</i> the literal string <code>arn</code>.</p>",
+                        "smithy.api#documentation": "<p>Specifies the task list to poll for activity tasks.</p>\n         <p>The specified string must not start or end with whitespace. It must not contain a\n        <code>:</code> (colon), <code>/</code> (slash), <code>|</code> (vertical bar), or any\n      control characters (<code>\\u0000-\\u001f</code> | <code>\\u007f-\\u009f</code>). Also, it must\n      <i>not</i> be the literal string <code>arn</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4107,7 +4107,7 @@
                 "taskList": {
                     "target": "com.amazonaws.swf#TaskList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the task list to poll for decision tasks.</p>\n    \n         <p>The specified string must not start or end with whitespace. It must not contain a\n        <code>:</code> (colon), <code>/</code> (slash), <code>|</code> (vertical bar), or any\n      control characters (<code>\\u0000-\\u001f</code> | <code>\\u007f-\\u009f</code>). Also, it must\n      not <i>be</i> the literal string <code>arn</code>.</p>",
+                        "smithy.api#documentation": "<p>Specifies the task list to poll for decision tasks.</p>\n         <p>The specified string must not contain a\n        <code>:</code> (colon), <code>/</code> (slash), <code>|</code> (vertical bar), or any\n      control characters (<code>\\u0000-\\u001f</code> | <code>\\u007f-\\u009f</code>). Also, it must\n      <i>not</i> be the literal string <code>arn</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4120,14 +4120,14 @@
                 "nextPageToken": {
                     "target": "com.amazonaws.swf#PageToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If <code>NextPageToken</code> is returned there are more results\n      available.  The value of <code>NextPageToken</code> is a unique pagination token for each page. Make the call again using \n      the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires \n      after 60 seconds. Using an expired pagination token will return a <code>400</code> error: \"<code>Specified token has \n      exceeded its maximum lifetime</code>\". </p>\n      \n         <p>The configured <code>maximumPageSize</code> determines how many results can be returned\n      in a single call. </p>\n         <note>\n            <p>The <code>nextPageToken</code> returned by this action cannot be used with <a>GetWorkflowExecutionHistory</a> to get the next page. You must call <a>PollForDecisionTask</a> again (with the <code>nextPageToken</code>) to retrieve\n        the next page of history records. Calling <a>PollForDecisionTask</a> with a\n          <code>nextPageToken</code> doesn't return a new decision task.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>If <code>NextPageToken</code> is returned there are more results\n      available.  The value of <code>NextPageToken</code> is a unique pagination token for each page. Make the call again using \n      the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires \n      after 24 hours. Using an expired pagination token will return a <code>400</code> error: \"<code>Specified token has \n      exceeded its maximum lifetime</code>\". </p>\n         <p>The configured <code>maximumPageSize</code> determines how many results can be returned\n      in a single call. </p>\n         <note>\n            <p>The <code>nextPageToken</code> returned by this action cannot be used with <a>GetWorkflowExecutionHistory</a> to get the next page. You must call <a>PollForDecisionTask</a> again (with the <code>nextPageToken</code>) to retrieve\n        the next page of history records. Calling <a>PollForDecisionTask</a> with a\n          <code>nextPageToken</code> doesn't return a new decision task.</p>\n         </note>"
                     }
                 },
                 "maximumPageSize": {
                     "target": "com.amazonaws.swf#PageSize",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The maximum number of results that are returned per call.\n  Use <code>nextPageToken</code> to obtain further pages of results. </p>  \n         <p>This\n      is an upper limit only; the actual number of results returned per call may be fewer than the\n      specified maximum.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of results that are returned per call.\n  Use <code>nextPageToken</code> to obtain further pages of results. </p>\n         <p>This\n      is an upper limit only; the actual number of results returned per call may be fewer than the\n      specified maximum.</p>"
                     }
                 },
                 "reverseOrder": {
@@ -4135,6 +4135,13 @@
                     "traits": {
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>When set to <code>true</code>, returns the events in reverse order. By default the\n      results are returned in ascending order of the <code>eventTimestamp</code> of the\n      events.</p>"
+                    }
+                },
+                "startAtPreviousStartedEvent": {
+                    "target": "com.amazonaws.swf#StartAtPreviousStartedEvent",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>When set to <code>true</code>, returns the events with <code>eventTimestamp</code> greater than or equal to <code>eventTimestamp</code> of the most recent <code>DecisionTaskStarted</code> event. By default, this parameter is set to <code>false</code>.</p>"
                     }
                 }
             },
@@ -4284,14 +4291,14 @@
                 "name": {
                     "target": "com.amazonaws.swf#Name",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the activity type within the domain.</p>\n    \n         <p>The specified string must not start or end with whitespace. It must not contain a\n        <code>:</code> (colon), <code>/</code> (slash), <code>|</code> (vertical bar), or any\n      control characters (<code>\\u0000-\\u001f</code> | <code>\\u007f-\\u009f</code>). Also, it must\n      not <i>be</i> the literal string <code>arn</code>.</p>",
+                        "smithy.api#documentation": "<p>The name of the activity type within the domain.</p>\n         <p>The specified string must not contain a\n        <code>:</code> (colon), <code>/</code> (slash), <code>|</code> (vertical bar), or any\n      control characters (<code>\\u0000-\\u001f</code> | <code>\\u007f-\\u009f</code>). Also, it must\n      <i>not</i> be the literal string <code>arn</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "version": {
                     "target": "com.amazonaws.swf#Version",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the activity type.</p>\n         <note>\n            <p>The activity type consists of the name and version, the combination of which must be\n        unique within the domain.</p>\n         </note>\n    \n         <p>The specified string must not start or end with whitespace. It must not contain a\n        <code>:</code> (colon), <code>/</code> (slash), <code>|</code> (vertical bar), or any\n      control characters (<code>\\u0000-\\u001f</code> | <code>\\u007f-\\u009f</code>). Also, it must\n      not <i>be</i> the literal string <code>arn</code>.</p>",
+                        "smithy.api#documentation": "<p>The version of the activity type.</p>\n         <note>\n            <p>The activity type consists of the name and version, the combination of which must be\n        unique within the domain.</p>\n         </note>\n         <p>The specified string must not contain a\n        <code>:</code> (colon), <code>/</code> (slash), <code>|</code> (vertical bar), or any\n      control characters (<code>\\u0000-\\u001f</code> | <code>\\u007f-\\u009f</code>). Also, it must\n      <i>not</i> be the literal string <code>arn</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4374,7 +4381,7 @@
                 "name": {
                     "target": "com.amazonaws.swf#DomainName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Name of the domain to register. The name must be unique in the region that the domain\n      is registered in.</p>\n    \n         <p>The specified string must not start or end with whitespace. It must not contain a\n        <code>:</code> (colon), <code>/</code> (slash), <code>|</code> (vertical bar), or any\n      control characters (<code>\\u0000-\\u001f</code> | <code>\\u007f-\\u009f</code>). Also, it must\n      not <i>be</i> the literal string <code>arn</code>.</p>",
+                        "smithy.api#documentation": "<p>Name of the domain to register. The name must be unique in the region that the domain\n      is registered in.</p>\n         <p>The specified string must not start or end with whitespace. It must not contain a\n        <code>:</code> (colon), <code>/</code> (slash), <code>|</code> (vertical bar), or any\n      control characters (<code>\\u0000-\\u001f</code> | <code>\\u007f-\\u009f</code>). Also, it must\n      <i>not</i> be the literal string <code>arn</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4394,7 +4401,7 @@
                 "tags": {
                     "target": "com.amazonaws.swf#ResourceTagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Tags to be added when registering a domain.</p> \n         <p>Tags may only contain unicode letters, digits, whitespace, or these symbols: <code>_ . : / = + - @</code>.</p>"
+                        "smithy.api#documentation": "<p>Tags to be added when registering a domain.</p>\n         <p>Tags may only contain unicode letters, digits, whitespace, or these symbols: <code>_ . : / = + - @</code>.</p>"
                     }
                 }
             },
@@ -4441,14 +4448,14 @@
                 "name": {
                     "target": "com.amazonaws.swf#Name",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the workflow type.</p>\n    \n         <p>The specified string must not start or end with whitespace. It must not contain a\n        <code>:</code> (colon), <code>/</code> (slash), <code>|</code> (vertical bar), or any\n      control characters (<code>\\u0000-\\u001f</code> | <code>\\u007f-\\u009f</code>). Also, it must\n      not <i>be</i> the literal string <code>arn</code>.</p>",
+                        "smithy.api#documentation": "<p>The name of the workflow type.</p>\n         <p>The specified string must not contain a\n        <code>:</code> (colon), <code>/</code> (slash), <code>|</code> (vertical bar), or any\n      control characters (<code>\\u0000-\\u001f</code> | <code>\\u007f-\\u009f</code>). Also, it must\n      <i>not</i> be the literal string <code>arn</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "version": {
                     "target": "com.amazonaws.swf#Version",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the workflow type.</p>\n         <note>\n            <p>The workflow type consists of the name and version, the combination of which must be\n        unique within the domain. To get a list of all currently registered workflow types, use the\n          <a>ListWorkflowTypes</a> action.</p>\n         </note>\n    \n         <p>The specified string must not start or end with whitespace. It must not contain a\n        <code>:</code> (colon), <code>/</code> (slash), <code>|</code> (vertical bar), or any\n      control characters (<code>\\u0000-\\u001f</code> | <code>\\u007f-\\u009f</code>). Also, it must\n      not <i>be</i> the literal string <code>arn</code>.</p>",
+                        "smithy.api#documentation": "<p>The version of the workflow type.</p>\n         <note>\n            <p>The workflow type consists of the name and version, the combination of which must be\n        unique within the domain. To get a list of all currently registered workflow types, use the\n          <a>ListWorkflowTypes</a> action.</p>\n         </note>\n         <p>The specified string must not contain a\n        <code>:</code> (colon), <code>/</code> (slash), <code>|</code> (vertical bar), or any\n      control characters (<code>\\u0000-\\u001f</code> | <code>\\u007f-\\u009f</code>). Also, it must\n      <i>not</i> be the literal string <code>arn</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4467,7 +4474,7 @@
                 "defaultExecutionStartToCloseTimeout": {
                     "target": "com.amazonaws.swf#DurationInSecondsOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>If set, specifies the default maximum duration for executions of this workflow type.\n      You can override this default when starting an execution through the <a>StartWorkflowExecution</a> Action or <code>StartChildWorkflowExecution</code>\n            <a>Decision</a>.</p>\n\n         <p>The duration is specified in seconds; an integer greater than or equal to 0. Unlike\n      some of the other timeout parameters in Amazon SWF, you cannot specify a value of \"NONE\" for\n        <code>defaultExecutionStartToCloseTimeout</code>; there is a one-year max limit on the time\n      that a workflow execution can run. Exceeding this limit always causes the workflow execution\n      to time out.</p>"
+                        "smithy.api#documentation": "<p>If set, specifies the default maximum duration for executions of this workflow type.\n      You can override this default when starting an execution through the <a>StartWorkflowExecution</a> Action or <code>StartChildWorkflowExecution</code>\n            <a>Decision</a>.</p>\n         <p>The duration is specified in seconds; an integer greater than or equal to 0. Unlike\n      some of the other timeout parameters in Amazon SWF, you cannot specify a value of \"NONE\" for\n        <code>defaultExecutionStartToCloseTimeout</code>; there is a one-year max limit on the time\n      that a workflow execution can run. Exceeding this limit always causes the workflow execution\n      to time out.</p>"
                     }
                 },
                 "defaultTaskList": {
@@ -4730,7 +4737,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Records a <code>WorkflowExecutionCancelRequested</code> event in the currently running\n      workflow execution identified by the given domain, workflowId, and runId. This logically\n      requests the cancellation of the workflow execution as a whole. It is up to the decider to\n      take appropriate actions when it receives an execution history with this event.</p>\n\n         <note>\n            <p>If the runId isn't specified, the <code>WorkflowExecutionCancelRequested</code> event\n        is recorded in the history of the current open workflow execution with the specified\n        workflowId in the domain.</p>\n         </note>\n\n         <note>\n            <p>Because this action allows the workflow to properly clean up and gracefully close, it\n        should be used instead of <a>TerminateWorkflowExecution</a> when\n        possible.</p>\n         </note>\n         <p>\n            <b>Access Control</b>\n         </p>\n         <p>You can use IAM policies to control this action's access to Amazon SWF resources as\n      follows:</p>\n         <ul>\n            <li>\n               <p>Use a <code>Resource</code> element with the domain name to limit the action to\n          only specified domains.</p>\n            </li>\n            <li>\n               <p>Use an <code>Action</code> element to allow or deny permission to call this\n          action.</p>\n            </li>\n            <li>\n               <p>You cannot use an IAM policy to constrain this action's parameters.</p>\n            </li>\n         </ul>\n         <p>If the caller doesn't have sufficient permissions to invoke the action, or the\n      parameter values fall outside the specified constraints, the action fails. The associated\n      event attribute's <code>cause</code> parameter is set to <code>OPERATION_NOT_PERMITTED</code>.\n      For details and example IAM policies, see <a href=\"https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html\">Using IAM to Manage Access to Amazon SWF\n        Workflows</a> in the <i>Amazon SWF Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Records a <code>WorkflowExecutionCancelRequested</code> event in the currently running\n      workflow execution identified by the given domain, workflowId, and runId. This logically\n      requests the cancellation of the workflow execution as a whole. It is up to the decider to\n      take appropriate actions when it receives an execution history with this event.</p>\n         <note>\n            <p>If the runId isn't specified, the <code>WorkflowExecutionCancelRequested</code> event\n        is recorded in the history of the current open workflow execution with the specified\n        workflowId in the domain.</p>\n         </note>\n         <note>\n            <p>Because this action allows the workflow to properly clean up and gracefully close, it\n        should be used instead of <a>TerminateWorkflowExecution</a> when\n        possible.</p>\n         </note>\n         <p>\n            <b>Access Control</b>\n         </p>\n         <p>You can use IAM policies to control this action's access to Amazon SWF resources as\n      follows:</p>\n         <ul>\n            <li>\n               <p>Use a <code>Resource</code> element with the domain name to limit the action to\n          only specified domains.</p>\n            </li>\n            <li>\n               <p>Use an <code>Action</code> element to allow or deny permission to call this\n          action.</p>\n            </li>\n            <li>\n               <p>You cannot use an IAM policy to constrain this action's parameters.</p>\n            </li>\n         </ul>\n         <p>If the caller doesn't have sufficient permissions to invoke the action, or the\n      parameter values fall outside the specified constraints, the action fails. The associated\n      event attribute's <code>cause</code> parameter is set to <code>OPERATION_NOT_PERMITTED</code>.\n      For details and example IAM policies, see <a href=\"https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html\">Using IAM to Manage Access to Amazon SWF\n        Workflows</a> in the <i>Amazon SWF Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.swf#RequestCancelWorkflowExecutionInput": {
@@ -4779,7 +4786,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Tags are key-value pairs that can be associated with Amazon SWF state machines and\n      activities.</p> \n         <p>Tags may only contain unicode letters, digits, whitespace, or these symbols: <code>_ . : / = + - @</code>.</p>"
+                "smithy.api#documentation": "<p>Tags are key-value pairs that can be associated with Amazon SWF state machines and\n      activities.</p>\n         <p>Tags may only contain unicode letters, digits, whitespace, or these symbols: <code>_ . : / = + - @</code>.</p>"
             }
         },
         "com.amazonaws.swf#ResourceTagKey": {
@@ -4829,7 +4836,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Used by workers to tell the service that the <a>ActivityTask</a> identified\n      by the <code>taskToken</code> was successfully canceled. Additional <code>details</code> can\n      be provided using the <code>details</code> argument.</p>\n\n         <p>These <code>details</code> (if provided) appear in the\n        <code>ActivityTaskCanceled</code> event added to the workflow history.</p>\n\n         <important>\n            <p>Only use this operation if the <code>canceled</code> flag of a <a>RecordActivityTaskHeartbeat</a> request returns <code>true</code> and if the\n        activity can be safely undone or abandoned.</p>\n         </important>\n\n         <p>A task is considered open from the time that it is scheduled until it is closed.\n      Therefore a task is reported as open while a worker is processing it. A task is closed after\n      it has been specified in a call to <a>RespondActivityTaskCompleted</a>,\n      RespondActivityTaskCanceled, <a>RespondActivityTaskFailed</a>, or the task has\n        <a href=\"https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dg-basic.html#swf-dev-timeout-types\">timed\n        out</a>.</p>\n\n         <p>\n            <b>Access Control</b>\n         </p>\n         <p>You can use IAM policies to control this action's access to Amazon SWF resources as\n      follows:</p>\n         <ul>\n            <li>\n               <p>Use a <code>Resource</code> element with the domain name to limit the action to\n          only specified domains.</p>\n            </li>\n            <li>\n               <p>Use an <code>Action</code> element to allow or deny permission to call this\n          action.</p>\n            </li>\n            <li>\n               <p>You cannot use an IAM policy to constrain this action's parameters.</p>\n            </li>\n         </ul>\n         <p>If the caller doesn't have sufficient permissions to invoke the action, or the\n      parameter values fall outside the specified constraints, the action fails. The associated\n      event attribute's <code>cause</code> parameter is set to <code>OPERATION_NOT_PERMITTED</code>.\n      For details and example IAM policies, see <a href=\"https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html\">Using IAM to Manage Access to Amazon SWF\n        Workflows</a> in the <i>Amazon SWF Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Used by workers to tell the service that the <a>ActivityTask</a> identified\n      by the <code>taskToken</code> was successfully canceled. Additional <code>details</code> can\n      be provided using the <code>details</code> argument.</p>\n         <p>These <code>details</code> (if provided) appear in the\n        <code>ActivityTaskCanceled</code> event added to the workflow history.</p>\n         <important>\n            <p>Only use this operation if the <code>canceled</code> flag of a <a>RecordActivityTaskHeartbeat</a> request returns <code>true</code> and if the\n        activity can be safely undone or abandoned.</p>\n         </important>\n         <p>A task is considered open from the time that it is scheduled until it is closed.\n      Therefore a task is reported as open while a worker is processing it. A task is closed after\n      it has been specified in a call to <a>RespondActivityTaskCompleted</a>,\n      RespondActivityTaskCanceled, <a>RespondActivityTaskFailed</a>, or the task has\n        <a href=\"https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dg-basic.html#swf-dev-timeout-types\">timed\n        out</a>.</p>\n         <p>\n            <b>Access Control</b>\n         </p>\n         <p>You can use IAM policies to control this action's access to Amazon SWF resources as\n      follows:</p>\n         <ul>\n            <li>\n               <p>Use a <code>Resource</code> element with the domain name to limit the action to\n          only specified domains.</p>\n            </li>\n            <li>\n               <p>Use an <code>Action</code> element to allow or deny permission to call this\n          action.</p>\n            </li>\n            <li>\n               <p>You cannot use an IAM policy to constrain this action's parameters.</p>\n            </li>\n         </ul>\n         <p>If the caller doesn't have sufficient permissions to invoke the action, or the\n      parameter values fall outside the specified constraints, the action fails. The associated\n      event attribute's <code>cause</code> parameter is set to <code>OPERATION_NOT_PERMITTED</code>.\n      For details and example IAM policies, see <a href=\"https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html\">Using IAM to Manage Access to Amazon SWF\n        Workflows</a> in the <i>Amazon SWF Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.swf#RespondActivityTaskCanceledInput": {
@@ -4870,7 +4877,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Used by workers to tell the service that the <a>ActivityTask</a> identified\n      by the <code>taskToken</code> completed successfully with a <code>result</code> (if provided).\n      The <code>result</code> appears in the <code>ActivityTaskCompleted</code> event in the\n      workflow history.</p>\n\n         <important>\n            <p>If the requested task doesn't complete successfully, use <a>RespondActivityTaskFailed</a> instead. If the worker finds that the task is\n        canceled through the <code>canceled</code> flag returned by <a>RecordActivityTaskHeartbeat</a>, it should cancel the task, clean up and then call\n          <a>RespondActivityTaskCanceled</a>.</p>\n         </important>\n\n         <p>A task is considered open from the time that it is scheduled until it is closed.\n      Therefore a task is reported as open while a worker is processing it. A task is closed after\n      it has been specified in a call to RespondActivityTaskCompleted, <a>RespondActivityTaskCanceled</a>, <a>RespondActivityTaskFailed</a>, or the\n      task has <a href=\"https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dg-basic.html#swf-dev-timeout-types\">timed\n        out</a>.</p>\n\n         <p>\n            <b>Access Control</b>\n         </p>\n         <p>You can use IAM policies to control this action's access to Amazon SWF resources as\n      follows:</p>\n         <ul>\n            <li>\n               <p>Use a <code>Resource</code> element with the domain name to limit the action to\n          only specified domains.</p>\n            </li>\n            <li>\n               <p>Use an <code>Action</code> element to allow or deny permission to call this\n          action.</p>\n            </li>\n            <li>\n               <p>You cannot use an IAM policy to constrain this action's parameters.</p>\n            </li>\n         </ul>\n         <p>If the caller doesn't have sufficient permissions to invoke the action, or the\n      parameter values fall outside the specified constraints, the action fails. The associated\n      event attribute's <code>cause</code> parameter is set to <code>OPERATION_NOT_PERMITTED</code>.\n      For details and example IAM policies, see <a href=\"https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html\">Using IAM to Manage Access to Amazon SWF\n        Workflows</a> in the <i>Amazon SWF Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Used by workers to tell the service that the <a>ActivityTask</a> identified\n      by the <code>taskToken</code> completed successfully with a <code>result</code> (if provided).\n      The <code>result</code> appears in the <code>ActivityTaskCompleted</code> event in the\n      workflow history.</p>\n         <important>\n            <p>If the requested task doesn't complete successfully, use <a>RespondActivityTaskFailed</a> instead. If the worker finds that the task is\n        canceled through the <code>canceled</code> flag returned by <a>RecordActivityTaskHeartbeat</a>, it should cancel the task, clean up and then call\n          <a>RespondActivityTaskCanceled</a>.</p>\n         </important>\n         <p>A task is considered open from the time that it is scheduled until it is closed.\n      Therefore a task is reported as open while a worker is processing it. A task is closed after\n      it has been specified in a call to RespondActivityTaskCompleted, <a>RespondActivityTaskCanceled</a>, <a>RespondActivityTaskFailed</a>, or the\n      task has <a href=\"https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dg-basic.html#swf-dev-timeout-types\">timed\n        out</a>.</p>\n         <p>\n            <b>Access Control</b>\n         </p>\n         <p>You can use IAM policies to control this action's access to Amazon SWF resources as\n      follows:</p>\n         <ul>\n            <li>\n               <p>Use a <code>Resource</code> element with the domain name to limit the action to\n          only specified domains.</p>\n            </li>\n            <li>\n               <p>Use an <code>Action</code> element to allow or deny permission to call this\n          action.</p>\n            </li>\n            <li>\n               <p>You cannot use an IAM policy to constrain this action's parameters.</p>\n            </li>\n         </ul>\n         <p>If the caller doesn't have sufficient permissions to invoke the action, or the\n      parameter values fall outside the specified constraints, the action fails. The associated\n      event attribute's <code>cause</code> parameter is set to <code>OPERATION_NOT_PERMITTED</code>.\n      For details and example IAM policies, see <a href=\"https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html\">Using IAM to Manage Access to Amazon SWF\n        Workflows</a> in the <i>Amazon SWF Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.swf#RespondActivityTaskCompletedInput": {
@@ -4911,7 +4918,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Used by workers to tell the service that the <a>ActivityTask</a> identified\n      by the <code>taskToken</code> has failed with <code>reason</code> (if specified). The\n        <code>reason</code> and <code>details</code> appear in the <code>ActivityTaskFailed</code>\n      event added to the workflow history.</p>\n\n         <p>A task is considered open from the time that it is scheduled until it is closed.\n      Therefore a task is reported as open while a worker is processing it. A task is closed after\n      it has been specified in a call to <a>RespondActivityTaskCompleted</a>, <a>RespondActivityTaskCanceled</a>, RespondActivityTaskFailed, or the task has <a href=\"https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dg-basic.html#swf-dev-timeout-types\">timed\n        out</a>.</p>\n\n         <p>\n            <b>Access Control</b>\n         </p>\n         <p>You can use IAM policies to control this action's access to Amazon SWF resources as\n      follows:</p>\n         <ul>\n            <li>\n               <p>Use a <code>Resource</code> element with the domain name to limit the action to\n          only specified domains.</p>\n            </li>\n            <li>\n               <p>Use an <code>Action</code> element to allow or deny permission to call this\n          action.</p>\n            </li>\n            <li>\n               <p>You cannot use an IAM policy to constrain this action's parameters.</p>\n            </li>\n         </ul>\n         <p>If the caller doesn't have sufficient permissions to invoke the action, or the\n      parameter values fall outside the specified constraints, the action fails. The associated\n      event attribute's <code>cause</code> parameter is set to <code>OPERATION_NOT_PERMITTED</code>.\n      For details and example IAM policies, see <a href=\"https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html\">Using IAM to Manage Access to Amazon SWF\n        Workflows</a> in the <i>Amazon SWF Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Used by workers to tell the service that the <a>ActivityTask</a> identified\n      by the <code>taskToken</code> has failed with <code>reason</code> (if specified). The\n        <code>reason</code> and <code>details</code> appear in the <code>ActivityTaskFailed</code>\n      event added to the workflow history.</p>\n         <p>A task is considered open from the time that it is scheduled until it is closed.\n      Therefore a task is reported as open while a worker is processing it. A task is closed after\n      it has been specified in a call to <a>RespondActivityTaskCompleted</a>, <a>RespondActivityTaskCanceled</a>, RespondActivityTaskFailed, or the task has <a href=\"https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dg-basic.html#swf-dev-timeout-types\">timed\n        out</a>.</p>\n         <p>\n            <b>Access Control</b>\n         </p>\n         <p>You can use IAM policies to control this action's access to Amazon SWF resources as\n      follows:</p>\n         <ul>\n            <li>\n               <p>Use a <code>Resource</code> element with the domain name to limit the action to\n          only specified domains.</p>\n            </li>\n            <li>\n               <p>Use an <code>Action</code> element to allow or deny permission to call this\n          action.</p>\n            </li>\n            <li>\n               <p>You cannot use an IAM policy to constrain this action's parameters.</p>\n            </li>\n         </ul>\n         <p>If the caller doesn't have sufficient permissions to invoke the action, or the\n      parameter values fall outside the specified constraints, the action fails. The associated\n      event attribute's <code>cause</code> parameter is set to <code>OPERATION_NOT_PERMITTED</code>.\n      For details and example IAM policies, see <a href=\"https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html\">Using IAM to Manage Access to Amazon SWF\n        Workflows</a> in the <i>Amazon SWF Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.swf#RespondActivityTaskFailedInput": {
@@ -4920,7 +4927,7 @@
                 "taskToken": {
                     "target": "com.amazonaws.swf#TaskToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>taskToken</code> of the <a>ActivityTask</a>.</p>\n\n         <important>\n            <p>\n               <code>taskToken</code> is generated by the service and should be treated as an opaque value.\n        If the task is passed to another process, its <code>taskToken</code> must also be passed.\n        This enables it to provide its progress and respond with results.</p>\n         </important>",
+                        "smithy.api#documentation": "<p>The <code>taskToken</code> of the <a>ActivityTask</a>.</p>\n         <important>\n            <p>\n               <code>taskToken</code> is generated by the service and should be treated as an opaque value.\n        If the task is passed to another process, its <code>taskToken</code> must also be passed.\n        This enables it to provide its progress and respond with results.</p>\n         </important>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4958,7 +4965,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Used by deciders to tell the service that the <a>DecisionTask</a> identified\n      by the <code>taskToken</code> has successfully completed. The <code>decisions</code> argument\n      specifies the list of decisions made while processing the task.</p>\n\n         <p>A <code>DecisionTaskCompleted</code> event is added to the workflow history. The\n        <code>executionContext</code> specified is attached to the event in the workflow execution\n      history.</p>\n\n         <p>\n            <b>Access Control</b>\n         </p>\n\n         <p>If an IAM policy grants permission to use <code>RespondDecisionTaskCompleted</code>, it\n      can express permissions for the list of decisions in the <code>decisions</code> parameter.\n      Each of the decisions has one or more parameters, much like a regular API call. To allow for\n      policies to be as readable as possible, you can express permissions on decisions as if they\n      were actual API calls, including applying conditions to some parameters. For more information,\n      see <a href=\"https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html\">Using\n        IAM to Manage Access to Amazon SWF Workflows</a> in the\n      <i>Amazon SWF Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Used by deciders to tell the service that the <a>DecisionTask</a> identified\n      by the <code>taskToken</code> has successfully completed. The <code>decisions</code> argument\n      specifies the list of decisions made while processing the task.</p>\n         <p>A <code>DecisionTaskCompleted</code> event is added to the workflow history. The\n        <code>executionContext</code> specified is attached to the event in the workflow execution\n      history.</p>\n         <p>\n            <b>Access Control</b>\n         </p>\n         <p>If an IAM policy grants permission to use <code>RespondDecisionTaskCompleted</code>, it\n      can express permissions for the list of decisions in the <code>decisions</code> parameter.\n      Each of the decisions has one or more parameters, much like a regular API call. To allow for\n      policies to be as readable as possible, you can express permissions on decisions as if they\n      were actual API calls, including applying conditions to some parameters. For more information,\n      see <a href=\"https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html\">Using\n        IAM to Manage Access to Amazon SWF Workflows</a> in the\n      <i>Amazon SWF Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.swf#RespondDecisionTaskCompletedInput": {
@@ -5022,7 +5029,7 @@
                 "activityId": {
                     "target": "com.amazonaws.swf#ActivityId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The <code>activityId</code> of the activity task.</p>\n         <p>The specified string must not start or end with whitespace. It must not contain a <code>:</code>\n          (colon), <code>/</code> (slash), <code>|</code> (vertical bar), or any control characters (<code>\\u0000-\\u001f</code> | <code>\\u007f-\\u009f</code>). Also, it must not contain the literal string <code>arn</code>.</p>",
+                        "smithy.api#documentation": "<p>\n         The <code>activityId</code> of the activity task.</p>\n         <p>The specified string must not contain a\n        <code>:</code> (colon), <code>/</code> (slash), <code>|</code> (vertical bar), or any\n      control characters (<code>\\u0000-\\u001f</code> | <code>\\u007f-\\u009f</code>). Also, it must\n      <i>not</i> be the literal string <code>arn</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5047,7 +5054,7 @@
                 "taskList": {
                     "target": "com.amazonaws.swf#TaskList",
                     "traits": {
-                        "smithy.api#documentation": "<p>If set, specifies the name of the task list in which to schedule the activity task. If not specified, the\n      <code>defaultTaskList</code> registered with the activity type is used.</p>\n         <note>\n            <p>A task list for this activity task must be specified either as a default for the activity type or through this field. If neither this field is set nor a default task list was specified at registration time then a fault is returned.</p>\n         </note>\n         <p>The specified string must not start or end with whitespace. It must not contain a <code>:</code>\n          (colon), <code>/</code> (slash), <code>|</code> (vertical bar), or any control characters (<code>\\u0000-\\u001f</code> | <code>\\u007f-\\u009f</code>). Also, it must not contain the literal string <code>arn</code>.</p>"
+                        "smithy.api#documentation": "<p>If set, specifies the name of the task list in which to schedule the activity task. If not specified, the\n      <code>defaultTaskList</code> registered with the activity type is used.</p>\n         <note>\n            <p>A task list for this activity task must be specified either as a default for the activity type or through this field. If neither this field is set nor a default task list was specified at registration time then a fault is returned.</p>\n         </note>\n         <p>The specified string must not contain a\n        <code>:</code> (colon), <code>/</code> (slash), <code>|</code> (vertical bar), or any\n      control characters (<code>\\u0000-\\u001f</code> | <code>\\u007f-\\u009f</code>). Also, it must\n      <i>not</i> be the literal string <code>arn</code>.</p>"
                     }
                 },
                 "taskPriority": {
@@ -5076,7 +5083,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides the details of the <code>ScheduleActivityTask</code> decision.</p>\n         <p>\n            <b>Access Control</b>\n         </p>\n         <p>You can use IAM policies to control this decision's access to Amazon SWF resources as follows:</p>\n         <ul>\n            <li>\n               <p>Use a <code>Resource</code> element with the domain name to limit the action to only\n  specified domains.</p>\n            </li>\n            <li>\n               <p>Use an <code>Action</code> element to allow or deny permission to call this action.</p>\n            </li>\n            <li>\n              <p>Constrain the following parameters by using a <code>Condition</code> element with the\n  appropriate keys.</p>\n              <ul>\n                  <li>\n                     <p>\n                        <code>activityType.name</code> – String constraint. The key is <code>swf:activityType.name</code>.</p>\n                  </li>\n                  <li>\n                      <p>\n                        <code>activityType.version</code> – String constraint. The key is <code>swf:activityType.version</code>.</p>\n                  </li>\n                  <li>\n                      <p>\n                        <code>taskList</code> – String constraint. The key is <code>swf:taskList.name</code>.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>If the caller doesn't have sufficient permissions to invoke the action, or the\n  parameter values fall outside the specified constraints, the action fails. The associated event attribute's\n          <code>cause</code> parameter is set to <code>OPERATION_NOT_PERMITTED</code>. For details and example IAM policies, see\n  <a href=\"https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html\">Using IAM to Manage Access to Amazon SWF Workflows</a>\n          in the <i>Amazon SWF Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Provides the details of the <code>ScheduleActivityTask</code> decision.</p>\n         <p>\n            <b>Access Control</b>\n         </p>\n         <p>You can use IAM policies to control this decision's access to Amazon SWF resources as follows:</p>\n         <ul>\n            <li>\n               <p>Use a <code>Resource</code> element with the domain name to limit the action to only\n  specified domains.</p>\n            </li>\n            <li>\n               <p>Use an <code>Action</code> element to allow or deny permission to call this action.</p>\n            </li>\n            <li>\n               <p>Constrain the following parameters by using a <code>Condition</code> element with the\n  appropriate keys.</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>activityType.name</code> – String constraint. The key is <code>swf:activityType.name</code>.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>activityType.version</code> – String constraint. The key is <code>swf:activityType.version</code>.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>taskList</code> – String constraint. The key is <code>swf:taskList.name</code>.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>If the caller doesn't have sufficient permissions to invoke the action, or the\n  parameter values fall outside the specified constraints, the action fails. The associated event attribute's\n          <code>cause</code> parameter is set to <code>OPERATION_NOT_PERMITTED</code>. For details and example IAM policies, see\n  <a href=\"https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html\">Using IAM to Manage Access to Amazon SWF Workflows</a>\n          in the <i>Amazon SWF Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.swf#ScheduleActivityTaskFailedCause": {
@@ -5219,7 +5226,7 @@
                 "startToCloseTimeout": {
                     "target": "com.amazonaws.swf#DurationInSecondsOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timeout value, in seconds, after which the Lambda function is considered to be failed once it has started. This can be any integer from 1-300 (1s-5m). If no value is supplied, than a default value of 300s is assumed.</p>"
+                        "smithy.api#documentation": "<p>The timeout value, in seconds, after which the Lambda function is considered to be\n            failed once it has started. This can be any integer from 1-900 (1s-15m).</p>\n         <p>If no value is supplied, then a default value of 900s is assumed.</p>"
                     }
                 }
             },
@@ -5480,7 +5487,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Records a <code>WorkflowExecutionSignaled</code> event in the workflow execution\n      history and creates a decision task for the workflow execution identified by the given domain,\n      workflowId and runId. The event is recorded with the specified user defined signalName and\n      input (if provided).</p>\n\n         <note>\n            <p>If a runId isn't specified, then the <code>WorkflowExecutionSignaled</code> event is\n        recorded in the history of the current open workflow with the matching workflowId in the\n        domain.</p>\n         </note>\n\n         <note>\n            <p>If the specified workflow execution isn't open, this method fails with\n          <code>UnknownResource</code>.</p>\n         </note>\n\n         <p>\n            <b>Access Control</b>\n         </p>\n         <p>You can use IAM policies to control this action's access to Amazon SWF resources as\n      follows:</p>\n         <ul>\n            <li>\n               <p>Use a <code>Resource</code> element with the domain name to limit the action to\n          only specified domains.</p>\n            </li>\n            <li>\n               <p>Use an <code>Action</code> element to allow or deny permission to call this\n          action.</p>\n            </li>\n            <li>\n               <p>You cannot use an IAM policy to constrain this action's parameters.</p>\n            </li>\n         </ul>\n         <p>If the caller doesn't have sufficient permissions to invoke the action, or the\n      parameter values fall outside the specified constraints, the action fails. The associated\n      event attribute's <code>cause</code> parameter is set to <code>OPERATION_NOT_PERMITTED</code>.\n      For details and example IAM policies, see <a href=\"https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html\">Using IAM to Manage Access to Amazon SWF\n        Workflows</a> in the <i>Amazon SWF Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Records a <code>WorkflowExecutionSignaled</code> event in the workflow execution\n      history and creates a decision task for the workflow execution identified by the given domain,\n      workflowId and runId. The event is recorded with the specified user defined signalName and\n      input (if provided).</p>\n         <note>\n            <p>If a runId isn't specified, then the <code>WorkflowExecutionSignaled</code> event is\n        recorded in the history of the current open workflow with the matching workflowId in the\n        domain.</p>\n         </note>\n         <note>\n            <p>If the specified workflow execution isn't open, this method fails with\n          <code>UnknownResource</code>.</p>\n         </note>\n         <p>\n            <b>Access Control</b>\n         </p>\n         <p>You can use IAM policies to control this action's access to Amazon SWF resources as\n      follows:</p>\n         <ul>\n            <li>\n               <p>Use a <code>Resource</code> element with the domain name to limit the action to\n          only specified domains.</p>\n            </li>\n            <li>\n               <p>Use an <code>Action</code> element to allow or deny permission to call this\n          action.</p>\n            </li>\n            <li>\n               <p>You cannot use an IAM policy to constrain this action's parameters.</p>\n            </li>\n         </ul>\n         <p>If the caller doesn't have sufficient permissions to invoke the action, or the\n      parameter values fall outside the specified constraints, the action fails. The associated\n      event attribute's <code>cause</code> parameter is set to <code>OPERATION_NOT_PERMITTED</code>.\n      For details and example IAM policies, see <a href=\"https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html\">Using IAM to Manage Access to Amazon SWF\n        Workflows</a> in the <i>Amazon SWF Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.swf#SignalWorkflowExecutionInput": {
@@ -5652,7 +5659,7 @@
                     "name": "swf"
                 },
                 "aws.protocols#awsJson1_0": {},
-                "smithy.api#documentation": "<fullname>Amazon Simple Workflow Service</fullname>\n\n         <p>The Amazon Simple Workflow Service (Amazon SWF) makes it easy to build applications that use Amazon's cloud to\n      coordinate work across distributed components. In Amazon SWF, a <i>task</i>\n      represents a logical unit of work that is performed by a component of your workflow.\n      Coordinating tasks in a workflow involves managing intertask dependencies, scheduling, and \n      concurrency in accordance with the logical flow of the application.</p>\n\n         <p>Amazon SWF gives you full control over implementing tasks and coordinating them without\n      worrying about underlying complexities such as tracking their progress and maintaining their\n      state.</p>\n\n         <p>This documentation serves as reference only. For a broader overview of the Amazon SWF\n      programming model, see the <i>\n               <a href=\"https://docs.aws.amazon.com/amazonswf/latest/developerguide/\">Amazon SWF Developer Guide</a>\n            </i>.</p>",
+                "smithy.api#documentation": "<fullname>Amazon Simple Workflow Service</fullname>\n         <p>The Amazon Simple Workflow Service (Amazon SWF) makes it easy to build applications that use Amazon's cloud to\n      coordinate work across distributed components. In Amazon SWF, a <i>task</i>\n      represents a logical unit of work that is performed by a component of your workflow.\n      Coordinating tasks in a workflow involves managing intertask dependencies, scheduling, and \n      concurrency in accordance with the logical flow of the application.</p>\n         <p>Amazon SWF gives you full control over implementing tasks and coordinating them without\n      worrying about underlying complexities such as tracking their progress and maintaining their\n      state.</p>\n         <p>This documentation serves as reference only. For a broader overview of the Amazon SWF\n      programming model, see the <i>\n               <a href=\"https://docs.aws.amazon.com/amazonswf/latest/developerguide/\">Amazon SWF Developer Guide</a>\n            </i>.</p>",
                 "smithy.api#title": "Amazon Simple Workflow Service",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://swf.amazonaws.com/doc/2012-01-25"
@@ -6009,44 +6016,6 @@
                                                     "type": "tree",
                                                     "rules": [
                                                         {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "stringEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "Region"
-                                                                        },
-                                                                        "us-gov-east-1"
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "endpoint": {
-                                                                "url": "https://swf.us-gov-east-1.amazonaws.com",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        },
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "stringEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "Region"
-                                                                        },
-                                                                        "us-gov-west-1"
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "endpoint": {
-                                                                "url": "https://swf.us-gov-west-1.amazonaws.com",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        },
-                                                        {
                                                             "conditions": [],
                                                             "endpoint": {
                                                                 "url": "https://swf.{Region}.{PartitionResult#dnsSuffix}",
@@ -6081,8 +6050,8 @@
                             },
                             "params": {
                                 "Region": "af-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6094,8 +6063,8 @@
                             },
                             "params": {
                                 "Region": "ap-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6107,8 +6076,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6120,8 +6089,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6133,8 +6102,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6146,8 +6115,8 @@
                             },
                             "params": {
                                 "Region": "ap-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6159,8 +6128,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6172,8 +6141,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6185,8 +6154,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6198,8 +6167,8 @@
                             },
                             "params": {
                                 "Region": "ca-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6211,8 +6180,8 @@
                             },
                             "params": {
                                 "Region": "eu-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6224,8 +6193,8 @@
                             },
                             "params": {
                                 "Region": "eu-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6237,8 +6206,8 @@
                             },
                             "params": {
                                 "Region": "eu-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6250,8 +6219,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6263,8 +6232,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6276,8 +6245,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6289,8 +6258,8 @@
                             },
                             "params": {
                                 "Region": "me-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6302,8 +6271,8 @@
                             },
                             "params": {
                                 "Region": "sa-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6315,8 +6284,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6328,8 +6297,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6341,8 +6310,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6354,8 +6323,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6367,8 +6336,8 @@
                             },
                             "params": {
                                 "Region": "us-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6380,8 +6349,8 @@
                             },
                             "params": {
                                 "Region": "us-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6393,8 +6362,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6406,8 +6375,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6419,8 +6388,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -6432,8 +6401,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -6445,8 +6414,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6458,8 +6427,8 @@
                             },
                             "params": {
                                 "Region": "cn-northwest-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6471,8 +6440,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -6484,8 +6453,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6497,8 +6466,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -6510,8 +6479,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6523,8 +6492,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6536,8 +6505,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6549,8 +6518,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6562,8 +6531,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -6575,8 +6544,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -6588,8 +6557,8 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6601,8 +6570,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -6614,8 +6594,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -6627,8 +6618,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -6640,8 +6642,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -6653,8 +6666,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -6666,8 +6679,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -6678,8 +6691,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -6690,14 +6703,26 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
                     "version": "1.0"
                 }
+            }
+        },
+        "com.amazonaws.swf#StartAtPreviousStartedEvent": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
             }
         },
         "com.amazonaws.swf#StartChildWorkflowExecutionDecisionAttributes": {
@@ -6713,7 +6738,7 @@
                 "workflowId": {
                     "target": "com.amazonaws.swf#WorkflowId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The <code>workflowId</code> of the workflow execution.</p>\n         <p>The specified string must not start or end with whitespace. It must not contain a <code>:</code>\n          (colon), <code>/</code> (slash), <code>|</code> (vertical bar), or any control characters (<code>\\u0000-\\u001f</code> | <code>\\u007f-\\u009f</code>). Also, it must not contain the literal string <code>arn</code>.</p>",
+                        "smithy.api#documentation": "<p>\n         The <code>workflowId</code> of the workflow execution.</p>\n         <p>The specified string must not contain a\n        <code>:</code> (colon), <code>/</code> (slash), <code>|</code> (vertical bar), or any\n      control characters (<code>\\u0000-\\u001f</code> | <code>\\u007f-\\u009f</code>). Also, it must\n      <i>not</i> be the literal string <code>arn</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6738,7 +6763,7 @@
                 "taskList": {
                     "target": "com.amazonaws.swf#TaskList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the task list to be used for decision tasks of the child workflow execution.</p>\n         <note>\n            <p>A task list for this workflow execution must be specified either as a default for the workflow type or through this parameter. If neither this parameter is set nor a default task list was specified at registration time then a fault is returned.</p>\n         </note>\n         <p>The specified string must not start or end with whitespace. It must not contain a <code>:</code>\n          (colon), <code>/</code> (slash), <code>|</code> (vertical bar), or any control characters (<code>\\u0000-\\u001f</code> | <code>\\u007f-\\u009f</code>). Also, it must not contain the literal string <code>arn</code>.</p>"
+                        "smithy.api#documentation": "<p>The name of the task list to be used for decision tasks of the child workflow execution.</p>\n         <note>\n            <p>A task list for this workflow execution must be specified either as a default for the workflow type or through this parameter. If neither this parameter is set nor a default task list was specified at registration time then a fault is returned.</p>\n         </note>\n         <p>The specified string must not start or end with whitespace. It must not contain a\n        <code>:</code> (colon), <code>/</code> (slash), <code>|</code> (vertical bar), or any\n      control characters (<code>\\u0000-\\u001f</code> | <code>\\u007f-\\u009f</code>). Also, it must\n      <i>not</i> be the literal string <code>arn</code>.</p>"
                     }
                 },
                 "taskPriority": {
@@ -6773,7 +6798,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides the details of the <code>StartChildWorkflowExecution</code> decision.</p>\n         <p>\n            <b>Access Control</b>\n         </p>\n         <p>You can use IAM policies to control this decision's access to Amazon SWF resources as follows:</p>\n         <ul>\n            <li>\n               <p>Use a <code>Resource</code> element with the domain name to limit the action to only\n  specified domains.</p>\n            </li>\n            <li>\n               <p>Use an <code>Action</code> element to allow or deny permission to call this action.</p>\n            </li>\n            <li>\n               <p>Constrain the following parameters by using a <code>Condition</code> element with the\n             appropriate keys.</p>\n              <ul>\n                  <li>\n                      <p>\n                        <code>tagList.member.N</code> – The key is \"swf:tagList.N\" where N is the tag number from 0 to 4,\n            inclusive.</p>\n                  </li>\n                  <li>\n                      <p>\n                        <code>taskList</code> – String constraint. The key is <code>swf:taskList.name</code>.</p>\n                  </li>\n                  <li>\n                      <p>\n                        <code>workflowType.name</code> – String constraint. The key is <code>swf:workflowType.name</code>.</p>\n                  </li>\n                  <li>\n                      <p>\n                        <code>workflowType.version</code> – String constraint. The key is <code>swf:workflowType.version</code>.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>If the caller doesn't have sufficient permissions to invoke the action, or the\n  parameter values fall outside the specified constraints, the action fails. The associated event attribute's\n          <code>cause</code> parameter is set to <code>OPERATION_NOT_PERMITTED</code>. For details and example IAM policies, see\n          <a href=\"https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html\">Using IAM to Manage Access to Amazon SWF Workflows</a> in the <i>Amazon SWF Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Provides the details of the <code>StartChildWorkflowExecution</code> decision.</p>\n         <p>\n            <b>Access Control</b>\n         </p>\n         <p>You can use IAM policies to control this decision's access to Amazon SWF resources as follows:</p>\n         <ul>\n            <li>\n               <p>Use a <code>Resource</code> element with the domain name to limit the action to only\n  specified domains.</p>\n            </li>\n            <li>\n               <p>Use an <code>Action</code> element to allow or deny permission to call this action.</p>\n            </li>\n            <li>\n               <p>Constrain the following parameters by using a <code>Condition</code> element with the\n             appropriate keys.</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>tagList.member.N</code> – The key is \"swf:tagList.N\" where N is the tag number from 0 to 4,\n            inclusive.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>taskList</code> – String constraint. The key is <code>swf:taskList.name</code>.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>workflowType.name</code> – String constraint. The key is <code>swf:workflowType.name</code>.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>workflowType.version</code> – String constraint. The key is <code>swf:workflowType.version</code>.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>If the caller doesn't have sufficient permissions to invoke the action, or the\n  parameter values fall outside the specified constraints, the action fails. The associated event attribute's\n          <code>cause</code> parameter is set to <code>OPERATION_NOT_PERMITTED</code>. For details and example IAM policies, see\n          <a href=\"https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html\">Using IAM to Manage Access to Amazon SWF Workflows</a> in the <i>Amazon SWF Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.swf#StartChildWorkflowExecutionFailedCause": {
@@ -6853,7 +6878,7 @@
                 "workflowType": {
                     "target": "com.amazonaws.swf#WorkflowType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The workflow type provided in the <code>StartChildWorkflowExecution</code> \n            <a>Decision</a> that failed.</p>",
+                        "smithy.api#documentation": "<p>The workflow type provided in the <code>StartChildWorkflowExecution</code>\n            <a>Decision</a> that failed.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6875,7 +6900,7 @@
                     "target": "com.amazonaws.swf#EventId",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>When the <code>cause</code> is <code>WORKFLOW_ALREADY_RUNNING</code>, <code>initiatedEventId</code> is the ID of the <code>StartChildWorkflowExecutionInitiated</code>\n          event that corresponds to the <code>StartChildWorkflowExecution</code> \n            <a>Decision</a> to start the workflow execution. You can use this information to diagnose\n          problems by tracing back the chain of events leading up to this event.</p>\n         <p>When the <code>cause</code> isn't <code>WORKFLOW_ALREADY_RUNNING</code>, <code>initiatedEventId</code> is set to <code>0</code> because the \n          <code>StartChildWorkflowExecutionInitiated</code> event doesn't exist.</p>",
+                        "smithy.api#documentation": "<p>When the <code>cause</code> is <code>WORKFLOW_ALREADY_RUNNING</code>, <code>initiatedEventId</code> is the ID of the <code>StartChildWorkflowExecutionInitiated</code>\n          event that corresponds to the <code>StartChildWorkflowExecution</code>\n            <a>Decision</a> to start the workflow execution. You can use this information to diagnose\n          problems by tracing back the chain of events leading up to this event.</p>\n         <p>When the <code>cause</code> isn't <code>WORKFLOW_ALREADY_RUNNING</code>, <code>initiatedEventId</code> is set to <code>0</code> because the \n          <code>StartChildWorkflowExecutionInitiated</code> event doesn't exist.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6883,7 +6908,7 @@
                     "target": "com.amazonaws.swf#EventId",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The ID of the <code>DecisionTaskCompleted</code> event corresponding to the decision task that resulted in the <code>StartChildWorkflowExecution</code> \n            <a>Decision</a> to request this child workflow execution. This information can be useful for diagnosing problems by tracing back the chain of events.</p>",
+                        "smithy.api#documentation": "<p>The ID of the <code>DecisionTaskCompleted</code> event corresponding to the decision task that resulted in the <code>StartChildWorkflowExecution</code>\n            <a>Decision</a> to request this child workflow execution. This information can be useful for diagnosing problems by tracing back the chain of events.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6950,7 +6975,7 @@
                     "target": "com.amazonaws.swf#EventId",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The ID of the <code>DecisionTaskCompleted</code> event corresponding to the decision task that resulted in the\n      <code>StartChildWorkflowExecution</code> \n            <a>Decision</a> to request this child workflow execution. This\n      information can be useful for diagnosing problems by tracing back the cause of events.</p>",
+                        "smithy.api#documentation": "<p>The ID of the <code>DecisionTaskCompleted</code> event corresponding to the decision task that resulted in the\n      <code>StartChildWorkflowExecution</code>\n            <a>Decision</a> to request this child workflow execution. This\n      information can be useful for diagnosing problems by tracing back the cause of events.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7028,7 +7053,7 @@
                 "timerId": {
                     "target": "com.amazonaws.swf#TimerId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The unique ID of the timer.</p>\n         <p>The specified string must not start or end with whitespace. It must not contain a <code>:</code>\n          (colon), <code>/</code> (slash), <code>|</code> (vertical bar), or any control characters (<code>\\u0000-\\u001f</code> | <code>\\u007f-\\u009f</code>). Also, it must not contain the literal string <code>arn</code>.</p>",
+                        "smithy.api#documentation": "<p>\n         The unique ID of the timer.</p>\n         <p>The specified string must not contain a\n        <code>:</code> (colon), <code>/</code> (slash), <code>|</code> (vertical bar), or any\n      control characters (<code>\\u0000-\\u001f</code> | <code>\\u007f-\\u009f</code>). Also, it must\n      <i>not</i> be the literal string <code>arn</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7138,7 +7163,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts an execution of the workflow type in the specified domain using the provided\n        <code>workflowId</code> and input data.</p>\n\n         <p>This action returns the newly started workflow execution.</p>\n\n         <p>\n            <b>Access Control</b>\n         </p>\n         <p>You can use IAM policies to control this action's access to Amazon SWF resources as\n      follows:</p>\n         <ul>\n            <li>\n               <p>Use a <code>Resource</code> element with the domain name to limit the action to\n          only specified domains.</p>\n            </li>\n            <li>\n               <p>Use an <code>Action</code> element to allow or deny permission to call this\n          action.</p>\n            </li>\n            <li>\n               <p>Constrain the following parameters by using a <code>Condition</code> element with\n          the appropriate keys.</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>tagList.member.0</code>: The key is <code>swf:tagList.member.0</code>.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>tagList.member.1</code>: The key is <code>swf:tagList.member.1</code>.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>tagList.member.2</code>: The key is <code>swf:tagList.member.2</code>.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>tagList.member.3</code>: The key is <code>swf:tagList.member.3</code>.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>tagList.member.4</code>: The key is <code>swf:tagList.member.4</code>.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>taskList</code>: String constraint. The key is\n              <code>swf:taskList.name</code>.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>workflowType.name</code>: String constraint. The key is\n                <code>swf:workflowType.name</code>.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>workflowType.version</code>: String constraint. The key is\n                <code>swf:workflowType.version</code>.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>If the caller doesn't have sufficient permissions to invoke the action, or the\n      parameter values fall outside the specified constraints, the action fails. The associated\n      event attribute's <code>cause</code> parameter is set to <code>OPERATION_NOT_PERMITTED</code>.\n      For details and example IAM policies, see <a href=\"https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html\">Using IAM to Manage Access to Amazon SWF\n        Workflows</a> in the <i>Amazon SWF Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Starts an execution of the workflow type in the specified domain using the provided\n        <code>workflowId</code> and input data.</p>\n         <p>This action returns the newly started workflow execution.</p>\n         <p>\n            <b>Access Control</b>\n         </p>\n         <p>You can use IAM policies to control this action's access to Amazon SWF resources as\n      follows:</p>\n         <ul>\n            <li>\n               <p>Use a <code>Resource</code> element with the domain name to limit the action to\n          only specified domains.</p>\n            </li>\n            <li>\n               <p>Use an <code>Action</code> element to allow or deny permission to call this\n          action.</p>\n            </li>\n            <li>\n               <p>Constrain the following parameters by using a <code>Condition</code> element with\n          the appropriate keys.</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>tagList.member.0</code>: The key is <code>swf:tagList.member.0</code>.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>tagList.member.1</code>: The key is <code>swf:tagList.member.1</code>.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>tagList.member.2</code>: The key is <code>swf:tagList.member.2</code>.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>tagList.member.3</code>: The key is <code>swf:tagList.member.3</code>.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>tagList.member.4</code>: The key is <code>swf:tagList.member.4</code>.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>taskList</code>: String constraint. The key is\n              <code>swf:taskList.name</code>.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>workflowType.name</code>: String constraint. The key is\n                <code>swf:workflowType.name</code>.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>workflowType.version</code>: String constraint. The key is\n                <code>swf:workflowType.version</code>.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>If the caller doesn't have sufficient permissions to invoke the action, or the\n      parameter values fall outside the specified constraints, the action fails. The associated\n      event attribute's <code>cause</code> parameter is set to <code>OPERATION_NOT_PERMITTED</code>.\n      For details and example IAM policies, see <a href=\"https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html\">Using IAM to Manage Access to Amazon SWF\n        Workflows</a> in the <i>Amazon SWF Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.swf#StartWorkflowExecutionInput": {
@@ -7147,14 +7172,14 @@
                 "domain": {
                     "target": "com.amazonaws.swf#DomainName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the domain in which the workflow execution is created.</p>",
+                        "smithy.api#documentation": "<p>The name of the domain in which the workflow execution is created.</p>\n         <p>The specified string must not contain a\n        <code>:</code> (colon), <code>/</code> (slash), <code>|</code> (vertical bar), or any\n      control characters (<code>\\u0000-\\u001f</code> | <code>\\u007f-\\u009f</code>). Also, it must\n      <i>not</i> be the literal string <code>arn</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "workflowId": {
                     "target": "com.amazonaws.swf#WorkflowId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user defined identifier associated with the workflow execution. You can use this to\n      associate a custom identifier with the workflow execution. You may specify the same identifier\n      if a workflow execution is logically a <i>restart</i> of a previous execution.\n      You cannot have two open workflow executions with the same <code>workflowId</code> at the same\n      time within the same domain.</p>\n    \n         <p>The specified string must not start or end with whitespace. It must not contain a\n        <code>:</code> (colon), <code>/</code> (slash), <code>|</code> (vertical bar), or any\n      control characters (<code>\\u0000-\\u001f</code> | <code>\\u007f-\\u009f</code>). Also, it must\n      not <i>be</i> the literal string <code>arn</code>.</p>",
+                        "smithy.api#documentation": "<p>The user defined identifier associated with the workflow execution. You can use this to\n      associate a custom identifier with the workflow execution. You may specify the same identifier\n      if a workflow execution is logically a <i>restart</i> of a previous execution.\n      You cannot have two open workflow executions with the same <code>workflowId</code> at the same\n      time within the same domain.</p>\n         <p>The specified string must not contain a\n        <code>:</code> (colon), <code>/</code> (slash), <code>|</code> (vertical bar), or any\n      control characters (<code>\\u0000-\\u001f</code> | <code>\\u007f-\\u009f</code>). Also, it must\n      <i>not</i> be the literal string <code>arn</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7168,7 +7193,7 @@
                 "taskList": {
                     "target": "com.amazonaws.swf#TaskList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The task list to use for the decision tasks generated for this workflow execution. This\n      overrides the <code>defaultTaskList</code> specified when registering the workflow\n      type.</p>\n         <note>\n            <p>A task list for this workflow execution must be specified either as a default for the\n        workflow type or through this parameter. If neither this parameter is set nor a default task\n        list was specified at registration time then a fault is returned.</p>\n         </note>\n    \n         <p>The specified string must not start or end with whitespace. It must not contain a\n        <code>:</code> (colon), <code>/</code> (slash), <code>|</code> (vertical bar), or any\n      control characters (<code>\\u0000-\\u001f</code> | <code>\\u007f-\\u009f</code>). Also, it must\n      not <i>be</i> the literal string <code>arn</code>.</p>"
+                        "smithy.api#documentation": "<p>The task list to use for the decision tasks generated for this workflow execution. This\n      overrides the <code>defaultTaskList</code> specified when registering the workflow\n      type.</p>\n         <note>\n            <p>A task list for this workflow execution must be specified either as a default for the\n        workflow type or through this parameter. If neither this parameter is set nor a default task\n        list was specified at registration time then a fault is returned.</p>\n         </note>\n         <p>The specified string must not contain a\n        <code>:</code> (colon), <code>/</code> (slash), <code>|</code> (vertical bar), or any\n      control characters (<code>\\u0000-\\u001f</code> | <code>\\u007f-\\u009f</code>). Also, it must\n      <i>not</i> be the literal string <code>arn</code>.</p>"
                     }
                 },
                 "taskPriority": {
@@ -7186,7 +7211,7 @@
                 "executionStartToCloseTimeout": {
                     "target": "com.amazonaws.swf#DurationInSecondsOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>The total duration for this workflow execution. This overrides the\n      defaultExecutionStartToCloseTimeout specified when registering the workflow type.</p>\n\n         <p>The duration is specified in seconds; an integer greater than or equal to\n        <code>0</code>. Exceeding this limit causes the workflow execution to time out. Unlike some\n      of the other timeout parameters in Amazon SWF, you cannot specify a value of \"NONE\" for this\n      timeout; there is a one-year max limit on the time that a workflow execution can\n      run.</p>\n\n         <note>\n            <p>An execution start-to-close timeout must be specified either through this parameter\n        or as a default when the workflow type is registered. If neither this parameter nor a\n        default execution start-to-close timeout is specified, a fault is returned.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The total duration for this workflow execution. This overrides the\n      defaultExecutionStartToCloseTimeout specified when registering the workflow type.</p>\n         <p>The duration is specified in seconds; an integer greater than or equal to\n        <code>0</code>. Exceeding this limit causes the workflow execution to time out. Unlike some\n      of the other timeout parameters in Amazon SWF, you cannot specify a value of \"NONE\" for this\n      timeout; there is a one-year max limit on the time that a workflow execution can\n      run.</p>\n         <note>\n            <p>An execution start-to-close timeout must be specified either through this parameter\n        or as a default when the workflow type is registered. If neither this parameter nor a\n        default execution start-to-close timeout is specified, a fault is returned.</p>\n         </note>"
                     }
                 },
                 "tagList": {
@@ -7293,7 +7318,7 @@
                 "tags": {
                     "target": "com.amazonaws.swf#ResourceTagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of tags to add to a domain. </p> \n         <p>Tags may only contain unicode letters, digits, whitespace, or these symbols: <code>_ . : / = + - @</code>.</p>",
+                        "smithy.api#documentation": "<p>The list of tags to add to a domain. </p>\n         <p>Tags may only contain unicode letters, digits, whitespace, or these symbols: <code>_ . : / = + - @</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -7355,7 +7380,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Records a <code>WorkflowExecutionTerminated</code> event and forces closure of the\n      workflow execution identified by the given domain, runId, and workflowId. The child policy,\n      registered with the workflow type or specified when starting this execution, is applied to any\n      open child workflow executions of this workflow execution.</p>\n\n         <important>\n            <p>If the identified workflow execution was in progress, it is terminated\n        immediately.</p>\n         </important>\n\n         <note>\n            <p>If a runId isn't specified, then the <code>WorkflowExecutionTerminated</code> event\n        is recorded in the history of the current open workflow with the matching workflowId in the\n        domain.</p>\n         </note>\n\n         <note>\n            <p>You should consider using <a>RequestCancelWorkflowExecution</a> action\n        instead because it allows the workflow to gracefully close while <a>TerminateWorkflowExecution</a> doesn't.</p>\n         </note>\n\n         <p>\n            <b>Access Control</b>\n         </p>\n         <p>You can use IAM policies to control this action's access to Amazon SWF resources as\n      follows:</p>\n         <ul>\n            <li>\n               <p>Use a <code>Resource</code> element with the domain name to limit the action to\n          only specified domains.</p>\n            </li>\n            <li>\n               <p>Use an <code>Action</code> element to allow or deny permission to call this\n          action.</p>\n            </li>\n            <li>\n               <p>You cannot use an IAM policy to constrain this action's parameters.</p>\n            </li>\n         </ul>\n         <p>If the caller doesn't have sufficient permissions to invoke the action, or the\n      parameter values fall outside the specified constraints, the action fails. The associated\n      event attribute's <code>cause</code> parameter is set to <code>OPERATION_NOT_PERMITTED</code>.\n      For details and example IAM policies, see <a href=\"https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html\">Using IAM to Manage Access to Amazon SWF\n        Workflows</a> in the <i>Amazon SWF Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Records a <code>WorkflowExecutionTerminated</code> event and forces closure of the\n      workflow execution identified by the given domain, runId, and workflowId. The child policy,\n      registered with the workflow type or specified when starting this execution, is applied to any\n      open child workflow executions of this workflow execution.</p>\n         <important>\n            <p>If the identified workflow execution was in progress, it is terminated\n        immediately.</p>\n         </important>\n         <note>\n            <p>If a runId isn't specified, then the <code>WorkflowExecutionTerminated</code> event\n        is recorded in the history of the current open workflow with the matching workflowId in the\n        domain.</p>\n         </note>\n         <note>\n            <p>You should consider using <a>RequestCancelWorkflowExecution</a> action\n        instead because it allows the workflow to gracefully close while <a>TerminateWorkflowExecution</a> doesn't.</p>\n         </note>\n         <p>\n            <b>Access Control</b>\n         </p>\n         <p>You can use IAM policies to control this action's access to Amazon SWF resources as\n      follows:</p>\n         <ul>\n            <li>\n               <p>Use a <code>Resource</code> element with the domain name to limit the action to\n          only specified domains.</p>\n            </li>\n            <li>\n               <p>Use an <code>Action</code> element to allow or deny permission to call this\n          action.</p>\n            </li>\n            <li>\n               <p>You cannot use an IAM policy to constrain this action's parameters.</p>\n            </li>\n         </ul>\n         <p>If the caller doesn't have sufficient permissions to invoke the action, or the\n      parameter values fall outside the specified constraints, the action fails. The associated\n      event attribute's <code>cause</code> parameter is set to <code>OPERATION_NOT_PERMITTED</code>.\n      For details and example IAM policies, see <a href=\"https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html\">Using IAM to Manage Access to Amazon SWF\n        Workflows</a> in the <i>Amazon SWF Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.swf#TerminateWorkflowExecutionInput": {
@@ -8360,7 +8385,7 @@
                     "target": "com.amazonaws.swf#EventId",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The ID of the <code>StartChildWorkflowExecutionInitiated</code> event corresponding to the\n      <code>StartChildWorkflowExecution</code> \n            <a>Decision</a> to start this workflow execution. The source event with\n      this ID can be found in the history of the source workflow execution. This information can be useful for diagnosing problems by tracing back the chain of\n  events leading up to this event.</p>"
+                        "smithy.api#documentation": "<p>The ID of the <code>StartChildWorkflowExecutionInitiated</code> event corresponding to the\n      <code>StartChildWorkflowExecution</code>\n            <a>Decision</a> to start this workflow execution. The source event with\n      this ID can be found in the history of the source workflow execution. This information can be useful for diagnosing problems by tracing back the chain of\n  events leading up to this event.</p>"
                     }
                 },
                 "lambdaRole": {
@@ -8518,13 +8543,13 @@
                 "defaultTaskStartToCloseTimeout": {
                     "target": "com.amazonaws.swf#DurationInSecondsOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The default maximum duration, specified when registering the workflow type, that a decision task\n      for executions of this workflow type might take before returning completion or failure. If the task doesn'tdo  close\n      in the specified time then the task is automatically timed out and rescheduled. If the decider eventually reports\n      a completion or failure, it is ignored. This default can be overridden when starting a workflow execution using\n      the <a>StartWorkflowExecution</a> action or the <code>StartChildWorkflowExecution</code> \n            <a>Decision</a>.</p>\n         <p>The duration is specified in seconds, an integer greater than or equal to <code>0</code>. You can use <code>NONE</code> to specify unlimited duration.</p>"
+                        "smithy.api#documentation": "<p>\n         The default maximum duration, specified when registering the workflow type, that a decision task\n      for executions of this workflow type might take before returning completion or failure. If the task doesn'tdo  close\n      in the specified time then the task is automatically timed out and rescheduled. If the decider eventually reports\n      a completion or failure, it is ignored. This default can be overridden when starting a workflow execution using\n      the <a>StartWorkflowExecution</a> action or the <code>StartChildWorkflowExecution</code>\n            <a>Decision</a>.</p>\n         <p>The duration is specified in seconds, an integer greater than or equal to <code>0</code>. You can use <code>NONE</code> to specify unlimited duration.</p>"
                     }
                 },
                 "defaultExecutionStartToCloseTimeout": {
                     "target": "com.amazonaws.swf#DurationInSecondsOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The default maximum duration, specified when registering the workflow type, for executions of\n      this workflow type. This default can be overridden when starting a workflow execution using the\n      <a>StartWorkflowExecution</a> action or the <code>StartChildWorkflowExecution</code> \n            <a>Decision</a>.</p>\n         <p>The duration is specified in seconds, an integer greater than or equal to <code>0</code>. You can use <code>NONE</code> to specify unlimited duration.</p>"
+                        "smithy.api#documentation": "<p>\n         The default maximum duration, specified when registering the workflow type, for executions of\n      this workflow type. This default can be overridden when starting a workflow execution using the\n      <a>StartWorkflowExecution</a> action or the <code>StartChildWorkflowExecution</code>\n            <a>Decision</a>.</p>\n         <p>The duration is specified in seconds, an integer greater than or equal to <code>0</code>. You can use <code>NONE</code> to specify unlimited duration.</p>"
                     }
                 },
                 "defaultTaskList": {
@@ -8542,7 +8567,7 @@
                 "defaultChildPolicy": {
                     "target": "com.amazonaws.swf#ChildPolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The default policy to use for the child workflow executions when a workflow execution of this\n      type is terminated, by calling the <a>TerminateWorkflowExecution</a> action explicitly or due to an expired\n      timeout. This default can be overridden when starting a workflow execution using the <a>StartWorkflowExecution</a>\n      action or the <code>StartChildWorkflowExecution</code> \n            <a>Decision</a>.</p>\n         <p>The supported child policies are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>TERMINATE</code> – The child executions are terminated.</p>\n            </li>\n            <li>\n               <p>\n                  <code>REQUEST_CANCEL</code> – A request to cancel is attempted for each child\n  execution by recording a <code>WorkflowExecutionCancelRequested</code> event in its history. It is up to the decider\n  to take appropriate actions when it receives an execution history with this event.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ABANDON</code> – No action is taken. The child executions continue to run.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>\n         The default policy to use for the child workflow executions when a workflow execution of this\n      type is terminated, by calling the <a>TerminateWorkflowExecution</a> action explicitly or due to an expired\n      timeout. This default can be overridden when starting a workflow execution using the <a>StartWorkflowExecution</a>\n      action or the <code>StartChildWorkflowExecution</code>\n            <a>Decision</a>.</p>\n         <p>The supported child policies are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>TERMINATE</code> – The child executions are terminated.</p>\n            </li>\n            <li>\n               <p>\n                  <code>REQUEST_CANCEL</code> – A request to cancel is attempted for each child\n  execution by recording a <code>WorkflowExecutionCancelRequested</code> event in its history. It is up to the decider\n  to take appropriate actions when it receives an execution history with this event.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ABANDON</code> – No action is taken. The child executions continue to run.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "defaultLambdaRole": {
