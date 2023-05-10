@@ -1,8 +1,0 @@
-{
-    "id": "1bfd29cc-577f-4838-8e9c-755ab705971a",
-    "type": "feature",
-    "description": "Amazon Relational Database Service (RDS) updates for the new Aurora I/O-Optimized storage type for Amazon Aurora DB clusters",
-    "modules": [
-        "service/rds"
-    ]
-}

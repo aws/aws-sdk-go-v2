@@ -41,7 +41,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2 v1.19.11
 	github.com/aws/aws-sdk-go-v2/service/elasticsearchservice v1.18.11
 	github.com/aws/aws-sdk-go-v2/service/elastictranscoder v1.14.10
-	github.com/aws/aws-sdk-go-v2/service/emr v1.24.4
+	github.com/aws/aws-sdk-go-v2/service/emr v1.25.0
 	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.19.2
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.16.12
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.18.2
@@ -60,7 +60,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.14.10
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.12.10
 	github.com/aws/aws-sdk-go-v2/service/polly v1.25.10
-	github.com/aws/aws-sdk-go-v2/service/rds v1.43.3
+	github.com/aws/aws-sdk-go-v2/service/rds v1.44.0
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.27.11
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.27.0
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.28.1

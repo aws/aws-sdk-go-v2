@@ -1,3 +1,13 @@
+# Release (2023-05-10)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/emr`: [v1.25.0](service/emr/CHANGELOG.md#v1250-2023-05-10)
+  * **Feature**: EMR Studio now supports programmatically executing a Notebooks on an EMR on EKS cluster.  In addition, notebooks can now be executed by specifying its location in S3.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.44.0](service/rds/CHANGELOG.md#v1440-2023-05-10)
+  * **Feature**: Amazon Relational Database Service (RDS) updates for the new Aurora I/O-Optimized storage type for Amazon Aurora DB clusters
+* `github.com/aws/aws-sdk-go-v2/service/swf`: [v1.15.0](service/swf/CHANGELOG.md#v1150-2023-05-10)
+  * **Feature**: This release adds a new API parameter to exclude old history events from decision tasks.
+
 # Release (2023-05-09)
 
 ## General Highlights

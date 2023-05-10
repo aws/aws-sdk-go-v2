@@ -1,3 +1,7 @@
+# v1.25.0 (2023-05-10)
+
+* **Feature**: EMR Studio now supports programmatically executing a Notebooks on an EMR on EKS cluster.  In addition, notebooks can now be executed by specifying its location in S3.
+
 # v1.24.4 (2023-05-04)
 
 * No change notes available for this release.

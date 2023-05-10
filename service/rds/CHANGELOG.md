@@ -1,3 +1,7 @@
+# v1.44.0 (2023-05-10)
+
+* **Feature**: Amazon Relational Database Service (RDS) updates for the new Aurora I/O-Optimized storage type for Amazon Aurora DB clusters
+
 # v1.43.3 (2023-05-04)
 
 * No change notes available for this release.
