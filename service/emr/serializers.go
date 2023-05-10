@@ -3300,9 +3300,25 @@ func awsAwsjson11_serializeDocumentEC2InstanceIdsToTerminateList(v []string, val
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentEnvironmentVariablesMap(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentExecutionEngineConfig(v *types.ExecutionEngineConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ExecutionRoleArn != nil {
+		ok := object.Key("ExecutionRoleArn")
+		ok.String(*v.ExecutionRoleArn)
+	}
 
 	if v.Id != nil {
 		ok := object.Key("Id")
@@ -3971,6 +3987,23 @@ func awsAwsjson11_serializeDocumentNewSupportedProductsList(v []types.SupportedP
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentNotebookS3LocationFromInput(v *types.NotebookS3LocationFromInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Bucket != nil {
+		ok := object.Key("Bucket")
+		ok.String(*v.Bucket)
+	}
+
+	if v.Key != nil {
+		ok := object.Key("Key")
+		ok.String(*v.Key)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentOnDemandCapacityReservationOptions(v *types.OnDemandCapacityReservationOptions, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4019,6 +4052,23 @@ func awsAwsjson11_serializeDocumentOnDemandResizingSpecification(v *types.OnDema
 	if v.TimeoutDurationMinutes != nil {
 		ok := object.Key("TimeoutDurationMinutes")
 		ok.Integer(*v.TimeoutDurationMinutes)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentOutputNotebookS3LocationFromInput(v *types.OutputNotebookS3LocationFromInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Bucket != nil {
+		ok := object.Key("Bucket")
+		ok.String(*v.Bucket)
+	}
+
+	if v.Key != nil {
+		ok := object.Key("Key")
+		ok.String(*v.Key)
 	}
 
 	return nil
@@ -5134,6 +5184,11 @@ func awsAwsjson11_serializeOpDocumentListNotebookExecutionsInput(v *ListNotebook
 		ok.String(*v.EditorId)
 	}
 
+	if v.ExecutionEngineId != nil {
+		ok := object.Key("ExecutionEngineId")
+		ok.String(*v.ExecutionEngineId)
+	}
+
 	if v.From != nil {
 		ok := object.Key("From")
 		ok.Double(smithytime.FormatEpochSeconds(*v.From))
@@ -5672,6 +5727,13 @@ func awsAwsjson11_serializeOpDocumentStartNotebookExecutionInput(v *StartNoteboo
 		ok.String(*v.EditorId)
 	}
 
+	if v.EnvironmentVariables != nil {
+		ok := object.Key("EnvironmentVariables")
+		if err := awsAwsjson11_serializeDocumentEnvironmentVariablesMap(v.EnvironmentVariables, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ExecutionEngine != nil {
 		ok := object.Key("ExecutionEngine")
 		if err := awsAwsjson11_serializeDocumentExecutionEngineConfig(v.ExecutionEngine, ok); err != nil {
@@ -5692,6 +5754,25 @@ func awsAwsjson11_serializeOpDocumentStartNotebookExecutionInput(v *StartNoteboo
 	if v.NotebookParams != nil {
 		ok := object.Key("NotebookParams")
 		ok.String(*v.NotebookParams)
+	}
+
+	if v.NotebookS3Location != nil {
+		ok := object.Key("NotebookS3Location")
+		if err := awsAwsjson11_serializeDocumentNotebookS3LocationFromInput(v.NotebookS3Location, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.OutputNotebookFormat) > 0 {
+		ok := object.Key("OutputNotebookFormat")
+		ok.String(string(v.OutputNotebookFormat))
+	}
+
+	if v.OutputNotebookS3Location != nil {
+		ok := object.Key("OutputNotebookS3Location")
+		if err := awsAwsjson11_serializeDocumentOutputNotebookS3LocationFromInput(v.OutputNotebookS3Location, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.RelativePath != nil {

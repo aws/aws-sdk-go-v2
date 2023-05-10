@@ -53,7 +53,10 @@ func (c *Client) StartWorkflowExecution(ctx context.Context, params *StartWorkfl
 
 type StartWorkflowExecutionInput struct {
 
-	// The name of the domain in which the workflow execution is created.
+	// The name of the domain in which the workflow execution is created. The
+	// specified string must not contain a : (colon), / (slash), | (vertical bar), or
+	// any control characters ( \u0000-\u001f | \u007f-\u009f ). Also, it must not be
+	// the literal string arn .
 	//
 	// This member is required.
 	Domain *string
@@ -63,9 +66,8 @@ type StartWorkflowExecutionInput struct {
 	// specify the same identifier if a workflow execution is logically a restart of a
 	// previous execution. You cannot have two open workflow executions with the same
 	// workflowId at the same time within the same domain. The specified string must
-	// not start or end with whitespace. It must not contain a : (colon), / (slash), |
-	// (vertical bar), or any control characters ( \u0000-\u001f | \u007f-\u009f ).
-	// Also, it must not be the literal string arn .
+	// not contain a : (colon), / (slash), | (vertical bar), or any control characters
+	// ( \u0000-\u001f | \u007f-\u009f ). Also, it must not be the literal string arn .
 	//
 	// This member is required.
 	WorkflowId *string
@@ -128,10 +130,9 @@ type StartWorkflowExecutionInput struct {
 	// workflow type. A task list for this workflow execution must be specified either
 	// as a default for the workflow type or through this parameter. If neither this
 	// parameter is set nor a default task list was specified at registration time then
-	// a fault is returned. The specified string must not start or end with whitespace.
-	// It must not contain a : (colon), / (slash), | (vertical bar), or any control
-	// characters ( \u0000-\u001f | \u007f-\u009f ). Also, it must not be the literal
-	// string arn .
+	// a fault is returned. The specified string must not contain a : (colon), /
+	// (slash), | (vertical bar), or any control characters ( \u0000-\u001f |
+	// \u007f-\u009f ). Also, it must not be the literal string arn .
 	TaskList *types.TaskList
 
 	// The task priority to use for this workflow execution. This overrides any

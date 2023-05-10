@@ -56,18 +56,17 @@ type RegisterActivityTypeInput struct {
 	Domain *string
 
 	// The name of the activity type within the domain. The specified string must not
-	// start or end with whitespace. It must not contain a : (colon), / (slash), |
-	// (vertical bar), or any control characters ( \u0000-\u001f | \u007f-\u009f ).
-	// Also, it must not be the literal string arn .
+	// contain a : (colon), / (slash), | (vertical bar), or any control characters (
+	// \u0000-\u001f | \u007f-\u009f ). Also, it must not be the literal string arn .
 	//
 	// This member is required.
 	Name *string
 
 	// The version of the activity type. The activity type consists of the name and
 	// version, the combination of which must be unique within the domain. The
-	// specified string must not start or end with whitespace. It must not contain a :
-	// (colon), / (slash), | (vertical bar), or any control characters ( \u0000-\u001f
-	// | \u007f-\u009f ). Also, it must not be the literal string arn .
+	// specified string must not contain a : (colon), / (slash), | (vertical bar), or
+	// any control characters ( \u0000-\u001f | \u007f-\u009f ). Also, it must not be
+	// the literal string arn .
 	//
 	// This member is required.
 	Version *string

@@ -3301,6 +3301,11 @@ func awsAwsjson10_serializeOpDocumentPollForDecisionTaskInput(v *PollForDecision
 		ok.Boolean(v.ReverseOrder)
 	}
 
+	if v.StartAtPreviousStartedEvent {
+		ok := object.Key("startAtPreviousStartedEvent")
+		ok.Boolean(v.StartAtPreviousStartedEvent)
+	}
+
 	if v.TaskList != nil {
 		ok := object.Key("taskList")
 		if err := awsAwsjson10_serializeDocumentTaskList(v.TaskList, ok); err != nil {

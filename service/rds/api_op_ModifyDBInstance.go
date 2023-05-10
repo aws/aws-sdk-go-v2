@@ -291,10 +291,10 @@ type ModifyDBInstanceInput struct {
 	LicenseModel *string
 
 	// A value that indicates whether to manage the master user password with Amazon
-	// Web Services Secrets Manager. If the DB cluster doesn't manage the master user
+	// Web Services Secrets Manager. If the DB instance doesn't manage the master user
 	// password with Amazon Web Services Secrets Manager, you can turn on this
 	// management. In this case, you can't specify MasterUserPassword . If the DB
-	// cluster already manages the master user password with Amazon Web Services
+	// instance already manages the master user password with Amazon Web Services
 	// Secrets Manager, and you specify that the master user password is not managed
 	// with Amazon Web Services Secrets Manager, then you must specify
 	// MasterUserPassword . In this case, RDS deletes the secret and uses the new

@@ -7811,6 +7811,42 @@ func awsAwsjson11_deserializeDocumentEC2InstanceIdsList(v *[]string, value inter
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentEnvironmentVariablesMap(v *map[string]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]string
+	if *v == nil {
+		mv = map[string]string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected XmlString to be of type string, got %T instead", value)
+			}
+			parsedVal = jtv
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentErrorData(v *[]map[string]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7953,6 +7989,15 @@ func awsAwsjson11_deserializeDocumentExecutionEngineConfig(v **types.ExecutionEn
 
 	for key, value := range shape {
 		switch key {
+		case "ExecutionRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IAMRoleArn to be of type string, got %T instead", value)
+				}
+				sv.ExecutionRoleArn = ptr.String(jtv)
+			}
+
 		case "Id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10708,6 +10753,11 @@ func awsAwsjson11_deserializeDocumentNotebookExecution(v **types.NotebookExecuti
 				}
 			}
 
+		case "EnvironmentVariables":
+			if err := awsAwsjson11_deserializeDocumentEnvironmentVariablesMap(&sv.EnvironmentVariables, value); err != nil {
+				return err
+			}
+
 		case "ExecutionEngine":
 			if err := awsAwsjson11_deserializeDocumentExecutionEngineConfig(&sv.ExecutionEngine, value); err != nil {
 				return err
@@ -10756,6 +10806,25 @@ func awsAwsjson11_deserializeDocumentNotebookExecution(v **types.NotebookExecuti
 					return fmt.Errorf("expected XmlString to be of type string, got %T instead", value)
 				}
 				sv.NotebookParams = ptr.String(jtv)
+			}
+
+		case "NotebookS3Location":
+			if err := awsAwsjson11_deserializeDocumentNotebookS3LocationForOutput(&sv.NotebookS3Location, value); err != nil {
+				return err
+			}
+
+		case "OutputNotebookFormat":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OutputNotebookFormat to be of type string, got %T instead", value)
+				}
+				sv.OutputNotebookFormat = types.OutputNotebookFormat(jtv)
+			}
+
+		case "OutputNotebookS3Location":
+			if err := awsAwsjson11_deserializeDocumentOutputNotebookS3LocationForOutput(&sv.OutputNotebookS3Location, value); err != nil {
+				return err
 			}
 
 		case "OutputNotebookURI":
@@ -10853,6 +10922,15 @@ func awsAwsjson11_deserializeDocumentNotebookExecutionSummary(v **types.Notebook
 				}
 			}
 
+		case "ExecutionEngineId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected XmlString to be of type string, got %T instead", value)
+				}
+				sv.ExecutionEngineId = ptr.String(jtv)
+			}
+
 		case "NotebookExecutionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10869,6 +10947,11 @@ func awsAwsjson11_deserializeDocumentNotebookExecutionSummary(v **types.Notebook
 					return fmt.Errorf("expected XmlStringMaxLen256 to be of type string, got %T instead", value)
 				}
 				sv.NotebookExecutionName = ptr.String(jtv)
+			}
+
+		case "NotebookS3Location":
+			if err := awsAwsjson11_deserializeDocumentNotebookS3LocationForOutput(&sv.NotebookS3Location, value); err != nil {
+				return err
 			}
 
 		case "StartTime":
@@ -10936,6 +11019,55 @@ func awsAwsjson11_deserializeDocumentNotebookExecutionSummaryList(v *[]types.Not
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentNotebookS3LocationForOutput(v **types.NotebookS3LocationForOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NotebookS3LocationForOutput
+	if *v == nil {
+		sv = &types.NotebookS3LocationForOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Bucket":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected XmlStringMaxLen256 to be of type string, got %T instead", value)
+				}
+				sv.Bucket = ptr.String(jtv)
+			}
+
+		case "Key":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UriString to be of type string, got %T instead", value)
+				}
+				sv.Key = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -11157,6 +11289,55 @@ func awsAwsjson11_deserializeDocumentOSReleaseList(v *[]types.OSRelease, value i
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentOutputNotebookS3LocationForOutput(v **types.OutputNotebookS3LocationForOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OutputNotebookS3LocationForOutput
+	if *v == nil {
+		sv = &types.OutputNotebookS3LocationForOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Bucket":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected XmlStringMaxLen256 to be of type string, got %T instead", value)
+				}
+				sv.Bucket = ptr.String(jtv)
+			}
+
+		case "Key":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UriString to be of type string, got %T instead", value)
+				}
+				sv.Key = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

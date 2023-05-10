@@ -253,10 +253,11 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// in the Amazon Aurora User Guide.
 	ServerlessV2ScalingConfiguration *types.ServerlessV2ScalingConfiguration
 
-	// Specifies the storage type to be associated with the each DB instance in the
-	// Multi-AZ DB cluster. Valid values: io1 When specified, a value for the Iops
-	// parameter is required. Default: io1 Valid for: Aurora DB clusters and Multi-AZ
-	// DB clusters
+	// Specifies the storage type to be associated with the DB cluster. When specified
+	// for a Multi-AZ DB cluster, a value for the Iops parameter is required. Valid
+	// values: aurora , aurora-iopt1 (Aurora DB clusters); io1 (Multi-AZ DB clusters)
+	// Default: aurora (Aurora DB clusters); io1 (Multi-AZ DB clusters) Valid for:
+	// Aurora DB clusters and Multi-AZ DB clusters
 	StorageType *string
 
 	// The tags to be assigned to the restored DB cluster. Valid for: Aurora DB

@@ -44,7 +44,7 @@ type CreateStudioSessionMappingInput struct {
 	// The Amazon Resource Name (ARN) for the session policy that will be applied to
 	// the user or group. You should specify the ARN for the session policy that you
 	// want to apply, not the ARN of your user role. For more information, see Create
-	// an EMR Studio User Role with Session Policies (https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-studio-user-role.html)
+	// an Amazon EMR Studio User Role with Session Policies (https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-studio-user-role.html)
 	// .
 	//
 	// This member is required.

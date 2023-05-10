@@ -14381,6 +14381,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBClusterFromS3Input(v *RestoreDBClus
 		objectKey.Boolean(*v.StorageEncrypted)
 	}
 
+	if v.StorageType != nil {
+		objectKey := object.Key("StorageType")
+		objectKey.String(*v.StorageType)
+	}
+
 	if v.Tags != nil {
 		objectKey := object.Key("Tags")
 		if err := awsAwsquery_serializeDocumentTagList(v.Tags, objectKey); err != nil {

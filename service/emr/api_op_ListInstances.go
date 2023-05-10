@@ -12,10 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides information for all active EC2 instances and EC2 instances terminated
-// in the last 30 days, up to a maximum of 2,000. EC2 instances in any of the
-// following states are considered active: AWAITING_FULFILLMENT, PROVISIONING,
-// BOOTSTRAPPING, RUNNING.
+// Provides information for all active Amazon EC2 instances and Amazon EC2
+// instances terminated in the last 30 days, up to a maximum of 2,000. Amazon EC2
+// instances in any of the following states are considered active:
+// AWAITING_FULFILLMENT, PROVISIONING, BOOTSTRAPPING, RUNNING.
 func (c *Client) ListInstances(ctx context.Context, params *ListInstancesInput, optFns ...func(*Options)) (*ListInstancesOutput, error) {
 	if params == nil {
 		params = &ListInstancesInput{}

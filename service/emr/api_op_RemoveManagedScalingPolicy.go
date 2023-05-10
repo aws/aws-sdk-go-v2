@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes a managed scaling policy from a specified EMR cluster.
+// Removes a managed scaling policy from a specified Amazon EMR cluster.
 func (c *Client) RemoveManagedScalingPolicy(ctx context.Context, params *RemoveManagedScalingPolicyInput, optFns ...func(*Options)) (*RemoveManagedScalingPolicyOutput, error) {
 	if params == nil {
 		params = &RemoveManagedScalingPolicyInput{}

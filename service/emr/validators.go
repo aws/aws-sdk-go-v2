@@ -2604,12 +2604,6 @@ func validateOpStartNotebookExecutionInput(v *StartNotebookExecutionInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "StartNotebookExecutionInput"}
-	if v.EditorId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EditorId"))
-	}
-	if v.RelativePath == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RelativePath"))
-	}
 	if v.ExecutionEngine == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ExecutionEngine"))
 	} else if v.ExecutionEngine != nil {

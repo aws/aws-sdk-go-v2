@@ -11,7 +11,7 @@ import (
 )
 
 // Removes an automatic scaling policy from a specified instance group within an
-// EMR cluster.
+// Amazon EMR cluster.
 func (c *Client) RemoveAutoScalingPolicy(ctx context.Context, params *RemoveAutoScalingPolicyInput, optFns ...func(*Options)) (*RemoveAutoScalingPolicyOutput, error) {
 	if params == nil {
 		params = &RemoveAutoScalingPolicyInput{}

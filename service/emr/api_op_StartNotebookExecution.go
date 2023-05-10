@@ -29,44 +29,53 @@ func (c *Client) StartNotebookExecution(ctx context.Context, params *StartNotebo
 
 type StartNotebookExecutionInput struct {
 
-	// The unique identifier of the EMR Notebook to use for notebook execution.
-	//
-	// This member is required.
-	EditorId *string
-
 	// Specifies the execution engine (cluster) that runs the notebook execution.
 	//
 	// This member is required.
 	ExecutionEngine *types.ExecutionEngineConfig
 
-	// The path and file name of the notebook file for this execution, relative to the
-	// path specified for the EMR Notebook. For example, if you specify a path of
-	// s3://MyBucket/MyNotebooks when you create an EMR Notebook for a notebook with an
-	// ID of e-ABCDEFGHIJK1234567890ABCD (the EditorID of this request), and you
-	// specify a RelativePath of my_notebook_executions/notebook_execution.ipynb , the
-	// location of the file for the notebook execution is
-	// s3://MyBucket/MyNotebooks/e-ABCDEFGHIJK1234567890ABCD/my_notebook_executions/notebook_execution.ipynb
-	// .
-	//
-	// This member is required.
-	RelativePath *string
-
 	// The name or ARN of the IAM role that is used as the service role for Amazon EMR
-	// (the EMR role) for the notebook execution.
+	// (the Amazon EMR role) for the notebook execution.
 	//
 	// This member is required.
 	ServiceRole *string
+
+	// The unique identifier of the Amazon EMR Notebook to use for notebook execution.
+	EditorId *string
+
+	// The environment variables associated with the notebook execution.
+	EnvironmentVariables map[string]string
 
 	// An optional name for the notebook execution.
 	NotebookExecutionName *string
 
 	// The unique identifier of the Amazon EC2 security group to associate with the
-	// EMR Notebook for this notebook execution.
+	// Amazon EMR Notebook for this notebook execution.
 	NotebookInstanceSecurityGroupId *string
 
-	// Input parameters in JSON format passed to the EMR Notebook at runtime for
-	// execution.
+	// Input parameters in JSON format passed to the Amazon EMR Notebook at runtime
+	// for execution.
 	NotebookParams *string
+
+	// The Amazon S3 location for the notebook execution input.
+	NotebookS3Location *types.NotebookS3LocationFromInput
+
+	// The output format for the notebook execution.
+	OutputNotebookFormat types.OutputNotebookFormat
+
+	// The Amazon S3 location for the notebook execution output.
+	OutputNotebookS3Location *types.OutputNotebookS3LocationFromInput
+
+	// The path and file name of the notebook file for this execution, relative to the
+	// path specified for the Amazon EMR Notebook. For example, if you specify a path
+	// of s3://MyBucket/MyNotebooks when you create an Amazon EMR Notebook for a
+	// notebook with an ID of e-ABCDEFGHIJK1234567890ABCD (the EditorID of this
+	// request), and you specify a RelativePath of
+	// my_notebook_executions/notebook_execution.ipynb , the location of the file for
+	// the notebook execution is
+	// s3://MyBucket/MyNotebooks/e-ABCDEFGHIJK1234567890ABCD/my_notebook_executions/notebook_execution.ipynb
+	// .
+	RelativePath *string
 
 	// A list of tags associated with a notebook execution. Tags are user-defined
 	// key-value pairs that consist of a required key string with a maximum of 128

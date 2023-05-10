@@ -260,6 +260,10 @@ type RestoreDBClusterFromS3Input struct {
 	// A value that indicates whether the restored DB cluster is encrypted.
 	StorageEncrypted *bool
 
+	// Specifies the storage type to be associated with the DB cluster. Valid values:
+	// aurora , aurora-iopt1 Default: aurora Valid for: Aurora DB clusters only
+	StorageType *string
+
 	// A list of tags. For more information, see Tagging Amazon RDS Resources (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html)
 	// in the Amazon RDS User Guide.
 	Tags []types.Tag

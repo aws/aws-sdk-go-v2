@@ -12,7 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves release labels of EMR services in the region where the API is called.
+// Retrieves release labels of Amazon EMR services in the Region where the API is
+// called.
 func (c *Client) ListReleaseLabels(ctx context.Context, params *ListReleaseLabelsInput, optFns ...func(*Options)) (*ListReleaseLabelsOutput, error) {
 	if params == nil {
 		params = &ListReleaseLabelsInput{}

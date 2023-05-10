@@ -1987,10 +1987,9 @@ type ResourceTag struct {
 // in the Amazon SWF Developer Guide.
 type ScheduleActivityTaskDecisionAttributes struct {
 
-	// The activityId of the activity task. The specified string must not start or end
-	// with whitespace. It must not contain a : (colon), / (slash), | (vertical bar),
-	// or any control characters ( \u0000-\u001f | \u007f-\u009f ). Also, it must not
-	// contain the literal string arn .
+	// The activityId of the activity task. The specified string must not contain a :
+	// (colon), / (slash), | (vertical bar), or any control characters ( \u0000-\u001f
+	// | \u007f-\u009f ). Also, it must not be the literal string arn .
 	//
 	// This member is required.
 	ActivityId *string
@@ -2051,10 +2050,9 @@ type ScheduleActivityTaskDecisionAttributes struct {
 	// is used. A task list for this activity task must be specified either as a
 	// default for the activity type or through this field. If neither this field is
 	// set nor a default task list was specified at registration time then a fault is
-	// returned. The specified string must not start or end with whitespace. It must
-	// not contain a : (colon), / (slash), | (vertical bar), or any control characters
-	// ( \u0000-\u001f | \u007f-\u009f ). Also, it must not contain the literal string
-	// arn .
+	// returned. The specified string must not contain a : (colon), / (slash), |
+	// (vertical bar), or any control characters ( \u0000-\u001f | \u007f-\u009f ).
+	// Also, it must not be the literal string arn .
 	TaskList *TaskList
 
 	// If set, specifies the priority with which the activity task is to be assigned
@@ -2124,8 +2122,8 @@ type ScheduleLambdaFunctionDecisionAttributes struct {
 	Input *string
 
 	// The timeout value, in seconds, after which the Lambda function is considered to
-	// be failed once it has started. This can be any integer from 1-300 (1s-5m). If no
-	// value is supplied, than a default value of 300s is assumed.
+	// be failed once it has started. This can be any integer from 1-900 (1s-15m). If
+	// no value is supplied, then a default value of 900s is assumed.
 	StartToCloseTimeout *string
 
 	noSmithyDocumentSerde
@@ -2308,10 +2306,9 @@ type SignalExternalWorkflowExecutionInitiatedEventAttributes struct {
 // in the Amazon SWF Developer Guide.
 type StartChildWorkflowExecutionDecisionAttributes struct {
 
-	// The workflowId of the workflow execution. The specified string must not start
-	// or end with whitespace. It must not contain a : (colon), / (slash), | (vertical
-	// bar), or any control characters ( \u0000-\u001f | \u007f-\u009f ). Also, it must
-	// not contain the literal string arn .
+	// The workflowId of the workflow execution. The specified string must not contain
+	// a : (colon), / (slash), | (vertical bar), or any control characters (
+	// \u0000-\u001f | \u007f-\u009f ). Also, it must not be the literal string arn .
 	//
 	// This member is required.
 	WorkflowId *string
@@ -2370,8 +2367,8 @@ type StartChildWorkflowExecutionDecisionAttributes struct {
 	// parameter is set nor a default task list was specified at registration time then
 	// a fault is returned. The specified string must not start or end with whitespace.
 	// It must not contain a : (colon), / (slash), | (vertical bar), or any control
-	// characters ( \u0000-\u001f | \u007f-\u009f ). Also, it must not contain the
-	// literal string arn .
+	// characters ( \u0000-\u001f | \u007f-\u009f ). Also, it must not be the literal
+	// string arn .
 	TaskList *TaskList
 
 	// A task priority that, if set, specifies the priority for a decision task of
@@ -2564,10 +2561,9 @@ type StartTimerDecisionAttributes struct {
 	// This member is required.
 	StartToFireTimeout *string
 
-	// The unique ID of the timer. The specified string must not start or end with
-	// whitespace. It must not contain a : (colon), / (slash), | (vertical bar), or
-	// any control characters ( \u0000-\u001f | \u007f-\u009f ). Also, it must not
-	// contain the literal string arn .
+	// The unique ID of the timer. The specified string must not contain a : (colon), /
+	// (slash), | (vertical bar), or any control characters ( \u0000-\u001f |
+	// \u007f-\u009f ). Also, it must not be the literal string arn .
 	//
 	// This member is required.
 	TimerId *string

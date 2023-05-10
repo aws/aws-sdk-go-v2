@@ -307,6 +307,9 @@ type ClusterPendingModifiedValues struct {
 	// these log types are in the process of being activated or deactivated.
 	PendingCloudwatchLogsExports *PendingCloudwatchLogsExports
 
+	// The storage type for the DB cluster.
+	StorageType *string
+
 	noSmithyDocumentSerde
 }
 
@@ -569,9 +572,8 @@ type DBCluster struct {
 	// The name of the database engine to be used for this DB cluster.
 	Engine *string
 
-	// The DB engine mode of the DB cluster, either provisioned , serverless ,
-	// parallelquery , global , or multimaster . For more information, see
-	// CreateDBCluster (https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html)
+	// The DB engine mode of the DB cluster, either provisioned or serverless . For
+	// more information, see CreateDBCluster (https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html)
 	// .
 	EngineMode *string
 
@@ -603,6 +605,10 @@ type DBCluster struct {
 	// A value that indicates whether the mapping of Amazon Web Services Identity and
 	// Access Management (IAM) accounts to database accounts is enabled.
 	IAMDatabaseAuthenticationEnabled *bool
+
+	// The next time you can modify the DB cluster to use the aurora-iopt1 storage
+	// type. This setting is only for Aurora DB clusters.
+	IOOptimizedNextAllowedModificationTime *time.Time
 
 	// The Provisioned IOPS (I/O operations per second) value. This setting is only
 	// for non-Aurora Multi-AZ DB clusters.
@@ -740,8 +746,7 @@ type DBCluster struct {
 	// Specifies whether the DB cluster is encrypted.
 	StorageEncrypted bool
 
-	// The storage type associated with the DB cluster. This setting is only for
-	// non-Aurora Multi-AZ DB clusters.
+	// The storage type associated with the DB cluster.
 	StorageType *string
 
 	// A list of tags. For more information, see Tagging Amazon RDS Resources (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html)
@@ -1003,6 +1008,10 @@ type DBClusterSnapshot struct {
 
 	// Specifies whether the DB cluster snapshot is encrypted.
 	StorageEncrypted bool
+
+	// The storage type associated with the DB cluster snapshot. This setting is only
+	// for Aurora DB clusters.
+	StorageType *string
 
 	// A list of tags. For more information, see Tagging Amazon RDS Resources (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html)
 	// in the Amazon RDS User Guide.
@@ -1378,10 +1387,11 @@ type DBInstance struct {
 	EnhancedMonitoringResourceArn *string
 
 	// True if mapping of Amazon Web Services Identity and Access Management (IAM)
-	// accounts to database accounts is enabled, and otherwise false. IAM database
-	// authentication can be enabled for the following database engines:
-	//   - For MySQL 5.7, minor version 5.7.16 or higher.
-	//   - For Amazon Aurora, all versions of Aurora MySQL and Aurora PostgreSQL.
+	// accounts to database accounts is enabled, and otherwise false. For a list of
+	// engine versions that support IAM database authentication, see IAM database
+	// authentication (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RDS_Fea_Regions_DB-eng.Feature.IamDatabaseAuthentication.html)
+	// in the Amazon RDS User Guide and IAM database authentication in Aurora (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.Aurora_Fea_Regions_DB-eng.Feature.IAMdbauth.html)
+	// in the Amazon Aurora User Guide.
 	IAMDatabaseAuthenticationEnabled bool
 
 	// Provides the date and time the DB instance was created.

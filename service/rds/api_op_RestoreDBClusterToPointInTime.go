@@ -237,9 +237,11 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// in the Amazon Aurora User Guide.
 	ServerlessV2ScalingConfiguration *types.ServerlessV2ScalingConfiguration
 
-	// Specifies the storage type to be associated with the each DB instance in the
-	// Multi-AZ DB cluster. Valid values: io1 When specified, a value for the Iops
-	// parameter is required. Default: io1 Valid for: Multi-AZ DB clusters only
+	// Specifies the storage type to be associated with the DB cluster. When specified
+	// for a Multi-AZ DB cluster, a value for the Iops parameter is required. Valid
+	// values: aurora , aurora-iopt1 (Aurora DB clusters); io1 (Multi-AZ DB clusters)
+	// Default: aurora (Aurora DB clusters); io1 (Multi-AZ DB clusters) Valid for:
+	// Aurora DB clusters and Multi-AZ DB clusters
 	StorageType *string
 
 	// A list of tags. For more information, see Tagging Amazon RDS Resources (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html)

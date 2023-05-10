@@ -60,7 +60,7 @@ type AddJobFlowStepsInput struct {
 	// The runtime role can be a cross-account IAM role. The runtime role ARN is a
 	// combination of account ID, role name, and role type using the following format:
 	// arn:partition:service:region:account:resource . For example,
-	// arn:aws:iam::1234567890:role/ReadOnly is a correctly formatted runtime role ARN.
+	// arn:aws:IAM::1234567890:role/ReadOnly is a correctly formatted runtime role ARN.
 	ExecutionRoleArn *string
 
 	noSmithyDocumentSerde

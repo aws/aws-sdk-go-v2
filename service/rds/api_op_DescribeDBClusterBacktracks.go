@@ -46,8 +46,8 @@ type DescribeDBClusterBacktracksInput struct {
 	// If specified, this value is the backtrack identifier of the backtrack to be
 	// described. Constraints:
 	//   - Must contain a valid universally unique identifier (UUID). For more
-	//   information about UUIDs, see A Universally Unique Identifier (UUID) URN
-	//   Namespace (http://www.ietf.org/rfc/rfc4122.txt) .
+	//   information about UUIDs, see Universally unique identifier (https://en.wikipedia.org/wiki/Universally_unique_identifier)
+	//   .
 	// Example: 123e4567-e89b-12d3-a456-426655440000
 	BacktrackIdentifier *string
 

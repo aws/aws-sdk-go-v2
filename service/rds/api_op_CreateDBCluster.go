@@ -194,13 +194,11 @@ type CreateDBClusterInput struct {
 	EnablePerformanceInsights *bool
 
 	// The DB engine mode of the DB cluster, either provisioned or serverless . The
-	// serverless engine mode only applies for Aurora Serverless v1 DB clusters.
-	// Limitations and requirements apply to some DB engine modes. For more
-	// information, see the following sections in the Amazon Aurora User Guide:
+	// serverless engine mode only applies for Aurora Serverless v1 DB clusters. For
+	// information about limitations and requirements for Serverless DB clusters, see
+	// the following sections in the Amazon Aurora User Guide:
 	//   - Limitations of Aurora Serverless v1 (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html#aurora-serverless.limitations)
 	//   - Requirements for Aurora Serverless v2 (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.requirements.html)
-	//   - Limitations of parallel query (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-mysql-parallel-query.html#aurora-mysql-parallel-query-limitations)
-	//   - Limitations of Aurora global databases (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database.html#aurora-global-database.limitations)
 	// Valid for: Aurora DB clusters only
 	EngineMode *string
 
@@ -461,9 +459,11 @@ type CreateDBClusterInput struct {
 	StorageEncrypted *bool
 
 	// Specifies the storage type to be associated with the DB cluster. This setting
-	// is required to create a Multi-AZ DB cluster. Valid values: io1 When specified,
-	// a value for the Iops parameter is required. Default: io1 Valid for: Multi-AZ DB
-	// clusters only
+	// is required to create a Multi-AZ DB cluster. When specified for a Multi-AZ DB
+	// cluster, a value for the Iops parameter is required. Valid values: aurora ,
+	// aurora-iopt1 (Aurora DB clusters); io1 (Multi-AZ DB clusters) Default: aurora
+	// (Aurora DB clusters); io1 (Multi-AZ DB clusters) Valid for: Aurora DB clusters
+	// and Multi-AZ DB clusters
 	StorageType *string
 
 	// Tags to assign to the DB cluster. Valid for: Aurora DB clusters and Multi-AZ DB

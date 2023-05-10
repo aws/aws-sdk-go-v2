@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides EMR release label details, such as releases available the region where
-// the API request is run, and the available applications for a specific EMR
-// release label. Can also list EMR release versions that support a specified
-// version of Spark.
+// Provides Amazon EMR release label details, such as the releases available the
+// Region where the API request is run, and the available applications for a
+// specific Amazon EMR release label. Can also list Amazon EMR releases that
+// support a specified version of Spark.
 func (c *Client) DescribeReleaseLabel(ctx context.Context, params *DescribeReleaseLabelInput, optFns ...func(*Options)) (*DescribeReleaseLabelOutput, error) {
 	if params == nil {
 		params = &DescribeReleaseLabelInput{}

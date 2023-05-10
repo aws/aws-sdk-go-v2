@@ -16,7 +16,7 @@ import (
 // Provides summaries of all notebook executions. You can filter the list based on
 // multiple criteria such as status, time range, and editor id. Returns a maximum
 // of 50 notebook executions and a marker to track the paging of a longer notebook
-// execution list across multiple ListNotebookExecution calls.
+// execution list across multiple ListNotebookExecutions calls.
 func (c *Client) ListNotebookExecutions(ctx context.Context, params *ListNotebookExecutionsInput, optFns ...func(*Options)) (*ListNotebookExecutionsOutput, error) {
 	if params == nil {
 		params = &ListNotebookExecutionsInput{}
@@ -36,6 +36,9 @@ type ListNotebookExecutionsInput struct {
 
 	// The unique ID of the editor associated with the notebook execution.
 	EditorId *string
+
+	// The unique ID of the execution engine.
+	ExecutionEngineId *string
 
 	// The beginning of time range filter for listing notebook executions. The default
 	// is the timestamp of 30 days ago.

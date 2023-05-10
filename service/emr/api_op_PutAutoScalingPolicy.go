@@ -13,8 +13,8 @@ import (
 
 // Creates or updates an automatic scaling policy for a core instance group or
 // task instance group in an Amazon EMR cluster. The automatic scaling policy
-// defines how an instance group dynamically adds and terminates EC2 instances in
-// response to the value of a CloudWatch metric.
+// defines how an instance group dynamically adds and terminates Amazon EC2
+// instances in response to the value of a CloudWatch metric.
 func (c *Client) PutAutoScalingPolicy(ctx context.Context, params *PutAutoScalingPolicyInput, optFns ...func(*Options)) (*PutAutoScalingPolicyOutput, error) {
 	if params == nil {
 		params = &PutAutoScalingPolicyInput{}

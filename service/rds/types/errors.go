@@ -3248,7 +3248,34 @@ func (e *StorageQuotaExceededFault) ErrorCode() string {
 }
 func (e *StorageQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Storage of the StorageType specified can't be associated with the DB instance.
+// The aurora-iopt1 storage type isn't available, because you modified the DB
+// cluster to use this storage type less than one month ago.
+type StorageTypeNotAvailableFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *StorageTypeNotAvailableFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *StorageTypeNotAvailableFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *StorageTypeNotAvailableFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "StorageTypeNotAvailableFault"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *StorageTypeNotAvailableFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The specified StorageType can't be associated with the DB instance.
 type StorageTypeNotSupportedFault struct {
 	Message *string
 
