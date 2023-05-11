@@ -1,6 +1,97 @@
 {
     "smithy": "2.0",
     "shapes": {
+        "com.amazonaws.omics#AbortMultipartReadSetUpload": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.omics#AbortMultipartReadSetUploadRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.omics#AbortMultipartReadSetUploadResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.omics#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.omics#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.omics#NotSupportedOperationException"
+                },
+                {
+                    "target": "com.amazonaws.omics#RequestTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n      Stops a multipart upload.\n    </p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "control-storage-"
+                },
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/sequencestore/{sequenceStoreId}/upload/{uploadId}/abort"
+                }
+            }
+        },
+        "com.amazonaws.omics#AbortMultipartReadSetUploadRequest": {
+            "type": "structure",
+            "members": {
+                "sequenceStoreId": {
+                    "target": "com.amazonaws.omics#SequenceStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The sequence store ID for the store involved in the multipart upload.\n    </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "uploadId": {
+                    "target": "com.amazonaws.omics#UploadId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The ID for the multipart upload. \n    </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.omics#AbortMultipartReadSetUploadResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.omics#Accelerators": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "GPU",
+                        "value": "GPU"
+                    }
+                ],
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
         "com.amazonaws.omics#AccessDeniedException": {
             "type": "structure",
             "members": {
@@ -139,6 +230,27 @@
                 "smithy.api#pattern": "^[0-9]+$"
             }
         },
+        "com.amazonaws.omics#AnnotationFieldMap": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String",
+                "traits": {
+                    "smithy.api#length": {
+                        "min": 1,
+                        "max": 21
+                    }
+                }
+            },
+            "value": {
+                "target": "smithy.api#String",
+                "traits": {
+                    "smithy.api#length": {
+                        "min": 1,
+                        "max": 21
+                    }
+                }
+            }
+        },
         "com.amazonaws.omics#AnnotationImportItemDetail": {
             "type": "structure",
             "members": {
@@ -275,6 +387,12 @@
                     "traits": {
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>The job's left normalization setting.</p>"
+                    }
+                },
+                "annotationFields": {
+                    "target": "com.amazonaws.omics#AnnotationFieldMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The annotation schema generated by the parsed annotation data. \n    </p>"
                     }
                 }
             },
@@ -741,6 +859,136 @@
                 }
             }
         },
+        "com.amazonaws.omics#CompleteMultipartReadSetUpload": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.omics#CompleteMultipartReadSetUploadRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.omics#CompleteMultipartReadSetUploadResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.omics#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.omics#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.omics#NotSupportedOperationException"
+                },
+                {
+                    "target": "com.amazonaws.omics#RequestTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n      Concludes a multipart upload once you have uploaded all the components.\n    </p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "storage-"
+                },
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/sequencestore/{sequenceStoreId}/upload/{uploadId}/complete"
+                }
+            }
+        },
+        "com.amazonaws.omics#CompleteMultipartReadSetUploadRequest": {
+            "type": "structure",
+            "members": {
+                "sequenceStoreId": {
+                    "target": "com.amazonaws.omics#SequenceStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The sequence store ID for the store involved in the multipart upload.\n    </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "uploadId": {
+                    "target": "com.amazonaws.omics#UploadId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The ID for the multipart upload. \n    </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "parts": {
+                    "target": "com.amazonaws.omics#CompleteReadSetUploadPartList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The individual uploads or parts of a multipart upload.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.omics#CompleteMultipartReadSetUploadResponse": {
+            "type": "structure",
+            "members": {
+                "readSetId": {
+                    "target": "com.amazonaws.omics#ReadSetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The read set ID created for an uploaded read set. \n    </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.omics#CompleteReadSetUploadPartList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.omics#CompleteReadSetUploadPartListItem"
+            }
+        },
+        "com.amazonaws.omics#CompleteReadSetUploadPartListItem": {
+            "type": "structure",
+            "members": {
+                "partNumber": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      A number identifying the part in a read set upload.\n    </p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 10000
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "partSource": {
+                    "target": "com.amazonaws.omics#ReadSetPartSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The source file of the part being uploaded. \n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "checksum": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      A unique identifier used to confirm that parts are being added to the correct upload.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      Part of the response to the CompleteReadSetUpload API, including metadata.\n    </p>"
+            }
+        },
         "com.amazonaws.omics#CompletionTime": {
             "type": "timestamp",
             "traits": {
@@ -905,6 +1153,208 @@
                     "traits": {
                         "smithy.api#documentation": "<p>When the store was created.</p>",
                         "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.omics#CreateMultipartReadSetUpload": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.omics#CreateMultipartReadSetUploadRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.omics#CreateMultipartReadSetUploadResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.omics#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.omics#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.omics#NotSupportedOperationException"
+                },
+                {
+                    "target": "com.amazonaws.omics#RequestTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n      Begins a multipart read set upload. \n    </p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "control-storage-"
+                },
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/sequencestore/{sequenceStoreId}/upload"
+                }
+            }
+        },
+        "com.amazonaws.omics#CreateMultipartReadSetUploadRequest": {
+            "type": "structure",
+            "members": {
+                "sequenceStoreId": {
+                    "target": "com.amazonaws.omics#SequenceStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The sequence store ID for the store that is the destination of the multipart uploads.\n    </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.omics#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      An idempotency token that can be used to avoid triggering multiple multipart uploads.\n    </p>"
+                    }
+                },
+                "sourceFileType": {
+                    "target": "com.amazonaws.omics#FileType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The type of file being uploaded.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "subjectId": {
+                    "target": "com.amazonaws.omics#SubjectId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The source's subject ID.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sampleId": {
+                    "target": "com.amazonaws.omics#SampleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The source's sample ID.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "generatedFrom": {
+                    "target": "com.amazonaws.omics#GeneratedFrom",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Where the source originated.\n    </p>"
+                    }
+                },
+                "referenceArn": {
+                    "target": "com.amazonaws.omics#ReferenceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The ARN of the reference.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.omics#ReadSetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The name of the read set.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.omics#ReadSetDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The description of the read set.\n    </p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.omics#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Any tags to add to the read set.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.omics#CreateMultipartReadSetUploadResponse": {
+            "type": "structure",
+            "members": {
+                "sequenceStoreId": {
+                    "target": "com.amazonaws.omics#SequenceStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The sequence store ID for the store that the read set will be created in.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "uploadId": {
+                    "target": "com.amazonaws.omics#UploadId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      he ID for the initiated multipart upload.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sourceFileType": {
+                    "target": "com.amazonaws.omics#FileType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The file type of the read set source.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "subjectId": {
+                    "target": "com.amazonaws.omics#SubjectId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The source's subject ID.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sampleId": {
+                    "target": "com.amazonaws.omics#SampleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The source's sample ID.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "generatedFrom": {
+                    "target": "com.amazonaws.omics#GeneratedFrom",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The source of the read set. \n    </p>"
+                    }
+                },
+                "referenceArn": {
+                    "target": "com.amazonaws.omics#ReferenceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The read set source's reference ARN.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.omics#ReadSetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The name of the read set.\n    </p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.omics#ReadSetDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The description of the read set.\n    </p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.omics#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The tags to add to the read set.\n    </p>"
+                    }
+                },
+                "creationTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The creation time of the multipart upload.\n    </p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
                     }
                 }
             },
@@ -1140,6 +1590,16 @@
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#required": {}
                     }
+                },
+                "maxGpus": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The maximum GPUs that can be used by a run group. \n    </p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100000
+                        }
+                    }
                 }
             },
             "traits": {
@@ -1248,6 +1708,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>To ensure that requests don't run multiple times, specify a unique token for each request.</p>"
                     }
+                },
+                "fallbackLocation": {
+                    "target": "com.amazonaws.omics#S3Destination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      An S3 location that is used to store files that have failed a direct upload. \n    </p>"
+                    }
                 }
             },
             "traits": {
@@ -1295,6 +1761,12 @@
                         "smithy.api#documentation": "<p>When the store was created.</p>",
                         "smithy.api#required": {},
                         "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "fallbackLocation": {
+                    "target": "com.amazonaws.omics#S3Destination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      An S3 location that is used to store files that have failed a direct upload. \n    </p>"
                     }
                 }
             },
@@ -1541,6 +2013,12 @@
                         "smithy.api#documentation": "<p>To ensure that requests don't run multiple times, specify a unique ID for each request.</p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "accelerators": {
+                    "target": "com.amazonaws.omics#Accelerators",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The computational accelerator specified to run the workflow. \n    </p>"
                     }
                 }
             },
@@ -2655,6 +3133,12 @@
                     "traits": {
                         "smithy.api#required": {}
                     }
+                },
+                "annotationFields": {
+                    "target": "com.amazonaws.omics#AnnotationFieldMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The annotation schema generated by the parsed annotation data.\n    </p>"
+                    }
                 }
             },
             "traits": {
@@ -3711,6 +4195,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The read set's files.</p>"
                     }
+                },
+                "statusMessage": {
+                    "target": "com.amazonaws.omics#ReadSetStatusMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The status message for a read set. It provides more detail as to why the read set has a status. \n    </p>"
+                    }
                 }
             },
             "traits": {
@@ -4638,6 +5128,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The group's tags.</p>"
                     }
+                },
+                "maxGpus": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The maximum GPUs that can be used by a run group. \n    </p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100000
+                        }
+                    }
                 }
             },
             "traits": {
@@ -4814,6 +5314,12 @@
                     "target": "com.amazonaws.omics#TagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The run's tags.</p>"
+                    }
+                },
+                "accelerators": {
+                    "target": "com.amazonaws.omics#Accelerators",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The computational accelerator used to run the workflow. \n    </p>"
                     }
                 }
             },
@@ -5086,6 +5592,15 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The task's log stream.</p>"
                     }
+                },
+                "gpus": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The number of Graphics Processing Units (GPU) specified in the task. \n    </p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
+                    }
                 }
             },
             "traits": {
@@ -5190,6 +5705,12 @@
                         "smithy.api#documentation": "<p>When the store was created.</p>",
                         "smithy.api#required": {},
                         "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "fallbackLocation": {
+                    "target": "com.amazonaws.omics#S3Destination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      An S3 location that is used to store files that have failed a direct upload.\n    </p>"
                     }
                 }
             },
@@ -5381,6 +5902,12 @@
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>The job's left normalization setting.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "annotationFields": {
+                    "target": "com.amazonaws.omics#AnnotationFieldMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The annotation schema generated by the parsed annotation data. \n    </p>"
                     }
                 }
             },
@@ -5840,6 +6367,18 @@
                     "target": "com.amazonaws.omics#TagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The workflow's tags.</p>"
+                    }
+                },
+                "metadata": {
+                    "target": "com.amazonaws.omics#WorkflowMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Gets metadata for workflow.  \n    </p>"
+                    }
+                },
+                "accelerators": {
+                    "target": "com.amazonaws.omics#Accelerators",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The computational accelerator specified to run the workflow. </p>"
                     }
                 }
             },
@@ -6505,6 +7044,112 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.omics#ListMultipartReadSetUploads": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.omics#ListMultipartReadSetUploadsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.omics#ListMultipartReadSetUploadsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.omics#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.omics#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.omics#NotSupportedOperationException"
+                },
+                {
+                    "target": "com.amazonaws.omics#RequestTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n      Lists all multipart read set uploads and their statuses. \n    </p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "control-storage-"
+                },
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/sequencestore/{sequenceStoreId}/uploads"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "uploads"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.omics#ListMultipartReadSetUploadsRequest": {
+            "type": "structure",
+            "members": {
+                "sequenceStoreId": {
+                    "target": "com.amazonaws.omics#SequenceStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The Sequence Store ID used for the multipart uploads.\n    </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The maximum number of multipart uploads returned in a page.\n    </p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.omics#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Next token returned in the response of a previous ListMultipartReadSetUploads call. Used to get the next page of results.\n    </p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.omics#ListMultipartReadSetUploadsResponse": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.omics#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Next token returned in the response of a previous ListMultipartReadSetUploads call. Used to get the next page of results.\n    </p>"
+                    }
+                },
+                "uploads": {
+                    "target": "com.amazonaws.omics#MultipartReadSetUploadList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      An array of multipart uploads.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.omics#ListReadSetActivationJobs": {
             "type": "operation",
             "input": {
@@ -6816,6 +7461,133 @@
                     "target": "com.amazonaws.omics#ImportReadSetJobList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of jobs.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.omics#ListReadSetUploadParts": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.omics#ListReadSetUploadPartsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.omics#ListReadSetUploadPartsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.omics#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.omics#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.omics#NotSupportedOperationException"
+                },
+                {
+                    "target": "com.amazonaws.omics#RequestTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n      This operation will list all parts in a requested multipart upload for a sequence store.\n    </p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "control-storage-"
+                },
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/sequencestore/{sequenceStoreId}/upload/{uploadId}/parts"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "parts"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.omics#ListReadSetUploadPartsRequest": {
+            "type": "structure",
+            "members": {
+                "sequenceStoreId": {
+                    "target": "com.amazonaws.omics#SequenceStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The Sequence Store ID used for the multipart uploads.\n    </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "uploadId": {
+                    "target": "com.amazonaws.omics#UploadId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The ID for the initiated multipart upload. \n    </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "partSource": {
+                    "target": "com.amazonaws.omics#ReadSetPartSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The source file for the upload part.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The maximum number of read set upload parts returned in a page.\n    </p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.omics#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Next token returned in the response of a previous ListReadSetUploadPartsRequest call. Used to get the next page of results.\n    </p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "filter": {
+                    "target": "com.amazonaws.omics#ReadSetUploadPartListFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Attributes used to filter for a specific subset of read set part uploads.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.omics#ListReadSetUploadPartsResponse": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.omics#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Next token returned in the response of a previous ListReadSetUploadParts call. Used to get the next page of results.\n    </p>"
+                    }
+                },
+                "parts": {
+                    "target": "com.amazonaws.omics#ReadSetUploadPartList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      An array of upload parts.\n    </p>"
                     }
                 }
             },
@@ -7546,6 +8318,13 @@
                             "max": 100
                         }
                     }
+                },
+                "status": {
+                    "target": "com.amazonaws.omics#RunStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The status of a run.\n    </p>",
+                        "smithy.api#httpQuery": "status"
+                    }
                 }
             },
             "traits": {
@@ -8123,6 +8902,95 @@
                 "smithy.api#pattern": "^[\\p{L}||\\p{N}]+$"
             }
         },
+        "com.amazonaws.omics#MultipartReadSetUploadList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.omics#MultipartReadSetUploadListItem"
+            }
+        },
+        "com.amazonaws.omics#MultipartReadSetUploadListItem": {
+            "type": "structure",
+            "members": {
+                "sequenceStoreId": {
+                    "target": "com.amazonaws.omics#SequenceStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The sequence store ID used for the multipart upload.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "uploadId": {
+                    "target": "com.amazonaws.omics#UploadId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The ID for the initiated multipart upload.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sourceFileType": {
+                    "target": "com.amazonaws.omics#FileType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The type of file the read set originated from.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "subjectId": {
+                    "target": "com.amazonaws.omics#SubjectId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The read set source's subject ID.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sampleId": {
+                    "target": "com.amazonaws.omics#SampleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The read set source's sample ID.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "generatedFrom": {
+                    "target": "com.amazonaws.omics#GeneratedFrom",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The source of an uploaded part.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "referenceArn": {
+                    "target": "com.amazonaws.omics#ReferenceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The source's reference ARN.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.omics#ReadSetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The name of a read set. \n    </p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.omics#ReadSetDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The description of a read set. \n    </p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.omics#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Any tags you wish to add to a read set. \n    </p>"
+                    }
+                },
+                "creationTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The time stamp for when a direct upload was created.\n    </p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      Part of the response to ListMultipartReadSetUploads, excluding completed and aborted multipart uploads.\n    </p>"
+            }
+        },
         "com.amazonaws.omics#NextToken": {
             "type": "string",
             "traits": {
@@ -8131,6 +8999,22 @@
                     "max": 6144
                 },
                 "smithy.api#pattern": "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"
+            }
+        },
+        "com.amazonaws.omics#NotSupportedOperationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      The operation is not supported by Amazon Omics, or the API does not exist. \n    </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 405
             }
         },
         "com.amazonaws.omics#Omics": {
@@ -8201,7 +9085,7 @@
                     "FederatedUser"
                 ],
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>This is the <i>Amazon Omics API Reference</i>. For an introduction to the service, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/\">What is Amazon Omics?</a> in the\n      <i>Amazon Omics Developer Guide</i>.</p>",
+                "smithy.api#documentation": "<p>This is the <i>Amazon Omics API Reference</i>. For an introduction to the service, see <a href=\"https://docs.aws.amazon.com/omics/latest/dev/\">What is Amazon Omics?</a> in the\n      <i>Amazon Omics User Guide</i>.</p>",
                 "smithy.api#title": "Amazon Omics",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -8563,9 +9447,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "UseFIPS": true,
                                 "Region": "us-gov-east-1",
-                                "UseFIPS": true
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -8576,9 +9460,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "UseFIPS": true,
                                 "Region": "us-gov-east-1",
-                                "UseFIPS": true
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -8589,9 +9473,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "UseFIPS": false,
                                 "Region": "us-gov-east-1",
-                                "UseFIPS": false
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -8602,9 +9486,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Region": "us-gov-east-1",
-                                "UseFIPS": false
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -8615,9 +9499,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "UseFIPS": true,
                                 "Region": "cn-north-1",
-                                "UseFIPS": true
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -8628,9 +9512,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "UseFIPS": true,
                                 "Region": "cn-north-1",
-                                "UseFIPS": true
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -8641,9 +9525,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "UseFIPS": false,
                                 "Region": "cn-north-1",
-                                "UseFIPS": false
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -8654,9 +9538,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Region": "cn-north-1",
-                                "UseFIPS": false
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -8665,9 +9549,9 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "UseFIPS": true,
                                 "Region": "us-iso-east-1",
-                                "UseFIPS": true
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -8678,9 +9562,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "UseFIPS": true,
                                 "Region": "us-iso-east-1",
-                                "UseFIPS": true
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -8689,9 +9573,9 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "UseFIPS": false,
                                 "Region": "us-iso-east-1",
-                                "UseFIPS": false
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -8702,9 +9586,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Region": "us-iso-east-1",
-                                "UseFIPS": false
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -8715,9 +9599,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "UseFIPS": true,
                                 "Region": "us-east-1",
-                                "UseFIPS": true
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -8728,9 +9612,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "UseFIPS": true,
                                 "Region": "us-east-1",
-                                "UseFIPS": true
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -8741,9 +9625,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "UseFIPS": false,
                                 "Region": "us-east-1",
-                                "UseFIPS": false
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -8754,9 +9638,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Region": "us-east-1",
-                                "UseFIPS": false
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -8765,9 +9649,9 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "UseFIPS": true,
                                 "Region": "us-isob-east-1",
-                                "UseFIPS": true
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -8778,9 +9662,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "UseFIPS": true,
                                 "Region": "us-isob-east-1",
-                                "UseFIPS": true
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -8789,9 +9673,9 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "UseFIPS": false,
                                 "Region": "us-isob-east-1",
-                                "UseFIPS": false
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -8802,9 +9686,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "UseFIPS": false,
                                 "Region": "us-isob-east-1",
-                                "UseFIPS": false
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -8815,9 +9699,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
-                                "Region": "us-east-1",
                                 "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -8827,9 +9711,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": false,
-                                "Region": "us-east-1",
                                 "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -8839,9 +9723,9 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": true,
-                                "Region": "us-east-1",
                                 "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
                             }
                         }
@@ -9207,6 +10091,24 @@
                         "smithy.api#documentation": "<p>The filter's end date.</p>",
                         "smithy.api#timestampFormat": "date-time"
                     }
+                },
+                "sampleId": {
+                    "target": "com.amazonaws.omics#SampleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The read set source's sample ID.\n    </p>"
+                    }
+                },
+                "subjectId": {
+                    "target": "com.amazonaws.omics#SubjectId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The read set source's subject ID.\n    </p>"
+                    }
+                },
+                "generatedFrom": {
+                    "target": "com.amazonaws.omics#GeneratedFrom",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Where the source originated.\n    </p>"
+                    }
                 }
             },
             "traits": {
@@ -9377,6 +10279,12 @@
                         "smithy.api#required": {},
                         "smithy.api#timestampFormat": "date-time"
                     }
+                },
+                "statusMessage": {
+                    "target": "com.amazonaws.omics#ReadSetStatusMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The status for a read set. It provides more detail as to why the read set has a status. \n    </p>"
+                    }
                 }
             },
             "traits": {
@@ -9391,6 +10299,28 @@
                     "max": 127
                 },
                 "smithy.api#pattern": "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"
+            }
+        },
+        "com.amazonaws.omics#ReadSetPartSource": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SOURCE1",
+                        "name": "SOURCE1"
+                    },
+                    {
+                        "value": "SOURCE2",
+                        "name": "SOURCE2"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.omics#ReadSetPartStreamingBlob": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#requiresLength": {},
+                "smithy.api#streaming": {}
             }
         },
         "com.amazonaws.omics#ReadSetResource": {
@@ -9458,14 +10388,118 @@
                     {
                         "value": "DELETED",
                         "name": "DELETED"
+                    },
+                    {
+                        "value": "PROCESSING_UPLOAD",
+                        "name": "PROCESSING_UPLOAD"
+                    },
+                    {
+                        "value": "UPLOAD_FAILED",
+                        "name": "UPLOAD_FAILED"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.omics#ReadSetStatusMessage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"
             }
         },
         "com.amazonaws.omics#ReadSetStreamingBlob": {
             "type": "blob",
             "traits": {
                 "smithy.api#streaming": {}
+            }
+        },
+        "com.amazonaws.omics#ReadSetUploadPartList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.omics#ReadSetUploadPartListItem"
+            }
+        },
+        "com.amazonaws.omics#ReadSetUploadPartListFilter": {
+            "type": "structure",
+            "members": {
+                "createdAfter": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Filters for read set uploads after a specified time.\n    </p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "createdBefore": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Filters for read set part uploads before a specified time.\n    </p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      Filter settings that select for read set upload parts of interest.\n    </p>"
+            }
+        },
+        "com.amazonaws.omics#ReadSetUploadPartListItem": {
+            "type": "structure",
+            "members": {
+                "partNumber": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The number identifying the part in an upload. \n    </p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 10000
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "partSize": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The size of the the part in an upload.\n    </p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 5368709120
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "partSource": {
+                    "target": "com.amazonaws.omics#ReadSetPartSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The origin of the part being direct uploaded.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "checksum": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      A unique identifier used to confirm that parts are being added to the correct upload.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "creationTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The time stamp for when a direct upload was created.\n    </p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "lastUpdatedTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The time stamp for the most recent update to an uploaded part. \n    </p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      The metadata of a single part of a file that was added to a multipart upload. A list of these parts is returned in the response to the ListReadSetUploadParts API.\n    </p>"
             }
         },
         "com.amazonaws.omics#ReferenceArn": {
@@ -10139,6 +11173,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>When the group was created.</p>"
                     }
+                },
+                "maxGpus": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The maximum GPUs that can be used by a run group. \n    </p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100000
+                        }
+                    }
                 }
             },
             "traits": {
@@ -10718,6 +11762,12 @@
                         "smithy.api#required": {},
                         "smithy.api#timestampFormat": "date-time"
                     }
+                },
+                "fallbackLocation": {
+                    "target": "com.amazonaws.omics#S3Destination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      An S3 location that is used to store files that have failed a direct upload. \n    </p>"
+                    }
                 }
             },
             "traits": {
@@ -10799,6 +11849,15 @@
             },
             "operations": [
                 {
+                    "target": "com.amazonaws.omics#AbortMultipartReadSetUpload"
+                },
+                {
+                    "target": "com.amazonaws.omics#CompleteMultipartReadSetUpload"
+                },
+                {
+                    "target": "com.amazonaws.omics#CreateMultipartReadSetUpload"
+                },
+                {
                     "target": "com.amazonaws.omics#GetReadSetActivationJob"
                 },
                 {
@@ -10806,6 +11865,9 @@
                 },
                 {
                     "target": "com.amazonaws.omics#GetReadSetImportJob"
+                },
+                {
+                    "target": "com.amazonaws.omics#ListMultipartReadSetUploads"
                 },
                 {
                     "target": "com.amazonaws.omics#ListReadSetActivationJobs"
@@ -10817,6 +11879,9 @@
                     "target": "com.amazonaws.omics#ListReadSetImportJobs"
                 },
                 {
+                    "target": "com.amazonaws.omics#ListReadSetUploadParts"
+                },
+                {
                     "target": "com.amazonaws.omics#StartReadSetActivationJob"
                 },
                 {
@@ -10824,6 +11889,9 @@
                 },
                 {
                     "target": "com.amazonaws.omics#StartReadSetImportJob"
+                },
+                {
+                    "target": "com.amazonaws.omics#UploadReadSetPart"
                 }
             ],
             "resources": [
@@ -10985,6 +12053,12 @@
                     "traits": {
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>The job's left normalization setting.</p>"
+                    }
+                },
+                "annotationFields": {
+                    "target": "com.amazonaws.omics#AnnotationFieldMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The annotation schema generated by the parsed annotation data. \n    </p>"
                     }
                 }
             },
@@ -11883,6 +12957,12 @@
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>The job's left normalization setting.</p>"
                     }
+                },
+                "annotationFields": {
+                    "target": "com.amazonaws.omics#AnnotationFieldMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The annotation schema generated by the parsed annotation data. \n    </p>"
+                    }
                 }
             },
             "traits": {
@@ -12235,6 +13315,15 @@
                     "target": "com.amazonaws.omics#TaskTimestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>When the task stopped.</p>"
+                    }
+                },
+                "gpus": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The number of Graphics Processing Units (GPU) specified for the task. \n    </p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        }
                     }
                 }
             },
@@ -12699,6 +13788,16 @@
                             "max": 100000
                         }
                     }
+                },
+                "maxGpus": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The maximum GPUs that can be used by a run group. \n    </p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100000
+                        }
+                    }
                 }
             },
             "traits": {
@@ -12901,6 +14000,129 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.omics#UploadId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 10,
+                    "max": 36
+                },
+                "smithy.api#pattern": "^[0-9]+$"
+            }
+        },
+        "com.amazonaws.omics#UploadReadSetPart": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.omics#UploadReadSetPartRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.omics#UploadReadSetPartResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.omics#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.omics#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.omics#NotSupportedOperationException"
+                },
+                {
+                    "target": "com.amazonaws.omics#RequestTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.omics#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.auth#unsignedPayload": {},
+                "smithy.api#documentation": "<p>\n      This operation uploads a specific part of a read set. If you upload a new part using a previously used part number, the previously uploaded part will be overwritten. \n    </p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "storage-"
+                },
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/sequencestore/{sequenceStoreId}/upload/{uploadId}/part"
+                }
+            }
+        },
+        "com.amazonaws.omics#UploadReadSetPartRequest": {
+            "type": "structure",
+            "members": {
+                "sequenceStoreId": {
+                    "target": "com.amazonaws.omics#SequenceStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The Sequence Store ID used for the multipart upload.\n    </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "uploadId": {
+                    "target": "com.amazonaws.omics#UploadId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The ID for the initiated multipart upload.\n    </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "partSource": {
+                    "target": "com.amazonaws.omics#ReadSetPartSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The source file for an upload part. \n    </p>",
+                        "smithy.api#httpQuery": "partSource",
+                        "smithy.api#required": {}
+                    }
+                },
+                "partNumber": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The number of the part being uploaded.\n    </p>",
+                        "smithy.api#httpQuery": "partNumber",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 10000
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "payload": {
+                    "target": "com.amazonaws.omics#ReadSetPartStreamingBlob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The read set data to upload for a part.\n    </p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.omics#UploadReadSetPartResponse": {
+            "type": "structure",
+            "members": {
+                "checksum": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      An identifier used to confirm that parts are being added to the intended upload.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.omics#ValidationException": {
             "type": "structure",
             "members": {
@@ -13058,6 +14280,12 @@
                     "traits": {
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>The job's left normalization setting.</p>"
+                    }
+                },
+                "annotationFields": {
+                    "target": "com.amazonaws.omics#AnnotationFieldMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The annotation schema generated by the parsed annotation data. \n    </p>"
                     }
                 }
             },
@@ -13350,6 +14578,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>When the workflow was created.</p>"
                     }
+                },
+                "metadata": {
+                    "target": "com.amazonaws.omics#WorkflowMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Any metadata available for workflow. The information listed may vary depending on the workflow, and there may also be no metadata to return. \n    </p>"
+                    }
                 }
             },
             "traits": {
@@ -13374,6 +14608,33 @@
                     "max": 128
                 },
                 "smithy.api#pattern": "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"
+            }
+        },
+        "com.amazonaws.omics#WorkflowMetadata": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.omics#WorkflowMetadataKey"
+            },
+            "value": {
+                "target": "com.amazonaws.omics#WorkflowMetadataValue"
+            }
+        },
+        "com.amazonaws.omics#WorkflowMetadataKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.omics#WorkflowMetadataValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
             }
         },
         "com.amazonaws.omics#WorkflowName": {
@@ -13512,6 +14773,10 @@
                     {
                         "name": "FAILED",
                         "value": "FAILED"
+                    },
+                    {
+                        "name": "INACTIVE",
+                        "value": "INACTIVE"
                     }
                 ],
                 "smithy.api#length": {
@@ -13539,6 +14804,10 @@
                     {
                         "name": "PRIVATE",
                         "value": "PRIVATE"
+                    },
+                    {
+                        "name": "READY2RUN",
+                        "value": "READY2RUN"
                     }
                 ],
                 "smithy.api#length": {

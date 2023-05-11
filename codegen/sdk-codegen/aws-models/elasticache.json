@@ -774,8 +774,8 @@
                             },
                             "params": {
                                 "Region": "af-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -787,8 +787,8 @@
                             },
                             "params": {
                                 "Region": "ap-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -800,8 +800,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -813,8 +813,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -826,8 +826,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -839,8 +839,8 @@
                             },
                             "params": {
                                 "Region": "ap-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -852,8 +852,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -865,8 +865,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -878,8 +878,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -891,8 +891,8 @@
                             },
                             "params": {
                                 "Region": "ca-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -904,8 +904,8 @@
                             },
                             "params": {
                                 "Region": "eu-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -917,8 +917,8 @@
                             },
                             "params": {
                                 "Region": "eu-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -930,8 +930,8 @@
                             },
                             "params": {
                                 "Region": "eu-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -943,8 +943,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -956,8 +956,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -969,8 +969,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -982,8 +982,8 @@
                             },
                             "params": {
                                 "Region": "me-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -995,8 +995,8 @@
                             },
                             "params": {
                                 "Region": "sa-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1008,8 +1008,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1021,8 +1021,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1034,8 +1034,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1047,8 +1047,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1060,8 +1060,8 @@
                             },
                             "params": {
                                 "Region": "us-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1073,8 +1073,8 @@
                             },
                             "params": {
                                 "Region": "us-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1086,8 +1086,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1099,8 +1099,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1112,8 +1112,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1125,8 +1125,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1138,8 +1138,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1151,8 +1151,8 @@
                             },
                             "params": {
                                 "Region": "cn-northwest-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1164,8 +1164,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1177,8 +1177,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1190,8 +1190,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1203,8 +1203,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1216,8 +1216,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1229,8 +1229,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1242,8 +1242,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1255,8 +1255,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1268,8 +1268,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1281,8 +1281,8 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1294,8 +1294,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1307,8 +1318,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1320,8 +1342,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1333,8 +1366,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1346,8 +1390,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1359,8 +1403,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1371,8 +1415,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1383,9 +1427,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -1933,13 +1983,13 @@
                 "NetworkType": {
                     "target": "com.amazonaws.elasticache#NetworkType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Must be either <code>ipv4</code> | <code>ipv6</code> | <code>dual_stack</code>. IPv6 is supported for workloads using Redis engine version 6.2 onward or Memcached engine version 1.6.6 on all instances built on the \n            <a href=\"https://aws.amazon.com/ec2/nitro/\">Nitro system</a>.</p>"
+                        "smithy.api#documentation": "<p>Must be either <code>ipv4</code> | <code>ipv6</code> | <code>dual_stack</code>. IPv6 is supported for workloads using Redis engine version 6.2 onward or Memcached engine version 1.6.6 on all instances built on the \n            <a href=\"http://aws.amazon.com/ec2/nitro/\">Nitro system</a>.</p>"
                     }
                 },
                 "IpDiscovery": {
                     "target": "com.amazonaws.elasticache#IpDiscovery",
                     "traits": {
-                        "smithy.api#documentation": "<p>The network type associated with the cluster, either <code>ipv4</code> | <code>ipv6</code>. IPv6 is supported for workloads using Redis engine version 6.2 onward or Memcached engine version 1.6.6 on all instances built on the \n            <a href=\"https://aws.amazon.com/ec2/nitro/\">Nitro system</a>.</p>"
+                        "smithy.api#documentation": "<p>The network type associated with the cluster, either <code>ipv4</code> | <code>ipv6</code>. IPv6 is supported for workloads using Redis engine version 6.2 onward or Memcached engine version 1.6.6 on all instances built on the \n            <a href=\"http://aws.amazon.com/ec2/nitro/\">Nitro system</a>.</p>"
                     }
                 },
                 "TransitEncryptionMode": {
@@ -2046,7 +2096,7 @@
                 "CacheParameterGroupFamily": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the cache parameter group family associated with this cache engine.</p>\n         <p>Valid values are: \n    <code>memcached1.4</code> | \n     <code>memcached1.5</code> | \n      <code>memcached1.6</code> | \n    <code>redis2.6</code> | \n    <code>redis2.8</code> |\n    <code>redis3.2</code> |\n    <code>redis4.0</code> |\n     <code>redis5.0</code> | \n      <code>redis6.x</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The name of the cache parameter group family associated with this cache engine.</p>\n         <p>Valid values are: \n    <code>memcached1.4</code> | \n     <code>memcached1.5</code> | \n      <code>memcached1.6</code> | \n    <code>redis2.6</code> | \n    <code>redis2.8</code> |\n    <code>redis3.2</code> |\n    <code>redis4.0</code> |\n     <code>redis5.0</code> | \n      <code>redis6.x</code> |\n      <code>redis7</code>\n         </p>"
                     }
                 },
                 "CacheEngineDescription": {
@@ -2347,7 +2397,7 @@
                 "CacheParameterGroupFamily": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the cache parameter group family that this cache parameter group is compatible with.</p>\n         <p>Valid values are: \n    <code>memcached1.4</code> | \n     <code>memcached1.5</code> | \n      <code>memcached1.6</code> | \n    <code>redis2.6</code> | \n    <code>redis2.8</code> |\n    <code>redis3.2</code> |\n    <code>redis4.0</code> |\n     <code>redis5.0</code> | \n      <code>redis6.x</code> | \n    </p>"
+                        "smithy.api#documentation": "<p>The name of the cache parameter group family that this cache parameter group is compatible with.</p>\n         <p>Valid values are: \n    <code>memcached1.4</code> | \n     <code>memcached1.5</code> | \n      <code>memcached1.6</code> | \n    <code>redis2.6</code> | \n    <code>redis2.8</code> |\n    <code>redis3.2</code> |\n    <code>redis4.0</code> |\n     <code>redis5.0</code> | \n      <code>redis6.x</code> | \n      <code>redis7</code>\n         </p>"
                     }
                 },
                 "Description": {
@@ -2712,7 +2762,7 @@
                 "SupportedNetworkTypes": {
                     "target": "com.amazonaws.elasticache#NetworkTypeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Either <code>ipv4</code> | <code>ipv6</code> | <code>dual_stack</code>. IPv6 is supported for workloads using Redis engine version 6.2 onward or Memcached engine version 1.6.6 on all instances built on the \n            <a href=\"https://aws.amazon.com/ec2/nitro/\">Nitro system</a>.</p>"
+                        "smithy.api#documentation": "<p>Either <code>ipv4</code> | <code>ipv6</code> | <code>dual_stack</code>. IPv6 is supported for workloads using Redis engine version 6.2 onward or Memcached engine version 1.6.6 on all instances built on the \n            <a href=\"http://aws.amazon.com/ec2/nitro/\">Nitro system</a>.</p>"
                     }
                 }
             },
@@ -2874,6 +2924,29 @@
                 }
             }
         },
+        "com.amazonaws.elasticache#ClusterMode": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "enabled"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "disabled"
+                    }
+                },
+                "COMPATIBLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "compatible"
+                    }
+                }
+            }
+        },
         "com.amazonaws.elasticache#ClusterQuotaForCustomerExceededFault": {
             "type": "structure",
             "members": {
@@ -2939,6 +3012,9 @@
                 "ReplicationGroup": {
                     "target": "com.amazonaws.elasticache#ReplicationGroup"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elasticache#ConfigureShard": {
@@ -3284,19 +3360,19 @@
                 "TransitEncryptionEnabled": {
                     "target": "com.amazonaws.elasticache#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>A flag that enables in-transit encryption when set to true.</p>\n         <p> Only available when creating a cache cluster in an Amazon VPC using Memcached version 1.6.12 or later.</p>"
+                        "smithy.api#documentation": "<p>A flag that enables in-transit encryption when set to true.</p>"
                     }
                 },
                 "NetworkType": {
                     "target": "com.amazonaws.elasticache#NetworkType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Must be either <code>ipv4</code> | <code>ipv6</code> | <code>dual_stack</code>. IPv6 is supported for workloads using Redis engine version 6.2 onward or Memcached engine version 1.6.6 on all instances built on the \n            <a href=\"https://aws.amazon.com/ec2/nitro/\">Nitro system</a>. </p>"
+                        "smithy.api#documentation": "<p>Must be either <code>ipv4</code> | <code>ipv6</code> | <code>dual_stack</code>. IPv6 is supported for workloads using Redis engine version 6.2 onward or Memcached engine version 1.6.6 on all instances built on the \n            <a href=\"http://aws.amazon.com/ec2/nitro/\">Nitro system</a>. </p>"
                     }
                 },
                 "IpDiscovery": {
                     "target": "com.amazonaws.elasticache#IpDiscovery",
                     "traits": {
-                        "smithy.api#documentation": "<p>The network type you choose when modifying a cluster, either <code>ipv4</code> | <code>ipv6</code>. IPv6 is supported for workloads using Redis engine version 6.2 onward or Memcached engine version 1.6.6 on all instances built on the \n            <a href=\"https://aws.amazon.com/ec2/nitro/\">Nitro system</a>.</p>"
+                        "smithy.api#documentation": "<p>The network type you choose when modifying a cluster, either <code>ipv4</code> | <code>ipv6</code>. IPv6 is supported for workloads using Redis engine version 6.2 onward or Memcached engine version 1.6.6 on all instances built on the \n            <a href=\"http://aws.amazon.com/ec2/nitro/\">Nitro system</a>.</p>"
                     }
                 }
             },
@@ -3357,7 +3433,7 @@
                 "CacheParameterGroupFamily": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the cache parameter group family that the cache parameter group can be used with.</p>\n         <p>Valid values are: \n    <code>memcached1.4</code> | \n     <code>memcached1.5</code> | \n      <code>memcached1.6</code> | \n    <code>redis2.6</code> | \n    <code>redis2.8</code> |\n    <code>redis3.2</code> |\n    <code>redis4.0</code> |\n     <code>redis5.0</code> | \n      <code>redis6.x</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The name of the cache parameter group family that the cache parameter group can be used with.</p>\n         <p>Valid values are: \n    <code>memcached1.4</code> | \n     <code>memcached1.5</code> | \n      <code>memcached1.6</code> | \n    <code>redis2.6</code> | \n    <code>redis2.8</code> |\n    <code>redis3.2</code> |\n    <code>redis4.0</code> |\n     <code>redis5.0</code> | \n      <code>redis6.x</code> |\n      <code>redis7</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3872,19 +3948,25 @@
                 "NetworkType": {
                     "target": "com.amazonaws.elasticache#NetworkType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Must be either <code>ipv4</code> | <code>ipv6</code> | <code>dual_stack</code>. IPv6 is supported for workloads using Redis engine version 6.2 onward or Memcached engine version 1.6.6 on all instances built on the \n            <a href=\"https://aws.amazon.com/ec2/nitro/\">Nitro system</a>.</p>"
+                        "smithy.api#documentation": "<p>Must be either <code>ipv4</code> | <code>ipv6</code> | <code>dual_stack</code>. IPv6 is supported for workloads using Redis engine version 6.2 onward or Memcached engine version 1.6.6 on all instances built on the \n            <a href=\"http://aws.amazon.com/ec2/nitro/\">Nitro system</a>.</p>"
                     }
                 },
                 "IpDiscovery": {
                     "target": "com.amazonaws.elasticache#IpDiscovery",
                     "traits": {
-                        "smithy.api#documentation": "<p>The network type you choose when creating a replication group, either <code>ipv4</code> | <code>ipv6</code>. IPv6 is supported for workloads using Redis engine version 6.2 onward or Memcached engine version 1.6.6 on all instances built on the \n            <a href=\"https://aws.amazon.com/ec2/nitro/\">Nitro system</a>.</p>"
+                        "smithy.api#documentation": "<p>The network type you choose when creating a replication group, either <code>ipv4</code> | <code>ipv6</code>. IPv6 is supported for workloads using Redis engine version 6.2 onward or Memcached engine version 1.6.6 on all instances built on the \n            <a href=\"http://aws.amazon.com/ec2/nitro/\">Nitro system</a>.</p>"
                     }
                 },
                 "TransitEncryptionMode": {
                     "target": "com.amazonaws.elasticache#TransitEncryptionMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>A setting that allows you to migrate your clients to use in-transit encryption, with no downtime.</p>\n         <p>When setting <code>TransitEncryptionEnabled</code> to <code>true</code>, you can set your <code>TransitEncryptionMode</code> to <code>preferred</code> in the same request, to allow both encrypted and \nunencrypted connections at the same time. Once you migrate all your Redis clients to use encrypted connections you can modify the value to <code>required</code> to allow encrypted connections only.</p>\n         <p>Setting <code>TransitEncryptionMode</code> to <code>required</code> is a two-step process that requires you to first set the <code>TransitEncryptionMode</code> to <code>preferred</code> first, after that you can set  <code>TransitEncryptionMode</code> to <code>required</code>.\n</p>"
+                        "smithy.api#documentation": "<p>A setting that allows you to migrate your clients to use in-transit encryption, with no downtime.</p>\n         <p>When setting <code>TransitEncryptionEnabled</code> to <code>true</code>, you can set your\n      <code>TransitEncryptionMode</code> to <code>preferred</code> in the same request, to allow\n      both encrypted and unencrypted connections at the same time. Once you migrate all your Redis\n      clients to use encrypted connections you can modify the value to <code>required</code> to\n      allow encrypted connections only.</p>\n         <p>Setting <code>TransitEncryptionMode</code> to <code>required</code> is a two-step\n      process that requires you to first set the <code>TransitEncryptionMode</code> to <code>preferred</code>, \n      after that you can set <code>TransitEncryptionMode</code> to <code>required</code>.</p>\n         <p>This process will not trigger the replacement of the replication group.</p>"
+                    }
+                },
+                "ClusterMode": {
+                    "target": "com.amazonaws.elasticache#ClusterMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enabled or Disabled. To modify cluster mode from Disabled to Enabled, you must first set the cluster mode to Compatible.\n            \n            Compatible mode allows your Redis clients to connect using both cluster mode enabled and cluster mode disabled. After you migrate all Redis clients to use cluster mode enabled, you can then complete cluster mode configuration and set the cluster mode to Enabled.</p>"
                     }
                 }
             },
@@ -6397,7 +6479,7 @@
                 "CacheParameterGroupFamily": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the name of the cache parameter group family to which the engine default parameters apply.</p>\n         <p>Valid values are: \n    <code>memcached1.4</code> | \n     <code>memcached1.5</code> | \n      <code>memcached1.6</code> | \n    <code>redis2.6</code> | \n    <code>redis2.8</code> |\n    <code>redis3.2</code> |\n    <code>redis4.0</code> |\n     <code>redis5.0</code> | \n      <code>redis6.0</code> | \n            <code>redis6.x</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Specifies the name of the cache parameter group family to which the engine default parameters apply.</p>\n         <p>Valid values are: \n    <code>memcached1.4</code> | \n     <code>memcached1.5</code> | \n      <code>memcached1.6</code> | \n    <code>redis2.6</code> | \n    <code>redis2.8</code> |\n    <code>redis3.2</code> |\n    <code>redis4.0</code> |\n     <code>redis5.0</code> | \n      <code>redis6.0</code> | \n            <code>redis6.x</code> | \n            <code>redis7</code>\n         </p>"
                     }
                 },
                 "Marker": {
@@ -7775,7 +7857,7 @@
                 "IpDiscovery": {
                     "target": "com.amazonaws.elasticache#IpDiscovery",
                     "traits": {
-                        "smithy.api#documentation": "<p>The network type you choose when modifying a cluster, either <code>ipv4</code> | <code>ipv6</code>. IPv6 is supported for workloads using Redis engine version 6.2 onward or Memcached engine version 1.6.6 on all instances built on the \n            <a href=\"https://aws.amazon.com/ec2/nitro/\">Nitro system</a>.</p>"
+                        "smithy.api#documentation": "<p>The network type you choose when modifying a cluster, either <code>ipv4</code> | <code>ipv6</code>. IPv6 is supported for workloads using Redis engine version 6.2 onward or Memcached engine version 1.6.6 on all instances built on the \n            <a href=\"http://aws.amazon.com/ec2/nitro/\">Nitro system</a>.</p>"
                     }
                 }
             },
@@ -8208,7 +8290,7 @@
                 "IpDiscovery": {
                     "target": "com.amazonaws.elasticache#IpDiscovery",
                     "traits": {
-                        "smithy.api#documentation": "<p>The network type you choose when modifying a cluster, either <code>ipv4</code> | <code>ipv6</code>. IPv6 is supported for workloads using Redis engine version 6.2 onward or Memcached engine version 1.6.6 on all instances built on the \n            <a href=\"https://aws.amazon.com/ec2/nitro/\">Nitro system</a>.</p>"
+                        "smithy.api#documentation": "<p>The network type you choose when modifying a cluster, either <code>ipv4</code> | <code>ipv6</code>. IPv6 is supported for workloads using Redis engine version 6.2 onward or Memcached engine version 1.6.6 on all instances built on the \n            <a href=\"http://aws.amazon.com/ec2/nitro/\">Nitro system</a>.</p>"
                     }
                 },
                 "TransitEncryptionEnabled": {
@@ -8220,7 +8302,13 @@
                 "TransitEncryptionMode": {
                     "target": "com.amazonaws.elasticache#TransitEncryptionMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>A setting that allows you to migrate your clients to use in-transit encryption, with no downtime.</p>\n         <p>You must set <code>TransitEncryptionEnabled</code> to <code>true</code>, for your existing cluster, and set <code>TransitEncryptionMode</code> to <code>preferred</code> in the same request to allow both encrypted and \nunencrypted connections at the same time. Once you migrate all your Redis clients to use encrypted connections you can set the value to <code>required</code> to allow encrypted connections only.</p>\n         <p>Setting <code>TransitEncryptionMode</code> to <code>required</code> is a two-step process that requires you to first set the <code>TransitEncryptionMode</code> to  <code>preferred</code> first, after that you can set  <code>TransitEncryptionMode</code> to <code>required</code>.\n</p>"
+                        "smithy.api#documentation": "<p>A setting that allows you to migrate your clients to use in-transit encryption, with no downtime.</p>\n         <p>You must set <code>TransitEncryptionEnabled</code> to <code>true</code>, for your existing cluster, and set <code>TransitEncryptionMode</code> to <code>preferred</code> in the same request to allow both encrypted and \nunencrypted connections at the same time. Once you migrate all your Redis clients to use encrypted connections you can set the value to <code>required</code> to allow encrypted connections only.</p>\n         <p>Setting <code>TransitEncryptionMode</code> to <code>required</code> is a two-step process that requires you to first set the <code>TransitEncryptionMode</code> to  <code>preferred</code>, after that you can set  <code>TransitEncryptionMode</code> to <code>required</code>.\n</p>"
+                    }
+                },
+                "ClusterMode": {
+                    "target": "com.amazonaws.elasticache#ClusterMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enabled or Disabled. To modify cluster mode from Disabled to Enabled, you must first set the cluster mode to Compatible.\n            \n            Compatible mode allows your Redis clients to connect using both cluster mode enabled and cluster mode disabled. After you migrate all Redis clients to use cluster mode enabled, you can then complete cluster mode configuration and set the cluster mode to Enabled.</p>"
                     }
                 }
             },
@@ -9827,25 +9915,31 @@
                     "target": "com.amazonaws.elasticache#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p> If you are running Redis engine version 6.0 or later, set this parameter to yes if you want to opt-in to the next auto minor version upgrade campaign. This parameter is disabled for previous versions. \n        </p>"
+                        "smithy.api#documentation": "<p>If you are running Redis engine version 6.0 or later, set this parameter to yes if you want to opt-in to the next auto minor version upgrade campaign. This parameter is disabled for previous versions. </p>"
                     }
                 },
                 "NetworkType": {
                     "target": "com.amazonaws.elasticache#NetworkType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Must be either <code>ipv4</code> | <code>ipv6</code> | <code>dual_stack</code>. IPv6 is supported for workloads using Redis engine version 6.2 onward or Memcached engine version 1.6.6 on all instances built on the \n            <a href=\"https://aws.amazon.com/ec2/nitro/\">Nitro system</a>.</p>"
+                        "smithy.api#documentation": "<p>Must be either <code>ipv4</code> | <code>ipv6</code> | <code>dual_stack</code>. IPv6 is supported for workloads using Redis engine version 6.2 onward or Memcached engine version 1.6.6 on all instances built on the \n            <a href=\"http://aws.amazon.com/ec2/nitro/\">Nitro system</a>.</p>"
                     }
                 },
                 "IpDiscovery": {
                     "target": "com.amazonaws.elasticache#IpDiscovery",
                     "traits": {
-                        "smithy.api#documentation": "<p>The network type you choose when modifying a cluster, either <code>ipv4</code> | <code>ipv6</code>. IPv6 is supported for workloads using Redis engine version 6.2 onward or Memcached engine version 1.6.6 on all instances built on the \n            <a href=\"https://aws.amazon.com/ec2/nitro/\">Nitro system</a>.</p>"
+                        "smithy.api#documentation": "<p>The network type you choose when modifying a cluster, either <code>ipv4</code> | <code>ipv6</code>. IPv6 is supported for workloads using Redis engine version 6.2 onward or Memcached engine version 1.6.6 on all instances built on the \n            <a href=\"http://aws.amazon.com/ec2/nitro/\">Nitro system</a>.</p>"
                     }
                 },
                 "TransitEncryptionMode": {
                     "target": "com.amazonaws.elasticache#TransitEncryptionMode",
                     "traits": {
                         "smithy.api#documentation": "<p>A setting that allows you to migrate your clients to use in-transit encryption, with no downtime.</p>"
+                    }
+                },
+                "ClusterMode": {
+                    "target": "com.amazonaws.elasticache#ClusterMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enabled or Disabled. To modify cluster mode from Disabled to Enabled, you must first set the cluster mode to Compatible.\n            \n            Compatible mode allows your Redis clients to connect using both cluster mode enabled and cluster mode disabled. After you migrate all Redis clients to use cluster mode enabled, you can then complete cluster mode configuration and set the cluster mode to Enabled.</p>"
                     }
                 }
             },
@@ -10020,6 +10114,12 @@
                     "target": "com.amazonaws.elasticache#TransitEncryptionMode",
                     "traits": {
                         "smithy.api#documentation": "<p>A setting that allows you to migrate your clients to use in-transit encryption, with no downtime.</p>"
+                    }
+                },
+                "ClusterMode": {
+                    "target": "com.amazonaws.elasticache#ClusterMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enabled or Disabled. To modify cluster mode from Disabled to Enabled, you must first set the cluster mode to Compatible.\n            \n            Compatible mode allows your Redis clients to connect using both cluster mode enabled and cluster mode disabled. After you migrate all Redis clients to use cluster mode enabled, you can then complete cluster mode configuration and set the cluster mode to Enabled.</p>"
                     }
                 }
             },
@@ -11117,6 +11217,9 @@
                 "ReplicationGroup": {
                     "target": "com.amazonaws.elasticache#ReplicationGroup"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.elasticache#String": {
@@ -11146,7 +11249,7 @@
                 "SupportedNetworkTypes": {
                     "target": "com.amazonaws.elasticache#NetworkTypeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Either <code>ipv4</code> | <code>ipv6</code> | <code>dual_stack</code>. IPv6 is supported for workloads using Redis engine version 6.2 onward or Memcached engine version 1.6.6 on all instances built on the \n            <a href=\"https://aws.amazon.com/ec2/nitro/\">Nitro system</a>.</p>"
+                        "smithy.api#documentation": "<p>Either <code>ipv4</code> | <code>ipv6</code> | <code>dual_stack</code>. IPv6 is supported for workloads using Redis engine version 6.2 onward or Memcached engine version 1.6.6 on all instances built on the \n            <a href=\"http://aws.amazon.com/ec2/nitro/\">Nitro system</a>.</p>"
                     }
                 }
             },

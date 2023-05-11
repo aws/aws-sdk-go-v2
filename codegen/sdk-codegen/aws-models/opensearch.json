@@ -4597,6 +4597,11 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.opensearch#DescribePackagesFilterValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
             }
         },
         "com.amazonaws.opensearch#DescribePackagesRequest": {
