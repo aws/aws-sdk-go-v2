@@ -1,8 +1,0 @@
-{
-    "id": "099e69e4-44c7-4089-af77-06b3e12f467e",
-    "type": "feature",
-    "description": "This release fixes DescribePackages API error with null filter value parameter.",
-    "modules": [
-        "service/elasticsearchservice"
-    ]
-}

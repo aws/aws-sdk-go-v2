@@ -1,3 +1,7 @@
+# v1.2.0 (2023-05-11)
+
+* **Feature**: Add methods for inspecting and debugging stages: ListStageSessions, GetStageSession, ListParticipants, GetParticipant, and ListParticipantEvents.
+
 # v1.1.4 (2023-05-04)
 
 * No change notes available for this release.

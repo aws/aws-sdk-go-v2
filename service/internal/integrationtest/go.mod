@@ -35,11 +35,11 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.18.11
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.27.0
 	github.com/aws/aws-sdk-go-v2/service/efs v1.20.1
-	github.com/aws/aws-sdk-go-v2/service/elasticache v1.26.10
+	github.com/aws/aws-sdk-go-v2/service/elasticache v1.27.0
 	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.15.10
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing v1.15.10
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2 v1.19.11
-	github.com/aws/aws-sdk-go-v2/service/elasticsearchservice v1.18.11
+	github.com/aws/aws-sdk-go-v2/service/elasticsearchservice v1.19.0
 	github.com/aws/aws-sdk-go-v2/service/elastictranscoder v1.14.10
 	github.com/aws/aws-sdk-go-v2/service/emr v1.25.0
 	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.19.2
@@ -47,7 +47,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.18.2
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.14.11
 	github.com/aws/aws-sdk-go-v2/service/glue v1.47.0
-	github.com/aws/aws-sdk-go-v2/service/health v1.16.10
+	github.com/aws/aws-sdk-go-v2/service/health v1.17.0
 	github.com/aws/aws-sdk-go-v2/service/iam v1.19.12
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.13.10
 	github.com/aws/aws-sdk-go-v2/service/iot v1.37.1
@@ -78,7 +78,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.22.0
 	github.com/aws/aws-sdk-go-v2/service/ssm v1.36.4
 	github.com/aws/aws-sdk-go-v2/service/sts v1.19.0
-	github.com/aws/aws-sdk-go-v2/service/support v1.14.11
+	github.com/aws/aws-sdk-go-v2/service/support v1.15.0
 	github.com/aws/aws-sdk-go-v2/service/timestreamwrite v1.16.6
 	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.9.10
 	github.com/aws/aws-sdk-go-v2/service/waf v1.12.10

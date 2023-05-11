@@ -1,3 +1,7 @@
+# v1.54.2 (2023-05-11)
+
+* **Documentation**: This release updates GetMetricDataV2 API, to support metric data up-to last 35 days
+
 # v1.54.1 (2023-05-04)
 
 * **Documentation**: Remove unused InvalidParameterException from CreateParticipant API

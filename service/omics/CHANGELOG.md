@@ -1,3 +1,7 @@
+# v1.4.0 (2023-05-11)
+
+* **Feature**: This release provides support for Ready2Run and GPU workflows, an improved read set filter, the direct upload of read sets into Omics Storage, and annotation parsing for analytics stores.
+
 # v1.3.3 (2023-05-04)
 
 * No change notes available for this release.

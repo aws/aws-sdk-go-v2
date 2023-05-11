@@ -1,3 +1,7 @@
+# v1.17.0 (2023-05-11)
+
+* **Feature**: Add support for regional endpoints
+
 # v1.16.10 (2023-05-04)
 
 * No change notes available for this release.

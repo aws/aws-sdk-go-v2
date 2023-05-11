@@ -1,3 +1,21 @@
+# Release (2023-05-11)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.54.2](service/connect/CHANGELOG.md#v1542-2023-05-11)
+  * **Documentation**: This release updates GetMetricDataV2 API, to support metric data up-to last 35 days
+* `github.com/aws/aws-sdk-go-v2/service/elasticache`: [v1.27.0](service/elasticache/CHANGELOG.md#v1270-2023-05-11)
+  * **Feature**: Added support to modify the cluster mode configuration for the existing ElastiCache ReplicationGroups. Customers can now modify the configuration from cluster mode disabled to cluster mode enabled.
+* `github.com/aws/aws-sdk-go-v2/service/elasticsearchservice`: [v1.19.0](service/elasticsearchservice/CHANGELOG.md#v1190-2023-05-11)
+  * **Feature**: This release fixes DescribePackages API error with null filter value parameter.
+* `github.com/aws/aws-sdk-go-v2/service/health`: [v1.17.0](service/health/CHANGELOG.md#v1170-2023-05-11)
+  * **Feature**: Add support for regional endpoints
+* `github.com/aws/aws-sdk-go-v2/service/ivsrealtime`: [v1.2.0](service/ivsrealtime/CHANGELOG.md#v120-2023-05-11)
+  * **Feature**: Add methods for inspecting and debugging stages: ListStageSessions, GetStageSession, ListParticipants, GetParticipant, and ListParticipantEvents.
+* `github.com/aws/aws-sdk-go-v2/service/omics`: [v1.4.0](service/omics/CHANGELOG.md#v140-2023-05-11)
+  * **Feature**: This release provides support for Ready2Run and GPU workflows, an improved read set filter, the direct upload of read sets into Omics Storage, and annotation parsing for analytics stores.
+* `github.com/aws/aws-sdk-go-v2/service/support`: [v1.15.0](service/support/CHANGELOG.md#v1150-2023-05-11)
+  * **Feature**: This release adds 2 new Support APIs, DescribeCreateCaseOptions and DescribeSupportedLanguages. You can use these new APIs to get available support languages.
+
 # Release (2023-05-10)
 
 ## Module Highlights
