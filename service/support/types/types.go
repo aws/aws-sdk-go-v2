@@ -43,9 +43,9 @@ type AttachmentDetails struct {
 //   - displayId - The identifier for the case on pages in the Amazon Web Services
 //     Support Center.
 //   - language - The language in which Amazon Web Services Support handles the
-//     case. Amazon Web Services Support currently supports English ("en") and Japanese
-//     ("ja"). You must specify the ISO 639-1 code for the language parameter if you
-//     want support in that language.
+//     case. Amazon Web Services Support currently supports Chinese (“zh”), English
+//     ("en"), Japanese ("ja") and Korean (“ko”). You must specify the ISO 639-1 code
+//     for the language parameter if you want support in that language.
 //   - nextToken - A resumption point for pagination.
 //   - recentCommunications - One or more Communication objects. Fields of these
 //     objects are attachments , body , caseId , submittedBy , and timeCreated .
@@ -83,9 +83,9 @@ type CaseDetails struct {
 	DisplayId *string
 
 	// The language in which Amazon Web Services Support handles the case. Amazon Web
-	// Services Support currently supports English ("en") and Japanese ("ja"). You must
-	// specify the ISO 639-1 code for the language parameter if you want support in
-	// that language.
+	// Services Support currently supports Chinese (“zh”), English ("en"), Japanese
+	// ("ja") and Korean (“ko”). You must specify the ISO 639-1 code for the language
+	// parameter if you want support in that language.
 	Language *string
 
 	// The five most recent communications between you and Amazon Web Services Support
@@ -153,13 +153,54 @@ type Communication struct {
 	CaseId *string
 
 	// The identity of the account that submitted, or responded to, the support case.
-	// Customer entries include the role or IAM user as well as the email address. For
-	// example, "AdminRole (Role) . Entries from the Amazon Web Services Support team
-	// display "Amazon Web Services," and don't show an email address.
+	// Customer entries include the IAM role as well as the email address (for example,
+	// "AdminRole (Role) ). Entries from the Amazon Web Services Support team display
+	// "Amazon Web Services," and don't show an email address.
 	SubmittedBy *string
 
 	// The time the communication was created.
 	TimeCreated *string
+
+	noSmithyDocumentSerde
+}
+
+// A JSON-formatted object that contains the CommunicationTypeOptions for creating
+// a case for a certain communication channel. It is contained in the response from
+// a DescribeCreateCaseOptions request. CommunicationTypeOptions contains the
+// following fields:
+//   - datesWithoutSupport - A JSON-formatted list containing date and time ranges
+//     for periods without support in UTC time. Date and time format is RFC 3339 :
+//     'yyyy-MM-dd'T'HH:mm:ss.SSSZZ'.
+//   - supportedHours - A JSON-formatted list containing time ranges when support
+//     are available. Time format is RFC 3339 : 'HH:mm:ss.SSS'.
+//   - type - A string value indicating the communication type that the
+//     aforementioned rules apply to. At the moment the type value can assume one of 3
+//     values at the moment chat , web and call .
+type CommunicationTypeOptions struct {
+
+	// A JSON-formatted list containing date and time ranges for periods without
+	// support
+	DatesWithoutSupport []DateInterval
+
+	// A JSON-formatted list containing time ranges when support is available.
+	SupportedHours []SupportedHour
+
+	// A string value indicating the communication type. At the moment the type value
+	// can assume one of 3 values at the moment chat, web and call.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// Date and time (UTC) format in RFC 3339 : 'yyyy-MM-dd'T'HH:mm:ss.SSSZZ'.
+type DateInterval struct {
+
+	// End Date Time (UTC). RFC 3339 format : 'yyyy-MM-dd'T'HH:mm:ss.SSSZZ'.
+	EndDateTime *string
+
+	// A JSON object containing start and date time (UTC). Date and time format is RFC
+	// 3339 : 'yyyy-MM-dd'T'HH:mm:ss.SSSZZ'.
+	StartDateTime *string
 
 	noSmithyDocumentSerde
 }
@@ -219,6 +260,36 @@ type SeverityLevel struct {
 	// For more information, see Choosing a severity (https://docs.aws.amazon.com/awssupport/latest/user/case-management.html#choosing-severity)
 	// in the Amazon Web Services Support User Guide.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Time range object with startTime and endTime range in RFC 3339 format.
+// 'HH:mm:ss.SSS' .
+type SupportedHour struct {
+
+	// End Time. RFC 3339 format 'HH:mm:ss.SSS' .
+	EndTime *string
+
+	// Start Time. RFC 3339 format 'HH:mm:ss.SSS' .
+	StartTime *string
+
+	noSmithyDocumentSerde
+}
+
+// A JSON-formatted object that contains the available ISO 639-1 language code ,
+// language name and langauge display value. The language code is what should be
+// used in the CreateCase call.
+type SupportedLanguage struct {
+
+	// 2 digit ISO 639-1 code. e.g. en
+	Code *string
+
+	// Language display value e.g. ENGLISH
+	Display *string
+
+	// Full language description e.g. ENGLISH
+	Language *string
 
 	noSmithyDocumentSerde
 }

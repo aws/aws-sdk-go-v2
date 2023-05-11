@@ -41,6 +41,9 @@ type CreateRunGroupInput struct {
 	// A maximum run time for the group in minutes.
 	MaxDuration *int32
 
+	// The maximum GPUs that can be used by a run group.
+	MaxGpus *int32
+
 	// The maximum number of concurrent runs for the group.
 	MaxRuns *int32
 

@@ -43,6 +43,9 @@ type CreateSequenceStoreInput struct {
 	// A description for the store.
 	Description *string
 
+	// An S3 location that is used to store files that have failed a direct upload.
+	FallbackLocation *string
+
 	// Server-side encryption (SSE) settings for the store.
 	SseConfig *types.SseConfig
 
@@ -71,6 +74,9 @@ type CreateSequenceStoreOutput struct {
 
 	// The store's description.
 	Description *string
+
+	// An S3 location that is used to store files that have failed a direct upload.
+	FallbackLocation *string
 
 	// The store's name.
 	Name *string

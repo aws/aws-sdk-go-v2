@@ -73,9 +73,9 @@ type DescribeCasesInput struct {
 	IncludeResolvedCases bool
 
 	// The language in which Amazon Web Services Support handles the case. Amazon Web
-	// Services Support currently supports English ("en") and Japanese ("ja"). You must
-	// specify the ISO 639-1 code for the language parameter if you want support in
-	// that language.
+	// Services Support currently supports Chinese (“zh”), English ("en"), Japanese
+	// ("ja") and Korean (“ko”). You must specify the ISO 639-1 code for the language
+	// parameter if you want support in that language.
 	Language *string
 
 	// The maximum number of results to return before paginating.

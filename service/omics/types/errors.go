@@ -85,6 +85,32 @@ func (e *InternalServerException) ErrorCode() string {
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
+// The operation is not supported by Amazon Omics, or the API does not exist.
+type NotSupportedOperationException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *NotSupportedOperationException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *NotSupportedOperationException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *NotSupportedOperationException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "NotSupportedOperationException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *NotSupportedOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The ranges specified in the request are not valid.
 type RangeNotSatisfiableException struct {
 	Message *string

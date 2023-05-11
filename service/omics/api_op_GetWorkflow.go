@@ -50,6 +50,9 @@ type GetWorkflowInput struct {
 
 type GetWorkflowOutput struct {
 
+	// The computational accelerator specified to run the workflow.
+	Accelerators types.Accelerators
+
 	// The workflow's ARN.
 	Arn *string
 
@@ -73,6 +76,9 @@ type GetWorkflowOutput struct {
 
 	// The path of the main definition file for the workflow.
 	Main *string
+
+	// Gets metadata for workflow.
+	Metadata map[string]string
 
 	// The workflow's name.
 	Name *string

@@ -109,6 +109,46 @@ func (m *validateOpDescribeCommunications) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeCreateCaseOptions struct {
+}
+
+func (*validateOpDescribeCreateCaseOptions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeCreateCaseOptions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeCreateCaseOptionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeCreateCaseOptionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeSupportedLanguages struct {
+}
+
+func (*validateOpDescribeSupportedLanguages) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeSupportedLanguages) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeSupportedLanguagesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeSupportedLanguagesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeTrustedAdvisorCheckRefreshStatuses struct {
 }
 
@@ -229,6 +269,14 @@ func addOpDescribeCommunicationsValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpDescribeCommunications{}, middleware.After)
 }
 
+func addOpDescribeCreateCaseOptionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeCreateCaseOptions{}, middleware.After)
+}
+
+func addOpDescribeSupportedLanguagesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeSupportedLanguages{}, middleware.After)
+}
+
 func addOpDescribeTrustedAdvisorCheckRefreshStatusesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeTrustedAdvisorCheckRefreshStatuses{}, middleware.After)
 }
@@ -319,6 +367,51 @@ func validateOpDescribeCommunicationsInput(v *DescribeCommunicationsInput) error
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeCommunicationsInput"}
 	if v.CaseId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CaseId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeCreateCaseOptionsInput(v *DescribeCreateCaseOptionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeCreateCaseOptionsInput"}
+	if v.IssueType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IssueType"))
+	}
+	if v.ServiceCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceCode"))
+	}
+	if v.Language == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Language"))
+	}
+	if v.CategoryCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CategoryCode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeSupportedLanguagesInput(v *DescribeSupportedLanguagesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeSupportedLanguagesInput"}
+	if v.IssueType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IssueType"))
+	}
+	if v.ServiceCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceCode"))
+	}
+	if v.CategoryCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CategoryCode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

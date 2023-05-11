@@ -2,6 +2,22 @@
 
 package types
 
+type Accelerators string
+
+// Enum values for Accelerators
+const (
+	AcceleratorsGpu Accelerators = "GPU"
+)
+
+// Values returns all known values for Accelerators. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (Accelerators) Values() []Accelerators {
+	return []Accelerators{
+		"GPU",
+	}
+}
+
 type AnnotationType string
 
 // Enum values for AnnotationType
@@ -305,15 +321,35 @@ func (ReadSetImportJobStatus) Values() []ReadSetImportJobStatus {
 	}
 }
 
+type ReadSetPartSource string
+
+// Enum values for ReadSetPartSource
+const (
+	ReadSetPartSourceSource1 ReadSetPartSource = "SOURCE1"
+	ReadSetPartSourceSource2 ReadSetPartSource = "SOURCE2"
+)
+
+// Values returns all known values for ReadSetPartSource. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ReadSetPartSource) Values() []ReadSetPartSource {
+	return []ReadSetPartSource{
+		"SOURCE1",
+		"SOURCE2",
+	}
+}
+
 type ReadSetStatus string
 
 // Enum values for ReadSetStatus
 const (
-	ReadSetStatusArchived   ReadSetStatus = "ARCHIVED"
-	ReadSetStatusActivating ReadSetStatus = "ACTIVATING"
-	ReadSetStatusActive     ReadSetStatus = "ACTIVE"
-	ReadSetStatusDeleting   ReadSetStatus = "DELETING"
-	ReadSetStatusDeleted    ReadSetStatus = "DELETED"
+	ReadSetStatusArchived         ReadSetStatus = "ARCHIVED"
+	ReadSetStatusActivating       ReadSetStatus = "ACTIVATING"
+	ReadSetStatusActive           ReadSetStatus = "ACTIVE"
+	ReadSetStatusDeleting         ReadSetStatus = "DELETING"
+	ReadSetStatusDeleted          ReadSetStatus = "DELETED"
+	ReadSetStatusProcessingUpload ReadSetStatus = "PROCESSING_UPLOAD"
+	ReadSetStatusUploadFailed     ReadSetStatus = "UPLOAD_FAILED"
 )
 
 // Values returns all known values for ReadSetStatus. Note that this can be
@@ -326,6 +362,8 @@ func (ReadSetStatus) Values() []ReadSetStatus {
 		"ACTIVE",
 		"DELETING",
 		"DELETED",
+		"PROCESSING_UPLOAD",
+		"UPLOAD_FAILED",
 	}
 }
 
@@ -641,6 +679,7 @@ const (
 	WorkflowStatusUpdating WorkflowStatus = "UPDATING"
 	WorkflowStatusDeleted  WorkflowStatus = "DELETED"
 	WorkflowStatusFailed   WorkflowStatus = "FAILED"
+	WorkflowStatusInactive WorkflowStatus = "INACTIVE"
 )
 
 // Values returns all known values for WorkflowStatus. Note that this can be
@@ -653,6 +692,7 @@ func (WorkflowStatus) Values() []WorkflowStatus {
 		"UPDATING",
 		"DELETED",
 		"FAILED",
+		"INACTIVE",
 	}
 }
 
@@ -660,7 +700,8 @@ type WorkflowType string
 
 // Enum values for WorkflowType
 const (
-	WorkflowTypePrivate WorkflowType = "PRIVATE"
+	WorkflowTypePrivate   WorkflowType = "PRIVATE"
+	WorkflowTypeReady2run WorkflowType = "READY2RUN"
 )
 
 // Values returns all known values for WorkflowType. Note that this can be
@@ -669,5 +710,6 @@ const (
 func (WorkflowType) Values() []WorkflowType {
 	return []WorkflowType{
 		"PRIVATE",
+		"READY2RUN",
 	}
 }

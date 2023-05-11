@@ -1,0 +1,8 @@
+{
+    "id": "319e3eb2-c334-4c5c-9ca0-268cbad4091e",
+    "type": "feature",
+    "description": "Add methods for inspecting and debugging stages: ListStageSessions, GetStageSession, ListParticipants, GetParticipant, and ListParticipantEvents.",
+    "modules": [
+        "service/ivsrealtime"
+    ]
+}

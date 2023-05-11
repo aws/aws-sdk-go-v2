@@ -11,8 +11,7 @@ import (
 )
 
 // This operation provides status information on enabling or disabling Health to
-// work with your organization. To call this operation, you must sign in as an IAM
-// user, assume an IAM role, or sign in as the root user (not recommended) in the
+// work with your organization. To call this operation, you must use the
 // organization's management account.
 func (c *Client) DescribeHealthServiceStatusForOrganization(ctx context.Context, params *DescribeHealthServiceStatusForOrganizationInput, optFns ...func(*Options)) (*DescribeHealthServiceStatusForOrganizationOutput, error) {
 	if params == nil {

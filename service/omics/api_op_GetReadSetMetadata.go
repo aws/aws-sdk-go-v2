@@ -94,6 +94,10 @@ type GetReadSetMetadataOutput struct {
 	// The read set's sequence information.
 	SequenceInformation *types.SequenceInformation
 
+	// The status message for a read set. It provides more detail as to why the read
+	// set has a status.
+	StatusMessage *string
+
 	// The read set's subject ID.
 	SubjectId *string
 

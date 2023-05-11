@@ -39,7 +39,7 @@ type GetStageInput struct {
 
 type GetStageOutput struct {
 
-	//
+	// The stage that is returned.
 	Stage *types.Stage
 
 	// Metadata pertaining to the operation's result.

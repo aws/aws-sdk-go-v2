@@ -59,6 +59,9 @@ type GetSequenceStoreOutput struct {
 	// The store's description.
 	Description *string
 
+	// An S3 location that is used to store files that have failed a direct upload.
+	FallbackLocation *string
+
 	// The store's name.
 	Name *string
 

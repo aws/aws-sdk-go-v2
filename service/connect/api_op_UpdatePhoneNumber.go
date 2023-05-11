@@ -13,8 +13,12 @@ import (
 
 // Updates your claimed phone number from its current Amazon Connect instance or
 // traffic distribution group to another Amazon Connect instance or traffic
-// distribution group in the same Amazon Web Services Region. You can call
-// DescribePhoneNumber (https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html)
+// distribution group in the same Amazon Web Services Region. After using this API,
+// you must verify that the phone number is attached to the correct flow in the
+// target instance or traffic distribution group. You need to do this because the
+// API switches only the phone number to a new instance or traffic distribution
+// group. It doesn't migrate the flow configuration of the phone number, too. You
+// can call DescribePhoneNumber (https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html)
 // API to verify the status of a previous UpdatePhoneNumber (https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumber.html)
 // operation.
 func (c *Client) UpdatePhoneNumber(ctx context.Context, params *UpdatePhoneNumberInput, optFns ...func(*Options)) (*UpdatePhoneNumberOutput, error) {

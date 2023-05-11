@@ -2,6 +2,72 @@
 
 package types
 
+type EventErrorCode string
+
+// Enum values for EventErrorCode
+const (
+	EventErrorCodeInsufficientCapabilities EventErrorCode = "INSUFFICIENT_CAPABILITIES"
+)
+
+// Values returns all known values for EventErrorCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EventErrorCode) Values() []EventErrorCode {
+	return []EventErrorCode{
+		"INSUFFICIENT_CAPABILITIES",
+	}
+}
+
+type EventName string
+
+// Enum values for EventName
+const (
+	EventNameJoined           EventName = "JOINED"
+	EventNameLeft             EventName = "LEFT"
+	EventNamePublishStarted   EventName = "PUBLISH_STARTED"
+	EventNamePublishStopped   EventName = "PUBLISH_STOPPED"
+	EventNameSubscribeStarted EventName = "SUBSCRIBE_STARTED"
+	EventNameSubscribeStopped EventName = "SUBSCRIBE_STOPPED"
+	EventNamePublishError     EventName = "PUBLISH_ERROR"
+	EventNameSubscribeError   EventName = "SUBSCRIBE_ERROR"
+	EventNameJoinError        EventName = "JOIN_ERROR"
+)
+
+// Values returns all known values for EventName. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (EventName) Values() []EventName {
+	return []EventName{
+		"JOINED",
+		"LEFT",
+		"PUBLISH_STARTED",
+		"PUBLISH_STOPPED",
+		"SUBSCRIBE_STARTED",
+		"SUBSCRIBE_STOPPED",
+		"PUBLISH_ERROR",
+		"SUBSCRIBE_ERROR",
+		"JOIN_ERROR",
+	}
+}
+
+type ParticipantState string
+
+// Enum values for ParticipantState
+const (
+	ParticipantStateConnected    ParticipantState = "CONNECTED"
+	ParticipantStateDisconnected ParticipantState = "DISCONNECTED"
+)
+
+// Values returns all known values for ParticipantState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ParticipantState) Values() []ParticipantState {
+	return []ParticipantState{
+		"CONNECTED",
+		"DISCONNECTED",
+	}
+}
+
 type ParticipantTokenCapability string
 
 // Enum values for ParticipantTokenCapability

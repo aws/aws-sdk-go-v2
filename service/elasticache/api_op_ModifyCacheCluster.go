@@ -111,7 +111,7 @@ type ModifyCacheClusterInput struct {
 
 	// The network type you choose when modifying a cluster, either ipv4 | ipv6 . IPv6
 	// is supported for workloads using Redis engine version 6.2 onward or Memcached
-	// engine version 1.6.6 on all instances built on the Nitro system (https://aws.amazon.com/ec2/nitro/)
+	// engine version 1.6.6 on all instances built on the Nitro system (http://aws.amazon.com/ec2/nitro/)
 	// .
 	IpDiscovery types.IpDiscovery
 

@@ -5285,6 +5285,11 @@ func awsAwsquery_serializeOpDocumentCreateReplicationGroupInput(v *CreateReplica
 		objectKey.String(*v.CacheSubnetGroupName)
 	}
 
+	if len(v.ClusterMode) > 0 {
+		objectKey := object.Key("ClusterMode")
+		objectKey.String(string(v.ClusterMode))
+	}
+
 	if v.DataTieringEnabled != nil {
 		objectKey := object.Key("DataTieringEnabled")
 		objectKey.Boolean(*v.DataTieringEnabled)
@@ -6705,6 +6710,11 @@ func awsAwsquery_serializeOpDocumentModifyReplicationGroupInput(v *ModifyReplica
 		if err := awsAwsquery_serializeDocumentCacheSecurityGroupNameList(v.CacheSecurityGroupNames, objectKey); err != nil {
 			return err
 		}
+	}
+
+	if len(v.ClusterMode) > 0 {
+		objectKey := object.Key("ClusterMode")
+		objectKey.String(string(v.ClusterMode))
 	}
 
 	if v.EngineVersion != nil {

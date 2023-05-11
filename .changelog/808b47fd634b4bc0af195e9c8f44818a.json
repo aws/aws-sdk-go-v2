@@ -1,0 +1,8 @@
+{
+    "id": "808b47fd-634b-4bc0-af19-5e9c8f44818a",
+    "type": "feature",
+    "description": "Update FIPS endpoints for GovCloud (US) regions in SDK.",
+    "modules": [
+        "service/route53resolver"
+    ]
+}

@@ -138,8 +138,8 @@ type Event struct {
 	// The date and time that the event ended.
 	EndTime *time.Time
 
-	// This parameter specifies if the Health event is a public Amazon Web Services
-	// service event or an account-specific event.
+	// This parameter specifies if the Health event is a public Amazon Web Service
+	// event or an account-specific event.
 	//   - If the eventScopeCode value is PUBLIC , then the affectedAccounts value is
 	//   always empty.
 	//   - If the eventScopeCode value is ACCOUNT_SPECIFIC , then the affectedAccounts
@@ -166,8 +166,7 @@ type Event struct {
 	// The Amazon Web Services Region name of the event.
 	Region *string
 
-	// The Amazon Web Services service that is affected by the event. For example, EC2
-	// , RDS .
+	// The Amazon Web Service that is affected by the event. For example, EC2 , RDS .
 	Service *string
 
 	// The date and time that the event began.
@@ -303,8 +302,7 @@ type EventFilter struct {
 	// A list of Amazon Web Services Regions.
 	Regions []string
 
-	// The Amazon Web Services services associated with the event. For example, EC2 ,
-	// RDS .
+	// The Amazon Web Services associated with the event. For example, EC2 , RDS .
 	Services []string
 
 	// A list of dates and times that the event began.
@@ -339,8 +337,7 @@ type EventType struct {
 	// ; for example, AWS_EC2_SYSTEM_MAINTENANCE_EVENT .
 	Code *string
 
-	// The Amazon Web Services service that is affected by the event. For example, EC2
-	// , RDS .
+	// The Amazon Web Service that is affected by the event. For example, EC2 , RDS .
 	Service *string
 
 	noSmithyDocumentSerde
@@ -358,8 +355,7 @@ type EventTypeFilter struct {
 	// A list of event type codes.
 	EventTypeCodes []string
 
-	// The Amazon Web Services services associated with the event. For example, EC2 ,
-	// RDS .
+	// The Amazon Web Services associated with the event. For example, EC2 , RDS .
 	Services []string
 
 	noSmithyDocumentSerde
@@ -373,8 +369,11 @@ type OrganizationAffectedEntitiesErrorItem struct {
 	// entities.
 	AwsAccountId *string
 
-	// The unique identifier for the event type. The format is AWS_SERVICE_DESCRIPTION
-	// . For example, AWS_EC2_SYSTEM_MAINTENANCE_EVENT .
+	// A message that describes the error. Follow the error message and retry your
+	// request. For example, the InvalidAccountInputError error message appears if you
+	// call the DescribeAffectedEntitiesForOrganization operation and specify the
+	// AccountSpecific value for the EventScopeCode parameter, but don't specify an
+	// Amazon Web Services account.
 	ErrorMessage *string
 
 	// The name of the error.
@@ -403,8 +402,8 @@ type OrganizationEvent struct {
 	// The date and time that the event ended.
 	EndTime *time.Time
 
-	// This parameter specifies if the Health event is a public Amazon Web Services
-	// service event or an account-specific event.
+	// This parameter specifies if the Health event is a public Amazon Web Service
+	// event or an account-specific event.
 	//   - If the eventScopeCode value is PUBLIC , then the affectedAccounts value is
 	//   always empty.
 	//   - If the eventScopeCode value is ACCOUNT_SPECIFIC , then the affectedAccounts
@@ -431,8 +430,7 @@ type OrganizationEvent struct {
 	// The Amazon Web Services Region name of the event.
 	Region *string
 
-	// The Amazon Web Services service that is affected by the event, such as EC2 and
-	// RDS.
+	// The Amazon Web Service that is affected by the event, such as EC2 and RDS.
 	Service *string
 
 	// The date and time that the event began.
@@ -564,8 +562,7 @@ type OrganizationEventFilter struct {
 	// A list of Amazon Web Services Regions.
 	Regions []string
 
-	// The Amazon Web Services services associated with the event. For example, EC2 ,
-	// RDS .
+	// The Amazon Web Services associated with the event. For example, EC2 , RDS .
 	Services []string
 
 	// A range of dates and times that is used by the EventFilter (https://docs.aws.amazon.com/health/latest/APIReference/API_EventFilter.html)

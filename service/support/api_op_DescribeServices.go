@@ -46,9 +46,9 @@ func (c *Client) DescribeServices(ctx context.Context, params *DescribeServicesI
 type DescribeServicesInput struct {
 
 	// The language in which Amazon Web Services Support handles the case. Amazon Web
-	// Services Support currently supports English ("en") and Japanese ("ja"). You must
-	// specify the ISO 639-1 code for the language parameter if you want support in
-	// that language.
+	// Services Support currently supports Chinese (“zh”), English ("en"), Japanese
+	// ("ja") and Korean (“ko”). You must specify the ISO 639-1 code for the language
+	// parameter if you want support in that language.
 	Language *string
 
 	// A JSON-formatted list of service codes available for Amazon Web Services

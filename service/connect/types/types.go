@@ -2058,7 +2058,8 @@ type MetricV2 struct {
 	// Contains the filters to be used when returning data.
 	MetricFilters []MetricFilterV2
 
-	// The name of the metric.
+	// The name of the metric. This parameter is required. The following Required = No
+	// is incorrect.
 	Name *string
 
 	// Contains information about the threshold for service level metrics.

@@ -43,6 +43,9 @@ type ListRunsInput struct {
 	// of results.
 	StartingToken *string
 
+	// The status of a run.
+	Status types.RunStatus
+
 	noSmithyDocumentSerde
 }
 

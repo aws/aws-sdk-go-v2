@@ -18,7 +18,7 @@ import (
 // , the previous version of this API. It has new metrics, offers filtering at a
 // metric level, and offers the ability to filter and group data by channels,
 // queues, routing profiles, agents, and agent hierarchy levels. It can retrieve
-// historical data for the last 14 days, in 24-hour intervals. For a description of
+// historical data for the last 35 days, in 24-hour intervals. For a description of
 // the historical metrics that are supported by GetMetricDataV2 and GetMetricData ,
 // see Historical metrics definitions (https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html)
 // in the Amazon Connect Administrator's Guide. This API is not available in the
@@ -146,8 +146,8 @@ type GetMetricDataV2Input struct {
 	// The timestamp, in UNIX Epoch time format, at which to start the reporting
 	// interval for the retrieval of historical metrics data. The time must be before
 	// the end time timestamp. The time range between the start and end time must be
-	// less than 24 hours. The start time cannot be earlier than 14 days before the
-	// time of the request. Historical metrics are available for 14 days.
+	// less than 24 hours. The start time cannot be earlier than 35 days before the
+	// time of the request. Historical metrics are available for 35 days.
 	//
 	// This member is required.
 	StartTime *time.Time

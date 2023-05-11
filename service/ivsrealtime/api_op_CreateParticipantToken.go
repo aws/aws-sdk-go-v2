@@ -47,7 +47,7 @@ type CreateParticipantTokenInput struct {
 	// PUBLISH, SUBSCRIBE .
 	Capabilities []types.ParticipantTokenCapability
 
-	// Duration (in minutes), after which the token expires. Default: 60 (1 hour).
+	// Duration (in minutes), after which the token expires. Default: 720 (12 hours).
 	Duration int32
 
 	// Name that can be specified to help identify the token. This can be any UTF-8

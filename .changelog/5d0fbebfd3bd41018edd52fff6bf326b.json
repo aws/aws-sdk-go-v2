@@ -1,0 +1,8 @@
+{
+    "id": "5d0fbebf-d3bd-4101-8edd-52fff6bf326b",
+    "type": "feature",
+    "description": "This release fixes DescribePackages API error with null filter value parameter.",
+    "modules": [
+        "service/opensearch"
+    ]
+}

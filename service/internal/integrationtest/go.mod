@@ -259,8 +259,6 @@ replace github.com/aws/aws-sdk-go-v2/service/sfn => ../../../service/sfn/
 
 replace github.com/aws/aws-sdk-go-v2/service/shield => ../../../service/shield/
 
-replace github.com/aws/aws-sdk-go-v2/service/sms => ../../../service/sms/
-
 replace github.com/aws/aws-sdk-go-v2/service/snowball => ../../../service/snowball/
 
 replace github.com/aws/aws-sdk-go-v2/service/sns => ../../../service/sns/

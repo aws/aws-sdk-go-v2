@@ -1,0 +1,8 @@
+{
+    "id": "07979a9f-0c53-4f12-9a50-53430152a8c9",
+    "type": "feature",
+    "description": "This release provides support for Ready2Run and GPU workflows, an improved read set filter, the direct upload of read sets into Omics Storage, and annotation parsing for analytics stores.",
+    "modules": [
+        "service/omics"
+    ]
+}

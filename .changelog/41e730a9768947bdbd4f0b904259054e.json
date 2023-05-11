@@ -1,0 +1,8 @@
+{
+    "id": "41e730a9-7689-47bd-bd4f-0b904259054e",
+    "type": "feature",
+    "description": "Add support for regional endpoints",
+    "modules": [
+        "service/health"
+    ]
+}

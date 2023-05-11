@@ -5,5 +5,5 @@
 //
 // This is the Amazon Omics API Reference. For an introduction to the service, see
 // What is Amazon Omics? (https://docs.aws.amazon.com/omics/latest/dev/) in the
-// Amazon Omics Developer Guide.
+// Amazon Omics User Guide.
 package omics

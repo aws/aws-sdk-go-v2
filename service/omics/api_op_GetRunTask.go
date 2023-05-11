@@ -55,6 +55,9 @@ type GetRunTaskOutput struct {
 	// When the task was created.
 	CreationTime *time.Time
 
+	// The number of Graphics Processing Units (GPU) specified in the task.
+	Gpus *int32
+
 	// The task's log stream.
 	LogStream *string
 

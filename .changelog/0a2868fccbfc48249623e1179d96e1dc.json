@@ -1,0 +1,8 @@
+{
+    "id": "0a2868fc-cbfc-4824-9623-e1179d96e1dc",
+    "type": "documentation",
+    "description": "This release updates GetMetricDataV2 API, to support metric data up-to last 35 days",
+    "modules": [
+        "service/connect"
+    ]
+}

@@ -148,7 +148,7 @@ type CreateCacheClusterInput struct {
 
 	// The network type you choose when modifying a cluster, either ipv4 | ipv6 . IPv6
 	// is supported for workloads using Redis engine version 6.2 onward or Memcached
-	// engine version 1.6.6 on all instances built on the Nitro system (https://aws.amazon.com/ec2/nitro/)
+	// engine version 1.6.6 on all instances built on the Nitro system (http://aws.amazon.com/ec2/nitro/)
 	// .
 	IpDiscovery types.IpDiscovery
 
@@ -157,7 +157,7 @@ type CreateCacheClusterInput struct {
 
 	// Must be either ipv4 | ipv6 | dual_stack . IPv6 is supported for workloads using
 	// Redis engine version 6.2 onward or Memcached engine version 1.6.6 on all
-	// instances built on the Nitro system (https://aws.amazon.com/ec2/nitro/) .
+	// instances built on the Nitro system (http://aws.amazon.com/ec2/nitro/) .
 	NetworkType types.NetworkType
 
 	// The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS)
@@ -252,9 +252,7 @@ type CreateCacheClusterInput struct {
 	// A list of tags to be added to this resource.
 	Tags []types.Tag
 
-	// A flag that enables in-transit encryption when set to true. Only available when
-	// creating a cache cluster in an Amazon VPC using Memcached version 1.6.12 or
-	// later.
+	// A flag that enables in-transit encryption when set to true.
 	TransitEncryptionEnabled *bool
 
 	noSmithyDocumentSerde

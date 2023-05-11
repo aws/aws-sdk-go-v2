@@ -1,0 +1,8 @@
+{
+    "id": "fb7645a9-e5c2-4be4-8661-43d36cea0f8b",
+    "type": "feature",
+    "description": "Added support to modify the cluster mode configuration for the existing ElastiCache ReplicationGroups. Customers can now modify the configuration from cluster mode disabled to cluster mode enabled.",
+    "modules": [
+        "service/elasticache"
+    ]
+}

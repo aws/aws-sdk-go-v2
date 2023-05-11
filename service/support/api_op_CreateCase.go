@@ -85,9 +85,9 @@ type CreateCaseInput struct {
 	IssueType *string
 
 	// The language in which Amazon Web Services Support handles the case. Amazon Web
-	// Services Support currently supports English ("en") and Japanese ("ja"). You must
-	// specify the ISO 639-1 code for the language parameter if you want support in
-	// that language.
+	// Services Support currently supports Chinese (“zh”), English ("en"), Japanese
+	// ("ja") and Korean (“ko”). You must specify the ISO 639-1 code for the language
+	// parameter if you want support in that language.
 	Language *string
 
 	// The code for the Amazon Web Services service. You can use the DescribeServices

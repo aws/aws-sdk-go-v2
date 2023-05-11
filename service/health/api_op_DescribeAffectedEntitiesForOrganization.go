@@ -15,11 +15,10 @@ import (
 // Returns a list of entities that have been affected by one or more events for
 // one or more accounts in your organization in Organizations, based on the filter
 // criteria. Entities can refer to individual customer resources, groups of
-// customer resources, or any other construct, depending on the Amazon Web Services
-// service. At least one event Amazon Resource Name (ARN) and account ID are
-// required. Before you can call this operation, you must first enable Health to
-// work with Organizations. To do this, call the
-// EnableHealthServiceAccessForOrganization (https://docs.aws.amazon.com/health/latest/APIReference/API_EnableHealthServiceAccessForOrganization.html)
+// customer resources, or any other construct, depending on the Amazon Web Service.
+// At least one event Amazon Resource Name (ARN) and account ID are required.
+// Before you can call this operation, you must first enable Health to work with
+// Organizations. To do this, call the EnableHealthServiceAccessForOrganization (https://docs.aws.amazon.com/health/latest/APIReference/API_EnableHealthServiceAccessForOrganization.html)
 // operation from your organization's management account.
 //   - This API operation uses pagination. Specify the nextToken parameter in the
 //     next request to return more results.

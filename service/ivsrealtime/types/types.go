@@ -7,6 +7,91 @@ import (
 	"time"
 )
 
+// An occurrence during a stage session.
+type Event struct {
+
+	// If the event is an error event, the error code is provided to give insight into
+	// the specific error that occurred. If the event is not an error event, this field
+	// is null. INSUFFICIENT_CAPABILITIES indicates that the participant tried to take
+	// an action that the participant’s token is not allowed to do. For more
+	// information about participant capabilities, see the capabilities field in
+	// CreateParticipantToken .
+	ErrorCode EventErrorCode
+
+	// ISO 8601 timestamp (returned as a string) for when the event occurred.
+	EventTime *time.Time
+
+	// The name of the event.
+	Name EventName
+
+	// Unique identifier for the participant who triggered the event. This is assigned
+	// by IVS.
+	ParticipantId *string
+
+	// Unique identifier for the remote participant. For a subscribe event, this is
+	// the publisher. For a publish or join event, this is null. This is assigned by
+	// IVS.
+	RemoteParticipantId *string
+
+	noSmithyDocumentSerde
+}
+
+// Object describing a participant that has joined a stage.
+type Participant struct {
+
+	// Application-provided attributes to encode into the token and attach to a stage.
+	// Map keys and values can contain UTF-8 encoded text. The maximum length of this
+	// field is 1 KB total. This field is exposed to all stage participants and should
+	// not be used for personally identifying, confidential, or sensitive information.
+	Attributes map[string]string
+
+	// ISO 8601 timestamp (returned as a string) when the participant first joined the
+	// stage session.
+	FirstJoinTime *time.Time
+
+	// Unique identifier for this participant, assigned by IVS.
+	ParticipantId *string
+
+	// Whether the participant ever published to the stage session.
+	Published bool
+
+	// Whether the participant is connected to or disconnected from the stage.
+	State ParticipantState
+
+	// Customer-assigned name to help identify the token; this can be used to link a
+	// participant to a user in the customer’s own systems. This can be any UTF-8
+	// encoded text. This field is exposed to all stage participants and should not be
+	// used for personally identifying, confidential, or sensitive information.
+	UserId *string
+
+	noSmithyDocumentSerde
+}
+
+// Summary object describing a participant that has joined a stage.
+type ParticipantSummary struct {
+
+	// ISO 8601 timestamp (returned as a string) when the participant first joined the
+	// stage session.
+	FirstJoinTime *time.Time
+
+	// Unique identifier for this participant, assigned by IVS.
+	ParticipantId *string
+
+	// Whether the participant ever published to the stage session.
+	Published bool
+
+	// Whether the participant is connected to or disconnected from the stage.
+	State ParticipantState
+
+	// Customer-assigned name to help identify the token; this can be used to link a
+	// participant to a user in the customer’s own systems. This can be any UTF-8
+	// encoded text. This field is exposed to all stage participants and should not be
+	// used for personally identifying, confidential, or sensitive information.
+	UserId *string
+
+	noSmithyDocumentSerde
+}
+
 // Object specifying a participant token in a stage.
 type ParticipantToken struct {
 
@@ -18,8 +103,8 @@ type ParticipantToken struct {
 	// Set of capabilities that the user is allowed to perform in the stage.
 	Capabilities []ParticipantTokenCapability
 
-	// Duration (in minutes), after which the participant token expires. Default: 60
-	// (1 hour).
+	// Duration (in minutes), after which the participant token expires. Default: 720
+	// (12 hours).
 	Duration int32
 
 	// ISO 8601 timestamp (returned as a string) for when this token expires.
@@ -31,9 +116,10 @@ type ParticipantToken struct {
 	// The issued client token, encrypted.
 	Token *string
 
-	// Name to help identify the token. This can be any UTF-8 encoded text. This field
-	// is exposed to all stage participants and should not be used for personally
-	// identifying, confidential, or sensitive information.
+	// Customer-assigned name to help identify the token; this can be used to link a
+	// participant to a user in the customer’s own systems. This can be any UTF-8
+	// encoded text. This field is exposed to all stage participants and should not be
+	// used for personally identifying, confidential, or sensitive information.
 	UserId *string
 
 	noSmithyDocumentSerde
@@ -53,13 +139,13 @@ type ParticipantTokenConfiguration struct {
 	Capabilities []ParticipantTokenCapability
 
 	// Duration (in minutes), after which the corresponding participant token expires.
-	// Default: 60 (1 hour).
+	// Default: 720 (12 hours).
 	Duration int32
 
-	// Name that can be specified to help identify the corresponding participant
-	// token. This can be any UTF-8 encoded text. This field is exposed to all stage
-	// participants and should not be used for personally identifying, confidential, or
-	// sensitive information.
+	// Customer-assigned name to help identify the token; this can be used to link a
+	// participant to a user in the customer’s own systems. This can be any UTF-8
+	// encoded text. This field is exposed to all stage participants and should not be
+	// used for personally identifying, confidential, or sensitive information.
 	UserId *string
 
 	noSmithyDocumentSerde
@@ -85,6 +171,41 @@ type Stage struct {
 	// and requirements"; Amazon IVS has no constraints on tags beyond what is
 	// documented there.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// A stage session begins when the first participant joins a stage and ends after
+// the last participant leaves the stage. A stage session helps with debugging
+// stages by grouping events and participants into shorter periods of time (i.e., a
+// session), which is helpful when stages are used over long periods of time.
+type StageSession struct {
+
+	// ISO 8601 timestamp (returned as a string) when the stage session ended. This is
+	// null if the stage is active.
+	EndTime *time.Time
+
+	// ID of the session within the stage.
+	SessionId *string
+
+	// ISO 8601 timestamp (returned as a string) when this stage session began.
+	StartTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about a stage session.
+type StageSessionSummary struct {
+
+	// ISO 8601 timestamp (returned as a string) when the stage session ended. This is
+	// null if the stage is active.
+	EndTime *time.Time
+
+	// ID of the session within the stage.
+	SessionId *string
+
+	// ISO 8601 timestamp (returned as a string) when this stage session began.
+	StartTime *time.Time
 
 	noSmithyDocumentSerde
 }

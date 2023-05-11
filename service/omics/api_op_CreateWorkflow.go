@@ -36,6 +36,9 @@ type CreateWorkflowInput struct {
 	// This member is required.
 	RequestId *string
 
+	// The computational accelerator specified to run the workflow.
+	Accelerators types.Accelerators
+
 	// The URI of a definition for the workflow.
 	DefinitionUri *string
 

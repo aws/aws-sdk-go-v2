@@ -11,9 +11,8 @@ import (
 )
 
 // Disables Health from working with Organizations. To call this operation, you
-// must sign in as an Identity and Access Management (IAM) user, assume an IAM
-// role, or sign in as the root user (not recommended) in the organization's
-// management account. For more information, see Aggregating Health events (https://docs.aws.amazon.com/health/latest/ug/aggregate-events.html)
+// must sign in to the organization's management account. For more information, see
+// Aggregating Health events (https://docs.aws.amazon.com/health/latest/ug/aggregate-events.html)
 // in the Health User Guide. This operation doesn't remove the service-linked role
 // from the management account in your organization. You must use the IAM console,
 // API, or Command Line Interface (CLI) to remove the service-linked role. For more

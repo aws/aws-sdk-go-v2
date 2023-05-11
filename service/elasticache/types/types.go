@@ -159,7 +159,7 @@ type CacheCluster struct {
 
 	// The network type associated with the cluster, either ipv4 | ipv6 . IPv6 is
 	// supported for workloads using Redis engine version 6.2 onward or Memcached
-	// engine version 1.6.6 on all instances built on the Nitro system (https://aws.amazon.com/ec2/nitro/)
+	// engine version 1.6.6 on all instances built on the Nitro system (http://aws.amazon.com/ec2/nitro/)
 	// .
 	IpDiscovery IpDiscovery
 
@@ -168,7 +168,7 @@ type CacheCluster struct {
 
 	// Must be either ipv4 | ipv6 | dual_stack . IPv6 is supported for workloads using
 	// Redis engine version 6.2 onward or Memcached engine version 1.6.6 on all
-	// instances built on the Nitro system (https://aws.amazon.com/ec2/nitro/) .
+	// instances built on the Nitro system (http://aws.amazon.com/ec2/nitro/) .
 	NetworkType NetworkType
 
 	// Describes a notification topic and its status. Notification topics are used for
@@ -250,7 +250,7 @@ type CacheEngineVersion struct {
 
 	// The name of the cache parameter group family associated with this cache engine.
 	// Valid values are: memcached1.4 | memcached1.5 | memcached1.6 | redis2.6 |
-	// redis2.8 | redis3.2 | redis4.0 | redis5.0 | redis6.x
+	// redis2.8 | redis3.2 | redis4.0 | redis5.0 | redis6.x | redis7
 	CacheParameterGroupFamily *string
 
 	// The name of the cache engine.
@@ -437,7 +437,7 @@ type CacheParameterGroup struct {
 
 	// The name of the cache parameter group family that this cache parameter group is
 	// compatible with. Valid values are: memcached1.4 | memcached1.5 | memcached1.6 |
-	// redis2.6 | redis2.8 | redis3.2 | redis4.0 | redis5.0 | redis6.x |
+	// redis2.6 | redis2.8 | redis3.2 | redis4.0 | redis5.0 | redis6.x | redis7
 	CacheParameterGroupFamily *string
 
 	// The name of the cache parameter group.
@@ -526,7 +526,7 @@ type CacheSubnetGroup struct {
 
 	// Either ipv4 | ipv6 | dual_stack . IPv6 is supported for workloads using Redis
 	// engine version 6.2 onward or Memcached engine version 1.6.6 on all instances
-	// built on the Nitro system (https://aws.amazon.com/ec2/nitro/) .
+	// built on the Nitro system (http://aws.amazon.com/ec2/nitro/) .
 	SupportedNetworkTypes []NetworkType
 
 	// The Amazon Virtual Private Cloud identifier (VPC ID) of the cache subnet group.
@@ -647,7 +647,7 @@ type EngineDefaults struct {
 	// Specifies the name of the cache parameter group family to which the engine
 	// default parameters apply. Valid values are: memcached1.4 | memcached1.5 |
 	// memcached1.6 | redis2.6 | redis2.8 | redis3.2 | redis4.0 | redis5.0 | redis6.0
-	// | redis6.x
+	// | redis6.x | redis7
 	CacheParameterGroupFamily *string
 
 	// Provides an identifier to allow retrieval of paginated results.
@@ -1221,8 +1221,8 @@ type ReplicationGroup struct {
 	// The date the auth token was last modified
 	AuthTokenLastModifiedDate *time.Time
 
-	//  If you are running Redis engine version 6.0 or later, set this parameter to
-	// yes if you want to opt-in to the next auto minor version upgrade campaign. This
+	// If you are running Redis engine version 6.0 or later, set this parameter to yes
+	// if you want to opt-in to the next auto minor version upgrade campaign. This
 	// parameter is disabled for previous versions.
 	AutoMinorVersionUpgrade bool
 
@@ -1237,6 +1237,13 @@ type ReplicationGroup struct {
 	// i.e., whether its data can be partitioned across multiple shards (API/CLI: node
 	// groups). Valid values: true | false
 	ClusterEnabled *bool
+
+	// Enabled or Disabled. To modify cluster mode from Disabled to Enabled, you must
+	// first set the cluster mode to Compatible. Compatible mode allows your Redis
+	// clients to connect using both cluster mode enabled and cluster mode disabled.
+	// After you migrate all Redis clients to use cluster mode enabled, you can then
+	// complete cluster mode configuration and set the cluster mode to Enabled.
+	ClusterMode ClusterMode
 
 	// The configuration endpoint for this replication group. Use the configuration
 	// endpoint to connect to this replication group.
@@ -1257,7 +1264,7 @@ type ReplicationGroup struct {
 
 	// The network type you choose when modifying a cluster, either ipv4 | ipv6 . IPv6
 	// is supported for workloads using Redis engine version 6.2 onward or Memcached
-	// engine version 1.6.6 on all instances built on the Nitro system (https://aws.amazon.com/ec2/nitro/)
+	// engine version 1.6.6 on all instances built on the Nitro system (http://aws.amazon.com/ec2/nitro/)
 	// .
 	IpDiscovery IpDiscovery
 
@@ -1279,7 +1286,7 @@ type ReplicationGroup struct {
 
 	// Must be either ipv4 | ipv6 | dual_stack . IPv6 is supported for workloads using
 	// Redis engine version 6.2 onward or Memcached engine version 1.6.6 on all
-	// instances built on the Nitro system (https://aws.amazon.com/ec2/nitro/) .
+	// instances built on the Nitro system (http://aws.amazon.com/ec2/nitro/) .
 	NetworkType NetworkType
 
 	// A list of node groups in this replication group. For Redis (cluster mode
@@ -1342,6 +1349,13 @@ type ReplicationGroupPendingModifiedValues struct {
 
 	// Indicates the status of automatic failover for this Redis replication group.
 	AutomaticFailoverStatus PendingAutomaticFailoverStatus
+
+	// Enabled or Disabled. To modify cluster mode from Disabled to Enabled, you must
+	// first set the cluster mode to Compatible. Compatible mode allows your Redis
+	// clients to connect using both cluster mode enabled and cluster mode disabled.
+	// After you migrate all Redis clients to use cluster mode enabled, you can then
+	// complete cluster mode configuration and set the cluster mode to Enabled.
+	ClusterMode ClusterMode
 
 	// The log delivery configurations being modified
 	LogDeliveryConfigurations []PendingLogDeliveryConfiguration
@@ -1818,7 +1832,7 @@ type Subnet struct {
 
 	// Either ipv4 | ipv6 | dual_stack . IPv6 is supported for workloads using Redis
 	// engine version 6.2 onward or Memcached engine version 1.6.6 on all instances
-	// built on the Nitro system (https://aws.amazon.com/ec2/nitro/) .
+	// built on the Nitro system (http://aws.amazon.com/ec2/nitro/) .
 	SupportedNetworkTypes []NetworkType
 
 	noSmithyDocumentSerde

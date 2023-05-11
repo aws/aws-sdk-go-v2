@@ -48,6 +48,9 @@ type GetRunInput struct {
 
 type GetRunOutput struct {
 
+	// The computational accelerator used to run the workflow.
+	Accelerators types.Accelerators
+
 	// The run's ARN.
 	Arn *string
 

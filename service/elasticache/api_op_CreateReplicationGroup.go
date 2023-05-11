@@ -173,6 +173,13 @@ type CreateReplicationGroupInput struct {
 	// .
 	CacheSubnetGroupName *string
 
+	// Enabled or Disabled. To modify cluster mode from Disabled to Enabled, you must
+	// first set the cluster mode to Compatible. Compatible mode allows your Redis
+	// clients to connect using both cluster mode enabled and cluster mode disabled.
+	// After you migrate all Redis clients to use cluster mode enabled, you can then
+	// complete cluster mode configuration and set the cluster mode to Enabled.
+	ClusterMode types.ClusterMode
+
 	// Enables data tiering. Data tiering is only supported for replication groups
 	// using the r6gd node type. This parameter must be set to true when using r6gd
 	// nodes. For more information, see Data tiering (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/data-tiering.html)
@@ -198,7 +205,7 @@ type CreateReplicationGroupInput struct {
 
 	// The network type you choose when creating a replication group, either ipv4 |
 	// ipv6 . IPv6 is supported for workloads using Redis engine version 6.2 onward or
-	// Memcached engine version 1.6.6 on all instances built on the Nitro system (https://aws.amazon.com/ec2/nitro/)
+	// Memcached engine version 1.6.6 on all instances built on the Nitro system (http://aws.amazon.com/ec2/nitro/)
 	// .
 	IpDiscovery types.IpDiscovery
 
@@ -215,7 +222,7 @@ type CreateReplicationGroupInput struct {
 
 	// Must be either ipv4 | ipv6 | dual_stack . IPv6 is supported for workloads using
 	// Redis engine version 6.2 onward or Memcached engine version 1.6.6 on all
-	// instances built on the Nitro system (https://aws.amazon.com/ec2/nitro/) .
+	// instances built on the Nitro system (http://aws.amazon.com/ec2/nitro/) .
 	NetworkType types.NetworkType
 
 	// A list of node group (shard) configuration options. Each node group (shard)
@@ -343,8 +350,9 @@ type CreateReplicationGroupInput struct {
 	// your Redis clients to use encrypted connections you can modify the value to
 	// required to allow encrypted connections only. Setting TransitEncryptionMode to
 	// required is a two-step process that requires you to first set the
-	// TransitEncryptionMode to preferred first, after that you can set
-	// TransitEncryptionMode to required .
+	// TransitEncryptionMode to preferred , after that you can set
+	// TransitEncryptionMode to required . This process will not trigger the
+	// replacement of the replication group.
 	TransitEncryptionMode types.TransitEncryptionMode
 
 	// The user group to associate with the replication group.

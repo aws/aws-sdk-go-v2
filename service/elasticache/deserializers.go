@@ -18984,6 +18984,19 @@ func awsAwsquery_deserializeDocumentReplicationGroup(v **types.ReplicationGroup,
 				sv.ClusterEnabled = ptr.Bool(xtv)
 			}
 
+		case strings.EqualFold("ClusterMode", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ClusterMode = types.ClusterMode(xtv)
+			}
+
 		case strings.EqualFold("ConfigurationEndpoint", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentEndpoint(&sv.ConfigurationEndpoint, nodeDecoder); err != nil {
@@ -19629,6 +19642,19 @@ func awsAwsquery_deserializeDocumentReplicationGroupPendingModifiedValues(v **ty
 			{
 				xtv := string(val)
 				sv.AutomaticFailoverStatus = types.PendingAutomaticFailoverStatus(xtv)
+			}
+
+		case strings.EqualFold("ClusterMode", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ClusterMode = types.ClusterMode(xtv)
 			}
 
 		case strings.EqualFold("LogDeliveryConfigurations", t.Name.Local):

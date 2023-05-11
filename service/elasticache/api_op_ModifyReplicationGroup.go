@@ -90,6 +90,13 @@ type ModifyReplicationGroupInput struct {
 	// Must contain no more than 255 alphanumeric characters. Must not be Default .
 	CacheSecurityGroupNames []string
 
+	// Enabled or Disabled. To modify cluster mode from Disabled to Enabled, you must
+	// first set the cluster mode to Compatible. Compatible mode allows your Redis
+	// clients to connect using both cluster mode enabled and cluster mode disabled.
+	// After you migrate all Redis clients to use cluster mode enabled, you can then
+	// complete cluster mode configuration and set the cluster mode to Enabled.
+	ClusterMode types.ClusterMode
+
 	// The upgraded version of the cache engine to be run on the clusters in the
 	// replication group. Important: You can upgrade to a newer engine version (see
 	// Selecting a Cache Engine and Version (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SelectEngine.html#VersionManagement)
@@ -100,7 +107,7 @@ type ModifyReplicationGroupInput struct {
 
 	// The network type you choose when modifying a cluster, either ipv4 | ipv6 . IPv6
 	// is supported for workloads using Redis engine version 6.2 onward or Memcached
-	// engine version 1.6.6 on all instances built on the Nitro system (https://aws.amazon.com/ec2/nitro/)
+	// engine version 1.6.6 on all instances built on the Nitro system (http://aws.amazon.com/ec2/nitro/)
 	// .
 	IpDiscovery types.IpDiscovery
 
@@ -186,7 +193,7 @@ type ModifyReplicationGroupInput struct {
 	// Once you migrate all your Redis clients to use encrypted connections you can set
 	// the value to required to allow encrypted connections only. Setting
 	// TransitEncryptionMode to required is a two-step process that requires you to
-	// first set the TransitEncryptionMode to preferred first, after that you can set
+	// first set the TransitEncryptionMode to preferred , after that you can set
 	// TransitEncryptionMode to required .
 	TransitEncryptionMode types.TransitEncryptionMode
 

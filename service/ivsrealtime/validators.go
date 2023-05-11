@@ -69,6 +69,26 @@ func (m *validateOpDisconnectParticipant) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetParticipant struct {
+}
+
+func (*validateOpGetParticipant) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetParticipant) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetParticipantInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetParticipantInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetStage struct {
 }
 
@@ -84,6 +104,86 @@ func (m *validateOpGetStage) HandleInitialize(ctx context.Context, in middleware
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetStageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetStageSession struct {
+}
+
+func (*validateOpGetStageSession) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetStageSession) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetStageSessionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetStageSessionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListParticipantEvents struct {
+}
+
+func (*validateOpListParticipantEvents) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListParticipantEvents) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListParticipantEventsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListParticipantEventsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListParticipants struct {
+}
+
+func (*validateOpListParticipants) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListParticipants) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListParticipantsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListParticipantsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListStageSessions struct {
+}
+
+func (*validateOpListStageSessions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListStageSessions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListStageSessionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListStageSessionsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -181,8 +281,28 @@ func addOpDisconnectParticipantValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpDisconnectParticipant{}, middleware.After)
 }
 
+func addOpGetParticipantValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetParticipant{}, middleware.After)
+}
+
 func addOpGetStageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetStage{}, middleware.After)
+}
+
+func addOpGetStageSessionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetStageSession{}, middleware.After)
+}
+
+func addOpListParticipantEventsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListParticipantEvents{}, middleware.After)
+}
+
+func addOpListParticipantsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListParticipants{}, middleware.After)
+}
+
+func addOpListStageSessionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListStageSessions{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -249,6 +369,27 @@ func validateOpDisconnectParticipantInput(v *DisconnectParticipantInput) error {
 	}
 }
 
+func validateOpGetParticipantInput(v *GetParticipantInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetParticipantInput"}
+	if v.StageArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StageArn"))
+	}
+	if v.SessionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
+	}
+	if v.ParticipantId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ParticipantId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetStageInput(v *GetStageInput) error {
 	if v == nil {
 		return nil
@@ -256,6 +397,78 @@ func validateOpGetStageInput(v *GetStageInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetStageInput"}
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetStageSessionInput(v *GetStageSessionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetStageSessionInput"}
+	if v.StageArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StageArn"))
+	}
+	if v.SessionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListParticipantEventsInput(v *ListParticipantEventsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListParticipantEventsInput"}
+	if v.StageArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StageArn"))
+	}
+	if v.SessionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
+	}
+	if v.ParticipantId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ParticipantId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListParticipantsInput(v *ListParticipantsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListParticipantsInput"}
+	if v.StageArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StageArn"))
+	}
+	if v.SessionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListStageSessionsInput(v *ListStageSessionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListStageSessionsInput"}
+	if v.StageArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StageArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

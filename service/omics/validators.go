@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpAbortMultipartReadSetUpload struct {
+}
+
+func (*validateOpAbortMultipartReadSetUpload) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAbortMultipartReadSetUpload) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AbortMultipartReadSetUploadInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAbortMultipartReadSetUploadInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchDeleteReadSet struct {
 }
 
@@ -90,6 +110,26 @@ func (m *validateOpCancelVariantImportJob) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCompleteMultipartReadSetUpload struct {
+}
+
+func (*validateOpCompleteMultipartReadSetUpload) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCompleteMultipartReadSetUpload) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CompleteMultipartReadSetUploadInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCompleteMultipartReadSetUploadInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateAnnotationStore struct {
 }
 
@@ -105,6 +145,26 @@ func (m *validateOpCreateAnnotationStore) HandleInitialize(ctx context.Context, 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateAnnotationStoreInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateMultipartReadSetUpload struct {
+}
+
+func (*validateOpCreateMultipartReadSetUpload) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateMultipartReadSetUpload) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateMultipartReadSetUploadInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateMultipartReadSetUploadInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -730,6 +790,26 @@ func (m *validateOpGetWorkflow) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListMultipartReadSetUploads struct {
+}
+
+func (*validateOpListMultipartReadSetUploads) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListMultipartReadSetUploads) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListMultipartReadSetUploadsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListMultipartReadSetUploadsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListReadSetActivationJobs struct {
 }
 
@@ -805,6 +885,26 @@ func (m *validateOpListReadSets) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListReadSetsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListReadSetUploadParts struct {
+}
+
+func (*validateOpListReadSetUploadParts) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListReadSetUploadParts) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListReadSetUploadPartsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListReadSetUploadPartsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1150,6 +1250,30 @@ func (m *validateOpUpdateWorkflow) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUploadReadSetPart struct {
+}
+
+func (*validateOpUploadReadSetPart) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUploadReadSetPart) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UploadReadSetPartInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUploadReadSetPartInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+func addOpAbortMultipartReadSetUploadValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAbortMultipartReadSetUpload{}, middleware.After)
+}
+
 func addOpBatchDeleteReadSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchDeleteReadSet{}, middleware.After)
 }
@@ -1166,8 +1290,16 @@ func addOpCancelVariantImportJobValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpCancelVariantImportJob{}, middleware.After)
 }
 
+func addOpCompleteMultipartReadSetUploadValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCompleteMultipartReadSetUpload{}, middleware.After)
+}
+
 func addOpCreateAnnotationStoreValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAnnotationStore{}, middleware.After)
+}
+
+func addOpCreateMultipartReadSetUploadValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateMultipartReadSetUpload{}, middleware.After)
 }
 
 func addOpCreateReferenceStoreValidationMiddleware(stack *middleware.Stack) error {
@@ -1294,6 +1426,10 @@ func addOpGetWorkflowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetWorkflow{}, middleware.After)
 }
 
+func addOpListMultipartReadSetUploadsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListMultipartReadSetUploads{}, middleware.After)
+}
+
 func addOpListReadSetActivationJobsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListReadSetActivationJobs{}, middleware.After)
 }
@@ -1308,6 +1444,10 @@ func addOpListReadSetImportJobsValidationMiddleware(stack *middleware.Stack) err
 
 func addOpListReadSetsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListReadSets{}, middleware.After)
+}
+
+func addOpListReadSetUploadPartsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListReadSetUploadParts{}, middleware.After)
 }
 
 func addOpListReferenceImportJobsValidationMiddleware(stack *middleware.Stack) error {
@@ -1378,6 +1518,10 @@ func addOpUpdateWorkflowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateWorkflow{}, middleware.After)
 }
 
+func addOpUploadReadSetPartValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUploadReadSetPart{}, middleware.After)
+}
+
 func validateAnnotationImportItemSource(v *types.AnnotationImportItemSource) error {
 	if v == nil {
 		return nil
@@ -1402,6 +1546,44 @@ func validateAnnotationImportItemSources(v []types.AnnotationImportItemSource) e
 		if err := validateAnnotationImportItemSource(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCompleteReadSetUploadPartList(v []types.CompleteReadSetUploadPartListItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CompleteReadSetUploadPartList"}
+	for i := range v {
+		if err := validateCompleteReadSetUploadPartListItem(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCompleteReadSetUploadPartListItem(v *types.CompleteReadSetUploadPartListItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CompleteReadSetUploadPartListItem"}
+	if v.PartNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PartNumber"))
+	}
+	if len(v.PartSource) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PartSource"))
+	}
+	if v.Checksum == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Checksum"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1619,6 +1801,24 @@ func validateVariantImportItemSources(v []types.VariantImportItemSource) error {
 	}
 }
 
+func validateOpAbortMultipartReadSetUploadInput(v *AbortMultipartReadSetUploadInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AbortMultipartReadSetUploadInput"}
+	if v.SequenceStoreId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SequenceStoreId"))
+	}
+	if v.UploadId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UploadId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpBatchDeleteReadSetInput(v *BatchDeleteReadSetInput) error {
 	if v == nil {
 		return nil
@@ -1682,6 +1882,31 @@ func validateOpCancelVariantImportJobInput(v *CancelVariantImportJobInput) error
 	}
 }
 
+func validateOpCompleteMultipartReadSetUploadInput(v *CompleteMultipartReadSetUploadInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CompleteMultipartReadSetUploadInput"}
+	if v.SequenceStoreId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SequenceStoreId"))
+	}
+	if v.UploadId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UploadId"))
+	}
+	if v.Parts == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Parts"))
+	} else if v.Parts != nil {
+		if err := validateCompleteReadSetUploadPartList(v.Parts); err != nil {
+			invalidParams.AddNested("Parts", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateAnnotationStoreInput(v *CreateAnnotationStoreInput) error {
 	if v == nil {
 		return nil
@@ -1694,6 +1919,36 @@ func validateOpCreateAnnotationStoreInput(v *CreateAnnotationStoreInput) error {
 	}
 	if len(v.StoreFormat) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("StoreFormat"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateMultipartReadSetUploadInput(v *CreateMultipartReadSetUploadInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateMultipartReadSetUploadInput"}
+	if v.SequenceStoreId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SequenceStoreId"))
+	}
+	if len(v.SourceFileType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceFileType"))
+	}
+	if v.SubjectId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubjectId"))
+	}
+	if v.SampleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SampleId"))
+	}
+	if v.ReferenceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReferenceArn"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2218,6 +2473,21 @@ func validateOpGetWorkflowInput(v *GetWorkflowInput) error {
 	}
 }
 
+func validateOpListMultipartReadSetUploadsInput(v *ListMultipartReadSetUploadsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListMultipartReadSetUploadsInput"}
+	if v.SequenceStoreId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SequenceStoreId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListReadSetActivationJobsInput(v *ListReadSetActivationJobsInput) error {
 	if v == nil {
 		return nil
@@ -2270,6 +2540,27 @@ func validateOpListReadSetsInput(v *ListReadSetsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListReadSetsInput"}
 	if v.SequenceStoreId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SequenceStoreId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListReadSetUploadPartsInput(v *ListReadSetUploadPartsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListReadSetUploadPartsInput"}
+	if v.SequenceStoreId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SequenceStoreId"))
+	}
+	if v.UploadId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UploadId"))
+	}
+	if len(v.PartSource) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PartSource"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2594,6 +2885,33 @@ func validateOpUpdateWorkflowInput(v *UpdateWorkflowInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateWorkflowInput"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUploadReadSetPartInput(v *UploadReadSetPartInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UploadReadSetPartInput"}
+	if v.SequenceStoreId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SequenceStoreId"))
+	}
+	if v.UploadId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UploadId"))
+	}
+	if len(v.PartSource) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PartSource"))
+	}
+	if v.PartNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PartNumber"))
+	}
+	if v.Payload == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Payload"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

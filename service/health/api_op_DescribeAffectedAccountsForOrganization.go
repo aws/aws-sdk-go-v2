@@ -64,8 +64,8 @@ type DescribeAffectedAccountsForOrganizationOutput struct {
 	// A JSON set of elements of the affected accounts.
 	AffectedAccounts []string
 
-	// This parameter specifies if the Health event is a public Amazon Web Services
-	// service event or an account-specific event.
+	// This parameter specifies if the Health event is a public Amazon Web Service
+	// event or an account-specific event.
 	//   - If the eventScopeCode value is PUBLIC , then the affectedAccounts value is
 	//   always empty.
 	//   - If the eventScopeCode value is ACCOUNT_SPECIFIC , then the affectedAccounts
