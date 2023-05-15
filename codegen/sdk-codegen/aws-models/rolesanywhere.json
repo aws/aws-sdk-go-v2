@@ -40,7 +40,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a profile. A profile is configuration resource to list the roles that RolesAnywhere service is trusted to assume. In addition, by applying a profile you can intersect permissions with IAM managed policies.</p>\n         <p>\n            <b>Required permissions: </b>\n            <code>rolesanywhere:CreateProfile</code>. \n         </p>",
+                "smithy.api#documentation": "<p>Creates a <i>profile</i>, a list of the roles that Roles Anywhere service is trusted to assume. You use profiles to intersect permissions with IAM managed policies.</p>\n         <p>\n            <b>Required permissions: </b>\n            <code>rolesanywhere:CreateProfile</code>. \n         </p>",
                 "smithy.api#http": {
                     "uri": "/profiles",
                     "method": "POST",
@@ -61,7 +61,7 @@
                 "requireInstanceProperties": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether instance properties are required in <a href=\"https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html\">CreateSession</a> requests with this profile. </p>"
+                        "smithy.api#documentation": "<p>Specifies whether instance properties are required in temporary credential requests with this profile. </p>"
                     }
                 },
                 "sessionPolicy": {
@@ -73,7 +73,7 @@
                 "roleArns": {
                     "target": "com.amazonaws.rolesanywhere#RoleArnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of IAM roles that this profile can assume in a <a href=\"https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html\">CreateSession</a> operation.</p>",
+                        "smithy.api#documentation": "<p>A list of IAM roles that this profile can assume in a temporary credential request.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -89,7 +89,7 @@
                         "smithy.api#documentation": "<p> The number of seconds the vended session credentials are valid for. </p>",
                         "smithy.api#range": {
                             "min": 900,
-                            "max": 43200
+                            "max": 3600
                         }
                     }
                 },
@@ -124,7 +124,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a trust anchor. You establish trust between IAM Roles Anywhere and your certificate authority (CA) by configuring a trust anchor. A Trust Anchor is defined either as a reference to a AWS Certificate Manager Private Certificate Authority (ACM PCA), or by uploading a Certificate Authority (CA) certificate. Your AWS workloads can authenticate with the trust anchor using certificates issued by the trusted Certificate Authority (CA) in exchange for temporary AWS credentials.</p>\n         <p>\n            <b>Required permissions: </b>\n            <code>rolesanywhere:CreateTrustAnchor</code>. \n         </p>",
+                "smithy.api#documentation": "<p>Creates a trust anchor to establish trust between IAM Roles Anywhere and\n         your certificate authority (CA). You can define a trust anchor as a reference to an Private Certificate Authority (Private CA) or by uploading a CA certificate. Your Amazon Web Services workloads can authenticate with the trust anchor using certificates issued by\n         the CA in exchange for temporary Amazon Web Services credentials.</p>\n         <p>\n            <b>Required permissions: </b>\n            <code>rolesanywhere:CreateTrustAnchor</code>. \n         </p>",
                 "smithy.api#http": {
                     "uri": "/trustanchors",
                     "method": "POST",
@@ -160,6 +160,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The tags to attach to the trust anchor.</p>"
                     }
+                },
+                "notificationSettings": {
+                    "target": "com.amazonaws.rolesanywhere#NotificationSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of notification settings to be associated to the trust anchor.</p>"
+                    }
                 }
             }
         },
@@ -175,7 +181,7 @@
                 "seenAt": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ISO-8601 time stamp of when the certificate was last used in a <a href=\"https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html\">CreateSession</a> operation.</p>",
+                        "smithy.api#documentation": "<p>The ISO-8601 time stamp of when the certificate was last used in a temporary credential request.</p>",
                         "smithy.api#timestampFormat": "date-time"
                     }
                 },
@@ -206,12 +212,12 @@
                 "failed": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether the <a href=\"https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html\">CreateSession</a> operation was successful. </p>"
+                        "smithy.api#documentation": "<p>Indicates whether the temporary credential request was successful. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A record of a presented X509 credential to <a href=\"https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html\">CreateSession</a>. </p>"
+                "smithy.api#documentation": "<p>A record of a presented X509 credential from a temporary credential request. </p>"
             }
         },
         "com.amazonaws.rolesanywhere#Crl": {
@@ -437,7 +443,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disables a profile. When disabled, <a href=\"https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html\">CreateSession</a> requests with this profile fail.</p>\n         <p>\n            <b>Required permissions: </b>\n            <code>rolesanywhere:DisableProfile</code>. \n         </p>",
+                "smithy.api#documentation": "<p>Disables a profile. When disabled, temporary credential requests with this profile fail.</p>\n         <p>\n            <b>Required permissions: </b>\n            <code>rolesanywhere:DisableProfile</code>. \n         </p>",
                 "smithy.api#http": {
                     "uri": "/profile/{profileId}/disable",
                     "method": "POST"
@@ -461,7 +467,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disables a trust anchor. When disabled, <a href=\"https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html\">CreateSession</a> requests specifying this trust anchor are unauthorized.</p>\n         <p>\n            <b>Required permissions: </b>\n            <code>rolesanywhere:DisableTrustAnchor</code>. \n         </p>",
+                "smithy.api#documentation": "<p>Disables a trust anchor. When disabled, temporary credential requests specifying this trust anchor are unauthorized.</p>\n         <p>\n            <b>Required permissions: </b>\n            <code>rolesanywhere:DisableTrustAnchor</code>. \n         </p>",
                 "smithy.api#http": {
                     "uri": "/trustanchor/{trustAnchorId}/disable",
                     "method": "POST"
@@ -509,7 +515,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Enables the roles in a profile to receive session credentials in <a href=\"https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html\">CreateSession</a>. </p>\n         <p>\n            <b>Required permissions: </b>\n            <code>rolesanywhere:EnableProfile</code>. \n         </p>",
+                "smithy.api#documentation": "<p>Enables temporary credential requests for a profile. </p>\n         <p>\n            <b>Required permissions: </b>\n            <code>rolesanywhere:EnableProfile</code>. \n         </p>",
                 "smithy.api#http": {
                     "uri": "/profile/{profileId}/enable",
                     "method": "POST"
@@ -604,7 +610,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets a Subject. A Subject associates a certificate identity with authentication attempts by CreateSession. The Subject resources stores audit information such as status of the last authentication attempt, the certificate data used in the attempt, and the last time the associated identity attempted authentication. </p>\n         <p>\n            <b>Required permissions: </b>\n            <code>rolesanywhere:GetSubject</code>. \n         </p>",
+                "smithy.api#documentation": "<p>Gets a <i>subject</i>, which associates a certificate identity with\n         authentication attempts. The subject stores auditing information such as the status\n         of the last authentication attempt, the certificate data used in the attempt, and the\n         last time the associated identity attempted authentication. </p>\n         <p>\n            <b>Required permissions: </b>\n            <code>rolesanywhere:GetSubject</code>. \n         </p>",
                 "smithy.api#http": {
                     "uri": "/subject/{subjectId}",
                     "method": "GET"
@@ -657,7 +663,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Imports the certificate revocation list (CRL). CRl is a list of certificates that have been revoked by the issuing certificate Authority (CA). IAM Roles Anywhere validates against the crl list before issuing credentials. </p>\n         <p>\n            <b>Required permissions: </b>\n            <code>rolesanywhere:ImportCrl</code>. \n         </p>",
+                "smithy.api#documentation": "<p>Imports the certificate revocation list (CRL). A CRL is a list of certificates that have\n         been revoked by the issuing certificate Authority (CA). IAM Roles Anywhere\n         validates against the CRL before issuing credentials. </p>\n         <p>\n            <b>Required permissions: </b>\n            <code>rolesanywhere:ImportCrl</code>. \n         </p>",
                 "smithy.api#http": {
                     "uri": "/crls",
                     "method": "POST",
@@ -678,7 +684,7 @@
                 "crlData": {
                     "target": "smithy.api#Blob",
                     "traits": {
-                        "smithy.api#documentation": "<p>The x509 v3 specified certificate revocation list</p>",
+                        "smithy.api#documentation": "<p>The x509 v3 specified certificate revocation list (CRL).</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 300000
@@ -719,7 +725,7 @@
                 "seenAt": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ISO-8601 time stamp of when the certificate was last used in a <a href=\"https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html\">CreateSession</a> operation.</p>",
+                        "smithy.api#documentation": "<p>The ISO-8601 time stamp of when the certificate was last used in a temporary credential request.</p>",
                         "smithy.api#timestampFormat": "date-time"
                     }
                 },
@@ -732,7 +738,7 @@
                 "failed": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether the <a href=\"https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html\">CreateSession</a> operation was successful. </p>"
+                        "smithy.api#documentation": "<p>Indicates whether the temporary credential request was successful. </p>"
                     }
                 }
             },
@@ -784,7 +790,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all Crls in the authenticated account and Amazon Web Services Region.</p>\n         <p>\n            <b>Required permissions: </b>\n            <code>rolesanywhere:ListCrls</code>. \n         </p>",
+                "smithy.api#documentation": "<p>Lists all certificate revocation lists (CRL) in the authenticated account and Amazon Web Services Region.</p>\n         <p>\n            <b>Required permissions: </b>\n            <code>rolesanywhere:ListCrls</code>. \n         </p>",
                 "smithy.api#http": {
                     "uri": "/crls",
                     "method": "GET"
@@ -803,7 +809,7 @@
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token that indicates where the output should continue from, if a previous operation did not show all results. To get the next results, call the operation again with this value.</p>"
+                        "smithy.api#documentation": "<p>A token that indicates where the output should continue from, if a previous request did not show all results. To get the next results, make the request again with this value.</p>"
                     }
                 },
                 "crls": {
@@ -850,7 +856,7 @@
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token that indicates where the output should continue from, if a previous operation did not show all results. To get the next results, call the operation again with this value.</p>"
+                        "smithy.api#documentation": "<p>A token that indicates where the output should continue from, if a previous request did not show all results. To get the next results, make the request again with this value.</p>"
                     }
                 },
                 "profiles": {
@@ -867,7 +873,7 @@
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token that indicates where the output should continue from, if a previous operation did not show all results. To get the next results, call the operation again with this value.</p>",
+                        "smithy.api#documentation": "<p>A token that indicates where the output should continue from, if a previous request did not show all results. To get the next results, make the request again with this value.</p>",
                         "smithy.api#httpQuery": "nextToken",
                         "smithy.api#length": {
                             "min": 1,
@@ -926,7 +932,7 @@
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token that indicates where the output should continue from, if a previous operation did not show all results. To get the next results, call the operation again with this value.</p>"
+                        "smithy.api#documentation": "<p>A token that indicates where the output should continue from, if a previous request did not show all results. To get the next results, make the request again with this value.</p>"
                     }
                 }
             }
@@ -1019,7 +1025,7 @@
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token that indicates where the output should continue from, if a previous operation did not show all results. To get the next results, call the operation again with this value.</p>"
+                        "smithy.api#documentation": "<p>A token that indicates where the output should continue from, if a previous request did not show all results. To get the next results, make the request again with this value.</p>"
                     }
                 },
                 "trustAnchors": {
@@ -1040,6 +1046,175 @@
                         "max": 200
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.rolesanywhere#NotificationChannel": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ALL",
+                        "name": "ALL"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.rolesanywhere#NotificationEvent": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CA_CERTIFICATE_EXPIRY",
+                        "name": "CA_CERTIFICATE_EXPIRY"
+                    },
+                    {
+                        "value": "END_ENTITY_CERTIFICATE_EXPIRY",
+                        "name": "END_ENTITY_CERTIFICATE_EXPIRY"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.rolesanywhere#NotificationSetting": {
+            "type": "structure",
+            "members": {
+                "enabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the notification setting is enabled.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "event": {
+                    "target": "com.amazonaws.rolesanywhere#NotificationEvent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The event to which this notification setting is applied.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "threshold": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of days before a notification event. This value is required for a notification setting that is enabled.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 360
+                        }
+                    }
+                },
+                "channel": {
+                    "target": "com.amazonaws.rolesanywhere#NotificationChannel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specified channel of notification.\n      IAM Roles Anywhere uses CloudWatch metrics, EventBridge, and Health Dashboard to notify for an event.</p>\n         <note>\n            <p>In the absence of a specific channel, IAM Roles Anywhere applies this setting to 'ALL' channels.</p>\n         </note>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n         Customizable notification settings that will be applied to notification events.\n         IAM Roles Anywhere consumes these settings while notifying across multiple channels - CloudWatch metrics, EventBridge, and Health Dashboard.\n      </p>"
+            }
+        },
+        "com.amazonaws.rolesanywhere#NotificationSettingDetail": {
+            "type": "structure",
+            "members": {
+                "enabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the notification setting is enabled.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "event": {
+                    "target": "com.amazonaws.rolesanywhere#NotificationEvent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The event to which this notification setting is applied.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "threshold": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of days before a notification event.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 360
+                        }
+                    }
+                },
+                "channel": {
+                    "target": "com.amazonaws.rolesanywhere#NotificationChannel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specified channel of notification.\n      IAM Roles Anywhere uses CloudWatch metrics, EventBridge, and Health Dashboard to notify for an event.</p>\n         <note>\n            <p>In the absence of a specific channel, IAM Roles Anywhere applies this setting to 'ALL' channels.</p>\n         </note>"
+                    }
+                },
+                "configuredBy": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The principal that configured the notification setting.\n      For default settings configured by IAM Roles Anywhere,\n      the value is <code>rolesanywhere.amazonaws.com</code>, and\n      for customized notifications settings, it is the respective account ID.\n      </p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 200
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The state of a notification setting.</p>\n         <p>A notification setting includes information such as event name, threshold, status of\n         the notification setting, and the channel to notify.</p>"
+            }
+        },
+        "com.amazonaws.rolesanywhere#NotificationSettingDetails": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.rolesanywhere#NotificationSettingDetail"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.rolesanywhere#NotificationSettingKey": {
+            "type": "structure",
+            "members": {
+                "event": {
+                    "target": "com.amazonaws.rolesanywhere#NotificationEvent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The notification setting event to reset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "channel": {
+                    "target": "com.amazonaws.rolesanywhere#NotificationChannel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specified channel of notification.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A notification setting key to reset.\n         A notification setting key includes the event and the channel.\n      </p>"
+            }
+        },
+        "com.amazonaws.rolesanywhere#NotificationSettingKeys": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.rolesanywhere#NotificationSettingKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.rolesanywhere#NotificationSettings": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.rolesanywhere#NotificationSetting"
             },
             "traits": {
                 "smithy.api#length": {
@@ -1116,7 +1291,7 @@
                 "requireInstanceProperties": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether instance properties are required in <a href=\"https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html\">CreateSession</a> requests with this profile. </p>"
+                        "smithy.api#documentation": "<p>Specifies whether instance properties are required in temporary credential requests with this profile. </p>"
                     }
                 },
                 "enabled": {
@@ -1140,7 +1315,7 @@
                 "roleArns": {
                     "target": "com.amazonaws.rolesanywhere#RoleArnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of IAM roles that this profile can assume in a <a href=\"https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html\">CreateSession</a> operation.</p>"
+                        "smithy.api#documentation": "<p>A list of IAM roles that this profile can assume in a temporary credential request.</p>"
                     }
                 },
                 "managedPolicyArns": {
@@ -1189,6 +1364,224 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.rolesanywhere#ProfileDetail"
+            }
+        },
+        "com.amazonaws.rolesanywhere#PutNotificationSettings": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rolesanywhere#PutNotificationSettingsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.rolesanywhere#PutNotificationSettingsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rolesanywhere#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.rolesanywhere#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rolesanywhere#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Attaches a list of <i>notification settings</i> to a trust anchor.</p>\n         <p>A notification setting includes information such as event name, threshold, status of\n         the notification setting, and the channel to notify.</p>\n         <p>\n            <b>Required permissions: </b>\n            <code>rolesanywhere:PutNotificationSettings</code>.\n         </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "PutNotificationSettings - Adds custom notification settings",
+                        "input": {
+                            "trustAnchorId": "c2505e61-2fc1-4a18-9fcf-94e18a22928b",
+                            "notificationSettings": [
+                                {
+                                    "event": "END_ENTITY_CERTIFICATE_EXPIRY",
+                                    "enabled": true,
+                                    "threshold": 10
+                                }
+                            ]
+                        },
+                        "output": {
+                            "trustAnchor": {
+                                "trustAnchorId": "c2505e61-2fc1-4a18-9fcf-94e18a22928b",
+                                "trustAnchorArn": "arn:aws:rolesanywhere:us-west-2:123456789012:trust-anchor/c2505e61-2fc1-4a18-9fcf-94e18a22928b",
+                                "name": "PutNotificationSettings - TA with PCA - example",
+                                "enabled": true,
+                                "notificationSettings": [
+                                    {
+                                        "event": "CA_CERTIFICATE_EXPIRY",
+                                        "channel": "ALL",
+                                        "configuredBy": "rolesanywhere.amazonaws.com",
+                                        "enabled": true,
+                                        "threshold": 45
+                                    },
+                                    {
+                                        "event": "END_ENTITY_CERTIFICATE_EXPIRY",
+                                        "channel": "ALL",
+                                        "configuredBy": "123456789012",
+                                        "enabled": true,
+                                        "threshold": 10
+                                    }
+                                ],
+                                "source": {
+                                    "sourceType": "AWS_ACM_PCA",
+                                    "sourceData": {
+                                        "acmPcaArn": "arn:aws:acm-pca:us-west-2:123456789012:certificate-authority/123abc00-1233-12b3-1a33-54cb9c1ce2f3"
+                                    }
+                                },
+                                "updatedAt": "2021-07-19T15:55:25.986591Z",
+                                "createdAt": "2021-07-19T15:55:25.986591Z"
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "uri": "/put-notifications-settings",
+                    "method": "PATCH"
+                }
+            }
+        },
+        "com.amazonaws.rolesanywhere#PutNotificationSettingsRequest": {
+            "type": "structure",
+            "members": {
+                "trustAnchorId": {
+                    "target": "com.amazonaws.rolesanywhere#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the trust anchor.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "notificationSettings": {
+                    "target": "com.amazonaws.rolesanywhere#NotificationSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of notification settings to be associated to the trust anchor.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.rolesanywhere#PutNotificationSettingsResponse": {
+            "type": "structure",
+            "members": {
+                "trustAnchor": {
+                    "target": "com.amazonaws.rolesanywhere#TrustAnchorDetail",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.rolesanywhere#ResetNotificationSettings": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rolesanywhere#ResetNotificationSettingsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.rolesanywhere#ResetNotificationSettingsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rolesanywhere#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.rolesanywhere#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rolesanywhere#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Resets the <i>custom notification setting</i> to IAM Roles Anywhere default setting.\n      </p>\n         <p>\n            <b>Required permissions: </b>\n            <code>rolesanywhere:ResetNotificationSettings</code>.\n         </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "ResetNotificationSettings - Resets to IAM Roles Anywhere defined default notification settings",
+                        "input": {
+                            "trustAnchorId": "c2505e61-2fc1-4a18-9fcf-94e18a22928b",
+                            "notificationSettingKeys": [
+                                {
+                                    "event": "END_ENTITY_CERTIFICATE_EXPIRY"
+                                }
+                            ]
+                        },
+                        "output": {
+                            "trustAnchor": {
+                                "trustAnchorId": "c2505e61-2fc1-4a18-9fcf-94e18a22928b",
+                                "trustAnchorArn": "arn:aws:rolesanywhere:us-west-2:123456789012:trust-anchor/c2505e61-2fc1-4a18-9fcf-94e18a22928b",
+                                "name": "ResetNotificationSettings - TA with PCA - example",
+                                "enabled": true,
+                                "notificationSettings": [
+                                    {
+                                        "event": "CA_CERTIFICATE_EXPIRY",
+                                        "channel": "ALL",
+                                        "configuredBy": "rolesanywhere.amazonaws.com",
+                                        "enabled": true,
+                                        "threshold": 45
+                                    },
+                                    {
+                                        "event": "END_ENTITY_CERTIFICATE_EXPIRY",
+                                        "channel": "ALL",
+                                        "configuredBy": "123456789012",
+                                        "enabled": true,
+                                        "threshold": 45
+                                    }
+                                ],
+                                "source": {
+                                    "sourceType": "AWS_ACM_PCA",
+                                    "sourceData": {
+                                        "acmPcaArn": "arn:aws:acm-pca:us-west-2:123456789012:certificate-authority/123abc00-1233-12b3-1a33-54cb9c1ce2f3"
+                                    }
+                                },
+                                "updatedAt": "2021-07-19T15:55:25.986591Z",
+                                "createdAt": "2021-07-19T15:55:25.986591Z"
+                            }
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "uri": "/reset-notifications-settings",
+                    "method": "PATCH"
+                }
+            }
+        },
+        "com.amazonaws.rolesanywhere#ResetNotificationSettingsRequest": {
+            "type": "structure",
+            "members": {
+                "trustAnchorId": {
+                    "target": "com.amazonaws.rolesanywhere#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the trust anchor.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "notificationSettingKeys": {
+                    "target": "com.amazonaws.rolesanywhere#NotificationSettingKeys",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of notification setting keys to reset.\n         A notification setting key includes the event and the channel.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.rolesanywhere#ResetNotificationSettingsResponse": {
+            "type": "structure",
+            "members": {
+                "trustAnchor": {
+                    "target": "com.amazonaws.rolesanywhere#TrustAnchorDetail",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rolesanywhere#ResourceName": {
@@ -1244,6 +1637,12 @@
                     "target": "com.amazonaws.rolesanywhere#ListTagsForResource"
                 },
                 {
+                    "target": "com.amazonaws.rolesanywhere#PutNotificationSettings"
+                },
+                {
+                    "target": "com.amazonaws.rolesanywhere#ResetNotificationSettings"
+                },
+                {
                     "target": "com.amazonaws.rolesanywhere#TagResource"
                 },
                 {
@@ -1274,7 +1673,7 @@
                     "name": "rolesanywhere"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>AWS Identity and Access Management Roles Anywhere provides a secure way for your workloads such as servers, containers, and applications running outside of AWS to obtain Temporary AWS credentials. Your workloads can use the same IAM policies and roles that you have configured with native AWS applications to access AWS resources. Using IAM Roles Anywhere will eliminate the need to manage long term credentials for workloads running outside of AWS.</p>\n         <p>To use IAM Roles Anywhere customer workloads will need to use X.509 certificates issued by their Certificate Authority (CA) . The Certificate Authority (CA) needs to be registered with IAM Roles Anywhere as a trust anchor to establish trust between customer PKI and IAM Roles Anywhere. Customers who do not manage their own PKI system can use AWS Certificate Manager Private Certificate Authority (ACM PCA) to create a Certificate Authority and use that to establish trust with IAM Roles Anywhere</p>\n         <p>This guide describes the IAM rolesanywhere operations that you can call programmatically. For general information about IAM Roles Anywhere see <a href=\"https://docs.aws.amazon.com/\">https://docs.aws.amazon.com/</a>\n         </p>",
+                "smithy.api#documentation": "<p>Identity and Access Management Roles Anywhere provides a secure way for your workloads such as\n         servers, containers, and applications that run outside of Amazon Web Services to obtain\n         temporary Amazon Web Services credentials. Your workloads can use the same IAM policies and roles you have for native Amazon Web Services applications to access Amazon Web Services resources. Using IAM Roles Anywhere eliminates the need to\n         manage long-term credentials for workloads running outside of Amazon Web Services.</p>\n         <p>\n         To use IAM Roles Anywhere, your workloads must use X.509 certificates\n         issued by their certificate authority (CA). You register the CA with IAM\n         Roles Anywhere as a trust anchor to establish trust between your public key infrastructure\n         (PKI) and IAM Roles Anywhere. If you don't manage your own PKI system, you\n         can use Private Certificate Authority to create a CA and then use that to establish trust with\n         IAM Roles Anywhere.\n      </p>\n         <p>This guide describes the IAM Roles Anywhere operations that you can call\n         programmatically. For more information about IAM Roles Anywhere, see the\n            <a href=\"https://docs.aws.amazon.com/rolesanywhere/latest/userguide/introduction.html\">IAM Roles Anywhere User Guide</a>.</p>",
                 "smithy.api#title": "IAM Roles Anywhere",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -1637,8 +2036,8 @@
                             },
                             "params": {
                                 "Region": "ap-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1650,8 +2049,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1663,8 +2062,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1676,8 +2075,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1689,8 +2088,8 @@
                             },
                             "params": {
                                 "Region": "ap-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1702,8 +2101,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1715,8 +2114,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1728,8 +2127,8 @@
                             },
                             "params": {
                                 "Region": "ca-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1741,8 +2140,8 @@
                             },
                             "params": {
                                 "Region": "eu-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1754,8 +2153,8 @@
                             },
                             "params": {
                                 "Region": "eu-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1767,8 +2166,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1780,8 +2179,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1793,8 +2192,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1806,8 +2205,8 @@
                             },
                             "params": {
                                 "Region": "me-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1819,8 +2218,8 @@
                             },
                             "params": {
                                 "Region": "sa-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1832,8 +2231,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1845,8 +2244,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1858,8 +2257,8 @@
                             },
                             "params": {
                                 "Region": "us-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1871,8 +2270,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1884,8 +2283,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1897,8 +2296,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1910,8 +2309,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1923,8 +2322,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1936,8 +2335,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1949,8 +2348,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1962,8 +2361,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1975,8 +2374,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1988,8 +2387,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2001,8 +2400,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2014,8 +2413,19 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2027,8 +2437,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2040,8 +2461,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2053,8 +2485,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2066,8 +2509,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2079,8 +2522,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2092,8 +2535,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2104,8 +2547,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2116,9 +2559,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -2204,13 +2653,17 @@
                 "x509CertificateData": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The PEM-encoded data for the certificate anchor. Included for trust anchors of type <code>CERTIFICATE_BUNDLE</code>. </p>"
+                        "smithy.api#documentation": "<p>The PEM-encoded data for the certificate anchor. Included for trust anchors of type <code>CERTIFICATE_BUNDLE</code>. </p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 8000
+                        }
                     }
                 },
                 "acmPcaArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The root certificate of the Certificate Manager Private Certificate Authority specified by this ARN is used in trust validation for <a href=\"https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html\">CreateSession</a> operations. Included for trust anchors of type <code>AWS_ACM_PCA</code>. </p>"
+                        "smithy.api#documentation": "<p>\n         The root certificate of the Private Certificate Authority specified by this ARN is used in trust\n         validation for temporary credential requests. Included for trust anchors of type <code>AWS_ACM_PCA</code>.\n      </p>"
                     }
                 }
             },
@@ -2265,7 +2718,7 @@
                 "lastSeenAt": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ISO-8601 timestamp of the last time this Subject requested temporary session credentials.</p>",
+                        "smithy.api#documentation": "<p>The ISO-8601 timestamp of the last time this subject requested temporary session credentials.</p>",
                         "smithy.api#timestampFormat": "date-time"
                     }
                 },
@@ -2286,7 +2739,7 @@
                 "credentials": {
                     "target": "com.amazonaws.rolesanywhere#CredentialSummaries",
                     "traits": {
-                        "smithy.api#documentation": "<p>The temporary session credentials vended at the last authenticating call with this Subject.</p>"
+                        "smithy.api#documentation": "<p>The temporary session credentials vended at the last authenticating call with this subject.</p>"
                     }
                 },
                 "instanceProperties": {
@@ -2335,7 +2788,7 @@
                 "enabled": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>The enabled status of the Subject. </p>"
+                        "smithy.api#documentation": "<p>The enabled status of the subject. </p>"
                     }
                 },
                 "x509Subject": {
@@ -2347,14 +2800,14 @@
                 "lastSeenAt": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ISO-8601 time stamp of when the certificate was last used in a <a href=\"https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html\">CreateSession</a> operation.</p>",
+                        "smithy.api#documentation": "<p>The ISO-8601 time stamp of when the certificate was last used in a temporary credential request.</p>",
                         "smithy.api#timestampFormat": "date-time"
                     }
                 },
                 "createdAt": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ISO-8601 time stamp of when the certificate was first used in a <a href=\"https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html\">CreateSession</a> operation.</p>",
+                        "smithy.api#documentation": "<p>The ISO-8601 time stamp of when the certificate was first used in a temporary credential request.</p>",
                         "smithy.api#timestampFormat": "date-time"
                     }
                 },
@@ -2367,7 +2820,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A summary representation of Subject resources returned in read operations; primarily ListSubjects.</p>"
+                "smithy.api#documentation": "<p>A summary representation of subjects.</p>"
             }
         },
         "com.amazonaws.rolesanywhere#Tag": {
@@ -2411,7 +2864,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 50
+                    "max": 200
                 }
             }
         },
@@ -2423,7 +2876,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 50
+                    "max": 200
                 }
             }
         },
@@ -2595,6 +3048,12 @@
                         "smithy.api#documentation": "<p>The ISO-8601 timestamp when the trust anchor was last updated. </p>",
                         "smithy.api#timestampFormat": "date-time"
                     }
+                },
+                "notificationSettings": {
+                    "target": "com.amazonaws.rolesanywhere#NotificationSettingDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of notification settings to be associated to the trust anchor.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2709,7 +3168,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the certificate revocation list (CRL). CRl is a list of certificates that have been revoked by the issuing certificate Authority (CA). IAM Roles Anywhere validates against the crl list before issuing credentials.</p>\n         <p>\n            <b>Required permissions: </b>\n            <code>rolesanywhere:UpdateCrl</code>. \n         </p>",
+                "smithy.api#documentation": "<p>Updates the certificate revocation list (CRL). A CRL is a list of certificates that have\n         been revoked by the issuing certificate authority (CA). IAM Roles Anywhere\n         validates against the CRL before issuing credentials.</p>\n         <p>\n            <b>Required permissions: </b>\n            <code>rolesanywhere:UpdateCrl</code>. \n         </p>",
                 "smithy.api#http": {
                     "uri": "/crl/{crlId}",
                     "method": "PATCH"
@@ -2736,7 +3195,7 @@
                 "crlData": {
                     "target": "smithy.api#Blob",
                     "traits": {
-                        "smithy.api#documentation": "<p>The x509 v3 specified certificate revocation list</p>",
+                        "smithy.api#documentation": "<p>The x509 v3 specified certificate revocation list (CRL).</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 300000
@@ -2765,7 +3224,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the profile. A profile is configuration resource to list the roles that RolesAnywhere service is trusted to assume. In addition, by applying a profile you can scope-down permissions with IAM managed policies.</p>\n         <p>\n            <b>Required permissions: </b>\n            <code>rolesanywhere:UpdateProfile</code>. \n         </p>",
+                "smithy.api#documentation": "<p>Updates a <i>profile</i>, a list of the roles that IAM\n         Roles Anywhere service is trusted to assume. You use profiles to intersect permissions with\n            IAM managed policies.</p>\n         <p>\n            <b>Required permissions: </b>\n            <code>rolesanywhere:UpdateProfile</code>. \n         </p>",
                 "smithy.api#http": {
                     "uri": "/profile/{profileId}",
                     "method": "PATCH"
@@ -2803,7 +3262,7 @@
                 "roleArns": {
                     "target": "com.amazonaws.rolesanywhere#RoleArnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of IAM roles that this profile can assume in a <a href=\"https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html\">CreateSession</a> operation.</p>"
+                        "smithy.api#documentation": "<p>A list of IAM roles that this profile can assume in a temporary credential request.</p>"
                     }
                 },
                 "managedPolicyArns": {
@@ -2818,7 +3277,7 @@
                         "smithy.api#documentation": "<p> The number of seconds the vended session credentials are valid for. </p>",
                         "smithy.api#range": {
                             "min": 900,
-                            "max": 43200
+                            "max": 3600
                         }
                     }
                 }
@@ -2844,7 +3303,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the trust anchor.You establish trust between IAM Roles Anywhere and your certificate authority (CA) by configuring a trust anchor. A Trust Anchor is defined either as a reference to a AWS Certificate Manager Private Certificate Authority (ACM PCA), or by uploading a Certificate Authority (CA) certificate. Your AWS workloads can authenticate with the trust anchor using certificates issued by the trusted Certificate Authority (CA) in exchange for temporary AWS credentials.</p>\n         <p>\n            <b>Required permissions: </b>\n            <code>rolesanywhere:UpdateTrustAnchor</code>. \n         </p>",
+                "smithy.api#documentation": "<p>Updates a trust anchor. You establish trust between IAM Roles Anywhere\n         and your certificate authority (CA) by configuring a trust anchor. You can define a trust\n         anchor as a reference to an Private Certificate Authority (Private CA) or by uploading a\n         CA certificate. Your Amazon Web Services workloads can authenticate with the trust anchor\n         using certificates issued by the CA in exchange for temporary Amazon Web Services\n         credentials.</p>\n         <p>\n            <b>Required permissions: </b>\n            <code>rolesanywhere:UpdateTrustAnchor</code>. \n         </p>",
                 "smithy.api#http": {
                     "uri": "/trustanchor/{trustAnchorId}",
                     "method": "PATCH"

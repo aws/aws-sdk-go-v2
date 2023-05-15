@@ -120,6 +120,12 @@
                         "smithy.api#enumValue": "EMOTIONS"
                     }
                 },
+                "EYE_DIRECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EYE_DIRECTION"
+                    }
+                },
                 "EYEGLASSES": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -4003,6 +4009,32 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9_.\\-:]+$"
             }
         },
+        "com.amazonaws.rekognition#EyeDirection": {
+            "type": "structure",
+            "members": {
+                "Yaw": {
+                    "target": "com.amazonaws.rekognition#Degree",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Value representing eye direction on the yaw axis.</p>"
+                    }
+                },
+                "Pitch": {
+                    "target": "com.amazonaws.rekognition#Degree",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Value representing eye direction on the pitch axis.</p>"
+                    }
+                },
+                "Confidence": {
+                    "target": "com.amazonaws.rekognition#Percent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The confidence that the service has in its predicted eye direction.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Indicates the direction the eyes are gazing in (independent of the head pose) as determined by its pitch and yaw. </p>"
+            }
+        },
         "com.amazonaws.rekognition#EyeOpen": {
             "type": "structure",
             "members": {
@@ -4203,6 +4235,12 @@
                     "target": "com.amazonaws.rekognition#FaceOccluded",
                     "traits": {
                         "smithy.api#documentation": "<p>\n            <code>FaceOccluded</code> should return \"true\" with a high confidence score if a detected\n      face’s eyes, nose, and mouth are partially captured or if they are covered by masks, dark\n      sunglasses, cell phones, hands, or other objects. <code>FaceOccluded</code> should return\n      \"false\" with a high confidence score if common occurrences that do not impact face\n      verification are detected, such as eye glasses, lightly tinted sunglasses, strands of hair,\n      and others. </p>"
+                    }
+                },
+                "EyeDirection": {
+                    "target": "com.amazonaws.rekognition#EyeDirection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the direction the eyes are gazing in, as defined by pitch and yaw.</p>"
                     }
                 }
             },

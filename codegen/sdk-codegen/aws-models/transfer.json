@@ -363,13 +363,13 @@
                 "DestinationFileLocation": {
                     "target": "com.amazonaws.transfer#InputFileLocation",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the location for the file being copied. Use <code>${Transfer:username}</code> or <code>${Transfer:UploadDate}</code> in this field to parametrize the destination\n      prefix by username or uploaded date.</p>\n         <ul>\n            <li>\n               <p>Set the value of <code>DestinationFileLocation</code> to <code>${Transfer:username}</code> to copy uploaded files to \n        an Amazon S3 bucket that is prefixed with the name of the Transfer Family user that uploaded the file.</p>\n            </li>\n            <li>\n               <p>Set the value of <code>DestinationFileLocation</code> to <code>${Transfer:UploadDate}</code> to copy uploaded files to \n          an Amazon S3 bucket that is prefixed with the date of the upload.</p>\n               <note>\n                  <p>The system resolves <code>UploadDate</code> to a date format of <i>YYYY-MM-DD</i>, based on the date the file\n            is uploaded.</p>\n               </note>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specifies the location for the file being copied. Use <code>${Transfer:UserName}</code> or\n        <code>${Transfer:UploadDate}</code> in this field to parametrize the destination prefix by\n      username or uploaded date.</p>\n         <ul>\n            <li>\n               <p>Set the value of <code>DestinationFileLocation</code> to\n            <code>${Transfer:UserName}</code> to copy uploaded files to an Amazon S3 bucket\n          that is prefixed with the name of the Transfer Family user that uploaded the\n          file.</p>\n            </li>\n            <li>\n               <p>Set the value of <code>DestinationFileLocation</code> to <code>${Transfer:UploadDate}</code> to copy uploaded files to \n          an Amazon S3 bucket that is prefixed with the date of the upload.</p>\n               <note>\n                  <p>The system resolves <code>UploadDate</code> to a date format of <i>YYYY-MM-DD</i>, based on the date the file\n            is uploaded in UTC.</p>\n               </note>\n            </li>\n         </ul>"
                     }
                 },
                 "OverwriteExisting": {
                     "target": "com.amazonaws.transfer#OverwriteExisting",
                     "traits": {
-                        "smithy.api#documentation": "<p>A flag that indicates whether to overwrite an existing file of the same name.\n      The default is <code>FALSE</code>.</p>"
+                        "smithy.api#documentation": "<p>A flag that indicates whether to overwrite an existing file of the same name.\n      The default is <code>FALSE</code>.</p>\n         <p>If the workflow is processing a file that has the same name as an existing file, the behavior is as follows:</p>\n         <ul>\n            <li>\n               <p>If <code>OverwriteExisting</code> is <code>TRUE</code>, the existing file is replaced with the file being processed.</p>\n            </li>\n            <li>\n               <p>If <code>OverwriteExisting</code> is <code>FALSE</code>, nothing happens, and the workflow processing stops.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "SourceFileLocation": {
@@ -835,13 +835,13 @@
                 "IdentityProviderDetails": {
                     "target": "com.amazonaws.transfer#IdentityProviderDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>Required when <code>IdentityProviderType</code> is set to\n        <code>AWS_DIRECTORY_SERVICE</code> or <code>API_GATEWAY</code>. Accepts an array containing\n      all of the information required to use a directory in <code>AWS_DIRECTORY_SERVICE</code> or\n      invoke a customer-supplied authentication API, including the API Gateway URL. Not required\n      when <code>IdentityProviderType</code> is set to <code>SERVICE_MANAGED</code>.</p>"
+                        "smithy.api#documentation": "<p>Required when <code>IdentityProviderType</code> is set to\n        <code>AWS_DIRECTORY_SERVICE</code>, <code>Amazon Web Services_LAMBDA</code> or <code>API_GATEWAY</code>. Accepts an array containing\n      all of the information required to use a directory in <code>AWS_DIRECTORY_SERVICE</code> or\n      invoke a customer-supplied authentication API, including the API Gateway URL. Not required\n      when <code>IdentityProviderType</code> is set to <code>SERVICE_MANAGED</code>.</p>"
                     }
                 },
                 "IdentityProviderType": {
                     "target": "com.amazonaws.transfer#IdentityProviderType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The mode of authentication for a server. The default value is\n        <code>SERVICE_MANAGED</code>, which allows you to store and access user credentials within\n      the Transfer Family service.</p>\n         <p>Use <code>AWS_DIRECTORY_SERVICE</code> to provide access to\n      Active Directory groups in Directory Service for Microsoft Active Directory or Microsoft Active Directory in your\n      on-premises environment or in Amazon Web Services using AD Connector. This option also requires you to\n      provide a Directory ID by using the <code>IdentityProviderDetails</code> parameter.</p>\n         <p>Use the <code>API_GATEWAY</code> value to integrate with an identity provider of your choosing. The\n      <code>API_GATEWAY</code> setting requires you to provide an Amazon API Gateway endpoint URL to call\n      for authentication by using the <code>IdentityProviderDetails</code> parameter.</p>\n         <p>Use the <code>AWS_LAMBDA</code> value to directly use an Lambda function as your identity provider. \n      If you choose this value, you must specify the ARN for the Lambda function in the <code>Function</code> parameter \n      or the <code>IdentityProviderDetails</code> data type.</p>"
+                        "smithy.api#documentation": "<p>The mode of authentication for a server. The default value is\n        <code>SERVICE_MANAGED</code>, which allows you to store and access user credentials within\n      the Transfer Family service.</p>\n         <p>Use <code>AWS_DIRECTORY_SERVICE</code> to provide access to\n      Active Directory groups in Directory Service for Microsoft Active Directory or Microsoft Active Directory in your\n      on-premises environment or in Amazon Web Services using AD Connector. This option also requires you to\n      provide a Directory ID by using the <code>IdentityProviderDetails</code> parameter.</p>\n         <p>Use the <code>API_GATEWAY</code> value to integrate with an identity provider of your choosing. The\n      <code>API_GATEWAY</code> setting requires you to provide an Amazon API Gateway endpoint URL to call\n      for authentication by using the <code>IdentityProviderDetails</code> parameter.</p>\n         <p>Use the <code>AWS_LAMBDA</code> value to directly use an Lambda function as your identity provider. \n      If you choose this value, you must specify the ARN for the Lambda function in the <code>Function</code> parameter \n      for the <code>IdentityProviderDetails</code> data type.</p>"
                     }
                 },
                 "LoggingRole": {
@@ -889,7 +889,7 @@
                 "WorkflowDetails": {
                     "target": "com.amazonaws.transfer#WorkflowDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the workflow ID for the workflow to assign and the execution role that's used for executing the workflow.</p>\n         <p>In addition to a workflow to execute when a file is uploaded completely, <code>WorkflowDetails</code> can also contain a\n    workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when a file is open when\n    the session disconnects.</p>"
+                        "smithy.api#documentation": "<p>Specifies the workflow ID for the workflow to assign and the execution role that's used for executing the workflow.</p>\n         <p>In addition to a workflow to execute when a file is uploaded completely, <code>WorkflowDetails</code> can also contain a\n    workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when the server session disconnects\n    while the file is still being uploaded.</p>"
                     }
                 }
             },
@@ -1025,7 +1025,7 @@
                 "UserName": {
                     "target": "com.amazonaws.transfer#UserName",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique string that identifies a user account associated with a server.</p>",
+                        "smithy.api#documentation": "<p>A unique string that identifies a Transfer Family user.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1085,7 +1085,7 @@
                 "OnExceptionSteps": {
                     "target": "com.amazonaws.transfer#WorkflowSteps",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the steps (actions) to take if errors are encountered during execution of the workflow.</p>\n         <note>\n            <p>For custom steps, the lambda function needs to send <code>FAILURE</code> to the call\n        back API to kick off the exception steps. Additionally, if the lambda does not send\n          <code>SUCCESS</code> before it times out, the exception steps are executed.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies the steps (actions) to take if errors are encountered during execution of the workflow.</p>\n         <note>\n            <p>For custom steps, the Lambda function needs to send <code>FAILURE</code> to the call\n        back API to kick off the exception steps. Additionally, if the Lambda does not send\n          <code>SUCCESS</code> before it times out, the exception steps are executed.</p>\n         </note>"
                     }
                 },
                 "Tags": {
@@ -1126,7 +1126,7 @@
                 "Target": {
                     "target": "com.amazonaws.transfer#CustomStepTarget",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN for the lambda function that is being called.</p>"
+                        "smithy.api#documentation": "<p>The ARN for the Lambda function that is being called.</p>"
                     }
                 },
                 "TimeoutSeconds": {
@@ -1210,12 +1210,13 @@
                 "OverwriteExisting": {
                     "target": "com.amazonaws.transfer#OverwriteExisting",
                     "traits": {
-                        "smithy.api#documentation": "<p>A flag that indicates whether to overwrite an existing file of the same name.\n      The default is <code>FALSE</code>.</p>"
+                        "smithy.api#documentation": "<p>A flag that indicates whether to overwrite an existing file of the same name.\n      The default is <code>FALSE</code>.</p>\n         <p>If the workflow is processing a file that has the same name as an existing file, the behavior is as follows:</p>\n         <ul>\n            <li>\n               <p>If <code>OverwriteExisting</code> is <code>TRUE</code>, the existing file is replaced with the file being processed.</p>\n            </li>\n            <li>\n               <p>If <code>OverwriteExisting</code> is <code>FALSE</code>, nothing happens, and the workflow processing stops.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "DestinationFileLocation": {
                     "target": "com.amazonaws.transfer#InputFileLocation",
                     "traits": {
+                        "smithy.api#documentation": "<p>Specifies the location for the file being decrypted. Use <code>${Transfer:UserName}</code> or\n      <code>${Transfer:UploadDate}</code> in this field to parametrize the destination prefix by\n      username or uploaded date.</p>\n         <ul>\n            <li>\n               <p>Set the value of <code>DestinationFileLocation</code> to\n          <code>${Transfer:UserName}</code> to decrypt uploaded files to an Amazon S3 bucket\n          that is prefixed with the name of the Transfer Family user that uploaded the\n          file.</p>\n            </li>\n            <li>\n               <p>Set the value of <code>DestinationFileLocation</code> to <code>${Transfer:UploadDate}</code> to decrypt uploaded files to \n          an Amazon S3 bucket that is prefixed with the date of the upload.</p>\n               <note>\n                  <p>The system resolves <code>UploadDate</code> to a date format of <i>YYYY-MM-DD</i>, based on the date the file\n            is uploaded in UTC.</p>\n               </note>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1428,7 +1429,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the host key that's specified in the <code>HoskKeyId</code> parameter.</p>"
+                "smithy.api#documentation": "<p>Deletes the host key that's specified in the <code>HostKeyId</code> parameter.</p>"
             }
         },
         "com.amazonaws.transfer#DeleteHostKeyRequest": {
@@ -1976,7 +1977,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>You can use <code>DescribeExecution</code> to check the details of the execution of the specified workflow.</p>"
+                "smithy.api#documentation": "<p>You can use <code>DescribeExecution</code> to check the details of the execution of the specified workflow.</p>\n         <note>\n            <p>This API call only returns details for in-progress workflows.</p>\n            <p>\n        If you provide an ID for an execution that is not in progress, or if the execution doesn't match the specified workflow ID, you receive a\n        <code>ResourceNotFound</code> exception.</p>\n         </note>"
             }
         },
         "com.amazonaws.transfer#DescribeExecutionRequest": {
@@ -2367,7 +2368,7 @@
                 "User": {
                     "target": "com.amazonaws.transfer#DescribedUser",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array containing the properties of the user account for the <code>ServerID</code> value\n      that you specified.</p>",
+                        "smithy.api#documentation": "<p>An array containing the properties of the Transfer Family user for the <code>ServerID</code> value\n      that you specified.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2941,7 +2942,7 @@
                 "IdentityProviderType": {
                     "target": "com.amazonaws.transfer#IdentityProviderType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The mode of authentication for a server. The default value is\n        <code>SERVICE_MANAGED</code>, which allows you to store and access user credentials within\n      the Transfer Family service.</p>\n         <p>Use <code>AWS_DIRECTORY_SERVICE</code> to provide access to\n      Active Directory groups in Directory Service for Microsoft Active Directory or Microsoft Active Directory in your\n      on-premises environment or in Amazon Web Services using AD Connector. This option also requires you to\n      provide a Directory ID by using the <code>IdentityProviderDetails</code> parameter.</p>\n         <p>Use the <code>API_GATEWAY</code> value to integrate with an identity provider of your choosing. The\n      <code>API_GATEWAY</code> setting requires you to provide an Amazon API Gateway endpoint URL to call\n      for authentication by using the <code>IdentityProviderDetails</code> parameter.</p>\n         <p>Use the <code>AWS_LAMBDA</code> value to directly use an Lambda function as your identity provider. \n      If you choose this value, you must specify the ARN for the Lambda function in the <code>Function</code> parameter \n      or the <code>IdentityProviderDetails</code> data type.</p>"
+                        "smithy.api#documentation": "<p>The mode of authentication for a server. The default value is\n        <code>SERVICE_MANAGED</code>, which allows you to store and access user credentials within\n      the Transfer Family service.</p>\n         <p>Use <code>AWS_DIRECTORY_SERVICE</code> to provide access to\n      Active Directory groups in Directory Service for Microsoft Active Directory or Microsoft Active Directory in your\n      on-premises environment or in Amazon Web Services using AD Connector. This option also requires you to\n      provide a Directory ID by using the <code>IdentityProviderDetails</code> parameter.</p>\n         <p>Use the <code>API_GATEWAY</code> value to integrate with an identity provider of your choosing. The\n      <code>API_GATEWAY</code> setting requires you to provide an Amazon API Gateway endpoint URL to call\n      for authentication by using the <code>IdentityProviderDetails</code> parameter.</p>\n         <p>Use the <code>AWS_LAMBDA</code> value to directly use an Lambda function as your identity provider. \n      If you choose this value, you must specify the ARN for the Lambda function in the <code>Function</code> parameter \n      for the <code>IdentityProviderDetails</code> data type.</p>"
                     }
                 },
                 "LoggingRole": {
@@ -3001,7 +3002,7 @@
                 "WorkflowDetails": {
                     "target": "com.amazonaws.transfer#WorkflowDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the workflow ID for the workflow to assign and the execution role that's used for executing the workflow.</p>\n         <p>In addition to a workflow to execute when a file is uploaded completely, <code>WorkflowDetails</code> can also contain a\n    workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when a file is open when\n    the session disconnects.</p>"
+                        "smithy.api#documentation": "<p>Specifies the workflow ID for the workflow to assign and the execution role that's used for executing the workflow.</p>\n         <p>In addition to a workflow to execute when a file is uploaded completely, <code>WorkflowDetails</code> can also contain a\n    workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when the server session disconnects\n    while the file is still being uploaded.</p>"
                     }
                 }
             },
@@ -3650,7 +3651,7 @@
                 "InvocationRole": {
                     "target": "com.amazonaws.transfer#Role",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides the type of <code>InvocationRole</code> used to authenticate the user\n      account.</p>"
+                        "smithy.api#documentation": "<p>This parameter is only applicable if your <code>IdentityProviderType</code> is <code>API_GATEWAY</code>. Provides the type of <code>InvocationRole</code> used to authenticate the user\n      account.</p>"
                     }
                 },
                 "DirectoryId": {
@@ -3662,7 +3663,13 @@
                 "Function": {
                     "target": "com.amazonaws.transfer#Function",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN for a lambda function to use for the Identity provider.</p>"
+                        "smithy.api#documentation": "<p>The ARN for a Lambda function to use for the Identity provider.</p>"
+                    }
+                },
+                "SftpAuthenticationMethods": {
+                    "target": "com.amazonaws.transfer#SftpAuthenticationMethods",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For SFTP-enabled servers, and for custom identity providers <i>only</i>, you\n      can specify whether to authenticate using a password, SSH key pair, or both.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PASSWORD</code> - users must provide their password to connect.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PUBLIC_KEY</code> - users must provide their private key to connect.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PUBLIC_KEY_OR_PASSWORD</code> - users can authenticate with either their password or their key. This is the default value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PUBLIC_KEY_AND_PASSWORD</code> - users must provide both their private key and their password to connect.\n          The server checks the key first, and then if the key is valid, the system prompts for a password. \n          If the private key provided does not match the public key that is stored, authentication fails.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -3699,7 +3706,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns information related to the type of user authentication that is in use for a file\n      transfer protocol-enabled server's users. For <code>AWS_DIRECTORY_SERVICE</code> or <code>SERVICE_MANAGED</code>\n      authentication, the Secure Shell (SSH) public keys are stored with a user on the server\n      instance. For <code>API_GATEWAY</code> authentication, your custom authentication method is\n      implemented by using an API call. The server can have only one method of\n      authentication.</p>"
+                "smithy.api#documentation": "<p>The mode of authentication for a server. The default value is\n        <code>SERVICE_MANAGED</code>, which allows you to store and access user credentials within\n      the Transfer Family service.</p>\n         <p>Use <code>AWS_DIRECTORY_SERVICE</code> to provide access to\n      Active Directory groups in Directory Service for Microsoft Active Directory or Microsoft Active Directory in your\n      on-premises environment or in Amazon Web Services using AD Connector. This option also requires you to\n      provide a Directory ID by using the <code>IdentityProviderDetails</code> parameter.</p>\n         <p>Use the <code>API_GATEWAY</code> value to integrate with an identity provider of your choosing. The\n      <code>API_GATEWAY</code> setting requires you to provide an Amazon API Gateway endpoint URL to call\n      for authentication by using the <code>IdentityProviderDetails</code> parameter.</p>\n         <p>Use the <code>AWS_LAMBDA</code> value to directly use an Lambda function as your identity provider. \n      If you choose this value, you must specify the ARN for the Lambda function in the <code>Function</code> parameter \n      for the <code>IdentityProviderDetails</code> data type.</p>"
             }
         },
         "com.amazonaws.transfer#ImportCertificate": {
@@ -3918,7 +3925,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds a Secure Shell (SSH) public key to a user account identified by a\n        <code>UserName</code> value assigned to the specific file transfer protocol-enabled server,\n      identified by <code>ServerId</code>.</p>\n         <p>The response returns the <code>UserName</code> value, the <code>ServerId</code> value, and\n      the name of the <code>SshPublicKeyId</code>.</p>"
+                "smithy.api#documentation": "<p>Adds a Secure Shell (SSH) public key to a Transfer Family user identified by a\n        <code>UserName</code> value assigned to the specific file transfer protocol-enabled server,\n      identified by <code>ServerId</code>.</p>\n         <p>The response returns the <code>UserName</code> value, the <code>ServerId</code> value, and\n      the name of the <code>SshPublicKeyId</code>.</p>"
             }
         },
         "com.amazonaws.transfer#ImportSshPublicKeyRequest": {
@@ -3941,7 +3948,7 @@
                 "UserName": {
                     "target": "com.amazonaws.transfer#UserName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the user account that is assigned to one or more servers.</p>",
+                        "smithy.api#documentation": "<p>The name of the Transfer Family user that is assigned to one or more servers.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4399,7 +4406,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all executions for the specified workflow.</p>",
+                "smithy.api#documentation": "<p>Lists all in-progress executions for the specified workflow.</p>\n         <note>\n            <p>If the specified workflow ID cannot be found, <code>ListExecutions</code> returns a \n        <code>ResourceNotFound</code> exception.</p>\n         </note>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -4454,7 +4461,7 @@
                 "Executions": {
                     "target": "com.amazonaws.transfer#ListedExecutions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns the details for each execution.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>NextToken</b>: returned from a call to several APIs,\n      you can use pass it to a subsequent command to continue listing additional executions.</p>\n            </li>\n            <li>\n               <p>\n                  <b>StartTime</b>: timestamp indicating when the execution began.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Executions</b>: details of the execution, including the execution ID, initial file location,\n      and Service metadata.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Status</b>: one of the following values:\n        <code>IN_PROGRESS</code>, <code>COMPLETED</code>, <code>EXCEPTION</code>, <code>HANDLING_EXEPTION</code>.\n      </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Returns the details for each execution, in a <code>ListedExecution</code> array.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4941,7 +4948,7 @@
                 "Users": {
                     "target": "com.amazonaws.transfer#ListedUsers",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns the user accounts and their properties for the <code>ServerId</code> value that\n      you specify.</p>",
+                        "smithy.api#documentation": "<p>Returns the Transfer Family users and their properties for the <code>ServerId</code> value that\n      you specify.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4973,7 +4980,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all of your workflows.</p>",
+                "smithy.api#documentation": "<p>Lists all workflows associated with your Amazon Web Services account for your current region.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -5357,7 +5364,7 @@
                 "IdentityProviderType": {
                     "target": "com.amazonaws.transfer#IdentityProviderType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The mode of authentication for a server. The default value is\n        <code>SERVICE_MANAGED</code>, which allows you to store and access user credentials within\n      the Transfer Family service.</p>\n         <p>Use <code>AWS_DIRECTORY_SERVICE</code> to provide access to\n      Active Directory groups in Directory Service for Microsoft Active Directory or Microsoft Active Directory in your\n      on-premises environment or in Amazon Web Services using AD Connector. This option also requires you to\n      provide a Directory ID by using the <code>IdentityProviderDetails</code> parameter.</p>\n         <p>Use the <code>API_GATEWAY</code> value to integrate with an identity provider of your choosing. The\n      <code>API_GATEWAY</code> setting requires you to provide an Amazon API Gateway endpoint URL to call\n      for authentication by using the <code>IdentityProviderDetails</code> parameter.</p>\n         <p>Use the <code>AWS_LAMBDA</code> value to directly use an Lambda function as your identity provider. \n      If you choose this value, you must specify the ARN for the Lambda function in the <code>Function</code> parameter \n      or the <code>IdentityProviderDetails</code> data type.</p>"
+                        "smithy.api#documentation": "<p>The mode of authentication for a server. The default value is\n        <code>SERVICE_MANAGED</code>, which allows you to store and access user credentials within\n      the Transfer Family service.</p>\n         <p>Use <code>AWS_DIRECTORY_SERVICE</code> to provide access to\n      Active Directory groups in Directory Service for Microsoft Active Directory or Microsoft Active Directory in your\n      on-premises environment or in Amazon Web Services using AD Connector. This option also requires you to\n      provide a Directory ID by using the <code>IdentityProviderDetails</code> parameter.</p>\n         <p>Use the <code>API_GATEWAY</code> value to integrate with an identity provider of your choosing. The\n      <code>API_GATEWAY</code> setting requires you to provide an Amazon API Gateway endpoint URL to call\n      for authentication by using the <code>IdentityProviderDetails</code> parameter.</p>\n         <p>Use the <code>AWS_LAMBDA</code> value to directly use an Lambda function as your identity provider. \n      If you choose this value, you must specify the ARN for the Lambda function in the <code>Function</code> parameter \n      for the <code>IdentityProviderDetails</code> data type.</p>"
                     }
                 },
                 "EndpointType": {
@@ -6290,6 +6297,35 @@
                 }
             }
         },
+        "com.amazonaws.transfer#SftpAuthenticationMethods": {
+            "type": "enum",
+            "members": {
+                "PASSWORD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PASSWORD"
+                    }
+                },
+                "PUBLIC_KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PUBLIC_KEY"
+                    }
+                },
+                "PUBLIC_KEY_OR_PASSWORD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PUBLIC_KEY_OR_PASSWORD"
+                    }
+                },
+                "PUBLIC_KEY_AND_PASSWORD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PUBLIC_KEY_AND_PASSWORD"
+                    }
+                }
+            }
+        },
         "com.amazonaws.transfer#SigningAlg": {
             "type": "enum",
             "members": {
@@ -6351,7 +6387,7 @@
                 "DateImported": {
                     "target": "com.amazonaws.transfer#DateImported",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the date that the public key was added to the user account.</p>",
+                        "smithy.api#documentation": "<p>Specifies the date that the public key was added to the Transfer Family user.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6371,7 +6407,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides information about the public Secure Shell (SSH) key that is associated with a\n      user account for the specific file transfer protocol-enabled server (as identified by\n        <code>ServerId</code>). The information returned includes the date the key was imported, the\n      public key contents, and the public key ID. A user can store more than one SSH public key\n      associated with their user name on a specific server.</p>"
+                "smithy.api#documentation": "<p>Provides information about the public Secure Shell (SSH) key that is associated with a Transfer Family\n      user for the specific file transfer protocol-enabled server (as identified by\n        <code>ServerId</code>). The information returned includes the date the key was imported, the\n      public key contents, and the public key ID. A user can store more than one SSH public key\n      associated with their user name on a specific server.</p>"
             }
         },
         "com.amazonaws.transfer#SshPublicKeyBody": {
@@ -6712,7 +6748,7 @@
                 "Tags": {
                     "target": "com.amazonaws.transfer#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Key-value pairs assigned to ARNs that you can use to group and search for resources by\n      type. You can attach this metadata to user accounts for any purpose.</p>",
+                        "smithy.api#documentation": "<p>Key-value pairs assigned to ARNs that you can use to group and search for resources by\n      type. You can attach this metadata to resources (servers, users, workflows, and so on) for any purpose.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -6791,7 +6827,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>If the <code>IdentityProviderType</code> of a file transfer protocol-enabled server is\n        <code>AWS_DIRECTORY_SERVICE</code> or <code>API_Gateway</code>, tests whether your identity\n      provider is set up successfully. We highly recommend that you call this operation to test your\n      authentication method as soon as you create your server. By doing so, you can troubleshoot\n      issues with the identity provider integration to ensure that your users can successfully use\n      the service.</p>\n         <p>\n      The <code>ServerId</code> and <code>UserName</code> parameters are required. The <code>ServerProtocol</code>, <code>SourceIp</code>, and <code>UserPassword</code> are all optional. \n    </p>\n         <note>\n            <p>\n        You cannot use <code>TestIdentityProvider</code> if the <code>IdentityProviderType</code> of your server is <code>SERVICE_MANAGED</code>.\n      </p>\n         </note>\n         <ul>\n            <li>\n               <p>\n        If you provide any incorrect values for any parameters, the <code>Response</code> field is empty.\n      </p>\n            </li>\n            <li>\n               <p>\n        If you provide a server ID for a server that uses service-managed users, you get an error:\n      </p>\n               <p>\n                  <code>\n        An error occurred (InvalidRequestException) when calling the TestIdentityProvider operation: s-<i>server-ID</i> not configured for external auth\n      </code>\n               </p>\n            </li>\n            <li>\n               <p>\n          If you enter a Server ID for the <code>--server-id</code> parameter that does not identify an actual Transfer server, you receive the following error:\n        </p>\n               <p>\n                  <code>An error occurred (ResourceNotFoundException) when calling the TestIdentityProvider operation: Unknown server</code>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>If the <code>IdentityProviderType</code> of a file transfer protocol-enabled server is\n        <code>AWS_DIRECTORY_SERVICE</code> or <code>API_Gateway</code>, tests whether your identity\n      provider is set up successfully. We highly recommend that you call this operation to test your\n      authentication method as soon as you create your server. By doing so, you can troubleshoot\n      issues with the identity provider integration to ensure that your users can successfully use\n      the service.</p>\n         <p>\n      The <code>ServerId</code> and <code>UserName</code> parameters are required. The <code>ServerProtocol</code>, <code>SourceIp</code>, and <code>UserPassword</code> are all optional. \n    </p>\n         <p>Note the following:</p>\n         <ul>\n            <li>\n               <p> You cannot use <code>TestIdentityProvider</code> if the\n          <code>IdentityProviderType</code> of your server is <code>SERVICE_MANAGED</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TestIdentityProvider</code> does not work with keys: it only accepts\n          passwords.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TestIdentityProvider</code> can test the password operation for a custom Identity Provider that handles keys and passwords.</p>\n            </li>\n            <li>\n               <p>\n        If you provide any incorrect values for any parameters, the <code>Response</code> field is empty.\n      </p>\n            </li>\n            <li>\n               <p>\n        If you provide a server ID for a server that uses service-managed users, you get an error:\n      </p>\n               <p>\n                  <code>\n        An error occurred (InvalidRequestException) when calling the TestIdentityProvider operation: s-<i>server-ID</i> not configured for external auth\n      </code>\n               </p>\n            </li>\n            <li>\n               <p>\n          If you enter a Server ID for the <code>--server-id</code> parameter that does not identify an actual Transfer server, you receive the following error:\n        </p>\n               <p>\n                  <code>An error occurred (ResourceNotFoundException) when calling the TestIdentityProvider operation: Unknown server</code>.\n        </p>\n               <p>It is possible your sever is in a different region. You can specify a region by adding the following: <code>--region region-code</code>,\n          such as <code>--region us-east-2</code> to specify a server in <b>US East (Ohio)</b>.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.transfer#TestIdentityProviderRequest": {
@@ -6807,26 +6843,26 @@
                 "ServerProtocol": {
                     "target": "com.amazonaws.transfer#Protocol",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of file transfer protocol to be tested.</p>\n         <p>The available protocols are:</p>\n         <ul>\n            <li>\n               <p>Secure Shell (SSH) File Transfer Protocol (SFTP)</p>\n            </li>\n            <li>\n               <p>File Transfer Protocol Secure (FTPS)</p>\n            </li>\n            <li>\n               <p>File Transfer Protocol (FTP)</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The type of file transfer protocol to be tested.</p>\n         <p>The available protocols are:</p>\n         <ul>\n            <li>\n               <p>Secure Shell (SSH) File Transfer Protocol (SFTP)</p>\n            </li>\n            <li>\n               <p>File Transfer Protocol Secure (FTPS)</p>\n            </li>\n            <li>\n               <p>File Transfer Protocol (FTP)</p>\n            </li>\n            <li>\n               <p>Applicability Statement 2 (AS2)</p>\n            </li>\n         </ul>"
                     }
                 },
                 "SourceIp": {
                     "target": "com.amazonaws.transfer#SourceIp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The source IP address of the user account to be tested.</p>"
+                        "smithy.api#documentation": "<p>The source IP address of the account to be tested.</p>"
                     }
                 },
                 "UserName": {
                     "target": "com.amazonaws.transfer#UserName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the user account to be tested.</p>",
+                        "smithy.api#documentation": "<p>The name of the account to be tested.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "UserPassword": {
                     "target": "com.amazonaws.transfer#UserPassword",
                     "traits": {
-                        "smithy.api#documentation": "<p>The password of the user account to be tested.</p>"
+                        "smithy.api#documentation": "<p>The password of the account to be tested.</p>"
                     }
                 }
             },
@@ -6840,14 +6876,14 @@
                 "Response": {
                     "target": "com.amazonaws.transfer#Response",
                     "traits": {
-                        "smithy.api#documentation": "<p>The response that is returned from your API Gateway.</p>"
+                        "smithy.api#documentation": "<p>The response that is returned from your API Gateway or your Lambda function.</p>"
                     }
                 },
                 "StatusCode": {
                     "target": "com.amazonaws.transfer#StatusCode",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The HTTP status code that is the response from your API Gateway.</p>",
+                        "smithy.api#documentation": "<p>The HTTP status code that is the response from your API Gateway or your Lambda function.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7472,8 +7508,8 @@
                             },
                             "params": {
                                 "Region": "af-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7485,8 +7521,8 @@
                             },
                             "params": {
                                 "Region": "ap-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7498,8 +7534,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7511,8 +7547,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7524,8 +7560,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7537,8 +7573,8 @@
                             },
                             "params": {
                                 "Region": "ap-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7550,8 +7586,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7563,8 +7599,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7576,8 +7612,8 @@
                             },
                             "params": {
                                 "Region": "ca-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7589,8 +7625,8 @@
                             },
                             "params": {
                                 "Region": "ca-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7602,8 +7638,8 @@
                             },
                             "params": {
                                 "Region": "eu-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7615,8 +7651,8 @@
                             },
                             "params": {
                                 "Region": "eu-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7628,8 +7664,8 @@
                             },
                             "params": {
                                 "Region": "eu-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7641,8 +7677,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7654,8 +7690,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7667,8 +7703,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7680,8 +7716,8 @@
                             },
                             "params": {
                                 "Region": "me-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7693,8 +7729,8 @@
                             },
                             "params": {
                                 "Region": "sa-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7706,8 +7742,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7719,8 +7755,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7732,8 +7768,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7745,8 +7781,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7758,8 +7794,8 @@
                             },
                             "params": {
                                 "Region": "us-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7771,8 +7807,8 @@
                             },
                             "params": {
                                 "Region": "us-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7784,8 +7820,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7797,8 +7833,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7810,8 +7846,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -7823,8 +7859,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -7836,8 +7872,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7849,8 +7885,8 @@
                             },
                             "params": {
                                 "Region": "cn-northwest-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7862,8 +7898,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -7875,8 +7911,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7888,8 +7924,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -7901,8 +7937,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7914,8 +7950,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7927,8 +7963,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7940,8 +7976,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7953,8 +7989,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -7966,8 +8002,19 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -7979,8 +8026,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -7992,8 +8050,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -8005,8 +8074,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -8018,8 +8098,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -8031,8 +8111,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -8044,8 +8124,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -8056,8 +8136,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -8068,9 +8148,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -8758,14 +8844,14 @@
                 "ServerId": {
                     "target": "com.amazonaws.transfer#ServerId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A system-assigned unique identifier for a server instance that the user account is\n      assigned to.</p>",
+                        "smithy.api#documentation": "<p>A system-assigned unique identifier for a server instance that the Transfer Family user is\n      assigned to.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "WorkflowDetails": {
                     "target": "com.amazonaws.transfer#WorkflowDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the workflow ID for the workflow to assign and the execution role that's used for executing the workflow.</p>\n         <p>In addition to a workflow to execute when a file is uploaded completely, <code>WorkflowDetails</code> can also contain a\n    workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when a file is open when\n    the session disconnects.</p>\n         <p>To remove an associated workflow from a server, you can provide an empty <code>OnUpload</code> object, as in the following example.</p>\n         <p>\n            <code>aws transfer update-server --server-id s-01234567890abcdef --workflow-details '{\"OnUpload\":[]}'</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Specifies the workflow ID for the workflow to assign and the execution role that's used for executing the workflow.</p>\n         <p>In addition to a workflow to execute when a file is uploaded completely, <code>WorkflowDetails</code> can also contain a\n    workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when the server session disconnects\n    while the file is still being uploaded.</p>\n         <p>To remove an associated workflow from a server, you can provide an empty <code>OnUpload</code> object, as in the following example.</p>\n         <p>\n            <code>aws transfer update-server --server-id s-01234567890abcdef --workflow-details '{\"OnUpload\":[]}'</code>\n         </p>"
                     }
                 }
             },
@@ -8779,7 +8865,7 @@
                 "ServerId": {
                     "target": "com.amazonaws.transfer#ServerId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A system-assigned unique identifier for a server that the user account is assigned\n      to.</p>",
+                        "smithy.api#documentation": "<p>A system-assigned unique identifier for a server that the Transfer Family user is assigned\n      to.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -8859,7 +8945,7 @@
                 "ServerId": {
                     "target": "com.amazonaws.transfer#ServerId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A system-assigned unique identifier for a server instance that the user account is\n      assigned to.</p>",
+                        "smithy.api#documentation": "<p>A system-assigned unique identifier for a Transfer Family server instance that the user is\n      assigned to.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8881,7 +8967,7 @@
                 "ServerId": {
                     "target": "com.amazonaws.transfer#ServerId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A system-assigned unique identifier for a server instance that the user account is\n      assigned to.</p>",
+                        "smithy.api#documentation": "<p>A system-assigned unique identifier for a Transfer Family server instance that the account is\n      assigned to.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8916,7 +9002,7 @@
                 "UserName": {
                     "target": "com.amazonaws.transfer#UserName",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique string that identifies a user account associated with a server.</p>",
+                        "smithy.api#documentation": "<p>A unique string that identifies a Transfer Family user associated with a server.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -9000,7 +9086,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the workflow ID for the workflow to assign and the execution role that's used for executing the workflow.</p>\n         <p>In addition to a workflow to execute when a file is uploaded completely, <code>WorkflowDetails</code> can also contain a\n    workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when a file is open when\n    the session disconnects.</p>"
+                "smithy.api#documentation": "<p>Specifies the workflow ID for the workflow to assign and the execution role that's used for executing the workflow.</p>\n         <p>In addition to a workflow to execute when a file is uploaded completely, <code>WorkflowDetails</code> can also contain a\n    workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when the server session disconnects\n    while the file is still being uploaded.</p>"
             }
         },
         "com.amazonaws.transfer#WorkflowDetails": {
