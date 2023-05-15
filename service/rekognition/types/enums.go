@@ -11,6 +11,7 @@ const (
 	AttributeAgeRange     Attribute = "AGE_RANGE"
 	AttributeBeard        Attribute = "BEARD"
 	AttributeEmotions     Attribute = "EMOTIONS"
+	AttributeEyeDirection Attribute = "EYE_DIRECTION"
 	AttributeEyeglasses   Attribute = "EYEGLASSES"
 	AttributeEyesOpen     Attribute = "EYES_OPEN"
 	AttributeGender       Attribute = "GENDER"
@@ -31,6 +32,7 @@ func (Attribute) Values() []Attribute {
 		"AGE_RANGE",
 		"BEARD",
 		"EMOTIONS",
+		"EYE_DIRECTION",
 		"EYEGLASSES",
 		"EYES_OPEN",
 		"GENDER",

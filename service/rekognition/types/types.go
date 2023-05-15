@@ -785,6 +785,22 @@ type EvaluationResult struct {
 	noSmithyDocumentSerde
 }
 
+// Indicates the direction the eyes are gazing in (independent of the head pose)
+// as determined by its pitch and yaw.
+type EyeDirection struct {
+
+	// The confidence that the service has in its predicted eye direction.
+	Confidence *float32
+
+	// Value representing eye direction on the pitch axis.
+	Pitch *float32
+
+	// Value representing eye direction on the yaw axis.
+	Yaw *float32
+
+	noSmithyDocumentSerde
+}
+
 // Indicates whether or not the face is wearing eye glasses, and the confidence
 // level in the determination.
 type Eyeglasses struct {
@@ -878,6 +894,9 @@ type FaceDetail struct {
 	// internal emotional state and should not be used in such a way. For example, a
 	// person pretending to have a sad face might not be sad emotionally.
 	Emotions []Emotion
+
+	// Indicates the direction the eyes are gazing in, as defined by pitch and yaw.
+	EyeDirection *EyeDirection
 
 	// Indicates whether or not the face is wearing eye glasses, and the confidence
 	// level in the determination.

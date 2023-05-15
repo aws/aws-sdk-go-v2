@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all Crls in the authenticated account and Amazon Web Services Region.
-// Required permissions: rolesanywhere:ListCrls .
+// Lists all certificate revocation lists (CRL) in the authenticated account and
+// Amazon Web Services Region. Required permissions: rolesanywhere:ListCrls .
 func (c *Client) ListCrls(ctx context.Context, params *ListCrlsInput, optFns ...func(*Options)) (*ListCrlsOutput, error) {
 	if params == nil {
 		params = &ListCrlsInput{}
@@ -32,7 +32,7 @@ func (c *Client) ListCrls(ctx context.Context, params *ListCrlsInput, optFns ...
 type ListCrlsInput struct {
 
 	// A token that indicates where the output should continue from, if a previous
-	// operation did not show all results. To get the next results, call the operation
+	// request did not show all results. To get the next results, make the request
 	// again with this value.
 	NextToken *string
 
@@ -48,7 +48,7 @@ type ListCrlsOutput struct {
 	Crls []types.CrlDetail
 
 	// A token that indicates where the output should continue from, if a previous
-	// operation did not show all results. To get the next results, call the operation
+	// request did not show all results. To get the next results, make the request
 	// again with this value.
 	NextToken *string
 

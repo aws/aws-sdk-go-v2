@@ -9521,6 +9521,11 @@ func awsAwsjson11_deserializeDocumentEngineConfiguration(v **types.EngineConfigu
 				sv.MaxConcurrentDpus = int32(i64)
 			}
 
+		case "SparkProperties":
+			if err := awsAwsjson11_deserializeDocumentParametersMap(&sv.SparkProperties, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 

@@ -230,6 +230,26 @@ func (m *validateOpGetSubscription) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListDevEnvironmentSessions struct {
+}
+
+func (*validateOpListDevEnvironmentSessions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListDevEnvironmentSessions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListDevEnvironmentSessionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListDevEnvironmentSessionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListDevEnvironments struct {
 }
 
@@ -472,6 +492,10 @@ func addOpGetSpaceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetSubscriptionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetSubscription{}, middleware.After)
+}
+
+func addOpListDevEnvironmentSessionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListDevEnvironmentSessions{}, middleware.After)
 }
 
 func addOpListDevEnvironmentsValidationMiddleware(stack *middleware.Stack) error {
@@ -874,6 +898,27 @@ func validateOpGetSubscriptionInput(v *GetSubscriptionInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetSubscriptionInput"}
 	if v.SpaceName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SpaceName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListDevEnvironmentSessionsInput(v *ListDevEnvironmentSessionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListDevEnvironmentSessionsInput"}
+	if v.SpaceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SpaceName"))
+	}
+	if v.ProjectName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectName"))
+	}
+	if v.DevEnvironmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DevEnvironmentId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

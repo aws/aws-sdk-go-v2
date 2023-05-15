@@ -29,6 +29,8 @@
         "api_op_ListSubjects.go",
         "api_op_ListTagsForResource.go",
         "api_op_ListTrustAnchors.go",
+        "api_op_PutNotificationSettings.go",
+        "api_op_ResetNotificationSettings.go",
         "api_op_TagResource.go",
         "api_op_UntagResource.go",
         "api_op_UpdateCrl.go",

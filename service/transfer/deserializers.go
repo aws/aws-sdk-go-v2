@@ -9294,6 +9294,15 @@ func awsAwsjson11_deserializeDocumentIdentityProviderDetails(v **types.IdentityP
 				sv.InvocationRole = ptr.String(jtv)
 			}
 
+		case "SftpAuthenticationMethods":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SftpAuthenticationMethods to be of type string, got %T instead", value)
+				}
+				sv.SftpAuthenticationMethods = types.SftpAuthenticationMethods(jtv)
+			}
+
 		case "Url":
 			if value != nil {
 				jtv, ok := value.(string)

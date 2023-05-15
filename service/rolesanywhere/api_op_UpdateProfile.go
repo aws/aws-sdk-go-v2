@@ -11,10 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the profile. A profile is configuration resource to list the roles that
-// RolesAnywhere service is trusted to assume. In addition, by applying a profile
-// you can scope-down permissions with IAM managed policies. Required permissions:
-// rolesanywhere:UpdateProfile .
+// Updates a profile, a list of the roles that IAM Roles Anywhere service is
+// trusted to assume. You use profiles to intersect permissions with IAM managed
+// policies. Required permissions: rolesanywhere:UpdateProfile .
 func (c *Client) UpdateProfile(ctx context.Context, params *UpdateProfileInput, optFns ...func(*Options)) (*UpdateProfileOutput, error) {
 	if params == nil {
 		params = &UpdateProfileInput{}
@@ -46,8 +45,8 @@ type UpdateProfileInput struct {
 	// The name of the profile.
 	Name *string
 
-	// A list of IAM roles that this profile can assume in a CreateSession (https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html)
-	// operation.
+	// A list of IAM roles that this profile can assume in a temporary credential
+	// request.
 	RoleArns []string
 
 	// A session policy that applies to the trust boundary of the vended session

@@ -54,8 +54,8 @@ type ListUsersOutput struct {
 	// This member is required.
 	ServerId *string
 
-	// Returns the user accounts and their properties for the ServerId value that you
-	// specify.
+	// Returns the Transfer Family users and their properties for the ServerId value
+	// that you specify.
 	//
 	// This member is required.
 	Users []types.ListedUser

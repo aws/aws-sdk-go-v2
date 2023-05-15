@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the host key that's specified in the HoskKeyId parameter.
+// Deletes the host key that's specified in the HostKeyId parameter.
 func (c *Client) DeleteHostKey(ctx context.Context, params *DeleteHostKeyInput, optFns ...func(*Options)) (*DeleteHostKeyOutput, error) {
 	if params == nil {
 		params = &DeleteHostKeyInput{}

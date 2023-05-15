@@ -26,6 +26,8 @@
 //     CodeCatalyst.
 //   - ListDevEnvironments , which retrieves a list of Dev Environments in a
 //     project.
+//   - ListDevEnvironmentSessions , which retrieves a list of active Dev
+//     Environment sessions in a project.
 //   - ListProjects , which retrieves a list of projects in a space.
 //   - ListSourceRepositories , which retrieves a list of source repositories in a
 //     project.

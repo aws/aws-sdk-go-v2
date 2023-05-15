@@ -3507,6 +3507,11 @@ func awsAwsjson11_serializeDocumentIdentityProviderDetails(v *types.IdentityProv
 		ok.String(*v.InvocationRole)
 	}
 
+	if len(v.SftpAuthenticationMethods) > 0 {
+		ok := object.Key("SftpAuthenticationMethods")
+		ok.String(string(v.SftpAuthenticationMethods))
+	}
+
 	if v.Url != nil {
 		ok := object.Key("Url")
 		ok.String(*v.Url)

@@ -1,0 +1,8 @@
+{
+    "id": "b029974d-8b45-429d-8117-f2429480868f",
+    "type": "feature",
+    "description": "You can now define custom spark properties at start of the session for use cases like cluster encryption, table formats, and general Spark tuning.",
+    "modules": [
+        "service/athena"
+    ]
+}

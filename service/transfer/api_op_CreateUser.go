@@ -134,7 +134,7 @@ type CreateUserOutput struct {
 	// This member is required.
 	ServerId *string
 
-	// A unique string that identifies a user account associated with a server.
+	// A unique string that identifies a Transfer Family user.
 	//
 	// This member is required.
 	UserName *string

@@ -12,7 +12,10 @@ import (
 )
 
 // You can use DescribeExecution to check the details of the execution of the
-// specified workflow.
+// specified workflow. This API call only returns details for in-progress
+// workflows. If you provide an ID for an execution that is not in progress, or if
+// the execution doesn't match the specified workflow ID, you receive a
+// ResourceNotFound exception.
 func (c *Client) DescribeExecution(ctx context.Context, params *DescribeExecutionInput, optFns ...func(*Options)) (*DescribeExecutionOutput, error) {
 	if params == nil {
 		params = &DescribeExecutionInput{}

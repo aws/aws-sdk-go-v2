@@ -11,37 +11,45 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Enables temporary credential requests for a profile. Required permissions:
-// rolesanywhere:EnableProfile .
-func (c *Client) EnableProfile(ctx context.Context, params *EnableProfileInput, optFns ...func(*Options)) (*EnableProfileOutput, error) {
+// Resets the custom notification setting to IAM Roles Anywhere default setting.
+// Required permissions: rolesanywhere:ResetNotificationSettings .
+func (c *Client) ResetNotificationSettings(ctx context.Context, params *ResetNotificationSettingsInput, optFns ...func(*Options)) (*ResetNotificationSettingsOutput, error) {
 	if params == nil {
-		params = &EnableProfileInput{}
+		params = &ResetNotificationSettingsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "EnableProfile", params, optFns, c.addOperationEnableProfileMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ResetNotificationSettings", params, optFns, c.addOperationResetNotificationSettingsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*EnableProfileOutput)
+	out := result.(*ResetNotificationSettingsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type EnableProfileInput struct {
+type ResetNotificationSettingsInput struct {
 
-	// The unique identifier of the profile.
+	// A list of notification setting keys to reset. A notification setting key
+	// includes the event and the channel.
 	//
 	// This member is required.
-	ProfileId *string
+	NotificationSettingKeys []types.NotificationSettingKey
+
+	// The unique identifier of the trust anchor.
+	//
+	// This member is required.
+	TrustAnchorId *string
 
 	noSmithyDocumentSerde
 }
 
-type EnableProfileOutput struct {
+type ResetNotificationSettingsOutput struct {
 
-	// The state of the profile after a read or write operation.
-	Profile *types.ProfileDetail
+	// The state of the trust anchor after a read or write operation.
+	//
+	// This member is required.
+	TrustAnchor *types.TrustAnchorDetail
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -49,12 +57,12 @@ type EnableProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationEnableProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpEnableProfile{}, middleware.After)
+func (c *Client) addOperationResetNotificationSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpResetNotificationSettings{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpEnableProfile{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpResetNotificationSettings{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -94,10 +102,10 @@ func (c *Client) addOperationEnableProfileMiddlewares(stack *middleware.Stack, o
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpEnableProfileValidationMiddleware(stack); err != nil {
+	if err = addOpResetNotificationSettingsValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opEnableProfile(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opResetNotificationSettings(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -115,11 +123,11 @@ func (c *Client) addOperationEnableProfileMiddlewares(stack *middleware.Stack, o
 	return nil
 }
 
-func newServiceMetadataMiddleware_opEnableProfile(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opResetNotificationSettings(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "rolesanywhere",
-		OperationName: "EnableProfile",
+		OperationName: "ResetNotificationSettings",
 	}
 }

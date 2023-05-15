@@ -54,8 +54,8 @@ type DescribeUserOutput struct {
 	// This member is required.
 	ServerId *string
 
-	// An array containing the properties of the user account for the ServerID value
-	// that you specified.
+	// An array containing the properties of the Transfer Family user for the ServerID
+	// value that you specified.
 	//
 	// This member is required.
 	User *types.DescribedUser

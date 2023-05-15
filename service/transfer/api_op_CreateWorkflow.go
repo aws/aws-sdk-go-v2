@@ -50,9 +50,9 @@ type CreateWorkflowInput struct {
 	Description *string
 
 	// Specifies the steps (actions) to take if errors are encountered during
-	// execution of the workflow. For custom steps, the lambda function needs to send
+	// execution of the workflow. For custom steps, the Lambda function needs to send
 	// FAILURE to the call back API to kick off the exception steps. Additionally, if
-	// the lambda does not send SUCCESS before it times out, the exception steps are
+	// the Lambda does not send SUCCESS before it times out, the exception steps are
 	// executed.
 	OnExceptionSteps []types.WorkflowStep
 

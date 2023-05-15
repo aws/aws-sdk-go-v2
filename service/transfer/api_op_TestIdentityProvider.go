@@ -18,8 +18,15 @@ import (
 // can troubleshoot issues with the identity provider integration to ensure that
 // your users can successfully use the service. The ServerId and UserName
 // parameters are required. The ServerProtocol , SourceIp , and UserPassword are
-// all optional. You cannot use TestIdentityProvider if the IdentityProviderType
-// of your server is SERVICE_MANAGED .
+// all optional. Note the following:
+//
+//   - You cannot use TestIdentityProvider if the IdentityProviderType of your
+//     server is SERVICE_MANAGED .
+//
+//   - TestIdentityProvider does not work with keys: it only accepts passwords.
+//
+//   - TestIdentityProvider can test the password operation for a custom Identity
+//     Provider that handles keys and passwords.
 //
 //   - If you provide any incorrect values for any parameters, the Response field
 //     is empty.
@@ -31,7 +38,9 @@ import (
 //   - If you enter a Server ID for the --server-id parameter that does not
 //     identify an actual Transfer server, you receive the following error: An error
 //     occurred (ResourceNotFoundException) when calling the TestIdentityProvider
-//     operation: Unknown server
+//     operation: Unknown server . It is possible your sever is in a different
+//     region. You can specify a region by adding the following: --region region-code
+//     , such as --region us-east-2 to specify a server in US East (Ohio).
 func (c *Client) TestIdentityProvider(ctx context.Context, params *TestIdentityProviderInput, optFns ...func(*Options)) (*TestIdentityProviderOutput, error) {
 	if params == nil {
 		params = &TestIdentityProviderInput{}
@@ -55,7 +64,7 @@ type TestIdentityProviderInput struct {
 	// This member is required.
 	ServerId *string
 
-	// The name of the user account to be tested.
+	// The name of the account to be tested.
 	//
 	// This member is required.
 	UserName *string
@@ -64,12 +73,13 @@ type TestIdentityProviderInput struct {
 	//   - Secure Shell (SSH) File Transfer Protocol (SFTP)
 	//   - File Transfer Protocol Secure (FTPS)
 	//   - File Transfer Protocol (FTP)
+	//   - Applicability Statement 2 (AS2)
 	ServerProtocol types.Protocol
 
-	// The source IP address of the user account to be tested.
+	// The source IP address of the account to be tested.
 	SourceIp *string
 
-	// The password of the user account to be tested.
+	// The password of the account to be tested.
 	UserPassword *string
 
 	noSmithyDocumentSerde
@@ -77,7 +87,8 @@ type TestIdentityProviderInput struct {
 
 type TestIdentityProviderOutput struct {
 
-	// The HTTP status code that is the response from your API Gateway.
+	// The HTTP status code that is the response from your API Gateway or your Lambda
+	// function.
 	//
 	// This member is required.
 	StatusCode int32
@@ -92,7 +103,7 @@ type TestIdentityProviderOutput struct {
 	// to an incorrect username or password.
 	Message *string
 
-	// The response that is returned from your API Gateway.
+	// The response that is returned from your API Gateway or your Lambda function.
 	Response *string
 
 	// Metadata pertaining to the operation's result.

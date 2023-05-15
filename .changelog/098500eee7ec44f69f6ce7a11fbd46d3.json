@@ -1,0 +1,8 @@
+{
+    "id": "098500ee-e7ec-44f6-9f6c-e7a11fbd46d3",
+    "type": "feature",
+    "description": "Adds support for custom notification settings in a trust anchor. Introduces PutNotificationSettings and ResetNotificationSettings API's. Updates DurationSeconds max value to 3600.",
+    "modules": [
+        "service/rolesanywhere"
+    ]
+}

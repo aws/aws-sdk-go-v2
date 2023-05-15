@@ -12,7 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all executions for the specified workflow.
+// Lists all in-progress executions for the specified workflow. If the specified
+// workflow ID cannot be found, ListExecutions returns a ResourceNotFound
+// exception.
 func (c *Client) ListExecutions(ctx context.Context, params *ListExecutionsInput, optFns ...func(*Options)) (*ListExecutionsOutput, error) {
 	if params == nil {
 		params = &ListExecutionsInput{}
@@ -56,14 +58,7 @@ type ListExecutionsInput struct {
 
 type ListExecutionsOutput struct {
 
-	// Returns the details for each execution.
-	//   - NextToken: returned from a call to several APIs, you can use pass it to a
-	//   subsequent command to continue listing additional executions.
-	//   - StartTime: timestamp indicating when the execution began.
-	//   - Executions: details of the execution, including the execution ID, initial
-	//   file location, and Service metadata.
-	//   - Status: one of the following values: IN_PROGRESS , COMPLETED , EXCEPTION ,
-	//   HANDLING_EXEPTION .
+	// Returns the details for each execution, in a ListedExecution array.
 	//
 	// This member is required.
 	Executions []types.ListedExecution

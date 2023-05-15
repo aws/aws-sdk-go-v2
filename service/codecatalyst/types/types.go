@@ -74,6 +74,38 @@ type DevEnvironmentSessionConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Information about active sessions for a Dev Environment.
+type DevEnvironmentSessionSummary struct {
+
+	// The system-generated unique ID of the Dev Environment.
+	//
+	// This member is required.
+	DevEnvironmentId *string
+
+	// The system-generated unique ID of the Dev Environment session.
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the project in the space.
+	//
+	// This member is required.
+	ProjectName *string
+
+	// The name of the space.
+	//
+	// This member is required.
+	SpaceName *string
+
+	// The date and time the session started, in coordinated universal time (UTC)
+	// timestamp format as specified in RFC 3339 (https://www.rfc-editor.org/rfc/rfc3339#section-5.6)
+	//
+	// This member is required.
+	StartedTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Information about a Dev Environment.
 type DevEnvironmentSummary struct {
 

@@ -1,0 +1,8 @@
+{
+    "id": "6c7f5ba5-01f3-4eb8-b115-166eb0b8dcc8",
+    "type": "feature",
+    "description": "Added a fix to make clusterarn a required field in ListClientVpcConnections and RejectClientVpcConnection APIs",
+    "modules": [
+        "service/kafka"
+    ]
+}

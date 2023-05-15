@@ -11,37 +11,46 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Enables temporary credential requests for a profile. Required permissions:
-// rolesanywhere:EnableProfile .
-func (c *Client) EnableProfile(ctx context.Context, params *EnableProfileInput, optFns ...func(*Options)) (*EnableProfileOutput, error) {
+// Attaches a list of notification settings to a trust anchor. A notification
+// setting includes information such as event name, threshold, status of the
+// notification setting, and the channel to notify. Required permissions:
+// rolesanywhere:PutNotificationSettings .
+func (c *Client) PutNotificationSettings(ctx context.Context, params *PutNotificationSettingsInput, optFns ...func(*Options)) (*PutNotificationSettingsOutput, error) {
 	if params == nil {
-		params = &EnableProfileInput{}
+		params = &PutNotificationSettingsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "EnableProfile", params, optFns, c.addOperationEnableProfileMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutNotificationSettings", params, optFns, c.addOperationPutNotificationSettingsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*EnableProfileOutput)
+	out := result.(*PutNotificationSettingsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type EnableProfileInput struct {
+type PutNotificationSettingsInput struct {
 
-	// The unique identifier of the profile.
+	// A list of notification settings to be associated to the trust anchor.
 	//
 	// This member is required.
-	ProfileId *string
+	NotificationSettings []types.NotificationSetting
+
+	// The unique identifier of the trust anchor.
+	//
+	// This member is required.
+	TrustAnchorId *string
 
 	noSmithyDocumentSerde
 }
 
-type EnableProfileOutput struct {
+type PutNotificationSettingsOutput struct {
 
-	// The state of the profile after a read or write operation.
-	Profile *types.ProfileDetail
+	// The state of the trust anchor after a read or write operation.
+	//
+	// This member is required.
+	TrustAnchor *types.TrustAnchorDetail
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -49,12 +58,12 @@ type EnableProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationEnableProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpEnableProfile{}, middleware.After)
+func (c *Client) addOperationPutNotificationSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutNotificationSettings{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpEnableProfile{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutNotificationSettings{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -94,10 +103,10 @@ func (c *Client) addOperationEnableProfileMiddlewares(stack *middleware.Stack, o
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpEnableProfileValidationMiddleware(stack); err != nil {
+	if err = addOpPutNotificationSettingsValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opEnableProfile(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutNotificationSettings(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -115,11 +124,11 @@ func (c *Client) addOperationEnableProfileMiddlewares(stack *middleware.Stack, o
 	return nil
 }
 
-func newServiceMetadataMiddleware_opEnableProfile(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opPutNotificationSettings(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "rolesanywhere",
-		OperationName: "EnableProfile",
+		OperationName: "PutNotificationSettings",
 	}
 }

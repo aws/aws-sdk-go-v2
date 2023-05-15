@@ -416,6 +416,28 @@ func (SetStatOption) Values() []SetStatOption {
 	}
 }
 
+type SftpAuthenticationMethods string
+
+// Enum values for SftpAuthenticationMethods
+const (
+	SftpAuthenticationMethodsPassword             SftpAuthenticationMethods = "PASSWORD"
+	SftpAuthenticationMethodsPublicKey            SftpAuthenticationMethods = "PUBLIC_KEY"
+	SftpAuthenticationMethodsPublicKeyOrPassword  SftpAuthenticationMethods = "PUBLIC_KEY_OR_PASSWORD"
+	SftpAuthenticationMethodsPublicKeyAndPassword SftpAuthenticationMethods = "PUBLIC_KEY_AND_PASSWORD"
+)
+
+// Values returns all known values for SftpAuthenticationMethods. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SftpAuthenticationMethods) Values() []SftpAuthenticationMethods {
+	return []SftpAuthenticationMethods{
+		"PASSWORD",
+		"PUBLIC_KEY",
+		"PUBLIC_KEY_OR_PASSWORD",
+		"PUBLIC_KEY_AND_PASSWORD",
+	}
+}
+
 type SigningAlg string
 
 // Enum values for SigningAlg

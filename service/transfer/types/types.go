@@ -51,23 +51,28 @@ type As2ConnectorConfig struct {
 // Each step type has its own StepDetails structure.
 type CopyStepDetails struct {
 
-	// Specifies the location for the file being copied. Use ${Transfer:username} or
+	// Specifies the location for the file being copied. Use ${Transfer:UserName} or
 	// ${Transfer:UploadDate} in this field to parametrize the destination prefix by
 	// username or uploaded date.
-	//   - Set the value of DestinationFileLocation to ${Transfer:username} to copy
+	//   - Set the value of DestinationFileLocation to ${Transfer:UserName} to copy
 	//   uploaded files to an Amazon S3 bucket that is prefixed with the name of the
 	//   Transfer Family user that uploaded the file.
 	//   - Set the value of DestinationFileLocation to ${Transfer:UploadDate} to copy
 	//   uploaded files to an Amazon S3 bucket that is prefixed with the date of the
 	//   upload. The system resolves UploadDate to a date format of YYYY-MM-DD, based
-	//   on the date the file is uploaded.
+	//   on the date the file is uploaded in UTC.
 	DestinationFileLocation *InputFileLocation
 
 	// The name of the step, used as an identifier.
 	Name *string
 
 	// A flag that indicates whether to overwrite an existing file of the same name.
-	// The default is FALSE .
+	// The default is FALSE . If the workflow is processing a file that has the same
+	// name as an existing file, the behavior is as follows:
+	//   - If OverwriteExisting is TRUE , the existing file is replaced with the file
+	//   being processed.
+	//   - If OverwriteExisting is FALSE , nothing happens, and the workflow processing
+	//   stops.
 	OverwriteExisting OverwriteExisting
 
 	// Specifies which file to use as input to the workflow step: either the output
@@ -97,7 +102,7 @@ type CustomStepDetails struct {
 	//   ${original.file} .
 	SourceFileLocation *string
 
-	// The ARN for the lambda function that is being called.
+	// The ARN for the Lambda function that is being called.
 	Target *string
 
 	// Timeout, in seconds, for the step.
@@ -109,7 +114,16 @@ type CustomStepDetails struct {
 // Each step type has its own StepDetails structure.
 type DecryptStepDetails struct {
 
-	// Specifies the location for the file that's being processed.
+	// Specifies the location for the file being decrypted. Use ${Transfer:UserName}
+	// or ${Transfer:UploadDate} in this field to parametrize the destination prefix
+	// by username or uploaded date.
+	//   - Set the value of DestinationFileLocation to ${Transfer:UserName} to decrypt
+	//   uploaded files to an Amazon S3 bucket that is prefixed with the name of the
+	//   Transfer Family user that uploaded the file.
+	//   - Set the value of DestinationFileLocation to ${Transfer:UploadDate} to
+	//   decrypt uploaded files to an Amazon S3 bucket that is prefixed with the date of
+	//   the upload. The system resolves UploadDate to a date format of YYYY-MM-DD,
+	//   based on the date the file is uploaded in UTC.
 	//
 	// This member is required.
 	DestinationFileLocation *InputFileLocation
@@ -123,7 +137,12 @@ type DecryptStepDetails struct {
 	Name *string
 
 	// A flag that indicates whether to overwrite an existing file of the same name.
-	// The default is FALSE .
+	// The default is FALSE . If the workflow is processing a file that has the same
+	// name as an existing file, the behavior is as follows:
+	//   - If OverwriteExisting is TRUE , the existing file is replaced with the file
+	//   being processed.
+	//   - If OverwriteExisting is FALSE , nothing happens, and the workflow processing
+	//   stops.
 	OverwriteExisting OverwriteExisting
 
 	// Specifies which file to use as input to the workflow step: either the output
@@ -556,7 +575,7 @@ type DescribedServer struct {
 	// provide an Amazon API Gateway endpoint URL to call for authentication by using
 	// the IdentityProviderDetails parameter. Use the AWS_LAMBDA value to directly use
 	// an Lambda function as your identity provider. If you choose this value, you must
-	// specify the ARN for the Lambda function in the Function parameter or the
+	// specify the ARN for the Lambda function in the Function parameter for the
 	// IdentityProviderDetails data type.
 	IdentityProviderType IdentityProviderType
 
@@ -647,7 +666,8 @@ type DescribedServer struct {
 	// that's used for executing the workflow. In addition to a workflow to execute
 	// when a file is uploaded completely, WorkflowDetails can also contain a workflow
 	// ID (and execution role) for a workflow to execute on partial upload. A partial
-	// upload occurs when a file is open when the session disconnects.
+	// upload occurs when the server session disconnects while the file is still being
+	// uploaded.
 	WorkflowDetails *WorkflowDetails
 
 	noSmithyDocumentSerde
@@ -921,11 +941,24 @@ type IdentityProviderDetails struct {
 	// The identifier of the Directory Service directory that you want to stop sharing.
 	DirectoryId *string
 
-	// The ARN for a lambda function to use for the Identity provider.
+	// The ARN for a Lambda function to use for the Identity provider.
 	Function *string
 
+	// This parameter is only applicable if your IdentityProviderType is API_GATEWAY .
 	// Provides the type of InvocationRole used to authenticate the user account.
 	InvocationRole *string
+
+	// For SFTP-enabled servers, and for custom identity providers only, you can
+	// specify whether to authenticate using a password, SSH key pair, or both.
+	//   - PASSWORD - users must provide their password to connect.
+	//   - PUBLIC_KEY - users must provide their private key to connect.
+	//   - PUBLIC_KEY_OR_PASSWORD - users can authenticate with either their password
+	//   or their key. This is the default value.
+	//   - PUBLIC_KEY_AND_PASSWORD - users must provide both their private key and
+	//   their password to connect. The server checks the key first, and then if the key
+	//   is valid, the system prompts for a password. If the private key provided does
+	//   not match the public key that is stored, authentication fails.
+	SftpAuthenticationMethods SftpAuthenticationMethods
 
 	// Provides the location of the service endpoint used to authenticate users.
 	Url *string
@@ -1171,7 +1204,7 @@ type ListedServer struct {
 	// provide an Amazon API Gateway endpoint URL to call for authentication by using
 	// the IdentityProviderDetails parameter. Use the AWS_LAMBDA value to directly use
 	// an Lambda function as your identity provider. If you choose this value, you must
-	// specify the ARN for the Lambda function in the Function parameter or the
+	// specify the ARN for the Lambda function in the Function parameter for the
 	// IdentityProviderDetails data type.
 	IdentityProviderType IdentityProviderType
 
@@ -1444,13 +1477,14 @@ type ServiceMetadata struct {
 }
 
 // Provides information about the public Secure Shell (SSH) key that is associated
-// with a user account for the specific file transfer protocol-enabled server (as
-// identified by ServerId ). The information returned includes the date the key was
-// imported, the public key contents, and the public key ID. A user can store more
-// than one SSH public key associated with their user name on a specific server.
+// with a Transfer Family user for the specific file transfer protocol-enabled
+// server (as identified by ServerId ). The information returned includes the date
+// the key was imported, the public key contents, and the public key ID. A user can
+// store more than one SSH public key associated with their user name on a specific
+// server.
 type SshPublicKey struct {
 
-	// Specifies the date that the public key was added to the user account.
+	// Specifies the date that the public key was added to the Transfer Family user.
 	//
 	// This member is required.
 	DateImported *time.Time
@@ -1520,7 +1554,7 @@ type UserDetails struct {
 	// This member is required.
 	ServerId *string
 
-	// A unique string that identifies a user account associated with a server.
+	// A unique string that identifies a Transfer Family user associated with a server.
 	//
 	// This member is required.
 	UserName *string
@@ -1536,7 +1570,8 @@ type UserDetails struct {
 // that's used for executing the workflow. In addition to a workflow to execute
 // when a file is uploaded completely, WorkflowDetails can also contain a workflow
 // ID (and execution role) for a workflow to execute on partial upload. A partial
-// upload occurs when a file is open when the session disconnects.
+// upload occurs when the server session disconnects while the file is still being
+// uploaded.
 type WorkflowDetail struct {
 
 	// Includes the necessary permissions for S3, EFS, and Lambda operations that

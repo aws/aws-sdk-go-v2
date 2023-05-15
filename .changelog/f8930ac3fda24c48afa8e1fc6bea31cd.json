@@ -1,0 +1,8 @@
+{
+    "id": "f8930ac3-fda2-4c48-afa8-e1fc6bea31cd",
+    "type": "feature",
+    "description": "This release introduces the ability to require both password and SSH key when users authenticate to your Transfer Family servers that use the SFTP protocol.",
+    "modules": [
+        "service/transfer"
+    ]
+}

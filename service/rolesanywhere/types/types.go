@@ -7,23 +7,21 @@ import (
 	"time"
 )
 
-// A record of a presented X509 credential to CreateSession (https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html)
-// .
+// A record of a presented X509 credential from a temporary credential request.
 type CredentialSummary struct {
 
 	// Indicates whether the credential is enabled.
 	Enabled *bool
 
-	// Indicates whether the CreateSession (https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html)
-	// operation was successful.
+	// Indicates whether the temporary credential request was successful.
 	Failed *bool
 
 	// The fully qualified domain name of the issuing certificate for the presented
 	// end-entity certificate.
 	Issuer *string
 
-	// The ISO-8601 time stamp of when the certificate was last used in a CreateSession (https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html)
-	// operation.
+	// The ISO-8601 time stamp of when the certificate was last used in a temporary
+	// credential request.
 	SeenAt *time.Time
 
 	// The serial number of the certificate.
@@ -73,16 +71,90 @@ type CrlDetail struct {
 // instance.
 type InstanceProperty struct {
 
-	// Indicates whether the CreateSession (https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html)
-	// operation was successful.
+	// Indicates whether the temporary credential request was successful.
 	Failed *bool
 
 	// A list of instanceProperty objects.
 	Properties map[string]string
 
-	// The ISO-8601 time stamp of when the certificate was last used in a CreateSession (https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html)
-	// operation.
+	// The ISO-8601 time stamp of when the certificate was last used in a temporary
+	// credential request.
 	SeenAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Customizable notification settings that will be applied to notification events.
+// IAM Roles Anywhere consumes these settings while notifying across multiple
+// channels - CloudWatch metrics, EventBridge, and Health Dashboard.
+type NotificationSetting struct {
+
+	// Indicates whether the notification setting is enabled.
+	//
+	// This member is required.
+	Enabled *bool
+
+	// The event to which this notification setting is applied.
+	//
+	// This member is required.
+	Event NotificationEvent
+
+	// The specified channel of notification. IAM Roles Anywhere uses CloudWatch
+	// metrics, EventBridge, and Health Dashboard to notify for an event. In the
+	// absence of a specific channel, IAM Roles Anywhere applies this setting to 'ALL'
+	// channels.
+	Channel NotificationChannel
+
+	// The number of days before a notification event. This value is required for a
+	// notification setting that is enabled.
+	Threshold *int32
+
+	noSmithyDocumentSerde
+}
+
+// The state of a notification setting. A notification setting includes
+// information such as event name, threshold, status of the notification setting,
+// and the channel to notify.
+type NotificationSettingDetail struct {
+
+	// Indicates whether the notification setting is enabled.
+	//
+	// This member is required.
+	Enabled *bool
+
+	// The event to which this notification setting is applied.
+	//
+	// This member is required.
+	Event NotificationEvent
+
+	// The specified channel of notification. IAM Roles Anywhere uses CloudWatch
+	// metrics, EventBridge, and Health Dashboard to notify for an event. In the
+	// absence of a specific channel, IAM Roles Anywhere applies this setting to 'ALL'
+	// channels.
+	Channel NotificationChannel
+
+	// The principal that configured the notification setting. For default settings
+	// configured by IAM Roles Anywhere, the value is rolesanywhere.amazonaws.com , and
+	// for customized notifications settings, it is the respective account ID.
+	ConfiguredBy *string
+
+	// The number of days before a notification event.
+	Threshold *int32
+
+	noSmithyDocumentSerde
+}
+
+// A notification setting key to reset. A notification setting key includes the
+// event and the channel.
+type NotificationSettingKey struct {
+
+	// The notification setting event to reset.
+	//
+	// This member is required.
+	Event NotificationEvent
+
+	// The specified channel of notification.
+	Channel NotificationChannel
 
 	noSmithyDocumentSerde
 }
@@ -114,12 +186,12 @@ type ProfileDetail struct {
 	// The unique identifier of the profile.
 	ProfileId *string
 
-	// Specifies whether instance properties are required in CreateSession (https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html)
+	// Specifies whether instance properties are required in temporary credential
 	// requests with this profile.
 	RequireInstanceProperties *bool
 
-	// A list of IAM roles that this profile can assume in a CreateSession (https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html)
-	// operation.
+	// A list of IAM roles that this profile can assume in a temporary credential
+	// request.
 	RoleArns []string
 
 	// A session policy that applies to the trust boundary of the vended session
@@ -154,9 +226,9 @@ type SourceData interface {
 	isSourceData()
 }
 
-// The root certificate of the Certificate Manager Private Certificate Authority
-// specified by this ARN is used in trust validation for CreateSession (https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html)
-// operations. Included for trust anchors of type AWS_ACM_PCA .
+// The root certificate of the Private Certificate Authority specified by this ARN
+// is used in trust validation for temporary credential requests. Included for
+// trust anchors of type AWS_ACM_PCA .
 type SourceDataMemberAcmPcaArn struct {
 	Value string
 
@@ -182,7 +254,7 @@ type SubjectDetail struct {
 	CreatedAt *time.Time
 
 	// The temporary session credentials vended at the last authenticating call with
-	// this Subject.
+	// this subject.
 	Credentials []CredentialSummary
 
 	// The enabled status of the subject.
@@ -191,7 +263,7 @@ type SubjectDetail struct {
 	// The specified instance properties associated with the request.
 	InstanceProperties []InstanceProperty
 
-	// The ISO-8601 timestamp of the last time this Subject requested temporary
+	// The ISO-8601 timestamp of the last time this subject requested temporary
 	// session credentials.
 	LastSeenAt *time.Time
 
@@ -210,20 +282,18 @@ type SubjectDetail struct {
 	noSmithyDocumentSerde
 }
 
-// A summary representation of Subject resources returned in read operations;
-// primarily ListSubjects.
+// A summary representation of subjects.
 type SubjectSummary struct {
 
-	// The ISO-8601 time stamp of when the certificate was first used in a
-	// CreateSession (https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html)
-	// operation.
+	// The ISO-8601 time stamp of when the certificate was first used in a temporary
+	// credential request.
 	CreatedAt *time.Time
 
-	// The enabled status of the Subject.
+	// The enabled status of the subject.
 	Enabled *bool
 
-	// The ISO-8601 time stamp of when the certificate was last used in a CreateSession (https://docs.aws.amazon.com/rolesanywhere/latest/APIReference/API_CreateSession.html)
-	// operation.
+	// The ISO-8601 time stamp of when the certificate was last used in a temporary
+	// credential request.
 	LastSeenAt *time.Time
 
 	// The ARN of the resource.
@@ -268,6 +338,9 @@ type TrustAnchorDetail struct {
 
 	// The name of the trust anchor.
 	Name *string
+
+	// A list of notification settings to be associated to the trust anchor.
+	NotificationSettings []NotificationSettingDetail
 
 	// The trust anchor type and its related certificate data.
 	Source *Source

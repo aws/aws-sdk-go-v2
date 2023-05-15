@@ -99,11 +99,11 @@ type CreateServerInput struct {
 	// in the Transfer Family User Guide.
 	HostKey *string
 
-	// Required when IdentityProviderType is set to AWS_DIRECTORY_SERVICE or
-	// API_GATEWAY . Accepts an array containing all of the information required to use
-	// a directory in AWS_DIRECTORY_SERVICE or invoke a customer-supplied
-	// authentication API, including the API Gateway URL. Not required when
-	// IdentityProviderType is set to SERVICE_MANAGED .
+	// Required when IdentityProviderType is set to AWS_DIRECTORY_SERVICE , Amazon Web
+	// Services_LAMBDA or API_GATEWAY . Accepts an array containing all of the
+	// information required to use a directory in AWS_DIRECTORY_SERVICE or invoke a
+	// customer-supplied authentication API, including the API Gateway URL. Not
+	// required when IdentityProviderType is set to SERVICE_MANAGED .
 	IdentityProviderDetails *types.IdentityProviderDetails
 
 	// The mode of authentication for a server. The default value is SERVICE_MANAGED ,
@@ -117,7 +117,7 @@ type CreateServerInput struct {
 	// provide an Amazon API Gateway endpoint URL to call for authentication by using
 	// the IdentityProviderDetails parameter. Use the AWS_LAMBDA value to directly use
 	// an Lambda function as your identity provider. If you choose this value, you must
-	// specify the ARN for the Lambda function in the Function parameter or the
+	// specify the ARN for the Lambda function in the Function parameter for the
 	// IdentityProviderDetails data type.
 	IdentityProviderType types.IdentityProviderType
 
@@ -191,7 +191,8 @@ type CreateServerInput struct {
 	// that's used for executing the workflow. In addition to a workflow to execute
 	// when a file is uploaded completely, WorkflowDetails can also contain a workflow
 	// ID (and execution role) for a workflow to execute on partial upload. A partial
-	// upload occurs when a file is open when the session disconnects.
+	// upload occurs when the server session disconnects while the file is still being
+	// uploaded.
 	WorkflowDetails *types.WorkflowDetails
 
 	noSmithyDocumentSerde

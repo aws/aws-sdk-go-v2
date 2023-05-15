@@ -193,6 +193,13 @@ func awsRestjson1_serializeOpDocumentCreateTrustAnchorInput(v *CreateTrustAnchor
 		ok.String(*v.Name)
 	}
 
+	if v.NotificationSettings != nil {
+		ok := object.Key("notificationSettings")
+		if err := awsRestjson1_serializeDocumentNotificationSettings(v.NotificationSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Source != nil {
 		ok := object.Key("source")
 		if err := awsRestjson1_serializeDocumentSource(v.Source, ok); err != nil {
@@ -1335,6 +1342,156 @@ func awsRestjson1_serializeOpHttpBindingsListTrustAnchorsInput(v *ListTrustAncho
 	return nil
 }
 
+type awsRestjson1_serializeOpPutNotificationSettings struct {
+}
+
+func (*awsRestjson1_serializeOpPutNotificationSettings) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpPutNotificationSettings) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*PutNotificationSettingsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/put-notifications-settings")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PATCH"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentPutNotificationSettingsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsPutNotificationSettingsInput(v *PutNotificationSettingsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentPutNotificationSettingsInput(v *PutNotificationSettingsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.NotificationSettings != nil {
+		ok := object.Key("notificationSettings")
+		if err := awsRestjson1_serializeDocumentNotificationSettings(v.NotificationSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TrustAnchorId != nil {
+		ok := object.Key("trustAnchorId")
+		ok.String(*v.TrustAnchorId)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpResetNotificationSettings struct {
+}
+
+func (*awsRestjson1_serializeOpResetNotificationSettings) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpResetNotificationSettings) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ResetNotificationSettingsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/reset-notifications-settings")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PATCH"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentResetNotificationSettingsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsResetNotificationSettingsInput(v *ResetNotificationSettingsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentResetNotificationSettingsInput(v *ResetNotificationSettingsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.NotificationSettingKeys != nil {
+		ok := object.Key("notificationSettingKeys")
+		if err := awsRestjson1_serializeDocumentNotificationSettingKeys(v.NotificationSettingKeys, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TrustAnchorId != nil {
+		ok := object.Key("trustAnchorId")
+		ok.String(*v.TrustAnchorId)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpTagResource struct {
 }
 
@@ -1771,6 +1928,76 @@ func awsRestjson1_serializeDocumentManagedPolicyList(v []string, value smithyjso
 	for i := range v {
 		av := array.Value()
 		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentNotificationSetting(v *types.NotificationSetting, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Channel) > 0 {
+		ok := object.Key("channel")
+		ok.String(string(v.Channel))
+	}
+
+	if v.Enabled != nil {
+		ok := object.Key("enabled")
+		ok.Boolean(*v.Enabled)
+	}
+
+	if len(v.Event) > 0 {
+		ok := object.Key("event")
+		ok.String(string(v.Event))
+	}
+
+	if v.Threshold != nil {
+		ok := object.Key("threshold")
+		ok.Integer(*v.Threshold)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentNotificationSettingKey(v *types.NotificationSettingKey, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Channel) > 0 {
+		ok := object.Key("channel")
+		ok.String(string(v.Channel))
+	}
+
+	if len(v.Event) > 0 {
+		ok := object.Key("event")
+		ok.String(string(v.Event))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentNotificationSettingKeys(v []types.NotificationSettingKey, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentNotificationSettingKey(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentNotificationSettings(v []types.NotificationSetting, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentNotificationSetting(&v[i], av); err != nil {
+			return err
+		}
 	}
 	return nil
 }

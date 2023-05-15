@@ -32,8 +32,8 @@ func (c *Client) UpdateUser(ctx context.Context, params *UpdateUserInput, optFns
 
 type UpdateUserInput struct {
 
-	// A system-assigned unique identifier for a server instance that the user account
-	// is assigned to.
+	// A system-assigned unique identifier for a Transfer Family server instance that
+	// the user is assigned to.
 	//
 	// This member is required.
 	ServerId *string
@@ -113,8 +113,8 @@ type UpdateUserInput struct {
 // update a user's properties.
 type UpdateUserOutput struct {
 
-	// A system-assigned unique identifier for a server instance that the user account
-	// is assigned to.
+	// A system-assigned unique identifier for a Transfer Family server instance that
+	// the account is assigned to.
 	//
 	// This member is required.
 	ServerId *string

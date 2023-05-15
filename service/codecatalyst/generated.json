@@ -21,6 +21,7 @@
         "api_op_GetSubscription.go",
         "api_op_GetUserDetails.go",
         "api_op_ListAccessTokens.go",
+        "api_op_ListDevEnvironmentSessions.go",
         "api_op_ListDevEnvironments.go",
         "api_op_ListEventLogs.go",
         "api_op_ListProjects.go",

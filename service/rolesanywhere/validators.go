@@ -350,6 +350,46 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutNotificationSettings struct {
+}
+
+func (*validateOpPutNotificationSettings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutNotificationSettings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutNotificationSettingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutNotificationSettingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpResetNotificationSettings struct {
+}
+
+func (*validateOpResetNotificationSettings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpResetNotificationSettings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ResetNotificationSettingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpResetNotificationSettingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -518,6 +558,14 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
 
+func addOpPutNotificationSettingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutNotificationSettings{}, middleware.After)
+}
+
+func addOpResetNotificationSettingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpResetNotificationSettings{}, middleware.After)
+}
+
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
 }
@@ -536,6 +584,73 @@ func addOpUpdateProfileValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateTrustAnchorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateTrustAnchor{}, middleware.After)
+}
+
+func validateNotificationSetting(v *types.NotificationSetting) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NotificationSetting"}
+	if v.Enabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
+	}
+	if len(v.Event) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Event"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNotificationSettingKey(v *types.NotificationSettingKey) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NotificationSettingKey"}
+	if len(v.Event) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Event"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNotificationSettingKeys(v []types.NotificationSettingKey) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NotificationSettingKeys"}
+	for i := range v {
+		if err := validateNotificationSettingKey(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNotificationSettings(v []types.NotificationSetting) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NotificationSettings"}
+	for i := range v {
+		if err := validateNotificationSetting(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateTag(v *types.Tag) error {
@@ -610,6 +725,11 @@ func validateOpCreateTrustAnchorInput(v *CreateTrustAnchorInput) error {
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.NotificationSettings != nil {
+		if err := validateNotificationSettings(v.NotificationSettings); err != nil {
+			invalidParams.AddNested("NotificationSettings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -847,6 +967,50 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutNotificationSettingsInput(v *PutNotificationSettingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutNotificationSettingsInput"}
+	if v.TrustAnchorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrustAnchorId"))
+	}
+	if v.NotificationSettings == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NotificationSettings"))
+	} else if v.NotificationSettings != nil {
+		if err := validateNotificationSettings(v.NotificationSettings); err != nil {
+			invalidParams.AddNested("NotificationSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpResetNotificationSettingsInput(v *ResetNotificationSettingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResetNotificationSettingsInput"}
+	if v.TrustAnchorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrustAnchorId"))
+	}
+	if v.NotificationSettingKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NotificationSettingKeys"))
+	} else if v.NotificationSettingKeys != nil {
+		if err := validateNotificationSettingKeys(v.NotificationSettingKeys); err != nil {
+			invalidParams.AddNested("NotificationSettingKeys", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

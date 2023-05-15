@@ -31,8 +31,8 @@ func (c *Client) UpdateServer(ctx context.Context, params *UpdateServerInput, op
 
 type UpdateServerInput struct {
 
-	// A system-assigned unique identifier for a server instance that the user account
-	// is assigned to.
+	// A system-assigned unique identifier for a server instance that the Transfer
+	// Family user is assigned to.
 	//
 	// This member is required.
 	ServerId *string
@@ -170,10 +170,10 @@ type UpdateServerInput struct {
 	// that's used for executing the workflow. In addition to a workflow to execute
 	// when a file is uploaded completely, WorkflowDetails can also contain a workflow
 	// ID (and execution role) for a workflow to execute on partial upload. A partial
-	// upload occurs when a file is open when the session disconnects. To remove an
-	// associated workflow from a server, you can provide an empty OnUpload object, as
-	// in the following example. aws transfer update-server --server-id
-	// s-01234567890abcdef --workflow-details '{"OnUpload":[]}'
+	// upload occurs when the server session disconnects while the file is still being
+	// uploaded. To remove an associated workflow from a server, you can provide an
+	// empty OnUpload object, as in the following example. aws transfer update-server
+	// --server-id s-01234567890abcdef --workflow-details '{"OnUpload":[]}'
 	WorkflowDetails *types.WorkflowDetails
 
 	noSmithyDocumentSerde
@@ -181,8 +181,8 @@ type UpdateServerInput struct {
 
 type UpdateServerOutput struct {
 
-	// A system-assigned unique identifier for a server that the user account is
-	// assigned to.
+	// A system-assigned unique identifier for a server that the Transfer Family user
+	// is assigned to.
 	//
 	// This member is required.
 	ServerId *string

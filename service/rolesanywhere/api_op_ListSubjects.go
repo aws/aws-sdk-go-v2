@@ -32,7 +32,7 @@ func (c *Client) ListSubjects(ctx context.Context, params *ListSubjectsInput, op
 type ListSubjectsInput struct {
 
 	// A token that indicates where the output should continue from, if a previous
-	// operation did not show all results. To get the next results, call the operation
+	// request did not show all results. To get the next results, make the request
 	// again with this value.
 	NextToken *string
 
@@ -45,7 +45,7 @@ type ListSubjectsInput struct {
 type ListSubjectsOutput struct {
 
 	// A token that indicates where the output should continue from, if a previous
-	// operation did not show all results. To get the next results, call the operation
+	// request did not show all results. To get the next results, make the request
 	// again with this value.
 	NextToken *string
 
