@@ -1,8 +1,0 @@
-{
-    "id": "9629df9a-620f-498a-8fd2-888e82b0a43d",
-    "type": "feature",
-    "description": "With this release, the users can list the active sessions connected to their Dev Environment on AWS CodeCatalyst",
-    "modules": [
-        "service/codecatalyst"
-    ]
-}

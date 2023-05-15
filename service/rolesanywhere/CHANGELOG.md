@@ -1,3 +1,7 @@
+# v1.2.0 (2023-05-15)
+
+* **Feature**: Adds support for custom notification settings in a trust anchor. Introduces PutNotificationSettings and ResetNotificationSettings API's. Updates DurationSeconds max value to 3600.
+
 # v1.1.11 (2023-05-04)
 
 * No change notes available for this release.

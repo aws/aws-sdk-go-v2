@@ -8,7 +8,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.20.0
 	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.15.10
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.20.11
-	github.com/aws/aws-sdk-go-v2/service/athena v1.26.1
+	github.com/aws/aws-sdk-go-v2/service/athena v1.27.0
 	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.28.7
 	github.com/aws/aws-sdk-go-v2/service/batch v1.23.5
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.27.4
@@ -62,10 +62,10 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/polly v1.25.10
 	github.com/aws/aws-sdk-go-v2/service/rds v1.44.0
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.27.11
-	github.com/aws/aws-sdk-go-v2/service/rekognition v1.27.0
+	github.com/aws/aws-sdk-go-v2/service/rekognition v1.28.0
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.28.1
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.14.10
-	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.17.9
+	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.17.10
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.33.1
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.31.5
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.19.7

@@ -1,3 +1,17 @@
+# Release (2023-05-15)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/athena`: [v1.27.0](service/athena/CHANGELOG.md#v1270-2023-05-15)
+  * **Feature**: You can now define custom spark properties at start of the session for use cases like cluster encryption, table formats, and general Spark tuning.
+* `github.com/aws/aws-sdk-go-v2/service/codecatalyst`: [v1.3.0](service/codecatalyst/CHANGELOG.md#v130-2023-05-15)
+  * **Feature**: With this release, the users can list the active sessions connected to their Dev Environment on AWS CodeCatalyst
+* `github.com/aws/aws-sdk-go-v2/service/rekognition`: [v1.28.0](service/rekognition/CHANGELOG.md#v1280-2023-05-15)
+  * **Feature**: This release adds a new EyeDirection attribute in Amazon Rekognition DetectFaces and IndexFaces APIs which predicts the yaw and pitch angles of a person's eye gaze direction for each face detected in the image.
+* `github.com/aws/aws-sdk-go-v2/service/rolesanywhere`: [v1.2.0](service/rolesanywhere/CHANGELOG.md#v120-2023-05-15)
+  * **Feature**: Adds support for custom notification settings in a trust anchor. Introduces PutNotificationSettings and ResetNotificationSettings API's. Updates DurationSeconds max value to 3600.
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.29.0](service/transfer/CHANGELOG.md#v1290-2023-05-15)
+  * **Feature**: This release introduces the ability to require both password and SSH key when users authenticate to your Transfer Family servers that use the SFTP protocol.
+
 # Release (2023-05-11)
 
 ## Module Highlights
