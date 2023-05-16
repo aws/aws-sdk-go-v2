@@ -1,3 +1,7 @@
+# v1.18.14 (2023-05-16)
+
+* **Documentation**: This release includes an update to the mtu value for CreateTransitVirtualInterface from 9001 mtu to 8500 mtu.
+
 # v1.18.13 (2023-05-04)
 
 * No change notes available for this release.

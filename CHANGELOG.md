@@ -1,3 +1,17 @@
+# Release (2023-05-16)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/detective`: [v1.19.0](service/detective/CHANGELOG.md#v1190-2023-05-16)
+  * **Feature**: Added and updated API operations in Detective to support the integration of ASFF Security Hub findings.
+* `github.com/aws/aws-sdk-go-v2/service/directconnect`: [v1.18.14](service/directconnect/CHANGELOG.md#v11814-2023-05-16)
+  * **Documentation**: This release includes an update to the mtu value for CreateTransitVirtualInterface from 9001 mtu to 8500 mtu.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.48.0](service/glue/CHANGELOG.md#v1480-2023-05-16)
+  * **Feature**: Add Support for Tags for Custom Entity Types
+* `github.com/aws/aws-sdk-go-v2/service/secretsmanager`: [v1.19.8](service/secretsmanager/CHANGELOG.md#v1198-2023-05-16)
+  * **Documentation**: Documentation updates for Secrets Manager
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.32.0](service/wafv2/CHANGELOG.md#v1320-2023-05-16)
+  * **Feature**: My AWS Service (placeholder) - You can now rate limit web requests based on aggregation keys other than IP addresses, and you can aggregate using combinations of keys. You can also rate limit all requests that match a scope-down statement, without further aggregation.
+
 # Release (2023-05-15)
 
 ## Module Highlights

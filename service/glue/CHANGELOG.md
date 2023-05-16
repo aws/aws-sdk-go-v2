@@ -1,3 +1,7 @@
+# v1.48.0 (2023-05-16)
+
+* **Feature**: Add Support for Tags for Custom Entity Types
+
 # v1.47.0 (2023-05-09)
 
 * **Feature**: This release adds AmazonRedshift Source and Target nodes in addition to DynamicTransform OutputSchemas

@@ -1,3 +1,7 @@
+# v1.19.0 (2023-05-16)
+
+* **Feature**: Added and updated API operations in Detective to support the integration of ASFF Security Hub findings.
+
 # v1.18.10 (2023-05-04)
 
 * No change notes available for this release.

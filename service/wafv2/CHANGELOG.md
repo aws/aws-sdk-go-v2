@@ -1,3 +1,7 @@
+# v1.32.0 (2023-05-16)
+
+* **Feature**: My AWS Service (placeholder) - You can now rate limit web requests based on aggregation keys other than IP addresses, and you can aggregate using combinations of keys. You can also rate limit all requests that match a scope-down statement, without further aggregation.
+
 # v1.31.1 (2023-05-04)
 
 * No change notes available for this release.

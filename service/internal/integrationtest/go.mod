@@ -27,7 +27,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.15.10
 	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.25.5
 	github.com/aws/aws-sdk-go-v2/service/devicefarm v1.15.10
-	github.com/aws/aws-sdk-go-v2/service/directconnect v1.18.13
+	github.com/aws/aws-sdk-go-v2/service/directconnect v1.18.14
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.17.1
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.21.3
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.19.7
@@ -46,7 +46,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.16.12
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.18.2
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.14.11
-	github.com/aws/aws-sdk-go-v2/service/glue v1.47.0
+	github.com/aws/aws-sdk-go-v2/service/glue v1.48.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.17.0
 	github.com/aws/aws-sdk-go-v2/service/iam v1.19.12
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.13.10
@@ -68,7 +68,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.17.10
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.33.1
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.31.5
-	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.19.7
+	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.19.8
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.18.4
 	github.com/aws/aws-sdk-go-v2/service/ses v1.15.9
 	github.com/aws/aws-sdk-go-v2/service/sfn v1.17.11
@@ -83,7 +83,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.9.10
 	github.com/aws/aws-sdk-go-v2/service/waf v1.12.10
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.13.13
-	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.31.1
+	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.32.0
 	github.com/aws/aws-sdk-go-v2/service/workspaces v1.28.12
 	github.com/aws/smithy-go v1.13.5
 	github.com/google/go-cmp v0.5.8

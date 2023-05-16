@@ -1,8 +1,0 @@
-{
-    "id": "cdccd3b2-b3ed-4ac6-a301-5d9fdc816c68",
-    "type": "feature",
-    "description": "Added and updated API operations in Detective to support the integration of ASFF Security Hub findings.",
-    "modules": [
-        "service/detective"
-    ]
-}
