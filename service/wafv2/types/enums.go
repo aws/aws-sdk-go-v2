@@ -885,6 +885,8 @@ const (
 	ParameterExceptionFieldTokenDomain                    ParameterExceptionField = "TOKEN_DOMAIN"
 	ParameterExceptionFieldAtpRuleSetResponseInspection   ParameterExceptionField = "ATP_RULE_SET_RESPONSE_INSPECTION"
 	ParameterExceptionFieldAssociatedResourceType         ParameterExceptionField = "ASSOCIATED_RESOURCE_TYPE"
+	ParameterExceptionFieldScopeDown                      ParameterExceptionField = "SCOPE_DOWN"
+	ParameterExceptionFieldCustomKeys                     ParameterExceptionField = "CUSTOM_KEYS"
 )
 
 // Values returns all known values for ParameterExceptionField. Note that this can
@@ -959,6 +961,8 @@ func (ParameterExceptionField) Values() []ParameterExceptionField {
 		"TOKEN_DOMAIN",
 		"ATP_RULE_SET_RESPONSE_INSPECTION",
 		"ASSOCIATED_RESOURCE_TYPE",
+		"SCOPE_DOWN",
+		"CUSTOM_KEYS",
 	}
 }
 
@@ -1028,6 +1032,8 @@ type RateBasedStatementAggregateKeyType string
 const (
 	RateBasedStatementAggregateKeyTypeIp          RateBasedStatementAggregateKeyType = "IP"
 	RateBasedStatementAggregateKeyTypeForwardedIp RateBasedStatementAggregateKeyType = "FORWARDED_IP"
+	RateBasedStatementAggregateKeyTypeCustomKeys  RateBasedStatementAggregateKeyType = "CUSTOM_KEYS"
+	RateBasedStatementAggregateKeyTypeConstant    RateBasedStatementAggregateKeyType = "CONSTANT"
 )
 
 // Values returns all known values for RateBasedStatementAggregateKeyType. Note
@@ -1038,6 +1044,8 @@ func (RateBasedStatementAggregateKeyType) Values() []RateBasedStatementAggregate
 	return []RateBasedStatementAggregateKeyType{
 		"IP",
 		"FORWARDED_IP",
+		"CUSTOM_KEYS",
+		"CONSTANT",
 	}
 }
 

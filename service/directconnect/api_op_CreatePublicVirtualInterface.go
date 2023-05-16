@@ -96,7 +96,7 @@ type CreatePublicVirtualInterfaceOutput struct {
 	Location *string
 
 	// The maximum transmission unit (MTU), in bytes. The supported values are 1500
-	// and 9001. The default value is 1500.
+	// and 8500. The default value is 1500
 	Mtu *int32
 
 	// The ID of the Amazon Web Services account that owns the virtual interface.

@@ -6,8 +6,9 @@ type DatasourcePackage string
 
 // Enum values for DatasourcePackage
 const (
-	DatasourcePackageDetectiveCore DatasourcePackage = "DETECTIVE_CORE"
-	DatasourcePackageEksAudit      DatasourcePackage = "EKS_AUDIT"
+	DatasourcePackageDetectiveCore          DatasourcePackage = "DETECTIVE_CORE"
+	DatasourcePackageEksAudit               DatasourcePackage = "EKS_AUDIT"
+	DatasourcePackageAsffSecurityhubFinding DatasourcePackage = "ASFF_SECURITYHUB_FINDING"
 )
 
 // Values returns all known values for DatasourcePackage. Note that this can be
@@ -17,6 +18,7 @@ func (DatasourcePackage) Values() []DatasourcePackage {
 	return []DatasourcePackage{
 		"DETECTIVE_CORE",
 		"EKS_AUDIT",
+		"ASFF_SECURITYHUB_FINDING",
 	}
 }
 

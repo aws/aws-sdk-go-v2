@@ -36,6 +36,9 @@ type ListCustomEntityTypesInput struct {
 	// A paginated token to offset the results.
 	NextToken *string
 
+	// A list of key-value pair tags.
+	Tags map[string]string
+
 	noSmithyDocumentSerde
 }
 

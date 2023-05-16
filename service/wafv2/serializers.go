@@ -3978,6 +3978,13 @@ func awsAwsjson11_serializeDocumentRateBasedStatement(v *types.RateBasedStatemen
 		ok.String(string(v.AggregateKeyType))
 	}
 
+	if v.CustomKeys != nil {
+		ok := object.Key("CustomKeys")
+		if err := awsAwsjson11_serializeDocumentRateBasedStatementCustomKeys(v.CustomKeys, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ForwardedIPConfig != nil {
 		ok := object.Key("ForwardedIPConfig")
 		if err := awsAwsjson11_serializeDocumentForwardedIPConfig(v.ForwardedIPConfig, ok); err != nil {
@@ -3993,6 +4000,186 @@ func awsAwsjson11_serializeDocumentRateBasedStatement(v *types.RateBasedStatemen
 	if v.ScopeDownStatement != nil {
 		ok := object.Key("ScopeDownStatement")
 		if err := awsAwsjson11_serializeDocumentStatement(v.ScopeDownStatement, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRateBasedStatementCustomKey(v *types.RateBasedStatementCustomKey, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Cookie != nil {
+		ok := object.Key("Cookie")
+		if err := awsAwsjson11_serializeDocumentRateLimitCookie(v.Cookie, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ForwardedIP != nil {
+		ok := object.Key("ForwardedIP")
+		if err := awsAwsjson11_serializeDocumentRateLimitForwardedIP(v.ForwardedIP, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Header != nil {
+		ok := object.Key("Header")
+		if err := awsAwsjson11_serializeDocumentRateLimitHeader(v.Header, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.HTTPMethod != nil {
+		ok := object.Key("HTTPMethod")
+		if err := awsAwsjson11_serializeDocumentRateLimitHTTPMethod(v.HTTPMethod, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.IP != nil {
+		ok := object.Key("IP")
+		if err := awsAwsjson11_serializeDocumentRateLimitIP(v.IP, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LabelNamespace != nil {
+		ok := object.Key("LabelNamespace")
+		if err := awsAwsjson11_serializeDocumentRateLimitLabelNamespace(v.LabelNamespace, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.QueryArgument != nil {
+		ok := object.Key("QueryArgument")
+		if err := awsAwsjson11_serializeDocumentRateLimitQueryArgument(v.QueryArgument, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.QueryString != nil {
+		ok := object.Key("QueryString")
+		if err := awsAwsjson11_serializeDocumentRateLimitQueryString(v.QueryString, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRateBasedStatementCustomKeys(v []types.RateBasedStatementCustomKey, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentRateBasedStatementCustomKey(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRateLimitCookie(v *types.RateLimitCookie, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.TextTransformations != nil {
+		ok := object.Key("TextTransformations")
+		if err := awsAwsjson11_serializeDocumentTextTransformations(v.TextTransformations, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRateLimitForwardedIP(v *types.RateLimitForwardedIP, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRateLimitHeader(v *types.RateLimitHeader, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.TextTransformations != nil {
+		ok := object.Key("TextTransformations")
+		if err := awsAwsjson11_serializeDocumentTextTransformations(v.TextTransformations, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRateLimitHTTPMethod(v *types.RateLimitHTTPMethod, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRateLimitIP(v *types.RateLimitIP, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRateLimitLabelNamespace(v *types.RateLimitLabelNamespace, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Namespace != nil {
+		ok := object.Key("Namespace")
+		ok.String(*v.Namespace)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRateLimitQueryArgument(v *types.RateLimitQueryArgument, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.TextTransformations != nil {
+		ok := object.Key("TextTransformations")
+		if err := awsAwsjson11_serializeDocumentTextTransformations(v.TextTransformations, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRateLimitQueryString(v *types.RateLimitQueryString, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TextTransformations != nil {
+		ok := object.Key("TextTransformations")
+		if err := awsAwsjson11_serializeDocumentTextTransformations(v.TextTransformations, ok); err != nil {
 			return err
 		}
 	}

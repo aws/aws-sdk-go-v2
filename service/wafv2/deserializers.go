@@ -3037,6 +3037,9 @@ func awsAwsjson11_deserializeOpErrorGetRateBasedStatementManagedKeys(response *s
 	case strings.EqualFold("WAFNonexistentItemException", errorCode):
 		return awsAwsjson11_deserializeErrorWAFNonexistentItemException(response, errorBody)
 
+	case strings.EqualFold("WAFUnsupportedAggregateKeyTypeException", errorCode):
+		return awsAwsjson11_deserializeErrorWAFUnsupportedAggregateKeyTypeException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -6977,6 +6980,41 @@ func awsAwsjson11_deserializeErrorWAFUnavailableEntityException(response *smithy
 
 	output := &types.WAFUnavailableEntityException{}
 	err := awsAwsjson11_deserializeDocumentWAFUnavailableEntityException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
+func awsAwsjson11_deserializeErrorWAFUnsupportedAggregateKeyTypeException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.WAFUnsupportedAggregateKeyTypeException{}
+	err := awsAwsjson11_deserializeDocumentWAFUnsupportedAggregateKeyTypeException(&output, shape)
 
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -11183,6 +11221,11 @@ func awsAwsjson11_deserializeDocumentRateBasedStatement(v **types.RateBasedState
 				sv.AggregateKeyType = types.RateBasedStatementAggregateKeyType(jtv)
 			}
 
+		case "CustomKeys":
+			if err := awsAwsjson11_deserializeDocumentRateBasedStatementCustomKeys(&sv.CustomKeys, value); err != nil {
+				return err
+			}
+
 		case "ForwardedIPConfig":
 			if err := awsAwsjson11_deserializeDocumentForwardedIPConfig(&sv.ForwardedIPConfig, value); err != nil {
 				return err
@@ -11212,6 +11255,111 @@ func awsAwsjson11_deserializeDocumentRateBasedStatement(v **types.RateBasedState
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRateBasedStatementCustomKey(v **types.RateBasedStatementCustomKey, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RateBasedStatementCustomKey
+	if *v == nil {
+		sv = &types.RateBasedStatementCustomKey{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Cookie":
+			if err := awsAwsjson11_deserializeDocumentRateLimitCookie(&sv.Cookie, value); err != nil {
+				return err
+			}
+
+		case "ForwardedIP":
+			if err := awsAwsjson11_deserializeDocumentRateLimitForwardedIP(&sv.ForwardedIP, value); err != nil {
+				return err
+			}
+
+		case "Header":
+			if err := awsAwsjson11_deserializeDocumentRateLimitHeader(&sv.Header, value); err != nil {
+				return err
+			}
+
+		case "HTTPMethod":
+			if err := awsAwsjson11_deserializeDocumentRateLimitHTTPMethod(&sv.HTTPMethod, value); err != nil {
+				return err
+			}
+
+		case "IP":
+			if err := awsAwsjson11_deserializeDocumentRateLimitIP(&sv.IP, value); err != nil {
+				return err
+			}
+
+		case "LabelNamespace":
+			if err := awsAwsjson11_deserializeDocumentRateLimitLabelNamespace(&sv.LabelNamespace, value); err != nil {
+				return err
+			}
+
+		case "QueryArgument":
+			if err := awsAwsjson11_deserializeDocumentRateLimitQueryArgument(&sv.QueryArgument, value); err != nil {
+				return err
+			}
+
+		case "QueryString":
+			if err := awsAwsjson11_deserializeDocumentRateLimitQueryString(&sv.QueryString, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRateBasedStatementCustomKeys(v *[]types.RateBasedStatementCustomKey, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RateBasedStatementCustomKey
+	if *v == nil {
+		cv = []types.RateBasedStatementCustomKey{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RateBasedStatementCustomKey
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentRateBasedStatementCustomKey(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -11249,6 +11397,310 @@ func awsAwsjson11_deserializeDocumentRateBasedStatementManagedKeysIPSet(v **type
 					return fmt.Errorf("expected IPAddressVersion to be of type string, got %T instead", value)
 				}
 				sv.IPAddressVersion = types.IPAddressVersion(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRateLimitCookie(v **types.RateLimitCookie, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RateLimitCookie
+	if *v == nil {
+		sv = &types.RateLimitCookie{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FieldToMatchData to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "TextTransformations":
+			if err := awsAwsjson11_deserializeDocumentTextTransformations(&sv.TextTransformations, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRateLimitForwardedIP(v **types.RateLimitForwardedIP, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RateLimitForwardedIP
+	if *v == nil {
+		sv = &types.RateLimitForwardedIP{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRateLimitHeader(v **types.RateLimitHeader, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RateLimitHeader
+	if *v == nil {
+		sv = &types.RateLimitHeader{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FieldToMatchData to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "TextTransformations":
+			if err := awsAwsjson11_deserializeDocumentTextTransformations(&sv.TextTransformations, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRateLimitHTTPMethod(v **types.RateLimitHTTPMethod, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RateLimitHTTPMethod
+	if *v == nil {
+		sv = &types.RateLimitHTTPMethod{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRateLimitIP(v **types.RateLimitIP, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RateLimitIP
+	if *v == nil {
+		sv = &types.RateLimitIP{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRateLimitLabelNamespace(v **types.RateLimitLabelNamespace, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RateLimitLabelNamespace
+	if *v == nil {
+		sv = &types.RateLimitLabelNamespace{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Namespace":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LabelNamespace to be of type string, got %T instead", value)
+				}
+				sv.Namespace = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRateLimitQueryArgument(v **types.RateLimitQueryArgument, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RateLimitQueryArgument
+	if *v == nil {
+		sv = &types.RateLimitQueryArgument{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FieldToMatchData to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "TextTransformations":
+			if err := awsAwsjson11_deserializeDocumentTextTransformations(&sv.TextTransformations, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRateLimitQueryString(v **types.RateLimitQueryString, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RateLimitQueryString
+	if *v == nil {
+		sv = &types.RateLimitQueryString{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "TextTransformations":
+			if err := awsAwsjson11_deserializeDocumentTextTransformations(&sv.TextTransformations, value); err != nil {
+				return err
 			}
 
 		default:
@@ -14698,6 +15150,46 @@ func awsAwsjson11_deserializeDocumentWAFUnavailableEntityException(v **types.WAF
 	var sv *types.WAFUnavailableEntityException
 	if *v == nil {
 		sv = &types.WAFUnavailableEntityException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentWAFUnsupportedAggregateKeyTypeException(v **types.WAFUnsupportedAggregateKeyTypeException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.WAFUnsupportedAggregateKeyTypeException
+	if *v == nil {
+		sv = &types.WAFUnsupportedAggregateKeyTypeException{}
 	} else {
 		sv = *v
 	}

@@ -1,0 +1,8 @@
+{
+    "id": "bab1c7be-b1db-401d-bc30-10b679d39c86",
+    "type": "feature",
+    "description": "Add Support for Tags for Custom Entity Types",
+    "modules": [
+        "service/glue"
+    ]
+}

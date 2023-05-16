@@ -48,6 +48,9 @@ type CreateCustomEntityTypeInput struct {
 	// data. If no context words are passed only a regular expression is checked.
 	ContextWords []string
 
+	// A list of tags applied to the custom entity type.
+	Tags map[string]string
+
 	noSmithyDocumentSerde
 }
 

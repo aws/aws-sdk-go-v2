@@ -545,3 +545,33 @@ func (e *WAFUnavailableEntityException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *WAFUnavailableEntityException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The rule that you've named doesn't aggregate solely on the IP address or solely
+// on the forwarded IP address. This call is only available for rate-based rules
+// with an AggregateKeyType setting of IP or FORWARDED_IP .
+type WAFUnsupportedAggregateKeyTypeException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *WAFUnsupportedAggregateKeyTypeException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *WAFUnsupportedAggregateKeyTypeException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *WAFUnsupportedAggregateKeyTypeException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "WAFUnsupportedAggregateKeyTypeException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *WAFUnsupportedAggregateKeyTypeException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}

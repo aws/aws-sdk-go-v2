@@ -19679,6 +19679,13 @@ func awsAwsjson11_serializeOpDocumentCreateCustomEntityTypeInput(v *CreateCustom
 		ok.String(*v.RegexString)
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsAwsjson11_serializeDocumentTagsMap(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -22523,6 +22530,13 @@ func awsAwsjson11_serializeOpDocumentListCustomEntityTypesInput(v *ListCustomEnt
 	if v.NextToken != nil {
 		ok := object.Key("NextToken")
 		ok.String(*v.NextToken)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsAwsjson11_serializeDocumentTagsMap(v.Tags, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
