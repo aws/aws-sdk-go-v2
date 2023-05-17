@@ -14,6 +14,7 @@ import (
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/endpoints/private/rulesfn"
 	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"net/http"
 	"net/url"
@@ -305,6 +306,19 @@ func (p EndpointParameters) ValidateRequired() error {
 	return nil
 }
 
+// WithDefaults returns a shallow copy of EndpointParameterswith default values
+// applied to members where applicable.
+func (p EndpointParameters) WithDefaults() EndpointParameters {
+	if p.UseDualStack == nil {
+		p.UseDualStack = ptr.Bool(false)
+	}
+
+	if p.UseFIPS == nil {
+		p.UseFIPS = ptr.Bool(false)
+	}
+	return p
+}
+
 // EndpointResolverV2 provides the interface for resolving service endpoints.
 type EndpointResolverV2 interface {
 	// ResolveEndpoint attempts to resolve the endpoint with the provided options,
@@ -328,6 +342,7 @@ func (r *resolver) ResolveEndpoint(
 ) (
 	endpoint smithyendpoints.Endpoint, err error,
 ) {
+	params = params.WithDefaults()
 	if err = params.ValidateRequired(); err != nil {
 		return endpoint, fmt.Errorf("endpoint parameters are not valid, %w", err)
 	}
@@ -337,6 +352,56 @@ func (r *resolver) ResolveEndpoint(
 	if exprVal := params.Region; exprVal != nil {
 		_Region := *exprVal
 		_ = _Region
+		if _Region == "snow" {
+			if exprVal := params.Endpoint; exprVal != nil {
+				_Endpoint := *exprVal
+				_ = _Endpoint
+				if exprVal := rulesfn.ParseURL(_Endpoint); exprVal != nil {
+					_url := *exprVal
+					_ = _url
+					if exprVal := awsrulesfn.GetPartition(_Region); exprVal != nil {
+						_partitionResult := *exprVal
+						_ = _partitionResult
+						if _UseDualStack == true {
+							return endpoint, fmt.Errorf("endpoint rule error, %s", "S3 Snow does not support Dual-stack")
+						}
+						if _UseFIPS == true {
+							return endpoint, fmt.Errorf("endpoint rule error, %s", "S3 Snow does not support FIPS")
+						}
+						uriString := func() string {
+							var out strings.Builder
+							out.WriteString(_url.Scheme)
+							out.WriteString("://")
+							out.WriteString(_url.Authority)
+							return out.String()
+						}()
+
+						uri, err := url.Parse(uriString)
+						if err != nil {
+							return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+						}
+
+						return smithyendpoints.Endpoint{
+							URI:     *uri,
+							Headers: http.Header{},
+							Properties: func() smithy.Properties {
+								var out smithy.Properties
+								out.Set("authSchemes", []interface{}{
+									map[string]interface{}{
+										"disableDoubleEncoding": true,
+										"name":                  "sigv4",
+										"signingName":           "s3",
+										"signingRegion":         _Region,
+									},
+								})
+								return out
+							}(),
+						}, nil
+					}
+					return endpoint, fmt.Errorf("endpoint rule error, %s", "A valid partition could not be determined")
+				}
+			}
+		}
 		if exprVal := params.OutpostId; exprVal != nil {
 			_OutpostId := *exprVal
 			_ = _OutpostId
@@ -560,7 +625,7 @@ func (r *resolver) ResolveEndpoint(
 
 																			return smithyendpoints.Endpoint{
 																				URI: *uri,
-																				Headers: func() *http.Header {
+																				Headers: func() http.Header {
 																					headers := http.Header{}
 																					headers.Set("x-amz-account-id", _accessPointArn.AccountId)
 																					headers.Set("x-amz-outpost-id", _outpostId)
@@ -602,7 +667,7 @@ func (r *resolver) ResolveEndpoint(
 
 																				return smithyendpoints.Endpoint{
 																					URI: *uri,
-																					Headers: func() *http.Header {
+																					Headers: func() http.Header {
 																						headers := http.Header{}
 																						headers.Set("x-amz-account-id", _accessPointArn.AccountId)
 																						headers.Set("x-amz-outpost-id", _outpostId)
@@ -639,7 +704,7 @@ func (r *resolver) ResolveEndpoint(
 
 																		return smithyendpoints.Endpoint{
 																			URI: *uri,
-																			Headers: func() *http.Header {
+																			Headers: func() http.Header {
 																				headers := http.Header{}
 																				headers.Set("x-amz-account-id", _accessPointArn.AccountId)
 																				headers.Set("x-amz-outpost-id", _outpostId)
@@ -809,7 +874,7 @@ func (r *resolver) ResolveEndpoint(
 
 																			return smithyendpoints.Endpoint{
 																				URI: *uri,
-																				Headers: func() *http.Header {
+																				Headers: func() http.Header {
 																					headers := http.Header{}
 																					headers.Set("x-amz-account-id", _bucketArn.AccountId)
 																					headers.Set("x-amz-outpost-id", _outpostId)
@@ -851,7 +916,7 @@ func (r *resolver) ResolveEndpoint(
 
 																				return smithyendpoints.Endpoint{
 																					URI: *uri,
-																					Headers: func() *http.Header {
+																					Headers: func() http.Header {
 																						headers := http.Header{}
 																						headers.Set("x-amz-account-id", _bucketArn.AccountId)
 																						headers.Set("x-amz-outpost-id", _outpostId)
@@ -888,7 +953,7 @@ func (r *resolver) ResolveEndpoint(
 
 																		return smithyendpoints.Endpoint{
 																			URI: *uri,
-																			Headers: func() *http.Header {
+																			Headers: func() http.Header {
 																				headers := http.Header{}
 																				headers.Set("x-amz-account-id", _bucketArn.AccountId)
 																				headers.Set("x-amz-outpost-id", _outpostId)
