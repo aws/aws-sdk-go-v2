@@ -58,7 +58,7 @@ import software.amazon.smithy.model.traits.MediaTypeTrait;
 import software.amazon.smithy.model.traits.StreamingTrait;
 import software.amazon.smithy.model.traits.TimestampFormatTrait;
 import software.amazon.smithy.model.traits.XmlNamespaceTrait;
-import software.amazon.smithy.go.codegen.endpoints.EndpointResolutionV2Generator;
+import software.amazon.smithy.go.codegen.endpoints.EndpointResolutionGenerator;
 import software.amazon.smithy.go.codegen.endpoints.FnGenerator;
 
 /**
@@ -111,9 +111,10 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                 .build());
     }
 
+
     @Override
     public void generateEndpointResolution(GenerationContext context) {
-        var generator = new EndpointResolutionV2Generator(new AwsFnProvider());
+        var generator = new EndpointResolutionGenerator(new AwsFnProvider());
         generator.generate(context);
     }
 

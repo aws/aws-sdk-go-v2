@@ -14,6 +14,7 @@ import (
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/endpoints/private/rulesfn"
 	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"net/http"
 	"net/url"
@@ -336,6 +337,31 @@ func (p EndpointParameters) ValidateRequired() error {
 	return nil
 }
 
+// WithDefaults returns a shallow copy of EndpointParameterswith default values
+// applied to members where applicable.
+func (p EndpointParameters) WithDefaults() EndpointParameters {
+	if p.Accelerate == nil {
+		p.Accelerate = ptr.Bool(false)
+	}
+
+	if p.DisableMultiRegionAccessPoints == nil {
+		p.DisableMultiRegionAccessPoints = ptr.Bool(false)
+	}
+
+	if p.UseDualStack == nil {
+		p.UseDualStack = ptr.Bool(false)
+	}
+
+	if p.UseFIPS == nil {
+		p.UseFIPS = ptr.Bool(false)
+	}
+
+	if p.UseGlobalEndpoint == nil {
+		p.UseGlobalEndpoint = ptr.Bool(false)
+	}
+	return p
+}
+
 // EndpointResolverV2 provides the interface for resolving service endpoints.
 type EndpointResolverV2 interface {
 	// ResolveEndpoint attempts to resolve the endpoint with the provided options,
@@ -359,6 +385,7 @@ func (r *resolver) ResolveEndpoint(
 ) (
 	endpoint smithyendpoints.Endpoint, err error,
 ) {
+	params = params.WithDefaults()
 	if err = params.ValidateRequired(); err != nil {
 		return endpoint, fmt.Errorf("endpoint parameters are not valid, %w", err)
 	}
