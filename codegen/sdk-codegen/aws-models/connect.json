@@ -626,6 +626,9 @@
                     "target": "com.amazonaws.connect#CreateParticipant"
                 },
                 {
+                    "target": "com.amazonaws.connect#CreatePrompt"
+                },
+                {
                     "target": "com.amazonaws.connect#CreateQueue"
                 },
                 {
@@ -681,6 +684,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#DeleteIntegrationAssociation"
+                },
+                {
+                    "target": "com.amazonaws.connect#DeletePrompt"
                 },
                 {
                     "target": "com.amazonaws.connect#DeleteQuickConnect"
@@ -741,6 +747,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#DescribePhoneNumber"
+                },
+                {
+                    "target": "com.amazonaws.connect#DescribePrompt"
                 },
                 {
                     "target": "com.amazonaws.connect#DescribeQueue"
@@ -819,6 +828,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#GetMetricDataV2"
+                },
+                {
+                    "target": "com.amazonaws.connect#GetPromptFile"
                 },
                 {
                     "target": "com.amazonaws.connect#GetTaskTemplate"
@@ -1053,6 +1065,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#UpdatePhoneNumber"
+                },
+                {
+                    "target": "com.amazonaws.connect#UpdatePrompt"
                 },
                 {
                     "target": "com.amazonaws.connect#UpdateQueueHoursOfOperation"
@@ -4761,6 +4776,105 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.connect#CreatePrompt": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#CreatePromptRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#CreatePromptResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#DuplicateResourceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a prompt. For more information about prompts, such as supported file types and maximum length, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/prompts.html\">Create prompts</a> in the <i>Amazon Connect Administrator's Guide</i>.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/prompts/{InstanceId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#CreatePromptRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.connect#CommonNameLength127",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the prompt.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.connect#PromptDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the prompt.</p>"
+                    }
+                },
+                "S3Uri": {
+                    "target": "com.amazonaws.connect#S3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URI for the S3 bucket where the prompt is stored.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.connect#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#CreatePromptResponse": {
+            "type": "structure",
+            "members": {
+                "PromptARN": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the prompt.</p>"
+                    }
+                },
+                "PromptId": {
+                    "target": "com.amazonaws.connect#PromptId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the prompt.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.connect#CreateQueue": {
             "type": "operation",
             "input": {
@@ -6834,6 +6948,64 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.connect#DeletePrompt": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#DeletePromptRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a prompt.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/prompts/{InstanceId}/{PromptId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#DeletePromptRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "PromptId": {
+                    "target": "com.amazonaws.connect#PromptId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the prompt.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
         "com.amazonaws.connect#DeleteQuickConnect": {
             "type": "operation",
             "input": {
@@ -8195,6 +8367,78 @@
                     "target": "com.amazonaws.connect#ClaimedPhoneNumberSummary",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about a phone number that's been claimed to your Amazon Connect instance or\n   traffic distribution group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connect#DescribePrompt": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#DescribePromptRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#DescribePromptResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the prompt.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/prompts/{InstanceId}/{PromptId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#DescribePromptRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "PromptId": {
+                    "target": "com.amazonaws.connect#PromptId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the prompt.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#DescribePromptResponse": {
+            "type": "structure",
+            "members": {
+                "Prompt": {
+                    "target": "com.amazonaws.connect#Prompt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the prompt.</p>"
                     }
                 }
             },
@@ -11822,6 +12066,78 @@
                     "target": "com.amazonaws.connect#MetricResultsV2",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the metrics requested in the API request If no grouping is specified, a\n   summary of metric data is returned. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connect#GetPromptFile": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#GetPromptFileRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#GetPromptFileResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the prompt file.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/prompts/{InstanceId}/{PromptId}/file",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#GetPromptFileRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "PromptId": {
+                    "target": "com.amazonaws.connect#PromptId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the prompt.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#GetPromptFileResponse": {
+            "type": "structure",
+            "members": {
+                "PromptPresignedUrl": {
+                    "target": "com.amazonaws.connect#PromptPresignedUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A generated URL to the prompt that can be given to an unauthorized user so they can access\n   the prompt in S3.</p>"
                     }
                 }
             },
@@ -19614,6 +19930,53 @@
                 }
             }
         },
+        "com.amazonaws.connect#Prompt": {
+            "type": "structure",
+            "members": {
+                "PromptARN": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the prompt.</p>"
+                    }
+                },
+                "PromptId": {
+                    "target": "com.amazonaws.connect#PromptId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the prompt.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.connect#CommonNameLength127",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the prompt.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.connect#PromptDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description for the prompt.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.connect#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a prompt.</p>"
+            }
+        },
+        "com.amazonaws.connect#PromptDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 250
+                }
+            }
+        },
         "com.amazonaws.connect#PromptId": {
             "type": "string",
             "traits": {
@@ -19629,6 +19992,15 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 256
+                }
+            }
+        },
+        "com.amazonaws.connect#PromptPresignedUrl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2000
                 }
             }
         },
@@ -21519,6 +21891,16 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information about the Amazon Simple Storage Service (Amazon S3) storage type.</p>"
+            }
+        },
+        "com.amazonaws.connect#S3Uri": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^s3://\\S+/.+$"
             }
         },
         "com.amazonaws.connect#SearchAvailablePhoneNumbers": {
@@ -26102,7 +26484,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates your claimed phone number from its current Amazon Connect instance or traffic distribution group to\n   another Amazon Connect instance or traffic distribution group in the same Amazon Web Services Region.</p>\n         <important>\n            <p>After using this API, you must verify that the phone number is attached to the correct flow\n    in the target instance or traffic distribution group. You need to do this because the API switches\n    only the phone number to a new instance or traffic distribution group. It doesn't migrate the\n    flow configuration of the phone number, too.</p>\n            <p>You can call <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html\">DescribePhoneNumber</a> API\n    to verify the status of a previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumber.html\">UpdatePhoneNumber</a>\n    operation.</p>\n         </important>",
+                "smithy.api#documentation": "<p>Updates your claimed phone number from its current Amazon Connect instance or traffic distribution group to\n   another Amazon Connect instance or traffic distribution group in the same Amazon Web Services Region.</p>\n         <important>\n            <p>After using this API, you must verify that the phone number is attached to the correct flow\n    in the target instance or traffic distribution group. You need to do this because the API\n    switches only the phone number to a new instance or traffic distribution group. It doesn't\n    migrate the flow configuration of the phone number, too.</p>\n            <p>You can call <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html\">DescribePhoneNumber</a> API\n    to verify the status of a previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumber.html\">UpdatePhoneNumber</a>\n    operation.</p>\n         </important>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/phone-number/{PhoneNumberId}",
@@ -26153,6 +26535,102 @@
                     "target": "com.amazonaws.connect#ARN",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the phone number.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connect#UpdatePrompt": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#UpdatePromptRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#UpdatePromptResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a prompt.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/prompts/{InstanceId}/{PromptId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#UpdatePromptRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "PromptId": {
+                    "target": "com.amazonaws.connect#PromptId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the prompt.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.connect#CommonNameLength127",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the prompt.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.connect#PromptDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the prompt.</p>"
+                    }
+                },
+                "S3Uri": {
+                    "target": "com.amazonaws.connect#S3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URI for the S3 bucket where the prompt is stored.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#UpdatePromptResponse": {
+            "type": "structure",
+            "members": {
+                "PromptARN": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the prompt.</p>"
+                    }
+                },
+                "PromptId": {
+                    "target": "com.amazonaws.connect#PromptId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the prompt.</p>"
                     }
                 }
             },

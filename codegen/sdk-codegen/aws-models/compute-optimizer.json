@@ -3626,6 +3626,18 @@
                     "traits": {
                         "smithy.api#enumValue": "Tags"
                     }
+                },
+                "EXTERNAL_METRIC_STATUS_CODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ExternalMetricStatusCode"
+                    }
+                },
+                "EXTERNAL_METRIC_STATUS_REASON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ExternalMetricStatusReason"
+                    }
                 }
             }
         },
@@ -3998,6 +4010,94 @@
             "member": {
                 "target": "com.amazonaws.computeoptimizer#ExportableVolumeField"
             }
+        },
+        "com.amazonaws.computeoptimizer#ExternalMetricStatus": {
+            "type": "structure",
+            "members": {
+                "statusCode": {
+                    "target": "com.amazonaws.computeoptimizer#ExternalMetricStatusCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The status code for Compute Optimizer's integration with an external metrics provider.\n        </p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "com.amazonaws.computeoptimizer#ExternalMetricStatusReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The reason for Compute Optimizer's integration status with your external metric provider.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Describes Compute Optimizer's integration status with your chosen external metric provider. For example, Datadog.\n        </p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#ExternalMetricStatusCode": {
+            "type": "enum",
+            "members": {
+                "NO_EXTERNAL_METRIC_SET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_EXTERNAL_METRIC_SET"
+                    }
+                },
+                "INTEGRATION_SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTEGRATION_SUCCESS"
+                    }
+                },
+                "DATADOG_INTEGRATION_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATADOG_INTEGRATION_ERROR"
+                    }
+                },
+                "DYNATRACE_INTEGRATION_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DYNATRACE_INTEGRATION_ERROR"
+                    }
+                },
+                "NEWRELIC_INTEGRATION_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NEWRELIC_INTEGRATION_ERROR"
+                    }
+                },
+                "INSTANA_INTEGRATION_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INSTANA_INTEGRATION_ERROR"
+                    }
+                },
+                "INSUFFICIENT_DATADOG_METRICS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INSUFFICIENT_DATADOG_METRICS"
+                    }
+                },
+                "INSUFFICIENT_DYNATRACE_METRICS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INSUFFICIENT_DYNATRACE_METRICS"
+                    }
+                },
+                "INSUFFICIENT_NEWRELIC_METRICS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INSUFFICIENT_NEWRELIC_METRICS"
+                    }
+                },
+                "INSUFFICIENT_INSTANA_METRICS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INSUFFICIENT_INSTANA_METRICS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.computeoptimizer#ExternalMetricStatusReason": {
+            "type": "string"
         },
         "com.amazonaws.computeoptimizer#ExternalMetricsPreference": {
             "type": "structure",
@@ -5582,6 +5682,12 @@
                     "target": "com.amazonaws.computeoptimizer#Tags",
                     "traits": {
                         "smithy.api#documentation": "<p>\n            A list of tags assigned to your Amazon EC2 instance recommendations.\n        </p>"
+                    }
+                },
+                "externalMetricStatus": {
+                    "target": "com.amazonaws.computeoptimizer#ExternalMetricStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            An object that describes Compute Optimizer's integration status with your external metrics provider.\n        </p>"
                     }
                 }
             },

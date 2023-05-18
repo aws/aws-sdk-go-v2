@@ -2137,7 +2137,7 @@
                 "imageDigest": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The container image manifest digest.</p>\n         <note>\n            <p>The <code>imageDigest</code> is only returned if the container is using an image\n\t\t\t\thosted in Amazon ECR, otherwise it is omitted.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The container image manifest digest.</p>"
                     }
                 },
                 "runtimeId": {
@@ -3090,7 +3090,7 @@
                 "desiredCount": {
                     "target": "com.amazonaws.ecs#BoxedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of instantiations of the specified task definition to place and keep\n\t\t\trunning on your cluster.</p>\n         <p>This is required if <code>schedulingStrategy</code> is <code>REPLICA</code> or isn't\n\t\t\tspecified. If <code>schedulingStrategy</code> is <code>DAEMON</code> then this isn't\n\t\t\trequired.</p>"
+                        "smithy.api#documentation": "<p>The number of instantiations of the specified task definition to place and keep running in your service.</p>\n         <p>This is required if <code>schedulingStrategy</code> is <code>REPLICA</code> or isn't\n\t\t\tspecified. If <code>schedulingStrategy</code> is <code>DAEMON</code> then this isn't\n\t\t\trequired.</p>"
                     }
                 },
                 "clientToken": {
