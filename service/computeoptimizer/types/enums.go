@@ -530,6 +530,8 @@ const (
 	ExportableInstanceFieldEffectiveRecommendationPreferencesExternalMetricsSource         ExportableInstanceField = "EffectiveRecommendationPreferencesExternalMetricsSource"
 	ExportableInstanceFieldInstanceState                                                   ExportableInstanceField = "InstanceState"
 	ExportableInstanceFieldTags                                                            ExportableInstanceField = "Tags"
+	ExportableInstanceFieldExternalMetricStatusCode                                        ExportableInstanceField = "ExternalMetricStatusCode"
+	ExportableInstanceFieldExternalMetricStatusReason                                      ExportableInstanceField = "ExternalMetricStatusReason"
 )
 
 // Values returns all known values for ExportableInstanceField. Note that this can
@@ -592,6 +594,8 @@ func (ExportableInstanceField) Values() []ExportableInstanceField {
 		"EffectiveRecommendationPreferencesExternalMetricsSource",
 		"InstanceState",
 		"Tags",
+		"ExternalMetricStatusCode",
+		"ExternalMetricStatusReason",
 	}
 }
 
@@ -757,6 +761,40 @@ func (ExternalMetricsSource) Values() []ExternalMetricsSource {
 		"Dynatrace",
 		"NewRelic",
 		"Instana",
+	}
+}
+
+type ExternalMetricStatusCode string
+
+// Enum values for ExternalMetricStatusCode
+const (
+	ExternalMetricStatusCodeNoExternalMetricSet          ExternalMetricStatusCode = "NO_EXTERNAL_METRIC_SET"
+	ExternalMetricStatusCodeIntegrationSuccess           ExternalMetricStatusCode = "INTEGRATION_SUCCESS"
+	ExternalMetricStatusCodeDatadogIntegrationError      ExternalMetricStatusCode = "DATADOG_INTEGRATION_ERROR"
+	ExternalMetricStatusCodeDynatraceIntegrationError    ExternalMetricStatusCode = "DYNATRACE_INTEGRATION_ERROR"
+	ExternalMetricStatusCodeNewrelicIntegrationError     ExternalMetricStatusCode = "NEWRELIC_INTEGRATION_ERROR"
+	ExternalMetricStatusCodeInstanaIntegrationError      ExternalMetricStatusCode = "INSTANA_INTEGRATION_ERROR"
+	ExternalMetricStatusCodeInsufficientDatadogMetrics   ExternalMetricStatusCode = "INSUFFICIENT_DATADOG_METRICS"
+	ExternalMetricStatusCodeInsufficientDynatraceMetrics ExternalMetricStatusCode = "INSUFFICIENT_DYNATRACE_METRICS"
+	ExternalMetricStatusCodeInsufficientNewrelicMetrics  ExternalMetricStatusCode = "INSUFFICIENT_NEWRELIC_METRICS"
+	ExternalMetricStatusCodeInsufficientInstanaMetrics   ExternalMetricStatusCode = "INSUFFICIENT_INSTANA_METRICS"
+)
+
+// Values returns all known values for ExternalMetricStatusCode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExternalMetricStatusCode) Values() []ExternalMetricStatusCode {
+	return []ExternalMetricStatusCode{
+		"NO_EXTERNAL_METRIC_SET",
+		"INTEGRATION_SUCCESS",
+		"DATADOG_INTEGRATION_ERROR",
+		"DYNATRACE_INTEGRATION_ERROR",
+		"NEWRELIC_INTEGRATION_ERROR",
+		"INSTANA_INTEGRATION_ERROR",
+		"INSUFFICIENT_DATADOG_METRICS",
+		"INSUFFICIENT_DYNATRACE_METRICS",
+		"INSUFFICIENT_NEWRELIC_METRICS",
+		"INSUFFICIENT_INSTANA_METRICS",
 	}
 }
 

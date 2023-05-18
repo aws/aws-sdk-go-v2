@@ -13,7 +13,11 @@ import (
 
 // Configures an event selector or advanced event selectors for your trail. Use
 // event selectors or advanced event selectors to specify management and data event
-// settings for your trail. By default, trails created without specific event
+// settings for your trail. If you want your trail to log Insights events, be sure
+// the event selector enables logging of the Insights event types you want
+// configured for your trail. For more information about logging Insights events,
+// see Logging Insights events for trails (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-insights-events-with-cloudtrail.html)
+// in the CloudTrail User Guide. By default, trails created without specific event
 // selectors are configured to log all read and write management events, and no
 // data events. When an event occurs in your account, CloudTrail evaluates the
 // event selectors or advanced event selectors in all trails. For each trail, if
@@ -33,16 +37,15 @@ import (
 // The PutEventSelectors operation must be called from the region in which the
 // trail was created; otherwise, an InvalidHomeRegionException exception is
 // thrown. You can configure up to five event selectors for each trail. For more
-// information, see Logging management events for trails  (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-events-with-cloudtrail.html)
-// , Logging data events for trails  (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html)
+// information, see Logging management events (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-events-with-cloudtrail.html)
+// , Logging data events (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html)
 // , and Quotas in CloudTrail (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/WhatIsCloudTrail-Limits.html)
 // in the CloudTrail User Guide. You can add advanced event selectors, and
 // conditions for your advanced event selectors, up to a maximum of 500 values for
 // all conditions and selectors on a trail. You can use either
 // AdvancedEventSelectors or EventSelectors , but not both. If you apply
 // AdvancedEventSelectors to a trail, any existing EventSelectors are overwritten.
-// For more information about advanced event selectors, see Logging data events
-// for trails (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html)
+// For more information about advanced event selectors, see Logging data events (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html)
 // in the CloudTrail User Guide.
 func (c *Client) PutEventSelectors(ctx context.Context, params *PutEventSelectorsInput, optFns ...func(*Options)) (*PutEventSelectorsOutput, error) {
 	if params == nil {
@@ -81,8 +84,7 @@ type PutEventSelectorsInput struct {
 	// 500 values for all conditions and selectors on a trail. You can use either
 	// AdvancedEventSelectors or EventSelectors , but not both. If you apply
 	// AdvancedEventSelectors to a trail, any existing EventSelectors are overwritten.
-	// For more information about advanced event selectors, see Logging data events
-	// for trails (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html)
+	// For more information about advanced event selectors, see Logging data events (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html)
 	// in the CloudTrail User Guide.
 	AdvancedEventSelectors []types.AdvancedEventSelector
 

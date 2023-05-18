@@ -1608,24 +1608,6 @@ func awsRestjson1_serializeDocumentEoCloudCoverInput(v *types.EoCloudCoverInput,
 	return nil
 }
 
-func awsRestjson1_serializeDocumentEojDataSourceConfigInput(v types.EojDataSourceConfigInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	switch uv := v.(type) {
-	case *types.EojDataSourceConfigInputMemberS3Data:
-		av := object.Key("S3Data")
-		if err := awsRestjson1_serializeDocumentS3DataInput(&uv.Value, av); err != nil {
-			return err
-		}
-
-	default:
-		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
-
-	}
-	return nil
-}
-
 func awsRestjson1_serializeDocumentExportS3DataInput(v *types.ExportS3DataInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1679,13 +1661,6 @@ func awsRestjson1_serializeDocumentGeoMosaicConfigInput(v *types.GeoMosaicConfig
 func awsRestjson1_serializeDocumentInputConfigInput(v *types.InputConfigInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
-
-	if v.DataSourceConfig != nil {
-		ok := object.Key("DataSourceConfig")
-		if err := awsRestjson1_serializeDocumentEojDataSourceConfigInput(v.DataSourceConfig, ok); err != nil {
-			return err
-		}
-	}
 
 	if v.PreviousEarthObservationJobArn != nil {
 		ok := object.Key("PreviousEarthObservationJobArn")
@@ -2244,28 +2219,6 @@ func awsRestjson1_serializeDocumentReverseGeocodingConfig(v *types.ReverseGeocod
 	if v.YAttributeName != nil {
 		ok := object.Key("YAttributeName")
 		ok.String(*v.YAttributeName)
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeDocumentS3DataInput(v *types.S3DataInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.KmsKeyId != nil {
-		ok := object.Key("KmsKeyId")
-		ok.String(*v.KmsKeyId)
-	}
-
-	if len(v.MetadataProvider) > 0 {
-		ok := object.Key("MetadataProvider")
-		ok.String(string(v.MetadataProvider))
-	}
-
-	if v.S3Uri != nil {
-		ok := object.Key("S3Uri")
-		ok.String(*v.S3Uri)
 	}
 
 	return nil

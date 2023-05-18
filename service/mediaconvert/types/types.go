@@ -45,7 +45,7 @@ type AacSettings struct {
 	// the number of audio channels and channel layout for each coding mode. * 1.0
 	// Audio Description (Receiver Mix): One channel, C. Includes audio description
 	// data from your stereo input. For more information see ETSI TS 101 154 Annex E. *
-	// 1.0 Mono: One channel, C. * 2.0 Stereo: Two channels, L, R. * 5.1 Surround: Five
+	// 1.0 Mono: One channel, C. * 2.0 Stereo: Two channels, L, R. * 5.1 Surround: Six
 	// channels, C, L, R, Ls, Rs, LFE.
 	CodingMode AacCodingMode
 
@@ -4271,8 +4271,9 @@ type HlsGroupSettings struct {
 	// lengths to match the next GOP boundary.
 	SegmentLengthControl HlsSegmentLengthControl
 
-	// Number of segments to write to a subdirectory before starting a new one.
-	// directoryStructure must be SINGLE_DIRECTORY for this setting to have an effect.
+	// Specify the number of segments to write to a subdirectory before starting a new
+	// one. You must also set Directory structure to Subdirectory per stream for this
+	// setting to have an effect.
 	SegmentsPerSubdirectory int32
 
 	// Include or exclude RESOLUTION attribute for video in EXT-X-STREAM-INF tag of
@@ -4533,7 +4534,7 @@ type Input struct {
 	// increase the video quality of your output relative to its bitrate, since noisy
 	// inputs are more complex and require more bits to encode. To help restore loss of
 	// detail after applying the filter, you can optionally add texture or sharpening
-	// as an additional step.Jobs that use this feature incur pro-tier pricing. To not
+	// as an additional step. Jobs that use this feature incur pro-tier pricing. To not
 	// apply advanced input filtering: Choose Disabled. Note that you can still apply
 	// basic filtering with Deblock and Denoise.
 	AdvancedInputFilter AdvancedInputFilter
@@ -4770,7 +4771,7 @@ type InputTemplate struct {
 	// increase the video quality of your output relative to its bitrate, since noisy
 	// inputs are more complex and require more bits to encode. To help restore loss of
 	// detail after applying the filter, you can optionally add texture or sharpening
-	// as an additional step.Jobs that use this feature incur pro-tier pricing. To not
+	// as an additional step. Jobs that use this feature incur pro-tier pricing. To not
 	// apply advanced input filtering: Choose Disabled. Note that you can still apply
 	// basic filtering with Deblock and Denoise.
 	AdvancedInputFilter AdvancedInputFilter
@@ -7930,9 +7931,11 @@ type VideoDescription struct {
 	// frames of this video output.
 	FixedAfd int32
 
-	// Use the Height (Height) setting to define the video resolution height for this
-	// output. Specify in pixels. If you don't provide a value here, the service will
-	// use the input height.
+	// Use Height to define the video resolution height, in pixels, for this output.
+	// To use the same resolution as your input: Leave both Width and Height blank. To
+	// evenly scale from your input resolution: Leave Height blank and enter a value
+	// for Width. For example, if your input is 1920x1080 and you set Width to 1280,
+	// your output will be 1280x720.
 	Height int32
 
 	// Use Selection placement (position) to define the video area in your output
@@ -7983,8 +7986,11 @@ type VideoDescription struct {
 	// default.
 	VideoPreprocessors *VideoPreprocessor
 
-	// Use Width (Width) to define the video resolution width, in pixels, for this
-	// output. If you don't provide a value here, the service will use the input width.
+	// Use Width to define the video resolution width, in pixels, for this output. To
+	// use the same resolution as your input: Leave both Width and Height blank. To
+	// evenly scale from your input resolution: Leave Width blank and enter a value for
+	// Height. For example, if your input is 1920x1080 and you set Height to 720, your
+	// output will be 1280x720.
 	Width int32
 
 	noSmithyDocumentSerde

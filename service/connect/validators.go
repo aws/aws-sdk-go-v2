@@ -410,6 +410,26 @@ func (m *validateOpCreateParticipant) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreatePrompt struct {
+}
+
+func (*validateOpCreatePrompt) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreatePrompt) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreatePromptInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreatePromptInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateQueue struct {
 }
 
@@ -785,6 +805,26 @@ func (m *validateOpDeleteIntegrationAssociation) HandleInitialize(ctx context.Co
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteIntegrationAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeletePrompt struct {
+}
+
+func (*validateOpDeletePrompt) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeletePrompt) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeletePromptInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeletePromptInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1185,6 +1225,26 @@ func (m *validateOpDescribePhoneNumber) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribePhoneNumberInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribePrompt struct {
+}
+
+func (*validateOpDescribePrompt) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribePrompt) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribePromptInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribePromptInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1705,6 +1765,26 @@ func (m *validateOpGetMetricDataV2) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetMetricDataV2Input(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetPromptFile struct {
+}
+
+func (*validateOpGetPromptFile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetPromptFile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetPromptFileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetPromptFileInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -3190,6 +3270,26 @@ func (m *validateOpUpdatePhoneNumber) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdatePrompt struct {
+}
+
+func (*validateOpUpdatePrompt) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdatePrompt) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdatePromptInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdatePromptInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateQueueHoursOfOperation struct {
 }
 
@@ -3710,6 +3810,10 @@ func addOpCreateParticipantValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateParticipant{}, middleware.After)
 }
 
+func addOpCreatePromptValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreatePrompt{}, middleware.After)
+}
+
 func addOpCreateQueueValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateQueue{}, middleware.After)
 }
@@ -3784,6 +3888,10 @@ func addOpDeleteInstanceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteIntegrationAssociationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteIntegrationAssociation{}, middleware.After)
+}
+
+func addOpDeletePromptValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeletePrompt{}, middleware.After)
 }
 
 func addOpDeleteQuickConnectValidationMiddleware(stack *middleware.Stack) error {
@@ -3864,6 +3972,10 @@ func addOpDescribeInstanceStorageConfigValidationMiddleware(stack *middleware.St
 
 func addOpDescribePhoneNumberValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribePhoneNumber{}, middleware.After)
+}
+
+func addOpDescribePromptValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribePrompt{}, middleware.After)
 }
 
 func addOpDescribeQueueValidationMiddleware(stack *middleware.Stack) error {
@@ -3968,6 +4080,10 @@ func addOpGetMetricDataValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetMetricDataV2ValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetMetricDataV2{}, middleware.After)
+}
+
+func addOpGetPromptFileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetPromptFile{}, middleware.After)
 }
 
 func addOpGetTaskTemplateValidationMiddleware(stack *middleware.Stack) error {
@@ -4264,6 +4380,10 @@ func addOpUpdateParticipantRoleConfigValidationMiddleware(stack *middleware.Stac
 
 func addOpUpdatePhoneNumberValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdatePhoneNumber{}, middleware.After)
+}
+
+func addOpUpdatePromptValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdatePrompt{}, middleware.After)
 }
 
 func addOpUpdateQueueHoursOfOperationValidationMiddleware(stack *middleware.Stack) error {
@@ -5992,6 +6112,27 @@ func validateOpCreateParticipantInput(v *CreateParticipantInput) error {
 	}
 }
 
+func validateOpCreatePromptInput(v *CreatePromptInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreatePromptInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.S3Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Uri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateQueueInput(v *CreateQueueInput) error {
 	if v == nil {
 		return nil
@@ -6411,6 +6552,24 @@ func validateOpDeleteIntegrationAssociationInput(v *DeleteIntegrationAssociation
 	}
 }
 
+func validateOpDeletePromptInput(v *DeletePromptInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeletePromptInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.PromptId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PromptId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteQuickConnectInput(v *DeleteQuickConnectInput) error {
 	if v == nil {
 		return nil
@@ -6760,6 +6919,24 @@ func validateOpDescribePhoneNumberInput(v *DescribePhoneNumberInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribePhoneNumberInput"}
 	if v.PhoneNumberId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PhoneNumberId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribePromptInput(v *DescribePromptInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribePromptInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.PromptId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PromptId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -7261,6 +7438,24 @@ func validateOpGetMetricDataV2Input(v *GetMetricDataV2Input) error {
 	}
 	if v.Metrics == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Metrics"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetPromptFileInput(v *GetPromptFileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetPromptFileInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.PromptId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PromptId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -8635,6 +8830,24 @@ func validateOpUpdatePhoneNumberInput(v *UpdatePhoneNumberInput) error {
 	}
 	if v.TargetArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdatePromptInput(v *UpdatePromptInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdatePromptInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.PromptId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PromptId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

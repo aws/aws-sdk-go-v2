@@ -6787,10 +6787,11 @@ type MxfProfile string
 
 // Enum values for MxfProfile
 const (
-	MxfProfileD10   MxfProfile = "D_10"
-	MxfProfileXdcam MxfProfile = "XDCAM"
-	MxfProfileOp1a  MxfProfile = "OP1A"
-	MxfProfileXavc  MxfProfile = "XAVC"
+	MxfProfileD10       MxfProfile = "D_10"
+	MxfProfileXdcam     MxfProfile = "XDCAM"
+	MxfProfileOp1a      MxfProfile = "OP1A"
+	MxfProfileXavc      MxfProfile = "XAVC"
+	MxfProfileXdcamRdd9 MxfProfile = "XDCAM_RDD9"
 )
 
 // Values returns all known values for MxfProfile. Note that this can be expanded
@@ -6802,6 +6803,7 @@ func (MxfProfile) Values() []MxfProfile {
 		"XDCAM",
 		"OP1A",
 		"XAVC",
+		"XDCAM_RDD9",
 	}
 }
 

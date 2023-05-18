@@ -477,8 +477,7 @@ type Container struct {
 	// The image used for the container.
 	Image *string
 
-	// The container image manifest digest. The imageDigest is only returned if the
-	// container is using an image hosted in Amazon ECR, otherwise it is omitted.
+	// The container image manifest digest.
 	ImageDigest *string
 
 	// The last known status of the container.

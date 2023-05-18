@@ -118,6 +118,9 @@ func awsAwsjson11_deserializeOpErrorAddTags(response *smithyhttp.Response, metad
 	}
 
 	switch {
+	case strings.EqualFold("ChannelARNInvalidException", errorCode):
+		return awsAwsjson11_deserializeErrorChannelARNInvalidException(response, errorBody)
+
 	case strings.EqualFold("ChannelNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorChannelNotFoundException(response, errorBody)
 
@@ -126,6 +129,9 @@ func awsAwsjson11_deserializeOpErrorAddTags(response *smithyhttp.Response, metad
 
 	case strings.EqualFold("ConflictException", errorCode):
 		return awsAwsjson11_deserializeErrorConflictException(response, errorBody)
+
+	case strings.EqualFold("EventDataStoreARNInvalidException", errorCode):
+		return awsAwsjson11_deserializeErrorEventDataStoreARNInvalidException(response, errorBody)
 
 	case strings.EqualFold("EventDataStoreNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorEventDataStoreNotFoundException(response, errorBody)
@@ -3709,8 +3715,14 @@ func awsAwsjson11_deserializeOpErrorListTags(response *smithyhttp.Response, meta
 	}
 
 	switch {
+	case strings.EqualFold("ChannelARNInvalidException", errorCode):
+		return awsAwsjson11_deserializeErrorChannelARNInvalidException(response, errorBody)
+
 	case strings.EqualFold("CloudTrailARNInvalidException", errorCode):
 		return awsAwsjson11_deserializeErrorCloudTrailARNInvalidException(response, errorBody)
+
+	case strings.EqualFold("EventDataStoreARNInvalidException", errorCode):
+		return awsAwsjson11_deserializeErrorEventDataStoreARNInvalidException(response, errorBody)
 
 	case strings.EqualFold("EventDataStoreNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorEventDataStoreNotFoundException(response, errorBody)
@@ -4092,6 +4104,9 @@ func awsAwsjson11_deserializeOpErrorPutEventSelectors(response *smithyhttp.Respo
 	switch {
 	case strings.EqualFold("CloudTrailARNInvalidException", errorCode):
 		return awsAwsjson11_deserializeErrorCloudTrailARNInvalidException(response, errorBody)
+
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsAwsjson11_deserializeErrorConflictException(response, errorBody)
 
 	case strings.EqualFold("InsufficientDependencyServiceAccessPermissionException", errorCode):
 		return awsAwsjson11_deserializeErrorInsufficientDependencyServiceAccessPermissionException(response, errorBody)
@@ -4648,11 +4663,17 @@ func awsAwsjson11_deserializeOpErrorRemoveTags(response *smithyhttp.Response, me
 	}
 
 	switch {
+	case strings.EqualFold("ChannelARNInvalidException", errorCode):
+		return awsAwsjson11_deserializeErrorChannelARNInvalidException(response, errorBody)
+
 	case strings.EqualFold("ChannelNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorChannelNotFoundException(response, errorBody)
 
 	case strings.EqualFold("CloudTrailARNInvalidException", errorCode):
 		return awsAwsjson11_deserializeErrorCloudTrailARNInvalidException(response, errorBody)
+
+	case strings.EqualFold("EventDataStoreARNInvalidException", errorCode):
+		return awsAwsjson11_deserializeErrorEventDataStoreARNInvalidException(response, errorBody)
 
 	case strings.EqualFold("EventDataStoreNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorEventDataStoreNotFoundException(response, errorBody)

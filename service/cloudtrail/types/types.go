@@ -10,7 +10,7 @@ import (
 // Advanced event selectors let you create fine-grained selectors for the
 // following CloudTrail event record ﬁelds. They help you control costs by logging
 // only those events that are important to you. For more information about advanced
-// event selectors, see Logging data events for trails (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html)
+// event selectors, see Logging data events (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html)
 // in the CloudTrail User Guide.
 //   - readOnly
 //   - eventSource
@@ -61,20 +61,23 @@ type AdvancedFieldSelector struct {
 	//   - resources.type - This ﬁeld is required for CloudTrail data events.
 	//   resources.type can only use the Equals operator, and the value can be one of
 	//   the following:
-	//   - AWS::CloudTrail::Channel
-	//   - AWS::S3::Object
-	//   - AWS::Lambda::Function
 	//   - AWS::DynamoDB::Table
-	//   - AWS::S3Outposts::Object
-	//   - AWS::ManagedBlockchain::Node
-	//   - AWS::S3ObjectLambda::AccessPoint
-	//   - AWS::EC2::Snapshot
-	//   - AWS::S3::AccessPoint
+	//   - AWS::Lambda::Function
+	//   - AWS::S3::Object
+	//   - AWS::CloudTrail::Channel
+	//   - AWS::Cognito::IdentityPool
 	//   - AWS::DynamoDB::Stream
-	//   - AWS::Glue::Table
+	//   - AWS::EC2::Snapshot
 	//   - AWS::FinSpace::Environment
+	//   - AWS::Glue::Table
+	//   - AWS::GuardDuty::Detector
+	//   - AWS::KendraRanking::ExecutionPlan
+	//   - AWS::ManagedBlockchain::Node
 	//   - AWS::SageMaker::ExperimentTrialComponent
-	//   - AWS::SageMaker::FeatureGroup You can have only one resources.type ﬁeld per
+	//   - AWS::SageMaker::FeatureGroup
+	//   - AWS::S3::AccessPoint
+	//   - AWS::S3ObjectLambda::AccessPoint
+	//   - AWS::S3Outposts::Object You can have only one resources.type ﬁeld per
 	//   selector. To log data events on more than one resource type, add another
 	//   selector.
 	//   - resources.ARN - You can use any operator with resources.ARN , but if you use
@@ -87,49 +90,58 @@ type AdvancedFieldSelector struct {
 	//   the text between less than and greater than symbols (<>) with resource-specific
 	//   information.
 	//   - arn::s3:::/
-	//   - arn::s3:::// When resources.type equals AWS::S3::AccessPoint , and the
-	//   operator is set to Equals or NotEquals , the ARN must be in one of the
-	//   following formats. To log events on all objects in an S3 access point, we
-	//   recommend that you use only the access point ARN, don’t include the object path,
-	//   and use the StartsWith or NotStartsWith operators.
-	//   - arn::s3:::accesspoint/
-	//   - arn::s3:::accesspoint//object/ When resources.type equals
-	//   AWS::Lambda::Function , and the operator is set to Equals or NotEquals , the
-	//   ARN must be in the following format:
-	//   - arn::lambda:::function: When resources.type equals AWS::DynamoDB::Table ,
+	//   - arn::s3:::// When resources.type equals AWS::DynamoDB::Table , and the
+	//   operator is set to Equals or NotEquals , the ARN must be in the following
+	//   format:
+	//   - arn::dynamodb:::table/ When resources.type equals AWS::Lambda::Function ,
 	//   and the operator is set to Equals or NotEquals , the ARN must be in the
 	//   following format:
-	//   - arn::dynamodb:::table/ When resources.type equals AWS::CloudTrail::Channel ,
-	//   and the operator is set to Equals or NotEquals , the ARN must be in the
-	//   following format:
-	//   - arn::cloudtrail:::channel/ When resources.type equals
-	//   AWS::S3Outposts::Object , and the operator is set to Equals or NotEquals , the
-	//   ARN must be in the following format:
-	//   - arn::s3-outposts::: When resources.type equals AWS::ManagedBlockchain::Node
+	//   - arn::lambda:::function: When resources.type equals AWS::CloudTrail::Channel
 	//   , and the operator is set to Equals or NotEquals , the ARN must be in the
 	//   following format:
-	//   - arn::managedblockchain:::nodes/ When resources.type equals
-	//   AWS::S3ObjectLambda::AccessPoint , and the operator is set to Equals or
+	//   - arn::cloudtrail:::channel/ When resources.type equals
+	//   AWS::Cognito::IdentityPool , and the operator is set to Equals or NotEquals ,
+	//   the ARN must be in the following format:
+	//   - arn::cognito-identity:::identitypool/ When resources.type equals
+	//   AWS::DynamoDB::Stream , and the operator is set to Equals or NotEquals , the
+	//   ARN must be in the following format:
+	//   - arn::dynamodb:::table//stream/ When resources.type equals AWS::EC2::Snapshot
+	//   , and the operator is set to Equals or NotEquals , the ARN must be in the
+	//   following format:
+	//   - arn::ec2:::snapshot/ When resources.type equals AWS::FinSpace::Environment ,
+	//   and the operator is set to Equals or NotEquals , the ARN must be in the
+	//   following format:
+	//   - arn::finspace:::environment/ When resources.type equals AWS::Glue::Table ,
+	//   and the operator is set to Equals or NotEquals , the ARN must be in the
+	//   following format:
+	//   - arn::glue:::table// When resources.type equals AWS::GuardDuty::Detector ,
+	//   and the operator is set to Equals or NotEquals , the ARN must be in the
+	//   following format:
+	//   - arn::guardduty:::detector/ When resources.type equals
+	//   AWS::KendraRanking::ExecutionPlan , and the operator is set to Equals or
 	//   NotEquals , the ARN must be in the following format:
-	//   - arn::s3-object-lambda:::accesspoint/ When resources.type equals
-	//   AWS::EC2::Snapshot , and the operator is set to Equals or NotEquals , the ARN
-	//   must be in the following format:
-	//   - arn::ec2:::snapshot/ When resources.type equals AWS::DynamoDB::Stream , and
-	//   the operator is set to Equals or NotEquals , the ARN must be in the following
-	//   format:
-	//   - arn::dynamodb:::table//stream/ When resources.type equals AWS::Glue::Table ,
-	//   and the operator is set to Equals or NotEquals , the ARN must be in the
-	//   following format:
-	//   - arn::glue:::table// When resources.type equals AWS::FinSpace::Environment ,
-	//   and the operator is set to Equals or NotEquals , the ARN must be in the
-	//   following format:
-	//   - arn::finspace:::environment/ When resources.type equals
+	//   - arn::kendra-ranking:::rescore-execution-plan/ When resources.type equals
+	//   AWS::ManagedBlockchain::Node , and the operator is set to Equals or NotEquals
+	//   , the ARN must be in the following format:
+	//   - arn::managedblockchain:::nodes/ When resources.type equals
 	//   AWS::SageMaker::ExperimentTrialComponent , and the operator is set to Equals
 	//   or NotEquals , the ARN must be in the following format:
 	//   - arn::sagemaker:::experiment-trial-component/ When resources.type equals
 	//   AWS::SageMaker::FeatureGroup , and the operator is set to Equals or NotEquals
 	//   , the ARN must be in the following format:
-	//   - arn::sagemaker:::feature-group/
+	//   - arn::sagemaker:::feature-group/ When resources.type equals
+	//   AWS::S3::AccessPoint , and the operator is set to Equals or NotEquals , the
+	//   ARN must be in one of the following formats. To log events on all objects in an
+	//   S3 access point, we recommend that you use only the access point ARN, don’t
+	//   include the object path, and use the StartsWith or NotStartsWith operators.
+	//   - arn::s3:::accesspoint/
+	//   - arn::s3:::accesspoint//object/ When resources.type equals
+	//   AWS::S3ObjectLambda::AccessPoint , and the operator is set to Equals or
+	//   NotEquals , the ARN must be in the following format:
+	//   - arn::s3-object-lambda:::accesspoint/ When resources.type equals
+	//   AWS::S3Outposts::Object , and the operator is set to Equals or NotEquals , the
+	//   ARN must be in the following format:
+	//   - arn::s3-outposts:::
 	//
 	// This member is required.
 	Field *string
@@ -216,24 +228,27 @@ type DataResource struct {
 
 	// The resource type in which you want to log data events. You can specify the
 	// following basic event selector resource types:
-	//   - AWS::S3::Object
-	//   - AWS::Lambda::Function
 	//   - AWS::DynamoDB::Table
+	//   - AWS::Lambda::Function
+	//   - AWS::S3::Object
 	// The following resource types are also available through advanced event
 	// selectors. Basic event selector resource types are valid in advanced event
 	// selectors, but advanced event selector resource types are not valid in basic
 	// event selectors. For more information, see AdvancedFieldSelector$Field .
 	//   - AWS::CloudTrail::Channel
-	//   - AWS::S3Outposts::Object
-	//   - AWS::ManagedBlockchain::Node
-	//   - AWS::S3ObjectLambda::AccessPoint
-	//   - AWS::EC2::Snapshot
-	//   - AWS::S3::AccessPoint
+	//   - AWS::Cognito::IdentityPool
 	//   - AWS::DynamoDB::Stream
-	//   - AWS::Glue::Table
+	//   - AWS::EC2::Snapshot
 	//   - AWS::FinSpace::Environment
+	//   - AWS::Glue::Table
+	//   - AWS::GuardDuty::Detector
+	//   - AWS::KendraRanking::ExecutionPlan
+	//   - AWS::ManagedBlockchain::Node
 	//   - AWS::SageMaker::ExperimentTrialComponent
 	//   - AWS::SageMaker::FeatureGroup
+	//   - AWS::S3::AccessPoint
+	//   - AWS::S3ObjectLambda::AccessPoint
+	//   - AWS::S3Outposts::Object
 	Type *string
 
 	// An array of Amazon Resource Name (ARN) strings or partial ARN strings for the
@@ -532,11 +547,15 @@ type IngestionStatus struct {
 	noSmithyDocumentSerde
 }
 
-// A JSON string that contains a list of insight types that are logged on a trail.
+// A JSON string that contains a list of Insights types that are logged on a trail.
 type InsightSelector struct {
 
-	// The type of insights to log on a trail. ApiCallRateInsight and
-	// ApiErrorRateInsight are valid insight types.
+	// The type of Insights events to log on a trail. ApiCallRateInsight and
+	// ApiErrorRateInsight are valid Insight types. The ApiCallRateInsight Insights
+	// type analyzes write-only management API calls that are aggregated per minute
+	// against a baseline API call volume. The ApiErrorRateInsight Insights type
+	// analyzes management API calls that result in error codes. The error is shown if
+	// the API call is unsuccessful.
 	InsightType InsightType
 
 	noSmithyDocumentSerde

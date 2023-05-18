@@ -1,0 +1,8 @@
+{
+    "id": "ccfcd49f-1ce4-4d09-b812-8bc69e34fb38",
+    "type": "feature",
+    "description": "This release makes ExecutionRoleArn a required field in the StartEarthObservationJob API.",
+    "modules": [
+        "service/sagemakergeospatial"
+    ]
+}

@@ -142,7 +142,7 @@ type CreateServiceInput struct {
 	DeploymentController *types.DeploymentController
 
 	// The number of instantiations of the specified task definition to place and keep
-	// running on your cluster. This is required if schedulingStrategy is REPLICA or
+	// running in your service. This is required if schedulingStrategy is REPLICA or
 	// isn't specified. If schedulingStrategy is DAEMON then this isn't required.
 	DesiredCount *int32
 

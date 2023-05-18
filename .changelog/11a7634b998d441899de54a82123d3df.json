@@ -1,0 +1,8 @@
+{
+    "id": "11a7634b-998d-4418-99de-54a82123d3df",
+    "type": "feature",
+    "description": "This release introduces a new MXF Profile for XDCAM which is strictly compliant with the SMPTE RDD 9 standard and improved handling of output name modifiers.",
+    "modules": [
+        "service/mediaconvert"
+    ]
+}

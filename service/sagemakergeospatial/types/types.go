@@ -133,26 +133,6 @@ type EoCloudCoverInput struct {
 	noSmithyDocumentSerde
 }
 
-// Union representing different data sources to be used as input for an Earth
-// Observation job.
-//
-// The following types satisfy this interface:
-//
-//	EojDataSourceConfigInputMemberS3Data
-type EojDataSourceConfigInput interface {
-	isEojDataSourceConfigInput()
-}
-
-// The input structure for S3Data; representing the Amazon S3 location of the
-// input data objects.
-type EojDataSourceConfigInputMemberS3Data struct {
-	Value S3DataInput
-
-	noSmithyDocumentSerde
-}
-
-func (*EojDataSourceConfigInputMemberS3Data) isEojDataSourceConfigInput() {}
-
 // The structure for returning the export error details in a
 // GetEarthObservationJob.
 type ExportErrorDetails struct {
@@ -263,9 +243,6 @@ type GeoMosaicConfigInput struct {
 // Input configuration information.
 type InputConfigInput struct {
 
-	// The location of the input data.>
-	DataSourceConfig EojDataSourceConfigInput
-
 	// The Amazon Resource Name (ARN) of the previous Earth Observation job.
 	PreviousEarthObservationJobArn *string
 
@@ -278,9 +255,6 @@ type InputConfigInput struct {
 
 // The InputConfig for an EarthObservationJob response.
 type InputConfigOutput struct {
-
-	// The location of the input data.
-	DataSourceConfig EojDataSourceConfigInput
 
 	// The Amazon Resource Name (ARN) of the previous Earth Observation job.
 	PreviousEarthObservationJobArn *string
@@ -945,25 +919,6 @@ type ReverseGeocodingConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Path to Amazon S3 storage location for input data.
-type S3DataInput struct {
-
-	// Metadata provider from whom the Amazon S3 data has been acquired.
-	//
-	// This member is required.
-	MetadataProvider MetadataProvider
-
-	// The URL to the Amazon S3 input.
-	//
-	// This member is required.
-	S3Uri *string
-
-	// The Key Management Service key ID for server-side encryption.
-	KmsKeyId *string
-
-	noSmithyDocumentSerde
-}
-
 // The input structure for Stacking Operation.
 type StackConfigInput struct {
 
@@ -1255,7 +1210,6 @@ type UnknownUnionMember struct {
 
 func (*UnknownUnionMember) isAreaOfInterest()                           {}
 func (*UnknownUnionMember) isAreaOfInterestGeometry()                   {}
-func (*UnknownUnionMember) isEojDataSourceConfigInput()                 {}
 func (*UnknownUnionMember) isJobConfigInput()                           {}
 func (*UnknownUnionMember) isProperty()                                 {}
 func (*UnknownUnionMember) isVectorEnrichmentJobConfig()                {}

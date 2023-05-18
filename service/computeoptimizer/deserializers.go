@@ -5044,6 +5044,55 @@ func awsAwsjson10_deserializeDocumentExternalMetricsPreference(v **types.Externa
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentExternalMetricStatus(v **types.ExternalMetricStatus, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ExternalMetricStatus
+	if *v == nil {
+		sv = &types.ExternalMetricStatus{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "statusCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExternalMetricStatusCode to be of type string, got %T instead", value)
+				}
+				sv.StatusCode = types.ExternalMetricStatusCode(jtv)
+			}
+
+		case "statusReason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExternalMetricStatusReason to be of type string, got %T instead", value)
+				}
+				sv.StatusReason = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentGetRecommendationError(v **types.GetRecommendationError, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5298,6 +5347,11 @@ func awsAwsjson10_deserializeDocumentInstanceRecommendation(v **types.InstanceRe
 
 		case "effectiveRecommendationPreferences":
 			if err := awsAwsjson10_deserializeDocumentEffectiveRecommendationPreferences(&sv.EffectiveRecommendationPreferences, value); err != nil {
+				return err
+			}
+
+		case "externalMetricStatus":
+			if err := awsAwsjson10_deserializeDocumentExternalMetricStatus(&sv.ExternalMetricStatus, value); err != nil {
 				return err
 			}
 

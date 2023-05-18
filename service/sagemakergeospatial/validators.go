@@ -489,25 +489,6 @@ func validateEoCloudCoverInput(v *types.EoCloudCoverInput) error {
 	}
 }
 
-func validateEojDataSourceConfigInput(v types.EojDataSourceConfigInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "EojDataSourceConfigInput"}
-	switch uv := v.(type) {
-	case *types.EojDataSourceConfigInputMemberS3Data:
-		if err := validateS3DataInput(&uv.Value); err != nil {
-			invalidParams.AddNested("[S3Data]", err.(smithy.InvalidParamsError))
-		}
-
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateExportS3DataInput(v *types.ExportS3DataInput) error {
 	if v == nil {
 		return nil
@@ -547,11 +528,6 @@ func validateInputConfigInput(v *types.InputConfigInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "InputConfigInput"}
-	if v.DataSourceConfig != nil {
-		if err := validateEojDataSourceConfigInput(v.DataSourceConfig); err != nil {
-			invalidParams.AddNested("DataSourceConfig", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.RasterDataCollectionQuery != nil {
 		if err := validateRasterDataCollectionQueryInput(v.RasterDataCollectionQuery); err != nil {
 			invalidParams.AddNested("RasterDataCollectionQuery", err.(smithy.InvalidParamsError))
@@ -967,24 +943,6 @@ func validateReverseGeocodingConfig(v *types.ReverseGeocodingConfig) error {
 	}
 	if v.XAttributeName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("XAttributeName"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateS3DataInput(v *types.S3DataInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "S3DataInput"}
-	if v.S3Uri == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("S3Uri"))
-	}
-	if len(v.MetadataProvider) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("MetadataProvider"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1426,6 +1384,9 @@ func validateOpStartEarthObservationJobInput(v *StartEarthObservationJobInput) e
 		if err := validateJobConfigInput(v.JobConfig); err != nil {
 			invalidParams.AddNested("JobConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.ExecutionRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExecutionRoleArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

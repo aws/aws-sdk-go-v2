@@ -47,24 +47,6 @@ func ExampleAreaOfInterestGeometry_outputUsage() {
 var _ *types.PolygonGeometryInput
 var _ *types.MultiPolygonGeometryInput
 
-func ExampleEojDataSourceConfigInput_outputUsage() {
-	var union types.EojDataSourceConfigInput
-	// type switches can be used to check the union value
-	switch v := union.(type) {
-	case *types.EojDataSourceConfigInputMemberS3Data:
-		_ = v.Value // Value is types.S3DataInput
-
-	case *types.UnknownUnionMember:
-		fmt.Println("unknown tag:", v.Tag)
-
-	default:
-		fmt.Println("union is nil or unknown type")
-
-	}
-}
-
-var _ *types.S3DataInput
-
 func ExampleJobConfigInput_outputUsage() {
 	var union types.JobConfigInput
 	// type switches can be used to check the union value

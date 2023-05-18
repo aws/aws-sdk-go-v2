@@ -31,6 +31,11 @@ func (c *Client) StartEarthObservationJob(ctx context.Context, params *StartEart
 
 type StartEarthObservationJobInput struct {
 
+	// The Amazon Resource Name (ARN) of the IAM role that you specified for the job.
+	//
+	// This member is required.
+	ExecutionRoleArn *string
+
 	// Input configuration information for the Earth Observation job.
 	//
 	// This member is required.
@@ -48,9 +53,6 @@ type StartEarthObservationJobInput struct {
 
 	// A unique token that guarantees that the call to this API is idempotent.
 	ClientToken *string
-
-	// The Amazon Resource Name (ARN) of the IAM role that you specified for the job.
-	ExecutionRoleArn *string
 
 	// The Key Management Service key ID for server-side encryption.
 	KmsKeyId *string
@@ -78,6 +80,11 @@ type StartEarthObservationJobOutput struct {
 	// This member is required.
 	DurationInSeconds *int32
 
+	// The Amazon Resource Name (ARN) of the IAM role that you specified for the job.
+	//
+	// This member is required.
+	ExecutionRoleArn *string
+
 	// An object containing information about the job configuration.
 	//
 	// This member is required.
@@ -92,9 +99,6 @@ type StartEarthObservationJobOutput struct {
 	//
 	// This member is required.
 	Status types.EarthObservationJobStatus
-
-	// The Amazon Resource Name (ARN) of the IAM role that you specified for the job.
-	ExecutionRoleArn *string
 
 	// Input configuration information for the Earth Observation job.
 	InputConfig *types.InputConfigOutput

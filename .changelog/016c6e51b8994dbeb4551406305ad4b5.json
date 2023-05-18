@@ -1,0 +1,8 @@
+{
+    "id": "016c6e51-b899-4dbe-b455-1406305ad4b5",
+    "type": "feature",
+    "description": "You can programmatically create and manage prompts using APIs, for example, to extract prompts stored within Amazon Connect and add them to your Amazon S3 bucket. AWS CloudTrail, AWS CloudFormation and tagging are supported.",
+    "modules": [
+        "service/connect"
+    ]
+}

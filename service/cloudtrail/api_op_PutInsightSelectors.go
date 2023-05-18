@@ -15,7 +15,11 @@ import (
 // that you want to enable on an existing trail. You also use PutInsightSelectors
 // to turn off Insights event logging, by passing an empty list of insight types.
 // The valid Insights event types in this release are ApiErrorRateInsight and
-// ApiCallRateInsight .
+// ApiCallRateInsight . To log CloudTrail Insights events on API call volume, the
+// trail must log write management events. To log CloudTrail Insights events on
+// API error rate, the trail must log read or write management events. You can
+// call GetEventSelectors on a trail to check whether the trail logs management
+// events.
 func (c *Client) PutInsightSelectors(ctx context.Context, params *PutInsightSelectorsInput, optFns ...func(*Options)) (*PutInsightSelectorsOutput, error) {
 	if params == nil {
 		params = &PutInsightSelectorsInput{}
@@ -34,7 +38,11 @@ func (c *Client) PutInsightSelectors(ctx context.Context, params *PutInsightSele
 type PutInsightSelectorsInput struct {
 
 	// A JSON string that contains the insight types you want to log on a trail.
-	// ApiCallRateInsight and ApiErrorRateInsight are valid insight types.
+	// ApiCallRateInsight and ApiErrorRateInsight are valid Insight types. The
+	// ApiCallRateInsight Insights type analyzes write-only management API calls that
+	// are aggregated per minute against a baseline API call volume. The
+	// ApiErrorRateInsight Insights type analyzes management API calls that result in
+	// error codes. The error is shown if the API call is unsuccessful.
 	//
 	// This member is required.
 	InsightSelectors []types.InsightSelector

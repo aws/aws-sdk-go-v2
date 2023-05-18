@@ -623,6 +623,21 @@ type ExternalMetricsPreference struct {
 	noSmithyDocumentSerde
 }
 
+// Describes Compute Optimizer's integration status with your chosen external
+// metric provider. For example, Datadog.
+type ExternalMetricStatus struct {
+
+	// The status code for Compute Optimizer's integration with an external metrics
+	// provider.
+	StatusCode ExternalMetricStatusCode
+
+	// The reason for Compute Optimizer's integration status with your external metric
+	// provider.
+	StatusReason *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes a filter that returns a more specific list of recommendations. Use
 // this filter with the GetAutoScalingGroupRecommendations and
 // GetEC2InstanceRecommendations actions. You can use EBSFilter with the
@@ -778,6 +793,10 @@ type InstanceRecommendation struct {
 	// An object that describes the effective recommendation preferences for the
 	// instance.
 	EffectiveRecommendationPreferences *EffectiveRecommendationPreferences
+
+	// An object that describes Compute Optimizer's integration status with your
+	// external metrics provider.
+	ExternalMetricStatus *ExternalMetricStatus
 
 	// The finding classification of the instance. Findings for instances include:
 	//   - Underprovisioned —An instance is considered under-provisioned when at least

@@ -441,10 +441,6 @@ type EngineConfiguration struct {
 	// 1.
 	DefaultExecutorDpuSize *int32
 
-	// Specifies custom jar files and Spark properties for use cases like cluster
-	// encryption, table formats, and general Spark tuning.
-	SparkProperties map[string]string
-
 	noSmithyDocumentSerde
 }
 

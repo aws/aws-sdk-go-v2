@@ -4137,46 +4137,6 @@ func awsRestjson1_deserializeDocumentEoCloudCoverInput(v **types.EoCloudCoverInp
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentEojDataSourceConfigInput(v *types.EojDataSourceConfigInput, value interface{}) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	if value == nil {
-		return nil
-	}
-
-	shape, ok := value.(map[string]interface{})
-	if !ok {
-		return fmt.Errorf("unexpected JSON type %v", value)
-	}
-
-	var uv types.EojDataSourceConfigInput
-loop:
-	for key, value := range shape {
-		if value == nil {
-			continue
-		}
-		switch key {
-		case "S3Data":
-			var mv types.S3DataInput
-			destAddr := &mv
-			if err := awsRestjson1_deserializeDocumentS3DataInput(&destAddr, value); err != nil {
-				return err
-			}
-			mv = *destAddr
-			uv = &types.EojDataSourceConfigInputMemberS3Data{Value: mv}
-			break loop
-
-		default:
-			uv = &types.UnknownUnionMember{Tag: key}
-			break loop
-
-		}
-	}
-	*v = uv
-	return nil
-}
-
 func awsRestjson1_deserializeDocumentExportErrorDetails(v **types.ExportErrorDetails, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4651,11 +4611,6 @@ func awsRestjson1_deserializeDocumentInputConfigOutput(v **types.InputConfigOutp
 
 	for key, value := range shape {
 		switch key {
-		case "DataSourceConfig":
-			if err := awsRestjson1_deserializeDocumentEojDataSourceConfigInput(&sv.DataSourceConfig, value); err != nil {
-				return err
-			}
-
 		case "PreviousEarthObservationJobArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6584,64 +6539,6 @@ func awsRestjson1_deserializeDocumentReverseGeocodingConfig(v **types.ReverseGeo
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.YAttributeName = ptr.String(jtv)
-			}
-
-		default:
-			_, _ = key, value
-
-		}
-	}
-	*v = sv
-	return nil
-}
-
-func awsRestjson1_deserializeDocumentS3DataInput(v **types.S3DataInput, value interface{}) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	if value == nil {
-		return nil
-	}
-
-	shape, ok := value.(map[string]interface{})
-	if !ok {
-		return fmt.Errorf("unexpected JSON type %v", value)
-	}
-
-	var sv *types.S3DataInput
-	if *v == nil {
-		sv = &types.S3DataInput{}
-	} else {
-		sv = *v
-	}
-
-	for key, value := range shape {
-		switch key {
-		case "KmsKeyId":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected KmsKey to be of type string, got %T instead", value)
-				}
-				sv.KmsKeyId = ptr.String(jtv)
-			}
-
-		case "MetadataProvider":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected MetadataProvider to be of type string, got %T instead", value)
-				}
-				sv.MetadataProvider = types.MetadataProvider(jtv)
-			}
-
-		case "S3Uri":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected S3Uri to be of type string, got %T instead", value)
-				}
-				sv.S3Uri = ptr.String(jtv)
 			}
 
 		default:

@@ -2321,6 +2321,28 @@ type ProblemDetail struct {
 	noSmithyDocumentSerde
 }
 
+// Information about a prompt.
+type Prompt struct {
+
+	// A description for the prompt.
+	Description *string
+
+	// The name of the prompt.
+	Name *string
+
+	// The Amazon Resource Name (ARN) of the prompt.
+	PromptARN *string
+
+	// A unique identifier for the prompt.
+	PromptId *string
+
+	// The tags used to organize, track, or control access for this resource. For
+	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about the prompt.
 type PromptSummary struct {
 
