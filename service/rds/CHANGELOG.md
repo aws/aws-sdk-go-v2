@@ -1,3 +1,7 @@
+# v1.44.1 (2023-05-18)
+
+* **Documentation**: RDS documentation update for the EngineVersion parameter of ModifyDBSnapshot
+
 # v1.44.0 (2023-05-10)
 
 * **Feature**: Amazon Relational Database Service (RDS) updates for the new Aurora I/O-Optimized storage type for Amazon Aurora DB clusters

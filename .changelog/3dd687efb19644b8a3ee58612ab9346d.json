@@ -1,8 +1,0 @@
-{
-    "id": "3dd687ef-b196-44b8-a3ee-58612ab9346d",
-    "type": "feature",
-    "description": "Add ConflictException to PutEventSelectors, add (Channel/EDS)ARNInvalidException to Tag APIs. These exceptions provide customers with more specific error messages instead of internal errors.",
-    "modules": [
-        "service/cloudtrail"
-    ]
-}

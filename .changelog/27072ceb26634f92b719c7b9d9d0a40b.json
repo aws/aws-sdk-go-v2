@@ -1,8 +1,0 @@
-{
-    "id": "27072ceb-2663-4f92-b719-c7b9d9d0a40b",
-    "type": "feature",
-    "description": "In this launch, we add support for showing integration status with external metric providers such as Instana, Datadog ...etc in GetEC2InstanceRecommendations and ExportEC2InstanceRecommendations apis",
-    "modules": [
-        "service/computeoptimizer"
-    ]
-}

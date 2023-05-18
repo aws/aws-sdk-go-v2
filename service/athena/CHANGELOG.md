@@ -1,3 +1,7 @@
+# v1.28.0 (2023-05-18)
+
+* **Feature**: Removing SparkProperties from EngineConfiguration object for StartSession API call
+
 # v1.27.0 (2023-05-15)
 
 * **Feature**: You can now define custom spark properties at start of the session for use cases like cluster encryption, table formats, and general Spark tuning.

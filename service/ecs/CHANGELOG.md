@@ -1,3 +1,7 @@
+# v1.27.1 (2023-05-18)
+
+* **Documentation**: Documentation only release to address various tickets.
+
 # v1.27.0 (2023-05-04)
 
 * **Feature**: Documentation update for new error type NamespaceNotFoundException for CreateCluster and UpdateCluster

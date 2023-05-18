@@ -8,14 +8,14 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.20.0
 	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.15.10
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.20.11
-	github.com/aws/aws-sdk-go-v2/service/athena v1.27.0
+	github.com/aws/aws-sdk-go-v2/service/athena v1.28.0
 	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.28.7
 	github.com/aws/aws-sdk-go-v2/service/batch v1.23.5
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.27.4
 	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.26.6
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.14.10
 	github.com/aws/aws-sdk-go-v2/service/cloudsearch v1.14.9
-	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.24.8
+	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.25.0
 	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.26.0
 	github.com/aws/aws-sdk-go-v2/service/codebuild v1.20.12
 	github.com/aws/aws-sdk-go-v2/service/codecommit v1.14.12
@@ -31,9 +31,9 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.17.1
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.21.3
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.19.7
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.97.0
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.98.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.18.11
-	github.com/aws/aws-sdk-go-v2/service/ecs v1.27.0
+	github.com/aws/aws-sdk-go-v2/service/ecs v1.27.1
 	github.com/aws/aws-sdk-go-v2/service/efs v1.20.1
 	github.com/aws/aws-sdk-go-v2/service/elasticache v1.27.0
 	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.15.10
@@ -60,7 +60,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.14.10
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.12.10
 	github.com/aws/aws-sdk-go-v2/service/polly v1.25.10
-	github.com/aws/aws-sdk-go-v2/service/rds v1.44.0
+	github.com/aws/aws-sdk-go-v2/service/rds v1.44.1
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.27.11
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.28.0
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.28.1

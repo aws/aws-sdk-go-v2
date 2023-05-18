@@ -1,3 +1,25 @@
+# Release (2023-05-18)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/athena`: [v1.28.0](service/athena/CHANGELOG.md#v1280-2023-05-18)
+  * **Feature**: Removing SparkProperties from EngineConfiguration object for StartSession API call
+* `github.com/aws/aws-sdk-go-v2/service/cloudtrail`: [v1.25.0](service/cloudtrail/CHANGELOG.md#v1250-2023-05-18)
+  * **Feature**: Add ConflictException to PutEventSelectors, add (Channel/EDS)ARNInvalidException to Tag APIs. These exceptions provide customers with more specific error messages instead of internal errors.
+* `github.com/aws/aws-sdk-go-v2/service/computeoptimizer`: [v1.24.0](service/computeoptimizer/CHANGELOG.md#v1240-2023-05-18)
+  * **Feature**: In this launch, we add support for showing integration status with external metric providers such as Instana, Datadog ...etc in GetEC2InstanceRecommendations and ExportEC2InstanceRecommendations apis
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.55.0](service/connect/CHANGELOG.md#v1550-2023-05-18)
+  * **Feature**: You can programmatically create and manage prompts using APIs, for example, to extract prompts stored within Amazon Connect and add them to your Amazon S3 bucket. AWS CloudTrail, AWS CloudFormation and tagging are supported.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.98.0](service/ec2/CHANGELOG.md#v1980-2023-05-18)
+  * **Feature**: Add support for i4g.large, i4g.xlarge, i4g.2xlarge, i4g.4xlarge, i4g.8xlarge and i4g.16xlarge instances powered by AWS Graviton2 processors that deliver up to 15% better compute performance than our other storage-optimized instances.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.27.1](service/ecs/CHANGELOG.md#v1271-2023-05-18)
+  * **Documentation**: Documentation only release to address various tickets.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.37.0](service/mediaconvert/CHANGELOG.md#v1370-2023-05-18)
+  * **Feature**: This release introduces a new MXF Profile for XDCAM which is strictly compliant with the SMPTE RDD 9 standard and improved handling of output name modifiers.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.44.1](service/rds/CHANGELOG.md#v1441-2023-05-18)
+  * **Documentation**: RDS documentation update for the EngineVersion parameter of ModifyDBSnapshot
+* `github.com/aws/aws-sdk-go-v2/service/sagemakergeospatial`: [v1.3.0](service/sagemakergeospatial/CHANGELOG.md#v130-2023-05-18)
+  * **Feature**: This release makes ExecutionRoleArn a required field in the StartEarthObservationJob API.
+
 # Release (2023-05-16)
 
 ## Module Highlights

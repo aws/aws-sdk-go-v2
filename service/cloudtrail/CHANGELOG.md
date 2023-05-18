@@ -1,3 +1,7 @@
+# v1.25.0 (2023-05-18)
+
+* **Feature**: Add ConflictException to PutEventSelectors, add (Channel/EDS)ARNInvalidException to Tag APIs. These exceptions provide customers with more specific error messages instead of internal errors.
+
 # v1.24.8 (2023-05-04)
 
 * No change notes available for this release.

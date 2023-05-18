@@ -1,8 +1,0 @@
-{
-    "id": "5a4a21c0-6131-47ee-999f-18fca7920feb",
-    "type": "feature",
-    "description": "Removing SparkProperties from EngineConfiguration object for StartSession API call",
-    "modules": [
-        "service/athena"
-    ]
-}

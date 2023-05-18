@@ -1,8 +1,0 @@
-{
-    "id": "6769c920-1d96-49b8-a75a-69f89ad57c0e",
-    "type": "documentation",
-    "description": "RDS documentation update for the EngineVersion parameter of ModifyDBSnapshot",
-    "modules": [
-        "service/rds"
-    ]
-}

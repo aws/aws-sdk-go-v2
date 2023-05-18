@@ -1,3 +1,7 @@
+# v1.24.0 (2023-05-18)
+
+* **Feature**: In this launch, we add support for showing integration status with external metric providers such as Instana, Datadog ...etc in GetEC2InstanceRecommendations and ExportEC2InstanceRecommendations apis
+
 # v1.23.1 (2023-05-04)
 
 * No change notes available for this release.
