@@ -1,0 +1,8 @@
+{
+    "id": "609f269f-8df7-4547-a9b9-78ff08a307c8",
+    "type": "feature",
+    "description": "Adds support for the MediaPackage Live v2 API",
+    "modules": [
+        "service/mediapackagev2"
+    ]
+}

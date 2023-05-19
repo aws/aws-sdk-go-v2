@@ -74,6 +74,7 @@
         "api_op_PutConfigurationSetTrackingOptions.go",
         "api_op_PutConfigurationSetVdmOptions.go",
         "api_op_PutDedicatedIpInPool.go",
+        "api_op_PutDedicatedIpPoolScalingAttributes.go",
         "api_op_PutDedicatedIpWarmupAttributes.go",
         "api_op_PutDeliverabilityDashboardOption.go",
         "api_op_PutEmailIdentityConfigurationSetAttributes.go",

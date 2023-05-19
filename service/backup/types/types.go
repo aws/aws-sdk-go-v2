@@ -313,7 +313,14 @@ type BackupRule struct {
 
 	// A value in minutes after a backup is scheduled before a job will be canceled if
 	// it doesn't start successfully. This value is optional. If this value is
-	// included, it must be at least 60 minutes to avoid errors.
+	// included, it must be at least 60 minutes to avoid errors. During the start
+	// window, the backup job status remains in CREATED status until it has
+	// successfully begun or until the start window time has run out. If within the
+	// start window time Backup receives an error that allows the job to be retried,
+	// Backup will automatically retry to begin the job at least every 10 minutes until
+	// the backup successfully begins (the job status changes to RUNNING ) or until the
+	// job status changes to EXPIRED (which is expected to occur when the start window
+	// time is over).
 	StartWindowMinutes *int64
 
 	noSmithyDocumentSerde
@@ -370,7 +377,14 @@ type BackupRuleInput struct {
 
 	// A value in minutes after a backup is scheduled before a job will be canceled if
 	// it doesn't start successfully. This value is optional. If this value is
-	// included, it must be at least 60 minutes to avoid errors.
+	// included, it must be at least 60 minutes to avoid errors. During the start
+	// window, the backup job status remains in CREATED status until it has
+	// successfully begun or until the start window time has run out. If within the
+	// start window time Backup receives an error that allows the job to be retried,
+	// Backup will automatically retry to begin the job at least every 10 minutes until
+	// the backup successfully begins (the job status changes to RUNNING ) or until the
+	// job status changes to EXPIRED (which is expected to occur when the start window
+	// time is over).
 	StartWindowMinutes *int64
 
 	noSmithyDocumentSerde
@@ -1141,8 +1155,19 @@ type RecoveryPointCreator struct {
 // member.
 type RecoveryPointMember struct {
 
+	// This is the name of the backup vault (the logical container in which backups
+	// are stored).
+	BackupVaultName *string
+
 	// This is the Amazon Resource Name (ARN) of the parent (composite) recovery point.
 	RecoveryPointArn *string
+
+	// This is the Amazon Resource Name (ARN) that uniquely identifies a saved
+	// resource.
+	ResourceArn *string
+
+	// This is the Amazon Web Services resource type that is saved as a recovery point.
+	ResourceType *string
 
 	noSmithyDocumentSerde
 }

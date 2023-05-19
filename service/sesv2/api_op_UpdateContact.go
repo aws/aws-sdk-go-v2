@@ -36,7 +36,7 @@ type UpdateContactInput struct {
 	// This member is required.
 	ContactListName *string
 
-	// The contact's email addres.
+	// The contact's email address.
 	//
 	// This member is required.
 	EmailAddress *string

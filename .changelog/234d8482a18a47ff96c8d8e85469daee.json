@@ -1,0 +1,8 @@
+{
+    "id": "234d8482-a18a-47ff-96c8-d8e85469daee",
+    "type": "feature",
+    "description": "This release adds the ability to create fields with type Url through the CreateField API. For more information see https://docs.aws.amazon.com/cases/latest/APIReference/Welcome.html",
+    "modules": [
+        "service/connectcases"
+    ]
+}

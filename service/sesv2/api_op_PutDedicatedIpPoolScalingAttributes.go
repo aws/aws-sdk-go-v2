@@ -9,79 +9,57 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"time"
 )
 
-// Returns a contact from a contact list.
-func (c *Client) GetContact(ctx context.Context, params *GetContactInput, optFns ...func(*Options)) (*GetContactOutput, error) {
+// Used to convert a dedicated IP pool to a different scaling mode. MANAGED pools
+// cannot be converted to STANDARD scaling mode.
+func (c *Client) PutDedicatedIpPoolScalingAttributes(ctx context.Context, params *PutDedicatedIpPoolScalingAttributesInput, optFns ...func(*Options)) (*PutDedicatedIpPoolScalingAttributesOutput, error) {
 	if params == nil {
-		params = &GetContactInput{}
+		params = &PutDedicatedIpPoolScalingAttributesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetContact", params, optFns, c.addOperationGetContactMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PutDedicatedIpPoolScalingAttributes", params, optFns, c.addOperationPutDedicatedIpPoolScalingAttributesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*GetContactOutput)
+	out := result.(*PutDedicatedIpPoolScalingAttributesOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type GetContactInput struct {
+// A request to convert a dedicated IP pool to a different scaling mode.
+type PutDedicatedIpPoolScalingAttributesInput struct {
 
-	// The name of the contact list to which the contact belongs.
+	// The name of the dedicated IP pool.
 	//
 	// This member is required.
-	ContactListName *string
+	PoolName *string
 
-	// The contact's email address.
+	// The scaling mode to apply to the dedicated IP pool. Changing the scaling mode
+	// from MANAGED to STANDARD is not supported.
 	//
 	// This member is required.
-	EmailAddress *string
+	ScalingMode types.ScalingMode
 
 	noSmithyDocumentSerde
 }
 
-type GetContactOutput struct {
-
-	// The attribute data attached to a contact.
-	AttributesData *string
-
-	// The name of the contact list to which the contact belongs.
-	ContactListName *string
-
-	// A timestamp noting when the contact was created.
-	CreatedTimestamp *time.Time
-
-	// The contact's email address.
-	EmailAddress *string
-
-	// A timestamp noting the last time the contact's information was updated.
-	LastUpdatedTimestamp *time.Time
-
-	// The default topic preferences applied to the contact.
-	TopicDefaultPreferences []types.TopicPreference
-
-	// The contact's preference for being opted-in to or opted-out of a topic.>
-	TopicPreferences []types.TopicPreference
-
-	// A boolean value status noting if the contact is unsubscribed from all contact
-	// list topics.
-	UnsubscribeAll bool
-
+// An HTTP 200 response if the request succeeds, or an error message if the
+// request fails.
+type PutDedicatedIpPoolScalingAttributesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationGetContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetContact{}, middleware.After)
+func (c *Client) addOperationPutDedicatedIpPoolScalingAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutDedicatedIpPoolScalingAttributes{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetContact{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutDedicatedIpPoolScalingAttributes{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -121,10 +99,10 @@ func (c *Client) addOperationGetContactMiddlewares(stack *middleware.Stack, opti
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpGetContactValidationMiddleware(stack); err != nil {
+	if err = addOpPutDedicatedIpPoolScalingAttributesValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetContact(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutDedicatedIpPoolScalingAttributes(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -142,11 +120,11 @@ func (c *Client) addOperationGetContactMiddlewares(stack *middleware.Stack, opti
 	return nil
 }
 
-func newServiceMetadataMiddleware_opGetContact(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opPutDedicatedIpPoolScalingAttributes(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "ses",
-		OperationName: "GetContact",
+		OperationName: "PutDedicatedIpPoolScalingAttributes",
 	}
 }

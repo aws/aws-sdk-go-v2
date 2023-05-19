@@ -1,0 +1,8 @@
+{
+    "id": "087589c2-d196-48dd-a534-e48bb6e1db3f",
+    "type": "feature",
+    "description": "This release allows customers to update scaling mode property of dedicated IP pools with PutDedicatedIpPoolScalingAttributes call.",
+    "modules": [
+        "service/sesv2"
+    ]
+}

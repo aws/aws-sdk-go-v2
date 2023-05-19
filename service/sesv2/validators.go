@@ -1010,6 +1010,26 @@ func (m *validateOpPutDedicatedIpInPool) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutDedicatedIpPoolScalingAttributes struct {
+}
+
+func (*validateOpPutDedicatedIpPoolScalingAttributes) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutDedicatedIpPoolScalingAttributes) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutDedicatedIpPoolScalingAttributesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutDedicatedIpPoolScalingAttributesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutDedicatedIpWarmupAttributes struct {
 }
 
@@ -1608,6 +1628,10 @@ func addOpPutConfigurationSetVdmOptionsValidationMiddleware(stack *middleware.St
 
 func addOpPutDedicatedIpInPoolValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutDedicatedIpInPool{}, middleware.After)
+}
+
+func addOpPutDedicatedIpPoolScalingAttributesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutDedicatedIpPoolScalingAttributes{}, middleware.After)
 }
 
 func addOpPutDedicatedIpWarmupAttributesValidationMiddleware(stack *middleware.Stack) error {
@@ -3127,6 +3151,24 @@ func validateOpPutDedicatedIpInPoolInput(v *PutDedicatedIpInPoolInput) error {
 	}
 	if v.DestinationPoolName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DestinationPoolName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutDedicatedIpPoolScalingAttributesInput(v *PutDedicatedIpPoolScalingAttributesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutDedicatedIpPoolScalingAttributesInput"}
+	if v.PoolName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PoolName"))
+	}
+	if len(v.ScalingMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ScalingMode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

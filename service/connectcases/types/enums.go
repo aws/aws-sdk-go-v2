@@ -65,6 +65,7 @@ const (
 	FieldTypeBoolean      FieldType = "Boolean"
 	FieldTypeDateTime     FieldType = "DateTime"
 	FieldTypeSingleSelect FieldType = "SingleSelect"
+	FieldTypeUrl          FieldType = "Url"
 )
 
 // Values returns all known values for FieldType. Note that this can be expanded
@@ -77,6 +78,7 @@ func (FieldType) Values() []FieldType {
 		"Boolean",
 		"DateTime",
 		"SingleSelect",
+		"Url",
 	}
 }
 

@@ -62,7 +62,7 @@ func transformToSharedOptions(options Options) endpoints.Options {
 	}
 }
 
-// Resolver CodeStar connections endpoint resolver
+// Resolver MediaPackageV2 endpoint resolver
 type Resolver struct {
 	partitions endpoints.Partitions
 }
@@ -108,87 +108,34 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname:          "codestar-connections.{region}.api.aws",
+				Hostname:          "mediapackagev2.{region}.api.aws",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname:          "codestar-connections-fips.{region}.amazonaws.com",
+				Hostname:          "mediapackagev2-fips.{region}.amazonaws.com",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
 			}: {
-				Hostname:          "codestar-connections-fips.{region}.api.aws",
+				Hostname:          "mediapackagev2-fips.{region}.api.aws",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: 0,
 			}: {
-				Hostname:          "codestar-connections.{region}.amazonaws.com",
+				Hostname:          "mediapackagev2.{region}.amazonaws.com",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 		},
 		RegionRegex:    partitionRegexp.Aws,
 		IsRegionalized: true,
-		Endpoints: endpoints.Endpoints{
-			endpoints.EndpointKey{
-				Region: "ap-northeast-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "ap-northeast-2",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "ap-south-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "ap-southeast-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "ap-southeast-2",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "ca-central-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "eu-central-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "eu-north-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "eu-south-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "eu-west-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "eu-west-2",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "eu-west-3",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "sa-east-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "us-east-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "us-east-2",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "us-west-1",
-			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "us-west-2",
-			}: endpoints.Endpoint{},
-		},
 	},
 	{
 		ID: "aws-cn",
@@ -196,28 +143,28 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname:          "codestar-connections.{region}.api.amazonwebservices.com.cn",
+				Hostname:          "mediapackagev2.{region}.api.amazonwebservices.com.cn",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname:          "codestar-connections-fips.{region}.amazonaws.com.cn",
+				Hostname:          "mediapackagev2-fips.{region}.amazonaws.com.cn",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
 			}: {
-				Hostname:          "codestar-connections-fips.{region}.api.amazonwebservices.com.cn",
+				Hostname:          "mediapackagev2-fips.{region}.api.amazonwebservices.com.cn",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: 0,
 			}: {
-				Hostname:          "codestar-connections.{region}.amazonaws.com.cn",
+				Hostname:          "mediapackagev2.{region}.amazonaws.com.cn",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
@@ -231,14 +178,14 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname:          "codestar-connections-fips.{region}.c2s.ic.gov",
+				Hostname:          "mediapackagev2-fips.{region}.c2s.ic.gov",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: 0,
 			}: {
-				Hostname:          "codestar-connections.{region}.c2s.ic.gov",
+				Hostname:          "mediapackagev2.{region}.c2s.ic.gov",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
@@ -252,14 +199,14 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname:          "codestar-connections-fips.{region}.sc2s.sgov.gov",
+				Hostname:          "mediapackagev2-fips.{region}.sc2s.sgov.gov",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: 0,
 			}: {
-				Hostname:          "codestar-connections.{region}.sc2s.sgov.gov",
+				Hostname:          "mediapackagev2.{region}.sc2s.sgov.gov",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
@@ -273,14 +220,14 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname:          "codestar-connections-fips.{region}.cloud.adc-e.uk",
+				Hostname:          "mediapackagev2-fips.{region}.cloud.adc-e.uk",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: 0,
 			}: {
-				Hostname:          "codestar-connections.{region}.cloud.adc-e.uk",
+				Hostname:          "mediapackagev2.{region}.cloud.adc-e.uk",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
@@ -294,28 +241,28 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: endpoints.DualStackVariant,
 			}: {
-				Hostname:          "codestar-connections.{region}.api.aws",
+				Hostname:          "mediapackagev2.{region}.api.aws",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname:          "codestar-connections-fips.{region}.amazonaws.com",
+				Hostname:          "mediapackagev2-fips.{region}.amazonaws.com",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
 			}: {
-				Hostname:          "codestar-connections-fips.{region}.api.aws",
+				Hostname:          "mediapackagev2-fips.{region}.api.aws",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
 			{
 				Variant: 0,
 			}: {
-				Hostname:          "codestar-connections.{region}.amazonaws.com",
+				Hostname:          "mediapackagev2.{region}.amazonaws.com",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},

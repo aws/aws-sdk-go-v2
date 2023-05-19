@@ -1,0 +1,8 @@
+{
+    "id": "b3b238ec-f157-4464-97d3-3db2b1521afa",
+    "type": "feature",
+    "description": "Add  ResourceArn, ResourceType, and BackupVaultName to ListRecoveryPointsByLegalHold API response.",
+    "modules": [
+        "service/backup"
+    ]
+}

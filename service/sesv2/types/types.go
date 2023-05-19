@@ -452,9 +452,9 @@ type DedicatedIpPool struct {
 	PoolName *string
 
 	// The type of the dedicated IP pool.
-	//   - STANDARD – A dedicated IP pool where the customer can control which IPs are
-	//   part of the pool.
-	//   - MANAGED – A dedicated IP pool where the reputation and number of IPs is
+	//   - STANDARD – A dedicated IP pool where you can control which IPs are part of
+	//   the pool.
+	//   - MANAGED – A dedicated IP pool where the reputation and number of IPs are
 	//   automatically managed by Amazon SES.
 	//
 	// This member is required.

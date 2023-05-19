@@ -16227,6 +16227,15 @@ func awsRestjson1_deserializeDocumentRecoveryPointMember(v **types.RecoveryPoint
 
 	for key, value := range shape {
 		switch key {
+		case "BackupVaultName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BackupVaultName to be of type string, got %T instead", value)
+				}
+				sv.BackupVaultName = ptr.String(jtv)
+			}
+
 		case "RecoveryPointArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16234,6 +16243,24 @@ func awsRestjson1_deserializeDocumentRecoveryPointMember(v **types.RecoveryPoint
 					return fmt.Errorf("expected ARN to be of type string, got %T instead", value)
 				}
 				sv.RecoveryPointArn = ptr.String(jtv)
+			}
+
+		case "ResourceArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ARN to be of type string, got %T instead", value)
+				}
+				sv.ResourceArn = ptr.String(jtv)
+			}
+
+		case "ResourceType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceType to be of type string, got %T instead", value)
+				}
+				sv.ResourceType = ptr.String(jtv)
 			}
 
 		default:
