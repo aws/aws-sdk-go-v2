@@ -1,3 +1,16 @@
+# Release (2023-05-19)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/backup`: [v1.21.0](service/backup/CHANGELOG.md#v1210-2023-05-19)
+  * **Feature**: Add  ResourceArn, ResourceType, and BackupVaultName to ListRecoveryPointsByLegalHold API response.
+* `github.com/aws/aws-sdk-go-v2/service/connectcases`: [v1.4.0](service/connectcases/CHANGELOG.md#v140-2023-05-19)
+  * **Feature**: This release adds the ability to create fields with type Url through the CreateField API. For more information see https://docs.aws.amazon.com/cases/latest/APIReference/Welcome.html
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagev2`: [v1.0.0](service/mediapackagev2/CHANGELOG.md#v100-2023-05-19)
+  * **Release**: New AWS service client module
+  * **Feature**: Adds support for the MediaPackage Live v2 API
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.18.0](service/sesv2/CHANGELOG.md#v1180-2023-05-19)
+  * **Feature**: This release allows customers to update scaling mode property of dedicated IP pools with PutDedicatedIpPoolScalingAttributes call.
+
 # Release (2023-05-18)
 
 ## Module Highlights

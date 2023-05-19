@@ -1,3 +1,7 @@
+# v1.18.0 (2023-05-19)
+
+* **Feature**: This release allows customers to update scaling mode property of dedicated IP pools with PutDedicatedIpPoolScalingAttributes call.
+
 # v1.17.6 (2023-05-04)
 
 * No change notes available for this release.

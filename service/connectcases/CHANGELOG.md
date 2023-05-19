@@ -1,3 +1,7 @@
+# v1.4.0 (2023-05-19)
+
+* **Feature**: This release adds the ability to create fields with type Url through the CreateField API. For more information see https://docs.aws.amazon.com/cases/latest/APIReference/Welcome.html
+
 # v1.3.6 (2023-05-04)
 
 * No change notes available for this release.

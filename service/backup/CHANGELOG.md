@@ -1,3 +1,7 @@
+# v1.21.0 (2023-05-19)
+
+* **Feature**: Add  ResourceArn, ResourceType, and BackupVaultName to ListRecoveryPointsByLegalHold API response.
+
 # v1.20.11 (2023-05-04)
 
 * No change notes available for this release.
