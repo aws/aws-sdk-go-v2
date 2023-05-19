@@ -2389,6 +2389,10 @@
                     {
                         "value": "SingleSelect",
                         "name": "SINGLE_SELECT"
+                    },
+                    {
+                        "value": "Url",
+                        "name": "URL"
                     }
                 ]
             }
