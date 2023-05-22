@@ -1,0 +1,8 @@
+{
+    "id": "d23630f6-7a0d-4d66-9b5c-0449df51a4dc",
+    "type": "feature",
+    "description": "Added support for tags on restore.",
+    "modules": [
+        "service/backup"
+    ]
+}

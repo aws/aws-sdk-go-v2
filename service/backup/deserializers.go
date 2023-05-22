@@ -10586,6 +10586,9 @@ func awsRestjson1_deserializeOpErrorStartRestoreJob(response *smithyhttp.Respons
 	case strings.EqualFold("InvalidParameterValueException", errorCode):
 		return awsRestjson1_deserializeErrorInvalidParameterValueException(response, errorBody)
 
+	case strings.EqualFold("InvalidRequestException", errorCode):
+		return awsRestjson1_deserializeErrorInvalidRequestException(response, errorBody)
+
 	case strings.EqualFold("MissingParameterValueException", errorCode):
 		return awsRestjson1_deserializeErrorMissingParameterValueException(response, errorBody)
 

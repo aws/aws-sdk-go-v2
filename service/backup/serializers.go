@@ -4302,6 +4302,11 @@ func awsRestjson1_serializeOpDocumentStartRestoreJobInput(v *StartRestoreJobInpu
 	object := value.Object()
 	defer object.Close()
 
+	if v.CopySourceTagsToRestoredResource {
+		ok := object.Key("CopySourceTagsToRestoredResource")
+		ok.Boolean(v.CopySourceTagsToRestoredResource)
+	}
+
 	if v.IamRoleArn != nil {
 		ok := object.Key("IamRoleArn")
 		ok.String(*v.IamRoleArn)

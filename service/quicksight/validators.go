@@ -1030,6 +1030,46 @@ func (m *validateOpDescribeAnalysisPermissions) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeAssetBundleExportJob struct {
+}
+
+func (*validateOpDescribeAssetBundleExportJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeAssetBundleExportJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeAssetBundleExportJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeAssetBundleExportJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeAssetBundleImportJob struct {
+}
+
+func (*validateOpDescribeAssetBundleImportJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeAssetBundleImportJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeAssetBundleImportJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeAssetBundleImportJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeDashboardDefinition struct {
 }
 
@@ -1750,6 +1790,46 @@ func (m *validateOpListAnalyses) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListAssetBundleExportJobs struct {
+}
+
+func (*validateOpListAssetBundleExportJobs) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAssetBundleExportJobs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAssetBundleExportJobsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAssetBundleExportJobsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListAssetBundleImportJobs struct {
+}
+
+func (*validateOpListAssetBundleImportJobs) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAssetBundleImportJobs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAssetBundleImportJobsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAssetBundleImportJobsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListDashboards struct {
 }
 
@@ -2425,6 +2505,46 @@ func (m *validateOpSearchGroups) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpSearchGroupsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartAssetBundleExportJob struct {
+}
+
+func (*validateOpStartAssetBundleExportJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartAssetBundleExportJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartAssetBundleExportJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartAssetBundleExportJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartAssetBundleImportJob struct {
+}
+
+func (*validateOpStartAssetBundleImportJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartAssetBundleImportJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartAssetBundleImportJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartAssetBundleImportJobInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -3254,6 +3374,14 @@ func addOpDescribeAnalysisPermissionsValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpDescribeAnalysisPermissions{}, middleware.After)
 }
 
+func addOpDescribeAssetBundleExportJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeAssetBundleExportJob{}, middleware.After)
+}
+
+func addOpDescribeAssetBundleImportJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeAssetBundleImportJob{}, middleware.After)
+}
+
 func addOpDescribeDashboardDefinitionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeDashboardDefinition{}, middleware.After)
 }
@@ -3398,6 +3526,14 @@ func addOpListAnalysesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAnalyses{}, middleware.After)
 }
 
+func addOpListAssetBundleExportJobsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAssetBundleExportJobs{}, middleware.After)
+}
+
+func addOpListAssetBundleImportJobsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAssetBundleImportJobs{}, middleware.After)
+}
+
 func addOpListDashboardsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListDashboards{}, middleware.After)
 }
@@ -3532,6 +3668,14 @@ func addOpSearchFoldersValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpSearchGroupsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSearchGroups{}, middleware.After)
+}
+
+func addOpStartAssetBundleExportJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartAssetBundleExportJob{}, middleware.After)
+}
+
+func addOpStartAssetBundleImportJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartAssetBundleImportJob{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -3905,6 +4049,601 @@ func validateAnonymousUserQSearchBarEmbeddingConfiguration(v *types.AnonymousUse
 	invalidParams := smithy.InvalidParamsError{Context: "AnonymousUserQSearchBarEmbeddingConfiguration"}
 	if v.InitialTopicId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InitialTopicId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssetBundleCloudFormationOverridePropertyConfiguration(v *types.AssetBundleCloudFormationOverridePropertyConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetBundleCloudFormationOverridePropertyConfiguration"}
+	if v.VPCConnections != nil {
+		if err := validateAssetBundleExportJobVPCConnectionOverridePropertiesList(v.VPCConnections); err != nil {
+			invalidParams.AddNested("VPCConnections", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RefreshSchedules != nil {
+		if err := validateAssetBundleExportJobRefreshScheduleOverridePropertiesList(v.RefreshSchedules); err != nil {
+			invalidParams.AddNested("RefreshSchedules", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DataSources != nil {
+		if err := validateAssetBundleExportJobDataSourceOverridePropertiesList(v.DataSources); err != nil {
+			invalidParams.AddNested("DataSources", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DataSets != nil {
+		if err := validateAssetBundleExportJobDataSetOverridePropertiesList(v.DataSets); err != nil {
+			invalidParams.AddNested("DataSets", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Themes != nil {
+		if err := validateAssetBundleExportJobThemeOverridePropertiesList(v.Themes); err != nil {
+			invalidParams.AddNested("Themes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Analyses != nil {
+		if err := validateAssetBundleExportJobAnalysisOverridePropertiesList(v.Analyses); err != nil {
+			invalidParams.AddNested("Analyses", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Dashboards != nil {
+		if err := validateAssetBundleExportJobDashboardOverridePropertiesList(v.Dashboards); err != nil {
+			invalidParams.AddNested("Dashboards", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssetBundleExportJobAnalysisOverrideProperties(v *types.AssetBundleExportJobAnalysisOverrideProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetBundleExportJobAnalysisOverrideProperties"}
+	if v.Properties == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Properties"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssetBundleExportJobAnalysisOverridePropertiesList(v []types.AssetBundleExportJobAnalysisOverrideProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetBundleExportJobAnalysisOverridePropertiesList"}
+	for i := range v {
+		if err := validateAssetBundleExportJobAnalysisOverrideProperties(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssetBundleExportJobDashboardOverrideProperties(v *types.AssetBundleExportJobDashboardOverrideProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetBundleExportJobDashboardOverrideProperties"}
+	if v.Properties == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Properties"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssetBundleExportJobDashboardOverridePropertiesList(v []types.AssetBundleExportJobDashboardOverrideProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetBundleExportJobDashboardOverridePropertiesList"}
+	for i := range v {
+		if err := validateAssetBundleExportJobDashboardOverrideProperties(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssetBundleExportJobDataSetOverrideProperties(v *types.AssetBundleExportJobDataSetOverrideProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetBundleExportJobDataSetOverrideProperties"}
+	if v.Properties == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Properties"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssetBundleExportJobDataSetOverridePropertiesList(v []types.AssetBundleExportJobDataSetOverrideProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetBundleExportJobDataSetOverridePropertiesList"}
+	for i := range v {
+		if err := validateAssetBundleExportJobDataSetOverrideProperties(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssetBundleExportJobDataSourceOverrideProperties(v *types.AssetBundleExportJobDataSourceOverrideProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetBundleExportJobDataSourceOverrideProperties"}
+	if v.Properties == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Properties"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssetBundleExportJobDataSourceOverridePropertiesList(v []types.AssetBundleExportJobDataSourceOverrideProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetBundleExportJobDataSourceOverridePropertiesList"}
+	for i := range v {
+		if err := validateAssetBundleExportJobDataSourceOverrideProperties(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssetBundleExportJobRefreshScheduleOverrideProperties(v *types.AssetBundleExportJobRefreshScheduleOverrideProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetBundleExportJobRefreshScheduleOverrideProperties"}
+	if v.Properties == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Properties"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssetBundleExportJobRefreshScheduleOverridePropertiesList(v []types.AssetBundleExportJobRefreshScheduleOverrideProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetBundleExportJobRefreshScheduleOverridePropertiesList"}
+	for i := range v {
+		if err := validateAssetBundleExportJobRefreshScheduleOverrideProperties(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssetBundleExportJobThemeOverrideProperties(v *types.AssetBundleExportJobThemeOverrideProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetBundleExportJobThemeOverrideProperties"}
+	if v.Properties == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Properties"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssetBundleExportJobThemeOverridePropertiesList(v []types.AssetBundleExportJobThemeOverrideProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetBundleExportJobThemeOverridePropertiesList"}
+	for i := range v {
+		if err := validateAssetBundleExportJobThemeOverrideProperties(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssetBundleExportJobVPCConnectionOverrideProperties(v *types.AssetBundleExportJobVPCConnectionOverrideProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetBundleExportJobVPCConnectionOverrideProperties"}
+	if v.Properties == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Properties"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssetBundleExportJobVPCConnectionOverridePropertiesList(v []types.AssetBundleExportJobVPCConnectionOverrideProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetBundleExportJobVPCConnectionOverridePropertiesList"}
+	for i := range v {
+		if err := validateAssetBundleExportJobVPCConnectionOverrideProperties(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssetBundleImportJobAnalysisOverrideParameters(v *types.AssetBundleImportJobAnalysisOverrideParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetBundleImportJobAnalysisOverrideParameters"}
+	if v.AnalysisId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AnalysisId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssetBundleImportJobAnalysisOverrideParametersList(v []types.AssetBundleImportJobAnalysisOverrideParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetBundleImportJobAnalysisOverrideParametersList"}
+	for i := range v {
+		if err := validateAssetBundleImportJobAnalysisOverrideParameters(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssetBundleImportJobDashboardOverrideParameters(v *types.AssetBundleImportJobDashboardOverrideParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetBundleImportJobDashboardOverrideParameters"}
+	if v.DashboardId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DashboardId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssetBundleImportJobDashboardOverrideParametersList(v []types.AssetBundleImportJobDashboardOverrideParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetBundleImportJobDashboardOverrideParametersList"}
+	for i := range v {
+		if err := validateAssetBundleImportJobDashboardOverrideParameters(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssetBundleImportJobDataSetOverrideParameters(v *types.AssetBundleImportJobDataSetOverrideParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetBundleImportJobDataSetOverrideParameters"}
+	if v.DataSetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSetId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssetBundleImportJobDataSetOverrideParametersList(v []types.AssetBundleImportJobDataSetOverrideParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetBundleImportJobDataSetOverrideParametersList"}
+	for i := range v {
+		if err := validateAssetBundleImportJobDataSetOverrideParameters(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssetBundleImportJobDataSourceCredentialPair(v *types.AssetBundleImportJobDataSourceCredentialPair) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetBundleImportJobDataSourceCredentialPair"}
+	if v.Username == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Username"))
+	}
+	if v.Password == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Password"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssetBundleImportJobDataSourceCredentials(v *types.AssetBundleImportJobDataSourceCredentials) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetBundleImportJobDataSourceCredentials"}
+	if v.CredentialPair != nil {
+		if err := validateAssetBundleImportJobDataSourceCredentialPair(v.CredentialPair); err != nil {
+			invalidParams.AddNested("CredentialPair", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssetBundleImportJobDataSourceOverrideParameters(v *types.AssetBundleImportJobDataSourceOverrideParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetBundleImportJobDataSourceOverrideParameters"}
+	if v.DataSourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSourceId"))
+	}
+	if v.DataSourceParameters != nil {
+		if err := validateDataSourceParameters(v.DataSourceParameters); err != nil {
+			invalidParams.AddNested("DataSourceParameters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.VpcConnectionProperties != nil {
+		if err := validateVpcConnectionProperties(v.VpcConnectionProperties); err != nil {
+			invalidParams.AddNested("VpcConnectionProperties", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Credentials != nil {
+		if err := validateAssetBundleImportJobDataSourceCredentials(v.Credentials); err != nil {
+			invalidParams.AddNested("Credentials", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssetBundleImportJobDataSourceOverrideParametersList(v []types.AssetBundleImportJobDataSourceOverrideParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetBundleImportJobDataSourceOverrideParametersList"}
+	for i := range v {
+		if err := validateAssetBundleImportJobDataSourceOverrideParameters(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssetBundleImportJobOverrideParameters(v *types.AssetBundleImportJobOverrideParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetBundleImportJobOverrideParameters"}
+	if v.VPCConnections != nil {
+		if err := validateAssetBundleImportJobVPCConnectionOverrideParametersList(v.VPCConnections); err != nil {
+			invalidParams.AddNested("VPCConnections", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RefreshSchedules != nil {
+		if err := validateAssetBundleImportJobRefreshScheduleOverrideParametersList(v.RefreshSchedules); err != nil {
+			invalidParams.AddNested("RefreshSchedules", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DataSources != nil {
+		if err := validateAssetBundleImportJobDataSourceOverrideParametersList(v.DataSources); err != nil {
+			invalidParams.AddNested("DataSources", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DataSets != nil {
+		if err := validateAssetBundleImportJobDataSetOverrideParametersList(v.DataSets); err != nil {
+			invalidParams.AddNested("DataSets", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Themes != nil {
+		if err := validateAssetBundleImportJobThemeOverrideParametersList(v.Themes); err != nil {
+			invalidParams.AddNested("Themes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Analyses != nil {
+		if err := validateAssetBundleImportJobAnalysisOverrideParametersList(v.Analyses); err != nil {
+			invalidParams.AddNested("Analyses", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Dashboards != nil {
+		if err := validateAssetBundleImportJobDashboardOverrideParametersList(v.Dashboards); err != nil {
+			invalidParams.AddNested("Dashboards", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssetBundleImportJobRefreshScheduleOverrideParameters(v *types.AssetBundleImportJobRefreshScheduleOverrideParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetBundleImportJobRefreshScheduleOverrideParameters"}
+	if v.DataSetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSetId"))
+	}
+	if v.ScheduleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScheduleId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssetBundleImportJobRefreshScheduleOverrideParametersList(v []types.AssetBundleImportJobRefreshScheduleOverrideParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetBundleImportJobRefreshScheduleOverrideParametersList"}
+	for i := range v {
+		if err := validateAssetBundleImportJobRefreshScheduleOverrideParameters(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssetBundleImportJobThemeOverrideParameters(v *types.AssetBundleImportJobThemeOverrideParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetBundleImportJobThemeOverrideParameters"}
+	if v.ThemeId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ThemeId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssetBundleImportJobThemeOverrideParametersList(v []types.AssetBundleImportJobThemeOverrideParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetBundleImportJobThemeOverrideParametersList"}
+	for i := range v {
+		if err := validateAssetBundleImportJobThemeOverrideParameters(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssetBundleImportJobVPCConnectionOverrideParameters(v *types.AssetBundleImportJobVPCConnectionOverrideParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetBundleImportJobVPCConnectionOverrideParameters"}
+	if v.VPCConnectionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VPCConnectionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssetBundleImportJobVPCConnectionOverrideParametersList(v []types.AssetBundleImportJobVPCConnectionOverrideParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetBundleImportJobVPCConnectionOverrideParametersList"}
+	for i := range v {
+		if err := validateAssetBundleImportJobVPCConnectionOverrideParameters(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -8408,6 +9147,72 @@ func validateGeospatialCoordinateBounds(v *types.GeospatialCoordinateBounds) err
 	}
 }
 
+func validateGeospatialHeatmapColorScale(v *types.GeospatialHeatmapColorScale) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GeospatialHeatmapColorScale"}
+	if v.Colors != nil {
+		if err := validateGeospatialHeatmapDataColorList(v.Colors); err != nil {
+			invalidParams.AddNested("Colors", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGeospatialHeatmapConfiguration(v *types.GeospatialHeatmapConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GeospatialHeatmapConfiguration"}
+	if v.HeatmapColor != nil {
+		if err := validateGeospatialHeatmapColorScale(v.HeatmapColor); err != nil {
+			invalidParams.AddNested("HeatmapColor", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGeospatialHeatmapDataColor(v *types.GeospatialHeatmapDataColor) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GeospatialHeatmapDataColor"}
+	if v.Color == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Color"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGeospatialHeatmapDataColorList(v []types.GeospatialHeatmapDataColor) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GeospatialHeatmapDataColorList"}
+	for i := range v {
+		if err := validateGeospatialHeatmapDataColor(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateGeospatialMapAggregatedFieldWells(v *types.GeospatialMapAggregatedFieldWells) error {
 	if v == nil {
 		return nil
@@ -8453,6 +9258,11 @@ func validateGeospatialMapConfiguration(v *types.GeospatialMapConfiguration) err
 	if v.WindowOptions != nil {
 		if err := validateGeospatialWindowOptions(v.WindowOptions); err != nil {
 			invalidParams.AddNested("WindowOptions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PointStyleOptions != nil {
+		if err := validateGeospatialPointStyleOptions(v.PointStyleOptions); err != nil {
+			invalidParams.AddNested("PointStyleOptions", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.VisualPalette != nil {
@@ -8505,6 +9315,23 @@ func validateGeospatialMapVisual(v *types.GeospatialMapVisual) error {
 	if v.Actions != nil {
 		if err := validateVisualCustomActionList(v.Actions); err != nil {
 			invalidParams.AddNested("Actions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGeospatialPointStyleOptions(v *types.GeospatialPointStyleOptions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GeospatialPointStyleOptions"}
+	if v.HeatmapConfiguration != nil {
+		if err := validateGeospatialHeatmapConfiguration(v.HeatmapConfiguration); err != nil {
+			invalidParams.AddNested("HeatmapConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -16334,6 +17161,42 @@ func validateOpDescribeAnalysisPermissionsInput(v *DescribeAnalysisPermissionsIn
 	}
 }
 
+func validateOpDescribeAssetBundleExportJobInput(v *DescribeAssetBundleExportJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeAssetBundleExportJobInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.AssetBundleExportJobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetBundleExportJobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeAssetBundleImportJobInput(v *DescribeAssetBundleImportJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeAssetBundleImportJobInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.AssetBundleImportJobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetBundleImportJobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeDashboardDefinitionInput(v *DescribeDashboardDefinitionInput) error {
 	if v == nil {
 		return nil
@@ -17031,6 +17894,36 @@ func validateOpListAnalysesInput(v *ListAnalysesInput) error {
 	}
 }
 
+func validateOpListAssetBundleExportJobsInput(v *ListAssetBundleExportJobsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAssetBundleExportJobsInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAssetBundleImportJobsInput(v *ListAssetBundleImportJobsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAssetBundleImportJobsInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListDashboardsInput(v *ListDashboardsInput) error {
 	if v == nil {
 		return nil
@@ -17648,6 +18541,61 @@ func validateOpSearchGroupsInput(v *SearchGroupsInput) error {
 	} else if v.Filters != nil {
 		if err := validateGroupSearchFilterList(v.Filters); err != nil {
 			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartAssetBundleExportJobInput(v *StartAssetBundleExportJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartAssetBundleExportJobInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.AssetBundleExportJobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetBundleExportJobId"))
+	}
+	if v.ResourceArns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArns"))
+	}
+	if len(v.ExportFormat) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ExportFormat"))
+	}
+	if v.CloudFormationOverridePropertyConfiguration != nil {
+		if err := validateAssetBundleCloudFormationOverridePropertyConfiguration(v.CloudFormationOverridePropertyConfiguration); err != nil {
+			invalidParams.AddNested("CloudFormationOverridePropertyConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartAssetBundleImportJobInput(v *StartAssetBundleImportJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartAssetBundleImportJobInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.AssetBundleImportJobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetBundleImportJobId"))
+	}
+	if v.AssetBundleImportSource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetBundleImportSource"))
+	}
+	if v.OverrideParameters != nil {
+		if err := validateAssetBundleImportJobOverrideParameters(v.OverrideParameters); err != nil {
+			invalidParams.AddNested("OverrideParameters", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

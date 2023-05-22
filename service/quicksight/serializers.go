@@ -4478,6 +4478,140 @@ func awsRestjson1_serializeOpHttpBindingsDescribeAnalysisPermissionsInput(v *Des
 	return nil
 }
 
+type awsRestjson1_serializeOpDescribeAssetBundleExportJob struct {
+}
+
+func (*awsRestjson1_serializeOpDescribeAssetBundleExportJob) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDescribeAssetBundleExportJob) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeAssetBundleExportJobInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/accounts/{AwsAccountId}/asset-bundle-export-jobs/{AssetBundleExportJobId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDescribeAssetBundleExportJobInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDescribeAssetBundleExportJobInput(v *DescribeAssetBundleExportJobInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AssetBundleExportJobId == nil || len(*v.AssetBundleExportJobId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member AssetBundleExportJobId must not be empty")}
+	}
+	if v.AssetBundleExportJobId != nil {
+		if err := encoder.SetURI("AssetBundleExportJobId").String(*v.AssetBundleExportJobId); err != nil {
+			return err
+		}
+	}
+
+	if v.AwsAccountId == nil || len(*v.AwsAccountId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member AwsAccountId must not be empty")}
+	}
+	if v.AwsAccountId != nil {
+		if err := encoder.SetURI("AwsAccountId").String(*v.AwsAccountId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDescribeAssetBundleImportJob struct {
+}
+
+func (*awsRestjson1_serializeOpDescribeAssetBundleImportJob) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDescribeAssetBundleImportJob) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeAssetBundleImportJobInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/accounts/{AwsAccountId}/asset-bundle-import-jobs/{AssetBundleImportJobId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDescribeAssetBundleImportJobInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDescribeAssetBundleImportJobInput(v *DescribeAssetBundleImportJobInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AssetBundleImportJobId == nil || len(*v.AssetBundleImportJobId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member AssetBundleImportJobId must not be empty")}
+	}
+	if v.AssetBundleImportJobId != nil {
+		if err := encoder.SetURI("AssetBundleImportJobId").String(*v.AssetBundleImportJobId); err != nil {
+			return err
+		}
+	}
+
+	if v.AwsAccountId == nil || len(*v.AwsAccountId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member AwsAccountId must not be empty")}
+	}
+	if v.AwsAccountId != nil {
+		if err := encoder.SetURI("AwsAccountId").String(*v.AwsAccountId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpDescribeDashboard struct {
 }
 
@@ -7112,6 +7246,138 @@ func (m *awsRestjson1_serializeOpListAnalyses) HandleSerialize(ctx context.Conte
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsListAnalysesInput(v *ListAnalysesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AwsAccountId == nil || len(*v.AwsAccountId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member AwsAccountId must not be empty")}
+	}
+	if v.AwsAccountId != nil {
+		if err := encoder.SetURI("AwsAccountId").String(*v.AwsAccountId); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("max-results").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("next-token").String(*v.NextToken)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListAssetBundleExportJobs struct {
+}
+
+func (*awsRestjson1_serializeOpListAssetBundleExportJobs) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListAssetBundleExportJobs) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListAssetBundleExportJobsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/accounts/{AwsAccountId}/asset-bundle-export-jobs")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListAssetBundleExportJobsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListAssetBundleExportJobsInput(v *ListAssetBundleExportJobsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AwsAccountId == nil || len(*v.AwsAccountId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member AwsAccountId must not be empty")}
+	}
+	if v.AwsAccountId != nil {
+		if err := encoder.SetURI("AwsAccountId").String(*v.AwsAccountId); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("max-results").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("next-token").String(*v.NextToken)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListAssetBundleImportJobs struct {
+}
+
+func (*awsRestjson1_serializeOpListAssetBundleImportJobs) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListAssetBundleImportJobs) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListAssetBundleImportJobsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/accounts/{AwsAccountId}/asset-bundle-import-jobs")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListAssetBundleImportJobsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListAssetBundleImportJobsInput(v *ListAssetBundleImportJobsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -9784,6 +10050,211 @@ func awsRestjson1_serializeOpDocumentSearchGroupsInput(v *SearchGroupsInput, val
 	if v.Filters != nil {
 		ok := object.Key("Filters")
 		if err := awsRestjson1_serializeDocumentGroupSearchFilterList(v.Filters, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpStartAssetBundleExportJob struct {
+}
+
+func (*awsRestjson1_serializeOpStartAssetBundleExportJob) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpStartAssetBundleExportJob) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StartAssetBundleExportJobInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/accounts/{AwsAccountId}/asset-bundle-export-jobs/export")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsStartAssetBundleExportJobInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentStartAssetBundleExportJobInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsStartAssetBundleExportJobInput(v *StartAssetBundleExportJobInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AwsAccountId == nil || len(*v.AwsAccountId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member AwsAccountId must not be empty")}
+	}
+	if v.AwsAccountId != nil {
+		if err := encoder.SetURI("AwsAccountId").String(*v.AwsAccountId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentStartAssetBundleExportJobInput(v *StartAssetBundleExportJobInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AssetBundleExportJobId != nil {
+		ok := object.Key("AssetBundleExportJobId")
+		ok.String(*v.AssetBundleExportJobId)
+	}
+
+	if v.CloudFormationOverridePropertyConfiguration != nil {
+		ok := object.Key("CloudFormationOverridePropertyConfiguration")
+		if err := awsRestjson1_serializeDocumentAssetBundleCloudFormationOverridePropertyConfiguration(v.CloudFormationOverridePropertyConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.ExportFormat) > 0 {
+		ok := object.Key("ExportFormat")
+		ok.String(string(v.ExportFormat))
+	}
+
+	if v.IncludeAllDependencies {
+		ok := object.Key("IncludeAllDependencies")
+		ok.Boolean(v.IncludeAllDependencies)
+	}
+
+	if v.ResourceArns != nil {
+		ok := object.Key("ResourceArns")
+		if err := awsRestjson1_serializeDocumentAssetBundleResourceArns(v.ResourceArns, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpStartAssetBundleImportJob struct {
+}
+
+func (*awsRestjson1_serializeOpStartAssetBundleImportJob) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpStartAssetBundleImportJob) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StartAssetBundleImportJobInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/accounts/{AwsAccountId}/asset-bundle-import-jobs/import")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsStartAssetBundleImportJobInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentStartAssetBundleImportJobInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsStartAssetBundleImportJobInput(v *StartAssetBundleImportJobInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AwsAccountId == nil || len(*v.AwsAccountId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member AwsAccountId must not be empty")}
+	}
+	if v.AwsAccountId != nil {
+		if err := encoder.SetURI("AwsAccountId").String(*v.AwsAccountId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentStartAssetBundleImportJobInput(v *StartAssetBundleImportJobInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AssetBundleImportJobId != nil {
+		ok := object.Key("AssetBundleImportJobId")
+		ok.String(*v.AssetBundleImportJobId)
+	}
+
+	if v.AssetBundleImportSource != nil {
+		ok := object.Key("AssetBundleImportSource")
+		if err := awsRestjson1_serializeDocumentAssetBundleImportSource(v.AssetBundleImportSource, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.FailureAction) > 0 {
+		ok := object.Key("FailureAction")
+		ok.String(string(v.FailureAction))
+	}
+
+	if v.OverrideParameters != nil {
+		ok := object.Key("OverrideParameters")
+		if err := awsRestjson1_serializeDocumentAssetBundleImportJobOverrideParameters(v.OverrideParameters, ok); err != nil {
 			return err
 		}
 	}
@@ -13395,6 +13866,790 @@ func awsRestjson1_serializeDocumentArcOptions(v *types.ArcOptions, value smithyj
 }
 
 func awsRestjson1_serializeDocumentArnList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssetBundleCloudFormationOverridePropertyConfiguration(v *types.AssetBundleCloudFormationOverridePropertyConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Analyses != nil {
+		ok := object.Key("Analyses")
+		if err := awsRestjson1_serializeDocumentAssetBundleExportJobAnalysisOverridePropertiesList(v.Analyses, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Dashboards != nil {
+		ok := object.Key("Dashboards")
+		if err := awsRestjson1_serializeDocumentAssetBundleExportJobDashboardOverridePropertiesList(v.Dashboards, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DataSets != nil {
+		ok := object.Key("DataSets")
+		if err := awsRestjson1_serializeDocumentAssetBundleExportJobDataSetOverridePropertiesList(v.DataSets, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DataSources != nil {
+		ok := object.Key("DataSources")
+		if err := awsRestjson1_serializeDocumentAssetBundleExportJobDataSourceOverridePropertiesList(v.DataSources, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RefreshSchedules != nil {
+		ok := object.Key("RefreshSchedules")
+		if err := awsRestjson1_serializeDocumentAssetBundleExportJobRefreshScheduleOverridePropertiesList(v.RefreshSchedules, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ResourceIdOverrideConfiguration != nil {
+		ok := object.Key("ResourceIdOverrideConfiguration")
+		if err := awsRestjson1_serializeDocumentAssetBundleExportJobResourceIdOverrideConfiguration(v.ResourceIdOverrideConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Themes != nil {
+		ok := object.Key("Themes")
+		if err := awsRestjson1_serializeDocumentAssetBundleExportJobThemeOverridePropertiesList(v.Themes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VPCConnections != nil {
+		ok := object.Key("VPCConnections")
+		if err := awsRestjson1_serializeDocumentAssetBundleExportJobVPCConnectionOverridePropertiesList(v.VPCConnections, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssetBundleExportJobAnalysisOverrideProperties(v *types.AssetBundleExportJobAnalysisOverrideProperties, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Arn != nil {
+		ok := object.Key("Arn")
+		ok.String(*v.Arn)
+	}
+
+	if v.Properties != nil {
+		ok := object.Key("Properties")
+		if err := awsRestjson1_serializeDocumentAssetBundleExportJobAnalysisPropertyToOverrideList(v.Properties, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssetBundleExportJobAnalysisOverridePropertiesList(v []types.AssetBundleExportJobAnalysisOverrideProperties, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAssetBundleExportJobAnalysisOverrideProperties(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssetBundleExportJobAnalysisPropertyToOverrideList(v []types.AssetBundleExportJobAnalysisPropertyToOverride, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssetBundleExportJobDashboardOverrideProperties(v *types.AssetBundleExportJobDashboardOverrideProperties, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Arn != nil {
+		ok := object.Key("Arn")
+		ok.String(*v.Arn)
+	}
+
+	if v.Properties != nil {
+		ok := object.Key("Properties")
+		if err := awsRestjson1_serializeDocumentAssetBundleExportJobDashboardPropertyToOverrideList(v.Properties, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssetBundleExportJobDashboardOverridePropertiesList(v []types.AssetBundleExportJobDashboardOverrideProperties, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAssetBundleExportJobDashboardOverrideProperties(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssetBundleExportJobDashboardPropertyToOverrideList(v []types.AssetBundleExportJobDashboardPropertyToOverride, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssetBundleExportJobDataSetOverrideProperties(v *types.AssetBundleExportJobDataSetOverrideProperties, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Arn != nil {
+		ok := object.Key("Arn")
+		ok.String(*v.Arn)
+	}
+
+	if v.Properties != nil {
+		ok := object.Key("Properties")
+		if err := awsRestjson1_serializeDocumentAssetBundleExportJobDataSetPropertyToOverrideList(v.Properties, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssetBundleExportJobDataSetOverridePropertiesList(v []types.AssetBundleExportJobDataSetOverrideProperties, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAssetBundleExportJobDataSetOverrideProperties(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssetBundleExportJobDataSetPropertyToOverrideList(v []types.AssetBundleExportJobDataSetPropertyToOverride, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssetBundleExportJobDataSourceOverrideProperties(v *types.AssetBundleExportJobDataSourceOverrideProperties, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Arn != nil {
+		ok := object.Key("Arn")
+		ok.String(*v.Arn)
+	}
+
+	if v.Properties != nil {
+		ok := object.Key("Properties")
+		if err := awsRestjson1_serializeDocumentAssetBundleExportJobDataSourcePropertyToOverrideList(v.Properties, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssetBundleExportJobDataSourceOverridePropertiesList(v []types.AssetBundleExportJobDataSourceOverrideProperties, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAssetBundleExportJobDataSourceOverrideProperties(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssetBundleExportJobDataSourcePropertyToOverrideList(v []types.AssetBundleExportJobDataSourcePropertyToOverride, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssetBundleExportJobRefreshScheduleOverrideProperties(v *types.AssetBundleExportJobRefreshScheduleOverrideProperties, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Arn != nil {
+		ok := object.Key("Arn")
+		ok.String(*v.Arn)
+	}
+
+	if v.Properties != nil {
+		ok := object.Key("Properties")
+		if err := awsRestjson1_serializeDocumentAssetBundleExportJobRefreshSchedulePropertyToOverrideList(v.Properties, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssetBundleExportJobRefreshScheduleOverridePropertiesList(v []types.AssetBundleExportJobRefreshScheduleOverrideProperties, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAssetBundleExportJobRefreshScheduleOverrideProperties(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssetBundleExportJobRefreshSchedulePropertyToOverrideList(v []types.AssetBundleExportJobRefreshSchedulePropertyToOverride, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssetBundleExportJobResourceIdOverrideConfiguration(v *types.AssetBundleExportJobResourceIdOverrideConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PrefixForAllResources {
+		ok := object.Key("PrefixForAllResources")
+		ok.Boolean(v.PrefixForAllResources)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssetBundleExportJobThemeOverrideProperties(v *types.AssetBundleExportJobThemeOverrideProperties, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Arn != nil {
+		ok := object.Key("Arn")
+		ok.String(*v.Arn)
+	}
+
+	if v.Properties != nil {
+		ok := object.Key("Properties")
+		if err := awsRestjson1_serializeDocumentAssetBundleExportJobThemePropertyToOverrideList(v.Properties, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssetBundleExportJobThemeOverridePropertiesList(v []types.AssetBundleExportJobThemeOverrideProperties, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAssetBundleExportJobThemeOverrideProperties(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssetBundleExportJobThemePropertyToOverrideList(v []types.AssetBundleExportJobThemePropertyToOverride, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssetBundleExportJobVPCConnectionOverrideProperties(v *types.AssetBundleExportJobVPCConnectionOverrideProperties, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Arn != nil {
+		ok := object.Key("Arn")
+		ok.String(*v.Arn)
+	}
+
+	if v.Properties != nil {
+		ok := object.Key("Properties")
+		if err := awsRestjson1_serializeDocumentAssetBundleExportJobVPCConnectionPropertyToOverrideList(v.Properties, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssetBundleExportJobVPCConnectionOverridePropertiesList(v []types.AssetBundleExportJobVPCConnectionOverrideProperties, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAssetBundleExportJobVPCConnectionOverrideProperties(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssetBundleExportJobVPCConnectionPropertyToOverrideList(v []types.AssetBundleExportJobVPCConnectionPropertyToOverride, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssetBundleImportJobAnalysisOverrideParameters(v *types.AssetBundleImportJobAnalysisOverrideParameters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AnalysisId != nil {
+		ok := object.Key("AnalysisId")
+		ok.String(*v.AnalysisId)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssetBundleImportJobAnalysisOverrideParametersList(v []types.AssetBundleImportJobAnalysisOverrideParameters, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAssetBundleImportJobAnalysisOverrideParameters(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssetBundleImportJobDashboardOverrideParameters(v *types.AssetBundleImportJobDashboardOverrideParameters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DashboardId != nil {
+		ok := object.Key("DashboardId")
+		ok.String(*v.DashboardId)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssetBundleImportJobDashboardOverrideParametersList(v []types.AssetBundleImportJobDashboardOverrideParameters, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAssetBundleImportJobDashboardOverrideParameters(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssetBundleImportJobDataSetOverrideParameters(v *types.AssetBundleImportJobDataSetOverrideParameters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DataSetId != nil {
+		ok := object.Key("DataSetId")
+		ok.String(*v.DataSetId)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssetBundleImportJobDataSetOverrideParametersList(v []types.AssetBundleImportJobDataSetOverrideParameters, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAssetBundleImportJobDataSetOverrideParameters(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssetBundleImportJobDataSourceCredentialPair(v *types.AssetBundleImportJobDataSourceCredentialPair, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Password != nil {
+		ok := object.Key("Password")
+		ok.String(*v.Password)
+	}
+
+	if v.Username != nil {
+		ok := object.Key("Username")
+		ok.String(*v.Username)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssetBundleImportJobDataSourceCredentials(v *types.AssetBundleImportJobDataSourceCredentials, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CredentialPair != nil {
+		ok := object.Key("CredentialPair")
+		if err := awsRestjson1_serializeDocumentAssetBundleImportJobDataSourceCredentialPair(v.CredentialPair, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SecretArn != nil {
+		ok := object.Key("SecretArn")
+		ok.String(*v.SecretArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssetBundleImportJobDataSourceOverrideParameters(v *types.AssetBundleImportJobDataSourceOverrideParameters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Credentials != nil {
+		ok := object.Key("Credentials")
+		if err := awsRestjson1_serializeDocumentAssetBundleImportJobDataSourceCredentials(v.Credentials, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DataSourceId != nil {
+		ok := object.Key("DataSourceId")
+		ok.String(*v.DataSourceId)
+	}
+
+	if v.DataSourceParameters != nil {
+		ok := object.Key("DataSourceParameters")
+		if err := awsRestjson1_serializeDocumentDataSourceParameters(v.DataSourceParameters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.SslProperties != nil {
+		ok := object.Key("SslProperties")
+		if err := awsRestjson1_serializeDocumentSslProperties(v.SslProperties, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VpcConnectionProperties != nil {
+		ok := object.Key("VpcConnectionProperties")
+		if err := awsRestjson1_serializeDocumentVpcConnectionProperties(v.VpcConnectionProperties, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssetBundleImportJobDataSourceOverrideParametersList(v []types.AssetBundleImportJobDataSourceOverrideParameters, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAssetBundleImportJobDataSourceOverrideParameters(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssetBundleImportJobOverrideParameters(v *types.AssetBundleImportJobOverrideParameters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Analyses != nil {
+		ok := object.Key("Analyses")
+		if err := awsRestjson1_serializeDocumentAssetBundleImportJobAnalysisOverrideParametersList(v.Analyses, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Dashboards != nil {
+		ok := object.Key("Dashboards")
+		if err := awsRestjson1_serializeDocumentAssetBundleImportJobDashboardOverrideParametersList(v.Dashboards, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DataSets != nil {
+		ok := object.Key("DataSets")
+		if err := awsRestjson1_serializeDocumentAssetBundleImportJobDataSetOverrideParametersList(v.DataSets, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DataSources != nil {
+		ok := object.Key("DataSources")
+		if err := awsRestjson1_serializeDocumentAssetBundleImportJobDataSourceOverrideParametersList(v.DataSources, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RefreshSchedules != nil {
+		ok := object.Key("RefreshSchedules")
+		if err := awsRestjson1_serializeDocumentAssetBundleImportJobRefreshScheduleOverrideParametersList(v.RefreshSchedules, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ResourceIdOverrideConfiguration != nil {
+		ok := object.Key("ResourceIdOverrideConfiguration")
+		if err := awsRestjson1_serializeDocumentAssetBundleImportJobResourceIdOverrideConfiguration(v.ResourceIdOverrideConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Themes != nil {
+		ok := object.Key("Themes")
+		if err := awsRestjson1_serializeDocumentAssetBundleImportJobThemeOverrideParametersList(v.Themes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VPCConnections != nil {
+		ok := object.Key("VPCConnections")
+		if err := awsRestjson1_serializeDocumentAssetBundleImportJobVPCConnectionOverrideParametersList(v.VPCConnections, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssetBundleImportJobRefreshScheduleOverrideParameters(v *types.AssetBundleImportJobRefreshScheduleOverrideParameters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DataSetId != nil {
+		ok := object.Key("DataSetId")
+		ok.String(*v.DataSetId)
+	}
+
+	if v.ScheduleId != nil {
+		ok := object.Key("ScheduleId")
+		ok.String(*v.ScheduleId)
+	}
+
+	if v.StartAfterDateTime != nil {
+		ok := object.Key("StartAfterDateTime")
+		ok.Double(smithytime.FormatEpochSeconds(*v.StartAfterDateTime))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssetBundleImportJobRefreshScheduleOverrideParametersList(v []types.AssetBundleImportJobRefreshScheduleOverrideParameters, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAssetBundleImportJobRefreshScheduleOverrideParameters(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssetBundleImportJobResourceIdOverrideConfiguration(v *types.AssetBundleImportJobResourceIdOverrideConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PrefixForAllResources != nil {
+		ok := object.Key("PrefixForAllResources")
+		ok.String(*v.PrefixForAllResources)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssetBundleImportJobThemeOverrideParameters(v *types.AssetBundleImportJobThemeOverrideParameters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.ThemeId != nil {
+		ok := object.Key("ThemeId")
+		ok.String(*v.ThemeId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssetBundleImportJobThemeOverrideParametersList(v []types.AssetBundleImportJobThemeOverrideParameters, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAssetBundleImportJobThemeOverrideParameters(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssetBundleImportJobVPCConnectionOverrideParameters(v *types.AssetBundleImportJobVPCConnectionOverrideParameters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DnsResolvers != nil {
+		ok := object.Key("DnsResolvers")
+		if err := awsRestjson1_serializeDocumentDnsResolverList(v.DnsResolvers, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.RoleArn != nil {
+		ok := object.Key("RoleArn")
+		ok.String(*v.RoleArn)
+	}
+
+	if v.SecurityGroupIds != nil {
+		ok := object.Key("SecurityGroupIds")
+		if err := awsRestjson1_serializeDocumentSecurityGroupIdList(v.SecurityGroupIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SubnetIds != nil {
+		ok := object.Key("SubnetIds")
+		if err := awsRestjson1_serializeDocumentSubnetIdList(v.SubnetIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VPCConnectionId != nil {
+		ok := object.Key("VPCConnectionId")
+		ok.String(*v.VPCConnectionId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssetBundleImportJobVPCConnectionOverrideParametersList(v []types.AssetBundleImportJobVPCConnectionOverrideParameters, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAssetBundleImportJobVPCConnectionOverrideParameters(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssetBundleImportSource(v *types.AssetBundleImportSource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Body != nil {
+		ok := object.Key("Body")
+		ok.Base64EncodeBytes(v.Body)
+	}
+
+	if v.S3Uri != nil {
+		ok := object.Key("S3Uri")
+		ok.String(*v.S3Uri)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssetBundleResourceArns(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
@@ -20609,6 +21864,59 @@ func awsRestjson1_serializeDocumentGeospatialCoordinateBounds(v *types.Geospatia
 	return nil
 }
 
+func awsRestjson1_serializeDocumentGeospatialHeatmapColorScale(v *types.GeospatialHeatmapColorScale, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Colors != nil {
+		ok := object.Key("Colors")
+		if err := awsRestjson1_serializeDocumentGeospatialHeatmapDataColorList(v.Colors, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGeospatialHeatmapConfiguration(v *types.GeospatialHeatmapConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.HeatmapColor != nil {
+		ok := object.Key("HeatmapColor")
+		if err := awsRestjson1_serializeDocumentGeospatialHeatmapColorScale(v.HeatmapColor, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGeospatialHeatmapDataColor(v *types.GeospatialHeatmapDataColor, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Color != nil {
+		ok := object.Key("Color")
+		ok.String(*v.Color)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGeospatialHeatmapDataColorList(v []types.GeospatialHeatmapDataColor, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentGeospatialHeatmapDataColor(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentGeospatialMapAggregatedFieldWells(v *types.GeospatialMapAggregatedFieldWells, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -20773,6 +22081,13 @@ func awsRestjson1_serializeDocumentGeospatialPointStyleOptions(v *types.Geospati
 	if v.ClusterMarkerConfiguration != nil {
 		ok := object.Key("ClusterMarkerConfiguration")
 		if err := awsRestjson1_serializeDocumentClusterMarkerConfiguration(v.ClusterMarkerConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.HeatmapConfiguration != nil {
+		ok := object.Key("HeatmapConfiguration")
+		if err := awsRestjson1_serializeDocumentGeospatialHeatmapConfiguration(v.HeatmapConfiguration, ok); err != nil {
 			return err
 		}
 	}

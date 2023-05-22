@@ -2279,9 +2279,15 @@ type EmailTemplateRequest struct {
 	// message template.
 	Subject *string
 
-	// A string-to-string map of key-value pairs that defines the tags to associate
-	// with the message template. Each tag consists of a required tag key and an
-	// associated tag value.
+	// As of 22-05-2023 tags has been deprecated for update operations. After this
+	// date any value in tags is not processed and an error code is not returned. To
+	// manage tags we recommend using either Tags (https://docs.aws.amazon.com/pinpoint/latest/apireference/tags-resource-arn.html)
+	// in the API Reference for Amazon Pinpoint, resourcegroupstaggingapi (https://docs.aws.amazon.com/cli/latest/reference/resourcegroupstaggingapi/index.html)
+	// commands in the AWS Command Line Interface Documentation or
+	// resourcegroupstaggingapi (https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/services/resourcegroupstaggingapi/package-summary.html)
+	// in the AWS SDK. (Deprecated) A string-to-string map of key-value pairs that
+	// defines the tags to associate with the message template. Each tag consists of a
+	// required tag key and an associated tag value.
 	Tags map[string]string
 
 	// A custom description of the message template.
@@ -3713,9 +3719,15 @@ type InAppTemplateRequest struct {
 	// The layout of the message.
 	Layout Layout
 
-	// A string-to-string map of key-value pairs that defines the tags to associate
-	// with the message template. Each tag consists of a required tag key and an
-	// associated tag value.
+	// As of 22-05-2023 tags has been deprecated for update operations. After this
+	// date any value in tags is not processed and an error code is not returned. To
+	// manage tags we recommend using either Tags (https://docs.aws.amazon.com/pinpoint/latest/apireference/tags-resource-arn.html)
+	// in the API Reference for Amazon Pinpoint, resourcegroupstaggingapi (https://docs.aws.amazon.com/cli/latest/reference/resourcegroupstaggingapi/index.html)
+	// commands in the AWS Command Line Interface Documentation or
+	// resourcegroupstaggingapi (https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/services/resourcegroupstaggingapi/package-summary.html)
+	// in the AWS SDK. (Deprecated) A string-to-string map of key-value pairs that
+	// defines the tags to associate with the message template. Each tag consists of a
+	// required tag key and an associated tag value.
 	Tags map[string]string
 
 	// The description of the template.
@@ -4893,9 +4905,15 @@ type PushNotificationTemplateRequest struct {
 	// template, if the template contains message variables for recommendation data.
 	RecommenderId *string
 
-	// A string-to-string map of key-value pairs that defines the tags to associate
-	// with the message template. Each tag consists of a required tag key and an
-	// associated tag value.
+	// As of 22-05-2023 tags has been deprecated for update operations. After this
+	// date any value in tags is not processed and an error code is not returned. To
+	// manage tags we recommend using either Tags (https://docs.aws.amazon.com/pinpoint/latest/apireference/tags-resource-arn.html)
+	// in the API Reference for Amazon Pinpoint, resourcegroupstaggingapi (https://docs.aws.amazon.com/cli/latest/reference/resourcegroupstaggingapi/index.html)
+	// commands in the AWS Command Line Interface Documentation or
+	// resourcegroupstaggingapi (https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/services/resourcegroupstaggingapi/package-summary.html)
+	// in the AWS SDK. (Deprecated) A string-to-string map of key-value pairs that
+	// defines the tags to associate with the message template. Each tag consists of a
+	// required tag key and an associated tag value.
 	Tags map[string]string
 
 	// A custom description of the message template.
@@ -5873,9 +5891,15 @@ type SMSTemplateRequest struct {
 	// template, if the template contains message variables for recommendation data.
 	RecommenderId *string
 
-	// A string-to-string map of key-value pairs that defines the tags to associate
-	// with the message template. Each tag consists of a required tag key and an
-	// associated tag value.
+	// As of 22-05-2023 tags has been deprecated for update operations. After this
+	// date any value in tags is not processed and an error code is not returned. To
+	// manage tags we recommend using either Tags (https://docs.aws.amazon.com/pinpoint/latest/apireference/tags-resource-arn.html)
+	// in the API Reference for Amazon Pinpoint, resourcegroupstaggingapi (https://docs.aws.amazon.com/cli/latest/reference/resourcegroupstaggingapi/index.html)
+	// commands in the AWS Command Line Interface Documentation or
+	// resourcegroupstaggingapi (https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/services/resourcegroupstaggingapi/package-summary.html)
+	// in the AWS SDK. (Deprecated) A string-to-string map of key-value pairs that
+	// defines the tags to associate with the message template. Each tag consists of a
+	// required tag key and an associated tag value.
 	Tags map[string]string
 
 	// A custom description of the message template.
@@ -6467,9 +6491,15 @@ type VoiceTemplateRequest struct {
 	// .
 	LanguageCode *string
 
-	// A string-to-string map of key-value pairs that defines the tags to associate
-	// with the message template. Each tag consists of a required tag key and an
-	// associated tag value.
+	// As of 22-05-2023 tags has been deprecated for update operations. After this
+	// date any value in tags is not processed and an error code is not returned. To
+	// manage tags we recommend using either Tags (https://docs.aws.amazon.com/pinpoint/latest/apireference/tags-resource-arn.html)
+	// in the API Reference for Amazon Pinpoint, resourcegroupstaggingapi (https://docs.aws.amazon.com/cli/latest/reference/resourcegroupstaggingapi/index.html)
+	// commands in the AWS Command Line Interface Documentation or
+	// resourcegroupstaggingapi (https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/services/resourcegroupstaggingapi/package-summary.html)
+	// in the AWS SDK. (Deprecated) A string-to-string map of key-value pairs that
+	// defines the tags to associate with the message template. Each tag consists of a
+	// required tag key and an associated tag value.
 	Tags map[string]string
 
 	// A custom description of the message template.
@@ -6674,9 +6704,15 @@ type WriteCampaignRequest struct {
 	// The version of the segment to associate with the campaign.
 	SegmentVersion int32
 
-	// A string-to-string map of key-value pairs that defines the tags to associate
-	// with the campaign. Each tag consists of a required tag key and an associated tag
-	// value.
+	// As of 22-05-2023 tags has been deprecated for update operations. After this
+	// date any value in tags is not processed and an error code is not returned. To
+	// manage tags we recommend using either Tags (https://docs.aws.amazon.com/pinpoint/latest/apireference/tags-resource-arn.html)
+	// in the API Reference for Amazon Pinpoint, resourcegroupstaggingapi (https://docs.aws.amazon.com/cli/latest/reference/resourcegroupstaggingapi/index.html)
+	// commands in the AWS Command Line Interface Documentation or
+	// resourcegroupstaggingapi (https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/services/resourcegroupstaggingapi/package-summary.html)
+	// in the AWS SDK. (Deprecated) A string-to-string map of key-value pairs that
+	// defines the tags to associate with the campaign. Each tag consists of a required
+	// tag key and an associated tag value.
 	Tags map[string]string
 
 	// The message template to use for the campaign.
@@ -6829,9 +6865,15 @@ type WriteSegmentRequest struct {
 	// more base segments. Your request can include only one segment group.
 	SegmentGroups *SegmentGroupList
 
-	// A string-to-string map of key-value pairs that defines the tags to associate
-	// with the segment. Each tag consists of a required tag key and an associated tag
-	// value.
+	// As of 22-05-2023 tags has been deprecated for update operations. After this
+	// date any value in tags is not processed and an error code is not returned. To
+	// manage tags we recommend using either Tags (https://docs.aws.amazon.com/pinpoint/latest/apireference/tags-resource-arn.html)
+	// in the API Reference for Amazon Pinpoint, resourcegroupstaggingapi (https://docs.aws.amazon.com/cli/latest/reference/resourcegroupstaggingapi/index.html)
+	// commands in the AWS Command Line Interface Documentation or
+	// resourcegroupstaggingapi (https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/services/resourcegroupstaggingapi/package-summary.html)
+	// in the AWS SDK. (Deprecated) A string-to-string map of key-value pairs that
+	// defines the tags to associate with the segment. Each tag consists of a required
+	// tag key and an associated tag value.
 	Tags map[string]string
 
 	noSmithyDocumentSerde

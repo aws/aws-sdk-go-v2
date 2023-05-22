@@ -64,6 +64,11 @@ type StartRestoreJobInput struct {
 	// This member is required.
 	RecoveryPointArn *string
 
+	// This is an optional parameter. If this equals True , tags included in the backup
+	// will be copied to the restored resource. This can only be applied to backups
+	// created through Backup.
+	CopySourceTagsToRestoredResource bool
+
 	// The Amazon Resource Name (ARN) of the IAM role that Backup uses to create the
 	// target resource; for example: arn:aws:iam::123456789012:role/S3Access .
 	IamRoleArn *string

@@ -122,6 +122,248 @@ func (ArcThicknessOptions) Values() []ArcThicknessOptions {
 	}
 }
 
+type AssetBundleExportFormat string
+
+// Enum values for AssetBundleExportFormat
+const (
+	AssetBundleExportFormatCloudformationJson AssetBundleExportFormat = "CLOUDFORMATION_JSON"
+	AssetBundleExportFormatQuicksightJson     AssetBundleExportFormat = "QUICKSIGHT_JSON"
+)
+
+// Values returns all known values for AssetBundleExportFormat. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AssetBundleExportFormat) Values() []AssetBundleExportFormat {
+	return []AssetBundleExportFormat{
+		"CLOUDFORMATION_JSON",
+		"QUICKSIGHT_JSON",
+	}
+}
+
+type AssetBundleExportJobAnalysisPropertyToOverride string
+
+// Enum values for AssetBundleExportJobAnalysisPropertyToOverride
+const (
+	AssetBundleExportJobAnalysisPropertyToOverrideName AssetBundleExportJobAnalysisPropertyToOverride = "Name"
+)
+
+// Values returns all known values for
+// AssetBundleExportJobAnalysisPropertyToOverride. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (AssetBundleExportJobAnalysisPropertyToOverride) Values() []AssetBundleExportJobAnalysisPropertyToOverride {
+	return []AssetBundleExportJobAnalysisPropertyToOverride{
+		"Name",
+	}
+}
+
+type AssetBundleExportJobDashboardPropertyToOverride string
+
+// Enum values for AssetBundleExportJobDashboardPropertyToOverride
+const (
+	AssetBundleExportJobDashboardPropertyToOverrideName AssetBundleExportJobDashboardPropertyToOverride = "Name"
+)
+
+// Values returns all known values for
+// AssetBundleExportJobDashboardPropertyToOverride. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (AssetBundleExportJobDashboardPropertyToOverride) Values() []AssetBundleExportJobDashboardPropertyToOverride {
+	return []AssetBundleExportJobDashboardPropertyToOverride{
+		"Name",
+	}
+}
+
+type AssetBundleExportJobDataSetPropertyToOverride string
+
+// Enum values for AssetBundleExportJobDataSetPropertyToOverride
+const (
+	AssetBundleExportJobDataSetPropertyToOverrideName AssetBundleExportJobDataSetPropertyToOverride = "Name"
+)
+
+// Values returns all known values for
+// AssetBundleExportJobDataSetPropertyToOverride. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (AssetBundleExportJobDataSetPropertyToOverride) Values() []AssetBundleExportJobDataSetPropertyToOverride {
+	return []AssetBundleExportJobDataSetPropertyToOverride{
+		"Name",
+	}
+}
+
+type AssetBundleExportJobDataSourcePropertyToOverride string
+
+// Enum values for AssetBundleExportJobDataSourcePropertyToOverride
+const (
+	AssetBundleExportJobDataSourcePropertyToOverrideName                 AssetBundleExportJobDataSourcePropertyToOverride = "Name"
+	AssetBundleExportJobDataSourcePropertyToOverrideDisableSsl           AssetBundleExportJobDataSourcePropertyToOverride = "DisableSsl"
+	AssetBundleExportJobDataSourcePropertyToOverrideSecretArn            AssetBundleExportJobDataSourcePropertyToOverride = "SecretArn"
+	AssetBundleExportJobDataSourcePropertyToOverrideUsername             AssetBundleExportJobDataSourcePropertyToOverride = "Username"
+	AssetBundleExportJobDataSourcePropertyToOverridePassword             AssetBundleExportJobDataSourcePropertyToOverride = "Password"
+	AssetBundleExportJobDataSourcePropertyToOverrideDomain               AssetBundleExportJobDataSourcePropertyToOverride = "Domain"
+	AssetBundleExportJobDataSourcePropertyToOverrideWorkGroup            AssetBundleExportJobDataSourcePropertyToOverride = "WorkGroup"
+	AssetBundleExportJobDataSourcePropertyToOverrideHost                 AssetBundleExportJobDataSourcePropertyToOverride = "Host"
+	AssetBundleExportJobDataSourcePropertyToOverridePort                 AssetBundleExportJobDataSourcePropertyToOverride = "Port"
+	AssetBundleExportJobDataSourcePropertyToOverrideDatabase             AssetBundleExportJobDataSourcePropertyToOverride = "Database"
+	AssetBundleExportJobDataSourcePropertyToOverrideDataSetName          AssetBundleExportJobDataSourcePropertyToOverride = "DataSetName"
+	AssetBundleExportJobDataSourcePropertyToOverrideCatalog              AssetBundleExportJobDataSourcePropertyToOverride = "Catalog"
+	AssetBundleExportJobDataSourcePropertyToOverrideInstanceId           AssetBundleExportJobDataSourcePropertyToOverride = "InstanceId"
+	AssetBundleExportJobDataSourcePropertyToOverrideClusterId            AssetBundleExportJobDataSourcePropertyToOverride = "ClusterId"
+	AssetBundleExportJobDataSourcePropertyToOverrideManifestFileLocation AssetBundleExportJobDataSourcePropertyToOverride = "ManifestFileLocation"
+	AssetBundleExportJobDataSourcePropertyToOverrideWarehouse            AssetBundleExportJobDataSourcePropertyToOverride = "Warehouse"
+	AssetBundleExportJobDataSourcePropertyToOverrideRoleArn              AssetBundleExportJobDataSourcePropertyToOverride = "RoleArn"
+)
+
+// Values returns all known values for
+// AssetBundleExportJobDataSourcePropertyToOverride. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (AssetBundleExportJobDataSourcePropertyToOverride) Values() []AssetBundleExportJobDataSourcePropertyToOverride {
+	return []AssetBundleExportJobDataSourcePropertyToOverride{
+		"Name",
+		"DisableSsl",
+		"SecretArn",
+		"Username",
+		"Password",
+		"Domain",
+		"WorkGroup",
+		"Host",
+		"Port",
+		"Database",
+		"DataSetName",
+		"Catalog",
+		"InstanceId",
+		"ClusterId",
+		"ManifestFileLocation",
+		"Warehouse",
+		"RoleArn",
+	}
+}
+
+type AssetBundleExportJobRefreshSchedulePropertyToOverride string
+
+// Enum values for AssetBundleExportJobRefreshSchedulePropertyToOverride
+const (
+	AssetBundleExportJobRefreshSchedulePropertyToOverrideStartAfterDateTime AssetBundleExportJobRefreshSchedulePropertyToOverride = "StartAfterDateTime"
+)
+
+// Values returns all known values for
+// AssetBundleExportJobRefreshSchedulePropertyToOverride. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AssetBundleExportJobRefreshSchedulePropertyToOverride) Values() []AssetBundleExportJobRefreshSchedulePropertyToOverride {
+	return []AssetBundleExportJobRefreshSchedulePropertyToOverride{
+		"StartAfterDateTime",
+	}
+}
+
+type AssetBundleExportJobStatus string
+
+// Enum values for AssetBundleExportJobStatus
+const (
+	AssetBundleExportJobStatusQueuedForImmediateExecution AssetBundleExportJobStatus = "QUEUED_FOR_IMMEDIATE_EXECUTION"
+	AssetBundleExportJobStatusInProgress                  AssetBundleExportJobStatus = "IN_PROGRESS"
+	AssetBundleExportJobStatusSuccessful                  AssetBundleExportJobStatus = "SUCCESSFUL"
+	AssetBundleExportJobStatusFailed                      AssetBundleExportJobStatus = "FAILED"
+)
+
+// Values returns all known values for AssetBundleExportJobStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AssetBundleExportJobStatus) Values() []AssetBundleExportJobStatus {
+	return []AssetBundleExportJobStatus{
+		"QUEUED_FOR_IMMEDIATE_EXECUTION",
+		"IN_PROGRESS",
+		"SUCCESSFUL",
+		"FAILED",
+	}
+}
+
+type AssetBundleExportJobThemePropertyToOverride string
+
+// Enum values for AssetBundleExportJobThemePropertyToOverride
+const (
+	AssetBundleExportJobThemePropertyToOverrideName AssetBundleExportJobThemePropertyToOverride = "Name"
+)
+
+// Values returns all known values for
+// AssetBundleExportJobThemePropertyToOverride. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (AssetBundleExportJobThemePropertyToOverride) Values() []AssetBundleExportJobThemePropertyToOverride {
+	return []AssetBundleExportJobThemePropertyToOverride{
+		"Name",
+	}
+}
+
+type AssetBundleExportJobVPCConnectionPropertyToOverride string
+
+// Enum values for AssetBundleExportJobVPCConnectionPropertyToOverride
+const (
+	AssetBundleExportJobVPCConnectionPropertyToOverrideName         AssetBundleExportJobVPCConnectionPropertyToOverride = "Name"
+	AssetBundleExportJobVPCConnectionPropertyToOverrideDnsResolvers AssetBundleExportJobVPCConnectionPropertyToOverride = "DnsResolvers"
+	AssetBundleExportJobVPCConnectionPropertyToOverrideRoleArn      AssetBundleExportJobVPCConnectionPropertyToOverride = "RoleArn"
+)
+
+// Values returns all known values for
+// AssetBundleExportJobVPCConnectionPropertyToOverride. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AssetBundleExportJobVPCConnectionPropertyToOverride) Values() []AssetBundleExportJobVPCConnectionPropertyToOverride {
+	return []AssetBundleExportJobVPCConnectionPropertyToOverride{
+		"Name",
+		"DnsResolvers",
+		"RoleArn",
+	}
+}
+
+type AssetBundleImportFailureAction string
+
+// Enum values for AssetBundleImportFailureAction
+const (
+	AssetBundleImportFailureActionDoNothing AssetBundleImportFailureAction = "DO_NOTHING"
+	AssetBundleImportFailureActionRollback  AssetBundleImportFailureAction = "ROLLBACK"
+)
+
+// Values returns all known values for AssetBundleImportFailureAction. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (AssetBundleImportFailureAction) Values() []AssetBundleImportFailureAction {
+	return []AssetBundleImportFailureAction{
+		"DO_NOTHING",
+		"ROLLBACK",
+	}
+}
+
+type AssetBundleImportJobStatus string
+
+// Enum values for AssetBundleImportJobStatus
+const (
+	AssetBundleImportJobStatusQueuedForImmediateExecution AssetBundleImportJobStatus = "QUEUED_FOR_IMMEDIATE_EXECUTION"
+	AssetBundleImportJobStatusInProgress                  AssetBundleImportJobStatus = "IN_PROGRESS"
+	AssetBundleImportJobStatusSuccessful                  AssetBundleImportJobStatus = "SUCCESSFUL"
+	AssetBundleImportJobStatusFailed                      AssetBundleImportJobStatus = "FAILED"
+	AssetBundleImportJobStatusFailedRollbackInProgress    AssetBundleImportJobStatus = "FAILED_ROLLBACK_IN_PROGRESS"
+	AssetBundleImportJobStatusFailedRollbackCompleted     AssetBundleImportJobStatus = "FAILED_ROLLBACK_COMPLETED"
+	AssetBundleImportJobStatusFailedRollbackError         AssetBundleImportJobStatus = "FAILED_ROLLBACK_ERROR"
+)
+
+// Values returns all known values for AssetBundleImportJobStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AssetBundleImportJobStatus) Values() []AssetBundleImportJobStatus {
+	return []AssetBundleImportJobStatus{
+		"QUEUED_FOR_IMMEDIATE_EXECUTION",
+		"IN_PROGRESS",
+		"SUCCESSFUL",
+		"FAILED",
+		"FAILED_ROLLBACK_IN_PROGRESS",
+		"FAILED_ROLLBACK_COMPLETED",
+		"FAILED_ROLLBACK_ERROR",
+	}
+}
+
 type AssignmentStatus string
 
 // Enum values for AssignmentStatus
@@ -1473,6 +1715,7 @@ type GeospatialSelectedPointStyle string
 const (
 	GeospatialSelectedPointStylePoint   GeospatialSelectedPointStyle = "POINT"
 	GeospatialSelectedPointStyleCluster GeospatialSelectedPointStyle = "CLUSTER"
+	GeospatialSelectedPointStyleHeatmap GeospatialSelectedPointStyle = "HEATMAP"
 )
 
 // Values returns all known values for GeospatialSelectedPointStyle. Note that
@@ -1483,6 +1726,7 @@ func (GeospatialSelectedPointStyle) Values() []GeospatialSelectedPointStyle {
 	return []GeospatialSelectedPointStyle{
 		"POINT",
 		"CLUSTER",
+		"HEATMAP",
 	}
 }
 

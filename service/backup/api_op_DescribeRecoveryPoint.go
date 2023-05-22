@@ -174,10 +174,13 @@ type DescribeRecoveryPointOutput struct {
 	// and that versioning is enabled on the S3 bucket. Once these conditions are met,
 	// the next instance of a backup rule running will result in a new continuous
 	// recovery point being created. The recovery points with STOPPED status do not
-	// need to be deleted.
+	// need to be deleted. For SAP HANA on Amazon EC2 STOPPED status occurs due to
+	// user action, application misconfiguration, or backup failure. To ensure that
+	// future continuous backups succeed, refer to the recovery point status and check
+	// SAP HANA for details.
 	Status types.RecoveryPointStatus
 
-	// A status message explaining the reason for the recovery point deletion failure.
+	// A status message explaining the status of the recovery point.
 	StatusMessage *string
 
 	// Specifies the storage class of the recovery point. Valid values are WARM or COLD

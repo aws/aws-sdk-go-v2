@@ -490,6 +490,512 @@ type ArcOptions struct {
 	noSmithyDocumentSerde
 }
 
+// An optional collection of CloudFormation property configurations that control
+// how the export job is generated.
+type AssetBundleCloudFormationOverridePropertyConfiguration struct {
+
+	// An optional list of structures that control how Analysis resources are
+	// parameterized in the returned CloudFormation template.
+	Analyses []AssetBundleExportJobAnalysisOverrideProperties
+
+	// An optional list of structures that control how Dashboard resources are
+	// parameterized in the returned CloudFormation template.
+	Dashboards []AssetBundleExportJobDashboardOverrideProperties
+
+	// An optional list of structures that control how DataSet resources are
+	// parameterized in the returned CloudFormation template.
+	DataSets []AssetBundleExportJobDataSetOverrideProperties
+
+	// An optional list of structures that control how DataSource resources are
+	// parameterized in the returned CloudFormation template.
+	DataSources []AssetBundleExportJobDataSourceOverrideProperties
+
+	// An optional list of structures that control how RefreshSchedule resources are
+	// parameterized in the returned CloudFormation template.
+	RefreshSchedules []AssetBundleExportJobRefreshScheduleOverrideProperties
+
+	// An optional list of structures that control how resource IDs are parameterized
+	// in the returned CloudFormation template.
+	ResourceIdOverrideConfiguration *AssetBundleExportJobResourceIdOverrideConfiguration
+
+	// An optional list of structures that control how Theme resources are
+	// parameterized in the returned CloudFormation template.
+	Themes []AssetBundleExportJobThemeOverrideProperties
+
+	// An optional list of structures that control how VPCConnection resources are
+	// parameterized in the returned CloudFormation template.
+	VPCConnections []AssetBundleExportJobVPCConnectionOverrideProperties
+
+	noSmithyDocumentSerde
+}
+
+// Controls how a specific Analysis resource is parameterized in the returned
+// CloudFormation template.
+type AssetBundleExportJobAnalysisOverrideProperties struct {
+
+	// A list of Analysis resource properties to generate variables for in the
+	// returned CloudFormation template.
+	//
+	// This member is required.
+	Properties []AssetBundleExportJobAnalysisPropertyToOverride
+
+	// The ARN of the specific Analysis resource whose override properties are
+	// configured in this structure.
+	Arn *string
+
+	noSmithyDocumentSerde
+}
+
+// Controls how a specific Dashboard resource is parameterized in the returned
+// CloudFormation template.
+type AssetBundleExportJobDashboardOverrideProperties struct {
+
+	// A list of Dashboard resource properties to generate variables for in the
+	// returned CloudFormation template.
+	//
+	// This member is required.
+	Properties []AssetBundleExportJobDashboardPropertyToOverride
+
+	// The ARN of the specific Dashboard resource whose override properties are
+	// configured in this structure.
+	Arn *string
+
+	noSmithyDocumentSerde
+}
+
+// Controls how a specific DataSet resource is parameterized in the returned
+// CloudFormation template.
+type AssetBundleExportJobDataSetOverrideProperties struct {
+
+	// A list of DataSet resource properties to generate variables for in the returned
+	// CloudFormation template.
+	//
+	// This member is required.
+	Properties []AssetBundleExportJobDataSetPropertyToOverride
+
+	// The ARN of the specific DataSet resource whose override properties are
+	// configured in this structure.
+	Arn *string
+
+	noSmithyDocumentSerde
+}
+
+// Controls how a specific DataSource resource is parameterized in the returned
+// CloudFormation template.
+type AssetBundleExportJobDataSourceOverrideProperties struct {
+
+	// A list of DataSource resource properties to generate variables for in the
+	// returned CloudFormation template.
+	//
+	// This member is required.
+	Properties []AssetBundleExportJobDataSourcePropertyToOverride
+
+	// The ARN of the specific DataSource resource whose override properties are
+	// configured in this structure.
+	Arn *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes an error that occurred during an Asset Bundle export job.
+type AssetBundleExportJobError struct {
+
+	// The ARN of the resource whose processing caused an error.
+	Arn *string
+
+	// A description of the error.
+	Message *string
+
+	// The specific error type of the error that occurred.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// Controls how a specific RefreshSchedule resource is parameterized in the
+// returned CloudFormation template.
+type AssetBundleExportJobRefreshScheduleOverrideProperties struct {
+
+	// A list of RefreshSchedule resource properties to generate variables for in the
+	// returned CloudFormation template.
+	//
+	// This member is required.
+	Properties []AssetBundleExportJobRefreshSchedulePropertyToOverride
+
+	// The ARN of the specific RefreshSchedule resource whose override properties are
+	// configured in this structure.
+	Arn *string
+
+	noSmithyDocumentSerde
+}
+
+// An optional structure that configures resource ID overrides for the export job.
+type AssetBundleExportJobResourceIdOverrideConfiguration struct {
+
+	// An option to request a CloudFormation variable for a prefix to be prepended to
+	// each resource's ID before import. The prefix is only added to the asset IDs and
+	// does not change the name of the asset.
+	PrefixForAllResources bool
+
+	noSmithyDocumentSerde
+}
+
+// A summary of the export job that includes details of the job's configuration
+// and its current status.
+type AssetBundleExportJobSummary struct {
+
+	// The ARN of the export job.
+	Arn *string
+
+	// The ID of the export job.
+	AssetBundleExportJobId *string
+
+	// The time that the export job was created.
+	CreatedTime *time.Time
+
+	// The format for the export job.
+	ExportFormat AssetBundleExportFormat
+
+	// The flag that determines the inclusion of resource dependencies in the returned
+	// asset bundle.
+	IncludeAllDependencies bool
+
+	// The current status of the export job.
+	JobStatus AssetBundleExportJobStatus
+
+	noSmithyDocumentSerde
+}
+
+// Controls how a specific Theme resource is parameterized in the returned
+// CloudFormation template.
+type AssetBundleExportJobThemeOverrideProperties struct {
+
+	// A list of Theme resource properties to generate variables for in the returned
+	// CloudFormation template.
+	//
+	// This member is required.
+	Properties []AssetBundleExportJobThemePropertyToOverride
+
+	// The ARN of the specific Theme resource whose override properties are configured
+	// in this structure.
+	Arn *string
+
+	noSmithyDocumentSerde
+}
+
+// Controls how a specific VPCConnection resource is parameterized in the
+// outputted CloudFormation template.
+type AssetBundleExportJobVPCConnectionOverrideProperties struct {
+
+	// A list of VPCConnection resource properties to generate variables for in the
+	// returned CloudFormation template.
+	//
+	// This member is required.
+	Properties []AssetBundleExportJobVPCConnectionPropertyToOverride
+
+	// The ARN of the specific VPCConnection resource whose override properties are
+	// configured in this structure.
+	Arn *string
+
+	noSmithyDocumentSerde
+}
+
+// The override parameters for a single analysis that is being imported.
+type AssetBundleImportJobAnalysisOverrideParameters struct {
+
+	// The ID of the analysis that you ant to apply overrides to.
+	//
+	// This member is required.
+	AnalysisId *string
+
+	// A new name for the analysis.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// The override parameters for a single dashboard that is being imported.
+type AssetBundleImportJobDashboardOverrideParameters struct {
+
+	// The ID of the dashboard that you want to apply overrides to.
+	//
+	// This member is required.
+	DashboardId *string
+
+	// A new name for the dashboard.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// The override parameters for a single dataset that is being imported.
+type AssetBundleImportJobDataSetOverrideParameters struct {
+
+	// The ID of the dataset to apply overrides to.
+	//
+	// This member is required.
+	DataSetId *string
+
+	// A new name for the dataset.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// A username and password credential pair to use to import a data source resource.
+type AssetBundleImportJobDataSourceCredentialPair struct {
+
+	// The password for the data source connection.
+	//
+	// This member is required.
+	Password *string
+
+	// The username for the data source connection.
+	//
+	// This member is required.
+	Username *string
+
+	noSmithyDocumentSerde
+}
+
+// The login credentials to use to import a data source resource.
+type AssetBundleImportJobDataSourceCredentials struct {
+
+	// A username and password credential pair to be used to create the imported data
+	// source. Leave this field blank if you are using an Secrets Manager Secret to
+	// provide credentials.
+	CredentialPair *AssetBundleImportJobDataSourceCredentialPair
+
+	// The ARN of the Secrets Manager Secret to be used to create the imported data
+	// source leave this field blank if you aren't using a Secret in place of a
+	// credential pair.
+	SecretArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The override parameters for a single data source that is being imported.
+type AssetBundleImportJobDataSourceOverrideParameters struct {
+
+	// The ID of the data source to apply overrides to.
+	//
+	// This member is required.
+	DataSourceId *string
+
+	// An optional structure that provides the credentials to be used to create the
+	// imported data source.
+	Credentials *AssetBundleImportJobDataSourceCredentials
+
+	// The parameters that Amazon QuickSight uses to connect to your underlying data
+	// source. This is a variant type structure. For this structure to be valid, only
+	// one of the attributes can be non-null.
+	DataSourceParameters DataSourceParameters
+
+	// A new name for the data source.
+	Name *string
+
+	// Secure Socket Layer (SSL) properties that apply when Amazon QuickSight connects
+	// to your underlying data source.
+	SslProperties *SslProperties
+
+	// VPC connection properties.
+	VpcConnectionProperties *VpcConnectionProperties
+
+	noSmithyDocumentSerde
+}
+
+// Describes an error that occurred within an Asset Bundle import execution.
+type AssetBundleImportJobError struct {
+
+	// The ARN of the resource whose processing caused an error.
+	Arn *string
+
+	// A description of the error.
+	Message *string
+
+	// The specific error type or the error that occurred.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// A list of overrides that modify the asset bundle resource configuration before
+// the resource is imported.
+type AssetBundleImportJobOverrideParameters struct {
+
+	// A list of overrides for any Analysis resources that are present in the asset
+	// bundle that is imported.
+	Analyses []AssetBundleImportJobAnalysisOverrideParameters
+
+	// A list of overrides for any Dashboard resources that are present in the asset
+	// bundle that is imported.
+	Dashboards []AssetBundleImportJobDashboardOverrideParameters
+
+	// A list of overrides for any DataSet resources that are present in the asset
+	// bundle that is imported.
+	DataSets []AssetBundleImportJobDataSetOverrideParameters
+
+	// A list of overrides for any DataSource resources that are present in the asset
+	// bundle that is imported.
+	DataSources []AssetBundleImportJobDataSourceOverrideParameters
+
+	// A list of overrides for any RefreshSchedule resources that are present in the
+	// asset bundle that is imported.
+	RefreshSchedules []AssetBundleImportJobRefreshScheduleOverrideParameters
+
+	// An optional structure that configures resource ID overrides to be applied
+	// within the import job.
+	ResourceIdOverrideConfiguration *AssetBundleImportJobResourceIdOverrideConfiguration
+
+	// A list of overrides for any Theme resources that are present in the asset
+	// bundle that is imported.
+	Themes []AssetBundleImportJobThemeOverrideParameters
+
+	// A list of overrides for any VPCConnection resources that are present in the
+	// asset bundle that is imported.
+	VPCConnections []AssetBundleImportJobVPCConnectionOverrideParameters
+
+	noSmithyDocumentSerde
+}
+
+// A list of overrides for a specific RefreshsSchedule resource that is present in
+// the asset bundle that is imported.
+type AssetBundleImportJobRefreshScheduleOverrideParameters struct {
+
+	// A partial identifier for the specific RefreshSchedule resource that is being
+	// overridden. This structure is used together with the ScheduleID structure.
+	//
+	// This member is required.
+	DataSetId *string
+
+	// A partial identifier for the specific RefreshSchedule resource being
+	// overridden. This structure is used together with the DataSetId structure.
+	//
+	// This member is required.
+	ScheduleId *string
+
+	// An override for the StartAfterDateTime of a RefreshSchedule to ensure that the
+	// StartAfterDateTime is set to a time that takes place in the future.
+	StartAfterDateTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// An optional structure that configures resource ID overrides for the import job
+type AssetBundleImportJobResourceIdOverrideConfiguration struct {
+
+	// An option to request a CloudFormation variable for a prefix to be prepended to
+	// each resource's ID before import. The prefix is only added to the asset IDs and
+	// does not change the name of the asset.
+	PrefixForAllResources *string
+
+	noSmithyDocumentSerde
+}
+
+// A summary of the import job that includes details of the requested job's
+// configuration and its current status.
+type AssetBundleImportJobSummary struct {
+
+	// The ARN of the import job.
+	Arn *string
+
+	// The ID of the job. This ID is unique while the job is running. After the job is
+	// completed, you can reuse this ID for another job.
+	AssetBundleImportJobId *string
+
+	// The time that the import job was created.
+	CreatedTime *time.Time
+
+	// The failure action for the import job.
+	FailureAction AssetBundleImportFailureAction
+
+	// The current status of the import job.
+	JobStatus AssetBundleImportJobStatus
+
+	noSmithyDocumentSerde
+}
+
+// The override parameters for a single theme that is imported.
+type AssetBundleImportJobThemeOverrideParameters struct {
+
+	// The ID of the theme to apply overrides to.
+	//
+	// This member is required.
+	ThemeId *string
+
+	// A new name for the theme.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// The override parameters for a single VPC connection that is imported.
+type AssetBundleImportJobVPCConnectionOverrideParameters struct {
+
+	// The ID of the VPC Connection to apply overrides to.
+	//
+	// This member is required.
+	VPCConnectionId *string
+
+	// An optional override of dns resolvers to be used by the VPC connection.
+	DnsResolvers []string
+
+	// A new name for the VPC connection.
+	Name *string
+
+	// An optional override of the role ARN to be used by the VPC connection.
+	RoleArn *string
+
+	// A new security group ID for the VPC connection you are importing. This field is
+	// required if you are importing the VPC connection from another Amazon Web
+	// Services account or region.
+	SecurityGroupIds []string
+
+	// A list of new subnet IDs for the VPC connection you are importing. This field
+	// is required if you are importing the VPC connection from another Amazon Web
+	// Services account or region.
+	SubnetIds []string
+
+	noSmithyDocumentSerde
+}
+
+// The source of the asset bundle zip file that contains the data that you want to
+// import.
+type AssetBundleImportSource struct {
+
+	// The bytes of the Base64 encoded asset bundle import zip file. This file can't
+	// exceed 20MB. If you are calling the APIs from the Amazon Web Services Java,
+	// JavaScript, Python, or PHP SDKs, the SDK encodes Base64 automatically to allow
+	// the direct setting of the zip file's bytes. If you are using a SDK of a
+	// different language or are receiving related errors, try to Base64 encode your
+	// data.
+	Body []byte
+
+	// The Amazon S3 uri for an asset bundle import file that exists in an Amazon S3
+	// bucket that the caller has read access to. The file must be a zip format file
+	// and can't exceed 20MB.
+	S3Uri *string
+
+	noSmithyDocumentSerde
+}
+
+// A description of the import source that you provide at the start of an import
+// job. This value is set to either Body or S3Uri depending on how the
+// StartAssetBundleImportJobRequest is configured.
+type AssetBundleImportSourceDescription struct {
+
+	// A HTTPS download URL for the provided asset bundle that you optionally provided
+	// at the start of the import job. This URL is valid for 5 minutes after issuance.
+	// Call DescribeAssetBundleExportJob again for a fresh URL if needed. The
+	// downloaded asset bundle is a .qs zip file.
+	Body *string
+
+	// The Amazon S3 uri that you provided at the start of the import job.
+	S3Uri *string
+
+	noSmithyDocumentSerde
+}
+
 // Parameters for Amazon Athena.
 type AthenaParameters struct {
 
@@ -1322,7 +1828,7 @@ type ClusterMarker struct {
 // The cluster marker configuration of the geospatial map selected point style.
 type ClusterMarkerConfiguration struct {
 
-	// The cluster marker that is a part of the cluster marker configuration
+	// The cluster marker that is a part of the cluster marker configuration.
 	ClusterMarker *ClusterMarker
 
 	noSmithyDocumentSerde
@@ -5477,6 +5983,35 @@ type GeospatialCoordinateBounds struct {
 	noSmithyDocumentSerde
 }
 
+// The color scale specification for the heatmap point style.
+type GeospatialHeatmapColorScale struct {
+
+	// The list of colors to be used in heatmap point style.
+	Colors []GeospatialHeatmapDataColor
+
+	noSmithyDocumentSerde
+}
+
+// The heatmap configuration of the geospatial point style.
+type GeospatialHeatmapConfiguration struct {
+
+	// The color scale specification for the heatmap point style.
+	HeatmapColor *GeospatialHeatmapColorScale
+
+	noSmithyDocumentSerde
+}
+
+// The color to be used in the heatmap point style.
+type GeospatialHeatmapDataColor struct {
+
+	// The hex color to be used in the heatmap point style.
+	//
+	// This member is required.
+	Color *string
+
+	noSmithyDocumentSerde
+}
+
 // The aggregated field wells for a geospatial map.
 type GeospatialMapAggregatedFieldWells struct {
 
@@ -5575,6 +6110,9 @@ type GeospatialPointStyleOptions struct {
 
 	// The cluster marker configuration of the geospatial point style.
 	ClusterMarkerConfiguration *ClusterMarkerConfiguration
+
+	// The heatmap configuration of the geospatial point style.
+	HeatmapConfiguration *GeospatialHeatmapConfiguration
 
 	// The selected point styles (point, cluster) of the geospatial map.
 	SelectedPointStyle GeospatialSelectedPointStyle

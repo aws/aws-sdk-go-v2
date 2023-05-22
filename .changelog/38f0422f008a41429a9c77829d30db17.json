@@ -1,0 +1,8 @@
+{
+    "id": "38f0422f-008a-4142-9a9c-77829d30db17",
+    "type": "feature",
+    "description": "Add support for Asset Bundle, Geospatial Heatmaps.",
+    "modules": [
+        "service/quicksight"
+    ]
+}
