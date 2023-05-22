@@ -1,8 +1,0 @@
-{
-    "id": "f54d3095-7c92-49c3-885c-ff5bbe8f9976",
-    "type": "documentation",
-    "description": "Amazon Pinpoint is deprecating the tags parameter in the UpdateSegment, UpdateCampaign, UpdateEmailTemplate, UpdateSmsTemplate, UpdatePushTemplate, UpdateInAppTemplate and UpdateVoiceTemplate. Amazon Pinpoint will end support tags parameter by May 22, 2023.",
-    "modules": [
-        "service/pinpoint"
-    ]
-}

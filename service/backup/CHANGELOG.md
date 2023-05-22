@@ -1,3 +1,7 @@
+# v1.22.0 (2023-05-22)
+
+* **Feature**: Added support for tags on restore.
+
 # v1.21.0 (2023-05-19)
 
 * **Feature**: Add  ResourceArn, ResourceType, and BackupVaultName to ListRecoveryPointsByLegalHold API response.

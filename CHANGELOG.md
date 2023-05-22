@@ -1,3 +1,13 @@
+# Release (2023-05-22)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/backup`: [v1.22.0](service/backup/CHANGELOG.md#v1220-2023-05-22)
+  * **Feature**: Added support for tags on restore.
+* `github.com/aws/aws-sdk-go-v2/service/pinpoint`: [v1.19.2](service/pinpoint/CHANGELOG.md#v1192-2023-05-22)
+  * **Documentation**: Amazon Pinpoint is deprecating the tags parameter in the UpdateSegment, UpdateCampaign, UpdateEmailTemplate, UpdateSmsTemplate, UpdatePushTemplate, UpdateInAppTemplate and UpdateVoiceTemplate. Amazon Pinpoint will end support tags parameter by May 22, 2023.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.36.0](service/quicksight/CHANGELOG.md#v1360-2023-05-22)
+  * **Feature**: Add support for Asset Bundle, Geospatial Heatmaps.
+
 # Release (2023-05-19)
 
 ## Module Highlights

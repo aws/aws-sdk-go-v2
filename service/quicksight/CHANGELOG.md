@@ -1,3 +1,7 @@
+# v1.36.0 (2023-05-22)
+
+* **Feature**: Add support for Asset Bundle, Geospatial Heatmaps.
+
 # v1.35.0 (2023-05-04)
 
 * **Feature**: Add support for Topic, Dataset parameters and VPC
