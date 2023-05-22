@@ -4558,13 +4558,13 @@
                 "Status": {
                     "target": "com.amazonaws.backup#RecoveryPointStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>A status code specifying the state of the recovery point.</p>\n         <p>\n            <code>PARTIAL</code> status indicates Backup could not create the recovery\n         point before the backup window closed. To increase your backup plan window using the API,\n         see <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/API_UpdateBackupPlan.html\">UpdateBackupPlan</a>. You can also increase your backup plan window using the\n         Console by choosing and editing your backup plan.</p>\n         <p>\n            <code>EXPIRED</code> status indicates that the recovery point has exceeded its retention\n         period, but Backup lacks permission or is otherwise unable to delete it. To\n         manually delete these recovery points, see <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/gs-cleanup-resources.html#cleanup-backups\"> Step 3:\n            Delete the recovery points</a> in the <i>Clean up resources</i>\n         section of <i>Getting started</i>.</p>\n         <p>\n            <code>STOPPED</code> status occurs on a continuous backup where a user has taken some \n         action that causes the continuous backup to be disabled. This can be caused by the removal\n         of permissions, turning off versioning, turning off events being sent to EventBridge, \n         or disabling the EventBridge rules that are put in place by Backup.</p>\n         <p>To resolve <code>STOPPED</code> status, ensure that all requested permissions are in place and\n         that versioning is enabled on the S3 bucket. Once these conditions are met, the next instance\n         of a backup rule running will result in a new continuous recovery point being created. \n         The recovery points with STOPPED status do not need to be deleted.</p>"
+                        "smithy.api#documentation": "<p>A status code specifying the state of the recovery point.</p>\n         <p>\n            <code>PARTIAL</code> status indicates Backup could not create the recovery\n         point before the backup window closed. To increase your backup plan window using the API,\n         see <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/API_UpdateBackupPlan.html\">UpdateBackupPlan</a>. You can also increase your backup plan window using the\n         Console by choosing and editing your backup plan.</p>\n         <p>\n            <code>EXPIRED</code> status indicates that the recovery point has exceeded its retention\n         period, but Backup lacks permission or is otherwise unable to delete it. To\n         manually delete these recovery points, see <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/gs-cleanup-resources.html#cleanup-backups\"> Step 3:\n            Delete the recovery points</a> in the <i>Clean up resources</i>\n         section of <i>Getting started</i>.</p>\n         <p>\n            <code>STOPPED</code> status occurs on a continuous backup where a user has taken some \n         action that causes the continuous backup to be disabled. This can be caused by the removal\n         of permissions, turning off versioning, turning off events being sent to EventBridge, \n         or disabling the EventBridge rules that are put in place by Backup.</p>\n         <p>To resolve <code>STOPPED</code> status, ensure that all requested permissions are in place and\n         that versioning is enabled on the S3 bucket. Once these conditions are met, the next instance\n         of a backup rule running will result in a new continuous recovery point being created. \n         The recovery points with STOPPED status do not need to be deleted.</p>\n         <p>For SAP HANA on Amazon EC2 <code>STOPPED</code> status occurs due to user action, application\n         misconfiguration, or backup failure. To ensure that future continuous backups succeed,\n         refer to the recovery point status and check SAP HANA for details.</p>"
                     }
                 },
                 "StatusMessage": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>A status message explaining the reason for the recovery point deletion failure.</p>"
+                        "smithy.api#documentation": "<p>A status message explaining the status of the recovery point.</p>"
                     }
                 },
                 "CreationDate": {
@@ -9284,6 +9284,9 @@
                     "target": "com.amazonaws.backup#InvalidParameterValueException"
                 },
                 {
+                    "target": "com.amazonaws.backup#InvalidRequestException"
+                },
+                {
                     "target": "com.amazonaws.backup#MissingParameterValueException"
                 },
                 {
@@ -9336,6 +9339,13 @@
                     "target": "com.amazonaws.backup#ResourceType",
                     "traits": {
                         "smithy.api#documentation": "<p>Starts a job to restore a recovery point for one of the following resources:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Aurora</code> for Amazon Aurora</p>\n            </li>\n            <li>\n               <p>\n                  <code>DocumentDB</code> for Amazon DocumentDB (with MongoDB compatibility)</p>\n            </li>\n            <li>\n               <p>\n                  <code>CloudFormation</code> for CloudFormation</p>\n            </li>\n            <li>\n               <p>\n                  <code>DynamoDB</code> for Amazon DynamoDB</p>\n            </li>\n            <li>\n               <p>\n                  <code>EBS</code> for Amazon Elastic Block Store</p>\n            </li>\n            <li>\n               <p>\n                  <code>EC2</code> for Amazon Elastic Compute Cloud</p>\n            </li>\n            <li>\n               <p>\n                  <code>EFS</code> for Amazon Elastic File System</p>\n            </li>\n            <li>\n               <p>\n                  <code>FSx</code> for Amazon FSx</p>\n            </li>\n            <li>\n               <p>\n                  <code>Neptune</code> for Amazon Neptune</p>\n            </li>\n            <li>\n               <p>\n                  <code>RDS</code> for Amazon Relational Database Service</p>\n            </li>\n            <li>\n               <p>\n                  <code>Redshift</code> for Amazon Redshift</p>\n            </li>\n            <li>\n               <p>\n                  <code>Storage Gateway</code> for Storage Gateway</p>\n            </li>\n            <li>\n               <p>\n                  <code>S3</code> for Amazon S3</p>\n            </li>\n            <li>\n               <p>\n                  <code>Timestream</code> for Amazon Timestream</p>\n            </li>\n            <li>\n               <p>\n                  <code>VirtualMachine</code> for virtual machines</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "CopySourceTagsToRestoredResource": {
+                    "target": "com.amazonaws.backup#Boolean2",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>This is an optional parameter. If this equals <code>True</code>, tags included in the backup\n      will be copied to the restored resource.</p>\n         <p>This can only be applied to backups created through Backup.</p>"
                     }
                 }
             },

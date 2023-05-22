@@ -992,6 +992,1298 @@
                 "target": "com.amazonaws.quicksight#Arn"
             }
         },
+        "com.amazonaws.quicksight#AssetBundleCloudFormationOverridePropertyConfiguration": {
+            "type": "structure",
+            "members": {
+                "ResourceIdOverrideConfiguration": {
+                    "target": "com.amazonaws.quicksight#AssetBundleExportJobResourceIdOverrideConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional list of structures that control how resource IDs are parameterized in the returned CloudFormation template.</p>"
+                    }
+                },
+                "VPCConnections": {
+                    "target": "com.amazonaws.quicksight#AssetBundleExportJobVPCConnectionOverridePropertiesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional list of structures that control how <code>VPCConnection</code> resources are parameterized in the returned CloudFormation template.</p>"
+                    }
+                },
+                "RefreshSchedules": {
+                    "target": "com.amazonaws.quicksight#AssetBundleExportJobRefreshScheduleOverridePropertiesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional list of structures that control how <code>RefreshSchedule</code> resources are parameterized in the returned CloudFormation template.</p>"
+                    }
+                },
+                "DataSources": {
+                    "target": "com.amazonaws.quicksight#AssetBundleExportJobDataSourceOverridePropertiesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional list of structures that control how <code>DataSource</code> resources are parameterized in the returned CloudFormation template.</p>"
+                    }
+                },
+                "DataSets": {
+                    "target": "com.amazonaws.quicksight#AssetBundleExportJobDataSetOverridePropertiesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional list of structures that control how <code>DataSet</code> resources are parameterized in the returned CloudFormation template.</p>"
+                    }
+                },
+                "Themes": {
+                    "target": "com.amazonaws.quicksight#AssetBundleExportJobThemeOverridePropertiesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional list of structures that control how <code>Theme</code> resources are parameterized in the returned CloudFormation template.</p>"
+                    }
+                },
+                "Analyses": {
+                    "target": "com.amazonaws.quicksight#AssetBundleExportJobAnalysisOverridePropertiesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional list of structures that control how <code>Analysis</code> resources are parameterized in the returned CloudFormation template.</p>"
+                    }
+                },
+                "Dashboards": {
+                    "target": "com.amazonaws.quicksight#AssetBundleExportJobDashboardOverridePropertiesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional list of structures that control how <code>Dashboard</code> resources are parameterized in the returned CloudFormation template.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An optional collection of CloudFormation property configurations that control how the export job is generated.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleExportFormat": {
+            "type": "enum",
+            "members": {
+                "CLOUDFORMATION_JSON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CLOUDFORMATION_JSON"
+                    }
+                },
+                "QUICKSIGHT_JSON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUICKSIGHT_JSON"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleExportJobAnalysisOverrideProperties": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the specific <code>Analysis</code> resource whose override properties are configured in this structure.</p>"
+                    }
+                },
+                "Properties": {
+                    "target": "com.amazonaws.quicksight#AssetBundleExportJobAnalysisPropertyToOverrideList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>Analysis</code> resource properties to generate variables for in the returned CloudFormation template.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Controls how a specific <code>Analysis</code> resource is parameterized in the returned CloudFormation template.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleExportJobAnalysisOverridePropertiesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#AssetBundleExportJobAnalysisOverrideProperties"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleExportJobAnalysisPropertyToOverride": {
+            "type": "enum",
+            "members": {
+                "NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Name"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleExportJobAnalysisPropertyToOverrideList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#AssetBundleExportJobAnalysisPropertyToOverride"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleExportJobDashboardOverrideProperties": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the specific <code>Dashboard</code> resource whose override properties are configured in this structure.</p>"
+                    }
+                },
+                "Properties": {
+                    "target": "com.amazonaws.quicksight#AssetBundleExportJobDashboardPropertyToOverrideList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>Dashboard</code> resource properties to generate variables for in the returned CloudFormation template.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Controls how a specific <code>Dashboard</code> resource is parameterized in the returned CloudFormation template.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleExportJobDashboardOverridePropertiesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#AssetBundleExportJobDashboardOverrideProperties"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleExportJobDashboardPropertyToOverride": {
+            "type": "enum",
+            "members": {
+                "NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Name"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleExportJobDashboardPropertyToOverrideList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#AssetBundleExportJobDashboardPropertyToOverride"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleExportJobDataSetOverrideProperties": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the specific <code>DataSet</code> resource whose override properties are configured in this structure.</p>"
+                    }
+                },
+                "Properties": {
+                    "target": "com.amazonaws.quicksight#AssetBundleExportJobDataSetPropertyToOverrideList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>DataSet</code> resource properties to generate variables for in the returned CloudFormation template.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Controls how a specific <code>DataSet</code> resource is parameterized in the returned CloudFormation template.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleExportJobDataSetOverridePropertiesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#AssetBundleExportJobDataSetOverrideProperties"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleExportJobDataSetPropertyToOverride": {
+            "type": "enum",
+            "members": {
+                "NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Name"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleExportJobDataSetPropertyToOverrideList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#AssetBundleExportJobDataSetPropertyToOverride"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleExportJobDataSourceOverrideProperties": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the specific <code>DataSource</code> resource whose override properties are configured in this structure.</p>"
+                    }
+                },
+                "Properties": {
+                    "target": "com.amazonaws.quicksight#AssetBundleExportJobDataSourcePropertyToOverrideList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>DataSource</code> resource properties to generate variables for in the returned CloudFormation template.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Controls how a specific <code>DataSource</code> resource is parameterized in the returned CloudFormation template.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleExportJobDataSourceOverridePropertiesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#AssetBundleExportJobDataSourceOverrideProperties"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleExportJobDataSourcePropertyToOverride": {
+            "type": "enum",
+            "members": {
+                "NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Name"
+                    }
+                },
+                "DISABLE_SSL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DisableSsl"
+                    }
+                },
+                "SECRET_ARN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SecretArn"
+                    }
+                },
+                "USERNAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Username"
+                    }
+                },
+                "PASSWORD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Password"
+                    }
+                },
+                "DOMAIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Domain"
+                    }
+                },
+                "WORK_GROUP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WorkGroup"
+                    }
+                },
+                "HOST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Host"
+                    }
+                },
+                "PORT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Port"
+                    }
+                },
+                "DATABASE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Database"
+                    }
+                },
+                "DATA_SET_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DataSetName"
+                    }
+                },
+                "CATALOG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Catalog"
+                    }
+                },
+                "INSTANCE_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InstanceId"
+                    }
+                },
+                "CLUSTER_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ClusterId"
+                    }
+                },
+                "MANIFEST_FILE_LOCATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ManifestFileLocation"
+                    }
+                },
+                "WAREHOUSE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Warehouse"
+                    }
+                },
+                "ROLE_ARN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RoleArn"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleExportJobDataSourcePropertyToOverrideList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#AssetBundleExportJobDataSourcePropertyToOverride"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleExportJobError": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the resource whose processing caused an error.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.quicksight#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specific error type of the error that occurred.</p>"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.quicksight#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the error.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an error that occurred during an Asset Bundle export job.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleExportJobErrorList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#AssetBundleExportJobError"
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleExportJobRefreshScheduleOverrideProperties": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the specific <code>RefreshSchedule</code> resource whose override properties are configured in this structure.</p>"
+                    }
+                },
+                "Properties": {
+                    "target": "com.amazonaws.quicksight#AssetBundleExportJobRefreshSchedulePropertyToOverrideList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>RefreshSchedule</code> resource properties to generate variables for in the returned CloudFormation template.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Controls how a specific <code>RefreshSchedule</code> resource is parameterized in the returned CloudFormation template.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleExportJobRefreshScheduleOverridePropertiesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#AssetBundleExportJobRefreshScheduleOverrideProperties"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleExportJobRefreshSchedulePropertyToOverride": {
+            "type": "enum",
+            "members": {
+                "START_AFTER_DATE_TIME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "StartAfterDateTime"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleExportJobRefreshSchedulePropertyToOverrideList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#AssetBundleExportJobRefreshSchedulePropertyToOverride"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleExportJobResourceIdOverrideConfiguration": {
+            "type": "structure",
+            "members": {
+                "PrefixForAllResources": {
+                    "target": "com.amazonaws.quicksight#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>An option to request a CloudFormation variable for a prefix to be prepended to each resource's ID before import. The prefix is only added to the asset IDs and does not change the name of the asset.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An optional structure that configures resource ID overrides for the export job.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleExportJobStatus": {
+            "type": "enum",
+            "members": {
+                "QUEUED_FOR_IMMEDIATE_EXECUTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUEUED_FOR_IMMEDIATE_EXECUTION"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "SUCCESSFUL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCESSFUL"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleExportJobSummary": {
+            "type": "structure",
+            "members": {
+                "JobStatus": {
+                    "target": "com.amazonaws.quicksight#AssetBundleExportJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the export job.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the export job.</p>"
+                    }
+                },
+                "CreatedTime": {
+                    "target": "com.amazonaws.quicksight#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the export job was created.</p>"
+                    }
+                },
+                "AssetBundleExportJobId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the export job.</p>"
+                    }
+                },
+                "IncludeAllDependencies": {
+                    "target": "com.amazonaws.quicksight#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>The flag that determines the inclusion of resource dependencies in the returned asset bundle.</p>"
+                    }
+                },
+                "ExportFormat": {
+                    "target": "com.amazonaws.quicksight#AssetBundleExportFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format for the export job.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of the export job that includes details of the job's configuration and its current status.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleExportJobSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#AssetBundleExportJobSummary"
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleExportJobThemeOverrideProperties": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the specific <code>Theme</code> resource whose override properties are configured in this structure.</p>"
+                    }
+                },
+                "Properties": {
+                    "target": "com.amazonaws.quicksight#AssetBundleExportJobThemePropertyToOverrideList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>Theme</code> resource properties to generate variables for in the returned CloudFormation template.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Controls how a specific <code>Theme</code> resource is parameterized in the returned CloudFormation template.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleExportJobThemeOverridePropertiesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#AssetBundleExportJobThemeOverrideProperties"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleExportJobThemePropertyToOverride": {
+            "type": "enum",
+            "members": {
+                "NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Name"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleExportJobThemePropertyToOverrideList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#AssetBundleExportJobThemePropertyToOverride"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleExportJobVPCConnectionOverrideProperties": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the specific <code>VPCConnection</code> resource whose override properties are configured in this structure.</p>"
+                    }
+                },
+                "Properties": {
+                    "target": "com.amazonaws.quicksight#AssetBundleExportJobVPCConnectionPropertyToOverrideList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>VPCConnection</code> resource properties to generate variables for in the returned CloudFormation template.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Controls how a specific <code>VPCConnection</code> resource is parameterized in the outputted CloudFormation template.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleExportJobVPCConnectionOverridePropertiesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#AssetBundleExportJobVPCConnectionOverrideProperties"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleExportJobVPCConnectionPropertyToOverride": {
+            "type": "enum",
+            "members": {
+                "NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Name"
+                    }
+                },
+                "DNS_RESOLVERS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DnsResolvers"
+                    }
+                },
+                "ROLE_ARN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RoleArn"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleExportJobVPCConnectionPropertyToOverrideList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#AssetBundleExportJobVPCConnectionPropertyToOverride"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleImportBodyBlob": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 20971520
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleImportFailureAction": {
+            "type": "enum",
+            "members": {
+                "DO_NOTHING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DO_NOTHING"
+                    }
+                },
+                "ROLLBACK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROLLBACK"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleImportJobAnalysisOverrideParameters": {
+            "type": "structure",
+            "members": {
+                "AnalysisId": {
+                    "target": "com.amazonaws.quicksight#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the analysis that you ant to apply overrides to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.quicksight#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A new name for the analysis.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The override parameters for a single analysis that is being imported.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleImportJobAnalysisOverrideParametersList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#AssetBundleImportJobAnalysisOverrideParameters"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleImportJobDashboardOverrideParameters": {
+            "type": "structure",
+            "members": {
+                "DashboardId": {
+                    "target": "com.amazonaws.quicksight#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the dashboard that you want to apply overrides to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.quicksight#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A new name for the dashboard.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The override parameters for a single dashboard that is being imported.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleImportJobDashboardOverrideParametersList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#AssetBundleImportJobDashboardOverrideParameters"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleImportJobDataSetOverrideParameters": {
+            "type": "structure",
+            "members": {
+                "DataSetId": {
+                    "target": "com.amazonaws.quicksight#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the dataset to apply overrides to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.quicksight#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A new name for the dataset.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The override parameters for a single dataset that is being imported.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleImportJobDataSetOverrideParametersList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#AssetBundleImportJobDataSetOverrideParameters"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleImportJobDataSourceCredentialPair": {
+            "type": "structure",
+            "members": {
+                "Username": {
+                    "target": "com.amazonaws.quicksight#DbUsername",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The username for the data source connection.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Password": {
+                    "target": "com.amazonaws.quicksight#Password",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The password for the data source connection.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A username and password credential pair to use to import a data source resource.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleImportJobDataSourceCredentials": {
+            "type": "structure",
+            "members": {
+                "CredentialPair": {
+                    "target": "com.amazonaws.quicksight#AssetBundleImportJobDataSourceCredentialPair",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A username and password credential pair to be used to create the imported data source. Leave this field blank if you are using an Secrets Manager Secret to provide credentials.</p>"
+                    }
+                },
+                "SecretArn": {
+                    "target": "com.amazonaws.quicksight#SecretArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Secrets Manager Secret to be used to create the imported data source leave this field blank if you aren't using a Secret in place of a credential pair.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The login credentials to use to import a data source resource.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleImportJobDataSourceOverrideParameters": {
+            "type": "structure",
+            "members": {
+                "DataSourceId": {
+                    "target": "com.amazonaws.quicksight#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the data source to apply overrides to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.quicksight#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A new name for the data source.</p>"
+                    }
+                },
+                "DataSourceParameters": {
+                    "target": "com.amazonaws.quicksight#DataSourceParameters"
+                },
+                "VpcConnectionProperties": {
+                    "target": "com.amazonaws.quicksight#VpcConnectionProperties"
+                },
+                "SslProperties": {
+                    "target": "com.amazonaws.quicksight#SslProperties"
+                },
+                "Credentials": {
+                    "target": "com.amazonaws.quicksight#AssetBundleImportJobDataSourceCredentials",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional structure that provides the credentials to be used to create the imported data source.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The override parameters for a single data source that is being imported.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleImportJobDataSourceOverrideParametersList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#AssetBundleImportJobDataSourceOverrideParameters"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleImportJobError": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the resource whose processing caused an error.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.quicksight#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specific error type or the error that occurred.</p>"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.quicksight#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the error.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an error that occurred within an Asset Bundle import execution.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleImportJobErrorList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#AssetBundleImportJobError"
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleImportJobOverrideParameters": {
+            "type": "structure",
+            "members": {
+                "ResourceIdOverrideConfiguration": {
+                    "target": "com.amazonaws.quicksight#AssetBundleImportJobResourceIdOverrideConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional structure that configures resource ID overrides to be applied within the import job.</p>"
+                    }
+                },
+                "VPCConnections": {
+                    "target": "com.amazonaws.quicksight#AssetBundleImportJobVPCConnectionOverrideParametersList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of overrides for any <code>VPCConnection</code> resources that are present in the asset bundle that is imported.</p>"
+                    }
+                },
+                "RefreshSchedules": {
+                    "target": "com.amazonaws.quicksight#AssetBundleImportJobRefreshScheduleOverrideParametersList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of overrides for any <code>RefreshSchedule</code> resources that are present in the asset bundle that is imported.</p>"
+                    }
+                },
+                "DataSources": {
+                    "target": "com.amazonaws.quicksight#AssetBundleImportJobDataSourceOverrideParametersList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A list of overrides for any <code>DataSource</code> resources that are present in the asset bundle that is imported.</p>"
+                    }
+                },
+                "DataSets": {
+                    "target": "com.amazonaws.quicksight#AssetBundleImportJobDataSetOverrideParametersList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of overrides for any <code>DataSet</code> resources that are present in the asset bundle that is imported.</p>"
+                    }
+                },
+                "Themes": {
+                    "target": "com.amazonaws.quicksight#AssetBundleImportJobThemeOverrideParametersList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of overrides for any <code>Theme</code> resources that are present in the asset bundle that is imported.</p>"
+                    }
+                },
+                "Analyses": {
+                    "target": "com.amazonaws.quicksight#AssetBundleImportJobAnalysisOverrideParametersList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of overrides for any <code>Analysis</code> resources that are present in the asset bundle that is imported.</p>"
+                    }
+                },
+                "Dashboards": {
+                    "target": "com.amazonaws.quicksight#AssetBundleImportJobDashboardOverrideParametersList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of overrides for any <code>Dashboard</code> resources that are present in the asset bundle that is imported.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of overrides that modify the asset bundle resource configuration before the resource is imported.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleImportJobRefreshScheduleOverrideParameters": {
+            "type": "structure",
+            "members": {
+                "DataSetId": {
+                    "target": "com.amazonaws.quicksight#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A partial identifier for the specific <code>RefreshSchedule</code> resource that is being overridden. This structure is used together with the <code>ScheduleID</code> structure.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ScheduleId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A partial identifier for the specific <code>RefreshSchedule</code> resource being overridden. This structure is used together with the <code>DataSetId</code> structure.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StartAfterDateTime": {
+                    "target": "com.amazonaws.quicksight#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An override for the <code>StartAfterDateTime</code> of a <code>RefreshSchedule</code> to ensure that the <code>StartAfterDateTime</code> is set to a time that takes place in the future.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of overrides for a specific <code>RefreshsSchedule</code> resource that is present in the asset bundle that is imported.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleImportJobRefreshScheduleOverrideParametersList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#AssetBundleImportJobRefreshScheduleOverrideParameters"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleImportJobResourceIdOverrideConfiguration": {
+            "type": "structure",
+            "members": {
+                "PrefixForAllResources": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An option to request a CloudFormation variable for a prefix to be prepended to each resource's ID before import. The prefix is only added to the asset IDs and does not change the name of the asset.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An optional structure that configures resource ID overrides for the import job</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleImportJobStatus": {
+            "type": "enum",
+            "members": {
+                "QUEUED_FOR_IMMEDIATE_EXECUTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUEUED_FOR_IMMEDIATE_EXECUTION"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "SUCCESSFUL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCESSFUL"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "FAILED_ROLLBACK_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED_ROLLBACK_IN_PROGRESS"
+                    }
+                },
+                "FAILED_ROLLBACK_COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED_ROLLBACK_COMPLETED"
+                    }
+                },
+                "FAILED_ROLLBACK_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED_ROLLBACK_ERROR"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleImportJobSummary": {
+            "type": "structure",
+            "members": {
+                "JobStatus": {
+                    "target": "com.amazonaws.quicksight#AssetBundleImportJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the import job.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the import job.</p>"
+                    }
+                },
+                "CreatedTime": {
+                    "target": "com.amazonaws.quicksight#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the import job was created.</p>"
+                    }
+                },
+                "AssetBundleImportJobId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the job. This ID is unique while the job is running. After the job is completed, you can reuse this ID for another job.</p>"
+                    }
+                },
+                "FailureAction": {
+                    "target": "com.amazonaws.quicksight#AssetBundleImportFailureAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The failure action for the import job.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of the import job that includes details of the requested job's configuration and its current status.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleImportJobSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#AssetBundleImportJobSummary"
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleImportJobThemeOverrideParameters": {
+            "type": "structure",
+            "members": {
+                "ThemeId": {
+                    "target": "com.amazonaws.quicksight#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the theme to apply overrides to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.quicksight#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A new name for the theme.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The override parameters for a single theme that is imported.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleImportJobThemeOverrideParametersList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#AssetBundleImportJobThemeOverrideParameters"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleImportJobVPCConnectionOverrideParameters": {
+            "type": "structure",
+            "members": {
+                "VPCConnectionId": {
+                    "target": "com.amazonaws.quicksight#VPCConnectionResourceIdUnrestricted",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the VPC Connection to apply overrides to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.quicksight#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A new name for the VPC connection.</p>"
+                    }
+                },
+                "SubnetIds": {
+                    "target": "com.amazonaws.quicksight#SubnetIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of  new subnet IDs for the VPC connection you are importing. This field is required if you are importing the VPC connection from another Amazon Web Services account or region.</p>"
+                    }
+                },
+                "SecurityGroupIds": {
+                    "target": "com.amazonaws.quicksight#SecurityGroupIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A new security group ID for the VPC connection you are importing. This field is required if you are importing the VPC connection from another Amazon Web Services account or region.</p>"
+                    }
+                },
+                "DnsResolvers": {
+                    "target": "com.amazonaws.quicksight#DnsResolverList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional override of dns resolvers to be used by the VPC connection.</p>"
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.quicksight#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional override of the role ARN to be used by the VPC connection.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The override parameters for a single VPC connection that is imported.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleImportJobVPCConnectionOverrideParametersList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#AssetBundleImportJobVPCConnectionOverrideParameters"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleImportSource": {
+            "type": "structure",
+            "members": {
+                "Body": {
+                    "target": "com.amazonaws.quicksight#AssetBundleImportBodyBlob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The bytes of the Base64 encoded asset bundle import zip file. This file can't exceed 20MB.</p>\n         <p>If you are calling the APIs from the Amazon Web Services Java, JavaScript, Python, or PHP SDKs, the SDK encodes Base64 automatically to allow the direct setting of the zip file's bytes. If you are using a SDK of a different language or are receiving related errors, try to Base64 encode your data.</p>"
+                    }
+                },
+                "S3Uri": {
+                    "target": "com.amazonaws.quicksight#S3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 uri for an asset bundle import file that exists in an Amazon S3 bucket that the caller has read access to. The file must be a zip format file and can't exceed 20MB.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The source of the asset bundle zip file that contains the data that you want to import.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleImportSourceDescription": {
+            "type": "structure",
+            "members": {
+                "Body": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A HTTPS download URL for the provided asset bundle that you optionally provided at the start of the import job. This URL is valid for 5 minutes after issuance. Call <code>DescribeAssetBundleExportJob</code> again for a fresh URL if needed. The downloaded asset bundle is a <code>.qs</code> zip file.</p>"
+                    }
+                },
+                "S3Uri": {
+                    "target": "com.amazonaws.quicksight#S3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 uri that you provided at the start of the import job.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A description of the import source that you provide at the start of an import job. This value is set to either <code>Body</code> or <code>S3Uri</code> depending on how the <code>StartAssetBundleImportJobRequest</code> is configured.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AssetBundleResourceArns": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#Arn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.quicksight#AssignmentStatus": {
             "type": "enum",
             "members": {
@@ -2880,7 +4172,7 @@
                 "ClusterMarker": {
                     "target": "com.amazonaws.quicksight#ClusterMarker",
                     "traits": {
-                        "smithy.api#documentation": "<p>The cluster marker that is a part of the cluster marker configuration</p>"
+                        "smithy.api#documentation": "<p>The cluster marker that is a part of the cluster marker configuration.</p>"
                     }
                 }
             },
@@ -7135,7 +8427,7 @@
             "type": "structure",
             "members": {
                 "Username": {
-                    "target": "com.amazonaws.quicksight#UserName2",
+                    "target": "com.amazonaws.quicksight#DbUsername",
                     "traits": {
                         "smithy.api#documentation": "<p>User name.</p>",
                         "smithy.api#required": {}
@@ -10528,6 +11820,15 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#DbUsername": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
         "com.amazonaws.quicksight#DecimalDatasetParameter": {
             "type": "structure",
             "members": {
@@ -13769,6 +15070,281 @@
                     "target": "com.amazonaws.quicksight#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeAssetBundleExportJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#DescribeAssetBundleExportJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#DescribeAssetBundleExportJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UnsupportedUserEditionException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an existing export job.</p>\n         <p>Poll job descriptions after a job starts to know the status of the job. When a job succeeds, a URL is provided to download the exported assets' data from. Download URLs are valid for five minutes after they are generated. You can call the <code>DescribeAssetBundleExportJob</code> API for a new download URL as needed.</p>\n         <p>Job descriptions are available for 14 days after the job starts.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/accounts/{AwsAccountId}/asset-bundle-export-jobs/{AssetBundleExportJobId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DescribeAssetBundleExportJobRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account the export job is executed in. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AssetBundleExportJobId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the job that you want described. The job ID is set when you start a new job with a <code>StartAssetBundleExportJob</code> API call.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeAssetBundleExportJobResponse": {
+            "type": "structure",
+            "members": {
+                "JobStatus": {
+                    "target": "com.amazonaws.quicksight#AssetBundleExportJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates tha status of a job through its queueing and execution.</p>\n         <p>Poll this <code>DescribeAssetBundleExportApi</code> until <code>JobStatus</code> is either <code>SUCCESSFUL</code> or <code>FAILED</code>.</p>"
+                    }
+                },
+                "DownloadUrl": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL to download the exported asset bundle data from.</p>\n         <p>This URL is available only after the job has succeeded. This URL is valid for 5 minutes after issuance. Call <code>DescribeAssetBundleExportJob</code> again for a fresh URL if needed.</p>\n         <p>The downloaded asset bundle is a zip file named <code>assetbundle-{jobId}.qs</code>. The file has a <code>.qs</code> extension.</p>\n         <p>This URL can't be used in a <code>StartAssetBundleImportJob</code> API call and should only be used for download purposes.</p>"
+                    }
+                },
+                "Errors": {
+                    "target": "com.amazonaws.quicksight#AssetBundleExportJobErrorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of error records that describes any failures that occurred during the export job processing.</p>\n         <p>Error records accumulate while the job runs. The complete set of error records is available after the job has completed and failed.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the export job.</p>"
+                    }
+                },
+                "CreatedTime": {
+                    "target": "com.amazonaws.quicksight#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the export job was created.</p>"
+                    }
+                },
+                "AssetBundleExportJobId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the job. The job ID is set when you start a new job with a <code>StartAssetBundleExportJob</code> API call.</p>"
+                    }
+                },
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that the export job was executed in. </p>"
+                    }
+                },
+                "ResourceArns": {
+                    "target": "com.amazonaws.quicksight#AssetBundleResourceArns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of resource ARNs that exported with the job.</p>"
+                    }
+                },
+                "IncludeAllDependencies": {
+                    "target": "com.amazonaws.quicksight#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>The include dependencies flag.</p>"
+                    }
+                },
+                "ExportFormat": {
+                    "target": "com.amazonaws.quicksight#AssetBundleExportFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format of the export.</p>"
+                    }
+                },
+                "CloudFormationOverridePropertyConfiguration": {
+                    "target": "com.amazonaws.quicksight#AssetBundleCloudFormationOverridePropertyConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CloudFormation override property configuration for the export job.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the response.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeAssetBundleImportJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#DescribeAssetBundleImportJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#DescribeAssetBundleImportJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UnsupportedUserEditionException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an existing import job.</p>\n         <p>Poll job descriptions after starting a job to know when it has succeeded or failed. Job descriptions are available for 14 days after job starts.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/accounts/{AwsAccountId}/asset-bundle-import-jobs/{AssetBundleImportJobId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DescribeAssetBundleImportJobRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account the import job was executed in. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AssetBundleImportJobId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the job. The job ID is set when you start a new job with a <code>StartAssetBundleImportJob</code> API call.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeAssetBundleImportJobResponse": {
+            "type": "structure",
+            "members": {
+                "JobStatus": {
+                    "target": "com.amazonaws.quicksight#AssetBundleImportJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates tha status of a job through its queueing and execution.</p>\n         <p>Poll this <code>DescribeAssetBundleImport</code> API until <code>JobStatus</code> returns one of the following values.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SUCCESSFUL</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED_ROLLBACK_COMPLETED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED_ROLLBACK_ERROR</code>\n               </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "Errors": {
+                    "target": "com.amazonaws.quicksight#AssetBundleImportJobErrorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of error records that describes any failures that occurred during the export job processing.</p>\n         <p>Error records accumulate while the job is still running. The complete set of error records is available after the job has completed and failed.</p>"
+                    }
+                },
+                "RollbackErrors": {
+                    "target": "com.amazonaws.quicksight#AssetBundleImportJobErrorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of error records that describes any failures that occurred while an import job was attempting a rollback.</p>\n         <p>Error records accumulate while the job is still running. The complete set of error records is available after the job has completed and failed.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the import job.</p>"
+                    }
+                },
+                "CreatedTime": {
+                    "target": "com.amazonaws.quicksight#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the import job was created.</p>"
+                    }
+                },
+                "AssetBundleImportJobId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the job. The job ID is set when you start a new job with a <code>StartAssetBundleImportJob</code> API call.</p>"
+                    }
+                },
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account the import job was executed in. </p>"
+                    }
+                },
+                "AssetBundleImportSource": {
+                    "target": "com.amazonaws.quicksight#AssetBundleImportSourceDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source of the asset bundle zip file that contains the data that is imported by the job.</p>"
+                    }
+                },
+                "OverrideParameters": {
+                    "target": "com.amazonaws.quicksight#AssetBundleImportJobOverrideParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional overrides to be applied to the resource configuration before import.</p>"
+                    }
+                },
+                "FailureAction": {
+                    "target": "com.amazonaws.quicksight#AssetBundleImportFailureAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The failure action for the import job.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the response.</p>",
+                        "smithy.api#httpResponseCode": {}
                     }
                 }
             },
@@ -20457,6 +22033,61 @@
                 "smithy.api#documentation": "<p>The bound\n            options (north, south, west, east) of the geospatial window options.</p>"
             }
         },
+        "com.amazonaws.quicksight#GeospatialHeatmapColorScale": {
+            "type": "structure",
+            "members": {
+                "Colors": {
+                    "target": "com.amazonaws.quicksight#GeospatialHeatmapDataColorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of colors to be used in heatmap point style.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The color scale specification for the heatmap point style.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#GeospatialHeatmapConfiguration": {
+            "type": "structure",
+            "members": {
+                "HeatmapColor": {
+                    "target": "com.amazonaws.quicksight#GeospatialHeatmapColorScale",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The color scale specification for the heatmap point style.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The heatmap configuration of the geospatial point style.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#GeospatialHeatmapDataColor": {
+            "type": "structure",
+            "members": {
+                "Color": {
+                    "target": "com.amazonaws.quicksight#HexColor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The hex color to be used in the heatmap point style.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The color to be used in the heatmap point style.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#GeospatialHeatmapDataColorList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#GeospatialHeatmapDataColor"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 2
+                }
+            }
+        },
         "com.amazonaws.quicksight#GeospatialMapAggregatedFieldWells": {
             "type": "structure",
             "members": {
@@ -20617,6 +22248,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The cluster marker configuration of the geospatial point style.</p>"
                     }
+                },
+                "HeatmapConfiguration": {
+                    "target": "com.amazonaws.quicksight#GeospatialHeatmapConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The heatmap configuration of the geospatial point style.</p>"
+                    }
                 }
             },
             "traits": {
@@ -20636,6 +22273,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "CLUSTER"
+                    }
+                },
+                "HEATMAP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HEATMAP"
                     }
                 }
             }
@@ -24331,6 +25974,216 @@
                     "target": "com.amazonaws.quicksight#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#ListAssetBundleExportJobs": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#ListAssetBundleExportJobsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#ListAssetBundleExportJobsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidNextTokenException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UnsupportedUserEditionException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all asset bundle export jobs that have been taken place in the last 14 days. Jobs created more than 14 days ago are deleted forever and are not returned. If you are using the same job ID for multiple jobs, <code>ListAssetBundleExportJobs</code> only returns the most recent job that uses the repeated job ID.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/accounts/{AwsAccountId}/asset-bundle-export-jobs",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "AssetBundleExportJobSummaryList",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.quicksight#ListAssetBundleExportJobsRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that the export jobs were executed in. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or null if there are no more results.</p>",
+                        "smithy.api#httpQuery": "next-token"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.quicksight#MaxResults",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>",
+                        "smithy.api#httpQuery": "max-results"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#ListAssetBundleExportJobsResponse": {
+            "type": "structure",
+            "members": {
+                "AssetBundleExportJobSummaryList": {
+                    "target": "com.amazonaws.quicksight#AssetBundleExportJobSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of export job summaries.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or null if there are no more results.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#ListAssetBundleImportJobs": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#ListAssetBundleImportJobsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#ListAssetBundleImportJobsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidNextTokenException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UnsupportedUserEditionException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all asset bundle import jobs that have taken place in the last 14 days. Jobs created more than 14 days ago are deleted forever and are not returned. If you are using the same job ID for multiple jobs, <code>ListAssetBundleImportJobs</code> only returns the most recent job that uses the repeated job ID.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/accounts/{AwsAccountId}/asset-bundle-import-jobs",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "AssetBundleImportJobSummaryList",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.quicksight#ListAssetBundleImportJobsRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that the import jobs were executed in.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or null if there are no more results.</p>",
+                        "smithy.api#httpQuery": "next-token"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.quicksight#MaxResults",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>",
+                        "smithy.api#httpQuery": "max-results"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#ListAssetBundleImportJobsResponse": {
+            "type": "structure",
+            "members": {
+                "AssetBundleImportJobSummaryList": {
+                    "target": "com.amazonaws.quicksight#AssetBundleImportJobSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of import job summaries.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or null if there are no more results.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the response.</p>",
+                        "smithy.api#httpResponseCode": {}
                     }
                 }
             },
@@ -31457,6 +33310,12 @@
                     "target": "com.amazonaws.quicksight#DescribeAnalysisPermissions"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#DescribeAssetBundleExportJob"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#DescribeAssetBundleImportJob"
+                },
+                {
                     "target": "com.amazonaws.quicksight#DescribeDashboard"
                 },
                 {
@@ -31565,6 +33424,12 @@
                     "target": "com.amazonaws.quicksight#ListAnalyses"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#ListAssetBundleExportJobs"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ListAssetBundleImportJobs"
+                },
+                {
                     "target": "com.amazonaws.quicksight#ListDashboards"
                 },
                 {
@@ -31665,6 +33530,12 @@
                 },
                 {
                     "target": "com.amazonaws.quicksight#SearchGroups"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#StartAssetBundleExportJob"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#StartAssetBundleImportJob"
                 },
                 {
                     "target": "com.amazonaws.quicksight#TagResource"
@@ -34684,6 +36555,12 @@
                 "smithy.api#documentation": "<p>A physical table type for an S3 data source.</p>"
             }
         },
+        "com.amazonaws.quicksight#S3Uri": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^(https|s3)://([^/]+)/?(.*)$"
+            }
+        },
         "com.amazonaws.quicksight#SameSheetTargetVisualConfiguration": {
             "type": "structure",
             "members": {
@@ -37193,6 +39070,246 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Secure Socket Layer (SSL) properties that apply when Amazon QuickSight connects to your\n            underlying data source.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#StartAssetBundleExportJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#StartAssetBundleExportJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#StartAssetBundleExportJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UnsupportedUserEditionException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts an Asset Bundle export job.</p>\n         <p>An Asset Bundle export job exports specified Amazon QuickSight assets. You can also choose to export any asset dependencies in the same job. Export jobs run asynchronously and can be polled with a <code>DescribeAssetBundleExportJob</code> API call. When a job is successfully completed, a download URL that contains the exported assets is returned. The URL is valid for 5 minutes and can be refreshed with a <code>DescribeAssetBundleExportJob</code> API call. Each Amazon QuickSight account can run up to 10 export jobs concurrently.</p>\n         <p>The API caller must have the necessary permissions in their IAM role to access each resource before the resources can be exported.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/accounts/{AwsAccountId}/asset-bundle-export-jobs/export",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#StartAssetBundleExportJobRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account to export assets from.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AssetBundleExportJobId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the job. This ID is unique while the job is running. After the job is completed, you can reuse this ID for another job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceArns": {
+                    "target": "com.amazonaws.quicksight#AssetBundleResourceArns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of resource ARNs to export. The following resources are supported.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Analysis</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Dashboard</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DataSet</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DataSource</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>RefreshSchedule</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Theme</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>VPCConnection</code>\n               </p>\n            </li>\n         </ul>\n         <p>The API caller must have the necessary permissions in their IAM role to access each resource before the resources can be exported.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IncludeAllDependencies": {
+                    "target": "com.amazonaws.quicksight#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>A Boolean that determines whether all dependencies of each resource ARN are recursively exported with the job. For example, say you provided a Dashboard ARN to the <code>ResourceArns</code> parameter. If you set <code>IncludeAllDependencies</code> to <code>TRUE</code>, any theme, dataset, and dataource resource that is a dependency of the dashboard is also exported.</p>"
+                    }
+                },
+                "ExportFormat": {
+                    "target": "com.amazonaws.quicksight#AssetBundleExportFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The export data format.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CloudFormationOverridePropertyConfiguration": {
+                    "target": "com.amazonaws.quicksight#AssetBundleCloudFormationOverridePropertyConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional collection of structures that generate CloudFormation parameters to override the existing resource property values when the resource is exported to a new CloudFormation template.</p>\n         <p>Use this field if the <code>ExportFormat</code> field of a <code>StartAssetBundleExportJobRequest</code> API call is set to <code>CLOUDFORMATION_JSON</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#StartAssetBundleExportJobResponse": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the export job.</p>"
+                    }
+                },
+                "AssetBundleExportJobId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the job. This ID is unique while the job is running. After the job is completed, you can reuse this ID for another job.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services response ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the response.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#StartAssetBundleImportJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#StartAssetBundleImportJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#StartAssetBundleImportJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UnsupportedUserEditionException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts an Asset Bundle import job.</p>\n         <p>An Asset Bundle import job imports specified Amazon QuickSight assets into an Amazon QuickSight account. You can also choose to import a naming prefix and specified configuration overrides. The assets that are contained in the bundle file that you provide are used to create or update a new or existing asset in your Amazon QuickSight account. Each Amazon QuickSight account can run up to 10 import jobs concurrently.</p>\n         <p>The API caller must have the necessary <code>\"create\"</code>, <code>\"describe\"</code>, and <code>\"update\"</code> permissions in their IAM role to access each resource type that is contained in the bundle file before the resources can be imported.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/accounts/{AwsAccountId}/asset-bundle-import-jobs/import",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#StartAssetBundleImportJobRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account to import assets into. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AssetBundleImportJobId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the job. This ID is unique while the job is running. After the job is completed, you can reuse this ID for another job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AssetBundleImportSource": {
+                    "target": "com.amazonaws.quicksight#AssetBundleImportSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source of the asset bundle zip file that contains the data that you want to import.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OverrideParameters": {
+                    "target": "com.amazonaws.quicksight#AssetBundleImportJobOverrideParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional overrides to be applied to the resource configuration before import.</p>"
+                    }
+                },
+                "FailureAction": {
+                    "target": "com.amazonaws.quicksight#AssetBundleImportFailureAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The failure action for the import job.</p>\n         <p>If you choose <code>ROLLBACK</code>, failed  import jobs will attempt to  undo any asset changes caused by the failed job.</p>\n         <p>If you choose <code>DO_NOTHING</code>, failed import jobs will not attempt to roll back any asset changes caused by the failed job, possibly leaving the Amazon QuickSight account in an inconsistent state.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#StartAssetBundleImportJobResponse": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the import job.</p>"
+                    }
+                },
+                "AssetBundleImportJobId": {
+                    "target": "com.amazonaws.quicksight#ShortRestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the job. This ID is unique while the job is running. After the job is completed, you can reuse this ID for another job.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services response ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the response.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#StatePersistenceConfigurations": {
@@ -45381,15 +47498,6 @@
                     "min": 1
                 },
                 "smithy.api#pattern": "^[\\u0020-\\u00FF]+$"
-            }
-        },
-        "com.amazonaws.quicksight#UserName2": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 1,
-                    "max": 64
-                }
             }
         },
         "com.amazonaws.quicksight#UserRole": {
