@@ -3242,6 +3242,9 @@
                     "target": "com.amazonaws.fms#InvalidOperationException"
                 },
                 {
+                    "target": "com.amazonaws.fms#LimitExceededException"
+                },
+                {
                     "target": "com.amazonaws.fms#ResourceNotFoundException"
                 }
             ],
@@ -4007,6 +4010,9 @@
                 },
                 {
                     "target": "com.amazonaws.fms#InvalidOperationException"
+                },
+                {
+                    "target": "com.amazonaws.fms#LimitExceededException"
                 },
                 {
                     "target": "com.amazonaws.fms#ResourceNotFoundException"

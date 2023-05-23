@@ -79,6 +79,9 @@
                     "target": "com.amazonaws.translate#TagResource"
                 },
                 {
+                    "target": "com.amazonaws.translate#TranslateDocument"
+                },
+                {
                     "target": "com.amazonaws.translate#TranslateText"
                 },
                 {
@@ -463,8 +466,8 @@
                             },
                             "params": {
                                 "Region": "ap-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -476,8 +479,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -489,8 +492,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -502,8 +505,8 @@
                             },
                             "params": {
                                 "Region": "ap-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -515,8 +518,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -528,8 +531,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -541,8 +544,8 @@
                             },
                             "params": {
                                 "Region": "ca-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -554,8 +557,8 @@
                             },
                             "params": {
                                 "Region": "eu-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -567,8 +570,8 @@
                             },
                             "params": {
                                 "Region": "eu-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -580,8 +583,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -593,8 +596,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -606,8 +609,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -619,8 +622,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -632,8 +635,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -645,8 +648,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -658,8 +661,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -671,8 +674,8 @@
                             },
                             "params": {
                                 "Region": "us-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -684,8 +687,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -697,8 +700,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -710,8 +713,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -723,8 +726,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -736,8 +739,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -749,8 +752,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -762,8 +765,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -775,8 +778,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -788,8 +791,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -801,8 +804,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -814,8 +817,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -827,8 +830,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -840,8 +843,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -853,8 +856,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -866,8 +869,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -879,8 +893,30 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -892,8 +928,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -905,8 +952,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -918,8 +965,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -931,8 +978,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -943,8 +990,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -955,9 +1002,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -1125,6 +1178,9 @@
                         "smithy.api#documentation": "<p>Tags to be associated with this resource. A tag is a key-value pair that\n      adds metadata to a resource. Each tag key for the resource must be unique.\n      For more information, see <a href=\"https://docs.aws.amazon.com/translate/latest/dg/tagging.html\">\n        Tagging your resources</a>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.translate#CreateParallelDataResponse": {
@@ -1142,6 +1198,9 @@
                         "smithy.api#documentation": "<p>The status of the parallel data resource. When the resource is ready for you to use, the\n      status is <code>ACTIVE</code>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.translate#DeleteParallelData": {
@@ -1180,6 +1239,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.translate#DeleteParallelDataResponse": {
@@ -1197,6 +1259,9 @@
                         "smithy.api#documentation": "<p>The status of the parallel data deletion.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.translate#DeleteTerminology": {
@@ -1235,6 +1300,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.translate#DescribeTextTranslationJob": {
@@ -1270,6 +1338,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.translate#DescribeTextTranslationJobResponse": {
@@ -1281,6 +1352,9 @@
                         "smithy.api#documentation": "<p>An object that contains the properties associated with an asynchronous batch translation\n      job.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.translate#Description": {
@@ -1394,6 +1468,38 @@
                 }
             }
         },
+        "com.amazonaws.translate#Document": {
+            "type": "structure",
+            "members": {
+                "Content": {
+                    "target": "com.amazonaws.translate#DocumentContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>Content</code>field type is Binary large object (blob).\n      This object contains the document content converted into base64-encoded binary data.   \n      If you use one of the AWS SDKs, the SDK performs the\n      Base64-encoding on this field before sending the request.   \n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContentType": {
+                    "target": "com.amazonaws.translate#ContentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the format of the document. You can specify one of the following:</p>\n         <ul>\n            <li>\n               <p>text/html - The input data consists of HTML content. \n        Amazon Translate translates only the text in the HTML element.</p>\n            </li>\n            <li>\n               <p>text/plain - The input data consists of unformatted text. \n        Amazon Translate translates every character in the content. </p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The content and content type of a document.</p>"
+            }
+        },
+        "com.amazonaws.translate#DocumentContent": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 102400
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.translate#EncryptionKey": {
             "type": "structure",
             "members": {
@@ -1490,6 +1596,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.translate#GetParallelDataResponse": {
@@ -1519,6 +1628,9 @@
                         "smithy.api#documentation": "<p>The Amazon S3 location of a file that provides any errors or warnings that were produced\n      by your input file. This file was created when Amazon Translate attempted to update a parallel\n      data resource. The location is returned as a presigned URL to that has a 30-minute\n      expiration.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.translate#GetTerminology": {
@@ -1563,6 +1675,9 @@
                         "smithy.api#documentation": "<p>The data format of the custom terminology being retrieved.</p>\n         <p>If you don't specify this parameter, Amazon Translate returns a file with the same format\n      as the file that was imported to create the terminology. </p>\n         <p>If you specify this parameter when you retrieve a multi-directional terminology resource,\n      you must specify the same format as the input file that was imported to create it. Otherwise,\n      Amazon Translate throws an error.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.translate#GetTerminologyResponse": {
@@ -1586,6 +1701,9 @@
                         "smithy.api#documentation": "<p>The Amazon S3 location of a file that provides any errors or warnings that were produced\n      by your input file. This file was created when Amazon Translate attempted to create a\n      terminology resource. The location is returned as a presigned URL to that has a 30-minute\n      expiration.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.translate#IamRoleArn": {
@@ -1672,6 +1790,9 @@
                         "smithy.api#documentation": "<p>Tags to be associated with this resource. A tag is a key-value pair that\n      adds metadata to a resource. Each tag key for the resource must be unique.\n      For more information, see <a href=\"https://docs.aws.amazon.com/translate/latest/dg/tagging.html\">\n        Tagging your resources</a>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.translate#ImportTerminologyResponse": {
@@ -1689,6 +1810,9 @@
                         "smithy.api#documentation": "<p>The Amazon S3 location of a file that provides any errors or warnings that were produced\n      by your input file. This file was created when Amazon Translate attempted to create a\n      terminology resource. The location is returned as a presigned URL to that has a 30 minute\n      expiration.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.translate#InputDataConfig": {
@@ -1969,6 +2093,9 @@
                         "smithy.api#documentation": "<p>The maximum number of results to return in each response.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.translate#ListLanguagesResponse": {
@@ -1992,6 +2119,9 @@
                         "smithy.api#documentation": "<p> If the response does not include all remaining results, use the NextToken\n      in the next request to fetch the next group of supported languages.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.translate#ListParallelData": {
@@ -2037,6 +2167,9 @@
                         "smithy.api#documentation": "<p>The maximum number of parallel data resources returned for each request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.translate#ListParallelDataResponse": {
@@ -2054,6 +2187,9 @@
                         "smithy.api#documentation": "<p>The string to use in a subsequent request to get the next page of results in a paginated\n      response. This value is null if there are no additional pages.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.translate#ListTagsForResource": {
@@ -2089,6 +2225,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.translate#ListTagsForResourceResponse": {
@@ -2100,6 +2239,9 @@
                         "smithy.api#documentation": "<p>Tags associated with the Amazon Translate resource being queried. A tag is a key-value\n      pair that adds as a metadata to a resource used by Amazon Translate. For example, a tag with\n      \"Sales\" as the key might be added to a resource to indicate its use by the sales department.\n    </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.translate#ListTerminologies": {
@@ -2145,6 +2287,9 @@
                         "smithy.api#documentation": "<p>The maximum number of custom terminologies returned per list request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.translate#ListTerminologiesResponse": {
@@ -2162,6 +2307,9 @@
                         "smithy.api#documentation": "<p> If the response to the ListTerminologies was truncated, the NextToken fetches the next\n      group of custom terminologies.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.translate#ListTextTranslationJobs": {
@@ -2216,6 +2364,9 @@
                         "smithy.api#documentation": "<p>The maximum number of results to return in each page. The default value is 100.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.translate#ListTextTranslationJobsResponse": {
@@ -2233,6 +2384,9 @@
                         "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code>\n      when there are no more results to return.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.translate#LocalizedNameString": {
@@ -2693,6 +2847,9 @@
                         "smithy.api#documentation": "<p>Settings to configure your translation output, including the option to set the formality\n      level of the output text and the option to mask profane words and phrases.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.translate#StartTextTranslationJobResponse": {
@@ -2710,6 +2867,9 @@
                         "smithy.api#documentation": "<p>The status of the job. Possible values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SUBMITTED</code> - The job has been received and is queued for\n          processing.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IN_PROGRESS</code> - Amazon Translate is processing the job.</p>\n            </li>\n            <li>\n               <p>\n                  <code>COMPLETED</code> - The job was successfully completed and the output is\n          available.</p>\n            </li>\n            <li>\n               <p>\n                  <code>COMPLETED_WITH_ERROR</code> - The job was completed with errors. The errors can\n          be analyzed in the job's output.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> - The job did not complete. To get details, use the <a>DescribeTextTranslationJob</a> operation.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STOP_REQUESTED</code> - The user who started the job has requested that it be\n          stopped.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STOPPED</code> - The job has been stopped.</p>\n            </li>\n         </ul>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.translate#StopTextTranslationJob": {
@@ -2745,6 +2905,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.translate#StopTextTranslationJobResponse": {
@@ -2762,6 +2925,9 @@
                         "smithy.api#documentation": "<p>The status of the designated job. Upon successful completion, the job's status will be\n        <code>STOPPED</code>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.translate#String": {
@@ -2875,11 +3041,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.translate#TagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.translate#TagValue": {
             "type": "string",
@@ -3252,7 +3424,7 @@
                 "Settings": {
                     "target": "com.amazonaws.translate#TranslationSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>Settings that configure the translation output.</p>"
+                        "smithy.api#documentation": "<p>Settings that modify the translation output.</p>"
                     }
                 }
             },
@@ -3296,6 +3468,117 @@
                 "smithy.api#documentation": "<p>You have added too many tags to this resource. The maximum is 50 tags.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.translate#TranslateDocument": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.translate#TranslateDocumentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.translate#TranslateDocumentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.translate#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.translate#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.translate#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.translate#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.translate#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.translate#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.translate#UnsupportedLanguagePairException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Translates the input document from the source language to the target language.    \n      This synchronous operation supports plain text or HTML for the input document.\n      \n      <code>TranslateDocument</code> supports translations from English to any supported language, \n      and from any supported language to English. Therefore, specify either the source language code\n      or the target language code as “en” (English). \n    </p>\n         <p> \n            <code>TranslateDocument</code> does not support language auto-detection. </p>\n         <p> If you set the <code>Formality</code> parameter, the request will fail if the target language does \n       not support formality. For a list of target languages that support formality, see\n       <a href=\"https://docs.aws.amazon.com/translate/latest/dg/customizing-translations-formality.html\">Setting formality</a>.\n    </p>"
+            }
+        },
+        "com.amazonaws.translate#TranslateDocumentRequest": {
+            "type": "structure",
+            "members": {
+                "Document": {
+                    "target": "com.amazonaws.translate#Document",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content and content type for the document to be translated. The document size must not exceed 100 KB.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TerminologyNames": {
+                    "target": "com.amazonaws.translate#ResourceNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a terminology list file to add to the translation job. This file\n      provides source terms and the desired translation for each term. \n      A terminology list can contain a maximum of 256 terms.\n      You can use one custom terminology resource in your translation request.</p>\n         <p>Use the <a>ListTerminologies</a> operation\n       to get the available terminology lists.</p>\n         <p>For more information about custom terminology lists, see <a href=\"https://docs.aws.amazon.com/translate/latest/dg/how-custom-terminology.html\">Custom terminology</a>.</p>"
+                    }
+                },
+                "SourceLanguageCode": {
+                    "target": "com.amazonaws.translate#LanguageCodeString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language code for the language of the source text. Do not use <code>auto</code>, because\n      <code>TranslateDocument</code> does not support language auto-detection.\n      For a list of supported language codes, see\n      <a href=\"https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html\">Supported languages</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TargetLanguageCode": {
+                    "target": "com.amazonaws.translate#LanguageCodeString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language code requested for the translated document.  \n      For a list of supported language codes, see\n      <a href=\"https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html\">Supported languages</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Settings": {
+                    "target": "com.amazonaws.translate#TranslationSettings"
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.translate#TranslateDocumentResponse": {
+            "type": "structure",
+            "members": {
+                "TranslatedDocument": {
+                    "target": "com.amazonaws.translate#TranslatedDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The document containing the translated content. The document format matches the source document format.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SourceLanguageCode": {
+                    "target": "com.amazonaws.translate#LanguageCodeString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language code of the source document.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TargetLanguageCode": {
+                    "target": "com.amazonaws.translate#LanguageCodeString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language code of the translated document. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AppliedTerminologies": {
+                    "target": "com.amazonaws.translate#AppliedTerminologyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The names of the custom terminologies applied to the input text by Amazon Translate to produce the\n      translated text document.</p>"
+                    }
+                },
+                "AppliedSettings": {
+                    "target": "com.amazonaws.translate#TranslationSettings"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.translate#TranslateText": {
@@ -3349,20 +3632,20 @@
                 "TerminologyNames": {
                     "target": "com.amazonaws.translate#ResourceNameList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the terminology list file to be used in the TranslateText request. You can use\n      1 terminology list at most in a <code>TranslateText</code> request. Terminology lists can\n      contain a maximum of 256 terms.</p>"
+                        "smithy.api#documentation": "<p>The name of a terminology list file to add to the translation job. This file\n      provides source terms and the desired translation for each term. \n      A terminology list can contain a maximum of 256 terms.\n      You can use one custom terminology resource in your translation request.</p>\n         <p>Use the <a>ListTerminologies</a> operation\n      to get the available terminology lists.</p>\n         <p>For more information about custom terminology lists, see <a href=\"https://docs.aws.amazon.com/translate/latest/dg/how-custom-terminology.html\">Custom terminology</a>.</p>"
                     }
                 },
                 "SourceLanguageCode": {
                     "target": "com.amazonaws.translate#LanguageCodeString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code for the language of the source text. The language must be a language\n      supported by Amazon Translate. For a list of language codes, see <a href=\"https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html\">Supported languages</a>.</p>\n         <p>To have Amazon Translate determine the source language of your text, you can specify\n        <code>auto</code> in the <code>SourceLanguageCode</code> field. If you specify\n        <code>auto</code>, Amazon Translate will call <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/comprehend-general.html\">Amazon\n        Comprehend</a> to determine the source language.</p>\n         <note>\n            <p>If you specify <code>auto</code>, you must send the <code>TranslateText</code> request in a region that supports\n          Amazon Comprehend. Otherwise, the request returns an error indicating that autodetect is not supported. </p>\n         </note>",
+                        "smithy.api#documentation": "<p>The language code for the language of the source text. For a list of language codes, see <a href=\"https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html\">Supported languages</a>.</p>\n         <p>To have Amazon Translate determine the source language of your text, you can specify\n        <code>auto</code> in the <code>SourceLanguageCode</code> field. If you specify\n        <code>auto</code>, Amazon Translate will call <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/comprehend-general.html\">Amazon\n        Comprehend</a> to determine the source language.</p>\n         <note>\n            <p>If you specify <code>auto</code>, you must send the <code>TranslateText</code> request in a region that supports\n          Amazon Comprehend. Otherwise, the request returns an error indicating that autodetect is not supported. </p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
                 "TargetLanguageCode": {
                     "target": "com.amazonaws.translate#LanguageCodeString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code requested for the language of the target text. The language must be a\n      language supported by Amazon Translate.</p>",
+                        "smithy.api#documentation": "<p>The language code requested for the language of the target text.\n      For a list of language codes, see <a href=\"https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html\">Supported languages</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3372,6 +3655,9 @@
                         "smithy.api#documentation": "<p>Settings to configure your translation output, including the option to set the formality\n      level of the output text and the option to mask profane words and phrases.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.translate#TranslateTextResponse": {
@@ -3407,9 +3693,33 @@
                 "AppliedSettings": {
                     "target": "com.amazonaws.translate#TranslationSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>Settings that configure the translation output.</p>"
+                        "smithy.api#documentation": "<p>Optional settings that modify the translation output.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.translate#TranslatedDocument": {
+            "type": "structure",
+            "members": {
+                "Content": {
+                    "target": "com.amazonaws.translate#TranslatedDocumentContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The document containing the translated content.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The translated content.</p>"
+            }
+        },
+        "com.amazonaws.translate#TranslatedDocumentContent": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.translate#TranslatedTextString": {
@@ -3439,7 +3749,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Optional settings that configure the translation output. Use these settings for\n      real time translations and asynchronous translation jobs.</p>"
+                "smithy.api#documentation": "<p>Settings to configure your translation output, including the option to set the formality\n      level of the output text and the option to mask profane words and phrases.</p>"
             }
         },
         "com.amazonaws.translate#UnboundedLengthString": {
@@ -3484,7 +3794,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Amazon Translate does not support translation from the language of the source text into the requested\n      target language. For more information, see <a href=\"https://docs.aws.amazon.com/translate/latest/dg/how-to-error-msg.html\">Error messages</a>. </p>",
+                "smithy.api#documentation": "<p>Amazon Translate does not support translation from the language of the source text into the requested\n      target language. For more information, see <a href=\"https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html\">Supported languages</a>. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -3532,11 +3842,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.translate#UntagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.translate#UpdateParallelData": {
             "type": "operation",
@@ -3607,6 +3923,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.translate#UpdateParallelDataResponse": {
@@ -3636,6 +3955,9 @@
                         "smithy.api#documentation": "<p>The time that the most recent update was attempted.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         }
     }

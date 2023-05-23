@@ -10239,7 +10239,7 @@
                 "InputDataConfig": {
                     "target": "com.amazonaws.sagemaker#InputDataConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of <code>Channel</code> objects. Each channel is a named input source.\n                <code>InputDataConfig</code> describes the input data and its location. </p>\n         <p>Algorithms can accept input data from one or more channels. For example, an\n            algorithm might have two channels of input data, <code>training_data</code> and\n                <code>validation_data</code>. The configuration for each channel provides the S3,\n            EFS, or FSx location where the input data is stored. It also provides information about\n            the stored data: the MIME type, compression method, and whether the data is wrapped in\n            RecordIO format. </p>\n         <p>Depending on the input mode that the algorithm supports, SageMaker either copies input\n            data files from an S3 bucket to a local directory in the Docker container, or makes it\n            available as input streams. For example, if you specify an EFS location, input data\n            files are available as input streams. They do not need to be downloaded.</p>"
+                        "smithy.api#documentation": "<p>An array of <code>Channel</code> objects. Each channel is a named input source.\n                <code>InputDataConfig</code> describes the input data and its location. </p>\n         <p>Algorithms can accept input data from one or more channels. For example, an\n            algorithm might have two channels of input data, <code>training_data</code> and\n                <code>validation_data</code>. The configuration for each channel provides the S3,\n            EFS, or FSx location where the input data is stored. It also provides information about\n            the stored data: the MIME type, compression method, and whether the data is wrapped in\n            RecordIO format. </p>\n         <p>Depending on the input mode that the algorithm supports, SageMaker either copies input\n            data files from an S3 bucket to a local directory in the Docker container, or makes it\n            available as input streams. For example, if you specify an EFS location, input data\n            files are available as input streams. They do not need to be downloaded.</p>\n         <p>Your input must be in the same Amazon Web Services region as your training job.</p>"
                     }
                 },
                 "OutputDataConfig": {
@@ -27450,6 +27450,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The recommendation ID which uniquely identifies each recommendation.</p>"
                     }
+                },
+                "InvocationEndTime": {
+                    "target": "com.amazonaws.sagemaker#InvocationEndTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp that shows when the benchmark completed.</p>"
+                    }
+                },
+                "InvocationStartTime": {
+                    "target": "com.amazonaws.sagemaker#InvocationStartTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp that shows when the benchmark started.</p>"
+                    }
                 }
             },
             "traits": {
@@ -27537,6 +27549,24 @@
                     "target": "com.amazonaws.sagemaker#FailureReason",
                     "traits": {
                         "smithy.api#documentation": "<p>If the job fails, provides information why the job failed.</p>"
+                    }
+                },
+                "ModelName": {
+                    "target": "com.amazonaws.sagemaker#ModelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the created model.</p>"
+                    }
+                },
+                "SamplePayloadUrl": {
+                    "target": "com.amazonaws.sagemaker#S3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Simple Storage Service (Amazon S3) path where the sample payload is stored.\n         This path must point to a single gzip compressed tar archive (.tar.gz suffix).</p>"
+                    }
+                },
+                "ModelPackageVersionArn": {
+                    "target": "com.amazonaws.sagemaker#ModelPackageArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a versioned model package.</p>"
                     }
                 }
             },
@@ -28311,6 +28341,12 @@
             "traits": {
                 "smithy.api#default": 0
             }
+        },
+        "com.amazonaws.sagemaker#InvocationEndTime": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.sagemaker#InvocationStartTime": {
+            "type": "timestamp"
         },
         "com.amazonaws.sagemaker#InvocationsMaxRetries": {
             "type": "integer",
@@ -32566,6 +32602,18 @@
                     "target": "com.amazonaws.sagemaker#MaxResults",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of recommendations to return in the response.</p>"
+                    }
+                },
+                "ModelNameEquals": {
+                    "target": "com.amazonaws.sagemaker#ModelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter that returns only jobs that were created for this model.</p>"
+                    }
+                },
+                "ModelPackageVersionArnEquals": {
+                    "target": "com.amazonaws.sagemaker#ModelPackageArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter that returns only jobs that were created for this versioned model package.</p>"
                     }
                 }
             },
@@ -45981,6 +46029,18 @@
                 },
                 "EndpointMetrics": {
                     "target": "com.amazonaws.sagemaker#InferenceMetrics"
+                },
+                "InvocationEndTime": {
+                    "target": "com.amazonaws.sagemaker#InvocationEndTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp that shows when the benchmark completed.</p>"
+                    }
+                },
+                "InvocationStartTime": {
+                    "target": "com.amazonaws.sagemaker#InvocationStartTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp that shows when the benchmark started.</p>"
+                    }
                 }
             },
             "traits": {
@@ -47334,7 +47394,7 @@
                 "S3Uri": {
                     "target": "com.amazonaws.sagemaker#S3Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>Depending on the value specified for the <code>S3DataType</code>, identifies either\n            a key name prefix or a manifest. For example: </p>\n         <ul>\n            <li>\n               <p> A key name prefix might look like this:\n                        <code>s3://bucketname/exampleprefix</code>\n               </p>\n            </li>\n            <li>\n               <p> A manifest might look like this:\n                        <code>s3://bucketname/example.manifest</code>\n               </p>\n               <p> A manifest is an S3 object which is a JSON file consisting of an array of\n                    elements. The first element is a prefix which is followed by one or more\n                    suffixes. SageMaker appends the suffix elements to the prefix to get a full set\n                    of <code>S3Uri</code>. Note that the prefix must be a valid non-empty\n                        <code>S3Uri</code> that precludes users from specifying a manifest whose\n                    individual <code>S3Uri</code> is sourced from different S3 buckets.</p>\n               <p> The following code example shows a valid manifest format: </p>\n               <p>\n                  <code>[ {\"prefix\": \"s3://customer_bucket/some/prefix/\"},</code>\n               </p>\n               <p>\n                  <code> \"relative/path/to/custdata-1\",</code>\n               </p>\n               <p>\n                  <code> \"relative/path/custdata-2\",</code>\n               </p>\n               <p>\n                  <code> ...</code>\n               </p>\n               <p>\n                  <code> \"relative/path/custdata-N\"</code>\n               </p>\n               <p>\n                  <code>]</code>\n               </p>\n               <p> This JSON is equivalent to the following <code>S3Uri</code>\n                    list:</p>\n               <p>\n                  <code>s3://customer_bucket/some/prefix/relative/path/to/custdata-1</code>\n               </p>\n               <p>\n                  <code>s3://customer_bucket/some/prefix/relative/path/custdata-2</code>\n               </p>\n               <p>\n                  <code>...</code>\n               </p>\n               <p>\n                  <code>s3://customer_bucket/some/prefix/relative/path/custdata-N</code>\n               </p>\n               <p>The complete set of <code>S3Uri</code> in this manifest is the input data\n                    for the channel for this data source. The object that each <code>S3Uri</code>\n                    points to must be readable by the IAM role that SageMaker uses to perform tasks on\n                    your behalf. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Depending on the value specified for the <code>S3DataType</code>, identifies either\n            a key name prefix or a manifest. For example: </p>\n         <ul>\n            <li>\n               <p> A key name prefix might look like this:\n                        <code>s3://bucketname/exampleprefix</code>\n               </p>\n            </li>\n            <li>\n               <p> A manifest might look like this:\n                        <code>s3://bucketname/example.manifest</code>\n               </p>\n               <p> A manifest is an S3 object which is a JSON file consisting of an array of\n                    elements. The first element is a prefix which is followed by one or more\n                    suffixes. SageMaker appends the suffix elements to the prefix to get a full set\n                    of <code>S3Uri</code>. Note that the prefix must be a valid non-empty\n                        <code>S3Uri</code> that precludes users from specifying a manifest whose\n                    individual <code>S3Uri</code> is sourced from different S3 buckets.</p>\n               <p> The following code example shows a valid manifest format: </p>\n               <p>\n                  <code>[ {\"prefix\": \"s3://customer_bucket/some/prefix/\"},</code>\n               </p>\n               <p>\n                  <code> \"relative/path/to/custdata-1\",</code>\n               </p>\n               <p>\n                  <code> \"relative/path/custdata-2\",</code>\n               </p>\n               <p>\n                  <code> ...</code>\n               </p>\n               <p>\n                  <code> \"relative/path/custdata-N\"</code>\n               </p>\n               <p>\n                  <code>]</code>\n               </p>\n               <p> This JSON is equivalent to the following <code>S3Uri</code>\n                    list:</p>\n               <p>\n                  <code>s3://customer_bucket/some/prefix/relative/path/to/custdata-1</code>\n               </p>\n               <p>\n                  <code>s3://customer_bucket/some/prefix/relative/path/custdata-2</code>\n               </p>\n               <p>\n                  <code>...</code>\n               </p>\n               <p>\n                  <code>s3://customer_bucket/some/prefix/relative/path/custdata-N</code>\n               </p>\n               <p>The complete set of <code>S3Uri</code> in this manifest is the input data\n                    for the channel for this data source. The object that each <code>S3Uri</code>\n                    points to must be readable by the IAM role that SageMaker uses to perform tasks on\n                    your behalf. </p>\n            </li>\n         </ul>\n         <p>Your input bucket must be located in same Amazon Web Services region as your training job.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -47358,7 +47418,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the S3 data source.</p>"
+                "smithy.api#documentation": "<p>Describes the S3 data source.</p>\n         <p>Your input bucket must be in the same Amazon Web Services region as your training job.</p>"
             }
         },
         "com.amazonaws.sagemaker#S3DataType": {
@@ -50533,7 +50593,7 @@
                 "ModelDataUrl": {
                     "target": "com.amazonaws.sagemaker#Url",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 path where the model artifacts, which result from model training, are stored.\n            This path must point to a single <code>gzip</code> compressed tar archive\n                (<code>.tar.gz</code> suffix).</p>\n         <note>\n            <p>The model artifacts must be in an S3 bucket that is in the same region as the\n                algorithm.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The Amazon S3 path where the model artifacts, which result from model training, are stored.\n            This path must point to a single <code>gzip</code> compressed tar archive\n                (<code>.tar.gz</code> suffix).</p>\n         <note>\n            <p>The model artifacts must be in an S3 bucket that is in the same Amazon Web Services region as the\n                algorithm.</p>\n         </note>"
                     }
                 },
                 "AlgorithmName": {
@@ -53236,7 +53296,7 @@
                 "InputDataConfig": {
                     "target": "com.amazonaws.sagemaker#InputDataConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of <code>Channel</code> objects that describes each data input\n            channel.</p>"
+                        "smithy.api#documentation": "<p>An array of <code>Channel</code> objects that describes each data input\n            channel.</p>\n         <p>Your input must be in the same Amazon Web Services region as your training job.</p>"
                     }
                 },
                 "OutputDataConfig": {
