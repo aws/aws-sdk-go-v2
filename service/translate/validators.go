@@ -230,6 +230,26 @@ func (m *validateOpTagResource) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpTranslateDocument struct {
+}
+
+func (*validateOpTranslateDocument) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpTranslateDocument) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*TranslateDocumentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpTranslateDocumentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTranslateText struct {
 }
 
@@ -334,6 +354,10 @@ func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
 }
 
+func addOpTranslateDocumentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpTranslateDocument{}, middleware.After)
+}
+
 func addOpTranslateTextValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTranslateText{}, middleware.After)
 }
@@ -344,6 +368,24 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateParallelDataValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateParallelData{}, middleware.After)
+}
+
+func validateDocument(v *types.Document) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Document"}
+	if v.Content == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Content"))
+	}
+	if v.ContentType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContentType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateEncryptionKey(v *types.EncryptionKey) error {
@@ -700,6 +742,31 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpTranslateDocumentInput(v *TranslateDocumentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TranslateDocumentInput"}
+	if v.Document == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Document"))
+	} else if v.Document != nil {
+		if err := validateDocument(v.Document); err != nil {
+			invalidParams.AddNested("Document", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SourceLanguageCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceLanguageCode"))
+	}
+	if v.TargetLanguageCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetLanguageCode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -6539,6 +6539,12 @@ type InferenceRecommendation struct {
 	// This member is required.
 	ModelConfiguration *ModelConfiguration
 
+	// A timestamp that shows when the benchmark completed.
+	InvocationEndTime *time.Time
+
+	// A timestamp that shows when the benchmark started.
+	InvocationStartTime *time.Time
+
 	// The recommendation ID which uniquely identifies each recommendation.
 	RecommendationId *string
 
@@ -6594,6 +6600,17 @@ type InferenceRecommendationsJob struct {
 
 	// If the job fails, provides information why the job failed.
 	FailureReason *string
+
+	// The name of the created model.
+	ModelName *string
+
+	// The Amazon Resource Name (ARN) of a versioned model package.
+	ModelPackageVersionArn *string
+
+	// The Amazon Simple Storage Service (Amazon S3) path where the sample payload is
+	// stored. This path must point to a single gzip compressed tar archive (.tar.gz
+	// suffix).
+	SamplePayloadUrl *string
 
 	noSmithyDocumentSerde
 }
@@ -11390,6 +11407,12 @@ type RecommendationJobInferenceBenchmark struct {
 	// The reason why a benchmark failed.
 	FailureReason *string
 
+	// A timestamp that shows when the benchmark completed.
+	InvocationEndTime *time.Time
+
+	// A timestamp that shows when the benchmark started.
+	InvocationStartTime *time.Time
+
 	// The metrics of recommendations.
 	Metrics *RecommendationMetrics
 
@@ -11918,7 +11941,8 @@ type RStudioServerProDomainSettingsForUpdate struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the S3 data source.
+// Describes the S3 data source. Your input bucket must be in the same Amazon Web
+// Services region as your training job.
 type S3DataSource struct {
 
 	// If you choose S3Prefix , S3Uri identifies a key name prefix. SageMaker uses all
@@ -11952,6 +11976,8 @@ type S3DataSource struct {
 	//   S3Uri in this manifest is the input data for the channel for this data source.
 	//   The object that each S3Uri points to must be readable by the IAM role that
 	//   SageMaker uses to perform tasks on your behalf.
+	// Your input bucket must be located in same Amazon Web Services region as your
+	// training job.
 	//
 	// This member is required.
 	S3Uri *string
@@ -12360,7 +12386,7 @@ type SourceAlgorithm struct {
 	// The Amazon S3 path where the model artifacts, which result from model training,
 	// are stored. This path must point to a single gzip compressed tar archive (
 	// .tar.gz suffix). The model artifacts must be in an S3 bucket that is in the same
-	// region as the algorithm.
+	// Amazon Web Services region as the algorithm.
 	ModelDataUrl *string
 
 	noSmithyDocumentSerde
@@ -12780,7 +12806,8 @@ type TrainingJob struct {
 	// Algorithm-specific parameters.
 	HyperParameters map[string]string
 
-	// An array of Channel objects that describes each data input channel.
+	// An array of Channel objects that describes each data input channel. Your input
+	// must be in the same Amazon Web Services region as your training job.
 	InputDataConfig []Channel
 
 	// The Amazon Resource Name (ARN) of the labeling job.

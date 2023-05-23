@@ -1407,6 +1407,9 @@ func awsAwsjson11_deserializeOpErrorGetAdminScope(response *smithyhttp.Response,
 	case strings.EqualFold("InvalidOperationException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidOperationException(response, errorBody)
 
+	case strings.EqualFold("LimitExceededException", errorCode):
+		return awsAwsjson11_deserializeErrorLimitExceededException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -2588,6 +2591,9 @@ func awsAwsjson11_deserializeOpErrorListAdminAccountsForOrganization(response *s
 
 	case strings.EqualFold("InvalidOperationException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidOperationException(response, errorBody)
+
+	case strings.EqualFold("LimitExceededException", errorCode):
+		return awsAwsjson11_deserializeErrorLimitExceededException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)

@@ -11,50 +11,52 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Translates input text from the source language to the target language. For a
-// list of available languages and language codes, see Supported languages (https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html)
+// Translates the input document from the source language to the target language.
+// This synchronous operation supports plain text or HTML for the input document.
+// TranslateDocument supports translations from English to any supported language,
+// and from any supported language to English. Therefore, specify either the source
+// language code or the target language code as “en” (English). TranslateDocument
+// does not support language auto-detection. If you set the Formality parameter,
+// the request will fail if the target language does not support formality. For a
+// list of target languages that support formality, see Setting formality (https://docs.aws.amazon.com/translate/latest/dg/customizing-translations-formality.html)
 // .
-func (c *Client) TranslateText(ctx context.Context, params *TranslateTextInput, optFns ...func(*Options)) (*TranslateTextOutput, error) {
+func (c *Client) TranslateDocument(ctx context.Context, params *TranslateDocumentInput, optFns ...func(*Options)) (*TranslateDocumentOutput, error) {
 	if params == nil {
-		params = &TranslateTextInput{}
+		params = &TranslateDocumentInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "TranslateText", params, optFns, c.addOperationTranslateTextMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "TranslateDocument", params, optFns, c.addOperationTranslateDocumentMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*TranslateTextOutput)
+	out := result.(*TranslateDocumentOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type TranslateTextInput struct {
+type TranslateDocumentInput struct {
 
-	// The language code for the language of the source text. For a list of language
-	// codes, see Supported languages (https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html)
-	// . To have Amazon Translate determine the source language of your text, you can
-	// specify auto in the SourceLanguageCode field. If you specify auto , Amazon
-	// Translate will call Amazon Comprehend (https://docs.aws.amazon.com/comprehend/latest/dg/comprehend-general.html)
-	// to determine the source language. If you specify auto , you must send the
-	// TranslateText request in a region that supports Amazon Comprehend. Otherwise,
-	// the request returns an error indicating that autodetect is not supported.
+	// The content and content type for the document to be translated. The document
+	// size must not exceed 100 KB.
+	//
+	// This member is required.
+	Document *types.Document
+
+	// The language code for the language of the source text. Do not use auto , because
+	// TranslateDocument does not support language auto-detection. For a list of
+	// supported language codes, see Supported languages (https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html)
+	// .
 	//
 	// This member is required.
 	SourceLanguageCode *string
 
-	// The language code requested for the language of the target text. For a list of
-	// language codes, see Supported languages (https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html)
+	// The language code requested for the translated document. For a list of
+	// supported language codes, see Supported languages (https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html)
 	// .
 	//
 	// This member is required.
 	TargetLanguageCode *string
-
-	// The text to translate. The text string can be a maximum of 10,000 bytes long.
-	// Depending on your character set, this may be fewer than 10,000 characters.
-	//
-	// This member is required.
-	Text *string
 
 	// Settings to configure your translation output, including the option to set the
 	// formality level of the output text and the option to mask profane words and
@@ -73,28 +75,31 @@ type TranslateTextInput struct {
 	noSmithyDocumentSerde
 }
 
-type TranslateTextOutput struct {
+type TranslateDocumentOutput struct {
 
-	// The language code for the language of the source text.
+	// The language code of the source document.
 	//
 	// This member is required.
 	SourceLanguageCode *string
 
-	// The language code for the language of the target text.
+	// The language code of the translated document.
 	//
 	// This member is required.
 	TargetLanguageCode *string
 
-	// The translated text.
+	// The document containing the translated content. The document format matches the
+	// source document format.
 	//
 	// This member is required.
-	TranslatedText *string
+	TranslatedDocument *types.TranslatedDocument
 
-	// Optional settings that modify the translation output.
+	// Settings to configure your translation output, including the option to set the
+	// formality level of the output text and the option to mask profane words and
+	// phrases.
 	AppliedSettings *types.TranslationSettings
 
 	// The names of the custom terminologies applied to the input text by Amazon
-	// Translate for the translated text response.
+	// Translate to produce the translated text document.
 	AppliedTerminologies []types.AppliedTerminology
 
 	// Metadata pertaining to the operation's result.
@@ -103,12 +108,12 @@ type TranslateTextOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationTranslateTextMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpTranslateText{}, middleware.After)
+func (c *Client) addOperationTranslateDocumentMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpTranslateDocument{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpTranslateText{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpTranslateDocument{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -148,10 +153,10 @@ func (c *Client) addOperationTranslateTextMiddlewares(stack *middleware.Stack, o
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpTranslateTextValidationMiddleware(stack); err != nil {
+	if err = addOpTranslateDocumentValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opTranslateText(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opTranslateDocument(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -169,11 +174,11 @@ func (c *Client) addOperationTranslateTextMiddlewares(stack *middleware.Stack, o
 	return nil
 }
 
-func newServiceMetadataMiddleware_opTranslateText(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opTranslateDocument(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "translate",
-		OperationName: "TranslateText",
+		OperationName: "TranslateDocument",
 	}
 }

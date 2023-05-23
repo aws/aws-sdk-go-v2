@@ -49285,6 +49285,38 @@ func awsAwsjson11_deserializeDocumentInferenceRecommendation(v **types.Inference
 				return err
 			}
 
+		case "InvocationEndTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.InvocationEndTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected InvocationEndTime to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "InvocationStartTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.InvocationStartTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected InvocationStartTime to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "Metrics":
 			if err := awsAwsjson11_deserializeDocumentRecommendationMetrics(&sv.Metrics, value); err != nil {
 				return err
@@ -49462,6 +49494,24 @@ func awsAwsjson11_deserializeDocumentInferenceRecommendationsJob(v **types.Infer
 				}
 			}
 
+		case "ModelName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ModelName to be of type string, got %T instead", value)
+				}
+				sv.ModelName = ptr.String(jtv)
+			}
+
+		case "ModelPackageVersionArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ModelPackageArn to be of type string, got %T instead", value)
+				}
+				sv.ModelPackageVersionArn = ptr.String(jtv)
+			}
+
 		case "RoleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -49469,6 +49519,15 @@ func awsAwsjson11_deserializeDocumentInferenceRecommendationsJob(v **types.Infer
 					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
 				}
 				sv.RoleArn = ptr.String(jtv)
+			}
+
+		case "SamplePayloadUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3Uri to be of type string, got %T instead", value)
+				}
+				sv.SamplePayloadUrl = ptr.String(jtv)
 			}
 
 		case "Status":
@@ -63572,6 +63631,38 @@ func awsAwsjson11_deserializeDocumentRecommendationJobInferenceBenchmark(v **typ
 					return fmt.Errorf("expected RecommendationFailureReason to be of type string, got %T instead", value)
 				}
 				sv.FailureReason = ptr.String(jtv)
+			}
+
+		case "InvocationEndTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.InvocationEndTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected InvocationEndTime to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "InvocationStartTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.InvocationStartTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected InvocationStartTime to be a JSON Number, got %T instead", value)
+
+				}
 			}
 
 		case "Metrics":

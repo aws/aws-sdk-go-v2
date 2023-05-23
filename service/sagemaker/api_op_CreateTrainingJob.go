@@ -197,7 +197,8 @@ type CreateTrainingJobInput struct {
 	// input data files from an S3 bucket to a local directory in the Docker container,
 	// or makes it available as input streams. For example, if you specify an EFS
 	// location, input data files are available as input streams. They do not need to
-	// be downloaded.
+	// be downloaded. Your input must be in the same Amazon Web Services region as your
+	// training job.
 	InputDataConfig []types.Channel
 
 	// Configuration information for Amazon SageMaker Debugger system monitoring,

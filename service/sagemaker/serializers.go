@@ -31492,6 +31492,16 @@ func awsAwsjson11_serializeOpDocumentListInferenceRecommendationsJobsInput(v *Li
 		ok.Integer(*v.MaxResults)
 	}
 
+	if v.ModelNameEquals != nil {
+		ok := object.Key("ModelNameEquals")
+		ok.String(*v.ModelNameEquals)
+	}
+
+	if v.ModelPackageVersionArnEquals != nil {
+		ok := object.Key("ModelPackageVersionArnEquals")
+		ok.String(*v.ModelPackageVersionArnEquals)
+	}
+
 	if v.NameContains != nil {
 		ok := object.Key("NameContains")
 		ok.String(*v.NameContains)

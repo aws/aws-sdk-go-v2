@@ -26,6 +26,29 @@ type AppliedTerminology struct {
 	noSmithyDocumentSerde
 }
 
+// The content and content type of a document.
+type Document struct {
+
+	// The Content field type is Binary large object (blob). This object contains the
+	// document content converted into base64-encoded binary data. If you use one of
+	// the AWS SDKs, the SDK performs the Base64-encoding on this field before sending
+	// the request.
+	//
+	// This member is required.
+	Content []byte
+
+	// Describes the format of the document. You can specify one of the following:
+	//   - text/html - The input data consists of HTML content. Amazon Translate
+	//   translates only the text in the HTML element.
+	//   - text/plain - The input data consists of unformatted text. Amazon Translate
+	//   translates every character in the content.
+	//
+	// This member is required.
+	ContentType *string
+
+	noSmithyDocumentSerde
+}
+
 // The encryption key used to encrypt this object.
 type EncryptionKey struct {
 
@@ -438,7 +461,7 @@ type TextTranslationJobProperties struct {
 	// translation job.
 	ParallelDataNames []string
 
-	// Settings that configure the translation output.
+	// Settings that modify the translation output.
 	Settings *TranslationSettings
 
 	// The language code of the language of the source text. The language must be a
@@ -460,8 +483,20 @@ type TextTranslationJobProperties struct {
 	noSmithyDocumentSerde
 }
 
-// Optional settings that configure the translation output. Use these settings for
-// real time translations and asynchronous translation jobs.
+// The translated content.
+type TranslatedDocument struct {
+
+	// The document containing the translated content.
+	//
+	// This member is required.
+	Content []byte
+
+	noSmithyDocumentSerde
+}
+
+// Settings to configure your translation output, including the option to set the
+// formality level of the output text and the option to mask profane words and
+// phrases.
 type TranslationSettings struct {
 
 	// You can optionally specify the desired level of formality for translations to

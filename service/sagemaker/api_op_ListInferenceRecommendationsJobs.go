@@ -48,6 +48,13 @@ type ListInferenceRecommendationsJobsInput struct {
 	// The maximum number of recommendations to return in the response.
 	MaxResults *int32
 
+	// A filter that returns only jobs that were created for this model.
+	ModelNameEquals *string
+
+	// A filter that returns only jobs that were created for this versioned model
+	// package.
+	ModelPackageVersionArnEquals *string
+
 	// A string in the job name. This filter returns only recommendations whose name
 	// contains the specified string.
 	NameContains *string

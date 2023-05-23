@@ -111,9 +111,6 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname:          "iot.{region}.api.aws",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
-				CredentialScope: endpoints.CredentialScope{
-					Service: "execute-api",
-				},
 			},
 			{
 				Variant: endpoints.FIPSVariant,
@@ -121,9 +118,6 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname:          "iot-fips.{region}.amazonaws.com",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
-				CredentialScope: endpoints.CredentialScope{
-					Service: "execute-api",
-				},
 			},
 			{
 				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
@@ -131,9 +125,6 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname:          "iot-fips.{region}.api.aws",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
-				CredentialScope: endpoints.CredentialScope{
-					Service: "execute-api",
-				},
 			},
 			{
 				Variant: 0,
@@ -141,9 +132,6 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname:          "iot.{region}.amazonaws.com",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
-				CredentialScope: endpoints.CredentialScope{
-					Service: "execute-api",
-				},
 			},
 		},
 		RegionRegex:    partitionRegexp.Aws,
@@ -194,46 +182,31 @@ var defaultPartitions = endpoints.Partitions{
 			endpoints.EndpointKey{
 				Region: "fips-ca-central-1",
 			}: endpoints.Endpoint{
-				Hostname: "iot-fips.ca-central-1.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Service: "execute-api",
-				},
+				Hostname:   "iot-fips.ca-central-1.amazonaws.com",
 				Deprecated: aws.TrueTernary,
 			},
 			endpoints.EndpointKey{
 				Region: "fips-us-east-1",
 			}: endpoints.Endpoint{
-				Hostname: "iot-fips.us-east-1.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Service: "execute-api",
-				},
+				Hostname:   "iot-fips.us-east-1.amazonaws.com",
 				Deprecated: aws.TrueTernary,
 			},
 			endpoints.EndpointKey{
 				Region: "fips-us-east-2",
 			}: endpoints.Endpoint{
-				Hostname: "iot-fips.us-east-2.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Service: "execute-api",
-				},
+				Hostname:   "iot-fips.us-east-2.amazonaws.com",
 				Deprecated: aws.TrueTernary,
 			},
 			endpoints.EndpointKey{
 				Region: "fips-us-west-1",
 			}: endpoints.Endpoint{
-				Hostname: "iot-fips.us-west-1.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Service: "execute-api",
-				},
+				Hostname:   "iot-fips.us-west-1.amazonaws.com",
 				Deprecated: aws.TrueTernary,
 			},
 			endpoints.EndpointKey{
 				Region: "fips-us-west-2",
 			}: endpoints.Endpoint{
-				Hostname: "iot-fips.us-west-2.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Service: "execute-api",
-				},
+				Hostname:   "iot-fips.us-west-2.amazonaws.com",
 				Deprecated: aws.TrueTernary,
 			},
 			endpoints.EndpointKey{
@@ -292,9 +265,6 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname:          "iot.{region}.api.amazonwebservices.com.cn",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
-				CredentialScope: endpoints.CredentialScope{
-					Service: "execute-api",
-				},
 			},
 			{
 				Variant: endpoints.FIPSVariant,
@@ -302,9 +272,6 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname:          "iot-fips.{region}.amazonaws.com.cn",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
-				CredentialScope: endpoints.CredentialScope{
-					Service: "execute-api",
-				},
 			},
 			{
 				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
@@ -312,9 +279,6 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname:          "iot-fips.{region}.api.amazonwebservices.com.cn",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
-				CredentialScope: endpoints.CredentialScope{
-					Service: "execute-api",
-				},
 			},
 			{
 				Variant: 0,
@@ -322,9 +286,6 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname:          "iot.{region}.amazonaws.com.cn",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
-				CredentialScope: endpoints.CredentialScope{
-					Service: "execute-api",
-				},
 			},
 		},
 		RegionRegex:    partitionRegexp.AwsCn,
@@ -410,9 +371,6 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname:          "iot.{region}.api.aws",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
-				CredentialScope: endpoints.CredentialScope{
-					Service: "execute-api",
-				},
 			},
 			{
 				Variant: endpoints.FIPSVariant,
@@ -420,9 +378,6 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname:          "iot-fips.{region}.amazonaws.com",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
-				CredentialScope: endpoints.CredentialScope{
-					Service: "execute-api",
-				},
 			},
 			{
 				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
@@ -430,9 +385,6 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname:          "iot-fips.{region}.api.aws",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
-				CredentialScope: endpoints.CredentialScope{
-					Service: "execute-api",
-				},
 			},
 			{
 				Variant: 0,
@@ -440,9 +392,6 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname:          "iot.{region}.amazonaws.com",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
-				CredentialScope: endpoints.CredentialScope{
-					Service: "execute-api",
-				},
 			},
 		},
 		RegionRegex:    partitionRegexp.AwsUsGov,
@@ -451,19 +400,13 @@ var defaultPartitions = endpoints.Partitions{
 			endpoints.EndpointKey{
 				Region: "fips-us-gov-east-1",
 			}: endpoints.Endpoint{
-				Hostname: "iot-fips.us-gov-east-1.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Service: "execute-api",
-				},
+				Hostname:   "iot-fips.us-gov-east-1.amazonaws.com",
 				Deprecated: aws.TrueTernary,
 			},
 			endpoints.EndpointKey{
 				Region: "fips-us-gov-west-1",
 			}: endpoints.Endpoint{
-				Hostname: "iot-fips.us-gov-west-1.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Service: "execute-api",
-				},
+				Hostname:   "iot-fips.us-gov-west-1.amazonaws.com",
 				Deprecated: aws.TrueTernary,
 			},
 			endpoints.EndpointKey{

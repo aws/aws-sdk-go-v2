@@ -395,8 +395,8 @@ func (e *UnsupportedDisplayLanguageCodeException) ErrorFault() smithy.ErrorFault
 }
 
 // Amazon Translate does not support translation from the language of the source
-// text into the requested target language. For more information, see Error
-// messages (https://docs.aws.amazon.com/translate/latest/dg/how-to-error-msg.html)
+// text into the requested target language. For more information, see Supported
+// languages (https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html)
 // .
 type UnsupportedLanguagePairException struct {
 	Message *string
