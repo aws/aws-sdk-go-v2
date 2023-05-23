@@ -1,8 +1,0 @@
-{
-    "id": "a1a8e7a1-9506-4093-ba49-386812b12006",
-    "type": "feature",
-    "description": "Fixes issue that could cause calls to GetAdminScope and ListAdminAccountsForOrganization to return a 500 Internal Server error.",
-    "modules": [
-        "service/fms"
-    ]
-}

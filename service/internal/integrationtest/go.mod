@@ -50,7 +50,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/health v1.17.0
 	github.com/aws/aws-sdk-go-v2/service/iam v1.19.12
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.13.10
-	github.com/aws/aws-sdk-go-v2/service/iot v1.37.1
+	github.com/aws/aws-sdk-go-v2/service/iot v1.37.2
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.17.12
 	github.com/aws/aws-sdk-go-v2/service/kms v1.21.1
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.34.1

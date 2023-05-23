@@ -1,3 +1,13 @@
+# Release (2023-05-23)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/fms`: [v1.24.0](service/fms/CHANGELOG.md#v1240-2023-05-23)
+  * **Feature**: Fixes issue that could cause calls to GetAdminScope and ListAdminAccountsForOrganization to return a 500 Internal Server error.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.79.0](service/sagemaker/CHANGELOG.md#v1790-2023-05-23)
+  * **Feature**: Added ModelNameEquals, ModelPackageVersionArnEquals in request and ModelName, SamplePayloadUrl, ModelPackageVersionArn in response of ListInferenceRecommendationsJobs API. Added Invocation timestamps in response of DescribeInferenceRecommendationsJob API & ListInferenceRecommendationsJobSteps API.
+* `github.com/aws/aws-sdk-go-v2/service/translate`: [v1.18.0](service/translate/CHANGELOG.md#v1180-2023-05-23)
+  * **Feature**: Added support for calling TranslateDocument API.
+
 # Release (2023-05-22)
 
 ## Module Highlights
