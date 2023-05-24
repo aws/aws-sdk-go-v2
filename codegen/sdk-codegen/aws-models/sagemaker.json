@@ -13317,6 +13317,27 @@
                 "smithy.api#documentation": "<p>The deployment configuration for an endpoint, which contains the desired deployment\n            strategy and rollback configurations.</p>"
             }
         },
+        "com.amazonaws.sagemaker#DeploymentRecommendation": {
+            "type": "structure",
+            "members": {
+                "RecommendationStatus": {
+                    "target": "com.amazonaws.sagemaker#RecommendationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Status of the deployment recommendation. <code>NOT_APPLICABLE</code> means that SageMaker\n         is unable to provide a default recommendation for the model using the information provided.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RealTimeInferenceRecommendations": {
+                    "target": "com.amazonaws.sagemaker#RealTimeInferenceRecommendations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_RealTimeInferenceRecommendation.html\">RealTimeInferenceRecommendation</a> items.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A set of recommended deployment configurations for the model.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#DeploymentStage": {
             "type": "structure",
             "members": {
@@ -18035,6 +18056,12 @@
                     "traits": {
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>If <code>True</code>, no inbound or outbound network calls can be made to or from the\n            model container.</p>"
+                    }
+                },
+                "DeploymentRecommendation": {
+                    "target": "com.amazonaws.sagemaker#DeploymentRecommendation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A set of recommended deployment configurations for the model.</p>"
                     }
                 }
             },
@@ -36822,6 +36849,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of key-value pairs associated with the model. For more information, see\n            <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services\n                resources</a> in the <i>Amazon Web Services General Reference Guide</i>.</p>"
                     }
+                },
+                "DeploymentRecommendation": {
+                    "target": "com.amazonaws.sagemaker#DeploymentRecommendation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A set of recommended deployment configurations for the model.</p>"
+                    }
                 }
             },
             "traits": {
@@ -45888,6 +45921,46 @@
                 "smithy.api#documentation": "<p>The infrastructure configuration for deploying the model to a real-time inference endpoint.</p>"
             }
         },
+        "com.amazonaws.sagemaker#RealTimeInferenceRecommendation": {
+            "type": "structure",
+            "members": {
+                "RecommendationId": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recommendation ID which uniquely identifies each recommendation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstanceType": {
+                    "target": "com.amazonaws.sagemaker#ProductionVariantInstanceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recommended instance type for Real-Time Inference.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Environment": {
+                    "target": "com.amazonaws.sagemaker#EnvironmentMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recommended environment variables to set in the model container for Real-Time Inference.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The recommended configuration to use for Real-Time Inference.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#RealTimeInferenceRecommendations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#RealTimeInferenceRecommendation"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 3
+                }
+            }
+        },
         "com.amazonaws.sagemaker#RealtimeInferenceInstanceTypes": {
             "type": "list",
             "member": {
@@ -46392,6 +46465,35 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The metrics of recommendations.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#RecommendationStatus": {
+            "type": "enum",
+            "members": {
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "NOT_APPLICABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_APPLICABLE"
+                    }
+                }
             }
         },
         "com.amazonaws.sagemaker#RecommendationStepType": {

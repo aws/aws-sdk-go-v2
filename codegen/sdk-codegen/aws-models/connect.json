@@ -155,7 +155,7 @@
                 "EvaluationFormVersion": {
                     "target": "com.amazonaws.connect#VersionNumber",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the evaluation form to activate. If the version property is not provided, the\n   latest version of the evaluation form is activated.</p>",
+                        "smithy.api#documentation": "<p>The version of the evaluation form to activate. If the version property is not provided, the latest version of the\n   evaluation form is activated.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4288,7 +4288,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an evaluation form in the specified Amazon Connect instance. The form can be\n   used to define questions related to agent performance, and create sections to organize such\n   questions. Question and section identifiers cannot be duplicated within the same evaluation\n   form.</p>",
+                "smithy.api#documentation": "<p>Creates an evaluation form in the specified Amazon Connect instance. The form can be used to define\n   questions related to agent performance, and create sections to organize such questions.  Question and section identifiers\n   cannot be duplicated within the same evaluation form.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/evaluation-forms/{InstanceId}",
@@ -4712,7 +4712,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds a new participant into an on-going chat contact. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/chat-customize-flow.html\">Customize chat\n    flow experiences by integrating custom participants</a>.</p>",
+                "smithy.api#documentation": "<p>Adds a new participant into an on-going chat contact. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/chat-customize-flow.html\">Customize chat\n   flow experiences by integrating custom participants</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/contact/create-participant",
@@ -4762,7 +4762,7 @@
                 "ParticipantCredentials": {
                     "target": "com.amazonaws.connect#ParticipantTokenCredentials",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token used by the chat participant to call <code>CreateParticipantConnection</code>. The\n   participant token is valid for the lifetime of a chat participant.</p>"
+                        "smithy.api#documentation": "<p>The token used by the chat participant to call <code>CreateParticipantConnection</code>. The participant\n   token is valid for the lifetime of a chat participant.</p>"
                     }
                 },
                 "ParticipantId": {
@@ -6563,7 +6563,8 @@
                     "method": "DELETE",
                     "uri": "/contact-evaluations/{InstanceId}/{EvaluationId}",
                     "code": 200
-                }
+                },
+                "smithy.api#idempotent": {}
             }
         },
         "com.amazonaws.connect#DeleteContactEvaluationRequest": {
@@ -6752,12 +6753,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an evaluation form in the specified Amazon Connect instance. </p>\n         <ul>\n            <li>\n               <p>If the version property is provided, only the specified version of the evaluation form is\n     deleted.</p>\n            </li>\n            <li>\n               <p>If no version is provided, then the full form (all versions) is deleted.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Deletes an evaluation form in the specified Amazon Connect instance. </p>\n         <ul>\n            <li>\n               <p>If the version\n    property is provided, only the specified version of the evaluation form is deleted.</p>\n            </li>\n            <li>\n               <p>If no version is provided, then the full form (all versions) is deleted.</p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/evaluation-forms/{InstanceId}/{EvaluationFormId}",
                     "code": 200
-                }
+                },
+                "smithy.api#idempotent": {}
             }
         },
         "com.amazonaws.connect#DeleteEvaluationFormRequest": {
@@ -10394,7 +10396,7 @@
             },
             "traits": {
                 "smithy.api#length": {
-                    "min": 0,
+                    "min": 1,
                     "max": 100
                 }
             }
@@ -10707,7 +10709,8 @@
                 "Items": {
                     "target": "com.amazonaws.connect#EvaluationFormItemsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The items of the section.</p>"
+                        "smithy.api#documentation": "<p>The items of the section.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "Weight": {
@@ -10971,7 +10974,7 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 0,
+                    "min": 1,
                     "max": 128
                 }
             }
@@ -17535,7 +17538,7 @@
                 "MetricFilterKey": {
                     "target": "com.amazonaws.connect#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key to use for filtering data. </p>\n         <p>Valid metric filter keys: <code>INITIATION_METHOD</code>, <code>DISCONNECT_REASON</code>.\n   These are the same values as the <code>InitiationMethod</code> and <code>DisconnectReason</code>\n   in the contact record. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/ctr-data-model.html#ctr-ContactTraceRecord\">ContactTraceRecord</a> in the <i>Amazon Connect Administrator's\n   Guide</i>. </p>"
+                        "smithy.api#documentation": "<p>The key to use for filtering data. </p>\n         <p>Valid metric filter keys: <code>INITIATION_METHOD</code>, <code>DISCONNECT_REASON</code>.\n   These are the same values as the <code>InitiationMethod</code> and <code>DisconnectReason</code>\n   in the contact record. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/ctr-data-model.html#ctr-ContactTraceRecord\">ContactTraceRecord</a> in the <i>Amazon Connect Administrator's Guide</i>. </p>"
                     }
                 },
                 "MetricFilterValues": {
@@ -20738,7 +20741,7 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 0,
+                    "min": 1,
                     "max": 40
                 }
             }
@@ -21109,7 +21112,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 50
+                    "max": 500
                 }
             }
         },
@@ -22887,7 +22890,7 @@
                 "Condition": {
                     "target": "com.amazonaws.connect#SingleSelectQuestionRuleCategoryAutomationCondition",
                     "traits": {
-                        "smithy.api#documentation": "<p>The condition to apply for the automation option. If the condition is <code>PRESENT</code>,\n   then the option is applied when the contact data includes the category. Similarly, if the\n   condition is <code>NOT_PRESENT</code>, then the option is applied when the contact data does not\n   include the category.</p>",
+                        "smithy.api#documentation": "<p>The condition to apply for the automation option. If the condition is <code>PRESENT</code>, then the\n   option is applied when the contact data includes the category. Similarly, if the condition is\n   <code>NOT_PRESENT</code>, then the option is applied when the contact data does not include the\n   category.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -26024,7 +26027,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates details about a specific evaluation form version in the specified Amazon Connect\n   instance. Question and section identifiers cannot be duplicated within the same evaluation\n   form.</p>\n         <p>This operation does not support partial updates. Instead it does a full update of evaluation\n   form content.</p>",
+                "smithy.api#documentation": "<p>Updates details about a specific evaluation form version in the specified Amazon Connect\n   instance. Question and section\n   identifiers cannot be duplicated within the same evaluation form.</p>\n         <p>This operation does not support partial updates. Instead it does a full update of evaluation form content.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/evaluation-forms/{InstanceId}/{EvaluationFormId}",
