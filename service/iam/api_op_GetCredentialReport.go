@@ -37,7 +37,7 @@ type GetCredentialReportInput struct {
 // Contains the response to a successful GetCredentialReport request.
 type GetCredentialReportOutput struct {
 
-	// Contains the credential report. The report is Base64-encoded.
+	// Contains the credential report.
 	Content []byte
 
 	// The date and time when the credential report was created, in ISO 8601 date-time
