@@ -3087,6 +3087,23 @@ type DeploymentConfig struct {
 	noSmithyDocumentSerde
 }
 
+// A set of recommended deployment configurations for the model.
+type DeploymentRecommendation struct {
+
+	// Status of the deployment recommendation. NOT_APPLICABLE means that SageMaker is
+	// unable to provide a default recommendation for the model using the information
+	// provided.
+	//
+	// This member is required.
+	RecommendationStatus RecommendationStatus
+
+	// A list of RealTimeInferenceRecommendation (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_RealTimeInferenceRecommendation.html)
+	// items.
+	RealTimeInferenceRecommendations []RealTimeInferenceRecommendation
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about a stage in an edge deployment plan.
 type DeploymentStage struct {
 
@@ -7477,6 +7494,9 @@ type Model struct {
 	// A timestamp that indicates when the model was created.
 	CreationTime *time.Time
 
+	// A set of recommended deployment configurations for the model.
+	DeploymentRecommendation *DeploymentRecommendation
+
 	// Isolates the model container. No inbound or outbound network calls can be made
 	// to or from the model container.
 	EnableNetworkIsolation bool
@@ -11328,6 +11348,26 @@ type RealTimeInferenceConfig struct {
 	//
 	// This member is required.
 	InstanceType InstanceType
+
+	noSmithyDocumentSerde
+}
+
+// The recommended configuration to use for Real-Time Inference.
+type RealTimeInferenceRecommendation struct {
+
+	// The recommended instance type for Real-Time Inference.
+	//
+	// This member is required.
+	InstanceType ProductionVariantInstanceType
+
+	// The recommendation ID which uniquely identifies each recommendation.
+	//
+	// This member is required.
+	RecommendationId *string
+
+	// The recommended environment variables to set in the model container for
+	// Real-Time Inference.
+	Environment map[string]string
 
 	noSmithyDocumentSerde
 }

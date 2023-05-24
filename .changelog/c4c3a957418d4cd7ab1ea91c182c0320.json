@@ -1,0 +1,8 @@
+{
+    "id": "c4c3a957-418d-4cd7-ab1e-a91c182c0320",
+    "type": "feature",
+    "description": "Add support for split cost allocation data on a report.",
+    "modules": [
+        "service/costandusagereportservice"
+    ]
+}

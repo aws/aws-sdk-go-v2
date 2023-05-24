@@ -4799,7 +4799,9 @@ func validateEvaluationFormSection(v *types.EvaluationFormSection) error {
 	if v.RefId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RefId"))
 	}
-	if v.Items != nil {
+	if v.Items == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Items"))
+	} else if v.Items != nil {
 		if err := validateEvaluationFormItemsList(v.Items); err != nil {
 			invalidParams.AddNested("Items", err.(smithy.InvalidParamsError))
 		}

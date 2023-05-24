@@ -11,23 +11,28 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists multiple custom domain names.
-func (c *Client) ListDomainNames(ctx context.Context, params *ListDomainNamesInput, optFns ...func(*Options)) (*ListDomainNamesOutput, error) {
+// Lists the SourceApiAssociationSummary data.
+func (c *Client) ListSourceApiAssociations(ctx context.Context, params *ListSourceApiAssociationsInput, optFns ...func(*Options)) (*ListSourceApiAssociationsOutput, error) {
 	if params == nil {
-		params = &ListDomainNamesInput{}
+		params = &ListSourceApiAssociationsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListDomainNames", params, optFns, c.addOperationListDomainNamesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListSourceApiAssociations", params, optFns, c.addOperationListSourceApiAssociationsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*ListDomainNamesOutput)
+	out := result.(*ListSourceApiAssociationsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type ListDomainNamesInput struct {
+type ListSourceApiAssociationsInput struct {
+
+	// The API ID.
+	//
+	// This member is required.
+	ApiId *string
 
 	// The maximum number of results that you want the request to return.
 	MaxResults int32
@@ -39,14 +44,14 @@ type ListDomainNamesInput struct {
 	noSmithyDocumentSerde
 }
 
-type ListDomainNamesOutput struct {
-
-	// Lists configurations for multiple domain names.
-	DomainNameConfigs []types.DomainNameConfig
+type ListSourceApiAssociationsOutput struct {
 
 	// An identifier that was returned from the previous call to this operation, which
 	// you can use to return the next set of items in the list.
 	NextToken *string
+
+	// The SourceApiAssociationSummary object data.
+	SourceApiAssociationSummaries []types.SourceApiAssociationSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -54,12 +59,12 @@ type ListDomainNamesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationListDomainNamesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDomainNames{}, middleware.After)
+func (c *Client) addOperationListSourceApiAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSourceApiAssociations{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDomainNames{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSourceApiAssociations{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -99,7 +104,10 @@ func (c *Client) addOperationListDomainNamesMiddlewares(stack *middleware.Stack,
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDomainNames(options.Region), middleware.Before); err != nil {
+	if err = addOpListSourceApiAssociationsValidationMiddleware(stack); err != nil {
+		return err
+	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSourceApiAssociations(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -117,11 +125,11 @@ func (c *Client) addOperationListDomainNamesMiddlewares(stack *middleware.Stack,
 	return nil
 }
 
-func newServiceMetadataMiddleware_opListDomainNames(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opListSourceApiAssociations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "appsync",
-		OperationName: "ListDomainNames",
+		OperationName: "ListSourceApiAssociations",
 	}
 }

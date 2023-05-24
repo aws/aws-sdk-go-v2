@@ -1078,6 +1078,11 @@ type EvaluationFormScoringStrategy struct {
 // subsections (two level nesting).
 type EvaluationFormSection struct {
 
+	// The items of the section.
+	//
+	// This member is required.
+	Items []EvaluationFormItem
+
 	// The identifier of the section. An identifier must be unique within the
 	// evaluation form.
 	//
@@ -1091,9 +1096,6 @@ type EvaluationFormSection struct {
 
 	// The instructions of the section.
 	Instructions *string
-
-	// The items of the section.
-	Items []EvaluationFormItem
 
 	// The scoring weight of the section.
 	Weight float64

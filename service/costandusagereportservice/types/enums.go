@@ -29,6 +29,7 @@ const (
 	AWSRegionCapeTown           AWSRegion = "af-south-1"
 	AWSRegionHongKong           AWSRegion = "ap-east-1"
 	AWSRegionMumbai             AWSRegion = "ap-south-1"
+	AWSRegionHyderabad          AWSRegion = "ap-south-2"
 	AWSRegionSingapore          AWSRegion = "ap-southeast-1"
 	AWSRegionSydney             AWSRegion = "ap-southeast-2"
 	AWSRegionJakarta            AWSRegion = "ap-southeast-3"
@@ -37,6 +38,7 @@ const (
 	AWSRegionOsaka              AWSRegion = "ap-northeast-3"
 	AWSRegionCanadaCentral      AWSRegion = "ca-central-1"
 	AWSRegionFrankfurt          AWSRegion = "eu-central-1"
+	AWSRegionZurich             AWSRegion = "eu-central-2"
 	AWSRegionIreland            AWSRegion = "eu-west-1"
 	AWSRegionLondon             AWSRegion = "eu-west-2"
 	AWSRegionParis              AWSRegion = "eu-west-3"
@@ -62,6 +64,7 @@ func (AWSRegion) Values() []AWSRegion {
 		"af-south-1",
 		"ap-east-1",
 		"ap-south-1",
+		"ap-south-2",
 		"ap-southeast-1",
 		"ap-southeast-2",
 		"ap-southeast-3",
@@ -70,6 +73,7 @@ func (AWSRegion) Values() []AWSRegion {
 		"ap-northeast-3",
 		"ca-central-1",
 		"eu-central-1",
+		"eu-central-2",
 		"eu-west-1",
 		"eu-west-2",
 		"eu-west-3",
@@ -148,7 +152,8 @@ type SchemaElement string
 
 // Enum values for SchemaElement
 const (
-	SchemaElementResources SchemaElement = "RESOURCES"
+	SchemaElementResources               SchemaElement = "RESOURCES"
+	SchemaElementSplitCostAllocationData SchemaElement = "SPLIT_COST_ALLOCATION_DATA"
 )
 
 // Values returns all known values for SchemaElement. Note that this can be
@@ -157,6 +162,7 @@ const (
 func (SchemaElement) Values() []SchemaElement {
 	return []SchemaElement{
 		"RESOURCES",
+		"SPLIT_COST_ALLOCATION_DATA",
 	}
 }
 

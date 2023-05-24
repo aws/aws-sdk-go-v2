@@ -192,6 +192,15 @@ var defaultPartitions = endpoints.Partitions{
 				Deprecated: aws.TrueTernary,
 			},
 			endpoints.EndpointKey{
+				Region: "fips-us-west-1",
+			}: endpoints.Endpoint{
+				Hostname: "cognito-identity-fips.us-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
 				Region: "fips-us-west-2",
 			}: endpoints.Endpoint{
 				Hostname: "cognito-identity-fips.us-west-2.amazonaws.com",
@@ -227,6 +236,12 @@ var defaultPartitions = endpoints.Partitions{
 			endpoints.EndpointKey{
 				Region: "us-west-1",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "us-west-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "cognito-identity-fips.us-west-1.amazonaws.com",
+			},
 			endpoints.EndpointKey{
 				Region: "us-west-2",
 			}: endpoints.Endpoint{},

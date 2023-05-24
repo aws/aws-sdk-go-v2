@@ -40799,6 +40799,51 @@ func awsAwsjson11_deserializeDocumentDeploymentConfig(v **types.DeploymentConfig
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentDeploymentRecommendation(v **types.DeploymentRecommendation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DeploymentRecommendation
+	if *v == nil {
+		sv = &types.DeploymentRecommendation{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "RealTimeInferenceRecommendations":
+			if err := awsAwsjson11_deserializeDocumentRealTimeInferenceRecommendations(&sv.RealTimeInferenceRecommendations, value); err != nil {
+				return err
+			}
+
+		case "RecommendationStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RecommendationStatus to be of type string, got %T instead", value)
+				}
+				sv.RecommendationStatus = types.RecommendationStatus(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentDeploymentStageStatusSummaries(v *[]types.DeploymentStageStatusSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -52206,6 +52251,11 @@ func awsAwsjson11_deserializeDocumentModel(v **types.Model, value interface{}) e
 				}
 			}
 
+		case "DeploymentRecommendation":
+			if err := awsAwsjson11_deserializeDocumentDeploymentRecommendation(&sv.DeploymentRecommendation, value); err != nil {
+				return err
+			}
+
 		case "EnableNetworkIsolation":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -63490,6 +63540,94 @@ func awsAwsjson11_deserializeDocumentRealtimeInferenceInstanceTypes(v *[]types.P
 			}
 			col = types.ProductionVariantInstanceType(jtv)
 		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRealTimeInferenceRecommendation(v **types.RealTimeInferenceRecommendation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RealTimeInferenceRecommendation
+	if *v == nil {
+		sv = &types.RealTimeInferenceRecommendation{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Environment":
+			if err := awsAwsjson11_deserializeDocumentEnvironmentMap(&sv.Environment, value); err != nil {
+				return err
+			}
+
+		case "InstanceType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ProductionVariantInstanceType to be of type string, got %T instead", value)
+				}
+				sv.InstanceType = types.ProductionVariantInstanceType(jtv)
+			}
+
+		case "RecommendationId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.RecommendationId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRealTimeInferenceRecommendations(v *[]types.RealTimeInferenceRecommendation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RealTimeInferenceRecommendation
+	if *v == nil {
+		cv = []types.RealTimeInferenceRecommendation{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RealTimeInferenceRecommendation
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentRealTimeInferenceRecommendation(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}
@@ -79651,6 +79789,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeModelOutput(v **DescribeModelOutp
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "DeploymentRecommendation":
+			if err := awsAwsjson11_deserializeDocumentDeploymentRecommendation(&sv.DeploymentRecommendation, value); err != nil {
+				return err
 			}
 
 		case "EnableNetworkIsolation":

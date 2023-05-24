@@ -1,0 +1,8 @@
+{
+    "id": "8375e50b-7980-4d6a-8637-8e4fcb40b979",
+    "type": "feature",
+    "description": "Amazon Connect Evaluation Capabilities: validation improvements",
+    "modules": [
+        "service/connect"
+    ]
+}

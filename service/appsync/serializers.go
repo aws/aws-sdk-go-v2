@@ -95,6 +95,192 @@ func awsRestjson1_serializeOpDocumentAssociateApiInput(v *AssociateApiInput, val
 	return nil
 }
 
+type awsRestjson1_serializeOpAssociateMergedGraphqlApi struct {
+}
+
+func (*awsRestjson1_serializeOpAssociateMergedGraphqlApi) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpAssociateMergedGraphqlApi) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*AssociateMergedGraphqlApiInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/sourceApis/{sourceApiIdentifier}/mergedApiAssociations")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsAssociateMergedGraphqlApiInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentAssociateMergedGraphqlApiInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsAssociateMergedGraphqlApiInput(v *AssociateMergedGraphqlApiInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.SourceApiIdentifier == nil || len(*v.SourceApiIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member sourceApiIdentifier must not be empty")}
+	}
+	if v.SourceApiIdentifier != nil {
+		if err := encoder.SetURI("sourceApiIdentifier").String(*v.SourceApiIdentifier); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentAssociateMergedGraphqlApiInput(v *AssociateMergedGraphqlApiInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Description != nil {
+		ok := object.Key("description")
+		ok.String(*v.Description)
+	}
+
+	if v.MergedApiIdentifier != nil {
+		ok := object.Key("mergedApiIdentifier")
+		ok.String(*v.MergedApiIdentifier)
+	}
+
+	if v.SourceApiAssociationConfig != nil {
+		ok := object.Key("sourceApiAssociationConfig")
+		if err := awsRestjson1_serializeDocumentSourceApiAssociationConfig(v.SourceApiAssociationConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpAssociateSourceGraphqlApi struct {
+}
+
+func (*awsRestjson1_serializeOpAssociateSourceGraphqlApi) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpAssociateSourceGraphqlApi) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*AssociateSourceGraphqlApiInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/mergedApis/{mergedApiIdentifier}/sourceApiAssociations")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsAssociateSourceGraphqlApiInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentAssociateSourceGraphqlApiInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsAssociateSourceGraphqlApiInput(v *AssociateSourceGraphqlApiInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.MergedApiIdentifier == nil || len(*v.MergedApiIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member mergedApiIdentifier must not be empty")}
+	}
+	if v.MergedApiIdentifier != nil {
+		if err := encoder.SetURI("mergedApiIdentifier").String(*v.MergedApiIdentifier); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentAssociateSourceGraphqlApiInput(v *AssociateSourceGraphqlApiInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Description != nil {
+		ok := object.Key("description")
+		ok.String(*v.Description)
+	}
+
+	if v.SourceApiAssociationConfig != nil {
+		ok := object.Key("sourceApiAssociationConfig")
+		if err := awsRestjson1_serializeDocumentSourceApiAssociationConfig(v.SourceApiAssociationConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SourceApiIdentifier != nil {
+		ok := object.Key("sourceApiIdentifier")
+		ok.String(*v.SourceApiIdentifier)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpCreateApiCache struct {
 }
 
@@ -702,6 +888,11 @@ func awsRestjson1_serializeOpDocumentCreateGraphqlApiInput(v *CreateGraphqlApiIn
 		}
 	}
 
+	if len(v.ApiType) > 0 {
+		ok := object.Key("apiType")
+		ok.String(string(v.ApiType))
+	}
+
 	if len(v.AuthenticationType) > 0 {
 		ok := object.Key("authenticationType")
 		ok.String(string(v.AuthenticationType))
@@ -721,6 +912,11 @@ func awsRestjson1_serializeOpDocumentCreateGraphqlApiInput(v *CreateGraphqlApiIn
 		}
 	}
 
+	if v.MergedApiExecutionRoleArn != nil {
+		ok := object.Key("mergedApiExecutionRoleArn")
+		ok.String(*v.MergedApiExecutionRoleArn)
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
@@ -731,6 +927,11 @@ func awsRestjson1_serializeOpDocumentCreateGraphqlApiInput(v *CreateGraphqlApiIn
 		if err := awsRestjson1_serializeDocumentOpenIDConnectConfig(v.OpenIDConnectConfig, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.OwnerContact != nil {
+		ok := object.Key("ownerContact")
+		ok.String(*v.OwnerContact)
 	}
 
 	if v.Tags != nil {
@@ -1570,6 +1771,140 @@ func awsRestjson1_serializeOpHttpBindingsDisassociateApiInput(v *DisassociateApi
 	return nil
 }
 
+type awsRestjson1_serializeOpDisassociateMergedGraphqlApi struct {
+}
+
+func (*awsRestjson1_serializeOpDisassociateMergedGraphqlApi) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDisassociateMergedGraphqlApi) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DisassociateMergedGraphqlApiInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/sourceApis/{sourceApiIdentifier}/mergedApiAssociations/{associationId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDisassociateMergedGraphqlApiInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDisassociateMergedGraphqlApiInput(v *DisassociateMergedGraphqlApiInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AssociationId == nil || len(*v.AssociationId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member associationId must not be empty")}
+	}
+	if v.AssociationId != nil {
+		if err := encoder.SetURI("associationId").String(*v.AssociationId); err != nil {
+			return err
+		}
+	}
+
+	if v.SourceApiIdentifier == nil || len(*v.SourceApiIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member sourceApiIdentifier must not be empty")}
+	}
+	if v.SourceApiIdentifier != nil {
+		if err := encoder.SetURI("sourceApiIdentifier").String(*v.SourceApiIdentifier); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDisassociateSourceGraphqlApi struct {
+}
+
+func (*awsRestjson1_serializeOpDisassociateSourceGraphqlApi) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDisassociateSourceGraphqlApi) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DisassociateSourceGraphqlApiInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/mergedApis/{mergedApiIdentifier}/sourceApiAssociations/{associationId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDisassociateSourceGraphqlApiInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDisassociateSourceGraphqlApiInput(v *DisassociateSourceGraphqlApiInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AssociationId == nil || len(*v.AssociationId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member associationId must not be empty")}
+	}
+	if v.AssociationId != nil {
+		if err := encoder.SetURI("associationId").String(*v.AssociationId); err != nil {
+			return err
+		}
+	}
+
+	if v.MergedApiIdentifier == nil || len(*v.MergedApiIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member mergedApiIdentifier must not be empty")}
+	}
+	if v.MergedApiIdentifier != nil {
+		if err := encoder.SetURI("mergedApiIdentifier").String(*v.MergedApiIdentifier); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpEvaluateCode struct {
 }
 
@@ -2352,6 +2687,73 @@ func awsRestjson1_serializeOpHttpBindingsGetSchemaCreationStatusInput(v *GetSche
 	return nil
 }
 
+type awsRestjson1_serializeOpGetSourceApiAssociation struct {
+}
+
+func (*awsRestjson1_serializeOpGetSourceApiAssociation) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetSourceApiAssociation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetSourceApiAssociationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/mergedApis/{mergedApiIdentifier}/sourceApiAssociations/{associationId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetSourceApiAssociationInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetSourceApiAssociationInput(v *GetSourceApiAssociationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AssociationId == nil || len(*v.AssociationId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member associationId must not be empty")}
+	}
+	if v.AssociationId != nil {
+		if err := encoder.SetURI("associationId").String(*v.AssociationId); err != nil {
+			return err
+		}
+	}
+
+	if v.MergedApiIdentifier == nil || len(*v.MergedApiIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member mergedApiIdentifier must not be empty")}
+	}
+	if v.MergedApiIdentifier != nil {
+		if err := encoder.SetURI("mergedApiIdentifier").String(*v.MergedApiIdentifier); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpGetType struct {
 }
 
@@ -2724,12 +3126,20 @@ func awsRestjson1_serializeOpHttpBindingsListGraphqlApisInput(v *ListGraphqlApis
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if len(v.ApiType) > 0 {
+		encoder.SetQuery("apiType").String(string(v.ApiType))
+	}
+
 	if v.MaxResults != 0 {
 		encoder.SetQuery("maxResults").Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
 		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	if len(v.Owner) > 0 {
+		encoder.SetQuery("owner").String(string(v.Owner))
 	}
 
 	return nil
@@ -2885,6 +3295,72 @@ func awsRestjson1_serializeOpHttpBindingsListResolversByFunctionInput(v *ListRes
 	return nil
 }
 
+type awsRestjson1_serializeOpListSourceApiAssociations struct {
+}
+
+func (*awsRestjson1_serializeOpListSourceApiAssociations) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListSourceApiAssociations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListSourceApiAssociationsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/apis/{apiId}/sourceApiAssociations")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListSourceApiAssociationsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListSourceApiAssociationsInput(v *ListSourceApiAssociationsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ApiId == nil || len(*v.ApiId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member apiId must not be empty")}
+	}
+	if v.ApiId != nil {
+		if err := encoder.SetURI("apiId").String(*v.ApiId); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != 0 {
+		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpListTagsForResource struct {
 }
 
@@ -3013,6 +3489,85 @@ func awsRestjson1_serializeOpHttpBindingsListTypesInput(v *ListTypesInput, encod
 	return nil
 }
 
+type awsRestjson1_serializeOpListTypesByAssociation struct {
+}
+
+func (*awsRestjson1_serializeOpListTypesByAssociation) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListTypesByAssociation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListTypesByAssociationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/mergedApis/{mergedApiIdentifier}/sourceApiAssociations/{associationId}/types")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListTypesByAssociationInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListTypesByAssociationInput(v *ListTypesByAssociationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AssociationId == nil || len(*v.AssociationId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member associationId must not be empty")}
+	}
+	if v.AssociationId != nil {
+		if err := encoder.SetURI("associationId").String(*v.AssociationId); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Format) > 0 {
+		encoder.SetQuery("format").String(string(v.Format))
+	}
+
+	if v.MaxResults != 0 {
+		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	}
+
+	if v.MergedApiIdentifier == nil || len(*v.MergedApiIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member mergedApiIdentifier must not be empty")}
+	}
+	if v.MergedApiIdentifier != nil {
+		if err := encoder.SetURI("mergedApiIdentifier").String(*v.MergedApiIdentifier); err != nil {
+			return err
+		}
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpStartSchemaCreation struct {
 }
 
@@ -3089,6 +3644,73 @@ func awsRestjson1_serializeOpDocumentStartSchemaCreationInput(v *StartSchemaCrea
 	if v.Definition != nil {
 		ok := object.Key("definition")
 		ok.Base64EncodeBytes(v.Definition)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpStartSchemaMerge struct {
+}
+
+func (*awsRestjson1_serializeOpStartSchemaMerge) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpStartSchemaMerge) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StartSchemaMergeInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/mergedApis/{mergedApiIdentifier}/sourceApiAssociations/{associationId}/merge")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsStartSchemaMergeInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsStartSchemaMergeInput(v *StartSchemaMergeInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AssociationId == nil || len(*v.AssociationId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member associationId must not be empty")}
+	}
+	if v.AssociationId != nil {
+		if err := encoder.SetURI("associationId").String(*v.AssociationId); err != nil {
+			return err
+		}
+	}
+
+	if v.MergedApiIdentifier == nil || len(*v.MergedApiIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member mergedApiIdentifier must not be empty")}
+	}
+	if v.MergedApiIdentifier != nil {
+		if err := encoder.SetURI("mergedApiIdentifier").String(*v.MergedApiIdentifier); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -3895,6 +4517,11 @@ func awsRestjson1_serializeOpDocumentUpdateGraphqlApiInput(v *UpdateGraphqlApiIn
 		}
 	}
 
+	if v.MergedApiExecutionRoleArn != nil {
+		ok := object.Key("mergedApiExecutionRoleArn")
+		ok.String(*v.MergedApiExecutionRoleArn)
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
@@ -3905,6 +4532,11 @@ func awsRestjson1_serializeOpDocumentUpdateGraphqlApiInput(v *UpdateGraphqlApiIn
 		if err := awsRestjson1_serializeDocumentOpenIDConnectConfig(v.OpenIDConnectConfig, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.OwnerContact != nil {
+		ok := object.Key("ownerContact")
+		ok.String(*v.OwnerContact)
 	}
 
 	if v.UserPoolConfig != nil {
@@ -4067,6 +4699,103 @@ func awsRestjson1_serializeOpDocumentUpdateResolverInput(v *UpdateResolverInput,
 	if v.SyncConfig != nil {
 		ok := object.Key("syncConfig")
 		if err := awsRestjson1_serializeDocumentSyncConfig(v.SyncConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpUpdateSourceApiAssociation struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateSourceApiAssociation) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateSourceApiAssociation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateSourceApiAssociationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/mergedApis/{mergedApiIdentifier}/sourceApiAssociations/{associationId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateSourceApiAssociationInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateSourceApiAssociationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateSourceApiAssociationInput(v *UpdateSourceApiAssociationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AssociationId == nil || len(*v.AssociationId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member associationId must not be empty")}
+	}
+	if v.AssociationId != nil {
+		if err := encoder.SetURI("associationId").String(*v.AssociationId); err != nil {
+			return err
+		}
+	}
+
+	if v.MergedApiIdentifier == nil || len(*v.MergedApiIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member mergedApiIdentifier must not be empty")}
+	}
+	if v.MergedApiIdentifier != nil {
+		if err := encoder.SetURI("mergedApiIdentifier").String(*v.MergedApiIdentifier); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateSourceApiAssociationInput(v *UpdateSourceApiAssociationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Description != nil {
+		ok := object.Key("description")
+		ok.String(*v.Description)
+	}
+
+	if v.SourceApiAssociationConfig != nil {
+		ok := object.Key("sourceApiAssociationConfig")
+		if err := awsRestjson1_serializeDocumentSourceApiAssociationConfig(v.SourceApiAssociationConfig, ok); err != nil {
 			return err
 		}
 	}
@@ -4607,6 +5336,18 @@ func awsRestjson1_serializeDocumentRelationalDatabaseDataSourceConfig(v *types.R
 	if len(v.RelationalDatabaseSourceType) > 0 {
 		ok := object.Key("relationalDatabaseSourceType")
 		ok.String(string(v.RelationalDatabaseSourceType))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSourceApiAssociationConfig(v *types.SourceApiAssociationConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.MergeType) > 0 {
+		ok := object.Key("mergeType")
+		ok.String(string(v.MergeType))
 	}
 
 	return nil

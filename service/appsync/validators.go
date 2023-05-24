@@ -30,6 +30,46 @@ func (m *validateOpAssociateApi) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAssociateMergedGraphqlApi struct {
+}
+
+func (*validateOpAssociateMergedGraphqlApi) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateMergedGraphqlApi) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateMergedGraphqlApiInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateMergedGraphqlApiInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpAssociateSourceGraphqlApi struct {
+}
+
+func (*validateOpAssociateSourceGraphqlApi) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateSourceGraphqlApi) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateSourceGraphqlApiInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateSourceGraphqlApiInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateApiCache struct {
 }
 
@@ -370,6 +410,46 @@ func (m *validateOpDisassociateApi) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisassociateMergedGraphqlApi struct {
+}
+
+func (*validateOpDisassociateMergedGraphqlApi) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateMergedGraphqlApi) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateMergedGraphqlApiInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateMergedGraphqlApiInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDisassociateSourceGraphqlApi struct {
+}
+
+func (*validateOpDisassociateSourceGraphqlApi) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateSourceGraphqlApi) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateSourceGraphqlApiInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateSourceGraphqlApiInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpEvaluateCode struct {
 }
 
@@ -610,6 +690,26 @@ func (m *validateOpGetSchemaCreationStatus) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetSourceApiAssociation struct {
+}
+
+func (*validateOpGetSourceApiAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetSourceApiAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetSourceApiAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetSourceApiAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetType struct {
 }
 
@@ -730,6 +830,26 @@ func (m *validateOpListResolvers) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListSourceApiAssociations struct {
+}
+
+func (*validateOpListSourceApiAssociations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListSourceApiAssociations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListSourceApiAssociationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListSourceApiAssociationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -745,6 +865,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListTypesByAssociation struct {
+}
+
+func (*validateOpListTypesByAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListTypesByAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListTypesByAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListTypesByAssociationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -785,6 +925,26 @@ func (m *validateOpStartSchemaCreation) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStartSchemaCreationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartSchemaMerge struct {
+}
+
+func (*validateOpStartSchemaMerge) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartSchemaMerge) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartSchemaMergeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartSchemaMergeInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -970,6 +1130,26 @@ func (m *validateOpUpdateResolver) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateSourceApiAssociation struct {
+}
+
+func (*validateOpUpdateSourceApiAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateSourceApiAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateSourceApiAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateSourceApiAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateType struct {
 }
 
@@ -992,6 +1172,14 @@ func (m *validateOpUpdateType) HandleInitialize(ctx context.Context, in middlewa
 
 func addOpAssociateApiValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateApi{}, middleware.After)
+}
+
+func addOpAssociateMergedGraphqlApiValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateMergedGraphqlApi{}, middleware.After)
+}
+
+func addOpAssociateSourceGraphqlApiValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateSourceGraphqlApi{}, middleware.After)
 }
 
 func addOpCreateApiCacheValidationMiddleware(stack *middleware.Stack) error {
@@ -1062,6 +1250,14 @@ func addOpDisassociateApiValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociateApi{}, middleware.After)
 }
 
+func addOpDisassociateMergedGraphqlApiValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateMergedGraphqlApi{}, middleware.After)
+}
+
+func addOpDisassociateSourceGraphqlApiValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateSourceGraphqlApi{}, middleware.After)
+}
+
 func addOpEvaluateCodeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpEvaluateCode{}, middleware.After)
 }
@@ -1110,6 +1306,10 @@ func addOpGetSchemaCreationStatusValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpGetSchemaCreationStatus{}, middleware.After)
 }
 
+func addOpGetSourceApiAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetSourceApiAssociation{}, middleware.After)
+}
+
 func addOpGetTypeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetType{}, middleware.After)
 }
@@ -1134,8 +1334,16 @@ func addOpListResolversValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListResolvers{}, middleware.After)
 }
 
+func addOpListSourceApiAssociationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListSourceApiAssociations{}, middleware.After)
+}
+
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpListTypesByAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListTypesByAssociation{}, middleware.After)
 }
 
 func addOpListTypesValidationMiddleware(stack *middleware.Stack) error {
@@ -1144,6 +1352,10 @@ func addOpListTypesValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpStartSchemaCreationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartSchemaCreation{}, middleware.After)
+}
+
+func addOpStartSchemaMergeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartSchemaMerge{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1180,6 +1392,10 @@ func addOpUpdateGraphqlApiValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateResolverValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateResolver{}, middleware.After)
+}
+
+func addOpUpdateSourceApiAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateSourceApiAssociation{}, middleware.After)
 }
 
 func addOpUpdateTypeValidationMiddleware(stack *middleware.Stack) error {
@@ -1473,6 +1689,42 @@ func validateOpAssociateApiInput(v *AssociateApiInput) error {
 	}
 	if v.ApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAssociateMergedGraphqlApiInput(v *AssociateMergedGraphqlApiInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateMergedGraphqlApiInput"}
+	if v.SourceApiIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceApiIdentifier"))
+	}
+	if v.MergedApiIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MergedApiIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAssociateSourceGraphqlApiInput(v *AssociateSourceGraphqlApiInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateSourceGraphqlApiInput"}
+	if v.MergedApiIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MergedApiIdentifier"))
+	}
+	if v.SourceApiIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceApiIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1860,6 +2112,42 @@ func validateOpDisassociateApiInput(v *DisassociateApiInput) error {
 	}
 }
 
+func validateOpDisassociateMergedGraphqlApiInput(v *DisassociateMergedGraphqlApiInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateMergedGraphqlApiInput"}
+	if v.SourceApiIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceApiIdentifier"))
+	}
+	if v.AssociationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssociationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDisassociateSourceGraphqlApiInput(v *DisassociateSourceGraphqlApiInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateSourceGraphqlApiInput"}
+	if v.MergedApiIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MergedApiIdentifier"))
+	}
+	if v.AssociationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssociationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpEvaluateCodeInput(v *EvaluateCodeInput) error {
 	if v == nil {
 		return nil
@@ -2068,6 +2356,24 @@ func validateOpGetSchemaCreationStatusInput(v *GetSchemaCreationStatusInput) err
 	}
 }
 
+func validateOpGetSourceApiAssociationInput(v *GetSourceApiAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetSourceApiAssociationInput"}
+	if v.MergedApiIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MergedApiIdentifier"))
+	}
+	if v.AssociationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssociationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetTypeInput(v *GetTypeInput) error {
 	if v == nil {
 		return nil
@@ -2170,6 +2476,21 @@ func validateOpListResolversInput(v *ListResolversInput) error {
 	}
 }
 
+func validateOpListSourceApiAssociationsInput(v *ListSourceApiAssociationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListSourceApiAssociationsInput"}
+	if v.ApiId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApiId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	if v == nil {
 		return nil
@@ -2177,6 +2498,27 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListTypesByAssociationInput(v *ListTypesByAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListTypesByAssociationInput"}
+	if v.MergedApiIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MergedApiIdentifier"))
+	}
+	if v.AssociationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssociationId"))
+	}
+	if len(v.Format) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Format"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2213,6 +2555,24 @@ func validateOpStartSchemaCreationInput(v *StartSchemaCreationInput) error {
 	}
 	if v.Definition == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Definition"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartSchemaMergeInput(v *StartSchemaMergeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartSchemaMergeInput"}
+	if v.AssociationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssociationId"))
+	}
+	if v.MergedApiIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MergedApiIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2457,6 +2817,24 @@ func validateOpUpdateResolverInput(v *UpdateResolverInput) error {
 		if err := validateAppSyncRuntime(v.Runtime); err != nil {
 			invalidParams.AddNested("Runtime", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateSourceApiAssociationInput(v *UpdateSourceApiAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateSourceApiAssociationInput"}
+	if v.AssociationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssociationId"))
+	}
+	if v.MergedApiIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MergedApiIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

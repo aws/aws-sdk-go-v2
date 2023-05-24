@@ -1,0 +1,8 @@
+{
+    "id": "6f5bc151-2c08-44e6-aff4-70dcdd875784",
+    "type": "feature",
+    "description": "This release introduces AppSync Merged APIs, which provide the ability to compose multiple source APIs into a single federated/merged API.",
+    "modules": [
+        "service/appsync"
+    ]
+}

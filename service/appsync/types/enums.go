@@ -272,6 +272,24 @@ func (FieldLogLevel) Values() []FieldLogLevel {
 	}
 }
 
+type GraphQLApiType string
+
+// Enum values for GraphQLApiType
+const (
+	GraphQLApiTypeGraphql GraphQLApiType = "GRAPHQL"
+	GraphQLApiTypeMerged  GraphQLApiType = "MERGED"
+)
+
+// Values returns all known values for GraphQLApiType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (GraphQLApiType) Values() []GraphQLApiType {
+	return []GraphQLApiType{
+		"GRAPHQL",
+		"MERGED",
+	}
+}
+
 type GraphQLApiVisibility string
 
 // Enum values for GraphQLApiVisibility
@@ -290,6 +308,24 @@ func (GraphQLApiVisibility) Values() []GraphQLApiVisibility {
 	}
 }
 
+type MergeType string
+
+// Enum values for MergeType
+const (
+	MergeTypeManualMerge MergeType = "MANUAL_MERGE"
+	MergeTypeAutoMerge   MergeType = "AUTO_MERGE"
+)
+
+// Values returns all known values for MergeType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (MergeType) Values() []MergeType {
+	return []MergeType{
+		"MANUAL_MERGE",
+		"AUTO_MERGE",
+	}
+}
+
 type OutputType string
 
 // Enum values for OutputType
@@ -305,6 +341,24 @@ func (OutputType) Values() []OutputType {
 	return []OutputType{
 		"SDL",
 		"JSON",
+	}
+}
+
+type Ownership string
+
+// Enum values for Ownership
+const (
+	OwnershipCurrentAccount Ownership = "CURRENT_ACCOUNT"
+	OwnershipOtherAccounts  Ownership = "OTHER_ACCOUNTS"
+)
+
+// Values returns all known values for Ownership. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (Ownership) Values() []Ownership {
+	return []Ownership{
+		"CURRENT_ACCOUNT",
+		"OTHER_ACCOUNTS",
 	}
 }
 
@@ -382,6 +436,36 @@ func (SchemaStatus) Values() []SchemaStatus {
 		"FAILED",
 		"SUCCESS",
 		"NOT_APPLICABLE",
+	}
+}
+
+type SourceApiAssociationStatus string
+
+// Enum values for SourceApiAssociationStatus
+const (
+	SourceApiAssociationStatusMergeScheduled          SourceApiAssociationStatus = "MERGE_SCHEDULED"
+	SourceApiAssociationStatusMergeFailed             SourceApiAssociationStatus = "MERGE_FAILED"
+	SourceApiAssociationStatusMergeSuccess            SourceApiAssociationStatus = "MERGE_SUCCESS"
+	SourceApiAssociationStatusMergeInProgress         SourceApiAssociationStatus = "MERGE_IN_PROGRESS"
+	SourceApiAssociationStatusAutoMergeScheduleFailed SourceApiAssociationStatus = "AUTO_MERGE_SCHEDULE_FAILED"
+	SourceApiAssociationStatusDeletionScheduled       SourceApiAssociationStatus = "DELETION_SCHEDULED"
+	SourceApiAssociationStatusDeletionInProgress      SourceApiAssociationStatus = "DELETION_IN_PROGRESS"
+	SourceApiAssociationStatusDeletionFailed          SourceApiAssociationStatus = "DELETION_FAILED"
+)
+
+// Values returns all known values for SourceApiAssociationStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SourceApiAssociationStatus) Values() []SourceApiAssociationStatus {
+	return []SourceApiAssociationStatus{
+		"MERGE_SCHEDULED",
+		"MERGE_FAILED",
+		"MERGE_SUCCESS",
+		"MERGE_IN_PROGRESS",
+		"AUTO_MERGE_SCHEDULE_FAILED",
+		"DELETION_SCHEDULED",
+		"DELETION_IN_PROGRESS",
+		"DELETION_FAILED",
 	}
 }
 

@@ -63,6 +63,9 @@ type DescribeModelOutput struct {
 	// The containers in the inference pipeline.
 	Containers []types.ContainerDefinition
 
+	// A set of recommended deployment configurations for the model.
+	DeploymentRecommendation *types.DeploymentRecommendation
+
 	// If True , no inbound or outbound network calls can be made to or from the model
 	// container.
 	EnableNetworkIsolation bool

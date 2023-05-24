@@ -29,12 +29,19 @@ func (c *Client) ListGraphqlApis(ctx context.Context, params *ListGraphqlApisInp
 
 type ListGraphqlApisInput struct {
 
+	// The value that indicates whether the GraphQL API is a standard API ( GRAPHQL )
+	// or merged API ( MERGED ).
+	ApiType types.GraphQLApiType
+
 	// The maximum number of results that you want the request to return.
 	MaxResults int32
 
 	// An identifier that was returned from the previous call to this operation, which
 	// you can use to return the next set of items in the list.
 	NextToken *string
+
+	// The account owner of the GraphQL API.
+	Owner types.Ownership
 
 	noSmithyDocumentSerde
 }

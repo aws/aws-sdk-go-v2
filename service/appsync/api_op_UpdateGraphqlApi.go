@@ -51,8 +51,18 @@ type UpdateGraphqlApiInput struct {
 	// The Amazon CloudWatch Logs configuration for the GraphqlApi object.
 	LogConfig *types.LogConfig
 
+	// The Identity and Access Management service role ARN for a merged API. The
+	// AppSync service assumes this role on behalf of the Merged API to validate access
+	// to source APIs at runtime and to prompt the AUTO_MERGE to update the merged API
+	// endpoint with the source API changes automatically.
+	MergedApiExecutionRoleArn *string
+
 	// The OpenID Connect configuration for the GraphqlApi object.
 	OpenIDConnectConfig *types.OpenIDConnectConfig
+
+	// The owner contact information for an API resource. This field accepts any
+	// string input with a length of 0 - 256 characters.
+	OwnerContact *string
 
 	// The new Amazon Cognito user pool configuration for the ~GraphqlApi object.
 	UserPoolConfig *types.UserPoolConfig

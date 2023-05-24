@@ -4359,6 +4359,28 @@ func (RecommendationJobType) Values() []RecommendationJobType {
 	}
 }
 
+type RecommendationStatus string
+
+// Enum values for RecommendationStatus
+const (
+	RecommendationStatusInProgress    RecommendationStatus = "IN_PROGRESS"
+	RecommendationStatusCompleted     RecommendationStatus = "COMPLETED"
+	RecommendationStatusFailed        RecommendationStatus = "FAILED"
+	RecommendationStatusNotApplicable RecommendationStatus = "NOT_APPLICABLE"
+)
+
+// Values returns all known values for RecommendationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RecommendationStatus) Values() []RecommendationStatus {
+	return []RecommendationStatus{
+		"IN_PROGRESS",
+		"COMPLETED",
+		"FAILED",
+		"NOT_APPLICABLE",
+	}
+}
+
 type RecommendationStepType string
 
 // Enum values for RecommendationStepType
