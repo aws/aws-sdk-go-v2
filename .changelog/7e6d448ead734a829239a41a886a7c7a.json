@@ -1,8 +1,0 @@
-{
-    "id": "7e6d448e-ad73-4a82-9239-a41a886a7c7a",
-    "type": "feature",
-    "description": "SageMaker now provides an instantaneous deployment recommendation through the DescribeModel API",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

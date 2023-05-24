@@ -1,3 +1,15 @@
+# Release (2023-05-24)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appsync`: [v1.21.0](service/appsync/CHANGELOG.md#v1210-2023-05-24)
+  * **Feature**: This release introduces AppSync Merged APIs, which provide the ability to compose multiple source APIs into a single federated/merged API.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.56.0](service/connect/CHANGELOG.md#v1560-2023-05-24)
+  * **Feature**: Amazon Connect Evaluation Capabilities: validation improvements
+* `github.com/aws/aws-sdk-go-v2/service/costandusagereportservice`: [v1.16.0](service/costandusagereportservice/CHANGELOG.md#v1160-2023-05-24)
+  * **Feature**: Add support for split cost allocation data on a report.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.80.0](service/sagemaker/CHANGELOG.md#v1800-2023-05-24)
+  * **Feature**: SageMaker now provides an instantaneous deployment recommendation through the DescribeModel API
+
 # Release (2023-05-23)
 
 ## Module Highlights

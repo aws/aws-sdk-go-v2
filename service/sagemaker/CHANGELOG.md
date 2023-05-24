@@ -1,3 +1,7 @@
+# v1.80.0 (2023-05-24)
+
+* **Feature**: SageMaker now provides an instantaneous deployment recommendation through the DescribeModel API
+
 # v1.79.0 (2023-05-23)
 
 * **Feature**: Added ModelNameEquals, ModelPackageVersionArnEquals in request and ModelName, SamplePayloadUrl, ModelPackageVersionArn in response of ListInferenceRecommendationsJobs API. Added Invocation timestamps in response of DescribeInferenceRecommendationsJob API & ListInferenceRecommendationsJobSteps API.

@@ -1,3 +1,7 @@
+# v1.56.0 (2023-05-24)
+
+* **Feature**: Amazon Connect Evaluation Capabilities: validation improvements
+
 # v1.55.0 (2023-05-18)
 
 * **Feature**: You can programmatically create and manage prompts using APIs, for example, to extract prompts stored within Amazon Connect and add them to your Amazon S3 bucket. AWS CloudTrail, AWS CloudFormation and tagging are supported.

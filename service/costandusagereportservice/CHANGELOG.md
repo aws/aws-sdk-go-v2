@@ -1,3 +1,7 @@
+# v1.16.0 (2023-05-24)
+
+* **Feature**: Add support for split cost allocation data on a report.
+
 # v1.15.10 (2023-05-04)
 
 * No change notes available for this release.

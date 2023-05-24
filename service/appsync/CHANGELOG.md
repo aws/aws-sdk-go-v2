@@ -1,3 +1,7 @@
+# v1.21.0 (2023-05-24)
+
+* **Feature**: This release introduces AppSync Merged APIs, which provide the ability to compose multiple source APIs into a single federated/merged API.
+
 # v1.20.1 (2023-05-04)
 
 * No change notes available for this release.
