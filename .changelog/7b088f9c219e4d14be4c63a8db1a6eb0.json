@@ -1,8 +1,0 @@
-{
-    "id": "7b088f9c-219e-4d14-be4c-63a8db1a6eb0",
-    "type": "feature",
-    "description": "With this release, ElastiCache customers will be able to use predefined metricType \"ElastiCacheDatabaseCapacityUsageCountedForEvictPercentage\" for their ElastiCache instances.",
-    "modules": [
-        "service/applicationautoscaling"
-    ]
-}

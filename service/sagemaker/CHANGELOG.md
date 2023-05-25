@@ -1,3 +1,7 @@
+# v1.81.0 (2023-05-25)
+
+* **Feature**: Amazon SageMaker Automatic Model Tuning now supports enabling Autotune for tuning jobs which can choose tuning job configurations.
+
 # v1.80.0 (2023-05-24)
 
 * **Feature**: SageMaker now provides an instantaneous deployment recommendation through the DescribeModel API

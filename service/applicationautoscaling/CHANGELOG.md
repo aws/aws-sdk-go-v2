@@ -1,3 +1,7 @@
+# v1.21.0 (2023-05-25)
+
+* **Feature**: With this release, ElastiCache customers will be able to use predefined metricType "ElastiCacheDatabaseCapacityUsageCountedForEvictPercentage" for their ElastiCache instances.
+
 # v1.20.0 (2023-05-09)
 
 * **Feature**: With this release, Amazon SageMaker Serverless Inference customers can use Application Auto Scaling to auto scale the provisioned concurrency of their serverless endpoints.

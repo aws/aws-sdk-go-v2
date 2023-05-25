@@ -1,8 +1,0 @@
-{
-    "id": "d284c5c7-195a-47c5-9a9e-1dfd62d23042",
-    "type": "feature",
-    "description": "This SDK update allows for path parameter syntax to be passed to the CreateRoute API. Path parameter syntax require parameters to be enclosed in {} characters. This update also includes a new AppendSourcePath field which lets users forward the source path to the Service URL endpoint.",
-    "modules": [
-        "service/migrationhubrefactorspaces"
-    ]
-}

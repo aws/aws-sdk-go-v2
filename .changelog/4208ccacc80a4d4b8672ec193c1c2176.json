@@ -1,8 +1,0 @@
-{
-    "id": "4208ccac-c80a-4d4b-8672-ec193c1c2176",
-    "type": "feature",
-    "description": "Add PollingDisabledAt time information in PipelineMetadata object of GetPipeline API.",
-    "modules": [
-        "service/codepipeline"
-    ]
-}

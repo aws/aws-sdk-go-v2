@@ -1,3 +1,7 @@
+# v1.15.0 (2023-05-25)
+
+* **Feature**: Add PollingDisabledAt time information in PipelineMetadata object of GetPipeline API.
+
 # v1.14.11 (2023-05-04)
 
 * No change notes available for this release.

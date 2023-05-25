@@ -1,8 +1,0 @@
-{
-    "id": "0a51ffe0-b42e-485a-b68a-e25731e27033",
-    "type": "feature",
-    "description": "Amazon SageMaker Automatic Model Tuning now supports enabling Autotune for tuning jobs which can choose tuning job configurations.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

@@ -5,7 +5,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/config v1.18.25
 	github.com/aws/aws-sdk-go-v2/service/acm v1.17.11
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.16.11
-	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.20.0
+	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.21.0
 	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.15.10
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.20.11
 	github.com/aws/aws-sdk-go-v2/service/athena v1.28.0
@@ -17,10 +17,10 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/cloudsearch v1.14.9
 	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.25.0
 	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.26.0
-	github.com/aws/aws-sdk-go-v2/service/codebuild v1.20.12
+	github.com/aws/aws-sdk-go-v2/service/codebuild v1.20.13
 	github.com/aws/aws-sdk-go-v2/service/codecommit v1.14.12
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.16.11
-	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.14.11
+	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.15.0
 	github.com/aws/aws-sdk-go-v2/service/codestar v1.13.10
 	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.22.10
 	github.com/aws/aws-sdk-go-v2/service/configservice v1.32.0
@@ -44,9 +44,9 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/emr v1.25.0
 	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.19.2
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.16.12
-	github.com/aws/aws-sdk-go-v2/service/gamelift v1.18.2
+	github.com/aws/aws-sdk-go-v2/service/gamelift v1.19.0
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.14.11
-	github.com/aws/aws-sdk-go-v2/service/glue v1.48.0
+	github.com/aws/aws-sdk-go-v2/service/glue v1.49.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.17.0
 	github.com/aws/aws-sdk-go-v2/service/iam v1.19.12
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.13.10

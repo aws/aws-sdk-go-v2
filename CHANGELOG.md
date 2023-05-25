@@ -1,3 +1,19 @@
+# Release (2023-05-25)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/applicationautoscaling`: [v1.21.0](service/applicationautoscaling/CHANGELOG.md#v1210-2023-05-25)
+  * **Feature**: With this release, ElastiCache customers will be able to use predefined metricType "ElastiCacheDatabaseCapacityUsageCountedForEvictPercentage" for their ElastiCache instances.
+* `github.com/aws/aws-sdk-go-v2/service/codepipeline`: [v1.15.0](service/codepipeline/CHANGELOG.md#v1150-2023-05-25)
+  * **Feature**: Add PollingDisabledAt time information in PipelineMetadata object of GetPipeline API.
+* `github.com/aws/aws-sdk-go-v2/service/gamelift`: [v1.19.0](service/gamelift/CHANGELOG.md#v1190-2023-05-25)
+  * **Feature**: GameLift FleetIQ users can now filter game server claim requests to exclude servers on instances that are draining.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.49.0](service/glue/CHANGELOG.md#v1490-2023-05-25)
+  * **Feature**: Added ability to create data quality rulesets for shared, cross-account Glue Data Catalog tables. Added support for dataset comparison rules through a new parameter called AdditionalDataSources. Enhanced the data quality results with a map containing profiled metric values.
+* `github.com/aws/aws-sdk-go-v2/service/migrationhubrefactorspaces`: [v1.10.0](service/migrationhubrefactorspaces/CHANGELOG.md#v1100-2023-05-25)
+  * **Feature**: This SDK update allows for path parameter syntax to be passed to the CreateRoute API. Path parameter syntax require parameters to be enclosed in {} characters. This update also includes a new AppendSourcePath field which lets users forward the source path to the Service URL endpoint.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.81.0](service/sagemaker/CHANGELOG.md#v1810-2023-05-25)
+  * **Feature**: Amazon SageMaker Automatic Model Tuning now supports enabling Autotune for tuning jobs which can choose tuning job configurations.
+
 # Release (2023-05-24)
 
 ## Module Highlights

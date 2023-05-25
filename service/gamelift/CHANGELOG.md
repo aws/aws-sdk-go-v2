@@ -1,3 +1,7 @@
+# v1.19.0 (2023-05-25)
+
+* **Feature**: GameLift FleetIQ users can now filter game server claim requests to exclude servers on instances that are draining.
+
 # v1.18.2 (2023-05-04)
 
 * No change notes available for this release.
