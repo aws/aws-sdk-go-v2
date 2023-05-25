@@ -40,6 +40,10 @@ type GetDataQualityRulesetEvaluationRunInput struct {
 
 type GetDataQualityRulesetEvaluationRunOutput struct {
 
+	// A map of reference strings to additional data sources you can specify for an
+	// evaluation run.
+	AdditionalDataSources map[string]types.DataSource
+
 	// Additional run options you can specify for an evaluation run.
 	AdditionalRunOptions *types.DataQualityEvaluationRunAdditionalRunOptions
 

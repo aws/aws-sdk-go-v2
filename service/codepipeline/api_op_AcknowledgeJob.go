@@ -36,9 +36,9 @@ type AcknowledgeJobInput struct {
 	// This member is required.
 	JobId *string
 
-	// A system-generated random number that AWS CodePipeline uses to ensure that the
-	// job is being worked on by only one job worker. Get this number from the response
-	// of the PollForJobs request that returned this job.
+	// A system-generated random number that CodePipeline uses to ensure that the job
+	// is being worked on by only one job worker. Get this number from the response of
+	// the PollForJobs request that returned this job.
 	//
 	// This member is required.
 	Nonce *string

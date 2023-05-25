@@ -10303,6 +10303,22 @@ func awsAwsjson11_deserializeDocumentPipelineMetadata(v **types.PipelineMetadata
 				sv.PipelineArn = ptr.String(jtv)
 			}
 
+		case "pollingDisabledAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.PollingDisabledAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "updated":
 			if value != nil {
 				switch jtv := value.(type) {

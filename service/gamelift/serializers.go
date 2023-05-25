@@ -5804,6 +5804,20 @@ func awsAwsjson11_serializeDocumentCertificateConfiguration(v *types.Certificate
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentClaimFilterOption(v *types.ClaimFilterOption, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.InstanceStatuses != nil {
+		ok := object.Key("InstanceStatuses")
+		if err := awsAwsjson11_serializeDocumentFilterInstanceStatuses(v.InstanceStatuses, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentDesiredPlayerSession(v *types.DesiredPlayerSession, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5845,6 +5859,17 @@ func awsAwsjson11_serializeDocumentFilterConfiguration(v *types.FilterConfigurat
 		}
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentFilterInstanceStatuses(v []types.FilterInstanceStatus, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
 	return nil
 }
 
@@ -6672,6 +6697,13 @@ func awsAwsjson11_serializeOpDocumentAcceptMatchInput(v *AcceptMatchInput, value
 func awsAwsjson11_serializeOpDocumentClaimGameServerInput(v *ClaimGameServerInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.FilterOption != nil {
+		ok := object.Key("FilterOption")
+		if err := awsAwsjson11_serializeDocumentClaimFilterOption(v.FilterOption, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.GameServerData != nil {
 		ok := object.Key("GameServerData")

@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a listing of all the webhooks in this AWS Region for this account. The
-// output lists all webhooks and includes the webhook URL and ARN and the
-// configuration for each webhook.
+// Gets a listing of all the webhooks in this Amazon Web Services Region for this
+// account. The output lists all webhooks and includes the webhook URL and ARN and
+// the configuration for each webhook.
 func (c *Client) ListWebhooks(ctx context.Context, params *ListWebhooksInput, optFns ...func(*Options)) (*ListWebhooksOutput, error) {
 	if params == nil {
 		params = &ListWebhooksInput{}

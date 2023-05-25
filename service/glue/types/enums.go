@@ -2,6 +2,22 @@
 
 package types
 
+type AdditionalOptionKeys string
+
+// Enum values for AdditionalOptionKeys
+const (
+	AdditionalOptionKeysCacheOption AdditionalOptionKeys = "performanceTuning.caching"
+)
+
+// Values returns all known values for AdditionalOptionKeys. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AdditionalOptionKeys) Values() []AdditionalOptionKeys {
+	return []AdditionalOptionKeys{
+		"performanceTuning.caching",
+	}
+}
+
 type AggFunction string
 
 // Enum values for AggFunction

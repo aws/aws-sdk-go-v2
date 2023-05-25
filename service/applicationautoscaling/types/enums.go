@@ -70,28 +70,29 @@ type MetricType string
 
 // Enum values for MetricType
 const (
-	MetricTypeDynamoDBReadCapacityUtilization                         MetricType = "DynamoDBReadCapacityUtilization"
-	MetricTypeDynamoDBWriteCapacityUtilization                        MetricType = "DynamoDBWriteCapacityUtilization"
-	MetricTypeALBRequestCountPerTarget                                MetricType = "ALBRequestCountPerTarget"
-	MetricTypeRDSReaderAverageCPUUtilization                          MetricType = "RDSReaderAverageCPUUtilization"
-	MetricTypeRDSReaderAverageDatabaseConnections                     MetricType = "RDSReaderAverageDatabaseConnections"
-	MetricTypeEC2SpotFleetRequestAverageCPUUtilization                MetricType = "EC2SpotFleetRequestAverageCPUUtilization"
-	MetricTypeEC2SpotFleetRequestAverageNetworkIn                     MetricType = "EC2SpotFleetRequestAverageNetworkIn"
-	MetricTypeEC2SpotFleetRequestAverageNetworkOut                    MetricType = "EC2SpotFleetRequestAverageNetworkOut"
-	MetricTypeSageMakerVariantInvocationsPerInstance                  MetricType = "SageMakerVariantInvocationsPerInstance"
-	MetricTypeECSServiceAverageCPUUtilization                         MetricType = "ECSServiceAverageCPUUtilization"
-	MetricTypeECSServiceAverageMemoryUtilization                      MetricType = "ECSServiceAverageMemoryUtilization"
-	MetricTypeAppStreamAverageCapacityUtilization                     MetricType = "AppStreamAverageCapacityUtilization"
-	MetricTypeComprehendInferenceUtilization                          MetricType = "ComprehendInferenceUtilization"
-	MetricTypeLambdaProvisionedConcurrencyUtilization                 MetricType = "LambdaProvisionedConcurrencyUtilization"
-	MetricTypeCassandraReadCapacityUtilization                        MetricType = "CassandraReadCapacityUtilization"
-	MetricTypeCassandraWriteCapacityUtilization                       MetricType = "CassandraWriteCapacityUtilization"
-	MetricTypeKafkaBrokerStorageUtilization                           MetricType = "KafkaBrokerStorageUtilization"
-	MetricTypeElastiCachePrimaryEngineCPUUtilization                  MetricType = "ElastiCachePrimaryEngineCPUUtilization"
-	MetricTypeElastiCacheReplicaEngineCPUUtilization                  MetricType = "ElastiCacheReplicaEngineCPUUtilization"
-	MetricTypeElastiCacheDatabaseMemoryUsageCountedForEvictPercentage MetricType = "ElastiCacheDatabaseMemoryUsageCountedForEvictPercentage"
-	MetricTypeNeptuneReaderAverageCPUUtilization                      MetricType = "NeptuneReaderAverageCPUUtilization"
-	MetricTypeSageMakerVariantProvisionedConcurrencyUtilization       MetricType = "SageMakerVariantProvisionedConcurrencyUtilization"
+	MetricTypeDynamoDBReadCapacityUtilization                           MetricType = "DynamoDBReadCapacityUtilization"
+	MetricTypeDynamoDBWriteCapacityUtilization                          MetricType = "DynamoDBWriteCapacityUtilization"
+	MetricTypeALBRequestCountPerTarget                                  MetricType = "ALBRequestCountPerTarget"
+	MetricTypeRDSReaderAverageCPUUtilization                            MetricType = "RDSReaderAverageCPUUtilization"
+	MetricTypeRDSReaderAverageDatabaseConnections                       MetricType = "RDSReaderAverageDatabaseConnections"
+	MetricTypeEC2SpotFleetRequestAverageCPUUtilization                  MetricType = "EC2SpotFleetRequestAverageCPUUtilization"
+	MetricTypeEC2SpotFleetRequestAverageNetworkIn                       MetricType = "EC2SpotFleetRequestAverageNetworkIn"
+	MetricTypeEC2SpotFleetRequestAverageNetworkOut                      MetricType = "EC2SpotFleetRequestAverageNetworkOut"
+	MetricTypeSageMakerVariantInvocationsPerInstance                    MetricType = "SageMakerVariantInvocationsPerInstance"
+	MetricTypeECSServiceAverageCPUUtilization                           MetricType = "ECSServiceAverageCPUUtilization"
+	MetricTypeECSServiceAverageMemoryUtilization                        MetricType = "ECSServiceAverageMemoryUtilization"
+	MetricTypeAppStreamAverageCapacityUtilization                       MetricType = "AppStreamAverageCapacityUtilization"
+	MetricTypeComprehendInferenceUtilization                            MetricType = "ComprehendInferenceUtilization"
+	MetricTypeLambdaProvisionedConcurrencyUtilization                   MetricType = "LambdaProvisionedConcurrencyUtilization"
+	MetricTypeCassandraReadCapacityUtilization                          MetricType = "CassandraReadCapacityUtilization"
+	MetricTypeCassandraWriteCapacityUtilization                         MetricType = "CassandraWriteCapacityUtilization"
+	MetricTypeKafkaBrokerStorageUtilization                             MetricType = "KafkaBrokerStorageUtilization"
+	MetricTypeElastiCachePrimaryEngineCPUUtilization                    MetricType = "ElastiCachePrimaryEngineCPUUtilization"
+	MetricTypeElastiCacheReplicaEngineCPUUtilization                    MetricType = "ElastiCacheReplicaEngineCPUUtilization"
+	MetricTypeElastiCacheDatabaseMemoryUsageCountedForEvictPercentage   MetricType = "ElastiCacheDatabaseMemoryUsageCountedForEvictPercentage"
+	MetricTypeNeptuneReaderAverageCPUUtilization                        MetricType = "NeptuneReaderAverageCPUUtilization"
+	MetricTypeSageMakerVariantProvisionedConcurrencyUtilization         MetricType = "SageMakerVariantProvisionedConcurrencyUtilization"
+	MetricTypeElastiCacheDatabaseCapacityUsageCountedForEvictPercentage MetricType = "ElastiCacheDatabaseCapacityUsageCountedForEvictPercentage"
 )
 
 // Values returns all known values for MetricType. Note that this can be expanded
@@ -121,6 +122,7 @@ func (MetricType) Values() []MetricType {
 		"ElastiCacheDatabaseMemoryUsageCountedForEvictPercentage",
 		"NeptuneReaderAverageCPUUtilization",
 		"SageMakerVariantProvisionedConcurrencyUtilization",
+		"ElastiCacheDatabaseCapacityUsageCountedForEvictPercentage",
 	}
 }
 

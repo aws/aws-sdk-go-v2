@@ -1,0 +1,8 @@
+{
+    "id": "fbcf1b07-cd82-46a4-b34b-0225c7dfaeb2",
+    "type": "feature",
+    "description": "Added ability to create data quality rulesets for shared, cross-account Glue Data Catalog tables. Added support for dataset comparison rules through a new parameter called AdditionalDataSources. Enhanced the data quality results with a map containing profiled metric values.",
+    "modules": [
+        "service/glue"
+    ]
+}

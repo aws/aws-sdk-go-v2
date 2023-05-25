@@ -33,7 +33,7 @@ func (c *Client) GetPipeline(ctx context.Context, params *GetPipelineInput, optF
 type GetPipelineInput struct {
 
 	// The name of the pipeline for which you want to get information. Pipeline names
-	// must be unique under an AWS user account.
+	// must be unique in an Amazon Web Services account.
 	//
 	// This member is required.
 	Name *string

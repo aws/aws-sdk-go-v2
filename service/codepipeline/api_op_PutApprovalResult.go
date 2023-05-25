@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Provides the response to a manual approval request to AWS CodePipeline. Valid
+// Provides the response to a manual approval request to CodePipeline. Valid
 // responses include Approved and Rejected.
 func (c *Client) PutApprovalResult(ctx context.Context, params *PutApprovalResultInput, optFns ...func(*Options)) (*PutApprovalResultOutput, error) {
 	if params == nil {

@@ -36099,6 +36099,89 @@ func awsAwsjson11_deserializeDocumentAutoMLSecurityConfig(v **types.AutoMLSecuri
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentAutoParameter(v **types.AutoParameter, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AutoParameter
+	if *v == nil {
+		sv = &types.AutoParameter{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ParameterKey to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "ValueHint":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ParameterValue to be of type string, got %T instead", value)
+				}
+				sv.ValueHint = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAutoParameters(v *[]types.AutoParameter, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AutoParameter
+	if *v == nil {
+		cv = []types.AutoParameter{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AutoParameter
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentAutoParameter(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentAutoRollbackConfig(v **types.AutoRollbackConfig, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -36124,6 +36207,46 @@ func awsAwsjson11_deserializeDocumentAutoRollbackConfig(v **types.AutoRollbackCo
 		case "Alarms":
 			if err := awsAwsjson11_deserializeDocumentAlarmList(&sv.Alarms, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAutotune(v **types.Autotune, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Autotune
+	if *v == nil {
+		sv = &types.Autotune{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Mode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AutotuneMode to be of type string, got %T instead", value)
+				}
+				sv.Mode = types.AutotuneMode(jtv)
 			}
 
 		default:
@@ -59378,6 +59501,11 @@ func awsAwsjson11_deserializeDocumentParameterRanges(v **types.ParameterRanges, 
 
 	for key, value := range shape {
 		switch key {
+		case "AutoParameters":
+			if err := awsAwsjson11_deserializeDocumentAutoParameters(&sv.AutoParameters, value); err != nil {
+				return err
+			}
+
 		case "CategoricalParameterRanges":
 			if err := awsAwsjson11_deserializeDocumentCategoricalParameterRanges(&sv.CategoricalParameterRanges, value); err != nil {
 				return err
@@ -78179,6 +78307,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeHyperParameterTuningJobOutput(v *
 
 	for key, value := range shape {
 		switch key {
+		case "Autotune":
+			if err := awsAwsjson11_deserializeDocumentAutotune(&sv.Autotune, value); err != nil {
+				return err
+			}
+
 		case "BestTrainingJob":
 			if err := awsAwsjson11_deserializeDocumentHyperParameterTrainingJobSummary(&sv.BestTrainingJob, value); err != nil {
 				return err

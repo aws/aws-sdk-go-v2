@@ -788,6 +788,22 @@ func (AutoMLSortOrder) Values() []AutoMLSortOrder {
 	}
 }
 
+type AutotuneMode string
+
+// Enum values for AutotuneMode
+const (
+	AutotuneModeEnabled AutotuneMode = "Enabled"
+)
+
+// Values returns all known values for AutotuneMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AutotuneMode) Values() []AutotuneMode {
+	return []AutotuneMode{
+		"Enabled",
+	}
+}
+
 type AwsManagedHumanLoopRequestSource string
 
 // Enum values for AwsManagedHumanLoopRequestSource

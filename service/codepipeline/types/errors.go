@@ -565,8 +565,8 @@ func (e *JobNotFoundException) ErrorCode() string {
 }
 func (e *JobNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The number of pipelines associated with the AWS account has exceeded the limit
-// allowed for the account.
+// The number of pipelines associated with the Amazon Web Services account has
+// exceeded the limit allowed for the account.
 type LimitExceededException struct {
 	Message *string
 

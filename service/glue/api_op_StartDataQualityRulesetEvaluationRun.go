@@ -47,6 +47,10 @@ type StartDataQualityRulesetEvaluationRunInput struct {
 	// This member is required.
 	RulesetNames []string
 
+	// A map of reference strings to additional data sources you can specify for an
+	// evaluation run.
+	AdditionalDataSources map[string]types.DataSource
+
 	// Additional run options you can specify for an evaluation run.
 	AdditionalRunOptions *types.DataQualityEvaluationRunAdditionalRunOptions
 

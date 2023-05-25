@@ -12273,6 +12273,13 @@ func awsAwsjson11_serializeDocumentCodeGenConfigurationNode(v *types.CodeGenConf
 		}
 	}
 
+	if v.EvaluateDataQualityMultiFrame != nil {
+		ok := object.Key("EvaluateDataQualityMultiFrame")
+		if err := awsAwsjson11_serializeDocumentEvaluateDataQualityMultiFrame(v.EvaluateDataQualityMultiFrame, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.FillMissingValues != nil {
 		ok := object.Key("FillMissingValues")
 		if err := awsAwsjson11_serializeDocumentFillMissingValues(v.FillMissingValues, ok); err != nil {
@@ -13538,6 +13545,11 @@ func awsAwsjson11_serializeDocumentDataQualityTargetTable(v *types.DataQualityTa
 	object := value.Object()
 	defer object.Close()
 
+	if v.CatalogId != nil {
+		ok := object.Key("CatalogId")
+		ok.String(*v.CatalogId)
+	}
+
 	if v.DatabaseName != nil {
 		ok := object.Key("DatabaseName")
 		ok.String(*v.DatabaseName)
@@ -13562,6 +13574,20 @@ func awsAwsjson11_serializeDocumentDataSource(v *types.DataSource, value smithyj
 		}
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentDataSourceMap(v map[string]types.DataSource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		mapVar := v[key]
+		if err := awsAwsjson11_serializeDocumentDataSource(&mapVar, om); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -13927,6 +13953,28 @@ func awsAwsjson11_serializeDocumentDoubleColumnStatisticsData(v *types.DoubleCol
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentDQAdditionalOptions(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentDQDLAliases(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentDQResultsPublishingOptions(v *types.DQResultsPublishingOptions, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -14271,6 +14319,58 @@ func awsAwsjson11_serializeDocumentEvaluateDataQuality(v *types.EvaluateDataQual
 	if len(v.Output) > 0 {
 		ok := object.Key("Output")
 		ok.String(string(v.Output))
+	}
+
+	if v.PublishingOptions != nil {
+		ok := object.Key("PublishingOptions")
+		if err := awsAwsjson11_serializeDocumentDQResultsPublishingOptions(v.PublishingOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Ruleset != nil {
+		ok := object.Key("Ruleset")
+		ok.String(*v.Ruleset)
+	}
+
+	if v.StopJobOnFailureOptions != nil {
+		ok := object.Key("StopJobOnFailureOptions")
+		if err := awsAwsjson11_serializeDocumentDQStopJobOnFailureOptions(v.StopJobOnFailureOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentEvaluateDataQualityMultiFrame(v *types.EvaluateDataQualityMultiFrame, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AdditionalDataSources != nil {
+		ok := object.Key("AdditionalDataSources")
+		if err := awsAwsjson11_serializeDocumentDQDLAliases(v.AdditionalDataSources, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AdditionalOptions != nil {
+		ok := object.Key("AdditionalOptions")
+		if err := awsAwsjson11_serializeDocumentDQAdditionalOptions(v.AdditionalOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Inputs != nil {
+		ok := object.Key("Inputs")
+		if err := awsAwsjson11_serializeDocumentManyInputs(v.Inputs, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
 	}
 
 	if v.PublishingOptions != nil {
@@ -23293,6 +23393,13 @@ func awsAwsjson11_serializeOpDocumentStartDataQualityRuleRecommendationRunInput(
 func awsAwsjson11_serializeOpDocumentStartDataQualityRulesetEvaluationRunInput(v *StartDataQualityRulesetEvaluationRunInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AdditionalDataSources != nil {
+		ok := object.Key("AdditionalDataSources")
+		if err := awsAwsjson11_serializeDocumentDataSourceMap(v.AdditionalDataSources, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.AdditionalRunOptions != nil {
 		ok := object.Key("AdditionalRunOptions")

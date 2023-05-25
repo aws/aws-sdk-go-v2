@@ -12,8 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a summary of all AWS CodePipeline action types associated with your
-// account.
+// Gets a summary of all CodePipeline action types associated with your account.
 func (c *Client) ListActionTypes(ctx context.Context, params *ListActionTypesInput, optFns ...func(*Options)) (*ListActionTypesOutput, error) {
 	if params == nil {
 		params = &ListActionTypesInput{}

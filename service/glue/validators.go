@@ -4856,6 +4856,11 @@ func validateCodeGenConfigurationNode(v *types.CodeGenConfigurationNode) error {
 			invalidParams.AddNested("S3DeltaDirectTarget", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.EvaluateDataQualityMultiFrame != nil {
+		if err := validateEvaluateDataQualityMultiFrame(v.EvaluateDataQualityMultiFrame); err != nil {
+			invalidParams.AddNested("EvaluateDataQualityMultiFrame", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -5400,6 +5405,24 @@ func validateDataSource(v *types.DataSource) error {
 	}
 }
 
+func validateDataSourceMap(v map[string]types.DataSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataSourceMap"}
+	for key := range v {
+		value := v[key]
+		if err := validateDataSource(&value); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDatatype(v *types.Datatype) error {
 	if v == nil {
 		return nil
@@ -5676,6 +5699,27 @@ func validateEvaluateDataQuality(v *types.EvaluateDataQuality) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "EvaluateDataQuality"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Inputs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Inputs"))
+	}
+	if v.Ruleset == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Ruleset"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEvaluateDataQualityMultiFrame(v *types.EvaluateDataQualityMultiFrame) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EvaluateDataQualityMultiFrame"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
@@ -10022,6 +10066,11 @@ func validateOpStartDataQualityRulesetEvaluationRunInput(v *StartDataQualityRule
 	}
 	if v.RulesetNames == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RulesetNames"))
+	}
+	if v.AdditionalDataSources != nil {
+		if err := validateDataSourceMap(v.AdditionalDataSources); err != nil {
+			invalidParams.AddNested("AdditionalDataSources", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

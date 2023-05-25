@@ -1,0 +1,8 @@
+{
+    "id": "b61cb509-651f-4c54-8f59-9b67a5dd3d02",
+    "type": "feature",
+    "description": "GameLift FleetIQ users can now filter game server claim requests to exclude servers on instances that are draining.",
+    "modules": [
+        "service/gamelift"
+    ]
+}

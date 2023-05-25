@@ -1924,6 +1924,11 @@ func awsRestjson1_serializeDocumentUriPathRouteInput(v *types.UriPathRouteInput,
 		ok.String(string(v.ActivationState))
 	}
 
+	if v.AppendSourcePath != nil {
+		ok := object.Key("AppendSourcePath")
+		ok.Boolean(*v.AppendSourcePath)
+	}
+
 	if v.IncludeChildPaths != nil {
 		ok := object.Key("IncludeChildPaths")
 		ok.Boolean(*v.IncludeChildPaths)

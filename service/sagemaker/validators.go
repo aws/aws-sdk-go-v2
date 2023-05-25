@@ -6342,6 +6342,56 @@ func validateAutoMLSecurityConfig(v *types.AutoMLSecurityConfig) error {
 	}
 }
 
+func validateAutoParameter(v *types.AutoParameter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutoParameter"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.ValueHint == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ValueHint"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutoParameters(v []types.AutoParameter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutoParameters"}
+	for i := range v {
+		if err := validateAutoParameter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutotune(v *types.Autotune) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Autotune"}
+	if len(v.Mode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Mode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateBatchDataCaptureConfig(v *types.BatchDataCaptureConfig) error {
 	if v == nil {
 		return nil
@@ -9656,6 +9706,11 @@ func validateParameterRanges(v *types.ParameterRanges) error {
 			invalidParams.AddNested("CategoricalParameterRanges", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.AutoParameters != nil {
+		if err := validateAutoParameters(v.AutoParameters); err != nil {
+			invalidParams.AddNested("AutoParameters", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -11886,6 +11941,11 @@ func validateOpCreateHyperParameterTuningJobInput(v *CreateHyperParameterTuningJ
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Autotune != nil {
+		if err := validateAutotune(v.Autotune); err != nil {
+			invalidParams.AddNested("Autotune", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

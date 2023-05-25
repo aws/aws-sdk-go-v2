@@ -50,6 +50,9 @@ type GetRouteInput struct {
 
 type GetRouteOutput struct {
 
+	// If set to true , this option appends the source path to the service URL endpoint.
+	AppendSourcePath *bool
+
 	// The ID of the application that the route belongs to.
 	ApplicationId *string
 
@@ -99,8 +102,10 @@ type GetRouteOutput struct {
 	// The unique identifier of the service.
 	ServiceId *string
 
-	// The path to use to match traffic. Paths must start with / and are relative to
-	// the base of the application.
+	// This is the path that Refactor Spaces uses to match traffic. Paths must start
+	// with / and are relative to the base of the application. To use path parameters
+	// in the source path, add a variable in curly braces. For example, the resource
+	// path {user} represents a path parameter called 'user'.
 	SourcePath *string
 
 	// The current state of the route.

@@ -169,6 +169,17 @@ type CertificateConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// This data type is used with the Amazon GameLift FleetIQ and game server groups.
+// Filters which game servers may be claimed when calling ClaimGameServer .
+type ClaimFilterOption struct {
+
+	// List of instance statuses that game servers may be claimed on. If provided, the
+	// list must contain the ACTIVE status.
+	InstanceStatuses []FilterInstanceStatus
+
+	noSmithyDocumentSerde
+}
+
 // Resources used to host your game servers. A compute resource can be managed
 // Amazon GameLift Amazon EC2 instances or your own resources.
 type Compute struct {
@@ -1214,7 +1225,7 @@ type GameSessionQueue struct {
 
 	// The maximum time, in seconds, that a new game session placement request remains
 	// in the queue. When a request exceeds this time, the game session placement
-	// changes to a TIMED_OUT status.
+	// changes to a TIMED_OUT status. By default, this property is set to 600 .
 	TimeoutInSeconds *int32
 
 	noSmithyDocumentSerde

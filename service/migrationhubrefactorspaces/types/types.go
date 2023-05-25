@@ -43,8 +43,12 @@ type ApiGatewayProxyInput struct {
 	// in the request, the value is set to REGIONAL by default. If the value is set to
 	// PRIVATE in the request, this creates a private API endpoint that is isolated
 	// from the public internet. The private endpoint can only be accessed by using
-	// Amazon Virtual Private Cloud (Amazon VPC) endpoints for Amazon API Gateway that
-	// have been granted access.
+	// Amazon Virtual Private Cloud (Amazon VPC) interface endpoints for the Amazon API
+	// Gateway that has been granted access. For more information about creating a
+	// private connection with Refactor Spaces and interface endpoint (Amazon Web
+	// Services PrivateLink) availability, see Access Refactor Spaces using an
+	// interface endpoint (Amazon Web Services PrivateLink) (https://docs.aws.amazon.com/migrationhub-refactor-spaces/latest/userguide/vpc-interface-endpoints.html)
+	// .
 	EndpointType ApiGatewayEndpointType
 
 	// The name of the API Gateway stage. The name defaults to prod .
@@ -267,6 +271,9 @@ type LambdaEndpointSummary struct {
 // The summary information for the routes as a response to ListRoutes .
 type RouteSummary struct {
 
+	// If set to true , this option appends the source path to the service URL endpoint.
+	AppendSourcePath *bool
+
 	// The unique identifier of the application.
 	ApplicationId *string
 
@@ -313,8 +320,10 @@ type RouteSummary struct {
 	// The unique identifier of the service.
 	ServiceId *string
 
-	// The path to use to match traffic. Paths must start with / and are relative to
-	// the base of the application.
+	// This is the path that Refactor Spaces uses to match traffic. Paths must start
+	// with / and are relative to the base of the application. To use path parameters
+	// in the source path, add a variable in curly braces. For example, the resource
+	// path {user} represents a path parameter called 'user'.
 	SourcePath *string
 
 	// The current state of the route.
@@ -392,11 +401,16 @@ type UriPathRouteInput struct {
 	// This member is required.
 	ActivationState RouteActivationState
 
-	// The path to use to match traffic. Paths must start with / and are relative to
-	// the base of the application.
+	// This is the path that Refactor Spaces uses to match traffic. Paths must start
+	// with / and are relative to the base of the application. To use path parameters
+	// in the source path, add a variable in curly braces. For example, the resource
+	// path {user} represents a path parameter called 'user'.
 	//
 	// This member is required.
 	SourcePath *string
+
+	// If set to true , this option appends the source path to the service URL endpoint.
+	AppendSourcePath *bool
 
 	// Indicates whether to match all subpaths of the given source path. If this value
 	// is false , requests must match the source path exactly before they are forwarded

@@ -2968,6 +2968,15 @@ func awsRestjson1_deserializeOpDocumentGetRouteOutput(v **GetRouteOutput, value 
 
 	for key, value := range shape {
 		switch key {
+		case "AppendSourcePath":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.AppendSourcePath = ptr.Bool(jtv)
+			}
+
 		case "ApplicationId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6627,6 +6636,15 @@ func awsRestjson1_deserializeDocumentRouteSummary(v **types.RouteSummary, value 
 
 	for key, value := range shape {
 		switch key {
+		case "AppendSourcePath":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.AppendSourcePath = ptr.Bool(jtv)
+			}
+
 		case "ApplicationId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7215,6 +7233,15 @@ func awsRestjson1_deserializeDocumentUriPathRouteInput(v **types.UriPathRouteInp
 					return fmt.Errorf("expected RouteActivationState to be of type string, got %T instead", value)
 				}
 				sv.ActivationState = types.RouteActivationState(jtv)
+			}
+
+		case "AppendSourcePath":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.AppendSourcePath = ptr.Bool(jtv)
 			}
 
 		case "IncludeChildPaths":

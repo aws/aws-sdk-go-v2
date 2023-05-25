@@ -10,10 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the location of stored game session logs for a specified game
-// session. When a game session is terminated, Amazon GameLift automatically stores
-// the logs in Amazon S3 and retains them for 14 days. Use this URL to download the
-// logs. See the Amazon Web Services Service Limits (https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_gamelift)
+// Retrieves the location of stored game session logs for a specified game session
+// on Amazon GameLift managed fleets. When a game session is terminated, Amazon
+// GameLift automatically stores the logs in Amazon S3 and retains them for 14
+// days. Use this URL to download the logs. See the Amazon Web Services Service
+// Limits (https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_gamelift)
 // page for maximum log file sizes. Log files that exceed this limit are not saved.
 // All APIs by task (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) GetGameSessionLogUrl(ctx context.Context, params *GetGameSessionLogUrlInput, optFns ...func(*Options)) (*GetGameSessionLogUrlOutput, error) {

@@ -43,7 +43,7 @@ type DeleteCustomActionTypeInput struct {
 	// This member is required.
 	Category types.ActionCategory
 
-	// The provider of the service used in the custom action, such as AWS CodeDeploy.
+	// The provider of the service used in the custom action, such as CodeDeploy.
 	//
 	// This member is required.
 	Provider *string

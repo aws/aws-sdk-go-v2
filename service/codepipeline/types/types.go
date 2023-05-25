@@ -89,13 +89,13 @@ type ActionDeclaration struct {
 	// The action's configuration. These are key-value pairs that specify input values
 	// for an action. For more information, see Action Structure Requirements in
 	// CodePipeline (https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#action-requirements)
-	// . For the list of configuration properties for the AWS CloudFormation action
-	// type in CodePipeline, see Configuration Properties Reference (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline-action-reference.html)
-	// in the AWS CloudFormation User Guide. For template snippets with examples, see
+	// . For the list of configuration properties for the CloudFormation action type in
+	// CodePipeline, see Configuration Properties Reference (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline-action-reference.html)
+	// in the CloudFormation User Guide. For template snippets with examples, see
 	// Using Parameter Override Functions with CodePipeline Pipelines (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline-parameter-override-functions.html)
-	// in the AWS CloudFormation User Guide. The values can be represented in either
-	// JSON or YAML format. For example, the JSON configuration item format is as
-	// follows: JSON: "Configuration" : { Key : Value },
+	// in the CloudFormation User Guide. The values can be represented in either JSON
+	// or YAML format. For example, the JSON configuration item format is as follows:
+	// JSON: "Configuration" : { Key : Value },
 	Configuration map[string]string
 
 	// The name or ID of the artifact consumed by the action, such as a test or build
@@ -110,7 +110,7 @@ type ActionDeclaration struct {
 	// artifact.
 	OutputArtifacts []OutputArtifact
 
-	// The action declaration's AWS Region, such as us-east-1.
+	// The action declaration's Amazon Web Services Region, such as us-east-1.
 	Region *string
 
 	// The ARN of the IAM service role that performs the declared action. This is
@@ -132,14 +132,14 @@ type ActionExecution struct {
 	// execution ID is available for executions run on or after March 2020.
 	ActionExecutionId *string
 
-	// The details of an error returned by a URL external to AWS.
+	// The details of an error returned by a URL external to Amazon Web Services.
 	ErrorDetails *ErrorDetails
 
 	// The external ID of the run of the action.
 	ExternalExecutionId *string
 
-	// The URL of a resource external to AWS that is used when running the action (for
-	// example, an external repository URL).
+	// The URL of a resource external to Amazon Web Services that is used when running
+	// the action (for example, an external repository URL).
 	ExternalExecutionUrl *string
 
 	// The last status change of the action.
@@ -232,7 +232,7 @@ type ActionExecutionInput struct {
 	// output by this action fall under this namespace.
 	Namespace *string
 
-	// The AWS Region for the action, such as us-east-1.
+	// The Amazon Web Services Region for the action, such as us-east-1.
 	Region *string
 
 	// Configuration data for an action execution with all variable references
@@ -443,7 +443,7 @@ type ActionTypeExecutor struct {
 	JobTimeout *int32
 
 	// The policy statement that specifies the permissions in the CodePipeline
-	// customer’s account that are needed to successfully run an action. To grant
+	// customer account that are needed to successfully run an action. To grant
 	// permission to another account, specify the account ID as the Principal, a
 	// domain-style identifier defined by the service, for example
 	// codepipeline.amazonaws.com . The size of the passed JSON policy document cannot
@@ -480,9 +480,8 @@ type ActionTypeId struct {
 
 	// The provider of the service being called by the action. Valid providers are
 	// determined by the action category. For example, an action in the Deploy category
-	// type might have a provider of AWS CodeDeploy, which would be specified as
-	// CodeDeploy. For more information, see Valid Action Types and Providers in
-	// CodePipeline (https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#actions-valid-providers)
+	// type might have a provider of CodeDeploy, which would be specified as CodeDeploy
+	// . For more information, see Valid Action Types and Providers in CodePipeline (https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#actions-valid-providers)
 	// .
 	//
 	// This member is required.
@@ -532,7 +531,8 @@ type ActionTypeIdentifier struct {
 // Details identifying the users with permissions to use the action type.
 type ActionTypePermissions struct {
 
-	// A list of AWS account IDs with access to use the action type in their pipelines.
+	// A list of Amazon Web Services account IDs with access to use the action type in
+	// their pipelines.
 	//
 	// This member is required.
 	AllowedAccounts []string
@@ -580,21 +580,20 @@ type ActionTypeProperty struct {
 // Returns information about the settings for an action type.
 type ActionTypeSettings struct {
 
-	// The URL returned to the AWS CodePipeline console that provides a deep link to
-	// the resources of the external system, such as the configuration page for an AWS
+	// The URL returned to the CodePipeline console that provides a deep link to the
+	// resources of the external system, such as the configuration page for a
 	// CodeDeploy deployment group. This link is provided as part of the action display
 	// in the pipeline.
 	EntityUrlTemplate *string
 
-	// The URL returned to the AWS CodePipeline console that contains a link to the
-	// top-level landing page for the external system, such as the console page for AWS
-	// CodeDeploy. This link is shown on the pipeline view page in the AWS CodePipeline
+	// The URL returned to the CodePipeline console that contains a link to the
+	// top-level landing page for the external system, such as the console page for
+	// CodeDeploy. This link is shown on the pipeline view page in the CodePipeline
 	// console and provides a link to the execution entity of the external action.
 	ExecutionUrlTemplate *string
 
-	// The URL returned to the AWS CodePipeline console that contains a link to the
-	// page where customers can update or change the configuration of the external
-	// action.
+	// The URL returned to the CodePipeline console that contains a link to the page
+	// where customers can update or change the configuration of the external action.
 	RevisionUrlTemplate *string
 
 	// The URL of a sign-up page where users can sign up for an external service and
@@ -646,8 +645,11 @@ type ApprovalResult struct {
 	noSmithyDocumentSerde
 }
 
-// Represents information about an artifact that is worked on by actions in the
-// pipeline.
+// Artifacts are the files that are worked on by actions in the pipeline. See the
+// action configuration for each action for details about artifact parameters. For
+// example, the S3 source action artifact is a file name (or file path), and the
+// files are generally provided as a ZIP file. Example artifact name:
+// SampleApp_Windows.zip
 type Artifact struct {
 
 	// The location of an artifact.
@@ -722,12 +724,12 @@ type ArtifactRevision struct {
 	RevisionId *string
 
 	// Summary information about the most recent revision of the artifact. For GitHub
-	// and AWS CodeCommit repositories, the commit message. For Amazon S3 buckets or
+	// and CodeCommit repositories, the commit message. For Amazon S3 buckets or
 	// actions, the user-provided content of a codepipeline-artifact-revision-summary
 	// key specified in the object metadata.
 	RevisionSummary *string
 
-	// The commit ID for the artifact revision. For artifacts stored in GitHub or AWS
+	// The commit ID for the artifact revision. For artifacts stored in GitHub or
 	// CodeCommit repositories, the commit ID is linked to a commit details page.
 	RevisionUrl *string
 
@@ -743,8 +745,8 @@ type ArtifactStore struct {
 	// The S3 bucket used for storing the artifacts for a pipeline. You can specify
 	// the name of an S3 bucket but not a folder in the bucket. A folder to contain the
 	// pipeline artifacts is created for you based on the name of the pipeline. You can
-	// use any S3 bucket in the same AWS Region as the pipeline to store your pipeline
-	// artifacts.
+	// use any S3 bucket in the same Amazon Web Services Region as the pipeline to
+	// store your pipeline artifacts.
 	//
 	// This member is required.
 	Location *string
@@ -755,17 +757,17 @@ type ArtifactStore struct {
 	Type ArtifactStoreType
 
 	// The encryption key used to encrypt the data in the artifact store, such as an
-	// AWS Key Management Service (AWS KMS) key. If this is undefined, the default key
-	// for Amazon S3 is used.
+	// Amazon Web Services Key Management Service key. If this is undefined, the
+	// default key for Amazon S3 is used.
 	EncryptionKey *EncryptionKey
 
 	noSmithyDocumentSerde
 }
 
-// Represents an AWS session credentials object. These credentials are temporary
-// credentials that are issued by AWS Secure Token Service (STS). They can be used
-// to access input and output artifacts in the S3 bucket used to store artifact for
-// the pipeline in AWS CodePipeline.
+// Represents an Amazon Web Services session credentials object. These credentials
+// are temporary credentials that are issued by Amazon Web Services Secure Token
+// Service (STS). They can be used to access input and output artifacts in the S3
+// bucket used to store artifact for the pipeline in CodePipeline.
 type AWSSessionCredentials struct {
 
 	// The access key for the session.
@@ -826,19 +828,22 @@ type CurrentRevision struct {
 }
 
 // Represents information about the key used to encrypt data in the artifact
-// store, such as an AWS Key Management Service (AWS KMS) key.
+// store, such as an Amazon Web Services Key Management Service (Key Management
+// Service) key.
 type EncryptionKey struct {
 
-	// The ID used to identify the key. For an AWS KMS key, you can use the key ID,
-	// the key ARN, or the alias ARN. Aliases are recognized only in the account that
-	// created the customer master key (CMK). For cross-account actions, you can only
-	// use the key ID or key ARN to identify the key.
+	// The ID used to identify the key. For an Amazon Web Services KMS key, you can
+	// use the key ID, the key ARN, or the alias ARN. Aliases are recognized only in
+	// the account that created the KMS key. For cross-account actions, you can only
+	// use the key ID or key ARN to identify the key. Cross-account actions involve
+	// using the role from the other account (AccountB), so specifying the key ID will
+	// use the key from the other account (AccountB).
 	//
 	// This member is required.
 	Id *string
 
-	// The type of encryption key, such as an AWS Key Management Service (AWS KMS)
-	// key. When creating or updating a pipeline, the value must be set to 'KMS'.
+	// The type of encryption key, such as an Amazon Web Services KMS key. When
+	// creating or updating a pipeline, the value must be set to 'KMS'.
 	//
 	// This member is required.
 	Type EncryptionKeyType
@@ -846,7 +851,7 @@ type EncryptionKey struct {
 	noSmithyDocumentSerde
 }
 
-// Represents information about an error in AWS CodePipeline.
+// Represents information about an error in CodePipeline.
 type ErrorDetails struct {
 
 	// The system ID or number code of the error.
@@ -863,7 +868,7 @@ type ErrorDetails struct {
 type ExecutionDetails struct {
 
 	// The system-generated unique ID of this action used to identify this job worker
-	// in any external systems, such as AWS CodeDeploy.
+	// in any external systems, such as CodeDeploy.
 	ExternalExecutionId *string
 
 	// The percentage of work completed on the action, represented on a scale of 0 to
@@ -928,12 +933,16 @@ type FailureDetails struct {
 // build artifact.
 type InputArtifact struct {
 
-	// The name of the artifact to be worked on (for example, "My App"). The input
-	// artifact of an action must exactly match the output artifact declared in a
-	// preceding action, but the input artifact does not have to be the next action in
-	// strict sequence from the action that provided the output artifact. Actions in
-	// parallel can declare different output artifacts, which are in turn consumed by
-	// different following actions.
+	// The name of the artifact to be worked on (for example, "My App"). Artifacts are
+	// the files that are worked on by actions in the pipeline. See the action
+	// configuration for each action for details about artifact parameters. For
+	// example, the S3 source action input artifact is a file name (or file path), and
+	// the files are generally provided as a ZIP file. Example artifact name:
+	// SampleApp_Windows.zip The input artifact of an action must exactly match the
+	// output artifact declared in a preceding action, but the input artifact does not
+	// have to be the next action in strict sequence from the action that provided the
+	// output artifact. Actions in parallel can declare different output artifacts,
+	// which are in turn consumed by different following actions.
 	//
 	// This member is required.
 	Name *string
@@ -944,7 +953,7 @@ type InputArtifact struct {
 // Represents information about a job.
 type Job struct {
 
-	// The ID of the AWS account to use when performing the job.
+	// The ID of the Amazon Web Services account to use when performing the job.
 	AccountId *string
 
 	// Other data about a job.
@@ -953,9 +962,9 @@ type Job struct {
 	// The unique system-generated ID of the job.
 	Id *string
 
-	// A system-generated random number that AWS CodePipeline uses to ensure that the
-	// job is being worked on by only one job worker. Use this number in an
-	// AcknowledgeJob request.
+	// A system-generated random number that CodePipeline uses to ensure that the job
+	// is being worked on by only one job worker. Use this number in an AcknowledgeJob
+	// request.
 	Nonce *string
 
 	noSmithyDocumentSerde
@@ -971,18 +980,18 @@ type JobData struct {
 	// Represents information about an action type.
 	ActionTypeId *ActionTypeId
 
-	// Represents an AWS session credentials object. These credentials are temporary
-	// credentials that are issued by AWS Secure Token Service (STS). They can be used
-	// to access input and output artifacts in the S3 bucket used to store artifacts
-	// for the pipeline in AWS CodePipeline.
+	// Represents an Amazon Web Services session credentials object. These credentials
+	// are temporary credentials that are issued by Amazon Web Services Secure Token
+	// Service (STS). They can be used to access input and output artifacts in the S3
+	// bucket used to store artifacts for the pipeline in CodePipeline.
 	ArtifactCredentials *AWSSessionCredentials
 
-	// A system-generated token, such as a AWS CodeDeploy deployment ID, required by a
-	// job to continue the job asynchronously.
+	// A system-generated token, such as a deployment ID, required by a job to
+	// continue the job asynchronously.
 	ContinuationToken *string
 
 	// Represents information about the key used to encrypt data in the artifact
-	// store, such as an AWS Key Management Service (AWS KMS) key.
+	// store, such as an KMS key.
 	EncryptionKey *EncryptionKey
 
 	// The artifact supplied to the job.
@@ -1001,7 +1010,7 @@ type JobData struct {
 // Represents information about the details of a job.
 type JobDetails struct {
 
-	// The AWS account ID associated with the job.
+	// The Amazon Web Services account ID associated with the job.
 	AccountId *string
 
 	// Represents other information about a job required for a job worker to complete
@@ -1126,7 +1135,7 @@ type PipelineDeclaration struct {
 	// This member is required.
 	Name *string
 
-	// The Amazon Resource Name (ARN) for AWS CodePipeline to use to either perform
+	// The Amazon Resource Name (ARN) for CodePipeline to use to either perform
 	// actions with no actionRoleArn , or to use to assume roles for actions with an
 	// actionRoleArn .
 	//
@@ -1144,11 +1153,11 @@ type PipelineDeclaration struct {
 	// pipeline, you must use artifactStores .
 	ArtifactStore *ArtifactStore
 
-	// A mapping of artifactStore objects and their corresponding AWS Regions. There
-	// must be an artifact store for the pipeline Region and for each cross-region
-	// action in the pipeline. You must include either artifactStore or artifactStores
-	// in your pipeline, but you cannot use both. If you create a cross-region action
-	// in your pipeline, you must use artifactStores .
+	// A mapping of artifactStore objects and their corresponding Amazon Web Services
+	// Regions. There must be an artifact store for the pipeline Region and for each
+	// cross-region action in the pipeline. You must include either artifactStore or
+	// artifactStores in your pipeline, but you cannot use both. If you create a
+	// cross-region action in your pipeline, you must use artifactStores .
 	ArtifactStores map[string]ArtifactStore
 
 	// The version number of the pipeline. A new pipeline always has a version number
@@ -1250,6 +1259,15 @@ type PipelineMetadata struct {
 	// The Amazon Resource Name (ARN) of the pipeline.
 	PipelineArn *string
 
+	// The date and time that polling for source changes (periodic checks) was stopped
+	// for the pipeline, in timestamp format. You can migrate (update) a polling
+	// pipeline to use event-based change detection. For example, for a pipeline with a
+	// CodeCommit source, we recommend you migrate (update) your pipeline to use
+	// CloudWatch Events. To learn more, see Migrate polling pipelines to use
+	// event-based change detection (https://docs.aws.amazon.com/codepipeline/latest/userguide/update-change-detection.html)
+	// in the CodePipeline User Guide.
+	PollingDisabledAt *time.Time
+
 	// The date and time the pipeline was last updated, in timestamp format.
 	Updated *time.Time
 
@@ -1317,12 +1335,12 @@ type SourceRevision struct {
 	RevisionId *string
 
 	// Summary information about the most recent revision of the artifact. For GitHub
-	// and AWS CodeCommit repositories, the commit message. For Amazon S3 buckets or
+	// and CodeCommit repositories, the commit message. For Amazon S3 buckets or
 	// actions, the user-provided content of a codepipeline-artifact-revision-summary
 	// key specified in the object metadata.
 	RevisionSummary *string
 
-	// The commit ID for the artifact revision. For artifacts stored in GitHub or AWS
+	// The commit ID for the artifact revision. For artifacts stored in GitHub or
 	// CodeCommit repositories, the commit ID is linked to a commit details page.
 	RevisionUrl *string
 
@@ -1422,7 +1440,7 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
-// A response to a PollForThirdPartyJobs request returned by AWS CodePipeline when
+// A response to a PollForThirdPartyJobs request returned by CodePipeline when
 // there is a job to be worked on by a partner action.
 type ThirdPartyJob struct {
 
@@ -1430,7 +1448,7 @@ type ThirdPartyJob struct {
 	// that the calling entity is allowed access to the job and its details.
 	ClientId *string
 
-	// The identifier used to identify the job in AWS CodePipeline.
+	// The identifier used to identify the job in CodePipeline.
 	JobId *string
 
 	noSmithyDocumentSerde
@@ -1445,19 +1463,19 @@ type ThirdPartyJobData struct {
 	// Represents information about an action type.
 	ActionTypeId *ActionTypeId
 
-	// Represents an AWS session credentials object. These credentials are temporary
-	// credentials that are issued by AWS Secure Token Service (STS). They can be used
-	// to access input and output artifacts in the S3 bucket used to store artifact for
-	// the pipeline in AWS CodePipeline.
+	// Represents an Amazon Web Services session credentials object. These credentials
+	// are temporary credentials that are issued by Amazon Web Services Secure Token
+	// Service (STS). They can be used to access input and output artifacts in the S3
+	// bucket used to store artifact for the pipeline in CodePipeline.
 	ArtifactCredentials *AWSSessionCredentials
 
-	// A system-generated token, such as a AWS CodeDeploy deployment ID, that a job
+	// A system-generated token, such as a CodeDeploy deployment ID, that a job
 	// requires to continue the job asynchronously.
 	ContinuationToken *string
 
 	// The encryption key used to encrypt and decrypt data in the artifact store for
-	// the pipeline, such as an AWS Key Management Service (AWS KMS) key. This is
-	// optional and might not be present.
+	// the pipeline, such as an Amazon Web Services Key Management Service (Amazon Web
+	// Services KMS) key. This is optional and might not be present.
 	EncryptionKey *EncryptionKey
 
 	// The name of the artifact that is worked on by the action, if any. This name
@@ -1485,11 +1503,11 @@ type ThirdPartyJobDetails struct {
 	// The data to be returned by the third party job worker.
 	Data *ThirdPartyJobData
 
-	// The identifier used to identify the job details in AWS CodePipeline.
+	// The identifier used to identify the job details in CodePipeline.
 	Id *string
 
-	// A system-generated random number that AWS CodePipeline uses to ensure that the
-	// job is being worked on by only one job worker. Use this number in an
+	// A system-generated random number that CodePipeline uses to ensure that the job
+	// is being worked on by only one job worker. Use this number in an
 	// AcknowledgeThirdPartyJob request.
 	Nonce *string
 
@@ -1596,8 +1614,8 @@ type WebhookFilterRule struct {
 	// target action configuration can be included as placeholders in this value by
 	// surrounding the action configuration key with curly brackets. For example, if
 	// the value supplied here is "refs/heads/{Branch}" and the target action has an
-	// action configuration property called "Branch" with a value of "master", the
-	// MatchEquals value is evaluated as "refs/heads/master". For a list of action
+	// action configuration property called "Branch" with a value of "main", the
+	// MatchEquals value is evaluated as "refs/heads/main". For a list of action
 	// configuration properties for built-in action types, see Pipeline Structure
 	// Reference Action Requirements (https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#action-requirements)
 	// .

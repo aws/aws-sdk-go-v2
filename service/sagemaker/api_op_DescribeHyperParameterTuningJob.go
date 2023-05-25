@@ -12,7 +12,9 @@ import (
 	"time"
 )
 
-// Gets a description of a hyperparameter tuning job.
+// Returns a description of a hyperparameter tuning job, depending on the fields
+// selected. These fields can include the name, Amazon Resource Name (ARN), job
+// status of your tuning job and more.
 func (c *Client) DescribeHyperParameterTuningJob(ctx context.Context, params *DescribeHyperParameterTuningJobInput, optFns ...func(*Options)) (*DescribeHyperParameterTuningJobOutput, error) {
 	if params == nil {
 		params = &DescribeHyperParameterTuningJobInput{}
@@ -56,7 +58,7 @@ type DescribeHyperParameterTuningJobOutput struct {
 	// This member is required.
 	HyperParameterTuningJobConfig *types.HyperParameterTuningJobConfig
 
-	// The name of the tuning job.
+	// The name of the hyperparameter tuning job.
 	//
 	// This member is required.
 	HyperParameterTuningJobName *string
@@ -80,6 +82,9 @@ type DescribeHyperParameterTuningJobOutput struct {
 	//
 	// This member is required.
 	TrainingJobStatusCounters *types.TrainingJobStatusCounters
+
+	// A flag to indicate if autotune is enabled for the hyperparameter tuning job.
+	Autotune *types.Autotune
 
 	// A TrainingJobSummary (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_TrainingJobSummary.html)
 	// object that describes the training job that completed with the best current

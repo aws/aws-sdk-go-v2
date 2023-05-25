@@ -108,7 +108,7 @@ type CreateGameSessionQueueInput struct {
 
 	// The maximum time, in seconds, that a new game session placement request remains
 	// in the queue. When a request exceeds this time, the game session placement
-	// changes to a TIMED_OUT status.
+	// changes to a TIMED_OUT status. By default, this property is set to 600 .
 	TimeoutInSeconds *int32
 
 	noSmithyDocumentSerde

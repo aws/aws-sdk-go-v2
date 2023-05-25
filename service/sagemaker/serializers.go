@@ -17450,6 +17450,36 @@ func awsAwsjson11_serializeDocumentAutoMLSecurityConfig(v *types.AutoMLSecurityC
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentAutoParameter(v *types.AutoParameter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.ValueHint != nil {
+		ok := object.Key("ValueHint")
+		ok.String(*v.ValueHint)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentAutoParameters(v []types.AutoParameter, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentAutoParameter(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentAutoRollbackConfig(v *types.AutoRollbackConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -17459,6 +17489,18 @@ func awsAwsjson11_serializeDocumentAutoRollbackConfig(v *types.AutoRollbackConfi
 		if err := awsAwsjson11_serializeDocumentAlarmList(v.Alarms, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentAutotune(v *types.Autotune, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Mode) > 0 {
+		ok := object.Key("Mode")
+		ok.String(string(v.Mode))
 	}
 
 	return nil
@@ -22776,6 +22818,13 @@ func awsAwsjson11_serializeDocumentParameterRanges(v *types.ParameterRanges, val
 	object := value.Object()
 	defer object.Close()
 
+	if v.AutoParameters != nil {
+		ok := object.Key("AutoParameters")
+		if err := awsAwsjson11_serializeDocumentAutoParameters(v.AutoParameters, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.CategoricalParameterRanges != nil {
 		ok := object.Key("CategoricalParameterRanges")
 		if err := awsAwsjson11_serializeDocumentCategoricalParameterRanges(v.CategoricalParameterRanges, ok); err != nil {
@@ -26649,6 +26698,13 @@ func awsAwsjson11_serializeOpDocumentCreateHumanTaskUiInput(v *CreateHumanTaskUi
 func awsAwsjson11_serializeOpDocumentCreateHyperParameterTuningJobInput(v *CreateHyperParameterTuningJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Autotune != nil {
+		ok := object.Key("Autotune")
+		if err := awsAwsjson11_serializeDocumentAutotune(v.Autotune, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.HyperParameterTuningJobConfig != nil {
 		ok := object.Key("HyperParameterTuningJobConfig")

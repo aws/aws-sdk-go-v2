@@ -88,13 +88,13 @@ type AggregateOperation struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies an Amazon Redshift data store.
+// Specifies an optional value when connecting to the Redshift cluster.
 type AmazonRedshiftAdvancedOption struct {
 
-	// The key when specifying a key-value pair.
+	// The key for the additional connection option.
 	Key *string
 
-	// The value when specifying a key-value pair.
+	// The value for the additional connection option.
 	Value *string
 
 	noSmithyDocumentSerde
@@ -874,6 +874,10 @@ type CodeGenConfigurationNode struct {
 
 	// Specifies your data quality evaluation criteria.
 	EvaluateDataQuality *EvaluateDataQuality
+
+	// Specifies your data quality evaluation criteria. Allows multiple input data and
+	// returns a collection of Dynamic Frames.
+	EvaluateDataQualityMultiFrame *EvaluateDataQualityMultiFrame
 
 	// Specifies a transform that locates records in the dataset that have missing
 	// values and adds a new field with a value determined by imputation. The input
@@ -2196,6 +2200,9 @@ type DataQualityRuleResult struct {
 	// A description of the data quality rule.
 	Description *string
 
+	// A map of metrics associated with the evaluation of the rule.
+	EvaluatedMetrics map[string]float64
+
 	// An evaluation message.
 	EvaluationMessage *string
 
@@ -2310,6 +2317,9 @@ type DataQualityTargetTable struct {
 	//
 	// This member is required.
 	TableName *string
+
+	// The catalog id where the Glue table exists.
+	CatalogId *string
 
 	noSmithyDocumentSerde
 }
@@ -2957,6 +2967,41 @@ type EvaluateDataQuality struct {
 
 	// The output of your data quality evaluation.
 	Output DQTransformOutput
+
+	// Options to configure how your results are published.
+	PublishingOptions *DQResultsPublishingOptions
+
+	// Options to configure how your job will stop if your data quality evaluation
+	// fails.
+	StopJobOnFailureOptions *DQStopJobOnFailureOptions
+
+	noSmithyDocumentSerde
+}
+
+// Specifies your data quality evaluation criteria.
+type EvaluateDataQualityMultiFrame struct {
+
+	// The inputs of your data quality evaluation. The first input in this list is the
+	// primary data source.
+	//
+	// This member is required.
+	Inputs []string
+
+	// The name of the data quality evaluation.
+	//
+	// This member is required.
+	Name *string
+
+	// The ruleset for your data quality evaluation.
+	//
+	// This member is required.
+	Ruleset *string
+
+	// The aliases of all data sources except primary.
+	AdditionalDataSources map[string]string
+
+	// Options to configure runtime behavior of the transform.
+	AdditionalOptions map[string]string
 
 	// Options to configure how your results are published.
 	PublishingOptions *DQResultsPublishingOptions

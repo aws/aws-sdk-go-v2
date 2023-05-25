@@ -192,8 +192,8 @@ type RegisterScalableTargetInput struct {
 	//   - ECS services
 	//   - EMR clusters
 	//   - Lambda provisioned concurrency
-	//   - SageMaker Serverless endpoint provisioned concurrency
 	//   - SageMaker endpoint variants
+	//   - SageMaker Serverless endpoint provisioned concurrency
 	//   - Spot Fleets
 	//   - custom resources
 	// It's strongly recommended that you specify a value greater than 0. A value

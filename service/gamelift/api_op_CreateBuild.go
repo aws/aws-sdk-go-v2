@@ -16,19 +16,19 @@ import (
 // setting up a new game build for Amazon GameLift, we recommend using the CLI
 // command upload-build (https://docs.aws.amazon.com/cli/latest/reference/gamelift/upload-build.html)
 // . This helper command combines two tasks: (1) it uploads your build files from a
-// file directory to a Amazon GameLift Amazon S3 location, and (2) it creates a new
-// build resource. You can use the operation in the following scenarios:
-//   - To create a new game build with build files that are in an Amazon S3
-//     location under an Amazon Web Services account that you control. To use this
-//     option, you give Amazon GameLift access to the Amazon S3 bucket. With
-//     permissions in place, specify a build name, operating system, and the Amazon S3
-//     storage location of your game build.
-//   - To directly upload your build files to a Amazon GameLift Amazon S3
-//     location. To use this option, specify a build name and operating system. This
-//     operation creates a new build resource and also returns an Amazon S3 location
-//     with temporary access credentials. Use the credentials to manually upload your
-//     build files to the specified Amazon S3 location. For more information, see
-//     Uploading Objects (https://docs.aws.amazon.com/AmazonS3/latest/dev/UploadingObjects.html)
+// file directory to an Amazon GameLift Amazon S3 location, and (2) it creates a
+// new build resource. You can use the CreateBuild operation in the following
+// scenarios:
+//   - Create a new game build with build files that are in an Amazon S3 location
+//     under an Amazon Web Services account that you control. To use this option, you
+//     give Amazon GameLift access to the Amazon S3 bucket. With permissions in place,
+//     specify a build name, operating system, and the Amazon S3 storage location of
+//     your game build.
+//   - Upload your build files to a Amazon GameLift Amazon S3 location. To use
+//     this option, specify a build name and operating system. This operation creates a
+//     new build resource and also returns an Amazon S3 location with temporary access
+//     credentials. Use the credentials to manually upload your build files to the
+//     specified Amazon S3 location. For more information, see Uploading Objects (https://docs.aws.amazon.com/AmazonS3/latest/dev/UploadingObjects.html)
 //     in the Amazon S3 Developer Guide. After you upload build files to the Amazon
 //     GameLift Amazon S3 location, you can't update them.
 //
@@ -58,12 +58,15 @@ type CreateBuildInput struct {
 	// unique. You can change this value later.
 	Name *string
 
-	// The operating system that you built the game server binaries to run on. This
-	// value determines the type of fleet resources that you can use for this build. If
-	// your game build contains multiple executables, they all must run on the same
-	// operating system. If an operating system isn't specified when creating a build,
-	// Amazon GameLift uses the default value (WINDOWS_2012). This value can't be
-	// changed later.
+	// The operating system that your game server binaries run on. This value
+	// determines the type of fleet resources that you use for this build. If your game
+	// build contains multiple executables, they all must run on the same operating
+	// system. You must specify a valid operating system in this request. There is no
+	// default value. You can't change a build's operating system later. If you have
+	// active fleets using the Windows Server 2012 operating system, you can continue
+	// to create new builds using this OS until October 10, 2023, when Microsoft ends
+	// its support. All others must use Windows Server 2016 when creating new
+	// Windows-based builds.
 	OperatingSystem types.OperatingSystem
 
 	// A server SDK version you used when integrating your game server build with

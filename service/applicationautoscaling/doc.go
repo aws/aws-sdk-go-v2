@@ -16,8 +16,8 @@
 //   - Lambda function provisioned concurrency
 //   - Amazon Managed Streaming for Apache Kafka broker storage
 //   - Amazon Neptune clusters
-//   - Amazon SageMaker Serverless endpoint provisioned concurrency
 //   - Amazon SageMaker endpoint variants
+//   - Amazon SageMaker Serverless endpoint provisioned concurrency
 //   - Spot Fleets (Amazon EC2)
 //   - Custom resources provided by your own applications or services
 //

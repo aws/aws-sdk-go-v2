@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides information to AWS CodePipeline about new revisions to a source.
+// Provides information to CodePipeline about new revisions to a source.
 func (c *Client) PutActionRevision(ctx context.Context, params *PutActionRevisionInput, optFns ...func(*Options)) (*PutActionRevisionOutput, error) {
 	if params == nil {
 		params = &PutActionRevisionInput{}

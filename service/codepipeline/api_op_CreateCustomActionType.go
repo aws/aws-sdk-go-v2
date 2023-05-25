@@ -12,7 +12,7 @@ import (
 )
 
 // Creates a new custom action that can be used in all pipelines associated with
-// the AWS account. Only used for custom actions.
+// the Amazon Web Services account. Only used for custom actions.
 func (c *Client) CreateCustomActionType(ctx context.Context, params *CreateCustomActionTypeInput, optFns ...func(*Options)) (*CreateCustomActionTypeOutput, error) {
 	if params == nil {
 		params = &CreateCustomActionTypeInput{}
@@ -46,7 +46,7 @@ type CreateCustomActionTypeInput struct {
 	// This member is required.
 	OutputArtifactDetails *types.ArtifactDetails
 
-	// The provider of the service used in the custom action, such as AWS CodeDeploy.
+	// The provider of the service used in the custom action, such as CodeDeploy.
 	//
 	// This member is required.
 	Provider *string

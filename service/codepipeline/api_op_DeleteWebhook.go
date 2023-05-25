@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a previously created webhook by name. Deleting the webhook stops AWS
+// Deletes a previously created webhook by name. Deleting the webhook stops
 // CodePipeline from starting a pipeline every time an external event occurs. The
 // API returns successfully when trying to delete a webhook that is already
 // deleted. If a deleted webhook is re-created by calling PutWebhook with the same
