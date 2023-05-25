@@ -3337,6 +3337,40 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#AutoParameter": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.sagemaker#ParameterKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the hyperparameter to optimize using Autotune.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ValueHint": {
+                    "target": "com.amazonaws.sagemaker#ParameterValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An example value of the hyperparameter to optimize using Autotune.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The name and an example value of the hyperparameter that\n            you want to use in Autotune. If Automatic model tuning (AMT) determines that your hyperparameter is eligible\n            for Autotune, an optimal hyperparameter range is selected for you.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#AutoParameters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#AutoParameter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.sagemaker#AutoRollbackConfig": {
             "type": "structure",
             "members": {
@@ -3349,6 +3383,32 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Automatic rollback configuration for handling endpoint deployment failures and\n            recovery.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#Autotune": {
+            "type": "structure",
+            "members": {
+                "Mode": {
+                    "target": "com.amazonaws.sagemaker#AutotuneMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Set <code>Mode</code> to <code>Enabled</code> if you want to use Autotune.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A flag to indicate if you want to use Autotune to automatically find optimal values for\n            the following fields:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTuningJobConfig.html#sagemaker-Type-HyperParameterTuningJobConfig-ParameterRanges\">ParameterRanges</a>: The names and ranges of parameters that a hyperparameter\n                    tuning job can optimize.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ResourceLimits.html\">ResourceLimits</a>: The maximum resources that can be used for a training job.\n                    These resources include the maximum number of training jobs, the maximum runtime of a\n                    tuning job, and the maximum number of training jobs to run at the same time.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTuningJobConfig.html#sagemaker-Type-HyperParameterTuningJobConfig-TrainingJobEarlyStoppingType\">TrainingJobEarlyStoppingType</a>: A flag that specifies whether or not to use\n                    early stopping for training jobs launched by a hyperparameter tuning job.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTrainingJobDefinition.html#sagemaker-Type-HyperParameterTrainingJobDefinition-RetryStrategy\">RetryStrategy</a>: The number of times to retry a training job.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTuningJobConfig.html\">Strategy</a>: Specifies how hyperparameter tuning chooses the combinations of\n                    hyperparameter values to use for the training jobs that it launches.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ConvergenceDetected.html\">ConvergenceDetected</a>: A flag to indicate that Automatic model tuning (AMT) has detected model\n                    convergence.</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.sagemaker#AutotuneMode": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Enabled"
+                    }
+                }
             }
         },
         "com.amazonaws.sagemaker#AwsManagedHumanLoopRequestSource": {
@@ -8093,6 +8153,12 @@
                     "target": "com.amazonaws.sagemaker#TagList",
                     "traits": {
                         "smithy.api#documentation": "<p>An array of key-value pairs. You can use tags to categorize your Amazon Web Services\n            resources in different ways, for example, by purpose, owner, or environment. For more\n            information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services Resources</a>.</p>\n         <p>Tags that you specify for the tuning job are also added to all training jobs that the\n            tuning job launches.</p>"
+                    }
+                },
+                "Autotune": {
+                    "target": "com.amazonaws.sagemaker#Autotune",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configures SageMaker Automatic model tuning (AMT) to automatically find optimal parameters\n            for the following fields:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTuningJobConfig.html#sagemaker-Type-HyperParameterTuningJobConfig-ParameterRanges\">ParameterRanges</a>: The names and ranges of parameters that a hyperparameter\n                    tuning job can optimize.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ResourceLimits.html\">ResourceLimits</a>: The maximum resources that can be used for a training job.\n                    These resources include the maximum number of training jobs, the maximum runtime of a\n                    tuning job, and the maximum number of training jobs to run at the same time.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTuningJobConfig.html#sagemaker-Type-HyperParameterTuningJobConfig-TrainingJobEarlyStoppingType\">TrainingJobEarlyStoppingType</a>: A flag that specifies whether or not to use\n                    early stopping for training jobs launched by a hyperparameter tuning job.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTrainingJobDefinition.html#sagemaker-Type-HyperParameterTrainingJobDefinition-RetryStrategy\">RetryStrategy</a>: The number of times to retry a training job.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTuningJobConfig.html\">Strategy</a>: Specifies how hyperparameter tuning chooses the combinations of\n                    hyperparameter values to use for the training jobs that it launches.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ConvergenceDetected.html\">ConvergenceDetected</a>: A flag to indicate that Automatic model tuning (AMT) has detected model\n                    convergence.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -16478,7 +16544,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets\n            a description of a hyperparameter tuning job.</p>"
+                "smithy.api#documentation": "<p>Returns a description of a hyperparameter tuning job, depending on the fields\n            selected. These fields can include the name, Amazon Resource Name (ARN), job status of\n            your tuning job and more.</p>"
             }
         },
         "com.amazonaws.sagemaker#DescribeHyperParameterTuningJobRequest": {
@@ -16502,7 +16568,7 @@
                 "HyperParameterTuningJobName": {
                     "target": "com.amazonaws.sagemaker#HyperParameterTuningJobName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the tuning job.</p>",
+                        "smithy.api#documentation": "<p>The name of the hyperparameter tuning job.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -16604,6 +16670,12 @@
                 },
                 "ConsumedResources": {
                     "target": "com.amazonaws.sagemaker#HyperParameterTuningJobConsumedResources"
+                },
+                "Autotune": {
+                    "target": "com.amazonaws.sagemaker#Autotune",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A flag to indicate if autotune is enabled for the hyperparameter tuning job.</p>"
+                    }
                 }
             },
             "traits": {
@@ -41641,6 +41713,12 @@
                     "target": "com.amazonaws.sagemaker#CategoricalParameterRanges",
                     "traits": {
                         "smithy.api#documentation": "<p>The array of <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CategoricalParameterRange.html\">CategoricalParameterRange</a> objects that specify ranges\n            of categorical hyperparameters that a hyperparameter tuning job searches.</p>"
+                    }
+                },
+                "AutoParameters": {
+                    "target": "com.amazonaws.sagemaker#AutoParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list containing hyperparameter names and example values to be used by Autotune to determine optimal ranges for your tuning job.</p>"
                     }
                 }
             },

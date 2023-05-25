@@ -1732,6 +1732,17 @@
                 "target": "com.amazonaws.glue#Action"
             }
         },
+        "com.amazonaws.glue#AdditionalOptionKeys": {
+            "type": "enum",
+            "members": {
+                "CacheOption": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "performanceTuning.caching"
+                    }
+                }
+            }
+        },
         "com.amazonaws.glue#AdditionalOptions": {
             "type": "map",
             "key": {
@@ -1936,18 +1947,18 @@
                 "Key": {
                     "target": "com.amazonaws.glue#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key when specifying a key-value pair.</p>"
+                        "smithy.api#documentation": "<p>The key for the additional connection option.</p>"
                     }
                 },
                 "Value": {
                     "target": "com.amazonaws.glue#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value when specifying a key-value pair.</p>"
+                        "smithy.api#documentation": "<p>The value for the additional connection option.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies an Amazon Redshift data store.</p>"
+                "smithy.api#documentation": "<p>Specifies an optional value when connecting to the Redshift cluster.</p>"
             }
         },
         "com.amazonaws.glue#AmazonRedshiftAdvancedOptions": {
@@ -5264,6 +5275,12 @@
                     "target": "com.amazonaws.glue#AmazonRedshiftTarget",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies a target that writes to a data target in Amazon Redshift.</p>"
+                    }
+                },
+                "EvaluateDataQualityMultiFrame": {
+                    "target": "com.amazonaws.glue#EvaluateDataQualityMultiFrame",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies your data quality evaluation criteria. Allows multiple input data and returns a collection of Dynamic Frames.</p>"
                     }
                 }
             },
@@ -9658,6 +9675,24 @@
                 "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
             }
         },
+        "com.amazonaws.glue#DQAdditionalOptions": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.glue#AdditionalOptionKeys"
+            },
+            "value": {
+                "target": "com.amazonaws.glue#GenericString"
+            }
+        },
+        "com.amazonaws.glue#DQDLAliases": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.glue#NodeName"
+            },
+            "value": {
+                "target": "com.amazonaws.glue#EnclosedInStringProperty"
+            }
+        },
         "com.amazonaws.glue#DQDLString": {
             "type": "string",
             "traits": {
@@ -10123,6 +10158,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A pass or fail status for the rule.</p>"
                     }
+                },
+                "EvaluatedMetrics": {
+                    "target": "com.amazonaws.glue#EvaluatedMetricsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of metrics associated with the evaluation of the rule.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10360,6 +10401,12 @@
                         "smithy.api#documentation": "<p>The name of the database where the Glue table exists.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "CatalogId": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The catalog id where the Glue table exists.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10379,6 +10426,15 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A data source (an Glue table) for which you want data quality results.</p>"
+            }
+        },
+        "com.amazonaws.glue#DataSourceMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.glue#NameString"
+            },
+            "value": {
+                "target": "com.amazonaws.glue#DataSource"
             }
         },
         "com.amazonaws.glue#Database": {
@@ -13101,6 +13157,68 @@
                 "smithy.api#documentation": "<p>Specifies your data quality evaluation criteria.</p>"
             }
         },
+        "com.amazonaws.glue#EvaluateDataQualityMultiFrame": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.glue#NodeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the data quality evaluation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Inputs": {
+                    "target": "com.amazonaws.glue#ManyInputs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The inputs of your data quality evaluation. The first input in this list is the primary data source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AdditionalDataSources": {
+                    "target": "com.amazonaws.glue#DQDLAliases",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The aliases of all data sources except primary.</p>"
+                    }
+                },
+                "Ruleset": {
+                    "target": "com.amazonaws.glue#DQDLString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ruleset for your data quality evaluation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PublishingOptions": {
+                    "target": "com.amazonaws.glue#DQResultsPublishingOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Options to configure how your results are published.</p>"
+                    }
+                },
+                "AdditionalOptions": {
+                    "target": "com.amazonaws.glue#DQAdditionalOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Options to configure runtime behavior of the transform.</p>"
+                    }
+                },
+                "StopJobOnFailureOptions": {
+                    "target": "com.amazonaws.glue#DQStopJobOnFailureOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Options to configure how your job will stop if your data quality evaluation fails.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies your data quality evaluation criteria.</p>"
+            }
+        },
+        "com.amazonaws.glue#EvaluatedMetricsMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.glue#NameString"
+            },
+            "value": {
+                "target": "com.amazonaws.glue#NullableDouble"
+            }
+        },
         "com.amazonaws.glue#EvaluationMetrics": {
             "type": "structure",
             "members": {
@@ -15253,6 +15371,12 @@
                     "target": "com.amazonaws.glue#DataQualityResultIdList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of result IDs for the data quality results for the run.</p>"
+                    }
+                },
+                "AdditionalDataSources": {
+                    "target": "com.amazonaws.glue#DataSourceMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of reference strings to additional data sources you can specify for an evaluation run.</p>"
                     }
                 }
             },
@@ -29236,6 +29360,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of ruleset names.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "AdditionalDataSources": {
+                    "target": "com.amazonaws.glue#DataSourceMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of reference strings to additional data sources you can specify for an evaluation run.</p>"
                     }
                 }
             },

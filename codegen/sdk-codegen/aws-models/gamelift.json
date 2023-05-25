@@ -469,6 +469,20 @@
                 }
             }
         },
+        "com.amazonaws.gamelift#ClaimFilterOption": {
+            "type": "structure",
+            "members": {
+                "InstanceStatuses": {
+                    "target": "com.amazonaws.gamelift#FilterInstanceStatuses",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of instance statuses that game servers may be claimed on. If provided, the list must contain the\n            <code>ACTIVE</code> status.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            <b>This data type is used with the Amazon GameLift FleetIQ and game server groups.</b>\n         </p>\n         <p>\n        Filters which game servers may be claimed when calling <code>ClaimGameServer</code>.\n    </p>"
+            }
+        },
         "com.amazonaws.gamelift#ClaimGameServer": {
             "type": "operation",
             "input": {
@@ -498,7 +512,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>This operation is used with the Amazon GameLift FleetIQ solution and game server groups.</b>\n         </p>\n         <p>Locates an available game server and\n            temporarily reserves it to host gameplay and players. This operation is called from a\n            game client or client service (such as a matchmaker) to request hosting resources for a\n            new game session. In response, Amazon GameLift FleetIQ locates an available game server, places it in\n                <code>CLAIMED</code> status for 60 seconds, and returns connection information that\n            players can use to connect to the game server. </p>\n         <p>To claim a game server, identify a game server group. You can also specify a game\n            server ID, although this approach bypasses Amazon GameLift FleetIQ placement optimization. Optionally,\n            include game data to pass to the game server at the start of a game session, such as a\n            game map or player information. </p>\n         <p>When a game server is successfully claimed, connection information is returned. A\n            claimed game server's utilization status remains <code>AVAILABLE</code> while the claim\n            status is set to <code>CLAIMED</code> for up to 60 seconds. This time period gives the\n            game server time to update its status to <code>UTILIZED</code> after players join. If\n            the game server's status is not updated within 60 seconds, the game server reverts to\n            unclaimed status and is available to be claimed by another request. The claim time\n            period is a fixed value and is not configurable.</p>\n         <p>If you try to claim a specific game server, this request will fail in the following\n            cases:</p>\n         <ul>\n            <li>\n               <p>If the game server utilization status is <code>UTILIZED</code>.</p>\n            </li>\n            <li>\n               <p>If the game server claim status is <code>CLAIMED</code>.</p>\n            </li>\n         </ul>\n         <note>\n            <p>When claiming a specific game server, this request will succeed even if the game\n                server is running on an instance in <code>DRAINING</code> status. To avoid this,\n                first check the instance status by calling <a href=\"https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeGameServerInstances.html\">DescribeGameServerInstances</a> .</p>\n         </note>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html\">Amazon GameLift FleetIQ\n                Guide</a>\n         </p>"
+                "smithy.api#documentation": "<p>\n            <b>This operation is used with the Amazon GameLift FleetIQ solution and game server groups.</b>\n         </p>\n         <p>Locates an available game server and\n            temporarily reserves it to host gameplay and players. This operation is called from a\n            game client or client service (such as a matchmaker) to request hosting resources for a\n            new game session. In response, Amazon GameLift FleetIQ locates an available game server, places it in\n                <code>CLAIMED</code> status for 60 seconds, and returns connection information that\n            players can use to connect to the game server. </p>\n         <p>To claim a game server, identify a game server group. You can also specify a game\n            server ID, although this approach bypasses Amazon GameLift FleetIQ placement optimization. Optionally,\n            include game data to pass to the game server at the start of a game session, such as a\n            game map or player information. Filter options may be included to further restrict how a\n            game server is chosen, such as only allowing game servers on <code>ACTIVE</code> instances\n            to be claimed.</p>\n         <p>When a game server is successfully claimed, connection information is returned. A\n            claimed game server's utilization status remains <code>AVAILABLE</code> while the claim\n            status is set to <code>CLAIMED</code> for up to 60 seconds. This time period gives the\n            game server time to update its status to <code>UTILIZED</code> after players join. If\n            the game server's status is not updated within 60 seconds, the game server reverts to\n            unclaimed status and is available to be claimed by another request. The claim time\n            period is a fixed value and is not configurable.</p>\n         <p>If you try to claim a specific game server, this request will fail in the following\n            cases:</p>\n         <ul>\n            <li>\n               <p>If the game server utilization status is <code>UTILIZED</code>.</p>\n            </li>\n            <li>\n               <p>If the game server claim status is <code>CLAIMED</code>.</p>\n            </li>\n            <li>\n               <p>If the game server is running on an instance in <code>DRAINING</code> status and\n                provided filter option does not allow placing on <code>DRAINING</code> instances.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html\">Amazon GameLift FleetIQ\n                Guide</a>\n         </p>"
             }
         },
         "com.amazonaws.gamelift#ClaimGameServerInput": {
@@ -521,6 +535,12 @@
                     "target": "com.amazonaws.gamelift#GameServerData",
                     "traits": {
                         "smithy.api#documentation": "<p>A set of custom game server properties, formatted as a single string value. This data \n            is passed to a game client or service when it requests information on game servers. </p>"
+                    }
+                },
+                "FilterOption": {
+                    "target": "com.amazonaws.gamelift#ClaimFilterOption",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Object that restricts how a claimed game server is chosen.</p>"
                     }
                 }
             },
@@ -855,7 +875,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new Amazon GameLift build resource for your game server binary files. Combine game\n            server binaries into a zip file for use with Amazon GameLift. </p>\n         <important>\n            <p>When setting up a new game build for Amazon GameLift, we recommend using the CLI command <b>\n                  <a href=\"https://docs.aws.amazon.com/cli/latest/reference/gamelift/upload-build.html\">upload-build</a>\n               </b>. This helper command combines two tasks: (1) it\n                uploads your build files from a file directory to a Amazon GameLift Amazon S3 location, and (2)\n                it creates a new build resource.</p>\n         </important>\n         <p>You can use the operation in the following scenarios:</p>\n         <ul>\n            <li>\n               <p>To create a new game build with build files that are in an Amazon S3 location under\n                    an Amazon Web Services account that you control. To use this option, you give Amazon GameLift access to\n                    the Amazon S3 bucket. With permissions in place, specify a build name, operating\n                    system, and the Amazon S3 storage location of your game build.</p>\n            </li>\n            <li>\n               <p>To directly upload your build files to a Amazon GameLift Amazon S3 location. To use this\n                    option,  specify a build name and operating system. This operation creates a new\n                    build resource and also returns an Amazon S3 location with temporary access\n                    credentials. Use the credentials to manually upload your build files to the\n                    specified Amazon S3 location. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UploadingObjects.html\">Uploading Objects</a> in\n                    the <i>Amazon S3 Developer Guide</i>. After you upload build files to\n                    the Amazon GameLift Amazon S3 location, you can't update them. </p>\n            </li>\n         </ul>\n         <p>If successful, this operation creates a new build resource with a unique build ID and\n            places it in <code>INITIALIZED</code> status. A build must be in <code>READY</code>\n            status before you can create fleets with it.</p>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-intro.html\">Uploading Your\n                Game</a>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-cli-uploading.html#gamelift-build-cli-uploading-create-build\"> Create a Build with Files in Amazon S3</a>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets\">All APIs by task</a>\n         </p>"
+                "smithy.api#documentation": "<p>Creates a new Amazon GameLift build resource for your game server binary files. Combine game\n            server binaries into a zip file for use with Amazon GameLift. </p>\n         <important>\n            <p>When setting up a new game build for Amazon GameLift, we recommend using the CLI command <b>\n                  <a href=\"https://docs.aws.amazon.com/cli/latest/reference/gamelift/upload-build.html\">upload-build</a>\n               </b>. This helper command combines two tasks: (1) it\n                uploads your build files from a file directory to an Amazon GameLift Amazon S3 location, and (2)\n                it creates a new build resource.</p>\n         </important>\n         <p>You can use the <code>CreateBuild</code> operation in the following scenarios:</p>\n         <ul>\n            <li>\n               <p>Create a new game build with build files that are in an Amazon S3 location under an\n                    Amazon Web Services account that you control. To use this option, you give Amazon GameLift access to\n                    the Amazon S3 bucket. With permissions in place, specify a build name, operating\n                    system, and the Amazon S3 storage location of your game build.</p>\n            </li>\n            <li>\n               <p>Upload your build files to a Amazon GameLift Amazon S3 location. To use this option,\n                    specify a build name and operating system. This operation creates a new build\n                    resource and also returns an Amazon S3 location with temporary access credentials.\n                    Use the credentials to manually upload your build files to the specified Amazon S3\n                    location. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UploadingObjects.html\">Uploading Objects</a> in\n                    the <i>Amazon S3 Developer Guide</i>. After you upload build files to\n                    the Amazon GameLift Amazon S3 location, you can't update them. </p>\n            </li>\n         </ul>\n         <p>If successful, this operation creates a new build resource with a unique build ID and\n            places it in <code>INITIALIZED</code> status. A build must be in <code>READY</code>\n            status before you can create fleets with it.</p>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-intro.html\">Uploading Your\n                Game</a>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-cli-uploading.html#gamelift-build-cli-uploading-create-build\"> Create a Build with Files in Amazon S3</a>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets\">All APIs by task</a>\n         </p>"
             }
         },
         "com.amazonaws.gamelift#CreateBuildInput": {
@@ -882,7 +902,7 @@
                 "OperatingSystem": {
                     "target": "com.amazonaws.gamelift#OperatingSystem",
                     "traits": {
-                        "smithy.api#documentation": "<p>The operating system that you built the game server binaries to run on. This value\n            determines the type of fleet resources that you can use for this build. If your game\n            build contains multiple executables, they all must run on the same operating system. If\n            an operating system isn't specified when creating a build, Amazon GameLift uses the\n            default value (WINDOWS_2012). This value can't be changed later.</p>"
+                        "smithy.api#documentation": "<p>The operating system that your game server binaries run on. This value determines the\n            type of fleet resources that you use for this build. If your game build contains\n            multiple executables, they all must run on the same operating system. You must specify a\n            valid operating system in this request. There is no default value. You can't change a\n            build's operating system later.</p>\n         <note>\n            <p>If you have active fleets using the Windows Server 2012 operating system, you can continue to\n                create new builds using this OS until October 10, 2023, when Microsoft ends its\n                support. All others must use Windows Server 2016 when creating new Windows-based\n                builds.</p>\n         </note>"
                     }
                 },
                 "Tags": {
@@ -1511,7 +1531,7 @@
                 "TimeoutInSeconds": {
                     "target": "com.amazonaws.gamelift#WholeNumber",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum time, in seconds, that a new game session placement request remains in the queue. When a request exceeds this time, the game session placement changes to a <code>TIMED_OUT</code> status.</p>"
+                        "smithy.api#documentation": "<p>The maximum time, in seconds, that a new game session placement request remains in the queue. When a request exceeds this time, the game session placement changes to a <code>TIMED_OUT</code> status. By default, this property is set to <code>600</code>.</p>"
                     }
                 },
                 "PlayerLatencyPolicies": {
@@ -6256,6 +6276,29 @@
                 "smithy.api#documentation": "<p>A list of fleet locations where a game session queue can place new game sessions. You\n            can use a filter to temporarily turn off placements for specific locations. For queues\n            that have multi-location fleets, you can use a filter configuration allow placement with\n            some, but not all of these locations.</p>"
             }
         },
+        "com.amazonaws.gamelift#FilterInstanceStatus": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "DRAINING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DRAINING"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.gamelift#FilterInstanceStatuses": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.gamelift#FilterInstanceStatus"
+            }
+        },
         "com.amazonaws.gamelift#FleetAction": {
             "type": "enum",
             "members": {
@@ -9428,7 +9471,7 @@
                 "TimeoutInSeconds": {
                     "target": "com.amazonaws.gamelift#WholeNumber",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum time, in seconds, that a new game session placement request remains in the queue. When a request exceeds this time, the game session placement changes to a <code>TIMED_OUT</code> status.</p>"
+                        "smithy.api#documentation": "<p>The maximum time, in seconds, that a new game session placement request remains in the queue. When a request exceeds this time, the game session placement changes to a <code>TIMED_OUT</code> status. By default, this property is set to <code>600</code>.</p>"
                     }
                 },
                 "PlayerLatencyPolicies": {
@@ -9781,7 +9824,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the location of stored game session logs for a specified game session. When\n            a game session is terminated, Amazon GameLift automatically stores the logs in Amazon S3 and\n            retains them for 14 days. Use this URL to download the logs.</p>\n         <note>\n            <p>See the <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_gamelift\">Amazon Web Services Service\n                    Limits</a> page for maximum log file sizes. Log files that exceed this limit\n                are not saved.</p>\n         </note>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets\">All APIs by task</a>\n         </p>"
+                "smithy.api#documentation": "<p>Retrieves the location of stored game session logs for a specified game session on\n            Amazon GameLift managed fleets. When a game session is terminated, Amazon GameLift automatically stores\n            the logs in Amazon S3 and retains them for 14 days. Use this URL to download the logs.</p>\n         <note>\n            <p>See the <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_gamelift\">Amazon Web Services Service\n                    Limits</a> page for maximum log file sizes. Log files that exceed this limit\n                are not saved.</p>\n         </note>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets\">All APIs by task</a>\n         </p>"
             }
         },
         "com.amazonaws.gamelift#GetGameSessionLogUrlInput": {
@@ -14869,7 +14912,7 @@
                 "TimeoutInSeconds": {
                     "target": "com.amazonaws.gamelift#WholeNumber",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum time, in seconds, that a new game session placement request remains in the queue. When a request exceeds this time, the game session placement changes to a <code>TIMED_OUT</code> status.</p>"
+                        "smithy.api#documentation": "<p>The maximum time, in seconds, that a new game session placement request remains in the queue. When a request exceeds this time, the game session placement changes to a <code>TIMED_OUT</code> status. By default, this property is set to <code>600</code>.</p>"
                     }
                 },
                 "PlayerLatencyPolicies": {
