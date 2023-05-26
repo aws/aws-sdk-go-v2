@@ -1,8 +1,0 @@
-{
-    "id": "624803e0-f6b1-4d4e-bdd3-d4537ca7fc1b",
-    "type": "feature",
-    "description": "Add Multicast Group support in Network Analyzer Configuration.",
-    "modules": [
-        "service/iotwireless"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.57.0 (2023-05-26)
+
+* **Feature**: Documentation update for a new Initiation Method value in DescribeContact API
+
 # v1.56.0 (2023-05-24)
 
 * **Feature**: Amazon Connect Evaluation Capabilities: validation improvements

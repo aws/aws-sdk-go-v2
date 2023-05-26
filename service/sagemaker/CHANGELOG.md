@@ -1,3 +1,7 @@
+# v1.82.0 (2023-05-26)
+
+* **Feature**: Added ml.p4d and ml.inf1 as supported instance type families for SageMaker Notebook Instances.
+
 # v1.81.0 (2023-05-25)
 
 * **Feature**: Amazon SageMaker Automatic Model Tuning now supports enabling Autotune for tuning jobs which can choose tuning job configurations.

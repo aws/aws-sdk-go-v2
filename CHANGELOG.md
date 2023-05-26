@@ -1,3 +1,13 @@
+# Release (2023-05-26)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.57.0](service/connect/CHANGELOG.md#v1570-2023-05-26)
+  * **Feature**: Documentation update for a new Initiation Method value in DescribeContact API
+* `github.com/aws/aws-sdk-go-v2/service/iotwireless`: [v1.28.0](service/iotwireless/CHANGELOG.md#v1280-2023-05-26)
+  * **Feature**: Add Multicast Group support in Network Analyzer Configuration.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.82.0](service/sagemaker/CHANGELOG.md#v1820-2023-05-26)
+  * **Feature**: Added ml.p4d and ml.inf1 as supported instance type families for SageMaker Notebook Instances.
+
 # Release (2023-05-25)
 
 ## Module Highlights
