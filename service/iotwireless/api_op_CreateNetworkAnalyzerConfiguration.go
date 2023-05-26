@@ -44,6 +44,10 @@ type CreateNetworkAnalyzerConfigurationInput struct {
 	// The description of the new resource.
 	Description *string
 
+	// Multicast Group resources to add to the network analyzer configruation. Provide
+	// the MulticastGroupId of the resource to add in the input array.
+	MulticastGroups []string
+
 	// The tag to attach to the specified resource. Tags are metadata that you can use
 	// to manage a resource.
 	Tags []types.Tag

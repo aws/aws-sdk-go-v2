@@ -45,6 +45,10 @@ type GetNetworkAnalyzerConfigurationOutput struct {
 	// The description of the new resource.
 	Description *string
 
+	// List of multicast group resources that have been added to the network analyzer
+	// configuration.
+	MulticastGroups []string
+
 	// Name of the network analyzer configuration.
 	Name *string
 

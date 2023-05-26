@@ -1798,6 +1798,11 @@ type TraceContent struct {
 	// more detailed logs.
 	LogLevel LogLevel
 
+	// FrameInfo of your multicast group resources for the trace content. Use
+	// FrameInfo to debug the multicast communication between your LoRaWAN end devices
+	// and the network server.
+	MulticastFrameInfo MulticastFrameInfo
+
 	// FrameInfo of your wireless device resources for the trace content. Use
 	// FrameInfo to debug the communication between your LoRaWAN end devices and the
 	// network server.
@@ -2068,7 +2073,8 @@ type WirelessDeviceStatistics struct {
 	// The ID of the wireless device reporting the data.
 	Id *string
 
-	// The date and time when the most recent uplink was received.
+	// The date and time when the most recent uplink was received. Theis value is only
+	// valid for 3 months.
 	LastUplinkReceivedAt *string
 
 	// LoRaWAN device info.
@@ -2146,7 +2152,8 @@ type WirelessGatewayStatistics struct {
 	// The ID of the wireless gateway reporting the data.
 	Id *string
 
-	// The date and time when the most recent uplink was received.
+	// The date and time when the most recent uplink was received. This value is only
+	// valid for 3 months.
 	LastUplinkReceivedAt *string
 
 	// LoRaWAN gateway info.

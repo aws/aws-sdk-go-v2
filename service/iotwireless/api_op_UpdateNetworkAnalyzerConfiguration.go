@@ -37,6 +37,14 @@ type UpdateNetworkAnalyzerConfigurationInput struct {
 	// The description of the new resource.
 	Description *string
 
+	// Multicast group resources to add to the network analyzer configuration. Provide
+	// the MulticastGroupId of the resource to add in the input array.
+	MulticastGroupsToAdd []string
+
+	// Multicast group resources to remove from the network analyzer configuration.
+	// Provide the MulticastGroupId of the resource to remove in the input array.
+	MulticastGroupsToRemove []string
+
 	// Trace content for your wireless gateway and wireless device resources.
 	TraceContent *types.TraceContent
 

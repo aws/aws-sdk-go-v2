@@ -42,7 +42,8 @@ type GetWirelessGatewayStatisticsOutput struct {
 	// The connection status of the wireless gateway.
 	ConnectionStatus types.ConnectionStatus
 
-	// The date and time when the most recent uplink was received.
+	// The date and time when the most recent uplink was received. This value is only
+	// valid for 3 months.
 	LastUplinkReceivedAt *string
 
 	// The ID of the wireless gateway.

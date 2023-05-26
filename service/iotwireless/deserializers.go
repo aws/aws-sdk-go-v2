@@ -6171,6 +6171,11 @@ func awsRestjson1_deserializeOpDocumentGetNetworkAnalyzerConfigurationOutput(v *
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "MulticastGroups":
+			if err := awsRestjson1_deserializeDocumentNetworkAnalyzerMulticastGroupList(&sv.MulticastGroups, value); err != nil {
+				return err
+			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19538,6 +19543,42 @@ func awsRestjson1_deserializeDocumentNetworkAnalyzerConfigurations(v **types.Net
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentNetworkAnalyzerMulticastGroupList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected MulticastGroupId to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentOtaaV1_0_x(v **types.OtaaV1_0_x, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -21232,6 +21273,15 @@ func awsRestjson1_deserializeDocumentTraceContent(v **types.TraceContent, value 
 					return fmt.Errorf("expected LogLevel to be of type string, got %T instead", value)
 				}
 				sv.LogLevel = types.LogLevel(jtv)
+			}
+
+		case "MulticastFrameInfo":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MulticastFrameInfo to be of type string, got %T instead", value)
+				}
+				sv.MulticastFrameInfo = types.MulticastFrameInfo(jtv)
 			}
 
 		case "WirelessDeviceFrameInfo":

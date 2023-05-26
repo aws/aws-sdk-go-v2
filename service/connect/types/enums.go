@@ -206,14 +206,15 @@ type ContactInitiationMethod string
 
 // Enum values for ContactInitiationMethod
 const (
-	ContactInitiationMethodInbound       ContactInitiationMethod = "INBOUND"
-	ContactInitiationMethodOutbound      ContactInitiationMethod = "OUTBOUND"
-	ContactInitiationMethodTransfer      ContactInitiationMethod = "TRANSFER"
-	ContactInitiationMethodQueueTransfer ContactInitiationMethod = "QUEUE_TRANSFER"
-	ContactInitiationMethodCallback      ContactInitiationMethod = "CALLBACK"
-	ContactInitiationMethodApi           ContactInitiationMethod = "API"
-	ContactInitiationMethodDisconnect    ContactInitiationMethod = "DISCONNECT"
-	ContactInitiationMethodMonitor       ContactInitiationMethod = "MONITOR"
+	ContactInitiationMethodInbound          ContactInitiationMethod = "INBOUND"
+	ContactInitiationMethodOutbound         ContactInitiationMethod = "OUTBOUND"
+	ContactInitiationMethodTransfer         ContactInitiationMethod = "TRANSFER"
+	ContactInitiationMethodQueueTransfer    ContactInitiationMethod = "QUEUE_TRANSFER"
+	ContactInitiationMethodCallback         ContactInitiationMethod = "CALLBACK"
+	ContactInitiationMethodApi              ContactInitiationMethod = "API"
+	ContactInitiationMethodDisconnect       ContactInitiationMethod = "DISCONNECT"
+	ContactInitiationMethodMonitor          ContactInitiationMethod = "MONITOR"
+	ContactInitiationMethodExternalOutbound ContactInitiationMethod = "EXTERNAL_OUTBOUND"
 )
 
 // Values returns all known values for ContactInitiationMethod. Note that this can
@@ -229,6 +230,7 @@ func (ContactInitiationMethod) Values() []ContactInitiationMethod {
 		"API",
 		"DISCONNECT",
 		"MONITOR",
+		"EXTERNAL_OUTBOUND",
 	}
 }
 

@@ -385,6 +385,24 @@ func (MessageType) Values() []MessageType {
 	}
 }
 
+type MulticastFrameInfo string
+
+// Enum values for MulticastFrameInfo
+const (
+	MulticastFrameInfoEnabled  MulticastFrameInfo = "ENABLED"
+	MulticastFrameInfoDisabled MulticastFrameInfo = "DISABLED"
+)
+
+// Values returns all known values for MulticastFrameInfo. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MulticastFrameInfo) Values() []MulticastFrameInfo {
+	return []MulticastFrameInfo{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type OnboardStatus string
 
 // Enum values for OnboardStatus

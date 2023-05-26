@@ -1,0 +1,8 @@
+{
+    "id": "e749c496-9103-480c-af75-b0adeb618aba",
+    "type": "feature",
+    "description": "Added ml.p4d and ml.inf1 as supported instance type families for SageMaker Notebook Instances.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

@@ -50,15 +50,15 @@ type CreateFuotaTaskInput struct {
 	// The description of the new resource.
 	Description *string
 
-	// The interval of sending fragments in milliseconds. Currently the interval will
-	// be rounded to the nearest second. Note that this interval only controls the
-	// timing when the cloud sends the fragments down. The actual delay of receiving
-	// fragments at device side depends on the device's class and the communication
-	// delay with the cloud.
+	// The interval for sending fragments in milliseconds, rounded to the nearest
+	// second. This interval only determines the timing for when the Cloud sends down
+	// the fragments to yor device. There can be a delay for when your device will
+	// receive these fragments. This delay depends on the device's class and the
+	// communication delay with the cloud.
 	FragmentIntervalMS *int32
 
-	// The size of each fragment in bytes. Currently only supported in fuota tasks
-	// with multicast groups.
+	// The size of each fragment in bytes. This parameter is supported only for FUOTA
+	// tasks with multicast groups.
 	FragmentSizeBytes *int32
 
 	// The LoRaWAN information used with a FUOTA task.
@@ -67,9 +67,10 @@ type CreateFuotaTaskInput struct {
 	// The name of a FUOTA task.
 	Name *string
 
-	// The percentage of added redundant fragments. For example, if firmware file is
-	// 100 bytes and fragment size is 10 bytes, with RedundancyPercent set to 50(%),
-	// the final number of encoded fragments is (100 / 10) + (100 / 10 * 50%) = 15.
+	// The percentage of the added fragments that are redundant. For example, if the
+	// size of the firmware image file is 100 bytes and the fragment size is 10 bytes,
+	// with RedundancyPercent set to 50(%), the final number of encoded fragments is
+	// (100 / 10) + (100 / 10 * 50%) = 15.
 	RedundancyPercent *int32
 
 	// The tag to attach to the specified resource. Tags are metadata that you can use

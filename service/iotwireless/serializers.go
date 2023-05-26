@@ -1115,6 +1115,13 @@ func awsRestjson1_serializeOpDocumentCreateNetworkAnalyzerConfigurationInput(v *
 		ok.String(*v.Description)
 	}
 
+	if v.MulticastGroups != nil {
+		ok := object.Key("MulticastGroups")
+		if err := awsRestjson1_serializeDocumentNetworkAnalyzerMulticastGroupList(v.MulticastGroups, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
@@ -7152,6 +7159,20 @@ func awsRestjson1_serializeOpDocumentUpdateNetworkAnalyzerConfigurationInput(v *
 		ok.String(*v.Description)
 	}
 
+	if v.MulticastGroupsToAdd != nil {
+		ok := object.Key("MulticastGroupsToAdd")
+		if err := awsRestjson1_serializeDocumentNetworkAnalyzerMulticastGroupList(v.MulticastGroupsToAdd, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MulticastGroupsToRemove != nil {
+		ok := object.Key("MulticastGroupsToRemove")
+		if err := awsRestjson1_serializeDocumentNetworkAnalyzerMulticastGroupList(v.MulticastGroupsToRemove, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.TraceContent != nil {
 		ok := object.Key("TraceContent")
 		if err := awsRestjson1_serializeDocumentTraceContent(v.TraceContent, ok); err != nil {
@@ -9344,6 +9365,17 @@ func awsRestjson1_serializeDocumentNetIdFilters(v []string, value smithyjson.Val
 	return nil
 }
 
+func awsRestjson1_serializeDocumentNetworkAnalyzerMulticastGroupList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentOtaaV1_0_x(v *types.OtaaV1_0_x, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -9880,6 +9912,11 @@ func awsRestjson1_serializeDocumentTraceContent(v *types.TraceContent, value smi
 	if len(v.LogLevel) > 0 {
 		ok := object.Key("LogLevel")
 		ok.String(string(v.LogLevel))
+	}
+
+	if len(v.MulticastFrameInfo) > 0 {
+		ok := object.Key("MulticastFrameInfo")
+		ok.String(string(v.MulticastFrameInfo))
 	}
 
 	if len(v.WirelessDeviceFrameInfo) > 0 {
