@@ -3783,6 +3783,12 @@
                     "traits": {
                         "smithy.api#enumValue": "MONITOR"
                     }
+                },
+                "EXTERNAL_OUTBOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXTERNAL_OUTBOUND"
+                    }
                 }
             }
         },
