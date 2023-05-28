@@ -1,0 +1,8 @@
+{
+    "id": "1a2c46b4-f604-4155-b3dd-5979b26fd38e",
+    "type": "announcement",
+    "description": "This release contains a breaking change to the Amazon S3 API client's SelectObjectContent method. ScanRange members [Start and End], of the SelectObjectContentInput were changed from value, to pointer types. Your applications using SelectObjectContent with ScanRange parameter will fail to compile and need to be updated to use pointer types for the Start and End numeric parameters. You can use the SDK helper utility [aws.Int64](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#Int64) to convert literal numbers to pointer types.",
+    "modules": [
+        "service/s3"
+    ]
+}
