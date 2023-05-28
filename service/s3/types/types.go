@@ -2846,13 +2846,13 @@ type ScanRange struct {
 	// non-negative integers. The default value is one less than the size of the object
 	// being queried. If only the End parameter is supplied, it is interpreted to mean
 	// scan the last N bytes of the file. For example, 50 means scan the last 50 bytes.
-	End int64
+	End *int64
 
 	// Specifies the start of the byte range. This parameter is optional. Valid
 	// values: non-negative integers. The default value is 0. If only start is
 	// supplied, it means scan from that point to the end of the file. For example, 50
 	// means scan from byte 50 until the end of the file.
-	Start int64
+	Start *int64
 
 	noSmithyDocumentSerde
 }

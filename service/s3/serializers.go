@@ -12037,7 +12037,7 @@ func awsRestxml_serializeDocumentS3Location(v *types.S3Location, value smithyxml
 
 func awsRestxml_serializeDocumentScanRange(v *types.ScanRange, value smithyxml.Value) error {
 	defer value.Close()
-	if v.End != 0 {
+	if v.End != nil {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -12046,9 +12046,9 @@ func awsRestxml_serializeDocumentScanRange(v *types.ScanRange, value smithyxml.V
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Long(v.End)
+		el.Long(*v.End)
 	}
-	if v.Start != 0 {
+	if v.Start != nil {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
@@ -12057,7 +12057,7 @@ func awsRestxml_serializeDocumentScanRange(v *types.ScanRange, value smithyxml.V
 			Attr: rootAttr,
 		}
 		el := value.MemberElement(root)
-		el.Long(v.Start)
+		el.Long(*v.Start)
 	}
 	return nil
 }
