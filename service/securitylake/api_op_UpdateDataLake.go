@@ -6,37 +6,42 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/securitylake/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified notification subscription in Amazon Security Lake for the
-// organization you specify.
-func (c *Client) DeleteDatalakeExceptionsSubscription(ctx context.Context, params *DeleteDatalakeExceptionsSubscriptionInput, optFns ...func(*Options)) (*DeleteDatalakeExceptionsSubscriptionOutput, error) {
+// Specifies where to store your security data and for how long. You can add a
+// rollup Region to consolidate data from multiple Amazon Web Services Regions.
+func (c *Client) UpdateDataLake(ctx context.Context, params *UpdateDataLakeInput, optFns ...func(*Options)) (*UpdateDataLakeOutput, error) {
 	if params == nil {
-		params = &DeleteDatalakeExceptionsSubscriptionInput{}
+		params = &UpdateDataLakeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteDatalakeExceptionsSubscription", params, optFns, c.addOperationDeleteDatalakeExceptionsSubscriptionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateDataLake", params, optFns, c.addOperationUpdateDataLakeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DeleteDatalakeExceptionsSubscriptionOutput)
+	out := result.(*UpdateDataLakeOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type DeleteDatalakeExceptionsSubscriptionInput struct {
+type UpdateDataLakeInput struct {
+
+	// Specify the Region or Regions that will contribute data to the rollup region.
+	//
+	// This member is required.
+	Configurations []types.DataLakeConfiguration
+
 	noSmithyDocumentSerde
 }
 
-type DeleteDatalakeExceptionsSubscriptionOutput struct {
+type UpdateDataLakeOutput struct {
 
-	// Retrieves the status of the delete Security Lake operation for an account.
-	//
-	// This member is required.
-	Status *string
+	// The created Security Lake configuration object.
+	DataLakes []types.DataLakeResource
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -44,12 +49,12 @@ type DeleteDatalakeExceptionsSubscriptionOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDeleteDatalakeExceptionsSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDatalakeExceptionsSubscription{}, middleware.After)
+func (c *Client) addOperationUpdateDataLakeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDataLake{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteDatalakeExceptionsSubscription{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDataLake{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -89,7 +94,10 @@ func (c *Client) addOperationDeleteDatalakeExceptionsSubscriptionMiddlewares(sta
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDatalakeExceptionsSubscription(options.Region), middleware.Before); err != nil {
+	if err = addOpUpdateDataLakeValidationMiddleware(stack); err != nil {
+		return err
+	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateDataLake(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -107,11 +115,11 @@ func (c *Client) addOperationDeleteDatalakeExceptionsSubscriptionMiddlewares(sta
 	return nil
 }
 
-func newServiceMetadataMiddleware_opDeleteDatalakeExceptionsSubscription(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opUpdateDataLake(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "securitylake",
-		OperationName: "DeleteDatalakeExceptionsSubscription",
+		OperationName: "UpdateDataLake",
 	}
 }

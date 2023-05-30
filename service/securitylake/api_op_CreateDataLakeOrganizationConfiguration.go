@@ -11,51 +11,48 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the specified notification subscription in Amazon Security Lake for the
-// organization you specify.
-func (c *Client) UpdateDatalakeExceptionsSubscription(ctx context.Context, params *UpdateDatalakeExceptionsSubscriptionInput, optFns ...func(*Options)) (*UpdateDatalakeExceptionsSubscriptionOutput, error) {
+// Automatically enables Amazon Security Lake for new member accounts in your
+// organization. Security Lake is not automatically enabled for any existing member
+// accounts in your organization.
+func (c *Client) CreateDataLakeOrganizationConfiguration(ctx context.Context, params *CreateDataLakeOrganizationConfigurationInput, optFns ...func(*Options)) (*CreateDataLakeOrganizationConfigurationOutput, error) {
 	if params == nil {
-		params = &UpdateDatalakeExceptionsSubscriptionInput{}
+		params = &CreateDataLakeOrganizationConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateDatalakeExceptionsSubscription", params, optFns, c.addOperationUpdateDatalakeExceptionsSubscriptionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateDataLakeOrganizationConfiguration", params, optFns, c.addOperationCreateDataLakeOrganizationConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*UpdateDatalakeExceptionsSubscriptionOutput)
+	out := result.(*CreateDataLakeOrganizationConfigurationOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type UpdateDatalakeExceptionsSubscriptionInput struct {
+type CreateDataLakeOrganizationConfigurationInput struct {
 
-	// The account that is subscribed to receive exception notifications.
+	// Enable Security Lake with the specified configuration settings, to begin
+	// collecting security data for new accounts in your organization.
 	//
 	// This member is required.
-	NotificationEndpoint *string
-
-	// The subscription protocol to which exception messages are posted.
-	//
-	// This member is required.
-	SubscriptionProtocol types.SubscriptionProtocolType
+	AutoEnableNewAccount []types.DataLakeAutoEnableNewAccountConfiguration
 
 	noSmithyDocumentSerde
 }
 
-type UpdateDatalakeExceptionsSubscriptionOutput struct {
+type CreateDataLakeOrganizationConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationUpdateDatalakeExceptionsSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDatalakeExceptionsSubscription{}, middleware.After)
+func (c *Client) addOperationCreateDataLakeOrganizationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDataLakeOrganizationConfiguration{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDatalakeExceptionsSubscription{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDataLakeOrganizationConfiguration{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -95,10 +92,10 @@ func (c *Client) addOperationUpdateDatalakeExceptionsSubscriptionMiddlewares(sta
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpUpdateDatalakeExceptionsSubscriptionValidationMiddleware(stack); err != nil {
+	if err = addOpCreateDataLakeOrganizationConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateDatalakeExceptionsSubscription(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDataLakeOrganizationConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -116,11 +113,11 @@ func (c *Client) addOperationUpdateDatalakeExceptionsSubscriptionMiddlewares(sta
 	return nil
 }
 
-func newServiceMetadataMiddleware_opUpdateDatalakeExceptionsSubscription(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opCreateDataLakeOrganizationConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "securitylake",
-		OperationName: "UpdateDatalakeExceptionsSubscription",
+		OperationName: "CreateDataLakeOrganizationConfiguration",
 	}
 }

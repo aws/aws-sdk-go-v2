@@ -6,56 +6,44 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	"github.com/aws/aws-sdk-go-v2/service/securitylake/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// DeleteDatalakeAutoEnable removes automatic enablement of configuration settings
-// for new member accounts (but keeps settings for the delegated administrator)
-// from Amazon Security Lake. You must run this API using credentials of the
-// delegated administrator. When you run this API, new member accounts that are
-// added after the organization enables Security Lake won't contribute to the data
-// lake.
-func (c *Client) DeleteDatalakeAutoEnable(ctx context.Context, params *DeleteDatalakeAutoEnableInput, optFns ...func(*Options)) (*DeleteDatalakeAutoEnableOutput, error) {
+// Deletes the specified notification subscription in Amazon Security Lake for the
+// organization you specify.
+func (c *Client) DeleteDataLakeExceptionSubscription(ctx context.Context, params *DeleteDataLakeExceptionSubscriptionInput, optFns ...func(*Options)) (*DeleteDataLakeExceptionSubscriptionOutput, error) {
 	if params == nil {
-		params = &DeleteDatalakeAutoEnableInput{}
+		params = &DeleteDataLakeExceptionSubscriptionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteDatalakeAutoEnable", params, optFns, c.addOperationDeleteDatalakeAutoEnableMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteDataLakeExceptionSubscription", params, optFns, c.addOperationDeleteDataLakeExceptionSubscriptionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DeleteDatalakeAutoEnableOutput)
+	out := result.(*DeleteDataLakeExceptionSubscriptionOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type DeleteDatalakeAutoEnableInput struct {
-
-	// Remove automatic enablement of configuration settings for new member accounts
-	// in Security Lake.
-	//
-	// This member is required.
-	RemoveFromConfigurationForNewAccounts []types.AutoEnableNewRegionConfiguration
-
+type DeleteDataLakeExceptionSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
-type DeleteDatalakeAutoEnableOutput struct {
+type DeleteDataLakeExceptionSubscriptionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDeleteDatalakeAutoEnableMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDatalakeAutoEnable{}, middleware.After)
+func (c *Client) addOperationDeleteDataLakeExceptionSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDataLakeExceptionSubscription{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteDatalakeAutoEnable{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteDataLakeExceptionSubscription{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -95,10 +83,7 @@ func (c *Client) addOperationDeleteDatalakeAutoEnableMiddlewares(stack *middlewa
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpDeleteDatalakeAutoEnableValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDatalakeAutoEnable(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDataLakeExceptionSubscription(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -116,11 +101,11 @@ func (c *Client) addOperationDeleteDatalakeAutoEnableMiddlewares(stack *middlewa
 	return nil
 }
 
-func newServiceMetadataMiddleware_opDeleteDatalakeAutoEnable(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opDeleteDataLakeExceptionSubscription(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "securitylake",
-		OperationName: "DeleteDatalakeAutoEnable",
+		OperationName: "DeleteDataLakeExceptionSubscription",
 	}
 }

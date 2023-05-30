@@ -15113,6 +15113,11 @@ func awsAwsjson11_serializeDocumentJobCommand(v *types.JobCommand, value smithyj
 		ok.String(*v.PythonVersion)
 	}
 
+	if v.Runtime != nil {
+		ok := object.Key("Runtime")
+		ok.String(*v.Runtime)
+	}
+
 	if v.ScriptLocation != nil {
 		ok := object.Key("ScriptLocation")
 		ok.String(*v.ScriptLocation)

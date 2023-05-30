@@ -1,0 +1,8 @@
+{
+    "id": "736ce21d-b0c6-457a-ac78-b746f2be56eb",
+    "type": "feature",
+    "description": "Amazon Polly adds 2 new voices - Sofie (da-DK) and Niamh (en-IE)",
+    "modules": [
+        "service/polly"
+    ]
+}

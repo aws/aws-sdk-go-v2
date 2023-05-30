@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the number of minutes used by account.
+// Returns the number of reserved minutes used by account.
 func (c *Client) GetMinuteUsage(ctx context.Context, params *GetMinuteUsageInput, optFns ...func(*Options)) (*GetMinuteUsageOutput, error) {
 	if params == nil {
 		params = &GetMinuteUsageInput{}

@@ -74,8 +74,6 @@ type GetRegisterAccountStatusOutput struct {
 	LastModificationTime *time.Time
 
 	// Information about the registered Amazon Timestream resources or errors, if any.
-	//
-	// This member is required.
 	TimestreamRegistrationResponse *types.TimestreamRegistrationResponse
 
 	// Metadata pertaining to the operation's result.

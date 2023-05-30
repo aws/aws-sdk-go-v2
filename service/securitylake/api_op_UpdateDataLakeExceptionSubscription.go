@@ -10,48 +10,54 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Update the expiration period for the exception message to your preferred time,
-// and control the time-to-live (TTL) for the exception message to remain.
-// Exceptions are stored by default for 2 weeks from when a record was created in
-// Amazon Security Lake.
-func (c *Client) UpdateDatalakeExceptionsExpiry(ctx context.Context, params *UpdateDatalakeExceptionsExpiryInput, optFns ...func(*Options)) (*UpdateDatalakeExceptionsExpiryOutput, error) {
+// Updates the specified notification subscription in Amazon Security Lake for the
+// organization you specify.
+func (c *Client) UpdateDataLakeExceptionSubscription(ctx context.Context, params *UpdateDataLakeExceptionSubscriptionInput, optFns ...func(*Options)) (*UpdateDataLakeExceptionSubscriptionOutput, error) {
 	if params == nil {
-		params = &UpdateDatalakeExceptionsExpiryInput{}
+		params = &UpdateDataLakeExceptionSubscriptionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateDatalakeExceptionsExpiry", params, optFns, c.addOperationUpdateDatalakeExceptionsExpiryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateDataLakeExceptionSubscription", params, optFns, c.addOperationUpdateDataLakeExceptionSubscriptionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*UpdateDatalakeExceptionsExpiryOutput)
+	out := result.(*UpdateDataLakeExceptionSubscriptionOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type UpdateDatalakeExceptionsExpiryInput struct {
+type UpdateDataLakeExceptionSubscriptionInput struct {
 
-	// The time-to-live (TTL) for the exception message to remain.
+	// The account that is subscribed to receive exception notifications.
 	//
 	// This member is required.
-	ExceptionMessageExpiry *int64
+	NotificationEndpoint *string
+
+	// The subscription protocol to which exception messages are posted.
+	//
+	// This member is required.
+	SubscriptionProtocol *string
+
+	// The time-to-live (TTL) for the exception message to remain.
+	ExceptionTimeToLive *int64
 
 	noSmithyDocumentSerde
 }
 
-type UpdateDatalakeExceptionsExpiryOutput struct {
+type UpdateDataLakeExceptionSubscriptionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationUpdateDatalakeExceptionsExpiryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDatalakeExceptionsExpiry{}, middleware.After)
+func (c *Client) addOperationUpdateDataLakeExceptionSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDataLakeExceptionSubscription{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDatalakeExceptionsExpiry{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDataLakeExceptionSubscription{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -91,10 +97,10 @@ func (c *Client) addOperationUpdateDatalakeExceptionsExpiryMiddlewares(stack *mi
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpUpdateDatalakeExceptionsExpiryValidationMiddleware(stack); err != nil {
+	if err = addOpUpdateDataLakeExceptionSubscriptionValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateDatalakeExceptionsExpiry(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateDataLakeExceptionSubscription(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -112,11 +118,11 @@ func (c *Client) addOperationUpdateDatalakeExceptionsExpiryMiddlewares(stack *mi
 	return nil
 }
 
-func newServiceMetadataMiddleware_opUpdateDatalakeExceptionsExpiry(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opUpdateDataLakeExceptionSubscription(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "securitylake",
-		OperationName: "UpdateDatalakeExceptionsExpiry",
+		OperationName: "UpdateDataLakeExceptionSubscription",
 	}
 }

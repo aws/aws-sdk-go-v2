@@ -5145,6 +5145,11 @@ func awsRestjson1_serializeOpDocumentStartSpeakerSearchTaskInput(v *StartSpeaker
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.CallLeg) > 0 {
+		ok := object.Key("CallLeg")
+		ok.String(string(v.CallLeg))
+	}
+
 	if v.ClientRequestToken != nil {
 		ok := object.Key("ClientRequestToken")
 		ok.String(*v.ClientRequestToken)

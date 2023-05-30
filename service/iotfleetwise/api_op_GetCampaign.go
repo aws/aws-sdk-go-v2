@@ -55,6 +55,14 @@ type GetCampaignOutput struct {
 	// midnight UTC time).
 	CreationTime *time.Time
 
+	// The destination where the campaign sends data. You can choose to send data to
+	// be stored in Amazon S3 or Amazon Timestream. Amazon S3 optimizes the cost of
+	// data storage and provides additional mechanisms to use vehicle data, such as
+	// data lakes, centralized data storage, data processing pipelines, and analytics.
+	// You can use Amazon Timestream to access and analyze time series data, and
+	// Timestream to query vehicle data so that you can identify trends and patterns.
+	DataDestinationConfigs []types.DataDestinationConfig
+
 	// A list of vehicle attributes associated with the campaign.
 	DataExtraDimensions []string
 

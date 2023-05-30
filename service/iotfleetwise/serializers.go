@@ -2782,9 +2782,19 @@ func awsAwsjson10_serializeDocumentActuator(v *types.Actuator, value smithyjson.
 		ok.String(*v.AssignedValue)
 	}
 
+	if v.Comment != nil {
+		ok := object.Key("comment")
+		ok.String(*v.Comment)
+	}
+
 	if len(v.DataType) > 0 {
 		ok := object.Key("dataType")
 		ok.String(string(v.DataType))
+	}
+
+	if v.DeprecationMessage != nil {
+		ok := object.Key("deprecationMessage")
+		ok.String(*v.DeprecationMessage)
 	}
 
 	if v.Description != nil {
@@ -2857,6 +2867,11 @@ func awsAwsjson10_serializeDocumentAttribute(v *types.Attribute, value smithyjso
 		ok.String(*v.AssignedValue)
 	}
 
+	if v.Comment != nil {
+		ok := object.Key("comment")
+		ok.String(*v.Comment)
+	}
+
 	if len(v.DataType) > 0 {
 		ok := object.Key("dataType")
 		ok.String(string(v.DataType))
@@ -2865,6 +2880,11 @@ func awsAwsjson10_serializeDocumentAttribute(v *types.Attribute, value smithyjso
 	if v.DefaultValue != nil {
 		ok := object.Key("defaultValue")
 		ok.String(*v.DefaultValue)
+	}
+
+	if v.DeprecationMessage != nil {
+		ok := object.Key("deprecationMessage")
+		ok.String(*v.DeprecationMessage)
 	}
 
 	if v.Description != nil {
@@ -2935,6 +2955,16 @@ func awsAwsjson10_serializeDocumentAttributesMap(v map[string]string, value smit
 func awsAwsjson10_serializeDocumentBranch(v *types.Branch, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Comment != nil {
+		ok := object.Key("comment")
+		ok.String(*v.Comment)
+	}
+
+	if v.DeprecationMessage != nil {
+		ok := object.Key("deprecationMessage")
+		ok.String(*v.DeprecationMessage)
+	}
 
 	if v.Description != nil {
 		ok := object.Key("description")
@@ -3186,6 +3216,46 @@ func awsAwsjson10_serializeDocumentCreateVehicleRequestItems(v []types.CreateVeh
 	for i := range v {
 		av := array.Value()
 		if err := awsAwsjson10_serializeDocumentCreateVehicleRequestItem(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentDataDestinationConfig(v types.DataDestinationConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.DataDestinationConfigMemberS3Config:
+		av := object.Key("s3Config")
+		if err := awsAwsjson10_serializeDocumentS3Config(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.DataDestinationConfigMemberTimestreamConfig:
+		av := object.Key("timestreamConfig")
+		if err := awsAwsjson10_serializeDocumentTimestreamConfig(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentDataDestinationConfigs(v []types.DataDestinationConfig, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			continue
+		}
+		if err := awsAwsjson10_serializeDocumentDataDestinationConfig(v[i], av); err != nil {
 			return err
 		}
 	}
@@ -3550,6 +3620,33 @@ func awsAwsjson10_serializeDocumentObdSignal(v *types.ObdSignal, value smithyjso
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentS3Config(v *types.S3Config, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BucketArn != nil {
+		ok := object.Key("bucketArn")
+		ok.String(*v.BucketArn)
+	}
+
+	if len(v.DataFormat) > 0 {
+		ok := object.Key("dataFormat")
+		ok.String(string(v.DataFormat))
+	}
+
+	if v.Prefix != nil {
+		ok := object.Key("prefix")
+		ok.String(*v.Prefix)
+	}
+
+	if len(v.StorageCompressionFormat) > 0 {
+		ok := object.Key("storageCompressionFormat")
+		ok.String(string(v.StorageCompressionFormat))
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentSensor(v *types.Sensor, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3561,9 +3658,19 @@ func awsAwsjson10_serializeDocumentSensor(v *types.Sensor, value smithyjson.Valu
 		}
 	}
 
+	if v.Comment != nil {
+		ok := object.Key("comment")
+		ok.String(*v.Comment)
+	}
+
 	if len(v.DataType) > 0 {
 		ok := object.Key("dataType")
 		ok.String(string(v.DataType))
+	}
+
+	if v.DeprecationMessage != nil {
+		ok := object.Key("deprecationMessage")
+		ok.String(*v.DeprecationMessage)
 	}
 
 	if v.Description != nil {
@@ -3757,6 +3864,23 @@ func awsAwsjson10_serializeDocumentTimeBasedCollectionScheme(v *types.TimeBasedC
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentTimestreamConfig(v *types.TimestreamConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ExecutionRoleArn != nil {
+		ok := object.Key("executionRoleArn")
+		ok.String(*v.ExecutionRoleArn)
+	}
+
+	if v.TimestreamTableArn != nil {
+		ok := object.Key("timestreamTableArn")
+		ok.String(*v.TimestreamTableArn)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentTimestreamResources(v *types.TimestreamResources, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3880,6 +4004,13 @@ func awsAwsjson10_serializeOpDocumentCreateCampaignInput(v *CreateCampaignInput,
 	if len(v.Compression) > 0 {
 		ok := object.Key("compression")
 		ok.String(string(v.Compression))
+	}
+
+	if v.DataDestinationConfigs != nil {
+		ok := object.Key("dataDestinationConfigs")
+		if err := awsAwsjson10_serializeDocumentDataDestinationConfigs(v.DataDestinationConfigs, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.DataExtraDimensions != nil {

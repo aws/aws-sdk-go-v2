@@ -42,6 +42,24 @@ func (CallingNameStatus) Values() []CallingNameStatus {
 	}
 }
 
+type CallLegType string
+
+// Enum values for CallLegType
+const (
+	CallLegTypeCaller CallLegType = "Caller"
+	CallLegTypeCallee CallLegType = "Callee"
+)
+
+// Values returns all known values for CallLegType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (CallLegType) Values() []CallLegType {
+	return []CallLegType{
+		"Caller",
+		"Callee",
+	}
+}
+
 type Capability string
 
 // Enum values for Capability

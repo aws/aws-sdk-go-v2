@@ -71,7 +71,7 @@ type CreateDatasetInput struct {
 	// This member is required.
 	SchemaArn *string
 
-	// A list of tags (https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html)
+	// A list of tags (https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html)
 	// to apply to the dataset.
 	Tags []types.Tag
 

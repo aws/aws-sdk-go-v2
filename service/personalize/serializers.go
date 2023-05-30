@@ -3802,6 +3802,17 @@ func awsAwsjson11_serializeDocumentCategoricalValues(v []string, value smithyjso
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentColumnNamesList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentContinuousHyperParameterRange(v *types.ContinuousHyperParameterRange, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3886,6 +3897,22 @@ func awsAwsjson11_serializeDocumentDataSource(v *types.DataSource, value smithyj
 		ok.String(*v.DataLocation)
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentExcludedDatasetColumns(v map[string][]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		if vv := v[key]; vv == nil {
+			continue
+		}
+		if err := awsAwsjson11_serializeDocumentColumnNamesList(v[key], om); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -4139,6 +4166,13 @@ func awsAwsjson11_serializeDocumentRecommenderConfig(v *types.RecommenderConfig,
 		ok.Integer(*v.MinRecommendationRequestsPerSecond)
 	}
 
+	if v.TrainingDataConfig != nil {
+		ok := object.Key("trainingDataConfig")
+		if err := awsAwsjson11_serializeDocumentTrainingDataConfig(v.TrainingDataConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -4203,6 +4237,13 @@ func awsAwsjson11_serializeDocumentSolutionConfig(v *types.SolutionConfig, value
 		}
 	}
 
+	if v.TrainingDataConfig != nil {
+		ok := object.Key("trainingDataConfig")
+		if err := awsAwsjson11_serializeDocumentTrainingDataConfig(v.TrainingDataConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -4244,6 +4285,20 @@ func awsAwsjson11_serializeDocumentTags(v []types.Tag, value smithyjson.Value) e
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentTrainingDataConfig(v *types.TrainingDataConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ExcludedDatasetColumns != nil {
+		ok := object.Key("excludedDatasetColumns")
+		if err := awsAwsjson11_serializeDocumentExcludedDatasetColumns(v.ExcludedDatasetColumns, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 

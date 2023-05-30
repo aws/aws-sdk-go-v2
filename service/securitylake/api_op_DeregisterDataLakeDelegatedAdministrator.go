@@ -10,49 +10,42 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// When you delete Amazon Security Lake from your account, Security Lake is
-// disabled in all Amazon Web Services Regions. Also, this API automatically takes
-// steps to remove the account from Security Lake . This operation disables
-// security data collection from sources, deletes data stored, and stops making
-// data accessible to subscribers. Security Lake also deletes all the existing
-// settings and resources that it stores or maintains for your Amazon Web Services
-// account in the current Region, including security log and event data. The
-// DeleteDatalake operation does not delete the Amazon S3 bucket, which is owned by
-// your Amazon Web Services account. For more information, see the Amazon Security
-// Lake User Guide (https://docs.aws.amazon.com/security-lake/latest/userguide/disable-security-lake.html)
-// .
-func (c *Client) DeleteDatalake(ctx context.Context, params *DeleteDatalakeInput, optFns ...func(*Options)) (*DeleteDatalakeOutput, error) {
+// Deletes the Amazon Security Lake delegated administrator account for the
+// organization. This API can only be called by the organization management
+// account. The organization management account cannot be the delegated
+// administrator account.
+func (c *Client) DeregisterDataLakeDelegatedAdministrator(ctx context.Context, params *DeregisterDataLakeDelegatedAdministratorInput, optFns ...func(*Options)) (*DeregisterDataLakeDelegatedAdministratorOutput, error) {
 	if params == nil {
-		params = &DeleteDatalakeInput{}
+		params = &DeregisterDataLakeDelegatedAdministratorInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteDatalake", params, optFns, c.addOperationDeleteDatalakeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeregisterDataLakeDelegatedAdministrator", params, optFns, c.addOperationDeregisterDataLakeDelegatedAdministratorMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DeleteDatalakeOutput)
+	out := result.(*DeregisterDataLakeDelegatedAdministratorOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type DeleteDatalakeInput struct {
+type DeregisterDataLakeDelegatedAdministratorInput struct {
 	noSmithyDocumentSerde
 }
 
-type DeleteDatalakeOutput struct {
+type DeregisterDataLakeDelegatedAdministratorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDeleteDatalakeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDatalake{}, middleware.After)
+func (c *Client) addOperationDeregisterDataLakeDelegatedAdministratorMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeregisterDataLakeDelegatedAdministrator{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteDatalake{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeregisterDataLakeDelegatedAdministrator{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -92,7 +85,7 @@ func (c *Client) addOperationDeleteDatalakeMiddlewares(stack *middleware.Stack, 
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDatalake(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeregisterDataLakeDelegatedAdministrator(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -110,11 +103,11 @@ func (c *Client) addOperationDeleteDatalakeMiddlewares(stack *middleware.Stack, 
 	return nil
 }
 
-func newServiceMetadataMiddleware_opDeleteDatalake(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opDeregisterDataLakeDelegatedAdministrator(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "securitylake",
-		OperationName: "DeleteDatalake",
+		OperationName: "DeregisterDataLakeDelegatedAdministrator",
 	}
 }

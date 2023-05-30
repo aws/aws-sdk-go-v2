@@ -17,7 +17,8 @@ import (
 // appropriate IAM role to invoke Glue crawler, use this API to add a custom source
 // name in Security Lake. This operation creates a partition in the Amazon S3
 // bucket for Security Lake as the target location for log files from the custom
-// source in addition to an associated Glue table and an Glue crawler.
+// source. In addition, this operation also creates an associated Glue table and an
+// Glue crawler.
 func (c *Client) CreateCustomLogSource(ctx context.Context, params *CreateCustomLogSourceInput, optFns ...func(*Options)) (*CreateCustomLogSourceOutput, error) {
 	if params == nil {
 		params = &CreateCustomLogSourceInput{}
@@ -35,66 +36,60 @@ func (c *Client) CreateCustomLogSource(ctx context.Context, params *CreateCustom
 
 type CreateCustomLogSourceInput struct {
 
-	// The name for a third-party custom source. This must be a Regionally unique
-	// value.
+	// Specify the name for a third-party custom source. This must be a Regionally
+	// unique value.
 	//
 	// This member is required.
-	CustomSourceName *string
+	SourceName *string
 
-	// The Open Cybersecurity Schema Framework (OCSF) event class which describes the
-	// type of data that the custom source will send to Security Lake.
-	//
-	// This member is required.
-	EventClass types.OcsfEventClass
+	// The configuration for the third-party custom source.
+	Configuration *types.CustomLogSourceConfiguration
 
-	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
-	// to be used by the Glue crawler. The recommended IAM policies are:
-	//   - The managed policy AWSGlueServiceRole
-	//   - A custom policy granting access to your Amazon S3 Data Lake
-	//
-	// This member is required.
-	GlueInvocationRoleArn *string
+	// The Open Cybersecurity Schema Framework (OCSF) event classes which describes
+	// the type of data that the custom source will send to Security Lake. The
+	// supported event classes are:
+	//   - ACCESS_ACTIVITY
+	//   - FILE_ACTIVITY
+	//   - KERNEL_ACTIVITY
+	//   - KERNEL_EXTENSION
+	//   - MEMORY_ACTIVITY
+	//   - MODULE_ACTIVITY
+	//   - PROCESS_ACTIVITY
+	//   - REGISTRY_KEY_ACTIVITY
+	//   - REGISTRY_VALUE_ACTIVITY
+	//   - RESOURCE_ACTIVITY
+	//   - SCHEDULED_JOB_ACTIVITY
+	//   - SECURITY_FINDING
+	//   - ACCOUNT_CHANGE
+	//   - AUTHENTICATION
+	//   - AUTHORIZATION
+	//   - ENTITY_MANAGEMENT_AUDIT
+	//   - DHCP_ACTIVITY
+	//   - NETWORK_ACTIVITY
+	//   - DNS_ACTIVITY
+	//   - FTP_ACTIVITY
+	//   - HTTP_ACTIVITY
+	//   - RDP_ACTIVITY
+	//   - SMB_ACTIVITY
+	//   - SSH_ACTIVITY
+	//   - CONFIG_STATE
+	//   - INVENTORY_INFO
+	//   - EMAIL_ACTIVITY
+	//   - API_ACTIVITY
+	//   - CLOUD_API
+	EventClasses []string
 
-	// The Amazon Web Services account ID of the custom source that will write logs
-	// and events into the Amazon S3 Data Lake.
-	//
-	// This member is required.
-	LogProviderAccountId *string
+	// Specify the source version for the third-party custom source, to limit log
+	// collection to a specific version of custom data source.
+	SourceVersion *string
 
 	noSmithyDocumentSerde
 }
 
 type CreateCustomLogSourceOutput struct {
 
-	// The location of the partition in the Amazon S3 bucket for Security Lake.
-	//
-	// This member is required.
-	CustomDataLocation *string
-
-	// The name of the Glue crawler.
-	//
-	// This member is required.
-	GlueCrawlerName *string
-
-	// The Glue database where results are written, such as:
-	// arn:aws:daylight:us-east-1::database/sometable/* .
-	//
-	// This member is required.
-	GlueDatabaseName *string
-
-	// The table name of the Glue crawler.
-	//
-	// This member is required.
-	GlueTableName *string
-
-	// The ARN of the IAM role to be used by the entity putting logs into your custom
-	// source partition. Security Lake will apply the correct access policies to this
-	// role, but you must first manually create the trust policy for this role. The IAM
-	// role name must start with the text 'Security Lake'. The IAM role must trust the
-	// logProviderAccountId to assume the role.
-	//
-	// This member is required.
-	LogProviderAccessRoleArn *string
+	// The created third-party custom source.
+	Source *types.CustomLogSourceResource
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

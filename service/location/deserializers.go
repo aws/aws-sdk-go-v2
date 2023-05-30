@@ -2161,7 +2161,7 @@ func awsRestjson1_deserializeOpDocumentCreatePlaceIndexOutput(v **CreatePlaceInd
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+					return fmt.Errorf("expected GeoArn to be of type string, got %T instead", value)
 				}
 				sv.IndexArn = ptr.String(jtv)
 			}
@@ -2336,7 +2336,7 @@ func awsRestjson1_deserializeOpDocumentCreateRouteCalculatorOutput(v **CreateRou
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+					return fmt.Errorf("expected GeoArn to be of type string, got %T instead", value)
 				}
 				sv.CalculatorArn = ptr.String(jtv)
 			}
@@ -2478,6 +2478,9 @@ func awsRestjson1_deserializeOpErrorCreateTracker(response *smithyhttp.Response,
 
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
 
 	case strings.EqualFold("ThrottlingException", errorCode):
 		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
@@ -4025,7 +4028,7 @@ func awsRestjson1_deserializeOpDocumentDescribePlaceIndexOutput(v **DescribePlac
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+					return fmt.Errorf("expected GeoArn to be of type string, got %T instead", value)
 				}
 				sv.IndexArn = ptr.String(jtv)
 			}
@@ -4224,7 +4227,7 @@ func awsRestjson1_deserializeOpDocumentDescribeRouteCalculatorOutput(v **Describ
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+					return fmt.Errorf("expected GeoArn to be of type string, got %T instead", value)
 				}
 				sv.CalculatorArn = ptr.String(jtv)
 			}
@@ -9186,7 +9189,7 @@ func awsRestjson1_deserializeOpDocumentUpdatePlaceIndexOutput(v **UpdatePlaceInd
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+					return fmt.Errorf("expected GeoArn to be of type string, got %T instead", value)
 				}
 				sv.IndexArn = ptr.String(jtv)
 			}
@@ -9371,7 +9374,7 @@ func awsRestjson1_deserializeOpDocumentUpdateRouteCalculatorOutput(v **UpdateRou
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+					return fmt.Errorf("expected GeoArn to be of type string, got %T instead", value)
 				}
 				sv.CalculatorArn = ptr.String(jtv)
 			}
@@ -12612,6 +12615,15 @@ func awsRestjson1_deserializeDocumentMapConfiguration(v **types.MapConfiguration
 
 	for key, value := range shape {
 		switch key {
+		case "PoliticalView":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CountryCode3 to be of type string, got %T instead", value)
+				}
+				sv.PoliticalView = ptr.String(jtv)
+			}
+
 		case "Style":
 			if value != nil {
 				jtv, ok := value.(string)

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Get a list of tags (https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html)
+// Get a list of tags (https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html)
 // attached to a resource.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {

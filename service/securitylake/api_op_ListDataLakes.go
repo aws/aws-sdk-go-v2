@@ -6,52 +6,54 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/securitylake/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Designates the Amazon Security Lake delegated administrator account for the
-// organization. This API can only be called by the organization management
-// account. The organization management account cannot be the delegated
-// administrator account.
-func (c *Client) CreateDatalakeDelegatedAdmin(ctx context.Context, params *CreateDatalakeDelegatedAdminInput, optFns ...func(*Options)) (*CreateDatalakeDelegatedAdminOutput, error) {
+// Retrieves the Amazon Security Lake configuration object for the specified
+// Amazon Web Services account ID. You can use the ListDataLakes API to know
+// whether Security Lake is enabled for any region.
+func (c *Client) ListDataLakes(ctx context.Context, params *ListDataLakesInput, optFns ...func(*Options)) (*ListDataLakesOutput, error) {
 	if params == nil {
-		params = &CreateDatalakeDelegatedAdminInput{}
+		params = &ListDataLakesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateDatalakeDelegatedAdmin", params, optFns, c.addOperationCreateDatalakeDelegatedAdminMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListDataLakes", params, optFns, c.addOperationListDataLakesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*CreateDatalakeDelegatedAdminOutput)
+	out := result.(*ListDataLakesOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type CreateDatalakeDelegatedAdminInput struct {
+type ListDataLakesInput struct {
 
-	// The Amazon Web Services account ID of the Security Lake delegated administrator.
-	//
-	// This member is required.
-	Account *string
+	// The list of regions where Security Lake is enabled.
+	Regions []string
 
 	noSmithyDocumentSerde
 }
 
-type CreateDatalakeDelegatedAdminOutput struct {
+type ListDataLakesOutput struct {
+
+	// Retrieves the Security Lake configuration object.
+	DataLakes []types.DataLakeResource
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationCreateDatalakeDelegatedAdminMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDatalakeDelegatedAdmin{}, middleware.After)
+func (c *Client) addOperationListDataLakesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDataLakes{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDatalakeDelegatedAdmin{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDataLakes{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -91,10 +93,7 @@ func (c *Client) addOperationCreateDatalakeDelegatedAdminMiddlewares(stack *midd
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpCreateDatalakeDelegatedAdminValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDatalakeDelegatedAdmin(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDataLakes(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -112,11 +111,11 @@ func (c *Client) addOperationCreateDatalakeDelegatedAdminMiddlewares(stack *midd
 	return nil
 }
 
-func newServiceMetadataMiddleware_opCreateDatalakeDelegatedAdmin(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opListDataLakes(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "securitylake",
-		OperationName: "CreateDatalakeDelegatedAdmin",
+		OperationName: "ListDataLakes",
 	}
 }

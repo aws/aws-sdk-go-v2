@@ -4385,6 +4385,13 @@ func awsRestjson1_serializeOpDocumentUpdateMapInput(v *UpdateMapInput, value smi
 	object := value.Object()
 	defer object.Close()
 
+	if v.ConfigurationUpdate != nil {
+		ok := object.Key("ConfigurationUpdate")
+		if err := awsRestjson1_serializeDocumentMapConfigurationUpdate(v.ConfigurationUpdate, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Description != nil {
 		ok := object.Key("Description")
 		ok.String(*v.Description)
@@ -5024,9 +5031,26 @@ func awsRestjson1_serializeDocumentMapConfiguration(v *types.MapConfiguration, v
 	object := value.Object()
 	defer object.Close()
 
+	if v.PoliticalView != nil {
+		ok := object.Key("PoliticalView")
+		ok.String(*v.PoliticalView)
+	}
+
 	if v.Style != nil {
 		ok := object.Key("Style")
 		ok.String(*v.Style)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMapConfigurationUpdate(v *types.MapConfigurationUpdate, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PoliticalView != nil {
+		ok := object.Key("PoliticalView")
+		ok.String(*v.PoliticalView)
 	}
 
 	return nil

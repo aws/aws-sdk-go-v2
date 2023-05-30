@@ -1,0 +1,8 @@
+{
+    "id": "661bc7a1-7dfd-4e46-84dc-39cee4fac701",
+    "type": "feature",
+    "description": "This release provides support for the exclusion of certain columns for training when creating a solution and creating or updating a recommender with Amazon Personalize.",
+    "modules": [
+        "service/personalize"
+    ]
+}

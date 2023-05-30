@@ -8549,6 +8549,11 @@ func awsAwsjson11_deserializeDocumentFieldToMatch(v **types.FieldToMatch, value 
 				return err
 			}
 
+		case "HeaderOrder":
+			if err := awsAwsjson11_deserializeDocumentHeaderOrder(&sv.HeaderOrder, value); err != nil {
+				return err
+			}
+
 		case "Headers":
 			if err := awsAwsjson11_deserializeDocumentHeaders(&sv.Headers, value); err != nil {
 				return err
@@ -8993,6 +8998,46 @@ func awsAwsjson11_deserializeDocumentHeaderNames(v *[]string, value interface{})
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentHeaderOrder(v **types.HeaderOrder, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.HeaderOrder
+	if *v == nil {
+		sv = &types.HeaderOrder{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "OversizeHandling":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OversizeHandling to be of type string, got %T instead", value)
+				}
+				sv.OversizeHandling = types.OversizeHandling(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

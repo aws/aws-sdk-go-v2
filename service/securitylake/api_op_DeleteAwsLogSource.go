@@ -12,21 +12,13 @@ import (
 )
 
 // Removes a natively supported Amazon Web Service as an Amazon Security Lake
-// source. When you remove the source, Security Lake stops collecting data from
-// that source, and subscribers can no longer consume new data from the source.
-// Subscribers can still consume data that Security Lake collected from the source
-// before disablement. You can choose any source type in any Amazon Web Services
-// Region for either accounts that are part of a trusted organization or standalone
-// accounts. At least one of the three dimensions is a mandatory input to this API.
-// However, you can supply any combination of the three dimensions to this API. By
-// default, a dimension refers to the entire set. This is overridden when you
-// supply any one of the inputs. For instance, when you do not specify members, the
-// API disables all Security Lake member accounts for sources. Similarly, when you
-// do not specify Regions, Security Lake is disabled for all the Regions where
-// Security Lake is available as a service. When you don't provide a dimension,
-// Security Lake assumes that the missing dimension refers to the entire set. For
-// example, if you don't provide specific accounts, the API applies to the entire
-// set of accounts in your organization.
+// source. You can remove a source for one or more Regions. When you remove the
+// source, Security Lake stops collecting data from that source in the specified
+// Regions and accounts, and subscribers can no longer consume new data from the
+// source. However, subscribers can still consume data that Security Lake collected
+// from the source before removal. You can choose any source type in any Amazon Web
+// Services Region for either accounts that are part of a trusted organization or
+// standalone accounts.
 func (c *Client) DeleteAwsLogSource(ctx context.Context, params *DeleteAwsLogSourceInput, optFns ...func(*Options)) (*DeleteAwsLogSourceOutput, error) {
 	if params == nil {
 		params = &DeleteAwsLogSourceInput{}
@@ -44,22 +36,11 @@ func (c *Client) DeleteAwsLogSource(ctx context.Context, params *DeleteAwsLogSou
 
 type DeleteAwsLogSourceInput struct {
 
-	// This is a mandatory input. Specify the input order to disable dimensions in
-	// Security Lake, namely Region (Amazon Web Services Region code, source type, and
-	// member (account ID of a specific Amazon Web Services account).
+	// Specify the natively-supported Amazon Web Services service to remove as a
+	// source in Security Lake.
 	//
 	// This member is required.
-	InputOrder []types.Dimension
-
-	// Removes the specific Amazon Web Services sources from specific accounts and
-	// specific Regions.
-	DisableAllDimensions map[string]map[string][]string
-
-	// Removes all Amazon Web Services sources from specific accounts or Regions.
-	DisableSingleDimension []string
-
-	// Remove a specific Amazon Web Services source from specific accounts or Regions.
-	DisableTwoDimensions map[string][]string
+	Sources []types.AwsLogSourceConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -69,9 +50,6 @@ type DeleteAwsLogSourceOutput struct {
 	// Deletion of the Amazon Web Services sources failed as the account is not a part
 	// of the organization.
 	Failed []string
-
-	// Deletion of the Amazon Web Services sources is in progress.
-	Processing []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

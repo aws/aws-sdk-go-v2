@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Remove tags (https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html)
+// Remove tags (https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html)
 // that are attached to a resource.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {

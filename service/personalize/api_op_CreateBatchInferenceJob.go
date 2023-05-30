@@ -71,7 +71,7 @@ type CreateBatchInferenceJobInput struct {
 	// The number of recommendations to retrieve.
 	NumResults *int32
 
-	// A list of tags (https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html)
+	// A list of tags (https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html)
 	// to apply to the batch inference job.
 	Tags []types.Tag
 

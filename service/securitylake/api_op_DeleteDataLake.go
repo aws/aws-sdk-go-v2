@@ -6,51 +6,58 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	"github.com/aws/aws-sdk-go-v2/service/securitylake/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the details of exception notifications for the account in Amazon
-// Security Lake.
-func (c *Client) GetDatalakeExceptionsSubscription(ctx context.Context, params *GetDatalakeExceptionsSubscriptionInput, optFns ...func(*Options)) (*GetDatalakeExceptionsSubscriptionOutput, error) {
+// When you disable Amazon Security Lake from your account, Security Lake is
+// disabled in all Amazon Web Services Regions and it stops collecting data from
+// your sources. Also, this API automatically takes steps to remove the account
+// from Security Lake. However, Security Lake retains all of your existing settings
+// and the resources that it created in your Amazon Web Services account in the
+// current Amazon Web Services Region. The DeleteDataLake operation does not
+// delete the data that is stored in your Amazon S3 bucket, which is owned by your
+// Amazon Web Services account. For more information, see the Amazon Security Lake
+// User Guide (https://docs.aws.amazon.com/security-lake/latest/userguide/disable-security-lake.html)
+// .
+func (c *Client) DeleteDataLake(ctx context.Context, params *DeleteDataLakeInput, optFns ...func(*Options)) (*DeleteDataLakeOutput, error) {
 	if params == nil {
-		params = &GetDatalakeExceptionsSubscriptionInput{}
+		params = &DeleteDataLakeInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDatalakeExceptionsSubscription", params, optFns, c.addOperationGetDatalakeExceptionsSubscriptionMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteDataLake", params, optFns, c.addOperationDeleteDataLakeMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*GetDatalakeExceptionsSubscriptionOutput)
+	out := result.(*DeleteDataLakeOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type GetDatalakeExceptionsSubscriptionInput struct {
+type DeleteDataLakeInput struct {
+
+	// The list of Regions where Security Lake is enabled.
+	//
+	// This member is required.
+	Regions []string
+
 	noSmithyDocumentSerde
 }
 
-type GetDatalakeExceptionsSubscriptionOutput struct {
-
-	// Retrieves the exception notification subscription information.
-	//
-	// This member is required.
-	ProtocolAndNotificationEndpoint *types.ProtocolAndNotificationEndpoint
-
+type DeleteDataLakeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationGetDatalakeExceptionsSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDatalakeExceptionsSubscription{}, middleware.After)
+func (c *Client) addOperationDeleteDataLakeMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDataLake{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDatalakeExceptionsSubscription{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteDataLake{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -90,7 +97,10 @@ func (c *Client) addOperationGetDatalakeExceptionsSubscriptionMiddlewares(stack 
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDatalakeExceptionsSubscription(options.Region), middleware.Before); err != nil {
+	if err = addOpDeleteDataLakeValidationMiddleware(stack); err != nil {
+		return err
+	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDataLake(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -108,11 +118,11 @@ func (c *Client) addOperationGetDatalakeExceptionsSubscriptionMiddlewares(stack 
 	return nil
 }
 
-func newServiceMetadataMiddleware_opGetDatalakeExceptionsSubscription(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opDeleteDataLake(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "securitylake",
-		OperationName: "GetDatalakeExceptionsSubscription",
+		OperationName: "DeleteDataLake",
 	}
 }

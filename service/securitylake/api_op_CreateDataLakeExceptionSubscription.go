@@ -10,48 +10,55 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the Amazon Security Lake delegated administrator account for the
-// organization. This API can only be called by the organization management
-// account. The organization management account cannot be the delegated
-// administrator account.
-func (c *Client) DeleteDatalakeDelegatedAdmin(ctx context.Context, params *DeleteDatalakeDelegatedAdminInput, optFns ...func(*Options)) (*DeleteDatalakeDelegatedAdminOutput, error) {
+// Creates the specified notification subscription in Amazon Security Lake for the
+// organization you specify.
+func (c *Client) CreateDataLakeExceptionSubscription(ctx context.Context, params *CreateDataLakeExceptionSubscriptionInput, optFns ...func(*Options)) (*CreateDataLakeExceptionSubscriptionOutput, error) {
 	if params == nil {
-		params = &DeleteDatalakeDelegatedAdminInput{}
+		params = &CreateDataLakeExceptionSubscriptionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteDatalakeDelegatedAdmin", params, optFns, c.addOperationDeleteDatalakeDelegatedAdminMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateDataLakeExceptionSubscription", params, optFns, c.addOperationCreateDataLakeExceptionSubscriptionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DeleteDatalakeDelegatedAdminOutput)
+	out := result.(*CreateDataLakeExceptionSubscriptionOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type DeleteDatalakeDelegatedAdminInput struct {
+type CreateDataLakeExceptionSubscriptionInput struct {
 
-	// The account ID the Security Lake delegated administrator.
+	// The Amazon Web Services account where you want to receive exception
+	// notifications.
 	//
 	// This member is required.
-	Account *string
+	NotificationEndpoint *string
+
+	// The subscription protocol to which exception notifications are posted.
+	//
+	// This member is required.
+	SubscriptionProtocol *string
+
+	// The expiration period and time-to-live (TTL).
+	ExceptionTimeToLive *int64
 
 	noSmithyDocumentSerde
 }
 
-type DeleteDatalakeDelegatedAdminOutput struct {
+type CreateDataLakeExceptionSubscriptionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDeleteDatalakeDelegatedAdminMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDatalakeDelegatedAdmin{}, middleware.After)
+func (c *Client) addOperationCreateDataLakeExceptionSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDataLakeExceptionSubscription{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteDatalakeDelegatedAdmin{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDataLakeExceptionSubscription{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -91,10 +98,10 @@ func (c *Client) addOperationDeleteDatalakeDelegatedAdminMiddlewares(stack *midd
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpDeleteDatalakeDelegatedAdminValidationMiddleware(stack); err != nil {
+	if err = addOpCreateDataLakeExceptionSubscriptionValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDatalakeDelegatedAdmin(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDataLakeExceptionSubscription(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -112,11 +119,11 @@ func (c *Client) addOperationDeleteDatalakeDelegatedAdminMiddlewares(stack *midd
 	return nil
 }
 
-func newServiceMetadataMiddleware_opDeleteDatalakeDelegatedAdmin(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opCreateDataLakeExceptionSubscription(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "securitylake",
-		OperationName: "DeleteDatalakeDelegatedAdmin",
+		OperationName: "CreateDataLakeExceptionSubscription",
 	}
 }

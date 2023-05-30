@@ -32,6 +32,12 @@ type Actuator struct {
 	// Deprecated: assignedValue is no longer in use
 	AssignedValue *string
 
+	// A comment in addition to the description.
+	Comment *string
+
+	// The deprecation message for the node or the branch that was moved or deleted.
+	DeprecationMessage *string
+
 	// A brief description of the actuator.
 	Description *string
 
@@ -70,8 +76,14 @@ type Attribute struct {
 	// Deprecated: assignedValue is no longer in use
 	AssignedValue *string
 
+	// A comment in addition to the description.
+	Comment *string
+
 	// The default value of the attribute.
 	DefaultValue *string
+
+	// The deprecation message for the node or the branch that was moved or deleted.
+	DeprecationMessage *string
 
 	// A brief description of the attribute.
 	Description *string
@@ -96,6 +108,12 @@ type Branch struct {
 	//
 	// This member is required.
 	FullyQualifiedName *string
+
+	// A comment in addition to the description.
+	Comment *string
+
+	// The deprecation message for the node or the branch that was moved or deleted.
+	DeprecationMessage *string
 
 	// A brief description of the branch.
 	Description *string
@@ -213,12 +231,17 @@ type CanSignal struct {
 	// This member is required.
 	MessageId int32
 
-	// Indicates where data appears in the CAN message.
+	// The offset used to calculate the signal value. Combined with factor, the
+	// calculation is value = raw_value * factor + offset .
 	//
 	// This member is required.
 	Offset *float64
 
-	// Indicates the beginning of the CAN message.
+	// Indicates the beginning of the CAN signal. This should always be the least
+	// significant bit (LSB). This value might be different from the value in a DBC
+	// file. For little endian signals, startBit is the same value as in the DBC file.
+	// For big endian signals in a DBC file, the start bit is the most significant bit
+	// (MSB). You will have to calculate the LSB instead and pass it as the startBit .
 	//
 	// This member is required.
 	StartBit int32
@@ -364,6 +387,36 @@ type CreateVehicleResponseItem struct {
 	noSmithyDocumentSerde
 }
 
+// The destination where the Amazon Web Services IoT FleetWise campaign sends
+// data. You can send data to be stored in Amazon S3 or Amazon Timestream.
+//
+// The following types satisfy this interface:
+//
+//	DataDestinationConfigMemberS3Config
+//	DataDestinationConfigMemberTimestreamConfig
+type DataDestinationConfig interface {
+	isDataDestinationConfig()
+}
+
+// The Amazon S3 bucket where the Amazon Web Services IoT FleetWise campaign sends
+// data.
+type DataDestinationConfigMemberS3Config struct {
+	Value S3Config
+
+	noSmithyDocumentSerde
+}
+
+func (*DataDestinationConfigMemberS3Config) isDataDestinationConfig() {}
+
+// The Amazon Timestream table where the campaign sends data.
+type DataDestinationConfigMemberTimestreamConfig struct {
+	Value TimestreamConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*DataDestinationConfigMemberTimestreamConfig) isDataDestinationConfig() {}
+
 // Information about a created decoder manifest. You can use the API operation to
 // return this information about multiple decoder manifests.
 type DecoderManifestSummary struct {
@@ -437,9 +490,9 @@ type FleetSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Vehicle Signal Specification (VSS) is a precise language used to describe and
-// model signals in vehicle networks. The JSON file collects signal specificiations
-// in a VSS format.
+// Vehicle Signal Specification (VSS) (https://www.w3.org/auto/wg/wiki/Vehicle_Signal_Specification_(VSS)/Vehicle_Data_Spec)
+// is a precise language used to describe and model signals in vehicle networks.
+// The JSON file collects signal specificiations in a VSS format.
 //
 // The following types satisfy this interface:
 //
@@ -730,7 +783,8 @@ type ObdSignal struct {
 	// This member is required.
 	ByteLength *int32
 
-	// Indicates where data appears in the message.
+	// The offset used to calculate the signal value. Combined with scaling, the
+	// calculation is value = raw_value * scaling + offset .
 	//
 	// This member is required.
 	Offset *float64
@@ -769,6 +823,44 @@ type ObdSignal struct {
 	noSmithyDocumentSerde
 }
 
+// The Amazon S3 bucket where the Amazon Web Services IoT FleetWise campaign sends
+// data. Amazon S3 is an object storage service that stores data as objects within
+// buckets. For more information, see Creating, configuring, and working with
+// Amazon S3 buckets (https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-buckets-s3.html)
+// in the Amazon Simple Storage Service User Guide.
+type S3Config struct {
+
+	// The Amazon Resource Name (ARN) of the Amazon S3 bucket.
+	//
+	// This member is required.
+	BucketArn *string
+
+	// Specify the format that files are saved in the Amazon S3 bucket. You can save
+	// files in an Apache Parquet or JSON format.
+	//   - Parquet - Store data in a columnar storage file format. Parquet is optimal
+	//   for fast data retrieval and can reduce costs. This option is selected by
+	//   default.
+	//   - JSON - Store data in a standard text-based JSON file format.
+	DataFormat DataFormat
+
+	// (Optional) Enter an S3 bucket prefix. The prefix is the string of characters
+	// after the bucket name and before the object name. You can use the prefix to
+	// organize data stored in Amazon S3 buckets. For more information, see Organizing
+	// objects using prefixes (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-prefixes.html)
+	// in the Amazon Simple Storage Service User Guide. By default, Amazon Web Services
+	// IoT FleetWise sets the prefix processed-data/year=YY/month=MM/date=DD/hour=HH/
+	// (in UTC) to data it delivers to Amazon S3. You can enter a prefix to append it
+	// to this default prefix. For example, if you enter the prefix vehicles , the
+	// prefix will be vehicles/processed-data/year=YY/month=MM/date=DD/hour=HH/ .
+	Prefix *string
+
+	// By default, stored data is compressed as a .gzip file. Compressed files have a
+	// reduced file size, which can optimize the cost of data storage.
+	StorageCompressionFormat StorageCompressionFormat
+
+	noSmithyDocumentSerde
+}
+
 // An input component that reports the environmental condition of a vehicle. You
 // can collect data about fluid levels, temperatures, vibrations, or battery
 // voltage from sensors.
@@ -787,6 +879,12 @@ type Sensor struct {
 
 	// A list of possible values a sensor can take.
 	AllowedValues []string
+
+	// A comment in addition to the description.
+	Comment *string
+
+	// The deprecation message for the node or the branch that was moved or deleted.
+	DeprecationMessage *string
 
 	// A brief description of a sensor.
 	Description *string
@@ -902,6 +1000,28 @@ type TimeBasedCollectionScheme struct {
 	//
 	// This member is required.
 	PeriodMs *int64
+
+	noSmithyDocumentSerde
+}
+
+// The Amazon Timestream table where the Amazon Web Services IoT FleetWise
+// campaign sends data. Timestream stores and organizes data to optimize query
+// processing time and to reduce storage costs. For more information, see Data
+// modeling (https://docs.aws.amazon.com/timestream/latest/developerguide/data-modeling.html)
+// in the Amazon Timestream Developer Guide.
+type TimestreamConfig struct {
+
+	// The Amazon Resource Name (ARN) of the task execution role that grants Amazon
+	// Web Services IoT FleetWise permission to deliver data to the Amazon Timestream
+	// table.
+	//
+	// This member is required.
+	ExecutionRoleArn *string
+
+	// The Amazon Resource Name (ARN) of the Amazon Timestream table.
+	//
+	// This member is required.
+	TimestreamTableArn *string
 
 	noSmithyDocumentSerde
 }
@@ -1100,6 +1220,7 @@ type UnknownUnionMember struct {
 }
 
 func (*UnknownUnionMember) isCollectionScheme()      {}
+func (*UnknownUnionMember) isDataDestinationConfig() {}
 func (*UnknownUnionMember) isFormattedVss()          {}
 func (*UnknownUnionMember) isNetworkFileDefinition() {}
 func (*UnknownUnionMember) isNode()                  {}

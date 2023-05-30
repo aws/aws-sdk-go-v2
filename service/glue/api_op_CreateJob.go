@@ -60,16 +60,20 @@ type CreateJobInput struct {
 	// The connections used for this job.
 	Connections *types.ConnectionsList
 
-	// The default arguments for this job. You can specify arguments here that your
-	// own job-execution script consumes, as well as arguments that Glue itself
-	// consumes. Job arguments may be logged. Do not pass plaintext secrets as
-	// arguments. Retrieve secrets from a Glue Connection, Secrets Manager or other
-	// secret management mechanism if you intend to keep them within the Job. For
-	// information about how to specify and consume your own Job arguments, see the
-	// Calling Glue APIs in Python (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html)
-	// topic in the developer guide. For information about the key-value pairs that
-	// Glue consumes to set up your job, see the Special Parameters Used by Glue (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html)
-	// topic in the developer guide.
+	// The default arguments for every run of this job, specified as name-value pairs.
+	// You can specify arguments here that your own job-execution script consumes, as
+	// well as arguments that Glue itself consumes. Job arguments may be logged. Do not
+	// pass plaintext secrets as arguments. Retrieve secrets from a Glue Connection,
+	// Secrets Manager or other secret management mechanism if you intend to keep them
+	// within the Job. For information about how to specify and consume your own Job
+	// arguments, see the Calling Glue APIs in Python (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html)
+	// topic in the developer guide. For information about the arguments you can
+	// provide to this field when configuring Spark jobs, see the Special Parameters
+	// Used by Glue (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html)
+	// topic in the developer guide. For information about the arguments you can
+	// provide to this field when configuring Ray jobs, see Using job parameters in
+	// Ray jobs (https://docs.aws.amazon.com/glue/latest/dg/author-job-ray-job-parameters.html)
+	// in the developer guide.
 	DefaultArguments map[string]string
 
 	// Description of the job being defined.
@@ -88,10 +92,13 @@ type CreateJobInput struct {
 	// for this job.
 	ExecutionProperty *types.ExecutionProperty
 
-	// Glue version determines the versions of Apache Spark and Python that Glue
-	// supports. The Python version indicates the version supported for jobs of type
-	// Spark. For more information about the available Glue versions and corresponding
-	// Spark and Python versions, see Glue version (https://docs.aws.amazon.com/glue/latest/dg/add-job.html)
+	// In Spark jobs, GlueVersion determines the versions of Apache Spark and Python
+	// that Glue available in a job. The Python version indicates the version supported
+	// for jobs of type Spark. Ray jobs should set GlueVersion to 4.0 or greater.
+	// However, the versions of Ray, Python and additional libraries available in your
+	// Ray job are determined by the Runtime parameter of the Job command. For more
+	// information about the available Glue versions and corresponding Spark and Python
+	// versions, see Glue version (https://docs.aws.amazon.com/glue/latest/dg/add-job.html)
 	// in the developer guide. Jobs that are created without specifying a Glue version
 	// default to Glue 0.9.
 	GlueVersion *string
@@ -103,24 +110,25 @@ type CreateJobInput struct {
 	// number of Glue data processing units (DPUs) that can be allocated when this job
 	// runs. A DPU is a relative measure of processing power that consists of 4 vCPUs
 	// of compute capacity and 16 GB of memory. For more information, see the Glue
-	// pricing page (https://aws.amazon.com/glue/pricing/) . Do not set Max Capacity
-	// if using WorkerType and NumberOfWorkers . The value that can be allocated for
-	// MaxCapacity depends on whether you are running a Python shell job or an Apache
-	// Spark ETL job:
+	// pricing page (https://aws.amazon.com/glue/pricing/) . For Glue version 2.0+
+	// jobs, you cannot specify a Maximum capacity . Instead, you should specify a
+	// Worker type and the Number of workers . Do not set MaxCapacity if using
+	// WorkerType and NumberOfWorkers . The value that can be allocated for MaxCapacity
+	// depends on whether you are running a Python shell job, an Apache Spark ETL job,
+	// or an Apache Spark streaming ETL job:
 	//   - When you specify a Python shell job ( JobCommand.Name ="pythonshell"), you
 	//   can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.
 	//   - When you specify an Apache Spark ETL job ( JobCommand.Name ="glueetl") or
 	//   Apache Spark streaming ETL job ( JobCommand.Name ="gluestreaming"), you can
-	//   allocate a minimum of 2 DPUs. The default is 10 DPUs. This job type cannot have
-	//   a fractional DPU allocation.
-	// For Glue version 2.0 jobs, you cannot instead specify a Maximum capacity .
-	// Instead, you should specify a Worker type and the Number of workers .
+	//   allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a
+	//   fractional DPU allocation.
 	MaxCapacity *float64
 
 	// The maximum number of times to retry this job if it fails.
 	MaxRetries int32
 
-	// Non-overridable arguments for this job, specified as name-value pairs.
+	// Arguments for this job that are not overridden when providing job arguments in
+	// a job run, specified as name-value pairs.
 	NonOverridableArguments map[string]string
 
 	// Specifies configuration properties of a job notification.
@@ -148,7 +156,8 @@ type CreateJobInput struct {
 	Timeout *int32
 
 	// The type of predefined worker that is allocated when a job runs. Accepts a
-	// value of Standard, G.1X, G.2X, or G.025X.
+	// value of Standard, G.1X, G.2X, or G.025X for Spark jobs. Accepts the value Z.2X
+	// for Ray jobs.
 	//   - For the Standard worker type, each worker provides 4 vCPU, 16 GB of memory
 	//   and a 50GB disk, and 2 executors per worker.
 	//   - For the G.1X worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of
@@ -161,6 +170,8 @@ type CreateJobInput struct {
 	//   memory, 64 GB disk), and provides 1 executor per worker. We recommend this
 	//   worker type for low volume streaming jobs. This worker type is only available
 	//   for Glue version 3.0 streaming jobs.
+	//   - For the Z.2X worker type, each worker maps to 2 M-DPU (8vCPU, 64 GB of m
+	//   emory, 128 GB disk), and provides up to 8 Ray workers based on the autoscaler.
 	WorkerType types.WorkerType
 
 	noSmithyDocumentSerde

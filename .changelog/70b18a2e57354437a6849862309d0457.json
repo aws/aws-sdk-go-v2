@@ -1,0 +1,8 @@
+{
+    "id": "70b18a2e-5735-4437-a684-9862309d0457",
+    "type": "feature",
+    "description": "Added new resource detail objects to ASFF, including resources for AwsGuardDutyDetector, AwsAmazonMqBroker, AwsEventSchemasRegistry, AwsAppSyncGraphQlApi and AwsStepFunctionStateMachine.",
+    "modules": [
+        "service/securityhub"
+    ]
+}

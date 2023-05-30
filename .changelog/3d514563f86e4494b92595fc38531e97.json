@@ -1,0 +1,8 @@
+{
+    "id": "3d514563-f86e-4494-b925-95fc38531e97",
+    "type": "documentation",
+    "description": "Updating description of GetMinuteUsage to be clearer.",
+    "modules": [
+        "service/groundstation"
+    ]
+}

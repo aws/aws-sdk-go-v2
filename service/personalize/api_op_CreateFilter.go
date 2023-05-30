@@ -49,7 +49,7 @@ type CreateFilterInput struct {
 	// This member is required.
 	Name *string
 
-	// A list of tags (https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html)
+	// A list of tags (https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html)
 	// to apply to the filter.
 	Tags []types.Tag
 

@@ -14,9 +14,13 @@ import (
 // Creates a recommender with the recipe (a Domain dataset group use case) you
 // specify. You create recommenders for a Domain dataset group and specify the
 // recommender's Amazon Resource Name (ARN) when you make a GetRecommendations (https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html)
-// request. Minimum recommendation requests per second When you create a
-// recommender, you can configure the recommender's minimum recommendation requests
-// per second. The minimum recommendation requests per second (
+// request. Minimum recommendation requests per second A high
+// minRecommendationRequestsPerSecond will increase your bill. We recommend
+// starting with 1 for minRecommendationRequestsPerSecond (the default). Track
+// your usage using Amazon CloudWatch metrics, and increase the
+// minRecommendationRequestsPerSecond as necessary. When you create a recommender,
+// you can configure the recommender's minimum recommendation requests per second.
+// The minimum recommendation requests per second (
 // minRecommendationRequestsPerSecond ) specifies the baseline recommendation
 // request throughput provisioned by Amazon Personalize. The default
 // minRecommendationRequestsPerSecond is 1 . A recommendation request is a single
@@ -86,7 +90,7 @@ type CreateRecommenderInput struct {
 	// The configuration details of the recommender.
 	RecommenderConfig *types.RecommenderConfig
 
-	// A list of tags (https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html)
+	// A list of tags (https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html)
 	// to apply to the recommender.
 	Tags []types.Tag
 

@@ -8,6 +8,7 @@ type AuthenticationType string
 const (
 	AuthenticationTypePassword   AuthenticationType = "password"
 	AuthenticationTypeNoPassword AuthenticationType = "no-password"
+	AuthenticationTypeIam        AuthenticationType = "iam"
 )
 
 // Values returns all known values for AuthenticationType. Note that this can be
@@ -17,6 +18,7 @@ func (AuthenticationType) Values() []AuthenticationType {
 	return []AuthenticationType{
 		"password",
 		"no-password",
+		"iam",
 	}
 }
 
@@ -61,6 +63,7 @@ type InputAuthenticationType string
 // Enum values for InputAuthenticationType
 const (
 	InputAuthenticationTypePassword InputAuthenticationType = "password"
+	InputAuthenticationTypeIam      InputAuthenticationType = "iam"
 )
 
 // Values returns all known values for InputAuthenticationType. Note that this can
@@ -69,6 +72,7 @@ const (
 func (InputAuthenticationType) Values() []InputAuthenticationType {
 	return []InputAuthenticationType{
 		"password",
+		"iam",
 	}
 }
 

@@ -34,21 +34,19 @@ type UpdateSubscriberInput struct {
 	// A value created by Security Lake that uniquely identifies your subscription.
 	//
 	// This member is required.
-	Id *string
+	SubscriberId *string
 
 	// The supported Amazon Web Services from which logs and events are collected. For
 	// the list of supported Amazon Web Services, see the Amazon Security Lake User
 	// Guide (https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html)
 	// .
-	//
-	// This member is required.
-	SourceTypes []types.SourceType
-
-	// The external ID of the Security Lake account.
-	ExternalId *string
+	Sources []types.LogSourceResource
 
 	// The description of the Security Lake account subscriber.
 	SubscriberDescription *string
+
+	// The AWS identity used to access your data.
+	SubscriberIdentity *types.AwsIdentity
 
 	// The name of the Security Lake account subscriber.
 	SubscriberName *string
@@ -58,7 +56,7 @@ type UpdateSubscriberInput struct {
 
 type UpdateSubscriberOutput struct {
 
-	// The account of the subscriber.
+	// The updated subscriber information.
 	Subscriber *types.SubscriberResource
 
 	// Metadata pertaining to the operation's result.

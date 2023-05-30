@@ -12,8 +12,8 @@ import (
 )
 
 // Creates the configuration for training a model. A trained model is known as a
-// solution. After the configuration is created, you train the model (create a
-// solution) by calling the CreateSolutionVersion (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolutionVersion.html)
+// solution version. After the configuration is created, you train the model
+// (create a solution version) by calling the CreateSolutionVersion (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolutionVersion.html)
 // operation. Every time you call CreateSolutionVersion , a new version of the
 // solution is created. After creating a solution version, you check its accuracy
 // by calling GetSolutionMetrics (https://docs.aws.amazon.com/personalize/latest/dg/API_GetSolutionMetrics.html)
@@ -23,10 +23,8 @@ import (
 // API. To train a model, Amazon Personalize requires training data and a recipe.
 // The training data comes from the dataset group that you provide in the request.
 // A recipe specifies the training algorithm and a feature transformation. You can
-// specify one of the predefined recipes provided by Amazon Personalize.
-// Alternatively, you can specify performAutoML and Amazon Personalize will
-// analyze your data and select the optimum USER_PERSONALIZATION recipe for you.
-// Amazon Personalize doesn't support configuring the hpoObjective for solution
+// specify one of the predefined recipes provided by Amazon Personalize. Amazon
+// Personalize doesn't support configuring the hpoObjective for solution
 // hyperparameter optimization at this time. Status A solution can be in one of the
 // following states:
 //   - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
@@ -81,6 +79,9 @@ type CreateSolutionInput struct {
 	// will use all interactions for training with equal weight regardless of type.
 	EventType *string
 
+	// We don't recommend enabling automated machine learning. Instead, match your use
+	// case to the available Amazon Personalize recipes. For more information, see
+	// Determining your use case. (https://docs.aws.amazon.com/personalize/latest/dg/determining-use-case.html)
 	// Whether to perform automated machine learning (AutoML). The default is false .
 	// For this case, you must specify recipeArn . When set to true , Amazon
 	// Personalize analyzes your training data and selects the optimal
@@ -105,7 +106,7 @@ type CreateSolutionInput struct {
 	// at this time.
 	SolutionConfig *types.SolutionConfig
 
-	// A list of tags (https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html)
+	// A list of tags (https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html)
 	// to apply to the solution.
 	Tags []types.Tag
 

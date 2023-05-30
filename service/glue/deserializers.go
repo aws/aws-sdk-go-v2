@@ -38783,6 +38783,15 @@ func awsAwsjson11_deserializeDocumentJobCommand(v **types.JobCommand, value inte
 				sv.PythonVersion = ptr.String(jtv)
 			}
 
+		case "Runtime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RuntimeNameString to be of type string, got %T instead", value)
+				}
+				sv.Runtime = ptr.String(jtv)
+			}
+
 		case "ScriptLocation":
 			if value != nil {
 				jtv, ok := value.(string)

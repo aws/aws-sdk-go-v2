@@ -44,14 +44,12 @@ type ListSubscribersInput struct {
 
 type ListSubscribersOutput struct {
 
-	// The subscribers available for the specified Security Lake account ID.
-	//
-	// This member is required.
-	Subscribers []types.SubscriberResource
-
 	// If nextToken is returned, there are more results available. You can repeat the
 	// call using the returned token to retrieve the next page.
 	NextToken *string
+
+	// The subscribers available for the specified Security Lake account ID.
+	Subscribers []types.SubscriberResource
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

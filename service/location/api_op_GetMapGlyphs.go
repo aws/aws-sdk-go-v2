@@ -57,7 +57,12 @@ type GetMapGlyphsInput struct {
 	//   Ember Regular,Noto Sans Regular | Amazon Ember Bold,Noto Sans Bold | Amazon
 	//   Ember Medium,Noto Sans Medium | Amazon Ember Regular Italic,Noto Sans Italic |
 	//   Amazon Ember Condensed RC Regular,Noto Sans Regular | Amazon Ember Condensed
-	//   RC Bold,Noto Sans Bold
+	//   RC Bold,Noto Sans Bold | Amazon Ember Regular,Noto Sans Regular,Noto Sans
+	//   Arabic Regular | Amazon Ember Condensed RC Bold,Noto Sans Bold,Noto Sans
+	//   Arabic Condensed Bold | Amazon Ember Bold,Noto Sans Bold,Noto Sans Arabic Bold
+	//   | Amazon Ember Regular Italic,Noto Sans Italic,Noto Sans Arabic Regular |
+	//   Amazon Ember Condensed RC Regular,Noto Sans Regular,Noto Sans Arabic Condensed
+	//   Regular | Amazon Ember Medium,Noto Sans Medium,Noto Sans Arabic Medium
 	// The fonts used by the Open Data map styles are combined fonts that use Amazon
 	// Ember for most glyphs but Noto Sans for glyphs unsupported by Amazon Ember .
 	//

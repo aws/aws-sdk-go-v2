@@ -34,14 +34,14 @@ type GetSubscriberInput struct {
 	// GetSubscriber API request.
 	//
 	// This member is required.
-	Id *string
+	SubscriberId *string
 
 	noSmithyDocumentSerde
 }
 
 type GetSubscriberOutput struct {
 
-	// The subscription information for the specified subscription ID.
+	// The subscriber information for the specified subscriber ID.
 	Subscriber *types.SubscriberResource
 
 	// Metadata pertaining to the operation's result.

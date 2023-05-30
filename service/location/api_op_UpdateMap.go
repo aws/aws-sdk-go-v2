@@ -36,6 +36,10 @@ type UpdateMapInput struct {
 	// This member is required.
 	MapName *string
 
+	// Updates the parts of the map configuration that can be updated, including the
+	// political view.
+	ConfigurationUpdate *types.MapConfigurationUpdate
+
 	// Updates the description for the map resource.
 	Description *string
 

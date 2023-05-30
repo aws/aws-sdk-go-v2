@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes a custom log source from Amazon Security Lake.
+// Removes a custom log source from Amazon Security Lake, to stop sending data
+// from the custom source to Security Lake.
 func (c *Client) DeleteCustomLogSource(ctx context.Context, params *DeleteCustomLogSourceInput, optFns ...func(*Options)) (*DeleteCustomLogSourceOutput, error) {
 	if params == nil {
 		params = &DeleteCustomLogSourceInput{}
@@ -28,21 +29,19 @@ func (c *Client) DeleteCustomLogSource(ctx context.Context, params *DeleteCustom
 
 type DeleteCustomLogSourceInput struct {
 
-	// The custom source name for the custom log source.
+	// The source name of custom log source that you want to delete.
 	//
 	// This member is required.
-	CustomSourceName *string
+	SourceName *string
+
+	// The source version for the third-party custom source. You can limit the custom
+	// source removal to the specified source version.
+	SourceVersion *string
 
 	noSmithyDocumentSerde
 }
 
 type DeleteCustomLogSourceOutput struct {
-
-	// The location of the partition in the Amazon S3 bucket for Security Lake.
-	//
-	// This member is required.
-	CustomDataLocation *string
-
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

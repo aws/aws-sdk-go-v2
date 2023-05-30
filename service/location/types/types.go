@@ -894,11 +894,11 @@ type MapConfiguration struct {
 	//   your thematic content.
 	//   - VectorEsriTopographic – The Esri Light map style, which provides a detailed
 	//   vector basemap with a classic Esri map style.
-	//   - VectorEsriStreets – The Esri World Streets map style, which provides a
-	//   detailed vector basemap for the world symbolized with a classic Esri street map
-	//   style. The vector tile layer is similar in content and style to the World Street
-	//   Map raster map.
-	//   - VectorEsriNavigation – The Esri World Navigation map style, which provides a
+	//   - VectorEsriStreets – The Esri Street Map style, which provides a detailed
+	//   vector basemap for the world symbolized with a classic Esri street map style.
+	//   The vector tile layer is similar in content and style to the World Street Map
+	//   raster map.
+	//   - VectorEsriNavigation – The Esri Navigation map style, which provides a
 	//   detailed basemap for the world symbolized with a custom navigation map style
 	//   that's designed for use during the day in mobile devices.
 	// Valid HERE Technologies map styles (https://docs.aws.amazon.com/location/latest/developerguide/HERE.html)
@@ -955,6 +955,26 @@ type MapConfiguration struct {
 	//
 	// This member is required.
 	Style *string
+
+	// Specifies the political view for the style. Leave unset to not use a political
+	// view, or, for styles that support specific political views, you can choose a
+	// view, such as IND for the Indian view. Default is unset. Not all map resources
+	// or styles support political view styles. See Political views (https://docs.aws.amazon.com/location/latest/developerguide/map-concepts.html#political-views)
+	// for more information.
+	PoliticalView *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the political view for the style.
+type MapConfigurationUpdate struct {
+
+	// Specifies the political view for the style. Set to an empty string to not use a
+	// political view, or, for styles that support specific political views, you can
+	// choose a view, such as IND for the Indian view. Not all map resources or styles
+	// support political view styles. See Political views (https://docs.aws.amazon.com/location/latest/developerguide/map-concepts.html#political-views)
+	// for more information.
+	PoliticalView *string
 
 	noSmithyDocumentSerde
 }

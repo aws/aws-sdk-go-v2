@@ -42,6 +42,24 @@ func (Compression) Values() []Compression {
 	}
 }
 
+type DataFormat string
+
+// Enum values for DataFormat
+const (
+	DataFormatJson    DataFormat = "JSON"
+	DataFormatParquet DataFormat = "PARQUET"
+)
+
+// Values returns all known values for DataFormat. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (DataFormat) Values() []DataFormat {
+	return []DataFormat{
+		"JSON",
+		"PARQUET",
+	}
+}
+
 type DiagnosticsMode string
 
 // Enum values for DiagnosticsMode
@@ -294,6 +312,24 @@ func (SpoolingMode) Values() []SpoolingMode {
 	return []SpoolingMode{
 		"OFF",
 		"TO_DISK",
+	}
+}
+
+type StorageCompressionFormat string
+
+// Enum values for StorageCompressionFormat
+const (
+	StorageCompressionFormatNone StorageCompressionFormat = "NONE"
+	StorageCompressionFormatGzip StorageCompressionFormat = "GZIP"
+)
+
+// Values returns all known values for StorageCompressionFormat. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StorageCompressionFormat) Values() []StorageCompressionFormat {
+	return []StorageCompressionFormat{
+		"NONE",
+		"GZIP",
 	}
 }
 

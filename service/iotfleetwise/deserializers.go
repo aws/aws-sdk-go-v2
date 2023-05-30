@@ -6677,6 +6677,15 @@ func awsAwsjson10_deserializeDocumentActuator(v **types.Actuator, value interfac
 				sv.AssignedValue = ptr.String(jtv)
 			}
 
+		case "comment":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected message to be of type string, got %T instead", value)
+				}
+				sv.Comment = ptr.String(jtv)
+			}
+
 		case "dataType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6684,6 +6693,15 @@ func awsAwsjson10_deserializeDocumentActuator(v **types.Actuator, value interfac
 					return fmt.Errorf("expected NodeDataType to be of type string, got %T instead", value)
 				}
 				sv.DataType = types.NodeDataType(jtv)
+			}
+
+		case "deprecationMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected message to be of type string, got %T instead", value)
+				}
+				sv.DeprecationMessage = ptr.String(jtv)
 			}
 
 		case "description":
@@ -6826,6 +6844,15 @@ func awsAwsjson10_deserializeDocumentAttribute(v **types.Attribute, value interf
 				sv.AssignedValue = ptr.String(jtv)
 			}
 
+		case "comment":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected message to be of type string, got %T instead", value)
+				}
+				sv.Comment = ptr.String(jtv)
+			}
+
 		case "dataType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6842,6 +6869,15 @@ func awsAwsjson10_deserializeDocumentAttribute(v **types.Attribute, value interf
 					return fmt.Errorf("expected string to be of type string, got %T instead", value)
 				}
 				sv.DefaultValue = ptr.String(jtv)
+			}
+
+		case "deprecationMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected message to be of type string, got %T instead", value)
+				}
+				sv.DeprecationMessage = ptr.String(jtv)
 			}
 
 		case "description":
@@ -7006,6 +7042,24 @@ func awsAwsjson10_deserializeDocumentBranch(v **types.Branch, value interface{})
 
 	for key, value := range shape {
 		switch key {
+		case "comment":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected message to be of type string, got %T instead", value)
+				}
+				sv.Comment = ptr.String(jtv)
+			}
+
+		case "deprecationMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected message to be of type string, got %T instead", value)
+				}
+				sv.DeprecationMessage = ptr.String(jtv)
+			}
+
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7816,6 +7870,88 @@ func awsAwsjson10_deserializeDocumentCreateVehicleResponses(v *[]types.CreateVeh
 			return err
 		}
 		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentDataDestinationConfig(v *types.DataDestinationConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.DataDestinationConfig
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "s3Config":
+			var mv types.S3Config
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentS3Config(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.DataDestinationConfigMemberS3Config{Value: mv}
+			break loop
+
+		case "timestreamConfig":
+			var mv types.TimestreamConfig
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentTimestreamConfig(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.DataDestinationConfigMemberTimestreamConfig{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentDataDestinationConfigs(v *[]types.DataDestinationConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.DataDestinationConfig
+	if *v == nil {
+		cv = []types.DataDestinationConfig{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.DataDestinationConfig
+		if err := awsAwsjson10_deserializeDocumentDataDestinationConfig(&col, value); err != nil {
+			return err
+		}
 		cv = append(cv, col)
 
 	}
@@ -9600,6 +9736,73 @@ func awsAwsjson10_deserializeDocumentResourceNotFoundException(v **types.Resourc
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentS3Config(v **types.S3Config, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.S3Config
+	if *v == nil {
+		sv = &types.S3Config{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "bucketArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3BucketArn to be of type string, got %T instead", value)
+				}
+				sv.BucketArn = ptr.String(jtv)
+			}
+
+		case "dataFormat":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DataFormat to be of type string, got %T instead", value)
+				}
+				sv.DataFormat = types.DataFormat(jtv)
+			}
+
+		case "prefix":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Prefix to be of type string, got %T instead", value)
+				}
+				sv.Prefix = ptr.String(jtv)
+			}
+
+		case "storageCompressionFormat":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StorageCompressionFormat to be of type string, got %T instead", value)
+				}
+				sv.StorageCompressionFormat = types.StorageCompressionFormat(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentSensor(v **types.Sensor, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -9627,6 +9830,15 @@ func awsAwsjson10_deserializeDocumentSensor(v **types.Sensor, value interface{})
 				return err
 			}
 
+		case "comment":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected message to be of type string, got %T instead", value)
+				}
+				sv.Comment = ptr.String(jtv)
+			}
+
 		case "dataType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9634,6 +9846,15 @@ func awsAwsjson10_deserializeDocumentSensor(v **types.Sensor, value interface{})
 					return fmt.Errorf("expected NodeDataType to be of type string, got %T instead", value)
 				}
 				sv.DataType = types.NodeDataType(jtv)
+			}
+
+		case "deprecationMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected message to be of type string, got %T instead", value)
+				}
+				sv.DeprecationMessage = ptr.String(jtv)
 			}
 
 		case "description":
@@ -10244,6 +10465,55 @@ func awsAwsjson10_deserializeDocumentTimeBasedCollectionScheme(v **types.TimeBas
 					return err
 				}
 				sv.PeriodMs = ptr.Int64(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentTimestreamConfig(v **types.TimestreamConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TimestreamConfig
+	if *v == nil {
+		sv = &types.TimestreamConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "executionRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IAMRoleArn to be of type string, got %T instead", value)
+				}
+				sv.ExecutionRoleArn = ptr.String(jtv)
+			}
+
+		case "timestreamTableArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TimestreamTableArn to be of type string, got %T instead", value)
+				}
+				sv.TimestreamTableArn = ptr.String(jtv)
 			}
 
 		default:
@@ -11766,6 +12036,11 @@ func awsAwsjson10_deserializeOpDocumentGetCampaignOutput(v **GetCampaignOutput, 
 					return fmt.Errorf("expected timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "dataDestinationConfigs":
+			if err := awsAwsjson10_deserializeDocumentDataDestinationConfigs(&sv.DataDestinationConfigs, value); err != nil {
+				return err
 			}
 
 		case "dataExtraDimensions":

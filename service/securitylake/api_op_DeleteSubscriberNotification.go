@@ -6,53 +6,50 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	"github.com/aws/aws-sdk-go-v2/service/securitylake/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the Amazon Security Lake configuration object for the specified
-// Amazon Web Services account ID. You can use the GetDatalake API to know whether
-// Security Lake is enabled for the current Region. This API does not take input
-// parameters.
-func (c *Client) GetDatalake(ctx context.Context, params *GetDatalakeInput, optFns ...func(*Options)) (*GetDatalakeOutput, error) {
+// Deletes the specified notification subscription in Amazon Security Lake for the
+// organization you specify.
+func (c *Client) DeleteSubscriberNotification(ctx context.Context, params *DeleteSubscriberNotificationInput, optFns ...func(*Options)) (*DeleteSubscriberNotificationOutput, error) {
 	if params == nil {
-		params = &GetDatalakeInput{}
+		params = &DeleteSubscriberNotificationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDatalake", params, optFns, c.addOperationGetDatalakeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DeleteSubscriberNotification", params, optFns, c.addOperationDeleteSubscriberNotificationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*GetDatalakeOutput)
+	out := result.(*DeleteSubscriberNotificationOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type GetDatalakeInput struct {
+type DeleteSubscriberNotificationInput struct {
+
+	// The ID of the Security Lake subscriber account.
+	//
+	// This member is required.
+	SubscriberId *string
+
 	noSmithyDocumentSerde
 }
 
-type GetDatalakeOutput struct {
-
-	// Retrieves the Security Lake configuration object.
-	//
-	// This member is required.
-	Configurations map[string]types.LakeConfigurationResponse
-
+type DeleteSubscriberNotificationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationGetDatalakeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDatalake{}, middleware.After)
+func (c *Client) addOperationDeleteSubscriberNotificationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSubscriberNotification{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDatalake{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteSubscriberNotification{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -92,7 +89,10 @@ func (c *Client) addOperationGetDatalakeMiddlewares(stack *middleware.Stack, opt
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDatalake(options.Region), middleware.Before); err != nil {
+	if err = addOpDeleteSubscriberNotificationValidationMiddleware(stack); err != nil {
+		return err
+	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteSubscriberNotification(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -110,11 +110,11 @@ func (c *Client) addOperationGetDatalakeMiddlewares(stack *middleware.Stack, opt
 	return nil
 }
 
-func newServiceMetadataMiddleware_opGetDatalake(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opDeleteSubscriberNotification(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "securitylake",
-		OperationName: "GetDatalake",
+		OperationName: "DeleteSubscriberNotification",
 	}
 }

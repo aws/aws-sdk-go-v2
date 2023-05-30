@@ -46,7 +46,10 @@ type UpdateCampaignInput struct {
 	CampaignConfig *types.CampaignConfig
 
 	// Specifies the requested minimum provisioned transactions (recommendations) per
-	// second that Amazon Personalize will support.
+	// second that Amazon Personalize will support. A high minProvisionedTPS will
+	// increase your bill. We recommend starting with 1 for minProvisionedTPS (the
+	// default). Track your usage using Amazon CloudWatch metrics, and increase the
+	// minProvisionedTPS as necessary.
 	MinProvisionedTPS *int32
 
 	// The ARN of a new solution version to deploy.

@@ -1967,6 +1967,7 @@ const (
 	WorkerTypeG025x    WorkerType = "G.025X"
 	WorkerTypeG4x      WorkerType = "G.4X"
 	WorkerTypeG8x      WorkerType = "G.8X"
+	WorkerTypeZ2x      WorkerType = "Z.2X"
 )
 
 // Values returns all known values for WorkerType. Note that this can be expanded
@@ -1980,6 +1981,7 @@ func (WorkerType) Values() []WorkerType {
 		"G.025X",
 		"G.4X",
 		"G.8X",
+		"Z.2X",
 	}
 }
 

@@ -6,51 +6,52 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	"github.com/aws/aws-sdk-go-v2/service/securitylake/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Specifies where to store your security data and for how long. You can add a
-// rollup Region to consolidate data from multiple Amazon Web Services Regions.
-func (c *Client) UpdateDatalake(ctx context.Context, params *UpdateDatalakeInput, optFns ...func(*Options)) (*UpdateDatalakeOutput, error) {
+// Designates the Amazon Security Lake delegated administrator account for the
+// organization. This API can only be called by the organization management
+// account. The organization management account cannot be the delegated
+// administrator account.
+func (c *Client) RegisterDataLakeDelegatedAdministrator(ctx context.Context, params *RegisterDataLakeDelegatedAdministratorInput, optFns ...func(*Options)) (*RegisterDataLakeDelegatedAdministratorOutput, error) {
 	if params == nil {
-		params = &UpdateDatalakeInput{}
+		params = &RegisterDataLakeDelegatedAdministratorInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "UpdateDatalake", params, optFns, c.addOperationUpdateDatalakeMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "RegisterDataLakeDelegatedAdministrator", params, optFns, c.addOperationRegisterDataLakeDelegatedAdministratorMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*UpdateDatalakeOutput)
+	out := result.(*RegisterDataLakeDelegatedAdministratorOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type UpdateDatalakeInput struct {
+type RegisterDataLakeDelegatedAdministratorInput struct {
 
-	// Specify the Region or Regions that will contribute data to the rollup region.
+	// The Amazon Web Services account ID of the Security Lake delegated administrator.
 	//
 	// This member is required.
-	Configurations map[string]types.LakeConfigurationRequest
+	AccountId *string
 
 	noSmithyDocumentSerde
 }
 
-type UpdateDatalakeOutput struct {
+type RegisterDataLakeDelegatedAdministratorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationUpdateDatalakeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDatalake{}, middleware.After)
+func (c *Client) addOperationRegisterDataLakeDelegatedAdministratorMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpRegisterDataLakeDelegatedAdministrator{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDatalake{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRegisterDataLakeDelegatedAdministrator{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -90,10 +91,10 @@ func (c *Client) addOperationUpdateDatalakeMiddlewares(stack *middleware.Stack, 
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpUpdateDatalakeValidationMiddleware(stack); err != nil {
+	if err = addOpRegisterDataLakeDelegatedAdministratorValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateDatalake(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterDataLakeDelegatedAdministrator(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -111,11 +112,11 @@ func (c *Client) addOperationUpdateDatalakeMiddlewares(stack *middleware.Stack, 
 	return nil
 }
 
-func newServiceMetadataMiddleware_opUpdateDatalake(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opRegisterDataLakeDelegatedAdministrator(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "securitylake",
-		OperationName: "UpdateDatalake",
+		OperationName: "RegisterDataLakeDelegatedAdministrator",
 	}
 }

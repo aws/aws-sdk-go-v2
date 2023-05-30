@@ -6,39 +6,49 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/securitylake/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the expiration period and time-to-live (TTL) for which the exception
-// message will remain. Exceptions are stored by default, for 2 weeks from when a
-// record was created in Amazon Security Lake. This API does not take input
-// parameters.
-func (c *Client) GetDatalakeExceptionsExpiry(ctx context.Context, params *GetDatalakeExceptionsExpiryInput, optFns ...func(*Options)) (*GetDatalakeExceptionsExpiryOutput, error) {
+// Notifies the subscriber when new data is written to the data lake for the
+// sources that the subscriber consumes in Security Lake. You can create only one
+// subscriber notification per subscriber.
+func (c *Client) CreateSubscriberNotification(ctx context.Context, params *CreateSubscriberNotificationInput, optFns ...func(*Options)) (*CreateSubscriberNotificationOutput, error) {
 	if params == nil {
-		params = &GetDatalakeExceptionsExpiryInput{}
+		params = &CreateSubscriberNotificationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetDatalakeExceptionsExpiry", params, optFns, c.addOperationGetDatalakeExceptionsExpiryMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateSubscriberNotification", params, optFns, c.addOperationCreateSubscriberNotificationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*GetDatalakeExceptionsExpiryOutput)
+	out := result.(*CreateSubscriberNotificationOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type GetDatalakeExceptionsExpiryInput struct {
+type CreateSubscriberNotificationInput struct {
+
+	// Specify the configuration using which you want to create the subscriber
+	// notification.
+	//
+	// This member is required.
+	Configuration types.NotificationConfiguration
+
+	// The subscriber ID for the notification subscription.
+	//
+	// This member is required.
+	SubscriberId *string
+
 	noSmithyDocumentSerde
 }
 
-type GetDatalakeExceptionsExpiryOutput struct {
+type CreateSubscriberNotificationOutput struct {
 
-	// The expiration period and time-to-live (TTL).
-	//
-	// This member is required.
-	ExceptionMessageExpiry *int64
+	// The subscriber endpoint to which exception messages are posted.
+	SubscriberEndpoint *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,12 +56,12 @@ type GetDatalakeExceptionsExpiryOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationGetDatalakeExceptionsExpiryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDatalakeExceptionsExpiry{}, middleware.After)
+func (c *Client) addOperationCreateSubscriberNotificationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSubscriberNotification{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDatalakeExceptionsExpiry{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSubscriberNotification{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -91,7 +101,10 @@ func (c *Client) addOperationGetDatalakeExceptionsExpiryMiddlewares(stack *middl
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDatalakeExceptionsExpiry(options.Region), middleware.Before); err != nil {
+	if err = addOpCreateSubscriberNotificationValidationMiddleware(stack); err != nil {
+		return err
+	}
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSubscriberNotification(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -109,11 +122,11 @@ func (c *Client) addOperationGetDatalakeExceptionsExpiryMiddlewares(stack *middl
 	return nil
 }
 
-func newServiceMetadataMiddleware_opGetDatalakeExceptionsExpiry(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opCreateSubscriberNotification(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "securitylake",
-		OperationName: "GetDatalakeExceptionsExpiry",
+		OperationName: "CreateSubscriberNotification",
 	}
 }

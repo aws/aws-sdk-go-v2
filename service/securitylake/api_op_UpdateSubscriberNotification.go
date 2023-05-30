@@ -11,48 +11,55 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Automatically enables Amazon Security Lake for new member accounts in your
-// organization. Security Lake is not automatically enabled for any existing member
-// accounts in your organization.
-func (c *Client) CreateDatalakeAutoEnable(ctx context.Context, params *CreateDatalakeAutoEnableInput, optFns ...func(*Options)) (*CreateDatalakeAutoEnableOutput, error) {
+// Updates an existing notification method for the subscription (SQS or HTTPs
+// endpoint) or switches the notification subscription endpoint for a subscriber.
+func (c *Client) UpdateSubscriberNotification(ctx context.Context, params *UpdateSubscriberNotificationInput, optFns ...func(*Options)) (*UpdateSubscriberNotificationOutput, error) {
 	if params == nil {
-		params = &CreateDatalakeAutoEnableInput{}
+		params = &UpdateSubscriberNotificationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateDatalakeAutoEnable", params, optFns, c.addOperationCreateDatalakeAutoEnableMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateSubscriberNotification", params, optFns, c.addOperationUpdateSubscriberNotificationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*CreateDatalakeAutoEnableOutput)
+	out := result.(*UpdateSubscriberNotificationOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type CreateDatalakeAutoEnableInput struct {
+type UpdateSubscriberNotificationInput struct {
 
-	// Enable Security Lake with the specified configuration settings to begin
-	// collecting security data for new accounts in your organization.
+	// The configuration for subscriber notification.
 	//
 	// This member is required.
-	ConfigurationForNewAccounts []types.AutoEnableNewRegionConfiguration
+	Configuration types.NotificationConfiguration
+
+	// The subscription ID for which the subscription notification is specified.
+	//
+	// This member is required.
+	SubscriberId *string
 
 	noSmithyDocumentSerde
 }
 
-type CreateDatalakeAutoEnableOutput struct {
+type UpdateSubscriberNotificationOutput struct {
+
+	// The subscriber endpoint to which exception messages are posted.
+	SubscriberEndpoint *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationCreateDatalakeAutoEnableMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDatalakeAutoEnable{}, middleware.After)
+func (c *Client) addOperationUpdateSubscriberNotificationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSubscriberNotification{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDatalakeAutoEnable{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateSubscriberNotification{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -92,10 +99,10 @@ func (c *Client) addOperationCreateDatalakeAutoEnableMiddlewares(stack *middlewa
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpCreateDatalakeAutoEnableValidationMiddleware(stack); err != nil {
+	if err = addOpUpdateSubscriberNotificationValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDatalakeAutoEnable(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateSubscriberNotification(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -113,11 +120,11 @@ func (c *Client) addOperationCreateDatalakeAutoEnableMiddlewares(stack *middlewa
 	return nil
 }
 
-func newServiceMetadataMiddleware_opCreateDatalakeAutoEnable(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opUpdateSubscriberNotification(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "securitylake",
-		OperationName: "CreateDatalakeAutoEnable",
+		OperationName: "UpdateSubscriberNotification",
 	}
 }

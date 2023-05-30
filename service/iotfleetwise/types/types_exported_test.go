@@ -29,6 +29,28 @@ func ExampleCollectionScheme_outputUsage() {
 var _ *types.ConditionBasedCollectionScheme
 var _ *types.TimeBasedCollectionScheme
 
+func ExampleDataDestinationConfig_outputUsage() {
+	var union types.DataDestinationConfig
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.DataDestinationConfigMemberS3Config:
+		_ = v.Value // Value is types.S3Config
+
+	case *types.DataDestinationConfigMemberTimestreamConfig:
+		_ = v.Value // Value is types.TimestreamConfig
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.S3Config
+var _ *types.TimestreamConfig
+
 func ExampleFormattedVss_outputUsage() {
 	var union types.FormattedVss
 	// type switches can be used to check the union value

@@ -224,6 +224,202 @@ type AvailabilityZone struct {
 	noSmithyDocumentSerde
 }
 
+// Provides details about an Amazon MQ message broker. A message broker allows
+// software applications and components to communicate using various programming
+// languages, operating systems, and formal messaging protocols.
+type AwsAmazonMqBrokerDetails struct {
+
+	// The authentication strategy used to secure the broker. The default is SIMPLE .
+	AuthenticationStrategy *string
+
+	// Whether automatically upgrade new minor versions for brokers, as new versions
+	// are released and supported by Amazon MQ. Automatic upgrades occur during the
+	// scheduled maintenance window of the broker or after a manual broker reboot.
+	AutoMinorVersionUpgrade bool
+
+	// The Amazon Resource Name (ARN) of the broker.
+	BrokerArn *string
+
+	// The unique ID that Amazon MQ generates for the broker.
+	BrokerId *string
+
+	// The broker's name.
+	BrokerName *string
+
+	// The broker's deployment mode.
+	DeploymentMode *string
+
+	// Encryption options for the broker. Doesn’t apply to RabbitMQ brokers.
+	EncryptionOptions *AwsAmazonMqBrokerEncryptionOptionsDetails
+
+	// The type of broker engine.
+	EngineType *string
+
+	// The version of the broker engine.
+	EngineVersion *string
+
+	// The broker's instance type.
+	HostInstanceType *string
+
+	// The metadata of the Lightweight Directory Access Protocol (LDAP) server used to
+	// authenticate and authorize connections to the broker. This is an optional
+	// failover server.
+	LdapServerMetadata *AwsAmazonMqBrokerLdapServerMetadataDetails
+
+	// Turns on Amazon CloudWatch logging for brokers.
+	Logs *AwsAmazonMqBrokerLogsDetails
+
+	// The scheduled time period (UTC) during which Amazon MQ begins to apply pending
+	// updates or patches to the broker.
+	MaintenanceWindowStartTime *AwsAmazonMqBrokerMaintenanceWindowStartTimeDetails
+
+	// Permits connections from applications outside of the VPC that hosts the
+	// broker's subnets.
+	PubliclyAccessible bool
+
+	// The list of rules (one minimum, 125 maximum) that authorize connections to
+	// brokers.
+	SecurityGroups []string
+
+	// The broker's storage type.
+	StorageType *string
+
+	// The list of groups that define which subnets and IP ranges the broker can use
+	// from different Availability Zones.
+	SubnetIds []string
+
+	// The list of all broker usernames for the specified broker. Doesn't apply to
+	// RabbitMQ brokers.
+	Users []AwsAmazonMqBrokerUsersDetails
+
+	noSmithyDocumentSerde
+}
+
+// Provides details about broker encryption options.
+type AwsAmazonMqBrokerEncryptionOptionsDetails struct {
+
+	// The KMS key that’s used to encrypt your data at rest. If not provided, Amazon
+	// MQ will use a default KMS key to encrypt your data.
+	KmsKeyId *string
+
+	// Specifies that an KMS key should be used for at-rest encryption. Set to true by
+	// default if no value is provided (for example, for RabbitMQ brokers).
+	UseAwsOwnedKey bool
+
+	noSmithyDocumentSerde
+}
+
+// The metadata of the Lightweight Directory Access Protocol (LDAP) server used to
+// authenticate and authorize connections to the broker. This is an optional
+// failover server.
+type AwsAmazonMqBrokerLdapServerMetadataDetails struct {
+
+	// Specifies the location of the LDAP server, such as Amazon Web Services
+	// Directory Service for Microsoft Active Directory.
+	Hosts []string
+
+	// The distinguished name of the node in the directory information tree (DIT) to
+	// search for roles or groups.
+	RoleBase *string
+
+	// The group name attribute in a role entry whose value is the name of that role.
+	RoleName *string
+
+	// The LDAP search filter used to find roles within the roleBase .
+	RoleSearchMatching *string
+
+	// The directory search scope for the role. If set to true , the scope is to search
+	// the entire subtree.
+	RoleSearchSubtree bool
+
+	// A username for the service account, which is an account in your LDAP server
+	// that has access to initiate a connection.
+	ServiceAccountUsername *string
+
+	// Selects a particular subtree of the directory information tree (DIT) to search
+	// for user entries.
+	UserBase *string
+
+	// The name of the LDAP attribute in the user's directory entry for the user's
+	// group membership.
+	UserRoleName *string
+
+	// The LDAP search filter used to find users within the userBase .
+	UserSearchMatching *string
+
+	// The directory search scope for the user. If set to true, the scope is to search
+	// the entire subtree.
+	UserSearchSubtree bool
+
+	noSmithyDocumentSerde
+}
+
+// Provides information about logs to be activated for the specified broker.
+type AwsAmazonMqBrokerLogsDetails struct {
+
+	// Activates audit logging. Every user management action made using JMX or the
+	// ActiveMQ Web Console is logged. Doesn't apply to RabbitMQ brokers.
+	Audit bool
+
+	// The location of the CloudWatch Logs log group where audit logs are sent.
+	AuditLogGroup *string
+
+	// Activates general logging.
+	General bool
+
+	// The location of the CloudWatch Logs log group where general logs are sent.
+	GeneralLogGroup *string
+
+	// The list of information about logs that are to be turned on for the specified
+	// broker.
+	Pending *AwsAmazonMqBrokerLogsPendingDetails
+
+	noSmithyDocumentSerde
+}
+
+// Provides information about logs to be activated for the specified broker.
+type AwsAmazonMqBrokerLogsPendingDetails struct {
+
+	// Activates audit logging. Every user management action made using JMX or the
+	// ActiveMQ Web Console is logged. Doesn't apply to RabbitMQ brokers.
+	Audit bool
+
+	// Activates general logging.
+	General bool
+
+	noSmithyDocumentSerde
+}
+
+// The scheduled time period (UTC) during which Amazon MQ begins to apply pending
+// updates or patches to the broker.
+type AwsAmazonMqBrokerMaintenanceWindowStartTimeDetails struct {
+
+	// The day of the week on which the maintenance window falls.
+	DayOfWeek *string
+
+	// The time, in 24-hour format, on which the maintenance window falls.
+	TimeOfDay *string
+
+	// The time zone in either the Country/City format or the UTC offset format. UTC
+	// is the default format.
+	TimeZone *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides details about the broker usernames for the specified broker. Doesn't
+// apply to RabbitMQ brokers.
+type AwsAmazonMqBrokerUsersDetails struct {
+
+	// The type of change pending for the broker user.
+	PendingChange *string
+
+	// The username of the broker user.
+	Username *string
+
+	noSmithyDocumentSerde
+}
+
 // Provided if ActionType is AWS_API_CALL . It provides details about the API call
 // that was detected.
 type AwsApiCallAction struct {
@@ -607,6 +803,156 @@ type AwsApiGatewayV2StageDetails struct {
 	//   - Numbers
 	//   - Special characters -._~:/?#&=,
 	StageVariables map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// A list of additional authentication providers for the GraphqlApi API.
+type AwsAppSyncGraphQlApiAdditionalAuthenticationProvidersDetails struct {
+
+	// The type of security configuration for your GraphQL API: API key, Identity and
+	// Access Management (IAM), OpenID Connect (OIDC), Amazon Cognito user pools, or
+	// Lambda.
+	AuthenticationType *string
+
+	// The configuration for Lambda function authorization.
+	LambdaAuthorizerConfig *AwsAppSyncGraphQlApiLambdaAuthorizerConfigDetails
+
+	// The OpenID Connect configuration.
+	OpenIdConnectConfig *AwsAppSyncGraphQlApiOpenIdConnectConfigDetails
+
+	// The Amazon Cognito user pools configuration.
+	UserPoolConfig *AwsAppSyncGraphQlApiUserPoolConfigDetails
+
+	noSmithyDocumentSerde
+}
+
+// Provides details about an AppSync Graph QL API, which lets you query multiple
+// databases, microservices, and APIs from a single GraphQL endpoint.
+type AwsAppSyncGraphQlApiDetails struct {
+
+	// A list of additional authentication providers for the GraphQL API.
+	AdditionalAuthenticationProviders []AwsAppSyncGraphQlApiAdditionalAuthenticationProvidersDetails
+
+	// The unique identifier for the API.
+	ApiId *string
+
+	// The Amazon Resource Name (ARN) of the API.
+	Arn *string
+
+	// The type of security configuration for your GraphQL API: API key, Identity and
+	// Access Management (IAM), OpenID Connect (OIDC), Amazon Cognito user pools, or
+	// Lambda.
+	AuthenticationType *string
+
+	// The unique identifier for the API.
+	Id *string
+
+	// Specifies the configuration for Lambda function authorization.
+	LambdaAuthorizerConfig *AwsAppSyncGraphQlApiLambdaAuthorizerConfigDetails
+
+	// The Amazon CloudWatch Logs configuration.
+	LogConfig *AwsAppSyncGraphQlApiLogConfigDetails
+
+	// The API name.
+	Name *string
+
+	// Specifies the authorization configuration for using an OpenID Connect compliant
+	// service with an AppSync GraphQL API endpoint.
+	OpenIdConnectConfig *AwsAppSyncGraphQlApiOpenIdConnectConfigDetails
+
+	// The Amazon Cognito user pools configuration.
+	UserPoolConfig *AwsAppSyncGraphQlApiUserPoolConfigDetails
+
+	// The Amazon Resource Name (ARN) of the WAF web access control list (web ACL)
+	// associated with this GraphQL API, if one exists.
+	WafWebAclArn *string
+
+	// Indicates whether to use X-Ray tracing for the GraphQL API.
+	XrayEnabled bool
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the authorization configuration for using an Lambda function with
+// your AppSync GraphQL API endpoint.
+type AwsAppSyncGraphQlApiLambdaAuthorizerConfigDetails struct {
+
+	// The number of seconds a response should be cached for. The default is 5 minutes
+	// (300 seconds).
+	AuthorizerResultTtlInSeconds int32
+
+	// The Amazon Resource Name (ARN) of the Lambda function to be called for
+	// authorization. This can be a standard Lambda ARN, a version ARN (.../v3), or an
+	// alias ARN.
+	AuthorizerUri *string
+
+	// A regular expression for validation of tokens before the Lambda function is
+	// called.
+	IdentityValidationExpression *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the logging configuration when writing GraphQL operations and tracing
+// to Amazon CloudWatch for an AppSync GraphQL API.
+type AwsAppSyncGraphQlApiLogConfigDetails struct {
+
+	// The Amazon Resource Name (ARN) of the service role that AppSync assumes to
+	// publish to CloudWatch Logs in your account.
+	CloudWatchLogsRoleArn *string
+
+	// Set to TRUE to exclude sections that contain information such as headers,
+	// context, and evaluated mapping templates, regardless of logging level.
+	ExcludeVerboseContent bool
+
+	// The field logging level.
+	FieldLogLevel *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the authorization configuration for using an OpenID Connect compliant
+// service with your AppSync GraphQL API endpoint.
+type AwsAppSyncGraphQlApiOpenIdConnectConfigDetails struct {
+
+	// The number of milliseconds that a token is valid after being authenticated.
+	AuthTtL int64
+
+	// The client identifier of the relying party at the OpenID identity provider.
+	// This identifier is typically obtained when the relying party is registered with
+	// the OpenID identity provider. You can specify a regular expression so that
+	// AppSync can validate against multiple client identifiers at a time.
+	ClientId *string
+
+	// The number of milliseconds that a token is valid after it's issued to a user.
+	IatTtL int64
+
+	// The issuer for the OIDC configuration. The issuer returned by discovery must
+	// exactly match the value of iss in the ID token.
+	Issuer *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the authorization configuration for using Amazon Cognito user pools
+// with your AppSync GraphQL API endpoint.
+type AwsAppSyncGraphQlApiUserPoolConfigDetails struct {
+
+	// A regular expression for validating the incoming Amazon Cognito user pools app
+	// client ID. If this value isn't set, no filtering is applied.
+	AppIdClientRegex *string
+
+	// The Amazon Web Services Region in which the user pool was created.
+	AwsRegion *string
+
+	// The action that you want your GraphQL API to take when a request that uses
+	// Amazon Cognito user pools authentication doesn't match the Amazon Cognito user
+	// pools configuration.
+	DefaultAction *string
+
+	// The user pool ID.
+	UserPoolId *string
 
 	noSmithyDocumentSerde
 }
@@ -6457,6 +6803,191 @@ type AwsElbv2LoadBalancerDetails struct {
 	noSmithyDocumentSerde
 }
 
+// A schema defines the structure of events that are sent to Amazon EventBridge.
+// Schema registries are containers for schemas. They collect and organize schemas
+// so that your schemas are in logical groups.
+type AwsEventSchemasRegistryDetails struct {
+
+	// A description of the registry to be created.
+	Description *string
+
+	// The Amazon Resource Name (ARN) of the registry.
+	RegistryArn *string
+
+	// The name of the schema registry.
+	RegistryName *string
+
+	noSmithyDocumentSerde
+}
+
+// An object that contains information on the status of CloudTrail as a data
+// source for the detector.
+type AwsGuardDutyDetectorDataSourcesCloudTrailDetails struct {
+
+	// Specifies whether CloudTrail is activated as a data source for the detector.
+	Status *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes which data sources are activated for the detector.
+type AwsGuardDutyDetectorDataSourcesDetails struct {
+
+	// An object that contains information on the status of CloudTrail as a data
+	// source for the detector.
+	CloudTrail *AwsGuardDutyDetectorDataSourcesCloudTrailDetails
+
+	// An object that contains information on the status of DNS logs as a data source
+	// for the detector.
+	DnsLogs *AwsGuardDutyDetectorDataSourcesDnsLogsDetails
+
+	// An object that contains information on the status of VPC Flow Logs as a data
+	// source for the detector.
+	FlowLogs *AwsGuardDutyDetectorDataSourcesFlowLogsDetails
+
+	// An object that contains information on the status of Kubernetes data sources
+	// for the detector.
+	Kubernetes *AwsGuardDutyDetectorDataSourcesKubernetesDetails
+
+	// An object that contains information on the status of Malware Protection as a
+	// data source for the detector.
+	MalwareProtection *AwsGuardDutyDetectorDataSourcesMalwareProtectionDetails
+
+	// An object that contains information on the status of S3 Data event logs as a
+	// data source for the detector.
+	S3Logs *AwsGuardDutyDetectorDataSourcesS3LogsDetails
+
+	noSmithyDocumentSerde
+}
+
+// An object that contains information on the status of DNS logs as a data source
+// for the detector.
+type AwsGuardDutyDetectorDataSourcesDnsLogsDetails struct {
+
+	// Describes whether DNS logs is enabled as a data source for the detector.
+	Status *string
+
+	noSmithyDocumentSerde
+}
+
+// An object that contains information on the status of VPC Flow Logs as a data
+// source for the detector.
+type AwsGuardDutyDetectorDataSourcesFlowLogsDetails struct {
+
+	// Describes whether VPC Flow Logs are activated as a data source for the detector.
+	Status *string
+
+	noSmithyDocumentSerde
+}
+
+// An object that contains information on the status of Kubernetes audit logs as a
+// data source for the detector.
+type AwsGuardDutyDetectorDataSourcesKubernetesAuditLogsDetails struct {
+
+	// Describes whether Kubernetes audit logs are activated as a data source for the
+	// detector.
+	Status *string
+
+	noSmithyDocumentSerde
+}
+
+// An object that contains information on the status of Kubernetes data sources
+// for the detector.
+type AwsGuardDutyDetectorDataSourcesKubernetesDetails struct {
+
+	// Describes whether Kubernetes audit logs are activated as a data source for the
+	// detector.
+	AuditLogs *AwsGuardDutyDetectorDataSourcesKubernetesAuditLogsDetails
+
+	noSmithyDocumentSerde
+}
+
+// An object that contains information on the status of Malware Protection as a
+// data source for the detector.
+type AwsGuardDutyDetectorDataSourcesMalwareProtectionDetails struct {
+
+	// Describes the configuration of Malware Protection for EC2 instances with
+	// findings.
+	ScanEc2InstanceWithFindings *AwsGuardDutyDetectorDataSourcesMalwareProtectionScanEc2InstanceWithFindingsDetails
+
+	// The GuardDuty Malware Protection service role.
+	ServiceRole *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the configuration of Malware Protection for EC2 instances with
+// findings.
+type AwsGuardDutyDetectorDataSourcesMalwareProtectionScanEc2InstanceWithFindingsDetails struct {
+
+	// Describes the configuration of scanning EBS volumes (Malware Protection) as a
+	// data source.
+	EbsVolumes *AwsGuardDutyDetectorDataSourcesMalwareProtectionScanEc2InstanceWithFindingsEbsVolumesDetails
+
+	noSmithyDocumentSerde
+}
+
+// Describes the configuration of scanning EBS volumes (Malware Protection) as a
+// data source.
+type AwsGuardDutyDetectorDataSourcesMalwareProtectionScanEc2InstanceWithFindingsEbsVolumesDetails struct {
+
+	// Specifies the reason why scanning EBS volumes (Malware Protection) isn’t
+	// activated as a data source.
+	Reason *string
+
+	// Describes whether scanning EBS volumes is activated as a data source for the
+	// detector.
+	Status *string
+
+	noSmithyDocumentSerde
+}
+
+// An object that contains information on the status of S3 data event logs as a
+// data source for the detector.
+type AwsGuardDutyDetectorDataSourcesS3LogsDetails struct {
+
+	// A value that describes whether S3 data event logs are automatically enabled for
+	// new members of an organization.
+	Status *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides details about an Amazon GuardDuty detector. A detector is an object
+// that represents the GuardDuty service. A detector is required for GuardDuty to
+// become operational.
+type AwsGuardDutyDetectorDetails struct {
+
+	// Describes which data sources are activated for the detector.
+	DataSources *AwsGuardDutyDetectorDataSourcesDetails
+
+	// Describes which features are activated for the detector.
+	Features []AwsGuardDutyDetectorFeaturesDetails
+
+	// The publishing frequency of the finding.
+	FindingPublishingFrequency *string
+
+	// The GuardDuty service role.
+	ServiceRole *string
+
+	// The activation status of the detector.
+	Status *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes which features are activated for the detector.
+type AwsGuardDutyDetectorFeaturesDetails struct {
+
+	// Indicates the name of the feature that is activated for the detector.
+	Name *string
+
+	// Indicates the status of the feature that is activated for the detector.
+	Status *string
+
+	noSmithyDocumentSerde
+}
+
 // IAM access key details related to a finding.
 type AwsIamAccessKeyDetails struct {
 
@@ -10341,6 +10872,90 @@ type AwsSsmPatchComplianceDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Provides details about an Step Functions state machine, which is a workflow
+// consisting of a series of event- driven steps.
+type AwsStepFunctionStateMachineDetails struct {
+
+	// A user-defined or an auto-generated string that identifies a Map state. This
+	// parameter is present only if the stateMachineArn specified in input is a
+	// qualified state machine ARN.
+	Label *string
+
+	// Used to set CloudWatch Logs options.
+	LoggingConfiguration *AwsStepFunctionStateMachineLoggingConfigurationDetails
+
+	// The name of the state machine.
+	Name *string
+
+	// The Amazon Resource Name (ARN) of the IAM role used when creating this state
+	// machine.
+	RoleArn *string
+
+	// The ARN that identifies the state machine.
+	StateMachineArn *string
+
+	// The current status of the state machine.
+	Status *string
+
+	// Specifies whether X-Ray tracing is enabled.
+	TracingConfiguration *AwsStepFunctionStateMachineTracingConfigurationDetails
+
+	// The type of the state machine (STANDARD or EXPRESS).
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// An object describing a CloudWatch log group. For more information, see  Amazon
+// Web Services::Logs::LogGroup (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-loggroup.html)
+// in the CloudFormation User Guide.
+type AwsStepFunctionStateMachineLoggingConfigurationDestinationsCloudWatchLogsLogGroupDetails struct {
+
+	// The ARN (ends with :* ) of the CloudWatch Logs log group to which you want your
+	// logs emitted.
+	LogGroupArn *string
+
+	noSmithyDocumentSerde
+}
+
+// An array of objects that describes where your execution history events will be
+// logged.
+type AwsStepFunctionStateMachineLoggingConfigurationDestinationsDetails struct {
+
+	// An object describing a CloudWatch Logs log group. For more information, see
+	// Amazon Web Services::Logs::LogGroup (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-loggroup.html)
+	// in the CloudFormation User Guide.
+	CloudWatchLogsLogGroup *AwsStepFunctionStateMachineLoggingConfigurationDestinationsCloudWatchLogsLogGroupDetails
+
+	noSmithyDocumentSerde
+}
+
+// The LoggingConfiguration data type is used to set CloudWatch Logs options.
+type AwsStepFunctionStateMachineLoggingConfigurationDetails struct {
+
+	// An array of objects that describes where your execution history events will be
+	// logged.
+	Destinations []AwsStepFunctionStateMachineLoggingConfigurationDestinationsDetails
+
+	// Determines whether execution data is included in your log. When set to false,
+	// data is excluded.
+	IncludeExecutionData bool
+
+	// Defines which category of execution history events are logged.
+	Level *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies whether X-Ray tracing is enabled.
+type AwsStepFunctionStateMachineTracingConfigurationDetails struct {
+
+	// When set to true, X-Ray tracing is enabled.
+	Enabled bool
+
+	noSmithyDocumentSerde
+}
+
 // Details about a rate-based rule for global resources. A rate-based rule
 // provides settings to indicate when to allow, block, or count a request.
 // Rate-based rules include the number of requests that arrive over a specified
@@ -11450,8 +12065,8 @@ type FindingHistoryRecord struct {
 	// .
 	UpdateSource *FindingHistoryUpdateSource
 
-	// An ISO 8601-formatted timestamp that indicates when the security findings
-	// provider last updated the finding record. A correctly formatted example is
+	// An ISO 8601-formatted timestamp that indicates when Security Hub processed the
+	// updated finding record. A correctly formatted example is
 	// 2020-05-21T20:16:34.724Z . The value cannot contain spaces, and date and time
 	// should be separated by T . For more information, see RFC 3339 section 5.6,
 	// Internet Date/Time Format (https://www.rfc-editor.org/rfc/rfc3339#section-5.6) .
@@ -12448,6 +13063,11 @@ type Resource struct {
 // the selected type does not have a corresponding object.
 type ResourceDetails struct {
 
+	// Provides details about AppSync message broker. A message broker allows software
+	// applications and components to communicate using various programming languages,
+	// operating systems, and formal messaging protocols.
+	AwsAmazonMqBroker *AwsAmazonMqBrokerDetails
+
 	// Provides information about a REST API in version 1 of Amazon API Gateway.
 	AwsApiGatewayRestApi *AwsApiGatewayRestApiDetails
 
@@ -12459,6 +13079,10 @@ type ResourceDetails struct {
 
 	// Provides information about a version 2 stage for Amazon API Gateway.
 	AwsApiGatewayV2Stage *AwsApiGatewayV2StageDetails
+
+	// Provides details about an AppSync Graph QL API, which lets you query multiple
+	// databases, microservices, and APIs from a single GraphQL endpoint.
+	AwsAppSyncGraphQlApi *AwsAppSyncGraphQlApiDetails
 
 	// Details for an autoscaling group.
 	AwsAutoScalingAutoScalingGroup *AwsAutoScalingAutoScalingGroupDetails
@@ -12590,6 +13214,16 @@ type ResourceDetails struct {
 	// Details about a load balancer.
 	AwsElbv2LoadBalancer *AwsElbv2LoadBalancerDetails
 
+	// A schema defines the structure of events that are sent to Amazon EventBridge.
+	// Schema registries are containers for schemas. They collect and organize schemas
+	// so that your schemas are in logical groups.
+	AwsEventSchemasRegistry *AwsEventSchemasRegistryDetails
+
+	// Provides details about an Amazon GuardDuty detector. A detector is an object
+	// that represents the GuardDuty service. A detector is required for GuardDuty to
+	// become operational.
+	AwsGuardDutyDetector *AwsGuardDutyDetectorDetails
+
 	// Details about an IAM access key related to a finding.
 	AwsIamAccessKey *AwsIamAccessKeyDetails
 
@@ -12674,6 +13308,10 @@ type ResourceDetails struct {
 	// Provides information about the state of a patch on an instance based on the
 	// patch baseline that was used to patch the instance.
 	AwsSsmPatchCompliance *AwsSsmPatchComplianceDetails
+
+	// Provides details about an Step Functions state machine, which is a workflow
+	// consisting of a series of event-driven steps.
+	AwsStepFunctionStateMachine *AwsStepFunctionStateMachineDetails
 
 	// Details about a rate-based rule for global resources.
 	AwsWafRateBasedRule *AwsWafRateBasedRuleDetails

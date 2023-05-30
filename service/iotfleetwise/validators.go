@@ -1217,6 +1217,47 @@ func validateCreateVehicleRequestItems(v []types.CreateVehicleRequestItem) error
 	}
 }
 
+func validateDataDestinationConfig(v types.DataDestinationConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataDestinationConfig"}
+	switch uv := v.(type) {
+	case *types.DataDestinationConfigMemberS3Config:
+		if err := validateS3Config(&uv.Value); err != nil {
+			invalidParams.AddNested("[s3Config]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.DataDestinationConfigMemberTimestreamConfig:
+		if err := validateTimestreamConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[timestreamConfig]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataDestinationConfigs(v []types.DataDestinationConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataDestinationConfigs"}
+	for i := range v {
+		if err := validateDataDestinationConfig(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateIamResources(v *types.IamResources) error {
 	if v == nil {
 		return nil
@@ -1400,6 +1441,21 @@ func validateObdSignal(v *types.ObdSignal) error {
 	}
 }
 
+func validateS3Config(v *types.S3Config) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3Config"}
+	if v.BucketArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BucketArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSensor(v *types.Sensor) error {
 	if v == nil {
 		return nil
@@ -1548,6 +1604,24 @@ func validateTimeBasedCollectionScheme(v *types.TimeBasedCollectionScheme) error
 	}
 }
 
+func validateTimestreamConfig(v *types.TimestreamConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TimestreamConfig"}
+	if v.TimestreamTableArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TimestreamTableArn"))
+	}
+	if v.ExecutionRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExecutionRoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTimestreamResources(v *types.TimestreamResources) error {
 	if v == nil {
 		return nil
@@ -1683,6 +1757,11 @@ func validateOpCreateCampaignInput(v *CreateCampaignInput) error {
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DataDestinationConfigs != nil {
+		if err := validateDataDestinationConfigs(v.DataDestinationConfigs); err != nil {
+			invalidParams.AddNested("DataDestinationConfigs", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2209,9 +2288,7 @@ func validateOpRegisterAccountInput(v *RegisterAccountInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RegisterAccountInput"}
-	if v.TimestreamResources == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TimestreamResources"))
-	} else if v.TimestreamResources != nil {
+	if v.TimestreamResources != nil {
 		if err := validateTimestreamResources(v.TimestreamResources); err != nil {
 			invalidParams.AddNested("TimestreamResources", err.(smithy.InvalidParamsError))
 		}

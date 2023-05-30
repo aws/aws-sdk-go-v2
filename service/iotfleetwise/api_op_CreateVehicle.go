@@ -14,7 +14,7 @@ import (
 // Creates a vehicle, which is an instance of a vehicle model (model manifest).
 // Vehicles created from the same vehicle model consist of the same signals
 // inherited from the vehicle model. If you have an existing Amazon Web Services
-// IoT Thing, you can use Amazon Web Services IoT FleetWise to create a vehicle and
+// IoT thing, you can use Amazon Web Services IoT FleetWise to create a vehicle and
 // collect data from your thing. For more information, see Create a vehicle (AWS
 // CLI) (https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/create-vehicle-cli.html)
 // in the Amazon Web Services IoT FleetWise Developer Guide.
@@ -56,7 +56,8 @@ type CreateVehicleInput struct {
 	AssociationBehavior types.VehicleAssociationBehavior
 
 	// Static information about a vehicle in a key-value pair. For example:
-	// "engineType" : "1.3 L R2"
+	// "engineType" : "1.3 L R2" A campaign must include the keys (attribute names) in
+	// dataExtraDimensions for them to display in Amazon Timestream.
 	Attributes map[string]string
 
 	// Metadata that can be used to manage the vehicle.

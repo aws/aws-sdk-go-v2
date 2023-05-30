@@ -83,7 +83,7 @@ type CreateDatasetImportJobInput struct {
 	// this import job to Amazon S3
 	PublishAttributionMetricsToS3 *bool
 
-	// A list of tags (https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html)
+	// A list of tags (https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html)
 	// to apply to the dataset import job.
 	Tags []types.Tag
 

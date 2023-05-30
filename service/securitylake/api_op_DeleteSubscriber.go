@@ -10,9 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the subscription permission for accounts that are already enabled in
-// Amazon Security Lake. You can delete a subscriber and remove access to data in
-// the current Amazon Web Services Region.
+// Deletes the subscription permission and all notification settings for accounts
+// that are already enabled in Amazon Security Lake. When you run DeleteSubscriber
+// , the subscriber will no longer consume data from Security Lake and the
+// subscriber is removed. This operation deletes the subscriber and removes access
+// to data in the current Amazon Web Services Region.
 func (c *Client) DeleteSubscriber(ctx context.Context, params *DeleteSubscriberInput, optFns ...func(*Options)) (*DeleteSubscriberOutput, error) {
 	if params == nil {
 		params = &DeleteSubscriberInput{}
@@ -34,7 +36,7 @@ type DeleteSubscriberInput struct {
 	// API request.
 	//
 	// This member is required.
-	Id *string
+	SubscriberId *string
 
 	noSmithyDocumentSerde
 }

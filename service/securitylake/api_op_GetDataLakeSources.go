@@ -12,49 +12,57 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the Amazon Security Lake exceptions that you can use to find the source
-// of problems and fix them.
-func (c *Client) ListDatalakeExceptions(ctx context.Context, params *ListDatalakeExceptionsInput, optFns ...func(*Options)) (*ListDatalakeExceptionsOutput, error) {
+// Retrieves a snapshot of the current Region, including whether Amazon Security
+// Lake is enabled for those accounts and which sources Security Lake is collecting
+// data from.
+func (c *Client) GetDataLakeSources(ctx context.Context, params *GetDataLakeSourcesInput, optFns ...func(*Options)) (*GetDataLakeSourcesOutput, error) {
 	if params == nil {
-		params = &ListDatalakeExceptionsInput{}
+		params = &GetDataLakeSourcesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListDatalakeExceptions", params, optFns, c.addOperationListDatalakeExceptionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetDataLakeSources", params, optFns, c.addOperationGetDataLakeSourcesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*ListDatalakeExceptionsOutput)
+	out := result.(*GetDataLakeSourcesOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type ListDatalakeExceptionsInput struct {
+type GetDataLakeSourcesInput struct {
 
-	// List the maximum number of failures in Security Lake.
-	MaxFailures *int32
+	// The Amazon Web Services account ID for which a static snapshot of the current
+	// Amazon Web Services Region, including enabled accounts and log sources, is
+	// retrieved.
+	Accounts []string
 
-	// List if there are more results available. The value of nextToken is a unique
+	// The maximum limit of accounts for which the static snapshot of the current
+	// Region, including enabled accounts and log sources, is retrieved.
+	MaxResults *int32
+
+	// Lists if there are more results available. The value of nextToken is a unique
 	// pagination token for each page. Repeat the call using the returned token to
 	// retrieve the next page. Keep all other arguments unchanged. Each pagination
 	// token expires after 24 hours. Using an expired pagination token will return an
 	// HTTP 400 InvalidToken error.
 	NextToken *string
 
-	// List the Amazon Web Services Regions from which exceptions are retrieved.
-	RegionSet []types.Region
-
 	noSmithyDocumentSerde
 }
 
-type ListDatalakeExceptionsOutput struct {
+type GetDataLakeSourcesOutput struct {
 
-	// Lists the failures that cannot be retried in the current Region.
-	//
-	// This member is required.
-	NonRetryableFailures []types.FailuresResponse
+	// The Amazon Resource Name (ARN) created by you to provide to the subscriber. For
+	// more information about ARNs and how to use them in policies, see the Amazon
+	// Security Lake User Guide (https://docs.aws.amazon.com/security-lake/latest/userguide/subscriber-management.html)
+	// .
+	DataLakeArn *string
 
-	// List if there are more results available. The value of nextToken is a unique
+	// The list of enabled accounts and enabled sources.
+	DataLakeSources []types.DataLakeSource
+
+	// Lists if there are more results available. The value of nextToken is a unique
 	// pagination token for each page. Repeat the call using the returned token to
 	// retrieve the next page. Keep all other arguments unchanged. Each pagination
 	// token expires after 24 hours. Using an expired pagination token will return an
@@ -67,12 +75,12 @@ type ListDatalakeExceptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationListDatalakeExceptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDatalakeExceptions{}, middleware.After)
+func (c *Client) addOperationGetDataLakeSourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDataLakeSources{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDatalakeExceptions{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDataLakeSources{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -112,7 +120,7 @@ func (c *Client) addOperationListDatalakeExceptionsMiddlewares(stack *middleware
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDatalakeExceptions(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDataLakeSources(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -130,18 +138,19 @@ func (c *Client) addOperationListDatalakeExceptionsMiddlewares(stack *middleware
 	return nil
 }
 
-// ListDatalakeExceptionsAPIClient is a client that implements the
-// ListDatalakeExceptions operation.
-type ListDatalakeExceptionsAPIClient interface {
-	ListDatalakeExceptions(context.Context, *ListDatalakeExceptionsInput, ...func(*Options)) (*ListDatalakeExceptionsOutput, error)
+// GetDataLakeSourcesAPIClient is a client that implements the GetDataLakeSources
+// operation.
+type GetDataLakeSourcesAPIClient interface {
+	GetDataLakeSources(context.Context, *GetDataLakeSourcesInput, ...func(*Options)) (*GetDataLakeSourcesOutput, error)
 }
 
-var _ ListDatalakeExceptionsAPIClient = (*Client)(nil)
+var _ GetDataLakeSourcesAPIClient = (*Client)(nil)
 
-// ListDatalakeExceptionsPaginatorOptions is the paginator options for
-// ListDatalakeExceptions
-type ListDatalakeExceptionsPaginatorOptions struct {
-	// List the maximum number of failures in Security Lake.
+// GetDataLakeSourcesPaginatorOptions is the paginator options for
+// GetDataLakeSources
+type GetDataLakeSourcesPaginatorOptions struct {
+	// The maximum limit of accounts for which the static snapshot of the current
+	// Region, including enabled accounts and log sources, is retrieved.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token
@@ -149,31 +158,31 @@ type ListDatalakeExceptionsPaginatorOptions struct {
 	StopOnDuplicateToken bool
 }
 
-// ListDatalakeExceptionsPaginator is a paginator for ListDatalakeExceptions
-type ListDatalakeExceptionsPaginator struct {
-	options   ListDatalakeExceptionsPaginatorOptions
-	client    ListDatalakeExceptionsAPIClient
-	params    *ListDatalakeExceptionsInput
+// GetDataLakeSourcesPaginator is a paginator for GetDataLakeSources
+type GetDataLakeSourcesPaginator struct {
+	options   GetDataLakeSourcesPaginatorOptions
+	client    GetDataLakeSourcesAPIClient
+	params    *GetDataLakeSourcesInput
 	nextToken *string
 	firstPage bool
 }
 
-// NewListDatalakeExceptionsPaginator returns a new ListDatalakeExceptionsPaginator
-func NewListDatalakeExceptionsPaginator(client ListDatalakeExceptionsAPIClient, params *ListDatalakeExceptionsInput, optFns ...func(*ListDatalakeExceptionsPaginatorOptions)) *ListDatalakeExceptionsPaginator {
+// NewGetDataLakeSourcesPaginator returns a new GetDataLakeSourcesPaginator
+func NewGetDataLakeSourcesPaginator(client GetDataLakeSourcesAPIClient, params *GetDataLakeSourcesInput, optFns ...func(*GetDataLakeSourcesPaginatorOptions)) *GetDataLakeSourcesPaginator {
 	if params == nil {
-		params = &ListDatalakeExceptionsInput{}
+		params = &GetDataLakeSourcesInput{}
 	}
 
-	options := ListDatalakeExceptionsPaginatorOptions{}
-	if params.MaxFailures != nil {
-		options.Limit = *params.MaxFailures
+	options := GetDataLakeSourcesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
 		fn(&options)
 	}
 
-	return &ListDatalakeExceptionsPaginator{
+	return &GetDataLakeSourcesPaginator{
 		options:   options,
 		client:    client,
 		params:    params,
@@ -183,12 +192,12 @@ func NewListDatalakeExceptionsPaginator(client ListDatalakeExceptionsAPIClient, 
 }
 
 // HasMorePages returns a boolean indicating whether more pages are available
-func (p *ListDatalakeExceptionsPaginator) HasMorePages() bool {
+func (p *GetDataLakeSourcesPaginator) HasMorePages() bool {
 	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
 }
 
-// NextPage retrieves the next ListDatalakeExceptions page.
-func (p *ListDatalakeExceptionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListDatalakeExceptionsOutput, error) {
+// NextPage retrieves the next GetDataLakeSources page.
+func (p *GetDataLakeSourcesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetDataLakeSourcesOutput, error) {
 	if !p.HasMorePages() {
 		return nil, fmt.Errorf("no more pages available")
 	}
@@ -200,9 +209,9 @@ func (p *ListDatalakeExceptionsPaginator) NextPage(ctx context.Context, optFns .
 	if p.options.Limit > 0 {
 		limit = &p.options.Limit
 	}
-	params.MaxFailures = limit
+	params.MaxResults = limit
 
-	result, err := p.client.ListDatalakeExceptions(ctx, &params, optFns...)
+	result, err := p.client.GetDataLakeSources(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
 	}
@@ -221,11 +230,11 @@ func (p *ListDatalakeExceptionsPaginator) NextPage(ctx context.Context, optFns .
 	return result, nil
 }
 
-func newServiceMetadataMiddleware_opListDatalakeExceptions(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opGetDataLakeSources(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "securitylake",
-		OperationName: "ListDatalakeExceptions",
+		OperationName: "GetDataLakeSources",
 	}
 }

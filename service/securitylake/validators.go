@@ -50,61 +50,61 @@ func (m *validateOpCreateCustomLogSource) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpCreateDatalakeAutoEnable struct {
+type validateOpCreateDataLakeExceptionSubscription struct {
 }
 
-func (*validateOpCreateDatalakeAutoEnable) ID() string {
+func (*validateOpCreateDataLakeExceptionSubscription) ID() string {
 	return "OperationInputValidation"
 }
 
-func (m *validateOpCreateDatalakeAutoEnable) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+func (m *validateOpCreateDataLakeExceptionSubscription) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
 	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
 ) {
-	input, ok := in.Parameters.(*CreateDatalakeAutoEnableInput)
+	input, ok := in.Parameters.(*CreateDataLakeExceptionSubscriptionInput)
 	if !ok {
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
-	if err := validateOpCreateDatalakeAutoEnableInput(input); err != nil {
+	if err := validateOpCreateDataLakeExceptionSubscriptionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpCreateDatalakeDelegatedAdmin struct {
+type validateOpCreateDataLake struct {
 }
 
-func (*validateOpCreateDatalakeDelegatedAdmin) ID() string {
+func (*validateOpCreateDataLake) ID() string {
 	return "OperationInputValidation"
 }
 
-func (m *validateOpCreateDatalakeDelegatedAdmin) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+func (m *validateOpCreateDataLake) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
 	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
 ) {
-	input, ok := in.Parameters.(*CreateDatalakeDelegatedAdminInput)
+	input, ok := in.Parameters.(*CreateDataLakeInput)
 	if !ok {
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
-	if err := validateOpCreateDatalakeDelegatedAdminInput(input); err != nil {
+	if err := validateOpCreateDataLakeInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpCreateDatalakeExceptionsSubscription struct {
+type validateOpCreateDataLakeOrganizationConfiguration struct {
 }
 
-func (*validateOpCreateDatalakeExceptionsSubscription) ID() string {
+func (*validateOpCreateDataLakeOrganizationConfiguration) ID() string {
 	return "OperationInputValidation"
 }
 
-func (m *validateOpCreateDatalakeExceptionsSubscription) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+func (m *validateOpCreateDataLakeOrganizationConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
 	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
 ) {
-	input, ok := in.Parameters.(*CreateDatalakeExceptionsSubscriptionInput)
+	input, ok := in.Parameters.(*CreateDataLakeOrganizationConfigurationInput)
 	if !ok {
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
-	if err := validateOpCreateDatalakeExceptionsSubscriptionInput(input); err != nil {
+	if err := validateOpCreateDataLakeOrganizationConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -130,21 +130,21 @@ func (m *validateOpCreateSubscriber) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpCreateSubscriptionNotificationConfiguration struct {
+type validateOpCreateSubscriberNotification struct {
 }
 
-func (*validateOpCreateSubscriptionNotificationConfiguration) ID() string {
+func (*validateOpCreateSubscriberNotification) ID() string {
 	return "OperationInputValidation"
 }
 
-func (m *validateOpCreateSubscriptionNotificationConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+func (m *validateOpCreateSubscriberNotification) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
 	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
 ) {
-	input, ok := in.Parameters.(*CreateSubscriptionNotificationConfigurationInput)
+	input, ok := in.Parameters.(*CreateSubscriberNotificationInput)
 	if !ok {
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
-	if err := validateOpCreateSubscriptionNotificationConfigurationInput(input); err != nil {
+	if err := validateOpCreateSubscriberNotificationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -190,41 +190,41 @@ func (m *validateOpDeleteCustomLogSource) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpDeleteDatalakeAutoEnable struct {
+type validateOpDeleteDataLake struct {
 }
 
-func (*validateOpDeleteDatalakeAutoEnable) ID() string {
+func (*validateOpDeleteDataLake) ID() string {
 	return "OperationInputValidation"
 }
 
-func (m *validateOpDeleteDatalakeAutoEnable) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+func (m *validateOpDeleteDataLake) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
 	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
 ) {
-	input, ok := in.Parameters.(*DeleteDatalakeAutoEnableInput)
+	input, ok := in.Parameters.(*DeleteDataLakeInput)
 	if !ok {
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
-	if err := validateOpDeleteDatalakeAutoEnableInput(input); err != nil {
+	if err := validateOpDeleteDataLakeInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpDeleteDatalakeDelegatedAdmin struct {
+type validateOpDeleteDataLakeOrganizationConfiguration struct {
 }
 
-func (*validateOpDeleteDatalakeDelegatedAdmin) ID() string {
+func (*validateOpDeleteDataLakeOrganizationConfiguration) ID() string {
 	return "OperationInputValidation"
 }
 
-func (m *validateOpDeleteDatalakeDelegatedAdmin) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+func (m *validateOpDeleteDataLakeOrganizationConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
 	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
 ) {
-	input, ok := in.Parameters.(*DeleteDatalakeDelegatedAdminInput)
+	input, ok := in.Parameters.(*DeleteDataLakeOrganizationConfigurationInput)
 	if !ok {
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
-	if err := validateOpDeleteDatalakeDelegatedAdminInput(input); err != nil {
+	if err := validateOpDeleteDataLakeOrganizationConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -250,21 +250,21 @@ func (m *validateOpDeleteSubscriber) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpDeleteSubscriptionNotificationConfiguration struct {
+type validateOpDeleteSubscriberNotification struct {
 }
 
-func (*validateOpDeleteSubscriptionNotificationConfiguration) ID() string {
+func (*validateOpDeleteSubscriberNotification) ID() string {
 	return "OperationInputValidation"
 }
 
-func (m *validateOpDeleteSubscriptionNotificationConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+func (m *validateOpDeleteSubscriberNotification) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
 	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
 ) {
-	input, ok := in.Parameters.(*DeleteSubscriptionNotificationConfigurationInput)
+	input, ok := in.Parameters.(*DeleteSubscriberNotificationInput)
 	if !ok {
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
-	if err := validateOpDeleteSubscriptionNotificationConfigurationInput(input); err != nil {
+	if err := validateOpDeleteSubscriberNotificationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -290,61 +290,61 @@ func (m *validateOpGetSubscriber) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpUpdateDatalakeExceptionsExpiry struct {
+type validateOpRegisterDataLakeDelegatedAdministrator struct {
 }
 
-func (*validateOpUpdateDatalakeExceptionsExpiry) ID() string {
+func (*validateOpRegisterDataLakeDelegatedAdministrator) ID() string {
 	return "OperationInputValidation"
 }
 
-func (m *validateOpUpdateDatalakeExceptionsExpiry) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+func (m *validateOpRegisterDataLakeDelegatedAdministrator) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
 	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
 ) {
-	input, ok := in.Parameters.(*UpdateDatalakeExceptionsExpiryInput)
+	input, ok := in.Parameters.(*RegisterDataLakeDelegatedAdministratorInput)
 	if !ok {
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
-	if err := validateOpUpdateDatalakeExceptionsExpiryInput(input); err != nil {
+	if err := validateOpRegisterDataLakeDelegatedAdministratorInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpUpdateDatalakeExceptionsSubscription struct {
+type validateOpUpdateDataLakeExceptionSubscription struct {
 }
 
-func (*validateOpUpdateDatalakeExceptionsSubscription) ID() string {
+func (*validateOpUpdateDataLakeExceptionSubscription) ID() string {
 	return "OperationInputValidation"
 }
 
-func (m *validateOpUpdateDatalakeExceptionsSubscription) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+func (m *validateOpUpdateDataLakeExceptionSubscription) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
 	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
 ) {
-	input, ok := in.Parameters.(*UpdateDatalakeExceptionsSubscriptionInput)
+	input, ok := in.Parameters.(*UpdateDataLakeExceptionSubscriptionInput)
 	if !ok {
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
-	if err := validateOpUpdateDatalakeExceptionsSubscriptionInput(input); err != nil {
+	if err := validateOpUpdateDataLakeExceptionSubscriptionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpUpdateDatalake struct {
+type validateOpUpdateDataLake struct {
 }
 
-func (*validateOpUpdateDatalake) ID() string {
+func (*validateOpUpdateDataLake) ID() string {
 	return "OperationInputValidation"
 }
 
-func (m *validateOpUpdateDatalake) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+func (m *validateOpUpdateDataLake) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
 	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
 ) {
-	input, ok := in.Parameters.(*UpdateDatalakeInput)
+	input, ok := in.Parameters.(*UpdateDataLakeInput)
 	if !ok {
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
-	if err := validateOpUpdateDatalakeInput(input); err != nil {
+	if err := validateOpUpdateDataLakeInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -370,21 +370,21 @@ func (m *validateOpUpdateSubscriber) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpUpdateSubscriptionNotificationConfiguration struct {
+type validateOpUpdateSubscriberNotification struct {
 }
 
-func (*validateOpUpdateSubscriptionNotificationConfiguration) ID() string {
+func (*validateOpUpdateSubscriberNotification) ID() string {
 	return "OperationInputValidation"
 }
 
-func (m *validateOpUpdateSubscriptionNotificationConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+func (m *validateOpUpdateSubscriberNotification) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
 	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
 ) {
-	input, ok := in.Parameters.(*UpdateSubscriptionNotificationConfigurationInput)
+	input, ok := in.Parameters.(*UpdateSubscriberNotificationInput)
 	if !ok {
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
-	if err := validateOpUpdateSubscriptionNotificationConfigurationInput(input); err != nil {
+	if err := validateOpUpdateSubscriberNotificationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -398,24 +398,24 @@ func addOpCreateCustomLogSourceValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpCreateCustomLogSource{}, middleware.After)
 }
 
-func addOpCreateDatalakeAutoEnableValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpCreateDatalakeAutoEnable{}, middleware.After)
+func addOpCreateDataLakeExceptionSubscriptionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateDataLakeExceptionSubscription{}, middleware.After)
 }
 
-func addOpCreateDatalakeDelegatedAdminValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpCreateDatalakeDelegatedAdmin{}, middleware.After)
+func addOpCreateDataLakeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateDataLake{}, middleware.After)
 }
 
-func addOpCreateDatalakeExceptionsSubscriptionValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpCreateDatalakeExceptionsSubscription{}, middleware.After)
+func addOpCreateDataLakeOrganizationConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateDataLakeOrganizationConfiguration{}, middleware.After)
 }
 
 func addOpCreateSubscriberValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateSubscriber{}, middleware.After)
 }
 
-func addOpCreateSubscriptionNotificationConfigurationValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpCreateSubscriptionNotificationConfiguration{}, middleware.After)
+func addOpCreateSubscriberNotificationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateSubscriberNotification{}, middleware.After)
 }
 
 func addOpDeleteAwsLogSourceValidationMiddleware(stack *middleware.Stack) error {
@@ -426,52 +426,146 @@ func addOpDeleteCustomLogSourceValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpDeleteCustomLogSource{}, middleware.After)
 }
 
-func addOpDeleteDatalakeAutoEnableValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpDeleteDatalakeAutoEnable{}, middleware.After)
+func addOpDeleteDataLakeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteDataLake{}, middleware.After)
 }
 
-func addOpDeleteDatalakeDelegatedAdminValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpDeleteDatalakeDelegatedAdmin{}, middleware.After)
+func addOpDeleteDataLakeOrganizationConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteDataLakeOrganizationConfiguration{}, middleware.After)
 }
 
 func addOpDeleteSubscriberValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteSubscriber{}, middleware.After)
 }
 
-func addOpDeleteSubscriptionNotificationConfigurationValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpDeleteSubscriptionNotificationConfiguration{}, middleware.After)
+func addOpDeleteSubscriberNotificationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteSubscriberNotification{}, middleware.After)
 }
 
 func addOpGetSubscriberValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetSubscriber{}, middleware.After)
 }
 
-func addOpUpdateDatalakeExceptionsExpiryValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpUpdateDatalakeExceptionsExpiry{}, middleware.After)
+func addOpRegisterDataLakeDelegatedAdministratorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRegisterDataLakeDelegatedAdministrator{}, middleware.After)
 }
 
-func addOpUpdateDatalakeExceptionsSubscriptionValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpUpdateDatalakeExceptionsSubscription{}, middleware.After)
+func addOpUpdateDataLakeExceptionSubscriptionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateDataLakeExceptionSubscription{}, middleware.After)
 }
 
-func addOpUpdateDatalakeValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpUpdateDatalake{}, middleware.After)
+func addOpUpdateDataLakeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateDataLake{}, middleware.After)
 }
 
 func addOpUpdateSubscriberValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateSubscriber{}, middleware.After)
 }
 
-func addOpUpdateSubscriptionNotificationConfigurationValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpUpdateSubscriptionNotificationConfiguration{}, middleware.After)
+func addOpUpdateSubscriberNotificationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateSubscriberNotification{}, middleware.After)
 }
 
-func validateAutoEnableNewRegionConfiguration(v *types.AutoEnableNewRegionConfiguration) error {
+func validateAwsIdentity(v *types.AwsIdentity) error {
 	if v == nil {
 		return nil
 	}
-	invalidParams := smithy.InvalidParamsError{Context: "AutoEnableNewRegionConfiguration"}
-	if len(v.Region) == 0 {
+	invalidParams := smithy.InvalidParamsError{Context: "AwsIdentity"}
+	if v.Principal == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Principal"))
+	}
+	if v.ExternalId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExternalId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAwsLogSourceConfiguration(v *types.AwsLogSourceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AwsLogSourceConfiguration"}
+	if v.Regions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Regions"))
+	}
+	if len(v.SourceName) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAwsLogSourceConfigurationList(v []types.AwsLogSourceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AwsLogSourceConfigurationList"}
+	for i := range v {
+		if err := validateAwsLogSourceConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomLogSourceConfiguration(v *types.CustomLogSourceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomLogSourceConfiguration"}
+	if v.CrawlerConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CrawlerConfiguration"))
+	} else if v.CrawlerConfiguration != nil {
+		if err := validateCustomLogSourceCrawlerConfiguration(v.CrawlerConfiguration); err != nil {
+			invalidParams.AddNested("CrawlerConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ProviderIdentity == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProviderIdentity"))
+	} else if v.ProviderIdentity != nil {
+		if err := validateAwsIdentity(v.ProviderIdentity); err != nil {
+			invalidParams.AddNested("ProviderIdentity", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomLogSourceCrawlerConfiguration(v *types.CustomLogSourceCrawlerConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomLogSourceCrawlerConfiguration"}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataLakeAutoEnableNewAccountConfiguration(v *types.DataLakeAutoEnableNewAccountConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataLakeAutoEnableNewAccountConfiguration"}
+	if v.Region == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Region"))
 	}
 	if v.Sources == nil {
@@ -484,15 +578,84 @@ func validateAutoEnableNewRegionConfiguration(v *types.AutoEnableNewRegionConfig
 	}
 }
 
-func validateAutoEnableNewRegionConfigurationList(v []types.AutoEnableNewRegionConfiguration) error {
+func validateDataLakeAutoEnableNewAccountConfigurationList(v []types.DataLakeAutoEnableNewAccountConfiguration) error {
 	if v == nil {
 		return nil
 	}
-	invalidParams := smithy.InvalidParamsError{Context: "AutoEnableNewRegionConfigurationList"}
+	invalidParams := smithy.InvalidParamsError{Context: "DataLakeAutoEnableNewAccountConfigurationList"}
 	for i := range v {
-		if err := validateAutoEnableNewRegionConfiguration(&v[i]); err != nil {
+		if err := validateDataLakeAutoEnableNewAccountConfiguration(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataLakeConfiguration(v *types.DataLakeConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataLakeConfiguration"}
+	if v.Region == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Region"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataLakeConfigurationList(v []types.DataLakeConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataLakeConfigurationList"}
+	for i := range v {
+		if err := validateDataLakeConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHttpsNotificationConfiguration(v *types.HttpsNotificationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HttpsNotificationConfiguration"}
+	if v.Endpoint == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Endpoint"))
+	}
+	if v.TargetRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetRoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNotificationConfiguration(v types.NotificationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NotificationConfiguration"}
+	switch uv := v.(type) {
+	case *types.NotificationConfigurationMemberHttpsNotificationConfiguration:
+		if err := validateHttpsNotificationConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[httpsNotificationConfiguration]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -506,8 +669,12 @@ func validateOpCreateAwsLogSourceInput(v *CreateAwsLogSourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateAwsLogSourceInput"}
-	if v.InputOrder == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InputOrder"))
+	if v.Sources == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Sources"))
+	} else if v.Sources != nil {
+		if err := validateAwsLogSourceConfigurationList(v.Sources); err != nil {
+			invalidParams.AddNested("Sources", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -521,35 +688,12 @@ func validateOpCreateCustomLogSourceInput(v *CreateCustomLogSourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateCustomLogSourceInput"}
-	if v.CustomSourceName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CustomSourceName"))
+	if v.SourceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceName"))
 	}
-	if len(v.EventClass) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("EventClass"))
-	}
-	if v.GlueInvocationRoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("GlueInvocationRoleArn"))
-	}
-	if v.LogProviderAccountId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LogProviderAccountId"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpCreateDatalakeAutoEnableInput(v *CreateDatalakeAutoEnableInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "CreateDatalakeAutoEnableInput"}
-	if v.ConfigurationForNewAccounts == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationForNewAccounts"))
-	} else if v.ConfigurationForNewAccounts != nil {
-		if err := validateAutoEnableNewRegionConfigurationList(v.ConfigurationForNewAccounts); err != nil {
-			invalidParams.AddNested("ConfigurationForNewAccounts", err.(smithy.InvalidParamsError))
+	if v.Configuration != nil {
+		if err := validateCustomLogSourceConfiguration(v.Configuration); err != nil {
+			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -559,13 +703,16 @@ func validateOpCreateDatalakeAutoEnableInput(v *CreateDatalakeAutoEnableInput) e
 	}
 }
 
-func validateOpCreateDatalakeDelegatedAdminInput(v *CreateDatalakeDelegatedAdminInput) error {
+func validateOpCreateDataLakeExceptionSubscriptionInput(v *CreateDataLakeExceptionSubscriptionInput) error {
 	if v == nil {
 		return nil
 	}
-	invalidParams := smithy.InvalidParamsError{Context: "CreateDatalakeDelegatedAdminInput"}
-	if v.Account == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Account"))
+	invalidParams := smithy.InvalidParamsError{Context: "CreateDataLakeExceptionSubscriptionInput"}
+	if v.SubscriptionProtocol == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubscriptionProtocol"))
+	}
+	if v.NotificationEndpoint == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NotificationEndpoint"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -574,16 +721,39 @@ func validateOpCreateDatalakeDelegatedAdminInput(v *CreateDatalakeDelegatedAdmin
 	}
 }
 
-func validateOpCreateDatalakeExceptionsSubscriptionInput(v *CreateDatalakeExceptionsSubscriptionInput) error {
+func validateOpCreateDataLakeInput(v *CreateDataLakeInput) error {
 	if v == nil {
 		return nil
 	}
-	invalidParams := smithy.InvalidParamsError{Context: "CreateDatalakeExceptionsSubscriptionInput"}
-	if len(v.SubscriptionProtocol) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("SubscriptionProtocol"))
+	invalidParams := smithy.InvalidParamsError{Context: "CreateDataLakeInput"}
+	if v.Configurations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Configurations"))
+	} else if v.Configurations != nil {
+		if err := validateDataLakeConfigurationList(v.Configurations); err != nil {
+			invalidParams.AddNested("Configurations", err.(smithy.InvalidParamsError))
+		}
 	}
-	if v.NotificationEndpoint == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("NotificationEndpoint"))
+	if v.MetaStoreManagerRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetaStoreManagerRoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateDataLakeOrganizationConfigurationInput(v *CreateDataLakeOrganizationConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateDataLakeOrganizationConfigurationInput"}
+	if v.AutoEnableNewAccount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AutoEnableNewAccount"))
+	} else if v.AutoEnableNewAccount != nil {
+		if err := validateDataLakeAutoEnableNewAccountConfigurationList(v.AutoEnableNewAccount); err != nil {
+			invalidParams.AddNested("AutoEnableNewAccount", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -597,17 +767,18 @@ func validateOpCreateSubscriberInput(v *CreateSubscriberInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateSubscriberInput"}
-	if v.SourceTypes == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SourceTypes"))
-	}
-	if v.AccountId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
-	}
-	if v.ExternalId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ExternalId"))
+	if v.SubscriberIdentity == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubscriberIdentity"))
+	} else if v.SubscriberIdentity != nil {
+		if err := validateAwsIdentity(v.SubscriberIdentity); err != nil {
+			invalidParams.AddNested("SubscriberIdentity", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.SubscriberName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SubscriberName"))
+	}
+	if v.Sources == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Sources"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -616,13 +787,20 @@ func validateOpCreateSubscriberInput(v *CreateSubscriberInput) error {
 	}
 }
 
-func validateOpCreateSubscriptionNotificationConfigurationInput(v *CreateSubscriptionNotificationConfigurationInput) error {
+func validateOpCreateSubscriberNotificationInput(v *CreateSubscriberNotificationInput) error {
 	if v == nil {
 		return nil
 	}
-	invalidParams := smithy.InvalidParamsError{Context: "CreateSubscriptionNotificationConfigurationInput"}
-	if v.SubscriptionId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SubscriptionId"))
+	invalidParams := smithy.InvalidParamsError{Context: "CreateSubscriberNotificationInput"}
+	if v.SubscriberId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubscriberId"))
+	}
+	if v.Configuration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Configuration"))
+	} else if v.Configuration != nil {
+		if err := validateNotificationConfiguration(v.Configuration); err != nil {
+			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -636,8 +814,12 @@ func validateOpDeleteAwsLogSourceInput(v *DeleteAwsLogSourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteAwsLogSourceInput"}
-	if v.InputOrder == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InputOrder"))
+	if v.Sources == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Sources"))
+	} else if v.Sources != nil {
+		if err := validateAwsLogSourceConfigurationList(v.Sources); err != nil {
+			invalidParams.AddNested("Sources", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -651,8 +833,8 @@ func validateOpDeleteCustomLogSourceInput(v *DeleteCustomLogSourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteCustomLogSourceInput"}
-	if v.CustomSourceName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CustomSourceName"))
+	if v.SourceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -661,32 +843,32 @@ func validateOpDeleteCustomLogSourceInput(v *DeleteCustomLogSourceInput) error {
 	}
 }
 
-func validateOpDeleteDatalakeAutoEnableInput(v *DeleteDatalakeAutoEnableInput) error {
+func validateOpDeleteDataLakeInput(v *DeleteDataLakeInput) error {
 	if v == nil {
 		return nil
 	}
-	invalidParams := smithy.InvalidParamsError{Context: "DeleteDatalakeAutoEnableInput"}
-	if v.RemoveFromConfigurationForNewAccounts == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RemoveFromConfigurationForNewAccounts"))
-	} else if v.RemoveFromConfigurationForNewAccounts != nil {
-		if err := validateAutoEnableNewRegionConfigurationList(v.RemoveFromConfigurationForNewAccounts); err != nil {
-			invalidParams.AddNested("RemoveFromConfigurationForNewAccounts", err.(smithy.InvalidParamsError))
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteDataLakeInput"}
+	if v.Regions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Regions"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteDataLakeOrganizationConfigurationInput(v *DeleteDataLakeOrganizationConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteDataLakeOrganizationConfigurationInput"}
+	if v.AutoEnableNewAccount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AutoEnableNewAccount"))
+	} else if v.AutoEnableNewAccount != nil {
+		if err := validateDataLakeAutoEnableNewAccountConfigurationList(v.AutoEnableNewAccount); err != nil {
+			invalidParams.AddNested("AutoEnableNewAccount", err.(smithy.InvalidParamsError))
 		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpDeleteDatalakeDelegatedAdminInput(v *DeleteDatalakeDelegatedAdminInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "DeleteDatalakeDelegatedAdminInput"}
-	if v.Account == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Account"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -700,8 +882,8 @@ func validateOpDeleteSubscriberInput(v *DeleteSubscriberInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteSubscriberInput"}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	if v.SubscriberId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubscriberId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -710,13 +892,13 @@ func validateOpDeleteSubscriberInput(v *DeleteSubscriberInput) error {
 	}
 }
 
-func validateOpDeleteSubscriptionNotificationConfigurationInput(v *DeleteSubscriptionNotificationConfigurationInput) error {
+func validateOpDeleteSubscriberNotificationInput(v *DeleteSubscriberNotificationInput) error {
 	if v == nil {
 		return nil
 	}
-	invalidParams := smithy.InvalidParamsError{Context: "DeleteSubscriptionNotificationConfigurationInput"}
-	if v.SubscriptionId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SubscriptionId"))
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteSubscriberNotificationInput"}
+	if v.SubscriberId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubscriberId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -730,8 +912,8 @@ func validateOpGetSubscriberInput(v *GetSubscriberInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetSubscriberInput"}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	if v.SubscriberId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubscriberId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -740,13 +922,13 @@ func validateOpGetSubscriberInput(v *GetSubscriberInput) error {
 	}
 }
 
-func validateOpUpdateDatalakeExceptionsExpiryInput(v *UpdateDatalakeExceptionsExpiryInput) error {
+func validateOpRegisterDataLakeDelegatedAdministratorInput(v *RegisterDataLakeDelegatedAdministratorInput) error {
 	if v == nil {
 		return nil
 	}
-	invalidParams := smithy.InvalidParamsError{Context: "UpdateDatalakeExceptionsExpiryInput"}
-	if v.ExceptionMessageExpiry == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ExceptionMessageExpiry"))
+	invalidParams := smithy.InvalidParamsError{Context: "RegisterDataLakeDelegatedAdministratorInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -755,12 +937,12 @@ func validateOpUpdateDatalakeExceptionsExpiryInput(v *UpdateDatalakeExceptionsEx
 	}
 }
 
-func validateOpUpdateDatalakeExceptionsSubscriptionInput(v *UpdateDatalakeExceptionsSubscriptionInput) error {
+func validateOpUpdateDataLakeExceptionSubscriptionInput(v *UpdateDataLakeExceptionSubscriptionInput) error {
 	if v == nil {
 		return nil
 	}
-	invalidParams := smithy.InvalidParamsError{Context: "UpdateDatalakeExceptionsSubscriptionInput"}
-	if len(v.SubscriptionProtocol) == 0 {
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateDataLakeExceptionSubscriptionInput"}
+	if v.SubscriptionProtocol == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SubscriptionProtocol"))
 	}
 	if v.NotificationEndpoint == nil {
@@ -773,13 +955,17 @@ func validateOpUpdateDatalakeExceptionsSubscriptionInput(v *UpdateDatalakeExcept
 	}
 }
 
-func validateOpUpdateDatalakeInput(v *UpdateDatalakeInput) error {
+func validateOpUpdateDataLakeInput(v *UpdateDataLakeInput) error {
 	if v == nil {
 		return nil
 	}
-	invalidParams := smithy.InvalidParamsError{Context: "UpdateDatalakeInput"}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateDataLakeInput"}
 	if v.Configurations == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Configurations"))
+	} else if v.Configurations != nil {
+		if err := validateDataLakeConfigurationList(v.Configurations); err != nil {
+			invalidParams.AddNested("Configurations", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -793,11 +979,13 @@ func validateOpUpdateSubscriberInput(v *UpdateSubscriberInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateSubscriberInput"}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	if v.SubscriberId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubscriberId"))
 	}
-	if v.SourceTypes == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SourceTypes"))
+	if v.SubscriberIdentity != nil {
+		if err := validateAwsIdentity(v.SubscriberIdentity); err != nil {
+			invalidParams.AddNested("SubscriberIdentity", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -806,13 +994,20 @@ func validateOpUpdateSubscriberInput(v *UpdateSubscriberInput) error {
 	}
 }
 
-func validateOpUpdateSubscriptionNotificationConfigurationInput(v *UpdateSubscriptionNotificationConfigurationInput) error {
+func validateOpUpdateSubscriberNotificationInput(v *UpdateSubscriberNotificationInput) error {
 	if v == nil {
 		return nil
 	}
-	invalidParams := smithy.InvalidParamsError{Context: "UpdateSubscriptionNotificationConfigurationInput"}
-	if v.SubscriptionId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SubscriptionId"))
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateSubscriberNotificationInput"}
+	if v.SubscriberId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubscriberId"))
+	}
+	if v.Configuration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Configuration"))
+	} else if v.Configuration != nil {
+		if err := validateNotificationConfiguration(v.Configuration); err != nil {
+			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -1706,6 +1706,11 @@ func validateFieldToMatch(v *types.FieldToMatch) error {
 			invalidParams.AddNested("Cookies", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.HeaderOrder != nil {
+		if err := validateHeaderOrder(v.HeaderOrder); err != nil {
+			invalidParams.AddNested("HeaderOrder", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1782,6 +1787,21 @@ func validateGeoMatchStatement(v *types.GeoMatchStatement) error {
 		if err := validateForwardedIPConfig(v.ForwardedIPConfig); err != nil {
 			invalidParams.AddNested("ForwardedIPConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHeaderOrder(v *types.HeaderOrder) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HeaderOrder"}
+	if len(v.OversizeHandling) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("OversizeHandling"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

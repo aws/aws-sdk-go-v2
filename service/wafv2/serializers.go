@@ -3342,6 +3342,13 @@ func awsAwsjson11_serializeDocumentFieldToMatch(v *types.FieldToMatch, value smi
 		}
 	}
 
+	if v.HeaderOrder != nil {
+		ok := object.Key("HeaderOrder")
+		if err := awsAwsjson11_serializeDocumentHeaderOrder(v.HeaderOrder, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Headers != nil {
 		ok := object.Key("Headers")
 		if err := awsAwsjson11_serializeDocumentHeaders(v.Headers, ok); err != nil {
@@ -3505,6 +3512,18 @@ func awsAwsjson11_serializeDocumentHeaderNames(v []string, value smithyjson.Valu
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentHeaderOrder(v *types.HeaderOrder, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.OversizeHandling) > 0 {
+		ok := object.Key("OversizeHandling")
+		ok.String(string(v.OversizeHandling))
+	}
+
 	return nil
 }
 

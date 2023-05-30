@@ -30,22 +30,8 @@ func (c *Client) ListLogSources(ctx context.Context, params *ListLogSourcesInput
 
 type ListLogSourcesInput struct {
 
-	// Lists the log sources in input order, namely Region, source type, and member
-	// account.
-	InputOrder []types.Dimension
-
-	// List the view of log sources for enabled Amazon Security Lake accounts for
-	// specific Amazon Web Services sources from specific accounts and specific
-	// Regions.
-	ListAllDimensions map[string]map[string][]string
-
-	// List the view of log sources for enabled Security Lake accounts for all Amazon
-	// Web Services sources from specific accounts or specific Regions.
-	ListSingleDimension []string
-
-	// Lists the view of log sources for enabled Security Lake accounts for specific
-	// Amazon Web Services sources from specific accounts or specific Regions.
-	ListTwoDimensions map[string][]string
+	// The list of Amazon Web Services accounts for which log sources are displayed.
+	Accounts []string
 
 	// The maximum number of accounts for which the log sources are displayed.
 	MaxResults *int32
@@ -54,19 +40,23 @@ type ListLogSourcesInput struct {
 	// call using the returned token to retrieve the next page.
 	NextToken *string
 
+	// The list of regions for which log sources are displayed.
+	Regions []string
+
+	// The list of sources for which log sources are displayed.
+	Sources []types.LogSourceResource
+
 	noSmithyDocumentSerde
 }
 
 type ListLogSourcesOutput struct {
 
-	// Lists the log sources by Regions for enabled Security Lake accounts.
-	//
-	// This member is required.
-	RegionSourceTypesAccountsList []map[string]map[string][]string
-
 	// If nextToken is returned, there are more results available. You can repeat the
 	// call using the returned token to retrieve the next page.
 	NextToken *string
+
+	// The list of log sources in your organization that send data to the data lake.
+	Sources []types.LogSource
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

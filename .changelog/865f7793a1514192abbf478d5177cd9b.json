@@ -1,0 +1,8 @@
+{
+    "id": "865f7793-a151-4192-abbf-478d5177cd9b",
+    "type": "feature",
+    "description": "This release adds API support for political views for the maps service APIs: CreateMap, UpdateMap, DescribeMap.",
+    "modules": [
+        "service/location"
+    ]
+}

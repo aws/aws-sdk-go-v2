@@ -20,207 +20,47 @@ func (AccessType) Values() []AccessType {
 	}
 }
 
-type AwsLogSourceType string
+type AwsLogSourceName string
 
-// Enum values for AwsLogSourceType
+// Enum values for AwsLogSourceName
 const (
-	AwsLogSourceTypeRoute53    AwsLogSourceType = "ROUTE53"
-	AwsLogSourceTypeVpcFlow    AwsLogSourceType = "VPC_FLOW"
-	AwsLogSourceTypeCloudTrail AwsLogSourceType = "CLOUD_TRAIL"
-	AwsLogSourceTypeShFindings AwsLogSourceType = "SH_FINDINGS"
+	AwsLogSourceNameRoute53         AwsLogSourceName = "ROUTE53"
+	AwsLogSourceNameVpcFlow         AwsLogSourceName = "VPC_FLOW"
+	AwsLogSourceNameShFindings      AwsLogSourceName = "SH_FINDINGS"
+	AwsLogSourceNameCloudTrailMgmt  AwsLogSourceName = "CLOUD_TRAIL_MGMT"
+	AwsLogSourceNameLambdaExecution AwsLogSourceName = "LAMBDA_EXECUTION"
+	AwsLogSourceNameS3Data          AwsLogSourceName = "S3_DATA"
 )
 
-// Values returns all known values for AwsLogSourceType. Note that this can be
+// Values returns all known values for AwsLogSourceName. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
-func (AwsLogSourceType) Values() []AwsLogSourceType {
-	return []AwsLogSourceType{
+func (AwsLogSourceName) Values() []AwsLogSourceName {
+	return []AwsLogSourceName{
 		"ROUTE53",
 		"VPC_FLOW",
-		"CLOUD_TRAIL",
 		"SH_FINDINGS",
+		"CLOUD_TRAIL_MGMT",
+		"LAMBDA_EXECUTION",
+		"S3_DATA",
 	}
 }
 
-type Dimension string
+type DataLakeStatus string
 
-// Enum values for Dimension
+// Enum values for DataLakeStatus
 const (
-	DimensionRegion     Dimension = "REGION"
-	DimensionSourceType Dimension = "SOURCE_TYPE"
-	DimensionMember     Dimension = "MEMBER"
+	DataLakeStatusInitialized DataLakeStatus = "INITIALIZED"
+	DataLakeStatusPending     DataLakeStatus = "PENDING"
+	DataLakeStatusCompleted   DataLakeStatus = "COMPLETED"
+	DataLakeStatusFailed      DataLakeStatus = "FAILED"
 )
 
-// Values returns all known values for Dimension. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
-func (Dimension) Values() []Dimension {
-	return []Dimension{
-		"REGION",
-		"SOURCE_TYPE",
-		"MEMBER",
-	}
-}
-
-type EndpointProtocol string
-
-// Enum values for EndpointProtocol
-const (
-	EndpointProtocolHttps EndpointProtocol = "HTTPS"
-	EndpointProtocolSqs   EndpointProtocol = "SQS"
-)
-
-// Values returns all known values for EndpointProtocol. Note that this can be
+// Values returns all known values for DataLakeStatus. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
-func (EndpointProtocol) Values() []EndpointProtocol {
-	return []EndpointProtocol{
-		"HTTPS",
-		"SQS",
-	}
-}
-
-type HttpsMethod string
-
-// Enum values for HttpsMethod
-const (
-	HttpsMethodPost HttpsMethod = "POST"
-	HttpsMethodPut  HttpsMethod = "PUT"
-)
-
-// Values returns all known values for HttpsMethod. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
-func (HttpsMethod) Values() []HttpsMethod {
-	return []HttpsMethod{
-		"POST",
-		"PUT",
-	}
-}
-
-type OcsfEventClass string
-
-// Enum values for OcsfEventClass
-const (
-	OcsfEventClassAccessActivity         OcsfEventClass = "ACCESS_ACTIVITY"
-	OcsfEventClassFileActivity           OcsfEventClass = "FILE_ACTIVITY"
-	OcsfEventClassKernelActivity         OcsfEventClass = "KERNEL_ACTIVITY"
-	OcsfEventClassKernelExtension        OcsfEventClass = "KERNEL_EXTENSION"
-	OcsfEventClassMemoryActivity         OcsfEventClass = "MEMORY_ACTIVITY"
-	OcsfEventClassModuleActivity         OcsfEventClass = "MODULE_ACTIVITY"
-	OcsfEventClassProcessActivity        OcsfEventClass = "PROCESS_ACTIVITY"
-	OcsfEventClassRegistryKeyActivity    OcsfEventClass = "REGISTRY_KEY_ACTIVITY"
-	OcsfEventClassRegistryValueActivity  OcsfEventClass = "REGISTRY_VALUE_ACTIVITY"
-	OcsfEventClassResourceActivity       OcsfEventClass = "RESOURCE_ACTIVITY"
-	OcsfEventClassScheduledJobActivity   OcsfEventClass = "SCHEDULED_JOB_ACTIVITY"
-	OcsfEventClassSecurityFinding        OcsfEventClass = "SECURITY_FINDING"
-	OcsfEventClassAccountChange          OcsfEventClass = "ACCOUNT_CHANGE"
-	OcsfEventClassAuthentication         OcsfEventClass = "AUTHENTICATION"
-	OcsfEventClassAuthorization          OcsfEventClass = "AUTHORIZATION"
-	OcsfEventClassEntityManagementAudit  OcsfEventClass = "ENTITY_MANAGEMENT_AUDIT"
-	OcsfEventClassDhcpActivity           OcsfEventClass = "DHCP_ACTIVITY"
-	OcsfEventClassNetworkActivity        OcsfEventClass = "NETWORK_ACTIVITY"
-	OcsfEventClassDnsActivity            OcsfEventClass = "DNS_ACTIVITY"
-	OcsfEventClassFtpActivity            OcsfEventClass = "FTP_ACTIVITY"
-	OcsfEventClassHttpActivity           OcsfEventClass = "HTTP_ACTIVITY"
-	OcsfEventClassRdpActivity            OcsfEventClass = "RDP_ACTIVITY"
-	OcsfEventClassSmbActivity            OcsfEventClass = "SMB_ACTIVITY"
-	OcsfEventClassSshActivity            OcsfEventClass = "SSH_ACTIVITY"
-	OcsfEventClassCloudApi               OcsfEventClass = "CLOUD_API"
-	OcsfEventClassContainerLifecycle     OcsfEventClass = "CONTAINER_LIFECYCLE"
-	OcsfEventClassDatabaseLifecycle      OcsfEventClass = "DATABASE_LIFECYCLE"
-	OcsfEventClassConfigState            OcsfEventClass = "CONFIG_STATE"
-	OcsfEventClassCloudStorage           OcsfEventClass = "CLOUD_STORAGE"
-	OcsfEventClassInventoryInfo          OcsfEventClass = "INVENTORY_INFO"
-	OcsfEventClassRfbActivity            OcsfEventClass = "RFB_ACTIVITY"
-	OcsfEventClassSmtpActivity           OcsfEventClass = "SMTP_ACTIVITY"
-	OcsfEventClassVirtualMachineActivity OcsfEventClass = "VIRTUAL_MACHINE_ACTIVITY"
-)
-
-// Values returns all known values for OcsfEventClass. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
-func (OcsfEventClass) Values() []OcsfEventClass {
-	return []OcsfEventClass{
-		"ACCESS_ACTIVITY",
-		"FILE_ACTIVITY",
-		"KERNEL_ACTIVITY",
-		"KERNEL_EXTENSION",
-		"MEMORY_ACTIVITY",
-		"MODULE_ACTIVITY",
-		"PROCESS_ACTIVITY",
-		"REGISTRY_KEY_ACTIVITY",
-		"REGISTRY_VALUE_ACTIVITY",
-		"RESOURCE_ACTIVITY",
-		"SCHEDULED_JOB_ACTIVITY",
-		"SECURITY_FINDING",
-		"ACCOUNT_CHANGE",
-		"AUTHENTICATION",
-		"AUTHORIZATION",
-		"ENTITY_MANAGEMENT_AUDIT",
-		"DHCP_ACTIVITY",
-		"NETWORK_ACTIVITY",
-		"DNS_ACTIVITY",
-		"FTP_ACTIVITY",
-		"HTTP_ACTIVITY",
-		"RDP_ACTIVITY",
-		"SMB_ACTIVITY",
-		"SSH_ACTIVITY",
-		"CLOUD_API",
-		"CONTAINER_LIFECYCLE",
-		"DATABASE_LIFECYCLE",
-		"CONFIG_STATE",
-		"CLOUD_STORAGE",
-		"INVENTORY_INFO",
-		"RFB_ACTIVITY",
-		"SMTP_ACTIVITY",
-		"VIRTUAL_MACHINE_ACTIVITY",
-	}
-}
-
-type Region string
-
-// Enum values for Region
-const (
-	RegionUsEast1      Region = "us-east-1"
-	RegionUsWest2      Region = "us-west-2"
-	RegionEuCentral1   Region = "eu-central-1"
-	RegionUsEast2      Region = "us-east-2"
-	RegionEuWest1      Region = "eu-west-1"
-	RegionApNortheast1 Region = "ap-northeast-1"
-	RegionApSoutheast2 Region = "ap-southeast-2"
-)
-
-// Values returns all known values for Region. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
-func (Region) Values() []Region {
-	return []Region{
-		"us-east-1",
-		"us-west-2",
-		"eu-central-1",
-		"us-east-2",
-		"eu-west-1",
-		"ap-northeast-1",
-		"ap-southeast-2",
-	}
-}
-
-type SettingsStatus string
-
-// Enum values for SettingsStatus
-const (
-	SettingsStatusInitialized SettingsStatus = "INITIALIZED"
-	SettingsStatusPending     SettingsStatus = "PENDING"
-	SettingsStatusCompleted   SettingsStatus = "COMPLETED"
-	SettingsStatusFailed      SettingsStatus = "FAILED"
-)
-
-// Values returns all known values for SettingsStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
-func (SettingsStatus) Values() []SettingsStatus {
-	return []SettingsStatus{
+func (DataLakeStatus) Values() []DataLakeStatus {
+	return []DataLakeStatus{
 		"INITIALIZED",
 		"PENDING",
 		"COMPLETED",
@@ -228,126 +68,62 @@ func (SettingsStatus) Values() []SettingsStatus {
 	}
 }
 
-type SourceStatus string
+type HttpMethod string
 
-// Enum values for SourceStatus
+// Enum values for HttpMethod
 const (
-	SourceStatusActive      SourceStatus = "ACTIVE"
-	SourceStatusDeactivated SourceStatus = "DEACTIVATED"
-	SourceStatusPending     SourceStatus = "PENDING"
+	HttpMethodPost HttpMethod = "POST"
+	HttpMethodPut  HttpMethod = "PUT"
 )
 
-// Values returns all known values for SourceStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
-func (SourceStatus) Values() []SourceStatus {
-	return []SourceStatus{
-		"ACTIVE",
-		"DEACTIVATED",
-		"PENDING",
+// Values returns all known values for HttpMethod. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (HttpMethod) Values() []HttpMethod {
+	return []HttpMethod{
+		"POST",
+		"PUT",
 	}
 }
 
-type StorageClass string
+type SourceCollectionStatus string
 
-// Enum values for StorageClass
+// Enum values for SourceCollectionStatus
 const (
-	StorageClassStandardIa         StorageClass = "STANDARD_IA"
-	StorageClassOnezoneIa          StorageClass = "ONEZONE_IA"
-	StorageClassIntelligentTiering StorageClass = "INTELLIGENT_TIERING"
-	StorageClassGlacierIr          StorageClass = "GLACIER_IR"
-	StorageClassGlacier            StorageClass = "GLACIER"
-	StorageClassDeepArchive        StorageClass = "DEEP_ARCHIVE"
-	StorageClassExpire             StorageClass = "EXPIRE"
+	SourceCollectionStatusCollecting    SourceCollectionStatus = "COLLECTING"
+	SourceCollectionStatusMisconfigured SourceCollectionStatus = "MISCONFIGURED"
+	SourceCollectionStatusNotCollecting SourceCollectionStatus = "NOT_COLLECTING"
 )
 
-// Values returns all known values for StorageClass. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
+// Values returns all known values for SourceCollectionStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
-func (StorageClass) Values() []StorageClass {
-	return []StorageClass{
-		"STANDARD_IA",
-		"ONEZONE_IA",
-		"INTELLIGENT_TIERING",
-		"GLACIER_IR",
-		"GLACIER",
-		"DEEP_ARCHIVE",
-		"EXPIRE",
+func (SourceCollectionStatus) Values() []SourceCollectionStatus {
+	return []SourceCollectionStatus{
+		"COLLECTING",
+		"MISCONFIGURED",
+		"NOT_COLLECTING",
 	}
 }
 
-type SubscriptionProtocolType string
+type SubscriberStatus string
 
-// Enum values for SubscriptionProtocolType
+// Enum values for SubscriberStatus
 const (
-	SubscriptionProtocolTypeHttp      SubscriptionProtocolType = "HTTP"
-	SubscriptionProtocolTypeHttps     SubscriptionProtocolType = "HTTPS"
-	SubscriptionProtocolTypeEmail     SubscriptionProtocolType = "EMAIL"
-	SubscriptionProtocolTypeEmailJson SubscriptionProtocolType = "EMAIL_JSON"
-	SubscriptionProtocolTypeSms       SubscriptionProtocolType = "SMS"
-	SubscriptionProtocolTypeSqs       SubscriptionProtocolType = "SQS"
-	SubscriptionProtocolTypeLambda    SubscriptionProtocolType = "LAMBDA"
-	SubscriptionProtocolTypeApp       SubscriptionProtocolType = "APP"
-	SubscriptionProtocolTypeFirehose  SubscriptionProtocolType = "FIREHOSE"
+	SubscriberStatusActive      SubscriberStatus = "ACTIVE"
+	SubscriberStatusDeactivated SubscriberStatus = "DEACTIVATED"
+	SubscriberStatusPending     SubscriberStatus = "PENDING"
+	SubscriberStatusReady       SubscriberStatus = "READY"
 )
 
-// Values returns all known values for SubscriptionProtocolType. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
-func (SubscriptionProtocolType) Values() []SubscriptionProtocolType {
-	return []SubscriptionProtocolType{
-		"HTTP",
-		"HTTPS",
-		"EMAIL",
-		"EMAIL_JSON",
-		"SMS",
-		"SQS",
-		"LAMBDA",
-		"APP",
-		"FIREHOSE",
-	}
-}
-
-type SubscriptionStatus string
-
-// Enum values for SubscriptionStatus
-const (
-	SubscriptionStatusActive      SubscriptionStatus = "ACTIVE"
-	SubscriptionStatusDeactivated SubscriptionStatus = "DEACTIVATED"
-	SubscriptionStatusPending     SubscriptionStatus = "PENDING"
-	SubscriptionStatusReady       SubscriptionStatus = "READY"
-)
-
-// Values returns all known values for SubscriptionStatus. Note that this can be
+// Values returns all known values for SubscriberStatus. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
-func (SubscriptionStatus) Values() []SubscriptionStatus {
-	return []SubscriptionStatus{
+func (SubscriberStatus) Values() []SubscriberStatus {
+	return []SubscriberStatus{
 		"ACTIVE",
 		"DEACTIVATED",
 		"PENDING",
 		"READY",
-	}
-}
-
-type ValidationExceptionReason string
-
-// Enum values for ValidationExceptionReason
-const (
-	ValidationExceptionReasonUnknownOperation      ValidationExceptionReason = "unknownOperation"
-	ValidationExceptionReasonCannotParse           ValidationExceptionReason = "cannotParse"
-	ValidationExceptionReasonFieldValidationFailed ValidationExceptionReason = "fieldValidationFailed"
-	ValidationExceptionReasonOther                 ValidationExceptionReason = "other"
-)
-
-// Values returns all known values for ValidationExceptionReason. Note that this
-// can be expanded in the future, and so it is only as up to date as the client.
-// The ordering of this slice is not guaranteed to be stable across updates.
-func (ValidationExceptionReason) Values() []ValidationExceptionReason {
-	return []ValidationExceptionReason{
-		"unknownOperation",
-		"cannotParse",
-		"fieldValidationFailed",
-		"other",
 	}
 }

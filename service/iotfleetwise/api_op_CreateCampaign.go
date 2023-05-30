@@ -63,6 +63,14 @@ type CreateCampaignInput struct {
 	// it's not specified, SNAPPY is used. Default: SNAPPY
 	Compression types.Compression
 
+	// The destination where the campaign sends data. You can choose to send data to
+	// be stored in Amazon S3 or Amazon Timestream. Amazon S3 optimizes the cost of
+	// data storage and provides additional mechanisms to use vehicle data, such as
+	// data lakes, centralized data storage, data processing pipelines, and analytics.
+	// You can use Amazon Timestream to access and analyze time series data, and
+	// Timestream to query vehicle data so that you can identify trends and patterns.
+	DataDestinationConfigs []types.DataDestinationConfig
+
 	// (Optional) A list of vehicle attributes to associate with a campaign. Enrich
 	// the data with specified vehicle attributes. For example, add make and model to
 	// the campaign, and Amazon Web Services IoT FleetWise will associate the data with
@@ -79,7 +87,7 @@ type CreateCampaignInput struct {
 	DiagnosticsMode types.DiagnosticsMode
 
 	// (Optional) The time the campaign expires, in seconds since epoch (January 1,
-	// 1970 at midnight UTC time). Vehicle data won't be collected after the campaign
+	// 1970 at midnight UTC time). Vehicle data isn't collected after the campaign
 	// expires. Default: 253402214400 (December 31, 9999, 00:00:00 UTC)
 	ExpiryTime *time.Time
 

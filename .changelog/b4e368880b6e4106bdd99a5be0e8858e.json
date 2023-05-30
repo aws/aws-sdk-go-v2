@@ -1,0 +1,8 @@
+{
+    "id": "b4e36888-0b6e-4106-bdd9-9a5be0e8858e",
+    "type": "feature",
+    "description": "This SDK release provides customers the ability to use Header Order as a field to match.",
+    "modules": [
+        "service/wafv2"
+    ]
+}

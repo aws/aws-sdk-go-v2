@@ -25,8 +25,8 @@ type ActionCondition struct {
 
 // Inspect all of the elements that WAF has parsed and extracted from the web
 // request component that you've identified in your FieldToMatch specifications.
-// This is used only in the FieldToMatch specification for some web request
-// component types. JSON specification: "All": {}
+// This is used in the FieldToMatch specification for some web request component
+// types. JSON specification: "All": {}
 type All struct {
 	noSmithyDocumentSerde
 }
@@ -44,9 +44,9 @@ type AllowAction struct {
 	noSmithyDocumentSerde
 }
 
-// Inspect all query arguments of the web request. This is used only in the
-// FieldToMatch specification for some web request component types. JSON
-// specification: "AllQueryArguments": {}
+// Inspect all query arguments of the web request. This is used in the FieldToMatch
+// specification for some web request component types. JSON specification:
+// "AllQueryArguments": {}
 type AllQueryArguments struct {
 	noSmithyDocumentSerde
 }
@@ -181,8 +181,8 @@ type Body struct {
 	// CloudFront distributions, you can increase the limit in the web ACL
 	// AssociationConfig , for additional processing fees. The options for oversize
 	// handling are the following:
-	//   - CONTINUE - Inspect the body normally, according to the rule inspection
-	//   criteria.
+	//   - CONTINUE - Inspect the available body contents normally, according to the
+	//   rule inspection criteria.
 	//   - MATCH - Treat the web request as matching the rule statement. WAF applies
 	//   the rule action to the request.
 	//   - NO_MATCH - Treat the web request as not matching the rule statement.
@@ -236,6 +236,9 @@ type ByteMatchStatement struct {
 	//   type of operation specified in the request.
 	//   - UriPath : The value that you want WAF to search for in the URI path, for
 	//   example, /images/daily-ad.jpg .
+	//   - HeaderOrder : The comma-separated list of header names to match for. WAF
+	//   creates a string that contains the ordered list of header names, from the
+	//   headers in the web request, and then matches against that string.
 	// If SearchString includes alphabetic characters A-Z and a-z, note that the value
 	// is case sensitive. If you're using the WAF API Specify a base64-encoded version
 	// of the value. The maximum length of the value before you base64-encode it is 200
@@ -444,13 +447,13 @@ type Cookies struct {
 	// This member is required.
 	MatchScope MapMatchScope
 
-	// What WAF should do if the cookies of the request are larger than WAF can
-	// inspect. WAF does not support inspecting the entire contents of request cookies
-	// when they exceed 8 KB (8192 bytes) or 200 total cookies. The underlying host
-	// service forwards a maximum of 200 cookies and at most 8 KB of cookie contents to
-	// WAF. The options for oversize handling are the following:
-	//   - CONTINUE - Inspect the cookies normally, according to the rule inspection
-	//   criteria.
+	// What WAF should do if the cookies of the request are more numerous or larger
+	// than WAF can inspect. WAF does not support inspecting the entire contents of
+	// request cookies when they exceed 8 KB (8192 bytes) or 200 total cookies. The
+	// underlying host service forwards a maximum of 200 cookies and at most 8 KB of
+	// cookie contents to WAF. The options for oversize handling are the following:
+	//   - CONTINUE - Inspect the available cookies normally, according to the rule
+	//   inspection criteria.
 	//   - MATCH - Treat the web request as matching the rule statement. WAF applies
 	//   the rule action to the request.
 	//   - NO_MATCH - Treat the web request as not matching the rule statement.
@@ -626,6 +629,13 @@ type FieldToMatch struct {
 	// cookie content in the Cookies object. WAF applies the pattern matching filters
 	// to the cookies that it receives from the underlying host service.
 	Cookies *Cookies
+
+	// Inspect a string containing the list of the request's header names, ordered as
+	// they appear in the web request that WAF receives for inspection. WAF generates
+	// the string and then uses that as the field to match component in its inspection.
+	// WAF separates the header names in the string using commas and no added spaces.
+	// Matches against the header order string are case insensitive.
+	HeaderOrder *HeaderOrder
 
 	// Inspect the request headers. You must configure scope and pattern matching
 	// filters in the Headers object, to define the set of headers to and the parts of
@@ -854,6 +864,30 @@ type HeaderMatchPattern struct {
 	noSmithyDocumentSerde
 }
 
+// Inspect a string containing the list of the request's header names, ordered as
+// they appear in the web request that WAF receives for inspection. WAF generates
+// the string and then uses that as the field to match component in its inspection.
+// WAF separates the header names in the string using commas and no added spaces.
+// Matches against the header order string are case insensitive.
+type HeaderOrder struct {
+
+	// What WAF should do if the headers of the request are more numerous or larger
+	// than WAF can inspect. WAF does not support inspecting the entire contents of
+	// request headers when they exceed 8 KB (8192 bytes) or 200 total headers. The
+	// underlying host service forwards a maximum of 200 headers and at most 8 KB of
+	// header contents to WAF. The options for oversize handling are the following:
+	//   - CONTINUE - Inspect the available headers normally, according to the rule
+	//   inspection criteria.
+	//   - MATCH - Treat the web request as matching the rule statement. WAF applies
+	//   the rule action to the request.
+	//   - NO_MATCH - Treat the web request as not matching the rule statement.
+	//
+	// This member is required.
+	OversizeHandling OversizeHandling
+
+	noSmithyDocumentSerde
+}
+
 // Inspect all headers in the web request. You can specify the parts of the
 // headers to inspect and you can narrow the set of headers to inspect by including
 // or excluding specific keys. This is used to indicate the web request component
@@ -877,13 +911,13 @@ type Headers struct {
 	// This member is required.
 	MatchScope MapMatchScope
 
-	// What WAF should do if the headers of the request are larger than WAF can
-	// inspect. WAF does not support inspecting the entire contents of request headers
-	// when they exceed 8 KB (8192 bytes) or 200 total headers. The underlying host
-	// service forwards a maximum of 200 headers and at most 8 KB of header contents to
-	// WAF. The options for oversize handling are the following:
-	//   - CONTINUE - Inspect the headers normally, according to the rule inspection
-	//   criteria.
+	// What WAF should do if the headers of the request are more numerous or larger
+	// than WAF can inspect. WAF does not support inspecting the entire contents of
+	// request headers when they exceed 8 KB (8192 bytes) or 200 total headers. The
+	// underlying host service forwards a maximum of 200 headers and at most 8 KB of
+	// header contents to WAF. The options for oversize handling are the following:
+	//   - CONTINUE - Inspect the available headers normally, according to the rule
+	//   inspection criteria.
 	//   - MATCH - Treat the web request as matching the rule statement. WAF applies
 	//   the rule action to the request.
 	//   - NO_MATCH - Treat the web request as not matching the rule statement.
@@ -1173,8 +1207,8 @@ type JsonBody struct {
 	// CloudFront distributions, you can increase the limit in the web ACL
 	// AssociationConfig , for additional processing fees. The options for oversize
 	// handling are the following:
-	//   - CONTINUE - Inspect the body normally, according to the rule inspection
-	//   criteria.
+	//   - CONTINUE - Inspect the available body contents normally, according to the
+	//   rule inspection criteria.
 	//   - MATCH - Treat the web request as matching the rule statement. WAF applies
 	//   the rule action to the request.
 	//   - NO_MATCH - Treat the web request as not matching the rule statement.
@@ -1667,8 +1701,8 @@ type ManagedRuleSetVersion struct {
 }
 
 // Inspect the HTTP method of the web request. The method indicates the type of
-// operation that the request is asking the origin to perform. This is used only in
-// the FieldToMatch specification for some web request component types. JSON
+// operation that the request is asking the origin to perform. This is used in the
+// FieldToMatch specification for some web request component types. JSON
 // specification: "Method": {}
 type Method struct {
 	noSmithyDocumentSerde
@@ -1768,7 +1802,7 @@ type PasswordField struct {
 }
 
 // Inspect the query string of the web request. This is the part of a URL that
-// appears after a ? character, if any. This is used only in the FieldToMatch
+// appears after a ? character, if any. This is used in the FieldToMatch
 // specification for some web request component types. JSON specification:
 // "QueryString": {}
 type QueryString struct {
@@ -3312,8 +3346,8 @@ type TimeWindow struct {
 
 // Inspect the path component of the URI of the web request. This is the part of
 // the web request that identifies a resource. For example, /images/daily-ad.jpg .
-// This is used only in the FieldToMatch specification for some web request
-// component types. JSON specification: "UriPath": {}
+// This is used in the FieldToMatch specification for some web request component
+// types. JSON specification: "UriPath": {}
 type UriPath struct {
 	noSmithyDocumentSerde
 }
@@ -3355,6 +3389,10 @@ type VisibilityConfig struct {
 
 	// A boolean indicating whether the associated resource sends metrics to Amazon
 	// CloudWatch. For the list of available metrics, see WAF Metrics (https://docs.aws.amazon.com/waf/latest/developerguide/monitoring-cloudwatch.html#waf-metrics)
+	// in the WAF Developer Guide. For web ACLs, the metrics are for web requests that
+	// have the web ACL default action applied. WAF applies the default action to web
+	// requests that pass the inspection of all rules in the web ACL without being
+	// either allowed or blocked. For more information, see The web ACL default action (https://docs.aws.amazon.com/waf/latest/developerguide/web-acl-default-action.html)
 	// in the WAF Developer Guide.
 	//
 	// This member is required.

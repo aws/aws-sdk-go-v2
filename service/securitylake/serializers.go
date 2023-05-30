@@ -35,7 +35,7 @@ func (m *awsRestjson1_serializeOpCreateAwsLogSource) HandleSerialize(ctx context
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	opPath, opQuery := httpbinding.SplitURI("/v1/logsources/aws")
+	opPath, opQuery := httpbinding.SplitURI("/v1/datalake/logsources/aws")
 	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
 	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
@@ -74,30 +74,9 @@ func awsRestjson1_serializeOpDocumentCreateAwsLogSourceInput(v *CreateAwsLogSour
 	object := value.Object()
 	defer object.Close()
 
-	if v.EnableAllDimensions != nil {
-		ok := object.Key("enableAllDimensions")
-		if err := awsRestjson1_serializeDocumentAllDimensionsMap(v.EnableAllDimensions, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.EnableSingleDimension != nil {
-		ok := object.Key("enableSingleDimension")
-		if err := awsRestjson1_serializeDocumentInputSet(v.EnableSingleDimension, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.EnableTwoDimensions != nil {
-		ok := object.Key("enableTwoDimensions")
-		if err := awsRestjson1_serializeDocumentTwoDimensionsMap(v.EnableTwoDimensions, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.InputOrder != nil {
-		ok := object.Key("inputOrder")
-		if err := awsRestjson1_serializeDocumentDimensionSet(v.InputOrder, ok); err != nil {
+	if v.Sources != nil {
+		ok := object.Key("sources")
+		if err := awsRestjson1_serializeDocumentAwsLogSourceConfigurationList(v.Sources, ok); err != nil {
 			return err
 		}
 	}
@@ -126,7 +105,7 @@ func (m *awsRestjson1_serializeOpCreateCustomLogSource) HandleSerialize(ctx cont
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	opPath, opQuery := httpbinding.SplitURI("/v1/logsources/custom")
+	opPath, opQuery := httpbinding.SplitURI("/v1/datalake/logsources/custom")
 	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
 	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
@@ -165,37 +144,41 @@ func awsRestjson1_serializeOpDocumentCreateCustomLogSourceInput(v *CreateCustomL
 	object := value.Object()
 	defer object.Close()
 
-	if v.CustomSourceName != nil {
-		ok := object.Key("customSourceName")
-		ok.String(*v.CustomSourceName)
+	if v.Configuration != nil {
+		ok := object.Key("configuration")
+		if err := awsRestjson1_serializeDocumentCustomLogSourceConfiguration(v.Configuration, ok); err != nil {
+			return err
+		}
 	}
 
-	if len(v.EventClass) > 0 {
-		ok := object.Key("eventClass")
-		ok.String(string(v.EventClass))
+	if v.EventClasses != nil {
+		ok := object.Key("eventClasses")
+		if err := awsRestjson1_serializeDocumentOcsfEventClassList(v.EventClasses, ok); err != nil {
+			return err
+		}
 	}
 
-	if v.GlueInvocationRoleArn != nil {
-		ok := object.Key("glueInvocationRoleArn")
-		ok.String(*v.GlueInvocationRoleArn)
+	if v.SourceName != nil {
+		ok := object.Key("sourceName")
+		ok.String(*v.SourceName)
 	}
 
-	if v.LogProviderAccountId != nil {
-		ok := object.Key("logProviderAccountId")
-		ok.String(*v.LogProviderAccountId)
+	if v.SourceVersion != nil {
+		ok := object.Key("sourceVersion")
+		ok.String(*v.SourceVersion)
 	}
 
 	return nil
 }
 
-type awsRestjson1_serializeOpCreateDatalake struct {
+type awsRestjson1_serializeOpCreateDataLake struct {
 }
 
-func (*awsRestjson1_serializeOpCreateDatalake) ID() string {
+func (*awsRestjson1_serializeOpCreateDataLake) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *awsRestjson1_serializeOpCreateDatalake) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsRestjson1_serializeOpCreateDataLake) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	request, ok := in.Request.(*smithyhttp.Request)
@@ -203,7 +186,7 @@ func (m *awsRestjson1_serializeOpCreateDatalake) HandleSerialize(ctx context.Con
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
 	}
 
-	input, ok := in.Parameters.(*CreateDatalakeInput)
+	input, ok := in.Parameters.(*CreateDataLakeInput)
 	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
@@ -221,7 +204,7 @@ func (m *awsRestjson1_serializeOpCreateDatalake) HandleSerialize(ctx context.Con
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentCreateDatalakeInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentCreateDataLakeInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -236,7 +219,7 @@ func (m *awsRestjson1_serializeOpCreateDatalake) HandleSerialize(ctx context.Con
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeOpHttpBindingsCreateDatalakeInput(v *CreateDatalakeInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsCreateDataLakeInput(v *CreateDataLakeInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -244,20 +227,15 @@ func awsRestjson1_serializeOpHttpBindingsCreateDatalakeInput(v *CreateDatalakeIn
 	return nil
 }
 
-func awsRestjson1_serializeOpDocumentCreateDatalakeInput(v *CreateDatalakeInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentCreateDataLakeInput(v *CreateDataLakeInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	if v.Configurations != nil {
 		ok := object.Key("configurations")
-		if err := awsRestjson1_serializeDocumentLakeConfigurationRequestMap(v.Configurations, ok); err != nil {
+		if err := awsRestjson1_serializeDocumentDataLakeConfigurationList(v.Configurations, ok); err != nil {
 			return err
 		}
-	}
-
-	if v.EnableAll != nil {
-		ok := object.Key("enableAll")
-		ok.Boolean(*v.EnableAll)
 	}
 
 	if v.MetaStoreManagerRoleArn != nil {
@@ -265,24 +243,17 @@ func awsRestjson1_serializeOpDocumentCreateDatalakeInput(v *CreateDatalakeInput,
 		ok.String(*v.MetaStoreManagerRoleArn)
 	}
 
-	if v.Regions != nil {
-		ok := object.Key("regions")
-		if err := awsRestjson1_serializeDocumentRegionSet(v.Regions, ok); err != nil {
-			return err
-		}
-	}
-
 	return nil
 }
 
-type awsRestjson1_serializeOpCreateDatalakeAutoEnable struct {
+type awsRestjson1_serializeOpCreateDataLakeExceptionSubscription struct {
 }
 
-func (*awsRestjson1_serializeOpCreateDatalakeAutoEnable) ID() string {
+func (*awsRestjson1_serializeOpCreateDataLakeExceptionSubscription) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *awsRestjson1_serializeOpCreateDatalakeAutoEnable) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsRestjson1_serializeOpCreateDataLakeExceptionSubscription) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	request, ok := in.Request.(*smithyhttp.Request)
@@ -290,145 +261,7 @@ func (m *awsRestjson1_serializeOpCreateDatalakeAutoEnable) HandleSerialize(ctx c
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
 	}
 
-	input, ok := in.Parameters.(*CreateDatalakeAutoEnableInput)
-	_ = input
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
-	}
-
-	opPath, opQuery := httpbinding.SplitURI("/v1/datalake/autoenable")
-	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
-	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
-	request.Method = "POST"
-	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentCreateDatalakeAutoEnableInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
-
-	return next.HandleSerialize(ctx, in)
-}
-func awsRestjson1_serializeOpHttpBindingsCreateDatalakeAutoEnableInput(v *CreateDatalakeAutoEnableInput, encoder *httpbinding.Encoder) error {
-	if v == nil {
-		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentCreateDatalakeAutoEnableInput(v *CreateDatalakeAutoEnableInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.ConfigurationForNewAccounts != nil {
-		ok := object.Key("configurationForNewAccounts")
-		if err := awsRestjson1_serializeDocumentAutoEnableNewRegionConfigurationList(v.ConfigurationForNewAccounts, ok); err != nil {
-			return err
-		}
-	}
-
-	return nil
-}
-
-type awsRestjson1_serializeOpCreateDatalakeDelegatedAdmin struct {
-}
-
-func (*awsRestjson1_serializeOpCreateDatalakeDelegatedAdmin) ID() string {
-	return "OperationSerializer"
-}
-
-func (m *awsRestjson1_serializeOpCreateDatalakeDelegatedAdmin) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
-	input, ok := in.Parameters.(*CreateDatalakeDelegatedAdminInput)
-	_ = input
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
-	}
-
-	opPath, opQuery := httpbinding.SplitURI("/v1/datalake/delegate")
-	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
-	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
-	request.Method = "POST"
-	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentCreateDatalakeDelegatedAdminInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
-
-	return next.HandleSerialize(ctx, in)
-}
-func awsRestjson1_serializeOpHttpBindingsCreateDatalakeDelegatedAdminInput(v *CreateDatalakeDelegatedAdminInput, encoder *httpbinding.Encoder) error {
-	if v == nil {
-		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentCreateDatalakeDelegatedAdminInput(v *CreateDatalakeDelegatedAdminInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Account != nil {
-		ok := object.Key("account")
-		ok.String(*v.Account)
-	}
-
-	return nil
-}
-
-type awsRestjson1_serializeOpCreateDatalakeExceptionsSubscription struct {
-}
-
-func (*awsRestjson1_serializeOpCreateDatalakeExceptionsSubscription) ID() string {
-	return "OperationSerializer"
-}
-
-func (m *awsRestjson1_serializeOpCreateDatalakeExceptionsSubscription) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
-	input, ok := in.Parameters.(*CreateDatalakeExceptionsSubscriptionInput)
+	input, ok := in.Parameters.(*CreateDataLakeExceptionSubscriptionInput)
 	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
@@ -446,7 +279,7 @@ func (m *awsRestjson1_serializeOpCreateDatalakeExceptionsSubscription) HandleSer
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentCreateDatalakeExceptionsSubscriptionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentCreateDataLakeExceptionSubscriptionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -461,7 +294,7 @@ func (m *awsRestjson1_serializeOpCreateDatalakeExceptionsSubscription) HandleSer
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeOpHttpBindingsCreateDatalakeExceptionsSubscriptionInput(v *CreateDatalakeExceptionsSubscriptionInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsCreateDataLakeExceptionSubscriptionInput(v *CreateDataLakeExceptionSubscriptionInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -469,18 +302,93 @@ func awsRestjson1_serializeOpHttpBindingsCreateDatalakeExceptionsSubscriptionInp
 	return nil
 }
 
-func awsRestjson1_serializeOpDocumentCreateDatalakeExceptionsSubscriptionInput(v *CreateDatalakeExceptionsSubscriptionInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentCreateDataLakeExceptionSubscriptionInput(v *CreateDataLakeExceptionSubscriptionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ExceptionTimeToLive != nil {
+		ok := object.Key("exceptionTimeToLive")
+		ok.Long(*v.ExceptionTimeToLive)
+	}
 
 	if v.NotificationEndpoint != nil {
 		ok := object.Key("notificationEndpoint")
 		ok.String(*v.NotificationEndpoint)
 	}
 
-	if len(v.SubscriptionProtocol) > 0 {
+	if v.SubscriptionProtocol != nil {
 		ok := object.Key("subscriptionProtocol")
-		ok.String(string(v.SubscriptionProtocol))
+		ok.String(*v.SubscriptionProtocol)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpCreateDataLakeOrganizationConfiguration struct {
+}
+
+func (*awsRestjson1_serializeOpCreateDataLakeOrganizationConfiguration) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateDataLakeOrganizationConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateDataLakeOrganizationConfigurationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/datalake/organization/configuration")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateDataLakeOrganizationConfigurationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateDataLakeOrganizationConfigurationInput(v *CreateDataLakeOrganizationConfigurationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateDataLakeOrganizationConfigurationInput(v *CreateDataLakeOrganizationConfigurationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AutoEnableNewAccount != nil {
+		ok := object.Key("autoEnableNewAccount")
+		if err := awsRestjson1_serializeDocumentDataLakeAutoEnableNewAccountConfigurationList(v.AutoEnableNewAccount, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -553,19 +461,9 @@ func awsRestjson1_serializeOpDocumentCreateSubscriberInput(v *CreateSubscriberIn
 		}
 	}
 
-	if v.AccountId != nil {
-		ok := object.Key("accountId")
-		ok.String(*v.AccountId)
-	}
-
-	if v.ExternalId != nil {
-		ok := object.Key("externalId")
-		ok.String(*v.ExternalId)
-	}
-
-	if v.SourceTypes != nil {
-		ok := object.Key("sourceTypes")
-		if err := awsRestjson1_serializeDocumentSourceTypeList(v.SourceTypes, ok); err != nil {
+	if v.Sources != nil {
+		ok := object.Key("sources")
+		if err := awsRestjson1_serializeDocumentLogSourceResourceList(v.Sources, ok); err != nil {
 			return err
 		}
 	}
@@ -573,6 +471,13 @@ func awsRestjson1_serializeOpDocumentCreateSubscriberInput(v *CreateSubscriberIn
 	if v.SubscriberDescription != nil {
 		ok := object.Key("subscriberDescription")
 		ok.String(*v.SubscriberDescription)
+	}
+
+	if v.SubscriberIdentity != nil {
+		ok := object.Key("subscriberIdentity")
+		if err := awsRestjson1_serializeDocumentAwsIdentity(v.SubscriberIdentity, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.SubscriberName != nil {
@@ -583,14 +488,14 @@ func awsRestjson1_serializeOpDocumentCreateSubscriberInput(v *CreateSubscriberIn
 	return nil
 }
 
-type awsRestjson1_serializeOpCreateSubscriptionNotificationConfiguration struct {
+type awsRestjson1_serializeOpCreateSubscriberNotification struct {
 }
 
-func (*awsRestjson1_serializeOpCreateSubscriptionNotificationConfiguration) ID() string {
+func (*awsRestjson1_serializeOpCreateSubscriberNotification) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *awsRestjson1_serializeOpCreateSubscriptionNotificationConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsRestjson1_serializeOpCreateSubscriberNotification) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	request, ok := in.Request.(*smithyhttp.Request)
@@ -598,13 +503,13 @@ func (m *awsRestjson1_serializeOpCreateSubscriptionNotificationConfiguration) Ha
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
 	}
 
-	input, ok := in.Parameters.(*CreateSubscriptionNotificationConfigurationInput)
+	input, ok := in.Parameters.(*CreateSubscriberNotificationInput)
 	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	opPath, opQuery := httpbinding.SplitURI("/subscription-notifications/{subscriptionId}")
+	opPath, opQuery := httpbinding.SplitURI("/v1/subscribers/{subscriberId}/notification")
 	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
 	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
@@ -613,14 +518,14 @@ func (m *awsRestjson1_serializeOpCreateSubscriptionNotificationConfiguration) Ha
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeOpHttpBindingsCreateSubscriptionNotificationConfigurationInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsCreateSubscriberNotificationInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentCreateSubscriptionNotificationConfigurationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentCreateSubscriberNotificationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -635,16 +540,16 @@ func (m *awsRestjson1_serializeOpCreateSubscriptionNotificationConfiguration) Ha
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeOpHttpBindingsCreateSubscriptionNotificationConfigurationInput(v *CreateSubscriptionNotificationConfigurationInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsCreateSubscriberNotificationInput(v *CreateSubscriberNotificationInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.SubscriptionId == nil || len(*v.SubscriptionId) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member subscriptionId must not be empty")}
+	if v.SubscriberId == nil || len(*v.SubscriberId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member subscriberId must not be empty")}
 	}
-	if v.SubscriptionId != nil {
-		if err := encoder.SetURI("subscriptionId").String(*v.SubscriptionId); err != nil {
+	if v.SubscriberId != nil {
+		if err := encoder.SetURI("subscriberId").String(*v.SubscriberId); err != nil {
 			return err
 		}
 	}
@@ -652,38 +557,15 @@ func awsRestjson1_serializeOpHttpBindingsCreateSubscriptionNotificationConfigura
 	return nil
 }
 
-func awsRestjson1_serializeOpDocumentCreateSubscriptionNotificationConfigurationInput(v *CreateSubscriptionNotificationConfigurationInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentCreateSubscriberNotificationInput(v *CreateSubscriberNotificationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
-	if v.CreateSqs != nil {
-		ok := object.Key("createSqs")
-		ok.Boolean(*v.CreateSqs)
-	}
-
-	if v.HttpsApiKeyName != nil {
-		ok := object.Key("httpsApiKeyName")
-		ok.String(*v.HttpsApiKeyName)
-	}
-
-	if v.HttpsApiKeyValue != nil {
-		ok := object.Key("httpsApiKeyValue")
-		ok.String(*v.HttpsApiKeyValue)
-	}
-
-	if len(v.HttpsMethod) > 0 {
-		ok := object.Key("httpsMethod")
-		ok.String(string(v.HttpsMethod))
-	}
-
-	if v.RoleArn != nil {
-		ok := object.Key("roleArn")
-		ok.String(*v.RoleArn)
-	}
-
-	if v.SubscriptionEndpoint != nil {
-		ok := object.Key("subscriptionEndpoint")
-		ok.String(*v.SubscriptionEndpoint)
+	if v.Configuration != nil {
+		ok := object.Key("configuration")
+		if err := awsRestjson1_serializeDocumentNotificationConfiguration(v.Configuration, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -710,7 +592,7 @@ func (m *awsRestjson1_serializeOpDeleteAwsLogSource) HandleSerialize(ctx context
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	opPath, opQuery := httpbinding.SplitURI("/v1/logsources/aws/delete")
+	opPath, opQuery := httpbinding.SplitURI("/v1/datalake/logsources/aws/delete")
 	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
 	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
@@ -749,30 +631,9 @@ func awsRestjson1_serializeOpDocumentDeleteAwsLogSourceInput(v *DeleteAwsLogSour
 	object := value.Object()
 	defer object.Close()
 
-	if v.DisableAllDimensions != nil {
-		ok := object.Key("disableAllDimensions")
-		if err := awsRestjson1_serializeDocumentAllDimensionsMap(v.DisableAllDimensions, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.DisableSingleDimension != nil {
-		ok := object.Key("disableSingleDimension")
-		if err := awsRestjson1_serializeDocumentInputSet(v.DisableSingleDimension, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.DisableTwoDimensions != nil {
-		ok := object.Key("disableTwoDimensions")
-		if err := awsRestjson1_serializeDocumentTwoDimensionsMap(v.DisableTwoDimensions, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.InputOrder != nil {
-		ok := object.Key("inputOrder")
-		if err := awsRestjson1_serializeDocumentDimensionSet(v.InputOrder, ok); err != nil {
+	if v.Sources != nil {
+		ok := object.Key("sources")
+		if err := awsRestjson1_serializeDocumentAwsLogSourceConfigurationList(v.Sources, ok); err != nil {
 			return err
 		}
 	}
@@ -801,7 +662,7 @@ func (m *awsRestjson1_serializeOpDeleteCustomLogSource) HandleSerialize(ctx cont
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	opPath, opQuery := httpbinding.SplitURI("/v1/logsources/custom")
+	opPath, opQuery := httpbinding.SplitURI("/v1/datalake/logsources/custom/{sourceName}")
 	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
 	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "DELETE"
@@ -826,21 +687,30 @@ func awsRestjson1_serializeOpHttpBindingsDeleteCustomLogSourceInput(v *DeleteCus
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.CustomSourceName != nil {
-		encoder.SetQuery("customSourceName").String(*v.CustomSourceName)
+	if v.SourceName == nil || len(*v.SourceName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member sourceName must not be empty")}
+	}
+	if v.SourceName != nil {
+		if err := encoder.SetURI("sourceName").String(*v.SourceName); err != nil {
+			return err
+		}
+	}
+
+	if v.SourceVersion != nil {
+		encoder.SetQuery("sourceVersion").String(*v.SourceVersion)
 	}
 
 	return nil
 }
 
-type awsRestjson1_serializeOpDeleteDatalake struct {
+type awsRestjson1_serializeOpDeleteDataLake struct {
 }
 
-func (*awsRestjson1_serializeOpDeleteDatalake) ID() string {
+func (*awsRestjson1_serializeOpDeleteDataLake) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *awsRestjson1_serializeOpDeleteDatalake) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsRestjson1_serializeOpDeleteDataLake) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	request, ok := in.Request.(*smithyhttp.Request)
@@ -848,58 +718,13 @@ func (m *awsRestjson1_serializeOpDeleteDatalake) HandleSerialize(ctx context.Con
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
 	}
 
-	input, ok := in.Parameters.(*DeleteDatalakeInput)
+	input, ok := in.Parameters.(*DeleteDataLakeInput)
 	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	opPath, opQuery := httpbinding.SplitURI("/v1/datalake")
-	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
-	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
-	request.Method = "DELETE"
-	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
-
-	return next.HandleSerialize(ctx, in)
-}
-func awsRestjson1_serializeOpHttpBindingsDeleteDatalakeInput(v *DeleteDatalakeInput, encoder *httpbinding.Encoder) error {
-	if v == nil {
-		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	return nil
-}
-
-type awsRestjson1_serializeOpDeleteDatalakeAutoEnable struct {
-}
-
-func (*awsRestjson1_serializeOpDeleteDatalakeAutoEnable) ID() string {
-	return "OperationSerializer"
-}
-
-func (m *awsRestjson1_serializeOpDeleteDatalakeAutoEnable) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
-	input, ok := in.Parameters.(*DeleteDatalakeAutoEnableInput)
-	_ = input
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
-	}
-
-	opPath, opQuery := httpbinding.SplitURI("/v1/datalake/autoenable/delete")
+	opPath, opQuery := httpbinding.SplitURI("/v1/datalake/delete")
 	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
 	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
@@ -911,7 +736,7 @@ func (m *awsRestjson1_serializeOpDeleteDatalakeAutoEnable) HandleSerialize(ctx c
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentDeleteDatalakeAutoEnableInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentDeleteDataLakeInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -926,7 +751,7 @@ func (m *awsRestjson1_serializeOpDeleteDatalakeAutoEnable) HandleSerialize(ctx c
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeOpHttpBindingsDeleteDatalakeAutoEnableInput(v *DeleteDatalakeAutoEnableInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsDeleteDataLakeInput(v *DeleteDataLakeInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -934,13 +759,13 @@ func awsRestjson1_serializeOpHttpBindingsDeleteDatalakeAutoEnableInput(v *Delete
 	return nil
 }
 
-func awsRestjson1_serializeOpDocumentDeleteDatalakeAutoEnableInput(v *DeleteDatalakeAutoEnableInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentDeleteDataLakeInput(v *DeleteDataLakeInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
-	if v.RemoveFromConfigurationForNewAccounts != nil {
-		ok := object.Key("removeFromConfigurationForNewAccounts")
-		if err := awsRestjson1_serializeDocumentAutoEnableNewRegionConfigurationList(v.RemoveFromConfigurationForNewAccounts, ok); err != nil {
+	if v.Regions != nil {
+		ok := object.Key("regions")
+		if err := awsRestjson1_serializeDocumentRegionList(v.Regions, ok); err != nil {
 			return err
 		}
 	}
@@ -948,14 +773,14 @@ func awsRestjson1_serializeOpDocumentDeleteDatalakeAutoEnableInput(v *DeleteData
 	return nil
 }
 
-type awsRestjson1_serializeOpDeleteDatalakeDelegatedAdmin struct {
+type awsRestjson1_serializeOpDeleteDataLakeExceptionSubscription struct {
 }
 
-func (*awsRestjson1_serializeOpDeleteDatalakeDelegatedAdmin) ID() string {
+func (*awsRestjson1_serializeOpDeleteDataLakeExceptionSubscription) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *awsRestjson1_serializeOpDeleteDatalakeDelegatedAdmin) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsRestjson1_serializeOpDeleteDataLakeExceptionSubscription) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	request, ok := in.Request.(*smithyhttp.Request)
@@ -963,65 +788,7 @@ func (m *awsRestjson1_serializeOpDeleteDatalakeDelegatedAdmin) HandleSerialize(c
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
 	}
 
-	input, ok := in.Parameters.(*DeleteDatalakeDelegatedAdminInput)
-	_ = input
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
-	}
-
-	opPath, opQuery := httpbinding.SplitURI("/v1/datalake/delegate/{account}")
-	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
-	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
-	request.Method = "DELETE"
-	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if err := awsRestjson1_serializeOpHttpBindingsDeleteDatalakeDelegatedAdminInput(input, restEncoder); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
-
-	return next.HandleSerialize(ctx, in)
-}
-func awsRestjson1_serializeOpHttpBindingsDeleteDatalakeDelegatedAdminInput(v *DeleteDatalakeDelegatedAdminInput, encoder *httpbinding.Encoder) error {
-	if v == nil {
-		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	if v.Account == nil || len(*v.Account) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member account must not be empty")}
-	}
-	if v.Account != nil {
-		if err := encoder.SetURI("account").String(*v.Account); err != nil {
-			return err
-		}
-	}
-
-	return nil
-}
-
-type awsRestjson1_serializeOpDeleteDatalakeExceptionsSubscription struct {
-}
-
-func (*awsRestjson1_serializeOpDeleteDatalakeExceptionsSubscription) ID() string {
-	return "OperationSerializer"
-}
-
-func (m *awsRestjson1_serializeOpDeleteDatalakeExceptionsSubscription) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
-	input, ok := in.Parameters.(*DeleteDatalakeExceptionsSubscriptionInput)
+	input, ok := in.Parameters.(*DeleteDataLakeExceptionSubscriptionInput)
 	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
@@ -1043,9 +810,79 @@ func (m *awsRestjson1_serializeOpDeleteDatalakeExceptionsSubscription) HandleSer
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeOpHttpBindingsDeleteDatalakeExceptionsSubscriptionInput(v *DeleteDatalakeExceptionsSubscriptionInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsDeleteDataLakeExceptionSubscriptionInput(v *DeleteDataLakeExceptionSubscriptionInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDeleteDataLakeOrganizationConfiguration struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteDataLakeOrganizationConfiguration) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteDataLakeOrganizationConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteDataLakeOrganizationConfigurationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/datalake/organization/configuration/delete")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentDeleteDataLakeOrganizationConfigurationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteDataLakeOrganizationConfigurationInput(v *DeleteDataLakeOrganizationConfigurationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentDeleteDataLakeOrganizationConfigurationInput(v *DeleteDataLakeOrganizationConfigurationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AutoEnableNewAccount != nil {
+		ok := object.Key("autoEnableNewAccount")
+		if err := awsRestjson1_serializeDocumentDataLakeAutoEnableNewAccountConfigurationList(v.AutoEnableNewAccount, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -1072,7 +909,7 @@ func (m *awsRestjson1_serializeOpDeleteSubscriber) HandleSerialize(ctx context.C
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	opPath, opQuery := httpbinding.SplitURI("/v1/subscribers")
+	opPath, opQuery := httpbinding.SplitURI("/v1/subscribers/{subscriberId}")
 	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
 	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "DELETE"
@@ -1097,21 +934,26 @@ func awsRestjson1_serializeOpHttpBindingsDeleteSubscriberInput(v *DeleteSubscrib
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Id != nil {
-		encoder.SetQuery("id").String(*v.Id)
+	if v.SubscriberId == nil || len(*v.SubscriberId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member subscriberId must not be empty")}
+	}
+	if v.SubscriberId != nil {
+		if err := encoder.SetURI("subscriberId").String(*v.SubscriberId); err != nil {
+			return err
+		}
 	}
 
 	return nil
 }
 
-type awsRestjson1_serializeOpDeleteSubscriptionNotificationConfiguration struct {
+type awsRestjson1_serializeOpDeleteSubscriberNotification struct {
 }
 
-func (*awsRestjson1_serializeOpDeleteSubscriptionNotificationConfiguration) ID() string {
+func (*awsRestjson1_serializeOpDeleteSubscriberNotification) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *awsRestjson1_serializeOpDeleteSubscriptionNotificationConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsRestjson1_serializeOpDeleteSubscriberNotification) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	request, ok := in.Request.(*smithyhttp.Request)
@@ -1119,13 +961,13 @@ func (m *awsRestjson1_serializeOpDeleteSubscriptionNotificationConfiguration) Ha
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
 	}
 
-	input, ok := in.Parameters.(*DeleteSubscriptionNotificationConfigurationInput)
+	input, ok := in.Parameters.(*DeleteSubscriberNotificationInput)
 	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	opPath, opQuery := httpbinding.SplitURI("/subscription-notifications/{subscriptionId}")
+	opPath, opQuery := httpbinding.SplitURI("/v1/subscribers/{subscriberId}/notification")
 	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
 	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "DELETE"
@@ -1134,7 +976,7 @@ func (m *awsRestjson1_serializeOpDeleteSubscriptionNotificationConfiguration) Ha
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeOpHttpBindingsDeleteSubscriptionNotificationConfigurationInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteSubscriberNotificationInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1145,16 +987,16 @@ func (m *awsRestjson1_serializeOpDeleteSubscriptionNotificationConfiguration) Ha
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeOpHttpBindingsDeleteSubscriptionNotificationConfigurationInput(v *DeleteSubscriptionNotificationConfigurationInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsDeleteSubscriberNotificationInput(v *DeleteSubscriberNotificationInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.SubscriptionId == nil || len(*v.SubscriptionId) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member subscriptionId must not be empty")}
+	if v.SubscriberId == nil || len(*v.SubscriberId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member subscriberId must not be empty")}
 	}
-	if v.SubscriptionId != nil {
-		if err := encoder.SetURI("subscriptionId").String(*v.SubscriptionId); err != nil {
+	if v.SubscriberId != nil {
+		if err := encoder.SetURI("subscriberId").String(*v.SubscriberId); err != nil {
 			return err
 		}
 	}
@@ -1162,14 +1004,14 @@ func awsRestjson1_serializeOpHttpBindingsDeleteSubscriptionNotificationConfigura
 	return nil
 }
 
-type awsRestjson1_serializeOpGetDatalake struct {
+type awsRestjson1_serializeOpDeregisterDataLakeDelegatedAdministrator struct {
 }
 
-func (*awsRestjson1_serializeOpGetDatalake) ID() string {
+func (*awsRestjson1_serializeOpDeregisterDataLakeDelegatedAdministrator) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *awsRestjson1_serializeOpGetDatalake) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsRestjson1_serializeOpDeregisterDataLakeDelegatedAdministrator) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	request, ok := in.Request.(*smithyhttp.Request)
@@ -1177,16 +1019,16 @@ func (m *awsRestjson1_serializeOpGetDatalake) HandleSerialize(ctx context.Contex
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
 	}
 
-	input, ok := in.Parameters.(*GetDatalakeInput)
+	input, ok := in.Parameters.(*DeregisterDataLakeDelegatedAdministratorInput)
 	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	opPath, opQuery := httpbinding.SplitURI("/v1/datalake")
+	opPath, opQuery := httpbinding.SplitURI("/v1/datalake/delegate")
 	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
 	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
-	request.Method = "GET"
+	request.Method = "DELETE"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
@@ -1199,7 +1041,7 @@ func (m *awsRestjson1_serializeOpGetDatalake) HandleSerialize(ctx context.Contex
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeOpHttpBindingsGetDatalakeInput(v *GetDatalakeInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsDeregisterDataLakeDelegatedAdministratorInput(v *DeregisterDataLakeDelegatedAdministratorInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -1207,14 +1049,14 @@ func awsRestjson1_serializeOpHttpBindingsGetDatalakeInput(v *GetDatalakeInput, e
 	return nil
 }
 
-type awsRestjson1_serializeOpGetDatalakeAutoEnable struct {
+type awsRestjson1_serializeOpGetDataLakeExceptionSubscription struct {
 }
 
-func (*awsRestjson1_serializeOpGetDatalakeAutoEnable) ID() string {
+func (*awsRestjson1_serializeOpGetDataLakeExceptionSubscription) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *awsRestjson1_serializeOpGetDatalakeAutoEnable) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsRestjson1_serializeOpGetDataLakeExceptionSubscription) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	request, ok := in.Request.(*smithyhttp.Request)
@@ -1222,97 +1064,7 @@ func (m *awsRestjson1_serializeOpGetDatalakeAutoEnable) HandleSerialize(ctx cont
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
 	}
 
-	input, ok := in.Parameters.(*GetDatalakeAutoEnableInput)
-	_ = input
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
-	}
-
-	opPath, opQuery := httpbinding.SplitURI("/v1/datalake/autoenable")
-	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
-	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
-	request.Method = "GET"
-	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
-
-	return next.HandleSerialize(ctx, in)
-}
-func awsRestjson1_serializeOpHttpBindingsGetDatalakeAutoEnableInput(v *GetDatalakeAutoEnableInput, encoder *httpbinding.Encoder) error {
-	if v == nil {
-		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	return nil
-}
-
-type awsRestjson1_serializeOpGetDatalakeExceptionsExpiry struct {
-}
-
-func (*awsRestjson1_serializeOpGetDatalakeExceptionsExpiry) ID() string {
-	return "OperationSerializer"
-}
-
-func (m *awsRestjson1_serializeOpGetDatalakeExceptionsExpiry) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
-	input, ok := in.Parameters.(*GetDatalakeExceptionsExpiryInput)
-	_ = input
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
-	}
-
-	opPath, opQuery := httpbinding.SplitURI("/v1/datalake/exceptions/expiry")
-	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
-	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
-	request.Method = "GET"
-	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
-
-	return next.HandleSerialize(ctx, in)
-}
-func awsRestjson1_serializeOpHttpBindingsGetDatalakeExceptionsExpiryInput(v *GetDatalakeExceptionsExpiryInput, encoder *httpbinding.Encoder) error {
-	if v == nil {
-		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	return nil
-}
-
-type awsRestjson1_serializeOpGetDatalakeExceptionsSubscription struct {
-}
-
-func (*awsRestjson1_serializeOpGetDatalakeExceptionsSubscription) ID() string {
-	return "OperationSerializer"
-}
-
-func (m *awsRestjson1_serializeOpGetDatalakeExceptionsSubscription) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
-	input, ok := in.Parameters.(*GetDatalakeExceptionsSubscriptionInput)
+	input, ok := in.Parameters.(*GetDataLakeExceptionSubscriptionInput)
 	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
@@ -1334,7 +1086,7 @@ func (m *awsRestjson1_serializeOpGetDatalakeExceptionsSubscription) HandleSerial
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeOpHttpBindingsGetDatalakeExceptionsSubscriptionInput(v *GetDatalakeExceptionsSubscriptionInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsGetDataLakeExceptionSubscriptionInput(v *GetDataLakeExceptionSubscriptionInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -1342,14 +1094,14 @@ func awsRestjson1_serializeOpHttpBindingsGetDatalakeExceptionsSubscriptionInput(
 	return nil
 }
 
-type awsRestjson1_serializeOpGetDatalakeStatus struct {
+type awsRestjson1_serializeOpGetDataLakeOrganizationConfiguration struct {
 }
 
-func (*awsRestjson1_serializeOpGetDatalakeStatus) ID() string {
+func (*awsRestjson1_serializeOpGetDataLakeOrganizationConfiguration) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *awsRestjson1_serializeOpGetDatalakeStatus) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsRestjson1_serializeOpGetDataLakeOrganizationConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	request, ok := in.Request.(*smithyhttp.Request)
@@ -1357,13 +1109,58 @@ func (m *awsRestjson1_serializeOpGetDatalakeStatus) HandleSerialize(ctx context.
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
 	}
 
-	input, ok := in.Parameters.(*GetDatalakeStatusInput)
+	input, ok := in.Parameters.(*GetDataLakeOrganizationConfigurationInput)
 	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	opPath, opQuery := httpbinding.SplitURI("/v1/datalake/status")
+	opPath, opQuery := httpbinding.SplitURI("/v1/datalake/organization/configuration")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetDataLakeOrganizationConfigurationInput(v *GetDataLakeOrganizationConfigurationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpGetDataLakeSources struct {
+}
+
+func (*awsRestjson1_serializeOpGetDataLakeSources) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetDataLakeSources) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetDataLakeSourcesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/datalake/sources")
 	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
 	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
@@ -1375,7 +1172,7 @@ func (m *awsRestjson1_serializeOpGetDatalakeStatus) HandleSerialize(ctx context.
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentGetDatalakeStatusInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentGetDataLakeSourcesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1390,7 +1187,7 @@ func (m *awsRestjson1_serializeOpGetDatalakeStatus) HandleSerialize(ctx context.
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeOpHttpBindingsGetDatalakeStatusInput(v *GetDatalakeStatusInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsGetDataLakeSourcesInput(v *GetDataLakeSourcesInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -1398,20 +1195,20 @@ func awsRestjson1_serializeOpHttpBindingsGetDatalakeStatusInput(v *GetDatalakeSt
 	return nil
 }
 
-func awsRestjson1_serializeOpDocumentGetDatalakeStatusInput(v *GetDatalakeStatusInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentGetDataLakeSourcesInput(v *GetDataLakeSourcesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
-	if v.AccountSet != nil {
-		ok := object.Key("accountSet")
-		if err := awsRestjson1_serializeDocumentInputSet(v.AccountSet, ok); err != nil {
+	if v.Accounts != nil {
+		ok := object.Key("accounts")
+		if err := awsRestjson1_serializeDocumentAccountList(v.Accounts, ok); err != nil {
 			return err
 		}
 	}
 
-	if v.MaxAccountResults != nil {
-		ok := object.Key("maxAccountResults")
-		ok.Integer(*v.MaxAccountResults)
+	if v.MaxResults != nil {
+		ok := object.Key("maxResults")
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1443,7 +1240,7 @@ func (m *awsRestjson1_serializeOpGetSubscriber) HandleSerialize(ctx context.Cont
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	opPath, opQuery := httpbinding.SplitURI("/v1/subscribers/{id}")
+	opPath, opQuery := httpbinding.SplitURI("/v1/subscribers/{subscriberId}")
 	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
 	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
@@ -1468,11 +1265,11 @@ func awsRestjson1_serializeOpHttpBindingsGetSubscriberInput(v *GetSubscriberInpu
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Id == nil || len(*v.Id) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member id must not be empty")}
+	if v.SubscriberId == nil || len(*v.SubscriberId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member subscriberId must not be empty")}
 	}
-	if v.Id != nil {
-		if err := encoder.SetURI("id").String(*v.Id); err != nil {
+	if v.SubscriberId != nil {
+		if err := encoder.SetURI("subscriberId").String(*v.SubscriberId); err != nil {
 			return err
 		}
 	}
@@ -1480,14 +1277,14 @@ func awsRestjson1_serializeOpHttpBindingsGetSubscriberInput(v *GetSubscriberInpu
 	return nil
 }
 
-type awsRestjson1_serializeOpListDatalakeExceptions struct {
+type awsRestjson1_serializeOpListDataLakeExceptions struct {
 }
 
-func (*awsRestjson1_serializeOpListDatalakeExceptions) ID() string {
+func (*awsRestjson1_serializeOpListDataLakeExceptions) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *awsRestjson1_serializeOpListDatalakeExceptions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsRestjson1_serializeOpListDataLakeExceptions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	request, ok := in.Request.(*smithyhttp.Request)
@@ -1495,7 +1292,7 @@ func (m *awsRestjson1_serializeOpListDatalakeExceptions) HandleSerialize(ctx con
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
 	}
 
-	input, ok := in.Parameters.(*ListDatalakeExceptionsInput)
+	input, ok := in.Parameters.(*ListDataLakeExceptionsInput)
 	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
@@ -1513,7 +1310,7 @@ func (m *awsRestjson1_serializeOpListDatalakeExceptions) HandleSerialize(ctx con
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentListDatalakeExceptionsInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentListDataLakeExceptionsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1528,7 +1325,7 @@ func (m *awsRestjson1_serializeOpListDatalakeExceptions) HandleSerialize(ctx con
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeOpHttpBindingsListDatalakeExceptionsInput(v *ListDatalakeExceptionsInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsListDataLakeExceptionsInput(v *ListDataLakeExceptionsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -1536,13 +1333,13 @@ func awsRestjson1_serializeOpHttpBindingsListDatalakeExceptionsInput(v *ListData
 	return nil
 }
 
-func awsRestjson1_serializeOpDocumentListDatalakeExceptionsInput(v *ListDatalakeExceptionsInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentListDataLakeExceptionsInput(v *ListDataLakeExceptionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
-	if v.MaxFailures != nil {
-		ok := object.Key("maxFailures")
-		ok.Integer(*v.MaxFailures)
+	if v.MaxResults != nil {
+		ok := object.Key("maxResults")
+		ok.Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1550,10 +1347,65 @@ func awsRestjson1_serializeOpDocumentListDatalakeExceptionsInput(v *ListDatalake
 		ok.String(*v.NextToken)
 	}
 
-	if v.RegionSet != nil {
-		ok := object.Key("regionSet")
-		if err := awsRestjson1_serializeDocumentRegionSet(v.RegionSet, ok); err != nil {
+	if v.Regions != nil {
+		ok := object.Key("regions")
+		if err := awsRestjson1_serializeDocumentRegionList(v.Regions, ok); err != nil {
 			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListDataLakes struct {
+}
+
+func (*awsRestjson1_serializeOpListDataLakes) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListDataLakes) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListDataLakesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/datalakes")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListDataLakesInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListDataLakesInput(v *ListDataLakesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.Regions != nil {
+		for i := range v.Regions {
+			encoder.AddQuery("regions").String(v.Regions[i])
 		}
 	}
 
@@ -1581,7 +1433,7 @@ func (m *awsRestjson1_serializeOpListLogSources) HandleSerialize(ctx context.Con
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	opPath, opQuery := httpbinding.SplitURI("/v1/logsources/list")
+	opPath, opQuery := httpbinding.SplitURI("/v1/datalake/logsources/list")
 	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
 	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
@@ -1620,30 +1472,9 @@ func awsRestjson1_serializeOpDocumentListLogSourcesInput(v *ListLogSourcesInput,
 	object := value.Object()
 	defer object.Close()
 
-	if v.InputOrder != nil {
-		ok := object.Key("inputOrder")
-		if err := awsRestjson1_serializeDocumentDimensionSet(v.InputOrder, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.ListAllDimensions != nil {
-		ok := object.Key("listAllDimensions")
-		if err := awsRestjson1_serializeDocumentAllDimensionsMap(v.ListAllDimensions, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.ListSingleDimension != nil {
-		ok := object.Key("listSingleDimension")
-		if err := awsRestjson1_serializeDocumentInputSet(v.ListSingleDimension, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.ListTwoDimensions != nil {
-		ok := object.Key("listTwoDimensions")
-		if err := awsRestjson1_serializeDocumentTwoDimensionsMap(v.ListTwoDimensions, ok); err != nil {
+	if v.Accounts != nil {
+		ok := object.Key("accounts")
+		if err := awsRestjson1_serializeDocumentAccountList(v.Accounts, ok); err != nil {
 			return err
 		}
 	}
@@ -1656,6 +1487,20 @@ func awsRestjson1_serializeOpDocumentListLogSourcesInput(v *ListLogSourcesInput,
 	if v.NextToken != nil {
 		ok := object.Key("nextToken")
 		ok.String(*v.NextToken)
+	}
+
+	if v.Regions != nil {
+		ok := object.Key("regions")
+		if err := awsRestjson1_serializeDocumentRegionList(v.Regions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Sources != nil {
+		ok := object.Key("sources")
+		if err := awsRestjson1_serializeDocumentLogSourceResourceList(v.Sources, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -1718,14 +1563,14 @@ func awsRestjson1_serializeOpHttpBindingsListSubscribersInput(v *ListSubscribers
 	return nil
 }
 
-type awsRestjson1_serializeOpUpdateDatalake struct {
+type awsRestjson1_serializeOpRegisterDataLakeDelegatedAdministrator struct {
 }
 
-func (*awsRestjson1_serializeOpUpdateDatalake) ID() string {
+func (*awsRestjson1_serializeOpRegisterDataLakeDelegatedAdministrator) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *awsRestjson1_serializeOpUpdateDatalake) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsRestjson1_serializeOpRegisterDataLakeDelegatedAdministrator) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	request, ok := in.Request.(*smithyhttp.Request)
@@ -1733,7 +1578,75 @@ func (m *awsRestjson1_serializeOpUpdateDatalake) HandleSerialize(ctx context.Con
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
 	}
 
-	input, ok := in.Parameters.(*UpdateDatalakeInput)
+	input, ok := in.Parameters.(*RegisterDataLakeDelegatedAdministratorInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/datalake/delegate")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentRegisterDataLakeDelegatedAdministratorInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsRegisterDataLakeDelegatedAdministratorInput(v *RegisterDataLakeDelegatedAdministratorInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentRegisterDataLakeDelegatedAdministratorInput(v *RegisterDataLakeDelegatedAdministratorInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AccountId != nil {
+		ok := object.Key("accountId")
+		ok.String(*v.AccountId)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpUpdateDataLake struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateDataLake) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateDataLake) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateDataLakeInput)
 	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
@@ -1751,7 +1664,7 @@ func (m *awsRestjson1_serializeOpUpdateDatalake) HandleSerialize(ctx context.Con
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentUpdateDatalakeInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentUpdateDataLakeInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1766,7 +1679,7 @@ func (m *awsRestjson1_serializeOpUpdateDatalake) HandleSerialize(ctx context.Con
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeOpHttpBindingsUpdateDatalakeInput(v *UpdateDatalakeInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsUpdateDataLakeInput(v *UpdateDataLakeInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -1774,13 +1687,13 @@ func awsRestjson1_serializeOpHttpBindingsUpdateDatalakeInput(v *UpdateDatalakeIn
 	return nil
 }
 
-func awsRestjson1_serializeOpDocumentUpdateDatalakeInput(v *UpdateDatalakeInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentUpdateDataLakeInput(v *UpdateDataLakeInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	if v.Configurations != nil {
 		ok := object.Key("configurations")
-		if err := awsRestjson1_serializeDocumentLakeConfigurationRequestMap(v.Configurations, ok); err != nil {
+		if err := awsRestjson1_serializeDocumentDataLakeConfigurationList(v.Configurations, ok); err != nil {
 			return err
 		}
 	}
@@ -1788,14 +1701,14 @@ func awsRestjson1_serializeOpDocumentUpdateDatalakeInput(v *UpdateDatalakeInput,
 	return nil
 }
 
-type awsRestjson1_serializeOpUpdateDatalakeExceptionsExpiry struct {
+type awsRestjson1_serializeOpUpdateDataLakeExceptionSubscription struct {
 }
 
-func (*awsRestjson1_serializeOpUpdateDatalakeExceptionsExpiry) ID() string {
+func (*awsRestjson1_serializeOpUpdateDataLakeExceptionSubscription) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *awsRestjson1_serializeOpUpdateDatalakeExceptionsExpiry) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsRestjson1_serializeOpUpdateDataLakeExceptionSubscription) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	request, ok := in.Request.(*smithyhttp.Request)
@@ -1803,75 +1716,7 @@ func (m *awsRestjson1_serializeOpUpdateDatalakeExceptionsExpiry) HandleSerialize
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
 	}
 
-	input, ok := in.Parameters.(*UpdateDatalakeExceptionsExpiryInput)
-	_ = input
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
-	}
-
-	opPath, opQuery := httpbinding.SplitURI("/v1/datalake/exceptions/expiry")
-	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
-	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
-	request.Method = "PUT"
-	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentUpdateDatalakeExceptionsExpiryInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
-
-	return next.HandleSerialize(ctx, in)
-}
-func awsRestjson1_serializeOpHttpBindingsUpdateDatalakeExceptionsExpiryInput(v *UpdateDatalakeExceptionsExpiryInput, encoder *httpbinding.Encoder) error {
-	if v == nil {
-		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentUpdateDatalakeExceptionsExpiryInput(v *UpdateDatalakeExceptionsExpiryInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.ExceptionMessageExpiry != nil {
-		ok := object.Key("exceptionMessageExpiry")
-		ok.Long(*v.ExceptionMessageExpiry)
-	}
-
-	return nil
-}
-
-type awsRestjson1_serializeOpUpdateDatalakeExceptionsSubscription struct {
-}
-
-func (*awsRestjson1_serializeOpUpdateDatalakeExceptionsSubscription) ID() string {
-	return "OperationSerializer"
-}
-
-func (m *awsRestjson1_serializeOpUpdateDatalakeExceptionsSubscription) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
-	input, ok := in.Parameters.(*UpdateDatalakeExceptionsSubscriptionInput)
+	input, ok := in.Parameters.(*UpdateDataLakeExceptionSubscriptionInput)
 	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
@@ -1889,7 +1734,7 @@ func (m *awsRestjson1_serializeOpUpdateDatalakeExceptionsSubscription) HandleSer
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentUpdateDatalakeExceptionsSubscriptionInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentUpdateDataLakeExceptionSubscriptionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1904,7 +1749,7 @@ func (m *awsRestjson1_serializeOpUpdateDatalakeExceptionsSubscription) HandleSer
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeOpHttpBindingsUpdateDatalakeExceptionsSubscriptionInput(v *UpdateDatalakeExceptionsSubscriptionInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsUpdateDataLakeExceptionSubscriptionInput(v *UpdateDataLakeExceptionSubscriptionInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -1912,18 +1757,23 @@ func awsRestjson1_serializeOpHttpBindingsUpdateDatalakeExceptionsSubscriptionInp
 	return nil
 }
 
-func awsRestjson1_serializeOpDocumentUpdateDatalakeExceptionsSubscriptionInput(v *UpdateDatalakeExceptionsSubscriptionInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentUpdateDataLakeExceptionSubscriptionInput(v *UpdateDataLakeExceptionSubscriptionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ExceptionTimeToLive != nil {
+		ok := object.Key("exceptionTimeToLive")
+		ok.Long(*v.ExceptionTimeToLive)
+	}
 
 	if v.NotificationEndpoint != nil {
 		ok := object.Key("notificationEndpoint")
 		ok.String(*v.NotificationEndpoint)
 	}
 
-	if len(v.SubscriptionProtocol) > 0 {
+	if v.SubscriptionProtocol != nil {
 		ok := object.Key("subscriptionProtocol")
-		ok.String(string(v.SubscriptionProtocol))
+		ok.String(*v.SubscriptionProtocol)
 	}
 
 	return nil
@@ -1950,7 +1800,7 @@ func (m *awsRestjson1_serializeOpUpdateSubscriber) HandleSerialize(ctx context.C
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	opPath, opQuery := httpbinding.SplitURI("/v1/subscribers/{id}")
+	opPath, opQuery := httpbinding.SplitURI("/v1/subscribers/{subscriberId}")
 	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
 	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "PUT"
@@ -1986,11 +1836,11 @@ func awsRestjson1_serializeOpHttpBindingsUpdateSubscriberInput(v *UpdateSubscrib
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Id == nil || len(*v.Id) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member id must not be empty")}
+	if v.SubscriberId == nil || len(*v.SubscriberId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member subscriberId must not be empty")}
 	}
-	if v.Id != nil {
-		if err := encoder.SetURI("id").String(*v.Id); err != nil {
+	if v.SubscriberId != nil {
+		if err := encoder.SetURI("subscriberId").String(*v.SubscriberId); err != nil {
 			return err
 		}
 	}
@@ -2002,14 +1852,9 @@ func awsRestjson1_serializeOpDocumentUpdateSubscriberInput(v *UpdateSubscriberIn
 	object := value.Object()
 	defer object.Close()
 
-	if v.ExternalId != nil {
-		ok := object.Key("externalId")
-		ok.String(*v.ExternalId)
-	}
-
-	if v.SourceTypes != nil {
-		ok := object.Key("sourceTypes")
-		if err := awsRestjson1_serializeDocumentSourceTypeList(v.SourceTypes, ok); err != nil {
+	if v.Sources != nil {
+		ok := object.Key("sources")
+		if err := awsRestjson1_serializeDocumentLogSourceResourceList(v.Sources, ok); err != nil {
 			return err
 		}
 	}
@@ -2017,6 +1862,13 @@ func awsRestjson1_serializeOpDocumentUpdateSubscriberInput(v *UpdateSubscriberIn
 	if v.SubscriberDescription != nil {
 		ok := object.Key("subscriberDescription")
 		ok.String(*v.SubscriberDescription)
+	}
+
+	if v.SubscriberIdentity != nil {
+		ok := object.Key("subscriberIdentity")
+		if err := awsRestjson1_serializeDocumentAwsIdentity(v.SubscriberIdentity, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.SubscriberName != nil {
@@ -2027,14 +1879,14 @@ func awsRestjson1_serializeOpDocumentUpdateSubscriberInput(v *UpdateSubscriberIn
 	return nil
 }
 
-type awsRestjson1_serializeOpUpdateSubscriptionNotificationConfiguration struct {
+type awsRestjson1_serializeOpUpdateSubscriberNotification struct {
 }
 
-func (*awsRestjson1_serializeOpUpdateSubscriptionNotificationConfiguration) ID() string {
+func (*awsRestjson1_serializeOpUpdateSubscriberNotification) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *awsRestjson1_serializeOpUpdateSubscriptionNotificationConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *awsRestjson1_serializeOpUpdateSubscriberNotification) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	request, ok := in.Request.(*smithyhttp.Request)
@@ -2042,13 +1894,13 @@ func (m *awsRestjson1_serializeOpUpdateSubscriptionNotificationConfiguration) Ha
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
 	}
 
-	input, ok := in.Parameters.(*UpdateSubscriptionNotificationConfigurationInput)
+	input, ok := in.Parameters.(*UpdateSubscriberNotificationInput)
 	_ = input
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	opPath, opQuery := httpbinding.SplitURI("/subscription-notifications/{subscriptionId}")
+	opPath, opQuery := httpbinding.SplitURI("/v1/subscribers/{subscriberId}/notification")
 	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
 	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "PUT"
@@ -2057,14 +1909,14 @@ func (m *awsRestjson1_serializeOpUpdateSubscriptionNotificationConfiguration) Ha
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if err := awsRestjson1_serializeOpHttpBindingsUpdateSubscriptionNotificationConfigurationInput(input, restEncoder); err != nil {
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateSubscriberNotificationInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
 	restEncoder.SetHeader("Content-Type").String("application/json")
 
 	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentUpdateSubscriptionNotificationConfigurationInput(input, jsonEncoder.Value); err != nil {
+	if err := awsRestjson1_serializeOpDocumentUpdateSubscriberNotificationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2079,16 +1931,16 @@ func (m *awsRestjson1_serializeOpUpdateSubscriptionNotificationConfiguration) Ha
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsRestjson1_serializeOpHttpBindingsUpdateSubscriptionNotificationConfigurationInput(v *UpdateSubscriptionNotificationConfigurationInput, encoder *httpbinding.Encoder) error {
+func awsRestjson1_serializeOpHttpBindingsUpdateSubscriberNotificationInput(v *UpdateSubscriberNotificationInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.SubscriptionId == nil || len(*v.SubscriptionId) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member subscriptionId must not be empty")}
+	if v.SubscriberId == nil || len(*v.SubscriberId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member subscriberId must not be empty")}
 	}
-	if v.SubscriptionId != nil {
-		if err := encoder.SetURI("subscriptionId").String(*v.SubscriptionId); err != nil {
+	if v.SubscriberId != nil {
+		if err := encoder.SetURI("subscriberId").String(*v.SubscriberId); err != nil {
 			return err
 		}
 	}
@@ -2096,38 +1948,15 @@ func awsRestjson1_serializeOpHttpBindingsUpdateSubscriptionNotificationConfigura
 	return nil
 }
 
-func awsRestjson1_serializeOpDocumentUpdateSubscriptionNotificationConfigurationInput(v *UpdateSubscriptionNotificationConfigurationInput, value smithyjson.Value) error {
+func awsRestjson1_serializeOpDocumentUpdateSubscriberNotificationInput(v *UpdateSubscriberNotificationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
-	if v.CreateSqs != nil {
-		ok := object.Key("createSqs")
-		ok.Boolean(*v.CreateSqs)
-	}
-
-	if v.HttpsApiKeyName != nil {
-		ok := object.Key("httpsApiKeyName")
-		ok.String(*v.HttpsApiKeyName)
-	}
-
-	if v.HttpsApiKeyValue != nil {
-		ok := object.Key("httpsApiKeyValue")
-		ok.String(*v.HttpsApiKeyValue)
-	}
-
-	if len(v.HttpsMethod) > 0 {
-		ok := object.Key("httpsMethod")
-		ok.String(string(v.HttpsMethod))
-	}
-
-	if v.RoleArn != nil {
-		ok := object.Key("roleArn")
-		ok.String(*v.RoleArn)
-	}
-
-	if v.SubscriptionEndpoint != nil {
-		ok := object.Key("subscriptionEndpoint")
-		ok.String(*v.SubscriptionEndpoint)
+	if v.Configuration != nil {
+		ok := object.Key("configuration")
+		if err := awsRestjson1_serializeDocumentNotificationConfiguration(v.Configuration, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -2144,77 +1973,7 @@ func awsRestjson1_serializeDocumentAccessTypeList(v []types.AccessType, value sm
 	return nil
 }
 
-func awsRestjson1_serializeDocumentAllDimensionsMap(v map[string]map[string][]string, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	for key := range v {
-		om := object.Key(key)
-		if vv := v[key]; vv == nil {
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentTwoDimensionsMap(v[key], om); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-
-func awsRestjson1_serializeDocumentAutoEnableNewRegionConfiguration(v *types.AutoEnableNewRegionConfiguration, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if len(v.Region) > 0 {
-		ok := object.Key("region")
-		ok.String(string(v.Region))
-	}
-
-	if v.Sources != nil {
-		ok := object.Key("sources")
-		if err := awsRestjson1_serializeDocumentAwsSourceTypeList(v.Sources, ok); err != nil {
-			return err
-		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeDocumentAutoEnableNewRegionConfigurationList(v []types.AutoEnableNewRegionConfiguration, value smithyjson.Value) error {
-	array := value.Array()
-	defer array.Close()
-
-	for i := range v {
-		av := array.Value()
-		if err := awsRestjson1_serializeDocumentAutoEnableNewRegionConfiguration(&v[i], av); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-
-func awsRestjson1_serializeDocumentAwsSourceTypeList(v []types.AwsLogSourceType, value smithyjson.Value) error {
-	array := value.Array()
-	defer array.Close()
-
-	for i := range v {
-		av := array.Value()
-		av.String(string(v[i]))
-	}
-	return nil
-}
-
-func awsRestjson1_serializeDocumentDimensionSet(v []types.Dimension, value smithyjson.Value) error {
-	array := value.Array()
-	defer array.Close()
-
-	for i := range v {
-		av := array.Value()
-		av.String(string(v[i]))
-	}
-	return nil
-}
-
-func awsRestjson1_serializeDocumentInputSet(v []string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentAccountList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
@@ -2225,111 +1984,420 @@ func awsRestjson1_serializeDocumentInputSet(v []string, value smithyjson.Value) 
 	return nil
 }
 
-func awsRestjson1_serializeDocumentLakeConfigurationRequest(v *types.LakeConfigurationRequest, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentAwsIdentity(v *types.AwsIdentity, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
-	if v.EncryptionKey != nil {
-		ok := object.Key("encryptionKey")
-		ok.String(*v.EncryptionKey)
+	if v.ExternalId != nil {
+		ok := object.Key("externalId")
+		ok.String(*v.ExternalId)
 	}
 
-	if v.ReplicationDestinationRegions != nil {
-		ok := object.Key("replicationDestinationRegions")
-		if err := awsRestjson1_serializeDocumentRegionSet(v.ReplicationDestinationRegions, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.ReplicationRoleArn != nil {
-		ok := object.Key("replicationRoleArn")
-		ok.String(*v.ReplicationRoleArn)
-	}
-
-	if v.RetentionSettings != nil {
-		ok := object.Key("retentionSettings")
-		if err := awsRestjson1_serializeDocumentRetentionSettingList(v.RetentionSettings, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.TagsMap != nil {
-		ok := object.Key("tagsMap")
-		if err := awsRestjson1_serializeDocumentTagsMap(v.TagsMap, ok); err != nil {
-			return err
-		}
+	if v.Principal != nil {
+		ok := object.Key("principal")
+		ok.String(*v.Principal)
 	}
 
 	return nil
 }
 
-func awsRestjson1_serializeDocumentLakeConfigurationRequestMap(v map[string]types.LakeConfigurationRequest, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentAwsLogSourceConfiguration(v *types.AwsLogSourceConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
-	for key := range v {
-		om := object.Key(key)
-		mapVar := v[key]
-		if err := awsRestjson1_serializeDocumentLakeConfigurationRequest(&mapVar, om); err != nil {
+	if v.Accounts != nil {
+		ok := object.Key("accounts")
+		if err := awsRestjson1_serializeDocumentAccountList(v.Accounts, ok); err != nil {
 			return err
 		}
 	}
+
+	if v.Regions != nil {
+		ok := object.Key("regions")
+		if err := awsRestjson1_serializeDocumentRegionList(v.Regions, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.SourceName) > 0 {
+		ok := object.Key("sourceName")
+		ok.String(string(v.SourceName))
+	}
+
+	if v.SourceVersion != nil {
+		ok := object.Key("sourceVersion")
+		ok.String(*v.SourceVersion)
+	}
+
 	return nil
 }
 
-func awsRestjson1_serializeDocumentRegionSet(v []types.Region, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentAwsLogSourceConfigurationList(v []types.AwsLogSourceConfiguration, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		av.String(string(v[i]))
+		if err := awsRestjson1_serializeDocumentAwsLogSourceConfiguration(&v[i], av); err != nil {
+			return err
+		}
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocumentRetentionSetting(v *types.RetentionSetting, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentAwsLogSourceResource(v *types.AwsLogSourceResource, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
-	if v.RetentionPeriod != nil {
-		ok := object.Key("retentionPeriod")
-		ok.Integer(*v.RetentionPeriod)
+	if len(v.SourceName) > 0 {
+		ok := object.Key("sourceName")
+		ok.String(string(v.SourceName))
 	}
 
-	if len(v.StorageClass) > 0 {
+	if v.SourceVersion != nil {
+		ok := object.Key("sourceVersion")
+		ok.String(*v.SourceVersion)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsLogSourceResourceList(v []types.AwsLogSourceResource, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAwsLogSourceResource(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCustomLogSourceAttributes(v *types.CustomLogSourceAttributes, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CrawlerArn != nil {
+		ok := object.Key("crawlerArn")
+		ok.String(*v.CrawlerArn)
+	}
+
+	if v.DatabaseArn != nil {
+		ok := object.Key("databaseArn")
+		ok.String(*v.DatabaseArn)
+	}
+
+	if v.TableArn != nil {
+		ok := object.Key("tableArn")
+		ok.String(*v.TableArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCustomLogSourceConfiguration(v *types.CustomLogSourceConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CrawlerConfiguration != nil {
+		ok := object.Key("crawlerConfiguration")
+		if err := awsRestjson1_serializeDocumentCustomLogSourceCrawlerConfiguration(v.CrawlerConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ProviderIdentity != nil {
+		ok := object.Key("providerIdentity")
+		if err := awsRestjson1_serializeDocumentAwsIdentity(v.ProviderIdentity, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCustomLogSourceCrawlerConfiguration(v *types.CustomLogSourceCrawlerConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RoleArn != nil {
+		ok := object.Key("roleArn")
+		ok.String(*v.RoleArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCustomLogSourceProvider(v *types.CustomLogSourceProvider, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Location != nil {
+		ok := object.Key("location")
+		ok.String(*v.Location)
+	}
+
+	if v.RoleArn != nil {
+		ok := object.Key("roleArn")
+		ok.String(*v.RoleArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCustomLogSourceResource(v *types.CustomLogSourceResource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Attributes != nil {
+		ok := object.Key("attributes")
+		if err := awsRestjson1_serializeDocumentCustomLogSourceAttributes(v.Attributes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Provider != nil {
+		ok := object.Key("provider")
+		if err := awsRestjson1_serializeDocumentCustomLogSourceProvider(v.Provider, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SourceName != nil {
+		ok := object.Key("sourceName")
+		ok.String(*v.SourceName)
+	}
+
+	if v.SourceVersion != nil {
+		ok := object.Key("sourceVersion")
+		ok.String(*v.SourceVersion)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDataLakeAutoEnableNewAccountConfiguration(v *types.DataLakeAutoEnableNewAccountConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Region != nil {
+		ok := object.Key("region")
+		ok.String(*v.Region)
+	}
+
+	if v.Sources != nil {
+		ok := object.Key("sources")
+		if err := awsRestjson1_serializeDocumentAwsLogSourceResourceList(v.Sources, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDataLakeAutoEnableNewAccountConfigurationList(v []types.DataLakeAutoEnableNewAccountConfiguration, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentDataLakeAutoEnableNewAccountConfiguration(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDataLakeConfiguration(v *types.DataLakeConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EncryptionConfiguration != nil {
+		ok := object.Key("encryptionConfiguration")
+		if err := awsRestjson1_serializeDocumentDataLakeEncryptionConfiguration(v.EncryptionConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LifecycleConfiguration != nil {
+		ok := object.Key("lifecycleConfiguration")
+		if err := awsRestjson1_serializeDocumentDataLakeLifecycleConfiguration(v.LifecycleConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Region != nil {
+		ok := object.Key("region")
+		ok.String(*v.Region)
+	}
+
+	if v.ReplicationConfiguration != nil {
+		ok := object.Key("replicationConfiguration")
+		if err := awsRestjson1_serializeDocumentDataLakeReplicationConfiguration(v.ReplicationConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDataLakeConfigurationList(v []types.DataLakeConfiguration, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentDataLakeConfiguration(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDataLakeEncryptionConfiguration(v *types.DataLakeEncryptionConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.KmsKeyId != nil {
+		ok := object.Key("kmsKeyId")
+		ok.String(*v.KmsKeyId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDataLakeLifecycleConfiguration(v *types.DataLakeLifecycleConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Expiration != nil {
+		ok := object.Key("expiration")
+		if err := awsRestjson1_serializeDocumentDataLakeLifecycleExpiration(v.Expiration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Transitions != nil {
+		ok := object.Key("transitions")
+		if err := awsRestjson1_serializeDocumentDataLakeLifecycleTransitionList(v.Transitions, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDataLakeLifecycleExpiration(v *types.DataLakeLifecycleExpiration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Days != nil {
+		ok := object.Key("days")
+		ok.Integer(*v.Days)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDataLakeLifecycleTransition(v *types.DataLakeLifecycleTransition, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Days != nil {
+		ok := object.Key("days")
+		ok.Integer(*v.Days)
+	}
+
+	if v.StorageClass != nil {
 		ok := object.Key("storageClass")
-		ok.String(string(v.StorageClass))
+		ok.String(*v.StorageClass)
 	}
 
 	return nil
 }
 
-func awsRestjson1_serializeDocumentRetentionSettingList(v []types.RetentionSetting, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentDataLakeLifecycleTransitionList(v []types.DataLakeLifecycleTransition, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		if err := awsRestjson1_serializeDocumentRetentionSetting(&v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentDataLakeLifecycleTransition(&v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocumentSourceType(v types.SourceType, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentDataLakeReplicationConfiguration(v *types.DataLakeReplicationConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Regions != nil {
+		ok := object.Key("regions")
+		if err := awsRestjson1_serializeDocumentRegionList(v.Regions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RoleArn != nil {
+		ok := object.Key("roleArn")
+		ok.String(*v.RoleArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentHttpsNotificationConfiguration(v *types.HttpsNotificationConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AuthorizationApiKeyName != nil {
+		ok := object.Key("authorizationApiKeyName")
+		ok.String(*v.AuthorizationApiKeyName)
+	}
+
+	if v.AuthorizationApiKeyValue != nil {
+		ok := object.Key("authorizationApiKeyValue")
+		ok.String(*v.AuthorizationApiKeyValue)
+	}
+
+	if v.Endpoint != nil {
+		ok := object.Key("endpoint")
+		ok.String(*v.Endpoint)
+	}
+
+	if len(v.HttpMethod) > 0 {
+		ok := object.Key("httpMethod")
+		ok.String(string(v.HttpMethod))
+	}
+
+	if v.TargetRoleArn != nil {
+		ok := object.Key("targetRoleArn")
+		ok.String(*v.TargetRoleArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLogSourceResource(v types.LogSourceResource, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
 	switch uv := v.(type) {
-	case *types.SourceTypeMemberAwsSourceType:
-		av := object.Key("awsSourceType")
-		av.String(string(uv.Value))
+	case *types.LogSourceResourceMemberAwsLogSource:
+		av := object.Key("awsLogSource")
+		if err := awsRestjson1_serializeDocumentAwsLogSourceResource(&uv.Value, av); err != nil {
+			return err
+		}
 
-	case *types.SourceTypeMemberCustomSourceType:
-		av := object.Key("customSourceType")
-		av.String(uv.Value)
+	case *types.LogSourceResourceMemberCustomLogSource:
+		av := object.Key("customLogSource")
+		if err := awsRestjson1_serializeDocumentCustomLogSourceResource(&uv.Value, av); err != nil {
+			return err
+		}
 
 	default:
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
@@ -2338,7 +2406,7 @@ func awsRestjson1_serializeDocumentSourceType(v types.SourceType, value smithyjs
 	return nil
 }
 
-func awsRestjson1_serializeDocumentSourceTypeList(v []types.SourceType, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentLogSourceResourceList(v []types.LogSourceResource, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
@@ -2347,41 +2415,38 @@ func awsRestjson1_serializeDocumentSourceTypeList(v []types.SourceType, value sm
 		if vv := v[i]; vv == nil {
 			continue
 		}
-		if err := awsRestjson1_serializeDocumentSourceType(v[i], av); err != nil {
+		if err := awsRestjson1_serializeDocumentLogSourceResource(v[i], av); err != nil {
 			return err
 		}
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocumentTagsMap(v map[string]string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentNotificationConfiguration(v types.NotificationConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
-	for key := range v {
-		om := object.Key(key)
-		om.String(v[key])
-	}
-	return nil
-}
-
-func awsRestjson1_serializeDocumentTwoDimensionsMap(v map[string][]string, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	for key := range v {
-		om := object.Key(key)
-		if vv := v[key]; vv == nil {
-			continue
-		}
-		if err := awsRestjson1_serializeDocumentValueSet(v[key], om); err != nil {
+	switch uv := v.(type) {
+	case *types.NotificationConfigurationMemberHttpsNotificationConfiguration:
+		av := object.Key("httpsNotificationConfiguration")
+		if err := awsRestjson1_serializeDocumentHttpsNotificationConfiguration(&uv.Value, av); err != nil {
 			return err
 		}
+
+	case *types.NotificationConfigurationMemberSqsNotificationConfiguration:
+		av := object.Key("sqsNotificationConfiguration")
+		if err := awsRestjson1_serializeDocumentSqsNotificationConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocumentValueSet(v []string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentOcsfEventClassList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
@@ -2389,5 +2454,23 @@ func awsRestjson1_serializeDocumentValueSet(v []string, value smithyjson.Value) 
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRegionList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSqsNotificationConfiguration(v *types.SqsNotificationConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
 	return nil
 }

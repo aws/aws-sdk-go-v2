@@ -7,91 +7,249 @@ import (
 	"time"
 )
 
-// Amazon Security Lake collects logs and events from supported Amazon Web
-// Services and custom sources. For the list of supported Amazon Web Services, see
-// the Amazon Security Lake User Guide (https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html)
-// .
-type AccountSources struct {
+// The AWS identity.
+type AwsIdentity struct {
 
-	// The ID of the Security Lake account for which logs are collected.
+	// The external ID used to estalish trust relationship with the AWS identity.
 	//
 	// This member is required.
-	Account *string
+	ExternalId *string
 
-	// The supported Amazon Web Services from which logs and events are collected.
-	// Amazon Security Lake supports log and event collection for natively supported
-	// Amazon Web Services.
+	// The AWS identity principal.
 	//
 	// This member is required.
-	SourceType *string
+	Principal *string
 
-	// Initializes a new instance of the Event class.
-	EventClass OcsfEventClass
+	noSmithyDocumentSerde
+}
 
-	// The log status for the Security Lake account.
-	LogsStatus []LogsStatus
+// The Security Lake logs source configuration file describes the information
+// needed to generate Security Lake logs.
+type AwsLogSourceConfiguration struct {
+
+	// Specify the Regions where you want to enable Security Lake.
+	//
+	// This member is required.
+	Regions []string
+
+	// The name for a Amazon Web Services source. This must be a Regionally unique
+	// value.
+	//
+	// This member is required.
+	SourceName AwsLogSourceName
+
+	// Specify the Amazon Web Services account information where you want to enable
+	// Security Lake.
+	Accounts []string
+
+	// The version for a Amazon Web Services source. This must be a Regionally unique
+	// value.
+	SourceVersion *string
+
+	noSmithyDocumentSerde
+}
+
+// Amazon Security Lake can collect logs and events from natively-supported Amazon
+// Web Services services.
+type AwsLogSourceResource struct {
+
+	// The name for a Amazon Web Services source. This must be a Regionally unique
+	// value.
+	SourceName AwsLogSourceName
+
+	// The version for a Amazon Web Services source. This must be a Regionally unique
+	// value.
+	SourceVersion *string
+
+	noSmithyDocumentSerde
+}
+
+// The attributes of a third-party custom source.
+type CustomLogSourceAttributes struct {
+
+	// The ARN of the Glue crawler.
+	CrawlerArn *string
+
+	// The ARN of the Glue database where results are written, such as:
+	// arn:aws:daylight:us-east-1::database/sometable/* .
+	DatabaseArn *string
+
+	// The ARN of the Glue table.
+	TableArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for the third-party custom source.
+type CustomLogSourceConfiguration struct {
+
+	// The configuration for the Glue Crawler for the third-party custom source.
+	//
+	// This member is required.
+	CrawlerConfiguration *CustomLogSourceCrawlerConfiguration
+
+	// The identity of the log provider for the third-party custom source.
+	//
+	// This member is required.
+	ProviderIdentity *AwsIdentity
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for the Glue Crawler for the third-party custom source.
+type CustomLogSourceCrawlerConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
+	// to be used by the Glue crawler. The recommended IAM policies are:
+	//   - The managed policy AWSGlueServiceRole
+	//   - A custom policy granting access to your Amazon S3 Data Lake
+	//
+	// This member is required.
+	RoleArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The details of the log provider for a third-party custom source.
+type CustomLogSourceProvider struct {
+
+	// The location of the partition in the Amazon S3 bucket for Security Lake.
+	Location *string
+
+	// The ARN of the IAM role to be used by the entity putting logs into your custom
+	// source partition. Security Lake will apply the correct access policies to this
+	// role, but you must first manually create the trust policy for this role. The IAM
+	// role name must start with the text 'Security Lake'. The IAM role must trust the
+	// logProviderAccountId to assume the role.
+	RoleArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Amazon Security Lake can collect logs and events from third-party custom
+// sources.
+type CustomLogSourceResource struct {
+
+	// The attributes of a third-party custom source.
+	Attributes *CustomLogSourceAttributes
+
+	// The details of the log provider for a third-party custom source.
+	Provider *CustomLogSourceProvider
+
+	// The name for a third-party custom source. This must be a Regionally unique
+	// value.
+	SourceName *string
+
+	// The version for a third-party custom source. This must be a Regionally unique
+	// value.
+	SourceVersion *string
 
 	noSmithyDocumentSerde
 }
 
 // Automatically enable new organization accounts as member accounts from an
 // Amazon Security Lake administrator account.
-type AutoEnableNewRegionConfiguration struct {
+type DataLakeAutoEnableNewAccountConfiguration struct {
 
 	// The Amazon Web Services Regions where Security Lake is automatically enabled.
 	//
 	// This member is required.
-	Region Region
+	Region *string
 
 	// The Amazon Web Services sources that are automatically enabled in Security Lake.
 	//
 	// This member is required.
-	Sources []AwsLogSourceType
+	Sources []AwsLogSourceResource
 
 	noSmithyDocumentSerde
 }
 
-// List of all failures.
-type Failures struct {
+// Provides details of Amazon Security Lake object.
+type DataLakeConfiguration struct {
 
-	// List of all exception messages.
+	// The Amazon Web Services Regions where Security Lake is automatically enabled.
 	//
 	// This member is required.
-	ExceptionMessage *string
+	Region *string
 
-	// List of all remediation steps for failures.
-	//
-	// This member is required.
+	// Provides encryption details of Amazon Security Lake object.
+	EncryptionConfiguration *DataLakeEncryptionConfiguration
+
+	// Provides lifecycle details of Amazon Security Lake object.
+	LifecycleConfiguration *DataLakeLifecycleConfiguration
+
+	// Provides replication details of Amazon Security Lake object.
+	ReplicationConfiguration *DataLakeReplicationConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Provides encryption details of Amazon Security Lake object.
+type DataLakeEncryptionConfiguration struct {
+
+	// The id of KMS encryption key used by Amazon Security Lake to encrypt the
+	// Security Lake object.
+	KmsKeyId *string
+
+	noSmithyDocumentSerde
+}
+
+// The details for a Security Lake exception
+type DataLakeException struct {
+
+	// The underlying exception of a Security Lake exception.
+	Exception *string
+
+	// The Amazon Web Services Regions where the exception occurred.
+	Region *string
+
+	// List of all remediation steps for a Security Lake exception.
 	Remediation *string
 
 	// This error can occur if you configure the wrong timestamp format, or if the
 	// subset of entries used for validation had errors or missing values.
-	//
-	// This member is required.
 	Timestamp *time.Time
 
 	noSmithyDocumentSerde
 }
 
-// Response element for actions that make changes, namely create, update, or
-// delete actions.
-type FailuresResponse struct {
+// Provides lifecycle details of Amazon Security Lake object.
+type DataLakeLifecycleConfiguration struct {
 
-	// List of all failures.
-	Failures []Failures
+	// Provides data expiration details of Amazon Security Lake object.
+	Expiration *DataLakeLifecycleExpiration
 
-	// List of Amazon Web Services Regions where the failure occurred.
-	Region *string
+	// Provides data storage transition details of Amazon Security Lake object.
+	Transitions []DataLakeLifecycleTransition
 
 	noSmithyDocumentSerde
 }
 
-// Provides details of Amazon Security Lake configuration object.
-type LakeConfigurationRequest struct {
+// Provide expiration lifecycle details of Amazon Security Lake object.
+type DataLakeLifecycleExpiration struct {
 
-	// The type of encryption key used by Amazon Security Lake to encrypt the Security
-	// Lake configuration object.
-	EncryptionKey *string
+	// Number of days before data expires in the Amazon Security Lake object.
+	Days *int32
+
+	noSmithyDocumentSerde
+}
+
+// Provide transition lifecycle details of Amazon Security Lake object.
+type DataLakeLifecycleTransition struct {
+
+	// Number of days before data transitions to a different S3 Storage Class in the
+	// Amazon Security Lake object.
+	Days *int32
+
+	// The range of storage classes that you can choose from based on the data access,
+	// resiliency, and cost requirements of your workloads.
+	StorageClass *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides replication details of Amazon Security Lake object.
+type DataLakeReplicationConfiguration struct {
 
 	// Replication enables automatic, asynchronous copying of objects across Amazon S3
 	// buckets. Amazon S3 buckets that are configured for object replication can be
@@ -101,125 +259,197 @@ type LakeConfigurationRequest struct {
 	// or within the same Region as the source bucket. Set up one or more rollup
 	// Regions by providing the Region or Regions that should contribute to the central
 	// rollup Region.
-	ReplicationDestinationRegions []Region
+	Regions []string
 
 	// Replication settings for the Amazon S3 buckets. This parameter uses the
 	// Identity and Access Management (IAM) role you created that is managed by
 	// Security Lake, to ensure the replication setting is correct.
-	ReplicationRoleArn *string
-
-	// Retention settings for the destination Amazon S3 buckets.
-	RetentionSettings []RetentionSetting
-
-	// A tag is a label that you assign to an Amazon Web Services resource. Each tag
-	// consists of a key and an optional value, both of which you define.
-	TagsMap map[string]string
+	RoleArn *string
 
 	noSmithyDocumentSerde
 }
 
-// Provides details of Amazon Security Lake lake configuration object.
-type LakeConfigurationResponse struct {
+// Provides details of Amazon Security Lake object.
+type DataLakeResource struct {
 
-	// The type of encryption key used by secure the Security Lake configuration
-	// object.
-	EncryptionKey *string
+	// The Amazon Resource Name (ARN) created by you to provide to the subscriber. For
+	// more information about ARNs and how to use them in policies, see the Amazon
+	// Security Lake User Guide (https://docs.aws.amazon.com/security-lake/latest/userguide/subscriber-management.html)
+	// .
+	//
+	// This member is required.
+	DataLakeArn *string
 
-	// Replication enables automatic, asynchronous copying of objects across Amazon S3
-	// buckets. Amazon S3 buckets that are configured for object replication can be
-	// owned by the same Amazon Web Services account or by different accounts. You can
-	// replicate objects to a single destination bucket or to multiple destination
-	// buckets. The destination buckets can be in different Amazon Web Services Regions
-	// or within the same Region as the source bucket. Set up one or more rollup
-	// Regions by providing the Region or Regions that should contribute to the central
-	// rollup Region.
-	ReplicationDestinationRegions []Region
-
-	// Replication settings for the Amazon S3 buckets. This parameter uses the IAM
-	// role you created that is managed by Security Lake, to ensure the replication
-	// setting is correct.
-	ReplicationRoleArn *string
-
-	// Retention settings for the destination Amazon S3 buckets.
-	RetentionSettings []RetentionSetting
-
-	// Amazon Resource Names (ARNs) uniquely identify Amazon Web Services resources.
-	// Security Lake requires an ARN when you need to specify a resource unambiguously
-	// across all of Amazon Web Services, such as in IAM policies, Amazon Relational
-	// Database Service (Amazon RDS) tags, and API calls.
-	S3BucketArn *string
+	// The Amazon Web Services Regions where Security Lake is enabled.
+	//
+	// This member is required.
+	Region *string
 
 	// Retrieves the status of the configuration operation for an account in Amazon
 	// Security Lake.
-	Status SettingsStatus
+	CreateStatus DataLakeStatus
 
-	// A tag is a label that you assign to an Amazon Web Services resource. Each tag
-	// consists of a key and an optional value, both of which you define.
-	TagsMap map[string]string
+	// Provides encryption details of Amazon Security Lake object.
+	EncryptionConfiguration *DataLakeEncryptionConfiguration
 
-	// The status of the last UpdateDatalake or DeleteDatalake API request.
-	UpdateStatus *UpdateStatus
+	// Provides lifecycle details of Amazon Security Lake object.
+	LifecycleConfiguration *DataLakeLifecycleConfiguration
+
+	// Provides replication details of Amazon Security Lake object.
+	ReplicationConfiguration *DataLakeReplicationConfiguration
+
+	// The ARN for the Amazon Security Lake Amazon S3 bucket.
+	S3BucketArn *string
+
+	// The status of the last UpdateDataLake or DeleteDataLake API request.
+	UpdateStatus *DataLakeUpdateStatus
 
 	noSmithyDocumentSerde
 }
 
-// The details of the last UpdateDatalake or DeleteDatalake API request which
-// failed.
-type LastUpdateFailure struct {
+// Amazon Security Lake collects logs and events from supported Amazon Web
+// Services and custom sources. For the list of supported Amazon Web Services, see
+// the Amazon Security Lake User Guide (https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html)
+// .
+type DataLakeSource struct {
 
-	// The reason code for the failure of the last UpdateDatalake or DeleteDatalake
+	// The ID of the Security Lake account for which logs are collected.
+	Account *string
+
+	// The Open Cybersecurity Schema Framework (OCSF) event classes which describes
+	// the type of data that the custom source will send to Security Lake. The
+	// supported event classes are:
+	//   - ACCESS_ACTIVITY
+	//   - FILE_ACTIVITY
+	//   - KERNEL_ACTIVITY
+	//   - KERNEL_EXTENSION
+	//   - MEMORY_ACTIVITY
+	//   - MODULE_ACTIVITY
+	//   - PROCESS_ACTIVITY
+	//   - REGISTRY_KEY_ACTIVITY
+	//   - REGISTRY_VALUE_ACTIVITY
+	//   - RESOURCE_ACTIVITY
+	//   - SCHEDULED_JOB_ACTIVITY
+	//   - SECURITY_FINDING
+	//   - ACCOUNT_CHANGE
+	//   - AUTHENTICATION
+	//   - AUTHORIZATION
+	//   - ENTITY_MANAGEMENT_AUDIT
+	//   - DHCP_ACTIVITY
+	//   - NETWORK_ACTIVITY
+	//   - DNS_ACTIVITY
+	//   - FTP_ACTIVITY
+	//   - HTTP_ACTIVITY
+	//   - RDP_ACTIVITY
+	//   - SMB_ACTIVITY
+	//   - SSH_ACTIVITY
+	//   - CONFIG_STATE
+	//   - INVENTORY_INFO
+	//   - EMAIL_ACTIVITY
+	//   - API_ACTIVITY
+	//   - CLOUD_API
+	EventClasses []string
+
+	// The supported Amazon Web Services from which logs and events are collected.
+	// Amazon Security Lake supports log and event collection for natively supported
+	// Amazon Web Services.
+	SourceName *string
+
+	// The log status for the Security Lake account.
+	SourceStatuses []DataLakeSourceStatus
+
+	noSmithyDocumentSerde
+}
+
+// Retrieves the Logs status for the Amazon Security Lake account.
+type DataLakeSourceStatus struct {
+
+	// Defines path the stored logs are available which has information on your
+	// systems, applications, and services.
+	Resource *string
+
+	// The health status of services, including error codes and patterns.
+	Status SourceCollectionStatus
+
+	noSmithyDocumentSerde
+}
+
+// The details of the last UpdateDataLake or DeleteDataLake API request which
+// failed.
+type DataLakeUpdateException struct {
+
+	// The reason code for the exception of the last UpdateDataLake or DeleteDataLake
 	// API request.
 	Code *string
 
-	// The reason for the failure of the last UpdateDatalake or DeleteDatalake API
+	// The reason for the exception of the last UpdateDataLake or DeleteDataLake API
 	// request.
 	Reason *string
 
 	noSmithyDocumentSerde
 }
 
-// Retrieves the Logs status for the Amazon Security Lake account.
-type LogsStatus struct {
+// The status of the last UpdateDataLake or DeleteDataLake API request. This is
+// set to Completed after the configuration is updated, or removed if deletion of
+// the data lake is successful.
+type DataLakeUpdateStatus struct {
 
-	// The health status of services, including error codes and patterns.
-	//
-	// This member is required.
-	HealthStatus SourceStatus
+	// The details of the last UpdateDataLake or DeleteDataLake API request which
+	// failed.
+	Exception *DataLakeUpdateException
 
-	// Defines path the stored logs are available which has information on your
-	// systems, applications, and services.
-	//
-	// This member is required.
-	PathToLogs *string
+	// The unique ID for the last UpdateDataLake or DeleteDataLake API request.
+	RequestId *string
+
+	// The status of the last UpdateDataLake or DeleteDataLake API request that was
+	// requested.
+	Status DataLakeStatus
 
 	noSmithyDocumentSerde
 }
 
-// Protocol used in Amazon Security Lake that dictates how notifications are
-// posted at the endpoint.
-type ProtocolAndNotificationEndpoint struct {
+// The configurations for HTTPS subscriber notification.
+type HttpsNotificationConfiguration struct {
 
-	// The account that is subscribed to receive exception notifications.
+	// The subscription endpoint in Security Lake. If you prefer notification with an
+	// HTTPs endpoint, populate this field.
+	//
+	// This member is required.
 	Endpoint *string
 
-	// The protocol to which notification messages are posted.
-	Protocol *string
+	// The Amazon Resource Name (ARN) of the EventBridge API destinations IAM role
+	// that you created. For more information about ARNs and how to use them in
+	// policies, see Managing data access (https://docs.aws.amazon.com//security-lake/latest/userguide/subscriber-data-access.html)
+	// and Amazon Web Services Managed Policies (https://docs.aws.amazon.com/security-lake/latest/userguide/security-iam-awsmanpol.html)
+	// in the Amazon Security Lake User Guide.
+	//
+	// This member is required.
+	TargetRoleArn *string
+
+	// The key name for the notification subscription.
+	AuthorizationApiKeyName *string
+
+	// The key value for the notification subscription.
+	AuthorizationApiKeyValue *string
+
+	// The HTTPS method used for the notification subscription.
+	HttpMethod HttpMethod
 
 	noSmithyDocumentSerde
 }
 
-// Retention settings for the destination Amazon S3 buckets in Amazon Security
-// Lake.
-type RetentionSetting struct {
+// Amazon Security Lake can collect logs and events from natively-supported Amazon
+// Web Services services and custom sources.
+type LogSource struct {
 
-	// The retention period specifies a fixed period of time during which the Security
-	// Lake object remains locked. You can specify the retention period in days for one
-	// or more sources.
-	RetentionPeriod *int32
+	// Specify the account from which you want to collect logs.
+	Account *string
 
-	// The range of storage classes that you can choose from based on the data access,
-	// resiliency, and cost requirements of your workloads.
-	StorageClass StorageClass
+	// Specify the Regions from which you want to collect logs.
+	Region *string
+
+	// Specify the sources from which you want to collect logs.
+	Sources []LogSourceResource
 
 	noSmithyDocumentSerde
 }
@@ -231,54 +461,98 @@ type RetentionSetting struct {
 //
 // The following types satisfy this interface:
 //
-//	SourceTypeMemberAwsSourceType
-//	SourceTypeMemberCustomSourceType
-type SourceType interface {
-	isSourceType()
+//	LogSourceResourceMemberAwsLogSource
+//	LogSourceResourceMemberCustomLogSource
+type LogSourceResource interface {
+	isLogSourceResource()
 }
 
 // Amazon Security Lake supports log and event collection for natively supported
 // Amazon Web Services.
-type SourceTypeMemberAwsSourceType struct {
-	Value AwsLogSourceType
+type LogSourceResourceMemberAwsLogSource struct {
+	Value AwsLogSourceResource
 
 	noSmithyDocumentSerde
 }
 
-func (*SourceTypeMemberAwsSourceType) isSourceType() {}
+func (*LogSourceResourceMemberAwsLogSource) isLogSourceResource() {}
 
 // Amazon Security Lake supports custom source types. For a detailed list, see the
 // Amazon Security Lake User Guide.
-type SourceTypeMemberCustomSourceType struct {
-	Value string
+type LogSourceResourceMemberCustomLogSource struct {
+	Value CustomLogSourceResource
 
 	noSmithyDocumentSerde
 }
 
-func (*SourceTypeMemberCustomSourceType) isSourceType() {}
+func (*LogSourceResourceMemberCustomLogSource) isLogSourceResource() {}
+
+// Specify the configurations you want to use for subscriber notification to
+// notify the subscriber when new data is written to the data lake for sources that
+// the subscriber consumes in Security Lake.
+//
+// The following types satisfy this interface:
+//
+//	NotificationConfigurationMemberHttpsNotificationConfiguration
+//	NotificationConfigurationMemberSqsNotificationConfiguration
+type NotificationConfiguration interface {
+	isNotificationConfiguration()
+}
+
+// The configurations for HTTPS subscriber notification.
+type NotificationConfigurationMemberHttpsNotificationConfiguration struct {
+	Value HttpsNotificationConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*NotificationConfigurationMemberHttpsNotificationConfiguration) isNotificationConfiguration() {}
+
+// The configurations for SQS subscriber notification.
+type NotificationConfigurationMemberSqsNotificationConfiguration struct {
+	Value SqsNotificationConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*NotificationConfigurationMemberSqsNotificationConfiguration) isNotificationConfiguration() {}
+
+// The configurations for SQS subscriber notification.
+type SqsNotificationConfiguration struct {
+	noSmithyDocumentSerde
+}
 
 // Provides details about the Amazon Security Lake account subscription.
 // Subscribers are notified of new objects for a source as the data is written to
 // your Amazon S3 bucket for Security Lake.
 type SubscriberResource struct {
 
-	// The Amazon Web Services account ID you are using to create your Amazon Security
-	// Lake account.
-	//
-	// This member is required.
-	AccountId *string
-
 	// Amazon Security Lake supports log and event collection for natively supported
 	// Amazon Web Services. For more information, see the Amazon Security Lake User
 	// Guide.
 	//
 	// This member is required.
-	SourceTypes []SourceType
+	Sources []LogSourceResource
 
-	// The subscription ID of the Amazon Security Lake subscriber account.
+	// The subscriber ARN of the Amazon Security Lake subscriber account.
 	//
 	// This member is required.
-	SubscriptionId *string
+	SubscriberArn *string
+
+	// The subscriber ID of the Amazon Security Lake subscriber account.
+	//
+	// This member is required.
+	SubscriberId *string
+
+	// The AWS identity used to access your data.
+	//
+	// This member is required.
+	SubscriberIdentity *AwsIdentity
+
+	// The name of your Amazon Security Lake subscriber account.
+	//
+	// This member is required.
+	SubscriberName *string
 
 	// You can choose to notify subscribers of new objects with an Amazon Simple Queue
 	// Service (Amazon SQS) queue or through messaging to an HTTPS endpoint provided by
@@ -287,14 +561,8 @@ type SubscriberResource struct {
 	// subscription type is defined as LAKEFORMATION .
 	AccessTypes []AccessType
 
-	// The date and time when the subscription was created.
+	// The date and time when the subscriber was created.
 	CreatedAt *time.Time
-
-	// The external ID of the subscriber. The external ID lets the user that is
-	// assuming the role assert the circumstances in which they are operating. It also
-	// provides a way for the account owner to permit the role to be assumed only under
-	// specific circumstances.
-	ExternalId *string
 
 	// The Amazon Resource Name (ARN) which uniquely defines the AWS RAM resource
 	// share. Before accepting the RAM resource share invitation, you can view details
@@ -311,63 +579,18 @@ type SubscriberResource struct {
 	// The ARN for the Amazon S3 bucket.
 	S3BucketArn *string
 
-	// The ARN for the Amazon Simple Notification Service.
-	SnsArn *string
-
 	// The subscriber descriptions for a subscriber account. The description for a
-	// subscriber includes subscriberName , accountID , externalID , and subscriptionId
-	// .
+	// subscriber includes subscriberName , accountID , externalID , and subscriberId .
 	SubscriberDescription *string
 
-	// The name of your Amazon Security Lake subscriber account.
-	SubscriberName *string
+	// The subscriber endpoint to which exception messages are posted.
+	SubscriberEndpoint *string
 
-	// The subscription endpoint to which exception messages are posted.
-	SubscriptionEndpoint *string
+	// The subscriber status of the Amazon Security Lake subscriber account.
+	SubscriberStatus SubscriberStatus
 
-	// The subscription protocol to which exception messages are posted.
-	SubscriptionProtocol EndpointProtocol
-
-	// The subscription status of the Amazon Security Lake subscriber account.
-	SubscriptionStatus SubscriptionStatus
-
-	// The date and time when the subscription was created.
+	// The date and time when the subscriber was last updated.
 	UpdatedAt *time.Time
-
-	noSmithyDocumentSerde
-}
-
-// The status of the last UpdateDatalake or DeleteDatalake API request. This is
-// set to Completed after the configuration is updated, or removed if deletion of
-// the data lake is successful.
-type UpdateStatus struct {
-
-	// The details of the last UpdateDatalake or DeleteDatalake API request which
-	// failed.
-	LastUpdateFailure *LastUpdateFailure
-
-	// The unique ID for the UpdateDatalake or DeleteDatalake API request.
-	LastUpdateRequestId *string
-
-	// The status of the last UpdateDatalake or DeleteDatalake API request that was
-	// requested.
-	LastUpdateStatus SettingsStatus
-
-	noSmithyDocumentSerde
-}
-
-// The input fails to meet the constraints specified in Amazon Security Lake.
-type ValidationExceptionField struct {
-
-	// Describes the error encountered.
-	//
-	// This member is required.
-	Message *string
-
-	// Name of the validation exception.
-	//
-	// This member is required.
-	Name *string
 
 	noSmithyDocumentSerde
 }
@@ -383,4 +606,5 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isSourceType() {}
+func (*UnknownUnionMember) isLogSourceResource()         {}
+func (*UnknownUnionMember) isNotificationConfiguration() {}

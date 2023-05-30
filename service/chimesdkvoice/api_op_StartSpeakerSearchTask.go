@@ -47,6 +47,9 @@ type StartSpeakerSearchTaskInput struct {
 	// This member is required.
 	VoiceProfileDomainId *string
 
+	// Specifies which call leg to stream for speaker search.
+	CallLeg types.CallLegType
+
 	// The unique identifier for the client request. Use a different token for
 	// different speaker search tasks.
 	ClientRequestToken *string

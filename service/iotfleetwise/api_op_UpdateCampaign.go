@@ -31,8 +31,10 @@ type UpdateCampaignInput struct {
 
 	// Specifies how to update a campaign. The action can be one of the following:
 	//   - APPROVE - To approve delivering a data collection scheme to vehicles.
-	//   - SUSPEND - To suspend collecting signal data.
-	//   - RESUME - To resume collecting signal data.
+	//   - SUSPEND - To suspend collecting signal data. The campaign is deleted from
+	//   vehicles and all vehicles in the suspended campaign will stop sending data.
+	//   - RESUME - To reactivate the SUSPEND campaign. The campaign is redeployed to
+	//   all vehicles and the vehicles will resume sending data.
 	//   - UPDATE - To update a campaign.
 	//
 	// This member is required.

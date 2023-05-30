@@ -82,7 +82,7 @@ type CreateDatasetGroupInput struct {
 	// valid when also specifying a KMS key.
 	RoleArn *string
 
-	// A list of tags (https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html)
+	// A list of tags (https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html)
 	// to apply to the dataset group.
 	Tags []types.Tag
 

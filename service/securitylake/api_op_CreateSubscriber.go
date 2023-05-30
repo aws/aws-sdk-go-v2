@@ -31,25 +31,17 @@ func (c *Client) CreateSubscriber(ctx context.Context, params *CreateSubscriberI
 
 type CreateSubscriberInput struct {
 
-	// The Amazon Web Services account ID used to access your data.
-	//
-	// This member is required.
-	AccountId *string
-
-	// The external ID of the subscriber. This lets the user that is assuming the role
-	// assert the circumstances in which they are operating. It also provides a way for
-	// the account owner to permit the role to be assumed only under specific
-	// circumstances.
-	//
-	// This member is required.
-	ExternalId *string
-
 	// The supported Amazon Web Services from which logs and events are collected.
 	// Security Lake supports log and event collection for natively supported Amazon
 	// Web Services.
 	//
 	// This member is required.
-	SourceTypes []types.SourceType
+	Sources []types.LogSourceResource
+
+	// The AWS identity used to access your data.
+	//
+	// This member is required.
+	SubscriberIdentity *types.AwsIdentity
 
 	// The name of your Security Lake subscriber account.
 	//
@@ -67,30 +59,9 @@ type CreateSubscriberInput struct {
 
 type CreateSubscriberOutput struct {
 
-	// The subscriptionId created by the CreateSubscriber API call.
-	//
-	// This member is required.
-	SubscriptionId *string
-
-	// The Amazon Resource Name (ARN) which uniquely defines the AWS RAM resource
-	// share. Before accepting the RAM resource share invitation, you can view details
-	// related to the RAM resource share.
-	ResourceShareArn *string
-
-	// The name of the resource share.
-	ResourceShareName *string
-
-	// The Amazon Resource Name (ARN) created by you to provide to the subscriber. For
-	// more information about ARNs and how to use them in policies, see Amazon
-	// Security Lake User Guide (https://docs.aws.amazon.com/security-lake/latest/userguide/subscriber-management.html)
-	// .
-	RoleArn *string
-
-	// The ARN for the Amazon S3 bucket.
-	S3BucketArn *string
-
-	// The ARN for the Amazon Simple Notification Service.
-	SnsArn *string
+	// Retrieve information about the subscriber created using the CreateSubscriber
+	// API.
+	Subscriber *types.SubscriberResource
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
