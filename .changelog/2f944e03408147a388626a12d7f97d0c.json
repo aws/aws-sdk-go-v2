@@ -1,8 +1,0 @@
-{
-    "id": "2f944e03-4081-47a3-8862-6a12d7f97d0c",
-    "type": "feature",
-    "description": "Log sources are now versioned. AWS log sources and custom sources will now come with a version identifier that enables producers to vend multiple schema versions to subscribers. Security Lake API have been refactored to more closely align with AWS API conventions.",
-    "modules": [
-        "service/securitylake"
-    ]
-}

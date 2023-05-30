@@ -1,3 +1,7 @@
+# v1.32.0 (2023-05-30)
+
+* **Feature**: Added new resource detail objects to ASFF, including resources for AwsGuardDutyDetector, AwsAmazonMqBroker, AwsEventSchemasRegistry, AwsAppSyncGraphQlApi and AwsStepFunctionStateMachine.
+
 # v1.31.1 (2023-05-26)
 
 * No change notes available for this release.

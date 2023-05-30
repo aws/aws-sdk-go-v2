@@ -1,3 +1,7 @@
+# v1.13.0 (2023-05-30)
+
+* **Feature**: Amazon MemoryDB for Redis now supports AWS Identity and Access Management authentication access to Redis clusters starting with redis-engine version 7.0
+
 # v1.12.10 (2023-05-04)
 
 * No change notes available for this release.

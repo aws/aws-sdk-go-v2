@@ -1,3 +1,7 @@
+# v1.18.3 (2023-05-30)
+
+* **Documentation**: Updating description of GetMinuteUsage to be clearer.
+
 # v1.18.2 (2023-05-04)
 
 * No change notes available for this release.

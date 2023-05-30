@@ -1,8 +1,0 @@
-{
-    "id": "f7d3d5b4-f15d-41c5-9128-f88756886cf6",
-    "type": "feature",
-    "description": "Amazon MemoryDB for Redis now supports AWS Identity and Access Management authentication access to Redis clusters starting with redis-engine version 7.0",
-    "modules": [
-        "service/memorydb"
-    ]
-}

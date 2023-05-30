@@ -1,8 +1,0 @@
-{
-    "id": "5d8d043c-c116-4161-aebc-30cb8157a63e",
-    "type": "feature",
-    "description": "Added Runtime parameter to allow selection of Ray Runtime",
-    "modules": [
-        "service/glue"
-    ]
-}

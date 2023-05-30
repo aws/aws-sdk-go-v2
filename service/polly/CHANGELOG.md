@@ -1,3 +1,7 @@
+# v1.26.0 (2023-05-30)
+
+* **Feature**: Amazon Polly adds 2 new voices - Sofie (da-DK) and Niamh (en-IE)
+
 # v1.25.10 (2023-05-04)
 
 * No change notes available for this release.

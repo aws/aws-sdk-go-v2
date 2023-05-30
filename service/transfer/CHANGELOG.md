@@ -1,3 +1,7 @@
+# v1.29.1 (2023-05-30)
+
+* No change notes available for this release.
+
 # v1.29.0 (2023-05-15)
 
 * **Feature**: This release introduces the ability to require both password and SSH key when users authenticate to your Transfer Family servers that use the SFTP protocol.

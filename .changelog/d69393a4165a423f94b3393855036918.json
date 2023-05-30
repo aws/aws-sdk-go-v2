@@ -1,8 +1,0 @@
-{
-    "id": "d69393a4-165a-423f-94b3-393855036918",
-    "type": "feature",
-    "description": "Added optional CallLeg field to StartSpeakerSearchTask API request",
-    "modules": [
-        "service/chimesdkvoice"
-    ]
-}

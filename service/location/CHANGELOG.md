@@ -1,3 +1,7 @@
+# v1.23.0 (2023-05-30)
+
+* **Feature**: This release adds API support for political views for the maps service APIs: CreateMap, UpdateMap, DescribeMap.
+
 # v1.22.7 (2023-05-04)
 
 * No change notes available for this release.

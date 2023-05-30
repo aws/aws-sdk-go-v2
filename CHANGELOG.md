@@ -1,3 +1,29 @@
+# Release (2023-05-30)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkvoice`: [v1.6.0](service/chimesdkvoice/CHANGELOG.md#v160-2023-05-30)
+  * **Feature**: Added optional CallLeg field to StartSpeakerSearchTask API request
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.50.0](service/glue/CHANGELOG.md#v1500-2023-05-30)
+  * **Feature**: Added Runtime parameter to allow selection of Ray Runtime
+* `github.com/aws/aws-sdk-go-v2/service/groundstation`: [v1.18.3](service/groundstation/CHANGELOG.md#v1183-2023-05-30)
+  * **Documentation**: Updating description of GetMinuteUsage to be clearer.
+* `github.com/aws/aws-sdk-go-v2/service/iotfleetwise`: [v1.4.0](service/iotfleetwise/CHANGELOG.md#v140-2023-05-30)
+  * **Feature**: Campaigns now support selecting Timestream or S3 as the data destination, Signal catalogs now support "Deprecation" keyword released in VSS v2.1 and "Comment" keyword released in VSS v3.0
+* `github.com/aws/aws-sdk-go-v2/service/location`: [v1.23.0](service/location/CHANGELOG.md#v1230-2023-05-30)
+  * **Feature**: This release adds API support for political views for the maps service APIs: CreateMap, UpdateMap, DescribeMap.
+* `github.com/aws/aws-sdk-go-v2/service/memorydb`: [v1.13.0](service/memorydb/CHANGELOG.md#v1130-2023-05-30)
+  * **Feature**: Amazon MemoryDB for Redis now supports AWS Identity and Access Management authentication access to Redis clusters starting with redis-engine version 7.0
+* `github.com/aws/aws-sdk-go-v2/service/personalize`: [v1.24.0](service/personalize/CHANGELOG.md#v1240-2023-05-30)
+  * **Feature**: This release provides support for the exclusion of certain columns for training when creating a solution and creating or updating a recommender with Amazon Personalize.
+* `github.com/aws/aws-sdk-go-v2/service/polly`: [v1.26.0](service/polly/CHANGELOG.md#v1260-2023-05-30)
+  * **Feature**: Amazon Polly adds 2 new voices - Sofie (da-DK) and Niamh (en-IE)
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.32.0](service/securityhub/CHANGELOG.md#v1320-2023-05-30)
+  * **Feature**: Added new resource detail objects to ASFF, including resources for AwsGuardDutyDetector, AwsAmazonMqBroker, AwsEventSchemasRegistry, AwsAppSyncGraphQlApi and AwsStepFunctionStateMachine.
+* `github.com/aws/aws-sdk-go-v2/service/securitylake`: [v1.4.0](service/securitylake/CHANGELOG.md#v140-2023-05-30)
+  * **Feature**: Log sources are now versioned. AWS log sources and custom sources will now come with a version identifier that enables producers to vend multiple schema versions to subscribers. Security Lake API have been refactored to more closely align with AWS API conventions.
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.33.0](service/wafv2/CHANGELOG.md#v1330-2023-05-30)
+  * **Feature**: This SDK release provides customers the ability to use Header Order as a field to match.
+
 # Release (2023-05-26)
 
 ## Module Highlights
