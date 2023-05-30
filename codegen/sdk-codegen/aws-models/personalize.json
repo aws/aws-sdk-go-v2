@@ -705,8 +705,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -718,8 +718,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -731,8 +731,8 @@
                             },
                             "params": {
                                 "Region": "ap-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -744,8 +744,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -757,8 +757,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -770,8 +770,8 @@
                             },
                             "params": {
                                 "Region": "ca-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -783,8 +783,8 @@
                             },
                             "params": {
                                 "Region": "eu-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -796,8 +796,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -809,8 +809,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -822,8 +822,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -835,8 +835,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -848,8 +848,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -861,8 +861,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -874,8 +874,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -887,8 +887,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -900,8 +900,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -913,8 +913,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -926,8 +926,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -939,8 +939,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -952,8 +952,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -965,8 +965,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -978,8 +978,19 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -991,8 +1002,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1004,8 +1026,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1017,8 +1050,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1030,8 +1074,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1043,8 +1087,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1056,8 +1100,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1068,8 +1112,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1080,9 +1124,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -1383,7 +1433,7 @@
                 "numResults": {
                     "target": "com.amazonaws.personalize#NumBatchResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of predicted users generated by the batch segment job for each line of input data.</p>"
+                        "smithy.api#documentation": "<p>The number of predicted users generated by the batch segment job for each line of input data. The maximum number of users per segment is 5 million.</p>"
                     }
                 },
                 "jobInput": {
@@ -1544,7 +1594,7 @@
                 "minProvisionedTPS": {
                     "target": "com.amazonaws.personalize#TransactionsPerSecond",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the requested minimum provisioned transactions (recommendations) per second.</p>"
+                        "smithy.api#documentation": "<p>Specifies the requested minimum provisioned transactions (recommendations) per second. A high <code>minProvisionedTPS</code> will increase your bill. We recommend starting with 1 for <code>minProvisionedTPS</code> (the default). Track\n      your usage using Amazon CloudWatch metrics, and increase the <code>minProvisionedTPS</code>\n      as necessary.</p>"
                     }
                 },
                 "campaignConfig": {
@@ -1755,6 +1805,27 @@
                 }
             }
         },
+        "com.amazonaws.personalize#ColumnName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 150
+                }
+            }
+        },
+        "com.amazonaws.personalize#ColumnNamesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.personalize#ColumnName"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
         "com.amazonaws.personalize#ContinuousHyperParameterRange": {
             "type": "structure",
             "members": {
@@ -1904,9 +1975,12 @@
                 "tags": {
                     "target": "com.amazonaws.personalize#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <a href=\"https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html\">tags</a> to apply to the batch inference job.</p>"
+                        "smithy.api#documentation": "<p>A list of <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html\">tags</a> to apply to the batch inference job.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#CreateBatchInferenceJobResponse": {
@@ -1918,6 +1992,9 @@
                         "smithy.api#documentation": "<p>The ARN of the batch inference job.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.personalize#CreateBatchSegmentJob": {
@@ -1978,7 +2055,7 @@
                 "numResults": {
                     "target": "com.amazonaws.personalize#NumBatchResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of predicted users generated by the batch segment job for each line of input data.</p>"
+                        "smithy.api#documentation": "<p>The number of predicted users generated by the batch segment job for each line of input data. The maximum number of users per segment is 5 million.</p>"
                     }
                 },
                 "jobInput": {
@@ -2005,9 +2082,12 @@
                 "tags": {
                     "target": "com.amazonaws.personalize#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <a href=\"https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html\">tags</a> to apply to the batch segment job.</p>"
+                        "smithy.api#documentation": "<p>A list of <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html\">tags</a> to apply to the batch segment job.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#CreateBatchSegmentJobResponse": {
@@ -2019,6 +2099,9 @@
                         "smithy.api#documentation": "<p>The ARN of the batch segment job.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.personalize#CreateCampaign": {
@@ -2050,7 +2133,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a campaign that deploys a solution version. When a client calls the\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html\">GetRecommendations</a>\n      and\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetPersonalizedRanking.html\">GetPersonalizedRanking</a>\n      APIs, a campaign is specified in the request.</p>\n\n         <p>\n            <b>Minimum Provisioned TPS and Auto-Scaling</b>\n         </p>\n    \n         <p>A transaction is a single <code>GetRecommendations</code> or\n       <code>GetPersonalizedRanking</code> call. Transactions per second (TPS) is the throughput\n       and unit of billing for Amazon Personalize. The minimum provisioned TPS\n       (<code>minProvisionedTPS</code>) specifies the baseline throughput provisioned by\n       Amazon Personalize, and thus, the minimum billing charge. \n    </p>\n         <p>\n       If your TPS increases beyond\n       <code>minProvisionedTPS</code>, Amazon Personalize auto-scales the provisioned capacity up and down,\n       but never below <code>minProvisionedTPS</code>.\n       There's a short time delay while the capacity is increased that might cause loss of\n       transactions.</p>\n         <p>The actual TPS used is calculated as the average requests/second within a 5-minute window.\n      You pay for maximum of either the minimum provisioned TPS or the actual TPS.\n      We recommend starting with a low <code>minProvisionedTPS</code>, track\n       your usage using Amazon CloudWatch metrics, and then increase the <code>minProvisionedTPS</code>\n       as necessary.</p>\n\n         <p>\n            <b>Status</b>\n         </p>\n         <p>A campaign can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>\n            </li>\n            <li>\n               <p>DELETE PENDING > DELETE IN_PROGRESS</p>\n            </li>\n         </ul>\n         <p>To get the campaign status, call <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html\">DescribeCampaign</a>.</p>\n         <note>\n            <p>Wait until the <code>status</code> of the campaign\n        is <code>ACTIVE</code> before asking the campaign for recommendations.</p>\n         </note>\n         <p class=\"title\">\n            <b>Related APIs</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_ListCampaigns.html\">ListCampaigns</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html\">DescribeCampaign</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_UpdateCampaign.html\">UpdateCampaign</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteCampaign.html\">DeleteCampaign</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Creates a campaign that deploys a solution version. When a client calls the\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html\">GetRecommendations</a>\n      and\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetPersonalizedRanking.html\">GetPersonalizedRanking</a>\n      APIs, a campaign is specified in the request.</p>\n         <p>\n            <b>Minimum Provisioned TPS and Auto-Scaling</b>\n         </p>\n         <important>\n            <p> A high <code>minProvisionedTPS</code> will increase your bill. We recommend starting with 1 for <code>minProvisionedTPS</code> (the default). Track\n        your usage using Amazon CloudWatch metrics, and increase the <code>minProvisionedTPS</code>\n        as necessary.</p>\n         </important>\n         <p>A transaction is a single <code>GetRecommendations</code> or\n       <code>GetPersonalizedRanking</code> call. Transactions per second (TPS) is the throughput\n       and unit of billing for Amazon Personalize. The minimum provisioned TPS\n       (<code>minProvisionedTPS</code>) specifies the baseline throughput provisioned by\n       Amazon Personalize, and thus, the minimum billing charge. \n    </p>\n         <p>\n       If your TPS increases beyond\n       <code>minProvisionedTPS</code>, Amazon Personalize auto-scales the provisioned capacity up and down,\n       but never below <code>minProvisionedTPS</code>.\n       There's a short time delay while the capacity is increased that might cause loss of\n       transactions.</p>\n         <p>The actual TPS used is calculated as the average requests/second within a 5-minute window.\n      You pay for maximum of either the minimum provisioned TPS or the actual TPS.\n      We recommend starting with a low <code>minProvisionedTPS</code>, track\n       your usage using Amazon CloudWatch metrics, and then increase the <code>minProvisionedTPS</code>\n       as necessary.</p>\n         <p>\n            <b>Status</b>\n         </p>\n         <p>A campaign can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>\n            </li>\n            <li>\n               <p>DELETE PENDING > DELETE IN_PROGRESS</p>\n            </li>\n         </ul>\n         <p>To get the campaign status, call <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html\">DescribeCampaign</a>.</p>\n         <note>\n            <p>Wait until the <code>status</code> of the campaign\n        is <code>ACTIVE</code> before asking the campaign for recommendations.</p>\n         </note>\n         <p class=\"title\">\n            <b>Related APIs</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_ListCampaigns.html\">ListCampaigns</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html\">DescribeCampaign</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_UpdateCampaign.html\">UpdateCampaign</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteCampaign.html\">DeleteCampaign</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -2074,7 +2157,7 @@
                 "minProvisionedTPS": {
                     "target": "com.amazonaws.personalize#TransactionsPerSecond",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the requested minimum provisioned transactions (recommendations) per second that\n      Amazon Personalize will support.</p>"
+                        "smithy.api#documentation": "<p>Specifies the requested minimum provisioned transactions (recommendations) per second that\n      Amazon Personalize will support.  A high <code>minProvisionedTPS</code> will increase your bill. We recommend starting with 1 for <code>minProvisionedTPS</code> (the default). Track\n      your usage using Amazon CloudWatch metrics, and increase the <code>minProvisionedTPS</code> as necessary.</p>"
                     }
                 },
                 "campaignConfig": {
@@ -2086,9 +2169,12 @@
                 "tags": {
                     "target": "com.amazonaws.personalize#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <a href=\"https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html\">tags</a> to apply to the campaign.</p>"
+                        "smithy.api#documentation": "<p>A list of <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html\">tags</a> to apply to the campaign.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#CreateCampaignResponse": {
@@ -2100,6 +2186,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the campaign.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.personalize#CreateDataset": {
@@ -2131,7 +2220,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an empty dataset and adds it to the specified dataset group.\n      Use <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetImportJob.html\">CreateDatasetImportJob</a> to import your training data to a\n      dataset.</p>\n\n         <p>There are three types of datasets:</p>\n         <ul>\n            <li>\n               <p>Interactions</p>\n            </li>\n            <li>\n               <p>Items</p>\n            </li>\n            <li>\n               <p>Users</p>\n            </li>\n         </ul>\n         <p>Each dataset type has an associated schema with required field types.\n      Only the <code>Interactions</code> dataset is required in order to train a\n      model (also referred to as creating a solution).</p>\n         <p>A dataset can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE\n          FAILED</p>\n            </li>\n            <li>\n               <p>DELETE PENDING > DELETE IN_PROGRESS</p>\n            </li>\n         </ul>\n         <p>To get the status of the dataset, call <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDataset.html\">DescribeDataset</a>.</p>\n         <p class=\"title\">\n            <b>Related APIs</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetGroup.html\">CreateDatasetGroup</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_ListDatasets.html\">ListDatasets</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDataset.html\">DescribeDataset</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteDataset.html\">DeleteDataset</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Creates an empty dataset and adds it to the specified dataset group.\n      Use <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetImportJob.html\">CreateDatasetImportJob</a> to import your training data to a\n      dataset.</p>\n         <p>There are three types of datasets:</p>\n         <ul>\n            <li>\n               <p>Interactions</p>\n            </li>\n            <li>\n               <p>Items</p>\n            </li>\n            <li>\n               <p>Users</p>\n            </li>\n         </ul>\n         <p>Each dataset type has an associated schema with required field types.\n      Only the <code>Interactions</code> dataset is required in order to train a\n      model (also referred to as creating a solution).</p>\n         <p>A dataset can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE\n          FAILED</p>\n            </li>\n            <li>\n               <p>DELETE PENDING > DELETE IN_PROGRESS</p>\n            </li>\n         </ul>\n         <p>To get the status of the dataset, call <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDataset.html\">DescribeDataset</a>.</p>\n         <p class=\"title\">\n            <b>Related APIs</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDatasetGroup.html\">CreateDatasetGroup</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_ListDatasets.html\">ListDatasets</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDataset.html\">DescribeDataset</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteDataset.html\">DeleteDataset</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -2208,9 +2297,12 @@
                 "tags": {
                     "target": "com.amazonaws.personalize#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <a href=\"https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html\">tags</a> to apply to the dataset export job.</p>"
+                        "smithy.api#documentation": "<p>A list of <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html\">tags</a> to apply to the dataset export job.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#CreateDatasetExportJobResponse": {
@@ -2222,6 +2314,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset export job.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.personalize#CreateDatasetGroup": {
@@ -2281,9 +2376,12 @@
                 "tags": {
                     "target": "com.amazonaws.personalize#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <a href=\"https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html\">tags</a> to apply to the dataset group.</p>"
+                        "smithy.api#documentation": "<p>A list of <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html\">tags</a> to apply to the dataset group.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#CreateDatasetGroupResponse": {
@@ -2301,6 +2399,9 @@
                         "smithy.api#documentation": "<p>The domain for the new Domain dataset group.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.personalize#CreateDatasetImportJob": {
@@ -2332,7 +2433,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a job that imports training data from your data source (an\n      Amazon S3 bucket) to an Amazon Personalize dataset. To allow Amazon Personalize to import the\n      training data, you must specify an IAM service role that has permission to\n      read from the data source, as Amazon Personalize makes a copy of your data and\n      processes it internally. For information on granting access to your Amazon S3\n      bucket, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/granting-personalize-s3-access.html\">Giving\n        Amazon Personalize Access to Amazon S3 Resources</a>. </p>\n         <important>\n            <p>By default, a dataset import job replaces any existing data in the\n        dataset that you imported in bulk. To add new records without replacing\n        existing data, specify INCREMENTAL for the import mode in the\n        CreateDatasetImportJob operation.</p>\n         </important>\n         <p>\n            <b>Status</b>\n         </p>\n         <p>A dataset import job can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE\n          FAILED</p>\n            </li>\n         </ul>\n         <p>To get the status of the import job, call <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetImportJob.html\">DescribeDatasetImportJob</a>, providing the Amazon Resource Name\n      (ARN) of the dataset import job. The dataset import is complete when the\n      status shows as ACTIVE. If the status shows as CREATE FAILED, the response\n      includes a <code>failureReason</code> key, which describes why the job\n      failed.</p>\n         <note>\n            <p>Importing takes time. You must wait until the status shows as ACTIVE\n        before training a model using the dataset.</p>\n         </note>\n    \n         <p class=\"title\">\n            <b>Related APIs</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_ListDatasetImportJobs.html\">ListDatasetImportJobs</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetImportJob.html\">DescribeDatasetImportJob</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Creates a job that imports training data from your data source (an\n      Amazon S3 bucket) to an Amazon Personalize dataset. To allow Amazon Personalize to import the\n      training data, you must specify an IAM service role that has permission to\n      read from the data source, as Amazon Personalize makes a copy of your data and\n      processes it internally. For information on granting access to your Amazon S3\n      bucket, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/granting-personalize-s3-access.html\">Giving\n        Amazon Personalize Access to Amazon S3 Resources</a>. </p>\n         <important>\n            <p>By default, a dataset import job replaces any existing data in the\n        dataset that you imported in bulk. To add new records without replacing\n        existing data, specify INCREMENTAL for the import mode in the\n        CreateDatasetImportJob operation.</p>\n         </important>\n         <p>\n            <b>Status</b>\n         </p>\n         <p>A dataset import job can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE\n          FAILED</p>\n            </li>\n         </ul>\n         <p>To get the status of the import job, call <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetImportJob.html\">DescribeDatasetImportJob</a>, providing the Amazon Resource Name\n      (ARN) of the dataset import job. The dataset import is complete when the\n      status shows as ACTIVE. If the status shows as CREATE FAILED, the response\n      includes a <code>failureReason</code> key, which describes why the job\n      failed.</p>\n         <note>\n            <p>Importing takes time. You must wait until the status shows as ACTIVE\n        before training a model using the dataset.</p>\n         </note>\n         <p class=\"title\">\n            <b>Related APIs</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_ListDatasetImportJobs.html\">ListDatasetImportJobs</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetImportJob.html\">DescribeDatasetImportJob</a>\n               </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.personalize#CreateDatasetImportJobRequest": {
@@ -2369,7 +2470,7 @@
                 "tags": {
                     "target": "com.amazonaws.personalize#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <a href=\"https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html\">tags</a> to apply to the dataset import job.</p>"
+                        "smithy.api#documentation": "<p>A list of <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html\">tags</a> to apply to the dataset import job.</p>"
                     }
                 },
                 "importMode": {
@@ -2384,6 +2485,9 @@
                         "smithy.api#documentation": "<p>If you created a metric attribution, specify whether to publish metrics for this import job to Amazon S3</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#CreateDatasetImportJobResponse": {
@@ -2395,6 +2499,9 @@
                         "smithy.api#documentation": "<p>The ARN of the dataset import job.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.personalize#CreateDatasetRequest": {
@@ -2431,9 +2538,12 @@
                 "tags": {
                     "target": "com.amazonaws.personalize#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <a href=\"https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html\">tags</a> to apply to the dataset.</p>"
+                        "smithy.api#documentation": "<p>A list of <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html\">tags</a> to apply to the dataset.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#CreateDatasetResponse": {
@@ -2445,6 +2555,9 @@
                         "smithy.api#documentation": "<p>The ARN of the dataset.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.personalize#CreateEventTracker": {
@@ -2500,9 +2613,12 @@
                 "tags": {
                     "target": "com.amazonaws.personalize#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <a href=\"https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html\">tags</a> to apply to the event tracker.</p>"
+                        "smithy.api#documentation": "<p>A list of <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html\">tags</a> to apply to the event tracker.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#CreateEventTrackerResponse": {
@@ -2520,6 +2636,9 @@
                         "smithy.api#documentation": "<p>The ID of the event tracker. Include this ID in requests to the\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_UBS_PutEvents.html\">PutEvents</a> API.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.personalize#CreateFilter": {
@@ -2578,9 +2697,12 @@
                 "tags": {
                     "target": "com.amazonaws.personalize#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <a href=\"https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html\">tags</a> to apply to the filter.</p>"
+                        "smithy.api#documentation": "<p>A list of <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html\">tags</a> to apply to the filter.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#CreateFilterResponse": {
@@ -2592,6 +2714,9 @@
                         "smithy.api#documentation": "<p>The ARN of the new filter.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.personalize#CreateMetricAttribution": {
@@ -2654,6 +2779,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#CreateMetricAttributionResponse": {
@@ -2665,6 +2793,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the new metric attribution.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.personalize#CreateRecommender": {
@@ -2696,7 +2827,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a recommender with the recipe (a Domain dataset group use case) you specify. \n      You create recommenders for a Domain dataset group and specify the recommender's Amazon Resource Name (ARN) when you make a\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html\">GetRecommendations</a>\n      request.\n     </p>\n    \n         <p>\n            <b>Minimum recommendation requests per second</b>\n         </p>\n    \n         <p>When you create a recommender, you can configure the recommender's minimum recommendation requests per second. The minimum recommendation requests per second\n      (<code>minRecommendationRequestsPerSecond</code>) specifies the baseline recommendation request throughput provisioned by\n      Amazon Personalize. The default minRecommendationRequestsPerSecond is <code>1</code>. A recommendation request is a single <code>GetRecommendations</code> operation.\n      Request throughput is measured in requests per second and Amazon Personalize uses your requests per second to derive\n      your requests per hour and the price of your recommender usage.\n    </p>\n         <p>\n      If your requests per second increases beyond\n      <code>minRecommendationRequestsPerSecond</code>, Amazon Personalize auto-scales the provisioned capacity up and down,\n      but never below <code>minRecommendationRequestsPerSecond</code>.\n      There's a short time delay while the capacity is increased that might cause loss of\n      requests.</p>\n         <p>\n      Your bill is the greater of either the minimum requests per hour (based on minRecommendationRequestsPerSecond)\n      or the actual number of requests. The actual request throughput used is calculated as the average requests/second within a one-hour window.\n      \n      We recommend starting with the default <code>minRecommendationRequestsPerSecond</code>, track\n      your usage using Amazon CloudWatch metrics, and then increase the <code>minRecommendationRequestsPerSecond</code>\n      as necessary.\n    </p>\n    \n         <p>\n            <b>Status</b>\n         </p>\n         <p>A recommender can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>\n            </li>\n            <li>\n               <p>STOP PENDING > STOP IN_PROGRESS > INACTIVE > START PENDING > START IN_PROGRESS > ACTIVE</p>\n            </li>\n            <li>\n               <p>DELETE PENDING > DELETE IN_PROGRESS</p>\n            </li>\n         </ul>\n         <p>To get the recommender status, call <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeRecommender.html\">DescribeRecommender</a>.</p>\n         <note>\n            <p>Wait until the <code>status</code> of the recommender\n        is <code>ACTIVE</code> before asking the recommender for recommendations.</p>\n         </note>\n         <p class=\"title\">\n            <b>Related APIs</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_ListRecommenders.html\">ListRecommenders</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeRecommender.html\">DescribeRecommender</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_UpdateRecommender.html\">UpdateRecommender</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteRecommender.html\">DeleteRecommender</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Creates a recommender with the recipe (a Domain dataset group use case) you specify. \n      You create recommenders for a Domain dataset group and specify the recommender's Amazon Resource Name (ARN) when you make a\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html\">GetRecommendations</a>\n      request.\n     </p>\n         <p>\n            <b>Minimum recommendation requests per second</b>\n         </p>\n         <important>\n            <p>A high <code>minRecommendationRequestsPerSecond</code> will increase your bill. We recommend starting with 1 for <code>minRecommendationRequestsPerSecond</code> (the default). Track\n        your usage using Amazon CloudWatch metrics, and increase the <code>minRecommendationRequestsPerSecond</code>\n        as necessary.</p>\n         </important>\n         <p>When you create a recommender, you can configure the recommender's minimum recommendation requests per second. The minimum recommendation requests per second\n      (<code>minRecommendationRequestsPerSecond</code>) specifies the baseline recommendation request throughput provisioned by\n      Amazon Personalize. The default minRecommendationRequestsPerSecond is <code>1</code>. A recommendation request is a single <code>GetRecommendations</code> operation.\n      Request throughput is measured in requests per second and Amazon Personalize uses your requests per second to derive\n      your requests per hour and the price of your recommender usage.\n    </p>\n         <p>\n      If your requests per second increases beyond\n      <code>minRecommendationRequestsPerSecond</code>, Amazon Personalize auto-scales the provisioned capacity up and down,\n      but never below <code>minRecommendationRequestsPerSecond</code>.\n      There's a short time delay while the capacity is increased that might cause loss of\n      requests.</p>\n         <p>\n      Your bill is the greater of either the minimum requests per hour (based on minRecommendationRequestsPerSecond)\n      or the actual number of requests. The actual request throughput used is calculated as the average requests/second within a one-hour window.\n      \n      We recommend starting with the default <code>minRecommendationRequestsPerSecond</code>, track\n      your usage using Amazon CloudWatch metrics, and then increase the <code>minRecommendationRequestsPerSecond</code>\n      as necessary.\n    </p>\n         <p>\n            <b>Status</b>\n         </p>\n         <p>A recommender can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>\n            </li>\n            <li>\n               <p>STOP PENDING > STOP IN_PROGRESS > INACTIVE > START PENDING > START IN_PROGRESS > ACTIVE</p>\n            </li>\n            <li>\n               <p>DELETE PENDING > DELETE IN_PROGRESS</p>\n            </li>\n         </ul>\n         <p>To get the recommender status, call <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeRecommender.html\">DescribeRecommender</a>.</p>\n         <note>\n            <p>Wait until the <code>status</code> of the recommender\n        is <code>ACTIVE</code> before asking the recommender for recommendations.</p>\n         </note>\n         <p class=\"title\">\n            <b>Related APIs</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_ListRecommenders.html\">ListRecommenders</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeRecommender.html\">DescribeRecommender</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_UpdateRecommender.html\">UpdateRecommender</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteRecommender.html\">DeleteRecommender</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -2733,9 +2864,12 @@
                 "tags": {
                     "target": "com.amazonaws.personalize#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <a href=\"https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html\">tags</a> to apply to the recommender.</p>"
+                        "smithy.api#documentation": "<p>A list of <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html\">tags</a> to apply to the recommender.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#CreateRecommenderResponse": {
@@ -2747,6 +2881,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the recommender.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.personalize#CreateSchema": {
@@ -2769,7 +2906,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Amazon Personalize schema from the specified schema string. The schema you create\n      must be in Avro JSON format.</p>\n         <p>Amazon Personalize recognizes three schema variants. Each schema is associated with a dataset\n      type and has a set of required field and keywords. If you are creating a schema for a dataset in a Domain dataset group, you\n    provide the domain of the Domain dataset group.\n    You specify a schema when you call <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDataset.html\">CreateDataset</a>.</p>\n    \n         <p class=\"title\">\n            <b>Related APIs</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_ListSchemas.html\">ListSchemas</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSchema.html\">DescribeSchema</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteSchema.html\">DeleteSchema</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Creates an Amazon Personalize schema from the specified schema string. The schema you create\n      must be in Avro JSON format.</p>\n         <p>Amazon Personalize recognizes three schema variants. Each schema is associated with a dataset\n      type and has a set of required field and keywords. If you are creating a schema for a dataset in a Domain dataset group, you\n    provide the domain of the Domain dataset group.\n    You specify a schema when you call <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDataset.html\">CreateDataset</a>.</p>\n         <p class=\"title\">\n            <b>Related APIs</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_ListSchemas.html\">ListSchemas</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSchema.html\">DescribeSchema</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteSchema.html\">DeleteSchema</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -2796,6 +2933,9 @@
                         "smithy.api#documentation": "<p>The domain for the schema. If you are creating a schema for a dataset in a Domain dataset group, specify\n    the domain you chose when you created the Domain dataset group.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#CreateSchemaResponse": {
@@ -2807,6 +2947,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the created schema.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.personalize#CreateSolution": {
@@ -2838,7 +2981,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates the configuration for training a model. A trained model is known as\n      a solution. After the configuration is created, you train the model (create a solution)\n      by calling the <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolutionVersion.html\">CreateSolutionVersion</a> operation. Every time you call\n      <code>CreateSolutionVersion</code>, a new version of the solution is created.</p>\n         <p>After creating a solution version, you check its accuracy by calling\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_GetSolutionMetrics.html\">GetSolutionMetrics</a>. When you are satisfied with the version, you\n      deploy it using <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateCampaign.html\">CreateCampaign</a>. The campaign provides recommendations\n      to a client through the\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html\">GetRecommendations</a> API.</p>\n         <p>To train a model, Amazon Personalize requires training data and a recipe. The training data\n      comes from the dataset group that you provide in the request. A recipe specifies\n      the training algorithm and a feature transformation. You can specify one of the predefined\n      recipes provided by Amazon Personalize. Alternatively, you can specify\n      <code>performAutoML</code> and Amazon Personalize will analyze your data and select the\n      optimum USER_PERSONALIZATION recipe for you.</p>\n         <note>\n            <p>Amazon Personalize doesn't support configuring the <code>hpoObjective</code> \n        for solution hyperparameter optimization at this time.</p>\n         </note>\n         <p>\n            <b>Status</b>\n         </p>\n         <p>A solution can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>\n            </li>\n            <li>\n               <p>DELETE PENDING > DELETE IN_PROGRESS</p>\n            </li>\n         </ul>\n         <p>To get the status of the solution, call <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolution.html\">DescribeSolution</a>. Wait\n      until the status shows as ACTIVE before calling <code>CreateSolutionVersion</code>.</p>\n      \n    \n \n         <p class=\"title\">\n            <b>Related APIs</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutions.html\">ListSolutions</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolutionVersion.html\">CreateSolutionVersion</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolution.html\">DescribeSolution</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteSolution.html\">DeleteSolution</a>\n               </p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutionVersions.html\">ListSolutionVersions</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolutionVersion.html\">DescribeSolutionVersion</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Creates the configuration for training a model. A trained model is known as\n      a solution version. After the configuration is created, you train the model (create a solution version)\n      by calling the <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolutionVersion.html\">CreateSolutionVersion</a> operation. Every time you call\n      <code>CreateSolutionVersion</code>, a new version of the solution is created.</p>\n         <p>After creating a solution version, you check its accuracy by calling\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_GetSolutionMetrics.html\">GetSolutionMetrics</a>. When you are satisfied with the version, you\n      deploy it using <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateCampaign.html\">CreateCampaign</a>. The campaign provides recommendations\n      to a client through the\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html\">GetRecommendations</a> API.</p>\n         <p>To train a model, Amazon Personalize requires training data and a recipe. The training data\n      comes from the dataset group that you provide in the request. A recipe specifies\n      the training algorithm and a feature transformation. You can specify one of the predefined\n      recipes provided by Amazon Personalize. </p>\n         <note>\n            <p>Amazon Personalize doesn't support configuring the <code>hpoObjective</code> \n        for solution hyperparameter optimization at this time.</p>\n         </note>\n         <p>\n            <b>Status</b>\n         </p>\n         <p>A solution can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>\n            </li>\n            <li>\n               <p>DELETE PENDING > DELETE IN_PROGRESS</p>\n            </li>\n         </ul>\n         <p>To get the status of the solution, call <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolution.html\">DescribeSolution</a>. Wait\n      until the status shows as ACTIVE before calling <code>CreateSolutionVersion</code>.</p>\n         <p class=\"title\">\n            <b>Related APIs</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutions.html\">ListSolutions</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolutionVersion.html\">CreateSolutionVersion</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolution.html\">DescribeSolution</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteSolution.html\">DeleteSolution</a>\n               </p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutionVersions.html\">ListSolutionVersions</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolutionVersion.html\">DescribeSolutionVersion</a>\n               </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.personalize#CreateSolutionRequest": {
@@ -2861,7 +3004,7 @@
                     "target": "com.amazonaws.personalize#PerformAutoML",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Whether to perform automated machine learning (AutoML). The default is <code>false</code>.\n      For this case, you must specify <code>recipeArn</code>.</p>\n         <p>When set to <code>true</code>, Amazon Personalize analyzes your training data and selects\n      the optimal USER_PERSONALIZATION recipe and hyperparameters. In this case, you must omit\n      <code>recipeArn</code>. Amazon Personalize determines the optimal recipe by running tests with\n      different values for the hyperparameters.\n      AutoML lengthens the training process as compared to selecting a specific recipe.</p>"
+                        "smithy.api#documentation": "<important>\n            <p>We don't recommend enabling automated machine learning. Instead, match your use case to the available Amazon Personalize \n        recipes. For more information, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/determining-use-case.html\">Determining your use case.</a>\n            </p>\n         </important>\n         <p>Whether to perform automated machine learning (AutoML). The default is <code>false</code>.\n      For this case, you must specify <code>recipeArn</code>.</p>\n         <p>When set to <code>true</code>, Amazon Personalize analyzes your training data and selects\n      the optimal USER_PERSONALIZATION recipe and hyperparameters. In this case, you must omit\n      <code>recipeArn</code>. Amazon Personalize determines the optimal recipe by running tests with\n      different values for the hyperparameters.\n      AutoML lengthens the training process as compared to selecting a specific recipe.</p>"
                     }
                 },
                 "recipeArn": {
@@ -2892,9 +3035,12 @@
                 "tags": {
                     "target": "com.amazonaws.personalize#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <a href=\"https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html\">tags</a> to apply to the solution.</p>"
+                        "smithy.api#documentation": "<p>A list of <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html\">tags</a> to apply to the solution.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#CreateSolutionResponse": {
@@ -2906,6 +3052,9 @@
                         "smithy.api#documentation": "<p>The ARN of the solution.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.personalize#CreateSolutionVersion": {
@@ -2965,9 +3114,12 @@
                 "tags": {
                     "target": "com.amazonaws.personalize#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <a href=\"https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html\">tags</a> to apply to the solution version.</p>"
+                        "smithy.api#documentation": "<p>A list of <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html\">tags</a> to apply to the solution version.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#CreateSolutionVersionResponse": {
@@ -2979,6 +3131,9 @@
                         "smithy.api#documentation": "<p>The ARN of the new solution version.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.personalize#DataSource": {
@@ -3792,6 +3947,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#DeleteDataset": {
@@ -3852,6 +4010,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#DeleteDatasetRequest": {
@@ -3864,6 +4025,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#DeleteEventTracker": {
@@ -3900,6 +4064,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#DeleteFilter": {
@@ -3935,6 +4102,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#DeleteMetricAttribution": {
@@ -3971,6 +4141,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#DeleteRecommender": {
@@ -4007,6 +4180,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#DeleteSchema": {
@@ -4043,6 +4219,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#DeleteSolution": {
@@ -4079,6 +4258,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#DescribeAlgorithm": {
@@ -4112,6 +4294,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#DescribeAlgorithmResponse": {
@@ -4123,6 +4308,9 @@
                         "smithy.api#documentation": "<p>A listing of the properties of the algorithm.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.personalize#DescribeBatchInferenceJob": {
@@ -4156,6 +4344,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#DescribeBatchInferenceJobResponse": {
@@ -4167,6 +4358,9 @@
                         "smithy.api#documentation": "<p>Information on the specified batch inference job.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.personalize#DescribeBatchSegmentJob": {
@@ -4200,6 +4394,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#DescribeBatchSegmentJobResponse": {
@@ -4211,6 +4408,9 @@
                         "smithy.api#documentation": "<p>Information on the specified batch segment job.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.personalize#DescribeCampaign": {
@@ -4244,6 +4444,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#DescribeCampaignResponse": {
@@ -4255,6 +4458,9 @@
                         "smithy.api#documentation": "<p>The properties of the campaign.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.personalize#DescribeDataset": {
@@ -4309,6 +4515,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#DescribeDatasetExportJobResponse": {
@@ -4320,6 +4529,9 @@
                         "smithy.api#documentation": "<p>Information about the dataset export job, including the status.</p>\n         <p>The status is one of the following values:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING</p>\n            </li>\n            <li>\n               <p>CREATE IN_PROGRESS</p>\n            </li>\n            <li>\n               <p>ACTIVE</p>\n            </li>\n            <li>\n               <p>CREATE FAILED</p>\n            </li>\n         </ul>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.personalize#DescribeDatasetGroup": {
@@ -4353,6 +4565,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#DescribeDatasetGroupResponse": {
@@ -4364,6 +4579,9 @@
                         "smithy.api#documentation": "<p>A listing of the dataset group's properties.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.personalize#DescribeDatasetImportJob": {
@@ -4397,6 +4615,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#DescribeDatasetImportJobResponse": {
@@ -4408,6 +4629,9 @@
                         "smithy.api#documentation": "<p>Information about the dataset import job, including the status.</p>\n         <p>The status is one of the following values:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING</p>\n            </li>\n            <li>\n               <p>CREATE IN_PROGRESS</p>\n            </li>\n            <li>\n               <p>ACTIVE</p>\n            </li>\n            <li>\n               <p>CREATE FAILED</p>\n            </li>\n         </ul>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.personalize#DescribeDatasetRequest": {
@@ -4420,6 +4644,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#DescribeDatasetResponse": {
@@ -4431,6 +4658,9 @@
                         "smithy.api#documentation": "<p>A listing of the dataset's properties.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.personalize#DescribeEventTracker": {
@@ -4464,6 +4694,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#DescribeEventTrackerResponse": {
@@ -4475,6 +4708,9 @@
                         "smithy.api#documentation": "<p>An object that describes the event tracker.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.personalize#DescribeFeatureTransformation": {
@@ -4508,6 +4744,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#DescribeFeatureTransformationResponse": {
@@ -4519,6 +4758,9 @@
                         "smithy.api#documentation": "<p>A listing of the FeatureTransformation properties.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.personalize#DescribeFilter": {
@@ -4552,6 +4794,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#DescribeFilterResponse": {
@@ -4563,6 +4808,9 @@
                         "smithy.api#documentation": "<p>The filter's details.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.personalize#DescribeMetricAttribution": {
@@ -4595,6 +4843,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#DescribeMetricAttributionResponse": {
@@ -4606,6 +4857,9 @@
                         "smithy.api#documentation": "<p>The details of the metric attribution.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.personalize#DescribeRecipe": {
@@ -4639,6 +4893,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#DescribeRecipeResponse": {
@@ -4650,6 +4907,9 @@
                         "smithy.api#documentation": "<p>An object that describes the recipe.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.personalize#DescribeRecommender": {
@@ -4683,6 +4943,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#DescribeRecommenderResponse": {
@@ -4694,6 +4957,9 @@
                         "smithy.api#documentation": "<p>The properties of the recommender.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.personalize#DescribeSchema": {
@@ -4727,6 +4993,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#DescribeSchemaResponse": {
@@ -4738,6 +5007,9 @@
                         "smithy.api#documentation": "<p>The requested schema.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.personalize#DescribeSolution": {
@@ -4771,6 +5043,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#DescribeSolutionResponse": {
@@ -4782,6 +5057,9 @@
                         "smithy.api#documentation": "<p>An object that describes the solution.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.personalize#DescribeSolutionVersion": {
@@ -4815,6 +5093,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#DescribeSolutionVersionResponse": {
@@ -4826,6 +5107,9 @@
                         "smithy.api#documentation": "<p>The solution version.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.personalize#Description": {
@@ -4981,6 +5265,21 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 256
+                }
+            }
+        },
+        "com.amazonaws.personalize#ExcludedDatasetColumns": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.personalize#DatasetType"
+            },
+            "value": {
+                "target": "com.amazonaws.personalize#ColumnNamesList"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 3
                 }
             }
         },
@@ -5222,6 +5521,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#GetSolutionMetricsResponse": {
@@ -5239,6 +5541,9 @@
                         "smithy.api#documentation": "<p>The metrics for the solution version. For more information, see\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/working-with-training-metrics.html\">\n        Evaluating a solution version with metrics\n      </a>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.personalize#HPOConfig": {
@@ -5576,6 +5881,9 @@
                         "smithy.api#documentation": "<p>The maximum number of batch inference job results to return in each page. The default\n      value is 100.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#ListBatchInferenceJobsResponse": {
@@ -5593,6 +5901,9 @@
                         "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. The value is <code>null</code> when\n      there are no more results to return.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.personalize#ListBatchSegmentJobs": {
@@ -5643,6 +5954,9 @@
                         "smithy.api#documentation": "<p>The maximum number of batch segment job results to return in each page. The default\n      value is 100.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#ListBatchSegmentJobsResponse": {
@@ -5660,6 +5974,9 @@
                         "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. The value is <code>null</code> when\n      there are no more results to return.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.personalize#ListCampaigns": {
@@ -5710,6 +6027,9 @@
                         "smithy.api#documentation": "<p>The maximum number of campaigns to return.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#ListCampaignsResponse": {
@@ -5727,6 +6047,9 @@
                         "smithy.api#documentation": "<p>A token for getting the next set of campaigns (if they exist).</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.personalize#ListDatasetExportJobs": {
@@ -5777,6 +6100,9 @@
                         "smithy.api#documentation": "<p>The maximum number of dataset export jobs to return.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#ListDatasetExportJobsResponse": {
@@ -5794,6 +6120,9 @@
                         "smithy.api#documentation": "<p>A token for getting the next set of dataset export jobs (if they\n      exist).</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.personalize#ListDatasetGroups": {
@@ -5835,6 +6164,9 @@
                         "smithy.api#documentation": "<p>The maximum number of dataset groups to return.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#ListDatasetGroupsResponse": {
@@ -5852,6 +6184,9 @@
                         "smithy.api#documentation": "<p>A token for getting the next set of dataset groups (if they\n      exist).</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.personalize#ListDatasetImportJobs": {
@@ -5902,6 +6237,9 @@
                         "smithy.api#documentation": "<p>The maximum number of dataset import jobs to return.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#ListDatasetImportJobsResponse": {
@@ -5919,6 +6257,9 @@
                         "smithy.api#documentation": "<p>A token for getting the next set of dataset import jobs (if they\n      exist).</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.personalize#ListDatasets": {
@@ -5969,6 +6310,9 @@
                         "smithy.api#documentation": "<p>The maximum number of datasets to return.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#ListDatasetsResponse": {
@@ -5986,6 +6330,9 @@
                         "smithy.api#documentation": "<p>A token for getting the next set of datasets (if they exist).</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.personalize#ListEventTrackers": {
@@ -6036,6 +6383,9 @@
                         "smithy.api#documentation": "<p>The maximum number of event trackers to return.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#ListEventTrackersResponse": {
@@ -6053,6 +6403,9 @@
                         "smithy.api#documentation": "<p>A token for getting the next set of event trackers (if they exist).</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.personalize#ListFilters": {
@@ -6103,6 +6456,9 @@
                         "smithy.api#documentation": "<p>The maximum number of filters to return.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#ListFiltersResponse": {
@@ -6120,6 +6476,9 @@
                         "smithy.api#documentation": "<p>A token for getting the next set of filters (if they exist).</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.personalize#ListMetricAttributionMetrics": {
@@ -6170,6 +6529,9 @@
                         "smithy.api#documentation": "<p>The maximum number of metrics to return in one page of results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#ListMetricAttributionMetricsResponse": {
@@ -6187,6 +6549,9 @@
                         "smithy.api#documentation": "<p>Specify the pagination token from a previous <code>ListMetricAttributionMetricsResponse</code> request to retrieve the next page of results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.personalize#ListMetricAttributions": {
@@ -6237,6 +6602,9 @@
                         "smithy.api#documentation": "<p>The maximum number of metric attributions to return in one page of results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#ListMetricAttributionsResponse": {
@@ -6254,6 +6622,9 @@
                         "smithy.api#documentation": "<p>Specify the pagination token from a previous request to retrieve the next page of results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.personalize#ListRecipes": {
@@ -6310,6 +6681,9 @@
                         "smithy.api#documentation": "<p>\n      Filters returned recipes by domain for a Domain dataset group. Only recipes (Domain dataset group use cases)\n      for this domain are included in the response. If you don't specify a domain, all recipes are returned.\n    </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#ListRecipesResponse": {
@@ -6327,6 +6701,9 @@
                         "smithy.api#documentation": "<p>A token for getting the next set of recipes.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.personalize#ListRecommenders": {
@@ -6377,6 +6754,9 @@
                         "smithy.api#documentation": "<p>The maximum number of recommenders to return.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#ListRecommendersResponse": {
@@ -6394,6 +6774,9 @@
                         "smithy.api#documentation": "<p>A token for getting the next set of recommenders (if they exist).</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.personalize#ListSchemas": {
@@ -6435,6 +6818,9 @@
                         "smithy.api#documentation": "<p>The maximum number of schemas to return.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#ListSchemasResponse": {
@@ -6452,6 +6838,9 @@
                         "smithy.api#documentation": "<p>A token used to get the next set of schemas (if they exist).</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.personalize#ListSolutionVersions": {
@@ -6505,6 +6894,9 @@
                         "smithy.api#documentation": "<p>The maximum number of solution versions to return.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#ListSolutionVersionsResponse": {
@@ -6522,6 +6914,9 @@
                         "smithy.api#documentation": "<p>A token for getting the next set of solution versions (if they exist).</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.personalize#ListSolutions": {
@@ -6572,6 +6967,9 @@
                         "smithy.api#documentation": "<p>The maximum number of solutions to return.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#ListSolutionsResponse": {
@@ -6589,6 +6987,9 @@
                         "smithy.api#documentation": "<p>A token for getting the next set of solutions (if they exist).</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.personalize#ListTagsForResource": {
@@ -6611,7 +7012,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Get a list of <a href=\"https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html\">tags</a> attached to a resource.</p>"
+                "smithy.api#documentation": "<p>Get a list of <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html\">tags</a> attached to a resource.</p>"
             }
         },
         "com.amazonaws.personalize#ListTagsForResourceRequest": {
@@ -6624,6 +7025,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#ListTagsForResourceResponse": {
@@ -6635,6 +7039,9 @@
                         "smithy.api#documentation": "<p>The resource's tags.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.personalize#MaxResults": {
@@ -7202,7 +7609,13 @@
                 "minRecommendationRequestsPerSecond": {
                     "target": "com.amazonaws.personalize#TransactionsPerSecond",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the requested minimum provisioned recommendation requests per second that\n      Amazon Personalize will support.</p>"
+                        "smithy.api#documentation": "<p>Specifies the requested minimum provisioned recommendation requests per second that\n      Amazon Personalize will support. A high <code>minRecommendationRequestsPerSecond</code> will increase your bill. We recommend starting with 1 for <code>minRecommendationRequestsPerSecond</code> (the default). Track\n      your usage using Amazon CloudWatch metrics, and increase the <code>minRecommendationRequestsPerSecond</code>\n      as necessary.</p>"
+                    }
+                },
+                "trainingDataConfig": {
+                    "target": "com.amazonaws.personalize#TrainingDataConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Specifies the training data configuration to use when creating a domain recommender.\n    </p>"
                     }
                 }
             },
@@ -7449,7 +7862,7 @@
                     "target": "com.amazonaws.personalize#PerformAutoML",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>When true, Amazon Personalize performs a search for the best USER_PERSONALIZATION recipe from\n      the list specified in the solution configuration (<code>recipeArn</code> must not be specified).\n      When false (the default), Amazon Personalize uses <code>recipeArn</code> for training.</p>"
+                        "smithy.api#documentation": "<important>\n            <p>We don't recommend enabling automated machine learning. Instead, match your use case to the available Amazon Personalize \n        recipes. For more information, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/determining-use-case.html\">Determining your use case.</a>\n            </p>\n         </important>\n         <p>When true, Amazon Personalize performs a search for the best USER_PERSONALIZATION recipe from\n      the list specified in the solution configuration (<code>recipeArn</code> must not be specified).\n      When false (the default), Amazon Personalize uses <code>recipeArn</code> for training.</p>"
                     }
                 },
                 "recipeArn": {
@@ -7548,6 +7961,12 @@
                     "target": "com.amazonaws.personalize#OptimizationObjective",
                     "traits": {
                         "smithy.api#documentation": "<p>Describes the additional objective for the solution, such as maximizing streaming \n      minutes or increasing revenue. For more information see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/optimizing-solution-for-objective.html\">Optimizing a solution</a>.</p>"
+                    }
+                },
+                "trainingDataConfig": {
+                    "target": "com.amazonaws.personalize#TrainingDataConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n     Specifies the training data configuration to use when creating a custom solution version (trained model).\n    </p>"
                     }
                 }
             },
@@ -7801,6 +8220,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#StartRecommenderResponse": {
@@ -7812,6 +8234,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the recommender you started.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.personalize#Status": {
@@ -7857,6 +8282,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#StopRecommenderResponse": {
@@ -7868,6 +8296,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the recommender you stopped.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.personalize#StopSolutionVersionCreation": {
@@ -7904,6 +8335,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#Tag": {
@@ -7925,7 +8359,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The optional metadata that you apply to resources to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.\n      For more information see <a href=\"https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html\">Tagging Personalize resources</a>.\n    </p>"
+                "smithy.api#documentation": "<p>The optional metadata that you apply to resources to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.\n      For more information see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html\">Tagging Amazon Personalize recources</a>.\n    </p>"
             }
         },
         "com.amazonaws.personalize#TagKey": {
@@ -7992,15 +8426,21 @@
                 "tags": {
                     "target": "com.amazonaws.personalize#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Tags to apply to the resource. For more information see <a href=\"https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html\">Tagging Personalize resources</a>.</p>",
+                        "smithy.api#documentation": "<p>Tags to apply to the resource. For more information see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html\">Tagging Amazon Personalize recources</a>.</p>",
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#TagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.personalize#TagValue": {
             "type": "string",
@@ -8057,6 +8497,20 @@
                     "min": 0,
                     "max": 256
                 }
+            }
+        },
+        "com.amazonaws.personalize#TrainingDataConfig": {
+            "type": "structure",
+            "members": {
+                "excludedDatasetColumns": {
+                    "target": "com.amazonaws.personalize#ExcludedDatasetColumns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the columns to exclude from training. Each key is a dataset type, and each value is a list of columns.\n      Exclude columns to control what data Amazon Personalize uses to generate recommendations.  \n      For example, you might have a column that you want to use only to filter recommendations. You can\n      exclude this column from training and Amazon Personalize considers it only when filtering.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The training data configuration to use when creating a domain recommender or custom solution version (trained model).</p>"
             }
         },
         "com.amazonaws.personalize#TrainingHours": {
@@ -8144,7 +8598,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Remove <a href=\"https://docs.aws.amazon.com/personalize/latest/dev/tagging-resources.html\">tags</a> that are attached to a resource.</p>"
+                "smithy.api#documentation": "<p>Remove <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html\">tags</a> that are attached to a resource.</p>"
             }
         },
         "com.amazonaws.personalize#UntagResourceRequest": {
@@ -8164,11 +8618,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#UntagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.personalize#UpdateCampaign": {
             "type": "operation",
@@ -8190,7 +8650,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a campaign by either deploying a new solution or changing the value of the\n      campaign's <code>minProvisionedTPS</code> parameter.</p>\n         <p>To update a campaign, the campaign status must be ACTIVE or CREATE FAILED.\n      Check the campaign status using the <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html\">DescribeCampaign</a> operation.</p>\n\n         <note>\n            <p>You can still get recommendations from a campaign while an update is in progress.\n      The campaign will use the previous solution version and campaign configuration to generate recommendations until the latest campaign update status is <code>Active</code>.\n    </p>\n         </note>\n    \n         <p>For more information on campaigns, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateCampaign.html\">CreateCampaign</a>.</p>",
+                "smithy.api#documentation": "<p>Updates a campaign by either deploying a new solution or changing the value of the\n      campaign's <code>minProvisionedTPS</code> parameter.</p>\n         <p>To update a campaign, the campaign status must be ACTIVE or CREATE FAILED.\n      Check the campaign status using the <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html\">DescribeCampaign</a> operation.</p>\n         <note>\n            <p>You can still get recommendations from a campaign while an update is in progress.\n      The campaign will use the previous solution version and campaign configuration to generate recommendations until the latest campaign update status is <code>Active</code>.\n    </p>\n         </note>\n         <p>For more information on campaigns, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateCampaign.html\">CreateCampaign</a>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -8213,7 +8673,7 @@
                 "minProvisionedTPS": {
                     "target": "com.amazonaws.personalize#TransactionsPerSecond",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the requested minimum provisioned transactions (recommendations) per second that\n      Amazon Personalize will support.</p>"
+                        "smithy.api#documentation": "<p>Specifies the requested minimum provisioned transactions (recommendations) per second that\n      Amazon Personalize will support. A high <code>minProvisionedTPS</code> will increase your bill. We recommend starting with 1 for <code>minProvisionedTPS</code> (the default). Track\n      your usage using Amazon CloudWatch metrics, and increase the <code>minProvisionedTPS</code>\n      as necessary.</p>"
                     }
                 },
                 "campaignConfig": {
@@ -8222,6 +8682,9 @@
                         "smithy.api#documentation": "<p>The configuration details of a campaign.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#UpdateCampaignResponse": {
@@ -8233,6 +8696,9 @@
                         "smithy.api#documentation": "<p>The same campaign ARN as given in the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.personalize#UpdateMetricAttribution": {
@@ -8288,6 +8754,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the metric attribution to update.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#UpdateMetricAttributionResponse": {
@@ -8299,6 +8768,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the metric attribution that you updated.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.personalize#UpdateRecommender": {
@@ -8321,7 +8793,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the recommender to modify the recommender configuration.</p>",
+                "smithy.api#documentation": "<p>Updates the recommender to modify the recommender configuration. \n      If you update the recommender to modify the columns used in training, Amazon Personalize automatically starts a full retraining of\n      the models backing your recommender. While the update completes, you can still get recommendations from the recommender. The recommender\n      uses the previous configuration until the update completes.\n      To track the status of this update,\n      use the <code>latestRecommenderUpdate</code> returned in the <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeRecommender.html\">DescribeRecommender</a>\n      operation. \n    </p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -8342,6 +8814,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.personalize#UpdateRecommenderResponse": {
@@ -8353,6 +8828,9 @@
                         "smithy.api#documentation": "<p>The same recommender Amazon Resource Name (ARN) as given in the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         }
     }

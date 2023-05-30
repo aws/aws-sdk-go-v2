@@ -1642,14 +1642,14 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Inspect all of the elements that WAF has parsed and extracted from the web request\n         component that you've identified in your <a>FieldToMatch</a> specifications. </p>\n         <p>This is used only in the <a>FieldToMatch</a> specification for some web request component types. </p>\n         <p>JSON specification: <code>\"All\": {}</code>\n         </p>"
+                "smithy.api#documentation": "<p>Inspect all of the elements that WAF has parsed and extracted from the web request\n         component that you've identified in your <a>FieldToMatch</a> specifications. </p>\n         <p>This is used in the <a>FieldToMatch</a> specification for some web request component types. </p>\n         <p>JSON specification: <code>\"All\": {}</code>\n         </p>"
             }
         },
         "com.amazonaws.wafv2#AllQueryArguments": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Inspect all query arguments of the web request. </p>\n         <p>This is used only in the <a>FieldToMatch</a> specification for some web request component types. </p>\n         <p>JSON specification: <code>\"AllQueryArguments\": {}</code>\n         </p>"
+                "smithy.api#documentation": "<p>Inspect all query arguments of the web request. </p>\n         <p>This is used in the <a>FieldToMatch</a> specification for some web request component types. </p>\n         <p>JSON specification: <code>\"AllQueryArguments\": {}</code>\n         </p>"
             }
         },
         "com.amazonaws.wafv2#AllowAction": {
@@ -1784,7 +1784,7 @@
                 "OversizeHandling": {
                     "target": "com.amazonaws.wafv2#OversizeHandling",
                     "traits": {
-                        "smithy.api#documentation": "<p>What WAF should do if the body is larger than WAF can inspect. \n    WAF does not support inspecting the entire contents of the web request body if the body \n    exceeds the limit for the resource type. If the body is larger than the limit, the underlying host service \n    only forwards the contents that are below the limit to WAF for inspection. </p>\n         <p>The default limit is 8 KB (8,192 kilobytes) for regional resources and 16 KB (16,384 kilobytes) for CloudFront distributions. For CloudFront distributions, \n    you can increase the limit in the web ACL <code>AssociationConfig</code>, for additional processing fees. </p>\n         <p>The options for oversize handling are the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CONTINUE</code> - Inspect the body normally, according to the rule inspection criteria. </p>\n            </li>\n            <li>\n               <p>\n                  <code>MATCH</code> - Treat the web request as matching the rule statement. WAF\n               applies the rule action to the request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NO_MATCH</code> - Treat the web request as not matching the rule\n               statement.</p>\n            </li>\n         </ul>\n         <p>You can combine the <code>MATCH</code> or <code>NO_MATCH</code>\n      settings for oversize handling with your rule and web ACL action settings, so that you block any request whose body is over the limit. </p>\n         <p>Default: <code>CONTINUE</code>\n         </p>"
+                        "smithy.api#documentation": "<p>What WAF should do if the body is larger than WAF can inspect. \n    WAF does not support inspecting the entire contents of the web request body if the body \n    exceeds the limit for the resource type. If the body is larger than the limit, the underlying host service \n    only forwards the contents that are below the limit to WAF for inspection. </p>\n         <p>The default limit is 8 KB (8,192 kilobytes) for regional resources and 16 KB (16,384 kilobytes) for CloudFront distributions. For CloudFront distributions, \n    you can increase the limit in the web ACL <code>AssociationConfig</code>, for additional processing fees. </p>\n         <p>The options for oversize handling are the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CONTINUE</code> - Inspect the available body contents normally, according to the rule inspection criteria. </p>\n            </li>\n            <li>\n               <p>\n                  <code>MATCH</code> - Treat the web request as matching the rule statement. WAF\n               applies the rule action to the request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NO_MATCH</code> - Treat the web request as not matching the rule\n               statement.</p>\n            </li>\n         </ul>\n         <p>You can combine the <code>MATCH</code> or <code>NO_MATCH</code>\n      settings for oversize handling with your rule and web ACL action settings, so that you block any request whose body is over the limit. </p>\n         <p>Default: <code>CONTINUE</code>\n         </p>"
                     }
                 }
             },
@@ -1827,7 +1827,7 @@
                 "SearchString": {
                     "target": "com.amazonaws.wafv2#SearchString",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string value that you want WAF to search for. WAF searches only in the part of\n         web requests that you designate for inspection in <a>FieldToMatch</a>. The\n         maximum length of the value is 200 bytes.</p>\n         <p>Valid values depend on the component that you specify for inspection in\n            <code>FieldToMatch</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Method</code>: The HTTP method that you want WAF to search for. This\n               indicates the type of operation specified in the request. </p>\n            </li>\n            <li>\n               <p>\n                  <code>UriPath</code>: The value that you want WAF to search for in the URI path,\n               for example, <code>/images/daily-ad.jpg</code>. </p>\n            </li>\n         </ul>\n         <p>If <code>SearchString</code> includes alphabetic characters A-Z and a-z, note that the\n         value is case sensitive.</p>\n         <p>\n            <b>If you're using the WAF API</b>\n         </p>\n         <p>Specify a base64-encoded version of the value. The maximum length of the value before\n         you base64-encode it is 200 bytes.</p>\n         <p>For example, suppose the value of <code>Type</code> is <code>HEADER</code> and the value\n         of <code>Data</code> is <code>User-Agent</code>. If you want to search the\n            <code>User-Agent</code> header for the value <code>BadBot</code>, you base64-encode\n            <code>BadBot</code> using MIME base64-encoding and include the resulting value,\n            <code>QmFkQm90</code>, in the value of <code>SearchString</code>.</p>\n         <p>\n            <b>If you're using the CLI or one of the Amazon Web Services SDKs</b>\n         </p>\n         <p>The value that you want WAF to search for. The SDK automatically base64 encodes the\n         value.</p>",
+                        "smithy.api#documentation": "<p>A string value that you want WAF to search for. WAF searches only in the part of\n         web requests that you designate for inspection in <a>FieldToMatch</a>. The\n         maximum length of the value is 200 bytes.</p>\n         <p>Valid values depend on the component that you specify for inspection in\n            <code>FieldToMatch</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Method</code>: The HTTP method that you want WAF to search for. This\n               indicates the type of operation specified in the request. </p>\n            </li>\n            <li>\n               <p>\n                  <code>UriPath</code>: The value that you want WAF to search for in the URI path,\n               for example, <code>/images/daily-ad.jpg</code>. </p>\n            </li>\n            <li>\n               <p>\n                  <code>HeaderOrder</code>: The comma-separated list of header names to match for. WAF creates a \n                 string that contains the ordered list of header names, from the headers in the web request, and then matches against that string. </p>\n            </li>\n         </ul>\n         <p>If <code>SearchString</code> includes alphabetic characters A-Z and a-z, note that the\n         value is case sensitive.</p>\n         <p>\n            <b>If you're using the WAF API</b>\n         </p>\n         <p>Specify a base64-encoded version of the value. The maximum length of the value before\n         you base64-encode it is 200 bytes.</p>\n         <p>For example, suppose the value of <code>Type</code> is <code>HEADER</code> and the value\n         of <code>Data</code> is <code>User-Agent</code>. If you want to search the\n            <code>User-Agent</code> header for the value <code>BadBot</code>, you base64-encode\n            <code>BadBot</code> using MIME base64-encoding and include the resulting value,\n            <code>QmFkQm90</code>, in the value of <code>SearchString</code>.</p>\n         <p>\n            <b>If you're using the CLI or one of the Amazon Web Services SDKs</b>\n         </p>\n         <p>The value that you want WAF to search for. The SDK automatically base64 encodes the\n         value.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2191,7 +2191,7 @@
                 "OversizeHandling": {
                     "target": "com.amazonaws.wafv2#OversizeHandling",
                     "traits": {
-                        "smithy.api#documentation": "<p>What WAF should do if the cookies of the request are larger than WAF can inspect. \n    WAF does not support inspecting the entire contents of request cookies \n      when they exceed 8 KB (8192 bytes) or 200 total cookies. The underlying host service forwards a maximum of 200 cookies\n      and at most 8 KB of cookie contents to WAF. </p>\n         <p>The options for oversize handling are the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CONTINUE</code> - Inspect the cookies normally, according to the rule inspection criteria. </p>\n            </li>\n            <li>\n               <p>\n                  <code>MATCH</code> - Treat the web request as matching the rule statement. WAF\n               applies the rule action to the request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NO_MATCH</code> - Treat the web request as not matching the rule\n               statement.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>What WAF should do if the cookies of the request are more numerous or larger than WAF can inspect. \n    WAF does not support inspecting the entire contents of request cookies \n      when they exceed 8 KB (8192 bytes) or 200 total cookies. The underlying host service forwards a maximum of 200 cookies\n      and at most 8 KB of cookie contents to WAF. </p>\n         <p>The options for oversize handling are the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CONTINUE</code> - Inspect the available cookies normally, according to the rule inspection criteria. </p>\n            </li>\n            <li>\n               <p>\n                  <code>MATCH</code> - Treat the web request as matching the rule statement. WAF\n               applies the rule action to the request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NO_MATCH</code> - Treat the web request as not matching the rule\n               statement.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5270,6 +5270,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Inspect the request cookies. You must configure scope and pattern matching filters in\n         the <code>Cookies</code> object, to define the set of cookies and the parts of the cookies\n         that WAF inspects. </p>\n         <p>Only the first 8 KB (8192 bytes) of a request's cookies and only the first 200 cookies\n         are forwarded to WAF for inspection by the underlying host service. You must\n         configure how to handle any oversize cookie content in the <code>Cookies</code> object.\n         WAF applies the pattern matching filters to the cookies that it receives from the\n         underlying host service. </p>"
                     }
+                },
+                "HeaderOrder": {
+                    "target": "com.amazonaws.wafv2#HeaderOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Inspect a string containing the list of the request's header names, ordered as they appear in the web request\nthat WAF receives for inspection. \n           WAF generates the string and then uses that as the field to match component in its inspection. \n    WAF separates the header names in the string using commas and no added spaces.</p>\n         <p>Matches against the header order string are case insensitive.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6548,6 +6554,21 @@
                 }
             }
         },
+        "com.amazonaws.wafv2#HeaderOrder": {
+            "type": "structure",
+            "members": {
+                "OversizeHandling": {
+                    "target": "com.amazonaws.wafv2#OversizeHandling",
+                    "traits": {
+                        "smithy.api#documentation": "<p>What WAF should do if the headers of the request are more numerous or larger than WAF can inspect. \n    WAF does not support inspecting the entire contents of request headers \n      when they exceed 8 KB (8192 bytes) or 200 total headers. The underlying host service forwards a maximum of 200 headers\n      and at most 8 KB of header contents to WAF. </p>\n         <p>The options for oversize handling are the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CONTINUE</code> - Inspect the available headers normally, according to the rule inspection criteria. </p>\n            </li>\n            <li>\n               <p>\n                  <code>MATCH</code> - Treat the web request as matching the rule statement. WAF\n               applies the rule action to the request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NO_MATCH</code> - Treat the web request as not matching the rule\n               statement.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Inspect a string containing the list of the request's header names, ordered as they appear in the web request\nthat WAF receives for inspection. \n           WAF generates the string and then uses that as the field to match component in its inspection. \n    WAF separates the header names in the string using commas and no added spaces.</p>\n         <p>Matches against the header order string are case insensitive.</p>"
+            }
+        },
         "com.amazonaws.wafv2#HeaderValue": {
             "type": "string"
         },
@@ -6571,7 +6592,7 @@
                 "OversizeHandling": {
                     "target": "com.amazonaws.wafv2#OversizeHandling",
                     "traits": {
-                        "smithy.api#documentation": "<p>What WAF should do if the headers of the request are larger than WAF can inspect. \n    WAF does not support inspecting the entire contents of request headers \n      when they exceed 8 KB (8192 bytes) or 200 total headers. The underlying host service forwards a maximum of 200 headers\n      and at most 8 KB of header contents to WAF. </p>\n         <p>The options for oversize handling are the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CONTINUE</code> - Inspect the headers normally, according to the rule inspection criteria. </p>\n            </li>\n            <li>\n               <p>\n                  <code>MATCH</code> - Treat the web request as matching the rule statement. WAF\n               applies the rule action to the request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NO_MATCH</code> - Treat the web request as not matching the rule\n               statement.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>What WAF should do if the headers of the request are more numerous or larger than WAF can inspect. \n    WAF does not support inspecting the entire contents of request headers \n      when they exceed 8 KB (8192 bytes) or 200 total headers. The underlying host service forwards a maximum of 200 headers\n      and at most 8 KB of header contents to WAF. </p>\n         <p>The options for oversize handling are the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CONTINUE</code> - Inspect the available headers normally, according to the rule inspection criteria. </p>\n            </li>\n            <li>\n               <p>\n                  <code>MATCH</code> - Treat the web request as matching the rule statement. WAF\n               applies the rule action to the request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NO_MATCH</code> - Treat the web request as not matching the rule\n               statement.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -6817,7 +6838,7 @@
                 "OversizeHandling": {
                     "target": "com.amazonaws.wafv2#OversizeHandling",
                     "traits": {
-                        "smithy.api#documentation": "<p>What WAF should do if the body is larger than WAF can inspect. \n    WAF does not support inspecting the entire contents of the web request body if the body \n    exceeds the limit for the resource type. If the body is larger than the limit, the underlying host service \n    only forwards the contents that are below the limit to WAF for inspection. </p>\n         <p>The default limit is 8 KB (8,192 kilobytes) for regional resources and 16 KB (16,384 kilobytes) for CloudFront distributions. For CloudFront distributions, \n    you can increase the limit in the web ACL <code>AssociationConfig</code>, for additional processing fees. </p>\n         <p>The options for oversize handling are the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CONTINUE</code> - Inspect the body normally, according to the rule inspection criteria. </p>\n            </li>\n            <li>\n               <p>\n                  <code>MATCH</code> - Treat the web request as matching the rule statement. WAF\n               applies the rule action to the request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NO_MATCH</code> - Treat the web request as not matching the rule\n               statement.</p>\n            </li>\n         </ul>\n         <p>You can combine the <code>MATCH</code> or <code>NO_MATCH</code>\n      settings for oversize handling with your rule and web ACL action settings, so that you block any request whose body is over the limit. </p>\n         <p>Default: <code>CONTINUE</code>\n         </p>"
+                        "smithy.api#documentation": "<p>What WAF should do if the body is larger than WAF can inspect. \n    WAF does not support inspecting the entire contents of the web request body if the body \n    exceeds the limit for the resource type. If the body is larger than the limit, the underlying host service \n    only forwards the contents that are below the limit to WAF for inspection. </p>\n         <p>The default limit is 8 KB (8,192 kilobytes) for regional resources and 16 KB (16,384 kilobytes) for CloudFront distributions. For CloudFront distributions, \n    you can increase the limit in the web ACL <code>AssociationConfig</code>, for additional processing fees. </p>\n         <p>The options for oversize handling are the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CONTINUE</code> - Inspect the available body contents normally, according to the rule inspection criteria. </p>\n            </li>\n            <li>\n               <p>\n                  <code>MATCH</code> - Treat the web request as matching the rule statement. WAF\n               applies the rule action to the request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NO_MATCH</code> - Treat the web request as not matching the rule\n               statement.</p>\n            </li>\n         </ul>\n         <p>You can combine the <code>MATCH</code> or <code>NO_MATCH</code>\n      settings for oversize handling with your rule and web ACL action settings, so that you block any request whose body is over the limit. </p>\n         <p>Default: <code>CONTINUE</code>\n         </p>"
                     }
                 }
             },
@@ -8351,7 +8372,7 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Inspect the HTTP method of the web request. The method indicates the type of operation\n         that the request is asking the origin to perform. </p>\n         <p>This is used only in the <a>FieldToMatch</a> specification for some web request component types. </p>\n         <p>JSON specification: <code>\"Method\": {}</code>\n         </p>"
+                "smithy.api#documentation": "<p>Inspect the HTTP method of the web request. The method indicates the type of operation\n         that the request is asking the origin to perform. </p>\n         <p>This is used in the <a>FieldToMatch</a> specification for some web request component types. </p>\n         <p>JSON specification: <code>\"Method\": {}</code>\n         </p>"
             }
         },
         "com.amazonaws.wafv2#MetricName": {
@@ -9251,7 +9272,7 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Inspect the query string of the web request. This is the part of a URL that appears\n         after a <code>?</code> character, if any.</p>\n         <p>This is used only in the <a>FieldToMatch</a> specification for some web request component types. </p>\n         <p>JSON specification: <code>\"QueryString\": {}</code>\n         </p>"
+                "smithy.api#documentation": "<p>Inspect the query string of the web request. This is the part of a URL that appears\n         after a <code>?</code> character, if any.</p>\n         <p>This is used in the <a>FieldToMatch</a> specification for some web request component types. </p>\n         <p>JSON specification: <code>\"QueryString\": {}</code>\n         </p>"
             }
         },
         "com.amazonaws.wafv2#RateBasedStatement": {
@@ -11903,7 +11924,7 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Inspect the path component of the URI of the web request. This is the part of the web\n         request that identifies a resource. For example, <code>/images/daily-ad.jpg</code>.</p>\n         <p>This is used only in the <a>FieldToMatch</a> specification for some web request component types. </p>\n         <p>JSON specification: <code>\"UriPath\": {}</code>\n         </p>"
+                "smithy.api#documentation": "<p>Inspect the path component of the URI of the web request. This is the part of the web\n         request that identifies a resource. For example, <code>/images/daily-ad.jpg</code>.</p>\n         <p>This is used in the <a>FieldToMatch</a> specification for some web request component types. </p>\n         <p>JSON specification: <code>\"UriPath\": {}</code>\n         </p>"
             }
         },
         "com.amazonaws.wafv2#UsernameField": {
@@ -11985,7 +12006,7 @@
                     "target": "com.amazonaws.wafv2#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>A boolean indicating whether the associated resource sends metrics to Amazon CloudWatch. For the\n         list of available metrics, see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/monitoring-cloudwatch.html#waf-metrics\">WAF\n            Metrics</a> in the <i>WAF Developer Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>A boolean indicating whether the associated resource sends metrics to Amazon CloudWatch. For the\n         list of available metrics, see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/monitoring-cloudwatch.html#waf-metrics\">WAF\n            Metrics</a> in the <i>WAF Developer Guide</i>.</p>\n         <p>For web ACLs, the metrics are for web requests that have the web ACL default action applied. \n        WAF applies the default action to web requests that pass the inspection of all rules \n        in the web ACL without being either allowed or blocked. For more information,\nsee <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/web-acl-default-action.html\">The web ACL default action</a> in the <i>WAF Developer Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },

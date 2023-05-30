@@ -72,6 +72,18 @@
                         },
                         "smithy.api#documentation": "<p>A specified value for the actuator.</p>"
                     }
+                },
+                "deprecationMessage": {
+                    "target": "com.amazonaws.iotfleetwise#message",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deprecation message for the node or the branch that was moved or deleted.</p>"
+                    }
+                },
+                "comment": {
+                    "target": "com.amazonaws.iotfleetwise#message",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A comment in addition to the description.</p>"
+                    }
                 }
             },
             "traits": {
@@ -205,6 +217,18 @@
                     "target": "com.amazonaws.iotfleetwise#string",
                     "traits": {
                         "smithy.api#documentation": "<p>The default value of the attribute.</p>"
+                    }
+                },
+                "deprecationMessage": {
+                    "target": "com.amazonaws.iotfleetwise#message",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deprecation message for the node or the branch that was moved or deleted.</p>"
+                    }
+                },
+                "comment": {
+                    "target": "com.amazonaws.iotfleetwise#message",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A comment in addition to the description.</p>"
                     }
                 }
             },
@@ -349,6 +373,18 @@
                     "target": "com.amazonaws.iotfleetwise#description",
                     "traits": {
                         "smithy.api#documentation": "<p>A brief description of the branch.</p>"
+                    }
+                },
+                "deprecationMessage": {
+                    "target": "com.amazonaws.iotfleetwise#message",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deprecation message for the node or the branch that was moved or deleted.</p>"
+                    }
+                },
+                "comment": {
+                    "target": "com.amazonaws.iotfleetwise#message",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A comment in addition to the description.</p>"
                     }
                 }
             },
@@ -561,14 +597,14 @@
                     "target": "com.amazonaws.iotfleetwise#nonNegativeInteger",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>Indicates the beginning of the CAN message.</p>",
+                        "smithy.api#documentation": "<p>Indicates the beginning of the CAN signal. This should always be the least significant bit (LSB).</p>\n        <p>This value might be different from the value in a DBC file. For little endian signals,\n                <code>startBit</code> is the same value as in the DBC file. For big endian signals\n            in a DBC file, the start bit is the most significant bit (MSB). You will have to\n            calculate the LSB instead and pass it as the <code>startBit</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "offset": {
                     "target": "com.amazonaws.iotfleetwise#double",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates where data appears in the CAN message.</p>",
+                        "smithy.api#documentation": "<p>The offset used to calculate the signal value. Combined with factor, the calculation is <code>value = raw_value * factor + offset</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -814,7 +850,7 @@
                 "expiryTime": {
                     "target": "com.amazonaws.iotfleetwise#timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p> (Optional) The time the campaign expires, in seconds since epoch (January 1, 1970 at\n            midnight UTC time). Vehicle data won't be collected after the campaign expires. </p>\n        <p>Default: 253402214400 (December 31, 9999, 00:00:00 UTC)</p>"
+                        "smithy.api#documentation": "<p> (Optional) The time the campaign expires, in seconds since epoch (January 1, 1970 at\n            midnight UTC time). Vehicle data isn't collected after the campaign expires. </p>\n        <p>Default: 253402214400 (December 31, 9999, 00:00:00 UTC)</p>"
                     }
                 },
                 "postTriggerCollectionDuration": {
@@ -870,6 +906,12 @@
                     "target": "com.amazonaws.iotfleetwise#TagList",
                     "traits": {
                         "smithy.api#documentation": "<p>Metadata that can be used to manage the campaign.</p>"
+                    }
+                },
+                "dataDestinationConfigs": {
+                    "target": "com.amazonaws.iotfleetwise#DataDestinationConfigs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination where the campaign sends data. You can choose to send data to be stored in Amazon S3 or Amazon Timestream.</p>\n        <p>Amazon S3 optimizes the cost of data storage and provides additional mechanisms to use vehicle data, such as data lakes, centralized data storage, data processing pipelines, and analytics. </p>\n        <p>You can use Amazon Timestream to access and analyze time series data, and Timestream to query\n            vehicle data so that you can identify trends and patterns.</p>"
                     }
                 }
             }
@@ -1309,7 +1351,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Creates a vehicle, which is an instance of a vehicle model (model manifest). Vehicles\n            created from the same vehicle model consist of the same signals inherited from the\n            vehicle model.</p>\n        <note>\n            <p> If you have an existing Amazon Web Services IoT Thing, you can use Amazon Web Services IoT FleetWise to create a\n                vehicle and collect data from your thing. </p>\n        </note>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/create-vehicle-cli.html\">Create a vehicle\n                (AWS CLI)</a> in the <i>Amazon Web Services IoT FleetWise Developer Guide</i>.</p>",
+                "smithy.api#documentation": "<p> Creates a vehicle, which is an instance of a vehicle model (model manifest). Vehicles\n            created from the same vehicle model consist of the same signals inherited from the\n            vehicle model.</p>\n        <note>\n            <p> If you have an existing Amazon Web Services IoT thing, you can use Amazon Web Services IoT FleetWise to create a\n                vehicle and collect data from your thing. </p>\n        </note>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/create-vehicle-cli.html\">Create a vehicle\n                (AWS CLI)</a> in the <i>Amazon Web Services IoT FleetWise Developer Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/vehicles/{vehicleName}",
@@ -1372,7 +1414,7 @@
                 "attributes": {
                     "target": "com.amazonaws.iotfleetwise#attributesMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Static information about a vehicle in a key-value pair. For example:\n                <code>\"engineType\"</code> : <code>\"1.3 L R2\"</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Static information about a vehicle in a key-value pair. For example:\n                <code>\"engineType\"</code> : <code>\"1.3 L R2\"</code>\n         </p>\n        <p>A campaign must include the keys (attribute names) in <code>dataExtraDimensions</code> for them to display in Amazon Timestream.</p>"
                     }
                 },
                 "associationBehavior": {
@@ -1485,6 +1527,38 @@
                 "smithy.api#documentation": "<p>Information about a created vehicle.</p>"
             }
         },
+        "com.amazonaws.iotfleetwise#DataDestinationConfig": {
+            "type": "union",
+            "members": {
+                "s3Config": {
+                    "target": "com.amazonaws.iotfleetwise#S3Config",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 bucket where the Amazon Web Services IoT FleetWise campaign sends data.</p>"
+                    }
+                },
+                "timestreamConfig": {
+                    "target": "com.amazonaws.iotfleetwise#TimestreamConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Timestream table where the campaign sends data.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The destination where the Amazon Web Services IoT FleetWise campaign sends data. You can send data to be stored in Amazon S3 or Amazon Timestream.</p>"
+            }
+        },
+        "com.amazonaws.iotfleetwise#DataDestinationConfigs": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotfleetwise#DataDestinationConfig"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
         "com.amazonaws.iotfleetwise#DataExtraDimensionNodePathList": {
             "type": "list",
             "member": {
@@ -1495,6 +1569,21 @@
                     "min": 0,
                     "max": 5
                 }
+            }
+        },
+        "com.amazonaws.iotfleetwise#DataFormat": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "JSON",
+                        "name": "JSON"
+                    },
+                    {
+                        "value": "PARQUET",
+                        "name": "PARQUET"
+                    }
+                ]
             }
         },
         "com.amazonaws.iotfleetwise#DecoderManifestResource": {
@@ -2183,7 +2272,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Vehicle Signal Specification (VSS) is a precise language used to describe and model\n            signals in vehicle networks. The JSON file collects signal specificiations in a VSS\n            format.</p>"
+                "smithy.api#documentation": "<p>\n            <a href=\"https://www.w3.org/auto/wg/wiki/Vehicle_Signal_Specification_(VSS)/Vehicle_Data_Spec\">Vehicle Signal Specification (VSS)</a> is a precise language used to describe and model\n            signals in vehicle networks. The JSON file collects signal specificiations in a VSS\n            format.</p>"
             }
         },
         "com.amazonaws.iotfleetwise#Fqns": {
@@ -2361,6 +2450,12 @@
                     "target": "com.amazonaws.iotfleetwise#timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The last time the campaign was modified.</p>"
+                    }
+                },
+                "dataDestinationConfigs": {
+                    "target": "com.amazonaws.iotfleetwise#DataDestinationConfigs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination where the campaign sends data. You can choose to send data to be stored in Amazon S3 or Amazon Timestream.</p>\n        <p>Amazon S3 optimizes the cost of data storage and provides additional mechanisms to use vehicle data, such as data lakes, centralized data storage, data processing pipelines, and analytics. </p>\n        <p>You can use Amazon Timestream to access and analyze time series data, and Timestream to query\n            vehicle data so that you can identify trends and patterns.</p>"
                     }
                 }
             }
@@ -2752,8 +2847,7 @@
                 "timestreamRegistrationResponse": {
                     "target": "com.amazonaws.iotfleetwise#TimestreamRegistrationResponse",
                     "traits": {
-                        "smithy.api#documentation": "<p> Information about the registered Amazon Timestream resources or errors, if any.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p> Information about the registered Amazon Timestream resources or errors, if any.</p>"
                     }
                 },
                 "iamRegistrationResponse": {
@@ -3875,8 +3969,8 @@
                             },
                             "params": {
                                 "Region": "eu-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3888,8 +3982,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3901,8 +3995,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3914,8 +4008,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3927,8 +4021,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3940,8 +4034,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3953,8 +4047,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3966,8 +4060,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3979,8 +4073,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3992,8 +4086,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4005,8 +4099,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4018,8 +4112,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4031,8 +4125,19 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4044,8 +4149,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4057,8 +4173,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4070,8 +4197,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4083,8 +4221,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4096,8 +4234,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -4109,8 +4247,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -4121,8 +4259,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -4133,9 +4271,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -5814,7 +5958,7 @@
                 "offset": {
                     "target": "com.amazonaws.iotfleetwise#double",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates where data appears in the message.</p>",
+                        "smithy.api#documentation": "<p>The offset used to calculate the signal value. Combined with scaling, the calculation is <code>value = raw_value * scaling + offset</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5858,6 +6002,16 @@
                     "min": 1,
                     "max": 50
                 }
+            }
+        },
+        "com.amazonaws.iotfleetwise#Prefix": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-_:./!*'()]+$"
             }
         },
         "com.amazonaws.iotfleetwise#ProtocolName": {
@@ -5958,7 +6112,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Registers your Amazon Web Services account, IAM, and Amazon Timestream resources so Amazon Web Services IoT FleetWise can\n            transfer your vehicle data to the Amazon Web Services Cloud. For more information, including\n            step-by-step procedures, see <a href=\"https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/setting-up.html\">Setting up\n                Amazon Web Services IoT FleetWise</a>. </p>\n        <note>\n            <p>An Amazon Web Services account is <b>not</b> the same thing as a \"user\n                account\". An <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction_identity-management.html#intro-identity-users\">Amazon Web Services user</a> is an identity that you create using Identity and Access Management (IAM) and\n                takes the form of either an <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html\">IAM user</a> or an <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html\">IAM role, both\n                    with credentials</a>. A single Amazon Web Services account can, and typically does,\n                contain many users and roles.</p>\n        </note>",
+                "smithy.api#documentation": "<important>\n            <p>This API operation contains deprecated parameters. Register your account again without the Timestream resources parameter so that Amazon Web Services IoT FleetWise can remove the Timestream metadata stored. You should then pass the data destination into the <a href=\"https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_CreateCampaign.html\">CreateCampaign</a> API operation.</p>\n            <p>You must delete any existing campaigns that include an empty data destination before you register your account again. For more information, see the <a href=\"https://docs.aws.amazon.com/iot-fleetwise/latest/APIReference/API_DeleteCampaign.html\">DeleteCampaign</a> API operation.</p>\n            <p>If you want to delete the Timestream inline policy from the service-linked role, such as to mitigate an overly permissive policy, you must first delete any existing campaigns. Then delete the service-linked role and register your account again to enable CloudWatch metrics. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_DeleteServiceLinkedRole.html\">DeleteServiceLinkedRole</a> in the <i>Identity and Access Management API Reference</i>.</p>\n        </important>\n        \n        <p>Registers your Amazon Web Services account, IAM, and Amazon Timestream resources so Amazon Web Services IoT FleetWise can\n            transfer your vehicle data to the Amazon Web Services Cloud. For more information, including\n            step-by-step procedures, see <a href=\"https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/setting-up.html\">Setting up\n                Amazon Web Services IoT FleetWise</a>. </p>\n        <note>\n            <p>An Amazon Web Services account is <b>not</b> the same thing as a \"user.\" An <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction_identity-management.html#intro-identity-users\">Amazon Web Services user</a> is an identity that you create using Identity and Access Management (IAM) and\n                takes the form of either an <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html\">IAM user</a> or an <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html\">IAM role, both\n                    with credentials</a>. A single Amazon Web Services account can, and typically does,\n                contain many users and roles.</p>\n        </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/account/registration",
@@ -5972,7 +6126,9 @@
                 "timestreamResources": {
                     "target": "com.amazonaws.iotfleetwise#TimestreamResources",
                     "traits": {
-                        "smithy.api#required": {}
+                        "smithy.api#deprecated": {
+                            "message": "Amazon Timestream metadata is now passed in the CreateCampaign API."
+                        }
                     }
                 },
                 "iamResources": {
@@ -5997,10 +6153,7 @@
                     }
                 },
                 "timestreamResources": {
-                    "target": "com.amazonaws.iotfleetwise#TimestreamResources",
-                    "traits": {
-                        "smithy.api#required": {}
-                    }
+                    "target": "com.amazonaws.iotfleetwise#TimestreamResources"
                 },
                 "iamResources": {
                     "target": "com.amazonaws.iotfleetwise#IamResources",
@@ -6080,6 +6233,52 @@
                 "smithy.api#default": 0
             }
         },
+        "com.amazonaws.iotfleetwise#S3BucketArn": {
+            "type": "string",
+            "traits": {
+                "aws.api#arnReference": {
+                    "type": "AWS::S3::Bucket"
+                },
+                "smithy.api#length": {
+                    "min": 16,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^arn:(aws[a-zA-Z0-9-]*):s3:::.+$"
+            }
+        },
+        "com.amazonaws.iotfleetwise#S3Config": {
+            "type": "structure",
+            "members": {
+                "bucketArn": {
+                    "target": "com.amazonaws.iotfleetwise#S3BucketArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon S3 bucket.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "dataFormat": {
+                    "target": "com.amazonaws.iotfleetwise#DataFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify the format that files are saved in the Amazon S3 bucket. You can save files in an Apache Parquet or JSON format.</p>\n        <ul>\n            <li>\n                <p>Parquet - Store data in a columnar storage file format. Parquet is optimal for\n                    fast data retrieval and can reduce costs. This option is selected by\n                    default.</p>\n            </li>\n            <li>\n                <p>JSON - Store data in a standard text-based JSON file format.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "storageCompressionFormat": {
+                    "target": "com.amazonaws.iotfleetwise#StorageCompressionFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>By default, stored data is compressed as a .gzip file. Compressed files have a reduced\n            file size, which can optimize the cost of data storage.</p>"
+                    }
+                },
+                "prefix": {
+                    "target": "com.amazonaws.iotfleetwise#Prefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>(Optional) Enter an S3 bucket prefix. The prefix is the string of characters after the bucket name and before the object name. You can use the prefix to organize data stored in Amazon S3 buckets. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-prefixes.html\">Organizing objects using prefixes</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p>\n        <p>By default, Amazon Web Services IoT FleetWise sets the prefix <code>processed-data/year=YY/month=MM/date=DD/hour=HH/</code> (in UTC) to data it delivers to Amazon S3. You can enter a prefix to append it to this default prefix. For example, if you enter the prefix <code>vehicles</code>, the prefix will be <code>vehicles/processed-data/year=YY/month=MM/date=DD/hour=HH/</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon S3 bucket where the Amazon Web Services IoT FleetWise campaign sends data. Amazon S3 is an object storage service that stores data as objects within buckets. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-buckets-s3.html\">Creating, configuring, and working with Amazon S3 buckets</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p>"
+            }
+        },
         "com.amazonaws.iotfleetwise#Sensor": {
             "type": "structure",
             "members": {
@@ -6125,6 +6324,18 @@
                     "target": "com.amazonaws.iotfleetwise#double",
                     "traits": {
                         "smithy.api#documentation": "<p>The specified possible maximum value of the sensor.</p>"
+                    }
+                },
+                "deprecationMessage": {
+                    "target": "com.amazonaws.iotfleetwise#message",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deprecation message for the node or the branch that was moved or deleted.</p>"
+                    }
+                },
+                "comment": {
+                    "target": "com.amazonaws.iotfleetwise#message",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A comment in addition to the description.</p>"
                     }
                 }
             },
@@ -6366,6 +6577,21 @@
                 ]
             }
         },
+        "com.amazonaws.iotfleetwise#StorageCompressionFormat": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "NONE",
+                        "name": "NONE"
+                    },
+                    {
+                        "value": "GZIP",
+                        "name": "GZIP"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.iotfleetwise#Tag": {
             "type": "structure",
             "members": {
@@ -6540,6 +6766,28 @@
                 "smithy.api#documentation": "<p>Information about a collection scheme that uses a time period to decide how often to\n            collect data.</p>"
             }
         },
+        "com.amazonaws.iotfleetwise#TimestreamConfig": {
+            "type": "structure",
+            "members": {
+                "timestreamTableArn": {
+                    "target": "com.amazonaws.iotfleetwise#TimestreamTableArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Timestream table.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "executionRoleArn": {
+                    "target": "com.amazonaws.iotfleetwise#IAMRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the task execution role that grants Amazon Web Services IoT FleetWise permission to deliver data to the Amazon Timestream table.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon Timestream table where the Amazon Web Services IoT FleetWise campaign sends data. Timestream stores and organizes data to optimize query processing time and to reduce storage costs. For more information, see <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/data-modeling.html\">Data modeling</a> in the <i>Amazon Timestream Developer Guide</i>.</p>"
+            }
+        },
         "com.amazonaws.iotfleetwise#TimestreamDatabaseName": {
             "type": "string",
             "traits": {
@@ -6617,6 +6865,19 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The registered Amazon Timestream resources that Amazon Web Services IoT FleetWise edge agent software can transfer\n            your vehicle data to.</p>"
+            }
+        },
+        "com.amazonaws.iotfleetwise#TimestreamTableArn": {
+            "type": "string",
+            "traits": {
+                "aws.api#arnReference": {
+                    "type": "AWS::Timestream::Table"
+                },
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:(aws[a-zA-Z0-9-]*):timestream:[a-zA-Z0-9-]+:[0-9]{12}:database/[a-zA-Z0-9_.-]+/table/[a-zA-Z0-9_.-]+$"
             }
         },
         "com.amazonaws.iotfleetwise#TimestreamTableName": {
@@ -6787,7 +7048,7 @@
                 "action": {
                     "target": "com.amazonaws.iotfleetwise#UpdateCampaignAction",
                     "traits": {
-                        "smithy.api#documentation": "<p> Specifies how to update a campaign. The action can be one of the following:</p>\n        <ul>\n            <li>\n                <p>\n                    <code>APPROVE</code> - To approve delivering a data collection scheme to\n                    vehicles. </p>\n            </li>\n            <li>\n                <p>\n                    <code>SUSPEND</code> - To suspend collecting signal data. </p>\n            </li>\n            <li>\n                <p>\n                    <code>RESUME</code> - To resume collecting signal data. </p>\n            </li>\n            <li>\n                <p>\n                    <code>UPDATE</code> - To update a campaign. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p> Specifies how to update a campaign. The action can be one of the following:</p>\n        <ul>\n            <li>\n                <p>\n                    <code>APPROVE</code> - To approve delivering a data collection scheme to\n                    vehicles. </p>\n            </li>\n            <li>\n                <p>\n                    <code>SUSPEND</code> - To suspend collecting signal data. The campaign is deleted from vehicles and all vehicles in the suspended campaign will stop sending data.</p>\n            </li>\n            <li>\n                <p>\n                    <code>RESUME</code> - To reactivate the <code>SUSPEND</code> campaign. The campaign is redeployed to all vehicles and the vehicles will resume sending data.</p>\n            </li>\n            <li>\n                <p>\n                    <code>UPDATE</code> - To update a campaign. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -7835,6 +8096,16 @@
                     "min": 1,
                     "max": 4294967295
                 }
+            }
+        },
+        "com.amazonaws.iotfleetwise#message": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^[^\\u0000-\\u001F\\u007F]+$"
             }
         },
         "com.amazonaws.iotfleetwise#modelManifestSummaries": {

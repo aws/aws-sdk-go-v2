@@ -531,6 +531,23 @@
                 "smithy.api#documentation": "<p>The details of an Amazon Chime SDK Voice Connector call.</p>"
             }
         },
+        "com.amazonaws.chimesdkvoice#CallLegType": {
+            "type": "enum",
+            "members": {
+                "CALLER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Caller"
+                    }
+                },
+                "CALLEE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Callee"
+                    }
+                }
+            }
+        },
         "com.amazonaws.chimesdkvoice#CallingName": {
             "type": "string",
             "traits": {
@@ -8948,6 +8965,12 @@
                     "target": "com.amazonaws.chimesdkvoice#ClientRequestId",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier for the client request. Use a different token for different speaker search tasks.</p>"
+                    }
+                },
+                "CallLeg": {
+                    "target": "com.amazonaws.chimesdkvoice#CallLegType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies which call leg to stream for speaker search.</p>"
                     }
                 }
             },

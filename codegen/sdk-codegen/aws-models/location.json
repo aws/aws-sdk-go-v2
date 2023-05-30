@@ -33,7 +33,11 @@
         "com.amazonaws.location#ApiKeyAction": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^geo:GetMap\\*$"
+                "smithy.api#length": {
+                    "min": 5,
+                    "max": 200
+                },
+                "smithy.api#pattern": "^geo:\\w*\\*?$"
             }
         },
         "com.amazonaws.location#ApiKeyActionList": {
@@ -94,7 +98,7 @@
                         "smithy.api#documentation": "<p>A list of allowed actions that an API key resource grants permissions to\n            perform</p>\n         <note>\n            <p>Currently, the only valid action is <code>geo:GetMap*</code> as an input to the\n                list. For example, <code>[\"geo:GetMap*\"]</code> is valid but\n                    <code>[\"geo:GetMapTile\"]</code> is not.</p>\n         </note>",
                         "smithy.api#length": {
                             "min": 1,
-                            "max": 1
+                            "max": 5
                         },
                         "smithy.api#required": {}
                     }
@@ -1446,6 +1450,26 @@
                 "smithy.api#pattern": "^[A-Z]{3}$"
             }
         },
+        "com.amazonaws.location#CountryCode3": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 3
+                },
+                "smithy.api#pattern": "^[A-Z]{3}$"
+            }
+        },
+        "com.amazonaws.location#CountryCode3OrEmpty": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 3
+                },
+                "smithy.api#pattern": "^[A-Z]{3}$|^$"
+            }
+        },
         "com.amazonaws.location#CountryCodeList": {
             "type": "list",
             "member": {
@@ -1895,7 +1919,7 @@
                     }
                 },
                 "IndexArn": {
-                    "target": "com.amazonaws.location#Arn",
+                    "target": "com.amazonaws.location#GeoArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the place index resource. Used to specify a\n            resource across Amazon Web Services. </p>\n         <ul>\n            <li>\n               <p>Format example:\n                        <code>arn:aws:geo:region:account-id:place-index/ExamplePlaceIndex</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
@@ -2002,7 +2026,7 @@
                     }
                 },
                 "CalculatorArn": {
-                    "target": "com.amazonaws.location#Arn",
+                    "target": "com.amazonaws.location#GeoArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the route calculator resource. Use the ARN when you\n            specify a resource across all Amazon Web Services.</p>\n         <ul>\n            <li>\n               <p>Format example:\n                        <code>arn:aws:geo:region:account-id:route-calculator/ExampleCalculator</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
@@ -2034,6 +2058,9 @@
                 },
                 {
                     "target": "com.amazonaws.location#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.location#ServiceQuotaExceededException"
                 },
                 {
                     "target": "com.amazonaws.location#ThrottlingException"
@@ -2895,7 +2922,7 @@
                     }
                 },
                 "IndexArn": {
-                    "target": "com.amazonaws.location#Arn",
+                    "target": "com.amazonaws.location#GeoArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the place index resource. Used to specify a\n            resource across Amazon Web Services. </p>\n         <ul>\n            <li>\n               <p>Format example:\n                        <code>arn:aws:geo:region:account-id:place-index/ExamplePlaceIndex</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
@@ -3015,7 +3042,7 @@
                     }
                 },
                 "CalculatorArn": {
-                    "target": "com.amazonaws.location#Arn",
+                    "target": "com.amazonaws.location#GeoArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the Route calculator resource. Use the ARN when you\n            specify a resource across Amazon Web Services.</p>\n         <ul>\n            <li>\n               <p>Format example:\n                        <code>arn:aws:geo:region:account-id:route-calculator/ExampleCalculator</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
@@ -3857,7 +3884,7 @@
                 "FontStack": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A comma-separated list of fonts to load glyphs from in order of preference. For\n            example, <code>Noto Sans Regular, Arial Unicode</code>.</p>\n         <p>Valid fonts stacks for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/esri.html\">Esri</a> styles: </p>\n         <ul>\n            <li>\n               <p>VectorEsriDarkGrayCanvas – <code>Ubuntu Medium Italic</code> | <code>Ubuntu\n                        Medium</code> | <code>Ubuntu Italic</code> | <code>Ubuntu Regular</code> |\n                        <code>Ubuntu Bold</code>\n               </p>\n            </li>\n            <li>\n               <p>VectorEsriLightGrayCanvas – <code>Ubuntu Italic</code> | <code>Ubuntu\n                        Regular</code> | <code>Ubuntu Light</code> | <code>Ubuntu Bold</code>\n               </p>\n            </li>\n            <li>\n               <p>VectorEsriTopographic – <code>Noto Sans Italic</code> | <code>Noto Sans\n                        Regular</code> | <code>Noto Sans Bold</code> | <code>Noto Serif\n                        Regular</code> | <code>Roboto Condensed Light Italic</code>\n               </p>\n            </li>\n            <li>\n               <p>VectorEsriStreets – <code>Arial Regular</code> | <code>Arial Italic</code> |\n                        <code>Arial Bold</code>\n               </p>\n            </li>\n            <li>\n               <p>VectorEsriNavigation – <code>Arial Regular</code> | <code>Arial Italic</code>\n                    | <code>Arial Bold</code>\n               </p>\n            </li>\n         </ul>\n         <p>Valid font stacks for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/HERE.html\">HERE Technologies</a> styles:</p>\n         <ul>\n            <li>\n               <p>VectorHereContrast – <code>Fira \n                    GO Regular</code> | <code>Fira GO Bold</code>\n               </p>\n            </li>\n            <li>\n               <p>VectorHereExplore, VectorHereExploreTruck, HybridHereExploreSatellite – \n                    <code>Fira GO Italic</code> | <code>Fira GO Map</code> | \n                    <code>Fira GO Map Bold</code> | <code>Noto Sans CJK JP Bold</code> | \n                    <code>Noto Sans CJK JP Light</code> | \n                    <code>Noto Sans CJK JP Regular</code>\n               </p>\n            </li>\n         </ul>\n         <p>Valid font stacks for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/grab.html\">GrabMaps</a> styles:</p>\n         <ul>\n            <li>\n               <p>VectorGrabStandardLight, VectorGrabStandardDark – \n                    <code>Noto Sans Regular</code> |\n                    <code>Noto Sans Medium</code> |\n                    <code>Noto Sans Bold</code>\n               </p>\n            </li>\n         </ul>\n         <p>Valid font stacks for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/open-data.html\">Open Data</a> styles:</p>\n         <ul>\n            <li>\n               <p>VectorOpenDataStandardLight, VectorOpenDataStandardDark,\n                    VectorOpenDataVisualizationLight, VectorOpenDataVisualizationDark – \n                    <code>Amazon Ember Regular,Noto Sans Regular</code> |\n                    <code>Amazon Ember Bold,Noto Sans Bold</code> | \n                    <code>Amazon Ember Medium,Noto Sans Medium</code> |\n                    <code>Amazon Ember Regular Italic,Noto Sans Italic</code> | \n                    <code>Amazon Ember Condensed RC Regular,Noto Sans Regular</code> | \n                    <code>Amazon Ember Condensed RC Bold,Noto Sans Bold</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>The fonts used by the Open Data map styles are combined fonts\n                that use <code>Amazon Ember</code> for most glyphs but <code>Noto Sans</code> \n                for glyphs unsupported by <code>Amazon Ember</code>.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>A comma-separated list of fonts to load glyphs from in order of preference. For\n            example, <code>Noto Sans Regular, Arial Unicode</code>.</p>\n         <p>Valid fonts stacks for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/esri.html\">Esri</a> styles: </p>\n         <ul>\n            <li>\n               <p>VectorEsriDarkGrayCanvas – <code>Ubuntu Medium Italic</code> | <code>Ubuntu\n                        Medium</code> | <code>Ubuntu Italic</code> | <code>Ubuntu Regular</code> |\n                        <code>Ubuntu Bold</code>\n               </p>\n            </li>\n            <li>\n               <p>VectorEsriLightGrayCanvas – <code>Ubuntu Italic</code> | <code>Ubuntu\n                        Regular</code> | <code>Ubuntu Light</code> | <code>Ubuntu Bold</code>\n               </p>\n            </li>\n            <li>\n               <p>VectorEsriTopographic – <code>Noto Sans Italic</code> | <code>Noto Sans\n                        Regular</code> | <code>Noto Sans Bold</code> | <code>Noto Serif\n                        Regular</code> | <code>Roboto Condensed Light Italic</code>\n               </p>\n            </li>\n            <li>\n               <p>VectorEsriStreets – <code>Arial Regular</code> | <code>Arial Italic</code> |\n                        <code>Arial Bold</code>\n               </p>\n            </li>\n            <li>\n               <p>VectorEsriNavigation – <code>Arial Regular</code> | <code>Arial Italic</code>\n                    | <code>Arial Bold</code>\n               </p>\n            </li>\n         </ul>\n         <p>Valid font stacks for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/HERE.html\">HERE Technologies</a> styles:</p>\n         <ul>\n            <li>\n               <p>VectorHereContrast – <code>Fira \n                    GO Regular</code> | <code>Fira GO Bold</code>\n               </p>\n            </li>\n            <li>\n               <p>VectorHereExplore, VectorHereExploreTruck, HybridHereExploreSatellite – \n                    <code>Fira GO Italic</code> | <code>Fira GO Map</code> | \n                    <code>Fira GO Map Bold</code> | <code>Noto Sans CJK JP Bold</code> | \n                    <code>Noto Sans CJK JP Light</code> | \n                    <code>Noto Sans CJK JP Regular</code>\n               </p>\n            </li>\n         </ul>\n         <p>Valid font stacks for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/grab.html\">GrabMaps</a> styles:</p>\n         <ul>\n            <li>\n               <p>VectorGrabStandardLight, VectorGrabStandardDark – \n                    <code>Noto Sans Regular</code> |\n                    <code>Noto Sans Medium</code> |\n                    <code>Noto Sans Bold</code>\n               </p>\n            </li>\n         </ul>\n         <p>Valid font stacks for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/open-data.html\">Open Data</a> styles:</p>\n         <ul>\n            <li>\n               <p>VectorOpenDataStandardLight, VectorOpenDataStandardDark,\n                    VectorOpenDataVisualizationLight, VectorOpenDataVisualizationDark – \n                    <code>Amazon Ember Regular,Noto Sans Regular</code> |\n                    <code>Amazon Ember Bold,Noto Sans Bold</code> | \n                    <code>Amazon Ember Medium,Noto Sans Medium</code> |\n                    <code>Amazon Ember Regular Italic,Noto Sans Italic</code> | \n                    <code>Amazon Ember Condensed RC Regular,Noto Sans Regular</code> | \n                    <code>Amazon Ember Condensed RC Bold,Noto Sans Bold</code> |\n                    <code>Amazon Ember Regular,Noto Sans Regular,Noto Sans Arabic Regular</code> |\n                    <code>Amazon Ember Condensed RC Bold,Noto Sans Bold,Noto Sans Arabic \n                        Condensed Bold</code> |\n                    <code>Amazon Ember Bold,Noto Sans Bold,Noto Sans Arabic Bold</code> |\n                    <code>Amazon Ember Regular Italic,Noto Sans Italic,Noto Sans Arabic \n                        Regular</code> |\n                    <code>Amazon Ember Condensed RC Regular,Noto Sans Regular,Noto Sans Arabic \n                        Condensed Regular</code> |\n                    <code>Amazon Ember Medium,Noto Sans Medium,Noto Sans Arabic Medium</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>The fonts used by the Open Data map styles are combined fonts\n                that use <code>Amazon Ember</code> for most glyphs but <code>Noto Sans</code> \n                for glyphs unsupported by <code>Amazon Ember</code>.</p>\n         </note>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -6114,8 +6141,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -6127,8 +6154,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6140,8 +6167,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -6153,8 +6180,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6166,8 +6193,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -6179,8 +6206,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6192,8 +6219,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -6205,8 +6232,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6218,8 +6245,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -6231,8 +6258,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6244,8 +6271,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -6257,8 +6284,19 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -6270,8 +6308,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -6283,8 +6332,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -6296,8 +6356,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -6309,8 +6380,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6322,8 +6393,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -6335,8 +6406,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -6347,8 +6418,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -6359,9 +6430,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -6375,13 +6452,33 @@
                 "Style": {
                     "target": "com.amazonaws.location#MapStyle",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the map style selected from an available data provider.</p>\n         <p>Valid <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/esri.html\">Esri map styles</a>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>VectorEsriDarkGrayCanvas</code> – The Esri Dark Gray Canvas map style. A\n                    vector basemap with a dark gray, neutral background with minimal colors, labels,\n                    and features that's designed to draw attention to your thematic content. </p>\n            </li>\n            <li>\n               <p>\n                  <code>RasterEsriImagery</code> – The Esri Imagery map style. A raster basemap\n                    that provides one meter or better satellite and aerial imagery in many parts of\n                    the world and lower resolution satellite imagery worldwide. </p>\n            </li>\n            <li>\n               <p>\n                  <code>VectorEsriLightGrayCanvas</code> – The Esri Light Gray Canvas map style,\n                    which provides a detailed vector basemap with a light gray, neutral background\n                    style with minimal colors, labels, and features that's designed to draw\n                    attention to your thematic content. </p>\n            </li>\n            <li>\n               <p>\n                  <code>VectorEsriTopographic</code> – The Esri Light map style, which provides\n                    a detailed vector basemap with a classic Esri map style.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VectorEsriStreets</code> – The Esri World Streets map style, which\n                    provides a detailed vector basemap for the world symbolized with a classic Esri\n                    street map style. The vector tile layer is similar in content and style to the\n                    World Street Map raster map.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VectorEsriNavigation</code> – The Esri World Navigation map style, which\n                    provides a detailed basemap for the world symbolized with a custom navigation\n                    map style that's designed for use during the day in mobile devices.</p>\n            </li>\n         </ul>\n         <p>Valid <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/HERE.html\">HERE\n                Technologies map styles</a>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>VectorHereContrast</code> – The HERE Contrast (Berlin) map style is a \n                    high contrast\n                    detailed base map of the world that blends 3D and 2D rendering.</p>\n               <note>\n                  <p>The <code>VectorHereContrast</code> style has been renamed from \n                    <code>VectorHereBerlin</code>. \n                    <code>VectorHereBerlin</code> has been deprecated, but will continue to work in \n                    applications that use it.</p>\n               </note>\n            </li>\n            <li>\n               <p>\n                  <code>VectorHereExplore</code> – A default HERE map style containing a \n                    neutral, global map and its features including roads, buildings, landmarks, \n                    and water features. It also now includes a fully designed map of Japan.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VectorHereExploreTruck</code> – A global map containing truck \n                    restrictions and attributes (e.g. width / height / HAZMAT) symbolized with \n                    highlighted segments and icons on top of HERE Explore to support use cases \n                    within transport and logistics.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RasterHereExploreSatellite</code> – A global map containing high\n                    resolution satellite imagery.</p>\n            </li>\n            <li>\n               <p>\n                  <code>HybridHereExploreSatellite</code> – A global map displaying the road \n                    network, street names, and city labels over satellite imagery. This style \n                    will automatically retrieve both raster and vector tiles, and your charges \n                    will be based on total tiles retrieved.</p>\n               <note>\n                  <p>Hybrid styles use both vector and raster tiles when rendering the \n                    map that you see. This means that more tiles are retrieved than when using \n                    either vector or raster tiles alone. Your charges will include all tiles \n                    retrieved.</p>\n               </note>\n            </li>\n         </ul>\n         <p>Valid <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/grab.html\">GrabMaps map styles</a>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>VectorGrabStandardLight</code> – The Grab Standard Light \n                    map style provides a basemap with detailed land use coloring, \n                    area names, roads, landmarks, and points of interest covering \n                    Southeast Asia.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VectorGrabStandardDark</code> – The Grab Standard Dark \n                    map style provides a dark variation of the standard basemap \n                    covering Southeast Asia.</p>\n            </li>\n         </ul>\n         <note>\n            <p>Grab provides maps only for countries in Southeast Asia, and is only available \n                in the Asia Pacific (Singapore) Region (<code>ap-southeast-1</code>).\n                For more information, see <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/grab.html#grab-coverage-area\">GrabMaps countries and area covered</a>.</p>\n         </note>\n         <p>Valid <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/open-data.html\">Open Data map styles</a>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>VectorOpenDataStandardLight</code> – The Open Data Standard Light \n                    map style provides a detailed basemap for the world suitable for\n                    website and mobile application use. The map includes highways major roads, \n                    minor roads, railways, water features, cities, parks, landmarks, building\n                    footprints, and administrative boundaries.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VectorOpenDataStandardDark</code> – Open Data Standard Dark is a\n                    dark-themed map style that provides a detailed basemap for the world \n                    suitable for website and mobile application use. The map includes highways \n                    major roads, minor roads, railways, water features, cities, parks, \n                    landmarks, building footprints, and administrative boundaries.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VectorOpenDataVisualizationLight</code> – The Open Data \n                    Visualization Light map style is a light-themed style with muted colors and\n                    fewer features that aids in understanding overlaid data.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VectorOpenDataVisualizationDark</code> – The Open Data \n                    Visualization Dark map style is a dark-themed style with muted colors and\n                    fewer features that aids in understanding overlaid data.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies the map style selected from an available data provider.</p>\n         <p>Valid <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/esri.html\">Esri map styles</a>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>VectorEsriDarkGrayCanvas</code> – The Esri Dark Gray Canvas map style. A\n                    vector basemap with a dark gray, neutral background with minimal colors, labels,\n                    and features that's designed to draw attention to your thematic content. </p>\n            </li>\n            <li>\n               <p>\n                  <code>RasterEsriImagery</code> – The Esri Imagery map style. A raster basemap\n                    that provides one meter or better satellite and aerial imagery in many parts of\n                    the world and lower resolution satellite imagery worldwide. </p>\n            </li>\n            <li>\n               <p>\n                  <code>VectorEsriLightGrayCanvas</code> – The Esri Light Gray Canvas map style,\n                    which provides a detailed vector basemap with a light gray, neutral background\n                    style with minimal colors, labels, and features that's designed to draw\n                    attention to your thematic content. </p>\n            </li>\n            <li>\n               <p>\n                  <code>VectorEsriTopographic</code> – The Esri Light map style, which provides\n                    a detailed vector basemap with a classic Esri map style.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VectorEsriStreets</code> – The Esri Street Map style, which\n                    provides a detailed vector basemap for the world symbolized with a classic Esri\n                    street map style. The vector tile layer is similar in content and style to the\n                    World Street Map raster map.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VectorEsriNavigation</code> – The Esri Navigation map style, which\n                    provides a detailed basemap for the world symbolized with a custom navigation\n                    map style that's designed for use during the day in mobile devices.</p>\n            </li>\n         </ul>\n         <p>Valid <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/HERE.html\">HERE\n                Technologies map styles</a>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>VectorHereContrast</code> – The HERE Contrast (Berlin) map style is a \n                    high contrast\n                    detailed base map of the world that blends 3D and 2D rendering.</p>\n               <note>\n                  <p>The <code>VectorHereContrast</code> style has been renamed from \n                    <code>VectorHereBerlin</code>. \n                    <code>VectorHereBerlin</code> has been deprecated, but will continue to work in \n                    applications that use it.</p>\n               </note>\n            </li>\n            <li>\n               <p>\n                  <code>VectorHereExplore</code> – A default HERE map style containing a \n                    neutral, global map and its features including roads, buildings, landmarks, \n                    and water features. It also now includes a fully designed map of Japan.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VectorHereExploreTruck</code> – A global map containing truck \n                    restrictions and attributes (e.g. width / height / HAZMAT) symbolized with \n                    highlighted segments and icons on top of HERE Explore to support use cases \n                    within transport and logistics.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RasterHereExploreSatellite</code> – A global map containing high\n                    resolution satellite imagery.</p>\n            </li>\n            <li>\n               <p>\n                  <code>HybridHereExploreSatellite</code> – A global map displaying the road \n                    network, street names, and city labels over satellite imagery. This style \n                    will automatically retrieve both raster and vector tiles, and your charges \n                    will be based on total tiles retrieved.</p>\n               <note>\n                  <p>Hybrid styles use both vector and raster tiles when rendering the \n                    map that you see. This means that more tiles are retrieved than when using \n                    either vector or raster tiles alone. Your charges will include all tiles \n                    retrieved.</p>\n               </note>\n            </li>\n         </ul>\n         <p>Valid <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/grab.html\">GrabMaps map styles</a>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>VectorGrabStandardLight</code> – The Grab Standard Light \n                    map style provides a basemap with detailed land use coloring, \n                    area names, roads, landmarks, and points of interest covering \n                    Southeast Asia.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VectorGrabStandardDark</code> – The Grab Standard Dark \n                    map style provides a dark variation of the standard basemap \n                    covering Southeast Asia.</p>\n            </li>\n         </ul>\n         <note>\n            <p>Grab provides maps only for countries in Southeast Asia, and is only available \n                in the Asia Pacific (Singapore) Region (<code>ap-southeast-1</code>).\n                For more information, see <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/grab.html#grab-coverage-area\">GrabMaps countries and area covered</a>.</p>\n         </note>\n         <p>Valid <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/open-data.html\">Open Data map styles</a>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>VectorOpenDataStandardLight</code> – The Open Data Standard Light \n                    map style provides a detailed basemap for the world suitable for\n                    website and mobile application use. The map includes highways major roads, \n                    minor roads, railways, water features, cities, parks, landmarks, building\n                    footprints, and administrative boundaries.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VectorOpenDataStandardDark</code> – Open Data Standard Dark is a\n                    dark-themed map style that provides a detailed basemap for the world \n                    suitable for website and mobile application use. The map includes highways \n                    major roads, minor roads, railways, water features, cities, parks, \n                    landmarks, building footprints, and administrative boundaries.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VectorOpenDataVisualizationLight</code> – The Open Data \n                    Visualization Light map style is a light-themed style with muted colors and\n                    fewer features that aids in understanding overlaid data.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VectorOpenDataVisualizationDark</code> – The Open Data \n                    Visualization Dark map style is a dark-themed style with muted colors and\n                    fewer features that aids in understanding overlaid data.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
+                    }
+                },
+                "PoliticalView": {
+                    "target": "com.amazonaws.location#CountryCode3",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the political view for the style. Leave unset to not use a political \n            view, or, for styles that support specific political views, you can choose a view, \n            such as <code>IND</code> for the Indian view.</p>\n         <p>Default is unset.</p>\n         <note>\n            <p>Not all map resources or styles support political view styles. See \n                <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/map-concepts.html#political-views\">Political \n                    views</a> \n                for more information.</p>\n         </note>"
                     }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Specifies the map tile style selected from an available provider.</p>"
+            }
+        },
+        "com.amazonaws.location#MapConfigurationUpdate": {
+            "type": "structure",
+            "members": {
+                "PoliticalView": {
+                    "target": "com.amazonaws.location#CountryCode3OrEmpty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the political view for the style. Set to an empty string to not use a\n            political view, or, for styles that support specific political views, you can choose a \n            view, such as <code>IND</code> for the Indian view.</p>\n         <note>\n            <p>Not all map resources or styles support political view styles. See \n                <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/map-concepts.html#political-views\">Political \n                    views</a> \n                for more information.</p>\n         </note>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the political view for the style.</p>"
             }
         },
         "com.amazonaws.location#MapResource": {
@@ -8283,6 +8380,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Updates the description for the map resource.</p>"
                     }
+                },
+                "ConfigurationUpdate": {
+                    "target": "com.amazonaws.location#MapConfigurationUpdate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updates the parts of the map configuration that can be updated, including the\n            political view.</p>"
+                    }
                 }
             }
         },
@@ -8395,7 +8498,7 @@
                     }
                 },
                 "IndexArn": {
-                    "target": "com.amazonaws.location#Arn",
+                    "target": "com.amazonaws.location#GeoArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the upated place index resource. Used to specify a\n            resource across Amazon Web Services.</p>\n         <ul>\n            <li>\n               <p>Format example: <code>arn:aws:geo:region:account-id:place-\n                        index/ExamplePlaceIndex</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
@@ -8487,7 +8590,7 @@
                     }
                 },
                 "CalculatorArn": {
-                    "target": "com.amazonaws.location#Arn",
+                    "target": "com.amazonaws.location#GeoArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the updated route calculator resource. Used to\n            specify a resource across AWS.</p>\n         <ul>\n            <li>\n               <p>Format example: <code>arn:aws:geo:region:account-id:route-\n                        calculator/ExampleCalculator</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
