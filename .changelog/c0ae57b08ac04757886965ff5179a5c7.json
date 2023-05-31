@@ -1,8 +1,0 @@
-{
-    "id": "c0ae57b0-8ac0-4757-8869-65ff5179a5c7",
-    "type": "feature",
-    "description": "This release enables publishing event predictions from Amazon Fraud Detector (AFD) to Amazon EventBridge. For example, after getting predictions from AFD, Amazon EventBridge rules can be configured to trigger notification through an SNS topic, send a message with SES, or trigger Lambda workflows.",
-    "modules": [
-        "service/frauddetector"
-    ]
-}

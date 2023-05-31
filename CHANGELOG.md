@@ -1,3 +1,21 @@
+# Release (2023-05-31)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/configservice`: [v1.33.0](service/configservice/CHANGELOG.md#v1330-2023-05-31)
+  * **Feature**: Resource Types Exclusion feature launch by AWS Config
+* `github.com/aws/aws-sdk-go-v2/service/frauddetector`: [v1.24.0](service/frauddetector/CHANGELOG.md#v1240-2023-05-31)
+  * **Feature**: This release enables publishing event predictions from Amazon Fraud Detector (AFD) to Amazon EventBridge. For example, after getting predictions from AFD, Amazon EventBridge rules can be configured to trigger notification through an SNS topic, send a message with SES, or trigger Lambda workflows.
+* `github.com/aws/aws-sdk-go-v2/service/healthlake`: [v1.16.0](service/healthlake/CHANGELOG.md#v1160-2023-05-31)
+  * **Feature**: This release adds a new request parameter to the CreateFHIRDatastore API operation. IdentityProviderConfiguration specifies how you want to authenticate incoming requests to your Healthlake Data Store.
+* `github.com/aws/aws-sdk-go-v2/service/m2`: [v1.5.0](service/m2/CHANGELOG.md#v150-2023-05-31)
+  * **Feature**: Adds an optional create-only 'roleArn' property to Application resources.  Enables PS and PO data set org types.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.45.0](service/rds/CHANGELOG.md#v1450-2023-05-31)
+  * **Feature**: This release adds support for changing the engine for Oracle using the ModifyDbInstance API
+* `github.com/aws/aws-sdk-go-v2/service/servicecatalog`: [v1.18.5](service/servicecatalog/CHANGELOG.md#v1185-2023-05-31)
+  * **Documentation**: Documentation updates for ServiceCatalog.
+* `github.com/aws/aws-sdk-go-v2/service/workspacesweb`: [v1.10.0](service/workspacesweb/CHANGELOG.md#v1100-2023-05-31)
+  * **Feature**: WorkSpaces Web now allows you to control which IP addresses your WorkSpaces Web portal may be accessed from.
+
 # Release (2023-05-30)
 
 ## Module Highlights

@@ -1,3 +1,7 @@
+# v1.45.0 (2023-05-31)
+
+* **Feature**: This release adds support for changing the engine for Oracle using the ModifyDbInstance API
+
 # v1.44.1 (2023-05-18)
 
 * **Documentation**: RDS documentation update for the EngineVersion parameter of ModifyDBSnapshot

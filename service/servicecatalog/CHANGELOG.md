@@ -1,3 +1,7 @@
+# v1.18.5 (2023-05-31)
+
+* **Documentation**: Documentation updates for ServiceCatalog.
+
 # v1.18.4 (2023-05-04)
 
 * No change notes available for this release.

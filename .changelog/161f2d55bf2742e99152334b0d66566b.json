@@ -1,8 +1,0 @@
-{
-    "id": "161f2d55-bf27-42e9-9152-334b0d66566b",
-    "type": "feature",
-    "description": "Adds an optional create-only 'roleArn' property to Application resources.  Enables PS and PO data set org types.",
-    "modules": [
-        "service/m2"
-    ]
-}

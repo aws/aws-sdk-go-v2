@@ -1,8 +1,0 @@
-{
-    "id": "f0584259-f643-4c13-9812-b9813537ad00",
-    "type": "feature",
-    "description": "This release adds support for changing the engine for Oracle using the ModifyDbInstance API",
-    "modules": [
-        "service/rds"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.24.0 (2023-05-31)
+
+* **Feature**: This release enables publishing event predictions from Amazon Fraud Detector (AFD) to Amazon EventBridge. For example, after getting predictions from AFD, Amazon EventBridge rules can be configured to trigger notification through an SNS topic, send a message with SES, or trigger Lambda workflows.
+
 # v1.23.8 (2023-05-04)
 
 * No change notes available for this release.

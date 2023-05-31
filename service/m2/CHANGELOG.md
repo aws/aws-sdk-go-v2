@@ -1,3 +1,7 @@
+# v1.5.0 (2023-05-31)
+
+* **Feature**: Adds an optional create-only 'roleArn' property to Application resources.  Enables PS and PO data set org types.
+
 # v1.4.10 (2023-05-04)
 
 * No change notes available for this release.

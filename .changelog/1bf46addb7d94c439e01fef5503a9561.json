@@ -1,8 +1,0 @@
-{
-    "id": "1bf46add-b7d9-4c43-9e01-fef5503a9561",
-    "type": "feature",
-    "description": "This release adds a new request parameter to the CreateFHIRDatastore API operation. IdentityProviderConfiguration specifies how you want to authenticate incoming requests to your Healthlake Data Store.",
-    "modules": [
-        "service/healthlake"
-    ]
-}

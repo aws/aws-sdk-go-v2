@@ -1,3 +1,7 @@
+# v1.16.0 (2023-05-31)
+
+* **Feature**: This release adds a new request parameter to the CreateFHIRDatastore API operation. IdentityProviderConfiguration specifies how you want to authenticate incoming requests to your Healthlake Data Store.
+
 # v1.15.11 (2023-05-04)
 
 * No change notes available for this release.

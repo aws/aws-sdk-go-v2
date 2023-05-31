@@ -1,3 +1,7 @@
+# v1.33.0 (2023-05-31)
+
+* **Feature**: Resource Types Exclusion feature launch by AWS Config
+
 # v1.32.0 (2023-05-04)
 
 * **Feature**: Updated ResourceType enum with new resource types onboarded by AWS Config in April 2023.
