@@ -312,6 +312,9 @@
                 "EventSubscription": {
                     "target": "com.amazonaws.rds#EventSubscription"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#AddTagsToResource": {
@@ -1956,6 +1959,9 @@
                 "ResourcePendingMaintenanceActions": {
                     "target": "com.amazonaws.rds#ResourcePendingMaintenanceActions"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#AttributeValueList": {
@@ -2117,6 +2123,9 @@
                 "DBSecurityGroup": {
                     "target": "com.amazonaws.rds#DBSecurityGroup"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#AutomationMode": {
@@ -2899,6 +2908,9 @@
                 "DBClusterParameterGroup": {
                     "target": "com.amazonaws.rds#DBClusterParameterGroup"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#CopyDBClusterSnapshot": {
@@ -2982,6 +2994,9 @@
                 "DBClusterSnapshot": {
                     "target": "com.amazonaws.rds#DBClusterSnapshot"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#CopyDBParameterGroup": {
@@ -3045,6 +3060,9 @@
                 "DBParameterGroup": {
                     "target": "com.amazonaws.rds#DBParameterGroup"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#CopyDBSnapshot": {
@@ -3146,6 +3164,9 @@
                 "DBSnapshot": {
                     "target": "com.amazonaws.rds#DBSnapshot"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#CopyOptionGroup": {
@@ -3209,6 +3230,9 @@
                 "OptionGroup": {
                     "target": "com.amazonaws.rds#OptionGroup"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#CreateBlueGreenDeployment": {
@@ -3781,7 +3805,7 @@
                 "StorageType": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the storage type to be associated with the DB cluster.</p>\n         <p>This setting is required to create a Multi-AZ DB cluster.</p>\n         <p>When specified for a Multi-AZ DB cluster, a value for the <code>Iops</code> parameter is required.</p>\n         <p>Valid values: <code>aurora</code>, <code>aurora-iopt1</code> (Aurora DB clusters); <code>io1</code> (Multi-AZ DB clusters)</p>\n         <p>Default: <code>aurora</code> (Aurora DB clusters); <code>io1</code> (Multi-AZ DB clusters)</p>\n         <p>Valid for: Aurora DB clusters and Multi-AZ DB clusters</p>"
+                        "smithy.api#documentation": "<p>Specifies the storage type to be associated with the DB cluster.</p>\n         <p>This setting is required to create a Multi-AZ DB cluster.</p>\n         <p>When specified for a Multi-AZ DB cluster, a value for the <code>Iops</code> parameter is required.</p>\n         <p>Valid values: <code>aurora</code>, <code>aurora-iopt1</code> (Aurora DB clusters); <code>io1</code> (Multi-AZ DB clusters)</p>\n         <p>Default: <code>aurora</code> (Aurora DB clusters); <code>io1</code> (Multi-AZ DB clusters)</p>\n         <p>Valid for: Aurora DB clusters and Multi-AZ DB clusters</p>\n         <p>For more information on storage types for Aurora DB clusters, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Overview.StorageReliability.html#aurora-storage-type\">Storage configurations for Amazon Aurora DB clusters</a>. For more information on storage types for Multi-AZ DB\n            clusters, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/create-multi-az-db-cluster.html#create-multi-az-db-cluster-settings\">Settings for creating Multi-AZ DB clusters</a>.</p>"
                     }
                 },
                 "Iops": {
@@ -3925,6 +3949,9 @@
                 "DBClusterParameterGroup": {
                     "target": "com.amazonaws.rds#DBClusterParameterGroup"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#CreateDBClusterResult": {
@@ -3933,6 +3960,9 @@
                 "DBCluster": {
                     "target": "com.amazonaws.rds#DBCluster"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#CreateDBClusterSnapshot": {
@@ -3998,6 +4028,9 @@
                 "DBClusterSnapshot": {
                     "target": "com.amazonaws.rds#DBClusterSnapshot"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#CreateDBInstance": {
@@ -4735,6 +4768,9 @@
                 "DBInstance": {
                     "target": "com.amazonaws.rds#DBInstance"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#CreateDBInstanceResult": {
@@ -4743,6 +4779,9 @@
                 "DBInstance": {
                     "target": "com.amazonaws.rds#DBInstance"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#CreateDBParameterGroup": {
@@ -4806,6 +4845,9 @@
                 "DBParameterGroup": {
                     "target": "com.amazonaws.rds#DBParameterGroup"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#CreateDBProxy": {
@@ -5064,6 +5106,9 @@
                 "DBSecurityGroup": {
                     "target": "com.amazonaws.rds#DBSecurityGroup"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#CreateDBSnapshot": {
@@ -5123,6 +5168,9 @@
                 "DBSnapshot": {
                     "target": "com.amazonaws.rds#DBSnapshot"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#CreateDBSubnetGroup": {
@@ -5195,6 +5243,9 @@
                 "DBSubnetGroup": {
                     "target": "com.amazonaws.rds#DBSubnetGroup"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#CreateEventSubscription": {
@@ -5287,6 +5338,9 @@
                 "EventSubscription": {
                     "target": "com.amazonaws.rds#EventSubscription"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#CreateGlobalCluster": {
@@ -5368,6 +5422,9 @@
                 "GlobalCluster": {
                     "target": "com.amazonaws.rds#GlobalCluster"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#CreateOptionGroup": {
@@ -5438,6 +5495,9 @@
                 "OptionGroup": {
                     "target": "com.amazonaws.rds#OptionGroup"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#CustomAvailabilityZoneNotFoundFault": {
@@ -9813,6 +9873,9 @@
                 "DBCluster": {
                     "target": "com.amazonaws.rds#DBCluster"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#DeleteDBClusterSnapshot": {
@@ -9856,6 +9919,9 @@
                 "DBClusterSnapshot": {
                     "target": "com.amazonaws.rds#DBClusterSnapshot"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#DeleteDBInstance": {
@@ -9936,6 +10002,9 @@
                 "DBInstanceAutomatedBackup": {
                     "target": "com.amazonaws.rds#DBInstanceAutomatedBackup"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#DeleteDBInstanceMessage": {
@@ -9978,6 +10047,9 @@
                 "DBInstance": {
                     "target": "com.amazonaws.rds#DBInstance"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#DeleteDBParameterGroup": {
@@ -10189,6 +10261,9 @@
                 "DBSnapshot": {
                     "target": "com.amazonaws.rds#DBSnapshot"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#DeleteDBSubnetGroup": {
@@ -10270,6 +10345,9 @@
                 "EventSubscription": {
                     "target": "com.amazonaws.rds#EventSubscription"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#DeleteGlobalCluster": {
@@ -10310,6 +10388,9 @@
                 "GlobalCluster": {
                     "target": "com.amazonaws.rds#GlobalCluster"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#DeleteOptionGroup": {
@@ -10840,6 +10921,9 @@
                 "DBClusterSnapshotAttributesResult": {
                     "target": "com.amazonaws.rds#DBClusterSnapshotAttributesResult"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#DescribeDBClusterSnapshots": {
@@ -12257,6 +12341,9 @@
                 "DBSnapshotAttributesResult": {
                     "target": "com.amazonaws.rds#DBSnapshotAttributesResult"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#DescribeDBSnapshots": {
@@ -12583,6 +12670,9 @@
                 "EngineDefaults": {
                     "target": "com.amazonaws.rds#EngineDefaults"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#DescribeEngineDefaultParameters": {
@@ -12642,6 +12732,9 @@
                 "EngineDefaults": {
                     "target": "com.amazonaws.rds#EngineDefaults"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#DescribeEventCategories": {
@@ -13460,6 +13553,9 @@
                 "ValidDBInstanceModificationsMessage": {
                     "target": "com.amazonaws.rds#ValidDBInstanceModificationsMessage"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#Description": {
@@ -14273,6 +14369,9 @@
                 "DBCluster": {
                     "target": "com.amazonaws.rds#DBCluster"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#FailoverGlobalCluster": {
@@ -14326,6 +14425,9 @@
                 "GlobalCluster": {
                     "target": "com.amazonaws.rds#GlobalCluster"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#FailoverState": {
@@ -15540,6 +15642,9 @@
                 "Certificate": {
                     "target": "com.amazonaws.rds#Certificate"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#ModifyCurrentDBClusterCapacity": {
@@ -16064,6 +16169,9 @@
                 "DBCluster": {
                     "target": "com.amazonaws.rds#DBCluster"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#ModifyDBClusterSnapshotAttribute": {
@@ -16129,6 +16237,9 @@
                 "DBClusterSnapshotAttributesResult": {
                     "target": "com.amazonaws.rds#DBClusterSnapshotAttributesResult"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#ModifyDBInstance": {
@@ -16522,6 +16633,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Web Services KMS key identifier to encrypt a secret that is automatically generated and \n            managed in Amazon Web Services Secrets Manager.</p>\n         <p>This setting is valid only if both of the following conditions are met:</p>\n         <ul>\n            <li>\n               <p>The DB instance doesn't manage the master user password in Amazon Web Services Secrets Manager.</p>\n               <p>If the DB instance already manages the master user password in Amazon Web Services Secrets Manager, \n                    you can't change the KMS key used to encrypt the secret.</p>\n            </li>\n            <li>\n               <p>You are turning on <code>ManageMasterUserPassword</code> to manage the master user password \n                    in Amazon Web Services Secrets Manager.</p>\n               <p>If you are turning on <code>ManageMasterUserPassword</code> and don't specify \n                    <code>MasterUserSecretKmsKeyId</code>, then the <code>aws/secretsmanager</code> \n                    KMS key is used to encrypt the secret. If the secret is in a different Amazon Web Services account, then you can't \n                    use the <code>aws/secretsmanager</code> KMS key to encrypt the secret, and you must use a customer \n                    managed KMS key.</p>\n            </li>\n         </ul>\n         <p>The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.\n            To use a KMS key in a different Amazon Web Services account, specify the key ARN or alias ARN.</p>\n         <p>There is a default KMS key for your Amazon Web Services account. Your Amazon Web Services account\n            has a different default KMS key for each Amazon Web Services Region.</p>"
                     }
+                },
+                "Engine": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target Oracle DB engine when you convert a non-CDB to a CDB. This intermediate step is necessary to upgrade an Oracle Database 19c non-CDB\n           to an Oracle Database 21c CDB.</p>\n         <p>Note the following requirements:</p>\n         <ul>\n            <li>\n               <p>Make sure that you specify <code>oracle-ee-cdb</code> or <code>oracle-se2-cdb</code>.</p>\n            </li>\n            <li>\n               <p>Make sure that your DB engine runs Oracle Database 19c with an April 2021 or later RU.</p>\n            </li>\n         </ul>\n         <p>Note the following limitations:</p>\n         <ul>\n            <li>\n               <p>You can't convert a CDB to a non-CDB.</p>\n            </li>\n            <li>\n               <p>You can't convert a replica database.</p>\n            </li>\n            <li>\n               <p>You can't convert a non-CDB to a CDB and upgrade the engine version in the\n                   same command.</p>\n            </li>\n            <li>\n               <p>You can't convert the existing custom parameter or option group when it has\n                   options or parameters that are permanent or persistent. In this situation, the\n                   DB instance reverts to the default option and parameter group. To avoid\n                   reverting to the default, specify a new parameter group with\n                       <code>--db-parameter-group-name</code> and a new option group with\n                       <code>--option-group-name</code>.</p>\n            </li>\n         </ul>"
+                    }
                 }
             },
             "traits": {
@@ -16534,6 +16651,9 @@
                 "DBInstance": {
                     "target": "com.amazonaws.rds#DBInstance"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#ModifyDBParameterGroup": {
@@ -16890,6 +17010,9 @@
                 "DBSnapshotAttributesResult": {
                     "target": "com.amazonaws.rds#DBSnapshotAttributesResult"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#ModifyDBSnapshotMessage": {
@@ -16905,7 +17028,7 @@
                 "EngineVersion": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The engine version to upgrade the DB snapshot to.</p>\n         <p>The following are the database engines and engine versions that are available when you upgrade a DB snapshot.</p>\n         <p>\n            <b>MySQL</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>5.5.46</code> (supported for 5.1 DB snapshots)</p>\n            </li>\n         </ul>\n         <p>\n            <b>Oracle</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>19.0.0.0.ru-2022-01.rur-2022-01.r1</code> (supported for 12.2.0.1 DB\n                    snapshots)</p>\n            </li>\n            <li>\n               <p>\n                  <code>19.0.0.0.ru-2022-07.rur-2022-07.r1</code> (supported for 12.1.0.2 DB\n                    snapshots)</p>\n            </li>\n            <li>\n               <p>\n                  <code>12.1.0.2.v8</code>  (supported for 12.1.0.1 DB snapshots)</p>\n            </li>\n            <li>\n               <p>\n                  <code>11.2.0.4.v12</code> (supported for 11.2.0.2 DB snapshots)</p>\n            </li>\n            <li>\n               <p>\n                  <code>11.2.0.4.v11</code> (supported for 11.2.0.3 DB snapshots)</p>\n            </li>\n         </ul>\n         <p>\n            <b>PostgreSQL</b>\n         </p>\n         <p>For the list of engine versions that are available for upgrading a DB snapshot, see \n          <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.PostgreSQL.html#USER_UpgradeDBInstance.PostgreSQL.MajorVersion\">\n              Upgrading the PostgreSQL DB Engine for Amazon RDS</a>.</p>"
+                        "smithy.api#documentation": "<p>The engine version to upgrade the DB snapshot to.</p>\n         <p>The following are the database engines and engine versions that are available when you upgrade a DB snapshot.</p>\n         <p>\n            <b>MySQL</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>5.5.46</code> (supported for 5.1 DB snapshots)</p>\n            </li>\n         </ul>\n         <p>\n            <b>Oracle</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>12.1.0.2.v8</code>  (supported for 12.1.0.1 DB snapshots)</p>\n            </li>\n            <li>\n               <p>\n                  <code>11.2.0.4.v12</code> (supported for 11.2.0.2 DB snapshots)</p>\n            </li>\n            <li>\n               <p>\n                  <code>11.2.0.4.v11</code> (supported for 11.2.0.3 DB snapshots)</p>\n            </li>\n         </ul>\n         <p>\n            <b>PostgreSQL</b>\n         </p>\n         <p>For the list of engine versions that are available for upgrading a DB snapshot, see \n          <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.PostgreSQL.html#USER_UpgradeDBInstance.PostgreSQL.MajorVersion\">\n              Upgrading the PostgreSQL DB Engine for Amazon RDS</a>.</p>"
                     }
                 },
                 "OptionGroupName": {
@@ -16922,6 +17045,9 @@
                 "DBSnapshot": {
                     "target": "com.amazonaws.rds#DBSnapshot"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#ModifyDBSubnetGroup": {
@@ -16987,6 +17113,9 @@
                 "DBSubnetGroup": {
                     "target": "com.amazonaws.rds#DBSubnetGroup"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#ModifyEventSubscription": {
@@ -17066,6 +17195,9 @@
                 "EventSubscription": {
                     "target": "com.amazonaws.rds#EventSubscription"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#ModifyGlobalCluster": {
@@ -17135,6 +17267,9 @@
                 "GlobalCluster": {
                     "target": "com.amazonaws.rds#GlobalCluster"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#ModifyOptionGroup": {
@@ -17197,6 +17332,9 @@
                 "OptionGroup": {
                     "target": "com.amazonaws.rds#OptionGroup"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#NetworkTypeNotSupported": {
@@ -18446,6 +18584,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The storage throughput of the DB instance.</p>"
                     }
+                },
+                "Engine": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The database engine of the DB instance.</p>"
+                    }
                 }
             },
             "traits": {
@@ -18559,6 +18703,9 @@
                 "DBCluster": {
                     "target": "com.amazonaws.rds#DBCluster"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#PromoteReadReplicaMessage": {
@@ -18594,6 +18741,9 @@
                 "DBInstance": {
                     "target": "com.amazonaws.rds#DBInstance"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#ProvisionedIopsNotAvailableInAZFault": {
@@ -18672,6 +18822,9 @@
                 "ReservedDBInstance": {
                     "target": "com.amazonaws.rds#ReservedDBInstance"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#Range": {
@@ -18785,6 +18938,9 @@
                 "DBCluster": {
                     "target": "com.amazonaws.rds#DBCluster"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#RebootDBInstance": {
@@ -18834,6 +18990,9 @@
                 "DBInstance": {
                     "target": "com.amazonaws.rds#DBInstance"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#RecurringCharge": {
@@ -19000,6 +19159,9 @@
                 "GlobalCluster": {
                     "target": "com.amazonaws.rds#GlobalCluster"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#RemoveRoleFromDBCluster": {
@@ -19147,6 +19309,9 @@
                 "EventSubscription": {
                     "target": "com.amazonaws.rds#EventSubscription"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#RemoveTagsFromResource": {
@@ -19947,6 +20112,9 @@
                 "DBCluster": {
                     "target": "com.amazonaws.rds#DBCluster"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#RestoreDBClusterFromSnapshot": {
@@ -20199,6 +20367,9 @@
                 "DBCluster": {
                     "target": "com.amazonaws.rds#DBCluster"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#RestoreDBClusterToPointInTime": {
@@ -20442,6 +20613,9 @@
                 "DBCluster": {
                     "target": "com.amazonaws.rds#DBCluster"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#RestoreDBInstanceFromDBSnapshot": {
@@ -20746,6 +20920,9 @@
                 "DBInstance": {
                     "target": "com.amazonaws.rds#DBInstance"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#RestoreDBInstanceFromS3": {
@@ -21122,6 +21299,9 @@
                 "DBInstance": {
                     "target": "com.amazonaws.rds#DBInstance"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#RestoreDBInstanceToPointInTime": {
@@ -21454,6 +21634,9 @@
                 "DBInstance": {
                     "target": "com.amazonaws.rds#DBInstance"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#RestoreWindow": {
@@ -21544,6 +21727,9 @@
                 "DBSecurityGroup": {
                     "target": "com.amazonaws.rds#DBSecurityGroup"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#SNSInvalidTopicFault": {
@@ -22099,6 +22285,9 @@
                 "DBCluster": {
                     "target": "com.amazonaws.rds#DBCluster"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#StartDBInstance": {
@@ -22213,6 +22402,9 @@
                 "DBInstanceAutomatedBackup": {
                     "target": "com.amazonaws.rds#DBInstanceAutomatedBackup"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#StartDBInstanceMessage": {
@@ -22233,6 +22425,9 @@
                 "DBInstance": {
                     "target": "com.amazonaws.rds#DBInstance"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#StartExportTask": {
@@ -22448,6 +22643,9 @@
                 "DBCluster": {
                     "target": "com.amazonaws.rds#DBCluster"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#StopDBInstance": {
@@ -22517,6 +22715,9 @@
                 "DBInstanceAutomatedBackup": {
                     "target": "com.amazonaws.rds#DBInstanceAutomatedBackup"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#StopDBInstanceMessage": {
@@ -22543,6 +22744,9 @@
                 "DBInstance": {
                     "target": "com.amazonaws.rds#DBInstance"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#StorageQuotaExceededFault": {
@@ -22873,6 +23077,9 @@
                 "DBInstance": {
                     "target": "com.amazonaws.rds#DBInstance"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#SwitchoverTimeout": {
