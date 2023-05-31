@@ -4064,6 +4064,18 @@ func awsAwsjson11_serializeDocumentEntity(v *types.Entity, value smithyjson.Valu
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentEventOrchestration(v *types.EventOrchestration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EventBridgeEnabled != nil {
+		ok := object.Key("eventBridgeEnabled")
+		ok.Boolean(*v.EventBridgeEnabled)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentEventVariableMap(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5805,6 +5817,13 @@ func awsAwsjson11_serializeOpDocumentPutEventTypeInput(v *PutEventTypeInput, val
 	if len(v.EventIngestion) > 0 {
 		ok := object.Key("eventIngestion")
 		ok.String(string(v.EventIngestion))
+	}
+
+	if v.EventOrchestration != nil {
+		ok := object.Key("eventOrchestration")
+		if err := awsAwsjson11_serializeDocumentEventOrchestration(v.EventOrchestration, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.EventVariables != nil {

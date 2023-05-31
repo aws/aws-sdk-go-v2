@@ -61,6 +61,9 @@ type CreateApplicationInput struct {
 	// The identifier of a customer managed key.
 	KmsKeyId *string
 
+	// The Amazon Resource Name (ARN) of the role associated with the application.
+	RoleArn *string
+
 	// A list of tags to apply to the application.
 	Tags map[string]string
 

@@ -27,7 +27,7 @@ type DatastoreFilter struct {
 	noSmithyDocumentSerde
 }
 
-// Displays the properties of the Data Store, including the ID, Arn, name, and the
+// Displays the properties of the Data Store, including the ID, ARN, name, and the
 // status of the Data Store.
 type DatastoreProperties struct {
 
@@ -63,6 +63,9 @@ type DatastoreProperties struct {
 
 	// The user-generated name for the Data Store.
 	DatastoreName *string
+
+	// The identity provider that you selected when you created the Data Store.
+	IdentityProviderConfiguration *IdentityProviderConfiguration
 
 	// The preloaded data configuration for the Data Store. Only data preloaded from
 	// Synthea is supported.
@@ -121,6 +124,40 @@ type ExportJobProperties struct {
 	noSmithyDocumentSerde
 }
 
+// The identity provider configuration that you gave when the Data Store was
+// created.
+type IdentityProviderConfiguration struct {
+
+	// The authorization strategy that you selected when you created the Data Store.
+	//
+	// This member is required.
+	AuthorizationStrategy AuthorizationStrategy
+
+	// If you enabled fine-grained authorization when you created the Data Store.
+	FineGrainedAuthorizationEnabled bool
+
+	// The Amazon Resource Name (ARN) of the Lambda function that you want to use to
+	// decode the access token created by the authorization server.
+	IdpLambdaArn *string
+
+	// The JSON metadata elements that you want to use in your identity provider
+	// configuration. Required elements are listed based on the launch specification of
+	// the SMART application. For more information on all possible elements, see
+	// Metadata (https://build.fhir.org/ig/HL7/smart-app-launch/conformance.html#metadata)
+	// in SMART's App Launch specification. authorization_endpoint : The URL to the
+	// OAuth2 authorization endpoint. grant_types_supported : An array of grant types
+	// that are supported at the token endpoint. You must provide at least one grant
+	// type option. Valid options are authorization_code and client_credentials .
+	// token_endpoint : The URL to the OAuth2 token endpoint. capabilities : An array
+	// of strings of the SMART capabilities that the authorization server supports.
+	// code_challenge_methods_supported : An array of strings of supported PKCE code
+	// challenge methods. You must include the S256 method in the array of PKCE code
+	// challenge methods.
+	Metadata *string
+
+	noSmithyDocumentSerde
+}
+
 // Displays the properties of the import job, including the ID, Arn, Name, and the
 // status of the Data Store.
 type ImportJobProperties struct {
@@ -141,7 +178,7 @@ type ImportJobProperties struct {
 	JobId *string
 
 	// The job status for an Import job. Possible statuses are SUBMITTED, IN_PROGRESS,
-	// COMPLETED, FAILED.
+	// COMPLETED_WITH_ERRORS, COMPLETED, FAILED.
 	//
 	// This member is required.
 	JobStatus JobStatus
@@ -274,7 +311,7 @@ type Tag struct {
 	// This member is required.
 	Key *string
 
-	// The value portion of tag. Tag values are case sensitive.
+	// The value portion of a tag. Tag values are case sensitive.
 	//
 	// This member is required.
 	Value *string

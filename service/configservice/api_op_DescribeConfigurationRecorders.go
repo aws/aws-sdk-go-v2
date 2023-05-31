@@ -13,8 +13,8 @@ import (
 
 // Returns the details for the specified configuration recorders. If the
 // configuration recorder is not specified, this action returns the details for all
-// configuration recorders associated with the account. Currently, you can specify
-// only one configuration recorder per region in your account.
+// configuration recorders associated with the account. You can specify only one
+// configuration recorder for each Amazon Web Services Region for each account.
 func (c *Client) DescribeConfigurationRecorders(ctx context.Context, params *DescribeConfigurationRecordersInput, optFns ...func(*Options)) (*DescribeConfigurationRecordersOutput, error) {
 	if params == nil {
 		params = &DescribeConfigurationRecordersInput{}

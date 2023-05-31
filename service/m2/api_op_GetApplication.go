@@ -111,6 +111,9 @@ type GetApplicationOutput struct {
 	// customer's account.
 	LogGroups []types.LogGroupSummary
 
+	// The Amazon Resource Name (ARN) of the role associated with the application.
+	RoleArn *string
+
 	// The reason for the reported status.
 	StatusReason *string
 

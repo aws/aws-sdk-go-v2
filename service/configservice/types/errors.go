@@ -129,7 +129,7 @@ func (e *InsufficientPermissionsException) ErrorCode() string {
 }
 func (e *InsufficientPermissionsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You have provided a configuration recorder name that is not valid.
+// You have provided a name for the configuration recorder that is not valid.
 type InvalidConfigurationRecorderNameException struct {
 	Message *string
 
@@ -291,9 +291,21 @@ func (e *InvalidParameterValueException) ErrorCode() string {
 }
 func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Config throws an exception if the recording group does not contain a valid list
-// of resource types. Values that are not valid might also be incorrectly
-// formatted.
+// Indicates one of the following errors:
+//   - You have provided a combination of parameter values that is not valid. For
+//     example:
+//   - Setting the allSupported field of RecordingGroup (https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingGroup.html)
+//     to true , but providing a non-empty list for the resourceTypes field of
+//     RecordingGroup (https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingGroup.html)
+//     .
+//   - Setting the allSupported field of RecordingGroup (https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingGroup.html)
+//     to true , but also setting the useOnly field of RecordingStrategy (https://docs.aws.amazon.com/config/latest/APIReference/API_RecordingStrategy.html)
+//     to EXCLUSION_BY_RESOURCE_TYPES .
+//   - Every parameter is either null, false, or empty.
+//   - You have reached the limit of the number of resource types you can provide
+//     for the recording group.
+//   - You have provided resource types or a recording strategy that are not
+//     valid.
 type InvalidRecordingGroupException struct {
 	Message *string
 
@@ -345,7 +357,8 @@ func (e *InvalidResultTokenException) ErrorCode() string {
 }
 func (e *InvalidResultTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You have provided a null or empty role ARN.
+// You have provided a null or empty Amazon Resource Name (ARN) for the IAM role
+// assumed by Config and used by the configuration recorder.
 type InvalidRoleException struct {
 	Message *string
 
@@ -594,7 +607,8 @@ func (e *MaxNumberOfConfigRulesExceededException) ErrorFault() smithy.ErrorFault
 	return smithy.FaultClient
 }
 
-// You have reached the limit of the number of recorders you can create.
+// You have reached the limit of the number of configuration recorders you can
+// create.
 type MaxNumberOfConfigurationRecordersExceededException struct {
 	Message *string
 

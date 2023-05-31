@@ -1,0 +1,8 @@
+{
+    "id": "2cce805c-e190-431b-9988-5603e399da15",
+    "type": "feature",
+    "description": "WorkSpaces Web now allows you to control which IP addresses your WorkSpaces Web portal may be accessed from.",
+    "modules": [
+        "service/workspacesweb"
+    ]
+}

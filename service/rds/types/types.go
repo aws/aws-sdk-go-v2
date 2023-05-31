@@ -3225,6 +3225,9 @@ type PendingModifiedValues struct {
 	// The DB subnet group for the DB instance.
 	DBSubnetGroupName *string
 
+	// The database engine of the DB instance.
+	Engine *string
+
 	// The database engine version.
 	EngineVersion *string
 

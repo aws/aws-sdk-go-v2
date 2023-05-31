@@ -463,7 +463,11 @@ type CreateDBClusterInput struct {
 	// cluster, a value for the Iops parameter is required. Valid values: aurora ,
 	// aurora-iopt1 (Aurora DB clusters); io1 (Multi-AZ DB clusters) Default: aurora
 	// (Aurora DB clusters); io1 (Multi-AZ DB clusters) Valid for: Aurora DB clusters
-	// and Multi-AZ DB clusters
+	// and Multi-AZ DB clusters For more information on storage types for Aurora DB
+	// clusters, see Storage configurations for Amazon Aurora DB clusters (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Overview.StorageReliability.html#aurora-storage-type)
+	// . For more information on storage types for Multi-AZ DB clusters, see Settings
+	// for creating Multi-AZ DB clusters (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/create-multi-az-db-cluster.html#create-multi-az-db-cluster-settings)
+	// .
 	StorageType *string
 
 	// Tags to assign to the DB cluster. Valid for: Aurora DB clusters and Multi-AZ DB

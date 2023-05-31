@@ -147,6 +147,65 @@ type IdentityProviderSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The IP access settings resource that can be associated with a web portal.
+type IpAccessSettings struct {
+
+	// The ARN of the IP access settings resource.
+	//
+	// This member is required.
+	IpAccessSettingsArn *string
+
+	// A list of web portal ARNs that this IP access settings resource is associated
+	// with.
+	AssociatedPortalArns []string
+
+	// The creation date timestamp of the IP access settings.
+	CreationDate *time.Time
+
+	// The description of the IP access settings.
+	Description *string
+
+	// The display name of the IP access settings.
+	DisplayName *string
+
+	// The IP rules of the IP access settings.
+	IpRules []IpRule
+
+	noSmithyDocumentSerde
+}
+
+// The summary of IP access settings.
+type IpAccessSettingsSummary struct {
+
+	// The creation date timestamp of the IP access settings.
+	CreationDate *time.Time
+
+	// The description of the IP access settings.
+	Description *string
+
+	// The display name of the IP access settings.
+	DisplayName *string
+
+	// The ARN of IP access settings.
+	IpAccessSettingsArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The IP rules of the IP access settings.
+type IpRule struct {
+
+	// The IP range of the IP rule.
+	//
+	// This member is required.
+	IpRange *string
+
+	// The description of the IP rule.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
 // A network settings resource that can be associated with a web portal. Once
 // associated with a web portal, network settings define how streaming instances
 // will connect with your specified VPC.
@@ -214,6 +273,9 @@ type Portal struct {
 	// The name of the web portal.
 	DisplayName *string
 
+	// The ARN of the IP access settings.
+	IpAccessSettingsArn *string
+
 	// The ARN of the network settings that is associated with the web portal.
 	NetworkSettingsArn *string
 
@@ -272,6 +334,9 @@ type PortalSummary struct {
 
 	// The name of the web portal.
 	DisplayName *string
+
+	// The ARN of the IP access settings.
+	IpAccessSettingsArn *string
 
 	// The ARN of the network settings that is associated with the web portal.
 	NetworkSettingsArn *string

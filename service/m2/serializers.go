@@ -174,6 +174,11 @@ func awsRestjson1_serializeOpDocumentCreateApplicationInput(v *CreateApplication
 		ok.String(*v.Name)
 	}
 
+	if v.RoleArn != nil {
+		ok := object.Key("roleArn")
+		ok.String(*v.RoleArn)
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("tags")
 		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
@@ -2567,6 +2572,18 @@ func awsRestjson1_serializeDocumentDatasetOrgAttributes(v types.DatasetOrgAttrib
 			return err
 		}
 
+	case *types.DatasetOrgAttributesMemberPo:
+		av := object.Key("po")
+		if err := awsRestjson1_serializeDocumentPoAttributes(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.DatasetOrgAttributesMemberPs:
+		av := object.Key("ps")
+		if err := awsRestjson1_serializeDocumentPsAttributes(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.DatasetOrgAttributesMemberVsam:
 		av := object.Key("vsam")
 		if err := awsRestjson1_serializeDocumentVsamAttributes(&uv.Value, av); err != nil {
@@ -2696,6 +2713,30 @@ func awsRestjson1_serializeDocumentHighAvailabilityConfig(v *types.HighAvailabil
 	return nil
 }
 
+func awsRestjson1_serializeDocumentPoAttributes(v *types.PoAttributes, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Encoding != nil {
+		ok := object.Key("encoding")
+		ok.String(*v.Encoding)
+	}
+
+	if v.Format != nil {
+		ok := object.Key("format")
+		ok.String(*v.Format)
+	}
+
+	if v.MemberFileExtensions != nil {
+		ok := object.Key("memberFileExtensions")
+		if err := awsRestjson1_serializeDocumentString20List(v.MemberFileExtensions, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentPrimaryKey(v *types.PrimaryKey, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2713,6 +2754,23 @@ func awsRestjson1_serializeDocumentPrimaryKey(v *types.PrimaryKey, value smithyj
 	{
 		ok := object.Key("offset")
 		ok.Integer(v.Offset)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPsAttributes(v *types.PsAttributes, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Encoding != nil {
+		ok := object.Key("encoding")
+		ok.String(*v.Encoding)
+	}
+
+	if v.Format != nil {
+		ok := object.Key("format")
+		ok.String(*v.Format)
 	}
 
 	return nil
@@ -2783,6 +2841,17 @@ func awsRestjson1_serializeDocumentStorageConfigurationList(v []types.StorageCon
 		if err := awsRestjson1_serializeDocumentStorageConfiguration(v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentString20List(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
 	}
 	return nil
 }

@@ -852,6 +852,16 @@ func validateDatasetOrgAttributes(v types.DatasetOrgAttributes) error {
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DatasetOrgAttributes"}
 	switch uv := v.(type) {
+	case *types.DatasetOrgAttributesMemberPo:
+		if err := validatePoAttributes(&uv.Value); err != nil {
+			invalidParams.AddNested("[po]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.DatasetOrgAttributesMemberPs:
+		if err := validatePsAttributes(&uv.Value); err != nil {
+			invalidParams.AddNested("[ps]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.DatasetOrgAttributesMemberVsam:
 		if err := validateVsamAttributes(&uv.Value); err != nil {
 			invalidParams.AddNested("[vsam]", err.(smithy.InvalidParamsError))
@@ -931,11 +941,44 @@ func validateHighAvailabilityConfig(v *types.HighAvailabilityConfig) error {
 	}
 }
 
+func validatePoAttributes(v *types.PoAttributes) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PoAttributes"}
+	if v.Format == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Format"))
+	}
+	if v.MemberFileExtensions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MemberFileExtensions"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePrimaryKey(v *types.PrimaryKey) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PrimaryKey"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePsAttributes(v *types.PsAttributes) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PsAttributes"}
+	if v.Format == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Format"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

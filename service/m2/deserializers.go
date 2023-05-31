@@ -1372,6 +1372,15 @@ func awsRestjson1_deserializeOpDocumentGetApplicationOutput(v **GetApplicationOu
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "roleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+				}
+				sv.RoleArn = ptr.String(jtv)
+			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6031,6 +6040,15 @@ func awsRestjson1_deserializeDocumentApplicationSummary(v **types.ApplicationSum
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "roleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+				}
+				sv.RoleArn = ptr.String(jtv)
+			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6623,6 +6641,26 @@ loop:
 			}
 			mv = *destAddr
 			uv = &types.DatasetDetailOrgAttributesMemberGdg{Value: mv}
+			break loop
+
+		case "po":
+			var mv types.PoDetailAttributes
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentPoDetailAttributes(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.DatasetDetailOrgAttributesMemberPo{Value: mv}
+			break loop
+
+		case "ps":
+			var mv types.PsDetailAttributes
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentPsDetailAttributes(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.DatasetDetailOrgAttributesMemberPs{Value: mv}
 			break loop
 
 		case "vsam":
@@ -7934,6 +7972,55 @@ func awsRestjson1_deserializeDocumentPendingMaintenance(v **types.PendingMainten
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentPoDetailAttributes(v **types.PoDetailAttributes, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PoDetailAttributes
+	if *v == nil {
+		sv = &types.PoDetailAttributes{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "encoding":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Encoding = ptr.String(jtv)
+			}
+
+		case "format":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Format = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentPortList(v *[]int32, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8029,6 +8116,55 @@ func awsRestjson1_deserializeDocumentPrimaryKey(v **types.PrimaryKey, value inte
 					return err
 				}
 				sv.Offset = int32(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPsDetailAttributes(v **types.PsDetailAttributes, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PsDetailAttributes
+	if *v == nil {
+		sv = &types.PsDetailAttributes{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "encoding":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Encoding = ptr.String(jtv)
+			}
+
+		case "format":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Format = ptr.String(jtv)
 			}
 
 		default:

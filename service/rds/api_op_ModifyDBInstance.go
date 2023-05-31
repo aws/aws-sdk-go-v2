@@ -245,6 +245,24 @@ type ModifyDBInstanceInput struct {
 	// in the Amazon RDS User Guide. This setting doesn't apply to RDS Custom.
 	EnablePerformanceInsights *bool
 
+	// The target Oracle DB engine when you convert a non-CDB to a CDB. This
+	// intermediate step is necessary to upgrade an Oracle Database 19c non-CDB to an
+	// Oracle Database 21c CDB. Note the following requirements:
+	//   - Make sure that you specify oracle-ee-cdb or oracle-se2-cdb .
+	//   - Make sure that your DB engine runs Oracle Database 19c with an April 2021
+	//   or later RU.
+	// Note the following limitations:
+	//   - You can't convert a CDB to a non-CDB.
+	//   - You can't convert a replica database.
+	//   - You can't convert a non-CDB to a CDB and upgrade the engine version in the
+	//   same command.
+	//   - You can't convert the existing custom parameter or option group when it has
+	//   options or parameters that are permanent or persistent. In this situation, the
+	//   DB instance reverts to the default option and parameter group. To avoid
+	//   reverting to the default, specify a new parameter group with
+	//   --db-parameter-group-name and a new option group with --option-group-name .
+	Engine *string
+
 	// The version number of the database engine to upgrade to. Changing this
 	// parameter results in an outage and the change is applied during the next
 	// maintenance window unless the ApplyImmediately parameter is enabled for this

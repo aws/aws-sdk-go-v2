@@ -54,8 +54,12 @@ type PutEventTypeInput struct {
 	// The description of the event type.
 	Description *string
 
-	// Specifies if ingenstion is enabled or disabled.
+	// Specifies if ingestion is enabled or disabled.
 	EventIngestion types.EventIngestion
+
+	// Enables or disables event orchestration. If enabled, you can send event
+	// predictions to select AWS services for downstream processing of the events.
+	EventOrchestration *types.EventOrchestration
 
 	// The event type labels.
 	Labels []string

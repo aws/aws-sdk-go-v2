@@ -30,6 +30,26 @@ func (m *validateOpAssociateBrowserSettings) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAssociateIpAccessSettings struct {
+}
+
+func (*validateOpAssociateIpAccessSettings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateIpAccessSettings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateIpAccessSettingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateIpAccessSettingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAssociateNetworkSettings struct {
 }
 
@@ -145,6 +165,26 @@ func (m *validateOpCreateIdentityProvider) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateIdentityProviderInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateIpAccessSettings struct {
+}
+
+func (*validateOpCreateIpAccessSettings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateIpAccessSettings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateIpAccessSettingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateIpAccessSettingsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -290,6 +330,26 @@ func (m *validateOpDeleteIdentityProvider) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteIpAccessSettings struct {
+}
+
+func (*validateOpDeleteIpAccessSettings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteIpAccessSettings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteIpAccessSettingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteIpAccessSettingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteNetworkSettings struct {
 }
 
@@ -410,6 +470,26 @@ func (m *validateOpDisassociateBrowserSettings) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisassociateIpAccessSettings struct {
+}
+
+func (*validateOpDisassociateIpAccessSettings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateIpAccessSettings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateIpAccessSettingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateIpAccessSettingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDisassociateNetworkSettings struct {
 }
 
@@ -525,6 +605,26 @@ func (m *validateOpGetIdentityProvider) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetIdentityProviderInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetIpAccessSettings struct {
+}
+
+func (*validateOpGetIpAccessSettings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetIpAccessSettings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetIpAccessSettingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetIpAccessSettingsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -810,6 +910,26 @@ func (m *validateOpUpdateIdentityProvider) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateIpAccessSettings struct {
+}
+
+func (*validateOpUpdateIpAccessSettings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateIpAccessSettings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateIpAccessSettingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateIpAccessSettingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateNetworkSettings struct {
 }
 
@@ -914,6 +1034,10 @@ func addOpAssociateBrowserSettingsValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpAssociateBrowserSettings{}, middleware.After)
 }
 
+func addOpAssociateIpAccessSettingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateIpAccessSettings{}, middleware.After)
+}
+
 func addOpAssociateNetworkSettingsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateNetworkSettings{}, middleware.After)
 }
@@ -936,6 +1060,10 @@ func addOpCreateBrowserSettingsValidationMiddleware(stack *middleware.Stack) err
 
 func addOpCreateIdentityProviderValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateIdentityProvider{}, middleware.After)
+}
+
+func addOpCreateIpAccessSettingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateIpAccessSettings{}, middleware.After)
 }
 
 func addOpCreateNetworkSettingsValidationMiddleware(stack *middleware.Stack) error {
@@ -966,6 +1094,10 @@ func addOpDeleteIdentityProviderValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpDeleteIdentityProvider{}, middleware.After)
 }
 
+func addOpDeleteIpAccessSettingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteIpAccessSettings{}, middleware.After)
+}
+
 func addOpDeleteNetworkSettingsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteNetworkSettings{}, middleware.After)
 }
@@ -990,6 +1122,10 @@ func addOpDisassociateBrowserSettingsValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpDisassociateBrowserSettings{}, middleware.After)
 }
 
+func addOpDisassociateIpAccessSettingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateIpAccessSettings{}, middleware.After)
+}
+
 func addOpDisassociateNetworkSettingsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociateNetworkSettings{}, middleware.After)
 }
@@ -1012,6 +1148,10 @@ func addOpGetBrowserSettingsValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpGetIdentityProviderValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetIdentityProvider{}, middleware.After)
+}
+
+func addOpGetIpAccessSettingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetIpAccessSettings{}, middleware.After)
 }
 
 func addOpGetNetworkSettingsValidationMiddleware(stack *middleware.Stack) error {
@@ -1070,6 +1210,10 @@ func addOpUpdateIdentityProviderValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpUpdateIdentityProvider{}, middleware.After)
 }
 
+func addOpUpdateIpAccessSettingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateIpAccessSettings{}, middleware.After)
+}
+
 func addOpUpdateNetworkSettingsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateNetworkSettings{}, middleware.After)
 }
@@ -1088,6 +1232,38 @@ func addOpUpdateUserAccessLoggingSettingsValidationMiddleware(stack *middleware.
 
 func addOpUpdateUserSettingsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateUserSettings{}, middleware.After)
+}
+
+func validateIpRule(v *types.IpRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IpRule"}
+	if v.IpRange == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IpRange"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIpRuleList(v []types.IpRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IpRuleList"}
+	for i := range v {
+		if err := validateIpRule(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateTag(v *types.Tag) error {
@@ -1135,6 +1311,24 @@ func validateOpAssociateBrowserSettingsInput(v *AssociateBrowserSettingsInput) e
 	}
 	if v.BrowserSettingsArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BrowserSettingsArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAssociateIpAccessSettingsInput(v *AssociateIpAccessSettingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateIpAccessSettingsInput"}
+	if v.PortalArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PortalArn"))
+	}
+	if v.IpAccessSettingsArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IpAccessSettingsArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1251,6 +1445,30 @@ func validateOpCreateIdentityProviderInput(v *CreateIdentityProviderInput) error
 	}
 	if v.IdentityProviderDetails == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IdentityProviderDetails"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateIpAccessSettingsInput(v *CreateIpAccessSettingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateIpAccessSettingsInput"}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.IpRules == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IpRules"))
+	} else if v.IpRules != nil {
+		if err := validateIpRuleList(v.IpRules); err != nil {
+			invalidParams.AddNested("IpRules", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1404,6 +1622,21 @@ func validateOpDeleteIdentityProviderInput(v *DeleteIdentityProviderInput) error
 	}
 }
 
+func validateOpDeleteIpAccessSettingsInput(v *DeleteIpAccessSettingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteIpAccessSettingsInput"}
+	if v.IpAccessSettingsArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IpAccessSettingsArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteNetworkSettingsInput(v *DeleteNetworkSettingsInput) error {
 	if v == nil {
 		return nil
@@ -1484,6 +1717,21 @@ func validateOpDisassociateBrowserSettingsInput(v *DisassociateBrowserSettingsIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DisassociateBrowserSettingsInput"}
+	if v.PortalArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PortalArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDisassociateIpAccessSettingsInput(v *DisassociateIpAccessSettingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateIpAccessSettingsInput"}
 	if v.PortalArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PortalArn"))
 	}
@@ -1576,6 +1824,21 @@ func validateOpGetIdentityProviderInput(v *GetIdentityProviderInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetIdentityProviderInput"}
 	if v.IdentityProviderArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IdentityProviderArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetIpAccessSettingsInput(v *GetIpAccessSettingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetIpAccessSettingsInput"}
+	if v.IpAccessSettingsArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IpAccessSettingsArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1799,6 +2062,26 @@ func validateOpUpdateIdentityProviderInput(v *UpdateIdentityProviderInput) error
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateIdentityProviderInput"}
 	if v.IdentityProviderArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IdentityProviderArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateIpAccessSettingsInput(v *UpdateIpAccessSettingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateIpAccessSettingsInput"}
+	if v.IpAccessSettingsArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IpAccessSettingsArn"))
+	}
+	if v.IpRules != nil {
+		if err := validateIpRuleList(v.IpRules); err != nil {
+			invalidParams.AddNested("IpRules", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -1958,6 +1958,11 @@ func awsAwsjson10_deserializeDocumentDatastoreProperties(v **types.DatastoreProp
 				sv.DatastoreTypeVersion = types.FHIRVersion(jtv)
 			}
 
+		case "IdentityProviderConfiguration":
+			if err := awsAwsjson10_deserializeDocumentIdentityProviderConfiguration(&sv.IdentityProviderConfiguration, value); err != nil {
+				return err
+			}
+
 		case "PreloadDataConfig":
 			if err := awsAwsjson10_deserializeDocumentPreloadDataConfig(&sv.PreloadDataConfig, value); err != nil {
 				return err
@@ -2164,6 +2169,73 @@ func awsAwsjson10_deserializeDocumentExportJobPropertiesList(v *[]types.ExportJo
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentIdentityProviderConfiguration(v **types.IdentityProviderConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.IdentityProviderConfiguration
+	if *v == nil {
+		sv = &types.IdentityProviderConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AuthorizationStrategy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AuthorizationStrategy to be of type string, got %T instead", value)
+				}
+				sv.AuthorizationStrategy = types.AuthorizationStrategy(jtv)
+			}
+
+		case "FineGrainedAuthorizationEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.FineGrainedAuthorizationEnabled = jtv
+			}
+
+		case "IdpLambdaArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LambdaArn to be of type string, got %T instead", value)
+				}
+				sv.IdpLambdaArn = ptr.String(jtv)
+			}
+
+		case "Metadata":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConfigurationMetadata to be of type string, got %T instead", value)
+				}
+				sv.Metadata = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

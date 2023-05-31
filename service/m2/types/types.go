@@ -85,6 +85,9 @@ type ApplicationSummary struct {
 	// runs for the first time.
 	LastStartTime *time.Time
 
+	// The Amazon Resource Name (ARN) of the role associated with the application.
+	RoleArn *string
+
 	// Indicates the status of the latest version of the application.
 	VersionStatus ApplicationVersionLifecycle
 
@@ -166,7 +169,7 @@ type BatchJobExecutionSummary struct {
 	// This member is required.
 	Status BatchJobExecutionStatus
 
-	// Identifies a specific batch job.
+	// The unique identifier of this batch job.
 	BatchJobIdentifier BatchJobIdentifier
 
 	// The timestamp when this batch job execution ended.
@@ -181,7 +184,9 @@ type BatchJobExecutionSummary struct {
 	// The type of a particular batch job execution.
 	JobType BatchJobType
 
-	//
+	// The batch job return code from either the Blu Age or Micro Focus runtime
+	// engines. For more information, see Batch return codes (https://www.ibm.com/docs/en/was/8.5.5?topic=model-batch-return-codes)
+	// in the IBM WebSphere Application Server documentation.
 	ReturnCode *string
 
 	noSmithyDocumentSerde
@@ -252,6 +257,8 @@ type DataSet struct {
 // The following types satisfy this interface:
 //
 //	DatasetDetailOrgAttributesMemberGdg
+//	DatasetDetailOrgAttributesMemberPo
+//	DatasetDetailOrgAttributesMemberPs
 //	DatasetDetailOrgAttributesMemberVsam
 type DatasetDetailOrgAttributes interface {
 	isDatasetDetailOrgAttributes()
@@ -265,6 +272,24 @@ type DatasetDetailOrgAttributesMemberGdg struct {
 }
 
 func (*DatasetDetailOrgAttributesMemberGdg) isDatasetDetailOrgAttributes() {}
+
+// The details of a PO type data set.
+type DatasetDetailOrgAttributesMemberPo struct {
+	Value PoDetailAttributes
+
+	noSmithyDocumentSerde
+}
+
+func (*DatasetDetailOrgAttributesMemberPo) isDatasetDetailOrgAttributes() {}
+
+// The details of a PS type data set.
+type DatasetDetailOrgAttributesMemberPs struct {
+	Value PsDetailAttributes
+
+	noSmithyDocumentSerde
+}
+
+func (*DatasetDetailOrgAttributesMemberPs) isDatasetDetailOrgAttributes() {}
 
 // The details of a VSAM data set.
 type DatasetDetailOrgAttributesMemberVsam struct {
@@ -379,6 +404,8 @@ type DataSetImportTask struct {
 // The following types satisfy this interface:
 //
 //	DatasetOrgAttributesMemberGdg
+//	DatasetOrgAttributesMemberPo
+//	DatasetOrgAttributesMemberPs
 //	DatasetOrgAttributesMemberVsam
 type DatasetOrgAttributes interface {
 	isDatasetOrgAttributes()
@@ -392,6 +419,24 @@ type DatasetOrgAttributesMemberGdg struct {
 }
 
 func (*DatasetOrgAttributesMemberGdg) isDatasetOrgAttributes() {}
+
+// The details of a PO type data set.
+type DatasetOrgAttributesMemberPo struct {
+	Value PoAttributes
+
+	noSmithyDocumentSerde
+}
+
+func (*DatasetOrgAttributesMemberPo) isDatasetOrgAttributes() {}
+
+// The details of a PS type data set.
+type DatasetOrgAttributesMemberPs struct {
+	Value PsAttributes
+
+	noSmithyDocumentSerde
+}
+
+func (*DatasetOrgAttributesMemberPs) isDatasetOrgAttributes() {}
 
 // The details of a VSAM data set.
 type DatasetOrgAttributesMemberVsam struct {
@@ -744,6 +789,42 @@ type PendingMaintenance struct {
 	noSmithyDocumentSerde
 }
 
+// The supported properties for a PO type data set.
+type PoAttributes struct {
+
+	// The format of the data set records.
+	//
+	// This member is required.
+	Format *string
+
+	// An array containing one or more filename extensions, allowing you to specify
+	// which files to be included as PDS member.
+	//
+	// This member is required.
+	MemberFileExtensions []string
+
+	// The character set encoding of the data set.
+	Encoding *string
+
+	noSmithyDocumentSerde
+}
+
+// The supported properties for a PO type data set.
+type PoDetailAttributes struct {
+
+	// The character set encoding of the data set.
+	//
+	// This member is required.
+	Encoding *string
+
+	// The format of the data set records.
+	//
+	// This member is required.
+	Format *string
+
+	noSmithyDocumentSerde
+}
+
 // The primary key for a KSDS data set.
 type PrimaryKey struct {
 
@@ -760,6 +841,36 @@ type PrimaryKey struct {
 
 	// A name for the Primary Key.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// The supported properties for a PS type data set.
+type PsAttributes struct {
+
+	// The format of the data set records.
+	//
+	// This member is required.
+	Format *string
+
+	// The character set encoding of the data set.
+	Encoding *string
+
+	noSmithyDocumentSerde
+}
+
+// The supported properties for a PS type data set.
+type PsDetailAttributes struct {
+
+	// The character set encoding of the data set.
+	//
+	// This member is required.
+	Encoding *string
+
+	// The format of the data set records.
+	//
+	// This member is required.
+	Format *string
 
 	noSmithyDocumentSerde
 }

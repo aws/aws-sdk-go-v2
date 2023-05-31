@@ -1468,6 +1468,21 @@ func validateEntity(v *types.Entity) error {
 	}
 }
 
+func validateEventOrchestration(v *types.EventOrchestration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EventOrchestration"}
+	if v.EventBridgeEnabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventBridgeEnabled"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateExternalEventsDetail(v *types.ExternalEventsDetail) error {
 	if v == nil {
 		return nil
@@ -2557,6 +2572,11 @@ func validateOpPutEventTypeInput(v *PutEventTypeInput) error {
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EventOrchestration != nil {
+		if err := validateEventOrchestration(v.EventOrchestration); err != nil {
+			invalidParams.AddNested("EventOrchestration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

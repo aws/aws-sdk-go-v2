@@ -5759,6 +5759,20 @@ func awsAwsjson11_serializeDocumentExcludedAccounts(v []string, value smithyjson
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentExclusionByResourceTypes(v *types.ExclusionByResourceTypes, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ResourceTypes != nil {
+		ok := object.Key("resourceTypes")
+		if err := awsAwsjson11_serializeDocumentResourceTypeList(v.ResourceTypes, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentExecutionControls(v *types.ExecutionControls, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -6072,9 +6086,23 @@ func awsAwsjson11_serializeDocumentRecordingGroup(v *types.RecordingGroup, value
 		ok.Boolean(v.AllSupported)
 	}
 
+	if v.ExclusionByResourceTypes != nil {
+		ok := object.Key("exclusionByResourceTypes")
+		if err := awsAwsjson11_serializeDocumentExclusionByResourceTypes(v.ExclusionByResourceTypes, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.IncludeGlobalResourceTypes {
 		ok := object.Key("includeGlobalResourceTypes")
 		ok.Boolean(v.IncludeGlobalResourceTypes)
+	}
+
+	if v.RecordingStrategy != nil {
+		ok := object.Key("recordingStrategy")
+		if err := awsAwsjson11_serializeDocumentRecordingStrategy(v.RecordingStrategy, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.ResourceTypes != nil {
@@ -6082,6 +6110,18 @@ func awsAwsjson11_serializeDocumentRecordingGroup(v *types.RecordingGroup, value
 		if err := awsAwsjson11_serializeDocumentResourceTypeList(v.ResourceTypes, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRecordingStrategy(v *types.RecordingStrategy, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.UseOnly) > 0 {
+		ok := object.Key("useOnly")
+		ok.String(string(v.UseOnly))
 	}
 
 	return nil

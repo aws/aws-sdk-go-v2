@@ -16,6 +16,7 @@
 // HTTP or HTTPS. These libraries provide basic functions that automatically take
 // care of tasks such as cryptographically signing your requests, retrying
 // requests, and handling error responses, so that it is easier for you to get
-// started. For more information about the AWS SDKs, see Tools to build on AWS (https://docs.aws.amazon.com/https:/aws.amazon.com/tools/)
-// .
+// started. For more information about the AWS SDKs, go to Tools to build on AWS (https://aws.amazon.com/developer/tools/)
+// page, scroll down to the SDK section, and choose plus (+) sign to expand the
+// section.
 package frauddetector

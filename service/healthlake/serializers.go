@@ -757,6 +757,33 @@ func awsAwsjson10_serializeDocumentDatastoreFilter(v *types.DatastoreFilter, val
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentIdentityProviderConfiguration(v *types.IdentityProviderConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.AuthorizationStrategy) > 0 {
+		ok := object.Key("AuthorizationStrategy")
+		ok.String(string(v.AuthorizationStrategy))
+	}
+
+	if v.FineGrainedAuthorizationEnabled {
+		ok := object.Key("FineGrainedAuthorizationEnabled")
+		ok.Boolean(v.FineGrainedAuthorizationEnabled)
+	}
+
+	if v.IdpLambdaArn != nil {
+		ok := object.Key("IdpLambdaArn")
+		ok.String(*v.IdpLambdaArn)
+	}
+
+	if v.Metadata != nil {
+		ok := object.Key("Metadata")
+		ok.String(*v.Metadata)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentInputDataConfig(v types.InputDataConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -909,6 +936,13 @@ func awsAwsjson10_serializeOpDocumentCreateFHIRDatastoreInput(v *CreateFHIRDatas
 	if len(v.DatastoreTypeVersion) > 0 {
 		ok := object.Key("DatastoreTypeVersion")
 		ok.String(string(v.DatastoreTypeVersion))
+	}
+
+	if v.IdentityProviderConfiguration != nil {
+		ok := object.Key("IdentityProviderConfiguration")
+		if err := awsAwsjson10_serializeDocumentIdentityProviderConfiguration(v.IdentityProviderConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.PreloadDataConfig != nil {

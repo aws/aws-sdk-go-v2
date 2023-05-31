@@ -16959,6 +16959,42 @@ func awsAwsjson11_deserializeDocumentExcludedAccounts(v *[]string, value interfa
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentExclusionByResourceTypes(v **types.ExclusionByResourceTypes, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ExclusionByResourceTypes
+	if *v == nil {
+		sv = &types.ExclusionByResourceTypes{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "resourceTypes":
+			if err := awsAwsjson11_deserializeDocumentResourceTypeList(&sv.ResourceTypes, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentExecutionControls(v **types.ExecutionControls, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -20553,6 +20589,11 @@ func awsAwsjson11_deserializeDocumentRecordingGroup(v **types.RecordingGroup, va
 				sv.AllSupported = jtv
 			}
 
+		case "exclusionByResourceTypes":
+			if err := awsAwsjson11_deserializeDocumentExclusionByResourceTypes(&sv.ExclusionByResourceTypes, value); err != nil {
+				return err
+			}
+
 		case "includeGlobalResourceTypes":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -20562,9 +20603,54 @@ func awsAwsjson11_deserializeDocumentRecordingGroup(v **types.RecordingGroup, va
 				sv.IncludeGlobalResourceTypes = jtv
 			}
 
+		case "recordingStrategy":
+			if err := awsAwsjson11_deserializeDocumentRecordingStrategy(&sv.RecordingStrategy, value); err != nil {
+				return err
+			}
+
 		case "resourceTypes":
 			if err := awsAwsjson11_deserializeDocumentResourceTypeList(&sv.ResourceTypes, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRecordingStrategy(v **types.RecordingStrategy, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RecordingStrategy
+	if *v == nil {
+		sv = &types.RecordingStrategy{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "useOnly":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RecordingStrategyType to be of type string, got %T instead", value)
+				}
+				sv.UseOnly = types.RecordingStrategyType(jtv)
 			}
 
 		default:

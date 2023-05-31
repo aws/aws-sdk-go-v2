@@ -518,6 +518,26 @@ func (RecorderStatus) Values() []RecorderStatus {
 	}
 }
 
+type RecordingStrategyType string
+
+// Enum values for RecordingStrategyType
+const (
+	RecordingStrategyTypeAllSupportedResourceTypes RecordingStrategyType = "ALL_SUPPORTED_RESOURCE_TYPES"
+	RecordingStrategyTypeInclusionByResourceTypes  RecordingStrategyType = "INCLUSION_BY_RESOURCE_TYPES"
+	RecordingStrategyTypeExclusionByResourceTypes  RecordingStrategyType = "EXCLUSION_BY_RESOURCE_TYPES"
+)
+
+// Values returns all known values for RecordingStrategyType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RecordingStrategyType) Values() []RecordingStrategyType {
+	return []RecordingStrategyType{
+		"ALL_SUPPORTED_RESOURCE_TYPES",
+		"INCLUSION_BY_RESOURCE_TYPES",
+		"EXCLUSION_BY_RESOURCE_TYPES",
+	}
+}
+
 type RemediationExecutionState string
 
 // Enum values for RemediationExecutionState

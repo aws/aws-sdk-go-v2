@@ -11,13 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new configuration recorder to record the selected resource
-// configurations. You can use this action to change the role roleARN or the
-// recordingGroup of an existing recorder. To change the role, call the action on
-// the existing configuration recorder and specify a role. Currently, you can
-// specify only one configuration recorder per region in your account. If
-// ConfigurationRecorder does not have the recordingGroup parameter specified, the
-// default is to record all supported resource types.
+// Creates a new configuration recorder to record configuration changes for
+// specified resource types. You can also use this action to change the roleARN or
+// the recordingGroup of an existing recorder. For more information, see  Managing
+// the Configuration Recorder  (https://docs.aws.amazon.com/config/latest/developerguide/stop-start-recorder.html)
+// in the Config Developer Guide. You can specify only one configuration recorder
+// for each Amazon Web Services Region for each account. If the configuration
+// recorder does not have the recordingGroup field specified, the default is to
+// record all supported resource types.
 func (c *Client) PutConfigurationRecorder(ctx context.Context, params *PutConfigurationRecorderInput, optFns ...func(*Options)) (*PutConfigurationRecorderOutput, error) {
 	if params == nil {
 		params = &PutConfigurationRecorderInput{}
@@ -36,8 +37,8 @@ func (c *Client) PutConfigurationRecorder(ctx context.Context, params *PutConfig
 // The input for the PutConfigurationRecorder action.
 type PutConfigurationRecorderInput struct {
 
-	// The configuration recorder object that records each configuration change made
-	// to the resources.
+	// An object for the configuration recorder to record configuration changes for
+	// specified resource types.
 	//
 	// This member is required.
 	ConfigurationRecorder *types.ConfigurationRecorder

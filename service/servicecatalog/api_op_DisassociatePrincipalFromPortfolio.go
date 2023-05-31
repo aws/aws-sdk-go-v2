@@ -19,7 +19,15 @@ import (
 // DisassociatePrincipalFromPortfolio . For portfolios that have been shared with
 // principal name sharing enabled: after disassociating a principal, share
 // recipient accounts will no longer be able to provision products in this
-// portfolio using a role matching the name of the associated principal.
+// portfolio using a role matching the name of the associated principal. For more
+// information, review associate-principal-with-portfolio (https://docs.aws.amazon.com/cli/latest/reference/servicecatalog/associate-principal-with-portfolio.html#options)
+// in the Amazon Web Services CLI Command Reference. If you disassociate a
+// principal from a portfolio, with PrincipalType as IAM , the same principal will
+// still have access to the portfolio if it matches one of the associated
+// principals of type IAM_PATTERN . To fully remove access for a principal, verify
+// all the associated Principals of type IAM_PATTERN , and then ensure you
+// disassociate any IAM_PATTERN principals that match the principal whose access
+// you are removing.
 func (c *Client) DisassociatePrincipalFromPortfolio(ctx context.Context, params *DisassociatePrincipalFromPortfolioInput, optFns ...func(*Options)) (*DisassociatePrincipalFromPortfolioOutput, error) {
 	if params == nil {
 		params = &DisassociatePrincipalFromPortfolioInput{}
@@ -43,7 +51,8 @@ type DisassociatePrincipalFromPortfolioInput struct {
 	PortfolioId *string
 
 	// The ARN of the principal (user, role, or group). This field allows an ARN with
-	// no accountID if PrincipalType is IAM_PATTERN .
+	// no accountID with or without wildcard characters if PrincipalType is IAM_PATTERN
+	// .
 	//
 	// This member is required.
 	PrincipalARN *string
@@ -54,7 +63,7 @@ type DisassociatePrincipalFromPortfolioInput struct {
 	AcceptLanguage *string
 
 	// The supported value is IAM if you use a fully defined ARN, or IAM_PATTERN if
-	// you use no accountID .
+	// you specify an IAM ARN with no AccountId, with or without wildcard characters.
 	PrincipalType types.PrincipalType
 
 	noSmithyDocumentSerde

@@ -30,6 +30,46 @@ func (m *validateOpCreateFHIRDatastore) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteFHIRDatastore struct {
+}
+
+func (*validateOpDeleteFHIRDatastore) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteFHIRDatastore) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteFHIRDatastoreInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteFHIRDatastoreInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeFHIRDatastore struct {
+}
+
+func (*validateOpDescribeFHIRDatastore) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeFHIRDatastore) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeFHIRDatastoreInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeFHIRDatastoreInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeFHIRExportJob struct {
 }
 
@@ -214,6 +254,14 @@ func addOpCreateFHIRDatastoreValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpCreateFHIRDatastore{}, middleware.After)
 }
 
+func addOpDeleteFHIRDatastoreValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteFHIRDatastore{}, middleware.After)
+}
+
+func addOpDescribeFHIRDatastoreValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeFHIRDatastore{}, middleware.After)
+}
+
 func addOpDescribeFHIRExportJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeFHIRExportJob{}, middleware.After)
 }
@@ -248,6 +296,21 @@ func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func validateIdentityProviderConfiguration(v *types.IdentityProviderConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IdentityProviderConfiguration"}
+	if len(v.AuthorizationStrategy) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthorizationStrategy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateKmsEncryptionConfig(v *types.KmsEncryptionConfig) error {
@@ -393,6 +456,41 @@ func validateOpCreateFHIRDatastoreInput(v *CreateFHIRDatastoreInput) error {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.IdentityProviderConfiguration != nil {
+		if err := validateIdentityProviderConfiguration(v.IdentityProviderConfiguration); err != nil {
+			invalidParams.AddNested("IdentityProviderConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteFHIRDatastoreInput(v *DeleteFHIRDatastoreInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteFHIRDatastoreInput"}
+	if v.DatastoreId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatastoreId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeFHIRDatastoreInput(v *DescribeFHIRDatastoreInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeFHIRDatastoreInput"}
+	if v.DatastoreId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatastoreId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

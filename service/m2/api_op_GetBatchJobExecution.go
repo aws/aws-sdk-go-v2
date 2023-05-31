@@ -65,7 +65,7 @@ type GetBatchJobExecutionOutput struct {
 	// This member is required.
 	Status types.BatchJobExecutionStatus
 
-	// Identifies a specific batch job.
+	// The unique identifier of this batch job.
 	BatchJobIdentifier types.BatchJobIdentifier
 
 	// The timestamp when the batch job execution ended.
@@ -83,7 +83,9 @@ type GetBatchJobExecutionOutput struct {
 	// The user for the job.
 	JobUser *string
 
-	//
+	// The batch job return code from either the Blu Age or Micro Focus runtime
+	// engines. For more information, see Batch return codes (https://www.ibm.com/docs/en/was/8.5.5?topic=model-batch-return-codes)
+	// in the IBM WebSphere Application Server documentation.
 	ReturnCode *string
 
 	// The reason for the reported status.

@@ -41,6 +41,10 @@ type CreateFHIRDatastoreInput struct {
 	// The user generated name for the Data Store.
 	DatastoreName *string
 
+	// The configuration of the identity provider that you want to use for your Data
+	// Store.
+	IdentityProviderConfiguration *types.IdentityProviderConfiguration
+
 	// Optional parameter to preload data upon creation of the Data Store. Currently,
 	// the only supported preloaded data is synthetic data generated from Synthea.
 	PreloadDataConfig *types.PreloadDataConfig
@@ -57,14 +61,13 @@ type CreateFHIRDatastoreInput struct {
 
 type CreateFHIRDatastoreOutput struct {
 
-	// The datastore ARN is generated during the creation of the Data Store and can be
-	// found in the output from the initial Data Store creation call.
+	// The Data Store ARN is generated during the creation of the Data Store and can
+	// be found in the output from the initial Data Store creation call.
 	//
 	// This member is required.
 	DatastoreArn *string
 
-	// The AWS endpoint for the created Data Store. For preview, only US-east-1
-	// endpoints are supported.
+	// The AWS endpoint for the created Data Store.
 	//
 	// This member is required.
 	DatastoreEndpoint *string

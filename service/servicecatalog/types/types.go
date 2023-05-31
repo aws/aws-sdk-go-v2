@@ -359,11 +359,14 @@ type PortfolioShareDetail struct {
 type Principal struct {
 
 	// The ARN of the principal (user, role, or group). This field allows for an ARN
-	// with no accountID if the PrincipalType is an IAM_PATTERN .
+	// with no accountID , with or without wildcard characters if the PrincipalType is
+	// an IAM_PATTERN . For more information, review associate-principal-with-portfolio (https://docs.aws.amazon.com/cli/latest/reference/servicecatalog/associate-principal-with-portfolio.html#options)
+	// in the Amazon Web Services CLI Command Reference.
 	PrincipalARN *string
 
 	// The principal type. The supported value is IAM if you use a fully defined ARN,
-	// or IAM_PATTERN if you use an ARN with no accountID .
+	// or IAM_PATTERN if you use an ARN with no accountID , with or without wildcard
+	// characters.
 	PrincipalType PrincipalType
 
 	noSmithyDocumentSerde

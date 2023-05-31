@@ -463,6 +463,17 @@ type Event struct {
 	noSmithyDocumentSerde
 }
 
+// The event orchestration status.
+type EventOrchestration struct {
+
+	// Specifies if event orchestration is enabled through Amazon EventBridge.
+	//
+	// This member is required.
+	EventBridgeEnabled *bool
+
+	noSmithyDocumentSerde
+}
+
 // Information about the summary of an event prediction.
 type EventPredictionSummary struct {
 
@@ -507,6 +518,9 @@ type EventType struct {
 	// Amazon Fraud Detector uses this data, known as INGESTED_EVENTS , to train your
 	// model and improve fraud predictions.
 	EventIngestion EventIngestion
+
+	// The event orchestration status.
+	EventOrchestration *EventOrchestration
 
 	// The event type event variables.
 	EventVariables []string
@@ -757,7 +771,7 @@ type LabelSchema struct {
 	//   recommended when the majority of the events in the dataset are labeled.
 	//   - Use FRAUD if you want to categorize all unlabeled events as “Fraud”. This is
 	//   recommended when most of the events in your dataset are fraudulent.
-	//   - Use LEGIT f you want to categorize all unlabeled events as “Legit”. This is
+	//   - Use LEGIT if you want to categorize all unlabeled events as “Legit”. This is
 	//   recommended when most of the events in your dataset are legitimate.
 	//   - Use AUTO if you want Amazon Fraud Detector to decide how to use the
 	//   unlabeled data. This is recommended when there is significant unlabeled events
@@ -1330,7 +1344,7 @@ type UncertaintyRange struct {
 	// This member is required.
 	LowerBoundValue *float32
 
-	// The lower bound value of the area under curve (auc).
+	// The upper bound value of the area under curve (auc).
 	//
 	// This member is required.
 	UpperBoundValue *float32

@@ -58,6 +58,12 @@ func ExampleDatasetDetailOrgAttributes_outputUsage() {
 	case *types.DatasetDetailOrgAttributesMemberGdg:
 		_ = v.Value // Value is types.GdgDetailAttributes
 
+	case *types.DatasetDetailOrgAttributesMemberPo:
+		_ = v.Value // Value is types.PoDetailAttributes
+
+	case *types.DatasetDetailOrgAttributesMemberPs:
+		_ = v.Value // Value is types.PsDetailAttributes
+
 	case *types.DatasetDetailOrgAttributesMemberVsam:
 		_ = v.Value // Value is types.VsamDetailAttributes
 
@@ -70,7 +76,9 @@ func ExampleDatasetDetailOrgAttributes_outputUsage() {
 	}
 }
 
+var _ *types.PoDetailAttributes
 var _ *types.VsamDetailAttributes
+var _ *types.PsDetailAttributes
 var _ *types.GdgDetailAttributes
 
 func ExampleDataSetImportConfig_outputUsage() {
@@ -102,6 +110,12 @@ func ExampleDatasetOrgAttributes_outputUsage() {
 	case *types.DatasetOrgAttributesMemberGdg:
 		_ = v.Value // Value is types.GdgAttributes
 
+	case *types.DatasetOrgAttributesMemberPo:
+		_ = v.Value // Value is types.PoAttributes
+
+	case *types.DatasetOrgAttributesMemberPs:
+		_ = v.Value // Value is types.PsAttributes
+
 	case *types.DatasetOrgAttributesMemberVsam:
 		_ = v.Value // Value is types.VsamAttributes
 
@@ -114,8 +128,10 @@ func ExampleDatasetOrgAttributes_outputUsage() {
 	}
 }
 
+var _ *types.PsAttributes
 var _ *types.GdgAttributes
 var _ *types.VsamAttributes
+var _ *types.PoAttributes
 
 func ExampleDefinition_outputUsage() {
 	var union types.Definition

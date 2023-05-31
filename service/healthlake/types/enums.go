@@ -2,6 +2,24 @@
 
 package types
 
+type AuthorizationStrategy string
+
+// Enum values for AuthorizationStrategy
+const (
+	AuthorizationStrategySmartv1 AuthorizationStrategy = "SMART_ON_FHIR_V1"
+	AuthorizationStrategyAwsAuth AuthorizationStrategy = "AWS_AUTH"
+)
+
+// Values returns all known values for AuthorizationStrategy. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AuthorizationStrategy) Values() []AuthorizationStrategy {
+	return []AuthorizationStrategy{
+		"SMART_ON_FHIR_V1",
+		"AWS_AUTH",
+	}
+}
+
 type CmkType string
 
 // Enum values for CmkType
@@ -67,6 +85,10 @@ const (
 	JobStatusCompletedWithErrors JobStatus = "COMPLETED_WITH_ERRORS"
 	JobStatusCompleted           JobStatus = "COMPLETED"
 	JobStatusFailed              JobStatus = "FAILED"
+	JobStatusCancelSubmitted     JobStatus = "CANCEL_SUBMITTED"
+	JobStatusCancelInProgress    JobStatus = "CANCEL_IN_PROGRESS"
+	JobStatusCancelCompleted     JobStatus = "CANCEL_COMPLETED"
+	JobStatusCancelFailed        JobStatus = "CANCEL_FAILED"
 )
 
 // Values returns all known values for JobStatus. Note that this can be expanded
@@ -79,6 +101,10 @@ func (JobStatus) Values() []JobStatus {
 		"COMPLETED_WITH_ERRORS",
 		"COMPLETED",
 		"FAILED",
+		"CANCEL_SUBMITTED",
+		"CANCEL_IN_PROGRESS",
+		"CANCEL_COMPLETED",
+		"CANCEL_FAILED",
 	}
 }
 

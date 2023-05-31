@@ -1,0 +1,8 @@
+{
+    "id": "ce550033-7fb9-4531-9528-8a8fe0018673",
+    "type": "feature",
+    "description": "Resource Types Exclusion feature launch by AWS Config",
+    "modules": [
+        "service/configservice"
+    ]
+}

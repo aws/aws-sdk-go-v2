@@ -41700,6 +41700,19 @@ func awsAwsquery_deserializeDocumentPendingModifiedValues(v **types.PendingModif
 				sv.DBSubnetGroupName = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("Engine", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Engine = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("EngineVersion", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {

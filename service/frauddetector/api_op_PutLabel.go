@@ -39,7 +39,7 @@ type PutLabelInput struct {
 	// The label description.
 	Description *string
 
-	//
+	// A collection of key and value pairs.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

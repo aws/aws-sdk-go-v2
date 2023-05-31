@@ -30,6 +30,8 @@ func (c *Client) DeleteFHIRDatastore(ctx context.Context, params *DeleteFHIRData
 type DeleteFHIRDatastoreInput struct {
 
 	// The AWS-generated ID for the Data Store to be deleted.
+	//
+	// This member is required.
 	DatastoreId *string
 
 	noSmithyDocumentSerde
@@ -106,6 +108,9 @@ func (c *Client) addOperationDeleteFHIRDatastoreMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addOpDeleteFHIRDatastoreValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteFHIRDatastore(options.Region), middleware.Before); err != nil {
