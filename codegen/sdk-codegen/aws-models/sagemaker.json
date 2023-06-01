@@ -2546,7 +2546,7 @@
                 "ContentType": {
                     "target": "com.amazonaws.sagemaker#ContentType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The content type of the data from the input source. The following are the allowed\n         content types for different problems:</p>\n         <ul>\n            <li>\n               <p>ImageClassification: <code>image/png</code>, <code>image/jpeg</code>,\n                  <code>image/*</code>\n               </p>\n            </li>\n            <li>\n               <p>TextClassification: <code>text/csv;header=present</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The content type of the data from the input source. The following are the allowed\n         content types for different problems:</p>\n         <ul>\n            <li>\n               <p>ImageClassification: <code>image/png</code>, <code>image/jpeg</code>, or\n                  <code>image/*</code>. The default value is <code>image/*</code>.</p>\n            </li>\n            <li>\n               <p>TextClassification: <code>text/csv;header=present</code> or <code>x-application/vnd.amazon+parquet</code>. \n               The default value is <code>text/csv;header=present</code>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "CompressionType": {
@@ -13389,7 +13389,7 @@
                 "RecommendationStatus": {
                     "target": "com.amazonaws.sagemaker#RecommendationStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Status of the deployment recommendation. <code>NOT_APPLICABLE</code> means that SageMaker\n         is unable to provide a default recommendation for the model using the information provided.</p>",
+                        "smithy.api#documentation": "<p>Status of the deployment recommendation. The status <code>NOT_APPLICABLE</code> means that SageMaker\n         is unable to provide a default recommendation for the model using the information provided. If the deployment status is <code>IN_PROGRESS</code>,\n         retry your API call after a few seconds to get a <code>COMPLETED</code> deployment recommendation.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -13401,7 +13401,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A set of recommended deployment configurations for the model.</p>"
+                "smithy.api#documentation": "<p>A set of recommended deployment configurations for the model. To get more advanced recommendations, see\n         <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateInferenceRecommendationsJob.html\">CreateInferenceRecommendationsJob</a>\n         to create an inference recommendation job.</p>"
             }
         },
         "com.amazonaws.sagemaker#DeploymentStage": {
@@ -45925,7 +45925,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A collection of settings that configure user interaction with the\n                <code>RStudioServerPro</code> app. <code>RStudioServerProAppSettings</code> cannot\n            be updated. The <code>RStudioServerPro</code> app must be deleted and a new one created\n            to make any changes.</p>"
+                "smithy.api#documentation": "<p>A collection of settings that configure user interaction with the\n                <code>RStudioServerPro</code> app.</p>"
             }
         },
         "com.amazonaws.sagemaker#RStudioServerProDomainSettings": {

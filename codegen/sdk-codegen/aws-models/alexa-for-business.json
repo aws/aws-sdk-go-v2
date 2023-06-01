@@ -103,7 +103,7 @@
                     "min": 1,
                     "max": 200
                 },
-                "smithy.api#pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*"
+                "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*$"
             }
         },
         "com.amazonaws.alexaforbusiness#AddressBookName": {
@@ -113,7 +113,7 @@
                     "min": 1,
                     "max": 100
                 },
-                "smithy.api#pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*"
+                "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*$"
             }
         },
         "com.amazonaws.alexaforbusiness#AlexaForBusiness": {
@@ -412,7 +412,10 @@
                     "name": "a4b"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>Alexa for Business helps you use Alexa in your organization. Alexa for Business provides you with the tools\n         to manage Alexa devices, enroll your users, and assign skills, at scale. You can build your\n         own context-aware voice skills using the Alexa Skills Kit and the Alexa for Business API operations.\n         You can also make these available as private skills for your organization. Alexa for Business makes it\n         efficient to voice-enable your products and services, thus providing context-aware voice\n         experiences for your customers. Device makers building with the Alexa Voice Service (AVS)\n         can create fully integrated solutions, register their products with Alexa for Business, and manage them\n         as shared devices in their organization. </p>",
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
+                "smithy.api#documentation": "<p>Alexa for Business has been retired and is no longer supported.</p>",
                 "smithy.api#title": "Alexa For Business",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -775,8 +778,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -788,8 +791,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -801,8 +804,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -814,8 +817,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -827,8 +830,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -840,8 +843,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -853,8 +856,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -866,8 +869,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -879,8 +882,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -892,8 +895,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -905,8 +908,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -918,8 +921,19 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -931,8 +945,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -944,8 +969,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -957,8 +993,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -970,8 +1017,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -983,8 +1030,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -996,8 +1043,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1008,8 +1055,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1020,9 +1067,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -1045,7 +1098,7 @@
         "com.amazonaws.alexaforbusiness#AmazonId": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "[a-zA-Z0-9]{1,18}"
+                "smithy.api#pattern": "^[a-zA-Z0-9]{1,18}$"
             }
         },
         "com.amazonaws.alexaforbusiness#ApplianceDescription": {
@@ -1077,6 +1130,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Associates a skill with the organization under the customer's AWS account. If a skill\n         is private, the user implicitly accepts access to this skill during enablement.</p>"
             }
         },
@@ -1090,16 +1146,22 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#ApproveSkillResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.alexaforbusiness#Arn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "arn:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[^/].{0,1023}"
+                "smithy.api#pattern": "^arn:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[^/].{0,1023}$"
             }
         },
         "com.amazonaws.alexaforbusiness#AssociateContactWithAddressBook": {
@@ -1116,6 +1178,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Associates a contact with a given address book.</p>"
             }
         },
@@ -1136,11 +1201,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#AssociateContactWithAddressBookResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.alexaforbusiness#AssociateDeviceWithNetworkProfile": {
             "type": "operation",
@@ -1162,6 +1233,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Associates a device with the specified network profile.</p>"
             }
         },
@@ -1182,11 +1256,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#AssociateDeviceWithNetworkProfileResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.alexaforbusiness#AssociateDeviceWithRoom": {
             "type": "operation",
@@ -1208,6 +1288,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Associates a device with a given room. This applies all the settings from the room\n         profile to the device, and all the skills in any skill groups added to that room. This\n         operation requires the device to be online, or else a manual sync is required. </p>"
             }
         },
@@ -1226,11 +1309,17 @@
                         "smithy.api#documentation": "<p>The ARN of the room with which to associate the device. Required.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#AssociateDeviceWithRoomResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.alexaforbusiness#AssociateSkillGroupWithRoom": {
             "type": "operation",
@@ -1246,6 +1335,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Associates a skill group with a given room. This enables all skills in the associated\n         skill group on all devices in the room.</p>"
             }
         },
@@ -1264,11 +1356,17 @@
                         "smithy.api#documentation": "<p>The ARN of the room with which to associate the skill group. Required.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#AssociateSkillGroupWithRoomResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.alexaforbusiness#AssociateSkillWithSkillGroup": {
             "type": "operation",
@@ -1290,6 +1388,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Associates a skill with a skill group.</p>"
             }
         },
@@ -1309,11 +1410,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#AssociateSkillWithSkillGroupResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.alexaforbusiness#AssociateSkillWithUsers": {
             "type": "operation",
@@ -1332,6 +1439,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Makes a private skill available for enrolled users to enable on their devices.</p>"
             }
         },
@@ -1345,11 +1455,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#AssociateSkillWithUsersResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.alexaforbusiness#Audio": {
             "type": "structure",
@@ -1392,7 +1508,7 @@
                     "min": 0,
                     "max": 1200
                 },
-                "smithy.api#pattern": "https://([A-Za-z0-9_.-]+)?(s3-[A-Za-z0-9-]+|s3\\.([A-Za-z0-9-])+|s3|s3.dualstack\\.([A-Za-z0-9-])+)+.amazonaws.com/.*"
+                "smithy.api#pattern": "^https://([A-Za-z0-9_.-]+)?(s3-[A-Za-z0-9-]+|s3\\.([A-Za-z0-9-])+|s3|s3.dualstack\\.([A-Za-z0-9-])+)+.amazonaws.com/"
             }
         },
         "com.amazonaws.alexaforbusiness#AuthorizationResult": {
@@ -1485,56 +1601,66 @@
             "type": "string"
         },
         "com.amazonaws.alexaforbusiness#BusinessReportFailureCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ACCESS_DENIED",
-                        "name": "ACCESS_DENIED"
-                    },
-                    {
-                        "value": "NO_SUCH_BUCKET",
-                        "name": "NO_SUCH_BUCKET"
-                    },
-                    {
-                        "value": "INTERNAL_FAILURE",
-                        "name": "INTERNAL_FAILURE"
+            "type": "enum",
+            "members": {
+                "ACCESS_DENIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCESS_DENIED"
                     }
-                ]
+                },
+                "NO_SUCH_BUCKET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_SUCH_BUCKET"
+                    }
+                },
+                "INTERNAL_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNAL_FAILURE"
+                    }
+                }
             }
         },
         "com.amazonaws.alexaforbusiness#BusinessReportFormat": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CSV",
-                        "name": "CSV"
-                    },
-                    {
-                        "value": "CSV_ZIP",
-                        "name": "CSV_ZIP"
+            "type": "enum",
+            "members": {
+                "CSV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CSV"
                     }
-                ]
+                },
+                "CSV_ZIP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CSV_ZIP"
+                    }
+                }
             }
         },
         "com.amazonaws.alexaforbusiness#BusinessReportInterval": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ONE_DAY",
-                        "name": "ONE_DAY"
-                    },
-                    {
-                        "value": "ONE_WEEK",
-                        "name": "ONE_WEEK"
-                    },
-                    {
-                        "value": "THIRTY_DAYS",
-                        "name": "THIRTY_DAYS"
+            "type": "enum",
+            "members": {
+                "ONE_DAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ONE_DAY"
                     }
-                ]
+                },
+                "ONE_WEEK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ONE_WEEK"
+                    }
+                },
+                "THIRTY_DAYS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "THIRTY_DAYS"
+                    }
+                }
             }
         },
         "com.amazonaws.alexaforbusiness#BusinessReportRecurrence": {
@@ -1643,26 +1769,30 @@
                     "min": 0,
                     "max": 64
                 },
-                "smithy.api#pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*"
+                "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*$"
             }
         },
         "com.amazonaws.alexaforbusiness#BusinessReportStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "RUNNING",
-                        "name": "RUNNING"
-                    },
-                    {
-                        "value": "SUCCEEDED",
-                        "name": "SUCCEEDED"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
+            "type": "enum",
+            "members": {
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING"
                     }
-                ]
+                },
+                "SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCEEDED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
             }
         },
         "com.amazonaws.alexaforbusiness#Category": {
@@ -1719,26 +1849,30 @@
                     "min": 10,
                     "max": 150
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9][a-zA-Z0-9_-]*"
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
             }
         },
         "com.amazonaws.alexaforbusiness#CommsProtocol": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SIP",
-                        "name": "SIP"
-                    },
-                    {
-                        "value": "SIPS",
-                        "name": "SIPS"
-                    },
-                    {
-                        "value": "H323",
-                        "name": "H323"
+            "type": "enum",
+            "members": {
+                "SIP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SIP"
                     }
-                ]
+                },
+                "SIPS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SIPS"
+                    }
+                },
+                "H323": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "H323"
+                    }
+                }
             }
         },
         "com.amazonaws.alexaforbusiness#ConcurrentModificationException": {
@@ -1818,54 +1952,72 @@
                     "min": 1,
                     "max": 50
                 },
-                "smithy.api#pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*"
+                "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*$"
             }
         },
         "com.amazonaws.alexaforbusiness#ConferenceProviderType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CHIME",
-                        "name": "CHIME"
-                    },
-                    {
-                        "value": "BLUEJEANS",
-                        "name": "BLUEJEANS"
-                    },
-                    {
-                        "value": "FUZE",
-                        "name": "FUZE"
-                    },
-                    {
-                        "value": "GOOGLE_HANGOUTS",
-                        "name": "GOOGLE_HANGOUTS"
-                    },
-                    {
-                        "value": "POLYCOM",
-                        "name": "POLYCOM"
-                    },
-                    {
-                        "value": "RINGCENTRAL",
-                        "name": "RINGCENTRAL"
-                    },
-                    {
-                        "value": "SKYPE_FOR_BUSINESS",
-                        "name": "SKYPE_FOR_BUSINESS"
-                    },
-                    {
-                        "value": "WEBEX",
-                        "name": "WEBEX"
-                    },
-                    {
-                        "value": "ZOOM",
-                        "name": "ZOOM"
-                    },
-                    {
-                        "value": "CUSTOM",
-                        "name": "CUSTOM"
+            "type": "enum",
+            "members": {
+                "CHIME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CHIME"
                     }
-                ]
+                },
+                "BLUEJEANS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BLUEJEANS"
+                    }
+                },
+                "FUZE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FUZE"
+                    }
+                },
+                "GOOGLE_HANGOUTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GOOGLE_HANGOUTS"
+                    }
+                },
+                "POLYCOM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "POLYCOM"
+                    }
+                },
+                "RINGCENTRAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RINGCENTRAL"
+                    }
+                },
+                "SKYPE_FOR_BUSINESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SKYPE_FOR_BUSINESS"
+                    }
+                },
+                "WEBEX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WEBEX"
+                    }
+                },
+                "ZOOM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ZOOM"
+                    }
+                },
+                "CUSTOM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOM"
+                    }
+                }
             }
         },
         "com.amazonaws.alexaforbusiness#ConferenceProvidersList": {
@@ -1875,18 +2027,20 @@
             }
         },
         "com.amazonaws.alexaforbusiness#ConnectionStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ONLINE",
-                        "name": "ONLINE"
-                    },
-                    {
-                        "value": "OFFLINE",
-                        "name": "OFFLINE"
+            "type": "enum",
+            "members": {
+                "ONLINE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ONLINE"
                     }
-                ]
+                },
+                "OFFLINE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OFFLINE"
+                    }
+                }
             }
         },
         "com.amazonaws.alexaforbusiness#ConnectionStatusUpdatedTime": {
@@ -2005,7 +2159,7 @@
                     "min": 1,
                     "max": 100
                 },
-                "smithy.api#pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*"
+                "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*$"
             }
         },
         "com.amazonaws.alexaforbusiness#Content": {
@@ -2037,7 +2191,7 @@
         "com.amazonaws.alexaforbusiness#CountryCode": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "\\d{1,3}"
+                "smithy.api#pattern": "^\\d{1,3}$"
             }
         },
         "com.amazonaws.alexaforbusiness#CreateAddressBook": {
@@ -2057,6 +2211,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Creates an address book with the specified details.</p>"
             }
         },
@@ -2089,6 +2246,9 @@
                         "smithy.api#documentation": "<p>The tags to be added to the specified resource. Do not provide system tags.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#CreateAddressBookResponse": {
@@ -2100,6 +2260,9 @@
                         "smithy.api#documentation": "<p>The ARN of the newly created address book.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.alexaforbusiness#CreateBusinessReportSchedule": {
@@ -2116,6 +2279,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Creates a recurring schedule for usage reports to deliver to the specified S3\n         location with a specified daily or weekly interval.</p>"
             }
         },
@@ -2173,6 +2339,9 @@
                         "smithy.api#documentation": "<p>The tags for the business report schedule.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#CreateBusinessReportScheduleResponse": {
@@ -2184,6 +2353,9 @@
                         "smithy.api#documentation": "<p>The ARN of the business report schedule.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.alexaforbusiness#CreateConferenceProvider": {
@@ -2200,6 +2372,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Adds a new conference provider under the user's AWS account.</p>"
             }
         },
@@ -2252,6 +2427,9 @@
                         "smithy.api#documentation": "<p>The tags to be added to the specified resource. Do not provide system tags.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#CreateConferenceProviderResponse": {
@@ -2263,6 +2441,9 @@
                         "smithy.api#documentation": "<p>The ARN of the newly-created conference provider.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.alexaforbusiness#CreateContact": {
@@ -2282,6 +2463,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Creates a contact with the specified details.</p>"
             }
         },
@@ -2338,6 +2522,9 @@
                         "smithy.api#documentation": "<p>The tags to be added to the specified resource. Do not provide system tags.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#CreateContactResponse": {
@@ -2349,6 +2536,9 @@
                         "smithy.api#documentation": "<p>The ARN of the newly created address book.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.alexaforbusiness#CreateEndOfMeetingReminder": {
@@ -2397,6 +2587,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Creates a gateway group with the specified details.</p>"
             }
         },
@@ -2430,6 +2623,9 @@
                         "smithy.api#documentation": "<p>The tags to be added to the specified resource. Do not provide system tags.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#CreateGatewayGroupResponse": {
@@ -2441,6 +2637,9 @@
                         "smithy.api#documentation": "<p>The ARN of the created gateway group.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.alexaforbusiness#CreateInstantBooking": {
@@ -2488,6 +2687,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Settings for requiring a check in when a room is reserved. Alexa can cancel a room reservation if it's not checked into to make the room available for others. Users can check in by joining the meeting with Alexa or an AVS device, or by saying “Alexa, check in.”</p>"
                     }
+                },
+                "ProactiveJoin": {
+                    "target": "com.amazonaws.alexaforbusiness#CreateProactiveJoin"
                 }
             },
             "traits": {
@@ -2520,6 +2722,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Creates a network profile with the specified details.</p>"
             }
         },
@@ -2596,6 +2801,9 @@
                         "smithy.api#documentation": "<p>The tags to be added to the specified resource. Do not provide system tags. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#CreateNetworkProfileResponse": {
@@ -2605,6 +2813,20 @@
                     "target": "com.amazonaws.alexaforbusiness#Arn",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the network profile associated with a device.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.alexaforbusiness#CreateProactiveJoin": {
+            "type": "structure",
+            "members": {
+                "EnabledByMotion": {
+                    "target": "com.amazonaws.alexaforbusiness#Boolean",
+                    "traits": {
+                        "smithy.api#required": {}
                     }
                 }
             }
@@ -2629,6 +2851,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Creates a new room profile with the specified details.</p>"
             }
         },
@@ -2726,6 +2951,9 @@
                         "smithy.api#documentation": "<p>The tags for the profile.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#CreateProfileResponse": {
@@ -2737,6 +2965,9 @@
                         "smithy.api#documentation": "<p>The ARN of the newly created room profile in the response.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.alexaforbusiness#CreateRequireCheckIn": {
@@ -2778,6 +3009,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Creates a room with the specified details.</p>"
             }
         },
@@ -2822,6 +3056,9 @@
                         "smithy.api#documentation": "<p>The tags for the room.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#CreateRoomResponse": {
@@ -2833,6 +3070,9 @@
                         "smithy.api#documentation": "<p>The ARN of the newly created room in the response.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.alexaforbusiness#CreateSkillGroup": {
@@ -2855,6 +3095,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Creates a skill group with a specified name and description.</p>"
             }
         },
@@ -2887,6 +3130,9 @@
                         "smithy.api#documentation": "<p>The tags for the skill group.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#CreateSkillGroupResponse": {
@@ -2898,6 +3144,9 @@
                         "smithy.api#documentation": "<p>The ARN of the newly created skill group in the response.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.alexaforbusiness#CreateUser": {
@@ -2920,6 +3169,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Creates a user.</p>"
             }
         },
@@ -2964,6 +3216,9 @@
                         "smithy.api#documentation": "<p>The tags for the user.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#CreateUserResponse": {
@@ -2975,6 +3230,9 @@
                         "smithy.api#documentation": "<p>The ARN of the newly created user in the response.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.alexaforbusiness#CurrentWiFiPassword": {
@@ -2984,14 +3242,14 @@
                     "min": 5,
                     "max": 128
                 },
-                "smithy.api#pattern": "[\\x00-\\x7F]*",
+                "smithy.api#pattern": "^[\\x00-\\x7F]*$",
                 "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.alexaforbusiness#CustomerS3BucketName": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "[a-z0-9-\\.]{3,63}"
+                "smithy.api#pattern": "^[a-z0-9-\\.]{3,63}$"
             }
         },
         "com.amazonaws.alexaforbusiness#Date": {
@@ -3017,6 +3275,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Deletes an address book by the address book ARN.</p>"
             }
         },
@@ -3030,11 +3291,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#DeleteAddressBookResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.alexaforbusiness#DeleteBusinessReportSchedule": {
             "type": "operation",
@@ -3053,6 +3320,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Deletes the recurring report delivery schedule with the specified schedule\n         ARN.</p>"
             }
         },
@@ -3066,11 +3336,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#DeleteBusinessReportScheduleResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.alexaforbusiness#DeleteConferenceProvider": {
             "type": "operation",
@@ -3086,6 +3362,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Deletes a conference provider.</p>"
             }
         },
@@ -3099,11 +3378,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#DeleteConferenceProviderResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.alexaforbusiness#DeleteContact": {
             "type": "operation",
@@ -3122,6 +3407,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Deletes a contact by the contact ARN.</p>"
             }
         },
@@ -3135,11 +3423,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#DeleteContactResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.alexaforbusiness#DeleteDevice": {
             "type": "operation",
@@ -3161,6 +3455,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Removes a device from Alexa For Business.</p>"
             }
         },
@@ -3174,11 +3471,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#DeleteDeviceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.alexaforbusiness#DeleteDeviceUsageData": {
             "type": "operation",
@@ -3200,6 +3503,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>When this action is called for a specified shared device, it allows authorized users to\n         delete the device's entire previous history of voice input data and associated response\n         data. This action can be called once every 24 hours for a specific shared device.</p>"
             }
         },
@@ -3220,11 +3526,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#DeleteDeviceUsageDataResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.alexaforbusiness#DeleteGatewayGroup": {
             "type": "operation",
@@ -3240,6 +3552,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Deletes a gateway group.</p>"
             }
         },
@@ -3253,11 +3568,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#DeleteGatewayGroupResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.alexaforbusiness#DeleteNetworkProfile": {
             "type": "operation",
@@ -3279,6 +3600,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Deletes a network profile by the network profile ARN.</p>"
             }
         },
@@ -3292,11 +3616,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#DeleteNetworkProfileResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.alexaforbusiness#DeleteProfile": {
             "type": "operation",
@@ -3315,6 +3645,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Deletes a room profile by the profile ARN.</p>"
             }
         },
@@ -3327,11 +3660,17 @@
                         "smithy.api#documentation": "<p>The ARN of the room profile to delete. Required.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#DeleteProfileResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.alexaforbusiness#DeleteRoom": {
             "type": "operation",
@@ -3350,6 +3689,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Deletes a room by the room ARN.</p>"
             }
         },
@@ -3362,11 +3704,17 @@
                         "smithy.api#documentation": "<p>The ARN of the room to delete. Required.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#DeleteRoomResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.alexaforbusiness#DeleteRoomSkillParameter": {
             "type": "operation",
@@ -3382,6 +3730,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Deletes room skill parameter details by room, skill, and parameter key ID.</p>"
             }
         },
@@ -3408,11 +3759,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#DeleteRoomSkillParameterResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.alexaforbusiness#DeleteSkillAuthorization": {
             "type": "operation",
@@ -3431,6 +3788,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Unlinks a third-party account from a skill.</p>"
             }
         },
@@ -3450,11 +3810,17 @@
                         "smithy.api#documentation": "<p>The room that the skill is authorized for.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#DeleteSkillAuthorizationResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.alexaforbusiness#DeleteSkillGroup": {
             "type": "operation",
@@ -3473,6 +3839,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Deletes a skill group by skill group ARN.</p>"
             }
         },
@@ -3485,11 +3854,17 @@
                         "smithy.api#documentation": "<p>The ARN of the skill group to delete. Required.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#DeleteSkillGroupResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.alexaforbusiness#DeleteUser": {
             "type": "operation",
@@ -3508,6 +3883,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Deletes a specified user by user ARN and enrollment ARN.</p>"
             }
         },
@@ -3527,11 +3905,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#DeleteUserResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.alexaforbusiness#DeveloperInfo": {
             "type": "structure",
@@ -3767,18 +4151,20 @@
             "type": "timestamp"
         },
         "com.amazonaws.alexaforbusiness#DeviceEventType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CONNECTION_STATUS",
-                        "name": "CONNECTION_STATUS"
-                    },
-                    {
-                        "value": "DEVICE_STATUS",
-                        "name": "DEVICE_STATUS"
+            "type": "enum",
+            "members": {
+                "CONNECTION_STATUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONNECTION_STATUS"
                     }
-                ]
+                },
+                "DEVICE_STATUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEVICE_STATUS"
+                    }
+                }
             }
         },
         "com.amazonaws.alexaforbusiness#DeviceEventValue": {
@@ -3800,7 +4186,7 @@
                     "min": 2,
                     "max": 100
                 },
-                "smithy.api#pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*"
+                "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*$"
             }
         },
         "com.amazonaws.alexaforbusiness#DeviceNetworkProfileInfo": {
@@ -3848,13 +4234,13 @@
                     "min": 1,
                     "max": 100
                 },
-                "smithy.api#pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*"
+                "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*$"
             }
         },
         "com.amazonaws.alexaforbusiness#DeviceSerialNumber": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "[a-zA-Z0-9]{1,200}"
+                "smithy.api#pattern": "^[a-zA-Z0-9]{1,200}$"
             }
         },
         "com.amazonaws.alexaforbusiness#DeviceSerialNumberForAVS": {
@@ -3864,30 +4250,38 @@
             }
         },
         "com.amazonaws.alexaforbusiness#DeviceStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "READY",
-                        "name": "READY"
-                    },
-                    {
-                        "value": "PENDING",
-                        "name": "PENDING"
-                    },
-                    {
-                        "value": "WAS_OFFLINE",
-                        "name": "WAS_OFFLINE"
-                    },
-                    {
-                        "value": "DEREGISTERED",
-                        "name": "DEREGISTERED"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
+            "type": "enum",
+            "members": {
+                "READY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "READY"
                     }
-                ]
+                },
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                },
+                "WAS_OFFLINE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WAS_OFFLINE"
+                    }
+                },
+                "DEREGISTERED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEREGISTERED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
             }
         },
         "com.amazonaws.alexaforbusiness#DeviceStatusDetail": {
@@ -3911,78 +4305,110 @@
             }
         },
         "com.amazonaws.alexaforbusiness#DeviceStatusDetailCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "DEVICE_SOFTWARE_UPDATE_NEEDED",
-                        "name": "DEVICE_SOFTWARE_UPDATE_NEEDED"
-                    },
-                    {
-                        "value": "DEVICE_WAS_OFFLINE",
-                        "name": "DEVICE_WAS_OFFLINE"
-                    },
-                    {
-                        "value": "CREDENTIALS_ACCESS_FAILURE",
-                        "name": "CREDENTIALS_ACCESS_FAILURE"
-                    },
-                    {
-                        "value": "TLS_VERSION_MISMATCH",
-                        "name": "TLS_VERSION_MISMATCH"
-                    },
-                    {
-                        "value": "ASSOCIATION_REJECTION",
-                        "name": "ASSOCIATION_REJECTION"
-                    },
-                    {
-                        "value": "AUTHENTICATION_FAILURE",
-                        "name": "AUTHENTICATION_FAILURE"
-                    },
-                    {
-                        "value": "DHCP_FAILURE",
-                        "name": "DHCP_FAILURE"
-                    },
-                    {
-                        "value": "INTERNET_UNAVAILABLE",
-                        "name": "INTERNET_UNAVAILABLE"
-                    },
-                    {
-                        "value": "DNS_FAILURE",
-                        "name": "DNS_FAILURE"
-                    },
-                    {
-                        "value": "UNKNOWN_FAILURE",
-                        "name": "UNKNOWN_FAILURE"
-                    },
-                    {
-                        "value": "CERTIFICATE_ISSUING_LIMIT_EXCEEDED",
-                        "name": "CERTIFICATE_ISSUING_LIMIT_EXCEEDED"
-                    },
-                    {
-                        "value": "INVALID_CERTIFICATE_AUTHORITY",
-                        "name": "INVALID_CERTIFICATE_AUTHORITY"
-                    },
-                    {
-                        "value": "NETWORK_PROFILE_NOT_FOUND",
-                        "name": "NETWORK_PROFILE_NOT_FOUND"
-                    },
-                    {
-                        "value": "INVALID_PASSWORD_STATE",
-                        "name": "INVALID_PASSWORD_STATE"
-                    },
-                    {
-                        "value": "PASSWORD_NOT_FOUND",
-                        "name": "PASSWORD_NOT_FOUND"
-                    },
-                    {
-                        "value": "PASSWORD_MANAGER_ACCESS_DENIED",
-                        "name": "PASSWORD_MANAGER_ACCESS_DENIED"
-                    },
-                    {
-                        "value": "CERTIFICATE_AUTHORITY_ACCESS_DENIED",
-                        "name": "CERTIFICATE_AUTHORITY_ACCESS_DENIED"
+            "type": "enum",
+            "members": {
+                "DEVICE_SOFTWARE_UPDATE_NEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEVICE_SOFTWARE_UPDATE_NEEDED"
                     }
-                ]
+                },
+                "DEVICE_WAS_OFFLINE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEVICE_WAS_OFFLINE"
+                    }
+                },
+                "CREDENTIALS_ACCESS_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREDENTIALS_ACCESS_FAILURE"
+                    }
+                },
+                "TLS_VERSION_MISMATCH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TLS_VERSION_MISMATCH"
+                    }
+                },
+                "ASSOCIATION_REJECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASSOCIATION_REJECTION"
+                    }
+                },
+                "AUTHENTICATION_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTHENTICATION_FAILURE"
+                    }
+                },
+                "DHCP_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DHCP_FAILURE"
+                    }
+                },
+                "INTERNET_UNAVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNET_UNAVAILABLE"
+                    }
+                },
+                "DNS_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DNS_FAILURE"
+                    }
+                },
+                "UNKNOWN_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNKNOWN_FAILURE"
+                    }
+                },
+                "CERTIFICATE_ISSUING_LIMIT_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CERTIFICATE_ISSUING_LIMIT_EXCEEDED"
+                    }
+                },
+                "INVALID_CERTIFICATE_AUTHORITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_CERTIFICATE_AUTHORITY"
+                    }
+                },
+                "NETWORK_PROFILE_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NETWORK_PROFILE_NOT_FOUND"
+                    }
+                },
+                "INVALID_PASSWORD_STATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_PASSWORD_STATE"
+                    }
+                },
+                "PASSWORD_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PASSWORD_NOT_FOUND"
+                    }
+                },
+                "PASSWORD_MANAGER_ACCESS_DENIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PASSWORD_MANAGER_ACCESS_DENIED"
+                    }
+                },
+                "CERTIFICATE_AUTHORITY_ACCESS_DENIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CERTIFICATE_AUTHORITY_ACCESS_DENIED"
+                    }
+                }
             }
         },
         "com.amazonaws.alexaforbusiness#DeviceStatusDetails": {
@@ -4020,18 +4446,18 @@
         "com.amazonaws.alexaforbusiness#DeviceType": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "[a-zA-Z0-9]{1,200}"
+                "smithy.api#pattern": "^[a-zA-Z0-9]{1,200}$"
             }
         },
         "com.amazonaws.alexaforbusiness#DeviceUsageType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "VOICE",
-                        "name": "VOICE"
+            "type": "enum",
+            "members": {
+                "VOICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VOICE"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.alexaforbusiness#DisassociateContactFromAddressBook": {
@@ -4043,6 +4469,9 @@
                 "target": "com.amazonaws.alexaforbusiness#DisassociateContactFromAddressBookResponse"
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Disassociates a contact from a given address book.</p>"
             }
         },
@@ -4063,11 +4492,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#DisassociateContactFromAddressBookResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.alexaforbusiness#DisassociateDeviceFromRoom": {
             "type": "operation",
@@ -4086,6 +4521,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Disassociates a device from its current room. The device continues to be connected to\n         the Wi-Fi network and is still registered to the account. The device settings and skills\n         are removed from the room.</p>"
             }
         },
@@ -4098,11 +4536,17 @@
                         "smithy.api#documentation": "<p>The ARN of the device to disassociate from a room. Required.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#DisassociateDeviceFromRoomResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.alexaforbusiness#DisassociateSkillFromSkillGroup": {
             "type": "operation",
@@ -4121,6 +4565,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Disassociates a skill from a skill group.</p>"
             }
         },
@@ -4140,11 +4587,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#DisassociateSkillFromSkillGroupResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.alexaforbusiness#DisassociateSkillFromUsers": {
             "type": "operation",
@@ -4163,6 +4616,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Makes a private skill unavailable for enrolled users and prevents them from enabling it\n         on their devices.</p>"
             }
         },
@@ -4176,11 +4632,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#DisassociateSkillFromUsersResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.alexaforbusiness#DisassociateSkillGroupFromRoom": {
             "type": "operation",
@@ -4196,6 +4658,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Disassociates a skill group from a specified room. This disables all skills in the\n         skill group on all devices in the room.</p>"
             }
         },
@@ -4214,25 +4679,33 @@
                         "smithy.api#documentation": "<p>The ARN of the room from which the skill group is to be disassociated.\n         Required.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#DisassociateSkillGroupFromRoomResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.alexaforbusiness#DistanceUnit": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "METRIC",
-                        "name": "METRIC"
-                    },
-                    {
-                        "value": "IMPERIAL",
-                        "name": "IMPERIAL"
+            "type": "enum",
+            "members": {
+                "METRIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "METRIC"
                     }
-                ]
+                },
+                "IMPERIAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMPERIAL"
+                    }
+                }
             }
         },
         "com.amazonaws.alexaforbusiness#Email": {
@@ -4242,37 +4715,41 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "([0-9a-zA-Z]([+-.\\w]*[0-9a-zA-Z])*@([0-9a-zA-Z]([-\\w]*[0-9a-zA-Z]+)*\\.)+[a-zA-Z]{2,9})"
+                "smithy.api#pattern": "^\\w[+-.\\w]*@\\w[\\w\\.\\-]+\\.[0-9a-zA-Z]{2,24}$"
             }
         },
         "com.amazonaws.alexaforbusiness#EnablementType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ENABLED",
-                        "name": "ENABLED"
-                    },
-                    {
-                        "value": "PENDING",
-                        "name": "PENDING"
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
                     }
-                ]
+                },
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                }
             }
         },
         "com.amazonaws.alexaforbusiness#EnablementTypeFilter": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ENABLED",
-                        "name": "ENABLED"
-                    },
-                    {
-                        "value": "PENDING",
-                        "name": "PENDING"
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
                     }
-                ]
+                },
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                }
             }
         },
         "com.amazonaws.alexaforbusiness#EndOfMeetingReminder": {
@@ -4314,26 +4791,32 @@
             }
         },
         "com.amazonaws.alexaforbusiness#EndOfMeetingReminderType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ANNOUNCEMENT_TIME_CHECK",
-                        "name": "ANNOUNCEMENT_TIME_CHECK"
-                    },
-                    {
-                        "value": "ANNOUNCEMENT_VARIABLE_TIME_LEFT",
-                        "name": "ANNOUNCEMENT_VARIABLE_TIME_LEFT"
-                    },
-                    {
-                        "value": "CHIME",
-                        "name": "CHIME"
-                    },
-                    {
-                        "value": "KNOCK",
-                        "name": "KNOCK"
+            "type": "enum",
+            "members": {
+                "ANNOUNCEMENT_TIME_CHECK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ANNOUNCEMENT_TIME_CHECK"
                     }
-                ]
+                },
+                "ANNOUNCEMENT_VARIABLE_TIME_LEFT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ANNOUNCEMENT_VARIABLE_TIME_LEFT"
+                    }
+                },
+                "CHIME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CHIME"
+                    }
+                },
+                "KNOCK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KNOCK"
+                    }
+                }
             }
         },
         "com.amazonaws.alexaforbusiness#EndUserLicenseAgreement": {
@@ -4358,72 +4841,94 @@
             }
         },
         "com.amazonaws.alexaforbusiness#EnrollmentStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "INITIALIZED",
-                        "name": "INITIALIZED"
-                    },
-                    {
-                        "value": "PENDING",
-                        "name": "PENDING"
-                    },
-                    {
-                        "value": "REGISTERED",
-                        "name": "REGISTERED"
-                    },
-                    {
-                        "value": "DISASSOCIATING",
-                        "name": "DISASSOCIATING"
-                    },
-                    {
-                        "value": "DEREGISTERING",
-                        "name": "DEREGISTERING"
+            "type": "enum",
+            "members": {
+                "INITIALIZED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INITIALIZED"
                     }
-                ]
+                },
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                },
+                "REGISTERED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REGISTERED"
+                    }
+                },
+                "DISASSOCIATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISASSOCIATING"
+                    }
+                },
+                "DEREGISTERING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEREGISTERING"
+                    }
+                }
             }
         },
         "com.amazonaws.alexaforbusiness#ErrorMessage": {
             "type": "string"
         },
         "com.amazonaws.alexaforbusiness#Feature": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "BLUETOOTH",
-                        "name": "BLUETOOTH"
-                    },
-                    {
-                        "value": "VOLUME",
-                        "name": "VOLUME"
-                    },
-                    {
-                        "value": "NOTIFICATIONS",
-                        "name": "NOTIFICATIONS"
-                    },
-                    {
-                        "value": "LISTS",
-                        "name": "LISTS"
-                    },
-                    {
-                        "value": "SKILLS",
-                        "name": "SKILLS"
-                    },
-                    {
-                        "value": "NETWORK_PROFILE",
-                        "name": "NETWORK_PROFILE"
-                    },
-                    {
-                        "value": "SETTINGS",
-                        "name": "SETTINGS"
-                    },
-                    {
-                        "value": "ALL",
-                        "name": "ALL"
+            "type": "enum",
+            "members": {
+                "BLUETOOTH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BLUETOOTH"
                     }
-                ]
+                },
+                "VOLUME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VOLUME"
+                    }
+                },
+                "NOTIFICATIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOTIFICATIONS"
+                    }
+                },
+                "LISTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LISTS"
+                    }
+                },
+                "SKILLS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SKILLS"
+                    }
+                },
+                "NETWORK_PROFILE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NETWORK_PROFILE"
+                    }
+                },
+                "SETTINGS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SETTINGS"
+                    }
+                },
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL"
+                    }
+                }
             }
         },
         "com.amazonaws.alexaforbusiness#Features": {
@@ -4510,6 +5015,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Forgets smart home appliances associated to a room.</p>"
             }
         },
@@ -4523,11 +5031,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#ForgetSmartHomeAppliancesResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.alexaforbusiness#Gateway": {
             "type": "structure",
@@ -4574,7 +5088,7 @@
                     "min": 0,
                     "max": 200
                 },
-                "smithy.api#pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*"
+                "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*$"
             }
         },
         "com.amazonaws.alexaforbusiness#GatewayGroup": {
@@ -4619,7 +5133,7 @@
                     "min": 1,
                     "max": 100
                 },
-                "smithy.api#pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*"
+                "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*$"
             }
         },
         "com.amazonaws.alexaforbusiness#GatewayGroupSummaries": {
@@ -4661,7 +5175,7 @@
                     "min": 1,
                     "max": 253
                 },
-                "smithy.api#pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*"
+                "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*$"
             }
         },
         "com.amazonaws.alexaforbusiness#GatewaySummaries": {
@@ -4740,6 +5254,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Gets address the book details by the address book ARN.</p>"
             }
         },
@@ -4753,6 +5270,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#GetAddressBookResponse": {
@@ -4764,6 +5284,9 @@
                         "smithy.api#documentation": "<p>The details of the requested address book.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.alexaforbusiness#GetConferencePreference": {
@@ -4780,12 +5303,18 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Retrieves the existing conference preferences.</p>"
             }
         },
         "com.amazonaws.alexaforbusiness#GetConferencePreferenceRequest": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
         },
         "com.amazonaws.alexaforbusiness#GetConferencePreferenceResponse": {
             "type": "structure",
@@ -4796,6 +5325,9 @@
                         "smithy.api#documentation": "<p>The conference preference.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.alexaforbusiness#GetConferenceProvider": {
@@ -4812,6 +5344,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Gets details about a specific conference provider.</p>"
             }
         },
@@ -4825,6 +5360,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#GetConferenceProviderResponse": {
@@ -4836,6 +5374,9 @@
                         "smithy.api#documentation": "<p>The conference provider.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.alexaforbusiness#GetContact": {
@@ -4852,6 +5393,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Gets the contact details by the contact ARN.</p>"
             }
         },
@@ -4865,6 +5409,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#GetContactResponse": {
@@ -4876,6 +5423,9 @@
                         "smithy.api#documentation": "<p>The details of the requested contact.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.alexaforbusiness#GetDevice": {
@@ -4892,6 +5442,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Gets the details of a device by device ARN.</p>"
             }
         },
@@ -4904,6 +5457,9 @@
                         "smithy.api#documentation": "<p>The ARN of the device for which to request details. Required.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#GetDeviceResponse": {
@@ -4915,6 +5471,9 @@
                         "smithy.api#documentation": "<p>The details of the device requested. Required.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.alexaforbusiness#GetGateway": {
@@ -4931,6 +5490,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Retrieves the details of a gateway.</p>"
             }
         },
@@ -4948,6 +5510,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Retrieves the details of a gateway group.</p>"
             }
         },
@@ -4961,6 +5526,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#GetGatewayGroupResponse": {
@@ -4969,6 +5537,9 @@
                 "GatewayGroup": {
                     "target": "com.amazonaws.alexaforbusiness#GatewayGroup"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.alexaforbusiness#GetGatewayRequest": {
@@ -4981,6 +5552,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#GetGatewayResponse": {
@@ -4992,6 +5566,9 @@
                         "smithy.api#documentation": "<p>The details of the gateway.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.alexaforbusiness#GetInvitationConfiguration": {
@@ -5008,12 +5585,18 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Retrieves the configured values for the user enrollment invitation email\n         template.</p>"
             }
         },
         "com.amazonaws.alexaforbusiness#GetInvitationConfigurationRequest": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
         },
         "com.amazonaws.alexaforbusiness#GetInvitationConfigurationResponse": {
             "type": "structure",
@@ -5036,6 +5619,9 @@
                         "smithy.api#documentation": "<p>The list of private skill IDs that you want to recommend to the user to enable in the\n         invitation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.alexaforbusiness#GetNetworkProfile": {
@@ -5055,6 +5641,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Gets the network profile details by the network profile ARN.</p>"
             }
         },
@@ -5068,6 +5657,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#GetNetworkProfileResponse": {
@@ -5079,6 +5671,9 @@
                         "smithy.api#documentation": "<p>The network profile associated with a device.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.alexaforbusiness#GetProfile": {
@@ -5095,6 +5690,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Gets the details of a room profile by profile ARN.</p>"
             }
         },
@@ -5107,6 +5705,9 @@
                         "smithy.api#documentation": "<p>The ARN of the room profile for which to request details. Required.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#GetProfileResponse": {
@@ -5118,6 +5719,9 @@
                         "smithy.api#documentation": "<p>The details of the room profile requested. Required.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.alexaforbusiness#GetRoom": {
@@ -5134,6 +5738,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Gets room details by room ARN.</p>"
             }
         },
@@ -5146,6 +5753,9 @@
                         "smithy.api#documentation": "<p>The ARN of the room for which to request details. Required.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#GetRoomResponse": {
@@ -5157,6 +5767,9 @@
                         "smithy.api#documentation": "<p>The details of the room requested.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.alexaforbusiness#GetRoomSkillParameter": {
@@ -5173,6 +5786,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Gets room skill parameter details by room, skill, and parameter key ARN.</p>"
             }
         },
@@ -5199,6 +5815,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#GetRoomSkillParameterResponse": {
@@ -5210,6 +5829,9 @@
                         "smithy.api#documentation": "<p>The details of the room skill parameter requested. Required.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.alexaforbusiness#GetSkillGroup": {
@@ -5226,6 +5848,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Gets skill group details by skill group ARN.</p>"
             }
         },
@@ -5238,6 +5863,9 @@
                         "smithy.api#documentation": "<p>The ARN of the skill group for which to get details. Required.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#GetSkillGroupResponse": {
@@ -5249,6 +5877,9 @@
                         "smithy.api#documentation": "<p>The details of the skill group requested. Required.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.alexaforbusiness#IPDialIn": {
@@ -5388,6 +6019,9 @@
                 "target": "com.amazonaws.alexaforbusiness#ListBusinessReportSchedulesResponse"
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Lists the details of the schedules that a user configured. A download URL of the report associated with each schedule is returned every time this action is called. A new download URL is returned each time, and is valid for 24 hours.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
@@ -5411,6 +6045,9 @@
                         "smithy.api#documentation": "<p>The maximum number of schedules listed in the call.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#ListBusinessReportSchedulesResponse": {
@@ -5428,6 +6065,9 @@
                         "smithy.api#documentation": "<p>The token used to list the remaining schedules from the previous API call.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.alexaforbusiness#ListConferenceProviders": {
@@ -5439,6 +6079,9 @@
                 "target": "com.amazonaws.alexaforbusiness#ListConferenceProvidersResponse"
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Lists conference providers under a specific AWS account.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
@@ -5462,6 +6105,9 @@
                         "smithy.api#documentation": "<p>The maximum number of conference providers to be returned, per paginated\n         calls.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#ListConferenceProvidersResponse": {
@@ -5479,6 +6125,9 @@
                         "smithy.api#documentation": "<p>The tokens used for pagination.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.alexaforbusiness#ListDeviceEvents": {
@@ -5495,6 +6144,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Lists the device event history, including device connection status, for up to 30\n         days.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
@@ -5531,6 +6183,9 @@
                         "smithy.api#documentation": "<p>The maximum number of results to include in the response. The default value is 50. If\n         more results exist than the specified MaxResults value, a token is included in the response\n         so that the remaining results can be retrieved. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#ListDeviceEventsResponse": {
@@ -5548,6 +6203,9 @@
                         "smithy.api#documentation": "<p>The token returned to indicate that there is more data available.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.alexaforbusiness#ListGatewayGroups": {
@@ -5559,6 +6217,9 @@
                 "target": "com.amazonaws.alexaforbusiness#ListGatewayGroupsResponse"
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Retrieves a list of gateway group summaries. Use GetGatewayGroup to retrieve details of\n         a specific gateway group.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
@@ -5582,6 +6243,9 @@
                         "smithy.api#documentation": "<p>The maximum number of gateway group summaries to return. The default is 50.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#ListGatewayGroupsResponse": {
@@ -5599,6 +6263,9 @@
                         "smithy.api#documentation": "<p>The token used to paginate though multiple pages of gateway group summaries.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.alexaforbusiness#ListGateways": {
@@ -5610,6 +6277,9 @@
                 "target": "com.amazonaws.alexaforbusiness#ListGatewaysResponse"
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Retrieves a list of gateway summaries. Use GetGateway to retrieve details of a specific\n         gateway. An optional gateway group ARN can be provided to only retrieve gateway summaries\n         of gateways that are associated with that gateway group ARN.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
@@ -5639,6 +6309,9 @@
                         "smithy.api#documentation": "<p>The maximum number of gateway summaries to return. The default is 50.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#ListGatewaysResponse": {
@@ -5656,6 +6329,9 @@
                         "smithy.api#documentation": "<p>The token used to paginate though multiple pages of gateway summaries.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.alexaforbusiness#ListSkills": {
@@ -5667,6 +6343,9 @@
                 "target": "com.amazonaws.alexaforbusiness#ListSkillsResponse"
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Lists all enabled skills in a specific skill group.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
@@ -5708,6 +6387,9 @@
                         "smithy.api#documentation": "<p>The maximum number of results to include in the response. If more results exist than\n         the specified <code>MaxResults</code> value, a token is included in the response so that\n         the remaining results can be retrieved.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#ListSkillsResponse": {
@@ -5725,6 +6407,9 @@
                         "smithy.api#documentation": "<p>The token returned to indicate that there is more data available.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.alexaforbusiness#ListSkillsStoreCategories": {
@@ -5736,6 +6421,9 @@
                 "target": "com.amazonaws.alexaforbusiness#ListSkillsStoreCategoriesResponse"
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Lists all categories in the Alexa skill store.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
@@ -5759,6 +6447,9 @@
                         "smithy.api#documentation": "<p>The maximum number of categories returned, per paginated calls.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#ListSkillsStoreCategoriesResponse": {
@@ -5776,6 +6467,9 @@
                         "smithy.api#documentation": "<p>The tokens used for pagination.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.alexaforbusiness#ListSkillsStoreSkillsByCategory": {
@@ -5787,6 +6481,9 @@
                 "target": "com.amazonaws.alexaforbusiness#ListSkillsStoreSkillsByCategoryResponse"
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Lists all skills in the Alexa skill store by category.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
@@ -5817,6 +6514,9 @@
                         "smithy.api#documentation": "<p>The maximum number of skills returned per paginated calls.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#ListSkillsStoreSkillsByCategoryResponse": {
@@ -5834,6 +6534,9 @@
                         "smithy.api#documentation": "<p>The tokens used for pagination.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.alexaforbusiness#ListSmartHomeAppliances": {
@@ -5850,6 +6553,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Lists all of the smart home appliances associated with a room.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
@@ -5880,6 +6586,9 @@
                         "smithy.api#documentation": "<p>The tokens used for pagination.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#ListSmartHomeAppliancesResponse": {
@@ -5897,6 +6606,9 @@
                         "smithy.api#documentation": "<p>The tokens used for pagination.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.alexaforbusiness#ListTags": {
@@ -5913,6 +6625,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Lists all tags for the specified resource.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
@@ -5943,6 +6658,9 @@
                         "smithy.api#documentation": "<p>The maximum number of results to include in the response. If more results exist than\n         the specified <code>MaxResults</code> value, a token is included in the response so that\n         the remaining results can be retrieved.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#ListTagsResponse": {
@@ -5960,17 +6678,20 @@
                         "smithy.api#documentation": "<p>The token returned to indicate that there is more data available.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.alexaforbusiness#Locale": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "en-US",
-                        "name": "en_US"
+            "type": "enum",
+            "members": {
+                "en_US": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "en-US"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.alexaforbusiness#MacAddress": {
@@ -6014,6 +6735,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Settings for requiring a check in when a room is reserved. Alexa can cancel a room\n         reservation if it's not checked into. This makes the room available for others. Users can\n         check in by joining the meeting with Alexa or an AVS device, or by saying “Alexa, check\n         in.” </p>"
                     }
+                },
+                "ProactiveJoin": {
+                    "target": "com.amazonaws.alexaforbusiness#ProactiveJoin"
                 }
             },
             "traits": {
@@ -6051,14 +6775,14 @@
             }
         },
         "com.amazonaws.alexaforbusiness#NetworkEapMethod": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "EAP_TLS",
-                        "name": "EAP_TLS"
+            "type": "enum",
+            "members": {
+                "EAP_TLS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EAP_TLS"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.alexaforbusiness#NetworkProfile": {
@@ -6192,7 +6916,7 @@
                     "min": 0,
                     "max": 200
                 },
-                "smithy.api#pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*"
+                "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*$"
             }
         },
         "com.amazonaws.alexaforbusiness#NetworkProfileName": {
@@ -6202,34 +6926,42 @@
                     "min": 1,
                     "max": 100
                 },
-                "smithy.api#pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*"
+                "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*$"
             }
         },
         "com.amazonaws.alexaforbusiness#NetworkSecurityType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "OPEN",
-                        "name": "OPEN"
-                    },
-                    {
-                        "value": "WEP",
-                        "name": "WEP"
-                    },
-                    {
-                        "value": "WPA_PSK",
-                        "name": "WPA_PSK"
-                    },
-                    {
-                        "value": "WPA2_PSK",
-                        "name": "WPA2_PSK"
-                    },
-                    {
-                        "value": "WPA2_ENTERPRISE",
-                        "name": "WPA2_ENTERPRISE"
+            "type": "enum",
+            "members": {
+                "OPEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OPEN"
                     }
-                ]
+                },
+                "WEP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WEP"
+                    }
+                },
+                "WPA_PSK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WPA_PSK"
+                    }
+                },
+                "WPA2_PSK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WPA2_PSK"
+                    }
+                },
+                "WPA2_ENTERPRISE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WPA2_ENTERPRISE"
+                    }
+                }
             }
         },
         "com.amazonaws.alexaforbusiness#NetworkSsid": {
@@ -6239,7 +6971,7 @@
                     "min": 1,
                     "max": 32
                 },
-                "smithy.api#pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*"
+                "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*$"
             }
         },
         "com.amazonaws.alexaforbusiness#NewInThisVersionBulletPoints": {
@@ -6264,7 +6996,7 @@
                     "min": 0,
                     "max": 128
                 },
-                "smithy.api#pattern": "(^$)|([\\x00-\\x7F]{5,})",
+                "smithy.api#pattern": "^(^$)|([\\x00-\\x7F]{5,})$",
                 "smithy.api#sensitive": {}
             }
         },
@@ -6305,13 +7037,13 @@
                     "min": 1,
                     "max": 100
                 },
-                "smithy.api#pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*"
+                "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*$"
             }
         },
         "com.amazonaws.alexaforbusiness#OutboundPhoneNumber": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "\\d{10}"
+                "smithy.api#pattern": "^\\d{10}$"
             }
         },
         "com.amazonaws.alexaforbusiness#PSTNDialIn": {
@@ -6385,27 +7117,41 @@
             }
         },
         "com.amazonaws.alexaforbusiness#PhoneNumberType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "MOBILE",
-                        "name": "MOBILE"
-                    },
-                    {
-                        "value": "WORK",
-                        "name": "WORK"
-                    },
-                    {
-                        "value": "HOME",
-                        "name": "HOME"
+            "type": "enum",
+            "members": {
+                "MOBILE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MOBILE"
                     }
-                ],
+                },
+                "WORK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WORK"
+                    }
+                },
+                "HOME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HOME"
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.alexaforbusiness#PrivacyPolicy": {
             "type": "string"
+        },
+        "com.amazonaws.alexaforbusiness#ProactiveJoin": {
+            "type": "structure",
+            "members": {
+                "EnabledByMotion": {
+                    "target": "com.amazonaws.alexaforbusiness#Boolean"
+                }
+            }
         },
         "com.amazonaws.alexaforbusiness#ProductDescription": {
             "type": "string"
@@ -6589,7 +7335,7 @@
                     "min": 1,
                     "max": 100
                 },
-                "smithy.api#pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*"
+                "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*$"
             }
         },
         "com.amazonaws.alexaforbusiness#ProviderCalendarId": {
@@ -6615,6 +7361,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Sets the conference preferences on a specific conference provider at the account\n         level.</p>"
             }
         },
@@ -6628,11 +7377,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#PutConferencePreferenceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.alexaforbusiness#PutInvitationConfiguration": {
             "type": "operation",
@@ -6651,6 +7406,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Configures the email template for the user enrollment invitation with the specified\n         attributes.</p>"
             }
         },
@@ -6676,11 +7434,17 @@
                         "smithy.api#documentation": "<p>The list of private skill IDs that you want to recommend to the user to enable in the\n         invitation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#PutInvitationConfigurationResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.alexaforbusiness#PutRoomSkillParameter": {
             "type": "operation",
@@ -6696,6 +7460,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Updates room skill parameter details by room, skill, and parameter key ID. Not all\n         skills have a room skill parameter.</p>"
             }
         },
@@ -6722,11 +7489,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#PutRoomSkillParameterResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.alexaforbusiness#PutSkillAuthorization": {
             "type": "operation",
@@ -6745,6 +7518,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Links a user's account to a third-party skill provider. If this API operation is\n         called by an assumed IAM role, the skill being linked must be a private skill. Also, the\n         skill must be owned by the AWS account that assumed the IAM role.</p>"
             }
         },
@@ -6771,11 +7547,17 @@
                         "smithy.api#documentation": "<p>The room that the skill is authorized for.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#PutSkillAuthorizationResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.alexaforbusiness#RawPhoneNumber": {
             "type": "string",
@@ -6811,6 +7593,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Registers an Alexa-enabled device built by an Original Equipment Manufacturer (OEM)\n         using Alexa Voice Service (AVS).</p>"
             }
         },
@@ -6863,6 +7648,9 @@
                         "smithy.api#documentation": "<p>The tags to be added to the specified resource. Do not provide system tags.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#RegisterAVSDeviceResponse": {
@@ -6874,6 +7662,9 @@
                         "smithy.api#documentation": "<p>The ARN of the device.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.alexaforbusiness#RejectSkill": {
@@ -6893,6 +7684,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Disassociates a skill from the organization under a user's AWS account. If the skill\n         is a private skill, it moves to an AcceptStatus of PENDING. Any private or public skill\n         that is rejected can be added later by calling the ApproveSkill API. </p>"
             }
         },
@@ -6906,11 +7700,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#RejectSkillResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.alexaforbusiness#ReleaseDate": {
             "type": "string"
@@ -6936,22 +7736,26 @@
             }
         },
         "com.amazonaws.alexaforbusiness#RequirePin": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "YES",
-                        "name": "YES"
-                    },
-                    {
-                        "value": "NO",
-                        "name": "NO"
-                    },
-                    {
-                        "value": "OPTIONAL",
-                        "name": "OPTIONAL"
+            "type": "enum",
+            "members": {
+                "YES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "YES"
                     }
-                ]
+                },
+                "NO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO"
+                    }
+                },
+                "OPTIONAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OPTIONAL"
+                    }
+                }
             }
         },
         "com.amazonaws.alexaforbusiness#ResolveRoom": {
@@ -6968,6 +7772,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Determines the details for the room from which a skill request was invoked. This\n         operation is used by skill developers.</p>\n         <p>To query ResolveRoom from an Alexa skill, the skill ID needs to be authorized. When\n         the skill is using an AWS Lambda function, the skill is automatically authorized when you\n         publish your skill as a private skill to your AWS account. Skills that are hosted using a\n         custom web service must be manually authorized. To get your skill authorized, contact AWS\n         Support with your AWS account ID that queries the ResolveRoom API and skill ID. </p>"
             }
         },
@@ -6988,6 +7795,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#ResolveRoomResponse": {
@@ -7011,6 +7821,9 @@
                         "smithy.api#documentation": "<p>Response to get the room profile request. Required.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.alexaforbusiness#ResourceAssociatedException": {
@@ -7072,6 +7885,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Revokes an invitation and invalidates the enrollment URL.</p>"
             }
         },
@@ -7090,11 +7906,17 @@
                         "smithy.api#documentation": "<p>The ARN of the enrollment invitation to revoke. Required.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#RevokeInvitationResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.alexaforbusiness#Room": {
             "type": "structure",
@@ -7191,7 +8013,7 @@
                     "min": 1,
                     "max": 200
                 },
-                "smithy.api#pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*"
+                "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*$"
             }
         },
         "com.amazonaws.alexaforbusiness#RoomName": {
@@ -7201,7 +8023,7 @@
                     "min": 1,
                     "max": 100
                 },
-                "smithy.api#pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*"
+                "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*$"
             }
         },
         "com.amazonaws.alexaforbusiness#RoomSkillParameter": {
@@ -7257,7 +8079,7 @@
                     "min": 0,
                     "max": 100
                 },
-                "smithy.api#pattern": "[A-Za-z0-9!_\\-\\.\\*'()/]*"
+                "smithy.api#pattern": "^[A-Za-z0-9!_\\-\\.\\*'()/]*$"
             }
         },
         "com.amazonaws.alexaforbusiness#SampleUtterances": {
@@ -7275,6 +8097,9 @@
                 "target": "com.amazonaws.alexaforbusiness#SearchAddressBooksResponse"
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Searches address books and lists the ones that meet a set of filter and sort\n         criteria.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
@@ -7310,6 +8135,9 @@
                         "smithy.api#documentation": "<p>The maximum number of results to include in the response. If more results exist than\n         the specified MaxResults value, a token is included in the response so that the remaining\n         results can be retrieved.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#SearchAddressBooksResponse": {
@@ -7333,6 +8161,9 @@
                         "smithy.api#documentation": "<p>The total number of address books returned.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.alexaforbusiness#SearchContacts": {
@@ -7344,6 +8175,9 @@
                 "target": "com.amazonaws.alexaforbusiness#SearchContactsResponse"
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Searches contacts and lists the ones that meet a set of filter and sort\n         criteria.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
@@ -7379,6 +8213,9 @@
                         "smithy.api#documentation": "<p>The maximum number of results to include in the response. If more results exist than\n         the specified MaxResults value, a token is included in the response so that the remaining\n         results can be retrieved.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#SearchContactsResponse": {
@@ -7402,6 +8239,9 @@
                         "smithy.api#documentation": "<p>The total number of contacts returned.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.alexaforbusiness#SearchDevices": {
@@ -7413,6 +8253,9 @@
                 "target": "com.amazonaws.alexaforbusiness#SearchDevicesResponse"
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Searches devices and lists the ones that meet a set of filter criteria.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
@@ -7448,6 +8291,9 @@
                         "smithy.api#documentation": "<p>The sort order to use in listing the specified set of devices. Supported sort keys\n         are DeviceName, DeviceStatus, RoomName, DeviceType, DeviceSerialNumber, ConnectionStatus,\n         NetworkProfileName, NetworkProfileArn, Feature, and FailureCode.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#SearchDevicesResponse": {
@@ -7471,6 +8317,9 @@
                         "smithy.api#documentation": "<p>The total number of devices returned.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.alexaforbusiness#SearchNetworkProfiles": {
@@ -7482,6 +8331,9 @@
                 "target": "com.amazonaws.alexaforbusiness#SearchNetworkProfilesResponse"
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Searches network profiles and lists the ones that meet a set of filter and sort\n         criteria.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
@@ -7517,6 +8369,9 @@
                         "smithy.api#documentation": "<p>The sort order to use to list the specified set of network profiles. Valid sort criteria\n         includes NetworkProfileName, Ssid, and SecurityType.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#SearchNetworkProfilesResponse": {
@@ -7540,6 +8395,9 @@
                         "smithy.api#documentation": "<p>The total number of network profiles returned.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.alexaforbusiness#SearchProfiles": {
@@ -7551,6 +8409,9 @@
                 "target": "com.amazonaws.alexaforbusiness#SearchProfilesResponse"
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Searches room profiles and lists the ones that meet a set of filter\n         criteria.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
@@ -7586,6 +8447,9 @@
                         "smithy.api#documentation": "<p>The sort order to use in listing the specified set of room profiles. Supported sort\n         keys are ProfileName and Address.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#SearchProfilesResponse": {
@@ -7609,6 +8473,9 @@
                         "smithy.api#documentation": "<p>The total number of room profiles returned.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.alexaforbusiness#SearchRooms": {
@@ -7620,6 +8487,9 @@
                 "target": "com.amazonaws.alexaforbusiness#SearchRoomsResponse"
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Searches rooms and lists the ones that meet a set of filter and sort\n         criteria.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
@@ -7655,6 +8525,9 @@
                         "smithy.api#documentation": "<p>The sort order to use in listing the specified set of rooms. The supported sort keys\n         are RoomName and ProfileName.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#SearchRoomsResponse": {
@@ -7678,6 +8551,9 @@
                         "smithy.api#documentation": "<p>The total number of rooms returned.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.alexaforbusiness#SearchSkillGroups": {
@@ -7689,6 +8565,9 @@
                 "target": "com.amazonaws.alexaforbusiness#SearchSkillGroupsResponse"
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Searches skill groups and lists the ones that meet a set of filter and sort\n         criteria.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
@@ -7724,6 +8603,9 @@
                         "smithy.api#documentation": "<p>The sort order to use in listing the specified set of skill groups. The supported\n         sort key is SkillGroupName. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#SearchSkillGroupsResponse": {
@@ -7747,6 +8629,9 @@
                         "smithy.api#documentation": "<p>The total number of skill groups returned.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.alexaforbusiness#SearchUsers": {
@@ -7758,6 +8643,9 @@
                 "target": "com.amazonaws.alexaforbusiness#SearchUsersResponse"
             },
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Searches users and lists the ones that meet a set of filter and sort\n         criteria.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
@@ -7793,6 +8681,9 @@
                         "smithy.api#documentation": "<p>The sort order to use in listing the filtered set of users. Required. Supported sort\n         keys are UserId, FirstName, LastName, Email, and EnrollmentStatus.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#SearchUsersResponse": {
@@ -7816,6 +8707,9 @@
                         "smithy.api#documentation": "<p>The total number of users returned.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.alexaforbusiness#SendAnnouncement": {
@@ -7869,6 +8763,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#SendAnnouncementResponse": {
@@ -7880,6 +8777,9 @@
                         "smithy.api#documentation": "<p>The identifier of the announcement.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.alexaforbusiness#SendInvitation": {
@@ -7902,6 +8802,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Sends an enrollment invitation email with a URL to a user. The URL is valid for 30\n         days or until you call this operation again, whichever comes first. </p>"
             }
         },
@@ -7914,11 +8817,17 @@
                         "smithy.api#documentation": "<p>The ARN of the user to whom to send an invitation. Required.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#SendInvitationResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.alexaforbusiness#ShortDescription": {
             "type": "string"
@@ -7970,14 +8879,16 @@
             }
         },
         "com.amazonaws.alexaforbusiness#SipType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "WORK",
-                        "name": "WORK"
+            "type": "enum",
+            "members": {
+                "WORK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WORK"
                     }
-                ],
+                }
+            },
+            "traits": {
                 "smithy.api#sensitive": {}
             }
         },
@@ -8125,7 +9036,7 @@
                     "min": 1,
                     "max": 200
                 },
-                "smithy.api#pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*"
+                "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*$"
             }
         },
         "com.amazonaws.alexaforbusiness#SkillGroupName": {
@@ -8135,13 +9046,13 @@
                     "min": 1,
                     "max": 100
                 },
-                "smithy.api#pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*"
+                "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*$"
             }
         },
         "com.amazonaws.alexaforbusiness#SkillId": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^amzn1\\.ask\\.skill\\.[0-9a-f\\-]{1,200})|(^amzn1\\.echo-sdk-ams\\.app\\.[0-9a-f\\-]{1,200})"
+                "smithy.api#pattern": "^(^amzn1\\.ask\\.skill\\.[0-9a-f\\-]{1,200})|(^amzn1\\.echo-sdk-ams\\.app\\.[0-9a-f\\-]{1,200})$"
             }
         },
         "com.amazonaws.alexaforbusiness#SkillListMaxResults": {
@@ -8160,7 +9071,7 @@
                     "min": 1,
                     "max": 100
                 },
-                "smithy.api#pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*"
+                "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*$"
             }
         },
         "com.amazonaws.alexaforbusiness#SkillNotLinkedException": {
@@ -8224,42 +9135,50 @@
             }
         },
         "com.amazonaws.alexaforbusiness#SkillType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PUBLIC",
-                        "name": "PUBLIC"
-                    },
-                    {
-                        "value": "PRIVATE",
-                        "name": "PRIVATE"
+            "type": "enum",
+            "members": {
+                "PUBLIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PUBLIC"
                     }
-                ],
+                },
+                "PRIVATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRIVATE"
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#length": {
                     "min": 1,
                     "max": 100
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9][a-zA-Z0-9_-]*"
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
             }
         },
         "com.amazonaws.alexaforbusiness#SkillTypeFilter": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PUBLIC",
-                        "name": "PUBLIC"
-                    },
-                    {
-                        "value": "PRIVATE",
-                        "name": "PRIVATE"
-                    },
-                    {
-                        "value": "ALL",
-                        "name": "ALL"
+            "type": "enum",
+            "members": {
+                "PUBLIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PUBLIC"
                     }
-                ]
+                },
+                "PRIVATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRIVATE"
+                    }
+                },
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL"
+                    }
+                }
             }
         },
         "com.amazonaws.alexaforbusiness#SkillTypes": {
@@ -8404,18 +9323,20 @@
             }
         },
         "com.amazonaws.alexaforbusiness#SortValue": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ASC",
-                        "name": "ASC"
-                    },
-                    {
-                        "value": "DESC",
-                        "name": "DESC"
+            "type": "enum",
+            "members": {
+                "ASC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASC"
                     }
-                ]
+                },
+                "DESC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DESC"
+                    }
+                }
             }
         },
         "com.amazonaws.alexaforbusiness#Ssml": {
@@ -8459,7 +9380,7 @@
                     "min": 0,
                     "max": 4096
                 },
-                "smithy.api#pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*"
+                "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*$"
             }
         },
         "com.amazonaws.alexaforbusiness#StartDeviceSync": {
@@ -8476,6 +9397,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Resets a device and its account to the known default settings. This clears all\n         information and settings set by previous users in the following ways:</p>\n         <ul>\n            <li>\n               <p>Bluetooth - This unpairs all bluetooth devices paired with your echo\n               device.</p>\n            </li>\n            <li>\n               <p>Volume - This resets the echo device's volume to the default value.</p>\n            </li>\n            <li>\n               <p>Notifications - This clears all notifications from your echo device.</p>\n            </li>\n            <li>\n               <p>Lists - This clears all to-do items from your echo device.</p>\n            </li>\n            <li>\n               <p>Settings - This internally syncs the room's profile (if the device is assigned to\n               a room), contacts, address books, delegation access for account linking, and\n               communications (if enabled on the room profile).</p>\n            </li>\n         </ul>"
             }
         },
@@ -8501,11 +9425,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#StartDeviceSyncResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.alexaforbusiness#StartSmartHomeApplianceDiscovery": {
             "type": "operation",
@@ -8521,6 +9451,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Initiates the discovery of any smart home appliances associated with the\n         room.</p>"
             }
         },
@@ -8534,11 +9467,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#StartSmartHomeApplianceDiscoveryResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.alexaforbusiness#Tag": {
             "type": "structure",
@@ -8598,6 +9537,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Adds metadata tags to a specified resource.</p>"
             }
         },
@@ -8618,11 +9560,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#TagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.alexaforbusiness#TagValue": {
             "type": "string",
@@ -8635,18 +9583,20 @@
             }
         },
         "com.amazonaws.alexaforbusiness#TemperatureUnit": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "FAHRENHEIT",
-                        "name": "FAHRENHEIT"
-                    },
-                    {
-                        "value": "CELSIUS",
-                        "name": "CELSIUS"
+            "type": "enum",
+            "members": {
+                "FAHRENHEIT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAHRENHEIT"
                     }
-                ]
+                },
+                "CELSIUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CELSIUS"
+                    }
+                }
             }
         },
         "com.amazonaws.alexaforbusiness#Text": {
@@ -8690,7 +9640,7 @@
                     "min": 0,
                     "max": 4096
                 },
-                "smithy.api#pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*"
+                "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*$"
             }
         },
         "com.amazonaws.alexaforbusiness#TimeToLiveInSeconds": {
@@ -8717,7 +9667,7 @@
         "com.amazonaws.alexaforbusiness#TrustAnchor": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "-{5}BEGIN CERTIFICATE-{5}\\u000D?\\u000A([A-Za-z0-9/+]{64}\\u000D?\\u000A)*[A-Za-z0-9/+]{1,64}={0,2}\\u000D?\\u000A-{5}END CERTIFICATE-{5}(\\u000D?\\u000A)?"
+                "smithy.api#pattern": "^-{5}BEGIN CERTIFICATE-{5}\\u000D?\\u000A([A-Za-z0-9/+]{64}\\u000D?\\u000A)*[A-Za-z0-9/+]{1,64}={0,2}\\u000D?\\u000A-{5}END CERTIFICATE-{5}(\\u000D?\\u000A)?$"
             }
         },
         "com.amazonaws.alexaforbusiness#TrustAnchorList": {
@@ -8758,6 +9708,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Removes metadata tags from a specified resource.</p>"
             }
         },
@@ -8778,11 +9731,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#UntagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.alexaforbusiness#UpdateAddressBook": {
             "type": "operation",
@@ -8804,6 +9763,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Updates address book details by the address book ARN.</p>"
             }
         },
@@ -8829,11 +9791,17 @@
                         "smithy.api#documentation": "<p>The updated description of the room.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#UpdateAddressBookResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.alexaforbusiness#UpdateBusinessReportSchedule": {
             "type": "operation",
@@ -8852,6 +9820,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Updates the configuration of the report delivery schedule with the specified schedule\n         ARN.</p>"
             }
         },
@@ -8895,11 +9866,17 @@
                         "smithy.api#documentation": "<p>The recurrence of the reports.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#UpdateBusinessReportScheduleResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.alexaforbusiness#UpdateConferenceProvider": {
             "type": "operation",
@@ -8915,6 +9892,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Updates an existing conference provider's settings.</p>"
             }
         },
@@ -8954,11 +9934,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#UpdateConferenceProviderResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.alexaforbusiness#UpdateContact": {
             "type": "operation",
@@ -8977,6 +9963,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Updates the contact details by the contact ARN.</p>"
             }
         },
@@ -9026,11 +10015,17 @@
                         "smithy.api#documentation": "<p>The list of SIP addresses for the contact.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#UpdateContactResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.alexaforbusiness#UpdateDevice": {
             "type": "operation",
@@ -9052,6 +10047,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Updates the device name by device ARN.</p>"
             }
         },
@@ -9070,11 +10068,17 @@
                         "smithy.api#documentation": "<p>The updated device name. Required.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#UpdateDeviceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.alexaforbusiness#UpdateEndOfMeetingReminder": {
             "type": "structure",
@@ -9119,6 +10123,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Updates the details of a gateway. If any optional field is not provided, the existing\n         corresponding value is left unmodified.</p>"
             }
         },
@@ -9139,6 +10146,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Updates the details of a gateway group. If any optional field is not provided, the\n         existing corresponding value is left unmodified.</p>"
             }
         },
@@ -9164,11 +10174,17 @@
                         "smithy.api#documentation": "<p>The updated description of the gateway group.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#UpdateGatewayGroupResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.alexaforbusiness#UpdateGatewayRequest": {
             "type": "structure",
@@ -9198,11 +10214,17 @@
                         "smithy.api#documentation": "<p>The updated software version of the gateway. The gateway automatically updates its\n         software version during normal operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#UpdateGatewayResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.alexaforbusiness#UpdateInstantBooking": {
             "type": "structure",
@@ -9250,6 +10272,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Settings for requiring a check in when a room is reserved. Alexa can cancel a room reservation if it's not checked into to make the room available for others. Users can check in by joining the meeting with Alexa or an AVS device, or by saying “Alexa, check in.” </p>"
                     }
+                },
+                "ProactiveJoin": {
+                    "target": "com.amazonaws.alexaforbusiness#UpdateProactiveJoin"
                 }
             },
             "traits": {
@@ -9282,6 +10307,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Updates a network profile by the network profile ARN.</p>"
             }
         },
@@ -9331,11 +10359,28 @@
                         "smithy.api#documentation": "<p>The root certificate(s) of your authentication server that will be installed on your\n         devices and used to trust your authentication server during EAP negotiation. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#UpdateNetworkProfileResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.alexaforbusiness#UpdateProactiveJoin": {
+            "type": "structure",
+            "members": {
+                "EnabledByMotion": {
+                    "target": "com.amazonaws.alexaforbusiness#Boolean",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            }
         },
         "com.amazonaws.alexaforbusiness#UpdateProfile": {
             "type": "operation",
@@ -9357,6 +10402,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Updates an existing room profile by room profile ARN.</p>"
             }
         },
@@ -9447,11 +10495,17 @@
                         "smithy.api#documentation": "<p>The updated meeting room settings of a room profile.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#UpdateProfileResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.alexaforbusiness#UpdateRequireCheckIn": {
             "type": "structure",
@@ -9490,6 +10544,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Updates room details by room ARN.</p>"
             }
         },
@@ -9526,11 +10583,17 @@
                         "smithy.api#documentation": "<p>The updated profile ARN for the room.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#UpdateRoomResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.alexaforbusiness#UpdateSkillGroup": {
             "type": "operation",
@@ -9552,6 +10615,9 @@
                 }
             ],
             "traits": {
+                "smithy.api#deprecated": {
+                    "message": "Alexa For Business is no longer supported"
+                },
                 "smithy.api#documentation": "<p>Updates skill group details by skill group ARN.</p>"
             }
         },
@@ -9576,11 +10642,17 @@
                         "smithy.api#documentation": "<p>The updated description for the skill group.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.alexaforbusiness#UpdateSkillGroupResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.alexaforbusiness#Url": {
             "type": "string"
@@ -9647,7 +10719,7 @@
         "com.amazonaws.alexaforbusiness#UserId": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "amzn1\\.[A-Za-z0-9+-\\/=.]{1,300}"
+                "smithy.api#pattern": "^amzn1\\.[A-Za-z0-9+-\\/=.]{1,300}$"
             }
         },
         "com.amazonaws.alexaforbusiness#Utterance": {
@@ -9662,26 +10734,32 @@
             }
         },
         "com.amazonaws.alexaforbusiness#WakeWord": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ALEXA",
-                        "name": "ALEXA"
-                    },
-                    {
-                        "value": "AMAZON",
-                        "name": "AMAZON"
-                    },
-                    {
-                        "value": "ECHO",
-                        "name": "ECHO"
-                    },
-                    {
-                        "value": "COMPUTER",
-                        "name": "COMPUTER"
+            "type": "enum",
+            "members": {
+                "ALEXA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALEXA"
                     }
-                ]
+                },
+                "AMAZON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AMAZON"
+                    }
+                },
+                "ECHO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ECHO"
+                    }
+                },
+                "COMPUTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPUTER"
+                    }
+                }
             }
         },
         "com.amazonaws.alexaforbusiness#user_FirstName": {
@@ -9691,7 +10769,7 @@
                     "min": 0,
                     "max": 30
                 },
-                "smithy.api#pattern": "([A-Za-z\\-' 0-9._]|\\p{IsLetter})*"
+                "smithy.api#pattern": "^([A-Za-z\\-' 0-9._]|\\p{IsLetter})*$"
             }
         },
         "com.amazonaws.alexaforbusiness#user_LastName": {
@@ -9701,7 +10779,7 @@
                     "min": 0,
                     "max": 30
                 },
-                "smithy.api#pattern": "([A-Za-z\\-' 0-9._]|\\p{IsLetter})*"
+                "smithy.api#pattern": "^([A-Za-z\\-' 0-9._]|\\p{IsLetter})*$"
             }
         },
         "com.amazonaws.alexaforbusiness#user_UserId": {
@@ -9711,7 +10789,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9@_+.-]*"
+                "smithy.api#pattern": "^[a-zA-Z0-9@_+.-]*$"
             }
         }
     }

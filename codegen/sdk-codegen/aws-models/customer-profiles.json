@@ -368,6 +368,55 @@
                 "smithy.api#documentation": "<p>Workflow step details for <code>APPFLOW_INTEGRATION</code> workflow.</p>"
             }
         },
+        "com.amazonaws.customerprofiles#AttributeDetails": {
+            "type": "structure",
+            "members": {
+                "Attributes": {
+                    "target": "com.amazonaws.customerprofiles#AttributeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of attribute items specified in the mathematical expression.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Expression": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Mathematical expression that is performed on attribute items provided in the attribute list. Each element in the expression should follow the structure of \\\"{ObjectTypeName.AttributeName}\\\".</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Mathematical expression and a list of attribute items specified in that expression.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#AttributeItem": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.customerprofiles#attributeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of an attribute defined in a profile object type.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of a single attribute item specified in the mathematical expression.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#AttributeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#AttributeItem"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
+                }
+            }
+        },
         "com.amazonaws.customerprofiles#AttributeSourceIdMap": {
             "type": "map",
             "key": {
@@ -480,6 +529,44 @@
                 "smithy.api#pattern": ".*"
             }
         },
+        "com.amazonaws.customerprofiles#CalculatedAttributeDefinitionsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#ListCalculatedAttributeDefinitionItem"
+            }
+        },
+        "com.amazonaws.customerprofiles#CalculatedAttributesForProfileList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#ListCalculatedAttributeForProfileItem"
+            }
+        },
+        "com.amazonaws.customerprofiles#Conditions": {
+            "type": "structure",
+            "members": {
+                "Range": {
+                    "target": "com.amazonaws.customerprofiles#Range",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The relative time period over which data is included in the aggregation.</p>"
+                    }
+                },
+                "ObjectCount": {
+                    "target": "com.amazonaws.customerprofiles#ObjectCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of profile objects used for the calculated attribute.</p>"
+                    }
+                },
+                "Threshold": {
+                    "target": "com.amazonaws.customerprofiles#Threshold",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The threshold for the calculated attribute.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The conditions including range, object count, and threshold for the calculated attribute.</p>"
+            }
+        },
         "com.amazonaws.customerprofiles#ConflictResolution": {
             "type": "structure",
             "members": {
@@ -579,6 +666,164 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The matching criteria to be used during the auto-merging process. </p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#CreateCalculatedAttributeDefinition": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#CreateCalculatedAttributeDefinitionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#CreateCalculatedAttributeDefinitionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new calculated attribute definition. After creation, new object data ingested \n         into Customer Profiles will be included in the calculated attribute, which can be retrieved \n         for a profile using the <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetCalculatedAttributeForProfile.html\">GetCalculatedAttributeForProfile</a> API. \n         Defining a calculated attribute makes it available for all profiles within a domain. Each \n         calculated attribute can only reference one <code>ObjectType</code> and at most, two fields \n         from that <code>ObjectType</code>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/domains/{DomainName}/calculated-attributes/{CalculatedAttributeName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#CreateCalculatedAttributeDefinitionRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "CalculatedAttributeName": {
+                    "target": "com.amazonaws.customerprofiles#typeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the calculated attribute.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.customerprofiles#displayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the calculated attribute.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.customerprofiles#text",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the calculated attribute.</p>"
+                    }
+                },
+                "AttributeDetails": {
+                    "target": "com.amazonaws.customerprofiles#AttributeDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Mathematical expression and a list of attribute items specified in that expression.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Conditions": {
+                    "target": "com.amazonaws.customerprofiles#Conditions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The conditions including range, object count, and threshold for the calculated attribute.</p>"
+                    }
+                },
+                "Statistic": {
+                    "target": "com.amazonaws.customerprofiles#Statistic",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The aggregation operation to perform for the calculated attribute.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.customerprofiles#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#CreateCalculatedAttributeDefinitionResponse": {
+            "type": "structure",
+            "members": {
+                "CalculatedAttributeName": {
+                    "target": "com.amazonaws.customerprofiles#typeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the calculated attribute.</p>"
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.customerprofiles#displayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the calculated attribute.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.customerprofiles#text",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the calculated attribute.</p>"
+                    }
+                },
+                "AttributeDetails": {
+                    "target": "com.amazonaws.customerprofiles#AttributeDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Mathematical expression and a list of attribute items specified in that expression.</p>"
+                    }
+                },
+                "Conditions": {
+                    "target": "com.amazonaws.customerprofiles#Conditions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The conditions including range, object count, and threshold for the calculated attribute.</p>"
+                    }
+                },
+                "Statistic": {
+                    "target": "com.amazonaws.customerprofiles#Statistic",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The aggregation operation to perform for the calculated attribute.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the calculated attribute definition was created.</p>"
+                    }
+                },
+                "LastUpdatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the calculated attribute definition was most recently edited.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.customerprofiles#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.customerprofiles#CreateDomain": {
@@ -1039,6 +1284,9 @@
                     "target": "com.amazonaws.customerprofiles#AddProfileKey"
                 },
                 {
+                    "target": "com.amazonaws.customerprofiles#CreateCalculatedAttributeDefinition"
+                },
+                {
                     "target": "com.amazonaws.customerprofiles#CreateDomain"
                 },
                 {
@@ -1046,6 +1294,9 @@
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#CreateProfile"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#DeleteCalculatedAttributeDefinition"
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#DeleteDomain"
@@ -1070,6 +1321,12 @@
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#GetAutoMergingPreview"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#GetCalculatedAttributeDefinition"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#GetCalculatedAttributeForProfile"
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#GetDomain"
@@ -1097,6 +1354,12 @@
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#ListAccountIntegrations"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ListCalculatedAttributeDefinitions"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ListCalculatedAttributesForProfile"
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#ListDomains"
@@ -1142,6 +1405,9 @@
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#UpdateCalculatedAttributeDefinition"
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#UpdateDomain"
@@ -1525,8 +1791,8 @@
                             },
                             "params": {
                                 "Region": "af-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1538,8 +1804,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1551,8 +1817,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1564,8 +1830,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1577,8 +1843,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1590,8 +1856,8 @@
                             },
                             "params": {
                                 "Region": "ca-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1603,8 +1869,8 @@
                             },
                             "params": {
                                 "Region": "eu-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1616,8 +1882,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1629,8 +1895,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1642,8 +1908,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1655,8 +1921,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1668,8 +1934,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1681,8 +1947,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1694,8 +1960,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1707,8 +1973,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1720,8 +1986,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1733,8 +1999,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1746,8 +2012,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1759,8 +2025,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1772,8 +2038,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1785,8 +2051,19 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1798,8 +2075,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1811,8 +2099,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1824,8 +2123,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1837,8 +2147,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1850,8 +2160,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1863,8 +2173,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1875,8 +2185,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1887,9 +2197,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -1925,6 +2241,71 @@
                     "max": 256
                 },
                 "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.customerprofiles#DeleteCalculatedAttributeDefinition": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#DeleteCalculatedAttributeDefinitionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#DeleteCalculatedAttributeDefinitionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an existing calculated attribute definition. Note that deleting a default calculated attribute \n         is possible, however once deleted, you will be unable to undo that action and will need to recreate it on \n         your own using the CreateCalculatedAttributeDefinition API if you want it back.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/domains/{DomainName}/calculated-attributes/{CalculatedAttributeName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#DeleteCalculatedAttributeDefinitionRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "CalculatedAttributeName": {
+                    "target": "com.amazonaws.customerprofiles#typeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the calculated attribute.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#DeleteCalculatedAttributeDefinitionResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.customerprofiles#DeleteDomain": {
@@ -2933,6 +3314,224 @@
                     "traits": {
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of profiles that would be merged if this wasn't a preview dry run.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#GetCalculatedAttributeDefinition": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#GetCalculatedAttributeDefinitionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#GetCalculatedAttributeDefinitionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Provides more information on a calculated attribute definition for Customer Profiles.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/domains/{DomainName}/calculated-attributes/{CalculatedAttributeName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#GetCalculatedAttributeDefinitionRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "CalculatedAttributeName": {
+                    "target": "com.amazonaws.customerprofiles#typeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the calculated attribute.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#GetCalculatedAttributeDefinitionResponse": {
+            "type": "structure",
+            "members": {
+                "CalculatedAttributeName": {
+                    "target": "com.amazonaws.customerprofiles#typeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the calculated attribute.</p>"
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.customerprofiles#displayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the calculated attribute.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.customerprofiles#text",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the calculated attribute.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the calculated attribute definition was created.</p>"
+                    }
+                },
+                "LastUpdatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the calculated attribute definition was most recently edited.</p>"
+                    }
+                },
+                "Statistic": {
+                    "target": "com.amazonaws.customerprofiles#Statistic",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The aggregation operation to perform for the calculated attribute.</p>"
+                    }
+                },
+                "Conditions": {
+                    "target": "com.amazonaws.customerprofiles#Conditions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The conditions including range, object count, and threshold for the calculated attribute.</p>"
+                    }
+                },
+                "AttributeDetails": {
+                    "target": "com.amazonaws.customerprofiles#AttributeDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Mathematical expression and a list of attribute items specified in that expression.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.customerprofiles#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#GetCalculatedAttributeForProfile": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#GetCalculatedAttributeForProfileRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#GetCalculatedAttributeForProfileResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieve a calculated attribute for a customer profile.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/domains/{DomainName}/profile/{ProfileId}/calculated-attributes/{CalculatedAttributeName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#GetCalculatedAttributeForProfileRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProfileId": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of a customer profile.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "CalculatedAttributeName": {
+                    "target": "com.amazonaws.customerprofiles#typeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the calculated attribute.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#GetCalculatedAttributeForProfileResponse": {
+            "type": "structure",
+            "members": {
+                "CalculatedAttributeName": {
+                    "target": "com.amazonaws.customerprofiles#typeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the calculated attribute.</p>"
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.customerprofiles#displayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the calculated attribute.</p>"
+                    }
+                },
+                "IsDataPartial": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the calculated attribute’s value is based on partial data. If data is partial, it is set to true.</p>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the calculated attribute.</p>"
                     }
                 }
             },
@@ -4239,6 +4838,258 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.customerprofiles#ListCalculatedAttributeDefinitionItem": {
+            "type": "structure",
+            "members": {
+                "CalculatedAttributeName": {
+                    "target": "com.amazonaws.customerprofiles#typeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the calculated attribute.</p>"
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.customerprofiles#displayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the calculated attribute.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.customerprofiles#text",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The threshold for the calculated attribute.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The threshold for the calculated attribute.</p>"
+                    }
+                },
+                "LastUpdatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the calculated attribute definition was most recently edited.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.customerprofiles#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of a single calculated attribute definition.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#ListCalculatedAttributeDefinitions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#ListCalculatedAttributeDefinitionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#ListCalculatedAttributeDefinitionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists calculated attribute definitions for Customer Profiles</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/domains/{DomainName}/calculated-attributes",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#ListCalculatedAttributeDefinitionsRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.customerprofiles#token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token from the previous call to ListCalculatedAttributeDefinitions.</p>",
+                        "smithy.api#httpQuery": "next-token"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.customerprofiles#maxSize100",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of calculated attribute definitions returned per page.</p>",
+                        "smithy.api#httpQuery": "max-results"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#ListCalculatedAttributeDefinitionsResponse": {
+            "type": "structure",
+            "members": {
+                "Items": {
+                    "target": "com.amazonaws.customerprofiles#CalculatedAttributeDefinitionsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of calculated attribute definitions.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.customerprofiles#token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token from the previous call to ListCalculatedAttributeDefinitions.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#ListCalculatedAttributeForProfileItem": {
+            "type": "structure",
+            "members": {
+                "CalculatedAttributeName": {
+                    "target": "com.amazonaws.customerprofiles#typeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the calculated attribute.</p>"
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.customerprofiles#displayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the calculated attribute.</p>"
+                    }
+                },
+                "IsDataPartial": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the calculated attribute’s value is based on partial data. If data is partial, it is set to true.</p>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the calculated attribute.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of a single calculated attribute for a profile.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#ListCalculatedAttributesForProfile": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#ListCalculatedAttributesForProfileRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#ListCalculatedAttributesForProfileResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieve a list of calculated attributes for a customer profile.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/domains/{DomainName}/profile/{ProfileId}/calculated-attributes",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#ListCalculatedAttributesForProfileRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.customerprofiles#token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token from the previous call to ListCalculatedAttributesForProfile.</p>",
+                        "smithy.api#httpQuery": "next-token"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.customerprofiles#maxSize100",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of calculated attributes returned per page.</p>",
+                        "smithy.api#httpQuery": "max-results"
+                    }
+                },
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProfileId": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of a customer profile.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#ListCalculatedAttributesForProfileResponse": {
+            "type": "structure",
+            "members": {
+                "Items": {
+                    "target": "com.amazonaws.customerprofiles#CalculatedAttributesForProfileList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of calculated attributes.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.customerprofiles#token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token from the previous call to ListCalculatedAttributesForProfile.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.customerprofiles#ListDomainItem": {
             "type": "structure",
             "members": {
@@ -4919,7 +5770,7 @@
                 "ObjectFilter": {
                     "target": "com.amazonaws.customerprofiles#ObjectFilter",
                     "traits": {
-                        "smithy.api#documentation": "<p>Applies a filter to the response to include profile objects with the specified index\n         values. This filter is only supported for ObjectTypeName _asset, _case and _order.</p>"
+                        "smithy.api#documentation": "<p>Applies a filter to the response to include profile objects with the specified index\n         values.</p>"
                     }
                 }
             },
@@ -5491,13 +6342,22 @@
                 "smithy.api#pattern": "^\\S+$"
             }
         },
+        "com.amazonaws.customerprofiles#ObjectCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.customerprofiles#ObjectFilter": {
             "type": "structure",
             "members": {
                 "KeyName": {
                     "target": "com.amazonaws.customerprofiles#name",
                     "traits": {
-                        "smithy.api#documentation": "<p>A searchable identifier of a standard profile object. The predefined keys you can use to\n         search for _asset include: _assetId, _assetName, _serialNumber. The predefined keys you can\n         use to search for _case include: _caseId. The predefined keys you can use to search for\n         _order include: _orderId.</p>",
+                        "smithy.api#documentation": "<p>A searchable identifier of a profile object. The predefined keys you can use to\n         search for <code>_asset</code> include: <code>_assetId</code>, <code>_assetName</code>, \n         and <code>_serialNumber</code>. The predefined keys you can use to search for <code>_case</code> \n         include: <code>_caseId</code>. The predefined keys you can use to search for\n         <code>_order</code> include: <code>_orderId</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5510,7 +6370,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The filter applied to ListProfileObjects response to include profile objects with the\n         specified index values. This filter is only supported for ObjectTypeName _asset, _case and\n         _order.</p>"
+                "smithy.api#documentation": "<p>The filter applied to <code>ListProfileObjects</code> response to include profile objects with the\n         specified index values.</p>"
             }
         },
         "com.amazonaws.customerprofiles#ObjectTypeField": {
@@ -5572,6 +6432,35 @@
             },
             "value": {
                 "target": "com.amazonaws.customerprofiles#typeName"
+            }
+        },
+        "com.amazonaws.customerprofiles#Operator": {
+            "type": "enum",
+            "members": {
+                "EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQUAL_TO"
+                    }
+                },
+                "GREATER_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER_THAN"
+                    }
+                },
+                "LESS_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LESS_THAN"
+                    }
+                },
+                "NOT_EQUAL_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_EQUAL_TO"
+                    }
+                }
             }
         },
         "com.amazonaws.customerprofiles#OperatorPropertiesKeys": {
@@ -6318,6 +7207,29 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#Range": {
+            "type": "structure",
+            "members": {
+                "Value": {
+                    "target": "com.amazonaws.customerprofiles#Value",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The amount of time of the specified unit.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Unit": {
+                    "target": "com.amazonaws.customerprofiles#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unit of time.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The relative time period over which data is included in the aggregation.</p>"
             }
         },
         "com.amazonaws.customerprofiles#ResourceNotFoundException": {
@@ -7190,6 +8102,59 @@
                 "target": "com.amazonaws.customerprofiles#StandardIdentifier"
             }
         },
+        "com.amazonaws.customerprofiles#Statistic": {
+            "type": "enum",
+            "members": {
+                "FIRST_OCCURRENCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FIRST_OCCURRENCE"
+                    }
+                },
+                "LAST_OCCURRENCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LAST_OCCURRENCE"
+                    }
+                },
+                "COUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COUNT"
+                    }
+                },
+                "SUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUM"
+                    }
+                },
+                "MINIMUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MINIMUM"
+                    }
+                },
+                "MAXIMUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MAXIMUM"
+                    }
+                },
+                "AVERAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVERAGE"
+                    }
+                },
+                "MAX_OCCURRENCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MAX_OCCURRENCE"
+                    }
+                }
+            }
+        },
         "com.amazonaws.customerprofiles#Status": {
             "type": "enum",
             "members": {
@@ -7453,6 +8418,28 @@
                 "target": "com.amazonaws.customerprofiles#Task"
             }
         },
+        "com.amazonaws.customerprofiles#Threshold": {
+            "type": "structure",
+            "members": {
+                "Value": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the threshold.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Operator": {
+                    "target": "com.amazonaws.customerprofiles#Operator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operator of the threshold.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The threshold for the calculated attribute.</p>"
+            }
+        },
         "com.amazonaws.customerprofiles#ThrottlingException": {
             "type": "structure",
             "members": {
@@ -7530,6 +8517,17 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "OnDemand"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#Unit": {
+            "type": "enum",
+            "members": {
+                "DAYS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DAYS"
                     }
                 }
             }
@@ -7668,6 +8666,144 @@
             },
             "value": {
                 "target": "com.amazonaws.customerprofiles#string0To255"
+            }
+        },
+        "com.amazonaws.customerprofiles#UpdateCalculatedAttributeDefinition": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#UpdateCalculatedAttributeDefinitionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#UpdateCalculatedAttributeDefinitionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an existing calculated attribute definition. When updating the Conditions, note that increasing \n         the date range of a calculated attribute will not trigger inclusion of historical data greater than the \n         current date range.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/domains/{DomainName}/calculated-attributes/{CalculatedAttributeName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#UpdateCalculatedAttributeDefinitionRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "CalculatedAttributeName": {
+                    "target": "com.amazonaws.customerprofiles#typeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the calculated attribute.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.customerprofiles#displayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the calculated attribute.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.customerprofiles#text",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the calculated attribute.</p>"
+                    }
+                },
+                "Conditions": {
+                    "target": "com.amazonaws.customerprofiles#Conditions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The conditions including range, object count, and threshold for the calculated attribute.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#UpdateCalculatedAttributeDefinitionResponse": {
+            "type": "structure",
+            "members": {
+                "CalculatedAttributeName": {
+                    "target": "com.amazonaws.customerprofiles#typeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the calculated attribute.</p>"
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.customerprofiles#displayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the calculated attribute.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.customerprofiles#text",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the calculated attribute.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the calculated attribute definition was created.</p>"
+                    }
+                },
+                "LastUpdatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the calculated attribute definition was most recently edited.</p>"
+                    }
+                },
+                "Statistic": {
+                    "target": "com.amazonaws.customerprofiles#Statistic",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The aggregation operation to perform for the calculated attribute.</p>"
+                    }
+                },
+                "Conditions": {
+                    "target": "com.amazonaws.customerprofiles#Conditions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The conditions including range, object count, and threshold for the calculated attribute.</p>"
+                    }
+                },
+                "AttributeDetails": {
+                    "target": "com.amazonaws.customerprofiles#AttributeDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mathematical expression and a list of attribute items specified in that expression.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.customerprofiles#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.customerprofiles#UpdateDomain": {
@@ -8019,6 +9155,16 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.customerprofiles#Value": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 366
+                }
+            }
+        },
         "com.amazonaws.customerprofiles#WorkflowAttributes": {
             "type": "structure",
             "members": {
@@ -8200,10 +9346,30 @@
                 }
             }
         },
+        "com.amazonaws.customerprofiles#attributeName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_.-]+$"
+            }
+        },
         "com.amazonaws.customerprofiles#boolean": {
             "type": "boolean",
             "traits": {
                 "smithy.api#default": false
+            }
+        },
+        "com.amazonaws.customerprofiles#displayName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[a-zA-Z_][a-zA-Z_0-9-\\s]*$"
             }
         },
         "com.amazonaws.customerprofiles#encryptionKey": {

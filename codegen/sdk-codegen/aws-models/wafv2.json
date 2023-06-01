@@ -5274,7 +5274,7 @@
                 "HeaderOrder": {
                     "target": "com.amazonaws.wafv2#HeaderOrder",
                     "traits": {
-                        "smithy.api#documentation": "<p>Inspect a string containing the list of the request's header names, ordered as they appear in the web request\nthat WAF receives for inspection. \n           WAF generates the string and then uses that as the field to match component in its inspection. \n    WAF separates the header names in the string using commas and no added spaces.</p>\n         <p>Matches against the header order string are case insensitive.</p>"
+                        "smithy.api#documentation": "<p>Inspect a string containing the list of the request's header names, ordered as they appear in the web request\nthat WAF receives for inspection. \n           WAF generates the string and then uses that as the field to match component in its inspection. \n    WAF separates the header names in the string using colons and no added spaces, for example <code>Host:User-Agent:Accept:Authorization:Referer</code>.</p>\n         <p>Matches against the header order string are case insensitive.</p>"
                     }
                 }
             },
@@ -6566,7 +6566,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Inspect a string containing the list of the request's header names, ordered as they appear in the web request\nthat WAF receives for inspection. \n           WAF generates the string and then uses that as the field to match component in its inspection. \n    WAF separates the header names in the string using commas and no added spaces.</p>\n         <p>Matches against the header order string are case insensitive.</p>"
+                "smithy.api#documentation": "<p>Inspect a string containing the list of the request's header names, ordered as they appear in the web request\nthat WAF receives for inspection. \n           WAF generates the string and then uses that as the field to match component in its inspection. \n    WAF separates the header names in the string using colons and no added spaces, for example <code>Host:User-Agent:Accept:Authorization:Referer</code>.</p>\n         <p>Matches against the header order string are case insensitive.</p>"
             }
         },
         "com.amazonaws.wafv2#HeaderValue": {

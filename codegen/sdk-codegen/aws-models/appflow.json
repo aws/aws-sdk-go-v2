@@ -846,6 +846,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Information about who registered the connector.</p>"
                     }
+                },
+                "supportedDataTransferTypes": {
+                    "target": "com.amazonaws.appflow#SupportedDataTransferTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data transfer types that the connector supports.</p>\n         <dl>\n            <dt>RECORD</dt>\n            <dd>\n               <p>Structured records.</p>\n            </dd>\n            <dt>FILE</dt>\n            <dd>\n               <p>Files or binary data.</p>\n            </dd>\n         </dl>"
+                    }
+                },
+                "supportedDataTransferApis": {
+                    "target": "com.amazonaws.appflow#SupportedDataTransferApis",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The APIs of the connector application that Amazon AppFlow can use to transfer your\n      data.</p>"
+                    }
                 }
             },
             "traits": {
@@ -938,6 +950,12 @@
                     "target": "com.amazonaws.appflow#ConnectorModeList",
                     "traits": {
                         "smithy.api#documentation": "<p>The connection mode that the connector supports.</p>"
+                    }
+                },
+                "supportedDataTransferTypes": {
+                    "target": "com.amazonaws.appflow#SupportedDataTransferTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data transfer types that the connector supports.</p>\n         <dl>\n            <dt>RECORD</dt>\n            <dd>\n               <p>Structured records.</p>\n            </dd>\n            <dt>FILE</dt>\n            <dd>\n               <p>Files or binary data.</p>\n            </dd>\n         </dl>"
                     }
                 }
             },
@@ -2514,6 +2532,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Custom properties that are required to use the custom connector as a source.</p>"
                     }
+                },
+                "dataTransferApi": {
+                    "target": "com.amazonaws.appflow#DataTransferApi",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The API of the connector application that Amazon AppFlow uses to transfer your\n      data.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2608,6 +2632,59 @@
                         "smithy.api#enumValue": "Complete"
                     }
                 }
+            }
+        },
+        "com.amazonaws.appflow#DataTransferApi": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.appflow#DataTransferApiTypeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the connector application API.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.appflow#DataTransferApiType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You can specify one of the following types:</p>\n         <dl>\n            <dt>AUTOMATIC</dt>\n            <dd>\n               <p>The default. Optimizes a flow for datasets that fluctuate in size from small to\n            large. For each flow run, Amazon AppFlow chooses to use the SYNC or ASYNC API type based on\n            the amount of data that the run transfers.</p>\n            </dd>\n            <dt>SYNC</dt>\n            <dd>\n               <p>A synchronous API. This type of API optimizes a flow for small to medium-sized datasets.</p>\n            </dd>\n            <dt>ASYNC</dt>\n            <dd>\n               <p>An asynchronous API. This type of API optimizes a flow for large datasets.</p>\n            </dd>\n         </dl>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The API of the connector application that Amazon AppFlow uses to transfer your\n      data.</p>"
+            }
+        },
+        "com.amazonaws.appflow#DataTransferApiType": {
+            "type": "enum",
+            "members": {
+                "SYNC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SYNC"
+                    }
+                },
+                "ASYNC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASYNC"
+                    }
+                },
+                "AUTOMATIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTOMATIC"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.appflow#DataTransferApiTypeName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[\\w/-]+$"
             }
         },
         "com.amazonaws.appflow#DatabaseName": {
@@ -7782,7 +7859,7 @@
                 "oauth2GrantTypesSupported": {
                     "target": "com.amazonaws.appflow#OAuth2GrantTypeSupportedList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The OAuth 2.0 grant types that Amazon AppFlow can use when it requests an access\n      token from Salesforce. Amazon AppFlow requires an access token each time it\n      attempts to access your Salesforce records.</p>\n         <dl>\n            <dt>AUTHORIZATION_CODE</dt>\n            <dd>\n               <p>Amazon AppFlow passes an authorization code when it requests the access token\n            from Salesforce. Amazon AppFlow receives the authorization code from Salesforce\n            after you log in to your Salesforce account and authorize Amazon AppFlow to access\n            your records.</p>\n            </dd>\n            <dt>CLIENT_CREDENTIALS</dt>\n            <dd>\n               <p>Amazon AppFlow passes client credentials (a client ID and client secret) when\n            it requests the access token from Salesforce. You provide these credentials to Amazon AppFlow when you define the connection to your Salesforce account.</p>\n            </dd>\n            <dt>JWT_BEARER</dt>\n            <dd>\n               <p>Amazon AppFlow passes a JSON web token (JWT) when it requests the access token\n            from Salesforce. You provide the JWT to Amazon AppFlow when you define the\n            connection to your Salesforce account. When you use this grant type, you don't need to\n            log in to your Salesforce account to authorize Amazon AppFlow to access your\n            records.</p>\n            </dd>\n         </dl>"
+                        "smithy.api#documentation": "<p>The OAuth 2.0 grant types that Amazon AppFlow can use when it requests an access\n      token from Salesforce. Amazon AppFlow requires an access token each time it attempts to\n      access your Salesforce records.</p>\n         <dl>\n            <dt>AUTHORIZATION_CODE</dt>\n            <dd>\n               <p>Amazon AppFlow passes an authorization code when it requests the access token\n            from Salesforce. Amazon AppFlow receives the authorization code from Salesforce\n            after you log in to your Salesforce account and authorize Amazon AppFlow to access\n            your records.</p>\n            </dd>\n            <dt>CLIENT_CREDENTIALS</dt>\n            <dd>\n               <p>Amazon AppFlow passes client credentials (a client ID and client secret) when\n            it requests the access token from Salesforce. You provide these credentials to Amazon AppFlow when you define the connection to your Salesforce account.</p>\n            </dd>\n            <dt>JWT_BEARER</dt>\n            <dd>\n               <p>Amazon AppFlow passes a JSON web token (JWT) when it requests the access token\n            from Salesforce. You provide the JWT to Amazon AppFlow when you define the\n            connection to your Salesforce account. When you use this grant type, you don't need to\n            log in to your Salesforce account to authorize Amazon AppFlow to access your\n            records.</p>\n            </dd>\n         </dl>"
                     }
                 }
             },
@@ -9948,6 +10025,35 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.appflow#SupportedApiVersion"
+            }
+        },
+        "com.amazonaws.appflow#SupportedDataTransferApis": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.appflow#DataTransferApi"
+            }
+        },
+        "com.amazonaws.appflow#SupportedDataTransferType": {
+            "type": "enum",
+            "members": {
+                "RECORD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RECORD"
+                    }
+                },
+                "FILE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FILE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.appflow#SupportedDataTransferTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.appflow#SupportedDataTransferType"
             }
         },
         "com.amazonaws.appflow#SupportedFieldTypeDetails": {
