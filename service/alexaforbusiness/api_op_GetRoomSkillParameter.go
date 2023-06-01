@@ -12,6 +12,8 @@ import (
 )
 
 // Gets room skill parameter details by room, skill, and parameter key ARN.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) GetRoomSkillParameter(ctx context.Context, params *GetRoomSkillParameterInput, optFns ...func(*Options)) (*GetRoomSkillParameterOutput, error) {
 	if params == nil {
 		params = &GetRoomSkillParameterInput{}

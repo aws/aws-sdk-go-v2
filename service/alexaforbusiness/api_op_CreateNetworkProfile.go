@@ -13,6 +13,8 @@ import (
 )
 
 // Creates a network profile with the specified details.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) CreateNetworkProfile(ctx context.Context, params *CreateNetworkProfileInput, optFns ...func(*Options)) (*CreateNetworkProfileOutput, error) {
 	if params == nil {
 		params = &CreateNetworkProfileInput{}

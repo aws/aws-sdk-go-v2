@@ -13,6 +13,8 @@ import (
 )
 
 // Creates a room with the specified details.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) CreateRoom(ctx context.Context, params *CreateRoomInput, optFns ...func(*Options)) (*CreateRoomOutput, error) {
 	if params == nil {
 		params = &CreateRoomInput{}

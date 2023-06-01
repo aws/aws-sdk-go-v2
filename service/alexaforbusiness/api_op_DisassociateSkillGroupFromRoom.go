@@ -12,6 +12,8 @@ import (
 
 // Disassociates a skill group from a specified room. This disables all skills in
 // the skill group on all devices in the room.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) DisassociateSkillGroupFromRoom(ctx context.Context, params *DisassociateSkillGroupFromRoomInput, optFns ...func(*Options)) (*DisassociateSkillGroupFromRoomOutput, error) {
 	if params == nil {
 		params = &DisassociateSkillGroupFromRoomInput{}

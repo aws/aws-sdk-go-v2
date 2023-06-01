@@ -12,6 +12,8 @@ import (
 
 // Configures the email template for the user enrollment invitation with the
 // specified attributes.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) PutInvitationConfiguration(ctx context.Context, params *PutInvitationConfigurationInput, optFns ...func(*Options)) (*PutInvitationConfigurationOutput, error) {
 	if params == nil {
 		params = &PutInvitationConfigurationInput{}

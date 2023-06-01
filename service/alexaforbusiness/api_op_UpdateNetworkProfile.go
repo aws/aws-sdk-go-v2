@@ -11,6 +11,8 @@ import (
 )
 
 // Updates a network profile by the network profile ARN.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) UpdateNetworkProfile(ctx context.Context, params *UpdateNetworkProfileInput, optFns ...func(*Options)) (*UpdateNetworkProfileOutput, error) {
 	if params == nil {
 		params = &UpdateNetworkProfileInput{}

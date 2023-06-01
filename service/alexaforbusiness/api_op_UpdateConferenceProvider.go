@@ -12,6 +12,8 @@ import (
 )
 
 // Updates an existing conference provider's settings.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) UpdateConferenceProvider(ctx context.Context, params *UpdateConferenceProviderInput, optFns ...func(*Options)) (*UpdateConferenceProviderOutput, error) {
 	if params == nil {
 		params = &UpdateConferenceProviderInput{}

@@ -11,6 +11,8 @@ import (
 )
 
 // Updates the device name by device ARN.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) UpdateDevice(ctx context.Context, params *UpdateDeviceInput, optFns ...func(*Options)) (*UpdateDeviceOutput, error) {
 	if params == nil {
 		params = &UpdateDeviceInput{}

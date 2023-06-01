@@ -52,8 +52,7 @@ type ListProfileObjectsInput struct {
 	NextToken *string
 
 	// Applies a filter to the response to include profile objects with the specified
-	// index values. This filter is only supported for ObjectTypeName _asset, _case and
-	// _order.
+	// index values.
 	ObjectFilter *types.ObjectFilter
 
 	noSmithyDocumentSerde

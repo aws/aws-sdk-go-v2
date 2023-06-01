@@ -12,6 +12,8 @@ import (
 )
 
 // Retrieves the details of a gateway.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) GetGateway(ctx context.Context, params *GetGatewayInput, optFns ...func(*Options)) (*GetGatewayOutput, error) {
 	if params == nil {
 		params = &GetGatewayInput{}

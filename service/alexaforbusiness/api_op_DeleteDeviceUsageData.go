@@ -15,6 +15,8 @@ import (
 // users to delete the device's entire previous history of voice input data and
 // associated response data. This action can be called once every 24 hours for a
 // specific shared device.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) DeleteDeviceUsageData(ctx context.Context, params *DeleteDeviceUsageDataInput, optFns ...func(*Options)) (*DeleteDeviceUsageDataOutput, error) {
 	if params == nil {
 		params = &DeleteDeviceUsageDataInput{}

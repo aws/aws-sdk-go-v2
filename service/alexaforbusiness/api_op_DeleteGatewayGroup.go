@@ -11,6 +11,8 @@ import (
 )
 
 // Deletes a gateway group.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) DeleteGatewayGroup(ctx context.Context, params *DeleteGatewayGroupInput, optFns ...func(*Options)) (*DeleteGatewayGroupOutput, error) {
 	if params == nil {
 		params = &DeleteGatewayGroupInput{}

@@ -12,6 +12,8 @@ import (
 )
 
 // Gets skill group details by skill group ARN.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) GetSkillGroup(ctx context.Context, params *GetSkillGroupInput, optFns ...func(*Options)) (*GetSkillGroupOutput, error) {
 	if params == nil {
 		params = &GetSkillGroupInput{}

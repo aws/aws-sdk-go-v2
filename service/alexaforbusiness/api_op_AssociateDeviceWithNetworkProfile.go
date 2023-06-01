@@ -11,6 +11,8 @@ import (
 )
 
 // Associates a device with the specified network profile.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) AssociateDeviceWithNetworkProfile(ctx context.Context, params *AssociateDeviceWithNetworkProfileInput, optFns ...func(*Options)) (*AssociateDeviceWithNetworkProfileOutput, error) {
 	if params == nil {
 		params = &AssociateDeviceWithNetworkProfileInput{}

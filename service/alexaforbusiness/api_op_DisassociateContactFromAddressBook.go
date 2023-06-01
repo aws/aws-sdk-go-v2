@@ -11,6 +11,8 @@ import (
 )
 
 // Disassociates a contact from a given address book.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) DisassociateContactFromAddressBook(ctx context.Context, params *DisassociateContactFromAddressBookInput, optFns ...func(*Options)) (*DisassociateContactFromAddressBookOutput, error) {
 	if params == nil {
 		params = &DisassociateContactFromAddressBookInput{}

@@ -11,6 +11,8 @@ import (
 )
 
 // Makes a private skill available for enrolled users to enable on their devices.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) AssociateSkillWithUsers(ctx context.Context, params *AssociateSkillWithUsersInput, optFns ...func(*Options)) (*AssociateSkillWithUsersOutput, error) {
 	if params == nil {
 		params = &AssociateSkillWithUsersInput{}

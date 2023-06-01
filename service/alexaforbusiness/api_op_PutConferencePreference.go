@@ -13,6 +13,8 @@ import (
 
 // Sets the conference preferences on a specific conference provider at the
 // account level.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) PutConferencePreference(ctx context.Context, params *PutConferencePreferenceInput, optFns ...func(*Options)) (*PutConferencePreferenceOutput, error) {
 	if params == nil {
 		params = &PutConferencePreferenceInput{}

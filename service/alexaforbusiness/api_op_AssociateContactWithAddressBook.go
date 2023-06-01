@@ -11,6 +11,8 @@ import (
 )
 
 // Associates a contact with a given address book.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) AssociateContactWithAddressBook(ctx context.Context, params *AssociateContactWithAddressBookInput, optFns ...func(*Options)) (*AssociateContactWithAddressBookOutput, error) {
 	if params == nil {
 		params = &AssociateContactWithAddressBookInput{}

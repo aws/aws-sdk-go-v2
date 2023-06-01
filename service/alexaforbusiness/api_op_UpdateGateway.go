@@ -12,6 +12,8 @@ import (
 
 // Updates the details of a gateway. If any optional field is not provided, the
 // existing corresponding value is left unmodified.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) UpdateGateway(ctx context.Context, params *UpdateGatewayInput, optFns ...func(*Options)) (*UpdateGatewayOutput, error) {
 	if params == nil {
 		params = &UpdateGatewayInput{}

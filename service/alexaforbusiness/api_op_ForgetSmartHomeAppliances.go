@@ -11,6 +11,8 @@ import (
 )
 
 // Forgets smart home appliances associated to a room.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) ForgetSmartHomeAppliances(ctx context.Context, params *ForgetSmartHomeAppliancesInput, optFns ...func(*Options)) (*ForgetSmartHomeAppliancesOutput, error) {
 	if params == nil {
 		params = &ForgetSmartHomeAppliancesInput{}

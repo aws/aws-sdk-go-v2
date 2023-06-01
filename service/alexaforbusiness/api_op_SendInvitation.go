@@ -12,6 +12,8 @@ import (
 
 // Sends an enrollment invitation email with a URL to a user. The URL is valid for
 // 30 days or until you call this operation again, whichever comes first.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) SendInvitation(ctx context.Context, params *SendInvitationInput, optFns ...func(*Options)) (*SendInvitationOutput, error) {
 	if params == nil {
 		params = &SendInvitationInput{}

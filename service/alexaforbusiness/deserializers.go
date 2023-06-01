@@ -13615,6 +13615,11 @@ func awsAwsjson11_deserializeDocumentMeetingRoomConfiguration(v **types.MeetingR
 				return err
 			}
 
+		case "ProactiveJoin":
+			if err := awsAwsjson11_deserializeDocumentProactiveJoin(&sv.ProactiveJoin, value); err != nil {
+				return err
+			}
+
 		case "RequireCheckIn":
 			if err := awsAwsjson11_deserializeDocumentRequireCheckIn(&sv.RequireCheckIn, value); err != nil {
 				return err
@@ -14119,6 +14124,46 @@ func awsAwsjson11_deserializeDocumentPhoneNumberList(v *[]types.PhoneNumber, val
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentProactiveJoin(v **types.ProactiveJoin, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ProactiveJoin
+	if *v == nil {
+		sv = &types.ProactiveJoin{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "EnabledByMotion":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.EnabledByMotion = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

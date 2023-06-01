@@ -11,6 +11,8 @@ import (
 )
 
 // Deletes the recurring report delivery schedule with the specified schedule ARN.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) DeleteBusinessReportSchedule(ctx context.Context, params *DeleteBusinessReportScheduleInput, optFns ...func(*Options)) (*DeleteBusinessReportScheduleOutput, error) {
 	if params == nil {
 		params = &DeleteBusinessReportScheduleInput{}

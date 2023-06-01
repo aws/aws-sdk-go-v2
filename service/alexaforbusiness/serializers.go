@@ -5293,6 +5293,13 @@ func awsAwsjson11_serializeDocumentCreateMeetingRoomConfiguration(v *types.Creat
 		}
 	}
 
+	if v.ProactiveJoin != nil {
+		ok := object.Key("ProactiveJoin")
+		if err := awsAwsjson11_serializeDocumentCreateProactiveJoin(v.ProactiveJoin, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.RequireCheckIn != nil {
 		ok := object.Key("RequireCheckIn")
 		if err := awsAwsjson11_serializeDocumentCreateRequireCheckIn(v.RequireCheckIn, ok); err != nil {
@@ -5303,6 +5310,18 @@ func awsAwsjson11_serializeDocumentCreateMeetingRoomConfiguration(v *types.Creat
 	if v.RoomUtilizationMetricsEnabled != nil {
 		ok := object.Key("RoomUtilizationMetricsEnabled")
 		ok.Boolean(*v.RoomUtilizationMetricsEnabled)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCreateProactiveJoin(v *types.CreateProactiveJoin, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EnabledByMotion != nil {
+		ok := object.Key("EnabledByMotion")
+		ok.Boolean(*v.EnabledByMotion)
 	}
 
 	return nil
@@ -5735,6 +5754,13 @@ func awsAwsjson11_serializeDocumentUpdateMeetingRoomConfiguration(v *types.Updat
 		}
 	}
 
+	if v.ProactiveJoin != nil {
+		ok := object.Key("ProactiveJoin")
+		if err := awsAwsjson11_serializeDocumentUpdateProactiveJoin(v.ProactiveJoin, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.RequireCheckIn != nil {
 		ok := object.Key("RequireCheckIn")
 		if err := awsAwsjson11_serializeDocumentUpdateRequireCheckIn(v.RequireCheckIn, ok); err != nil {
@@ -5745,6 +5771,18 @@ func awsAwsjson11_serializeDocumentUpdateMeetingRoomConfiguration(v *types.Updat
 	if v.RoomUtilizationMetricsEnabled != nil {
 		ok := object.Key("RoomUtilizationMetricsEnabled")
 		ok.Boolean(*v.RoomUtilizationMetricsEnabled)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentUpdateProactiveJoin(v *types.UpdateProactiveJoin, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EnabledByMotion != nil {
+		ok := object.Key("EnabledByMotion")
+		ok.Boolean(*v.EnabledByMotion)
 	}
 
 	return nil

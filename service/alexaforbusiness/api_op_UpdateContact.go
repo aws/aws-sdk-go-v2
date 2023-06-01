@@ -12,6 +12,8 @@ import (
 )
 
 // Updates the contact details by the contact ARN.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) UpdateContact(ctx context.Context, params *UpdateContactInput, optFns ...func(*Options)) (*UpdateContactOutput, error) {
 	if params == nil {
 		params = &UpdateContactInput{}

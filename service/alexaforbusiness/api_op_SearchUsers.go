@@ -13,6 +13,8 @@ import (
 )
 
 // Searches users and lists the ones that meet a set of filter and sort criteria.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) SearchUsers(ctx context.Context, params *SearchUsersInput, optFns ...func(*Options)) (*SearchUsersOutput, error) {
 	if params == nil {
 		params = &SearchUsersInput{}

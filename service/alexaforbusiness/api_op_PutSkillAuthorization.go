@@ -14,6 +14,8 @@ import (
 // is called by an assumed IAM role, the skill being linked must be a private
 // skill. Also, the skill must be owned by the AWS account that assumed the IAM
 // role.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) PutSkillAuthorization(ctx context.Context, params *PutSkillAuthorizationInput, optFns ...func(*Options)) (*PutSkillAuthorizationOutput, error) {
 	if params == nil {
 		params = &PutSkillAuthorizationInput{}

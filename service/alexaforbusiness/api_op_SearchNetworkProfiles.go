@@ -14,6 +14,8 @@ import (
 
 // Searches network profiles and lists the ones that meet a set of filter and sort
 // criteria.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) SearchNetworkProfiles(ctx context.Context, params *SearchNetworkProfilesInput, optFns ...func(*Options)) (*SearchNetworkProfilesOutput, error) {
 	if params == nil {
 		params = &SearchNetworkProfilesInput{}

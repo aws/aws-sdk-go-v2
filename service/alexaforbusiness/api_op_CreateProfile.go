@@ -13,6 +13,8 @@ import (
 )
 
 // Creates a new room profile with the specified details.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) CreateProfile(ctx context.Context, params *CreateProfileInput, optFns ...func(*Options)) (*CreateProfileOutput, error) {
 	if params == nil {
 		params = &CreateProfileInput{}

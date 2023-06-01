@@ -11,6 +11,8 @@ import (
 )
 
 // Associates a skill with a skill group.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) AssociateSkillWithSkillGroup(ctx context.Context, params *AssociateSkillWithSkillGroupInput, optFns ...func(*Options)) (*AssociateSkillWithSkillGroupOutput, error) {
 	if params == nil {
 		params = &AssociateSkillWithSkillGroupInput{}

@@ -12,6 +12,8 @@ import (
 )
 
 // Gets room details by room ARN.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) GetRoom(ctx context.Context, params *GetRoomInput, optFns ...func(*Options)) (*GetRoomOutput, error) {
 	if params == nil {
 		params = &GetRoomInput{}

@@ -13,6 +13,8 @@ import (
 )
 
 // Searches rooms and lists the ones that meet a set of filter and sort criteria.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) SearchRooms(ctx context.Context, params *SearchRoomsInput, optFns ...func(*Options)) (*SearchRoomsOutput, error) {
 	if params == nil {
 		params = &SearchRoomsInput{}

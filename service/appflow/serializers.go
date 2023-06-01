@@ -2637,6 +2637,13 @@ func awsRestjson1_serializeDocumentCustomConnectorSourceProperties(v *types.Cust
 		}
 	}
 
+	if v.DataTransferApi != nil {
+		ok := object.Key("dataTransferApi")
+		if err := awsRestjson1_serializeDocumentDataTransferApi(v.DataTransferApi, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.EntityName != nil {
 		ok := object.Key("entityName")
 		ok.String(*v.EntityName)
@@ -2709,6 +2716,23 @@ func awsRestjson1_serializeDocumentDatadogSourceProperties(v *types.DatadogSourc
 	if v.Object != nil {
 		ok := object.Key("object")
 		ok.String(*v.Object)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDataTransferApi(v *types.DataTransferApi, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
 	}
 
 	return nil

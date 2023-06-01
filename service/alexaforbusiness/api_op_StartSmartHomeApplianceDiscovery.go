@@ -11,6 +11,8 @@ import (
 )
 
 // Initiates the discovery of any smart home appliances associated with the room.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) StartSmartHomeApplianceDiscovery(ctx context.Context, params *StartSmartHomeApplianceDiscoveryInput, optFns ...func(*Options)) (*StartSmartHomeApplianceDiscoveryOutput, error) {
 	if params == nil {
 		params = &StartSmartHomeApplianceDiscoveryInput{}

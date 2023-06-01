@@ -11,6 +11,8 @@ import (
 )
 
 // Deletes a room by the room ARN.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) DeleteRoom(ctx context.Context, params *DeleteRoomInput, optFns ...func(*Options)) (*DeleteRoomOutput, error) {
 	if params == nil {
 		params = &DeleteRoomInput{}

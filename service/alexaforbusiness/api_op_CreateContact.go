@@ -13,6 +13,8 @@ import (
 )
 
 // Creates a contact with the specified details.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) CreateContact(ctx context.Context, params *CreateContactInput, optFns ...func(*Options)) (*CreateContactOutput, error) {
 	if params == nil {
 		params = &CreateContactInput{}

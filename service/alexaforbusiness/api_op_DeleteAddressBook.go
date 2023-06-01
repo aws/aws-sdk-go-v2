@@ -11,6 +11,8 @@ import (
 )
 
 // Deletes an address book by the address book ARN.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) DeleteAddressBook(ctx context.Context, params *DeleteAddressBookInput, optFns ...func(*Options)) (*DeleteAddressBookOutput, error) {
 	if params == nil {
 		params = &DeleteAddressBookInput{}

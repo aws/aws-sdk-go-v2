@@ -12,6 +12,8 @@ import (
 
 // Associates a skill group with a given room. This enables all skills in the
 // associated skill group on all devices in the room.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) AssociateSkillGroupWithRoom(ctx context.Context, params *AssociateSkillGroupWithRoomInput, optFns ...func(*Options)) (*AssociateSkillGroupWithRoomOutput, error) {
 	if params == nil {
 		params = &AssociateSkillGroupWithRoomInput{}

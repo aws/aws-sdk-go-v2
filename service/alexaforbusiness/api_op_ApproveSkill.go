@@ -13,6 +13,8 @@ import (
 // Associates a skill with the organization under the customer's AWS account. If a
 // skill is private, the user implicitly accepts access to this skill during
 // enablement.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) ApproveSkill(ctx context.Context, params *ApproveSkillInput, optFns ...func(*Options)) (*ApproveSkillOutput, error) {
 	if params == nil {
 		params = &ApproveSkillInput{}

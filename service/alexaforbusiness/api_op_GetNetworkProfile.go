@@ -12,6 +12,8 @@ import (
 )
 
 // Gets the network profile details by the network profile ARN.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) GetNetworkProfile(ctx context.Context, params *GetNetworkProfileInput, optFns ...func(*Options)) (*GetNetworkProfileOutput, error) {
 	if params == nil {
 		params = &GetNetworkProfileInput{}

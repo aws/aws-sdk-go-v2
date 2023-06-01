@@ -11,6 +11,8 @@ import (
 )
 
 // Deletes room skill parameter details by room, skill, and parameter key ID.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) DeleteRoomSkillParameter(ctx context.Context, params *DeleteRoomSkillParameterInput, optFns ...func(*Options)) (*DeleteRoomSkillParameterOutput, error) {
 	if params == nil {
 		params = &DeleteRoomSkillParameterInput{}

@@ -13,6 +13,8 @@ import (
 )
 
 // Creates a user.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) CreateUser(ctx context.Context, params *CreateUserInput, optFns ...func(*Options)) (*CreateUserOutput, error) {
 	if params == nil {
 		params = &CreateUserInput{}

@@ -13,6 +13,8 @@ import (
 )
 
 // Creates a skill group with a specified name and description.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) CreateSkillGroup(ctx context.Context, params *CreateSkillGroupInput, optFns ...func(*Options)) (*CreateSkillGroupOutput, error) {
 	if params == nil {
 		params = &CreateSkillGroupInput{}

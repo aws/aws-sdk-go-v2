@@ -15,6 +15,8 @@ import (
 // Retrieves a list of gateway summaries. Use GetGateway to retrieve details of a
 // specific gateway. An optional gateway group ARN can be provided to only retrieve
 // gateway summaries of gateways that are associated with that gateway group ARN.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) ListGateways(ctx context.Context, params *ListGatewaysInput, optFns ...func(*Options)) (*ListGatewaysOutput, error) {
 	if params == nil {
 		params = &ListGatewaysInput{}

@@ -12,6 +12,8 @@ import (
 )
 
 // Updates an existing room profile by room profile ARN.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) UpdateProfile(ctx context.Context, params *UpdateProfileInput, optFns ...func(*Options)) (*UpdateProfileOutput, error) {
 	if params == nil {
 		params = &UpdateProfileInput{}
@@ -126,6 +128,9 @@ func (c *Client) addOperationUpdateProfileMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addOpUpdateProfileValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateProfile(options.Region), middleware.Before); err != nil {

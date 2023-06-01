@@ -12,6 +12,8 @@ import (
 )
 
 // Retrieves the details of a gateway group.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) GetGatewayGroup(ctx context.Context, params *GetGatewayGroupInput, optFns ...func(*Options)) (*GetGatewayGroupOutput, error) {
 	if params == nil {
 		params = &GetGatewayGroupInput{}

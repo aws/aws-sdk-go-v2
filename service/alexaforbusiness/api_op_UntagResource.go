@@ -11,6 +11,8 @@ import (
 )
 
 // Removes metadata tags from a specified resource.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}

@@ -13,6 +13,8 @@ import (
 )
 
 // Lists all skills in the Alexa skill store by category.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) ListSkillsStoreSkillsByCategory(ctx context.Context, params *ListSkillsStoreSkillsByCategoryInput, optFns ...func(*Options)) (*ListSkillsStoreSkillsByCategoryOutput, error) {
 	if params == nil {
 		params = &ListSkillsStoreSkillsByCategoryInput{}

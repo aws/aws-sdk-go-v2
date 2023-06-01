@@ -12,6 +12,8 @@ import (
 
 // Retrieves the configured values for the user enrollment invitation email
 // template.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) GetInvitationConfiguration(ctx context.Context, params *GetInvitationConfigurationInput, optFns ...func(*Options)) (*GetInvitationConfigurationOutput, error) {
 	if params == nil {
 		params = &GetInvitationConfigurationInput{}

@@ -14,6 +14,8 @@ import (
 
 // Lists the device event history, including device connection status, for up to
 // 30 days.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) ListDeviceEvents(ctx context.Context, params *ListDeviceEventsInput, optFns ...func(*Options)) (*ListDeviceEventsOutput, error) {
 	if params == nil {
 		params = &ListDeviceEventsInput{}

@@ -13,6 +13,8 @@ import (
 )
 
 // Searches devices and lists the ones that meet a set of filter criteria.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) SearchDevices(ctx context.Context, params *SearchDevicesInput, optFns ...func(*Options)) (*SearchDevicesOutput, error) {
 	if params == nil {
 		params = &SearchDevicesInput{}

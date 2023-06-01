@@ -12,6 +12,8 @@ import (
 )
 
 // Gets the details of a device by device ARN.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) GetDevice(ctx context.Context, params *GetDeviceInput, optFns ...func(*Options)) (*GetDeviceOutput, error) {
 	if params == nil {
 		params = &GetDeviceInput{}

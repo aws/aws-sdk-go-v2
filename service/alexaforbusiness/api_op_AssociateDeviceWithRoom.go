@@ -14,6 +14,8 @@ import (
 // room profile to the device, and all the skills in any skill groups added to that
 // room. This operation requires the device to be online, or else a manual sync is
 // required.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) AssociateDeviceWithRoom(ctx context.Context, params *AssociateDeviceWithRoomInput, optFns ...func(*Options)) (*AssociateDeviceWithRoomOutput, error) {
 	if params == nil {
 		params = &AssociateDeviceWithRoomInput{}

@@ -11,6 +11,8 @@ import (
 )
 
 // Deletes a specified user by user ARN and enrollment ARN.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) DeleteUser(ctx context.Context, params *DeleteUserInput, optFns ...func(*Options)) (*DeleteUserOutput, error) {
 	if params == nil {
 		params = &DeleteUserInput{}

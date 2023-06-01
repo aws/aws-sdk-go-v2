@@ -13,6 +13,8 @@ import (
 
 // Updates room skill parameter details by room, skill, and parameter key ID. Not
 // all skills have a room skill parameter.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) PutRoomSkillParameter(ctx context.Context, params *PutRoomSkillParameterInput, optFns ...func(*Options)) (*PutRoomSkillParameterOutput, error) {
 	if params == nil {
 		params = &PutRoomSkillParameterInput{}

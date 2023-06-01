@@ -11,6 +11,8 @@ import (
 )
 
 // Updates skill group details by skill group ARN.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) UpdateSkillGroup(ctx context.Context, params *UpdateSkillGroupInput, optFns ...func(*Options)) (*UpdateSkillGroupOutput, error) {
 	if params == nil {
 		params = &UpdateSkillGroupInput{}

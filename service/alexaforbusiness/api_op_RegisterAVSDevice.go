@@ -13,6 +13,8 @@ import (
 
 // Registers an Alexa-enabled device built by an Original Equipment Manufacturer
 // (OEM) using Alexa Voice Service (AVS).
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) RegisterAVSDevice(ctx context.Context, params *RegisterAVSDeviceInput, optFns ...func(*Options)) (*RegisterAVSDeviceOutput, error) {
 	if params == nil {
 		params = &RegisterAVSDeviceInput{}

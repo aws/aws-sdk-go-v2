@@ -12,6 +12,8 @@ import (
 )
 
 // Gets details about a specific conference provider.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) GetConferenceProvider(ctx context.Context, params *GetConferenceProviderInput, optFns ...func(*Options)) (*GetConferenceProviderOutput, error) {
 	if params == nil {
 		params = &GetConferenceProviderInput{}

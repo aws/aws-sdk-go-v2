@@ -12,6 +12,8 @@ import (
 )
 
 // Adds metadata tags to a specified resource.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}

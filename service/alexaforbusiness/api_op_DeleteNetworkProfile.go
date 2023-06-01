@@ -11,6 +11,8 @@ import (
 )
 
 // Deletes a network profile by the network profile ARN.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) DeleteNetworkProfile(ctx context.Context, params *DeleteNetworkProfileInput, optFns ...func(*Options)) (*DeleteNetworkProfileOutput, error) {
 	if params == nil {
 		params = &DeleteNetworkProfileInput{}

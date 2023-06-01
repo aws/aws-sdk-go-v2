@@ -232,6 +232,26 @@ func (DataPullMode) Values() []DataPullMode {
 	}
 }
 
+type DataTransferApiType string
+
+// Enum values for DataTransferApiType
+const (
+	DataTransferApiTypeSync      DataTransferApiType = "SYNC"
+	DataTransferApiTypeAsync     DataTransferApiType = "ASYNC"
+	DataTransferApiTypeAutomatic DataTransferApiType = "AUTOMATIC"
+)
+
+// Values returns all known values for DataTransferApiType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DataTransferApiType) Values() []DataTransferApiType {
+	return []DataTransferApiType{
+		"SYNC",
+		"ASYNC",
+		"AUTOMATIC",
+	}
+}
+
 type DynatraceConnectorOperator string
 
 // Enum values for DynatraceConnectorOperator
@@ -1180,6 +1200,24 @@ func (SlackConnectorOperator) Values() []SlackConnectorOperator {
 		"VALIDATE_NON_NEGATIVE",
 		"VALIDATE_NUMERIC",
 		"NO_OP",
+	}
+}
+
+type SupportedDataTransferType string
+
+// Enum values for SupportedDataTransferType
+const (
+	SupportedDataTransferTypeRecord SupportedDataTransferType = "RECORD"
+	SupportedDataTransferTypeFile   SupportedDataTransferType = "FILE"
+)
+
+// Values returns all known values for SupportedDataTransferType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SupportedDataTransferType) Values() []SupportedDataTransferType {
+	return []SupportedDataTransferType{
+		"RECORD",
+		"FILE",
 	}
 }
 

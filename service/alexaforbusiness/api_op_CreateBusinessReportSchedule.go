@@ -14,6 +14,8 @@ import (
 
 // Creates a recurring schedule for usage reports to deliver to the specified S3
 // location with a specified daily or weekly interval.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) CreateBusinessReportSchedule(ctx context.Context, params *CreateBusinessReportScheduleInput, optFns ...func(*Options)) (*CreateBusinessReportScheduleOutput, error) {
 	if params == nil {
 		params = &CreateBusinessReportScheduleInput{}

@@ -12,6 +12,8 @@ import (
 )
 
 // Gets the details of a room profile by profile ARN.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) GetProfile(ctx context.Context, params *GetProfileInput, optFns ...func(*Options)) (*GetProfileOutput, error) {
 	if params == nil {
 		params = &GetProfileInput{}

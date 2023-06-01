@@ -1,0 +1,8 @@
+{
+    "id": "8d969131-5841-4385-97a8-e3afd0eeb709",
+    "type": "feature",
+    "description": "This release introduces calculated attribute related APIs.",
+    "modules": [
+        "service/customerprofiles"
+    ]
+}

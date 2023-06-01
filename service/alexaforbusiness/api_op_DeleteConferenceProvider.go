@@ -11,6 +11,8 @@ import (
 )
 
 // Deletes a conference provider.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) DeleteConferenceProvider(ctx context.Context, params *DeleteConferenceProviderInput, optFns ...func(*Options)) (*DeleteConferenceProviderOutput, error) {
 	if params == nil {
 		params = &DeleteConferenceProviderInput{}

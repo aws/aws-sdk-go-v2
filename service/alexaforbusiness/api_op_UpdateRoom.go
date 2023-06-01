@@ -11,6 +11,8 @@ import (
 )
 
 // Updates room details by room ARN.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) UpdateRoom(ctx context.Context, params *UpdateRoomInput, optFns ...func(*Options)) (*UpdateRoomOutput, error) {
 	if params == nil {
 		params = &UpdateRoomInput{}

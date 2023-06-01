@@ -12,6 +12,8 @@ import (
 
 // Makes a private skill unavailable for enrolled users and prevents them from
 // enabling it on their devices.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) DisassociateSkillFromUsers(ctx context.Context, params *DisassociateSkillFromUsersInput, optFns ...func(*Options)) (*DisassociateSkillFromUsersOutput, error) {
 	if params == nil {
 		params = &DisassociateSkillFromUsersInput{}

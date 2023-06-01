@@ -4586,6 +4586,15 @@ func awsRestjson1_deserializeDocumentChannel(v **types.Channel, value interface{
 				sv.PlaybackUrl = ptr.String(jtv)
 			}
 
+		case "preset":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TranscodePreset to be of type string, got %T instead", value)
+				}
+				sv.Preset = types.TranscodePreset(jtv)
+			}
+
 		case "recordingConfigurationArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4793,6 +4802,15 @@ func awsRestjson1_deserializeDocumentChannelSummary(v **types.ChannelSummary, va
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "preset":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TranscodePreset to be of type string, got %T instead", value)
+				}
+				sv.Preset = types.TranscodePreset(jtv)
+			}
+
 		case "recordingConfigurationArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4805,6 +4823,15 @@ func awsRestjson1_deserializeDocumentChannelSummary(v **types.ChannelSummary, va
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err
+			}
+
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ChannelType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.ChannelType(jtv)
 			}
 
 		default:

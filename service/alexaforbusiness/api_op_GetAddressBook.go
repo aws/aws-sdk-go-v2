@@ -12,6 +12,8 @@ import (
 )
 
 // Gets address the book details by the address book ARN.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) GetAddressBook(ctx context.Context, params *GetAddressBookInput, optFns ...func(*Options)) (*GetAddressBookOutput, error) {
 	if params == nil {
 		params = &GetAddressBookInput{}

@@ -1370,6 +1370,26 @@ func (m *validateOpUpdateNetworkProfile) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateProfile struct {
+}
+
+func (*validateOpUpdateProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateProfileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpApproveSkillValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpApproveSkill{}, middleware.After)
 }
@@ -1642,6 +1662,10 @@ func addOpUpdateNetworkProfileValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpUpdateNetworkProfile{}, middleware.After)
 }
 
+func addOpUpdateProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateProfile{}, middleware.After)
+}
+
 func validateAudio(v *types.Audio) error {
 	if v == nil {
 		return nil
@@ -1777,6 +1801,26 @@ func validateCreateMeetingRoomConfiguration(v *types.CreateMeetingRoomConfigurat
 		if err := validateCreateRequireCheckIn(v.RequireCheckIn); err != nil {
 			invalidParams.AddNested("RequireCheckIn", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.ProactiveJoin != nil {
+		if err := validateCreateProactiveJoin(v.ProactiveJoin); err != nil {
+			invalidParams.AddNested("ProactiveJoin", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCreateProactiveJoin(v *types.CreateProactiveJoin) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateProactiveJoin"}
+	if v.EnabledByMotion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnabledByMotion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2115,6 +2159,38 @@ func validateTextList(v []types.Text) error {
 		if err := validateText(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdateMeetingRoomConfiguration(v *types.UpdateMeetingRoomConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateMeetingRoomConfiguration"}
+	if v.ProactiveJoin != nil {
+		if err := validateUpdateProactiveJoin(v.ProactiveJoin); err != nil {
+			invalidParams.AddNested("ProactiveJoin", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdateProactiveJoin(v *types.UpdateProactiveJoin) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateProactiveJoin"}
+	if v.EnabledByMotion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnabledByMotion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3409,6 +3485,23 @@ func validateOpUpdateNetworkProfileInput(v *UpdateNetworkProfileInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateNetworkProfileInput"}
 	if v.NetworkProfileArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NetworkProfileArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateProfileInput(v *UpdateProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateProfileInput"}
+	if v.MeetingRoomConfiguration != nil {
+		if err := validateUpdateMeetingRoomConfiguration(v.MeetingRoomConfiguration); err != nil {
+			invalidParams.AddNested("MeetingRoomConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

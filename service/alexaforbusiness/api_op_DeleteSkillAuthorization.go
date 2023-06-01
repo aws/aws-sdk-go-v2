@@ -11,6 +11,8 @@ import (
 )
 
 // Unlinks a third-party account from a skill.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) DeleteSkillAuthorization(ctx context.Context, params *DeleteSkillAuthorizationInput, optFns ...func(*Options)) (*DeleteSkillAuthorizationOutput, error) {
 	if params == nil {
 		params = &DeleteSkillAuthorizationInput{}

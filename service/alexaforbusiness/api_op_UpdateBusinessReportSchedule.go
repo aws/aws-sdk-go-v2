@@ -13,6 +13,8 @@ import (
 
 // Updates the configuration of the report delivery schedule with the specified
 // schedule ARN.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) UpdateBusinessReportSchedule(ctx context.Context, params *UpdateBusinessReportScheduleInput, optFns ...func(*Options)) (*UpdateBusinessReportScheduleOutput, error) {
 	if params == nil {
 		params = &UpdateBusinessReportScheduleInput{}

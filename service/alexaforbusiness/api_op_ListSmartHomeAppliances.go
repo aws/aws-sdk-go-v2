@@ -13,6 +13,8 @@ import (
 )
 
 // Lists all of the smart home appliances associated with a room.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) ListSmartHomeAppliances(ctx context.Context, params *ListSmartHomeAppliancesInput, optFns ...func(*Options)) (*ListSmartHomeAppliancesOutput, error) {
 	if params == nil {
 		params = &ListSmartHomeAppliancesInput{}

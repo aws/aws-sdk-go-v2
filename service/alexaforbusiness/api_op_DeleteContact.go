@@ -11,6 +11,8 @@ import (
 )
 
 // Deletes a contact by the contact ARN.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) DeleteContact(ctx context.Context, params *DeleteContactInput, optFns ...func(*Options)) (*DeleteContactOutput, error) {
 	if params == nil {
 		params = &DeleteContactInput{}

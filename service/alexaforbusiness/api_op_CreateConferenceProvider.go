@@ -13,6 +13,8 @@ import (
 )
 
 // Adds a new conference provider under the user's AWS account.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) CreateConferenceProvider(ctx context.Context, params *CreateConferenceProviderInput, optFns ...func(*Options)) (*CreateConferenceProviderOutput, error) {
 	if params == nil {
 		params = &CreateConferenceProviderInput{}

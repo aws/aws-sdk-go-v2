@@ -202,6 +202,28 @@ func (MarketoConnectorOperator) Values() []MarketoConnectorOperator {
 	}
 }
 
+type Operator string
+
+// Enum values for Operator
+const (
+	OperatorEqualTo     Operator = "EQUAL_TO"
+	OperatorGreaterThan Operator = "GREATER_THAN"
+	OperatorLessThan    Operator = "LESS_THAN"
+	OperatorNotEqualTo  Operator = "NOT_EQUAL_TO"
+)
+
+// Values returns all known values for Operator. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Operator) Values() []Operator {
+	return []Operator{
+		"EQUAL_TO",
+		"GREATER_THAN",
+		"LESS_THAN",
+		"NOT_EQUAL_TO",
+	}
+}
+
 type OperatorPropertiesKeys string
 
 // Enum values for OperatorPropertiesKeys
@@ -484,6 +506,36 @@ func (StandardIdentifier) Values() []StandardIdentifier {
 	}
 }
 
+type Statistic string
+
+// Enum values for Statistic
+const (
+	StatisticFirstOccurrence Statistic = "FIRST_OCCURRENCE"
+	StatisticLastOccurrence  Statistic = "LAST_OCCURRENCE"
+	StatisticCount           Statistic = "COUNT"
+	StatisticSum             Statistic = "SUM"
+	StatisticMinimum         Statistic = "MINIMUM"
+	StatisticMaximum         Statistic = "MAXIMUM"
+	StatisticAverage         Statistic = "AVERAGE"
+	StatisticMaxOccurrence   Statistic = "MAX_OCCURRENCE"
+)
+
+// Values returns all known values for Statistic. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (Statistic) Values() []Statistic {
+	return []Statistic{
+		"FIRST_OCCURRENCE",
+		"LAST_OCCURRENCE",
+		"COUNT",
+		"SUM",
+		"MINIMUM",
+		"MAXIMUM",
+		"AVERAGE",
+		"MAX_OCCURRENCE",
+	}
+}
+
 type Status string
 
 // Enum values for Status
@@ -557,6 +609,22 @@ func (TriggerType) Values() []TriggerType {
 		"Scheduled",
 		"Event",
 		"OnDemand",
+	}
+}
+
+type Unit string
+
+// Enum values for Unit
+const (
+	UnitDays Unit = "DAYS"
+)
+
+// Values returns all known values for Unit. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Unit) Values() []Unit {
+	return []Unit{
+		"DAYS",
 	}
 }
 

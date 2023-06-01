@@ -11,6 +11,8 @@ import (
 )
 
 // Updates address book details by the address book ARN.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) UpdateAddressBook(ctx context.Context, params *UpdateAddressBookInput, optFns ...func(*Options)) (*UpdateAddressBookOutput, error) {
 	if params == nil {
 		params = &UpdateAddressBookInput{}

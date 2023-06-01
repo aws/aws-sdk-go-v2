@@ -14,6 +14,8 @@ import (
 // skill is a private skill, it moves to an AcceptStatus of PENDING. Any private or
 // public skill that is rejected can be added later by calling the ApproveSkill
 // API.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) RejectSkill(ctx context.Context, params *RejectSkillInput, optFns ...func(*Options)) (*RejectSkillOutput, error) {
 	if params == nil {
 		params = &RejectSkillInput{}

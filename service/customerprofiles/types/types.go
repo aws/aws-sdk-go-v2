@@ -173,6 +173,36 @@ type AppflowIntegrationWorkflowStep struct {
 	noSmithyDocumentSerde
 }
 
+// Mathematical expression and a list of attribute items specified in that
+// expression.
+type AttributeDetails struct {
+
+	// A list of attribute items specified in the mathematical expression.
+	//
+	// This member is required.
+	Attributes []AttributeItem
+
+	// Mathematical expression that is performed on attribute items provided in the
+	// attribute list. Each element in the expression should follow the structure of
+	// \"{ObjectTypeName.AttributeName}\".
+	//
+	// This member is required.
+	Expression *string
+
+	noSmithyDocumentSerde
+}
+
+// The details of a single attribute item specified in the mathematical expression.
+type AttributeItem struct {
+
+	// The name of an attribute defined in a profile object type.
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
 // Configuration settings for how to perform the auto-merging of profiles.
 type AutoMerging struct {
 
@@ -213,6 +243,22 @@ type Batch struct {
 	//
 	// This member is required.
 	StartTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The conditions including range, object count, and threshold for the calculated
+// attribute.
+type Conditions struct {
+
+	// The number of profile objects used for the calculated attribute.
+	ObjectCount *int32
+
+	// The relative time period over which data is included in the aggregation.
+	Range *Range
+
+	// The threshold for the calculated attribute.
+	Threshold *Threshold
 
 	noSmithyDocumentSerde
 }
@@ -534,6 +580,50 @@ type JobStats struct {
 	noSmithyDocumentSerde
 }
 
+// The details of a single calculated attribute definition.
+type ListCalculatedAttributeDefinitionItem struct {
+
+	// The unique name of the calculated attribute.
+	CalculatedAttributeName *string
+
+	// The threshold for the calculated attribute.
+	CreatedAt *time.Time
+
+	// The threshold for the calculated attribute.
+	Description *string
+
+	// The display name of the calculated attribute.
+	DisplayName *string
+
+	// The timestamp of when the calculated attribute definition was most recently
+	// edited.
+	LastUpdatedAt *time.Time
+
+	// The tags used to organize, track, or control access for this resource.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// The details of a single calculated attribute for a profile.
+type ListCalculatedAttributeForProfileItem struct {
+
+	// The unique name of the calculated attribute.
+	CalculatedAttributeName *string
+
+	// The display name of the calculated attribute.
+	DisplayName *string
+
+	// Indicates whether the calculated attribute’s value is based on partial data. If
+	// data is partial, it is set to true.
+	IsDataPartial *string
+
+	// The value of the calculated attribute.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // An object in a list that represents a domain.
 type ListDomainItem struct {
 
@@ -773,14 +863,13 @@ type MatchItem struct {
 }
 
 // The filter applied to ListProfileObjects response to include profile objects
-// with the specified index values. This filter is only supported for
-// ObjectTypeName _asset, _case and _order.
+// with the specified index values.
 type ObjectFilter struct {
 
-	// A searchable identifier of a standard profile object. The predefined keys you
-	// can use to search for _asset include: _assetId, _assetName, _serialNumber. The
-	// predefined keys you can use to search for _case include: _caseId. The predefined
-	// keys you can use to search for _order include: _orderId.
+	// A searchable identifier of a profile object. The predefined keys you can use to
+	// search for _asset include: _assetId , _assetName , and _serialNumber . The
+	// predefined keys you can use to search for _case include: _caseId . The
+	// predefined keys you can use to search for _order include: _orderId .
 	//
 	// This member is required.
 	KeyName *string
@@ -932,6 +1021,22 @@ type Profile struct {
 
 	// The customer’s shipping address.
 	ShippingAddress *Address
+
+	noSmithyDocumentSerde
+}
+
+// The relative time period over which data is included in the aggregation.
+type Range struct {
+
+	// The unit of time.
+	//
+	// This member is required.
+	Unit Unit
+
+	// The amount of time of the specified unit.
+	//
+	// This member is required.
+	Value int32
 
 	noSmithyDocumentSerde
 }
@@ -1118,6 +1223,22 @@ type Task struct {
 	// A map used to store task-related information. The service looks for particular
 	// information based on the TaskType.
 	TaskProperties map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// The threshold for the calculated attribute.
+type Threshold struct {
+
+	// The operator of the threshold.
+	//
+	// This member is required.
+	Operator Operator
+
+	// The value of the threshold.
+	//
+	// This member is required.
+	Value *string
 
 	noSmithyDocumentSerde
 }

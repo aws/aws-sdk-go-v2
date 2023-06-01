@@ -24,8 +24,10 @@ type ChannelType string
 
 // Enum values for ChannelType
 const (
-	ChannelTypeBasicChannelType    ChannelType = "BASIC"
-	ChannelTypeStandardChannelType ChannelType = "STANDARD"
+	ChannelTypeBasicChannelType      ChannelType = "BASIC"
+	ChannelTypeStandardChannelType   ChannelType = "STANDARD"
+	ChannelTypeAdvancedSDChannelType ChannelType = "ADVANCED_SD"
+	ChannelTypeAdvancedHDChannelType ChannelType = "ADVANCED_HD"
 )
 
 // Values returns all known values for ChannelType. Note that this can be expanded
@@ -35,6 +37,8 @@ func (ChannelType) Values() []ChannelType {
 	return []ChannelType{
 		"BASIC",
 		"STANDARD",
+		"ADVANCED_SD",
+		"ADVANCED_HD",
 	}
 }
 
@@ -111,5 +115,23 @@ func (StreamState) Values() []StreamState {
 	return []StreamState{
 		"LIVE",
 		"OFFLINE",
+	}
+}
+
+type TranscodePreset string
+
+// Enum values for TranscodePreset
+const (
+	TranscodePresetHigherBandwidthTranscodePreset      TranscodePreset = "HIGHER_BANDWIDTH_DELIVERY"
+	TranscodePresetConstrainedBandwidthTranscodePreset TranscodePreset = "CONSTRAINED_BANDWIDTH_DELIVERY"
+)
+
+// Values returns all known values for TranscodePreset. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TranscodePreset) Values() []TranscodePreset {
+	return []TranscodePreset{
+		"HIGHER_BANDWIDTH_DELIVERY",
+		"CONSTRAINED_BANDWIDTH_DELIVERY",
 	}
 }

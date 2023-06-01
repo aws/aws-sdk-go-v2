@@ -11,6 +11,8 @@ import (
 )
 
 // Disassociates a skill from a skill group.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) DisassociateSkillFromSkillGroup(ctx context.Context, params *DisassociateSkillFromSkillGroupInput, optFns ...func(*Options)) (*DisassociateSkillFromSkillGroupOutput, error) {
 	if params == nil {
 		params = &DisassociateSkillFromSkillGroupInput{}

@@ -30,6 +30,26 @@ func (m *validateOpAddProfileKey) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateCalculatedAttributeDefinition struct {
+}
+
+func (*validateOpCreateCalculatedAttributeDefinition) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateCalculatedAttributeDefinition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateCalculatedAttributeDefinitionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateCalculatedAttributeDefinitionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateDomain struct {
 }
 
@@ -85,6 +105,26 @@ func (m *validateOpCreateProfile) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateProfileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteCalculatedAttributeDefinition struct {
+}
+
+func (*validateOpDeleteCalculatedAttributeDefinition) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteCalculatedAttributeDefinition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteCalculatedAttributeDefinitionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteCalculatedAttributeDefinitionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -245,6 +285,46 @@ func (m *validateOpGetAutoMergingPreview) HandleInitialize(ctx context.Context, 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetAutoMergingPreviewInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetCalculatedAttributeDefinition struct {
+}
+
+func (*validateOpGetCalculatedAttributeDefinition) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCalculatedAttributeDefinition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCalculatedAttributeDefinitionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCalculatedAttributeDefinitionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetCalculatedAttributeForProfile struct {
+}
+
+func (*validateOpGetCalculatedAttributeForProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCalculatedAttributeForProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCalculatedAttributeForProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCalculatedAttributeForProfileInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -425,6 +505,46 @@ func (m *validateOpListAccountIntegrations) HandleInitialize(ctx context.Context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListAccountIntegrationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListCalculatedAttributeDefinitions struct {
+}
+
+func (*validateOpListCalculatedAttributeDefinitions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListCalculatedAttributeDefinitions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListCalculatedAttributeDefinitionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListCalculatedAttributeDefinitionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListCalculatedAttributesForProfile struct {
+}
+
+func (*validateOpListCalculatedAttributesForProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListCalculatedAttributesForProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListCalculatedAttributesForProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListCalculatedAttributesForProfileInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -690,6 +810,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateCalculatedAttributeDefinition struct {
+}
+
+func (*validateOpUpdateCalculatedAttributeDefinition) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateCalculatedAttributeDefinition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateCalculatedAttributeDefinitionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateCalculatedAttributeDefinitionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateDomain struct {
 }
 
@@ -734,6 +874,10 @@ func addOpAddProfileKeyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAddProfileKey{}, middleware.After)
 }
 
+func addOpCreateCalculatedAttributeDefinitionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateCalculatedAttributeDefinition{}, middleware.After)
+}
+
 func addOpCreateDomainValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDomain{}, middleware.After)
 }
@@ -744,6 +888,10 @@ func addOpCreateIntegrationWorkflowValidationMiddleware(stack *middleware.Stack)
 
 func addOpCreateProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateProfile{}, middleware.After)
+}
+
+func addOpDeleteCalculatedAttributeDefinitionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteCalculatedAttributeDefinition{}, middleware.After)
 }
 
 func addOpDeleteDomainValidationMiddleware(stack *middleware.Stack) error {
@@ -776,6 +924,14 @@ func addOpDeleteWorkflowValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetAutoMergingPreviewValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetAutoMergingPreview{}, middleware.After)
+}
+
+func addOpGetCalculatedAttributeDefinitionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCalculatedAttributeDefinition{}, middleware.After)
+}
+
+func addOpGetCalculatedAttributeForProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCalculatedAttributeForProfile{}, middleware.After)
 }
 
 func addOpGetDomainValidationMiddleware(stack *middleware.Stack) error {
@@ -812,6 +968,14 @@ func addOpGetWorkflowStepsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListAccountIntegrationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAccountIntegrations{}, middleware.After)
+}
+
+func addOpListCalculatedAttributeDefinitionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListCalculatedAttributeDefinitions{}, middleware.After)
+}
+
+func addOpListCalculatedAttributesForProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListCalculatedAttributesForProfile{}, middleware.After)
 }
 
 func addOpListIdentityResolutionJobsValidationMiddleware(stack *middleware.Stack) error {
@@ -864,6 +1028,10 @@ func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func addOpUpdateCalculatedAttributeDefinitionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateCalculatedAttributeDefinition{}, middleware.After)
 }
 
 func addOpUpdateDomainValidationMiddleware(stack *middleware.Stack) error {
@@ -933,6 +1101,60 @@ func validateAppflowIntegration(v *types.AppflowIntegration) error {
 	}
 }
 
+func validateAttributeDetails(v *types.AttributeDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AttributeDetails"}
+	if v.Attributes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Attributes"))
+	} else if v.Attributes != nil {
+		if err := validateAttributeList(v.Attributes); err != nil {
+			invalidParams.AddNested("Attributes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Expression == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Expression"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAttributeItem(v *types.AttributeItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AttributeItem"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAttributeList(v []types.AttributeItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AttributeList"}
+	for i := range v {
+		if err := validateAttributeItem(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAutoMerging(v *types.AutoMerging) error {
 	if v == nil {
 		return nil
@@ -984,6 +1206,28 @@ func validateBatches(v []types.Batch) error {
 	for i := range v {
 		if err := validateBatch(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConditions(v *types.Conditions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Conditions"}
+	if v.Range != nil {
+		if err := validateRange(v.Range); err != nil {
+			invalidParams.AddNested("Range", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Threshold != nil {
+		if err := validateThreshold(v.Threshold); err != nil {
+			invalidParams.AddNested("Threshold", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1177,6 +1421,21 @@ func validateObjectFilter(v *types.ObjectFilter) error {
 	}
 }
 
+func validateRange(v *types.Range) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Range"}
+	if len(v.Unit) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Unit"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateS3ExportingConfig(v *types.S3ExportingConfig) error {
 	if v == nil {
 		return nil
@@ -1346,6 +1605,24 @@ func validateTasks(v []types.Task) error {
 	}
 }
 
+func validateThreshold(v *types.Threshold) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Threshold"}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if len(v.Operator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Operator"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTriggerConfig(v *types.TriggerConfig) error {
 	if v == nil {
 		return nil
@@ -1422,6 +1699,39 @@ func validateOpAddProfileKeyInput(v *AddProfileKeyInput) error {
 	}
 }
 
+func validateOpCreateCalculatedAttributeDefinitionInput(v *CreateCalculatedAttributeDefinitionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateCalculatedAttributeDefinitionInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.CalculatedAttributeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CalculatedAttributeName"))
+	}
+	if v.AttributeDetails == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttributeDetails"))
+	} else if v.AttributeDetails != nil {
+		if err := validateAttributeDetails(v.AttributeDetails); err != nil {
+			invalidParams.AddNested("AttributeDetails", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Conditions != nil {
+		if err := validateConditions(v.Conditions); err != nil {
+			invalidParams.AddNested("Conditions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.Statistic) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Statistic"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateDomainInput(v *CreateDomainInput) error {
 	if v == nil {
 		return nil
@@ -1483,6 +1793,24 @@ func validateOpCreateProfileInput(v *CreateProfileInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CreateProfileInput"}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteCalculatedAttributeDefinitionInput(v *DeleteCalculatedAttributeDefinitionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteCalculatedAttributeDefinitionInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.CalculatedAttributeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CalculatedAttributeName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1655,6 +1983,45 @@ func validateOpGetAutoMergingPreviewInput(v *GetAutoMergingPreviewInput) error {
 	}
 }
 
+func validateOpGetCalculatedAttributeDefinitionInput(v *GetCalculatedAttributeDefinitionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCalculatedAttributeDefinitionInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.CalculatedAttributeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CalculatedAttributeName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetCalculatedAttributeForProfileInput(v *GetCalculatedAttributeForProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCalculatedAttributeForProfileInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.ProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileId"))
+	}
+	if v.CalculatedAttributeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CalculatedAttributeName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetDomainInput(v *GetDomainInput) error {
 	if v == nil {
 		return nil
@@ -1797,6 +2164,39 @@ func validateOpListAccountIntegrationsInput(v *ListAccountIntegrationsInput) err
 	invalidParams := smithy.InvalidParamsError{Context: "ListAccountIntegrationsInput"}
 	if v.Uri == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Uri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListCalculatedAttributeDefinitionsInput(v *ListCalculatedAttributeDefinitionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCalculatedAttributeDefinitionsInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListCalculatedAttributesForProfileInput(v *ListCalculatedAttributesForProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCalculatedAttributesForProfileInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.ProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2043,6 +2443,29 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateCalculatedAttributeDefinitionInput(v *UpdateCalculatedAttributeDefinitionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateCalculatedAttributeDefinitionInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.CalculatedAttributeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CalculatedAttributeName"))
+	}
+	if v.Conditions != nil {
+		if err := validateConditions(v.Conditions); err != nil {
+			invalidParams.AddNested("Conditions", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -12,6 +12,8 @@ import (
 )
 
 // Retrieves the existing conference preferences.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) GetConferencePreference(ctx context.Context, params *GetConferencePreferenceInput, optFns ...func(*Options)) (*GetConferencePreferenceOutput, error) {
 	if params == nil {
 		params = &GetConferencePreferenceInput{}

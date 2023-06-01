@@ -209,6 +209,14 @@ type ConnectorConfiguration struct {
 	// A list of API versions that are supported by the connector.
 	SupportedApiVersions []string
 
+	// The APIs of the connector application that Amazon AppFlow can use to transfer
+	// your data.
+	SupportedDataTransferApis []DataTransferApi
+
+	// The data transfer types that the connector supports. RECORD Structured records.
+	// FILE Files or binary data.
+	SupportedDataTransferTypes []SupportedDataTransferType
+
 	// Lists the connectors that are available for use as destinations.
 	SupportedDestinationConnectors []ConnectorType
 
@@ -262,6 +270,10 @@ type ConnectorDetail struct {
 
 	// The user who registered the connector.
 	RegisteredBy *string
+
+	// The data transfer types that the connector supports. RECORD Structured records.
+	// FILE Files or binary data.
+	SupportedDataTransferTypes []SupportedDataTransferType
 
 	noSmithyDocumentSerde
 }
@@ -806,6 +818,10 @@ type CustomConnectorSourceProperties struct {
 	// Custom properties that are required to use the custom connector as a source.
 	CustomProperties map[string]string
 
+	// The API of the connector application that Amazon AppFlow uses to transfer your
+	// data.
+	DataTransferApi *DataTransferApi
+
 	noSmithyDocumentSerde
 }
 
@@ -872,6 +888,24 @@ type DatadogSourceProperties struct {
 	//
 	// This member is required.
 	Object *string
+
+	noSmithyDocumentSerde
+}
+
+// The API of the connector application that Amazon AppFlow uses to transfer your
+// data.
+type DataTransferApi struct {
+
+	// The name of the connector application API.
+	Name *string
+
+	// You can specify one of the following types: AUTOMATIC The default. Optimizes a
+	// flow for datasets that fluctuate in size from small to large. For each flow run,
+	// Amazon AppFlow chooses to use the SYNC or ASYNC API type based on the amount of
+	// data that the run transfers. SYNC A synchronous API. This type of API optimizes
+	// a flow for small to medium-sized datasets. ASYNC An asynchronous API. This type
+	// of API optimizes a flow for large datasets.
+	Type DataTransferApiType
 
 	noSmithyDocumentSerde
 }

@@ -14,6 +14,8 @@ import (
 
 // Searches skill groups and lists the ones that meet a set of filter and sort
 // criteria.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) SearchSkillGroups(ctx context.Context, params *SearchSkillGroupsInput, optFns ...func(*Options)) (*SearchSkillGroupsOutput, error) {
 	if params == nil {
 		params = &SearchSkillGroupsInput{}

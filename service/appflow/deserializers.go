@@ -4789,6 +4789,16 @@ func awsRestjson1_deserializeDocumentConnectorConfiguration(v **types.ConnectorC
 				return err
 			}
 
+		case "supportedDataTransferApis":
+			if err := awsRestjson1_deserializeDocumentSupportedDataTransferApis(&sv.SupportedDataTransferApis, value); err != nil {
+				return err
+			}
+
+		case "supportedDataTransferTypes":
+			if err := awsRestjson1_deserializeDocumentSupportedDataTransferTypeList(&sv.SupportedDataTransferTypes, value); err != nil {
+				return err
+			}
+
 		case "supportedDestinationConnectors":
 			if err := awsRestjson1_deserializeDocumentConnectorTypeList(&sv.SupportedDestinationConnectors, value); err != nil {
 				return err
@@ -4980,6 +4990,11 @@ func awsRestjson1_deserializeDocumentConnectorDetail(v **types.ConnectorDetail, 
 					return fmt.Errorf("expected RegisteredBy to be of type string, got %T instead", value)
 				}
 				sv.RegisteredBy = ptr.String(jtv)
+			}
+
+		case "supportedDataTransferTypes":
+			if err := awsRestjson1_deserializeDocumentSupportedDataTransferTypeList(&sv.SupportedDataTransferTypes, value); err != nil {
+				return err
 			}
 
 		default:
@@ -6466,6 +6481,11 @@ func awsRestjson1_deserializeDocumentCustomConnectorSourceProperties(v **types.C
 				return err
 			}
 
+		case "dataTransferApi":
+			if err := awsRestjson1_deserializeDocumentDataTransferApi(&sv.DataTransferApi, value); err != nil {
+				return err
+			}
+
 		case "entityName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6700,6 +6720,55 @@ func awsRestjson1_deserializeDocumentDatadogSourceProperties(v **types.DatadogSo
 					return fmt.Errorf("expected Object to be of type string, got %T instead", value)
 				}
 				sv.Object = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDataTransferApi(v **types.DataTransferApi, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DataTransferApi
+	if *v == nil {
+		sv = &types.DataTransferApi{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DataTransferApiTypeName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DataTransferApiType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.DataTransferApiType(jtv)
 			}
 
 		default:
@@ -11735,6 +11804,76 @@ func awsRestjson1_deserializeDocumentSupportedApiVersionList(v *[]string, value 
 				return fmt.Errorf("expected SupportedApiVersion to be of type string, got %T instead", value)
 			}
 			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSupportedDataTransferApis(v *[]types.DataTransferApi, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.DataTransferApi
+	if *v == nil {
+		cv = []types.DataTransferApi{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.DataTransferApi
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentDataTransferApi(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSupportedDataTransferTypeList(v *[]types.SupportedDataTransferType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.SupportedDataTransferType
+	if *v == nil {
+		cv = []types.SupportedDataTransferType{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.SupportedDataTransferType
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected SupportedDataTransferType to be of type string, got %T instead", value)
+			}
+			col = types.SupportedDataTransferType(jtv)
 		}
 		cv = append(cv, col)
 

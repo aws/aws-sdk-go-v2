@@ -13,6 +13,8 @@ import (
 )
 
 // Lists all enabled skills in a specific skill group.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) ListSkills(ctx context.Context, params *ListSkillsInput, optFns ...func(*Options)) (*ListSkillsOutput, error) {
 	if params == nil {
 		params = &ListSkillsInput{}

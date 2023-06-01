@@ -13,6 +13,8 @@ import (
 // Disassociates a device from its current room. The device continues to be
 // connected to the Wi-Fi network and is still registered to the account. The
 // device settings and skills are removed from the room.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) DisassociateDeviceFromRoom(ctx context.Context, params *DisassociateDeviceFromRoomInput, optFns ...func(*Options)) (*DisassociateDeviceFromRoomOutput, error) {
 	if params == nil {
 		params = &DisassociateDeviceFromRoomInput{}

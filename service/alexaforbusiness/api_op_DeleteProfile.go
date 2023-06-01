@@ -11,6 +11,8 @@ import (
 )
 
 // Deletes a room profile by the profile ARN.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) DeleteProfile(ctx context.Context, params *DeleteProfileInput, optFns ...func(*Options)) (*DeleteProfileOutput, error) {
 	if params == nil {
 		params = &DeleteProfileInput{}

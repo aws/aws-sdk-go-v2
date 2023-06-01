@@ -13,6 +13,8 @@ import (
 )
 
 // Lists all tags for the specified resource.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) ListTags(ctx context.Context, params *ListTagsInput, optFns ...func(*Options)) (*ListTagsOutput, error) {
 	if params == nil {
 		params = &ListTagsInput{}

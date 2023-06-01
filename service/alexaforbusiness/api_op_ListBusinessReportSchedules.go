@@ -15,6 +15,8 @@ import (
 // Lists the details of the schedules that a user configured. A download URL of
 // the report associated with each schedule is returned every time this action is
 // called. A new download URL is returned each time, and is valid for 24 hours.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) ListBusinessReportSchedules(ctx context.Context, params *ListBusinessReportSchedulesInput, optFns ...func(*Options)) (*ListBusinessReportSchedulesOutput, error) {
 	if params == nil {
 		params = &ListBusinessReportSchedulesInput{}

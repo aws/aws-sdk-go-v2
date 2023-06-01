@@ -11,6 +11,8 @@ import (
 )
 
 // Revokes an invitation and invalidates the enrollment URL.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) RevokeInvitation(ctx context.Context, params *RevokeInvitationInput, optFns ...func(*Options)) (*RevokeInvitationOutput, error) {
 	if params == nil {
 		params = &RevokeInvitationInput{}

@@ -19,6 +19,8 @@ import (
 // custom web service must be manually authorized. To get your skill authorized,
 // contact AWS Support with your AWS account ID that queries the ResolveRoom API
 // and skill ID.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) ResolveRoom(ctx context.Context, params *ResolveRoomInput, optFns ...func(*Options)) (*ResolveRoomOutput, error) {
 	if params == nil {
 		params = &ResolveRoomInput{}

@@ -13,6 +13,8 @@ import (
 )
 
 // Creates an address book with the specified details.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) CreateAddressBook(ctx context.Context, params *CreateAddressBookInput, optFns ...func(*Options)) (*CreateAddressBookOutput, error) {
 	if params == nil {
 		params = &CreateAddressBookInput{}

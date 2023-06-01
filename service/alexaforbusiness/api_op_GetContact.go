@@ -12,6 +12,8 @@ import (
 )
 
 // Gets the contact details by the contact ARN.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) GetContact(ctx context.Context, params *GetContactInput, optFns ...func(*Options)) (*GetContactOutput, error) {
 	if params == nil {
 		params = &GetContactInput{}

@@ -13,6 +13,8 @@ import (
 )
 
 // Lists conference providers under a specific AWS account.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) ListConferenceProviders(ctx context.Context, params *ListConferenceProvidersInput, optFns ...func(*Options)) (*ListConferenceProvidersOutput, error) {
 	if params == nil {
 		params = &ListConferenceProvidersInput{}

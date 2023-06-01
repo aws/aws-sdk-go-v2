@@ -234,6 +234,11 @@ func awsRestjson1_serializeOpDocumentCreateChannelInput(v *CreateChannelInput, v
 		ok.String(*v.Name)
 	}
 
+	if len(v.Preset) > 0 {
+		ok := object.Key("preset")
+		ok.String(string(v.Preset))
+	}
+
 	if v.RecordingConfigurationArn != nil {
 		ok := object.Key("recordingConfigurationArn")
 		ok.String(*v.RecordingConfigurationArn)
@@ -2082,6 +2087,11 @@ func awsRestjson1_serializeOpDocumentUpdateChannelInput(v *UpdateChannelInput, v
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
+	}
+
+	if len(v.Preset) > 0 {
+		ok := object.Key("preset")
+		ok.String(string(v.Preset))
 	}
 
 	if v.RecordingConfigurationArn != nil {

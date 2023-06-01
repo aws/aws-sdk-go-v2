@@ -13,6 +13,8 @@ import (
 )
 
 // Searches room profiles and lists the ones that meet a set of filter criteria.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) SearchProfiles(ctx context.Context, params *SearchProfilesInput, optFns ...func(*Options)) (*SearchProfilesOutput, error) {
 	if params == nil {
 		params = &SearchProfilesInput{}

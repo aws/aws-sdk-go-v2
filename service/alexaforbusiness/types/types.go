@@ -324,6 +324,8 @@ type CreateMeetingRoomConfiguration struct {
 	// when joining a meeting with Alexa.
 	InstantBooking *CreateInstantBooking
 
+	ProactiveJoin *CreateProactiveJoin
+
 	// Settings for requiring a check in when a room is reserved. Alexa can cancel a
 	// room reservation if it's not checked into to make the room available for others.
 	// Users can check in by joining the meeting with Alexa or an AVS device, or by
@@ -332,6 +334,14 @@ type CreateMeetingRoomConfiguration struct {
 
 	// Whether room utilization metrics are enabled or not.
 	RoomUtilizationMetricsEnabled *bool
+
+	noSmithyDocumentSerde
+}
+
+type CreateProactiveJoin struct {
+
+	// This member is required.
+	EnabledByMotion *bool
 
 	noSmithyDocumentSerde
 }
@@ -663,6 +673,8 @@ type MeetingRoomConfiguration struct {
 	// when joining a meeting with Alexa.
 	InstantBooking *InstantBooking
 
+	ProactiveJoin *ProactiveJoin
+
 	// Settings for requiring a check in when a room is reserved. Alexa can cancel a
 	// room reservation if it's not checked into. This makes the room available for
 	// others. Users can check in by joining the meeting with Alexa or an AVS device,
@@ -776,6 +788,12 @@ type PhoneNumber struct {
 	//
 	// This member is required.
 	Type PhoneNumberType
+
+	noSmithyDocumentSerde
+}
+
+type ProactiveJoin struct {
+	EnabledByMotion *bool
 
 	noSmithyDocumentSerde
 }
@@ -1233,6 +1251,8 @@ type UpdateMeetingRoomConfiguration struct {
 	// duration when joining a meeting with Alexa.
 	InstantBooking *UpdateInstantBooking
 
+	ProactiveJoin *UpdateProactiveJoin
+
 	// Settings for requiring a check in when a room is reserved. Alexa can cancel a
 	// room reservation if it's not checked into to make the room available for others.
 	// Users can check in by joining the meeting with Alexa or an AVS device, or by
@@ -1241,6 +1261,14 @@ type UpdateMeetingRoomConfiguration struct {
 
 	// Whether room utilization metrics are enabled or not.
 	RoomUtilizationMetricsEnabled *bool
+
+	noSmithyDocumentSerde
+}
+
+type UpdateProactiveJoin struct {
+
+	// This member is required.
+	EnabledByMotion *bool
 
 	noSmithyDocumentSerde
 }

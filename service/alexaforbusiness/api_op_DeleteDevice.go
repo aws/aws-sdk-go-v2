@@ -11,6 +11,8 @@ import (
 )
 
 // Removes a device from Alexa For Business.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) DeleteDevice(ctx context.Context, params *DeleteDeviceInput, optFns ...func(*Options)) (*DeleteDeviceOutput, error) {
 	if params == nil {
 		params = &DeleteDeviceInput{}

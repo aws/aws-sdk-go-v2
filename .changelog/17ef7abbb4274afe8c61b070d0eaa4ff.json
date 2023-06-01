@@ -1,0 +1,8 @@
+{
+    "id": "17ef7abb-b427-4afe-8c61-b070d0eaa4ff",
+    "type": "documentation",
+    "description": "Alexa for Business has been deprecated and is no longer supported.",
+    "modules": [
+        "service/alexaforbusiness"
+    ]
+}

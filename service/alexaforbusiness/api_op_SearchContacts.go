@@ -14,6 +14,8 @@ import (
 
 // Searches contacts and lists the ones that meet a set of filter and sort
 // criteria.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) SearchContacts(ctx context.Context, params *SearchContactsInput, optFns ...func(*Options)) (*SearchContactsOutput, error) {
 	if params == nil {
 		params = &SearchContactsInput{}

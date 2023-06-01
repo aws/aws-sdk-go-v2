@@ -11,6 +11,8 @@ import (
 )
 
 // Deletes a skill group by skill group ARN.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) DeleteSkillGroup(ctx context.Context, params *DeleteSkillGroupInput, optFns ...func(*Options)) (*DeleteSkillGroupOutput, error) {
 	if params == nil {
 		params = &DeleteSkillGroupInput{}

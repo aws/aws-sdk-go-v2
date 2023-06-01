@@ -14,6 +14,8 @@ import (
 
 // Searches address books and lists the ones that meet a set of filter and sort
 // criteria.
+//
+// Deprecated: Alexa For Business is no longer supported
 func (c *Client) SearchAddressBooks(ctx context.Context, params *SearchAddressBooksInput, optFns ...func(*Options)) (*SearchAddressBooksOutput, error) {
 	if params == nil {
 		params = &SearchAddressBooksInput{}
