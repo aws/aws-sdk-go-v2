@@ -1,3 +1,7 @@
+# v1.22.0 (2023-06-01)
+
+* **Feature**: API Update for IVS Advanced Channel type
+
 # v1.21.4 (2023-05-04)
 
 * No change notes available for this release.

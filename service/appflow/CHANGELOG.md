@@ -1,3 +1,7 @@
+# v1.30.0 (2023-06-01)
+
+* **Feature**: Added ability to select DataTransferApiType for DescribeConnector and CreateFlow requests when using Async supported connectors. Added supportedDataTransferType to DescribeConnector/DescribeConnectors/ListConnector response.
+
 # v1.29.1 (2023-05-04)
 
 * No change notes available for this release.

@@ -1,3 +1,7 @@
+# v1.82.1 (2023-06-01)
+
+* **Documentation**: Amazon Sagemaker Autopilot adds support for Parquet file input to NLP text classification jobs.
+
 # v1.82.0 (2023-05-26)
 
 * **Feature**: Added ml.p4d and ml.inf1 as supported instance type families for SageMaker Notebook Instances.

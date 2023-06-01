@@ -1,8 +1,0 @@
-{
-    "id": "24c8ce76-49e1-4cd6-b1e8-218fcf8e2c20",
-    "type": "feature",
-    "description": "API Update for IVS Advanced Channel type",
-    "modules": [
-        "service/ivs"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "8cf6240f-115b-41e5-bab0-9da2b4d02d83",
-    "type": "feature",
-    "description": "Added ability to select DataTransferApiType for DescribeConnector and CreateFlow requests when using Async supported connectors. Added supportedDataTransferType to DescribeConnector/DescribeConnectors/ListConnector response.",
-    "modules": [
-        "service/appflow"
-    ]
-}

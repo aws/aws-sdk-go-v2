@@ -1,3 +1,7 @@
+# v1.15.11 (2023-06-01)
+
+* **Documentation**: Alexa for Business has been deprecated and is no longer supported.
+
 # v1.15.10 (2023-05-04)
 
 * No change notes available for this release.

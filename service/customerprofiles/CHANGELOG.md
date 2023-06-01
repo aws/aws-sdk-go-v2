@@ -1,3 +1,7 @@
+# v1.24.0 (2023-06-01)
+
+* **Feature**: This release introduces calculated attribute related APIs.
+
 # v1.23.10 (2023-05-16)
 
 * No change notes available for this release.

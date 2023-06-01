@@ -1,3 +1,7 @@
+# v1.33.1 (2023-06-01)
+
+* **Documentation**: Corrected the information for the header order FieldToMatch setting
+
 # v1.33.0 (2023-05-30)
 
 * **Feature**: This SDK release provides customers the ability to use Header Order as a field to match.

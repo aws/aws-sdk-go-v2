@@ -10,7 +10,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.20.11
 	github.com/aws/aws-sdk-go-v2/service/athena v1.28.0
 	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.28.7
-	github.com/aws/aws-sdk-go-v2/service/batch v1.23.5
+	github.com/aws/aws-sdk-go-v2/service/batch v1.23.6
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.27.4
 	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.26.6
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.14.10
@@ -83,7 +83,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.9.11
 	github.com/aws/aws-sdk-go-v2/service/waf v1.12.10
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.13.13
-	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.33.0
+	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.33.1
 	github.com/aws/aws-sdk-go-v2/service/workspaces v1.28.12
 	github.com/aws/smithy-go v1.13.5
 	github.com/google/go-cmp v0.5.8

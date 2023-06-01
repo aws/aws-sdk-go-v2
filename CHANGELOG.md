@@ -1,3 +1,19 @@
+# Release (2023-06-01)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/alexaforbusiness`: [v1.15.11](service/alexaforbusiness/CHANGELOG.md#v11511-2023-06-01)
+  * **Documentation**: Alexa for Business has been deprecated and is no longer supported.
+* `github.com/aws/aws-sdk-go-v2/service/appflow`: [v1.30.0](service/appflow/CHANGELOG.md#v1300-2023-06-01)
+  * **Feature**: Added ability to select DataTransferApiType for DescribeConnector and CreateFlow requests when using Async supported connectors. Added supportedDataTransferType to DescribeConnector/DescribeConnectors/ListConnector response.
+* `github.com/aws/aws-sdk-go-v2/service/customerprofiles`: [v1.24.0](service/customerprofiles/CHANGELOG.md#v1240-2023-06-01)
+  * **Feature**: This release introduces calculated attribute related APIs.
+* `github.com/aws/aws-sdk-go-v2/service/ivs`: [v1.22.0](service/ivs/CHANGELOG.md#v1220-2023-06-01)
+  * **Feature**: API Update for IVS Advanced Channel type
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.82.1](service/sagemaker/CHANGELOG.md#v1821-2023-06-01)
+  * **Documentation**: Amazon Sagemaker Autopilot adds support for Parquet file input to NLP text classification jobs.
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.33.1](service/wafv2/CHANGELOG.md#v1331-2023-06-01)
+  * **Documentation**: Corrected the information for the header order FieldToMatch setting
+
 # Release (2023-05-31)
 
 ## Module Highlights

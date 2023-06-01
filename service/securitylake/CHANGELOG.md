@@ -1,3 +1,7 @@
+# v1.4.1 (2023-06-01)
+
+* No change notes available for this release.
+
 # v1.4.0 (2023-05-30)
 
 * **Feature**: Log sources are now versioned. AWS log sources and custom sources will now come with a version identifier that enables producers to vend multiple schema versions to subscribers. Security Lake API have been refactored to more closely align with AWS API conventions.
