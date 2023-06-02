@@ -1,3 +1,7 @@
+# v1.29.0 (2023-06-02)
+
+* **Feature**: This release introduces the DeleteCapacityReservation API and the ability to manage capacity reservations using CloudFormation
+
 # v1.28.0 (2023-05-18)
 
 * **Feature**: Removing SparkProperties from EngineConfiguration object for StartSession API call

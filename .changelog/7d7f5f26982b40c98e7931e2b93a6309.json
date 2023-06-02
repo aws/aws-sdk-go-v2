@@ -1,8 +1,0 @@
-{
-    "id": "7d7f5f26-982b-40c9-8e79-31e2b93a6309",
-    "type": "feature",
-    "description": "This release adds Selective Execution feature that allows SageMaker Pipelines users to run selected steps in a pipeline.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

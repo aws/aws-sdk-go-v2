@@ -1,3 +1,15 @@
+# Release (2023-06-02)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/athena`: [v1.29.0](service/athena/CHANGELOG.md#v1290-2023-06-02)
+  * **Feature**: This release introduces the DeleteCapacityReservation API and the ability to manage capacity reservations using CloudFormation
+* `github.com/aws/aws-sdk-go-v2/service/cloudtrail`: [v1.26.0](service/cloudtrail/CHANGELOG.md#v1260-2023-06-02)
+  * **Feature**: This feature allows users to start and stop event ingestion on a CloudTrail Lake event data store.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.83.0](service/sagemaker/CHANGELOG.md#v1830-2023-06-02)
+  * **Feature**: This release adds Selective Execution feature that allows SageMaker Pipelines users to run selected steps in a pipeline.
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.34.0](service/wafv2/CHANGELOG.md#v1340-2023-06-02)
+  * **Feature**: Added APIs to describe managed products. The APIs retrieve information about rule groups that are managed by AWS and by AWS Marketplace sellers.
+
 # Release (2023-06-01)
 
 ## Module Highlights

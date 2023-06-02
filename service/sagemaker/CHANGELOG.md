@@ -1,3 +1,7 @@
+# v1.83.0 (2023-06-02)
+
+* **Feature**: This release adds Selective Execution feature that allows SageMaker Pipelines users to run selected steps in a pipeline.
+
 # v1.82.1 (2023-06-01)
 
 * **Documentation**: Amazon Sagemaker Autopilot adds support for Parquet file input to NLP text classification jobs.

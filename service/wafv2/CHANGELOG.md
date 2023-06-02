@@ -1,3 +1,7 @@
+# v1.34.0 (2023-06-02)
+
+* **Feature**: Added APIs to describe managed products. The APIs retrieve information about rule groups that are managed by AWS and by AWS Marketplace sellers.
+
 # v1.33.1 (2023-06-01)
 
 * **Documentation**: Corrected the information for the header order FieldToMatch setting

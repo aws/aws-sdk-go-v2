@@ -1,8 +1,0 @@
-{
-    "id": "95d2a683-5828-46e0-b786-17de01d17086",
-    "type": "feature",
-    "description": "This release introduces the DeleteCapacityReservation API and the ability to manage capacity reservations using CloudFormation",
-    "modules": [
-        "service/athena"
-    ]
-}

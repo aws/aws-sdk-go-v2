@@ -1,3 +1,7 @@
+# v1.26.0 (2023-06-02)
+
+* **Feature**: This feature allows users to start and stop event ingestion on a CloudTrail Lake event data store.
+
 # v1.25.0 (2023-05-18)
 
 * **Feature**: Add ConflictException to PutEventSelectors, add (Channel/EDS)ARNInvalidException to Tag APIs. These exceptions provide customers with more specific error messages instead of internal errors.
