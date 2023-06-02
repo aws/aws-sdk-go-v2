@@ -187,6 +187,12 @@
                     "target": "com.amazonaws.wafv2#DeleteWebACL"
                 },
                 {
+                    "target": "com.amazonaws.wafv2#DescribeAllManagedProducts"
+                },
+                {
+                    "target": "com.amazonaws.wafv2#DescribeManagedProductsByVendor"
+                },
+                {
                     "target": "com.amazonaws.wafv2#DescribeManagedRuleGroup"
                 },
                 {
@@ -4900,6 +4906,114 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.wafv2#DescribeAllManagedProducts": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wafv2#DescribeAllManagedProductsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.wafv2#DescribeAllManagedProductsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wafv2#WAFInternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.wafv2#WAFInvalidOperationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Provides high-level information for the Amazon Web Services Managed Rules rule groups and Amazon Web Services Marketplace managed rule groups. </p>"
+            }
+        },
+        "com.amazonaws.wafv2#DescribeAllManagedProductsRequest": {
+            "type": "structure",
+            "members": {
+                "Scope": {
+                    "target": "com.amazonaws.wafv2#Scope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner service, or an Amazon Web Services Verified Access instance.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.wafv2#DescribeAllManagedProductsResponse": {
+            "type": "structure",
+            "members": {
+                "ManagedProducts": {
+                    "target": "com.amazonaws.wafv2#ManagedProductDescriptors",
+                    "traits": {
+                        "smithy.api#documentation": "<p>High-level information for the Amazon Web Services Managed Rules rule groups and Amazon Web Services Marketplace managed rule groups. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.wafv2#DescribeManagedProductsByVendor": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wafv2#DescribeManagedProductsByVendorRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.wafv2#DescribeManagedProductsByVendorResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wafv2#WAFInternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.wafv2#WAFInvalidOperationException"
+                },
+                {
+                    "target": "com.amazonaws.wafv2#WAFInvalidParameterException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Provides high-level information for the managed rule groups owned by a specific vendor.  </p>"
+            }
+        },
+        "com.amazonaws.wafv2#DescribeManagedProductsByVendorRequest": {
+            "type": "structure",
+            "members": {
+                "VendorName": {
+                    "target": "com.amazonaws.wafv2#VendorName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the managed rule group vendor. You use this, along with the rule group name, to identify a rule group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Scope": {
+                    "target": "com.amazonaws.wafv2#Scope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner service, or an Amazon Web Services Verified Access instance.  </p>\n         <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p>\n         <ul>\n            <li>\n               <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p>\n            </li>\n            <li>\n               <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.wafv2#DescribeManagedProductsByVendorResponse": {
+            "type": "structure",
+            "members": {
+                "ManagedProducts": {
+                    "target": "com.amazonaws.wafv2#ManagedProductDescriptors",
+                    "traits": {
+                        "smithy.api#documentation": "<p>High-level information for the managed rule groups owned by the specified vendor.  </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.wafv2#DescribeManagedRuleGroup": {
             "type": "operation",
             "input": {
@@ -4929,7 +5043,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides high-level information for a managed rule group, including descriptions of the\n         rules. </p>"
+                "smithy.api#documentation": "<p>Provides high-level information for a managed rule group, including descriptions of the rules. </p>"
             }
         },
         "com.amazonaws.wafv2#DescribeManagedRuleGroupRequest": {
@@ -4938,7 +5052,7 @@
                 "VendorName": {
                     "target": "com.amazonaws.wafv2#VendorName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the managed rule group vendor. You use this, along with the rule group name, to identify the rule group.</p>",
+                        "smithy.api#documentation": "<p>The name of the managed rule group vendor. You use this, along with the rule group name, to identify a rule group.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4979,7 +5093,7 @@
                 "SnsTopicArn": {
                     "target": "com.amazonaws.wafv2#ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon resource name (ARN) of the Amazon Simple Notification Service SNS topic that's used to record changes\n         to the managed rule group. You can subscribe to the SNS topic to receive notifications when\n         the managed rule group is modified, such as for new versions and for version expiration.\n         For more information, see the <a href=\"https://docs.aws.amazon.com/sns/latest/dg/welcome.html\">Amazon Simple Notification Service Developer Guide</a>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon resource name (ARN) of the Amazon Simple Notification Service SNS topic that's used to provide notification of changes\n         to the managed rule group. You can subscribe to the SNS topic to receive notifications when\n         the managed rule group is modified, such as for new versions and for version expiration.\n         For more information, see the <a href=\"https://docs.aws.amazon.com/sns/latest/dg/welcome.html\">Amazon Simple Notification Service Developer Guide</a>.</p>"
                     }
                 },
                 "Capacity": {
@@ -5274,7 +5388,7 @@
                 "HeaderOrder": {
                     "target": "com.amazonaws.wafv2#HeaderOrder",
                     "traits": {
-                        "smithy.api#documentation": "<p>Inspect a string containing the list of the request's header names, ordered as they appear in the web request\nthat WAF receives for inspection. \n           WAF generates the string and then uses that as the field to match component in its inspection. \n    WAF separates the header names in the string using colons and no added spaces, for example <code>Host:User-Agent:Accept:Authorization:Referer</code>.</p>\n         <p>Matches against the header order string are case insensitive.</p>"
+                        "smithy.api#documentation": "<p>Inspect a string containing the list of the request's header names, ordered as they appear in the web request\nthat WAF receives for inspection. \n           WAF generates the string and then uses that as the field to match component in its inspection. \n    WAF separates the header names in the string using commas and no added spaces.</p>\n         <p>Matches against the header order string are case insensitive.</p>"
                     }
                 }
             },
@@ -6566,7 +6680,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Inspect a string containing the list of the request's header names, ordered as they appear in the web request\nthat WAF receives for inspection. \n           WAF generates the string and then uses that as the field to match component in its inspection. \n    WAF separates the header names in the string using colons and no added spaces, for example <code>Host:User-Agent:Accept:Authorization:Referer</code>.</p>\n         <p>Matches against the header order string are case insensitive.</p>"
+                "smithy.api#documentation": "<p>Inspect a string containing the list of the request's header names, ordered as they appear in the web request\nthat WAF receives for inspection. \n           WAF generates the string and then uses that as the field to match component in its inspection. \n    WAF separates the header names in the string using commas and no added spaces.</p>\n         <p>Matches against the header order string are case insensitive.</p>"
             }
         },
         "com.amazonaws.wafv2#HeaderValue": {
@@ -7146,7 +7260,7 @@
                 "VendorName": {
                     "target": "com.amazonaws.wafv2#VendorName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the managed rule group vendor. You use this, along with the rule group name, to identify the rule group.</p>",
+                        "smithy.api#documentation": "<p>The name of the managed rule group vendor. You use this, along with the rule group name, to identify a rule group.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8018,6 +8132,76 @@
                 "smithy.api#pattern": "\\S"
             }
         },
+        "com.amazonaws.wafv2#ManagedProductDescriptor": {
+            "type": "structure",
+            "members": {
+                "VendorName": {
+                    "target": "com.amazonaws.wafv2#VendorName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the managed rule group vendor. You use this, along with the rule group name, to identify a rule group.</p>"
+                    }
+                },
+                "ManagedRuleSetName": {
+                    "target": "com.amazonaws.wafv2#EntityName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the managed rule group. For example, <code>AWSManagedRulesAnonymousIpList</code> or <code>AWSManagedRulesATPRuleSet</code>.</p>"
+                    }
+                },
+                "ProductId": {
+                    "target": "com.amazonaws.wafv2#ProductId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the rule group. This ID is returned in the responses to create and list commands. You provide it to operations like update and delete.</p>"
+                    }
+                },
+                "ProductLink": {
+                    "target": "com.amazonaws.wafv2#ProductLink",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For Amazon Web Services Marketplace managed rule groups only, the link to the rule group product page. </p>"
+                    }
+                },
+                "ProductTitle": {
+                    "target": "com.amazonaws.wafv2#ProductTitle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name for the managed rule group. For example, <code>Anonymous IP list</code> or <code>Account takeover prevention</code>.</p>"
+                    }
+                },
+                "ProductDescription": {
+                    "target": "com.amazonaws.wafv2#ProductDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A short description of the managed rule group.</p>"
+                    }
+                },
+                "SnsTopicArn": {
+                    "target": "com.amazonaws.wafv2#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon resource name (ARN) of the Amazon Simple Notification Service SNS topic that's used to provide notification of changes\n         to the managed rule group. You can subscribe to the SNS topic to receive notifications when\n         the managed rule group is modified, such as for new versions and for version expiration.\n         For more information, see the <a href=\"https://docs.aws.amazon.com/sns/latest/dg/welcome.html\">Amazon Simple Notification Service Developer Guide</a>.</p>"
+                    }
+                },
+                "IsVersioningSupported": {
+                    "target": "com.amazonaws.wafv2#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates whether the rule group is versioned. </p>"
+                    }
+                },
+                "IsAdvancedManagedRuleSet": {
+                    "target": "com.amazonaws.wafv2#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates whether the rule group provides an advanced set of protections, such as the the Amazon Web Services Managed Rules rule groups that \n           are used for WAF intelligent threat mitigation.  </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The properties of a managed product, such as an Amazon Web Services Managed Rules rule group or an Amazon Web Services Marketplace managed rule group. </p>"
+            }
+        },
+        "com.amazonaws.wafv2#ManagedProductDescriptors": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wafv2#ManagedProductDescriptor"
+            }
+        },
         "com.amazonaws.wafv2#ManagedRuleGroupConfig": {
             "type": "structure",
             "members": {
@@ -8086,7 +8270,7 @@
                 "VendorName": {
                     "target": "com.amazonaws.wafv2#VendorName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the managed rule group vendor. You use this, along with the rule group name, to identify the rule group.</p>",
+                        "smithy.api#documentation": "<p>The name of the managed rule group vendor. You use this, along with the rule group name, to identify a rule group.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8144,7 +8328,7 @@
                 "VendorName": {
                     "target": "com.amazonaws.wafv2#VendorName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the managed rule group vendor. You use this, along with the rule group name, to identify the rule group.</p>"
+                        "smithy.api#documentation": "<p>The name of the managed rule group vendor. You use this, along with the rule group name, to identify a rule group.</p>"
                     }
                 },
                 "Name": {
@@ -8168,7 +8352,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>High-level information about a managed rule group, returned by <a>ListAvailableManagedRuleGroups</a>. This provides information like the name and vendor name, that you provide when you add a <a>ManagedRuleGroupStatement</a> to a web ACL. Managed rule groups include Amazon Web Services Managed Rules rule groups, which are free of charge to WAF customers, and Amazon Web Services Marketplace managed rule groups, which you can subscribe to through Amazon Web Services Marketplace. </p>"
+                "smithy.api#documentation": "<p>High-level information about a managed rule group, returned by <a>ListAvailableManagedRuleGroups</a>. This provides information like the name and vendor name, that you provide when you add a <a>ManagedRuleGroupStatement</a> to a web ACL. Managed rule groups include Amazon Web Services Managed Rules rule groups and Amazon Web Services Marketplace managed rule groups. To use any Amazon Web Services Marketplace managed rule group, first subscribe to the rule group through Amazon Web Services Marketplace. </p>"
             }
         },
         "com.amazonaws.wafv2#ManagedRuleGroupVersion": {
@@ -9044,6 +9228,44 @@
                         "smithy.api#enumValue": "CONTAINS_WORD"
                     }
                 }
+            }
+        },
+        "com.amazonaws.wafv2#ProductDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                },
+                "smithy.api#pattern": "\\S"
+            }
+        },
+        "com.amazonaws.wafv2#ProductId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "\\S"
+            }
+        },
+        "com.amazonaws.wafv2#ProductLink": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "\\S"
+            }
+        },
+        "com.amazonaws.wafv2#ProductTitle": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                },
+                "smithy.api#pattern": "\\S"
             }
         },
         "com.amazonaws.wafv2#PublishedVersions": {
@@ -11998,7 +12220,7 @@
                     "target": "com.amazonaws.wafv2#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>A boolean indicating whether WAF should store a sampling of the web requests that\n         match the rules. You can view the sampled requests through the WAF console. </p>",
+                        "smithy.api#documentation": "<p>Indicates whether WAF should store a sampling of the web requests that\n         match the rules. You can view the sampled requests through the WAF console. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -12006,7 +12228,7 @@
                     "target": "com.amazonaws.wafv2#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>A boolean indicating whether the associated resource sends metrics to Amazon CloudWatch. For the\n         list of available metrics, see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/monitoring-cloudwatch.html#waf-metrics\">WAF\n            Metrics</a> in the <i>WAF Developer Guide</i>.</p>\n         <p>For web ACLs, the metrics are for web requests that have the web ACL default action applied. \n        WAF applies the default action to web requests that pass the inspection of all rules \n        in the web ACL without being either allowed or blocked. For more information,\nsee <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/web-acl-default-action.html\">The web ACL default action</a> in the <i>WAF Developer Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>Indicates whether the associated resource sends metrics to Amazon CloudWatch. For the\n         list of available metrics, see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/monitoring-cloudwatch.html#waf-metrics\">WAF\n            Metrics</a> in the <i>WAF Developer Guide</i>.</p>\n         <p>For web ACLs, the metrics are for web requests that have the web ACL default action applied. \n        WAF applies the default action to web requests that pass the inspection of all rules \n        in the web ACL without being either allowed or blocked. For more information,\nsee <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/web-acl-default-action.html\">The web ACL default action</a> in the <i>WAF Developer Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },

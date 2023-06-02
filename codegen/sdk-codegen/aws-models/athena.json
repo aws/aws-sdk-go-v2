@@ -99,6 +99,9 @@
                     "target": "com.amazonaws.athena#CreateWorkGroup"
                 },
                 {
+                    "target": "com.amazonaws.athena#DeleteCapacityReservation"
+                },
+                {
                     "target": "com.amazonaws.athena#DeleteDataCatalog"
                 },
                 {
@@ -1788,7 +1791,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Cancels the capacity reservation with the specified name.</p>",
+                "smithy.api#documentation": "<p>Cancels the capacity reservation with the specified name. Cancelled reservations remain in your account and will be deleted 45 days after cancellation. During the 45 days, you cannot re-purpose or reuse a reservation that has been cancelled, but you can refer to its tags and view it for historical reference. </p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -2827,6 +2830,49 @@
                     "min": 1,
                     "max": 1
                 }
+            }
+        },
+        "com.amazonaws.athena#DeleteCapacityReservation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.athena#DeleteCapacityReservationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.athena#DeleteCapacityReservationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.athena#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.athena#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a cancelled capacity reservation. A reservation must be cancelled before it can be deleted. A deleted reservation is immediately removed from your account and can no longer be referenced, including by its ARN. A deleted reservation cannot be called by <code>GetCapacityReservation</code>, and  deleted reservations do not appear in the output of <code>ListCapacityReservations</code>.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.athena#DeleteCapacityReservationInput": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.athena#CapacityReservationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the capacity reservation to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.athena#DeleteCapacityReservationOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.athena#DeleteDataCatalog": {
@@ -6378,7 +6424,7 @@
                 "ExecutionParameters": {
                     "target": "com.amazonaws.athena#ExecutionParameters",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of values for the parameters in a query. The values are applied sequentially to\n            the parameters in the query in the order in which the parameters occur.</p>"
+                        "smithy.api#documentation": "<p>A list of values for the parameters in a query. The values are applied sequentially to\n            the parameters in the query in the order in which the parameters occur. The list of parameters is not returned in the response.</p>"
                     }
                 },
                 "SubstatementType": {

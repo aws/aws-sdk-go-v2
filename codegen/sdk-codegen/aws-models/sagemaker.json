@@ -2546,7 +2546,7 @@
                 "ContentType": {
                     "target": "com.amazonaws.sagemaker#ContentType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The content type of the data from the input source. The following are the allowed\n         content types for different problems:</p>\n         <ul>\n            <li>\n               <p>ImageClassification: <code>image/png</code>, <code>image/jpeg</code>, or\n                  <code>image/*</code>. The default value is <code>image/*</code>.</p>\n            </li>\n            <li>\n               <p>TextClassification: <code>text/csv;header=present</code> or <code>x-application/vnd.amazon+parquet</code>. \n               The default value is <code>text/csv;header=present</code>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The content type of the data from the input source. The following are the allowed\n         content types for different problems:</p>\n         <ul>\n            <li>\n               <p>ImageClassification: <code>image/png</code>, <code>image/jpeg</code>,\n                  <code>image/*</code>\n               </p>\n            </li>\n            <li>\n               <p>TextClassification: <code>text/csv;header=present</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "CompressionType": {
@@ -19092,6 +19092,12 @@
                     "target": "com.amazonaws.sagemaker#ParallelismConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The parallelism configuration applied to the pipeline.</p>"
+                    }
+                },
+                "SelectiveExecutionConfig": {
+                    "target": "com.amazonaws.sagemaker#SelectiveExecutionConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The selective execution configuration applied to the pipeline run.</p>"
                     }
                 }
             },
@@ -42239,6 +42245,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Contains a list of pipeline parameters. This list can be empty. </p>"
                     }
+                },
+                "SelectiveExecutionConfig": {
+                    "target": "com.amazonaws.sagemaker#SelectiveExecutionConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The selective execution configuration applied to the pipeline run.</p>"
+                    }
                 }
             },
             "traits": {
@@ -42382,6 +42394,12 @@
                     "target": "com.amazonaws.sagemaker#PipelineExecutionStepMetadata",
                     "traits": {
                         "smithy.api#documentation": "<p>Metadata to run the pipeline step.</p>"
+                    }
+                },
+                "SelectiveExecutionResult": {
+                    "target": "com.amazonaws.sagemaker#SelectiveExecutionResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN from an execution of the current pipeline from which\n           results are reused for this step.</p>"
                     }
                 }
             },
@@ -50200,6 +50218,69 @@
                 "smithy.api#default": 0
             }
         },
+        "com.amazonaws.sagemaker#SelectedStep": {
+            "type": "structure",
+            "members": {
+                "StepName": {
+                    "target": "com.amazonaws.sagemaker#String256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the pipeline step.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A step selected to run in selective execution mode.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#SelectedStepList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#SelectedStep"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#SelectiveExecutionConfig": {
+            "type": "structure",
+            "members": {
+                "SourcePipelineExecutionArn": {
+                    "target": "com.amazonaws.sagemaker#PipelineExecutionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN from a reference execution of the current pipeline. \n        Used to copy input collaterals needed for the selected steps to run.\n        The execution status of the pipeline can be either <code>Failed</code>\n        or <code>Success</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SelectedSteps": {
+                    "target": "com.amazonaws.sagemaker#SelectedStepList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of pipeline steps to run. All step(s) in all path(s) between\n        two selected steps should be included.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The selective execution configuration applied to the pipeline run.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#SelectiveExecutionResult": {
+            "type": "structure",
+            "members": {
+                "SourcePipelineExecutionArn": {
+                    "target": "com.amazonaws.sagemaker#PipelineExecutionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN from an execution of the current pipeline.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The ARN from an execution of the current pipeline.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#SendPipelineExecutionStepFailure": {
             "type": "operation",
             "input": {
@@ -51325,6 +51406,12 @@
                     "target": "com.amazonaws.sagemaker#ParallelismConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>This configuration, if specified, overrides the parallelism configuration \n            of the parent pipeline for this specific run.</p>"
+                    }
+                },
+                "SelectiveExecutionConfig": {
+                    "target": "com.amazonaws.sagemaker#SelectiveExecutionConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The selective execution configuration applied to the pipeline run.</p>"
                     }
                 }
             },
