@@ -633,9 +633,8 @@ type FieldToMatch struct {
 	// Inspect a string containing the list of the request's header names, ordered as
 	// they appear in the web request that WAF receives for inspection. WAF generates
 	// the string and then uses that as the field to match component in its inspection.
-	// WAF separates the header names in the string using colons and no added spaces,
-	// for example Host:User-Agent:Accept:Authorization:Referer . Matches against the
-	// header order string are case insensitive.
+	// WAF separates the header names in the string using commas and no added spaces.
+	// Matches against the header order string are case insensitive.
 	HeaderOrder *HeaderOrder
 
 	// Inspect the request headers. You must configure scope and pattern matching
@@ -868,9 +867,8 @@ type HeaderMatchPattern struct {
 // Inspect a string containing the list of the request's header names, ordered as
 // they appear in the web request that WAF receives for inspection. WAF generates
 // the string and then uses that as the field to match component in its inspection.
-// WAF separates the header names in the string using colons and no added spaces,
-// for example Host:User-Agent:Accept:Authorization:Referer . Matches against the
-// header order string are case insensitive.
+// WAF separates the header names in the string using commas and no added spaces.
+// Matches against the header order string are case insensitive.
 type HeaderOrder struct {
 
 	// What WAF should do if the headers of the request are more numerous or larger
@@ -1394,6 +1392,52 @@ type LoggingFilter struct {
 	noSmithyDocumentSerde
 }
 
+// The properties of a managed product, such as an Amazon Web Services Managed
+// Rules rule group or an Amazon Web Services Marketplace managed rule group.
+type ManagedProductDescriptor struct {
+
+	// Indicates whether the rule group provides an advanced set of protections, such
+	// as the the Amazon Web Services Managed Rules rule groups that are used for WAF
+	// intelligent threat mitigation.
+	IsAdvancedManagedRuleSet bool
+
+	// Indicates whether the rule group is versioned.
+	IsVersioningSupported bool
+
+	// The name of the managed rule group. For example, AWSManagedRulesAnonymousIpList
+	// or AWSManagedRulesATPRuleSet .
+	ManagedRuleSetName *string
+
+	// A short description of the managed rule group.
+	ProductDescription *string
+
+	// A unique identifier for the rule group. This ID is returned in the responses to
+	// create and list commands. You provide it to operations like update and delete.
+	ProductId *string
+
+	// For Amazon Web Services Marketplace managed rule groups only, the link to the
+	// rule group product page.
+	ProductLink *string
+
+	// The display name for the managed rule group. For example, Anonymous IP list or
+	// Account takeover prevention .
+	ProductTitle *string
+
+	// The Amazon resource name (ARN) of the Amazon Simple Notification Service SNS
+	// topic that's used to provide notification of changes to the managed rule group.
+	// You can subscribe to the SNS topic to receive notifications when the managed
+	// rule group is modified, such as for new versions and for version expiration. For
+	// more information, see the Amazon Simple Notification Service Developer Guide (https://docs.aws.amazon.com/sns/latest/dg/welcome.html)
+	// .
+	SnsTopicArn *string
+
+	// The name of the managed rule group vendor. You use this, along with the rule
+	// group name, to identify a rule group.
+	VendorName *string
+
+	noSmithyDocumentSerde
+}
+
 // Additional information that's used by a managed rule group. Many managed rule
 // groups don't require this. Use the AWSManagedRulesATPRuleSet configuration
 // object for the account takeover prevention managed rule group, to provide
@@ -1472,7 +1516,7 @@ type ManagedRuleGroupStatement struct {
 	Name *string
 
 	// The name of the managed rule group vendor. You use this, along with the rule
-	// group name, to identify the rule group.
+	// group name, to identify a rule group.
 	//
 	// This member is required.
 	VendorName *string
@@ -1519,10 +1563,10 @@ type ManagedRuleGroupStatement struct {
 // High-level information about a managed rule group, returned by
 // ListAvailableManagedRuleGroups . This provides information like the name and
 // vendor name, that you provide when you add a ManagedRuleGroupStatement to a web
-// ACL. Managed rule groups include Amazon Web Services Managed Rules rule groups,
-// which are free of charge to WAF customers, and Amazon Web Services Marketplace
-// managed rule groups, which you can subscribe to through Amazon Web Services
-// Marketplace.
+// ACL. Managed rule groups include Amazon Web Services Managed Rules rule groups
+// and Amazon Web Services Marketplace managed rule groups. To use any Amazon Web
+// Services Marketplace managed rule group, first subscribe to the rule group
+// through Amazon Web Services Marketplace.
 type ManagedRuleGroupSummary struct {
 
 	// The description of the managed rule group, provided by Amazon Web Services
@@ -1534,7 +1578,7 @@ type ManagedRuleGroupSummary struct {
 	Name *string
 
 	// The name of the managed rule group vendor. You use this, along with the rule
-	// group name, to identify the rule group.
+	// group name, to identify a rule group.
 	VendorName *string
 
 	// Indicates whether the managed rule group is versioned. If it is, you can
@@ -3389,8 +3433,8 @@ type VersionToPublish struct {
 // Defines and enables Amazon CloudWatch metrics and web request sample collection.
 type VisibilityConfig struct {
 
-	// A boolean indicating whether the associated resource sends metrics to Amazon
-	// CloudWatch. For the list of available metrics, see WAF Metrics (https://docs.aws.amazon.com/waf/latest/developerguide/monitoring-cloudwatch.html#waf-metrics)
+	// Indicates whether the associated resource sends metrics to Amazon CloudWatch.
+	// For the list of available metrics, see WAF Metrics (https://docs.aws.amazon.com/waf/latest/developerguide/monitoring-cloudwatch.html#waf-metrics)
 	// in the WAF Developer Guide. For web ACLs, the metrics are for web requests that
 	// have the web ACL default action applied. WAF applies the default action to web
 	// requests that pass the inspection of all rules in the web ACL without being
@@ -3408,8 +3452,8 @@ type VisibilityConfig struct {
 	// This member is required.
 	MetricName *string
 
-	// A boolean indicating whether WAF should store a sampling of the web requests
-	// that match the rules. You can view the sampled requests through the WAF console.
+	// Indicates whether WAF should store a sampling of the web requests that match
+	// the rules. You can view the sampled requests through the WAF console.
 	//
 	// This member is required.
 	SampledRequestsEnabled bool

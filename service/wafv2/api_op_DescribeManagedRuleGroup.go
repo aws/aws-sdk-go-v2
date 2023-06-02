@@ -50,7 +50,7 @@ type DescribeManagedRuleGroupInput struct {
 	Scope types.Scope
 
 	// The name of the managed rule group vendor. You use this, along with the rule
-	// group name, to identify the rule group.
+	// group name, to identify a rule group.
 	//
 	// This member is required.
 	VendorName *string
@@ -99,10 +99,10 @@ type DescribeManagedRuleGroupOutput struct {
 	Rules []types.RuleSummary
 
 	// The Amazon resource name (ARN) of the Amazon Simple Notification Service SNS
-	// topic that's used to record changes to the managed rule group. You can subscribe
-	// to the SNS topic to receive notifications when the managed rule group is
-	// modified, such as for new versions and for version expiration. For more
-	// information, see the Amazon Simple Notification Service Developer Guide (https://docs.aws.amazon.com/sns/latest/dg/welcome.html)
+	// topic that's used to provide notification of changes to the managed rule group.
+	// You can subscribe to the SNS topic to receive notifications when the managed
+	// rule group is modified, such as for new versions and for version expiration. For
+	// more information, see the Amazon Simple Notification Service Developer Guide (https://docs.aws.amazon.com/sns/latest/dg/welcome.html)
 	// .
 	SnsTopicArn *string
 

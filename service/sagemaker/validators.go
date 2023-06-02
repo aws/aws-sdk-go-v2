@@ -10394,6 +10394,60 @@ func validateSearchExpressionList(v []types.SearchExpression) error {
 	}
 }
 
+func validateSelectedStep(v *types.SelectedStep) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SelectedStep"}
+	if v.StepName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StepName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSelectedStepList(v []types.SelectedStep) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SelectedStepList"}
+	for i := range v {
+		if err := validateSelectedStep(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSelectiveExecutionConfig(v *types.SelectiveExecutionConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SelectiveExecutionConfig"}
+	if v.SourcePipelineExecutionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourcePipelineExecutionArn"))
+	}
+	if v.SelectedSteps == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SelectedSteps"))
+	} else if v.SelectedSteps != nil {
+		if err := validateSelectedStepList(v.SelectedSteps); err != nil {
+			invalidParams.AddNested("SelectedSteps", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateServiceCatalogProvisioningDetails(v *types.ServiceCatalogProvisioningDetails) error {
 	if v == nil {
 		return nil
@@ -15261,6 +15315,11 @@ func validateOpStartPipelineExecutionInput(v *StartPipelineExecutionInput) error
 	if v.ParallelismConfiguration != nil {
 		if err := validateParallelismConfiguration(v.ParallelismConfiguration); err != nil {
 			invalidParams.AddNested("ParallelismConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SelectiveExecutionConfig != nil {
+		if err := validateSelectiveExecutionConfig(v.SelectiveExecutionConfig); err != nil {
+			invalidParams.AddNested("SelectiveExecutionConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

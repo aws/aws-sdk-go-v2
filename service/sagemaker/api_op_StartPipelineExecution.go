@@ -54,6 +54,9 @@ type StartPipelineExecutionInput struct {
 	// Contains a list of pipeline parameters. This list can be empty.
 	PipelineParameters []types.Parameter
 
+	// The selective execution configuration applied to the pipeline run.
+	SelectiveExecutionConfig *types.SelectiveExecutionConfig
+
 	noSmithyDocumentSerde
 }
 

@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a trail. This operation must be called from the region in which the
+// Deletes a trail. This operation must be called from the Region in which the
 // trail was created. DeleteTrail cannot be called on the shadow trails
-// (replicated trails in other regions) of a trail that is enabled in all regions.
+// (replicated trails in other Regions) of a trail that is enabled in all Regions.
 func (c *Client) DeleteTrail(ctx context.Context, params *DeleteTrailInput, optFns ...func(*Options)) (*DeleteTrailOutput, error) {
 	if params == nil {
 		params = &DeleteTrailInput{}

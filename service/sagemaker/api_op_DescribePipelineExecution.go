@@ -78,6 +78,9 @@ type DescribePipelineExecutionOutput struct {
 	// Specifies the names of the experiment and trial created by a pipeline.
 	PipelineExperimentConfig *types.PipelineExperimentConfig
 
+	// The selective execution configuration applied to the pipeline run.
+	SelectiveExecutionConfig *types.SelectiveExecutionConfig
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

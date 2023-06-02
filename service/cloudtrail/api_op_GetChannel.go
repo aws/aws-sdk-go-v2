@@ -62,7 +62,7 @@ type GetChannelOutput struct {
 	Source *string
 
 	// Provides information about the advanced event selectors configured for the
-	// channel, and whether the channel applies to all regions or a single region.
+	// channel, and whether the channel applies to all Regions or a single Region.
 	SourceConfig *types.SourceConfig
 
 	// Metadata pertaining to the operation's result.

@@ -22,6 +22,8 @@
         "api_op_DeleteRegexPatternSet.go",
         "api_op_DeleteRuleGroup.go",
         "api_op_DeleteWebACL.go",
+        "api_op_DescribeAllManagedProducts.go",
+        "api_op_DescribeManagedProductsByVendor.go",
         "api_op_DescribeManagedRuleGroup.go",
         "api_op_DisassociateWebACL.go",
         "api_op_GenerateMobileSdkReleaseUrl.go",

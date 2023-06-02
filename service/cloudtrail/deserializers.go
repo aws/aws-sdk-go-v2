@@ -4862,6 +4862,144 @@ func awsAwsjson11_deserializeOpErrorRestoreEventDataStore(response *smithyhttp.R
 	}
 }
 
+type awsAwsjson11_deserializeOpStartEventDataStoreIngestion struct {
+}
+
+func (*awsAwsjson11_deserializeOpStartEventDataStoreIngestion) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpStartEventDataStoreIngestion) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorStartEventDataStoreIngestion(response, &metadata)
+	}
+	output := &StartEventDataStoreIngestionOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentStartEventDataStoreIngestionOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorStartEventDataStoreIngestion(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("EventDataStoreARNInvalidException", errorCode):
+		return awsAwsjson11_deserializeErrorEventDataStoreARNInvalidException(response, errorBody)
+
+	case strings.EqualFold("EventDataStoreNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorEventDataStoreNotFoundException(response, errorBody)
+
+	case strings.EqualFold("InsufficientDependencyServiceAccessPermissionException", errorCode):
+		return awsAwsjson11_deserializeErrorInsufficientDependencyServiceAccessPermissionException(response, errorBody)
+
+	case strings.EqualFold("InvalidEventDataStoreCategoryException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidEventDataStoreCategoryException(response, errorBody)
+
+	case strings.EqualFold("InvalidEventDataStoreStatusException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidEventDataStoreStatusException(response, errorBody)
+
+	case strings.EqualFold("InvalidParameterException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
+
+	case strings.EqualFold("NoManagementAccountSLRExistsException", errorCode):
+		return awsAwsjson11_deserializeErrorNoManagementAccountSLRExistsException(response, errorBody)
+
+	case strings.EqualFold("NotOrganizationMasterAccountException", errorCode):
+		return awsAwsjson11_deserializeErrorNotOrganizationMasterAccountException(response, errorBody)
+
+	case strings.EqualFold("OperationNotPermittedException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotPermittedException(response, errorBody)
+
+	case strings.EqualFold("UnsupportedOperationException", errorCode):
+		return awsAwsjson11_deserializeErrorUnsupportedOperationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsjson11_deserializeOpStartImport struct {
 }
 
@@ -5280,6 +5418,144 @@ func awsAwsjson11_deserializeOpErrorStartQuery(response *smithyhttp.Response, me
 
 	case strings.EqualFold("S3BucketDoesNotExistException", errorCode):
 		return awsAwsjson11_deserializeErrorS3BucketDoesNotExistException(response, errorBody)
+
+	case strings.EqualFold("UnsupportedOperationException", errorCode):
+		return awsAwsjson11_deserializeErrorUnsupportedOperationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsAwsjson11_deserializeOpStopEventDataStoreIngestion struct {
+}
+
+func (*awsAwsjson11_deserializeOpStopEventDataStoreIngestion) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpStopEventDataStoreIngestion) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorStopEventDataStoreIngestion(response, &metadata)
+	}
+	output := &StopEventDataStoreIngestionOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentStopEventDataStoreIngestionOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorStopEventDataStoreIngestion(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("EventDataStoreARNInvalidException", errorCode):
+		return awsAwsjson11_deserializeErrorEventDataStoreARNInvalidException(response, errorBody)
+
+	case strings.EqualFold("EventDataStoreNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorEventDataStoreNotFoundException(response, errorBody)
+
+	case strings.EqualFold("InsufficientDependencyServiceAccessPermissionException", errorCode):
+		return awsAwsjson11_deserializeErrorInsufficientDependencyServiceAccessPermissionException(response, errorBody)
+
+	case strings.EqualFold("InvalidEventDataStoreCategoryException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidEventDataStoreCategoryException(response, errorBody)
+
+	case strings.EqualFold("InvalidEventDataStoreStatusException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidEventDataStoreStatusException(response, errorBody)
+
+	case strings.EqualFold("InvalidParameterException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
+
+	case strings.EqualFold("NoManagementAccountSLRExistsException", errorCode):
+		return awsAwsjson11_deserializeErrorNoManagementAccountSLRExistsException(response, errorBody)
+
+	case strings.EqualFold("NotOrganizationMasterAccountException", errorCode):
+		return awsAwsjson11_deserializeErrorNotOrganizationMasterAccountException(response, errorBody)
+
+	case strings.EqualFold("OperationNotPermittedException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotPermittedException(response, errorBody)
 
 	case strings.EqualFold("UnsupportedOperationException", errorCode):
 		return awsAwsjson11_deserializeErrorUnsupportedOperationException(response, errorBody)
@@ -16933,6 +17209,37 @@ func awsAwsjson11_deserializeOpDocumentRestoreEventDataStoreOutput(v **RestoreEv
 	return nil
 }
 
+func awsAwsjson11_deserializeOpDocumentStartEventDataStoreIngestionOutput(v **StartEventDataStoreIngestionOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *StartEventDataStoreIngestionOutput
+	if *v == nil {
+		sv = &StartEventDataStoreIngestionOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeOpDocumentStartImportOutput(v **StartImportOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -17118,6 +17425,37 @@ func awsAwsjson11_deserializeOpDocumentStartQueryOutput(v **StartQueryOutput, va
 				sv.QueryId = ptr.String(jtv)
 			}
 
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeOpDocumentStopEventDataStoreIngestionOutput(v **StopEventDataStoreIngestionOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *StopEventDataStoreIngestionOutput
+	if *v == nil {
+		sv = &StopEventDataStoreIngestionOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
 		default:
 			_, _ = key, value
 

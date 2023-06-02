@@ -49,7 +49,7 @@ type ListTrailsOutput struct {
 	// the call with NextToken should include those same parameters.
 	NextToken *string
 
-	// Returns the name, ARN, and home region of trails in the current account.
+	// Returns the name, ARN, and home Region of trails in the current account.
 	Trails []types.TrailInfo
 
 	// Metadata pertaining to the operation's result.

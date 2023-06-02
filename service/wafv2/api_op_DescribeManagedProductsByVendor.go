@@ -11,29 +11,24 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of the available versions for the specified managed rule group.
-func (c *Client) ListAvailableManagedRuleGroupVersions(ctx context.Context, params *ListAvailableManagedRuleGroupVersionsInput, optFns ...func(*Options)) (*ListAvailableManagedRuleGroupVersionsOutput, error) {
+// Provides high-level information for the managed rule groups owned by a specific
+// vendor.
+func (c *Client) DescribeManagedProductsByVendor(ctx context.Context, params *DescribeManagedProductsByVendorInput, optFns ...func(*Options)) (*DescribeManagedProductsByVendorOutput, error) {
 	if params == nil {
-		params = &ListAvailableManagedRuleGroupVersionsInput{}
+		params = &DescribeManagedProductsByVendorInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListAvailableManagedRuleGroupVersions", params, optFns, c.addOperationListAvailableManagedRuleGroupVersionsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeManagedProductsByVendor", params, optFns, c.addOperationDescribeManagedProductsByVendorMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*ListAvailableManagedRuleGroupVersionsOutput)
+	out := result.(*DescribeManagedProductsByVendorOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type ListAvailableManagedRuleGroupVersionsInput struct {
-
-	// The name of the managed rule group. You use this, along with the vendor name,
-	// to identify the rule group.
-	//
-	// This member is required.
-	Name *string
+type DescribeManagedProductsByVendorInput struct {
 
 	// Specifies whether this is for an Amazon CloudFront distribution or for a
 	// regional application. A regional application can be an Application Load Balancer
@@ -54,34 +49,14 @@ type ListAvailableManagedRuleGroupVersionsInput struct {
 	// This member is required.
 	VendorName *string
 
-	// The maximum number of objects that you want WAF to return for this request. If
-	// more objects are available, in the response, WAF provides a NextMarker value
-	// that you can use in a subsequent call to get the next batch of objects.
-	Limit *int32
-
-	// When you request a list of objects with a Limit setting, if the number of
-	// objects that are still available for retrieval exceeds the limit, WAF returns a
-	// NextMarker value in the response. To retrieve the next batch of objects, provide
-	// the marker from the prior call in your next request.
-	NextMarker *string
-
 	noSmithyDocumentSerde
 }
 
-type ListAvailableManagedRuleGroupVersionsOutput struct {
+type DescribeManagedProductsByVendorOutput struct {
 
-	// The name of the version that's currently set as the default.
-	CurrentDefaultVersion *string
-
-	// When you request a list of objects with a Limit setting, if the number of
-	// objects that are still available for retrieval exceeds the limit, WAF returns a
-	// NextMarker value in the response. To retrieve the next batch of objects, provide
-	// the marker from the prior call in your next request.
-	NextMarker *string
-
-	// The versions that are currently available for the specified managed rule group.
-	// If you specified a Limit in your request, this might not be the full list.
-	Versions []types.ManagedRuleGroupVersion
+	// High-level information for the managed rule groups owned by the specified
+	// vendor.
+	ManagedProducts []types.ManagedProductDescriptor
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -89,12 +64,12 @@ type ListAvailableManagedRuleGroupVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationListAvailableManagedRuleGroupVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAvailableManagedRuleGroupVersions{}, middleware.After)
+func (c *Client) addOperationDescribeManagedProductsByVendorMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeManagedProductsByVendor{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAvailableManagedRuleGroupVersions{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeManagedProductsByVendor{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -134,10 +109,10 @@ func (c *Client) addOperationListAvailableManagedRuleGroupVersionsMiddlewares(st
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpListAvailableManagedRuleGroupVersionsValidationMiddleware(stack); err != nil {
+	if err = addOpDescribeManagedProductsByVendorValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAvailableManagedRuleGroupVersions(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeManagedProductsByVendor(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -155,11 +130,11 @@ func (c *Client) addOperationListAvailableManagedRuleGroupVersionsMiddlewares(st
 	return nil
 }
 
-func newServiceMetadataMiddleware_opListAvailableManagedRuleGroupVersions(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opDescribeManagedProductsByVendor(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "wafv2",
-		OperationName: "ListAvailableManagedRuleGroupVersions",
+		OperationName: "DescribeManagedProductsByVendor",
 	}
 }

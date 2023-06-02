@@ -359,8 +359,8 @@ type EventDataStore struct {
 	// The ARN of the event data store.
 	EventDataStoreArn *string
 
-	// Indicates whether the event data store includes events from all regions, or
-	// only from the region in which it was created.
+	// Indicates whether the event data store includes events from all Regions, or
+	// only from the Region in which it was created.
 	//
 	// Deprecated: MultiRegionEnabled is no longer returned by ListEventDataStores
 	MultiRegionEnabled *bool
@@ -379,7 +379,7 @@ type EventDataStore struct {
 	// Deprecated: RetentionPeriod is no longer returned by ListEventDataStores
 	RetentionPeriod *int32
 
-	// The status of an event data store. Values are ENABLED and PENDING_DELETION .
+	// The status of an event data store.
 	//
 	// Deprecated: Status is no longer returned by ListEventDataStores
 	Status EventDataStoreStatus
@@ -427,14 +427,14 @@ type EventSelector struct {
 	// Data API events by containing kms.amazonaws.com or rdsdata.amazonaws.com . By
 	// default, ExcludeManagementEventSources is empty, and KMS and Amazon RDS Data
 	// API events are logged to your trail. You can exclude management event sources
-	// only in regions that support the event source.
+	// only in Regions that support the event source.
 	ExcludeManagementEventSources []string
 
 	// Specify if you want your event selector to include management events for your
 	// trail. For more information, see Management Events (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-events-with-cloudtrail.html)
 	// in the CloudTrail User Guide. By default, the value is true . The first copy of
 	// management events is free. You are charged for additional copies of management
-	// events that you are logging on any subsequent trail in the same region. For more
+	// events that you are logging on any subsequent trail in the same Region. For more
 	// information about CloudTrail pricing, see CloudTrail Pricing (http://aws.amazon.com/cloudtrail/pricing/)
 	// .
 	IncludeManagementEvents *bool
@@ -694,7 +694,7 @@ type S3ImportSource struct {
 	// This member is required.
 	S3BucketAccessRoleArn *string
 
-	// The region associated with the source S3 bucket.
+	// The Region associated with the source S3 bucket.
 	//
 	// This member is required.
 	S3BucketRegion *string
@@ -713,7 +713,7 @@ type SourceConfig struct {
 	// The advanced event selectors that are configured for the channel.
 	AdvancedEventSelectors []AdvancedEventSelector
 
-	// Specifies whether the channel applies to a single region or to all regions.
+	// Specifies whether the channel applies to a single Region or to all Regions.
 	ApplyToAllRegions *bool
 
 	noSmithyDocumentSerde
@@ -754,14 +754,14 @@ type Trail struct {
 	// list.
 	HasInsightSelectors *bool
 
-	// The region in which the trail was created.
+	// The Region in which the trail was created.
 	HomeRegion *string
 
 	// Set to True to include Amazon Web Services API calls from Amazon Web Services
 	// global services such as IAM. Otherwise, False.
 	IncludeGlobalServiceEvents *bool
 
-	// Specifies whether the trail exists only in one region or exists in all regions.
+	// Specifies whether the trail exists only in one Region or exists in all Regions.
 	IsMultiRegionTrail *bool
 
 	// Specifies whether the trail is an organization trail.
@@ -807,7 +807,7 @@ type Trail struct {
 	noSmithyDocumentSerde
 }
 
-// Information about a CloudTrail trail, including the trail's name, home region,
+// Information about a CloudTrail trail, including the trail's name, home Region,
 // and Amazon Resource Name (ARN).
 type TrailInfo struct {
 

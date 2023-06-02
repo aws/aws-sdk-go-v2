@@ -610,6 +610,26 @@ func (m *validateOpRestoreEventDataStore) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartEventDataStoreIngestion struct {
+}
+
+func (*validateOpStartEventDataStoreIngestion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartEventDataStoreIngestion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartEventDataStoreIngestionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartEventDataStoreIngestionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartImport struct {
 }
 
@@ -665,6 +685,26 @@ func (m *validateOpStartQuery) HandleInitialize(ctx context.Context, in middlewa
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStartQueryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStopEventDataStoreIngestion struct {
+}
+
+func (*validateOpStopEventDataStoreIngestion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopEventDataStoreIngestion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopEventDataStoreIngestionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopEventDataStoreIngestionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -890,6 +930,10 @@ func addOpRestoreEventDataStoreValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpRestoreEventDataStore{}, middleware.After)
 }
 
+func addOpStartEventDataStoreIngestionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartEventDataStoreIngestion{}, middleware.After)
+}
+
 func addOpStartImportValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartImport{}, middleware.After)
 }
@@ -900,6 +944,10 @@ func addOpStartLoggingValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpStartQueryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartQuery{}, middleware.After)
+}
+
+func addOpStopEventDataStoreIngestionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopEventDataStoreIngestion{}, middleware.After)
 }
 
 func addOpStopImportValidationMiddleware(stack *middleware.Stack) error {
@@ -1642,6 +1690,21 @@ func validateOpRestoreEventDataStoreInput(v *RestoreEventDataStoreInput) error {
 	}
 }
 
+func validateOpStartEventDataStoreIngestionInput(v *StartEventDataStoreIngestionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartEventDataStoreIngestionInput"}
+	if v.EventDataStore == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventDataStore"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStartImportInput(v *StartImportInput) error {
 	if v == nil {
 		return nil
@@ -1681,6 +1744,21 @@ func validateOpStartQueryInput(v *StartQueryInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "StartQueryInput"}
 	if v.QueryStatement == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("QueryStatement"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopEventDataStoreIngestionInput(v *StopEventDataStoreIngestionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopEventDataStoreIngestionInput"}
+	if v.EventDataStore == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventDataStore"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

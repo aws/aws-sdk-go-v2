@@ -34,7 +34,7 @@ import (
 //   - The GetConsoleOutput is a read-only event that doesn't match your event
 //     selector. The trail doesn't log the event.
 //
-// The PutEventSelectors operation must be called from the region in which the
+// The PutEventSelectors operation must be called from the Region in which the
 // trail was created; otherwise, an InvalidHomeRegionException exception is
 // thrown. You can configure up to five event selectors for each trail. For more
 // information, see Logging management events (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-events-with-cloudtrail.html)

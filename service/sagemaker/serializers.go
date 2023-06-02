@@ -24366,6 +24366,50 @@ func awsAwsjson11_serializeDocumentSecurityGroupIds(v []string, value smithyjson
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentSelectedStep(v *types.SelectedStep, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.StepName != nil {
+		ok := object.Key("StepName")
+		ok.String(*v.StepName)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSelectedStepList(v []types.SelectedStep, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentSelectedStep(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSelectiveExecutionConfig(v *types.SelectiveExecutionConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SelectedSteps != nil {
+		ok := object.Key("SelectedSteps")
+		if err := awsAwsjson11_serializeDocumentSelectedStepList(v.SelectedSteps, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SourcePipelineExecutionArn != nil {
+		ok := object.Key("SourcePipelineExecutionArn")
+		ok.String(*v.SourcePipelineExecutionArn)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentServiceCatalogProvisioningDetails(v *types.ServiceCatalogProvisioningDetails, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -33642,6 +33686,13 @@ func awsAwsjson11_serializeOpDocumentStartPipelineExecutionInput(v *StartPipelin
 	if v.PipelineParameters != nil {
 		ok := object.Key("PipelineParameters")
 		if err := awsAwsjson11_serializeDocumentParameterList(v.PipelineParameters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SelectiveExecutionConfig != nil {
+		ok := object.Key("SelectiveExecutionConfig")
+		if err := awsAwsjson11_serializeDocumentSelectiveExecutionConfig(v.SelectiveExecutionConfig, ok); err != nil {
 			return err
 		}
 	}

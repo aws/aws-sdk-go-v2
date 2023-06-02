@@ -10,7 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Cancels the capacity reservation with the specified name.
+// Cancels the capacity reservation with the specified name. Cancelled
+// reservations remain in your account and will be deleted 45 days after
+// cancellation. During the 45 days, you cannot re-purpose or reuse a reservation
+// that has been cancelled, but you can refer to its tags and view it for
+// historical reference.
 func (c *Client) CancelCapacityReservation(ctx context.Context, params *CancelCapacityReservationInput, optFns ...func(*Options)) (*CancelCapacityReservationOutput, error) {
 	if params == nil {
 		params = &CancelCapacityReservationInput{}

@@ -56,8 +56,8 @@ type GetEventDataStoreOutput struct {
 	// arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012
 	KmsKeyId *string
 
-	// Indicates whether the event data store includes events from all regions, or
-	// only from the region in which it was created.
+	// Indicates whether the event data store includes events from all Regions, or
+	// only from the Region in which it was created.
 	MultiRegionEnabled *bool
 
 	// The name of the event data store.
@@ -70,7 +70,7 @@ type GetEventDataStoreOutput struct {
 	// The retention period of the event data store, in days.
 	RetentionPeriod *int32
 
-	// The status of an event data store. Values can be ENABLED and PENDING_DELETION .
+	// The status of an event data store.
 	Status types.EventDataStoreStatus
 
 	// Indicates that termination protection is enabled.

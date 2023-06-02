@@ -614,7 +614,7 @@ type QueryExecution struct {
 
 	// A list of values for the parameters in a query. The values are applied
 	// sequentially to the parameters in the query in the order in which the parameters
-	// occur.
+	// occur. The list of parameters is not returned in the response.
 	ExecutionParameters []string
 
 	// The SQL query statements which the query execution ran.

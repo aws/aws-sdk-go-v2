@@ -19,5 +19,66 @@
 // on Amazon Web Services (http://aws.amazon.com/tools/) . See the CloudTrail User
 // Guide (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html)
 // for information about the data that is included with each Amazon Web Services
-// API call listed in the log files.
+// API call listed in the log files. Actions available for CloudTrail trails The
+// following actions are available for CloudTrail trails.
+//   - AddTags
+//   - CreateTrail
+//   - DeleteTrail
+//   - DescribeTrails
+//   - GetEventSelectors
+//   - GetInsightSelectors
+//   - GetTrail
+//   - GetTrailStatus
+//   - ListTags
+//   - ListTrails
+//   - PutEventSelectors
+//   - PutInsightSelectors
+//   - RemoveTags
+//   - StartLogging
+//   - StopLogging
+//   - UpdateTrail
+//
+// Actions available for CloudTrail event data stores The following actions are
+// available for CloudTrail event data stores.
+//   - AddTags
+//   - CancelQuery
+//   - CreateEventDataStore
+//   - DeleteEventDataStore
+//   - DescribeQuery
+//   - GetEventDataStore
+//   - GetQueryResults
+//   - ListEventDataStores
+//   - ListTags
+//   - ListQueries
+//   - RemoveTags
+//   - RestoreEventDataStore
+//   - StartEventDataStoreIngestion
+//   - StartImport The following additional actions are available for imports.
+//   - GetImport
+//   - ListImportFailures
+//   - ListImports
+//   - StopImport
+//   - StartQuery
+//   - StartEventDataStoreIngestion
+//   - UpdateEventDataStore
+//
+// Actions available for CloudTrail channels The following actions are available
+// for CloudTrail channels.
+//   - AddTags
+//   - CreateChannel
+//   - DeleteChannel
+//   - DeleteResourcePolicy
+//   - GetChannel
+//   - GetResourcePolicy
+//   - ListChannels
+//   - ListTags
+//   - PutResourcePolicy
+//   - RemoveTags
+//   - UpdateChannel
+//
+// Actions available for managing delegated administrators The following actions
+// are available for adding or a removing a delegated administrator to manage an
+// Organizations organization’s CloudTrail resources.
+//   - DeregisterOrganizationDelegatedAdmin
+//   - RegisterOrganizationDelegatedAdmin
 package cloudtrail

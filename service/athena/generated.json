@@ -19,6 +19,7 @@
         "api_op_CreatePreparedStatement.go",
         "api_op_CreatePresignedNotebookUrl.go",
         "api_op_CreateWorkGroup.go",
+        "api_op_DeleteCapacityReservation.go",
         "api_op_DeleteDataCatalog.go",
         "api_op_DeleteNamedQuery.go",
         "api_op_DeleteNotebook.go",

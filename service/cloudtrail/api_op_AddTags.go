@@ -18,7 +18,7 @@ import (
 // tag will be created with the specified key and a value of null. You can tag a
 // trail or event data store that applies to all Amazon Web Services Regions only
 // from the Region in which the trail or event data store was created (also known
-// as its home region).
+// as its home Region).
 func (c *Client) AddTags(ctx context.Context, params *AddTagsInput, optFns ...func(*Options)) (*AddTagsOutput, error) {
 	if params == nil {
 		params = &AddTagsInput{}
@@ -41,7 +41,7 @@ type AddTagsInput struct {
 	// more tags will be added. The format of a trail ARN is:
 	// arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail The format of an event
 	// data store ARN is:
-	// arn:aws:cloudtrail:us-east-2:12345678910:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE
+	// arn:aws:cloudtrail:us-east-2:123456789012:eventdatastore/EXAMPLE-f852-4e8f-8bd1-bcf6cEXAMPLE
 	// The format of a channel ARN is:
 	// arn:aws:cloudtrail:us-east-2:123456789012:channel/01234567890
 	//

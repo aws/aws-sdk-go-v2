@@ -10,55 +10,49 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts the recording of Amazon Web Services API calls and log file delivery for
-// a trail. For a trail that is enabled in all Regions, this operation must be
-// called from the Region in which the trail was created. This operation cannot be
-// called on the shadow trails (replicated trails in other Regions) of a trail that
-// is enabled in all Regions.
-func (c *Client) StartLogging(ctx context.Context, params *StartLoggingInput, optFns ...func(*Options)) (*StartLoggingOutput, error) {
+// Starts the ingestion of live events on an event data store specified as either
+// an ARN or the ID portion of the ARN. To start ingestion, the event data store
+// Status must be STOPPED_INGESTION and the eventCategory must be Management , Data
+// , or ConfigurationItem .
+func (c *Client) StartEventDataStoreIngestion(ctx context.Context, params *StartEventDataStoreIngestionInput, optFns ...func(*Options)) (*StartEventDataStoreIngestionOutput, error) {
 	if params == nil {
-		params = &StartLoggingInput{}
+		params = &StartEventDataStoreIngestionInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartLogging", params, optFns, c.addOperationStartLoggingMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartEventDataStoreIngestion", params, optFns, c.addOperationStartEventDataStoreIngestionMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*StartLoggingOutput)
+	out := result.(*StartEventDataStoreIngestionOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-// The request to CloudTrail to start logging Amazon Web Services API calls for an
-// account.
-type StartLoggingInput struct {
+type StartEventDataStoreIngestionInput struct {
 
-	// Specifies the name or the CloudTrail ARN of the trail for which CloudTrail logs
-	// Amazon Web Services API calls. The following is the format of a trail ARN.
-	// arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail
+	// The ARN (or ID suffix of the ARN) of the event data store for which you want to
+	// start ingestion.
 	//
 	// This member is required.
-	Name *string
+	EventDataStore *string
 
 	noSmithyDocumentSerde
 }
 
-// Returns the objects or data listed below if successful. Otherwise, returns an
-// error.
-type StartLoggingOutput struct {
+type StartEventDataStoreIngestionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationStartLoggingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartLogging{}, middleware.After)
+func (c *Client) addOperationStartEventDataStoreIngestionMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartEventDataStoreIngestion{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartLogging{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartEventDataStoreIngestion{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -98,10 +92,10 @@ func (c *Client) addOperationStartLoggingMiddlewares(stack *middleware.Stack, op
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpStartLoggingValidationMiddleware(stack); err != nil {
+	if err = addOpStartEventDataStoreIngestionValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartLogging(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartEventDataStoreIngestion(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -119,11 +113,11 @@ func (c *Client) addOperationStartLoggingMiddlewares(stack *middleware.Stack, op
 	return nil
 }
 
-func newServiceMetadataMiddleware_opStartLogging(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opStartEventDataStoreIngestion(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "cloudtrail",
-		OperationName: "StartLogging",
+		OperationName: "StartEventDataStoreIngestion",
 	}
 }

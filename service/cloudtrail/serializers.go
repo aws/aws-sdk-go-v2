@@ -1996,6 +1996,61 @@ func (m *awsAwsjson11_serializeOpRestoreEventDataStore) HandleSerialize(ctx cont
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpStartEventDataStoreIngestion struct {
+}
+
+func (*awsAwsjson11_serializeOpStartEventDataStoreIngestion) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpStartEventDataStoreIngestion) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StartEventDataStoreIngestionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("CloudTrail_20131101.StartEventDataStoreIngestion")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentStartEventDataStoreIngestionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpStartImport struct {
 }
 
@@ -2146,6 +2201,61 @@ func (m *awsAwsjson11_serializeOpStartQuery) HandleSerialize(ctx context.Context
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentStartQueryInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpStopEventDataStoreIngestion struct {
+}
+
+func (*awsAwsjson11_serializeOpStopEventDataStoreIngestion) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpStopEventDataStoreIngestion) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StopEventDataStoreIngestionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("CloudTrail_20131101.StopEventDataStoreIngestion")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentStopEventDataStoreIngestionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2930,6 +3040,11 @@ func awsAwsjson11_serializeOpDocumentCreateEventDataStoreInput(v *CreateEventDat
 		ok.Integer(*v.RetentionPeriod)
 	}
 
+	if v.StartIngestion != nil {
+		ok := object.Key("StartIngestion")
+		ok.Boolean(*v.StartIngestion)
+	}
+
 	if v.TagsList != nil {
 		ok := object.Key("TagsList")
 		if err := awsAwsjson11_serializeDocumentTagsList(v.TagsList, ok); err != nil {
@@ -3550,6 +3665,18 @@ func awsAwsjson11_serializeOpDocumentRestoreEventDataStoreInput(v *RestoreEventD
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentStartEventDataStoreIngestionInput(v *StartEventDataStoreIngestionInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EventDataStore != nil {
+		ok := object.Key("EventDataStore")
+		ok.String(*v.EventDataStore)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentStartImportInput(v *StartImportInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3610,6 +3737,18 @@ func awsAwsjson11_serializeOpDocumentStartQueryInput(v *StartQueryInput, value s
 	if v.QueryStatement != nil {
 		ok := object.Key("QueryStatement")
 		ok.String(*v.QueryStatement)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentStopEventDataStoreIngestionInput(v *StopEventDataStoreIngestionInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EventDataStore != nil {
+		ok := object.Key("EventDataStore")
+		ok.String(*v.EventDataStore)
 	}
 
 	return nil

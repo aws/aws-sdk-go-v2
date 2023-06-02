@@ -60385,6 +60385,11 @@ func awsAwsjson11_deserializeDocumentPipelineExecution(v **types.PipelineExecuti
 				return err
 			}
 
+		case "SelectiveExecutionConfig":
+			if err := awsAwsjson11_deserializeDocumentSelectiveExecutionConfig(&sv.SelectiveExecutionConfig, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -60461,6 +60466,11 @@ func awsAwsjson11_deserializeDocumentPipelineExecutionStep(v **types.PipelineExe
 
 		case "Metadata":
 			if err := awsAwsjson11_deserializeDocumentPipelineExecutionStepMetadata(&sv.Metadata, value); err != nil {
+				return err
+			}
+
+		case "SelectiveExecutionResult":
+			if err := awsAwsjson11_deserializeDocumentSelectiveExecutionResult(&sv.SelectiveExecutionResult, value); err != nil {
 				return err
 			}
 
@@ -66014,6 +66024,165 @@ func awsAwsjson11_deserializeDocumentSecurityGroupIds(v *[]string, value interfa
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentSelectedStep(v **types.SelectedStep, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SelectedStep
+	if *v == nil {
+		sv = &types.SelectedStep{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "StepName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String256 to be of type string, got %T instead", value)
+				}
+				sv.StepName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentSelectedStepList(v *[]types.SelectedStep, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.SelectedStep
+	if *v == nil {
+		cv = []types.SelectedStep{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.SelectedStep
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentSelectedStep(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentSelectiveExecutionConfig(v **types.SelectiveExecutionConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SelectiveExecutionConfig
+	if *v == nil {
+		sv = &types.SelectiveExecutionConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "SelectedSteps":
+			if err := awsAwsjson11_deserializeDocumentSelectedStepList(&sv.SelectedSteps, value); err != nil {
+				return err
+			}
+
+		case "SourcePipelineExecutionArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PipelineExecutionArn to be of type string, got %T instead", value)
+				}
+				sv.SourcePipelineExecutionArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentSelectiveExecutionResult(v **types.SelectiveExecutionResult, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SelectiveExecutionResult
+	if *v == nil {
+		sv = &types.SelectiveExecutionResult{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "SourcePipelineExecutionArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PipelineExecutionArn to be of type string, got %T instead", value)
+				}
+				sv.SourcePipelineExecutionArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -81046,6 +81215,11 @@ func awsAwsjson11_deserializeOpDocumentDescribePipelineExecutionOutput(v **Descr
 
 		case "PipelineExperimentConfig":
 			if err := awsAwsjson11_deserializeDocumentPipelineExperimentConfig(&sv.PipelineExperimentConfig, value); err != nil {
+				return err
+			}
+
+		case "SelectiveExecutionConfig":
+			if err := awsAwsjson11_deserializeDocumentSelectiveExecutionConfig(&sv.SelectiveExecutionConfig, value); err != nil {
 				return err
 			}
 

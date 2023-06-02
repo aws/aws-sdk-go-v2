@@ -13,7 +13,7 @@ import (
 )
 
 // Returns information about all event data stores in the account, in the current
-// region.
+// Region.
 func (c *Client) ListEventDataStores(ctx context.Context, params *ListEventDataStoresInput, optFns ...func(*Options)) (*ListEventDataStoresOutput, error) {
 	if params == nil {
 		params = &ListEventDataStoresInput{}
@@ -43,7 +43,7 @@ type ListEventDataStoresInput struct {
 type ListEventDataStoresOutput struct {
 
 	// Contains information about event data stores in the account, in the current
-	// region.
+	// Region.
 	EventDataStores []types.EventDataStore
 
 	// A token you can use to get the next page of results.

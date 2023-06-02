@@ -14,7 +14,7 @@ import (
 // handle log files. Changes to a trail do not require stopping the CloudTrail
 // service. Use this action to designate an existing bucket for log delivery. If
 // the existing bucket has previously been a target for CloudTrail log files, an
-// IAM policy exists for the bucket. UpdateTrail must be called from the region in
+// IAM policy exists for the bucket. UpdateTrail must be called from the Region in
 // which the trail was created; otherwise, an InvalidHomeRegionException is thrown.
 func (c *Client) UpdateTrail(ctx context.Context, params *UpdateTrailInput, optFns ...func(*Options)) (*UpdateTrailOutput, error) {
 	if params == nil {
@@ -74,13 +74,13 @@ type UpdateTrailInput struct {
 	// IAM to the log files.
 	IncludeGlobalServiceEvents *bool
 
-	// Specifies whether the trail applies only to the current region or to all
-	// regions. The default is false. If the trail exists only in the current region
+	// Specifies whether the trail applies only to the current Region or to all
+	// Regions. The default is false. If the trail exists only in the current Region
 	// and this value is set to true, shadow trails (replications of the trail) will be
-	// created in the other regions. If the trail exists in all regions and this value
-	// is set to false, the trail will remain in the region where it was created, and
-	// its shadow trails in other regions will be deleted. As a best practice, consider
-	// using trails that log events in all regions.
+	// created in the other Regions. If the trail exists in all Regions and this value
+	// is set to false, the trail will remain in the Region where it was created, and
+	// its shadow trails in other Regions will be deleted. As a best practice, consider
+	// using trails that log events in all Regions.
 	IsMultiRegionTrail *bool
 
 	// Specifies whether the trail is applied to all accounts in an organization in
@@ -141,7 +141,7 @@ type UpdateTrailOutput struct {
 	// IAM to the log files.
 	IncludeGlobalServiceEvents *bool
 
-	// Specifies whether the trail exists in one region or in all regions.
+	// Specifies whether the trail exists in one Region or in all Regions.
 	IsMultiRegionTrail *bool
 
 	// Specifies whether the trail is an organization trail.

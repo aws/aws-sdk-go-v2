@@ -72,9 +72,12 @@ type EventDataStoreStatus string
 
 // Enum values for EventDataStoreStatus
 const (
-	EventDataStoreStatusCreated         EventDataStoreStatus = "CREATED"
-	EventDataStoreStatusEnabled         EventDataStoreStatus = "ENABLED"
-	EventDataStoreStatusPendingDeletion EventDataStoreStatus = "PENDING_DELETION"
+	EventDataStoreStatusCreated           EventDataStoreStatus = "CREATED"
+	EventDataStoreStatusEnabled           EventDataStoreStatus = "ENABLED"
+	EventDataStoreStatusPendingDeletion   EventDataStoreStatus = "PENDING_DELETION"
+	EventDataStoreStatusStartingIngestion EventDataStoreStatus = "STARTING_INGESTION"
+	EventDataStoreStatusStoppingIngestion EventDataStoreStatus = "STOPPING_INGESTION"
+	EventDataStoreStatusStoppedIngestion  EventDataStoreStatus = "STOPPED_INGESTION"
 )
 
 // Values returns all known values for EventDataStoreStatus. Note that this can be
@@ -85,6 +88,9 @@ func (EventDataStoreStatus) Values() []EventDataStoreStatus {
 		"CREATED",
 		"ENABLED",
 		"PENDING_DELETION",
+		"STARTING_INGESTION",
+		"STOPPING_INGESTION",
+		"STOPPED_INGESTION",
 	}
 }
 

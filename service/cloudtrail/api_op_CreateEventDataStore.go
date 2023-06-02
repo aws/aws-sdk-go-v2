@@ -66,8 +66,8 @@ type CreateEventDataStoreInput struct {
 	//   - 12345678-1234-1234-1234-123456789012
 	KmsKeyId *string
 
-	// Specifies whether the event data store includes events from all regions, or
-	// only from the region in which the event data store is created.
+	// Specifies whether the event data store includes events from all Regions, or
+	// only from the Region in which the event data store is created.
 	MultiRegionEnabled *bool
 
 	// Specifies whether an event data store collects events logged for an
@@ -77,6 +77,10 @@ type CreateEventDataStoreInput struct {
 	// The retention period of the event data store, in days. You can set a retention
 	// period of up to 2557 days, the equivalent of seven years.
 	RetentionPeriod *int32
+
+	// Specifies whether the event data store should start ingesting live events. The
+	// default is true.
+	StartIngestion *bool
 
 	// A list of tags.
 	TagsList []types.Tag
@@ -106,8 +110,8 @@ type CreateEventDataStoreOutput struct {
 	// arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012
 	KmsKeyId *string
 
-	// Indicates whether the event data store collects events from all regions, or
-	// only from the region in which it was created.
+	// Indicates whether the event data store collects events from all Regions, or
+	// only from the Region in which it was created.
 	MultiRegionEnabled *bool
 
 	// The name of the event data store.

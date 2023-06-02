@@ -230,6 +230,26 @@ func (m *validateOpCreateWorkGroup) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteCapacityReservation struct {
+}
+
+func (*validateOpDeleteCapacityReservation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteCapacityReservation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteCapacityReservationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteCapacityReservationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteDataCatalog struct {
 }
 
@@ -1254,6 +1274,10 @@ func addOpCreateWorkGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateWorkGroup{}, middleware.After)
 }
 
+func addOpDeleteCapacityReservationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteCapacityReservation{}, middleware.After)
+}
+
 func addOpDeleteDataCatalogValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDataCatalog{}, middleware.After)
 }
@@ -1810,6 +1834,21 @@ func validateOpCreateWorkGroupInput(v *CreateWorkGroupInput) error {
 		if err := validateWorkGroupConfiguration(v.Configuration); err != nil {
 			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteCapacityReservationInput(v *DeleteCapacityReservationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteCapacityReservationInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

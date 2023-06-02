@@ -1358,11 +1358,8 @@ type AutoMLJobChannel struct {
 
 	// The content type of the data from the input source. The following are the
 	// allowed content types for different problems:
-	//   - ImageClassification: image/png , image/jpeg , or image/* . The default value
-	//   is image/* .
-	//   - TextClassification: text/csv;header=present or
-	//   x-application/vnd.amazon+parquet . The default value is
-	//   text/csv;header=present .
+	//   - ImageClassification: image/png , image/jpeg , image/*
+	//   - TextClassification: text/csv;header=present
 	ContentType *string
 
 	// The data source for an AutoML channel.
@@ -10200,6 +10197,9 @@ type PipelineExecution struct {
 	// Contains a list of pipeline parameters. This list can be empty.
 	PipelineParameters []Parameter
 
+	// The selective execution configuration applied to the pipeline run.
+	SelectiveExecutionConfig *SelectiveExecutionConfig
+
 	noSmithyDocumentSerde
 }
 
@@ -10223,6 +10223,10 @@ type PipelineExecutionStep struct {
 
 	// Metadata to run the pipeline step.
 	Metadata *PipelineExecutionStepMetadata
+
+	// The ARN from an execution of the current pipeline from which results are reused
+	// for this step.
+	SelectiveExecutionResult *SelectiveExecutionResult
 
 	// The time that the step started executing.
 	StartTime *time.Time
@@ -12315,6 +12319,45 @@ type SecondaryStatusTransition struct {
 	//   - SecondaryStatus - Training
 	//   - StatusMessage - Downloading the training image
 	StatusMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// A step selected to run in selective execution mode.
+type SelectedStep struct {
+
+	// The name of the pipeline step.
+	//
+	// This member is required.
+	StepName *string
+
+	noSmithyDocumentSerde
+}
+
+// The selective execution configuration applied to the pipeline run.
+type SelectiveExecutionConfig struct {
+
+	// A list of pipeline steps to run. All step(s) in all path(s) between two
+	// selected steps should be included.
+	//
+	// This member is required.
+	SelectedSteps []SelectedStep
+
+	// The ARN from a reference execution of the current pipeline. Used to copy input
+	// collaterals needed for the selected steps to run. The execution status of the
+	// pipeline can be either Failed or Success .
+	//
+	// This member is required.
+	SourcePipelineExecutionArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The ARN from an execution of the current pipeline.
+type SelectiveExecutionResult struct {
+
+	// The ARN from an execution of the current pipeline.
+	SourcePipelineExecutionArn *string
 
 	noSmithyDocumentSerde
 }

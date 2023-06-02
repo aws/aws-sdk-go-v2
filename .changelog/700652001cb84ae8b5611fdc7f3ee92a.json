@@ -1,0 +1,8 @@
+{
+    "id": "70065200-1cb8-4ae8-b561-1fdc7f3ee92a",
+    "type": "feature",
+    "description": "This feature allows users to start and stop event ingestion on a CloudTrail Lake event data store.",
+    "modules": [
+        "service/cloudtrail"
+    ]
+}

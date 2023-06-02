@@ -290,6 +290,46 @@ func (m *validateOpDeleteWebACL) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeAllManagedProducts struct {
+}
+
+func (*validateOpDescribeAllManagedProducts) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeAllManagedProducts) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeAllManagedProductsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeAllManagedProductsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeManagedProductsByVendor struct {
+}
+
+func (*validateOpDescribeManagedProductsByVendor) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeManagedProductsByVendor) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeManagedProductsByVendorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeManagedProductsByVendorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeManagedRuleGroup struct {
 }
 
@@ -1064,6 +1104,14 @@ func addOpDeleteRuleGroupValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteWebACLValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteWebACL{}, middleware.After)
+}
+
+func addOpDescribeAllManagedProductsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeAllManagedProducts{}, middleware.After)
+}
+
+func addOpDescribeManagedProductsByVendorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeManagedProductsByVendor{}, middleware.After)
 }
 
 func addOpDescribeManagedRuleGroupValidationMiddleware(stack *middleware.Stack) error {
@@ -3461,6 +3509,39 @@ func validateOpDeleteWebACLInput(v *DeleteWebACLInput) error {
 	}
 	if v.LockToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LockToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeAllManagedProductsInput(v *DescribeAllManagedProductsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeAllManagedProductsInput"}
+	if len(v.Scope) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Scope"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeManagedProductsByVendorInput(v *DescribeManagedProductsByVendorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeManagedProductsByVendorInput"}
+	if v.VendorName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VendorName"))
+	}
+	if len(v.Scope) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Scope"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
