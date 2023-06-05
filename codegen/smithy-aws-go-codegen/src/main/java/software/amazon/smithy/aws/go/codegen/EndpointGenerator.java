@@ -614,6 +614,7 @@ public final class EndpointGenerator implements Runnable {
             writer.write("return fn(region, options)");
         });
 
+        // Generate Client Options Configuration Resolver
         writer.openBlock("func $L(o $P) {", "}", CLIENT_CONFIG_RESOLVER,
                 SymbolUtils.createPointableSymbolBuilder("Options").build(), () -> {
                     writer.openBlock("if o.EndpointResolver != nil {", "}", () -> writer.write("return"));
