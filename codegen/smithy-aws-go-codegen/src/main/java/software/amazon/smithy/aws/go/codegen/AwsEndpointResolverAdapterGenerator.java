@@ -24,8 +24,9 @@ import java.util.function.Consumer;
 
 public class AwsEndpointResolverAdapterGenerator implements GoIntegration {
 
-    private static final String LEGACY_ADAPTER_TYPE = "legacyEndpointResolverAdapter";
-    private static final String COMPATIBLE_ADAPTER_TYPE = "compatibleEndpointResolver";
+    public static final String LEGACY_ADAPTER_TYPE = "legacyEndpointResolverAdapter";
+    public static final String COMPATIBLE_ADAPTER_TYPE = "compatibleEndpointResolver";
+
 
     private Map<String, Object> commonCodegenArgs;
 
@@ -46,8 +47,6 @@ public class AwsEndpointResolverAdapterGenerator implements GoIntegration {
                 "paramsType", SymbolUtils.createValueSymbolBuilder(EndpointResolutionGenerator.PARAMETERS_TYPE_NAME).build(),
                 "smithyEndpointType", SymbolUtils.createValueSymbolBuilder("Endpoint", SmithyGoDependency.SMITHY_ENDPOINTS).build(),
                 "awsEndpointType", SymbolUtils.createValueSymbolBuilder("Endpoint", AwsGoDependency.AWS_CORE).build(),
-                "awsFipsEndpointStateEnabledType", SymbolUtils.createValueSymbolBuilder("FIPSEndpointStateEnabled", AwsGoDependency.AWS_CORE).build(),
-                "awsDualStackEndpointStateEnabledType", SymbolUtils.createValueSymbolBuilder("DualStackEndpointStateEnabled", AwsGoDependency.AWS_CORE).build(),
                 "fmtErrorf", SymbolUtils.createValueSymbolBuilder("Errorf", SmithyGoDependency.FMT).build());
 
         var content = new GoWriter.ChainWritable()
@@ -118,6 +117,8 @@ public class AwsEndpointResolverAdapterGenerator implements GoIntegration {
             commonCodegenArgs,
             MapUtils.of(
                     "awsFipsEndpointStateType", SymbolUtils.createValueSymbolBuilder("FIPSEndpointState", AwsGoDependency.AWS_CORE).build(),
+                    "awsFipsEndpointStateEnabledType", SymbolUtils.createValueSymbolBuilder("FIPSEndpointStateEnabled", AwsGoDependency.AWS_CORE).build(),
+                    "awsDualStackEndpointStateEnabledType", SymbolUtils.createValueSymbolBuilder("DualStackEndpointStateEnabled", AwsGoDependency.AWS_CORE).build(),
                     "awsDualStackEndpointStateType", SymbolUtils.createValueSymbolBuilder("DualStackEndpointState", AwsGoDependency.AWS_CORE).build()
                     ));
 
@@ -195,15 +196,15 @@ public class AwsEndpointResolverAdapterGenerator implements GoIntegration {
 
         return goTemplate(
             """
-                type isClientProvidedImplementation interface {
-                    isClientProvidedImplementation()
+                type isDefaultProvidedImplementation interface {
+                    isDefaultProvidedImplementation()
                 }
 
                 type $compatibleResolverType:T struct {
                     EndpointResolverV2 $resolverType:T
                 }
 
-                func (n *$compatibleResolverType:T) isClientProvidedImplementation() {}
+                func (n *$compatibleResolverType:T) isDefaultProvidedImplementation() {}
 
                 func (n *$compatibleResolverType:T) ResolveEndpoint(region string, options EndpointResolverOptions) (endpoint $awsEndpointType:T, err error) {
                     $compatibleResolveMethodBody:W
@@ -247,6 +248,8 @@ public class AwsEndpointResolverAdapterGenerator implements GoIntegration {
             commonCodegenArgs,
             MapUtils.of(
                     "awsBoolType", SymbolUtils.createValueSymbolBuilder("Bool", AwsGoDependency.AWS_CORE).build(),
+                    "awsFipsEndpointStateEnabledType", SymbolUtils.createValueSymbolBuilder("FIPSEndpointStateEnabled", AwsGoDependency.AWS_CORE).build(),
+                    "awsDualStackEndpointStateEnabledType", SymbolUtils.createValueSymbolBuilder("DualStackEndpointStateEnabled", AwsGoDependency.AWS_CORE).build(),
                     "endpointSourceMetadata", SymbolUtils.createValueSymbolBuilder("EndpointSourceServiceMetadata", AwsGoDependency.AWS_CORE).build()
             ));
     }
@@ -274,6 +277,7 @@ public class AwsEndpointResolverAdapterGenerator implements GoIntegration {
             """,
             commonCodegenArgs,
             MapUtils.of(
+                    "awsFipsEndpointStateEnabledType", SymbolUtils.createValueSymbolBuilder("FIPSEndpointStateEnabled", AwsGoDependency.AWS_CORE).build(),
                     "awsFipsEndpointStateType", SymbolUtils.createValueSymbolBuilder("FIPSEndpointState", AwsGoDependency.AWS_CORE).build()
             ));
     }
@@ -283,12 +287,11 @@ public class AwsEndpointResolverAdapterGenerator implements GoIntegration {
         return goTemplate(
             """
                 func finalizeEndpointResolverV2(options *Options) {
-                    // check options.EndpointResolver is nil
-
-                    // Check if the EndpointResolver was not user provided, but out default provided version
-                    _, ok := options.EndpointResolver.(isClientProvidedImplementation)
+                    // Check if the EndpointResolver was not user provided
+                    // but is the SDK's default provided version.
+                    _, ok := options.EndpointResolver.(isDefaultProvidedImplementation)
                     if options.EndpointResolverV2 == nil {
-                        options.EndpointResolverV2 = NewDefaultEndpointResolverV2()
+                        options.EndpointResolverV2 = $newResolverFuncName:L()
                     }
                     if ok {
                         // Nothing further to do
@@ -297,12 +300,15 @@ public class AwsEndpointResolverAdapterGenerator implements GoIntegration {
 
                     options.EndpointResolverV2 = &$legacyAdapterType:T{
                         legacyResolver: options.EndpointResolver,
-                        resolver:       NewDefaultEndpointResolverV2(),
+                        resolver:       $newResolverFuncName:L(),
                     }
                 }
 
             """,
-            commonCodegenArgs);
+            commonCodegenArgs,
+            MapUtils.of(
+                    "newResolverFuncName", EndpointResolutionGenerator.NEW_RESOLVER_FUNC_NAME
+            ));
 
     }
 
