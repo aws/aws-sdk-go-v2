@@ -12,9 +12,9 @@ import (
 )
 
 // Specifies the configuration data for a registered CloudFormation extension, in
-// the given account and region. To view the current configuration data for an
-// extension, refer to the ConfigurationSchema element of DescribeType . For more
-// information, see Configuring extensions at the account level (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration)
+// the given account and Region. To view the current configuration data for an
+// extension, refer to the ConfigurationSchema element of DescribeType (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html)
+// . For more information, see Configuring extensions at the account level (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration)
 // in the CloudFormation User Guide. It's strongly recommended that you use dynamic
 // references to restrict sensitive configuration definitions, such as third-party
 // credentials. For more details on dynamic references, see Using dynamic
@@ -37,10 +37,11 @@ func (c *Client) SetTypeConfiguration(ctx context.Context, params *SetTypeConfig
 
 type SetTypeConfigurationInput struct {
 
-	// The configuration data for the extension, in this account and region. The
+	// The configuration data for the extension, in this account and Region. The
 	// configuration data must be formatted as JSON, and validate against the schema
-	// returned in the ConfigurationSchema response element of API_DescribeType . For
-	// more information, see Defining account-level configuration data for an extension (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-model.html#resource-type-howto-configuration)
+	// returned in the ConfigurationSchema response element of DescribeType (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html)
+	// . For more information, see Defining account-level configuration data for an
+	// extension (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-model.html#resource-type-howto-configuration)
 	// in the CloudFormation CLI User Guide.
 	//
 	// This member is required.
@@ -55,11 +56,11 @@ type SetTypeConfigurationInput struct {
 	// and TypeName .
 	Type types.ThirdPartyType
 
-	// The Amazon Resource Name (ARN) for the extension, in this account and region.
+	// The Amazon Resource Name (ARN) for the extension, in this account and Region.
 	// For public extensions, this will be the ARN assigned when you activate the type (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ActivateType.html)
-	// in this account and region. For private extensions, this will be the ARN
+	// in this account and Region. For private extensions, this will be the ARN
 	// assigned when you register the type (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html)
-	// in this account and region. Do not include the extension versions suffix at the
+	// in this account and Region. Do not include the extension versions suffix at the
 	// end of the ARN. You can set the configuration for an extension, but not for a
 	// specific extension version.
 	TypeArn *string
@@ -74,7 +75,7 @@ type SetTypeConfigurationInput struct {
 type SetTypeConfigurationOutput struct {
 
 	// The Amazon Resource Name (ARN) for the configuration data, in this account and
-	// region. Conditional: You must specify ConfigurationArn , or Type and TypeName .
+	// Region. Conditional: You must specify ConfigurationArn , or Type and TypeName .
 	ConfigurationArn *string
 
 	// Metadata pertaining to the operation's result.

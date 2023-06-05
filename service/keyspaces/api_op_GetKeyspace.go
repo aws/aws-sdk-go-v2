@@ -6,6 +6,7 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/keyspaces/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,10 +44,20 @@ type GetKeyspaceOutput struct {
 	// This member is required.
 	KeyspaceName *string
 
-	// The ARN of the keyspace.
+	// Returns the replication strategy of the keyspace. The options are SINGLE_REGION
+	// or MULTI_REGION .
+	//
+	// This member is required.
+	ReplicationStrategy types.Rs
+
+	// Returns the ARN of the keyspace.
 	//
 	// This member is required.
 	ResourceArn *string
+
+	// If the replicationStrategy of the keyspace is MULTI_REGION , a list of
+	// replication Regions is returned.
+	ReplicationRegions []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

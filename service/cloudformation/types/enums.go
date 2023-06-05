@@ -522,6 +522,26 @@ func (OperationStatus) Values() []OperationStatus {
 	}
 }
 
+type OrganizationStatus string
+
+// Enum values for OrganizationStatus
+const (
+	OrganizationStatusEnabled             OrganizationStatus = "ENABLED"
+	OrganizationStatusDisabled            OrganizationStatus = "DISABLED"
+	OrganizationStatusDisabledPermanently OrganizationStatus = "DISABLED_PERMANENTLY"
+)
+
+// Values returns all known values for OrganizationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OrganizationStatus) Values() []OrganizationStatus {
+	return []OrganizationStatus{
+		"ENABLED",
+		"DISABLED",
+		"DISABLED_PERMANENTLY",
+	}
+}
+
 type PermissionModels string
 
 // Enum values for PermissionModels

@@ -12,7 +12,7 @@ import (
 )
 
 // Publishes the specified extension to the CloudFormation registry as a public
-// extension in this region. Public extensions are available for use by all
+// extension in this Region. Public extensions are available for use by all
 // CloudFormation users. For more information about publishing extensions, see
 // Publishing extensions to make them available for public use (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html)
 // in the CloudFormation CLI User Guide. To publish an extension, you must be

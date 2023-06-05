@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the description of the specified stack set.
+// Returns the description of the specified StackSet.
 func (c *Client) DescribeStackSet(ctx context.Context, params *DescribeStackSetInput, optFns ...func(*Options)) (*DescribeStackSetOutput, error) {
 	if params == nil {
 		params = &DescribeStackSetInput{}

@@ -47,7 +47,10 @@ type PublishLayerVersionInput struct {
 	CompatibleArchitectures []types.Architecture
 
 	// A list of compatible function runtimes (https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html)
-	// . Used for filtering with ListLayers and ListLayerVersions .
+	// . Used for filtering with ListLayers and ListLayerVersions . The following list
+	// includes deprecated runtimes. For more information, see Runtime deprecation
+	// policy (https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy)
+	// .
 	CompatibleRuntimes []types.Runtime
 
 	// The description of the version.
@@ -69,7 +72,9 @@ type PublishLayerVersionOutput struct {
 	// .
 	CompatibleArchitectures []types.Architecture
 
-	// The layer's compatible runtimes.
+	// The layer's compatible runtimes. The following list includes deprecated
+	// runtimes. For more information, see Runtime deprecation policy (https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy)
+	// .
 	CompatibleRuntimes []types.Runtime
 
 	// Details about the layer version.

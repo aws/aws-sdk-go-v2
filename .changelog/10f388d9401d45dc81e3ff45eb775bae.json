@@ -1,0 +1,8 @@
+{
+    "id": "10f388d9-401d-45dc-81e3-ff45eb775bae",
+    "type": "feature",
+    "description": "Added new variable types, new DateTime data type, and new rules engine functions for interacting and working with DateTime data types.",
+    "modules": [
+        "service/frauddetector"
+    ]
+}

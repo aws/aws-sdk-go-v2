@@ -137,8 +137,12 @@ type CreateFunctionInput struct {
 	// The ARN of the Key Management Service (KMS) customer managed key that's used to
 	// encrypt your function's environment variables (https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-encryption)
 	// . When Lambda SnapStart (https://docs.aws.amazon.com/lambda/latest/dg/snapstart-security.html)
-	// is activated, this key is also used to encrypt your function's snapshot. If you
-	// don't provide a customer managed key, Lambda uses a default service key.
+	// is activated, Lambda also uses this key is to encrypt your function's snapshot.
+	// If you deploy your function using a container image, Lambda also uses this key
+	// to encrypt your function when it's deployed. Note that this is not the same key
+	// that's used to protect your container image in the Amazon Elastic Container
+	// Registry (Amazon ECR). If you don't provide a customer managed key, Lambda uses
+	// a default service key.
 	KMSKeyArn *string
 
 	// A list of function layers (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)

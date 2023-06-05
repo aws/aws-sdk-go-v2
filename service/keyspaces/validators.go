@@ -475,6 +475,21 @@ func validatePointInTimeRecovery(v *types.PointInTimeRecovery) error {
 	}
 }
 
+func validateReplicationSpecification(v *types.ReplicationSpecification) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ReplicationSpecification"}
+	if len(v.ReplicationStrategy) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ReplicationStrategy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSchemaDefinition(v *types.SchemaDefinition) error {
 	if v == nil {
 		return nil
@@ -604,6 +619,11 @@ func validateOpCreateKeyspaceInput(v *CreateKeyspaceInput) error {
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ReplicationSpecification != nil {
+		if err := validateReplicationSpecification(v.ReplicationSpecification); err != nil {
+			invalidParams.AddNested("ReplicationSpecification", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -14,7 +14,7 @@ import (
 
 // Returns information about a stack drift detection operation. A stack drift
 // detection operation detects whether a stack's actual configuration differs, or
-// has drifted, from it's expected configuration, as defined in the stack template
+// has drifted, from its expected configuration, as defined in the stack template
 // and any values specified as template parameters. A stack is considered to have
 // drifted if one or more of its resources have drifted. For more information about
 // stack and resource drift, see Detecting Unregulated Configuration Changes to

@@ -1,0 +1,8 @@
+{
+    "id": "3e9ca17e-26f8-40cd-bfff-05858764e035",
+    "type": "feature",
+    "description": "Releasing new Managed kdb Insights APIs",
+    "modules": [
+        "service/finspace"
+    ]
+}

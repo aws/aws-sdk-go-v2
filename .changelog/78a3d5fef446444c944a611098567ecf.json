@@ -1,0 +1,8 @@
+{
+    "id": "78a3d5fe-f446-444c-944a-611098567ecf",
+    "type": "feature",
+    "description": "Add Ruby 3.2 (ruby3.2) Runtime support to AWS Lambda.",
+    "modules": [
+        "service/lambda"
+    ]
+}

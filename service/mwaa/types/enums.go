@@ -6,14 +6,16 @@ type EnvironmentStatus string
 
 // Enum values for EnvironmentStatus
 const (
-	EnvironmentStatusCreating     EnvironmentStatus = "CREATING"
-	EnvironmentStatusCreateFailed EnvironmentStatus = "CREATE_FAILED"
-	EnvironmentStatusAvailable    EnvironmentStatus = "AVAILABLE"
-	EnvironmentStatusUpdating     EnvironmentStatus = "UPDATING"
-	EnvironmentStatusDeleting     EnvironmentStatus = "DELETING"
-	EnvironmentStatusDeleted      EnvironmentStatus = "DELETED"
-	EnvironmentStatusUnavailable  EnvironmentStatus = "UNAVAILABLE"
-	EnvironmentStatusUpdateFailed EnvironmentStatus = "UPDATE_FAILED"
+	EnvironmentStatusCreating         EnvironmentStatus = "CREATING"
+	EnvironmentStatusCreateFailed     EnvironmentStatus = "CREATE_FAILED"
+	EnvironmentStatusAvailable        EnvironmentStatus = "AVAILABLE"
+	EnvironmentStatusUpdating         EnvironmentStatus = "UPDATING"
+	EnvironmentStatusDeleting         EnvironmentStatus = "DELETING"
+	EnvironmentStatusDeleted          EnvironmentStatus = "DELETED"
+	EnvironmentStatusUnavailable      EnvironmentStatus = "UNAVAILABLE"
+	EnvironmentStatusUpdateFailed     EnvironmentStatus = "UPDATE_FAILED"
+	EnvironmentStatusRollingBack      EnvironmentStatus = "ROLLING_BACK"
+	EnvironmentStatusCreatingSnapshot EnvironmentStatus = "CREATING_SNAPSHOT"
 )
 
 // Values returns all known values for EnvironmentStatus. Note that this can be
@@ -29,6 +31,8 @@ func (EnvironmentStatus) Values() []EnvironmentStatus {
 		"DELETED",
 		"UNAVAILABLE",
 		"UPDATE_FAILED",
+		"ROLLING_BACK",
+		"CREATING_SNAPSHOT",
 	}
 }
 

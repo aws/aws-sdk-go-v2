@@ -36,7 +36,7 @@ type Environment struct {
 	AirflowConfigurationOptions map[string]string
 
 	// The Apache Airflow version on your environment. Valid values: 1.10.12 , 2.0.2 ,
-	// 2.2.2 , and 2.4.3 .
+	// 2.2.2 , 2.4.3 , and 2.5.1 .
 	AirflowVersion *string
 
 	// The Amazon Resource Name (ARN) of the Amazon MWAA environment.
@@ -153,11 +153,20 @@ type Environment struct {
 
 	// The status of the Amazon MWAA environment. Valid values:
 	//   - CREATING - Indicates the request to create the environment is in progress.
+	//   - CREATING_SNAPSHOT - Indicates the request to update environment details, or
+	//   upgrade the environment version, is in progress and Amazon MWAA is creating a
+	//   storage volume snapshot of the Amazon RDS database cluster associated with the
+	//   environment. A database snapshot is a backup created at a specific point in
+	//   time. Amazon MWAA uses snapshots to recover environment metadata if the process
+	//   to update or upgrade an environment fails.
 	//   - CREATE_FAILED - Indicates the request to create the environment failed, and
 	//   the environment could not be created.
 	//   - AVAILABLE - Indicates the request was successful and the environment is
 	//   ready to use.
 	//   - UPDATING - Indicates the request to update the environment is in progress.
+	//   - ROLLING_BACK - Indicates the request to update environment details, or
+	//   upgrade the environment version, failed and Amazon MWAA is restoring the
+	//   environment using the latest storage volume snapshot.
 	//   - DELETING - Indicates the request to delete the environment is in progress.
 	//   - DELETED - Indicates the request to delete the environment is complete, and
 	//   the environment has been deleted.

@@ -11,7 +11,7 @@ import (
 )
 
 // Detects whether a stack's actual configuration differs, or has drifted, from
-// it's expected configuration, as defined in the stack template and any values
+// its expected configuration, as defined in the stack template and any values
 // specified as template parameters. For each resource in the stack that supports
 // drift detection, CloudFormation compares the actual configuration of the
 // resource with its expected template configuration. Only resource properties

@@ -21,10 +21,11 @@ import (
 // For more information, see Testing your public extension prior to publishing (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html#publish-extension-testing)
 // in the CloudFormation CLI User Guide. If you don't specify a version,
 // CloudFormation uses the default version of the extension in your account and
-// region for testing. To perform testing, CloudFormation assumes the execution
+// Region for testing. To perform testing, CloudFormation assumes the execution
 // role specified when the type was registered. For more information, see
-// RegisterType . Once you've initiated testing on an extension using TestType ,
-// you can pass the returned TypeVersionArn into DescribeType (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html)
+// RegisterType (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html)
+// . Once you've initiated testing on an extension using TestType , you can pass
+// the returned TypeVersionArn into DescribeType (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html)
 // to monitor the current test status and test status description for the
 // extension. An extension must have a test status of PASSED before it can be
 // published. For more information, see Publishing extensions to make them
@@ -73,7 +74,7 @@ type TestTypeInput struct {
 	// The version of the extension to test. You can specify the version id with
 	// either Arn , or with TypeName and Type . If you don't specify a version,
 	// CloudFormation uses the default version of the extension in this account and
-	// region for testing.
+	// Region for testing.
 	VersionId *string
 
 	noSmithyDocumentSerde

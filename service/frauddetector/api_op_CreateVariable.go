@@ -34,7 +34,7 @@ type CreateVariableInput struct {
 	// This member is required.
 	DataSource types.DataSource
 
-	// The data type.
+	// The data type of the variable.
 	//
 	// This member is required.
 	DataType types.DataType

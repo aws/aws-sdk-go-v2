@@ -14,8 +14,8 @@ import (
 // Activates a public third-party extension, making it available for use in stack
 // templates. For more information, see Using public extensions (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html)
 // in the CloudFormation User Guide. Once you have activated a public third-party
-// extension in your account and region, use SetTypeConfiguration to specify
-// configuration properties for the extension. For more information, see
+// extension in your account and Region, use SetTypeConfiguration (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html)
+// to specify configuration properties for the extension. For more information, see
 // Configuring extensions at the account level (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration)
 // in the CloudFormation User Guide.
 func (c *Client) ActivateType(ctx context.Context, params *ActivateTypeInput, optFns ...func(*Options)) (*ActivateTypeOutput, error) {
@@ -35,7 +35,7 @@ func (c *Client) ActivateType(ctx context.Context, params *ActivateTypeInput, op
 
 type ActivateTypeInput struct {
 
-	// Whether to automatically update the extension in this account and region when a
+	// Whether to automatically update the extension in this account and Region when a
 	// new minor version is published by the extension publisher. Major versions
 	// released by the publisher must be manually updated. The default is true .
 	AutoUpdate *bool
@@ -68,12 +68,12 @@ type ActivateTypeInput struct {
 	// TypeName , Type , and PublisherId .
 	TypeName *string
 
-	// An alias to assign to the public extension, in this account and region. If you
+	// An alias to assign to the public extension, in this account and Region. If you
 	// specify an alias for the extension, CloudFormation treats the alias as the
-	// extension type name within this account and region. You must use the alias to
+	// extension type name within this account and Region. You must use the alias to
 	// refer to the extension in your templates, API calls, and CloudFormation console.
-	// An extension alias must be unique within a given account and region. You can
-	// activate the same public resource multiple times in the same account and region,
+	// An extension alias must be unique within a given account and Region. You can
+	// activate the same public resource multiple times in the same account and Region,
 	// using different type name aliases.
 	TypeNameAlias *string
 
@@ -92,7 +92,7 @@ type ActivateTypeInput struct {
 type ActivateTypeOutput struct {
 
 	// The Amazon Resource Name (ARN) of the activated extension, in this account and
-	// region.
+	// Region.
 	Arn *string
 
 	// Metadata pertaining to the operation's result.

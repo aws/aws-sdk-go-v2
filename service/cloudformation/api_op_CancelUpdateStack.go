@@ -31,7 +31,13 @@ func (c *Client) CancelUpdateStack(ctx context.Context, params *CancelUpdateStac
 // The input for the CancelUpdateStack action.
 type CancelUpdateStackInput struct {
 
-	// The name or the unique stack ID that's associated with the stack.
+	// If you don't pass a parameter to StackName , the API returns a response that
+	// describes all resources in the account. The IAM policy below can be added to IAM
+	// policies when you want to limit resource-level permissions and avoid returning a
+	// response when no parameter is sent in the request: { "Version": "2012-10-17",
+	// "Statement": [{ "Effect": "Deny", "Action": "cloudformation:DescribeStacks",
+	// "NotResource": "arn:aws:cloudformation:*:*:stack/*/*" }] } The name or the
+	// unique stack ID that's associated with the stack.
 	//
 	// This member is required.
 	StackName *string

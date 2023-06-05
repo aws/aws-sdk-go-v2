@@ -22,13 +22,13 @@ import (
 // registration, see Creating Resource Providers (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-types.html)
 // in the CloudFormation CLI User Guide. You can have a maximum of 50 resource
 // extension versions registered at a time. This maximum is per account and per
-// region. Use DeregisterType to deregister specific extension versions if
-// necessary. Once you have initiated a registration request using RegisterType ,
-// you can use DescribeTypeRegistration to monitor the progress of the
-// registration request. Once you have registered a private extension in your
-// account and region, use SetTypeConfiguration to specify configuration
-// properties for the extension. For more information, see Configuring extensions
-// at the account level (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration)
+// Region. Use DeregisterType (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeregisterType.html)
+// to deregister specific extension versions if necessary. Once you have initiated
+// a registration request using RegisterType , you can use DescribeTypeRegistration
+// to monitor the progress of the registration request. Once you have registered a
+// private extension in your account and Region, use SetTypeConfiguration (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html)
+// to specify configuration properties for the extension. For more information, see
+// Configuring extensions at the account level (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration)
 // in the CloudFormation User Guide.
 func (c *Client) RegisterType(ctx context.Context, params *RegisterTypeInput, optFns ...func(*Options)) (*RegisterTypeOutput, error) {
 	if params == nil {
@@ -89,9 +89,9 @@ type RegisterTypeInput struct {
 	// execution role, the role must contain a trust relationship with the
 	// CloudFormation service principle ( resources.cloudformation.amazonaws.com ). For
 	// more information about adding trust relationships, see Modifying a role trust
-	// policy in the Identity and Access Management User Guide. If your extension calls
-	// Amazon Web Services APIs in any of its handlers, you must create an IAM
-	// execution role (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)
+	// policy (https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-managingrole-editing-console.html#roles-managingrole_edit-trust-policy)
+	// in the Identity and Access Management User Guide. If your extension calls Amazon
+	// Web Services APIs in any of its handlers, you must create an IAM execution role (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)
 	// that includes the necessary permissions to call those Amazon Web Services APIs,
 	// and provision that execution role in your account. When CloudFormation needs to
 	// invoke the resource type handler, CloudFormation assumes this execution role to

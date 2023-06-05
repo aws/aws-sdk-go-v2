@@ -890,6 +890,36 @@ func awsAwsjson10_serializeDocumentPointInTimeRecovery(v *types.PointInTimeRecov
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentRegionList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentReplicationSpecification(v *types.ReplicationSpecification, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RegionList != nil {
+		ok := object.Key("regionList")
+		if err := awsAwsjson10_serializeDocumentRegionList(v.RegionList, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.ReplicationStrategy) > 0 {
+		ok := object.Key("replicationStrategy")
+		ok.String(string(v.ReplicationStrategy))
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentSchemaDefinition(v *types.SchemaDefinition, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -999,6 +1029,13 @@ func awsAwsjson10_serializeOpDocumentCreateKeyspaceInput(v *CreateKeyspaceInput,
 	if v.KeyspaceName != nil {
 		ok := object.Key("keyspaceName")
 		ok.String(*v.KeyspaceName)
+	}
+
+	if v.ReplicationSpecification != nil {
+		ok := object.Key("replicationSpecification")
+		if err := awsAwsjson10_serializeDocumentReplicationSpecification(v.ReplicationSpecification, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Tags != nil {

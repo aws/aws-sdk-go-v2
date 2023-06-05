@@ -9,6 +9,7 @@
     "files": [
         "api_client.go",
         "api_client_test.go",
+        "api_op_ActivateOrganizationsAccess.go",
         "api_op_ActivateType.go",
         "api_op_BatchDescribeTypeConfigurations.go",
         "api_op_CancelUpdateStack.go",
@@ -17,6 +18,7 @@
         "api_op_CreateStack.go",
         "api_op_CreateStackInstances.go",
         "api_op_CreateStackSet.go",
+        "api_op_DeactivateOrganizationsAccess.go",
         "api_op_DeactivateType.go",
         "api_op_DeleteChangeSet.go",
         "api_op_DeleteStack.go",
@@ -26,6 +28,7 @@
         "api_op_DescribeAccountLimits.go",
         "api_op_DescribeChangeSet.go",
         "api_op_DescribeChangeSetHooks.go",
+        "api_op_DescribeOrganizationsAccess.go",
         "api_op_DescribePublisher.go",
         "api_op_DescribeStackDriftDetectionStatus.go",
         "api_op_DescribeStackEvents.go",

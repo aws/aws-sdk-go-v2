@@ -68,14 +68,14 @@ type DescribeTypeOutput struct {
 	Arn *string
 
 	// Whether CloudFormation automatically updates the extension in this account and
-	// region when a new minor version is published by the extension publisher. Major
+	// Region when a new minor version is published by the extension publisher. Major
 	// versions released by the publisher must be manually updated. For more
-	// information, see Activating public extensions for use in your account in the
-	// CloudFormation User Guide.
+	// information, see Activating public extensions for use in your account (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html#registry-public-enable)
+	// in the CloudFormation User Guide.
 	AutoUpdate *bool
 
 	// A JSON string that represent the current configuration data for the extension
-	// in this account and region. To set the configuration data for an extension, use
+	// in this account and Region. To set the configuration data for an extension, use
 	// SetTypeConfiguration (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html)
 	// . For more information, see Configuring extensions at the account level (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration)
 	// in the CloudFormation User Guide.
@@ -114,7 +114,7 @@ type DescribeTypeOutput struct {
 	// that execution role to provide your extension with the appropriate credentials.
 	ExecutionRoleArn *string
 
-	// Whether the extension is activated in the account and region. This only applies
+	// Whether the extension is activated in the account and Region. This only applies
 	// to public third-party extensions. For all other extensions, CloudFormation
 	// returns null .
 	IsActivated *bool
@@ -146,14 +146,14 @@ type DescribeTypeOutput struct {
 	// .
 	LoggingConfig *types.LoggingConfig
 
-	// For public extensions that have been activated for this account and region, the
+	// For public extensions that have been activated for this account and Region, the
 	// Amazon Resource Name (ARN) of the public extension.
 	OriginalTypeArn *string
 
-	// For public extensions that have been activated for this account and region, the
+	// For public extensions that have been activated for this account and Region, the
 	// type name of the public extension. If you specified a TypeNameAlias when
-	// enabling the extension in this account and region, CloudFormation treats that
-	// alias as the extension's type name within the account and region, not the type
+	// enabling the extension in this account and Region, CloudFormation treats that
+	// alias as the extension's type name within the account and Region, not the type
 	// name of the public extension. For more information, see Specifying aliases to
 	// refer to extensions (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html#registry-public-enable-alias)
 	// in the CloudFormation User Guide.

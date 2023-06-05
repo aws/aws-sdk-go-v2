@@ -177,11 +177,21 @@ type KeyspaceSummary struct {
 	// This member is required.
 	KeyspaceName *string
 
+	// This property specifies if a keyspace is a single Region keyspace or a
+	// multi-Region keyspace. The available values are SINGLE_REGION or MULTI_REGION .
+	//
+	// This member is required.
+	ReplicationStrategy Rs
+
 	// The unique identifier of the keyspace in the format of an Amazon Resource Name
 	// (ARN).
 	//
 	// This member is required.
 	ResourceArn *string
+
+	// If the replicationStrategy of the keyspace is MULTI_REGION , a list of
+	// replication Regions is returned.
+	ReplicationRegions []string
 
 	noSmithyDocumentSerde
 }
@@ -225,6 +235,25 @@ type PointInTimeRecoverySummary struct {
 
 	// Specifies the earliest possible restore point of the table in ISO 8601 format.
 	EarliestRestorableTimestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The replication specification of the keyspace includes:
+//   - regionList - up to six Amazon Web Services Regions where the keyspace is
+//     replicated in.
+//   - replicationStrategy - the required value is SINGLE_REGION or MULTI_REGION .
+type ReplicationSpecification struct {
+
+	// The replicationStrategy of a keyspace, the required value is SINGLE_REGION or
+	// MULTI_REGION .
+	//
+	// This member is required.
+	ReplicationStrategy Rs
+
+	// The regionList can contain up to six Amazon Web Services Regions where the
+	// keyspace is replicated in.
+	RegionList []string
 
 	noSmithyDocumentSerde
 }

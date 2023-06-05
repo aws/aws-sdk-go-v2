@@ -12,7 +12,7 @@ import (
 )
 
 // Returns information about whether a resource's actual configuration differs, or
-// has drifted, from it's expected configuration, as defined in the stack template
+// has drifted, from its expected configuration, as defined in the stack template
 // and any values specified as template parameters. This information includes
 // actual and expected property values for resources in which CloudFormation
 // detects drift. Only resource properties explicitly defined in the stack template

@@ -52,10 +52,11 @@ type DataType string
 
 // Enum values for DataType
 const (
-	DataTypeString  DataType = "STRING"
-	DataTypeInteger DataType = "INTEGER"
-	DataTypeFloat   DataType = "FLOAT"
-	DataTypeBoolean DataType = "BOOLEAN"
+	DataTypeString   DataType = "STRING"
+	DataTypeInteger  DataType = "INTEGER"
+	DataTypeFloat    DataType = "FLOAT"
+	DataTypeBoolean  DataType = "BOOLEAN"
+	DataTypeDatetime DataType = "DATETIME"
 )
 
 // Values returns all known values for DataType. Note that this can be expanded in
@@ -67,6 +68,7 @@ func (DataType) Values() []DataType {
 		"INTEGER",
 		"FLOAT",
 		"BOOLEAN",
+		"DATETIME",
 	}
 }
 

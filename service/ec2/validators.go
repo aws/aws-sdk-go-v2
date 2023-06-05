@@ -3810,6 +3810,26 @@ func (m *validateOpDeregisterImage) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeregisterInstanceEventNotificationAttributes struct {
+}
+
+func (*validateOpDeregisterInstanceEventNotificationAttributes) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeregisterInstanceEventNotificationAttributes) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeregisterInstanceEventNotificationAttributesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeregisterInstanceEventNotificationAttributesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeByoipCidrs struct {
 }
 
@@ -7350,6 +7370,26 @@ func (m *validateOpRegisterImage) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRegisterInstanceEventNotificationAttributes struct {
+}
+
+func (*validateOpRegisterInstanceEventNotificationAttributes) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRegisterInstanceEventNotificationAttributes) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RegisterInstanceEventNotificationAttributesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRegisterInstanceEventNotificationAttributesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpRegisterTransitGatewayMulticastGroupMembers struct {
 }
 
@@ -9090,6 +9130,10 @@ func addOpDeregisterImageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeregisterImage{}, middleware.After)
 }
 
+func addOpDeregisterInstanceEventNotificationAttributesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeregisterInstanceEventNotificationAttributes{}, middleware.After)
+}
+
 func addOpDescribeByoipCidrsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeByoipCidrs{}, middleware.After)
 }
@@ -9796,6 +9840,10 @@ func addOpRebootInstancesValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpRegisterImageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRegisterImage{}, middleware.After)
+}
+
+func addOpRegisterInstanceEventNotificationAttributesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRegisterInstanceEventNotificationAttributes{}, middleware.After)
 }
 
 func addOpRegisterTransitGatewayMulticastGroupMembersValidationMiddleware(stack *middleware.Stack) error {
@@ -14073,6 +14121,21 @@ func validateOpDeregisterImageInput(v *DeregisterImageInput) error {
 	}
 }
 
+func validateOpDeregisterInstanceEventNotificationAttributesInput(v *DeregisterInstanceEventNotificationAttributesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeregisterInstanceEventNotificationAttributesInput"}
+	if v.InstanceTagAttribute == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceTagAttribute"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeByoipCidrsInput(v *DescribeByoipCidrsInput) error {
 	if v == nil {
 		return nil
@@ -17024,6 +17087,21 @@ func validateOpRegisterImageInput(v *RegisterImageInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "RegisterImageInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRegisterInstanceEventNotificationAttributesInput(v *RegisterInstanceEventNotificationAttributesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RegisterInstanceEventNotificationAttributesInput"}
+	if v.InstanceTagAttribute == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceTagAttribute"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

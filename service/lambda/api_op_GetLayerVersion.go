@@ -49,7 +49,9 @@ type GetLayerVersionOutput struct {
 	// .
 	CompatibleArchitectures []types.Architecture
 
-	// The layer's compatible runtimes.
+	// The layer's compatible runtimes. The following list includes deprecated
+	// runtimes. For more information, see Runtime deprecation policy (https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy)
+	// .
 	CompatibleRuntimes []types.Runtime
 
 	// Details about the layer version.

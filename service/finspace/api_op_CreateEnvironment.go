@@ -75,7 +75,7 @@ type CreateEnvironmentOutput struct {
 	// The unique identifier for FinSpace environment that you created.
 	EnvironmentId *string
 
-	// The sign-in url for the web application of the FinSpace environment you created.
+	// The sign-in URL for the web application of the FinSpace environment you created.
 	EnvironmentUrl *string
 
 	// Metadata pertaining to the operation's result.

@@ -39,6 +39,14 @@ type CreateKeyspaceInput struct {
 	// This member is required.
 	KeyspaceName *string
 
+	// The replication specification of the keyspace includes:
+	//   - replicationStrategy - the required value is SINGLE_REGION or MULTI_REGION .
+	//   - regionList - if the replicationStrategy is MULTI_REGION , the regionList
+	//   requires the current Region and at least one additional Amazon Web Services
+	//   Region where the keyspace is going to be replicated in. The maximum number of
+	//   supported replication Regions including the current Region is six.
+	ReplicationSpecification *types.ReplicationSpecification
+
 	// A list of key-value pair tags to be attached to the keyspace. For more
 	// information, see Adding tags and labels to Amazon Keyspaces resources (https://docs.aws.amazon.com/keyspaces/latest/devguide/tagging-keyspaces.html)
 	// in the Amazon Keyspaces Developer Guide.

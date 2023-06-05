@@ -5,7 +5,7 @@
 //
 // Amazon Managed Workflows for Apache Airflow This section contains the Amazon
 // Managed Workflows for Apache Airflow (MWAA) API reference documentation. For
-// more information, see What Is Amazon MWAA? (https://docs.aws.amazon.com/mwaa/latest/userguide/what-is-mwaa.html)
+// more information, see What is Amazon MWAA? (https://docs.aws.amazon.com/mwaa/latest/userguide/what-is-mwaa.html)
 // . Endpoints
 //   - api.airflow.{region}.amazonaws.com - This endpoint is used for environment
 //     management.

@@ -327,15 +327,16 @@ type ManagedExecution struct {
 // Contains information about the module from which the resource was created, if
 // the resource was created from a module included in the stack template. For more
 // information about modules, see Using modules to encapsulate and reuse resource
-// configurations in the CloudFormation User Guide.
+// configurations (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/modules.html)
+// in the CloudFormation User Guide.
 type ModuleInfo struct {
 
 	// A concatenated list of the logical IDs of the module or modules containing the
 	// resource. Modules are listed starting with the inner-most nested module, and
 	// separated by / . In the following example, the resource was created from a
 	// module, moduleA , that's nested inside a parent module, moduleB .
-	// moduleA/moduleB For more information, see Referencing resources in a module in
-	// the CloudFormation User Guide.
+	// moduleA/moduleB For more information, see Referencing resources in a module (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/modules.html#module-ref-resources)
+	// in the CloudFormation User Guide.
 	LogicalIdHierarchy *string
 
 	// A concatenated list of the module type or types containing the resource. Module
@@ -504,8 +505,8 @@ type PropertyDifference struct {
 type RequiredActivatedType struct {
 
 	// The type name of the public extension. If you specified a TypeNameAlias when
-	// enabling the extension in this account and region, CloudFormation treats that
-	// alias as the extension's type name within the account and region, not the type
+	// enabling the extension in this account and Region, CloudFormation treats that
+	// alias as the extension's type name within the account and Region, not the type
 	// name of the public extension. For more information, see Specifying aliases to
 	// refer to extensions (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html#registry-public-enable-alias)
 	// in the CloudFormation User Guide.
@@ -517,9 +518,9 @@ type RequiredActivatedType struct {
 	// A list of the major versions of the extension type that the macro supports.
 	SupportedMajorVersions []int32
 
-	// An alias assigned to the public extension, in this account and region. If you
+	// An alias assigned to the public extension, in this account and Region. If you
 	// specify an alias for the extension, CloudFormation treats the alias as the
-	// extension type name within this account and region. You must use the alias to
+	// extension type name within this account and Region. You must use the alias to
 	// refer to the extension in your templates, API calls, and CloudFormation console.
 	TypeNameAlias *string
 
@@ -800,7 +801,7 @@ type Stack struct {
 	DisableRollback *bool
 
 	// Information about whether a stack's actual configuration differs, or has
-	// drifted, from it's expected configuration, as defined in the stack template and
+	// drifted, from its expected configuration, as defined in the stack template and
 	// any values specified as template parameters. For more information, see
 	// Detecting Unregulated Configuration Changes to Stacks and Resources (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html)
 	// .
@@ -1538,6 +1539,9 @@ type StackSet struct {
 	//   .
 	PermissionModel PermissionModels
 
+	// Returns a list of all Amazon Web Services Regions the given StackSet has stack
+	// instances deployed in. The Amazon Web Services Regions list output is in no
+	// particular order.
 	Regions []string
 
 	// The Amazon Resource Name (ARN) of the stack set.
@@ -1963,7 +1967,7 @@ type StackSummary struct {
 	DeletionTime *time.Time
 
 	// Summarizes information about whether a stack's actual configuration differs, or
-	// has drifted, from it's expected configuration, as defined in the stack template
+	// has drifted, from its expected configuration, as defined in the stack template
 	// and any values specified as template parameters. For more information, see
 	// Detecting Unregulated Configuration Changes to Stacks and Resources (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html)
 	// .
@@ -2038,7 +2042,7 @@ type TemplateParameter struct {
 }
 
 // Detailed information concerning the specification of a CloudFormation extension
-// in a given account and region. For more information, see Configuring extensions
+// in a given account and Region. For more information, see Configuring extensions
 // at the account level (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration)
 // in the CloudFormation User Guide.
 type TypeConfigurationDetails struct {
@@ -2048,11 +2052,11 @@ type TypeConfigurationDetails struct {
 	Alias *string
 
 	// The Amazon Resource Name (ARN) for the configuration data, in this account and
-	// region.
+	// Region.
 	Arn *string
 
 	// A JSON string specifying the configuration data for the extension, in this
-	// account and region. If a configuration hasn't been set for a specified
+	// account and Region. If a configuration hasn't been set for a specified
 	// extension, CloudFormation returns {} .
 	Configuration *string
 
@@ -2064,11 +2068,11 @@ type TypeConfigurationDetails struct {
 	// null .
 	LastUpdated *time.Time
 
-	// The Amazon Resource Name (ARN) for the extension, in this account and region.
+	// The Amazon Resource Name (ARN) for the extension, in this account and Region.
 	// For public extensions, this will be the ARN assigned when you activate the type (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ActivateType.html)
-	// in this account and region. For private extensions, this will be the ARN
+	// in this account and Region. For private extensions, this will be the ARN
 	// assigned when you register the type (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html)
-	// in this account and region.
+	// in this account and Region.
 	TypeArn *string
 
 	// The name of the extension.
@@ -2083,11 +2087,11 @@ type TypeConfigurationIdentifier struct {
 	// The type of extension.
 	Type ThirdPartyType
 
-	// The Amazon Resource Name (ARN) for the extension, in this account and region.
+	// The Amazon Resource Name (ARN) for the extension, in this account and Region.
 	// For public extensions, this will be the ARN assigned when you activate the type (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ActivateType.html)
-	// in this account and region. For private extensions, this will be the ARN
+	// in this account and Region. For private extensions, this will be the ARN
 	// assigned when you register the type (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html)
-	// in this account and region.
+	// in this account and Region.
 	TypeArn *string
 
 	// The alias specified for this configuration, if one was specified when the
@@ -2095,7 +2099,7 @@ type TypeConfigurationIdentifier struct {
 	TypeConfigurationAlias *string
 
 	// The Amazon Resource Name (ARN) for the configuration, in this account and
-	// region.
+	// Region.
 	TypeConfigurationArn *string
 
 	// The name of the extension type to which this configuration applies.
@@ -2109,9 +2113,9 @@ type TypeFilters struct {
 
 	// The category of extensions to return.
 	//   - REGISTERED : Private extensions that have been registered for this account
-	//   and region.
+	//   and Region.
 	//   - ACTIVATED : Public extensions that have been activated for this account and
-	//   region.
+	//   Region.
 	//   - THIRD_PARTY : Extensions available for use from publishers other than
 	//   Amazon. This includes:
 	//   - Private extensions registered in the account.
@@ -2145,7 +2149,7 @@ type TypeSummary struct {
 	// The description of the extension.
 	Description *string
 
-	// Whether the extension is activated for this account and region. This applies
+	// Whether the extension is activated for this account and Region. This applies
 	// only to third-party public extensions. Extensions published by Amazon are
 	// activated by default.
 	IsActivated *bool
@@ -2160,30 +2164,30 @@ type TypeSummary struct {
 	// For all other extension types, CloudFormation returns null .
 	LastUpdated *time.Time
 
-	// For public extensions that have been activated for this account and region, the
+	// For public extensions that have been activated for this account and Region, the
 	// latest version of the public extension that is available. For any extensions
 	// other than activated third-arty extensions, CloudFormation returns null . How
 	// you specified AutoUpdate when enabling the extension affects whether
-	// CloudFormation automatically updates the extension in this account and region
+	// CloudFormation automatically updates the extension in this account and Region
 	// when a new version is released. For more information, see Setting
 	// CloudFormation to automatically use new versions of extensions (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html#registry-public-enable-auto)
 	// in the CloudFormation User Guide.
 	LatestPublicVersion *string
 
-	// For public extensions that have been activated for this account and region, the
+	// For public extensions that have been activated for this account and Region, the
 	// type name of the public extension. If you specified a TypeNameAlias when
-	// enabling the extension in this account and region, CloudFormation treats that
-	// alias as the extension's type name within the account and region, not the type
+	// enabling the extension in this account and Region, CloudFormation treats that
+	// alias as the extension's type name within the account and Region, not the type
 	// name of the public extension. For more information, see Specifying aliases to
 	// refer to extensions (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html#registry-public-enable-alias)
 	// in the CloudFormation User Guide.
 	OriginalTypeName *string
 
-	// For public extensions that have been activated for this account and region, the
+	// For public extensions that have been activated for this account and Region, the
 	// version of the public extension to be used for CloudFormation operations in this
 	// account and Region. How you specified AutoUpdate when enabling the extension
 	// affects whether CloudFormation automatically updates the extension in this
-	// account and region when a new version is released. For more information, see
+	// account and Region when a new version is released. For more information, see
 	// Setting CloudFormation to automatically use new versions of extensions (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html#registry-public-enable-auto)
 	// in the CloudFormation User Guide.
 	PublicVersionNumber *string
@@ -2209,7 +2213,7 @@ type TypeSummary struct {
 
 	// The name of the extension. If you specified a TypeNameAlias when you activate
 	// this extension (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ActivateType.html)
-	// in your account and region, CloudFormation considers that alias as the type
+	// in your account and Region, CloudFormation considers that alias as the type
 	// name.
 	TypeName *string
 
@@ -2232,12 +2236,12 @@ type TypeVersionSummary struct {
 	// CloudFormation returns null .
 	IsDefaultVersion *bool
 
-	// For public extensions that have been activated for this account and region, the
+	// For public extensions that have been activated for this account and Region, the
 	// version of the public extension to be used for CloudFormation operations in this
-	// account and region. For any extensions other than activated third-arty
+	// account and Region. For any extensions other than activated third-arty
 	// extensions, CloudFormation returns null . How you specified AutoUpdate when
 	// enabling the extension affects whether CloudFormation automatically updates the
-	// extension in this account and region when a new version is released. For more
+	// extension in this account and Region when a new version is released. For more
 	// information, see Setting CloudFormation to automatically use new versions of
 	// extensions (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html#registry-public-enable-auto)
 	// in the CloudFormation User Guide.

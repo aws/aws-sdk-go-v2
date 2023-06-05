@@ -4,7 +4,129 @@ package types
 
 import (
 	smithydocument "github.com/aws/smithy-go/document"
+	"time"
 )
+
+// The configuration based on which FinSpace will scale in or scale out nodes in
+// your cluster.
+type AutoScalingConfiguration struct {
+
+	// The metric your cluster will track in order to scale in and out. For example,
+	// CPU_UTILIZATION_PERCENTAGE is the average CPU usage across all the nodes in a
+	// cluster.
+	AutoScalingMetric AutoScalingMetric
+
+	// The highest number of nodes to scale. This value cannot be greater than 5.
+	MaxNodeCount *int32
+
+	// The desired value of the chosen autoScalingMetric . When the metric drops below
+	// this value, the cluster will scale in. When the metric goes above this value,
+	// the cluster will scale out. You can set the target value between 1 and 100
+	// percent.
+	MetricTarget *float64
+
+	// The lowest number of nodes to scale. This value must be at least 1 and less
+	// than the maxNodeCount . If the nodes in a cluster belong to multiple
+	// availability zones, then minNodeCount must be at least 3.
+	MinNodeCount *int32
+
+	// The duration in seconds that FinSpace will wait after a scale in event before
+	// initiating another scaling event.
+	ScaleInCooldownSeconds *float64
+
+	// The duration in seconds that FinSpace will wait after a scale out event before
+	// initiating another scaling event.
+	ScaleOutCooldownSeconds *float64
+
+	noSmithyDocumentSerde
+}
+
+// A structure for the metadata of a cluster. It includes information like the
+// CPUs needed, memory of instances, number of instances, and the port used while
+// establishing a connection.
+type CapacityConfiguration struct {
+
+	// The number of instances running in a cluster.
+	NodeCount *int32
+
+	// The type that determines the hardware of the host computer used for your
+	// cluster instance. Each node type offers different memory and storage
+	// capabilities. Choose a node type based on the requirements of the application or
+	// software that you plan to run on your instance. You can only specify one of the
+	// following values:
+	//   - kx.s.large – The node type with a configuration of 12 GiB memory and 2
+	//   vCPUs.
+	//   - kx.s.xlarge – The node type with a configuration of 27 GiB memory and 4
+	//   vCPUs.
+	//   - kx.s.2xlarge – The node type with a configuration of 54 GiB memory and 8
+	//   vCPUs.
+	//   - kx.s.4xlarge – The node type with a configuration of 108 GiB memory and 16
+	//   vCPUs.
+	//   - kx.s.8xlarge – The node type with a configuration of 216 GiB memory and 32
+	//   vCPUs.
+	//   - kx.s.16xlarge – The node type with a configuration of 432 GiB memory and 64
+	//   vCPUs.
+	//   - kx.s.32xlarge – The node type with a configuration of 864 GiB memory and 128
+	//   vCPUs.
+	NodeType *string
+
+	noSmithyDocumentSerde
+}
+
+// A list of change request objects.
+type ChangeRequest struct {
+
+	// Defines the type of change request. A changeType can have the following values:
+	//   - PUT – Adds or updates files in a database.
+	//   - DELETE – Deletes files in a database.
+	//
+	// This member is required.
+	ChangeType ChangeType
+
+	// Defines the path within the database directory.
+	//
+	// This member is required.
+	DbPath *string
+
+	// Defines the S3 path of the source file that is required to add or update files
+	// in a database.
+	S3Path *string
+
+	noSmithyDocumentSerde
+}
+
+// The structure of the customer code available within the running cluster.
+type CodeConfiguration struct {
+
+	// A unique name for the S3 bucket.
+	S3Bucket *string
+
+	// The full S3 path (excluding bucket) to the .zip file. This file contains the
+	// code that is loaded onto the cluster when it's started.
+	S3Key *string
+
+	// The version of an S3 object.
+	S3ObjectVersion *string
+
+	noSmithyDocumentSerde
+}
+
+// A list of DNS server name and server IP. This is used to set up Route-53
+// outbound resolvers.
+type CustomDNSServer struct {
+
+	// The IP address of the DNS server.
+	//
+	// This member is required.
+	CustomDNSServerIP *string
+
+	// The name of the DNS server.
+	//
+	// This member is required.
+	CustomDNSServerName *string
+
+	noSmithyDocumentSerde
+}
 
 // Represents an FinSpace environment.
 type Environment struct {
@@ -25,7 +147,7 @@ type Environment struct {
 	// The identifier of the FinSpace environment.
 	EnvironmentId *string
 
-	// The sign-in url for the web application of your FinSpace environment.
+	// The sign-in URL for the web application of your FinSpace environment.
 	EnvironmentUrl *string
 
 	// The authentication mode for the environment.
@@ -40,11 +162,24 @@ type Environment struct {
 	// The name of the FinSpace environment.
 	Name *string
 
-	// The url of the integrated FinSpace notebook environment in your web application.
+	// The URL of the integrated FinSpace notebook environment in your web application.
 	SageMakerStudioDomainUrl *string
 
 	// The current status of creation of the FinSpace environment.
 	Status EnvironmentStatus
+
+	noSmithyDocumentSerde
+}
+
+// Provides details in the event of a failed flow, including the error type and
+// the related error message.
+type ErrorInfo struct {
+
+	// Specifies the error message that appears if a flow fails.
+	ErrorMessage *string
+
+	// Specifies the type of error.
+	ErrorType ErrorDetails
 
 	noSmithyDocumentSerde
 }
@@ -79,6 +214,334 @@ type FederationParameters struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for read only disk cache associated with a cluster.
+type KxCacheStorageConfiguration struct {
+
+	// The size of cache in Gigabytes.
+	//
+	// This member is required.
+	Size *int32
+
+	// The type of cache storage . The valid values are:
+	//   - CACHE_1000 – This type provides at least 1000 MB/s disk access throughput.
+	//
+	// This member is required.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// Details of changeset.
+type KxChangesetListEntry struct {
+
+	// Beginning time from which the changeset is active. The value is determined as
+	// epoch time in milliseconds. For example, the value for Monday, November 1, 2021
+	// 12:00:00 PM UTC is specified as 1635768000000.
+	ActiveFromTimestamp *time.Time
+
+	// A unique identifier for the changeset.
+	ChangesetId *string
+
+	// The timestamp at which the changeset was created in FinSpace. The value is
+	// determined as epoch time in milliseconds. For example, the value for Monday,
+	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+	CreatedTimestamp *time.Time
+
+	// The timestamp at which the changeset was modified. The value is determined as
+	// epoch time in milliseconds. For example, the value for Monday, November 1, 2021
+	// 12:00:00 PM UTC is specified as 1635768000000.
+	LastModifiedTimestamp *time.Time
+
+	// Status of the changeset.
+	//   - Pending – Changeset creation is pending.
+	//   - Processing – Changeset creation is running.
+	//   - Failed – Changeset creation has failed.
+	//   - Complete – Changeset creation has succeeded.
+	Status ChangesetStatus
+
+	noSmithyDocumentSerde
+}
+
+// The details of a kdb cluster.
+type KxCluster struct {
+
+	// The availability zone identifiers for the requested regions.
+	AvailabilityZoneId *string
+
+	// The number of availability zones assigned per cluster. This can be one of the
+	// following
+	//   - SINGLE – Assigns one availability zone per cluster.
+	//   - MULTI – Assigns all the availability zones per cluster.
+	AzMode KxAzMode
+
+	// A description of the cluster.
+	ClusterDescription *string
+
+	// A unique name for the cluster.
+	ClusterName *string
+
+	// Specifies the type of KDB database that is being created. The following types
+	// are available:
+	//   - HDB – A Historical Database. The data is only accessible with read-only
+	//   permissions from one of the FinSpace managed kdb databases mounted to the
+	//   cluster.
+	//   - RDB – A Realtime Database. This type of database captures all the data from
+	//   a ticker plant and stores it in memory until the end of day, after which it
+	//   writes all of its data to a disk and reloads the HDB. This cluster type requires
+	//   local storage for temporary storage of data during the savedown process. If you
+	//   specify this field in your request, you must provide the
+	//   savedownStorageConfiguration parameter.
+	//   - GATEWAY – A gateway cluster allows you to access data across processes in
+	//   kdb systems. It allows you to create your own routing logic using the
+	//   initialization scripts and custom code. This type of cluster does not require a
+	//   writable local storage.
+	ClusterType KxClusterType
+
+	// The timestamp at which the cluster was created in FinSpace. The value is
+	// determined as epoch time in milliseconds. For example, the value for Monday,
+	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+	CreatedTimestamp *time.Time
+
+	// An IAM role that defines a set of permissions associated with a cluster. These
+	// permissions are assumed when a cluster attempts to access another cluster.
+	ExecutionRole *string
+
+	// Specifies a Q program that will be run at launch of a cluster. It is a relative
+	// path within .zip file that contains the custom code, which will be loaded on the
+	// cluster. It must include the file name itself. For example, somedir/init.q .
+	InitializationScript *string
+
+	// The last time that the cluster was modified. The value is determined as epoch
+	// time in milliseconds. For example, the value for Monday, November 1, 2021
+	// 12:00:00 PM UTC is specified as 1635768000000.
+	LastModifiedTimestamp *time.Time
+
+	// A version of the FinSpace managed kdb to run.
+	ReleaseLabel *string
+
+	// The status of a cluster.
+	//   - PENDING – The cluster is pending creation.
+	//   - CREATING –The cluster creation process is in progress.
+	//   - CREATE_FAILED– The cluster creation process has failed.
+	//   - RUNNING – The cluster creation process is running.
+	//   - UPDATING – The cluster is in the process of being updated.
+	//   - DELETING – The cluster is in the process of being deleted.
+	//   - DELETED – The cluster has been deleted.
+	//   - DELETE_FAILED – The cluster failed to delete.
+	Status KxClusterStatus
+
+	// The error message when a failed state occurs.
+	StatusReason *string
+
+	noSmithyDocumentSerde
+}
+
+// Defines the key-value pairs to make them available inside the cluster.
+type KxCommandLineArgument struct {
+
+	// The name of the key.
+	Key *string
+
+	// The value of the key.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// The structure of database cache configuration that is used for mapping database
+// paths to cache types in clusters.
+type KxDatabaseCacheConfiguration struct {
+
+	// The type of disk cache. This parameter is used to map the database path to
+	// cache storage. The valid values are:
+	//   - CACHE_1000 – This type provides at least 1000 MB/s disk access throughput.
+	//
+	// This member is required.
+	CacheType *string
+
+	// Specifies the portions of database that will be loaded into the cache for
+	// access.
+	//
+	// This member is required.
+	DbPaths []string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration of data that is available for querying from this database.
+type KxDatabaseConfiguration struct {
+
+	// The name of the kdb database. When this parameter is specified in the
+	// structure, S3 with the whole database is included by default.
+	//
+	// This member is required.
+	DatabaseName *string
+
+	// Configuration details for the disk cache used to increase performance reading
+	// from a kdb database mounted to the cluster.
+	CacheConfigurations []KxDatabaseCacheConfiguration
+
+	// A unique identifier of the changeset that is associated with the cluster.
+	ChangesetId *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about a FinSpace managed kdb database
+type KxDatabaseListEntry struct {
+
+	// The timestamp at which the database was created in FinSpace. The value is
+	// determined as epoch time in milliseconds. For example, the value for Monday,
+	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+	CreatedTimestamp *time.Time
+
+	// The name of the kdb database.
+	DatabaseName *string
+
+	// The last time that the database was modified. The value is determined as epoch
+	// time in milliseconds. For example, the value for Monday, November 1, 2021
+	// 12:00:00 PM UTC is specified as 1635768000000.
+	LastModifiedTimestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The details of a kdb environment.
+type KxEnvironment struct {
+
+	// The identifier of the availability zones where subnets for the environment are
+	// created.
+	AvailabilityZoneIds []string
+
+	// The unique identifier of the AWS account in which you create the kdb
+	// environment.
+	AwsAccountId *string
+
+	// The Amazon Resource Name (ARN) of the certificate authority:
+	CertificateAuthorityArn *string
+
+	// The timestamp at which the kdb environment was created in FinSpace. The value
+	// is determined as epoch time in milliseconds. For example, the value for Monday,
+	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+	CreationTimestamp *time.Time
+
+	// A list of DNS server name and server IP. This is used to set up Route-53
+	// outbound resolvers.
+	CustomDNSConfiguration []CustomDNSServer
+
+	// A unique identifier for the AWS environment infrastructure account.
+	DedicatedServiceAccountId *string
+
+	// A description of the kdb environment.
+	Description *string
+
+	// The status of DNS configuration.
+	DnsStatus DnsStatus
+
+	// The Amazon Resource Name (ARN) of your kdb environment.
+	EnvironmentArn *string
+
+	// A unique identifier for the kdb environment.
+	EnvironmentId *string
+
+	// Specifies the error message that appears if a flow fails.
+	ErrorMessage *string
+
+	// The unique identifier of the KMS key.
+	KmsKeyId *string
+
+	// The name of the kdb environment.
+	Name *string
+
+	// The status of the environment creation.
+	//   - CREATE_REQUESTED – Environment creation has been requested.
+	//   - CREATING – Environment is in the process of being created.
+	//   - FAILED_CREATION – Environment creation has failed.
+	//   - CREATED – Environment is successfully created and is currently active.
+	//   - DELETE REQUESTED – Environment deletion has been requested.
+	//   - DELETING – Environment is in the process of being deleted.
+	//   - RETRY_DELETION – Initial environment deletion failed, system is
+	//   reattempting delete.
+	//   - DELETED – Environment has been deleted.
+	//   - FAILED_DELETION – Environment deletion has failed.
+	Status EnvironmentStatus
+
+	// The status of the network configuration.
+	TgwStatus TgwStatus
+
+	// Specifies the transit gateway and network configuration to connect the kdb
+	// environment to an internal network.
+	TransitGatewayConfiguration *TransitGatewayConfiguration
+
+	// The timestamp at which the kdb environment was modified in FinSpace. The value
+	// is determined as epoch time in milliseconds. For example, the value for Monday,
+	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
+	UpdateTimestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// A structure that stores metadata for a kdb node.
+type KxNode struct {
+
+	// The identifier of the availability zones where subnets for the environment are
+	// created.
+	AvailabilityZoneId *string
+
+	// The time when a particular node is started. The value is determined as epoch
+	// time in milliseconds. For example, the value for Monday, November 1, 2021
+	// 12:00:00 PM UTC is specified as 1635768000000.
+	LaunchTime *time.Time
+
+	// A unique identifier for the node.
+	NodeId *string
+
+	noSmithyDocumentSerde
+}
+
+// The size and type of temporary storage that is used to hold data during the
+// savedown process. All the data written to this storage space is lost when the
+// cluster node is restarted.
+type KxSavedownStorageConfiguration struct {
+
+	// The size of temporary storage in bytes.
+	//
+	// This member is required.
+	Size int32
+
+	// The type of writeable storage space for temporarily storing your savedown data.
+	// The valid values are:
+	//   - SDS01 – This type represents 3000 IOPS and io2 ebs volume type.
+	//
+	// This member is required.
+	Type KxSavedownStorageType
+
+	noSmithyDocumentSerde
+}
+
+// A structure that stores metadata for a kdb user.
+type KxUser struct {
+
+	// The timestamp at which the kdb user was created.
+	CreateTimestamp *time.Time
+
+	// The IAM role ARN that is associated with the user.
+	IamRole *string
+
+	// The timestamp at which the kdb user was updated.
+	UpdateTimestamp *time.Time
+
+	// The Amazon Resource Name (ARN) that identifies the user. For more information
+	// about ARNs and how to use ARNs in policies, see IAM Identifiers in the IAM User
+	// Guide.
+	UserArn *string
+
+	// A unique identifier for the user.
+	UserName *string
+
+	noSmithyDocumentSerde
+}
+
 // Configuration information for the superuser.
 type SuperuserParameters struct {
 
@@ -96,6 +559,50 @@ type SuperuserParameters struct {
 	//
 	// This member is required.
 	LastName *string
+
+	noSmithyDocumentSerde
+}
+
+// The structure of the transit gateway and network configuration that is used to
+// connect the kdb environment to an internal network.
+type TransitGatewayConfiguration struct {
+
+	// The routing CIDR on behalf of kdb environment. It could be any "/26 range in
+	// the 100.64.0.0 CIDR space. After providing, it will be added to the customer's
+	// transit gateway routing table so that the traffics could be routed to kdb
+	// network.
+	//
+	// This member is required.
+	RoutableCIDRSpace *string
+
+	// The identifier of the transit gateway created by the customer to connect
+	// outbound traffics from kdb network to your internal network.
+	//
+	// This member is required.
+	TransitGatewayID *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration details about the network where the Privatelink endpoint of the
+// cluster resides.
+type VpcConfiguration struct {
+
+	// The IP address type for cluster network configuration parameters. The following
+	// type is available:
+	//   - IP_V4 – IP address version 4
+	IpAddressType IPAddressType
+
+	// The unique identifier of the VPC security group applied to the VPC endpoint ENI
+	// for the cluster.
+	SecurityGroupIds []string
+
+	// The identifier of the subnet that the Privatelink VPC endpoint uses to connect
+	// to the cluster.
+	SubnetIds []string
+
+	// The identifier of the VPC endpoint.
+	VpcId *string
 
 	noSmithyDocumentSerde
 }

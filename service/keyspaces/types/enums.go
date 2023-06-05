@@ -54,6 +54,24 @@ func (PointInTimeRecoveryStatus) Values() []PointInTimeRecoveryStatus {
 	}
 }
 
+type Rs string
+
+// Enum values for Rs
+const (
+	RsSingleRegion Rs = "SINGLE_REGION"
+	RsMultiRegion  Rs = "MULTI_REGION"
+)
+
+// Values returns all known values for Rs. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Rs) Values() []Rs {
+	return []Rs{
+		"SINGLE_REGION",
+		"MULTI_REGION",
+	}
+}
+
 type SortOrder string
 
 // Enum values for SortOrder

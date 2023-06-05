@@ -32,14 +32,16 @@ func (c *Client) RegisterInstanceEventNotificationAttributes(ctx context.Context
 
 type RegisterInstanceEventNotificationAttributesInput struct {
 
+	// Information about the tag keys to register.
+	//
+	// This member is required.
+	InstanceTagAttribute *types.RegisterInstanceTagAttributeRequest
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation . Otherwise, it is
 	// UnauthorizedOperation .
 	DryRun *bool
-
-	// Information about the tag keys to register.
-	InstanceTagAttribute *types.RegisterInstanceTagAttributeRequest
 
 	noSmithyDocumentSerde
 }
@@ -98,6 +100,9 @@ func (c *Client) addOperationRegisterInstanceEventNotificationAttributesMiddlewa
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addOpRegisterInstanceEventNotificationAttributesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterInstanceEventNotificationAttributes(options.Region), middleware.Before); err != nil {
