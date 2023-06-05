@@ -101,6 +101,9 @@ type Options struct {
 	// The service endpoint resolver.
 	EndpointResolver EndpointResolver
 
+	// The endpoint resolver V2.
+	EndpointResolverV2 EndpointResolverV2
+
 	// Signature Version 4 (SigV4) Signer
 	HTTPSignerV4 HTTPSignerV4
 
@@ -190,6 +193,14 @@ func WithAPIOptions(optFns ...func(*middleware.Stack) error) func(*Options) {
 func WithEndpointResolver(v EndpointResolver) func(*Options) {
 	return func(o *Options) {
 		o.EndpointResolver = v
+	}
+}
+
+// WithEndpointResolverV2 returns a functional option for setting the Client's
+// EndpointResolverV2 option.
+func WithEndpointResolverV2(v EndpointResolverV2) func(*Options) {
+	return func(o *Options) {
+		o.EndpointResolverV2 = v
 	}
 }
 
