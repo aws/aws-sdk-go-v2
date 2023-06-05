@@ -21,6 +21,7 @@ import java.util.function.Consumer;
 public class AwsEndpointResolverAdapterGenerator implements GoIntegration {
 
     private static final String LEGACY_ADAPTER_TYPE = "legacyEndpointResolverAdapter";
+    private static final String COMPATIBLE_ADAPTER_TYPE = "compatibleEndpointResolver";
 
     private Map<String, Object> commonCodegenArgs;
 
@@ -39,16 +40,18 @@ public class AwsEndpointResolverAdapterGenerator implements GoIntegration {
                 "legacyResolverType", SymbolUtils.createValueSymbolBuilder(EndpointGenerator.RESOLVER_INTERFACE_NAME).build(),
                 "resolverType", SymbolUtils.createValueSymbolBuilder(EndpointResolutionGenerator.RESOLVER_INTERFACE_NAME).build(),
                 "paramsType", SymbolUtils.createValueSymbolBuilder(EndpointResolutionGenerator.PARAMETERS_TYPE_NAME).build(),
-                "endpointType", SymbolUtils.createValueSymbolBuilder("Endpoint", SmithyGoDependency.SMITHY_ENDPOINTS).build(),
+                "smithyEndpointType", SymbolUtils.createValueSymbolBuilder("Endpoint", SmithyGoDependency.SMITHY_ENDPOINTS).build(),
+                "awsEndpointType", SymbolUtils.createValueSymbolBuilder("Endpoint", AwsGoDependency.AWS_CORE).build(),
+                "awsFipsEndpointStateEnabledType", SymbolUtils.createValueSymbolBuilder("FIPSEndpointStateEnabled", AwsGoDependency.AWS_CORE).build(),
+                "awsDualStackEndpointStateEnabledType", SymbolUtils.createValueSymbolBuilder("DualStackEndpointStateEnabled", AwsGoDependency.AWS_CORE).build(),
                 "fmtErrorf", SymbolUtils.createValueSymbolBuilder("Errorf", SmithyGoDependency.FMT).build());
 
-        // var content = new GoWriter.ChainWritable()
-        //         .add(generateLegacyAdapter())
-        //         .add(generateCompatibleAdapter())
-        //         .add(generateFinalizeMethod(newResolverFuncName))
-        //         .compose();
+        var content = new GoWriter.ChainWritable()
+                .add(generateLegacyAdapter())
+                .add(generateCompatibleAdapter())
+                .compose();
 
-        var content = generateLegacyAdapter();
+        // var content = generateLegacyAdapter();
         writerFactory.accept("endpoints.go", settings.getModuleName(), writer -> {
             writer.write("$W", content);
         });
@@ -62,7 +65,7 @@ public class AwsEndpointResolverAdapterGenerator implements GoIntegration {
                 resolver       $resolverType:T
             }
 
-            func (l *$legacyAdapterType:T) ResolveEndpoint(ctx $goContext:T, params $paramsType:T) (endpoint $endpointType:T, err error) {
+            func (l *$legacyAdapterType:T) ResolveEndpoint(ctx $goContext:T, params $paramsType:T) (endpoint $smithyEndpointType:T, err error) {
                 $legacyResolveMethodBody:W
             }
             """,
@@ -109,9 +112,7 @@ public class AwsEndpointResolverAdapterGenerator implements GoIntegration {
             commonCodegenArgs,
             MapUtils.of(
                     "awsFipsEndpointStateType", SymbolUtils.createValueSymbolBuilder("FIPSEndpointState", AwsGoDependency.AWS_CORE).build(),
-                    "awsDualStackEndpointStateType", SymbolUtils.createValueSymbolBuilder("DualStackEndpointState", AwsGoDependency.AWS_CORE).build(),
-                    "awsFipsEndpointStateEnabledType", SymbolUtils.createValueSymbolBuilder("FIPSEndpointStateEnabled", AwsGoDependency.AWS_CORE).build(),
-                    "awsDualStackEndpointStateEnabledType", SymbolUtils.createValueSymbolBuilder("DualStackEndpointStateEnabled", AwsGoDependency.AWS_CORE).build()
+                    "awsDualStackEndpointStateType", SymbolUtils.createValueSymbolBuilder("DualStackEndpointState", AwsGoDependency.AWS_CORE).build()
                     ));
 
     }
@@ -144,7 +145,7 @@ public class AwsEndpointResolverAdapterGenerator implements GoIntegration {
                     return endpoint, $fmtErrorf:T(\"Failed to parse uri: %s\", uriString)
                 }
 
-                return $endpointType:T{
+                return $smithyEndpointType:T{
                     URI: *uri,
                 }, nil
             }
@@ -172,44 +173,77 @@ public class AwsEndpointResolverAdapterGenerator implements GoIntegration {
             MapUtils.of(
                 "endpointSourceMetadata", SymbolUtils.createValueSymbolBuilder("EndpointSourceServiceMetadata", AwsGoDependency.AWS_CORE).build()
             ));
+
     }
 
 
-    // private GoWriter.Writable generateCompatibleAdapter() {
+    private GoWriter.Writable generateCompatibleAdapter() {
 
-    //     // generate type
-    //     // generate isClientProvidedImplementation method
-    //     // generate ResolveEndpointMethod
-    //     //
+        // generate type
+        // generate isClientProvidedImplementation method
+        // generate ResolveEndpointMethod
+        //
 
-    //     // external class: modify resolveDefaultEndpointConfiguration in EndpointGenerator.java
+        // external class: modify resolveDefaultEndpointConfiguration in EndpointGenerator.java
 
 
-    //     return goTemplate(
-    //         """
-    //             type $clientProvidedImplType interface {
-    //                 $clientProvidedImplMethod()
-    //             }
+        return goTemplate(
+            """
+                type isClientProvidedImplementation interface {
+                    isClientProvidedImplementation()
+                }
 
-    //             type $compatibleResolverType struct {
-    //                 EndpointResolverV2 EndpointResolverV2
-    //             }
+                type $compatibleResolverType:T struct {
+                    EndpointResolverV2 $resolverType:T
+                }
 
-    //             func (n *$compatibleResolverType) $clientProvidedImplMethod() {}
+                func (n *$compatibleResolverType:T) isClientProvidedImplementation() {}
 
-    //             func (n *$compatibleResolverType) ResolveEndpoint(region string, options EndpointResolverOptions) (endpoint aws.Endpoint, err error) {
-    //                 $compatibleResolveMethodBody:W
-    //             }
-    //         """,
-    //         commonCodegenArgs,
-    //         MapUtils.of(
-    //                 "compatibleResolveMethodBody", generateCompatibleResolveMethodBody()),
-    //         overriddenArgs
-    //     );
-    // }
+                func (n *$compatibleResolverType:T) ResolveEndpoint(region string, options EndpointResolverOptions) (endpoint $awsEndpointType:T, err error) {
+                    $compatibleResolveMethodBody:W
+                }
+            """,
+            commonCodegenArgs,
+            MapUtils.of(
+                    "compatibleResolverType", SymbolUtils.createValueSymbolBuilder(COMPATIBLE_ADAPTER_TYPE).build(),
+                    "compatibleResolveMethodBody", generateCompatibleResolveMethodBody()
+            ));
+    }
 
-    // private GoWriter.Writable generateCompatibleResolveMethodBody() {
-    // }
+    private GoWriter.Writable generateCompatibleResolveMethodBody() {
+        return goTemplate(
+            """
+                reg := region
+                fips := options.UseFIPSEndpoint
+                if len(options.ResolvedRegion) > 0 {
+                    reg = options.ResolvedRegion
+                } else {
+                    reg, fips = mapPseudoRegion(region)
+                }
+                ctx := context.Background()
+                resolved, err := n.EndpointResolverV2.ResolveEndpoint(ctx, $paramsType:T{
+                    Region:       &reg,
+                    UseFIPS:      $awsBoolType:T(fips == $awsFipsEndpointStateEnabledType:T),
+                    UseDualStack: $awsBoolType:T(options.UseDualStackEndpoint == $awsDualStackEndpointStateEnabledType:T),
+                })
+                if err != nil {
+                    return endpoint, err
+                }
+
+                endpoint = $awsEndpointType:T{
+                    URL:               resolved.URI.String(),
+                    HostnameImmutable: false,
+                    Source:            $endpointSourceMetadata:T,
+                }
+
+                return endpoint, nil
+            """,
+            commonCodegenArgs,
+            MapUtils.of(
+                    "awsBoolType", SymbolUtils.createValueSymbolBuilder("Bool", AwsGoDependency.AWS_CORE).build(),
+                    "endpointSourceMetadata", SymbolUtils.createValueSymbolBuilder("EndpointSourceServiceMetadata", AwsGoDependency.AWS_CORE).build()
+            ));
+    }
 
 
 
