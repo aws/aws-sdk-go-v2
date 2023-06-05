@@ -10,11 +10,15 @@ import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.TriConsumer;
 import software.amazon.smithy.go.codegen.endpoints.EndpointResolutionGenerator;
+import software.amazon.smithy.go.codegen.integration.ConfigField;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
+import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
 import software.amazon.smithy.model.Model;
+import software.amazon.smithy.utils.ListUtils;
 import software.amazon.smithy.utils.MapUtils;
+import software.amazon.smithy.utils.SetUtils;
 
-
+import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
@@ -300,5 +304,21 @@ public class AwsEndpointResolverAdapterGenerator implements GoIntegration {
             """,
             commonCodegenArgs);
 
+    }
+
+    @Override
+    public List<RuntimeClientPlugin> getClientPlugins() {
+        return ListUtils.of(
+                RuntimeClientPlugin.builder()
+                        .configFields(SetUtils.of(
+                                ConfigField.builder()
+                                        .name(EndpointResolutionGenerator.RESOLVER_INTERFACE_NAME)
+                                        .type(SymbolUtils.createValueSymbolBuilder(EndpointResolutionGenerator.RESOLVER_INTERFACE_NAME)
+                                                .build())
+                                        .documentation("The endpoint resolver V2.")
+                                        .withHelper(true)
+                                        .build()
+                        ))
+                        .build());
     }
 }
