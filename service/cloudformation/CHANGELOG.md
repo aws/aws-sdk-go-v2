@@ -1,3 +1,7 @@
+# v1.28.0 (2023-06-05)
+
+* **Feature**: AWS CloudFormation StackSets provides customers with three new APIs to activate, deactivate, and describe AWS Organizations trusted access which is needed to get started with service-managed StackSets.
+
 # v1.27.4 (2023-05-04)
 
 * No change notes available for this release.

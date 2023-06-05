@@ -1,8 +1,0 @@
-{
-    "id": "48801b70-0985-46ad-9d65-9bbb0f77a261",
-    "type": "feature",
-    "description": "This release adds ROLLING_BACK and CREATING_SNAPSHOT environment statuses for Amazon MWAA environments.",
-    "modules": [
-        "service/mwaa"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "87a770f7-879c-4e56-907d-a3f5784d6238",
-    "type": "feature",
-    "description": "This release adds support for MRR GA launch, and includes multiregion support in create-keyspace, get-keyspace, and list-keyspace.",
-    "modules": [
-        "service/keyspaces"
-    ]
-}

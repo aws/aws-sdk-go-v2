@@ -1,3 +1,7 @@
+# v1.16.0 (2023-06-05)
+
+* **Feature**: This release adds ROLLING_BACK and CREATING_SNAPSHOT environment statuses for Amazon MWAA environments.
+
 # v1.15.5 (2023-05-18)
 
 * No change notes available for this release.

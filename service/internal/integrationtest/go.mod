@@ -11,7 +11,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/athena v1.29.0
 	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.28.7
 	github.com/aws/aws-sdk-go-v2/service/batch v1.23.6
-	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.27.4
+	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.28.0
 	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.26.6
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.14.10
 	github.com/aws/aws-sdk-go-v2/service/cloudsearch v1.14.9
@@ -31,7 +31,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.17.1
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.21.3
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.19.7
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.98.0
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.99.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.18.11
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.27.1
 	github.com/aws/aws-sdk-go-v2/service/efs v1.20.1
@@ -52,8 +52,8 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.13.10
 	github.com/aws/aws-sdk-go-v2/service/iot v1.37.2
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.17.12
-	github.com/aws/aws-sdk-go-v2/service/kms v1.21.1
-	github.com/aws/aws-sdk-go-v2/service/lambda v1.34.1
+	github.com/aws/aws-sdk-go-v2/service/kms v1.22.0
+	github.com/aws/aws-sdk-go-v2/service/lambda v1.35.0
 	github.com/aws/aws-sdk-go-v2/service/lightsail v1.26.6
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.12.10
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.20.5
@@ -84,7 +84,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/waf v1.12.10
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.13.13
 	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.34.0
-	github.com/aws/aws-sdk-go-v2/service/workspaces v1.28.12
+	github.com/aws/aws-sdk-go-v2/service/workspaces v1.28.13
 	github.com/aws/smithy-go v1.13.5
 	github.com/google/go-cmp v0.5.8
 )

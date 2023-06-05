@@ -1,3 +1,7 @@
+# v1.10.0 (2023-06-05)
+
+* **Feature**: Releasing new Managed kdb Insights APIs
+
 # v1.9.10 (2023-05-04)
 
 * No change notes available for this release.

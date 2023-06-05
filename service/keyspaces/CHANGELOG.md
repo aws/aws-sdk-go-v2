@@ -1,3 +1,7 @@
+# v1.3.0 (2023-06-05)
+
+* **Feature**: This release adds support for MRR GA launch, and includes multiregion support in create-keyspace, get-keyspace, and list-keyspace.
+
 # v1.2.5 (2023-05-04)
 
 * No change notes available for this release.

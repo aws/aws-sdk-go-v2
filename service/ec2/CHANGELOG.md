@@ -1,3 +1,7 @@
+# v1.99.0 (2023-06-05)
+
+* **Feature**: Making InstanceTagAttribute as the required parameter for the DeregisterInstanceEventNotificationAttributes and RegisterInstanceEventNotificationAttributes APIs.
+
 # v1.98.0 (2023-05-18)
 
 * **Feature**: Add support for i4g.large, i4g.xlarge, i4g.2xlarge, i4g.4xlarge, i4g.8xlarge and i4g.16xlarge instances powered by AWS Graviton2 processors that deliver up to 15% better compute performance than our other storage-optimized instances.

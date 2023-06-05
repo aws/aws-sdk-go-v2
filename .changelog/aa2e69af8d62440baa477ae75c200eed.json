@@ -1,8 +1,0 @@
-{
-    "id": "aa2e69af-8d62-440b-aa47-7ae75c200eed",
-    "type": "feature",
-    "description": "Making InstanceTagAttribute as the required parameter for the DeregisterInstanceEventNotificationAttributes and RegisterInstanceEventNotificationAttributes APIs.",
-    "modules": [
-        "service/ec2"
-    ]
-}

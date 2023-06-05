@@ -1,3 +1,23 @@
+# Release (2023-06-05)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.28.0](service/cloudformation/CHANGELOG.md#v1280-2023-06-05)
+  * **Feature**: AWS CloudFormation StackSets provides customers with three new APIs to activate, deactivate, and describe AWS Organizations trusted access which is needed to get started with service-managed StackSets.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.99.0](service/ec2/CHANGELOG.md#v1990-2023-06-05)
+  * **Feature**: Making InstanceTagAttribute as the required parameter for the DeregisterInstanceEventNotificationAttributes and RegisterInstanceEventNotificationAttributes APIs.
+* `github.com/aws/aws-sdk-go-v2/service/finspace`: [v1.10.0](service/finspace/CHANGELOG.md#v1100-2023-06-05)
+  * **Feature**: Releasing new Managed kdb Insights APIs
+* `github.com/aws/aws-sdk-go-v2/service/frauddetector`: [v1.25.0](service/frauddetector/CHANGELOG.md#v1250-2023-06-05)
+  * **Feature**: Added new variable types, new DateTime data type, and new rules engine functions for interacting and working with DateTime data types.
+* `github.com/aws/aws-sdk-go-v2/service/keyspaces`: [v1.3.0](service/keyspaces/CHANGELOG.md#v130-2023-06-05)
+  * **Feature**: This release adds support for MRR GA launch, and includes multiregion support in create-keyspace, get-keyspace, and list-keyspace.
+* `github.com/aws/aws-sdk-go-v2/service/kms`: [v1.22.0](service/kms/CHANGELOG.md#v1220-2023-06-05)
+  * **Feature**: This release includes feature to import customer's asymmetric (RSA and ECC) and HMAC keys into KMS.  It also includes feature to allow customers to specify number of days to schedule a KMS key deletion as a policy condition key.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.35.0](service/lambda/CHANGELOG.md#v1350-2023-06-05)
+  * **Feature**: Add Ruby 3.2 (ruby3.2) Runtime support to AWS Lambda.
+* `github.com/aws/aws-sdk-go-v2/service/mwaa`: [v1.16.0](service/mwaa/CHANGELOG.md#v1160-2023-06-05)
+  * **Feature**: This release adds ROLLING_BACK and CREATING_SNAPSHOT environment statuses for Amazon MWAA environments.
+
 # Release (2023-06-02)
 
 ## Module Highlights
