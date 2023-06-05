@@ -78,7 +78,7 @@ type Options struct {
 	// The endpoint options to be used when attempting to resolve an endpoint.
 	EndpointOptions EndpointResolverOptions
 
-	// The service endpoint resolver.
+	// Deprecated: See EndpointResolverV2
 	EndpointResolver EndpointResolver
 
 	// The endpoint resolver V2.
