@@ -49,6 +49,7 @@ public class AwsEndpointResolverAdapterGenerator implements GoIntegration {
         var content = new GoWriter.ChainWritable()
                 .add(generateLegacyAdapter())
                 .add(generateCompatibleAdapter())
+                .add(generatePseudoRegionUtility())
                 .compose();
 
         // var content = generateLegacyAdapter();
@@ -245,7 +246,32 @@ public class AwsEndpointResolverAdapterGenerator implements GoIntegration {
             ));
     }
 
+    private GoWriter.Writable generatePseudoRegionUtility() {
+        return goTemplate(
+            """
+            func mapPseudoRegion(pr string) (region string, fips $awsFipsEndpointStateType:T) {
+                const fipsInfix = \"-fips-\"
+                const fipsPrefix = \"fips-\"
+                const fipsSuffix = \"-fips\"
 
+                if strings.Contains(pr, fipsInfix) ||
+                    strings.Contains(pr, fipsPrefix) ||
+                    strings.Contains(pr, fipsSuffix) {
+                    region = strings.ReplaceAll(strings.ReplaceAll(strings.ReplaceAll(
+                        pr, fipsInfix, "-"), fipsPrefix, ""), fipsSuffix, "")
+                    fips = $awsFipsEndpointStateEnabledType:T
+                } else {
+                    region = pr
+                }
+
+                return region, fips
+            }
+            """,
+            commonCodegenArgs,
+            MapUtils.of(
+                    "awsFipsEndpointStateType", SymbolUtils.createValueSymbolBuilder("FIPSEndpointState", AwsGoDependency.AWS_CORE).build()
+            ));
+    }
 
 
     // private GoWriter.Writable generateFinalizeMethod(String newResolverFuncName) {
