@@ -83,7 +83,7 @@
                     "name": "airflow"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<fullname>Amazon Managed Workflows for Apache Airflow</fullname>\n         <p>This section contains the Amazon Managed Workflows for Apache Airflow (MWAA) API reference documentation. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/what-is-mwaa.html\">What Is Amazon MWAA?</a>.</p>\n         <p>\n            <b>Endpoints</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>api.airflow.{region}.amazonaws.com</code> - This endpoint is used for environment management.</p>\n               <ul>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_CreateEnvironment.html\">CreateEnvironment</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_DeleteEnvironment.html\">DeleteEnvironment</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_GetEnvironment.html\">GetEnvironment</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_ListEnvironments.html\">ListEnvironments</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_ListTagsForResource.html\">ListTagsForResource</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_TagResource.html\">TagResource</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_UntagResource.html\">UntagResource</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_UpdateEnvironment.html\">UpdateEnvironment</a>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>env.airflow.{region}.amazonaws.com</code> - This endpoint is used to operate the Airflow environment.</p>\n               <ul>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_CreateCliToken.html \">CreateCliToken</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_CreateWebLoginToken.html\">CreateWebLoginToken</a>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>ops.airflow.{region}.amazonaws.com</code> - This endpoint is used to push environment metrics that track environment health.</p>\n               <ul>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_PublishMetrics.html \">PublishMetrics</a>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>\n            <b>Regions</b>\n         </p>\n         <p>For a list of regions that Amazon MWAA supports, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/what-is-mwaa.html#regions-mwaa\">Region availability</a> in the <i>Amazon MWAA User Guide</i>.</p>",
+                "smithy.api#documentation": "<fullname>Amazon Managed Workflows for Apache Airflow</fullname>\n         <p>This section contains the Amazon Managed Workflows for Apache Airflow (MWAA) API reference documentation. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/what-is-mwaa.html\">What is Amazon MWAA?</a>.</p>\n         <p>\n            <b>Endpoints</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>api.airflow.{region}.amazonaws.com</code> - This endpoint is used for environment management.</p>\n               <ul>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_CreateEnvironment.html\">CreateEnvironment</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_DeleteEnvironment.html\">DeleteEnvironment</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_GetEnvironment.html\">GetEnvironment</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_ListEnvironments.html\">ListEnvironments</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_ListTagsForResource.html\">ListTagsForResource</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_TagResource.html\">TagResource</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_UntagResource.html\">UntagResource</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_UpdateEnvironment.html\">UpdateEnvironment</a>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>env.airflow.{region}.amazonaws.com</code> - This endpoint is used to operate the Airflow environment.</p>\n               <ul>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_CreateCliToken.html \">CreateCliToken</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_CreateWebLoginToken.html\">CreateWebLoginToken</a>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>ops.airflow.{region}.amazonaws.com</code> - This endpoint is used to push environment metrics that track environment health.</p>\n               <ul>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/mwaa/latest/API/API_PublishMetrics.html \">PublishMetrics</a>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>\n            <b>Regions</b>\n         </p>\n         <p>For a list of regions that Amazon MWAA supports, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/what-is-mwaa.html#regions-mwaa\">Region availability</a> in the <i>Amazon MWAA User Guide</i>.</p>",
                 "smithy.api#title": "AmazonMWAA",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -445,9 +445,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-northeast-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-northeast-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -458,9 +458,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-northeast-2",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-northeast-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -471,9 +471,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-south-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-south-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -484,9 +484,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-southeast-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-southeast-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -497,9 +497,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-southeast-2",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-southeast-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -510,9 +510,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ca-central-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ca-central-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -523,9 +523,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-central-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-central-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -536,9 +536,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-north-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-north-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -549,9 +549,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-west-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -562,9 +562,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-west-2",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-west-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -575,9 +575,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-west-3",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-west-3"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -588,9 +588,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "sa-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "sa-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -601,9 +601,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -614,9 +614,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-2",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-east-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -627,9 +627,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-west-2",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-west-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -640,9 +640,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -653,9 +653,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -666,9 +666,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -679,9 +679,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "cn-north-1",
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "cn-north-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -692,9 +692,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "cn-north-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "cn-north-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -705,9 +705,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "cn-north-1",
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "cn-north-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -718,9 +718,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "cn-north-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "cn-north-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -731,9 +731,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -744,9 +744,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -757,9 +757,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -770,9 +770,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -781,9 +781,9 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -794,9 +794,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -805,9 +805,9 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -818,9 +818,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -829,9 +829,9 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -842,9 +842,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -853,9 +853,9 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -866,9 +866,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -879,9 +879,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
                                 "UseDualStack": false,
-                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -904,9 +904,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false,
-                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -916,9 +916,9 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
                                 "UseDualStack": true,
-                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1150,7 +1150,7 @@
                 "AirflowVersion": {
                     "target": "com.amazonaws.mwaa#AirflowVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Apache Airflow version for your environment. If no value is specified, it defaults to the latest version. Valid values:\n            <code>1.10.12</code>, <code>2.0.2</code>, <code>2.2.2</code>, and <code>2.4.3</code>.\n            For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/airflow-versions.html\">Apache Airflow versions on Amazon Managed Workflows for Apache Airflow (MWAA)</a>.</p>"
+                        "smithy.api#documentation": "<p>The Apache Airflow version for your environment. If no value is specified, it defaults to the latest version. Valid values:\n            <code>1.10.12</code>, <code>2.0.2</code>, <code>2.2.2</code>, <code>2.4.3</code>, and <code>2.5.1</code>.\n            For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/airflow-versions.html\">Apache Airflow versions on Amazon Managed Workflows for Apache Airflow (MWAA)</a>.</p>"
                     }
                 },
                 "LoggingConfiguration": {
@@ -1362,7 +1362,7 @@
                 "Status": {
                     "target": "com.amazonaws.mwaa#EnvironmentStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the Amazon MWAA environment. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATING</code> - Indicates the request to create the environment is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_FAILED</code> - Indicates the request to create the environment failed, and the environment could not be created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AVAILABLE</code> - Indicates the request was successful and the environment is ready to use.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATING</code> - Indicates the request to update the environment is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETING</code> - Indicates the request to delete the environment is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETED</code> - Indicates the request to delete the environment is complete, and the environment has been deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UNAVAILABLE</code> - Indicates the request failed, but the environment was unable to rollback and is not in a stable state.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATE_FAILED</code> - Indicates the request to update the environment failed, and the environment has rolled back successfully and is ready to use.</p>\n            </li>\n         </ul>\n         <p>We recommend reviewing our troubleshooting guide for a list of common errors and their solutions. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/troubleshooting.html\">Amazon MWAA troubleshooting</a>.</p>"
+                        "smithy.api#documentation": "<p>The status of the Amazon MWAA environment. Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATING</code> - Indicates the request to create the environment is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATING_SNAPSHOT</code> - Indicates the request to update environment details, or upgrade the environment version, is in progress and Amazon MWAA is creating a storage volume snapshot of the Amazon RDS\n                    database cluster associated with the environment. A database snapshot is a backup created at a specific point in time. Amazon MWAA uses snapshots to recover environment metadata if the process to update or upgrade\n                    an environment fails.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_FAILED</code> - Indicates the request to create the environment failed, and the environment could not be created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AVAILABLE</code> - Indicates the request was successful and the environment is ready to use.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATING</code> - Indicates the request to update the environment is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ROLLING_BACK</code> - Indicates the request to update environment details, or upgrade the environment version, failed and Amazon MWAA is restoring the environment using the latest storage volume snapshot.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETING</code> - Indicates the request to delete the environment is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETED</code> - Indicates the request to delete the environment is complete, and the environment has been deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UNAVAILABLE</code> - Indicates the request failed, but the environment was unable to rollback and is not in a stable state.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATE_FAILED</code> - Indicates the request to update the environment failed, and the environment has rolled back successfully and is ready to use.</p>\n            </li>\n         </ul>\n         <p>We recommend reviewing our troubleshooting guide for a list of common errors and their solutions. For more information, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/troubleshooting.html\">Amazon MWAA troubleshooting</a>.</p>"
                     }
                 },
                 "Arn": {
@@ -1404,7 +1404,7 @@
                 "AirflowVersion": {
                     "target": "com.amazonaws.mwaa#AirflowVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Apache Airflow version on your environment. Valid values: <code>1.10.12</code>, <code>2.0.2</code>, <code>2.2.2</code>, and <code>2.4.3</code>.</p>"
+                        "smithy.api#documentation": "<p>The Apache Airflow version on your environment. Valid values: <code>1.10.12</code>, <code>2.0.2</code>, <code>2.2.2</code>, <code>2.4.3</code>, and <code>2.5.1</code>.</p>"
                     }
                 },
                 "SourceBucketArn": {
@@ -1596,6 +1596,14 @@
                     {
                         "value": "UPDATE_FAILED",
                         "name": "UPDATE_FAILED"
+                    },
+                    {
+                        "value": "ROLLING_BACK",
+                        "name": "ROLLING_BACK"
+                    },
+                    {
+                        "value": "CREATING_SNAPSHOT",
+                        "name": "CREATING_SNAPSHOT"
                     }
                 ]
             }
@@ -2637,7 +2645,7 @@
                 "AirflowVersion": {
                     "target": "com.amazonaws.mwaa#AirflowVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Apache Airflow version for your environment. If no value is specified, defaults to the latest version.\n            Valid values: <code>1.10.12</code>, <code>2.0.2</code>, <code>2.2.2</code>, and <code>2.4.3</code>.</p>"
+                        "smithy.api#documentation": "<p>The Apache Airflow version for your environment. To upgrade your environment, specify a newer version of Apache Airflow supported by Amazon MWAA.</p>\n         <p>Before you upgrade an environment, make sure your requirements, DAGs, plugins, and other resources used in your workflows are compatible with the new Apache Airflow version. For more information about updating\n            your resources, see <a href=\"https://docs.aws.amazon.com/mwaa/latest/userguide/upgrading-environment.html\">Upgrading an Amazon MWAA environment</a>.</p>\n         <p>Valid values: <code>1.10.12</code>, <code>2.0.2</code>, <code>2.2.2</code>, <code>2.4.3</code>, and <code>2.5.1</code>.</p>"
                     }
                 },
                 "SourceBucketArn": {

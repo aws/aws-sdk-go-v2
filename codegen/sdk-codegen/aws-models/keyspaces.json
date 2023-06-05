@@ -41,13 +41,13 @@
                 "readCapacityUnits": {
                     "target": "com.amazonaws.keyspaces#CapacityUnits",
                     "traits": {
-                        "smithy.api#documentation": "<p>The throughput capacity specified for <code>read</code> operations defined in <code>read capacity units</code> \n            <code>(RCUs)</code>.</p>"
+                        "smithy.api#documentation": "<p>The throughput capacity specified for <code>read</code> operations defined in <code>read capacity units</code>\n            <code>(RCUs)</code>.</p>"
                     }
                 },
                 "writeCapacityUnits": {
                     "target": "com.amazonaws.keyspaces#CapacityUnits",
                     "traits": {
-                        "smithy.api#documentation": "<p>The throughput capacity specified for <code>write</code> operations defined in <code>write capacity units</code> \n            <code>(WCUs)</code>.</p>"
+                        "smithy.api#documentation": "<p>The throughput capacity specified for <code>write</code> operations defined in <code>write capacity units</code>\n            <code>(WCUs)</code>.</p>"
                     }
                 }
             },
@@ -68,13 +68,13 @@
                 "readCapacityUnits": {
                     "target": "com.amazonaws.keyspaces#CapacityUnits",
                     "traits": {
-                        "smithy.api#documentation": "<p>The throughput capacity specified for <code>read</code> operations defined in <code>read capacity units</code> \n            <code>(RCUs)</code>.</p>"
+                        "smithy.api#documentation": "<p>The throughput capacity specified for <code>read</code> operations defined in <code>read capacity units</code>\n            <code>(RCUs)</code>.</p>"
                     }
                 },
                 "writeCapacityUnits": {
                     "target": "com.amazonaws.keyspaces#CapacityUnits",
                     "traits": {
-                        "smithy.api#documentation": "<p>The throughput capacity specified for <code>write</code> operations defined in <code>write capacity units</code> \n            <code>(WCUs)</code>.</p>"
+                        "smithy.api#documentation": "<p>The throughput capacity specified for <code>write</code> operations defined in <code>write capacity units</code>\n            <code>(WCUs)</code>.</p>"
                     }
                 },
                 "lastUpdateToPayPerRequestTimestamp": {
@@ -108,7 +108,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The client-side timestamp setting of the table.</p>   \n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/client-side-timestamps-how-it-works.html\">How it works: Amazon Keyspaces client-side timestamps</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
+                "smithy.api#documentation": "<p>The client-side timestamp setting of the table.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/client-side-timestamps-how-it-works.html\">How it works: Amazon Keyspaces client-side timestamps</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
             }
         },
         "com.amazonaws.keyspaces#ClientSideTimestampsStatus": {
@@ -258,6 +258,12 @@
                     "target": "com.amazonaws.keyspaces#TagList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of key-value pair tags to be attached to the keyspace.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/tagging-keyspaces.html\">Adding tags and labels to Amazon Keyspaces resources</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
+                    }
+                },
+                "replicationSpecification": {
+                    "target": "com.amazonaws.keyspaces#ReplicationSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The replication specification of the keyspace includes:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>replicationStrategy</code> - the required value is <code>SINGLE_REGION</code> or \n            <code>MULTI_REGION</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>regionList</code> - if the <code>replicationStrategy</code> is <code>MULTI_REGION</code>, the\n            <code>regionList</code> requires the current Region and at least one additional Amazon Web Services Region where \n            the keyspace is going to be replicated in. The maximum number of supported replication Regions including the current\n            Region is six.</p>\n            </li>\n         </ul>"
                     }
                 }
             }
@@ -597,8 +603,21 @@
                 "resourceArn": {
                     "target": "com.amazonaws.keyspaces#ARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the keyspace.</p>",
+                        "smithy.api#documentation": "<p>Returns the ARN of the keyspace.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "replicationStrategy": {
+                    "target": "com.amazonaws.keyspaces#rs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Returns the replication strategy of the keyspace. The options are <code>SINGLE_REGION</code> or <code>MULTI_REGION</code>.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "replicationRegions": {
+                    "target": "com.amazonaws.keyspaces#RegionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         If the <code>replicationStrategy</code> of the keyspace is <code>MULTI_REGION</code>, a list of replication Regions is returned. \n      </p>"
                     }
                 }
             }
@@ -761,7 +780,7 @@
                     "min": 1,
                     "max": 48
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9_]{1,47}$"
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9_]{0,47}$"
             }
         },
         "com.amazonaws.keyspaces#KeyspaceSummary": {
@@ -779,6 +798,19 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier of the keyspace in the format of an Amazon Resource Name (ARN).</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "replicationStrategy": {
+                    "target": "com.amazonaws.keyspaces#rs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      This property specifies if a keyspace is a single Region keyspace or a multi-Region keyspace.  The available \n      values are <code>SINGLE_REGION</code> or <code>MULTI_REGION</code>.\n   </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "replicationRegions": {
+                    "target": "com.amazonaws.keyspaces#RegionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         If the <code>replicationStrategy</code> of the keyspace is <code>MULTI_REGION</code>, a list of replication Regions is returned. \n      </p>"
                     }
                 }
             },
@@ -1235,9 +1267,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-east-1",
                                 "UseFIPS": false,
-                                "Region": "ap-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1248,9 +1280,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-northeast-1",
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1261,9 +1293,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-northeast-2",
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1274,9 +1306,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-south-1",
                                 "UseFIPS": false,
-                                "Region": "ap-south-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1287,9 +1319,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-southeast-1",
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1300,9 +1332,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-southeast-2",
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1313,9 +1345,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ca-central-1",
                                 "UseFIPS": false,
-                                "Region": "ca-central-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1326,9 +1358,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "eu-central-1",
                                 "UseFIPS": false,
-                                "Region": "eu-central-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1339,9 +1371,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "eu-north-1",
                                 "UseFIPS": false,
-                                "Region": "eu-north-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1352,9 +1384,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "eu-west-1",
                                 "UseFIPS": false,
-                                "Region": "eu-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1365,9 +1397,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "eu-west-2",
                                 "UseFIPS": false,
-                                "Region": "eu-west-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1378,9 +1410,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "eu-west-3",
                                 "UseFIPS": false,
-                                "Region": "eu-west-3"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1391,9 +1423,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "me-south-1",
                                 "UseFIPS": false,
-                                "Region": "me-south-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1404,9 +1436,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "sa-east-1",
                                 "UseFIPS": false,
-                                "Region": "sa-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1417,9 +1449,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1430,9 +1462,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1443,9 +1475,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-east-2",
                                 "UseFIPS": false,
-                                "Region": "us-east-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1456,9 +1488,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-west-1",
                                 "UseFIPS": false,
-                                "Region": "us-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1469,9 +1501,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-west-2",
                                 "UseFIPS": false,
-                                "Region": "us-west-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1482,9 +1514,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-west-2",
                                 "UseFIPS": true,
-                                "Region": "us-west-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1495,9 +1527,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1508,9 +1540,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1521,9 +1553,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "cn-north-1",
                                 "UseFIPS": true,
-                                "Region": "cn-north-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1534,9 +1566,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "cn-north-1",
                                 "UseFIPS": true,
-                                "Region": "cn-north-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1547,9 +1579,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "cn-north-1",
                                 "UseFIPS": false,
-                                "Region": "cn-north-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1560,9 +1592,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "cn-north-1",
                                 "UseFIPS": false,
-                                "Region": "cn-north-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1573,9 +1605,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1586,9 +1618,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1599,9 +1631,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-gov-west-1",
                                 "UseFIPS": false,
-                                "Region": "us-gov-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1612,9 +1644,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-gov-west-1",
                                 "UseFIPS": true,
-                                "Region": "us-gov-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1625,9 +1657,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1638,9 +1670,20 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1651,9 +1694,20 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1664,9 +1718,20 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1677,9 +1742,20 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1690,9 +1766,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1703,9 +1779,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1717,8 +1793,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1728,9 +1804,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
                                 "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1740,10 +1816,16 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -2068,6 +2150,39 @@
                 "smithy.api#documentation": "<p>The point-in-time recovery status of the specified table.</p>"
             }
         },
+        "com.amazonaws.keyspaces#RegionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.keyspaces#region"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 6
+                }
+            }
+        },
+        "com.amazonaws.keyspaces#ReplicationSpecification": {
+            "type": "structure",
+            "members": {
+                "replicationStrategy": {
+                    "target": "com.amazonaws.keyspaces#rs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The <code>replicationStrategy</code> of a keyspace, the required value is <code>SINGLE_REGION</code> or \n            <code>MULTI_REGION</code>.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "regionList": {
+                    "target": "com.amazonaws.keyspaces#RegionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The <code>regionList</code> can contain up to six Amazon Web Services Regions where the keyspace is replicated in.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            The replication specification of the keyspace includes:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>regionList</code> - up to six Amazon Web Services Regions where the keyspace is replicated in.</p>\n            </li>\n            <li>\n               <p>\n                  <code>replicationStrategy</code> - the required value is <code>SINGLE_REGION</code> or \n               <code>MULTI_REGION</code>.</p>\n            </li>\n         </ul>"
+            }
+        },
         "com.amazonaws.keyspaces#ResourceNotFoundException": {
             "type": "structure",
             "members": {
@@ -2175,7 +2290,7 @@
                 "pointInTimeRecoveryOverride": {
                     "target": "com.amazonaws.keyspaces#PointInTimeRecovery",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the <code>pointInTimeRecovery</code> settings for the target\n            table. The options are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>status=ENABLED</code> \n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>status=DISABLED</code>\n               </p>\n            </li>\n         </ul>\n         <p>If it's not specified, the default is <code>status=DISABLED</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/PointInTimeRecovery.html\">Point-in-time recovery</a> in the <i>Amazon Keyspaces Developer\n               Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Specifies the <code>pointInTimeRecovery</code> settings for the target\n            table. The options are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>status=ENABLED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>status=DISABLED</code>\n               </p>\n            </li>\n         </ul>\n         <p>If it's not specified, the default is <code>status=DISABLED</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/PointInTimeRecovery.html\">Point-in-time recovery</a> in the <i>Amazon Keyspaces Developer\n               Guide</i>.</p>"
                     }
                 },
                 "tagsOverride": {
@@ -2292,7 +2407,7 @@
                     "min": 1,
                     "max": 48
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9_]{1,47}$"
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9_]{0,47}$"
             }
         },
         "com.amazonaws.keyspaces#TableStatus": {
@@ -2434,7 +2549,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Associates a set of tags with a Amazon Keyspaces resource. You can then \n         activate these user-defined tags so that they appear on the Cost Management Console for cost allocation tracking.\n      For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/tagging-keyspaces.html\">Adding tags and labels to Amazon Keyspaces resources</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>\n         <p>For IAM policy examples that show how to control access to Amazon Keyspaces resources based on tags, \n         see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/security_iam_id-based-policy-examples-tags\">Amazon Keyspaces resource access based on tags</a>\n         in the <i>Amazon Keyspaces Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Associates a set of tags with a Amazon Keyspaces resource. You can then \n         activate these user-defined tags so that they appear on the Cost Management Console for cost allocation tracking.\n      For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/tagging-keyspaces.html\">Adding tags and labels to Amazon Keyspaces resources</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>\n         <p>For IAM policy examples that show how to control access to Amazon Keyspaces resources based on tags, \n         see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/security_iam_id-based-policy-examples.html#security_iam_id-based-policy-examples-tags\">Amazon Keyspaces resource access based on tags</a>\n         in the <i>Amazon Keyspaces Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.keyspaces#TagResourceRequest": {
@@ -2638,13 +2753,13 @@
                 "pointInTimeRecovery": {
                     "target": "com.amazonaws.keyspaces#PointInTimeRecovery",
                     "traits": {
-                        "smithy.api#documentation": "<p>Modifies the <code>pointInTimeRecovery</code> settings of the table. The options are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>status=ENABLED</code> \n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>status=DISABLED</code> \n               </p>\n            </li>\n         </ul>\n         <p>If it's not specified, the default is <code>status=DISABLED</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/PointInTimeRecovery.html\">Point-in-time recovery</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Modifies the <code>pointInTimeRecovery</code> settings of the table. The options are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>status=ENABLED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>status=DISABLED</code>\n               </p>\n            </li>\n         </ul>\n         <p>If it's not specified, the default is <code>status=DISABLED</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/PointInTimeRecovery.html\">Point-in-time recovery</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
                     }
                 },
                 "ttl": {
                     "target": "com.amazonaws.keyspaces#TimeToLive",
                     "traits": {
-                        "smithy.api#documentation": "<p>Modifies Time to Live custom settings for the table. The options are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>status:enabled</code> \n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>status:disabled</code> \n               </p>\n            </li>\n         </ul>\n         <p>The default is <code>status:disabled</code>. After\n         <code>ttl</code> is enabled, you can't disable it\n         for the table.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/TTL.html\">Expiring data by using Amazon Keyspaces Time to Live (TTL)</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Modifies Time to Live custom settings for the table. The options are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>status:enabled</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>status:disabled</code>\n               </p>\n            </li>\n         </ul>\n         <p>The default is <code>status:disabled</code>. After\n         <code>ttl</code> is enabled, you can't disable it\n         for the table.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/keyspaces/latest/devguide/TTL.html\">Expiring data by using Amazon Keyspaces Time to Live (TTL)</a> in the <i>Amazon Keyspaces Developer\n            Guide</i>.</p>"
                     }
                 },
                 "defaultTimeToLive": {
@@ -2695,6 +2810,34 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 5096
+                }
+            }
+        },
+        "com.amazonaws.keyspaces#region": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 25
+                }
+            }
+        },
+        "com.amazonaws.keyspaces#rs": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SINGLE_REGION",
+                        "name": "SINGLE_REGION"
+                    },
+                    {
+                        "value": "MULTI_REGION",
+                        "name": "MULTI_REGION"
+                    }
+                ],
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
                 }
             }
         }

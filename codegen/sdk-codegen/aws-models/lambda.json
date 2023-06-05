@@ -2799,7 +2799,7 @@
                 "KMSKeyArn": {
                     "target": "com.amazonaws.lambda#KMSKeyArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Key Management Service (KMS) customer managed key that's used to encrypt your function's <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-encryption\">environment variables</a>. When <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/snapstart-security.html\">Lambda SnapStart</a> is activated, this key is also used to encrypt your function's snapshot. If you don't provide a customer managed key, Lambda uses a default service key.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the Key Management Service (KMS) customer managed key that's used to encrypt your function's \n<a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-encryption\">environment variables</a>. When \n<a href=\"https://docs.aws.amazon.com/lambda/latest/dg/snapstart-security.html\">Lambda SnapStart</a> is activated, Lambda also uses \nthis key is to encrypt your function's snapshot. If you deploy your function using a container image, Lambda also uses this key to \nencrypt your function when it's deployed. Note that this is not the same key that's used to protect your container image in the Amazon Elastic Container Registry (Amazon ECR).\nIf you don't provide a customer managed key, Lambda uses a default service key.</p>"
                     }
                 },
                 "TracingConfig": {
@@ -4014,7 +4014,7 @@
                 "MaximumRecordAgeInSeconds": {
                     "target": "com.amazonaws.lambda#MaximumRecordAgeInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Kinesis and DynamoDB Streams only) Discard records older than the specified age. The default value is -1,\nwhich sets the maximum age to infinite. When the value is set to infinite, Lambda never discards old records.</p>\n         <note>\n            <p>The minimum value that can be set is 60 seconds.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>(Kinesis and DynamoDB Streams only) Discard records older than the specified age. The default value is -1,\nwhich sets the maximum age to infinite. When the value is set to infinite, Lambda never discards old records.</p>\n         <note>\n            <p>The minimum valid value for maximum record age is 60s. Although values less than 60 and greater than -1 fall within the parameter's absolute range, they are not allowed</p>\n         </note>"
                     }
                 },
                 "BisectBatchOnFunctionError": {
@@ -5762,7 +5762,7 @@
                 "CompatibleRuntimes": {
                     "target": "com.amazonaws.lambda#CompatibleRuntimes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The layer's compatible runtimes.</p>"
+                        "smithy.api#documentation": "<p>The layer's compatible runtimes.</p>\n         <p>The following list includes deprecated runtimes. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy\">Runtime deprecation policy</a>.</p>"
                     }
                 },
                 "LicenseInfo": {
@@ -7270,7 +7270,7 @@
                 "CompatibleRuntimes": {
                     "target": "com.amazonaws.lambda#CompatibleRuntimes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The layer's compatible runtimes.</p>"
+                        "smithy.api#documentation": "<p>The layer's compatible runtimes.</p>\n         <p>The following list includes deprecated runtimes. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy\">Runtime deprecation policy</a>.</p>"
                     }
                 },
                 "LicenseInfo": {
@@ -7990,7 +7990,7 @@
                 "CompatibleRuntime": {
                     "target": "com.amazonaws.lambda#Runtime",
                     "traits": {
-                        "smithy.api#documentation": "<p>A runtime identifier. For example, <code>go1.x</code>.</p>",
+                        "smithy.api#documentation": "<p>A runtime identifier. For example, <code>go1.x</code>.</p>\n         <p>The following list includes deprecated runtimes. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy\">Runtime deprecation policy</a>.</p>",
                         "smithy.api#httpQuery": "CompatibleRuntime"
                     }
                 },
@@ -8088,7 +8088,7 @@
                 "CompatibleRuntime": {
                     "target": "com.amazonaws.lambda#Runtime",
                     "traits": {
-                        "smithy.api#documentation": "<p>A runtime identifier. For example, <code>go1.x</code>.</p>",
+                        "smithy.api#documentation": "<p>A runtime identifier. For example, <code>go1.x</code>.</p>\n         <p>The following list includes deprecated runtimes. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy\">Runtime deprecation policy</a>.</p>",
                         "smithy.api#httpQuery": "CompatibleRuntime"
                     }
                 },
@@ -8875,7 +8875,7 @@
                 "CompatibleRuntimes": {
                     "target": "com.amazonaws.lambda#CompatibleRuntimes",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of compatible <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html\">function\n        runtimes</a>. Used for filtering with <a>ListLayers</a> and <a>ListLayerVersions</a>.</p>"
+                        "smithy.api#documentation": "<p>A list of compatible <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html\">function\n        runtimes</a>. Used for filtering with <a>ListLayers</a> and <a>ListLayerVersions</a>.</p>\n         <p>The following list includes deprecated runtimes. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy\">Runtime deprecation policy</a>.</p>"
                     }
                 },
                 "LicenseInfo": {
@@ -8938,7 +8938,7 @@
                 "CompatibleRuntimes": {
                     "target": "com.amazonaws.lambda#CompatibleRuntimes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The layer's compatible runtimes.</p>"
+                        "smithy.api#documentation": "<p>The layer's compatible runtimes.</p>\n         <p>The following list includes deprecated runtimes. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy\">Runtime deprecation policy</a>.</p>"
                     }
                 },
                 "LicenseInfo": {
@@ -9941,6 +9941,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "java17"
+                    }
+                },
+                "ruby32": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ruby3.2"
                     }
                 }
             }
@@ -11426,7 +11432,7 @@
                 "KMSKeyArn": {
                     "target": "com.amazonaws.lambda#KMSKeyArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Key Management Service (KMS) customer managed key that's used to encrypt your function's <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-encryption\">environment variables</a>. When <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/snapstart-security.html\">Lambda SnapStart</a> is activated, this key is also used to encrypt your function's snapshot. If you don't provide a customer managed key, Lambda uses a default service key.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the Key Management Service (KMS) customer managed key that's used to encrypt your function's \n<a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-encryption\">environment variables</a>. When \n<a href=\"https://docs.aws.amazon.com/lambda/latest/dg/snapstart-security.html\">Lambda SnapStart</a> is activated, Lambda also uses \nthis key is to encrypt your function's snapshot. If you deploy your function using a container image, Lambda also uses this key to \nencrypt your function when it's deployed. Note that this is not the same key that's used to protect your container image in the Amazon Elastic Container Registry (Amazon ECR).\nIf you don't provide a customer managed key, Lambda uses a default service key.</p>"
                     }
                 },
                 "TracingConfig": {

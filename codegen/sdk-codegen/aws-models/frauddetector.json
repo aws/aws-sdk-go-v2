@@ -2433,7 +2433,7 @@
                 "dataType": {
                     "target": "com.amazonaws.frauddetector#DataType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data type.</p>",
+                        "smithy.api#documentation": "<p>The data type of the variable.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2538,6 +2538,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "BOOLEAN"
+                    }
+                },
+                "DATETIME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATETIME"
                     }
                 }
             }
@@ -2847,7 +2853,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified event.</p>\n         <p>When you delete an event, Amazon Fraud Detector permanently deletes that event and the event data is no longer stored in Amazon Fraud Detector.</p>"
+                "smithy.api#documentation": "<p>Deletes the specified event.</p>\n         <p>When you delete an event, Amazon Fraud Detector permanently deletes that event and the event data is no longer stored in Amazon Fraud Detector.\n\t  If <code>deleteAuditHistory</code> is <code>True</code>, event data is available through search for up to 30 seconds after the delete operation is completed.</p>"
             }
         },
         "com.amazonaws.frauddetector#DeleteEventRequest": {
@@ -2870,7 +2876,7 @@
                 "deleteAuditHistory": {
                     "target": "com.amazonaws.frauddetector#DeleteAuditHistory",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether or not to delete any predictions associated with the event.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether or not to delete any predictions associated with the event. If set to <code>True</code>, </p>"
                     }
                 }
             },
