@@ -37,8 +37,6 @@ public class AwsEndpointResolverAdapterGenerator implements GoIntegration {
             SymbolProvider symbolProvider,
             TriConsumer<String, String, Consumer<GoWriter>> writerFactory
     ) {
-        // String serviceId = settings.getService(model).expectTrait(ServiceTrait.class).getSdkId();
-
         this.commonCodegenArgs = MapUtils.of(
                 "goContext", SymbolUtils.createValueSymbolBuilder("Context", SmithyGoDependency.CONTEXT).build(),
                 "legacyAdapterType", SymbolUtils.createValueSymbolBuilder(LEGACY_ADAPTER_TYPE).build(),
@@ -56,7 +54,6 @@ public class AwsEndpointResolverAdapterGenerator implements GoIntegration {
                 .add(generateFinalizeMethod())
                 .compose();
 
-        // var content = generateLegacyAdapter();
         writerFactory.accept("endpoints.go", settings.getModuleName(), writer -> {
             writer.write("$W", content);
         });
@@ -185,15 +182,6 @@ public class AwsEndpointResolverAdapterGenerator implements GoIntegration {
 
 
     private GoWriter.Writable generateCompatibleAdapter() {
-
-        // generate type
-        // generate isClientProvidedImplementation method
-        // generate ResolveEndpointMethod
-        //
-
-        // external class: modify resolveDefaultEndpointConfiguration in EndpointGenerator.java
-
-
         return goTemplate(
             """
                 type isDefaultProvidedImplementation interface {
