@@ -50,6 +50,7 @@ public class AwsEndpointResolverAdapterGenerator implements GoIntegration {
                 .add(generateLegacyAdapter())
                 .add(generateCompatibleAdapter())
                 .add(generatePseudoRegionUtility())
+                .add(generateFinalizeMethod())
                 .compose();
 
         // var content = generateLegacyAdapter();
@@ -274,35 +275,30 @@ public class AwsEndpointResolverAdapterGenerator implements GoIntegration {
     }
 
 
-    // private GoWriter.Writable generateFinalizeMethod(String newResolverFuncName) {
-    //     return goTemplate(
-    //         """
-    //             func finalizeEndpointResolverV2(options *Options) {
-    //                 // check options.EndpointResolver is nil
+    private GoWriter.Writable generateFinalizeMethod() {
+        return goTemplate(
+            """
+                func finalizeEndpointResolverV2(options *Options) {
+                    // check options.EndpointResolver is nil
 
-    //                 // Check if the EndpointResolver was not user provided, but out default provided version
-    //                 _, ok := options.EndpointResolver.(isClientProvidedImplementation)
-    //                 if options.EndpointResolverV2 == nil {
-    //                     options.EndpointResolverV2 = NewDefaultEndpointResolverV2()
-    //                 }
-    //                 if ok {
-    //                     // Nothing further to do
-    //                     return
-    //                 }
+                    // Check if the EndpointResolver was not user provided, but out default provided version
+                    _, ok := options.EndpointResolver.(isClientProvidedImplementation)
+                    if options.EndpointResolverV2 == nil {
+                        options.EndpointResolverV2 = NewDefaultEndpointResolverV2()
+                    }
+                    if ok {
+                        // Nothing further to do
+                        return
+                    }
 
-    //                 options.EndpointResolverV2 = &legacyEndpointResolverAdaptor{
-    //                     legacyResolver: options.EndpointResolver,
-    //                     resolver:       NewDefaultEndpointResolverV2(),
-    //                 }
-    //             }
+                    options.EndpointResolverV2 = &$legacyAdapterType:T{
+                        legacyResolver: options.EndpointResolver,
+                        resolver:       NewDefaultEndpointResolverV2(),
+                    }
+                }
 
-    //         """,
-    //         commonCodegenArgs,
-    //         MapUtils.of(
-    //                 "", ),
-    //         overriddenArgs
+            """,
+            commonCodegenArgs);
 
-    //     )
-
-    // }
+    }
 }
