@@ -1896,6 +1896,11 @@ type Job struct {
 	// A short text description of the job.
 	Description *string
 
+	// The package version Amazon Resource Names (ARNs) that are installed on the
+	// device when the job successfully completes. Note:The following Length
+	// Constraints relates to a single string. Up to five strings are allowed.
+	DestinationPackageVersions []string
+
 	// A key-value map that pairs the patterns that need to be replaced in a managed
 	// template job document schema. You can use the description of each key as a
 	// guidance to specify the inputs during runtime when creating a job.
@@ -2801,6 +2806,47 @@ type OutgoingCertificate struct {
 
 	// The Amazon Web Services account to which the transfer was made.
 	TransferredTo *string
+
+	noSmithyDocumentSerde
+}
+
+// A summary of information about a software package.
+type PackageSummary struct {
+
+	// The date that the package was created.
+	CreationDate *time.Time
+
+	// The name of the default package version.
+	DefaultVersionName *string
+
+	// The date that the package was last updated.
+	LastModifiedDate *time.Time
+
+	// The name for the target package.
+	PackageName *string
+
+	noSmithyDocumentSerde
+}
+
+// A summary of information about a package version.
+type PackageVersionSummary struct {
+
+	// The date that the package version was created.
+	CreationDate *time.Time
+
+	// The date that the package version was last updated.
+	LastModifiedDate *time.Time
+
+	// The name of the associated software package.
+	PackageName *string
+
+	// The status of the package version. For more information, see Package version
+	// lifecycle (https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle)
+	// .
+	Status PackageVersionStatus
+
+	// The name of the target package version.
+	VersionName *string
 
 	noSmithyDocumentSerde
 }
@@ -4268,6 +4314,24 @@ type ValidationError struct {
 
 	// The description of an error found in the behaviors.
 	ErrorMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration to manage IoT Job's package version reporting. If configured,
+// Jobs updates the thing's reserved named shadow with the package version
+// information up on successful job completion. Note: For each job, the
+// destinationPackageVersions attribute has to be set with the correct data for
+// Jobs to report to the thing shadow.
+type VersionUpdateByJobsConfig struct {
+
+	// Indicates whether the Job is enabled or not.
+	Enabled *bool
+
+	// The Amazon Resource Name (ARN) of the role that grants permission to the IoT
+	// jobs service to update the reserved named shadow when the job successfully
+	// completes.
+	RoleArn *string
 
 	noSmithyDocumentSerde
 }

@@ -76,8 +76,8 @@ type StartAssetBundleExportJobInput struct {
 	// A Boolean that determines whether all dependencies of each resource ARN are
 	// recursively exported with the job. For example, say you provided a Dashboard ARN
 	// to the ResourceArns parameter. If you set IncludeAllDependencies to TRUE , any
-	// theme, dataset, and dataource resource that is a dependency of the dashboard is
-	// also exported.
+	// theme, dataset, and data source resource that is a dependency of the dashboard
+	// is also exported.
 	IncludeAllDependencies bool
 
 	noSmithyDocumentSerde

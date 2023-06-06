@@ -19,8 +19,8 @@ import (
 // exist. When you delete a queue, you must wait at least 60 seconds before
 // creating a queue with the same name. Cross-account permissions don't apply to
 // this action. For more information, see Grant cross-account permissions to a
-// role and a user name (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name)
-// in the Amazon SQS Developer Guide.
+// role and a username (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name)
+// in the Amazon SQS Developer Guide. The delete operation uses the HTTP GET verb.
 func (c *Client) DeleteQueue(ctx context.Context, params *DeleteQueueInput, optFns ...func(*Options)) (*DeleteQueueOutput, error) {
 	if params == nil {
 		params = &DeleteQueueInput{}

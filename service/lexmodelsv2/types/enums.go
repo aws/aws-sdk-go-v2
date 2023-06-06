@@ -379,6 +379,25 @@ func (BuiltInSlotTypeSortAttribute) Values() []BuiltInSlotTypeSortAttribute {
 	}
 }
 
+type ConversationLogsInputModeFilter string
+
+// Enum values for ConversationLogsInputModeFilter
+const (
+	ConversationLogsInputModeFilterSpeech ConversationLogsInputModeFilter = "Speech"
+	ConversationLogsInputModeFilterText   ConversationLogsInputModeFilter = "Text"
+)
+
+// Values returns all known values for ConversationLogsInputModeFilter. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ConversationLogsInputModeFilter) Values() []ConversationLogsInputModeFilter {
+	return []ConversationLogsInputModeFilter{
+		"Speech",
+		"Text",
+	}
+}
+
 type CustomVocabularyStatus string
 
 // Enum values for CustomVocabularyStatus
@@ -553,6 +572,7 @@ type ImportExportFileFormat string
 const (
 	ImportExportFileFormatLexJson ImportExportFileFormat = "LexJson"
 	ImportExportFileFormatTsv     ImportExportFileFormat = "TSV"
+	ImportExportFileFormatCsv     ImportExportFileFormat = "CSV"
 )
 
 // Values returns all known values for ImportExportFileFormat. Note that this can
@@ -562,6 +582,7 @@ func (ImportExportFileFormat) Values() []ImportExportFileFormat {
 	return []ImportExportFileFormat{
 		"LexJson",
 		"TSV",
+		"CSV",
 	}
 }
 
@@ -606,6 +627,7 @@ const (
 	ImportResourceTypeBot              ImportResourceType = "Bot"
 	ImportResourceTypeBotLocale        ImportResourceType = "BotLocale"
 	ImportResourceTypeCustomVocabulary ImportResourceType = "CustomVocabulary"
+	ImportResourceTypeTestSet          ImportResourceType = "TestSet"
 )
 
 // Values returns all known values for ImportResourceType. Note that this can be
@@ -616,6 +638,7 @@ func (ImportResourceType) Values() []ImportResourceType {
 		"Bot",
 		"BotLocale",
 		"CustomVocabulary",
+		"TestSet",
 	}
 }
 
@@ -1008,6 +1031,235 @@ func (SortOrder) Values() []SortOrder {
 	return []SortOrder{
 		"Ascending",
 		"Descending",
+	}
+}
+
+type TestExecutionApiMode string
+
+// Enum values for TestExecutionApiMode
+const (
+	TestExecutionApiModeStreaming    TestExecutionApiMode = "Streaming"
+	TestExecutionApiModeNonStreaming TestExecutionApiMode = "NonStreaming"
+)
+
+// Values returns all known values for TestExecutionApiMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TestExecutionApiMode) Values() []TestExecutionApiMode {
+	return []TestExecutionApiMode{
+		"Streaming",
+		"NonStreaming",
+	}
+}
+
+type TestExecutionModality string
+
+// Enum values for TestExecutionModality
+const (
+	TestExecutionModalityText  TestExecutionModality = "Text"
+	TestExecutionModalityAudio TestExecutionModality = "Audio"
+)
+
+// Values returns all known values for TestExecutionModality. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TestExecutionModality) Values() []TestExecutionModality {
+	return []TestExecutionModality{
+		"Text",
+		"Audio",
+	}
+}
+
+type TestExecutionSortAttribute string
+
+// Enum values for TestExecutionSortAttribute
+const (
+	TestExecutionSortAttributeTestSetName      TestExecutionSortAttribute = "TestSetName"
+	TestExecutionSortAttributeCreationDateTime TestExecutionSortAttribute = "CreationDateTime"
+)
+
+// Values returns all known values for TestExecutionSortAttribute. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TestExecutionSortAttribute) Values() []TestExecutionSortAttribute {
+	return []TestExecutionSortAttribute{
+		"TestSetName",
+		"CreationDateTime",
+	}
+}
+
+type TestExecutionStatus string
+
+// Enum values for TestExecutionStatus
+const (
+	TestExecutionStatusPending    TestExecutionStatus = "Pending"
+	TestExecutionStatusWaiting    TestExecutionStatus = "Waiting"
+	TestExecutionStatusInProgress TestExecutionStatus = "InProgress"
+	TestExecutionStatusCompleted  TestExecutionStatus = "Completed"
+	TestExecutionStatusFailed     TestExecutionStatus = "Failed"
+	TestExecutionStatusStopping   TestExecutionStatus = "Stopping"
+	TestExecutionStatusStopped    TestExecutionStatus = "Stopped"
+)
+
+// Values returns all known values for TestExecutionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TestExecutionStatus) Values() []TestExecutionStatus {
+	return []TestExecutionStatus{
+		"Pending",
+		"Waiting",
+		"InProgress",
+		"Completed",
+		"Failed",
+		"Stopping",
+		"Stopped",
+	}
+}
+
+type TestResultMatchStatus string
+
+// Enum values for TestResultMatchStatus
+const (
+	TestResultMatchStatusMatched        TestResultMatchStatus = "Matched"
+	TestResultMatchStatusMismatched     TestResultMatchStatus = "Mismatched"
+	TestResultMatchStatusExecutionError TestResultMatchStatus = "ExecutionError"
+)
+
+// Values returns all known values for TestResultMatchStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TestResultMatchStatus) Values() []TestResultMatchStatus {
+	return []TestResultMatchStatus{
+		"Matched",
+		"Mismatched",
+		"ExecutionError",
+	}
+}
+
+type TestResultTypeFilter string
+
+// Enum values for TestResultTypeFilter
+const (
+	TestResultTypeFilterOverallTestResults              TestResultTypeFilter = "OverallTestResults"
+	TestResultTypeFilterConversationLevelTestResults    TestResultTypeFilter = "ConversationLevelTestResults"
+	TestResultTypeFilterIntentClassificationTestResults TestResultTypeFilter = "IntentClassificationTestResults"
+	TestResultTypeFilterSlotResolutionTestResults       TestResultTypeFilter = "SlotResolutionTestResults"
+	TestResultTypeFilterUtteranceLevelResults           TestResultTypeFilter = "UtteranceLevelResults"
+)
+
+// Values returns all known values for TestResultTypeFilter. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TestResultTypeFilter) Values() []TestResultTypeFilter {
+	return []TestResultTypeFilter{
+		"OverallTestResults",
+		"ConversationLevelTestResults",
+		"IntentClassificationTestResults",
+		"SlotResolutionTestResults",
+		"UtteranceLevelResults",
+	}
+}
+
+type TestSetDiscrepancyReportStatus string
+
+// Enum values for TestSetDiscrepancyReportStatus
+const (
+	TestSetDiscrepancyReportStatusInProgress TestSetDiscrepancyReportStatus = "InProgress"
+	TestSetDiscrepancyReportStatusCompleted  TestSetDiscrepancyReportStatus = "Completed"
+	TestSetDiscrepancyReportStatusFailed     TestSetDiscrepancyReportStatus = "Failed"
+)
+
+// Values returns all known values for TestSetDiscrepancyReportStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (TestSetDiscrepancyReportStatus) Values() []TestSetDiscrepancyReportStatus {
+	return []TestSetDiscrepancyReportStatus{
+		"InProgress",
+		"Completed",
+		"Failed",
+	}
+}
+
+type TestSetGenerationStatus string
+
+// Enum values for TestSetGenerationStatus
+const (
+	TestSetGenerationStatusGenerating TestSetGenerationStatus = "Generating"
+	TestSetGenerationStatusReady      TestSetGenerationStatus = "Ready"
+	TestSetGenerationStatusFailed     TestSetGenerationStatus = "Failed"
+	TestSetGenerationStatusPending    TestSetGenerationStatus = "Pending"
+)
+
+// Values returns all known values for TestSetGenerationStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TestSetGenerationStatus) Values() []TestSetGenerationStatus {
+	return []TestSetGenerationStatus{
+		"Generating",
+		"Ready",
+		"Failed",
+		"Pending",
+	}
+}
+
+type TestSetModality string
+
+// Enum values for TestSetModality
+const (
+	TestSetModalityText  TestSetModality = "Text"
+	TestSetModalityAudio TestSetModality = "Audio"
+)
+
+// Values returns all known values for TestSetModality. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TestSetModality) Values() []TestSetModality {
+	return []TestSetModality{
+		"Text",
+		"Audio",
+	}
+}
+
+type TestSetSortAttribute string
+
+// Enum values for TestSetSortAttribute
+const (
+	TestSetSortAttributeTestSetName         TestSetSortAttribute = "TestSetName"
+	TestSetSortAttributeLastUpdatedDateTime TestSetSortAttribute = "LastUpdatedDateTime"
+)
+
+// Values returns all known values for TestSetSortAttribute. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TestSetSortAttribute) Values() []TestSetSortAttribute {
+	return []TestSetSortAttribute{
+		"TestSetName",
+		"LastUpdatedDateTime",
+	}
+}
+
+type TestSetStatus string
+
+// Enum values for TestSetStatus
+const (
+	TestSetStatusImporting         TestSetStatus = "Importing"
+	TestSetStatusPendingAnnotation TestSetStatus = "PendingAnnotation"
+	TestSetStatusDeleting          TestSetStatus = "Deleting"
+	TestSetStatusValidationError   TestSetStatus = "ValidationError"
+	TestSetStatusReady             TestSetStatus = "Ready"
+)
+
+// Values returns all known values for TestSetStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TestSetStatus) Values() []TestSetStatus {
+	return []TestSetStatus{
+		"Importing",
+		"PendingAnnotation",
+		"Deleting",
+		"ValidationError",
+		"Ready",
 	}
 }
 

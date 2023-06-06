@@ -70,6 +70,26 @@ func (m *validateOpDescribeSigningJob) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetRevocationStatus struct {
+}
+
+func (*validateOpGetRevocationStatus) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetRevocationStatus) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetRevocationStatusInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetRevocationStatusInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetSigningPlatform struct {
 }
 
@@ -230,6 +250,26 @@ func (m *validateOpRevokeSigningProfile) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSignPayload struct {
+}
+
+func (*validateOpSignPayload) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSignPayload) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SignPayloadInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSignPayloadInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartSigningJob struct {
 }
 
@@ -302,6 +342,10 @@ func addOpDescribeSigningJobValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpDescribeSigningJob{}, middleware.After)
 }
 
+func addOpGetRevocationStatusValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetRevocationStatus{}, middleware.After)
+}
+
 func addOpGetSigningPlatformValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetSigningPlatform{}, middleware.After)
 }
@@ -332,6 +376,10 @@ func addOpRevokeSignatureValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpRevokeSigningProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRevokeSigningProfile{}, middleware.After)
+}
+
+func addOpSignPayloadValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSignPayload{}, middleware.After)
 }
 
 func addOpStartSigningJobValidationMiddleware(stack *middleware.Stack) error {
@@ -445,6 +493,33 @@ func validateOpDescribeSigningJobInput(v *DescribeSigningJobInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeSigningJobInput"}
 	if v.JobId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetRevocationStatusInput(v *GetRevocationStatusInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetRevocationStatusInput"}
+	if v.SignatureTimestamp == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SignatureTimestamp"))
+	}
+	if v.PlatformId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PlatformId"))
+	}
+	if v.ProfileVersionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileVersionArn"))
+	}
+	if v.JobArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobArn"))
+	}
+	if v.CertificateHashes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CertificateHashes"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -591,6 +666,27 @@ func validateOpRevokeSigningProfileInput(v *RevokeSigningProfileInput) error {
 	}
 	if v.EffectiveTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EffectiveTime"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSignPayloadInput(v *SignPayloadInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SignPayloadInput"}
+	if v.ProfileName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileName"))
+	}
+	if v.Payload == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Payload"))
+	}
+	if v.PayloadFormat == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PayloadFormat"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

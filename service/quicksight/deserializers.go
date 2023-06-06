@@ -61686,6 +61686,11 @@ func awsRestjson1_deserializeDocumentPivotTableCellConditionalFormatting(v **typ
 				return err
 			}
 
+		case "Scopes":
+			if err := awsRestjson1_deserializeDocumentPivotTableConditionalFormattingScopeList(&sv.Scopes, value); err != nil {
+				return err
+			}
+
 		case "TextFormat":
 			if err := awsRestjson1_deserializeDocumentTextConditionalFormat(&sv.TextFormat, value); err != nil {
 				return err
@@ -61843,6 +61848,40 @@ func awsRestjson1_deserializeDocumentPivotTableConditionalFormattingScope(v **ty
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPivotTableConditionalFormattingScopeList(v *[]types.PivotTableConditionalFormattingScope, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.PivotTableConditionalFormattingScope
+	if *v == nil {
+		cv = []types.PivotTableConditionalFormattingScope{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.PivotTableConditionalFormattingScope
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentPivotTableConditionalFormattingScope(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -62020,6 +62059,130 @@ func awsRestjson1_deserializeDocumentPivotTableDimensionList(v *[]types.Dimensio
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentPivotTableFieldCollapseStateOption(v **types.PivotTableFieldCollapseStateOption, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PivotTableFieldCollapseStateOption
+	if *v == nil {
+		sv = &types.PivotTableFieldCollapseStateOption{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "State":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PivotTableFieldCollapseState to be of type string, got %T instead", value)
+				}
+				sv.State = types.PivotTableFieldCollapseState(jtv)
+			}
+
+		case "Target":
+			if err := awsRestjson1_deserializeDocumentPivotTableFieldCollapseStateTarget(&sv.Target, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPivotTableFieldCollapseStateOptionList(v *[]types.PivotTableFieldCollapseStateOption, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.PivotTableFieldCollapseStateOption
+	if *v == nil {
+		cv = []types.PivotTableFieldCollapseStateOption{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.PivotTableFieldCollapseStateOption
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentPivotTableFieldCollapseStateOption(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPivotTableFieldCollapseStateTarget(v **types.PivotTableFieldCollapseStateTarget, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PivotTableFieldCollapseStateTarget
+	if *v == nil {
+		sv = &types.PivotTableFieldCollapseStateTarget{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "FieldDataPathValues":
+			if err := awsRestjson1_deserializeDocumentDataPathValueList(&sv.FieldDataPathValues, value); err != nil {
+				return err
+			}
+
+		case "FieldId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.FieldId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentPivotTableFieldOption(v **types.PivotTableFieldOption, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -62134,6 +62297,11 @@ func awsRestjson1_deserializeDocumentPivotTableFieldOptions(v **types.PivotTable
 
 	for key, value := range shape {
 		switch key {
+		case "CollapseStateOptions":
+			if err := awsRestjson1_deserializeDocumentPivotTableFieldCollapseStateOptionList(&sv.CollapseStateOptions, value); err != nil {
+				return err
+			}
+
 		case "DataPathOptions":
 			if err := awsRestjson1_deserializeDocumentPivotTableDataPathOptionList(&sv.DataPathOptions, value); err != nil {
 				return err
@@ -63397,6 +63565,15 @@ func awsRestjson1_deserializeDocumentRadarChartConfiguration(v **types.RadarChar
 					return fmt.Errorf("expected HexColor to be of type string, got %T instead", value)
 				}
 				sv.AlternateBandOddColor = ptr.String(jtv)
+			}
+
+		case "AxesRangeScale":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RadarChartAxesRangeScale to be of type string, got %T instead", value)
+				}
+				sv.AxesRangeScale = types.RadarChartAxesRangeScale(jtv)
 			}
 
 		case "BaseSeriesSettings":

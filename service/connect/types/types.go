@@ -324,7 +324,9 @@ type Contact struct {
 	// when the contact arrived. For OUTBOUND , this is when the agent began dialing.
 	// For CALLBACK , this is when the callback contact was created. For TRANSFER and
 	// QUEUE_TRANSFER , this is when the transfer was initiated. For API , this is when
-	// the request arrived.
+	// the request arrived. For EXTERNAL_OUTBOUND , this is when the agent started
+	// dialing the external participant. For MONITOR , this is when the supervisor
+	// started listening to a contact.
 	InitiationTimestamp *time.Time
 
 	// The timestamp when contact was last updated.

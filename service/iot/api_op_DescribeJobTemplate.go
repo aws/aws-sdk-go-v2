@@ -49,6 +49,11 @@ type DescribeJobTemplateOutput struct {
 	// A description of the job template.
 	Description *string
 
+	// The package version Amazon Resource Names (ARNs) that are installed on the
+	// device when the job successfully completes. Note:The following Length
+	// Constraints relates to a single string. Up to five strings are allowed.
+	DestinationPackageVersions []string
+
 	// The job document.
 	Document *string
 

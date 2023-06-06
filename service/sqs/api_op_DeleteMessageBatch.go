@@ -15,12 +15,7 @@ import (
 // DeleteMessage . The result of the action on each message is reported
 // individually in the response. Because the batch request can result in a
 // combination of successful and unsuccessful actions, you should check for batch
-// errors even when the call returns an HTTP status code of 200 . Some actions take
-// lists of parameters. These lists are specified using the param.n notation.
-// Values of n are integers starting from 1. For example, a parameter list with
-// two elements looks like this: &AttributeName.1=first
-//
-//	&AttributeName.2=second
+// errors even when the call returns an HTTP status code of 200 .
 func (c *Client) DeleteMessageBatch(ctx context.Context, params *DeleteMessageBatchInput, optFns ...func(*Options)) (*DeleteMessageBatchOutput, error) {
 	if params == nil {
 		params = &DeleteMessageBatchInput{}
@@ -38,7 +33,7 @@ func (c *Client) DeleteMessageBatch(ctx context.Context, params *DeleteMessageBa
 
 type DeleteMessageBatchInput struct {
 
-	// A list of receipt handles for the messages to be deleted.
+	// Lists the receipt handles for the messages to be deleted.
 	//
 	// This member is required.
 	Entries []types.DeleteMessageBatchRequestEntry

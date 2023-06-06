@@ -39,7 +39,7 @@ type DescribeBotLocaleInput struct {
 	// This member is required.
 	BotId *string
 
-	// The identifier of the version of the bot associated with the locale.
+	// The version of the bot associated with the locale.
 	//
 	// This member is required.
 	BotVersion *string
@@ -67,7 +67,7 @@ type DescribeBotLocaleOutput struct {
 	// listed in the failureReasons field.
 	BotLocaleStatus types.BotLocaleStatus
 
-	// The identifier of the version of the bot associated with the locale.
+	// The version of the bot associated with the locale.
 	BotVersion *string
 
 	// The date and time that the locale was created.

@@ -7,12 +7,57 @@ import (
 	"time"
 )
 
+// The active context used in the test execution.
+type ActiveContext struct {
+
+	// The name of active context.
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
 // Provides settings that enable advanced recognition settings for slot values.
 type AdvancedRecognitionSetting struct {
 
 	// Enables using the slot values as a custom vocabulary for recognizing user
 	// utterances.
 	AudioRecognitionStrategy AudioRecognitionStrategy
+
+	noSmithyDocumentSerde
+}
+
+// The information about the agent turn in a test set execution.
+type AgentTurnResult struct {
+
+	// The expected agent prompt for the agent turn in a test set execution.
+	//
+	// This member is required.
+	ExpectedAgentPrompt *string
+
+	// The actual agent prompt for the agent turn in a test set execution.
+	ActualAgentPrompt *string
+
+	// The actual elicited slot for the agent turn in a test set execution.
+	ActualElicitedSlot *string
+
+	// The actual intent for the agent turn in a test set execution.
+	ActualIntent *string
+
+	// Details about an error in an execution of a test set.
+	ErrorDetails *ExecutionErrorDetails
+
+	noSmithyDocumentSerde
+}
+
+// The specification of an agent turn.
+type AgentTurnSpecification struct {
+
+	// The agent prompt for the agent turn in a test set.
+	//
+	// This member is required.
+	AgentPrompt *string
 
 	noSmithyDocumentSerde
 }
@@ -266,6 +311,27 @@ type BotAliasSummary struct {
 
 	// A timestamp of the date and time that the bot alias was last updated.
 	LastUpdatedDateTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The target Amazon S3 location for the test set execution using a bot alias.
+type BotAliasTestExecutionTarget struct {
+
+	// The bot alias Id of the bot alias used in the test set execution.
+	//
+	// This member is required.
+	BotAliasId *string
+
+	// The bot Id of the bot alias used in the test set execution.
+	//
+	// This member is required.
+	BotId *string
+
+	// The locale Id of the bot alias used in the test set execution.
+	//
+	// This member is required.
+	LocaleId *string
 
 	noSmithyDocumentSerde
 }
@@ -869,6 +935,156 @@ type ConditionalSpecification struct {
 	noSmithyDocumentSerde
 }
 
+// The item listing the evaluation of intent level success or failure.
+type ConversationLevelIntentClassificationResultItem struct {
+
+	// The intent name used in the evaluation of intent level success or failure.
+	//
+	// This member is required.
+	IntentName *string
+
+	// The number of times the specific intent is used in the evaluation of intent
+	// level success or failure.
+	//
+	// This member is required.
+	MatchResult TestResultMatchStatus
+
+	noSmithyDocumentSerde
+}
+
+// The conversation level details of the conversation used in the test set.
+type ConversationLevelResultDetail struct {
+
+	// The success or failure of the streaming of the conversation.
+	//
+	// This member is required.
+	EndToEndResult TestResultMatchStatus
+
+	// The speech transcription success or failure details of the conversation.
+	SpeechTranscriptionResult TestResultMatchStatus
+
+	noSmithyDocumentSerde
+}
+
+// The slots used for the slot resolution in the conversation.
+type ConversationLevelSlotResolutionResultItem struct {
+
+	// The intents used in the slots list for the slot resolution details.
+	//
+	// This member is required.
+	IntentName *string
+
+	// The number of matching slots used in the slots listings for the slot resolution
+	// evaluation.
+	//
+	// This member is required.
+	MatchResult TestResultMatchStatus
+
+	// The slot name in the slots list for the slot resolution details.
+	//
+	// This member is required.
+	SlotName *string
+
+	noSmithyDocumentSerde
+}
+
+// The test result evaluation item at the conversation level.
+type ConversationLevelTestResultItem struct {
+
+	// The conversation Id of the test result evaluation item.
+	//
+	// This member is required.
+	ConversationId *string
+
+	// The end-to-end success or failure of the test result evaluation item.
+	//
+	// This member is required.
+	EndToEndResult TestResultMatchStatus
+
+	// The intent classification of the test result evaluation item.
+	//
+	// This member is required.
+	IntentClassificationResults []ConversationLevelIntentClassificationResultItem
+
+	// The slot success or failure of the test result evaluation item.
+	//
+	// This member is required.
+	SlotResolutionResults []ConversationLevelSlotResolutionResultItem
+
+	// The speech transcription success or failure of the test result evaluation item.
+	SpeechTranscriptionResult TestResultMatchStatus
+
+	noSmithyDocumentSerde
+}
+
+// The test set results data at the conversation level.
+type ConversationLevelTestResults struct {
+
+	// The item list in the test set results data at the conversation level.
+	//
+	// This member is required.
+	Items []ConversationLevelTestResultItem
+
+	noSmithyDocumentSerde
+}
+
+// The selection to filter the test set results data at the conversation level.
+type ConversationLevelTestResultsFilterBy struct {
+
+	// The selection of matched or mismatched end-to-end status to filter test set
+	// results data at the conversation level.
+	EndToEndResult TestResultMatchStatus
+
+	noSmithyDocumentSerde
+}
+
+// The data source that uses conversation logs.
+type ConversationLogsDataSource struct {
+
+	// The bot alias Id from the conversation logs.
+	//
+	// This member is required.
+	BotAliasId *string
+
+	// The bot Id from the conversation logs.
+	//
+	// This member is required.
+	BotId *string
+
+	// The filter for the data source of the conversation log.
+	//
+	// This member is required.
+	Filter *ConversationLogsDataSourceFilterBy
+
+	// The locale Id of the conversation log.
+	//
+	// This member is required.
+	LocaleId *string
+
+	noSmithyDocumentSerde
+}
+
+// The selected data source to filter the conversation log.
+type ConversationLogsDataSourceFilterBy struct {
+
+	// The end time for the conversation log.
+	//
+	// This member is required.
+	EndTime *time.Time
+
+	// The selection to filter by input mode for the conversation logs.
+	//
+	// This member is required.
+	InputMode ConversationLogsInputModeFilter
+
+	// The start time for the conversation log.
+	//
+	// This member is required.
+	StartTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Configures conversation logging that saves audio, text, and metadata for the
 // conversations with your users.
 type ConversationLogSettings struct {
@@ -998,7 +1214,7 @@ type DataPrivacy struct {
 	// part, to children under age 13, you must obtain any required verifiable parental
 	// consent under COPPA. For information regarding the use of Amazon Lex in
 	// connection with websites, programs, or other applications that are directed or
-	// targeted, in whole or in part, to children under age 13, see the Amazon Lex FAQ (https://aws.amazon.com/lex/faqs#data-security)
+	// targeted, in whole or in part, to children under age 13, see the Amazon Lex FAQ (http://aws.amazon.com/lex/faqs#data-security)
 	// .
 	//
 	// This member is required.
@@ -1176,6 +1392,22 @@ type EncryptionSetting struct {
 	noSmithyDocumentSerde
 }
 
+// Details about an error in an execution of a test set.
+type ExecutionErrorDetails struct {
+
+	// The error code for the error.
+	//
+	// This member is required.
+	ErrorCode *string
+
+	// The message describing the error.
+	//
+	// This member is required.
+	ErrorMessage *string
+
+	noSmithyDocumentSerde
+}
+
 // Filters the response form the ListExports (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListExports.html)
 // operation
 type ExportFilter struct {
@@ -1215,6 +1447,9 @@ type ExportResourceSpecification struct {
 
 	// The parameters required to export a custom vocabulary.
 	CustomVocabularyExportSpecification *CustomVocabularyExportSpecification
+
+	// Specifications for the test set that is exported as a resource.
+	TestSetExportSpecification *TestSetExportSpecification
 
 	noSmithyDocumentSerde
 }
@@ -1324,8 +1559,8 @@ type FulfillmentStartResponseSpecification struct {
 	// This member is required.
 	DelayInSeconds *int32
 
-	// One to 5 message groups that contain start messages. Amazon Lex chooses one of
-	// the messages to play to the user.
+	// 1 - 5 message groups that contain start messages. Amazon Lex chooses one of the
+	// messages to play to the user.
 	//
 	// This member is required.
 	MessageGroups []MessageGroup
@@ -1348,7 +1583,7 @@ type FulfillmentUpdateResponseSpecification struct {
 	// This member is required.
 	FrequencyInSeconds *int32
 
-	// One to 5 message groups that contain update messages. Amazon Lex chooses one of
+	// 1 - 5 message groups that contain update messages. Amazon Lex chooses one of
 	// the messages to play to the user.
 	//
 	// This member is required.
@@ -1399,17 +1634,17 @@ type GrammarSlotTypeSetting struct {
 // source for the slot type.
 type GrammarSlotTypeSource struct {
 
-	// The name of the S3 bucket that contains the grammar source.
+	// The name of the Amazon S3 bucket that contains the grammar source.
 	//
 	// This member is required.
 	S3BucketName *string
 
-	// The path to the grammar in the S3 bucket.
+	// The path to the grammar in the Amazon S3 bucket.
 	//
 	// This member is required.
 	S3ObjectKey *string
 
-	// The Amazon KMS key required to decrypt the contents of the grammar, if any.
+	// The KMS key required to decrypt the contents of the grammar, if any.
 	KmsKeyArn *string
 
 	noSmithyDocumentSerde
@@ -1483,6 +1718,9 @@ type ImportResourceSpecification struct {
 
 	// Provides the parameters required for importing a custom vocabulary.
 	CustomVocabularyImportSpecification *CustomVocabularyImportSpecification
+
+	// Specifications for the test set that is imported.
+	TestSetImportResourceSpecification *TestSetImportResourceSpecification
 
 	noSmithyDocumentSerde
 }
@@ -1560,14 +1798,82 @@ type InitialResponseSetting struct {
 	noSmithyDocumentSerde
 }
 
-// The name of a context that must be active for an intent to be selected by
-// Amazon Lex.
+// A context that must be active for an intent to be selected by Amazon Lex.
 type InputContext struct {
 
 	// The name of the context.
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifications for the current state of the dialog between the user and the bot
+// in the test set.
+type InputSessionStateSpecification struct {
+
+	// Active contexts for the session state.
+	ActiveContexts []ActiveContext
+
+	// Runtime hints for the session state.
+	RuntimeHints *RuntimeHints
+
+	// Session attributes for the session state.
+	SessionAttributes map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Information for an intent that is classified by the test workbench.
+type IntentClassificationTestResultItem struct {
+
+	// The name of the intent.
+	//
+	// This member is required.
+	IntentName *string
+
+	// Indicates whether the conversation involves multiple turns or not.
+	//
+	// This member is required.
+	MultiTurnConversation bool
+
+	// The result of the intent classification test.
+	//
+	// This member is required.
+	ResultCounts *IntentClassificationTestResultItemCounts
+
+	noSmithyDocumentSerde
+}
+
+// The number of items in the intent classification test.
+type IntentClassificationTestResultItemCounts struct {
+
+	// The number of matched and mismatched results for intent recognition for the
+	// intent.
+	//
+	// This member is required.
+	IntentMatchResultCounts map[string]int32
+
+	// The total number of results in the intent classification test.
+	//
+	// This member is required.
+	TotalResultCount *int32
+
+	// The number of matched, mismatched, and execution error results for speech
+	// transcription for the intent.
+	SpeechTranscriptionResultCounts map[string]int32
+
+	noSmithyDocumentSerde
+}
+
+// Information for the results of the intent classification test.
+type IntentClassificationTestResults struct {
+
+	// A list of the results for the intent classification test.
+	//
+	// This member is required.
+	Items []IntentClassificationTestResultItem
 
 	noSmithyDocumentSerde
 }
@@ -1688,6 +1994,38 @@ type IntentFilter struct {
 	noSmithyDocumentSerde
 }
 
+// Information about intent-level slot resolution in a test result.
+type IntentLevelSlotResolutionTestResultItem struct {
+
+	// The name of the intent that was recognized.
+	//
+	// This member is required.
+	IntentName *string
+
+	// Indicates whether the conversation involves multiple turns or not.
+	//
+	// This member is required.
+	MultiTurnConversation bool
+
+	// The results for the slot resolution in the test execution result.
+	//
+	// This member is required.
+	SlotResolutionResults []SlotResolutionTestResultItem
+
+	noSmithyDocumentSerde
+}
+
+// Indicates the success or failure of slots at the intent level.
+type IntentLevelSlotResolutionTestResults struct {
+
+	// Indicates the items for the slot level resolution for the intents.
+	//
+	// This member is required.
+	Items []IntentLevelSlotResolutionTestResultItem
+
+	noSmithyDocumentSerde
+}
+
 // Override settings to configure the intent state.
 type IntentOverride struct {
 
@@ -1696,7 +2034,7 @@ type IntentOverride struct {
 
 	// A map of all of the slot value overrides for the intent. The name of the slot
 	// maps to the value of the slot. Slots that are not included in the map aren't
-	// overridden.,
+	// overridden.
 	Slots map[string]SlotValueOverride
 
 	noSmithyDocumentSerde
@@ -1812,7 +2150,7 @@ type LexTranscriptFilter struct {
 	noSmithyDocumentSerde
 }
 
-// The object that provides message text and it's type.
+// The object that provides message text and its type.
 type Message struct {
 
 	// A message in a custom format defined by the client application.
@@ -1912,6 +2250,41 @@ type OutputContext struct {
 	//
 	// This member is required.
 	TurnsToLive *int32
+
+	noSmithyDocumentSerde
+}
+
+// Information about the overall results for a test execution result.
+type OverallTestResultItem struct {
+
+	// The number of results that succeeded.
+	//
+	// This member is required.
+	EndToEndResultCounts map[string]int32
+
+	// Indicates whether the conversation contains multiple turns or not.
+	//
+	// This member is required.
+	MultiTurnConversation bool
+
+	// The total number of overall results in the result of the test execution.
+	//
+	// This member is required.
+	TotalResultCount *int32
+
+	// The number of speech transcription results in the overall test.
+	SpeechTranscriptionResultCounts map[string]int32
+
+	noSmithyDocumentSerde
+}
+
+// Information about the overall test results.
+type OverallTestResults struct {
+
+	// A list of the overall test results.
+	//
+	// This member is required.
+	Items []OverallTestResultItem
 
 	noSmithyDocumentSerde
 }
@@ -2050,8 +2423,8 @@ type Principal struct {
 	// The Amazon Resource Name (ARN) of the principal.
 	Arn *string
 
-	// The name of the AWS service that should allowed or denied access to an Amazon
-	// Lex action.
+	// The name of the Amazon Web Services service that should allowed or denied
+	// access to an Amazon Lex action.
 	Service *string
 
 	noSmithyDocumentSerde
@@ -2171,6 +2544,55 @@ type ResponseSpecification struct {
 	noSmithyDocumentSerde
 }
 
+// Provides an array of phrases that should be given preference when resolving
+// values for a slot.
+type RuntimeHintDetails struct {
+
+	// One or more strings that Amazon Lex should look for in the input to the bot.
+	// Each phrase is given preference when deciding on slot values.
+	RuntimeHintValues []RuntimeHintValue
+
+	// A map of constituent sub slot names inside a composite slot in the intent and
+	// the phrases that should be added for each sub slot. Inside each composite slot
+	// hints, this structure provides a mechanism to add granular sub slot phrases.
+	// Only sub slot hints are supported for composite slots. The intent name,
+	// composite slot name and the constituent sub slot names must exist.
+	SubSlotHints map[string]RuntimeHintDetails
+
+	noSmithyDocumentSerde
+}
+
+// You can provide Amazon Lex with hints to the phrases that a customer is likely
+// to use for a slot. When a slot with hints is resolved, the phrases in the
+// runtime hints are preferred in the resolution. You can provide hints for a
+// maximum of 100 intents. You can provide a maximum of 100 slots. Before you can
+// use runtime hints with an existing bot, you must first rebuild the bot. For more
+// information, see Using runtime hints to improve recognition of slot values (https://docs.aws.amazon.com/lexv2/latest/dg/using-hints.html)
+// .
+type RuntimeHints struct {
+
+	// A list of the slots in the intent that should have runtime hints added, and the
+	// phrases that should be added for each slot. The first level of the slotHints
+	// map is the name of the intent. The second level is the name of the slot within
+	// the intent. For more information, see Using hints to improve accuracy (https://docs.aws.amazon.com/lexv2/latest/dg/using-hints.html)
+	// . The intent name and slot name must exist.
+	SlotHints map[string]map[string]RuntimeHintDetails
+
+	noSmithyDocumentSerde
+}
+
+// Provides the phrase that Amazon Lex should look for in the user's input to the
+// bot.
+type RuntimeHintValue struct {
+
+	// The phrase that Amazon Lex should look for in the user's input to the bot.
+	//
+	// This member is required.
+	Phrase *string
+
+	noSmithyDocumentSerde
+}
+
 // Specifies an Amazon S3 bucket for logging audio conversations
 type S3BucketLogDestination struct {
 
@@ -2185,8 +2607,8 @@ type S3BucketLogDestination struct {
 	// This member is required.
 	S3BucketArn *string
 
-	// The Amazon Resource Name (ARN) of an AWS Key Management Service (KMS) key for
-	// encrypting audio log files stored in an S3 bucket.
+	// The Amazon Resource Name (ARN) of an Amazon Web Services Key Management Service
+	// (KMS) key for encrypting audio log files stored in an S3 bucket.
 	KmsKeyArn *string
 
 	noSmithyDocumentSerde
@@ -2348,7 +2770,7 @@ type SlotFilter struct {
 // user.
 type SlotPriority struct {
 
-	// The priority that a slot should be elicited.
+	// The priority that Amazon Lex should apply to the slot.
 	//
 	// This member is required.
 	Priority *int32
@@ -2357,6 +2779,44 @@ type SlotPriority struct {
 	//
 	// This member is required.
 	SlotId *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the success and failure rate of slot resolution in the
+// results of a test execution.
+type SlotResolutionTestResultItem struct {
+
+	// A result for slot resolution in the results of a test execution.
+	//
+	// This member is required.
+	ResultCounts *SlotResolutionTestResultItemCounts
+
+	// The name of the slot.
+	//
+	// This member is required.
+	SlotName *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the counts for a slot resolution in the results of a test
+// execution.
+type SlotResolutionTestResultItemCounts struct {
+
+	// The number of matched and mismatched results for slot resolution for the slot.
+	//
+	// This member is required.
+	SlotMatchResultCounts map[string]int32
+
+	// The total number of results.
+	//
+	// This member is required.
+	TotalResultCount *int32
+
+	// The number of matched, mismatched and execution error results for speech
+	// transcription for the slot.
+	SpeechTranscriptionResultCounts map[string]int32
 
 	noSmithyDocumentSerde
 }
@@ -2513,8 +2973,7 @@ type SlotValue struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the elicitation setting details for constituent sub slots of a
-// composite slot.
+// Specifies the elicitation setting details eliciting a slot.
 type SlotValueElicitationSetting struct {
 
 	// Specifies whether the slot is required or optional.
@@ -2574,9 +3033,9 @@ type SlotValueRegexFilter struct {
 	// expression:
 	//   - A-Z, a-z
 	//   - 0-9
-	//   - Unicode characters ("\ u")
-	// Represent Unicode characters with four digits, for example "\u0041" or
-	// "\u005A". The following regular expression operators are not supported:
+	//   - Unicode characters ("\⁠u")
+	// Represent Unicode characters with four digits, for example "\⁠u0041" or
+	// "\⁠u005A". The following regular expression operators are not supported:
 	//   - Infinite repeaters: *, +, or {x,} with no upper bound.
 	//   - Wild card (.)
 	//
@@ -2591,17 +3050,19 @@ type SlotValueSelectionSetting struct {
 
 	// Determines the slot resolution strategy that Amazon Lex uses to return slot
 	// type values. The field can be set to one of the following values:
-	//   - OriginalValue - Returns the value entered by the user, if the user value is
+	//   - ORIGINAL_VALUE - Returns the value entered by the user, if the user value is
 	//   similar to the slot value.
-	//   - TopResolution - If there is a resolution list for the slot, return the
+	//   - TOP_RESOLUTION - If there is a resolution list for the slot, return the
 	//   first value in the resolution list as the slot type value. If there is no
 	//   resolution list, null is returned.
-	// If you don't specify the valueSelectionStrategy, the default is OriginalValue.
+	// If you don't specify the valueSelectionStrategy , the default is ORIGINAL_VALUE .
 	//
 	// This member is required.
 	ResolutionStrategy SlotValueResolutionStrategy
 
 	// Provides settings that enable advanced recognition settings for slot values.
+	// You can use this to enable using slot values as a custom vocabulary for
+	// recognizing user utterances.
 	AdvancedRecognitionSetting *AdvancedRecognitionSetting
 
 	// A regular expression used to validate the value of a slot.
@@ -2730,6 +3191,393 @@ type SubSlotValueElicitationSetting struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about the method by which to filter the results of the
+// test execution.
+type TestExecutionResultFilterBy struct {
+
+	// Specifies which results to filter. See Test result details">Test results details (https://docs.aws.amazon.com/lexv2/latest/dg/test-results-details-test-set.html)
+	// for details about different types of results.
+	//
+	// This member is required.
+	ResultTypeFilter TestResultTypeFilter
+
+	// Contains information about the method for filtering Conversation level test
+	// results.
+	ConversationLevelTestResultsFilterBy *ConversationLevelTestResultsFilterBy
+
+	noSmithyDocumentSerde
+}
+
+// Contains the results of the test execution, grouped by type of results. See
+// Test result details">Test results details (https://docs.aws.amazon.com/lexv2/latest/dg/test-results-details-test-set.html)
+// for details about different types of results.
+type TestExecutionResultItems struct {
+
+	// Results related to conversations in the test set, including metrics about
+	// success and failure of conversations and intent and slot failures.
+	ConversationLevelTestResults *ConversationLevelTestResults
+
+	// Intent recognition results aggregated by intent name. The aggregated results
+	// contain success and failure rates of intent recognition, speech transcriptions,
+	// and end-to-end conversations.
+	IntentClassificationTestResults *IntentClassificationTestResults
+
+	// Slot resolution results aggregated by intent and slot name. The aggregated
+	// results contain success and failure rates of slot resolution, speech
+	// transcriptions, and end-to-end conversations
+	IntentLevelSlotResolutionTestResults *IntentLevelSlotResolutionTestResults
+
+	// Overall results for the test execution, including the breakdown of
+	// conversations and single-input utterances.
+	OverallTestResults *OverallTestResults
+
+	// Results related to utterances in the test set.
+	UtteranceLevelTestResults *UtteranceLevelTestResults
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the method by which to sort the instances of test
+// executions you have carried out.
+type TestExecutionSortBy struct {
+
+	// Specifies whether to sort the test set executions by the date and time at which
+	// the test sets were created.
+	//
+	// This member is required.
+	Attribute TestExecutionSortAttribute
+
+	// Specifies whether to sort in ascending or descending order.
+	//
+	// This member is required.
+	Order SortOrder
+
+	noSmithyDocumentSerde
+}
+
+// Summarizes metadata about the test execution.
+type TestExecutionSummary struct {
+
+	// Specifies whether the API mode for the test execution is streaming or
+	// non-streaming.
+	ApiMode TestExecutionApiMode
+
+	// The date and time at which the test execution was created.
+	CreationDateTime *time.Time
+
+	// The date and time at which the test execution was last updated.
+	LastUpdatedDateTime *time.Time
+
+	// Contains information about the bot used for the test execution..
+	Target *TestExecutionTarget
+
+	// The unique identifier of the test execution.
+	TestExecutionId *string
+
+	// Specifies whether the data used for the test execution is written or spoken.
+	TestExecutionModality TestExecutionModality
+
+	// The current status of the test execution.
+	TestExecutionStatus TestExecutionStatus
+
+	// The unique identifier of the test set used in the test execution.
+	TestSetId *string
+
+	// The name of the test set used in the test execution.
+	TestSetName *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the bot used for the test execution.
+type TestExecutionTarget struct {
+
+	// Contains information about the bot alias used for the test execution.
+	BotAliasTarget *BotAliasTestExecutionTarget
+
+	noSmithyDocumentSerde
+}
+
+// Contains details about the errors in the test set discrepancy report
+type TestSetDiscrepancyErrors struct {
+
+	// Contains information about discrepancies found for intents between the test set
+	// and the bot.
+	//
+	// This member is required.
+	IntentDiscrepancies []TestSetIntentDiscrepancyItem
+
+	// Contains information about discrepancies found for slots between the test set
+	// and the bot.
+	//
+	// This member is required.
+	SlotDiscrepancies []TestSetSlotDiscrepancyItem
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the bot alias used for the test set discrepancy
+// report.
+type TestSetDiscrepancyReportBotAliasTarget struct {
+
+	// The unique identifier for the bot associated with the bot alias.
+	//
+	// This member is required.
+	BotAliasId *string
+
+	// The unique identifier for the bot alias.
+	//
+	// This member is required.
+	BotId *string
+
+	// The unique identifier of the locale associated with the bot alias.
+	//
+	// This member is required.
+	LocaleId *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the resource used for the test set discrepancy
+// report.
+type TestSetDiscrepancyReportResourceTarget struct {
+
+	// Contains information about the bot alias used as the resource for the test set
+	// discrepancy report.
+	BotAliasTarget *TestSetDiscrepancyReportBotAliasTarget
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the test set that is exported.
+type TestSetExportSpecification struct {
+
+	// The unique identifier of the test set.
+	//
+	// This member is required.
+	TestSetId *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the data source from which the test set is generated.
+type TestSetGenerationDataSource struct {
+
+	// Contains information about the bot from which the conversation logs are sourced.
+	ConversationLogsDataSource *ConversationLogsDataSource
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the Amazon S3 location from which the test set is
+// imported.
+type TestSetImportInputLocation struct {
+
+	// The name of the Amazon S3 bucket.
+	//
+	// This member is required.
+	S3BucketName *string
+
+	// The path inside the Amazon S3 bucket pointing to the test-set CSV file.
+	//
+	// This member is required.
+	S3Path *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the test set that is imported.
+type TestSetImportResourceSpecification struct {
+
+	// Contains information about the input location from where test-set should be
+	// imported.
+	//
+	// This member is required.
+	ImportInputLocation *TestSetImportInputLocation
+
+	// Specifies whether the test-set being imported contains written or spoken data.
+	//
+	// This member is required.
+	Modality TestSetModality
+
+	// The Amazon Resource Name (ARN) of an IAM role that has permission to access the
+	// test set.
+	//
+	// This member is required.
+	RoleArn *string
+
+	// Contains information about the location that Amazon Lex uses to store the
+	// test-set.
+	//
+	// This member is required.
+	StorageLocation *TestSetStorageLocation
+
+	// The name of the test set.
+	//
+	// This member is required.
+	TestSetName *string
+
+	// The description of the test set.
+	Description *string
+
+	// A list of tags to add to the test set. You can only add tags when you
+	// import/generate a new test set. You can't use the UpdateTestSet operation to
+	// update tags. To update tags, use the TagResource operation.
+	TestSetTags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about discrepancy in an intent information between the
+// test set and the bot.
+type TestSetIntentDiscrepancyItem struct {
+
+	// The error message for a discrepancy for an intent between the test set and the
+	// bot.
+	//
+	// This member is required.
+	ErrorMessage *string
+
+	// The name of the intent in the discrepancy report.
+	//
+	// This member is required.
+	IntentName *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about discrepancy in a slot information between the test
+// set and the bot.
+type TestSetSlotDiscrepancyItem struct {
+
+	// The error message for a discrepancy for an intent between the test set and the
+	// bot.
+	//
+	// This member is required.
+	ErrorMessage *string
+
+	// The name of the intent associated with the slot in the discrepancy report.
+	//
+	// This member is required.
+	IntentName *string
+
+	// The name of the slot in the discrepancy report.
+	//
+	// This member is required.
+	SlotName *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the methods by which to sort the test set.
+type TestSetSortBy struct {
+
+	// Specifies whether to sort the test sets by name or by the time they were last
+	// updated.
+	//
+	// This member is required.
+	Attribute TestSetSortAttribute
+
+	// Specifies whether to sort in ascending or descending order.
+	//
+	// This member is required.
+	Order SortOrder
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the location in which the test set is stored.
+type TestSetStorageLocation struct {
+
+	// The name of the Amazon S3 bucket in which the test set is stored.
+	//
+	// This member is required.
+	S3BucketName *string
+
+	// The path inside the Amazon S3 bucket where the test set is stored.
+	//
+	// This member is required.
+	S3Path *string
+
+	// The Amazon Resource Name (ARN) of an Amazon Web Services Key Management Service
+	// (KMS) key for encrypting the test set.
+	KmsKeyArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about the test set.
+type TestSetSummary struct {
+
+	// The date and time at which the test set was created.
+	CreationDateTime *time.Time
+
+	// The description of the test set.
+	Description *string
+
+	// The date and time at which the test set was last updated.
+	LastUpdatedDateTime *time.Time
+
+	// Specifies whether the test set contains written or spoken data.
+	Modality TestSetModality
+
+	// The number of turns in the test set.
+	NumTurns *int32
+
+	// The Amazon Resource Name (ARN) of an IAM role that has permission to access the
+	// test set.
+	RoleArn *string
+
+	// The status of the test set.
+	Status TestSetStatus
+
+	// Contains information about the location at which the test set is stored.
+	StorageLocation *TestSetStorageLocation
+
+	// The unique identifier of the test set.
+	TestSetId *string
+
+	// The name of the test set.
+	TestSetName *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a turn in a test set.
+type TestSetTurnRecord struct {
+
+	// The record number associated with the turn.
+	//
+	// This member is required.
+	RecordNumber *int64
+
+	// Contains information about the agent or user turn depending upon type of turn.
+	//
+	// This member is required.
+	TurnSpecification *TurnSpecification
+
+	// The unique identifier for the conversation associated with the turn.
+	ConversationId *string
+
+	// The number of turns that has elapsed up to that turn.
+	TurnNumber *int32
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the results of the analysis of a turn in the test
+// set.
+type TestSetTurnResult struct {
+
+	// Contains information about the agent messages in the turn.
+	Agent *AgentTurnResult
+
+	// Contains information about the user messages in the turn.
+	User *UserTurnResult
+
+	noSmithyDocumentSerde
+}
+
 // Specifies the text input specifications.
 type TextInputSpecification struct {
 
@@ -2791,6 +3639,139 @@ type TranscriptSourceSetting struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about the messages in the turn.
+type TurnSpecification struct {
+
+	// Contains information about the agent messages in the turn.
+	AgentTurn *AgentTurnSpecification
+
+	// Contains information about the user messages in the turn.
+	UserTurn *UserTurnSpecification
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the user messages in the turn in the input.
+type UserTurnInputSpecification struct {
+
+	// The utterance input in the user turn.
+	//
+	// This member is required.
+	UtteranceInput *UtteranceInputSpecification
+
+	// Request attributes of the user turn.
+	RequestAttributes map[string]string
+
+	// Contains information about the session state in the input.
+	SessionState *InputSessionStateSpecification
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the intent that is output for the turn by the test
+// execution.
+type UserTurnIntentOutput struct {
+
+	// The name of the intent.
+	//
+	// This member is required.
+	Name *string
+
+	// The slots associated with the intent.
+	Slots map[string]UserTurnSlotOutput
+
+	noSmithyDocumentSerde
+}
+
+// Contains results that are output for the user turn by the test execution.
+type UserTurnOutputSpecification struct {
+
+	// Contains information about the intent.
+	//
+	// This member is required.
+	Intent *UserTurnIntentOutput
+
+	// The contexts that are active in the turn.
+	ActiveContexts []ActiveContext
+
+	// The transcript that is output for the user turn by the test execution.
+	Transcript *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the results for the user turn by the test execution.
+type UserTurnResult struct {
+
+	// Contains information about the expected output for the user turn.
+	//
+	// This member is required.
+	ExpectedOutput *UserTurnOutputSpecification
+
+	// Contains information about the user messages in the turn in the input.
+	//
+	// This member is required.
+	Input *UserTurnInputSpecification
+
+	// Contains information about the actual output for the user turn.
+	ActualOutput *UserTurnOutputSpecification
+
+	// Contains information about the results related to the conversation associated
+	// with the user turn.
+	ConversationLevelResult *ConversationLevelResultDetail
+
+	// Specifies whether the expected and actual outputs match or not, or if there is
+	// an error in execution.
+	EndToEndResult TestResultMatchStatus
+
+	// Details about an error in an execution of a test set.
+	ErrorDetails *ExecutionErrorDetails
+
+	// Specifies whether the expected and actual intents match or not.
+	IntentMatchResult TestResultMatchStatus
+
+	// Specifies whether the expected and actual slots match or not.
+	SlotMatchResult TestResultMatchStatus
+
+	// Specifies whether the expected and actual speech transcriptions match or not,
+	// or if there is an error in execution.
+	SpeechTranscriptionResult TestResultMatchStatus
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a slot output by the test set execution.
+type UserTurnSlotOutput struct {
+
+	// A list of items mapping the name of the subslots to information about those
+	// subslots.
+	SubSlots map[string]UserTurnSlotOutput
+
+	// The value output by the slot recognition.
+	Value *string
+
+	// Values that are output by the slot recognition.
+	Values []UserTurnSlotOutput
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the expected and input values for the user turn.
+type UserTurnSpecification struct {
+
+	// Contains results about the expected output for the user turn.
+	//
+	// This member is required.
+	Expected *UserTurnOutputSpecification
+
+	// Contains information about the user messages in the turn in the input.
+	//
+	// This member is required.
+	Input *UserTurnInputSpecification
+
+	noSmithyDocumentSerde
+}
+
 // Provides parameters for setting the time window and duration for aggregating
 // utterance data.
 type UtteranceAggregationDuration struct {
@@ -2799,6 +3780,63 @@ type UtteranceAggregationDuration struct {
 	//
 	// This member is required.
 	RelativeAggregationDuration *RelativeAggregationDuration
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the audio for an utterance.
+type UtteranceAudioInputSpecification struct {
+
+	// Amazon S3 file pointing to the audio.
+	//
+	// This member is required.
+	AudioFileS3Location *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about input of an utterance.
+type UtteranceInputSpecification struct {
+
+	// Contains information about the audio input for an utterance.
+	AudioInput *UtteranceAudioInputSpecification
+
+	// A text input transcription of the utterance. It is only applicable for
+	// test-sets containing text data.
+	TextInput *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about multiple utterances in the results of a test set
+// execution.
+type UtteranceLevelTestResultItem struct {
+
+	// The record number of the result.
+	//
+	// This member is required.
+	RecordNumber *int64
+
+	// Contains information about the turn associated with the result.
+	//
+	// This member is required.
+	TurnResult *TestSetTurnResult
+
+	// The unique identifier for the conversation associated with the result.
+	ConversationId *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the utterances in the results of the test set
+// execution.
+type UtteranceLevelTestResults struct {
+
+	// Contains information about an utterance in the results of the test set
+	// execution.
+	//
+	// This member is required.
+	Items []UtteranceLevelTestResultItem
 
 	noSmithyDocumentSerde
 }

@@ -621,6 +621,18 @@ type Counts struct {
 	noSmithyDocumentSerde
 }
 
+// Contains details of a coverage date filter.
+type CoverageDateFilter struct {
+
+	// A timestamp representing the end of the time period to filter results by.
+	EndInclusive *time.Time
+
+	// A timestamp representing the start of the time period to filter results by.
+	StartInclusive *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // A structure that identifies filter criteria for GetCoverageStatistics .
 type CoverageFilterCriteria struct {
 
@@ -645,11 +657,16 @@ type CoverageFilterCriteria struct {
 	// Returns coverage statistics for AWS Lambda functions filtered by tag.
 	LambdaFunctionTags []CoverageMapFilter
 
+	// Filters Amazon Web Services resources based on whether Amazon Inspector has
+	// checked them for vulnerabilities within the specified time range.
+	LastScannedAt []CoverageDateFilter
+
 	// An array of Amazon Web Services resource IDs to return coverage statistics for.
 	ResourceId []CoverageStringFilter
 
 	// An array of Amazon Web Services resource types to return coverage statistics
-	// for. The values can be AWS_EC2_INSTANCE or AWS_ECR_REPOSITORY .
+	// for. The values can be AWS_EC2_INSTANCE , AWS_LAMBDA_FUNCTION or
+	// AWS_ECR_REPOSITORY .
 	ResourceType []CoverageStringFilter
 
 	// The scan status code to filter on.
@@ -721,6 +738,9 @@ type CoveredResource struct {
 	//
 	// This member is required.
 	ScanType ScanType
+
+	// The date and time the resource was last checked for vulnerabilities.
+	LastScannedAt *time.Time
 
 	// An object that contains details about the metadata.
 	ResourceMetadata *ResourceScanMetadata

@@ -12,8 +12,7 @@ import (
 )
 
 // Creates a signing profile. A signing profile is a code signing template that
-// can be used to carry out a pre-defined signing job. For more information, see
-// http://docs.aws.amazon.com/signer/latest/developerguide/gs-profile.html (http://docs.aws.amazon.com/signer/latest/developerguide/gs-profile.html)
+// can be used to carry out a pre-defined signing job.
 func (c *Client) PutSigningProfile(ctx context.Context, params *PutSigningProfileInput, optFns ...func(*Options)) (*PutSigningProfileOutput, error) {
 	if params == nil {
 		params = &PutSigningProfileInput{}

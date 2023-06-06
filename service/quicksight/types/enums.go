@@ -2774,6 +2774,25 @@ func (PivotTableConditionalFormattingScopeRole) Values() []PivotTableConditional
 	}
 }
 
+type PivotTableFieldCollapseState string
+
+// Enum values for PivotTableFieldCollapseState
+const (
+	PivotTableFieldCollapseStateCollapsed PivotTableFieldCollapseState = "COLLAPSED"
+	PivotTableFieldCollapseStateExpanded  PivotTableFieldCollapseState = "EXPANDED"
+)
+
+// Values returns all known values for PivotTableFieldCollapseState. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (PivotTableFieldCollapseState) Values() []PivotTableFieldCollapseState {
+	return []PivotTableFieldCollapseState{
+		"COLLAPSED",
+		"EXPANDED",
+	}
+}
+
 type PivotTableMetricPlacement string
 
 // Enum values for PivotTableMetricPlacement
@@ -2867,6 +2886,26 @@ func (PropertyUsage) Values() []PropertyUsage {
 		"INHERIT",
 		"DIMENSION",
 		"MEASURE",
+	}
+}
+
+type RadarChartAxesRangeScale string
+
+// Enum values for RadarChartAxesRangeScale
+const (
+	RadarChartAxesRangeScaleAuto        RadarChartAxesRangeScale = "AUTO"
+	RadarChartAxesRangeScaleIndependent RadarChartAxesRangeScale = "INDEPENDENT"
+	RadarChartAxesRangeScaleShared      RadarChartAxesRangeScale = "SHARED"
+)
+
+// Values returns all known values for RadarChartAxesRangeScale. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RadarChartAxesRangeScale) Values() []RadarChartAxesRangeScale {
+	return []RadarChartAxesRangeScale{
+		"AUTO",
+		"INDEPENDENT",
+		"SHARED",
 	}
 }
 

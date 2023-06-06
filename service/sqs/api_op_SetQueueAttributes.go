@@ -13,12 +13,15 @@ import (
 // Sets the value of one or more queue attributes. When you change a queue's
 // attributes, the change can take up to 60 seconds for most of the attributes to
 // propagate throughout the Amazon SQS system. Changes made to the
-// MessageRetentionPeriod attribute can take up to 15 minutes.
+// MessageRetentionPeriod attribute can take up to 15 minutes and will impact
+// existing messages in the queue potentially causing them to be expired and
+// deleted if the MessageRetentionPeriod is reduced below the age of existing
+// messages.
 //   - In the future, new attributes might be added. If you write code that calls
 //     this action, we recommend that you structure your code so that it can handle new
 //     attributes gracefully.
 //   - Cross-account permissions don't apply to this action. For more information,
-//     see Grant cross-account permissions to a role and a user name (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name)
+//     see Grant cross-account permissions to a role and a username (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name)
 //     in the Amazon SQS Developer Guide.
 //   - To remove the ability to change queue permissions, you must deny permission
 //     to the AddPermission , RemovePermission , and SetQueueAttributes actions in
@@ -51,7 +54,13 @@ type SetQueueAttributesInput struct {
 	//   up to 262,144 bytes (256 KiB). Default: 262,144 (256 KiB).
 	//   - MessageRetentionPeriod – The length of time, in seconds, for which Amazon
 	//   SQS retains a message. Valid values: An integer representing seconds, from 60 (1
-	//   minute) to 1,209,600 (14 days). Default: 345,600 (4 days).
+	//   minute) to 1,209,600 (14 days). Default: 345,600 (4 days). When you change a
+	//   queue's attributes, the change can take up to 60 seconds for most of the
+	//   attributes to propagate throughout the Amazon SQS system. Changes made to the
+	//   MessageRetentionPeriod attribute can take up to 15 minutes and will impact
+	//   existing messages in the queue potentially causing them to be expired and
+	//   deleted if the MessageRetentionPeriod is reduced below the age of existing
+	//   messages.
 	//   - Policy – The queue's policy. A valid Amazon Web Services policy. For more
 	//   information about policy structure, see Overview of Amazon Web Services IAM
 	//   Policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/PoliciesOverview.html)
@@ -59,25 +68,40 @@ type SetQueueAttributesInput struct {
 	//   - ReceiveMessageWaitTimeSeconds – The length of time, in seconds, for which a
 	//   ReceiveMessage action waits for a message to arrive. Valid values: An integer
 	//   from 0 to 20 (seconds). Default: 0.
-	//   - RedrivePolicy – The string that includes the parameters for the dead-letter
-	//   queue functionality of the source queue as a JSON object. For more information
-	//   about the redrive policy and dead-letter queues, see Using Amazon SQS
-	//   Dead-Letter Queues (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html)
-	//   in the Amazon SQS Developer Guide.
-	//   - deadLetterTargetArn – The Amazon Resource Name (ARN) of the dead-letter
-	//   queue to which Amazon SQS moves messages after the value of maxReceiveCount is
-	//   exceeded.
-	//   - maxReceiveCount – The number of times a message is delivered to the source
-	//   queue before being moved to the dead-letter queue. When the ReceiveCount for a
-	//   message exceeds the maxReceiveCount for a queue, Amazon SQS moves the message
-	//   to the dead-letter-queue. The dead-letter queue of a FIFO queue must also be
-	//   a FIFO queue. Similarly, the dead-letter queue of a standard queue must also be
-	//   a standard queue.
 	//   - VisibilityTimeout – The visibility timeout for the queue, in seconds. Valid
 	//   values: An integer from 0 to 43,200 (12 hours). Default: 30. For more
 	//   information about the visibility timeout, see Visibility Timeout (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html)
 	//   in the Amazon SQS Developer Guide.
-	// The following attributes apply only to server-side-encryption (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html)
+	// The following attributes apply only to dead-letter queues: (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html)
+	//   - RedrivePolicy – The string that includes the parameters for the dead-letter
+	//   queue functionality of the source queue as a JSON object. The parameters are as
+	//   follows:
+	//   - deadLetterTargetArn – The Amazon Resource Name (ARN) of the dead-letter
+	//   queue to which Amazon SQS moves messages after the value of maxReceiveCount is
+	//   exceeded.
+	//   - maxReceiveCount – The number of times a message is delivered to the source
+	//   queue before being moved to the dead-letter queue. Default: 10. When the
+	//   ReceiveCount for a message exceeds the maxReceiveCount for a queue, Amazon SQS
+	//   moves the message to the dead-letter-queue.
+	//   - RedriveAllowPolicy – The string that includes the parameters for the
+	//   permissions for the dead-letter queue redrive permission and which source queues
+	//   can specify dead-letter queues as a JSON object. The parameters are as follows:
+	//   - redrivePermission – The permission type that defines which source queues can
+	//   specify the current queue as the dead-letter queue. Valid values are:
+	//   - allowAll – (Default) Any source queues in this Amazon Web Services account
+	//   in the same Region can specify this queue as the dead-letter queue.
+	//   - denyAll – No source queues can specify this queue as the dead-letter queue.
+	//   - byQueue – Only queues specified by the sourceQueueArns parameter can specify
+	//   this queue as the dead-letter queue.
+	//   - sourceQueueArns – The Amazon Resource Names (ARN)s of the source queues that
+	//   can specify this queue as the dead-letter queue and redrive messages. You can
+	//   specify this parameter only when the redrivePermission parameter is set to
+	//   byQueue . You can specify up to 10 source queue ARNs. To allow more than 10
+	//   source queues to specify dead-letter queues, set the redrivePermission
+	//   parameter to allowAll .
+	// The dead-letter queue of a FIFO queue must also be a FIFO queue. Similarly, the
+	// dead-letter queue of a standard queue must also be a standard queue. The
+	// following attributes apply only to server-side-encryption (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html)
 	// :
 	//   - KmsMasterKeyId – The ID of an Amazon Web Services managed customer master
 	//   key (CMK) for Amazon SQS or a custom CMK. For more information, see Key Terms (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html#sqs-sse-key-terms)
@@ -95,7 +119,7 @@ type SetQueueAttributesInput struct {
 	//   .
 	//   - SqsManagedSseEnabled – Enables server-side queue encryption using SQS owned
 	//   encryption keys. Only one server-side encryption option is supported per queue
-	//   (e.g. SSE-KMS (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-configure-sse-existing-queue.html)
+	//   (for example, SSE-KMS (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-configure-sse-existing-queue.html)
 	//   or SSE-SQS (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-configure-sqs-sse-queue.html)
 	//   ).
 	// The following attribute applies only to FIFO (first-in-first-out) queues (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html)

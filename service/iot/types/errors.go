@@ -93,6 +93,8 @@ type ConflictException struct {
 
 	ErrorCodeOverride *string
 
+	ResourceId *string
+
 	noSmithyDocumentSerde
 }
 
@@ -594,6 +596,32 @@ func (e *ResourceRegistrationFailureException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
+// A limit has been exceeded.
+type ServiceQuotaExceededException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ServiceQuotaExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ServiceQuotaExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ServiceQuotaExceededException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ServiceQuotaExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The service is temporarily unavailable.
 type ServiceUnavailableException struct {
 	Message *string
@@ -778,6 +806,32 @@ func (e *UnauthorizedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *UnauthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The request is not valid.
+type ValidationException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ValidationException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ValidationException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ValidationException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ValidationException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An exception thrown when the version of an entity specified with the
 // expectedVersion parameter does not match the latest version in the system.

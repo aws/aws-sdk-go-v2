@@ -762,12 +762,12 @@ type AssetBundleImportJobDataSourceCredentialPair struct {
 type AssetBundleImportJobDataSourceCredentials struct {
 
 	// A username and password credential pair to be used to create the imported data
-	// source. Leave this field blank if you are using an Secrets Manager Secret to
+	// source. Keep this field blank if you are using a Secrets Manager secret to
 	// provide credentials.
 	CredentialPair *AssetBundleImportJobDataSourceCredentialPair
 
-	// The ARN of the Secrets Manager Secret to be used to create the imported data
-	// source leave this field blank if you aren't using a Secret in place of a
+	// The ARN of the Secrets Manager secret that's used to create the imported data
+	// source. Keep this field blank, unless you are using a secret in place of a
 	// credential pair.
 	SecretArn *string
 
@@ -874,14 +874,14 @@ type AssetBundleImportJobRefreshScheduleOverrideParameters struct {
 	// This member is required.
 	ScheduleId *string
 
-	// An override for the StartAfterDateTime of a RefreshSchedule to ensure that the
+	// An override for the StartAfterDateTime of a RefreshSchedule . Make sure that the
 	// StartAfterDateTime is set to a time that takes place in the future.
 	StartAfterDateTime *time.Time
 
 	noSmithyDocumentSerde
 }
 
-// An optional structure that configures resource ID overrides for the import job
+// An optional structure that configures resource ID overrides for the import job.
 type AssetBundleImportJobResourceIdOverrideConfiguration struct {
 
 	// An option to request a CloudFormation variable for a prefix to be prepended to
@@ -937,7 +937,7 @@ type AssetBundleImportJobVPCConnectionOverrideParameters struct {
 	// This member is required.
 	VPCConnectionId *string
 
-	// An optional override of dns resolvers to be used by the VPC connection.
+	// An optional override of DNS resolvers to be used by the VPC connection.
 	DnsResolvers []string
 
 	// A new name for the VPC connection.
@@ -948,12 +948,12 @@ type AssetBundleImportJobVPCConnectionOverrideParameters struct {
 
 	// A new security group ID for the VPC connection you are importing. This field is
 	// required if you are importing the VPC connection from another Amazon Web
-	// Services account or region.
+	// Services account or Region.
 	SecurityGroupIds []string
 
 	// A list of new subnet IDs for the VPC connection you are importing. This field
 	// is required if you are importing the VPC connection from another Amazon Web
-	// Services account or region.
+	// Services account or Region.
 	SubnetIds []string
 
 	noSmithyDocumentSerde
@@ -963,34 +963,34 @@ type AssetBundleImportJobVPCConnectionOverrideParameters struct {
 // import.
 type AssetBundleImportSource struct {
 
-	// The bytes of the Base64 encoded asset bundle import zip file. This file can't
-	// exceed 20MB. If you are calling the APIs from the Amazon Web Services Java,
-	// JavaScript, Python, or PHP SDKs, the SDK encodes Base64 automatically to allow
-	// the direct setting of the zip file's bytes. If you are using a SDK of a
-	// different language or are receiving related errors, try to Base64 encode your
+	// The bytes of the base64 encoded asset bundle import zip file. This file can't
+	// exceed 20 MB. If you are calling the API operations from the Amazon Web Services
+	// SDK for Java, JavaScript, Python, or PHP, the SDK encodes base64 automatically
+	// to allow the direct setting of the zip file's bytes. If you are using an SDK for
+	// a different language or receiving related errors, try to base64 encode your
 	// data.
 	Body []byte
 
-	// The Amazon S3 uri for an asset bundle import file that exists in an Amazon S3
+	// The Amazon S3 URI for an asset bundle import file that exists in an Amazon S3
 	// bucket that the caller has read access to. The file must be a zip format file
-	// and can't exceed 20MB.
+	// and can't exceed 20 MB.
 	S3Uri *string
 
 	noSmithyDocumentSerde
 }
 
 // A description of the import source that you provide at the start of an import
-// job. This value is set to either Body or S3Uri depending on how the
+// job. This value is set to either Body or S3Uri , depending on how the
 // StartAssetBundleImportJobRequest is configured.
 type AssetBundleImportSourceDescription struct {
 
-	// A HTTPS download URL for the provided asset bundle that you optionally provided
-	// at the start of the import job. This URL is valid for 5 minutes after issuance.
-	// Call DescribeAssetBundleExportJob again for a fresh URL if needed. The
-	// downloaded asset bundle is a .qs zip file.
+	// An HTTPS download URL for the provided asset bundle that you optionally
+	// provided at the start of the import job. This URL is valid for five minutes
+	// after issuance. Call DescribeAssetBundleExportJob again for a fresh URL if
+	// needed. The downloaded asset bundle is a .qs zip file.
 	Body *string
 
-	// The Amazon S3 uri that you provided at the start of the import job.
+	// The Amazon S3 URI that you provided at the start of the import job.
 	S3Uri *string
 
 	noSmithyDocumentSerde
@@ -8761,6 +8761,9 @@ type PivotTableCellConditionalFormatting struct {
 	// The scope of the cell for conditional formatting.
 	Scope *PivotTableConditionalFormattingScope
 
+	// A list of cell scopes for conditional formatting.
+	Scopes []PivotTableConditionalFormattingScope
+
 	// The text format of the cell for conditional formatting.
 	TextFormat *TextConditionalFormat
 
@@ -8833,6 +8836,35 @@ type PivotTableDataPathOption struct {
 	noSmithyDocumentSerde
 }
 
+// The collapse state options for the pivot table field options.
+type PivotTableFieldCollapseStateOption struct {
+
+	// A tagged-union object that sets the collapse state.
+	//
+	// This member is required.
+	Target *PivotTableFieldCollapseStateTarget
+
+	// The state of the field target of a pivot table. Choose one of the following
+	// options:
+	//   - COLLAPSED
+	//   - EXPANDED
+	State PivotTableFieldCollapseState
+
+	noSmithyDocumentSerde
+}
+
+// The target of a pivot table field collapse state.
+type PivotTableFieldCollapseStateTarget struct {
+
+	// The data path of the pivot table's header. Used to set the collapse state.
+	FieldDataPathValues []DataPathValue
+
+	// The field ID of the pivot table that the collapse state needs to be set to.
+	FieldId *string
+
+	noSmithyDocumentSerde
+}
+
 // The selected field options for the pivot table field options.
 type PivotTableFieldOption struct {
 
@@ -8852,6 +8884,9 @@ type PivotTableFieldOption struct {
 
 // The field options for a pivot table visual.
 type PivotTableFieldOptions struct {
+
+	// The collapse state options for the pivot table field options.
+	CollapseStateOptions []PivotTableFieldCollapseStateOption
 
 	// The data path options for the pivot table field options.
 	DataPathOptions []PivotTableDataPathOption
@@ -9166,6 +9201,9 @@ type RadarChartConfiguration struct {
 
 	// The color of the odd-numbered alternate bands of a radar chart.
 	AlternateBandOddColor *string
+
+	// The axis behavior options of a radar chart.
+	AxesRangeScale RadarChartAxesRangeScale
 
 	// The base sreies settings of a radar chart.
 	BaseSeriesSettings *RadarChartSeriesSettings

@@ -277,7 +277,7 @@ type SigningPlatform struct {
 	// Any partner entities linked to a code signing platform.
 	Partner *string
 
-	// The ID of a code signing; platform.
+	// The ID of a code signing platform.
 	PlatformId *string
 
 	// Indicates whether revocation is supported for the platform.

@@ -530,6 +530,46 @@ func (m *validateOpCreateOTAUpdate) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreatePackage struct {
+}
+
+func (*validateOpCreatePackage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreatePackage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreatePackageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreatePackageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreatePackageVersion struct {
+}
+
+func (*validateOpCreatePackageVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreatePackageVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreatePackageVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreatePackageVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreatePolicy struct {
 }
 
@@ -1105,6 +1145,46 @@ func (m *validateOpDeleteOTAUpdate) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteOTAUpdateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeletePackage struct {
+}
+
+func (*validateOpDeletePackage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeletePackage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeletePackageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeletePackageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeletePackageVersion struct {
+}
+
+func (*validateOpDeletePackageVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeletePackageVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeletePackageVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeletePackageVersionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2190,6 +2270,46 @@ func (m *validateOpGetOTAUpdate) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetPackage struct {
+}
+
+func (*validateOpGetPackage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetPackage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetPackageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetPackageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetPackageVersion struct {
+}
+
+func (*validateOpGetPackageVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetPackageVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetPackageVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetPackageVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetPercentiles struct {
 }
 
@@ -2485,6 +2605,26 @@ func (m *validateOpListMetricValues) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListMetricValuesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListPackageVersions struct {
+}
+
+func (*validateOpListPackageVersions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListPackageVersions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListPackageVersionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListPackageVersionsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -3510,6 +3650,46 @@ func (m *validateOpUpdateMitigationAction) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdatePackage struct {
+}
+
+func (*validateOpUpdatePackage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdatePackage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdatePackageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdatePackageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdatePackageVersion struct {
+}
+
+func (*validateOpUpdatePackageVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdatePackageVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdatePackageVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdatePackageVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateProvisioningTemplate struct {
 }
 
@@ -3794,6 +3974,14 @@ func addOpCreateOTAUpdateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateOTAUpdate{}, middleware.After)
 }
 
+func addOpCreatePackageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreatePackage{}, middleware.After)
+}
+
+func addOpCreatePackageVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreatePackageVersion{}, middleware.After)
+}
+
 func addOpCreatePolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreatePolicy{}, middleware.After)
 }
@@ -3908,6 +4096,14 @@ func addOpDeleteMitigationActionValidationMiddleware(stack *middleware.Stack) er
 
 func addOpDeleteOTAUpdateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteOTAUpdate{}, middleware.After)
+}
+
+func addOpDeletePackageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeletePackage{}, middleware.After)
+}
+
+func addOpDeletePackageVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeletePackageVersion{}, middleware.After)
 }
 
 func addOpDeletePolicyValidationMiddleware(stack *middleware.Stack) error {
@@ -4126,6 +4322,14 @@ func addOpGetOTAUpdateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetOTAUpdate{}, middleware.After)
 }
 
+func addOpGetPackageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetPackage{}, middleware.After)
+}
+
+func addOpGetPackageVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetPackageVersion{}, middleware.After)
+}
+
 func addOpGetPercentilesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetPercentiles{}, middleware.After)
 }
@@ -4184,6 +4388,10 @@ func addOpListJobExecutionsForThingValidationMiddleware(stack *middleware.Stack)
 
 func addOpListMetricValuesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListMetricValues{}, middleware.After)
+}
+
+func addOpListPackageVersionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListPackageVersions{}, middleware.After)
 }
 
 func addOpListPolicyPrincipalsValidationMiddleware(stack *middleware.Stack) error {
@@ -4388,6 +4596,14 @@ func addOpUpdateJobValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateMitigationActionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateMitigationAction{}, middleware.After)
+}
+
+func addOpUpdatePackageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdatePackage{}, middleware.After)
+}
+
+func addOpUpdatePackageVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdatePackageVersion{}, middleware.After)
 }
 
 func addOpUpdateProvisioningTemplateValidationMiddleware(stack *middleware.Stack) error {
@@ -6781,6 +6997,39 @@ func validateOpCreateOTAUpdateInput(v *CreateOTAUpdateInput) error {
 	}
 }
 
+func validateOpCreatePackageInput(v *CreatePackageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreatePackageInput"}
+	if v.PackageName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PackageName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreatePackageVersionInput(v *CreatePackageVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreatePackageVersionInput"}
+	if v.PackageName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PackageName"))
+	}
+	if v.VersionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VersionName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreatePolicyInput(v *CreatePolicyInput) error {
 	if v == nil {
 		return nil
@@ -7318,6 +7567,39 @@ func validateOpDeleteOTAUpdateInput(v *DeleteOTAUpdateInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteOTAUpdateInput"}
 	if v.OtaUpdateId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OtaUpdateId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeletePackageInput(v *DeletePackageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeletePackageInput"}
+	if v.PackageName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PackageName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeletePackageVersionInput(v *DeletePackageVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeletePackageVersionInput"}
+	if v.PackageName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PackageName"))
+	}
+	if v.VersionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VersionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -8172,6 +8454,39 @@ func validateOpGetOTAUpdateInput(v *GetOTAUpdateInput) error {
 	}
 }
 
+func validateOpGetPackageInput(v *GetPackageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetPackageInput"}
+	if v.PackageName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PackageName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetPackageVersionInput(v *GetPackageVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetPackageVersionInput"}
+	if v.PackageName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PackageName"))
+	}
+	if v.VersionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VersionName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetPercentilesInput(v *GetPercentilesInput) error {
 	if v == nil {
 		return nil
@@ -8413,6 +8728,21 @@ func validateOpListMetricValuesInput(v *ListMetricValuesInput) error {
 	}
 	if v.EndTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListPackageVersionsInput(v *ListPackageVersionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListPackageVersionsInput"}
+	if v.PackageName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PackageName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -9315,6 +9645,39 @@ func validateOpUpdateMitigationActionInput(v *UpdateMitigationActionInput) error
 		if err := validateMitigationActionParams(v.ActionParams); err != nil {
 			invalidParams.AddNested("ActionParams", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdatePackageInput(v *UpdatePackageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdatePackageInput"}
+	if v.PackageName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PackageName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdatePackageVersionInput(v *UpdatePackageVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdatePackageVersionInput"}
+	if v.PackageName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PackageName"))
+	}
+	if v.VersionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VersionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -31,16 +31,8 @@ type BatchResultErrorEntry struct {
 	noSmithyDocumentSerde
 }
 
-// Encloses a receipt handle and an entry id for each message in
-// ChangeMessageVisibilityBatch . All of the following list parameters must be
-// prefixed with ChangeMessageVisibilityBatchRequestEntry.n , where n is an
-// integer value starting with 1 . For example, a parameter list for this action
-// might look like this:
-// &ChangeMessageVisibilityBatchRequestEntry.1.Id=change_visibility_msg_2
-//
-//	&ChangeMessageVisibilityBatchRequestEntry.1.ReceiptHandle=your_receipt_handle
-//
-//	&ChangeMessageVisibilityBatchRequestEntry.1.VisibilityTimeout=45
+// Encloses a receipt handle and an entry ID for each message in
+// ChangeMessageVisibilityBatch .
 type ChangeMessageVisibilityBatchRequestEntry struct {
 
 	// An identifier for this particular receipt handle used to communicate the
@@ -76,7 +68,7 @@ type ChangeMessageVisibilityBatchResultEntry struct {
 // Encloses a receipt handle and an identifier for it.
 type DeleteMessageBatchRequestEntry struct {
 
-	// An identifier for this particular receipt handle. This is used to communicate
+	// The identifier for this particular receipt handle. This is used to communicate
 	// the result. The Id s of a batch request need to be unique within a request. This
 	// identifier can have up to 80 characters. The following characters are accepted:
 	// alphanumeric characters, hyphens(-), and underscores (_).
@@ -99,6 +91,48 @@ type DeleteMessageBatchResultEntry struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the details of a message movement task.
+type ListMessageMoveTasksResultEntry struct {
+
+	// The approximate number of messages already moved to the destination queue.
+	ApproximateNumberOfMessagesMoved int64
+
+	// The number of messages to be moved from the source queue. This number is
+	// obtained at the time of starting the message movement task.
+	ApproximateNumberOfMessagesToMove int64
+
+	// The ARN of the destination queue if it has been specified in the
+	// StartMessageMoveTask request. If a DestinationArn has not been specified in the
+	// StartMessageMoveTask request, this field value will be NULL.
+	DestinationArn *string
+
+	// The task failure reason (only included if the task status is FAILED).
+	FailureReason *string
+
+	// The number of messages to be moved per second (the message movement rate), if
+	// it has been specified in the StartMessageMoveTask request. If a
+	// MaxNumberOfMessagesPerSecond has not been specified in the StartMessageMoveTask
+	// request, this field value will be NULL.
+	MaxNumberOfMessagesPerSecond int32
+
+	// The ARN of the queue that contains the messages to be moved to another queue.
+	SourceArn *string
+
+	// The timestamp of starting the message movement task.
+	StartedTimestamp int64
+
+	// The status of the message movement task. Possible values are: RUNNING,
+	// COMPLETED, CANCELLING, CANCELLED, and FAILED.
+	Status *string
+
+	// An identifier associated with a message movement task. When this field is
+	// returned in the response of the ListMessageMoveTasks action, it is only
+	// populated for tasks that are in RUNNING status.
+	TaskHandle *string
 
 	noSmithyDocumentSerde
 }
@@ -153,7 +187,8 @@ type Message struct {
 // attribute has the same restrictions on the content as the message body. For more
 // information, see SendMessage . Name , type , value and the message body must
 // not be empty or null. All parts of the message attribute, including Name , Type
-// , and Value , are part of the message size restriction (256 KB or 262,144 bytes).
+// , and Value , are part of the message size restriction (256 KiB or 262,144
+// bytes).
 type MessageAttributeValue struct {
 
 	// Amazon SQS supports the following logical data types: String , Number , and

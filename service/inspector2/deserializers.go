@@ -7710,6 +7710,22 @@ func awsRestjson1_deserializeDocumentCoveredResource(v **types.CoveredResource, 
 				sv.AccountId = ptr.String(jtv)
 			}
 
+		case "lastScannedAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastScannedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected DateTimeTimestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "resourceId":
 			if value != nil {
 				jtv, ok := value.(string)

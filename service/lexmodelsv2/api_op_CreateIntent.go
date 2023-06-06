@@ -53,7 +53,7 @@ type CreateIntentInput struct {
 	// This member is required.
 	BotId *string
 
-	// The identifier of the version of the bot associated with this intent.
+	// The version of the bot associated with this intent.
 	//
 	// This member is required.
 	BotVersion *string
@@ -148,7 +148,7 @@ type CreateIntentOutput struct {
 	// The identifier of the bot associated with the intent.
 	BotId *string
 
-	// The identifier of the version of the bot associated with the intent.
+	// The version of the bot associated with the intent.
 	BotVersion *string
 
 	// A timestamp of the date and time that the intent was created.

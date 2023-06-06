@@ -17,11 +17,7 @@ import (
 // requests with each ChangeMessageVisibilityBatch action. Because the batch
 // request can result in a combination of successful and unsuccessful actions, you
 // should check for batch errors even when the call returns an HTTP status code of
-// 200 . Some actions take lists of parameters. These lists are specified using the
-// param.n notation. Values of n are integers starting from 1. For example, a
-// parameter list with two elements looks like this: &AttributeName.1=first
-//
-//	&AttributeName.2=second
+// 200 .
 func (c *Client) ChangeMessageVisibilityBatch(ctx context.Context, params *ChangeMessageVisibilityBatchInput, optFns ...func(*Options)) (*ChangeMessageVisibilityBatchOutput, error) {
 	if params == nil {
 		params = &ChangeMessageVisibilityBatchInput{}
@@ -39,7 +35,7 @@ func (c *Client) ChangeMessageVisibilityBatch(ctx context.Context, params *Chang
 
 type ChangeMessageVisibilityBatchInput struct {
 
-	// A list of receipt handles of the messages for which the visibility timeout must
+	// Lists the receipt handles of the messages for which the visibility timeout must
 	// be changed.
 	//
 	// This member is required.

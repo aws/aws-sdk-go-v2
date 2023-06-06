@@ -96,7 +96,7 @@ type UpdateSlotOutput struct {
 	// The identifier of the bot that contains the slot.
 	BotId *string
 
-	// The identifier of the slot version that contains the slot. Will always be DRAFT .
+	// The version of the bot that contains the slot. Will always be DRAFT .
 	BotVersion *string
 
 	// The timestamp of the date and time that the slot was created.

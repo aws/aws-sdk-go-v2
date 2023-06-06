@@ -21,8 +21,7 @@ import (
 // historical data for the last 35 days, in 24-hour intervals. For a description of
 // the historical metrics that are supported by GetMetricDataV2 and GetMetricData ,
 // see Historical metrics definitions (https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html)
-// in the Amazon Connect Administrator's Guide. This API is not available in the
-// Amazon Web Services GovCloud (US) Regions.
+// in the Amazon Connect Administrator's Guide.
 func (c *Client) GetMetricDataV2(ctx context.Context, params *GetMetricDataV2Input, optFns ...func(*Options)) (*GetMetricDataV2Output, error) {
 	if params == nil {
 		params = &GetMetricDataV2Input{}

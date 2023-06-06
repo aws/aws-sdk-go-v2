@@ -11962,6 +11962,59 @@ func validatePivotTableDimensionList(v []types.DimensionField) error {
 	}
 }
 
+func validatePivotTableFieldCollapseStateOption(v *types.PivotTableFieldCollapseStateOption) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PivotTableFieldCollapseStateOption"}
+	if v.Target == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Target"))
+	} else if v.Target != nil {
+		if err := validatePivotTableFieldCollapseStateTarget(v.Target); err != nil {
+			invalidParams.AddNested("Target", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePivotTableFieldCollapseStateOptionList(v []types.PivotTableFieldCollapseStateOption) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PivotTableFieldCollapseStateOptionList"}
+	for i := range v {
+		if err := validatePivotTableFieldCollapseStateOption(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePivotTableFieldCollapseStateTarget(v *types.PivotTableFieldCollapseStateTarget) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PivotTableFieldCollapseStateTarget"}
+	if v.FieldDataPathValues != nil {
+		if err := validateDataPathValueList(v.FieldDataPathValues); err != nil {
+			invalidParams.AddNested("FieldDataPathValues", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePivotTableFieldOption(v *types.PivotTableFieldOption) error {
 	if v == nil {
 		return nil
@@ -12007,6 +12060,11 @@ func validatePivotTableFieldOptions(v *types.PivotTableFieldOptions) error {
 	if v.DataPathOptions != nil {
 		if err := validatePivotTableDataPathOptionList(v.DataPathOptions); err != nil {
 			invalidParams.AddNested("DataPathOptions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CollapseStateOptions != nil {
+		if err := validatePivotTableFieldCollapseStateOptionList(v.CollapseStateOptions); err != nil {
+			invalidParams.AddNested("CollapseStateOptions", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

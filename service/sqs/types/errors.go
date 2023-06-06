@@ -216,7 +216,7 @@ func (e *MessageNotInflight) ErrorCode() string {
 func (e *MessageNotInflight) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified action violates a limit. For example, ReceiveMessage returns this
-// error if the maximum number of inflight messages is reached and AddPermission
+// error if the maximum number of in flight messages is reached and AddPermission
 // returns this error if the maximum number of permissions for the queue is
 // reached.
 type OverLimit struct {
@@ -378,6 +378,32 @@ func (e *ReceiptHandleIsInvalid) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ReceiptHandleIsInvalid) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// One or more specified resources don't exist.
+type ResourceNotFoundException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ResourceNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ResourceNotFoundException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The batch request contains more entries than permissible.
 type TooManyEntriesInBatchRequest struct {

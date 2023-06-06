@@ -1,0 +1,8 @@
+{
+    "id": "86315e6a-1bea-473d-9a82-82ec7241bab8",
+    "type": "feature",
+    "description": "Adds new response properties and request parameters for 'last scanned at' on the ListCoverage operation. This feature allows you to search and view the date of which your resources were last scanned by Inspector.",
+    "modules": [
+        "service/inspector2"
+    ]
+}

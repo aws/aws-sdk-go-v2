@@ -1,0 +1,8 @@
+{
+    "id": "a3e0e03f-2647-48d7-80b0-b732f96d0571",
+    "type": "feature",
+    "description": "This release provides customers the ability to specify an allocation strategies amongst PRICE_CAPACITY_OPTIMIZED, CAPACITY_OPTIMIZED, LOWEST_PRICE, DIVERSIFIED for Spot instances in Instance Feet cluster. This enables customers to choose an allocation strategy best suited for their workload.",
+    "modules": [
+        "service/emr"
+    ]
+}

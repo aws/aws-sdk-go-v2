@@ -48,6 +48,11 @@ type CreateJobInput struct {
 	// A short text description of the job.
 	Description *string
 
+	// The package version Amazon Resource Names (ARNs) that are installed on the
+	// device when the job successfully completes. Note:The following Length
+	// Constraints relates to a single string. Up to five strings are allowed.
+	DestinationPackageVersions []string
+
 	// The job document. Required if you don't specify a value for documentSource .
 	Document *string
 
@@ -60,7 +65,7 @@ type CreateJobInput struct {
 	// An S3 link, or S3 object URL, to the job document. The link is an Amazon S3
 	// object URL and is required if you don't specify a value for document . For
 	// example, --document-source
-	// https://s3.region-code.amazonaws.com/example-firmware/device-firmware.1.0 . For
+	// https://s3.region-code.amazonaws.com/example-firmware/device-firmware.1.0 For
 	// more information, see Methods for accessing a bucket (https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-bucket-intro.html)
 	// .
 	DocumentSource *string

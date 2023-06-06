@@ -86,7 +86,7 @@ type DescribeAssetBundleExportJobOutput struct {
 	// The include dependencies flag.
 	IncludeAllDependencies bool
 
-	// Indicates tha status of a job through its queueing and execution. Poll this
+	// Indicates the status of a job through its queuing and execution. Poll this
 	// DescribeAssetBundleExportApi until JobStatus is either SUCCESSFUL or FAILED .
 	JobStatus types.AssetBundleExportJobStatus
 

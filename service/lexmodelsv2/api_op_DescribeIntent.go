@@ -76,7 +76,8 @@ type DescribeIntentOutput struct {
 	// fulfillment.
 	FulfillmentCodeHook *types.FulfillmentCodeHookSettings
 
-	//
+	// Configuration setting for a response sent to the user before Amazon Lex starts
+	// eliciting slots.
 	InitialResponseSetting *types.InitialResponseSetting
 
 	// A list of contexts that must be active for the intent to be considered for

@@ -51,7 +51,7 @@ type CreateSlotTypeInput struct {
 	// This member is required.
 	LocaleId *string
 
-	// The name for the slot. A slot type name must be unique within the account.
+	// The name for the slot. A slot type name must be unique within the intent.
 	//
 	// This member is required.
 	SlotTypeName *string
@@ -78,12 +78,13 @@ type CreateSlotTypeInput struct {
 
 	// Determines the strategy that Amazon Lex uses to select a value from the list of
 	// possible values. The field can be set to one of the following values:
-	//   - OriginalValue - Returns the value entered by the user, if the user value is
+	//   - ORIGINAL_VALUE - Returns the value entered by the user, if the user value is
 	//   similar to the slot value.
-	//   - TopResolution - If there is a resolution list for the slot, return the first
-	//   value in the resolution list. If there is no resolution list, return null.
+	//   - TOP_RESOLUTION - If there is a resolution list for the slot, return the
+	//   first value in the resolution list. If there is no resolution list, return null.
+	//
 	// If you don't specify the valueSelectionSetting parameter, the default is
-	// OriginalValue .
+	// ORIGINAL_VALUE .
 	ValueSelectionSetting *types.SlotValueSelectionSetting
 
 	noSmithyDocumentSerde

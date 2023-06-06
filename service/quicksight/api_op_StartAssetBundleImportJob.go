@@ -57,7 +57,7 @@ type StartAssetBundleImportJobInput struct {
 	// The failure action for the import job. If you choose ROLLBACK , failed import
 	// jobs will attempt to undo any asset changes caused by the failed job. If you
 	// choose DO_NOTHING , failed import jobs will not attempt to roll back any asset
-	// changes caused by the failed job, possibly leaving the Amazon QuickSight account
+	// changes caused by the failed job, possibly keeping the Amazon QuickSight account
 	// in an inconsistent state.
 	FailureAction types.AssetBundleImportFailureAction
 

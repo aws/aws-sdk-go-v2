@@ -68,7 +68,8 @@ type UpdateIntentInput struct {
 	// provided and the intent is ready for fulfillment.
 	FulfillmentCodeHook *types.FulfillmentCodeHookSettings
 
-	//
+	// Configuration settings for a response sent to the user before Amazon Lex starts
+	// eliciting slots.
 	InitialResponseSetting *types.InitialResponseSetting
 
 	// A new list of contexts that must be active in order for Amazon Lex to consider
@@ -121,7 +122,8 @@ type UpdateIntentOutput struct {
 	// The updated Lambda function called when the intent is ready for fulfillment.
 	FulfillmentCodeHook *types.FulfillmentCodeHookSettings
 
-	//
+	// Configuration settings for a response sent to the user before Amazon Lex starts
+	// eliciting slots.
 	InitialResponseSetting *types.InitialResponseSetting
 
 	// The updated list of contexts that must be active for the intent to be

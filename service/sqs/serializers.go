@@ -80,6 +80,70 @@ func (m *awsAwsquery_serializeOpAddPermission) HandleSerialize(ctx context.Conte
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsquery_serializeOpCancelMessageMoveTask struct {
+}
+
+func (*awsAwsquery_serializeOpCancelMessageMoveTask) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpCancelMessageMoveTask) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CancelMessageMoveTaskInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("CancelMessageMoveTask")
+	body.Key("Version").String("2012-11-05")
+
+	if err := awsAwsquery_serializeOpDocumentCancelMessageMoveTaskInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsquery_serializeOpChangeMessageVisibility struct {
 }
 
@@ -656,6 +720,70 @@ func (m *awsAwsquery_serializeOpListDeadLetterSourceQueues) HandleSerialize(ctx 
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsquery_serializeOpListMessageMoveTasks struct {
+}
+
+func (*awsAwsquery_serializeOpListMessageMoveTasks) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpListMessageMoveTasks) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListMessageMoveTasksInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("ListMessageMoveTasks")
+	body.Key("Version").String("2012-11-05")
+
+	if err := awsAwsquery_serializeOpDocumentListMessageMoveTasksInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsquery_serializeOpListQueues struct {
 }
 
@@ -1148,6 +1276,70 @@ func (m *awsAwsquery_serializeOpSetQueueAttributes) HandleSerialize(ctx context.
 	body.Key("Version").String("2012-11-05")
 
 	if err := awsAwsquery_serializeOpDocumentSetQueueAttributesInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsquery_serializeOpStartMessageMoveTask struct {
+}
+
+func (*awsAwsquery_serializeOpStartMessageMoveTask) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpStartMessageMoveTask) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StartMessageMoveTaskInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("StartMessageMoveTask")
+	body.Key("Version").String("2012-11-05")
+
+	if err := awsAwsquery_serializeOpDocumentStartMessageMoveTaskInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1674,6 +1866,18 @@ func awsAwsquery_serializeOpDocumentAddPermissionInput(v *AddPermissionInput, va
 	return nil
 }
 
+func awsAwsquery_serializeOpDocumentCancelMessageMoveTaskInput(v *CancelMessageMoveTaskInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.TaskHandle != nil {
+		objectKey := object.Key("TaskHandle")
+		objectKey.String(*v.TaskHandle)
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeOpDocumentChangeMessageVisibilityBatchInput(v *ChangeMessageVisibilityBatchInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -1842,6 +2046,23 @@ func awsAwsquery_serializeOpDocumentListDeadLetterSourceQueuesInput(v *ListDeadL
 	if v.QueueUrl != nil {
 		objectKey := object.Key("QueueUrl")
 		objectKey.String(*v.QueueUrl)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentListMessageMoveTasksInput(v *ListMessageMoveTasksInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.MaxResults != 0 {
+		objectKey := object.Key("MaxResults")
+		objectKey.Integer(v.MaxResults)
+	}
+
+	if v.SourceArn != nil {
+		objectKey := object.Key("SourceArn")
+		objectKey.String(*v.SourceArn)
 	}
 
 	return nil
@@ -2035,6 +2256,28 @@ func awsAwsquery_serializeOpDocumentSetQueueAttributesInput(v *SetQueueAttribute
 	if v.QueueUrl != nil {
 		objectKey := object.Key("QueueUrl")
 		objectKey.String(*v.QueueUrl)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentStartMessageMoveTaskInput(v *StartMessageMoveTaskInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.DestinationArn != nil {
+		objectKey := object.Key("DestinationArn")
+		objectKey.String(*v.DestinationArn)
+	}
+
+	if v.MaxNumberOfMessagesPerSecond != 0 {
+		objectKey := object.Key("MaxNumberOfMessagesPerSecond")
+		objectKey.Integer(v.MaxNumberOfMessagesPerSecond)
+	}
+
+	if v.SourceArn != nil {
+		objectKey := object.Key("SourceArn")
+		objectKey.String(*v.SourceArn)
 	}
 
 	return nil

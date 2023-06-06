@@ -20,7 +20,7 @@ import (
 // than once, the ReceiptHandle is different each time you receive a message. When
 // you use the DeleteMessage action, you must provide the most recently received
 // ReceiptHandle for the message (otherwise, the request succeeds, but the message
-// might not be deleted). For standard queues, it is possible to receive a message
+// will not be deleted). For standard queues, it is possible to receive a message
 // even after you delete it. This might happen on rare occasions if one of the
 // servers which stores a copy of the message is unavailable when you send the
 // request to delete the message. The copy remains on the server and might be

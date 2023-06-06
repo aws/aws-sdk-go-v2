@@ -1,0 +1,8 @@
+{
+    "id": "113424e7-c971-47c6-9153-b70f4ed5a329",
+    "type": "feature",
+    "description": "AWS Signer is launching Container Image Signing, a new feature that enables you to sign and verify container images. This feature enables you to validate that only container images you approve are used in your enterprise.",
+    "modules": [
+        "service/signer"
+    ]
+}

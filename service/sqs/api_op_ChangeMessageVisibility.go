@@ -14,12 +14,14 @@ import (
 // value. The default visibility timeout for a message is 30 seconds. The minimum
 // is 0 seconds. The maximum is 12 hours. For more information, see Visibility
 // Timeout (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html)
-// in the Amazon SQS Developer Guide. For example, you have a message with a
-// visibility timeout of 5 minutes. After 3 minutes, you call
-// ChangeMessageVisibility with a timeout of 10 minutes. You can continue to call
-// ChangeMessageVisibility to extend the visibility timeout to the maximum allowed
-// time. If you try to extend the visibility timeout beyond the maximum, your
-// request is rejected. An Amazon SQS message has three basic states:
+// in the Amazon SQS Developer Guide. For example, if the default timeout for a
+// queue is 60 seconds, 15 seconds have elapsed since you received the message, and
+// you send a ChangeMessageVisibility call with VisibilityTimeout set to 10
+// seconds, the 10 seconds begin to count from the time that you make the
+// ChangeMessageVisibility call. Thus, any attempt to change the visibility timeout
+// or to delete that message 10 seconds after you initially change the visibility
+// timeout (a total of 25 seconds) might result in an error. An Amazon SQS message
+// has three basic states:
 //   - Sent to a queue by a producer.
 //   - Received from the queue by a consumer.
 //   - Deleted from the queue.
@@ -29,16 +31,16 @@ import (
 // 2). There is no limit to the number of stored messages. A message is considered
 // to be in flight after it is received from a queue by a consumer, but not yet
 // deleted from the queue (that is, between states 2 and 3). There is a limit to
-// the number of inflight messages. Limits that apply to inflight messages are
+// the number of in flight messages. Limits that apply to in flight messages are
 // unrelated to the unlimited number of stored messages. For most standard queues
 // (depending on queue traffic and message backlog), there can be a maximum of
-// approximately 120,000 inflight messages (received from a queue by a consumer,
+// approximately 120,000 in flight messages (received from a queue by a consumer,
 // but not yet deleted from the queue). If you reach this limit, Amazon SQS returns
 // the OverLimit error message. To avoid reaching the limit, you should delete
 // messages from the queue after they're processed. You can also increase the
 // number of queues you use to process your messages. To request a limit increase,
 // file a support request (https://console.aws.amazon.com/support/home#/case/create?issueType=service-limit-increase&limitType=service-code-sqs)
-// . For FIFO queues, there can be a maximum of 20,000 inflight messages (received
+// . For FIFO queues, there can be a maximum of 20,000 in flight messages (received
 // from a queue by a consumer, but not yet deleted from the queue). If you reach
 // this limit, Amazon SQS returns no error messages. If you attempt to set the
 // VisibilityTimeout to a value greater than the maximum time left, Amazon SQS
@@ -72,7 +74,7 @@ type ChangeMessageVisibilityInput struct {
 	// This member is required.
 	QueueUrl *string
 
-	// The receipt handle associated with the message whose visibility timeout is
+	// The receipt handle associated with the message, whose visibility timeout is
 	// changed. This parameter is returned by the ReceiveMessage action.
 	//
 	// This member is required.

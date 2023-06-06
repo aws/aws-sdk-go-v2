@@ -790,6 +790,9 @@ func awsAwsquery_deserializeOpErrorCreateAccountAlias(response *smithyhttp.Respo
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
+	case strings.EqualFold("ConcurrentModification", errorCode):
+		return awsAwsquery_deserializeErrorConcurrentModificationException(response, errorBody)
+
 	case strings.EqualFold("EntityAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorEntityAlreadyExistsException(response, errorBody)
 
@@ -2306,6 +2309,9 @@ func awsAwsquery_deserializeOpErrorDeactivateMFADevice(response *smithyhttp.Resp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
+	case strings.EqualFold("ConcurrentModification", errorCode):
+		return awsAwsquery_deserializeErrorConcurrentModificationException(response, errorBody)
+
 	case strings.EqualFold("EntityTemporarilyUnmodifiable", errorCode):
 		return awsAwsquery_deserializeErrorEntityTemporarilyUnmodifiableException(response, errorBody)
 
@@ -2467,6 +2473,9 @@ func awsAwsquery_deserializeOpErrorDeleteAccountAlias(response *smithyhttp.Respo
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
+	case strings.EqualFold("ConcurrentModification", errorCode):
+		return awsAwsquery_deserializeErrorConcurrentModificationException(response, errorBody)
+
 	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
@@ -3799,6 +3808,9 @@ func awsAwsquery_deserializeOpErrorDeleteSigningCertificate(response *smithyhttp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
+	case strings.EqualFold("ConcurrentModification", errorCode):
+		return awsAwsquery_deserializeErrorConcurrentModificationException(response, errorBody)
+
 	case strings.EqualFold("LimitExceeded", errorCode):
 		return awsAwsquery_deserializeErrorLimitExceededException(response, errorBody)
 
@@ -4191,6 +4203,9 @@ func awsAwsquery_deserializeOpErrorDeleteVirtualMFADevice(response *smithyhttp.R
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
+	case strings.EqualFold("ConcurrentModification", errorCode):
+		return awsAwsquery_deserializeErrorConcurrentModificationException(response, errorBody)
+
 	case strings.EqualFold("DeleteConflict", errorCode):
 		return awsAwsquery_deserializeErrorDeleteConflictException(response, errorBody)
 
@@ -4522,6 +4537,9 @@ func awsAwsquery_deserializeOpErrorEnableMFADevice(response *smithyhttp.Response
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
+	case strings.EqualFold("ConcurrentModification", errorCode):
+		return awsAwsquery_deserializeErrorConcurrentModificationException(response, errorBody)
+
 	case strings.EqualFold("EntityAlreadyExists", errorCode):
 		return awsAwsquery_deserializeErrorEntityAlreadyExistsException(response, errorBody)
 
@@ -12250,6 +12268,9 @@ func awsAwsquery_deserializeOpErrorResyncMFADevice(response *smithyhttp.Response
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
+	case strings.EqualFold("ConcurrentModification", errorCode):
+		return awsAwsquery_deserializeErrorConcurrentModificationException(response, errorBody)
+
 	case strings.EqualFold("InvalidAuthenticationCode", errorCode):
 		return awsAwsquery_deserializeErrorInvalidAuthenticationCodeException(response, errorBody)
 
@@ -15435,6 +15456,9 @@ func awsAwsquery_deserializeOpErrorUploadSigningCertificate(response *smithyhttp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
+	case strings.EqualFold("ConcurrentModification", errorCode):
+		return awsAwsquery_deserializeErrorConcurrentModificationException(response, errorBody)
+
 	case strings.EqualFold("DuplicateCertificate", errorCode):
 		return awsAwsquery_deserializeErrorDuplicateCertificateException(response, errorBody)
 

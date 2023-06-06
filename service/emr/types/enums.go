@@ -730,7 +730,10 @@ type SpotProvisioningAllocationStrategy string
 
 // Enum values for SpotProvisioningAllocationStrategy
 const (
-	SpotProvisioningAllocationStrategyCapacityOptimized SpotProvisioningAllocationStrategy = "capacity-optimized"
+	SpotProvisioningAllocationStrategyCapacityOptimized      SpotProvisioningAllocationStrategy = "capacity-optimized"
+	SpotProvisioningAllocationStrategyPriceCapacityOptimized SpotProvisioningAllocationStrategy = "price-capacity-optimized"
+	SpotProvisioningAllocationStrategyLowestPrice            SpotProvisioningAllocationStrategy = "lowest-price"
+	SpotProvisioningAllocationStrategyDiversified            SpotProvisioningAllocationStrategy = "diversified"
 )
 
 // Values returns all known values for SpotProvisioningAllocationStrategy. Note
@@ -740,6 +743,9 @@ const (
 func (SpotProvisioningAllocationStrategy) Values() []SpotProvisioningAllocationStrategy {
 	return []SpotProvisioningAllocationStrategy{
 		"capacity-optimized",
+		"price-capacity-optimized",
+		"lowest-price",
+		"diversified",
 	}
 }
 

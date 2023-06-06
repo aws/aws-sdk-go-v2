@@ -16,7 +16,7 @@ import (
 // viewable by the ListSigningJobs operation for two years after they are
 // performed. Note the following requirements:
 //   - You must create an Amazon S3 source bucket. For more information, see
-//     Create a Bucket (http://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html)
+//     Creating a Bucket (http://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html)
 //     in the Amazon S3 Getting Started Guide.
 //   - Your S3 source bucket must be version enabled.
 //   - You must create an S3 destination bucket. Code signing uses your S3
@@ -28,7 +28,8 @@ import (
 //
 // You can call the DescribeSigningJob and the ListSigningJobs actions after you
 // call StartSigningJob . For a Java example that shows how to use this action, see
-// http://docs.aws.amazon.com/acm/latest/userguide/ (http://docs.aws.amazon.com/acm/latest/userguide/)
+// StartSigningJob (https://docs.aws.amazon.com/signer/latest/developerguide/api-startsigningjob.html)
+// .
 func (c *Client) StartSigningJob(ctx context.Context, params *StartSigningJobInput, optFns ...func(*Options)) (*StartSigningJobOutput, error) {
 	if params == nil {
 		params = &StartSigningJobInput{}

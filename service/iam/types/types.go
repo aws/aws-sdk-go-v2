@@ -1699,7 +1699,7 @@ type VirtualMFADevice struct {
 	SerialNumber *string
 
 	// The base32 seed defined as specified in RFC3548 (https://tools.ietf.org/html/rfc3548.txt)
-	// . The Base32StringSeed is base64-encoded.
+	// . The Base32StringSeed is base32-encoded.
 	Base32StringSeed []byte
 
 	// The date and time on which the virtual MFA device was enabled.

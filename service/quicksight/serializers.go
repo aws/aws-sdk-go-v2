@@ -26134,6 +26134,13 @@ func awsRestjson1_serializeDocumentPivotTableCellConditionalFormatting(v *types.
 		}
 	}
 
+	if v.Scopes != nil {
+		ok := object.Key("Scopes")
+		if err := awsRestjson1_serializeDocumentPivotTableConditionalFormattingScopeList(v.Scopes, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.TextFormat != nil {
 		ok := object.Key("TextFormat")
 		if err := awsRestjson1_serializeDocumentTextConditionalFormat(v.TextFormat, ok); err != nil {
@@ -26194,6 +26201,19 @@ func awsRestjson1_serializeDocumentPivotTableConditionalFormattingScope(v *types
 		ok.String(string(v.Role))
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPivotTableConditionalFormattingScopeList(v []types.PivotTableConditionalFormattingScope, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentPivotTableConditionalFormattingScope(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -26291,6 +26311,57 @@ func awsRestjson1_serializeDocumentPivotTableDimensionList(v []types.DimensionFi
 	return nil
 }
 
+func awsRestjson1_serializeDocumentPivotTableFieldCollapseStateOption(v *types.PivotTableFieldCollapseStateOption, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.State) > 0 {
+		ok := object.Key("State")
+		ok.String(string(v.State))
+	}
+
+	if v.Target != nil {
+		ok := object.Key("Target")
+		if err := awsRestjson1_serializeDocumentPivotTableFieldCollapseStateTarget(v.Target, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPivotTableFieldCollapseStateOptionList(v []types.PivotTableFieldCollapseStateOption, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentPivotTableFieldCollapseStateOption(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPivotTableFieldCollapseStateTarget(v *types.PivotTableFieldCollapseStateTarget, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FieldDataPathValues != nil {
+		ok := object.Key("FieldDataPathValues")
+		if err := awsRestjson1_serializeDocumentDataPathValueList(v.FieldDataPathValues, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FieldId != nil {
+		ok := object.Key("FieldId")
+		ok.String(*v.FieldId)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentPivotTableFieldOption(v *types.PivotTableFieldOption, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -26329,6 +26400,13 @@ func awsRestjson1_serializeDocumentPivotTableFieldOptionList(v []types.PivotTabl
 func awsRestjson1_serializeDocumentPivotTableFieldOptions(v *types.PivotTableFieldOptions, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.CollapseStateOptions != nil {
+		ok := object.Key("CollapseStateOptions")
+		if err := awsRestjson1_serializeDocumentPivotTableFieldCollapseStateOptionList(v.CollapseStateOptions, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.DataPathOptions != nil {
 		ok := object.Key("DataPathOptions")
@@ -26856,6 +26934,11 @@ func awsRestjson1_serializeDocumentRadarChartConfiguration(v *types.RadarChartCo
 	if v.AlternateBandOddColor != nil {
 		ok := object.Key("AlternateBandOddColor")
 		ok.String(*v.AlternateBandOddColor)
+	}
+
+	if len(v.AxesRangeScale) > 0 {
+		ok := object.Key("AxesRangeScale")
+		ok.String(string(v.AxesRangeScale))
 	}
 
 	if v.BaseSeriesSettings != nil {

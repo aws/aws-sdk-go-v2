@@ -76,15 +76,14 @@ type ReceiveMessageInput struct {
 	//   received across all queues but not deleted.
 	//   - AWSTraceHeader – Returns the X-Ray trace header string.
 	//   - SenderId
-	//   - For an IAM user, returns the IAM user ID, for example ABCDEFGHI1JKLMNOPQ23R
-	//   .
+	//   - For a user, returns the user ID, for example ABCDEFGHI1JKLMNOPQ23R .
 	//   - For an IAM role, returns the IAM role ID, for example
 	//   ABCDE1F2GH3I4JK5LMNOP:i-a123b456 .
 	//   - SentTimestamp – Returns the time the message was sent to the queue ( epoch
 	//   time (http://en.wikipedia.org/wiki/Unix_time) in milliseconds).
 	//   - SqsManagedSseEnabled – Enables server-side queue encryption using SQS owned
 	//   encryption keys. Only one server-side encryption option is supported per queue
-	//   (e.g. SSE-KMS (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-configure-sse-existing-queue.html)
+	//   (for example, SSE-KMS (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-configure-sse-existing-queue.html)
 	//   or SSE-SQS (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-configure-sqs-sse-queue.html)
 	//   ).
 	//   - MessageDeduplicationId – Returns the value provided by the producer that

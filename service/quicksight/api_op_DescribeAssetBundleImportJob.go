@@ -74,9 +74,9 @@ type DescribeAssetBundleImportJobOutput struct {
 	// The failure action for the import job.
 	FailureAction types.AssetBundleImportFailureAction
 
-	// Indicates tha status of a job through its queueing and execution. Poll this
+	// Indicates the status of a job through its queuing and execution. Poll the
 	// DescribeAssetBundleImport API until JobStatus returns one of the following
-	// values.
+	// values:
 	//   - SUCCESSFUL
 	//   - FAILED
 	//   - FAILED_ROLLBACK_COMPLETED

@@ -11,9 +11,9 @@ import (
 )
 
 // Creates an alias for your Amazon Web Services account. For information about
-// using an Amazon Web Services account alias, see Using an alias for your Amazon
-// Web Services account ID (https://docs.aws.amazon.com/IAM/latest/UserGuide/AccountAlias.html)
-// in the IAM User Guide.
+// using an Amazon Web Services account alias, see Creating, deleting, and listing
+// an Amazon Web Services account alias (https://docs.aws.amazon.com/signin/latest/userguide/CreateAccountAlias.html)
+// in the Amazon Web Services Sign-In User Guide.
 func (c *Client) CreateAccountAlias(ctx context.Context, params *CreateAccountAliasInput, optFns ...func(*Options)) (*CreateAccountAliasOutput, error) {
 	if params == nil {
 		params = &CreateAccountAliasInput{}

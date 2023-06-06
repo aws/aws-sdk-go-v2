@@ -20,17 +20,14 @@ import (
 //     upload your policy. For more information, see Using Custom Policies with the
 //     Amazon SQS Access Policy Language (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-creating-custom-policies.html)
 //     in the Amazon SQS Developer Guide.
-//   - An Amazon SQS policy can have a maximum of 7 actions.
+//   - An Amazon SQS policy can have a maximum of seven actions per statement.
 //   - To remove the ability to change queue permissions, you must deny permission
 //     to the AddPermission , RemovePermission , and SetQueueAttributes actions in
 //     your IAM policy.
+//   - Amazon SQS AddPermission does not support adding a non-account principal.
 //
-// Some actions take lists of parameters. These lists are specified using the
-// param.n notation. Values of n are integers starting from 1. For example, a
-// parameter list with two elements looks like this: &AttributeName.1=first
-// &AttributeName.2=second Cross-account permissions don't apply to this action.
-// For more information, see Grant cross-account permissions to a role and a user
-// name (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name)
+// Cross-account permissions don't apply to this action. For more information, see
+// Grant cross-account permissions to a role and a username (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name)
 // in the Amazon SQS Developer Guide.
 func (c *Client) AddPermission(ctx context.Context, params *AddPermissionInput, optFns ...func(*Options)) (*AddPermissionOutput, error) {
 	if params == nil {

@@ -14,6 +14,7 @@ const (
 	MessageSystemAttributeNameMessageDeduplicationId           MessageSystemAttributeName = "MessageDeduplicationId"
 	MessageSystemAttributeNameMessageGroupId                   MessageSystemAttributeName = "MessageGroupId"
 	MessageSystemAttributeNameAWSTraceHeader                   MessageSystemAttributeName = "AWSTraceHeader"
+	MessageSystemAttributeNameDeadLetterQueueSourceArn         MessageSystemAttributeName = "DeadLetterQueueSourceArn"
 )
 
 // Values returns all known values for MessageSystemAttributeName. Note that this
@@ -29,6 +30,7 @@ func (MessageSystemAttributeName) Values() []MessageSystemAttributeName {
 		"MessageDeduplicationId",
 		"MessageGroupId",
 		"AWSTraceHeader",
+		"DeadLetterQueueSourceArn",
 	}
 }
 

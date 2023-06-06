@@ -198,6 +198,12 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "kendra-ranking.ca-central-1.api.aws",
 			},
 			endpoints.EndpointKey{
+				Region:  "ca-central-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "kendra-ranking-fips.ca-central-1.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "eu-central-2",
 			}: endpoints.Endpoint{
 				Hostname: "kendra-ranking.eu-central-2.api.aws",
@@ -248,9 +254,21 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "kendra-ranking.us-east-1.api.aws",
 			},
 			endpoints.EndpointKey{
+				Region:  "us-east-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "kendra-ranking-fips.us-east-1.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "us-east-2",
 			}: endpoints.Endpoint{
 				Hostname: "kendra-ranking.us-east-2.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "us-east-2",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "kendra-ranking-fips.us-east-2.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "us-west-1",
@@ -261,6 +279,12 @@ var defaultPartitions = endpoints.Partitions{
 				Region: "us-west-2",
 			}: endpoints.Endpoint{
 				Hostname: "kendra-ranking.us-west-2.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region:  "us-west-2",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "kendra-ranking-fips.us-west-2.api.aws",
 			},
 		},
 	},

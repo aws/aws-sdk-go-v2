@@ -2970,6 +2970,36 @@ func awsRestjson1_serializeDocumentAwsEcrContainerAggregation(v *types.AwsEcrCon
 	return nil
 }
 
+func awsRestjson1_serializeDocumentCoverageDateFilter(v *types.CoverageDateFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EndInclusive != nil {
+		ok := object.Key("endInclusive")
+		ok.Double(smithytime.FormatEpochSeconds(*v.EndInclusive))
+	}
+
+	if v.StartInclusive != nil {
+		ok := object.Key("startInclusive")
+		ok.Double(smithytime.FormatEpochSeconds(*v.StartInclusive))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCoverageDateFilterList(v []types.CoverageDateFilter, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentCoverageDateFilter(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentCoverageFilterCriteria(v *types.CoverageFilterCriteria, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3019,6 +3049,13 @@ func awsRestjson1_serializeDocumentCoverageFilterCriteria(v *types.CoverageFilte
 	if v.LambdaFunctionTags != nil {
 		ok := object.Key("lambdaFunctionTags")
 		if err := awsRestjson1_serializeDocumentCoverageMapFilterList(v.LambdaFunctionTags, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LastScannedAt != nil {
+		ok := object.Key("lastScannedAt")
+		if err := awsRestjson1_serializeDocumentCoverageDateFilterList(v.LastScannedAt, ok); err != nil {
 			return err
 		}
 	}
