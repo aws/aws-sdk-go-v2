@@ -11,6 +11,7 @@ import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.TriConsumer;
 import software.amazon.smithy.go.codegen.endpoints.EndpointResolutionGenerator;
 import software.amazon.smithy.go.codegen.integration.ConfigField;
+import software.amazon.smithy.go.codegen.integration.ConfigFieldResolver;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
 import software.amazon.smithy.model.Model;
@@ -26,6 +27,7 @@ public class AwsEndpointResolverAdapterGenerator implements GoIntegration {
 
     public static final String LEGACY_ADAPTER_TYPE = "legacyEndpointResolverAdapter";
     public static final String COMPATIBLE_ADAPTER_TYPE = "compatibleEndpointResolver";
+    public static final String FINALIZE_ENDPOINT_RESOLVER_V2 = "finalize" + EndpointResolutionGenerator.RESOLVER_INTERFACE_NAME;
 
 
     private Map<String, Object> commonCodegenArgs;
@@ -274,7 +276,7 @@ public class AwsEndpointResolverAdapterGenerator implements GoIntegration {
     private GoWriter.Writable generateFinalizeMethod() {
         return goTemplate(
             """
-                func finalizeEndpointResolverV2(options *Options) {
+                func $finalizeMethodName:L(options *Options) {
                     // Check if the EndpointResolver was not user provided
                     // but is the SDK's default provided version.
                     _, ok := options.EndpointResolver.(isDefaultProvidedImplementation)
@@ -295,6 +297,7 @@ public class AwsEndpointResolverAdapterGenerator implements GoIntegration {
             """,
             commonCodegenArgs,
             MapUtils.of(
+                       "finalizeMethodName", FINALIZE_ENDPOINT_RESOLVER_V2,
                     "newResolverFuncName", EndpointResolutionGenerator.NEW_RESOLVER_FUNC_NAME
             ));
 
@@ -313,6 +316,12 @@ public class AwsEndpointResolverAdapterGenerator implements GoIntegration {
                                         .withHelper(true)
                                         .build()
                         ))
+                        .addConfigFieldResolver(ConfigFieldResolver.builder()
+                                        .location(ConfigFieldResolver.Location.OPERATION)
+                                        .target(ConfigFieldResolver.Target.FINALIZATION)
+                                        .resolver(SymbolUtils.createValueSymbolBuilder(
+                                                FINALIZE_ENDPOINT_RESOLVER_V2).build())
+                                        .build())
                         .build());
     }
 }
