@@ -1,3 +1,7 @@
+# v1.29.0 (2023-06-06)
+
+* **Feature**: This release adds support for Lex Developers to create test sets and to execute those test-sets against their bots.
+
 # v1.28.9 (2023-05-04)
 
 * No change notes available for this release.

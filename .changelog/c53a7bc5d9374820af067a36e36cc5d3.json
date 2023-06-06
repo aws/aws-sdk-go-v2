@@ -1,8 +1,0 @@
-{
-    "id": "c53a7bc5-d937-4820-af06-7a36e36cc5d3",
-    "type": "feature",
-    "description": "This release adds support for Lex Developers to create test sets and to execute those test-sets against their bots.",
-    "modules": [
-        "service/lexmodelsv2"
-    ]
-}

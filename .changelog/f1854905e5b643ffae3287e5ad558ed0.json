@@ -1,8 +1,0 @@
-{
-    "id": "f1854905-e5b6-43ff-ae32-87e5ad558ed0",
-    "type": "feature",
-    "description": "Amazon SQS adds three new APIs - StartMessageMoveTask, CancelMessageMoveTask, and ListMessageMoveTasks to automate redriving messages from dead-letter queues to source queues or a custom destination.",
-    "modules": [
-        "service/sqs"
-    ]
-}

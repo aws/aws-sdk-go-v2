@@ -1,8 +1,0 @@
-{
-    "id": "966df88d-9510-4c3d-8aa9-2f9a070ebf87",
-    "type": "feature",
-    "description": "QuickSight support for pivot table field collapse state, radar chart range scale and multiple scope options in conditional formatting.",
-    "modules": [
-        "service/quicksight"
-    ]
-}

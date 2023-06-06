@@ -41,16 +41,16 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2 v1.19.11
 	github.com/aws/aws-sdk-go-v2/service/elasticsearchservice v1.19.0
 	github.com/aws/aws-sdk-go-v2/service/elastictranscoder v1.14.10
-	github.com/aws/aws-sdk-go-v2/service/emr v1.25.0
+	github.com/aws/aws-sdk-go-v2/service/emr v1.26.0
 	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.19.2
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.16.12
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.19.0
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.14.11
 	github.com/aws/aws-sdk-go-v2/service/glue v1.50.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.17.0
-	github.com/aws/aws-sdk-go-v2/service/iam v1.19.12
+	github.com/aws/aws-sdk-go-v2/service/iam v1.20.0
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.13.10
-	github.com/aws/aws-sdk-go-v2/service/iot v1.37.2
+	github.com/aws/aws-sdk-go-v2/service/iot v1.38.0
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.17.12
 	github.com/aws/aws-sdk-go-v2/service/kms v1.22.0
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.35.0
@@ -75,7 +75,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/shield v1.18.10
 	github.com/aws/aws-sdk-go-v2/service/snowball v1.19.2
 	github.com/aws/aws-sdk-go-v2/service/sns v1.20.11
-	github.com/aws/aws-sdk-go-v2/service/sqs v1.22.0
+	github.com/aws/aws-sdk-go-v2/service/sqs v1.23.0
 	github.com/aws/aws-sdk-go-v2/service/ssm v1.36.4
 	github.com/aws/aws-sdk-go-v2/service/sts v1.19.0
 	github.com/aws/aws-sdk-go-v2/service/support v1.15.0

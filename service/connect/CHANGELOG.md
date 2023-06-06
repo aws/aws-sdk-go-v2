@@ -1,3 +1,7 @@
+# v1.57.1 (2023-06-06)
+
+* **Documentation**: GetMetricDataV2 API is now available in AWS GovCloud(US) region.
+
 # v1.57.0 (2023-05-26)
 
 * **Feature**: Documentation update for a new Initiation Method value in DescribeContact API

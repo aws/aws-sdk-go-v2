@@ -1,8 +1,0 @@
-{
-    "id": "10441de4-9a44-42d9-b12d-e84503daa3ff",
-    "type": "documentation",
-    "description": "GetMetricDataV2 API is now available in AWS GovCloud(US) region.",
-    "modules": [
-        "service/connect"
-    ]
-}

@@ -1,3 +1,25 @@
+# Release (2023-06-06)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.57.1](service/connect/CHANGELOG.md#v1571-2023-06-06)
+  * **Documentation**: GetMetricDataV2 API is now available in AWS GovCloud(US) region.
+* `github.com/aws/aws-sdk-go-v2/service/emr`: [v1.26.0](service/emr/CHANGELOG.md#v1260-2023-06-06)
+  * **Feature**: This release provides customers the ability to specify an allocation strategies amongst PRICE_CAPACITY_OPTIMIZED, CAPACITY_OPTIMIZED, LOWEST_PRICE, DIVERSIFIED for Spot instances in Instance Feet cluster. This enables customers to choose an allocation strategy best suited for their workload.
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.20.0](service/iam/CHANGELOG.md#v1200-2023-06-06)
+  * **Feature**: This release updates the AccountAlias regex pattern with the same length restrictions enforced by the length constraint.
+* `github.com/aws/aws-sdk-go-v2/service/inspector2`: [v1.14.0](service/inspector2/CHANGELOG.md#v1140-2023-06-06)
+  * **Feature**: Adds new response properties and request parameters for 'last scanned at' on the ListCoverage operation. This feature allows you to search and view the date of which your resources were last scanned by Inspector.
+* `github.com/aws/aws-sdk-go-v2/service/iot`: [v1.38.0](service/iot/CHANGELOG.md#v1380-2023-06-06)
+  * **Feature**: Adding IoT Device Management Software Package Catalog APIs to register, store, and report system software packages, along with their versions and metadata in a centralized location.
+* `github.com/aws/aws-sdk-go-v2/service/lexmodelsv2`: [v1.29.0](service/lexmodelsv2/CHANGELOG.md#v1290-2023-06-06)
+  * **Feature**: This release adds support for Lex Developers to create test sets and to execute those test-sets against their bots.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.37.0](service/quicksight/CHANGELOG.md#v1370-2023-06-06)
+  * **Feature**: QuickSight support for pivot table field collapse state, radar chart range scale and multiple scope options in conditional formatting.
+* `github.com/aws/aws-sdk-go-v2/service/signer`: [v1.15.0](service/signer/CHANGELOG.md#v1150-2023-06-06)
+  * **Feature**: AWS Signer is launching Container Image Signing, a new feature that enables you to sign and verify container images. This feature enables you to validate that only container images you approve are used in your enterprise.
+* `github.com/aws/aws-sdk-go-v2/service/sqs`: [v1.23.0](service/sqs/CHANGELOG.md#v1230-2023-06-06)
+  * **Feature**: Amazon SQS adds three new APIs - StartMessageMoveTask, CancelMessageMoveTask, and ListMessageMoveTasks to automate redriving messages from dead-letter queues to source queues or a custom destination.
+
 # Release (2023-06-05)
 
 ## Module Highlights

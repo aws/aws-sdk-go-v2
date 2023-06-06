@@ -1,8 +1,0 @@
-{
-    "id": "971434ec-96f4-4e48-9922-04812779e752",
-    "type": "feature",
-    "description": "Update thing shadow name regex to allow '$' character",
-    "modules": [
-        "service/iotdataplane"
-    ]
-}

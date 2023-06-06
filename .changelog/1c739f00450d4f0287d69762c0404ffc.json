@@ -1,8 +1,0 @@
-{
-    "id": "1c739f00-450d-4f02-87d6-9762c0404ffc",
-    "type": "feature",
-    "description": "Adding IoT Device Management Software Package Catalog APIs to register, store, and report system software packages, along with their versions and metadata in a centralized location.",
-    "modules": [
-        "service/iot"
-    ]
-}

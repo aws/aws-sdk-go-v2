@@ -1,3 +1,7 @@
+# v1.14.0 (2023-06-06)
+
+* **Feature**: Adds new response properties and request parameters for 'last scanned at' on the ListCoverage operation. This feature allows you to search and view the date of which your resources were last scanned by Inspector.
+
 # v1.13.0 (2023-05-05)
 
 * **Feature**: Amazon Inspector now allows customers to search its vulnerability intelligence database if any of the Inspector scanning types are activated.

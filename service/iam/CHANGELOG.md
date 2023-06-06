@@ -1,3 +1,7 @@
+# v1.20.0 (2023-06-06)
+
+* **Feature**: This release updates the AccountAlias regex pattern with the same length restrictions enforced by the length constraint.
+
 # v1.19.12 (2023-05-04)
 
 * No change notes available for this release.

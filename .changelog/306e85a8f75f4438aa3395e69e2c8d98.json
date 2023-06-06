@@ -1,8 +1,0 @@
-{
-    "id": "306e85a8-f75f-4438-aa33-95e69e2c8d98",
-    "type": "feature",
-    "description": "This release updates the AccountAlias regex pattern with the same length restrictions enforced by the length constraint.",
-    "modules": [
-        "service/iam"
-    ]
-}

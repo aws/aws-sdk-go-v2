@@ -1,3 +1,7 @@
+# v1.37.0 (2023-06-06)
+
+* **Feature**: QuickSight support for pivot table field collapse state, radar chart range scale and multiple scope options in conditional formatting.
+
 # v1.36.0 (2023-05-22)
 
 * **Feature**: Add support for Asset Bundle, Geospatial Heatmaps.
