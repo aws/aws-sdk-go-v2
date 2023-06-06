@@ -124,6 +124,12 @@
                     "target": "com.amazonaws.iot#CreateOTAUpdate"
                 },
                 {
+                    "target": "com.amazonaws.iot#CreatePackage"
+                },
+                {
+                    "target": "com.amazonaws.iot#CreatePackageVersion"
+                },
+                {
                     "target": "com.amazonaws.iot#CreatePolicy"
                 },
                 {
@@ -212,6 +218,12 @@
                 },
                 {
                     "target": "com.amazonaws.iot#DeleteOTAUpdate"
+                },
+                {
+                    "target": "com.amazonaws.iot#DeletePackage"
+                },
+                {
+                    "target": "com.amazonaws.iot#DeletePackageVersion"
                 },
                 {
                     "target": "com.amazonaws.iot#DeletePolicy"
@@ -403,6 +415,15 @@
                     "target": "com.amazonaws.iot#GetOTAUpdate"
                 },
                 {
+                    "target": "com.amazonaws.iot#GetPackage"
+                },
+                {
+                    "target": "com.amazonaws.iot#GetPackageConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.iot#GetPackageVersion"
+                },
+                {
                     "target": "com.amazonaws.iot#GetPercentiles"
                 },
                 {
@@ -509,6 +530,12 @@
                 },
                 {
                     "target": "com.amazonaws.iot#ListOutgoingCertificates"
+                },
+                {
+                    "target": "com.amazonaws.iot#ListPackages"
+                },
+                {
+                    "target": "com.amazonaws.iot#ListPackageVersions"
                 },
                 {
                     "target": "com.amazonaws.iot#ListPolicies"
@@ -716,6 +743,15 @@
                 },
                 {
                     "target": "com.amazonaws.iot#UpdateMitigationAction"
+                },
+                {
+                    "target": "com.amazonaws.iot#UpdatePackage"
+                },
+                {
+                    "target": "com.amazonaws.iot#UpdatePackageConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.iot#UpdatePackageVersion"
                 },
                 {
                     "target": "com.amazonaws.iot#UpdateProvisioningTemplate"
@@ -5681,6 +5717,16 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9-_]+$"
             }
         },
+        "com.amazonaws.iot#ClientToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 36,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^\\S{36,64}$"
+            }
+        },
         "com.amazonaws.iot#CloudwatchAlarmAction": {
             "type": "structure",
             "members": {
@@ -6047,6 +6093,12 @@
             "members": {
                 "message": {
                     "target": "com.amazonaws.iot#ErrorMessage2"
+                },
+                "resourceId": {
+                    "target": "com.amazonaws.iot#resourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A resource with the same name already exists.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6433,7 +6485,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an X.509 certificate using the specified certificate signing\n         request.\n      </p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateCertificateFromCsr</a> action.\n      </p>\n         <note>\n            <p>The CSR must include a public key that is either an\n            RSA key with a length of at least 2048 bits or an ECC key from NIST P-25 or NIST P-384 curves. \n            For supported certificates, consult <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/x509-client-certs.html#x509-cert-algorithms\">\n               Certificate signing algorithms supported by IoT</a>.\n         </p>\n         </note>\n         <note>\n            <p>Reusing the same certificate signing request (CSR)\n            results in a distinct certificate.</p>\n         </note>\n         <p>You can create multiple certificates in a batch by creating a directory, copying\n         multiple <code>.csr</code> files into that directory, and then specifying that directory on the command\n         line. The following commands show how to create a batch of certificates given a batch of\n         CSRs. In the following commands, we assume that a set of CSRs are located inside of the\n         directory my-csr-directory:</p>\n         <p>On Linux and OS X, the command is: </p>\n         <p>\n            <code>$ ls my-csr-directory/ | xargs -I {} aws iot create-certificate-from-csr\n            --certificate-signing-request file://my-csr-directory/{}</code>\n         </p>\n         <p>This command lists all of the CSRs in my-csr-directory and pipes each CSR file name\n         to the <code>aws iot create-certificate-from-csr</code> Amazon Web Services CLI command to create a certificate for\n         the corresponding CSR. </p>\n         <p>You can also run the <code>aws iot create-certificate-from-csr</code> part of the\n         command in parallel to speed up the certificate creation process:</p>\n         <p>\n            <code>$ ls my-csr-directory/ | xargs -P 10 -I {} aws iot create-certificate-from-csr\n            --certificate-signing-request file://my-csr-directory/{}\n         </code>\n         </p>\n         <p>On Windows PowerShell, the command to create certificates for all CSRs in\n         my-csr-directory is:</p>\n         <p>\n            <code>> ls -Name my-csr-directory | %{aws iot create-certificate-from-csr\n            --certificate-signing-request file://my-csr-directory/$_}\n         </code>\n         </p>\n         <p>On a Windows command prompt, the command to create certificates for all CSRs in\n         my-csr-directory is:</p>\n         <p>\n            <code>> forfiles /p my-csr-directory /c \"cmd /c aws iot create-certificate-from-csr\n            --certificate-signing-request file://@path\"\n         </code>\n         </p>",
+                "smithy.api#documentation": "<p>Creates an X.509 certificate using the specified certificate signing\n         request.\n      </p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreateCertificateFromCsr</a> action.\n      </p>\n         <note>\n            <p>The CSR must include a public key that is either an\n            RSA key with a length of at least 2048 bits or an ECC key from NIST P-256 or NIST P-384 curves. \n            For supported certificates, consult <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/x509-client-certs.html#x509-cert-algorithms\">\n               Certificate signing algorithms supported by IoT</a>.\n         </p>\n         </note>\n         <note>\n            <p>Reusing the same certificate signing request (CSR)\n            results in a distinct certificate.</p>\n         </note>\n         <p>You can create multiple certificates in a batch by creating a directory, copying\n         multiple <code>.csr</code> files into that directory, and then specifying that directory on the command\n         line. The following commands show how to create a batch of certificates given a batch of\n         CSRs. In the following commands, we assume that a set of CSRs are located inside of the\n         directory my-csr-directory:</p>\n         <p>On Linux and OS X, the command is: </p>\n         <p>\n            <code>$ ls my-csr-directory/ | xargs -I {} aws iot create-certificate-from-csr\n            --certificate-signing-request file://my-csr-directory/{}</code>\n         </p>\n         <p>This command lists all of the CSRs in my-csr-directory and pipes each CSR file name\n         to the <code>aws iot create-certificate-from-csr</code> Amazon Web Services CLI command to create a certificate for\n         the corresponding CSR. </p>\n         <p>You can also run the <code>aws iot create-certificate-from-csr</code> part of the\n         command in parallel to speed up the certificate creation process:</p>\n         <p>\n            <code>$ ls my-csr-directory/ | xargs -P 10 -I {} aws iot create-certificate-from-csr\n            --certificate-signing-request file://my-csr-directory/{}\n         </code>\n         </p>\n         <p>On Windows PowerShell, the command to create certificates for all CSRs in\n         my-csr-directory is:</p>\n         <p>\n            <code>> ls -Name my-csr-directory | %{aws iot create-certificate-from-csr\n            --certificate-signing-request file://my-csr-directory/$_}\n         </code>\n         </p>\n         <p>On a Windows command prompt, the command to create certificates for all CSRs in\n         my-csr-directory is:</p>\n         <p>\n            <code>> forfiles /p my-csr-directory /c \"cmd /c aws iot create-certificate-from-csr\n            --certificate-signing-request file://@path\"\n         </code>\n         </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/certificates",
@@ -7143,7 +7195,7 @@
                 "documentSource": {
                     "target": "com.amazonaws.iot#JobDocumentSource",
                     "traits": {
-                        "smithy.api#documentation": "<p>An S3 link, or S3 object URL, to the job document. The link is an Amazon S3 object URL and is required if you don't specify a value for <code>document</code>.</p>\n         <p>For example, <code>--document-source https://s3.<i>region-code</i>.amazonaws.com/example-firmware/device-firmware.1.0</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-bucket-intro.html\">Methods for accessing a bucket</a>.</p>"
+                        "smithy.api#documentation": "<p>An S3 link, or S3 object URL, to the job document. The link is an Amazon S3 object URL and is required if you don't specify a value for <code>document</code>.</p>\n         <p>For example, <code>--document-source https://s3.<i>region-code</i>.amazonaws.com/example-firmware/device-firmware.1.0</code>\n         </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-bucket-intro.html\">Methods for accessing a bucket</a>.</p>"
                     }
                 },
                 "document": {
@@ -7222,6 +7274,12 @@
                     "target": "com.amazonaws.iot#SchedulingConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration that allows you to schedule a job for a future date and time in\n            addition to specifying the end behavior for each job execution.</p>"
+                    }
+                },
+                "destinationPackageVersions": {
+                    "target": "com.amazonaws.iot#DestinationPackageVersions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The package version Amazon Resource Names (ARNs) that are installed on the device when the \n        job successfully completes. </p>\n         <p>\n            <b>Note:</b>The following Length Constraints relates to a single string. \n        Up to five strings are allowed.</p>"
                     }
                 }
             },
@@ -7356,6 +7414,12 @@
                     "target": "com.amazonaws.iot#MaintenanceWindows",
                     "traits": {
                         "smithy.api#documentation": "<p>Allows you to configure an optional maintenance window for the rollout of a job document to all devices in the target group for a job.</p>"
+                    }
+                },
+                "destinationPackageVersions": {
+                    "target": "com.amazonaws.iot#DestinationPackageVersions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The package version Amazon Resource Names (ARNs) that are installed on the device when the job successfully completes. </p>\n         <p>\n            <b>Note:</b>The following Length Constraints relates to a single string. \n        Up to five strings are allowed.</p>"
                     }
                 }
             },
@@ -7722,6 +7786,238 @@
                     "target": "com.amazonaws.iot#OTAUpdateStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>The OTA update status.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.iot#CreatePackage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iot#CreatePackageRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot#CreatePackageResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.iot#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an IoT software package that can be deployed to your fleet.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreatePackage</a> and <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">GetIndexingConfiguration</a> actions.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/packages/{packageName}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.iot#CreatePackageRequest": {
+            "type": "structure",
+            "members": {
+                "packageName": {
+                    "target": "com.amazonaws.iot#PackageName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the new package.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.iot#ResourceDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A summary of the package being created. This can be used to outline the package's contents or purpose.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.iot#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata that can be used to manage the package.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.iot#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. \n      Don't reuse this client token if a new idempotent request is required.</p>",
+                        "smithy.api#httpQuery": "clientToken",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iot#CreatePackageResponse": {
+            "type": "structure",
+            "members": {
+                "packageName": {
+                    "target": "com.amazonaws.iot#PackageName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the package.</p>"
+                    }
+                },
+                "packageArn": {
+                    "target": "com.amazonaws.iot#PackageArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the package.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.iot#ResourceDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The package description.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.iot#CreatePackageVersion": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iot#CreatePackageVersionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot#CreatePackageVersionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.iot#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new version for an existing IoT software package.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">CreatePackageVersion</a> and <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">GetIndexingConfiguration</a> actions.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/packages/{packageName}/versions/{versionName}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.iot#CreatePackageVersionRequest": {
+            "type": "structure",
+            "members": {
+                "packageName": {
+                    "target": "com.amazonaws.iot#PackageName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the associated package.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "versionName": {
+                    "target": "com.amazonaws.iot#VersionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the new package version.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.iot#ResourceDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A summary of the package version being created. This can be used to outline the package's contents or purpose.</p>"
+                    }
+                },
+                "attributes": {
+                    "target": "com.amazonaws.iot#ResourceAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata that can be used to define a package version’s configuration. For example, the S3 file location, configuration options that are being sent to the device or fleet.</p>\n         <p>The combined size of all the attributes on a package version is limited to 3KB.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.iot#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata that can be used to manage the package version.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.iot#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. \n      Don't reuse this client token if a new idempotent request is required.</p>",
+                        "smithy.api#httpQuery": "clientToken",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iot#CreatePackageVersionResponse": {
+            "type": "structure",
+            "members": {
+                "packageVersionArn": {
+                    "target": "com.amazonaws.iot#PackageVersionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the package.</p>"
+                    }
+                },
+                "packageName": {
+                    "target": "com.amazonaws.iot#PackageName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the associated package.</p>"
+                    }
+                },
+                "versionName": {
+                    "target": "com.amazonaws.iot#VersionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the new package version.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.iot#ResourceDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The package version description.</p>"
+                    }
+                },
+                "attributes": {
+                    "target": "com.amazonaws.iot#ResourceAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata that were added to the package version that can be used to define a package version’s configuration.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.iot#PackageVersionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the package version. For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle\">Package version lifecycle</a>.</p>"
+                    }
+                },
+                "errorReason": {
+                    "target": "com.amazonaws.iot#PackageVersionErrorReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Error reason for a package version failure during creation or update.</p>"
                     }
                 }
             },
@@ -10259,6 +10555,134 @@
             }
         },
         "com.amazonaws.iot#DeleteOTAUpdateResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.iot#DeletePackage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iot#DeletePackageRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot#DeletePackageResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a specific version from a software package.</p>\n         <p>\n            <b>Note:</b> All package versions must be deleted before deleting the software package.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">DeletePackageVersion</a> action.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/packages/{packageName}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.iot#DeletePackageRequest": {
+            "type": "structure",
+            "members": {
+                "packageName": {
+                    "target": "com.amazonaws.iot#PackageName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the target package.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.iot#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. \n      Don't reuse this client token if a new idempotent request is required.</p>",
+                        "smithy.api#httpQuery": "clientToken",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iot#DeletePackageResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.iot#DeletePackageVersion": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iot#DeletePackageVersionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot#DeletePackageVersionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a specific version from a software package.</p>\n         <p>\n            <b>Note:</b> If a package version is designated as default, you must remove the designation from the package using the <a>UpdatePackage</a> action.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/packages/{packageName}/versions/{versionName}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.iot#DeletePackageVersionRequest": {
+            "type": "structure",
+            "members": {
+                "packageName": {
+                    "target": "com.amazonaws.iot#PackageName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the associated package.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "versionName": {
+                    "target": "com.amazonaws.iot#VersionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the target package version.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.iot#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. \n      Don't reuse this client token if a new idempotent request is required.</p>",
+                        "smithy.api#httpQuery": "clientToken",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iot#DeletePackageVersionResponse": {
             "type": "structure",
             "members": {},
             "traits": {
@@ -12977,6 +13401,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Allows you to configure an optional maintenance window for the rollout of a job document to all devices in the target group for a job.</p>"
                     }
+                },
+                "destinationPackageVersions": {
+                    "target": "com.amazonaws.iot#DestinationPackageVersions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The package version Amazon Resource Names (ARNs) that are installed on the device when the job successfully completes. </p>\n         <p>\n            <b>Note:</b>The following Length Constraints relates to a single string. \n        Up to five strings are allowed.</p>"
+                    }
                 }
             },
             "traits": {
@@ -14221,6 +14651,12 @@
                 "smithy.api#documentation": "<p>Describes the location of the updated firmware.</p>"
             }
         },
+        "com.amazonaws.iot#DestinationPackageVersions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iot#PackageVersionArn"
+            }
+        },
         "com.amazonaws.iot#DetachPolicy": {
             "type": "operation",
             "input": {
@@ -15082,7 +15518,7 @@
             "type": "integer",
             "traits": {
                 "smithy.api#range": {
-                    "min": 30,
+                    "min": 1,
                     "max": 1430
                 }
             }
@@ -15398,6 +15834,9 @@
             "traits": {
                 "smithy.api#default": false
             }
+        },
+        "com.amazonaws.iot#EnabledBoolean": {
+            "type": "boolean"
         },
         "com.amazonaws.iot#EndpointAddress": {
             "type": "string"
@@ -16649,6 +17088,260 @@
                     "target": "com.amazonaws.iot#OTAUpdateInfo",
                     "traits": {
                         "smithy.api#documentation": "<p>The OTA update info.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.iot#GetPackage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iot#GetPackageRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot#GetPackageResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets information about the specified software package.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">GetPackage</a> action.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/packages/{packageName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iot#GetPackageConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iot#GetPackageConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot#GetPackageConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets information about the specified software package's configuration.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">GetPackageConfiguration</a> action.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/package-configuration",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iot#GetPackageConfigurationRequest": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iot#GetPackageConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "versionUpdateByJobsConfig": {
+                    "target": "com.amazonaws.iot#VersionUpdateByJobsConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version that is associated to a specific job.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.iot#GetPackageRequest": {
+            "type": "structure",
+            "members": {
+                "packageName": {
+                    "target": "com.amazonaws.iot#PackageName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the target package.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iot#GetPackageResponse": {
+            "type": "structure",
+            "members": {
+                "packageName": {
+                    "target": "com.amazonaws.iot#PackageName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the package.</p>"
+                    }
+                },
+                "packageArn": {
+                    "target": "com.amazonaws.iot#PackageArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for the package.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.iot#ResourceDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The package description.</p>"
+                    }
+                },
+                "defaultVersionName": {
+                    "target": "com.amazonaws.iot#VersionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the default package version.</p>"
+                    }
+                },
+                "creationDate": {
+                    "target": "com.amazonaws.iot#CreationDate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date the package was created.</p>"
+                    }
+                },
+                "lastModifiedDate": {
+                    "target": "com.amazonaws.iot#LastModifiedDate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date when the package was last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.iot#GetPackageVersion": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iot#GetPackageVersionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot#GetPackageVersionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets information about the specified package version. </p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">GetPackageVersion</a> action.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/packages/{packageName}/versions/{versionName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iot#GetPackageVersionRequest": {
+            "type": "structure",
+            "members": {
+                "packageName": {
+                    "target": "com.amazonaws.iot#PackageName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the associated package.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "versionName": {
+                    "target": "com.amazonaws.iot#VersionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the target package version.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iot#GetPackageVersionResponse": {
+            "type": "structure",
+            "members": {
+                "packageVersionArn": {
+                    "target": "com.amazonaws.iot#PackageVersionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for the package version.</p>"
+                    }
+                },
+                "packageName": {
+                    "target": "com.amazonaws.iot#PackageName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the package.</p>"
+                    }
+                },
+                "versionName": {
+                    "target": "com.amazonaws.iot#VersionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the package version.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.iot#ResourceDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The package version description.</p>"
+                    }
+                },
+                "attributes": {
+                    "target": "com.amazonaws.iot#ResourceAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata that were added to the package version that can be used to define a package version’s configuration.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.iot#PackageVersionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status associated to the package version. For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle\">Package version lifecycle</a>.</p>"
+                    }
+                },
+                "errorReason": {
+                    "target": "com.amazonaws.iot#PackageVersionErrorReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Error reason for a package version failure during creation or update.</p>"
+                    }
+                },
+                "creationDate": {
+                    "target": "com.amazonaws.iot#CreationDate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date when the package version was created.</p>"
+                    }
+                },
+                "lastModifiedDate": {
+                    "target": "com.amazonaws.iot#LastModifiedDate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date when the package version was last updated.</p>"
                     }
                 }
             },
@@ -18089,6 +18782,12 @@
                     "target": "com.amazonaws.iot#ScheduledJobRolloutList",
                     "traits": {
                         "smithy.api#documentation": "<p>Displays the next seven maintenance window occurrences and their start times.</p>"
+                    }
+                },
+                "destinationPackageVersions": {
+                    "target": "com.amazonaws.iot#DestinationPackageVersions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The package version Amazon Resource Names (ARNs) that are installed on the device when the job successfully completes. </p>\n         <p>\n            <b>Note:</b>The following Length Constraints relates to a single string. \n        Up to five strings are allowed.</p>"
                     }
                 }
             },
@@ -21537,6 +22236,173 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The output from the ListOutgoingCertificates operation.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.iot#ListPackageVersions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iot#ListPackageVersionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot#ListPackageVersionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the software package versions associated to the account.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListPackageVersions</a> action.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/packages/{packageName}/versions",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "packageVersionSummaries",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.iot#ListPackageVersionsRequest": {
+            "type": "structure",
+            "members": {
+                "packageName": {
+                    "target": "com.amazonaws.iot#PackageName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the target package.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.iot#PackageVersionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the package version. For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle\">Package version lifecycle</a>.</p>",
+                        "smithy.api#httpQuery": "status"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.iot#PackageCatalogMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return at one time.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.iot#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iot#ListPackageVersionsResponse": {
+            "type": "structure",
+            "members": {
+                "packageVersionSummaries": {
+                    "target": "com.amazonaws.iot#PackageVersionSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Lists the package versions associated to the package.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.iot#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.iot#ListPackages": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iot#ListPackagesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot#ListPackagesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the software packages associated to the account.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListPackages</a> action.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/packages",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "packageSummaries",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.iot#ListPackagesRequest": {
+            "type": "structure",
+            "members": {
+                "maxResults": {
+                    "target": "com.amazonaws.iot#PackageCatalogMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results returned at one time.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.iot#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iot#ListPackagesResponse": {
+            "type": "structure",
+            "members": {
+                "packageSummaries": {
+                    "target": "com.amazonaws.iot#PackageSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The software package summary.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.iot#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#output": {}
             }
         },
@@ -25587,6 +26453,163 @@
                 "smithy.api#default": false
             }
         },
+        "com.amazonaws.iot#PackageArn": {
+            "type": "string"
+        },
+        "com.amazonaws.iot#PackageCatalogMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.iot#PackageName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-_.]+$"
+            }
+        },
+        "com.amazonaws.iot#PackageSummary": {
+            "type": "structure",
+            "members": {
+                "packageName": {
+                    "target": "com.amazonaws.iot#PackageName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name for the target package.</p>"
+                    }
+                },
+                "defaultVersionName": {
+                    "target": "com.amazonaws.iot#VersionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the default package version.</p>"
+                    }
+                },
+                "creationDate": {
+                    "target": "com.amazonaws.iot#CreationDate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date that the package was created.</p>"
+                    }
+                },
+                "lastModifiedDate": {
+                    "target": "com.amazonaws.iot#LastModifiedDate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date that the package was last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of information about a software package.</p>"
+            }
+        },
+        "com.amazonaws.iot#PackageSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iot#PackageSummary"
+            }
+        },
+        "com.amazonaws.iot#PackageVersionAction": {
+            "type": "enum",
+            "members": {
+                "PUBLISH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PUBLISH"
+                    }
+                },
+                "DEPRECATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEPRECATE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iot#PackageVersionArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1600
+                },
+                "smithy.api#pattern": "^arn:[!-~]+$"
+            }
+        },
+        "com.amazonaws.iot#PackageVersionErrorReason": {
+            "type": "string"
+        },
+        "com.amazonaws.iot#PackageVersionStatus": {
+            "type": "enum",
+            "members": {
+                "DRAFT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DRAFT"
+                    }
+                },
+                "PUBLISHED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PUBLISHED"
+                    }
+                },
+                "DEPRECATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEPRECATED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iot#PackageVersionSummary": {
+            "type": "structure",
+            "members": {
+                "packageName": {
+                    "target": "com.amazonaws.iot#PackageName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the associated software package.</p>"
+                    }
+                },
+                "versionName": {
+                    "target": "com.amazonaws.iot#VersionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the target package version.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.iot#PackageVersionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the package version. For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle\">Package version lifecycle</a>.</p>"
+                    }
+                },
+                "creationDate": {
+                    "target": "com.amazonaws.iot#CreationDate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date that the package version was created.</p>"
+                    }
+                },
+                "lastModifiedDate": {
+                    "target": "com.amazonaws.iot#LastModifiedDate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date that the package version was last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of information about a package version.</p>"
+            }
+        },
+        "com.amazonaws.iot#PackageVersionSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iot#PackageVersionSummary"
+            }
+        },
         "com.amazonaws.iot#PageSize": {
             "type": "integer",
             "traits": {
@@ -27283,6 +28306,47 @@
                 "target": "com.amazonaws.iot#ResourceArn"
             }
         },
+        "com.amazonaws.iot#ResourceAttributeKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9:_-]+$"
+            }
+        },
+        "com.amazonaws.iot#ResourceAttributeValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                },
+                "smithy.api#pattern": "^[^\\p{C}]+$"
+            }
+        },
+        "com.amazonaws.iot#ResourceAttributes": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.iot#ResourceAttributeKey"
+            },
+            "value": {
+                "target": "com.amazonaws.iot#ResourceAttributeValue"
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.iot#ResourceDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[^\\p{C}]+$",
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.iot#ResourceIdentifier": {
             "type": "structure",
             "members": {
@@ -28206,6 +29270,19 @@
         },
         "com.amazonaws.iot#ServiceName": {
             "type": "string"
+        },
+        "com.amazonaws.iot#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.iot#ErrorMessage2"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A limit has been exceeded.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 402
+            }
         },
         "com.amazonaws.iot#ServiceType": {
             "type": "enum",
@@ -29585,6 +30662,21 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.iot#Tag"
+            }
+        },
+        "com.amazonaws.iot#TagMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.iot#TagKey"
+            },
+            "value": {
+                "target": "com.amazonaws.iot#TagValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
             }
         },
         "com.amazonaws.iot#TagResource": {
@@ -31420,6 +32512,9 @@
                 "smithy.api#default": false
             }
         },
+        "com.amazonaws.iot#UnsetDefaultVersion": {
+            "type": "boolean"
+        },
         "com.amazonaws.iot#UnsignedLong": {
             "type": "long",
             "traits": {
@@ -32780,6 +33875,234 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.iot#UpdatePackage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iot#UpdatePackageRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot#UpdatePackageResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the supported fields for a specific package.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">UpdatePackage</a> and <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">GetIndexingConfiguration</a> actions.</p>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/packages/{packageName}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.iot#UpdatePackageConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iot#UpdatePackageConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot#UpdatePackageConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the package configuration.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">UpdatePackageConfiguration</a> and <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html\">iam:PassRole</a> actions.</p>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/package-configuration",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.iot#UpdatePackageConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "versionUpdateByJobsConfig": {
+                    "target": "com.amazonaws.iot#VersionUpdateByJobsConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration to manage job's package version reporting. This updates the thing's reserved named shadow that the job targets.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.iot#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. \n      Don't reuse this client token if a new idempotent request is required.</p>",
+                        "smithy.api#httpQuery": "clientToken",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iot#UpdatePackageConfigurationResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.iot#UpdatePackageRequest": {
+            "type": "structure",
+            "members": {
+                "packageName": {
+                    "target": "com.amazonaws.iot#PackageName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the target package.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.iot#ResourceDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The package description.</p>"
+                    }
+                },
+                "defaultVersionName": {
+                    "target": "com.amazonaws.iot#VersionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the default package version.</p>\n         <p>\n            <b>Note:</b> You cannot name a <code>defaultVersion</code>\n       and set <code>unsetDefaultVersion</code> equal to <code>true</code> at the same time.</p>"
+                    }
+                },
+                "unsetDefaultVersion": {
+                    "target": "com.amazonaws.iot#UnsetDefaultVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether you want to remove the named default package version from the software package. \n      Set as <code>true</code> to remove the default package version. </p>\n         <p>\n            <b>Note:</b> You cannot name a <code>defaultVersion</code>\n       and set <code>unsetDefaultVersion</code> equal to <code>true</code> at the same time.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.iot#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. \n      Don't reuse this client token if a new idempotent request is required.</p>",
+                        "smithy.api#httpQuery": "clientToken",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iot#UpdatePackageResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.iot#UpdatePackageVersion": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iot#UpdatePackageVersionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot#UpdatePackageVersionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the supported fields for a specific package version.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">UpdatePackageVersion</a> and <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">GetIndexingConfiguration</a> actions.</p>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/packages/{packageName}/versions/{versionName}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.iot#UpdatePackageVersionRequest": {
+            "type": "structure",
+            "members": {
+                "packageName": {
+                    "target": "com.amazonaws.iot#PackageName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the associated software package.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "versionName": {
+                    "target": "com.amazonaws.iot#VersionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the target package version.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.iot#ResourceDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The package version description.</p>"
+                    }
+                },
+                "attributes": {
+                    "target": "com.amazonaws.iot#ResourceAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata that can be used to define a package version’s configuration. For example, the S3 file location, configuration options that are being sent to the device or fleet. </p>\n         <p>\n            <b>Note:</b> Attributes can be updated only when the package version\n      is in a draft state.</p>\n         <p>The combined size of all the attributes on a package version is limited to 3KB.</p>"
+                    }
+                },
+                "action": {
+                    "target": "com.amazonaws.iot#PackageVersionAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status that the package version should be assigned. For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle\">Package version lifecycle</a>.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.iot#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. \n      Don't reuse this client token if a new idempotent request is required.</p>",
+                        "smithy.api#httpQuery": "clientToken",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iot#UpdatePackageVersionResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.iot#UpdateProvisioningTemplate": {
             "type": "operation",
             "input": {
@@ -33786,6 +35109,19 @@
                 "target": "com.amazonaws.iot#ValidationError"
             }
         },
+        "com.amazonaws.iot#ValidationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.iot#ErrorMessage2"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request is not valid.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
         "com.amazonaws.iot#Value": {
             "type": "string",
             "traits": {
@@ -33863,10 +35199,40 @@
                 "smithy.api#httpError": 409
             }
         },
+        "com.amazonaws.iot#VersionName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-_.]+$"
+            }
+        },
         "com.amazonaws.iot#VersionNumber": {
             "type": "long",
             "traits": {
                 "smithy.api#default": 0
+            }
+        },
+        "com.amazonaws.iot#VersionUpdateByJobsConfig": {
+            "type": "structure",
+            "members": {
+                "enabled": {
+                    "target": "com.amazonaws.iot#EnabledBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the Job is enabled or not.</p>"
+                    }
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.iot#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the role that grants permission to the IoT\n      jobs service to update the reserved named shadow when the job successfully completes.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration to manage IoT Job's package version reporting. If configured, Jobs updates the thing's reserved named shadow with the package version information up on successful job completion.</p>\n         <p>\n            <b>Note:</b> For each job, the destinationPackageVersions attribute has to be set with the correct data for Jobs to report to the thing shadow.\n      </p>"
             }
         },
         "com.amazonaws.iot#VersionsLimitExceededException": {

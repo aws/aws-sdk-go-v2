@@ -139,6 +139,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.signer#AddProfilePermissionResponse": {
@@ -150,6 +153,9 @@
                         "smithy.api#documentation": "<p>A unique identifier for the current profile revision.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.signer#Arn": {
@@ -176,6 +182,9 @@
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
+        },
+        "com.amazonaws.signer#Blob": {
+            "type": "blob"
         },
         "com.amazonaws.signer#BucketName": {
             "type": "string"
@@ -222,21 +231,30 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.signer#Category": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "AWSIoT",
-                        "name": "AWSIoT"
+            "type": "enum",
+            "members": {
+                "AWSIoT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWSIoT"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.signer#CertificateArn": {
             "type": "string"
+        },
+        "com.amazonaws.signer#CertificateHashes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.signer#String"
+            }
         },
         "com.amazonaws.signer#ClientRequestToken": {
             "type": "string"
@@ -280,7 +298,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns information about a specific code signing job. You specify the job by using\n\t\t\tthe <code>jobId</code> value that is returned by the <a>StartSigningJob</a>\n\t\t\toperation. </p>",
+                "smithy.api#documentation": "<p>Returns information about a specific code signing job. You specify the job by using the\n\t\t\t\t<code>jobId</code> value that is returned by the <a>StartSigningJob</a>\n\t\t\toperation. </p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/signing-jobs/{jobId}",
@@ -332,6 +350,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.signer#DescribeSigningJobResponse": {
@@ -451,6 +472,9 @@
                         "smithy.api#documentation": "<p>The IAM entity that initiated the signing job.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.signer#Destination": {
@@ -471,18 +495,20 @@
             "type": "string"
         },
         "com.amazonaws.signer#EncryptionAlgorithm": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "RSA",
-                        "name": "RSA"
-                    },
-                    {
-                        "value": "ECDSA",
-                        "name": "ECDSA"
+            "type": "enum",
+            "members": {
+                "RSA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RSA"
                     }
-                ]
+                },
+                "ECDSA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ECDSA"
+                    }
+                }
             }
         },
         "com.amazonaws.signer#EncryptionAlgorithmOptions": {
@@ -518,6 +544,102 @@
         },
         "com.amazonaws.signer#ErrorMessage": {
             "type": "string"
+        },
+        "com.amazonaws.signer#GetRevocationStatus": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.signer#GetRevocationStatusRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.signer#GetRevocationStatusResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.signer#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.signer#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.signer#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.signer#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the\n\t\t\trevocation status of one or more of the signing profile, signing job, and signing\n\t\t\tcertificate.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "verification."
+                },
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/revocations",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.signer#GetRevocationStatusRequest": {
+            "type": "structure",
+            "members": {
+                "signatureTimestamp": {
+                    "target": "com.amazonaws.signer#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of the signature that validates the profile or job.</p>",
+                        "smithy.api#httpQuery": "signatureTimestamp",
+                        "smithy.api#required": {}
+                    }
+                },
+                "platformId": {
+                    "target": "com.amazonaws.signer#PlatformId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of a signing platform. </p>",
+                        "smithy.api#httpQuery": "platformId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "profileVersionArn": {
+                    "target": "com.amazonaws.signer#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of a signing profile.</p>",
+                        "smithy.api#httpQuery": "profileVersionArn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "jobArn": {
+                    "target": "com.amazonaws.signer#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of a signing job.</p>",
+                        "smithy.api#httpQuery": "jobArn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "certificateHashes": {
+                    "target": "com.amazonaws.signer#CertificateHashes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of composite signed hashes that identify certificates.</p>\n\t\t       <p>A certificate identifier consists of a subject certificate TBS hash (signed by the\n\t\t\tparent CA) combined with a parent CA TBS hash (signed by the parent CA’s CA). Root\n\t\t\tcertificates are defined as their own CA.</p>",
+                        "smithy.api#httpQuery": "certificateHashes",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.signer#GetRevocationStatusResponse": {
+            "type": "structure",
+            "members": {
+                "revokedEntities": {
+                    "target": "com.amazonaws.signer#RevokedEntities",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of revoked entities (including one or more of the signing profile ARN, signing\n\t\t\tjob ID, and certificate hash) supplied as input to the API.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.signer#GetSigningPlatform": {
             "type": "operation",
@@ -561,6 +683,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.signer#GetSigningPlatformResponse": {
@@ -622,6 +747,9 @@
                         "smithy.api#documentation": "<p>A flag indicating whether signatures generated for the signing platform can be\n\t\t\trevoked.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.signer#GetSigningProfile": {
@@ -673,6 +801,9 @@
                         "smithy.api#httpQuery": "profileOwner"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.signer#GetSigningProfileResponse": {
@@ -756,21 +887,26 @@
                         "smithy.api#documentation": "<p>A list of tags associated with the signing profile.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.signer#HashAlgorithm": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SHA1",
-                        "name": "SHA1"
-                    },
-                    {
-                        "value": "SHA256",
-                        "name": "SHA256"
+            "type": "enum",
+            "members": {
+                "SHA1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SHA1"
                     }
-                ]
+                },
+                "SHA256": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SHA256"
+                    }
+                }
             }
         },
         "com.amazonaws.signer#HashAlgorithmOptions": {
@@ -802,22 +938,26 @@
             }
         },
         "com.amazonaws.signer#ImageFormat": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "JSON",
-                        "name": "JSON"
-                    },
-                    {
-                        "value": "JSONEmbedded",
-                        "name": "JSONEmbedded"
-                    },
-                    {
-                        "value": "JSONDetached",
-                        "name": "JSONDetached"
+            "type": "enum",
+            "members": {
+                "JSON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JSON"
                     }
-                ]
+                },
+                "JSONEmbedded": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JSONEmbedded"
+                    }
+                },
+                "JSONDetached": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JSONDetached"
+                    }
+                }
             }
         },
         "com.amazonaws.signer#ImageFormats": {
@@ -906,6 +1046,9 @@
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.signer#ListProfilePermissionsResponse": {
@@ -936,6 +1079,9 @@
                         "smithy.api#documentation": "<p>String for specifying the next set of paginated results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.signer#ListSigningJobs": {
@@ -1041,6 +1187,9 @@
                         "smithy.api#httpQuery": "jobInvoker"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.signer#ListSigningJobsResponse": {
@@ -1058,6 +1207,9 @@
                         "smithy.api#documentation": "<p>String for specifying the next set of paginated results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.signer#ListSigningPlatforms": {
@@ -1134,6 +1286,9 @@
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.signer#ListSigningPlatformsResponse": {
@@ -1151,6 +1306,9 @@
                         "smithy.api#documentation": "<p>Value for specifying the next set of paginated results to return.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.signer#ListSigningProfiles": {
@@ -1225,6 +1383,9 @@
                         "smithy.api#httpQuery": "statuses"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.signer#ListSigningProfilesResponse": {
@@ -1242,6 +1403,9 @@
                         "smithy.api#documentation": "<p>Value for specifying the next set of paginated results to return.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.signer#ListTagsForResource": {
@@ -1286,6 +1450,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.signer#ListTagsForResourceResponse": {
@@ -1297,6 +1464,9 @@
                         "smithy.api#documentation": "<p>A list of tags associated with the signing profile.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.signer#MaxResults": {
@@ -1312,6 +1482,15 @@
             "type": "integer",
             "traits": {
                 "smithy.api#default": 0
+            }
+        },
+        "com.amazonaws.signer#Metadata": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.signer#String"
+            },
+            "value": {
+                "target": "com.amazonaws.signer#String"
             }
         },
         "com.amazonaws.signer#NextToken": {
@@ -1331,6 +1510,15 @@
                 "smithy.api#documentation": "<p>The signing profile was not found.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.signer#Payload": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4096
+                }
             }
         },
         "com.amazonaws.signer#Permission": {
@@ -1390,7 +1578,7 @@
                     "min": 2,
                     "max": 64
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9_]{2,}"
+                "smithy.api#pattern": "^[a-zA-Z0-9_]{2,}$"
             }
         },
         "com.amazonaws.signer#ProfileVersion": {
@@ -1429,7 +1617,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a signing profile. A signing profile is a code signing template that can be used to\n\t\t\tcarry out a pre-defined signing job. For more information, see <a href=\"http://docs.aws.amazon.com/signer/latest/developerguide/gs-profile.html\">http://docs.aws.amazon.com/signer/latest/developerguide/gs-profile.html</a>\n         </p>",
+                "smithy.api#documentation": "<p>Creates a signing profile. A signing profile is a code signing template that can be used to\n\t\t\tcarry out a pre-defined signing job.\n\t\t\t</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/signing-profiles/{profileName}",
@@ -1485,6 +1673,9 @@
                         "smithy.api#documentation": "<p>Tags to be associated with the signing profile that is being created.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.signer#PutSigningProfileResponse": {
@@ -1508,6 +1699,9 @@
                         "smithy.api#documentation": "<p>The signing profile ARN, including the profile version.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.signer#RemoveProfilePermission": {
@@ -1574,6 +1768,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.signer#RemoveProfilePermissionResponse": {
@@ -1585,6 +1782,9 @@
                         "smithy.api#documentation": "<p>An identifier for the current revision of the profile permissions.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.signer#RequestedBy": {
@@ -1673,6 +1873,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.signer#RevokeSigningProfile": {
@@ -1741,6 +1944,15 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.signer#RevokedEntities": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.signer#String"
             }
         },
         "com.amazonaws.signer#S3Destination": {
@@ -1828,6 +2040,107 @@
                 "smithy.api#httpError": 402
             }
         },
+        "com.amazonaws.signer#SignPayload": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.signer#SignPayloadRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.signer#SignPayloadResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.signer#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.signer#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.signer#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.signer#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.signer#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Signs a binary\n\t\t\tpayload and returns a signature envelope.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/signing-jobs/with-payload",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.signer#SignPayloadRequest": {
+            "type": "structure",
+            "members": {
+                "profileName": {
+                    "target": "com.amazonaws.signer#ProfileName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the signing profile.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "profileOwner": {
+                    "target": "com.amazonaws.signer#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID of the profile owner.</p>"
+                    }
+                },
+                "payload": {
+                    "target": "com.amazonaws.signer#Payload",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the object digest (hash) to sign.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "payloadFormat": {
+                    "target": "com.amazonaws.signer#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Payload content type</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.signer#SignPayloadResponse": {
+            "type": "structure",
+            "members": {
+                "jobId": {
+                    "target": "com.amazonaws.signer#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique identifier of the signing job.</p>"
+                    }
+                },
+                "jobOwner": {
+                    "target": "com.amazonaws.signer#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID of the job owner.</p>"
+                    }
+                },
+                "metadata": {
+                    "target": "com.amazonaws.signer#Metadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information including the signing profile ARN and the signing job ID. Clients use\n\t\t\tmetadata to signature records, for example, as annotations added to the signature\n\t\t\tmanifest inside an OCI registry.</p>"
+                    }
+                },
+                "signature": {
+                    "target": "com.amazonaws.signer#Blob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A cryptographic signature.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.signer#SignatureValidityPeriod": {
             "type": "structure",
             "members": {
@@ -1841,7 +2154,7 @@
                 "type": {
                     "target": "com.amazonaws.signer#ValidityType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time unit for signature\n\t\t\tvalidity.</p>"
+                        "smithy.api#documentation": "<p>The time unit for signature validity.</p>"
                     }
                 }
             },
@@ -2088,7 +2401,7 @@
                 "platformId": {
                     "target": "com.amazonaws.signer#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of a code signing; platform.</p>"
+                        "smithy.api#documentation": "<p>The ID of a code signing platform.</p>"
                     }
                 },
                 "displayName": {
@@ -2270,22 +2583,26 @@
             }
         },
         "com.amazonaws.signer#SigningProfileStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Active",
-                        "name": "Active"
-                    },
-                    {
-                        "value": "Canceled",
-                        "name": "Canceled"
-                    },
-                    {
-                        "value": "Revoked",
-                        "name": "Revoked"
+            "type": "enum",
+            "members": {
+                "Active": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Active"
                     }
-                ]
+                },
+                "Canceled": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Canceled"
+                    }
+                },
+                "Revoked": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Revoked"
+                    }
+                }
             }
         },
         "com.amazonaws.signer#SigningProfiles": {
@@ -2295,22 +2612,26 @@
             }
         },
         "com.amazonaws.signer#SigningStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "InProgress",
-                        "name": "InProgress"
-                    },
-                    {
-                        "value": "Failed",
-                        "name": "Failed"
-                    },
-                    {
-                        "value": "Succeeded",
-                        "name": "Succeeded"
+            "type": "enum",
+            "members": {
+                "InProgress": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InProgress"
                     }
-                ]
+                },
+                "Failed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Failed"
+                    }
+                },
+                "Succeeded": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Succeeded"
+                    }
+                }
             }
         },
         "com.amazonaws.signer#Source": {
@@ -2356,7 +2677,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Initiates a signing job to be performed on the code provided. Signing jobs are\n\t\t\tviewable by the <code>ListSigningJobs</code> operation for two years after they are\n\t\t\tperformed. Note the following requirements: </p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p> You must create an Amazon S3 source bucket. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html\">Create a Bucket</a> in the\n\t\t\t\t\t\t<i>Amazon S3 Getting Started Guide</i>. </p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>Your S3 source bucket must be version enabled.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>You must create an S3 destination bucket. Code signing uses your S3 destination\n\t\t\t\t\tbucket to write your signed code.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>You specify the name of the source and destination buckets when calling the\n\t\t\t\t\t\t<code>StartSigningJob</code> operation.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>You must also specify a request token that identifies your request to\n\t\t\t\t\tcode signing.</p>\n\t\t\t         </li>\n         </ul>\n\t\t       <p>You can call the <a>DescribeSigningJob</a> and the <a>ListSigningJobs</a> actions after you call\n\t\t\t<code>StartSigningJob</code>.</p>\n\t\t       <p>For a Java example that shows how to use this action, see <a href=\"http://docs.aws.amazon.com/acm/latest/userguide/\">http://docs.aws.amazon.com/acm/latest/userguide/</a>\n         </p>",
+                "smithy.api#documentation": "<p>Initiates a signing job to be performed on the code provided. Signing jobs are\n\t\t\tviewable by the <code>ListSigningJobs</code> operation for two years after they are\n\t\t\tperformed. Note the following requirements: </p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p> You must create an Amazon S3 source bucket. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html\">Creating a Bucket</a> in the\n\t\t\t\t\t\t<i>Amazon S3 Getting Started Guide</i>. </p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>Your S3 source bucket must be version enabled.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>You must create an S3 destination bucket. Code signing uses your S3 destination\n\t\t\t\t\tbucket to write your signed code.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>You specify the name of the source and destination buckets when calling the\n\t\t\t\t\t\t<code>StartSigningJob</code> operation.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>You must also specify a request token that identifies your request to\n\t\t\t\t\tcode signing.</p>\n\t\t\t         </li>\n         </ul>\n\t\t       <p>You can call the <a>DescribeSigningJob</a> and the <a>ListSigningJobs</a> actions after you call\n\t\t\t<code>StartSigningJob</code>.</p>\n\t\t       <p>For a Java example that shows how to use this action, see <a href=\"https://docs.aws.amazon.com/signer/latest/developerguide/api-startsigningjob.html\">StartSigningJob</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/signing-jobs",
@@ -2402,6 +2723,9 @@
                         "smithy.api#documentation": "<p>The AWS account ID of the signing profile owner.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.signer#StartSigningJobResponse": {
@@ -2419,6 +2743,9 @@
                         "smithy.api#documentation": "<p>The AWS account ID of the signing job owner.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.signer#StatusReason": {
@@ -2519,11 +2846,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.signer#TagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.signer#TagValue": {
             "type": "string",
@@ -2548,7 +2881,7 @@
                 "smithy.api#deprecated": {
                     "message": "Instead of this error, TooManyRequestsException should be used."
                 },
-                "smithy.api#documentation": "<p>The request was denied due to request throttling.</p>\n        <p>Instead of this error, <code>TooManyRequestsException</code> should be used.</p>",
+                "smithy.api#documentation": "<p>The request was denied due to request throttling.</p>\n\t\t       <p>Instead of this error, <code>TooManyRequestsException</code> should be used.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429
             }
@@ -2567,7 +2900,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The allowed number of job-signing requests has been exceeded.</p> \n\t\t       <p>This error supersedes the error <code>ThrottlingException</code>.</p>",
+                "smithy.api#documentation": "<p>The allowed number of job-signing requests has been exceeded.</p>\n\t\t       <p>This error supersedes the error <code>ThrottlingException</code>.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429
             }
@@ -2622,11 +2955,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.signer#UntagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.signer#ValidationException": {
             "type": "structure",
@@ -2645,22 +2984,26 @@
             }
         },
         "com.amazonaws.signer#ValidityType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "DAYS",
-                        "name": "DAYS"
-                    },
-                    {
-                        "value": "MONTHS",
-                        "name": "MONTHS"
-                    },
-                    {
-                        "value": "YEARS",
-                        "name": "YEARS"
+            "type": "enum",
+            "members": {
+                "DAYS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DAYS"
                     }
-                ]
+                },
+                "MONTHS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MONTHS"
+                    }
+                },
+                "YEARS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "YEARS"
+                    }
+                }
             }
         },
         "com.amazonaws.signer#Version": {
@@ -2678,6 +3021,9 @@
                 },
                 {
                     "target": "com.amazonaws.signer#DescribeSigningJob"
+                },
+                {
+                    "target": "com.amazonaws.signer#GetRevocationStatus"
                 },
                 {
                     "target": "com.amazonaws.signer#GetSigningPlatform"
@@ -2713,6 +3059,9 @@
                     "target": "com.amazonaws.signer#RevokeSigningProfile"
                 },
                 {
+                    "target": "com.amazonaws.signer#SignPayload"
+                },
+                {
                     "target": "com.amazonaws.signer#StartSigningJob"
                 },
                 {
@@ -2734,7 +3083,7 @@
                     "name": "signer"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>AWS Signer is a fully managed code signing service to help you ensure the trust and\n\t\t\tintegrity of your code. </p>\n\t\t       <p>AWS Signer supports the following applications:</p>\n\n\t\t       <p>With <i>code signing for AWS Lambda</i>, you can sign AWS Lambda\n\t\t\tdeployment packages. Integrated support is provided for Amazon S3, Amazon CloudWatch,\n\t\t\tand AWS CloudTrail. In order to sign code, you create a signing profile and then use\n\t\t\tSigner to sign Lambda zip files in S3. </p>\n\t\t\n\t\t       <p>With <i>code signing for IoT</i>, you can sign code for any IoT device that is\n\t\t\tsupported by AWS. IoT code signing is available for <a href=\"http://docs.aws.amazon.com/freertos/latest/userguide/\">Amazon FreeRTOS</a> and <a href=\"http://docs.aws.amazon.com/iot/latest/developerguide/\">AWS IoT Device Management</a>, and is\n\t\t\tintegrated with <a href=\"http://docs.aws.amazon.com/acm/latest/userguide/\">AWS Certificate Manager (ACM)</a>. In order to sign\n\t\t\tcode, you import a third-party code signing certificate using ACM, and use that to\n\t\t\tsign updates in Amazon FreeRTOS and AWS IoT Device Management. </p>\n\t\t       <p>For more information about AWS Signer, see the <a href=\"http://docs.aws.amazon.com/signer/latest/developerguide/Welcome.html\">AWS Signer Developer Guide</a>.</p>\n\t\t\n\t\t       <p></p>",
+                "smithy.api#documentation": "<p>AWS Signer is a fully managed code signing service to help you ensure the trust and\n\t\t\tintegrity of your code. </p>\n\t\t       <p>AWS Signer supports the following applications:</p>\n\t\t       <p>With code signing for AWS Lambda, you can sign <a href=\"http://docs.aws.amazon.com/lambda/latest/dg/\">AWS\n\t\t\t\tLambda</a> deployment packages. Integrated support is provided for <a href=\"http://docs.aws.amazon.com/AmazonS3/latest/gsg/\">Amazon S3</a>, <a href=\"http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/\">Amazon\n\t\t\t\tCloudWatch</a>, and <a href=\"http://docs.aws.amazon.com/awscloudtrail/latest/userguide/\">AWS CloudTrail</a>. In order\n\t\t\tto sign code, you create a signing profile and then use Signer to sign Lambda zip files\n\t\t\tin S3. </p>\n\t\t       <p>With code signing for IoT, you can sign code for any IoT device that is supported by AWS.\n\t\t\tIoT code signing is available for <a href=\"http://docs.aws.amazon.com/freertos/latest/userguide/\">Amazon FreeRTOS</a> and <a href=\"http://docs.aws.amazon.com/iot/latest/developerguide/\">AWS IoT Device Management</a>, and is integrated with <a href=\"http://docs.aws.amazon.com/acm/latest/userguide/\">AWS Certificate Manager (ACM)</a>. In order to sign code, you import a third-party code signing\n\t\t\tcertificate using ACM, and use that to sign updates in Amazon FreeRTOS and AWS IoT Device Management. </p>\n\t\t       <p>With code signing for\n\t\t\tcontainers …(TBD)</p>\n\t\t       <p>For more information about AWS Signer, see the <a href=\"https://docs.aws.amazon.com/signer/latest/developerguide/Welcome.html\">AWS Signer Developer\n\t\t\tGuide</a>.</p>",
                 "smithy.api#title": "AWS Signer",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -3097,8 +3446,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3110,8 +3459,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3123,8 +3472,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3136,8 +3485,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3149,8 +3498,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3162,8 +3511,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3175,8 +3524,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3188,8 +3537,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3201,8 +3550,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3214,8 +3563,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3227,8 +3576,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3240,8 +3589,19 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3253,8 +3613,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3266,8 +3637,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3279,8 +3661,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3292,8 +3685,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3305,8 +3698,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -3318,8 +3711,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -3330,8 +3723,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -3342,9 +3735,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],

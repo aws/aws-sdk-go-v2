@@ -1847,13 +1847,13 @@
                 "CredentialPair": {
                     "target": "com.amazonaws.quicksight#AssetBundleImportJobDataSourceCredentialPair",
                     "traits": {
-                        "smithy.api#documentation": "<p>A username and password credential pair to be used to create the imported data source. Leave this field blank if you are using an Secrets Manager Secret to provide credentials.</p>"
+                        "smithy.api#documentation": "<p>A username and password credential pair to be used to create the imported data source. Keep this field blank if you are using a Secrets Manager secret to provide credentials.</p>"
                     }
                 },
                 "SecretArn": {
                     "target": "com.amazonaws.quicksight#SecretArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Secrets Manager Secret to be used to create the imported data source leave this field blank if you aren't using a Secret in place of a credential pair.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the Secrets Manager secret that's used to create the imported data source. Keep this field blank, unless you are using a secret in place of a credential pair.</p>"
                     }
                 }
             },
@@ -2017,7 +2017,7 @@
                 "StartAfterDateTime": {
                     "target": "com.amazonaws.quicksight#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>An override for the <code>StartAfterDateTime</code> of a <code>RefreshSchedule</code> to ensure that the <code>StartAfterDateTime</code> is set to a time that takes place in the future.</p>"
+                        "smithy.api#documentation": "<p>An override for the <code>StartAfterDateTime</code> of a <code>RefreshSchedule</code>. Make\n         sure that the <code>StartAfterDateTime</code> is set to a time that takes\n         place in the future.</p>"
                     }
                 }
             },
@@ -2048,7 +2048,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An optional structure that configures resource ID overrides for the import job</p>"
+                "smithy.api#documentation": "<p>An optional structure that configures resource ID overrides for the import job.</p>"
             }
         },
         "com.amazonaws.quicksight#AssetBundleImportJobStatus": {
@@ -2194,19 +2194,19 @@
                 "SubnetIds": {
                     "target": "com.amazonaws.quicksight#SubnetIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of  new subnet IDs for the VPC connection you are importing. This field is required if you are importing the VPC connection from another Amazon Web Services account or region.</p>"
+                        "smithy.api#documentation": "<p>A list of new subnet IDs for the VPC connection you are importing. This field is\n         required if you are importing the VPC connection from another Amazon Web Services account or Region.</p>"
                     }
                 },
                 "SecurityGroupIds": {
                     "target": "com.amazonaws.quicksight#SecurityGroupIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A new security group ID for the VPC connection you are importing. This field is required if you are importing the VPC connection from another Amazon Web Services account or region.</p>"
+                        "smithy.api#documentation": "<p>A new security group ID for the VPC connection you are importing. This field is required\n         if you are importing the VPC connection from another Amazon Web Services account or Region.</p>"
                     }
                 },
                 "DnsResolvers": {
                     "target": "com.amazonaws.quicksight#DnsResolverList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional override of dns resolvers to be used by the VPC connection.</p>"
+                        "smithy.api#documentation": "<p>An optional override of DNS resolvers to be used by the VPC connection.</p>"
                     }
                 },
                 "RoleArn": {
@@ -2238,13 +2238,13 @@
                 "Body": {
                     "target": "com.amazonaws.quicksight#AssetBundleImportBodyBlob",
                     "traits": {
-                        "smithy.api#documentation": "<p>The bytes of the Base64 encoded asset bundle import zip file. This file can't exceed 20MB.</p>\n         <p>If you are calling the APIs from the Amazon Web Services Java, JavaScript, Python, or PHP SDKs, the SDK encodes Base64 automatically to allow the direct setting of the zip file's bytes. If you are using a SDK of a different language or are receiving related errors, try to Base64 encode your data.</p>"
+                        "smithy.api#documentation": "<p>The bytes of the base64 encoded asset bundle import zip file. This file can't exceed 20 MB.</p>\n         <p>If you are calling the API operations from the Amazon Web Services SDK for Java, JavaScript, Python, or\n         PHP, the SDK encodes base64 automatically to allow the direct setting of the zip file's bytes. If you are using\n         an SDK for a different language or receiving related errors, try to base64 encode your data.</p>"
                     }
                 },
                 "S3Uri": {
                     "target": "com.amazonaws.quicksight#S3Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 uri for an asset bundle import file that exists in an Amazon S3 bucket that the caller has read access to. The file must be a zip format file and can't exceed 20MB.</p>"
+                        "smithy.api#documentation": "<p>The Amazon S3 URI for an asset bundle import file that exists in an Amazon S3 bucket that the caller\n         has read access to. The file must be a zip format file and can't exceed 20 MB.</p>"
                     }
                 }
             },
@@ -2258,18 +2258,18 @@
                 "Body": {
                     "target": "com.amazonaws.quicksight#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A HTTPS download URL for the provided asset bundle that you optionally provided at the start of the import job. This URL is valid for 5 minutes after issuance. Call <code>DescribeAssetBundleExportJob</code> again for a fresh URL if needed. The downloaded asset bundle is a <code>.qs</code> zip file.</p>"
+                        "smithy.api#documentation": "<p>An HTTPS download URL for the provided asset bundle that you optionally provided at the start of the import job. This URL is valid for five minutes after issuance. Call <code>DescribeAssetBundleExportJob</code> again for a fresh URL if needed. The downloaded asset bundle is a <code>.qs</code> zip file.</p>"
                     }
                 },
                 "S3Uri": {
                     "target": "com.amazonaws.quicksight#S3Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 uri that you provided at the start of the import job.</p>"
+                        "smithy.api#documentation": "<p>The Amazon S3 URI that you provided at the start of the import job.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A description of the import source that you provide at the start of an import job. This value is set to either <code>Body</code> or <code>S3Uri</code> depending on how the <code>StartAssetBundleImportJobRequest</code> is configured.</p>"
+                "smithy.api#documentation": "<p>A description of the import source that you provide at the start of an import job. This value is set to either <code>Body</code> or <code>S3Uri</code>, depending on how the <code>StartAssetBundleImportJobRequest</code> is configured.</p>"
             }
         },
         "com.amazonaws.quicksight#AssetBundleResourceArns": {
@@ -15135,7 +15135,7 @@
                 "JobStatus": {
                     "target": "com.amazonaws.quicksight#AssetBundleExportJobStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates tha status of a job through its queueing and execution.</p>\n         <p>Poll this <code>DescribeAssetBundleExportApi</code> until <code>JobStatus</code> is either <code>SUCCESSFUL</code> or <code>FAILED</code>.</p>"
+                        "smithy.api#documentation": "<p>Indicates the status of a job through its queuing and execution.</p>\n         <p>Poll this <code>DescribeAssetBundleExportApi</code> until <code>JobStatus</code> is either <code>SUCCESSFUL</code> or <code>FAILED</code>.</p>"
                     }
                 },
                 "DownloadUrl": {
@@ -15276,7 +15276,7 @@
                 "JobStatus": {
                     "target": "com.amazonaws.quicksight#AssetBundleImportJobStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates tha status of a job through its queueing and execution.</p>\n         <p>Poll this <code>DescribeAssetBundleImport</code> API until <code>JobStatus</code> returns one of the following values.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SUCCESSFUL</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED_ROLLBACK_COMPLETED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED_ROLLBACK_ERROR</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Indicates the status of a job through its queuing and execution.</p>\n         <p>Poll the <code>DescribeAssetBundleImport</code> API until <code>JobStatus</code> returns one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SUCCESSFUL</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED_ROLLBACK_COMPLETED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED_ROLLBACK_ERROR</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "Errors": {
@@ -32143,6 +32143,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The scope of the cell for conditional formatting.</p>"
                     }
+                },
+                "Scopes": {
+                    "target": "com.amazonaws.quicksight#PivotTableConditionalFormattingScopeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of cell scopes for conditional formatting.</p>"
+                    }
                 }
             },
             "traits": {
@@ -32201,6 +32207,18 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The scope of the cell for conditional formatting.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#PivotTableConditionalFormattingScopeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#PivotTableConditionalFormattingScope"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 3
+                }
             }
         },
         "com.amazonaws.quicksight#PivotTableConditionalFormattingScopeRole": {
@@ -32315,6 +32333,70 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#PivotTableFieldCollapseState": {
+            "type": "enum",
+            "members": {
+                "COLLAPSED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COLLAPSED"
+                    }
+                },
+                "EXPANDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXPANDED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#PivotTableFieldCollapseStateOption": {
+            "type": "structure",
+            "members": {
+                "Target": {
+                    "target": "com.amazonaws.quicksight#PivotTableFieldCollapseStateTarget",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A tagged-union object that sets the collapse state.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.quicksight#PivotTableFieldCollapseState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the field target of a pivot table. Choose one of the following options:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>COLLAPSED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>EXPANDED</code>\n               </p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The collapse state options for the pivot table field options.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#PivotTableFieldCollapseStateOptionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#PivotTableFieldCollapseStateOption"
+            }
+        },
+        "com.amazonaws.quicksight#PivotTableFieldCollapseStateTarget": {
+            "type": "structure",
+            "members": {
+                "FieldId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The field ID of the pivot table that the collapse state needs to be set to.</p>"
+                    }
+                },
+                "FieldDataPathValues": {
+                    "target": "com.amazonaws.quicksight#DataPathValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data path of the pivot table's header. Used to set the collapse state.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The target of a pivot table field collapse state.</p>"
+            }
+        },
         "com.amazonaws.quicksight#PivotTableFieldOption": {
             "type": "structure",
             "members": {
@@ -32367,6 +32449,12 @@
                     "target": "com.amazonaws.quicksight#PivotTableDataPathOptionList",
                     "traits": {
                         "smithy.api#documentation": "<p>The data path options for the pivot table field options.</p>"
+                    }
+                },
+                "CollapseStateOptions": {
+                    "target": "com.amazonaws.quicksight#PivotTableFieldCollapseStateOptionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The collapse state options for the pivot table field options.</p>"
                     }
                 }
             },
@@ -34546,6 +34634,29 @@
                 "smithy.api#documentation": "<p>The configured style settings of a radar chart.</p>"
             }
         },
+        "com.amazonaws.quicksight#RadarChartAxesRangeScale": {
+            "type": "enum",
+            "members": {
+                "AUTO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTO"
+                    }
+                },
+                "INDEPENDENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INDEPENDENT"
+                    }
+                },
+                "SHARED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SHARED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.quicksight#RadarChartCategoryFieldList": {
             "type": "list",
             "member": {
@@ -34655,6 +34766,12 @@
                     "target": "com.amazonaws.quicksight#LegendOptions",
                     "traits": {
                         "smithy.api#documentation": "<p>The legend display setup of the visual.</p>"
+                    }
+                },
+                "AxesRangeScale": {
+                    "target": "com.amazonaws.quicksight#RadarChartAxesRangeScale",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The axis behavior options of a radar chart.</p>"
                     }
                 }
             },
@@ -39141,7 +39258,7 @@
                     "target": "com.amazonaws.quicksight#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>A Boolean that determines whether all dependencies of each resource ARN are recursively exported with the job. For example, say you provided a Dashboard ARN to the <code>ResourceArns</code> parameter. If you set <code>IncludeAllDependencies</code> to <code>TRUE</code>, any theme, dataset, and dataource resource that is a dependency of the dashboard is also exported.</p>"
+                        "smithy.api#documentation": "<p>A Boolean that determines whether all dependencies of each resource ARN are recursively\n         exported with the job. For example, say you provided a Dashboard ARN to the\n            <code>ResourceArns</code> parameter. If you set <code>IncludeAllDependencies</code> to\n            <code>TRUE</code>, any theme, dataset, and data source resource that is a dependency of the dashboard is also\n         exported.</p>"
                     }
                 },
                 "ExportFormat": {
@@ -39270,7 +39387,7 @@
                 "FailureAction": {
                     "target": "com.amazonaws.quicksight#AssetBundleImportFailureAction",
                     "traits": {
-                        "smithy.api#documentation": "<p>The failure action for the import job.</p>\n         <p>If you choose <code>ROLLBACK</code>, failed  import jobs will attempt to  undo any asset changes caused by the failed job.</p>\n         <p>If you choose <code>DO_NOTHING</code>, failed import jobs will not attempt to roll back any asset changes caused by the failed job, possibly leaving the Amazon QuickSight account in an inconsistent state.</p>"
+                        "smithy.api#documentation": "<p>The failure action for the import job.</p>\n         <p>If you choose <code>ROLLBACK</code>, failed  import jobs will attempt to  undo any asset changes caused by the failed job.</p>\n         <p>If you choose <code>DO_NOTHING</code>, failed import jobs will not attempt to roll back\n         any asset changes caused by the failed job, possibly keeping the Amazon QuickSight account in an inconsistent state.</p>"
                     }
                 }
             },
