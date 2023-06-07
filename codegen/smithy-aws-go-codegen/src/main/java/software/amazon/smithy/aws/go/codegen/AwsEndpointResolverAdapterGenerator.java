@@ -169,8 +169,7 @@ public class AwsEndpointResolverAdapterGenerator implements GoIntegration {
                 return l.resolver.ResolveEndpoint(ctx, params)
             }
 
-            params.UseDualStack = nil
-            params.UseFIPS = nil
+            params = params.WithDefaults()
             params.Endpoint = &resolveEndpoint.URL
 
             return l.resolver.ResolveEndpoint(ctx, params)
@@ -215,6 +214,8 @@ public class AwsEndpointResolverAdapterGenerator implements GoIntegration {
                 if len(options.ResolvedRegion) > 0 {
                     reg = options.ResolvedRegion
                 } else {
+                    // $resolverInterfaceName:L needs to support pseudo-regions to maintain backwards-compatibility
+                    // with the legacy $legacyResolverInterfaceName:L
                     reg, fips = mapPseudoRegion(region)
                 }
                 ctx := context.Background()
@@ -240,13 +241,17 @@ public class AwsEndpointResolverAdapterGenerator implements GoIntegration {
                     "awsBoolType", SymbolUtils.createValueSymbolBuilder("Bool", AwsGoDependency.AWS_CORE).build(),
                     "awsFipsEndpointStateEnabledType", SymbolUtils.createValueSymbolBuilder("FIPSEndpointStateEnabled", AwsGoDependency.AWS_CORE).build(),
                     "awsDualStackEndpointStateEnabledType", SymbolUtils.createValueSymbolBuilder("DualStackEndpointStateEnabled", AwsGoDependency.AWS_CORE).build(),
-                    "endpointSourceMetadata", SymbolUtils.createValueSymbolBuilder("EndpointSourceServiceMetadata", AwsGoDependency.AWS_CORE).build()
+                    "endpointSourceMetadata", SymbolUtils.createValueSymbolBuilder("EndpointSourceServiceMetadata", AwsGoDependency.AWS_CORE).build(),
+                    "resolverInterfaceName", EndpointResolutionGenerator.RESOLVER_INTERFACE_NAME,
+                    "legacyResolverInterfaceName", EndpointGenerator.RESOLVER_INTERFACE_NAME
             ));
     }
 
     private GoWriter.Writable generatePseudoRegionUtility() {
         return goTemplate(
             """
+            // Utility function to aid with translating pseudo-regions to classical regions
+            // with the appropriate setting indicated by the pseudo-region
             func mapPseudoRegion(pr string) (region string, fips $awsFipsEndpointStateType:T) {
                 const fipsInfix = \"-fips-\"
                 const fipsPrefix = \"fips-\"
@@ -312,7 +317,13 @@ public class AwsEndpointResolverAdapterGenerator implements GoIntegration {
                                         .name(EndpointResolutionGenerator.RESOLVER_INTERFACE_NAME)
                                         .type(SymbolUtils.createValueSymbolBuilder(EndpointResolutionGenerator.RESOLVER_INTERFACE_NAME)
                                                 .build())
-                                        .documentation("The endpoint resolver V2.")
+                                        .documentation(String.format(
+                                            """
+                                            Resolves the endpoint used for a particular service. This should be used over the
+                                            deprecated %s
+                                            """,
+                                            EndpointGenerator.RESOLVER_INTERFACE_NAME
+                                        ))
                                         .withHelper(true)
                                         .build()
                         ))

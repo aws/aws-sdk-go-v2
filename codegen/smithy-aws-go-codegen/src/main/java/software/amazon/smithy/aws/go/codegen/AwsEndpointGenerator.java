@@ -69,7 +69,15 @@ public final class AwsEndpointGenerator implements GoIntegration {
                                         .name(ENDPOINT_RESOLVER_CONFIG_NAME)
                                         .type(SymbolUtils.createValueSymbolBuilder(EndpointGenerator.RESOLVER_INTERFACE_NAME)
                                                 .build())
-                                        .documentation(String.format("Deprecated: See %s", EndpointResolutionGenerator.RESOLVER_INTERFACE_NAME))
+                                        .documentation(String.format("The service endpoint resolver."))
+                                        .deprecated(String.format(
+                                            """
+                                            Deprecated: %s is deprecated along with its corresponding With__ helper.
+                                            See %s and corresponding With__ helper
+                                            """,
+                                            EndpointGenerator.RESOLVER_INTERFACE_NAME,
+                                            EndpointResolutionGenerator.RESOLVER_INTERFACE_NAME
+                                        ))
                                         .withHelper(true)
                                         .build(),
                                 ConfigField.builder()
