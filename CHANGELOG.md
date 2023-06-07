@@ -1,3 +1,19 @@
+# Release (2023-06-07)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.29.0](service/cloudformation/CHANGELOG.md#v1290-2023-06-07)
+  * **Feature**: AWS CloudFormation StackSets is updating the deployment experience for all stackset operations to skip suspended AWS accounts during deployments. StackSets will skip target AWS accounts that are suspended and set the Detailed Status of the corresponding stack instances as SKIPPED_SUSPENDED_ACCOUNT
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.21.0](service/cloudwatchlogs/CHANGELOG.md#v1210-2023-06-07)
+  * **Feature**: This change adds support for account level data protection policies using 3 new APIs, PutAccountPolicy, DeleteAccountPolicy and DescribeAccountPolicy. DescribeLogGroup API has been modified to indicate if account level policy is applied to the LogGroup via "inheritedProperties" list in the response.
+* `github.com/aws/aws-sdk-go-v2/service/customerprofiles`: [v1.25.0](service/customerprofiles/CHANGELOG.md#v1250-2023-06-07)
+  * **Feature**: This release introduces event stream related APIs.
+* `github.com/aws/aws-sdk-go-v2/service/directconnect`: [v1.18.15](service/directconnect/CHANGELOG.md#v11815-2023-06-07)
+  * **Documentation**: This update corrects the jumbo frames mtu values from 9100 to 8500 for transit virtual interfaces.
+* `github.com/aws/aws-sdk-go-v2/service/emrcontainers`: [v1.19.0](service/emrcontainers/CHANGELOG.md#v1190-2023-06-07)
+  * **Feature**: EMR on EKS adds support for log rotation of Spark container logs with EMR-6.11.0 onwards, to the StartJobRun API.
+* `github.com/aws/aws-sdk-go-v2/service/iotdeviceadvisor`: [v1.19.0](service/iotdeviceadvisor/CHANGELOG.md#v1190-2023-06-07)
+  * **Feature**: AWS IoT Core Device Advisor now supports new Qualification Suite test case list. With this update, customers can more easily create new qualification test suite with an empty rootGroup input.
+
 # Release (2023-06-06)
 
 ## Module Highlights

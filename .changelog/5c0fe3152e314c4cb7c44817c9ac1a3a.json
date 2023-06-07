@@ -1,8 +1,0 @@
-{
-    "id": "5c0fe315-2e31-4c4c-b7c4-4817c9ac1a3a",
-    "type": "feature",
-    "description": "This change adds support for account level data protection policies using 3 new APIs, PutAccountPolicy, DeleteAccountPolicy and DescribeAccountPolicy. DescribeLogGroup API has been modified to indicate if account level policy is applied to the LogGroup via \"inheritedProperties\" list in the response.",
-    "modules": [
-        "service/cloudwatchlogs"
-    ]
-}

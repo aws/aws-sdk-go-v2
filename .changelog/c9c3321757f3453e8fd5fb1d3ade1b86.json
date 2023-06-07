@@ -1,8 +1,0 @@
-{
-    "id": "c9c33217-57f3-453e-8fd5-fb1d3ade1b86",
-    "type": "feature",
-    "description": "AWS CloudFormation StackSets is updating the deployment experience for all stackset operations to skip suspended AWS accounts during deployments. StackSets will skip target AWS accounts that are suspended and set the Detailed Status of the corresponding stack instances as SKIPPED_SUSPENDED_ACCOUNT",
-    "modules": [
-        "service/cloudformation"
-    ]
-}

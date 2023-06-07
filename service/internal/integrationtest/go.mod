@@ -11,7 +11,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/athena v1.29.0
 	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.28.7
 	github.com/aws/aws-sdk-go-v2/service/batch v1.23.6
-	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.28.0
+	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.29.0
 	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.26.6
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.14.10
 	github.com/aws/aws-sdk-go-v2/service/cloudsearch v1.14.9
@@ -27,7 +27,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.16.0
 	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.25.5
 	github.com/aws/aws-sdk-go-v2/service/devicefarm v1.15.10
-	github.com/aws/aws-sdk-go-v2/service/directconnect v1.18.14
+	github.com/aws/aws-sdk-go-v2/service/directconnect v1.18.15
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.17.1
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.21.3
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.19.7

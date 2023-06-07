@@ -1,3 +1,7 @@
+# v1.18.15 (2023-06-07)
+
+* **Documentation**: This update corrects the jumbo frames mtu values from 9100 to 8500 for transit virtual interfaces.
+
 # v1.18.14 (2023-05-16)
 
 * **Documentation**: This release includes an update to the mtu value for CreateTransitVirtualInterface from 9001 mtu to 8500 mtu.

@@ -1,3 +1,7 @@
+# v1.19.0 (2023-06-07)
+
+* **Feature**: AWS IoT Core Device Advisor now supports new Qualification Suite test case list. With this update, customers can more easily create new qualification test suite with an empty rootGroup input.
+
 # v1.18.1 (2023-05-04)
 
 * No change notes available for this release.

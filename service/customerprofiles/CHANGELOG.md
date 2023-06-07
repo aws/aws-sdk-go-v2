@@ -1,3 +1,7 @@
+# v1.25.0 (2023-06-07)
+
+* **Feature**: This release introduces event stream related APIs.
+
 # v1.24.0 (2023-06-01)
 
 * **Feature**: This release introduces calculated attribute related APIs.
