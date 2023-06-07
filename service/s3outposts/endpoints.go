@@ -246,8 +246,7 @@ func (l *legacyEndpointResolverAdapter) ResolveEndpoint(ctx context.Context, par
 		return l.resolver.ResolveEndpoint(ctx, params)
 	}
 
-	params.UseDualStack = nil
-	params.UseFIPS = nil
+	params = params.WithDefaults()
 	params.Endpoint = &resolveEndpoint.URL
 
 	return l.resolver.ResolveEndpoint(ctx, params)
@@ -269,6 +268,8 @@ func (n *compatibleEndpointResolver) ResolveEndpoint(region string, options Endp
 	if len(options.ResolvedRegion) > 0 {
 		reg = options.ResolvedRegion
 	} else {
+		// EndpointResolverV2 needs to support pseudo-regions to maintain backwards-compatibility
+		// with the legacy EndpointResolver
 		reg, fips = mapPseudoRegion(region)
 	}
 	ctx := context.Background()
@@ -290,6 +291,8 @@ func (n *compatibleEndpointResolver) ResolveEndpoint(region string, options Endp
 	return endpoint, nil
 }
 
+// Utility function to aid with translating pseudo-regions to classical regions
+// with the appropriate setting indicated by the pseudo-region
 func mapPseudoRegion(pr string) (region string, fips aws.FIPSEndpointState) {
 	const fipsInfix = "-fips-"
 	const fipsPrefix = "fips-"

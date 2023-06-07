@@ -78,10 +78,15 @@ type Options struct {
 	// The endpoint options to be used when attempting to resolve an endpoint.
 	EndpointOptions EndpointResolverOptions
 
-	// Deprecated: See EndpointResolverV2
+	// The service endpoint resolver.
+	//
+	// Deprecated: Deprecated: EndpointResolver is deprecated along with its
+	// corresponding With__ helper. See EndpointResolverV2 and corresponding With__
+	// helper
 	EndpointResolver EndpointResolver
 
-	// The endpoint resolver V2.
+	// Resolves the endpoint used for a particular service. This should be used over
+	// the deprecated EndpointResolver
 	EndpointResolverV2 EndpointResolverV2
 
 	// Signature Version 4 (SigV4) Signer
@@ -142,8 +147,8 @@ func WithAPIOptions(optFns ...func(*middleware.Stack) error) func(*Options) {
 	}
 }
 
-// WithEndpointResolver returns a functional option for setting the Client's
-// EndpointResolver option.
+// Deprecated: EndpointResolver is deprecated along with its corresponding With__
+// helper. See EndpointResolverV2 and corresponding With__ helper
 func WithEndpointResolver(v EndpointResolver) func(*Options) {
 	return func(o *Options) {
 		o.EndpointResolver = v
@@ -181,6 +186,8 @@ func (c *Client) invokeOperation(ctx context.Context, opID string, params interf
 	finalizeRetryMaxAttemptOptions(&options, *c)
 
 	finalizeClientEndpointResolverOptions(&options)
+
+	finalizeEndpointResolverV2(&options)
 
 	for _, fn := range stackFns {
 		if err := fn(stack, options); err != nil {
