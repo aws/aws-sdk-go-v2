@@ -126,7 +126,7 @@ type Connection struct {
 	// address family (IPv4/IPv6).
 	HasLogicalRedundancy HasLogicalRedundancy
 
-	// Indicates whether jumbo frames (9001 MTU) are supported.
+	// Indicates whether jumbo frames are supported.
 	JumboFrameCapable *bool
 
 	// The ID of the LAG.
@@ -373,7 +373,7 @@ type Interconnect struct {
 	//   - unknown : The state of the interconnect is not available.
 	InterconnectState InterconnectState
 
-	// Indicates whether jumbo frames (9001 MTU) are supported.
+	// Indicates whether jumbo frames are supported.
 	JumboFrameCapable *bool
 
 	// The ID of the LAG.
@@ -430,7 +430,7 @@ type Lag struct {
 	// family (IPv4/IPv6).
 	HasLogicalRedundancy HasLogicalRedundancy
 
-	// Indicates whether jumbo frames (9001 MTU) are supported.
+	// Indicates whether jumbo frames are supported.
 	JumboFrameCapable *bool
 
 	// The ID of the LAG.
@@ -960,7 +960,7 @@ type VirtualInterface struct {
 	// The ID of the Direct Connect gateway.
 	DirectConnectGatewayId *string
 
-	// Indicates whether jumbo frames (9001 MTU) are supported.
+	// Indicates whether jumbo frames are supported.
 	JumboFrameCapable *bool
 
 	// The location of the connection.

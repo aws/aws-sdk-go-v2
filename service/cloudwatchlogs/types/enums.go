@@ -68,6 +68,22 @@ func (ExportTaskStatusCode) Values() []ExportTaskStatusCode {
 	}
 }
 
+type InheritedProperty string
+
+// Enum values for InheritedProperty
+const (
+	InheritedPropertyAccountDataProtection InheritedProperty = "ACCOUNT_DATA_PROTECTION"
+)
+
+// Values returns all known values for InheritedProperty. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InheritedProperty) Values() []InheritedProperty {
+	return []InheritedProperty{
+		"ACCOUNT_DATA_PROTECTION",
+	}
+}
+
 type OrderBy string
 
 // Enum values for OrderBy
@@ -83,6 +99,22 @@ func (OrderBy) Values() []OrderBy {
 	return []OrderBy{
 		"LogStreamName",
 		"LastEventTime",
+	}
+}
+
+type PolicyType string
+
+// Enum values for PolicyType
+const (
+	PolicyTypeDataProtectionPolicy PolicyType = "DATA_PROTECTION_POLICY"
+)
+
+// Values returns all known values for PolicyType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (PolicyType) Values() []PolicyType {
+	return []PolicyType{
+		"DATA_PROTECTION_POLICY",
 	}
 }
 
@@ -111,6 +143,22 @@ func (QueryStatus) Values() []QueryStatus {
 		"Cancelled",
 		"Timeout",
 		"Unknown",
+	}
+}
+
+type Scope string
+
+// Enum values for Scope
+const (
+	ScopeAll Scope = "ALL"
+)
+
+// Values returns all known values for Scope. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Scope) Values() []Scope {
+	return []Scope{
+		"ALL",
 	}
 }
 

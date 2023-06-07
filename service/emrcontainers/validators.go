@@ -516,6 +516,24 @@ func validateConfigurationOverrides(v *types.ConfigurationOverrides) error {
 	}
 }
 
+func validateContainerLogRotationConfiguration(v *types.ContainerLogRotationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContainerLogRotationConfiguration"}
+	if v.RotationSize == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RotationSize"))
+	}
+	if v.MaxFilesToKeep == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxFilesToKeep"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateContainerProvider(v *types.ContainerProvider) error {
 	if v == nil {
 		return nil
@@ -594,6 +612,11 @@ func validateMonitoringConfiguration(v *types.MonitoringConfiguration) error {
 	if v.S3MonitoringConfiguration != nil {
 		if err := validateS3MonitoringConfiguration(v.S3MonitoringConfiguration); err != nil {
 			invalidParams.AddNested("S3MonitoringConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ContainerLogRotationConfiguration != nil {
+		if err := validateContainerLogRotationConfiguration(v.ContainerLogRotationConfiguration); err != nil {
+			invalidParams.AddNested("ContainerLogRotationConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -317,6 +317,26 @@ type Consolidation struct {
 	noSmithyDocumentSerde
 }
 
+// Summary information about the Kinesis data stream
+type DestinationSummary struct {
+
+	// The status of enabling the Kinesis stream as a destination for export.
+	//
+	// This member is required.
+	Status EventStreamDestinationStatus
+
+	// The StreamARN of the destination to deliver profile events to. For example,
+	// arn:aws:kinesis:region:account-id:stream/stream-name.
+	//
+	// This member is required.
+	Uri *string
+
+	// The timestamp when the status last changed to UNHEALHY .
+	UnhealthySince *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Usage-specific statistics about the domain.
 type DomainStats struct {
 
@@ -334,6 +354,65 @@ type DomainStats struct {
 
 	// The total size, in bytes, of all objects in the domain.
 	TotalSize int64
+
+	noSmithyDocumentSerde
+}
+
+// Details of the destination being used for the EventStream.
+type EventStreamDestinationDetails struct {
+
+	// The status of enabling the Kinesis stream as a destination for export.
+	//
+	// This member is required.
+	Status EventStreamDestinationStatus
+
+	// The StreamARN of the destination to deliver profile events to. For example,
+	// arn:aws:kinesis:region:account-id:stream/stream-name.
+	//
+	// This member is required.
+	Uri *string
+
+	// The human-readable string that corresponds to the error or success while
+	// enabling the streaming destination.
+	Message *string
+
+	// The timestamp when the status last changed to UNHEALHY .
+	UnhealthySince *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// An instance of EventStream in a list of EventStreams.
+type EventStreamSummary struct {
+
+	// The unique name of the domain.
+	//
+	// This member is required.
+	DomainName *string
+
+	// A unique identifier for the event stream.
+	//
+	// This member is required.
+	EventStreamArn *string
+
+	// The name of the event stream.
+	//
+	// This member is required.
+	EventStreamName *string
+
+	// The operational state of destination stream for export.
+	//
+	// This member is required.
+	State EventStreamState
+
+	// Summary information about the Kinesis data stream.
+	DestinationSummary *DestinationSummary
+
+	// The timestamp when the State changed to STOPPED .
+	StoppedSince *time.Time
+
+	// The tags used to organize, track, or control access for this resource.
+	Tags map[string]string
 
 	noSmithyDocumentSerde
 }

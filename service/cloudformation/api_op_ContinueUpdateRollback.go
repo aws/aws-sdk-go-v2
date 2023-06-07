@@ -48,7 +48,7 @@ type ContinueUpdateRollbackInput struct {
 	StackName *string
 
 	// A unique identifier for this ContinueUpdateRollback request. Specify this token
-	// if you plan to retry requests so that CloudFormationknows that you're not
+	// if you plan to retry requests so that CloudFormation knows that you're not
 	// attempting to continue the rollback to a stack with the same name. You might
 	// retry ContinueUpdateRollback requests to ensure that CloudFormation
 	// successfully received them.

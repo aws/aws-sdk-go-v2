@@ -110,6 +110,26 @@ func (m *validateOpCreateLogStream) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteAccountPolicy struct {
+}
+
+func (*validateOpDeleteAccountPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAccountPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAccountPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAccountPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteDataProtectionPolicy struct {
 }
 
@@ -270,6 +290,26 @@ func (m *validateOpDeleteSubscriptionFilter) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeAccountPolicies struct {
+}
+
+func (*validateOpDescribeAccountPolicies) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeAccountPolicies) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeAccountPoliciesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeAccountPoliciesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeSubscriptionFilters struct {
 }
 
@@ -425,6 +465,26 @@ func (m *validateOpListTagsLogGroup) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsLogGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutAccountPolicy struct {
+}
+
+func (*validateOpPutAccountPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutAccountPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutAccountPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutAccountPolicyInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -750,6 +810,10 @@ func addOpCreateLogStreamValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateLogStream{}, middleware.After)
 }
 
+func addOpDeleteAccountPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAccountPolicy{}, middleware.After)
+}
+
 func addOpDeleteDataProtectionPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDataProtectionPolicy{}, middleware.After)
 }
@@ -782,6 +846,10 @@ func addOpDeleteSubscriptionFilterValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpDeleteSubscriptionFilter{}, middleware.After)
 }
 
+func addOpDescribeAccountPoliciesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeAccountPolicies{}, middleware.After)
+}
+
 func addOpDescribeSubscriptionFiltersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeSubscriptionFilters{}, middleware.After)
 }
@@ -812,6 +880,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 
 func addOpListTagsLogGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsLogGroup{}, middleware.After)
+}
+
+func addOpPutAccountPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutAccountPolicy{}, middleware.After)
 }
 
 func addOpPutDataProtectionPolicyValidationMiddleware(stack *middleware.Stack) error {
@@ -1037,6 +1109,24 @@ func validateOpCreateLogStreamInput(v *CreateLogStreamInput) error {
 	}
 }
 
+func validateOpDeleteAccountPolicyInput(v *DeleteAccountPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAccountPolicyInput"}
+	if v.PolicyName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyName"))
+	}
+	if len(v.PolicyType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteDataProtectionPolicyInput(v *DeleteDataProtectionPolicyInput) error {
 	if v == nil {
 		return nil
@@ -1166,6 +1256,21 @@ func validateOpDeleteSubscriptionFilterInput(v *DeleteSubscriptionFilterInput) e
 	}
 }
 
+func validateOpDescribeAccountPoliciesInput(v *DescribeAccountPoliciesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeAccountPoliciesInput"}
+	if len(v.PolicyType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeSubscriptionFiltersInput(v *DescribeSubscriptionFiltersInput) error {
 	if v == nil {
 		return nil
@@ -1278,6 +1383,27 @@ func validateOpListTagsLogGroupInput(v *ListTagsLogGroupInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsLogGroupInput"}
 	if v.LogGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LogGroupName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutAccountPolicyInput(v *PutAccountPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutAccountPolicyInput"}
+	if v.PolicyName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyName"))
+	}
+	if v.PolicyDocument == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyDocument"))
+	}
+	if len(v.PolicyType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -1,0 +1,8 @@
+{
+    "id": "9a6fa86f-b53f-4749-b1cd-aa1838487dea",
+    "type": "documentation",
+    "description": "This update corrects the jumbo frames mtu values from 9100 to 8500 for transit virtual interfaces.",
+    "modules": [
+        "service/directconnect"
+    ]
+}

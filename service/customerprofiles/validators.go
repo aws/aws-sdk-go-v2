@@ -70,6 +70,26 @@ func (m *validateOpCreateDomain) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateEventStream struct {
+}
+
+func (*validateOpCreateEventStream) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateEventStream) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateEventStreamInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateEventStreamInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateIntegrationWorkflow struct {
 }
 
@@ -145,6 +165,26 @@ func (m *validateOpDeleteDomain) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteDomainInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteEventStream struct {
+}
+
+func (*validateOpDeleteEventStream) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteEventStream) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteEventStreamInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteEventStreamInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -350,6 +390,26 @@ func (m *validateOpGetDomain) HandleInitialize(ctx context.Context, in middlewar
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetEventStream struct {
+}
+
+func (*validateOpGetEventStream) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetEventStream) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetEventStreamInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetEventStreamInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetIdentityResolutionJob struct {
 }
 
@@ -545,6 +605,26 @@ func (m *validateOpListCalculatedAttributesForProfile) HandleInitialize(ctx cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListCalculatedAttributesForProfileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListEventStreams struct {
+}
+
+func (*validateOpListEventStreams) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListEventStreams) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListEventStreamsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListEventStreamsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -882,6 +962,10 @@ func addOpCreateDomainValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDomain{}, middleware.After)
 }
 
+func addOpCreateEventStreamValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateEventStream{}, middleware.After)
+}
+
 func addOpCreateIntegrationWorkflowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateIntegrationWorkflow{}, middleware.After)
 }
@@ -896,6 +980,10 @@ func addOpDeleteCalculatedAttributeDefinitionValidationMiddleware(stack *middlew
 
 func addOpDeleteDomainValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDomain{}, middleware.After)
+}
+
+func addOpDeleteEventStreamValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteEventStream{}, middleware.After)
 }
 
 func addOpDeleteIntegrationValidationMiddleware(stack *middleware.Stack) error {
@@ -938,6 +1026,10 @@ func addOpGetDomainValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDomain{}, middleware.After)
 }
 
+func addOpGetEventStreamValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetEventStream{}, middleware.After)
+}
+
 func addOpGetIdentityResolutionJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetIdentityResolutionJob{}, middleware.After)
 }
@@ -976,6 +1068,10 @@ func addOpListCalculatedAttributeDefinitionsValidationMiddleware(stack *middlewa
 
 func addOpListCalculatedAttributesForProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListCalculatedAttributesForProfile{}, middleware.After)
+}
+
+func addOpListEventStreamsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListEventStreams{}, middleware.After)
 }
 
 func addOpListIdentityResolutionJobsValidationMiddleware(stack *middleware.Stack) error {
@@ -1755,6 +1851,27 @@ func validateOpCreateDomainInput(v *CreateDomainInput) error {
 	}
 }
 
+func validateOpCreateEventStreamInput(v *CreateEventStreamInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateEventStreamInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Uri"))
+	}
+	if v.EventStreamName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventStreamName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateIntegrationWorkflowInput(v *CreateIntegrationWorkflowInput) error {
 	if v == nil {
 		return nil
@@ -1826,6 +1943,24 @@ func validateOpDeleteDomainInput(v *DeleteDomainInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteDomainInput"}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteEventStreamInput(v *DeleteEventStreamInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteEventStreamInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.EventStreamName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventStreamName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2037,6 +2172,24 @@ func validateOpGetDomainInput(v *GetDomainInput) error {
 	}
 }
 
+func validateOpGetEventStreamInput(v *GetEventStreamInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetEventStreamInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.EventStreamName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventStreamName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetIdentityResolutionJobInput(v *GetIdentityResolutionJobInput) error {
 	if v == nil {
 		return nil
@@ -2197,6 +2350,21 @@ func validateOpListCalculatedAttributesForProfileInput(v *ListCalculatedAttribut
 	}
 	if v.ProfileId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProfileId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListEventStreamsInput(v *ListEventStreamsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListEventStreamsInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

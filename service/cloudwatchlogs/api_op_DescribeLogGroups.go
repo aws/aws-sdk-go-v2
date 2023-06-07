@@ -49,9 +49,7 @@ type DescribeLogGroupsInput struct {
 	// return log groups in the accounts listed in accountIdentifiers . If this
 	// parameter is set to true and accountIdentifiers contains a null value, the
 	// operation returns all log groups in the monitoring account and all log groups in
-	// all source accounts that are linked to the monitoring account. If you specify
-	// includeLinkedAccounts in your request, then metricFilterCount , retentionInDays
-	// , and storedBytes are not included in the response.
+	// all source accounts that are linked to the monitoring account.
 	IncludeLinkedAccounts *bool
 
 	// The maximum number of items returned. If you don't specify a value, the default
@@ -61,9 +59,11 @@ type DescribeLogGroupsInput struct {
 	// If you specify a string for this parameter, the operation returns only log
 	// groups that have names that match the string based on a case-sensitive substring
 	// search. For example, if you specify Foo , log groups named FooBar , aws/Foo ,
-	// and GroupFoo would match, but foo , F/o/o and Froo would not match.
-	// logGroupNamePattern and logGroupNamePrefix are mutually exclusive. Only one of
-	// these parameters can be passed.
+	// and GroupFoo would match, but foo , F/o/o and Froo would not match. If you
+	// specify logGroupNamePattern in your request, then only arn , creationTime , and
+	// logGroupName are included in the response. logGroupNamePattern and
+	// logGroupNamePrefix are mutually exclusive. Only one of these parameters can be
+	// passed.
 	LogGroupNamePattern *string
 
 	// The prefix to match. logGroupNamePrefix and logGroupNamePattern are mutually

@@ -13,13 +13,13 @@ import (
 // Schedules a query of a log group using CloudWatch Logs Insights. You specify
 // the log group and time range to query and the query string to use. For more
 // information, see CloudWatch Logs Insights Query Syntax (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html)
-// . Queries time out after 15 minutes of runtime. If your queries are timing out,
+// . Queries time out after 60 minutes of runtime. If your queries are timing out,
 // reduce the time range being searched or partition your query into a number of
 // queries. If you are using CloudWatch cross-account observability, you can use
 // this operation in a monitoring account to start a query in a linked source
 // account. For more information, see CloudWatch cross-account observability (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html)
 // . For a cross-account StartQuery operation, the query definition must be
-// defined in the monitoring account. You can have up to 20 concurrent CloudWatch
+// defined in the monitoring account. You can have up to 30 concurrent CloudWatch
 // Logs insights queries, including queries that have been added to dashboards.
 func (c *Client) StartQuery(ctx context.Context, params *StartQueryInput, optFns ...func(*Options)) (*StartQueryOutput, error) {
 	if params == nil {

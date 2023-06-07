@@ -27,10 +27,10 @@ import (
 // using the KMS key. This association is stored as long as the data encrypted with
 // the KMS key is still within CloudWatch Logs. This enables CloudWatch Logs to
 // decrypt this data whenever it is requested. If you attempt to associate a KMS
-// key with the log group but the KMS keydoes not exist or the KMS key is disabled,
-// you receive an InvalidParameterException error. CloudWatch Logs supports only
-// symmetric KMS keys. Do not associate an asymmetric KMS key with your log group.
-// For more information, see Using Symmetric and Asymmetric Keys (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
+// key with the log group but the KMS key does not exist or the KMS key is
+// disabled, you receive an InvalidParameterException error. CloudWatch Logs
+// supports only symmetric KMS keys. Do not associate an asymmetric KMS key with
+// your log group. For more information, see Using Symmetric and Asymmetric Keys (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
 // .
 func (c *Client) CreateLogGroup(ctx context.Context, params *CreateLogGroupInput, optFns ...func(*Options)) (*CreateLogGroupOutput, error) {
 	if params == nil {

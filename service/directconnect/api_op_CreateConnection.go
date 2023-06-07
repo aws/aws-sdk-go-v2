@@ -120,7 +120,7 @@ type CreateConnectionOutput struct {
 	// address family (IPv4/IPv6).
 	HasLogicalRedundancy types.HasLogicalRedundancy
 
-	// Indicates whether jumbo frames (9001 MTU) are supported.
+	// Indicates whether jumbo frames are supported.
 	JumboFrameCapable *bool
 
 	// The ID of the LAG.

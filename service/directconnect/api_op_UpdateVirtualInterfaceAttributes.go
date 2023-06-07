@@ -17,7 +17,7 @@ import (
 // jumbo frames. Updating the connection disrupts network connectivity for all
 // virtual interfaces associated with the connection for up to 30 seconds. To check
 // whether your connection supports jumbo frames, call DescribeConnections . To
-// check whether your virtual q interface supports jumbo frames, call
+// check whether your virtual interface supports jumbo frames, call
 // DescribeVirtualInterfaces .
 func (c *Client) UpdateVirtualInterfaceAttributes(ctx context.Context, params *UpdateVirtualInterfaceAttributesInput, optFns ...func(*Options)) (*UpdateVirtualInterfaceAttributesOutput, error) {
 	if params == nil {
@@ -96,7 +96,7 @@ type UpdateVirtualInterfaceAttributesOutput struct {
 	// The ID of the Direct Connect gateway.
 	DirectConnectGatewayId *string
 
-	// Indicates whether jumbo frames (9001 MTU) are supported.
+	// Indicates whether jumbo frames are supported.
 	JumboFrameCapable *bool
 
 	// The location of the connection.

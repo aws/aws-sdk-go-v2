@@ -113,7 +113,7 @@ type CreateInterconnectOutput struct {
 	//   - unknown : The state of the interconnect is not available.
 	InterconnectState types.InterconnectState
 
-	// Indicates whether jumbo frames (9001 MTU) are supported.
+	// Indicates whether jumbo frames are supported.
 	JumboFrameCapable *bool
 
 	// The ID of the LAG.

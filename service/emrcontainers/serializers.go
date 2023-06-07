@@ -1674,6 +1674,23 @@ func awsRestjson1_serializeDocumentContainerInfo(v types.ContainerInfo, value sm
 	return nil
 }
 
+func awsRestjson1_serializeDocumentContainerLogRotationConfiguration(v *types.ContainerLogRotationConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxFilesToKeep != nil {
+		ok := object.Key("maxFilesToKeep")
+		ok.Integer(*v.MaxFilesToKeep)
+	}
+
+	if v.RotationSize != nil {
+		ok := object.Key("rotationSize")
+		ok.String(*v.RotationSize)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentContainerProvider(v *types.ContainerProvider, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1794,6 +1811,13 @@ func awsRestjson1_serializeDocumentMonitoringConfiguration(v *types.MonitoringCo
 	if v.CloudWatchMonitoringConfiguration != nil {
 		ok := object.Key("cloudWatchMonitoringConfiguration")
 		if err := awsRestjson1_serializeDocumentCloudWatchMonitoringConfiguration(v.CloudWatchMonitoringConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ContainerLogRotationConfiguration != nil {
+		ok := object.Key("containerLogRotationConfiguration")
+		if err := awsRestjson1_serializeDocumentContainerLogRotationConfiguration(v.ContainerLogRotationConfiguration, ok); err != nil {
 			return err
 		}
 	}

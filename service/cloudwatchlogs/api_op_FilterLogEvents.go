@@ -14,7 +14,7 @@ import (
 
 // Lists log events from the specified log group. You can list all the log events
 // or filter the results using a filter pattern, a time range, and the name of the
-// log stream. You must have the logs;FilterLogEvents permission to perform this
+// log stream. You must have the logs:FilterLogEvents permission to perform this
 // operation. You can specify the log group to search by using either
 // logGroupIdentifier or logGroupName . You must include one of these two
 // parameters, but you can't include both. By default, this operation returns as

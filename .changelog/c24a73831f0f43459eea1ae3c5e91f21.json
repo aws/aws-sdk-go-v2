@@ -1,0 +1,8 @@
+{
+    "id": "c24a7383-1f0f-4345-9eea-1ae3c5e91f21",
+    "type": "feature",
+    "description": "EMR on EKS adds support for log rotation of Spark container logs with EMR-6.11.0 onwards, to the StartJobRun API.",
+    "modules": [
+        "service/emrcontainers"
+    ]
+}

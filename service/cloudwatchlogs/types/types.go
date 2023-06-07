@@ -6,6 +6,31 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
+// A structure that contains information about one CloudWatch Logs account policy.
+type AccountPolicy struct {
+
+	// The Amazon Web Services account ID that the policy applies to.
+	AccountId *string
+
+	// The date and time that this policy was most recently updated.
+	LastUpdatedTime *int64
+
+	// The policy document for this account policy. The JSON specified in
+	// policyDocument can be up to 30,720 characters.
+	PolicyDocument *string
+
+	// The name of the account policy.
+	PolicyName *string
+
+	// The type of policy for this account policy.
+	PolicyType PolicyType
+
+	// The scope of the account policy.
+	Scope Scope
+
+	noSmithyDocumentSerde
+}
+
 // Represents a cross-account destination that receives subscription log events.
 type Destination struct {
 
@@ -122,7 +147,7 @@ type FilteredLogEvent struct {
 // application or resource being monitored.
 type InputLogEvent struct {
 
-	// The raw event message.
+	// The raw event message. Each log event can be no larger than 256 KB.
 	//
 	// This member is required.
 	Message *string
@@ -151,6 +176,10 @@ type LogGroup struct {
 	// .
 	DataProtectionStatus DataProtectionStatus
 
+	// Displays all the properties that this log group has inherited from
+	// account-level settings.
+	InheritedProperties []InheritedProperty
+
 	// The Amazon Resource Name (ARN) of the KMS key to use when encrypting log data.
 	KmsKeyId *string
 
@@ -162,8 +191,8 @@ type LogGroup struct {
 
 	// The number of days to retain the log events in the specified log group.
 	// Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180, 365, 400, 545,
-	// 731, 1827, 2192, 2557, 2922, 3288, and 3653. To set a log group so that its log
-	// events do not expire, use DeleteRetentionPolicy (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DeleteRetentionPolicy.html)
+	// 731, 1096, 1827, 2192, 2557, 2922, 3288, and 3653. To set a log group so that
+	// its log events do not expire, use DeleteRetentionPolicy (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DeleteRetentionPolicy.html)
 	// .
 	RetentionInDays *int32
 

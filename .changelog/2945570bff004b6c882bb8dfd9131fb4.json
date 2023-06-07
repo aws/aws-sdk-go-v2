@@ -1,0 +1,8 @@
+{
+    "id": "2945570b-ff00-4b6c-882b-b8dfd9131fb4",
+    "type": "feature",
+    "description": "This release introduces event stream related APIs.",
+    "modules": [
+        "service/customerprofiles"
+    ]
+}

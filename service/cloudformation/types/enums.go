@@ -844,12 +844,13 @@ type StackInstanceDetailedStatus string
 
 // Enum values for StackInstanceDetailedStatus
 const (
-	StackInstanceDetailedStatusPending    StackInstanceDetailedStatus = "PENDING"
-	StackInstanceDetailedStatusRunning    StackInstanceDetailedStatus = "RUNNING"
-	StackInstanceDetailedStatusSucceeded  StackInstanceDetailedStatus = "SUCCEEDED"
-	StackInstanceDetailedStatusFailed     StackInstanceDetailedStatus = "FAILED"
-	StackInstanceDetailedStatusCancelled  StackInstanceDetailedStatus = "CANCELLED"
-	StackInstanceDetailedStatusInoperable StackInstanceDetailedStatus = "INOPERABLE"
+	StackInstanceDetailedStatusPending                 StackInstanceDetailedStatus = "PENDING"
+	StackInstanceDetailedStatusRunning                 StackInstanceDetailedStatus = "RUNNING"
+	StackInstanceDetailedStatusSucceeded               StackInstanceDetailedStatus = "SUCCEEDED"
+	StackInstanceDetailedStatusFailed                  StackInstanceDetailedStatus = "FAILED"
+	StackInstanceDetailedStatusCancelled               StackInstanceDetailedStatus = "CANCELLED"
+	StackInstanceDetailedStatusInoperable              StackInstanceDetailedStatus = "INOPERABLE"
+	StackInstanceDetailedStatusSkippedSuspendedAccount StackInstanceDetailedStatus = "SKIPPED_SUSPENDED_ACCOUNT"
 )
 
 // Values returns all known values for StackInstanceDetailedStatus. Note that this
@@ -863,6 +864,7 @@ func (StackInstanceDetailedStatus) Values() []StackInstanceDetailedStatus {
 		"FAILED",
 		"CANCELLED",
 		"INOPERABLE",
+		"SKIPPED_SUSPENDED_ACCOUNT",
 	}
 }
 

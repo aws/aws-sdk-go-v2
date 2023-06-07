@@ -86,6 +86,22 @@ type ContainerInfoMemberEksInfo struct {
 
 func (*ContainerInfoMemberEksInfo) isContainerInfo() {}
 
+// The settings for container log rotation.
+type ContainerLogRotationConfiguration struct {
+
+	// The number of files to keep in container after rotation.
+	//
+	// This member is required.
+	MaxFilesToKeep *int32
+
+	// The file size at which to rotate logs. Minimum of 2KB, Maximum of 2GB.
+	//
+	// This member is required.
+	RotationSize *string
+
+	noSmithyDocumentSerde
+}
+
 // The information about the container provider.
 type ContainerProvider struct {
 
@@ -348,6 +364,9 @@ type MonitoringConfiguration struct {
 
 	// Monitoring configurations for CloudWatch.
 	CloudWatchMonitoringConfiguration *CloudWatchMonitoringConfiguration
+
+	// Enable or disable container log rotation.
+	ContainerLogRotationConfiguration *ContainerLogRotationConfiguration
 
 	// Monitoring configurations for the persistent application UI.
 	PersistentAppUI PersistentAppUI

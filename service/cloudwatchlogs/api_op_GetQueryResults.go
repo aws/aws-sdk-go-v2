@@ -64,7 +64,7 @@ type GetQueryResultsOutput struct {
 
 	// The status of the most recent running of the query. Possible values are
 	// Cancelled , Complete , Failed , Running , Scheduled , Timeout , and Unknown .
-	// Queries time out after 15 minutes of runtime. To avoid having your queries time
+	// Queries time out after 60 minutes of runtime. To avoid having your queries time
 	// out, reduce the time range being searched or partition your query into a number
 	// of queries.
 	Status types.QueryStatus

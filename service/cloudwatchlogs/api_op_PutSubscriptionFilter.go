@@ -28,8 +28,8 @@ import (
 //
 // Each log group can have up to two subscription filters associated with it. If
 // you are updating an existing filter, you must specify the correct name in
-// filterName . To perform a PutSubscriptionFilter operation, you must also have
-// the iam:PassRole permission.
+// filterName . To perform a PutSubscriptionFilter operation for any destination
+// except a Lambda function, you must also have the iam:PassRole permission.
 func (c *Client) PutSubscriptionFilter(ctx context.Context, params *PutSubscriptionFilterInput, optFns ...func(*Options)) (*PutSubscriptionFilterOutput, error) {
 	if params == nil {
 		params = &PutSubscriptionFilterInput{}

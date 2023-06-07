@@ -38,6 +38,43 @@ func (DataPullMode) Values() []DataPullMode {
 	}
 }
 
+type EventStreamDestinationStatus string
+
+// Enum values for EventStreamDestinationStatus
+const (
+	EventStreamDestinationStatusHealthy   EventStreamDestinationStatus = "HEALTHY"
+	EventStreamDestinationStatusUnhealthy EventStreamDestinationStatus = "UNHEALTHY"
+)
+
+// Values returns all known values for EventStreamDestinationStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (EventStreamDestinationStatus) Values() []EventStreamDestinationStatus {
+	return []EventStreamDestinationStatus{
+		"HEALTHY",
+		"UNHEALTHY",
+	}
+}
+
+type EventStreamState string
+
+// Enum values for EventStreamState
+const (
+	EventStreamStateRunning EventStreamState = "RUNNING"
+	EventStreamStateStopped EventStreamState = "STOPPED"
+)
+
+// Values returns all known values for EventStreamState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EventStreamState) Values() []EventStreamState {
+	return []EventStreamState{
+		"RUNNING",
+		"STOPPED",
+	}
+}
+
 type FieldContentType string
 
 // Enum values for FieldContentType
