@@ -967,6 +967,98 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.customerprofiles#CreateEventStream": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#CreateEventStreamRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#CreateEventStreamResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an event stream, which is a subscription to real-time events, such as when profiles are created and \n         updated through Amazon Connect Customer Profiles.</p>\n         <p>Each event stream can be associated with only one Kinesis Data Stream destination in the same region and \n         Amazon Web Services account as the customer profiles domain</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/domains/{DomainName}/event-streams/{EventStreamName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#CreateEventStreamRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Uri": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The StreamARN of the destination to deliver profile events to. For example, \n         arn:aws:kinesis:region:account-id:stream/stream-name</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EventStreamName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the event stream.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.customerprofiles#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#CreateEventStreamResponse": {
+            "type": "structure",
+            "members": {
+                "EventStreamArn": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the event stream.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.customerprofiles#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.customerprofiles#CreateIntegrationWorkflow": {
             "type": "operation",
             "input": {
@@ -1290,6 +1382,9 @@
                     "target": "com.amazonaws.customerprofiles#CreateDomain"
                 },
                 {
+                    "target": "com.amazonaws.customerprofiles#CreateEventStream"
+                },
+                {
                     "target": "com.amazonaws.customerprofiles#CreateIntegrationWorkflow"
                 },
                 {
@@ -1300,6 +1395,9 @@
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#DeleteDomain"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#DeleteEventStream"
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#DeleteIntegration"
@@ -1330,6 +1428,9 @@
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#GetDomain"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#GetEventStream"
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#GetIdentityResolutionJob"
@@ -1363,6 +1464,9 @@
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#ListDomains"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ListEventStreams"
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#ListIdentityResolutionJobs"
@@ -2373,6 +2477,72 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.customerprofiles#DeleteEventStream": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#DeleteEventStreamRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#DeleteEventStreamResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Disables and deletes the specified event stream.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/domains/{DomainName}/event-streams/{EventStreamName}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#DeleteEventStreamRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "EventStreamName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the event stream</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#DeleteEventStreamResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.customerprofiles#DeleteIntegration": {
             "type": "operation",
             "input": {
@@ -2834,6 +3004,34 @@
                 "smithy.api#pattern": ".*"
             }
         },
+        "com.amazonaws.customerprofiles#DestinationSummary": {
+            "type": "structure",
+            "members": {
+                "Uri": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The StreamARN of the destination to deliver profile events to. For example, \n         arn:aws:kinesis:region:account-id:stream/stream-name.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.customerprofiles#EventStreamDestinationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of enabling the Kinesis stream as a destination for export.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UnhealthySince": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the status last changed to <code>UNHEALHY</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information about the Kinesis data stream</p>"
+            }
+        },
         "com.amazonaws.customerprofiles#DomainList": {
             "type": "list",
             "member": {
@@ -2886,6 +3084,134 @@
                     "min": 0.0,
                     "max": 1.0
                 }
+            }
+        },
+        "com.amazonaws.customerprofiles#EventStreamDestinationDetails": {
+            "type": "structure",
+            "members": {
+                "Uri": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The StreamARN of the destination to deliver profile events to. For example, \n         arn:aws:kinesis:region:account-id:stream/stream-name.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.customerprofiles#EventStreamDestinationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of enabling the Kinesis stream as a destination for export.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UnhealthySince": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the status last changed to <code>UNHEALHY</code>.</p>"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.customerprofiles#string1To1000",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The human-readable string that corresponds to the error or success while enabling the streaming destination.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details of the destination being used for the EventStream.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#EventStreamDestinationStatus": {
+            "type": "enum",
+            "members": {
+                "HEALTHY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HEALTHY"
+                    }
+                },
+                "UNHEALTHY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNHEALTHY"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#EventStreamState": {
+            "type": "enum",
+            "members": {
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING"
+                    }
+                },
+                "STOPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#EventStreamSummary": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EventStreamName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the event stream.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EventStreamArn": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the event stream.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.customerprofiles#EventStreamState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operational state of destination stream for export.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StoppedSince": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the <code>State</code> changed to <code>STOPPED</code>.</p>"
+                    }
+                },
+                "DestinationSummary": {
+                    "target": "com.amazonaws.customerprofiles#DestinationSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Summary information about the Kinesis data stream.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.customerprofiles#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An instance of EventStream in a list of EventStreams.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#EventStreamSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#EventStreamSummary"
             }
         },
         "com.amazonaws.customerprofiles#ExportingConfig": {
@@ -3640,6 +3966,119 @@
                     "target": "com.amazonaws.customerprofiles#timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp of when the domain was most recently edited.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.customerprofiles#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#GetEventStream": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#GetEventStreamRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#GetEventStreamResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about the specified event stream in a specific domain.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/domains/{DomainName}/event-streams/{EventStreamName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#GetEventStreamRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "EventStreamName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the event stream provided during create operations.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#GetEventStreamResponse": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EventStreamArn": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the event stream.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the export was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.customerprofiles#EventStreamState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operational state of destination stream for export.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StoppedSince": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the <code>State</code> changed to <code>STOPPED</code>.</p>"
+                    }
+                },
+                "DestinationDetails": {
+                    "target": "com.amazonaws.customerprofiles#EventStreamDestinationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details regarding the Kinesis stream.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5194,6 +5633,96 @@
                     "target": "com.amazonaws.customerprofiles#token",
                     "traits": {
                         "smithy.api#documentation": "<p>The pagination token from the previous ListDomains API call.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#ListEventStreams": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#ListEventStreamsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#ListEventStreamsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of all the event streams in a specific domain.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/domains/{DomainName}/event-streams",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Items",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#ListEventStreamsRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.customerprofiles#token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the next page of results to return.</p>",
+                        "smithy.api#httpQuery": "next-token"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.customerprofiles#maxSize100",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of objects returned per page.</p>",
+                        "smithy.api#httpQuery": "max-results"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#ListEventStreamsResponse": {
+            "type": "structure",
+            "members": {
+                "Items": {
+                    "target": "com.amazonaws.customerprofiles#EventStreamSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains summary information about an EventStream.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.customerprofiles#token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the next page of results to return.</p>"
                     }
                 }
             },

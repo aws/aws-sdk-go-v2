@@ -1653,7 +1653,7 @@
                 "resourceArn": {
                     "target": "com.amazonaws.iotdeviceadvisor#AmazonResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource ARN of the IoT Device Advisor resource.\n        This can be SuiteDefinition ARN or SuiteRun ARN.</p>",
+                        "smithy.api#documentation": "<p>The resource ARN of the IoT Device Advisor resource. This can be SuiteDefinition ARN or\n            SuiteRun ARN.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1757,7 +1757,7 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
+                    "min": 0,
                     "max": 2048
                 }
             }
@@ -2038,7 +2038,7 @@
                 "rootGroup": {
                     "target": "com.amazonaws.iotdeviceadvisor#RootGroup",
                     "traits": {
-                        "smithy.api#documentation": "<p>Gets the test suite root group. This is a required parameter.</p>",
+                        "smithy.api#documentation": "<p>Gets the test suite root group. This is a required parameter.\n            For updating or creating the latest qualification suite, \n            if <code>intendedForQualification</code> is set to true, \n            <code>rootGroup</code> can be an empty string. If <code>intendedForQualification</code> is false, \n            <code>rootGroup</code> cannot be an empty string.\n            If <code>rootGroup</code> is empty, and \n            <code>intendedForQualification</code> is set to true, \n            all the qualification tests are included, and the configuration is default.</p>\n         <p>\n            For a qualification suite, the minimum length is 0, and the maximum is 2048.  For a \n            non-qualification suite, the minimum length is 1, and the maximum is 2048.\n        </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2142,7 +2142,7 @@
                 "primaryDevice": {
                     "target": "com.amazonaws.iotdeviceadvisor#DeviceUnderTest",
                     "traits": {
-                        "smithy.api#documentation": "<p>Sets the primary device for the test suite run. This requires\n        a thing ARN or a certificate ARN.</p>",
+                        "smithy.api#documentation": "<p>Sets the primary device for the test suite run. This requires a thing ARN or a\n            certificate ARN.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2373,7 +2373,7 @@
                 "resourceArn": {
                     "target": "com.amazonaws.iotdeviceadvisor#AmazonResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource ARN of an IoT Device Advisor resource. \n            This can be SuiteDefinition ARN or SuiteRun ARN.</p>",
+                        "smithy.api#documentation": "<p>The resource ARN of an IoT Device Advisor resource. This can be SuiteDefinition ARN or\n            SuiteRun ARN.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2507,7 +2507,7 @@
                 "systemMessage": {
                     "target": "com.amazonaws.iotdeviceadvisor#SystemMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n        </p>"
+                        "smithy.api#documentation": "<p>Provides test case scenario system messages if any.</p>"
                     }
                 }
             },
@@ -2669,7 +2669,7 @@
                 "resourceArn": {
                     "target": "com.amazonaws.iotdeviceadvisor#AmazonResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource ARN of an IoT Device Advisor resource.\n            This can be SuiteDefinition ARN or SuiteRun ARN.</p>",
+                        "smithy.api#documentation": "<p>The resource ARN of an IoT Device Advisor resource. This can be SuiteDefinition ARN or\n            SuiteRun ARN.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }

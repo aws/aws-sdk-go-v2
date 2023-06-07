@@ -116,7 +116,7 @@
                     "name": "emr-containers"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Amazon EMR on EKS provides a deployment option for Amazon EMR that allows\n         you to run open-source big data frameworks on Amazon Elastic Kubernetes Service (Amazon EKS).\n         With this deployment option, you can focus on running analytics workloads while Amazon EMR on EKS builds, configures, and manages containers for open-source applications.\n         For more information about Amazon EMR on EKS  concepts and tasks, see <a href=\"https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/emr-eks.html\">What is\n            shared id=\"EMR-EKS\"/></a>.</p>\n         <p>\n            <i>Amazon EMR containers</i> is the API name for Amazon EMR on EKS.\n         The <code>emr-containers</code> prefix is used in the following scenarios: </p>\n         <ul>\n            <li>\n               <p>It is the prefix in the CLI commands for Amazon EMR on EKS. For example,\n                  <code>aws emr-containers start-job-run</code>.</p>\n            </li>\n            <li>\n               <p>It is the prefix before IAM policy actions for Amazon EMR on EKS. For\n               example, <code>\"Action\": [ \"emr-containers:StartJobRun\"]</code>. For more\n               information, see <a href=\"https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-actions\">Policy actions for Amazon EMR on EKS</a>.</p>\n            </li>\n            <li>\n               <p>It is the prefix used in Amazon EMR on EKS service endpoints. For example,\n                  <code>emr-containers.us-east-2.amazonaws.com</code>. For more information, see\n                  <a href=\"https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/service-quotas.html#service-endpoints\">Amazon EMR on EKSService Endpoints</a>.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Amazon EMR on EKS provides a deployment option for Amazon EMR that allows\n         you to run open-source big data frameworks on Amazon Elastic Kubernetes Service (Amazon EKS).\n         With this deployment option, you can focus on running analytics workloads while Amazon EMR on EKS builds, configures, and manages containers for open-source applications.\n         For more information about Amazon EMR on EKS concepts and tasks, see <a href=\"https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/emr-eks.html\">What is\n            shared id=\"EMR-EKS\"/></a>.</p>\n         <p>\n            <i>Amazon EMR containers</i> is the API name for Amazon EMR on EKS. The <code>emr-containers</code> prefix is used in the following\n         scenarios: </p>\n         <ul>\n            <li>\n               <p>It is the prefix in the CLI commands for Amazon EMR on EKS. For example,\n                  <code>aws emr-containers start-job-run</code>.</p>\n            </li>\n            <li>\n               <p>It is the prefix before IAM policy actions for Amazon EMR on EKS. For\n               example, <code>\"Action\": [ \"emr-containers:StartJobRun\"]</code>. For more\n               information, see <a href=\"https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-actions\">Policy actions for Amazon EMR on EKS</a>.</p>\n            </li>\n            <li>\n               <p>It is the prefix used in Amazon EMR on EKS service endpoints. For example,\n                  <code>emr-containers.us-east-2.amazonaws.com</code>. For more information, see\n                  <a href=\"https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/service-quotas.html#service-endpoints\">Amazon EMR on EKSService Endpoints</a>.</p>\n            </li>\n         </ul>",
                 "smithy.api#title": "Amazon EMR Containers",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -1257,13 +1257,35 @@
                 "smithy.api#documentation": "<p>The information about the container used for a job run or a managed endpoint.</p>"
             }
         },
+        "com.amazonaws.emrcontainers#ContainerLogRotationConfiguration": {
+            "type": "structure",
+            "members": {
+                "rotationSize": {
+                    "target": "com.amazonaws.emrcontainers#RotationSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The file size at which to rotate logs. Minimum of 2KB, Maximum of 2GB.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxFilesToKeep": {
+                    "target": "com.amazonaws.emrcontainers#MaxFilesToKeep",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of files to keep in container after rotation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The settings for container log rotation.</p>"
+            }
+        },
         "com.amazonaws.emrcontainers#ContainerProvider": {
             "type": "structure",
             "members": {
                 "type": {
                     "target": "com.amazonaws.emrcontainers#ContainerProviderType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the container provider. Amazon EKS is the only supported type as of now.</p>",
+                        "smithy.api#documentation": "<p>The type of the container provider. Amazon EKS is the only supported type as of\n         now.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1418,7 +1440,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a managed endpoint. A managed endpoint is a gateway that connects Amazon EMR Studio to\n            Amazon EMR on EKS so that Amazon EMR Studio can communicate with your virtual\n         cluster.</p>",
+                "smithy.api#documentation": "<p>Creates a managed endpoint. A managed endpoint is a gateway that connects Amazon EMR Studio to Amazon EMR on EKS so that Amazon EMR Studio can\n         communicate with your virtual cluster.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/virtualclusters/{virtualClusterId}/endpoints",
@@ -1723,7 +1745,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a managed endpoint. A managed endpoint is a gateway that connects Amazon EMR Studio to\n            Amazon EMR on EKS so that Amazon EMR Studio can communicate with your virtual\n         cluster.</p>",
+                "smithy.api#documentation": "<p>Deletes a managed endpoint. A managed endpoint is a gateway that connects Amazon EMR Studio to Amazon EMR on EKS so that Amazon EMR Studio can\n         communicate with your virtual cluster.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/virtualclusters/{virtualClusterId}/endpoints/{id}",
@@ -1974,7 +1996,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Displays detailed information about a managed endpoint. A managed endpoint is a gateway\n         that connects Amazon EMR Studio to Amazon EMR on EKS so that Amazon EMR Studio can communicate with\n         your virtual cluster.</p>",
+                "smithy.api#documentation": "<p>Displays detailed information about a managed endpoint. A managed endpoint is a gateway\n         that connects Amazon EMR Studio to Amazon EMR on EKS so that Amazon EMR Studio can communicate with your virtual cluster.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/virtualclusters/{virtualClusterId}/endpoints/{id}",
@@ -2836,7 +2858,7 @@
                     "min": 3,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^(arn:(aws[a-zA-Z0-9-]*):kms:([a-zA-Z0-9]+-?)+:(\\d{12})?:key\\/[(0-9a-zA-Z)-?]+|\\$\\{[a-zA-Z]\\w*\\})$"
+                "smithy.api#pattern": "^(arn:(aws[a-zA-Z0-9-]*):kms:.+:(\\d{12})?:key\\/[(0-9a-zA-Z)-?]+|\\$\\{[a-zA-Z]\\w*\\})$"
             }
         },
         "com.amazonaws.emrcontainers#KubernetesNamespace": {
@@ -3062,7 +3084,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists managed endpoints based on a set of parameters. A managed endpoint is a gateway\n         that connects Amazon EMR Studio to Amazon EMR on EKS so that Amazon EMR Studio can communicate with\n         your virtual cluster.</p>",
+                "smithy.api#documentation": "<p>Lists managed endpoints based on a set of parameters. A managed endpoint is a gateway\n         that connects Amazon EMR Studio to Amazon EMR on EKS so that Amazon EMR Studio can communicate with your virtual cluster.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/virtualclusters/{virtualClusterId}/endpoints",
@@ -3256,7 +3278,7 @@
                 "containerProviderType": {
                     "target": "com.amazonaws.emrcontainers#ContainerProviderType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The container provider type of the virtual cluster. Amazon EKS is the only supported type as of\n         now.</p>",
+                        "smithy.api#documentation": "<p>The container provider type of the virtual cluster. Amazon EKS is the only\n         supported type as of now.</p>",
                         "smithy.api#httpQuery": "containerProviderType"
                     }
                 },
@@ -3340,6 +3362,15 @@
                 "smithy.api#pattern": "^[\\.\\-_/#A-Za-z0-9]+$"
             }
         },
+        "com.amazonaws.emrcontainers#MaxFilesToKeep": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
         "com.amazonaws.emrcontainers#MonitoringConfiguration": {
             "type": "structure",
             "members": {
@@ -3359,6 +3390,12 @@
                     "target": "com.amazonaws.emrcontainers#S3MonitoringConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Amazon S3 configuration for monitoring log publishing.</p>"
+                    }
+                },
+                "containerLogRotationConfiguration": {
+                    "target": "com.amazonaws.emrcontainers#ContainerLogRotationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enable or disable container log rotation.</p>"
                     }
                 }
             },
@@ -3587,6 +3624,16 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The current status of the retry policy executed on the job.</p>"
+            }
+        },
+        "com.amazonaws.emrcontainers#RotationSize": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 12
+                },
+                "smithy.api#pattern": "^\\d+(\\.\\d+)?[KMG][Bb]?$"
             }
         },
         "com.amazonaws.emrcontainers#RsiArn": {
@@ -3940,7 +3987,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Assigns tags to resources. A tag is a label that you assign to an Amazon Web Services resource. Each tag\n         consists of a key and an optional value, both of which you define. Tags enable you to\n         categorize your Amazon Web Services resources by attributes such as purpose, owner, or environment. When\n         you have many resources of the same type, you can quickly identify a specific resource\n         based on the tags you've assigned to it. For example, you can define a set of tags for your\n            Amazon EMR on EKS clusters to help you track each cluster's owner and stack level.\n         We recommend that you devise a consistent set of tag keys for each resource type. You can\n         then search and filter the resources based on the tags that you add.</p>",
+                "smithy.api#documentation": "<p>Assigns tags to resources. A tag is a label that you assign to an Amazon Web Services\n         resource. Each tag consists of a key and an optional value, both of which you define. Tags\n         enable you to categorize your Amazon Web Services resources by attributes such as purpose,\n         owner, or environment. When you have many resources of the same type, you can quickly\n         identify a specific resource based on the tags you've assigned to it. For example, you can\n         define a set of tags for your Amazon EMR on EKS clusters to help you track each\n         cluster's owner and stack level. We recommend that you devise a consistent set of tag keys\n         for each resource type. You can then search and filter the resources based on the tags that\n         you add.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/tags/{resourceArn}",
@@ -4204,7 +4251,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This entity describes a virtual cluster. A virtual cluster is a Kubernetes namespace\n         that Amazon EMR is registered with. Amazon EMR uses virtual clusters to run jobs and host\n         endpoints. Multiple virtual clusters can be backed by the same physical cluster. However,\n         each virtual cluster maps to one namespace on an Amazon EKS cluster. Virtual clusters do not\n         create any active resources that contribute to your bill or that require lifecycle\n         management outside the service.</p>"
+                "smithy.api#documentation": "<p>This entity describes a virtual cluster. A virtual cluster is a Kubernetes namespace\n         that Amazon EMR is registered with. Amazon EMR uses virtual clusters to run\n         jobs and host endpoints. Multiple virtual clusters can be backed by the same physical\n         cluster. However, each virtual cluster maps to one namespace on an Amazon EKS\n         cluster. Virtual clusters do not create any active resources that contribute to your bill\n         or that require lifecycle management outside the service.</p>"
             }
         },
         "com.amazonaws.emrcontainers#VirtualClusterArn": {

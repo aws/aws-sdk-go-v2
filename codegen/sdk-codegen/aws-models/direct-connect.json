@@ -1210,7 +1210,7 @@
                 "jumboFrameCapable": {
                     "target": "com.amazonaws.directconnect#JumboFrameCapable",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether jumbo frames (9001 MTU) are supported.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether jumbo frames are supported.</p>"
                     }
                 },
                 "awsDeviceV2": {
@@ -3924,7 +3924,7 @@
                 "jumboFrameCapable": {
                     "target": "com.amazonaws.directconnect#JumboFrameCapable",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether jumbo frames (9001 MTU) are supported.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether jumbo frames are supported.</p>"
                     }
                 },
                 "awsDeviceV2": {
@@ -4128,7 +4128,7 @@
                 "jumboFrameCapable": {
                     "target": "com.amazonaws.directconnect#JumboFrameCapable",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether jumbo frames (9001 MTU) are supported.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether jumbo frames are supported.</p>"
                     }
                 },
                 "hasLogicalRedundancy": {
@@ -6879,7 +6879,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the specified attributes of the specified virtual private interface.</p>\n         <p>Setting the MTU of a virtual interface to 9001 (jumbo frames) can cause an update to\n      the underlying physical connection if it wasn't updated to support jumbo frames. Updating \n      the connection disrupts network connectivity for all virtual interfaces associated with \n      the connection for up to 30 seconds. To check whether your connection supports jumbo \n      frames, call <a>DescribeConnections</a>. To check whether your virtual q\n      interface supports jumbo frames, call <a>DescribeVirtualInterfaces</a>.</p>"
+                "smithy.api#documentation": "<p>Updates the specified attributes of the specified virtual private interface.</p>\n         <p>Setting the MTU of a virtual interface to 9001 (jumbo frames) can cause an update to\n      the underlying physical connection if it wasn't updated to support jumbo frames. Updating \n      the connection disrupts network connectivity for all virtual interfaces associated with \n      the connection for up to 30 seconds. To check whether your connection supports jumbo \n      frames, call <a>DescribeConnections</a>. To check whether your virtual \n      interface supports jumbo frames, call <a>DescribeVirtualInterfaces</a>.</p>"
             }
         },
         "com.amazonaws.directconnect#UpdateVirtualInterfaceAttributesRequest": {
@@ -7077,7 +7077,7 @@
                 "jumboFrameCapable": {
                     "target": "com.amazonaws.directconnect#JumboFrameCapable",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether jumbo frames (9001 MTU) are supported.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether jumbo frames are supported.</p>"
                     }
                 },
                 "virtualGatewayId": {

@@ -59,6 +59,59 @@
                 }
             }
         },
+        "com.amazonaws.cloudwatchlogs#AccountPolicies": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudwatchlogs#AccountPolicy"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#AccountPolicy": {
+            "type": "structure",
+            "members": {
+                "policyName": {
+                    "target": "com.amazonaws.cloudwatchlogs#PolicyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the account policy.</p>"
+                    }
+                },
+                "policyDocument": {
+                    "target": "com.amazonaws.cloudwatchlogs#AccountPolicyDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The policy document for this account policy.</p>\n         <p>The JSON specified in <code>policyDocument</code> can be up to 30,720 characters.</p>"
+                    }
+                },
+                "lastUpdatedTime": {
+                    "target": "com.amazonaws.cloudwatchlogs#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that this policy was most recently updated.</p>"
+                    }
+                },
+                "policyType": {
+                    "target": "com.amazonaws.cloudwatchlogs#PolicyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of policy for this account policy.</p>"
+                    }
+                },
+                "scope": {
+                    "target": "com.amazonaws.cloudwatchlogs#Scope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scope of the account policy.</p>"
+                    }
+                },
+                "accountId": {
+                    "target": "com.amazonaws.cloudwatchlogs#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that the policy applies to.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains information about one CloudWatch Logs account policy.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#AccountPolicyDocument": {
+            "type": "string"
+        },
         "com.amazonaws.cloudwatchlogs#AmazonResourceName": {
             "type": "string",
             "traits": {
@@ -115,6 +168,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#CancelExportTask": {
@@ -153,6 +209,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#CreateExportTask": {
@@ -236,6 +295,9 @@
                         "smithy.api#documentation": "<p>The prefix used as the start of the key for every object exported. If you don't\n      specify a value, the default is <code>exportedlogs</code>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#CreateExportTaskResponse": {
@@ -247,6 +309,9 @@
                         "smithy.api#documentation": "<p>The ID of the export task.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#CreateLogGroup": {
@@ -275,7 +340,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a log group with the specified name. You can create up to 20,000 log groups per account.</p>\n         <p>You must use the following guidelines when naming a log group:</p>\n         <ul>\n            <li>\n               <p>Log group names must be unique within a Region for an Amazon Web Services\n          account.</p>\n            </li>\n            <li>\n               <p>Log group names can be between 1 and 512 characters long.</p>\n            </li>\n            <li>\n               <p>Log group names consist of the following characters: a-z, A-Z, 0-9, '_' (underscore), '-' (hyphen), \n          '/' (forward slash), '.' (period), and '#' (number sign)</p>\n            </li>\n         </ul>\n         <p>When you create a log group, by default the log events in the log group do not expire.\n      To set a retention policy so that events expire and are deleted after a specified time, use\n        <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutRetentionPolicy.html\">PutRetentionPolicy</a>.</p>\n         <p>If you associate an KMS key with the log group, ingested data is\n      encrypted using the KMS key. This association is stored as long as the data\n      encrypted with the KMS key is still within CloudWatch Logs. This enables\n        CloudWatch Logs to decrypt this data whenever it is requested.</p>\n         <p>If you attempt to associate a KMS key with the log group but the KMS keydoes not exist or the KMS key is disabled, you receive an\n        <code>InvalidParameterException</code> error. </p>\n         <important>\n            <p>CloudWatch Logs supports only symmetric KMS keys. Do not associate an\n        asymmetric KMS key with your log group. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html\">Using\n          Symmetric and Asymmetric Keys</a>.</p>\n         </important>"
+                "smithy.api#documentation": "<p>Creates a log group with the specified name. You can create up to 20,000 log groups per account.</p>\n         <p>You must use the following guidelines when naming a log group:</p>\n         <ul>\n            <li>\n               <p>Log group names must be unique within a Region for an Amazon Web Services\n          account.</p>\n            </li>\n            <li>\n               <p>Log group names can be between 1 and 512 characters long.</p>\n            </li>\n            <li>\n               <p>Log group names consist of the following characters: a-z, A-Z, 0-9, '_' (underscore), '-' (hyphen), \n          '/' (forward slash), '.' (period), and '#' (number sign)</p>\n            </li>\n         </ul>\n         <p>When you create a log group, by default the log events in the log group do not expire.\n      To set a retention policy so that events expire and are deleted after a specified time, use\n        <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutRetentionPolicy.html\">PutRetentionPolicy</a>.</p>\n         <p>If you associate an KMS key with the log group, ingested data is\n      encrypted using the KMS key. This association is stored as long as the data\n      encrypted with the KMS key is still within CloudWatch Logs. This enables\n        CloudWatch Logs to decrypt this data whenever it is requested.</p>\n         <p>If you attempt to associate a KMS key with the log group but the KMS key does not exist or the KMS key is disabled, you receive an\n        <code>InvalidParameterException</code> error. </p>\n         <important>\n            <p>CloudWatch Logs supports only symmetric KMS keys. Do not associate an\n        asymmetric KMS key with your log group. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html\">Using\n          Symmetric and Asymmetric Keys</a>.</p>\n         </important>"
             }
         },
         "com.amazonaws.cloudwatchlogs#CreateLogGroupRequest": {
@@ -300,6 +365,9 @@
                         "smithy.api#documentation": "<p>The key-value pairs to use for the tags.</p>\n         <p>You can grant users access to certain log groups while preventing them from accessing other log groups.\n      To do so, tag your groups and use IAM policies that refer to those tags. To assign tags when \n      you create a log group, you must have either the <code>logs:TagResource</code> or <code>logs:TagLogGroup</code>\n      permission. For more information about tagging, see \n      <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a>.\n      For more information about using tags to control access, see \n      <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html\">Controlling access to Amazon Web Services resources using tags</a>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#CreateLogStream": {
@@ -345,6 +413,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#DataAlreadyAcceptedException": {
@@ -397,11 +468,59 @@
         "com.amazonaws.cloudwatchlogs#Days": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "<p>The number of days to retain the log events in the specified log group.\n      Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180, 365, 400, 545, 731, 1827, 2192, 2557, 2922, 3288, and 3653.</p>\n         <p>To set a log group so that its log events do not expire, use <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DeleteRetentionPolicy.html\">DeleteRetentionPolicy</a>. </p>"
+                "smithy.api#documentation": "<p>The number of days to retain the log events in the specified log group.\n      Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180, 365, 400, 545, 731, 1096, 1827, 2192, 2557, 2922, 3288, and 3653.</p>\n         <p>To set a log group so that its log events do not expire, use <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DeleteRetentionPolicy.html\">DeleteRetentionPolicy</a>. </p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#DefaultValue": {
             "type": "double"
+        },
+        "com.amazonaws.cloudwatchlogs#DeleteAccountPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatchlogs#DeleteAccountPolicyRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#OperationAbortedException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a CloudWatch Logs account policy.</p>\n         <p>To use this operation, you must be signed on with the <code>logs:DeleteDataProtectionPolicy</code> and \n      <code>logs:DeleteAccountPolicy</code> permissions.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#DeleteAccountPolicyRequest": {
+            "type": "structure",
+            "members": {
+                "policyName": {
+                    "target": "com.amazonaws.cloudwatchlogs#PolicyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the policy to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "policyType": {
+                    "target": "com.amazonaws.cloudwatchlogs#PolicyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of policy to delete. Currently, the only valid value is <code>DATA_PROTECTION_POLICY</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
         },
         "com.amazonaws.cloudwatchlogs#DeleteDataProtectionPolicy": {
             "type": "operation",
@@ -439,6 +558,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#DeleteDestination": {
@@ -477,6 +599,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#DeleteLogGroup": {
@@ -515,6 +640,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#DeleteLogStream": {
@@ -560,6 +688,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#DeleteMetricFilter": {
@@ -605,6 +736,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#DeleteQueryDefinition": {
@@ -640,6 +774,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#DeleteQueryDefinitionResponse": {
@@ -652,6 +789,9 @@
                         "smithy.api#documentation": "<p>A value of TRUE indicates that the operation succeeded. FALSE indicates that the operation\n      failed.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#DeleteResourcePolicy": {
@@ -686,6 +826,9 @@
                         "smithy.api#documentation": "<p>The name of the policy to be revoked. This parameter is required.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#DeleteRetentionPolicy": {
@@ -724,6 +867,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#DeleteSubscriptionFilter": {
@@ -769,10 +915,80 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#Descending": {
             "type": "boolean"
+        },
+        "com.amazonaws.cloudwatchlogs#DescribeAccountPolicies": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatchlogs#DescribeAccountPoliciesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudwatchlogs#DescribeAccountPoliciesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#OperationAbortedException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of all CloudWatch Logs account policies in the account.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#DescribeAccountPoliciesRequest": {
+            "type": "structure",
+            "members": {
+                "policyType": {
+                    "target": "com.amazonaws.cloudwatchlogs#PolicyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this parameter to limit the returned policies to only the policies that match the policy type that you\n      specify. Currently, the only valid value is <code>DATA_PROTECTION_POLICY</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "policyName": {
+                    "target": "com.amazonaws.cloudwatchlogs#PolicyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this parameter to limit the returned policies to only the policy with the name that you specify.</p>"
+                    }
+                },
+                "accountIdentifiers": {
+                    "target": "com.amazonaws.cloudwatchlogs#AccountIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If you are using an account that is set up as a monitoring account for CloudWatch unified cross-account\n      observability, you can use this to specify the account ID of a source account. If you do, \n      the operation returns the account policy for the specified account. Currently, you can specify only\n    one account ID in this parameter.</p>\n         <p>If you\n    omit this parameter, only the policy in the current account is returned.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#DescribeAccountPoliciesResponse": {
+            "type": "structure",
+            "members": {
+                "accountPolicies": {
+                    "target": "com.amazonaws.cloudwatchlogs#AccountPolicies",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of structures that contain information about the CloudWatch Logs account policies that match \n    the specified filters.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.cloudwatchlogs#DescribeDestinations": {
             "type": "operation",
@@ -821,6 +1037,9 @@
                         "smithy.api#documentation": "<p>The maximum number of items returned. If you don't specify a value, the default maximum value of \n      50 items is used.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#DescribeDestinationsResponse": {
@@ -835,6 +1054,9 @@
                 "nextToken": {
                     "target": "com.amazonaws.cloudwatchlogs#NextToken"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#DescribeExportTasks": {
@@ -884,6 +1106,9 @@
                         "smithy.api#documentation": "<p>The maximum number of items returned. If you don't specify a value, the default is up to 50 items.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#DescribeExportTasksResponse": {
@@ -898,6 +1123,9 @@
                 "nextToken": {
                     "target": "com.amazonaws.cloudwatchlogs#NextToken"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#DescribeLimit": {
@@ -953,7 +1181,7 @@
                 "logGroupNamePattern": {
                     "target": "com.amazonaws.cloudwatchlogs#LogGroupNamePattern",
                     "traits": {
-                        "smithy.api#documentation": "<p>If you specify a string for this parameter, the operation returns only log groups that have names\nthat match the string based on a case-sensitive substring search. For example, if you specify <code>Foo</code>, log groups\nnamed <code>FooBar</code>, <code>aws/Foo</code>, and <code>GroupFoo</code> would match, but <code>foo</code>, \n<code>F/o/o</code> and <code>Froo</code> would not match.</p>\n         <note>\n            <p>\n               <code>logGroupNamePattern</code> and <code>logGroupNamePrefix</code> are mutually exclusive. \n        Only one \n        of these parameters can be passed.\n      </p>\n         </note>"
+                        "smithy.api#documentation": "<p>If you specify a string for this parameter, the operation returns only log groups that have names\nthat match the string based on a case-sensitive substring search. For example, if you specify <code>Foo</code>, log groups\nnamed <code>FooBar</code>, <code>aws/Foo</code>, and <code>GroupFoo</code> would match, but <code>foo</code>, \n<code>F/o/o</code> and <code>Froo</code> would not match.</p>\n         <p>If you specify <code>logGroupNamePattern</code> in your request, then only\n        <code>arn</code>, <code>creationTime</code>, and <code>logGroupName</code>\n        are included in the response. </p>\n         <note>\n            <p>\n               <code>logGroupNamePattern</code> and <code>logGroupNamePrefix</code> are mutually exclusive. \n        Only one \n        of these parameters can be passed.\n      </p>\n         </note>"
                     }
                 },
                 "nextToken": {
@@ -971,9 +1199,12 @@
                 "includeLinkedAccounts": {
                     "target": "com.amazonaws.cloudwatchlogs#IncludeLinkedAccounts",
                     "traits": {
-                        "smithy.api#documentation": "<p>If you are using a monitoring account, set this to <code>True</code> to have the operation\n      return log groups in \n      the accounts listed in <code>accountIdentifiers</code>.</p>\n         <p>If this parameter is set to <code>true</code> and <code>accountIdentifiers</code>\n\n      contains a null value, the operation returns all log groups in the monitoring account\n      and all log groups in all source accounts that are linked to the monitoring account. </p>\n         <note>\n            <p> If you specify <code>includeLinkedAccounts</code> in your request, then\n        <code>metricFilterCount</code>, <code>retentionInDays</code>, and <code>storedBytes</code>\n        are not included in the response. </p>\n         </note>"
+                        "smithy.api#documentation": "<p>If you are using a monitoring account, set this to <code>True</code> to have the operation\n      return log groups in \n      the accounts listed in <code>accountIdentifiers</code>.</p>\n         <p>If this parameter is set to <code>true</code> and <code>accountIdentifiers</code>\n\n      contains a null value, the operation returns all log groups in the monitoring account\n      and all log groups in all source accounts that are linked to the monitoring account. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#DescribeLogGroupsResponse": {
@@ -988,6 +1219,9 @@
                 "nextToken": {
                     "target": "com.amazonaws.cloudwatchlogs#NextToken"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#DescribeLogStreams": {
@@ -1064,6 +1298,9 @@
                         "smithy.api#documentation": "<p>The maximum number of items returned. If you don't specify a value, the default is up to 50 items.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#DescribeLogStreamsResponse": {
@@ -1078,6 +1315,9 @@
                 "nextToken": {
                     "target": "com.amazonaws.cloudwatchlogs#NextToken"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#DescribeMetricFilters": {
@@ -1148,6 +1388,9 @@
                         "smithy.api#documentation": "<p>Filters results to include only those in the specified namespace. If you include this parameter in your request, you \n    must also include the <code>metricName</code> parameter.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#DescribeMetricFiltersResponse": {
@@ -1162,6 +1405,9 @@
                 "nextToken": {
                     "target": "com.amazonaws.cloudwatchlogs#NextToken"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#DescribeQueries": {
@@ -1220,6 +1466,9 @@
                 "nextToken": {
                     "target": "com.amazonaws.cloudwatchlogs#NextToken"
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#DescribeQueriesResponse": {
@@ -1234,6 +1483,9 @@
                 "nextToken": {
                     "target": "com.amazonaws.cloudwatchlogs#NextToken"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#DescribeQueryDefinitions": {
@@ -1274,6 +1526,9 @@
                 "nextToken": {
                     "target": "com.amazonaws.cloudwatchlogs#NextToken"
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#DescribeQueryDefinitionsResponse": {
@@ -1288,6 +1543,9 @@
                 "nextToken": {
                     "target": "com.amazonaws.cloudwatchlogs#NextToken"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#DescribeResourcePolicies": {
@@ -1322,6 +1580,9 @@
                         "smithy.api#documentation": "<p>The maximum number of resource policies to be displayed with one call of this API.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#DescribeResourcePoliciesResponse": {
@@ -1336,6 +1597,9 @@
                 "nextToken": {
                     "target": "com.amazonaws.cloudwatchlogs#NextToken"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#DescribeSubscriptionFilters": {
@@ -1395,6 +1659,9 @@
                         "smithy.api#documentation": "<p>The maximum number of items returned. If you don't specify a value, the default is up to 50 items.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#DescribeSubscriptionFiltersResponse": {
@@ -1409,6 +1676,9 @@
                 "nextToken": {
                     "target": "com.amazonaws.cloudwatchlogs#NextToken"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#Destination": {
@@ -1542,6 +1812,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#Distribution": {
@@ -1807,7 +2080,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists log events from the specified log group. You can list all the log events or filter the results\n      using a filter pattern, a time range, and the name of the log stream.</p>\n         <p>You must have the <code>logs;FilterLogEvents</code> permission to perform this operation.</p>\n         <p>You can specify the log group to search by using either <code>logGroupIdentifier</code> or <code>logGroupName</code>.\n      You must include one of these two parameters, but you can't include both.\n    </p>\n         <p>By default, this operation returns as many log events as can fit in 1 MB (up to 10,000\n      log events) or all the events found within the specified time range. If the results include a\n      token, that means there are more log events available. You can get additional results by\n      specifying the token in a subsequent call. This operation can return empty results while there\n      are more log events available through the token.</p>\n         <p>The returned log events are sorted by event timestamp, the timestamp when the event was ingested\n    by CloudWatch Logs, and the ID of the <code>PutLogEvents</code> request.</p>\n         <p>If you are using CloudWatch cross-account observability, you can use this operation in a monitoring account and \n      view data from the linked source accounts. For more information, see \n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html\">CloudWatch cross-account observability</a>.</p>",
+                "smithy.api#documentation": "<p>Lists log events from the specified log group. You can list all the log events or filter the results\n      using a filter pattern, a time range, and the name of the log stream.</p>\n         <p>You must have the <code>logs:FilterLogEvents</code> permission to perform this operation.</p>\n         <p>You can specify the log group to search by using either <code>logGroupIdentifier</code> or <code>logGroupName</code>.\n      You must include one of these two parameters, but you can't include both.\n    </p>\n         <p>By default, this operation returns as many log events as can fit in 1 MB (up to 10,000\n      log events) or all the events found within the specified time range. If the results include a\n      token, that means there are more log events available. You can get additional results by\n      specifying the token in a subsequent call. This operation can return empty results while there\n      are more log events available through the token.</p>\n         <p>The returned log events are sorted by event timestamp, the timestamp when the event was ingested\n    by CloudWatch Logs, and the ID of the <code>PutLogEvents</code> request.</p>\n         <p>If you are using CloudWatch cross-account observability, you can use this operation in a monitoring account and \n      view data from the linked source accounts. For more information, see \n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html\">CloudWatch cross-account observability</a>.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -1888,6 +2161,9 @@
                         "smithy.api#documentation": "<p>Specify <code>true</code> to display the log event fields with all sensitive data unmasked and visible.\n      The default is <code>false</code>.</p>\n         <p>To use this operation with this parameter, you must be signed into an account with the <code>logs:Unmask</code>\n      permission.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#FilterLogEventsResponse": {
@@ -1911,6 +2187,9 @@
                         "smithy.api#documentation": "<p>The token to use when requesting the next set of items. The token expires after 24 hours.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#FilterName": {
@@ -2016,6 +2295,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#GetDataProtectionPolicyResponse": {
@@ -2039,6 +2321,9 @@
                         "smithy.api#documentation": "<p>The date and time that this policy was most recently updated.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#GetLogEvents": {
@@ -2129,6 +2414,9 @@
                         "smithy.api#documentation": "<p>Specify <code>true</code> to display the log event fields with all sensitive data unmasked and visible.\n      The default is <code>false</code>.</p>\n         <p>To use this operation with this parameter, you must be signed into an account with the <code>logs:Unmask</code>\n      permission.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#GetLogEventsResponse": {
@@ -2152,6 +2440,9 @@
                         "smithy.api#documentation": "<p>The token for the next set of items in the backward direction. The token expires after\n      24 hours. This token is not null. If you have reached the end of the stream, it returns the\n      same token you passed in.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#GetLogGroupFields": {
@@ -2201,6 +2492,9 @@
                         "smithy.api#documentation": "<p>Specify either the name or ARN of the log group to view. If the log group is in a source account and\n    you are using a monitoring account, you must specify the ARN.</p>\n         <note>\n            <p>\n        You must include either <code>logGroupIdentifier</code> or <code>logGroupName</code>, but not \n        both.\n      </p>\n         </note>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#GetLogGroupFieldsResponse": {
@@ -2212,6 +2506,9 @@
                         "smithy.api#documentation": "<p>The array of fields found in the query. Each object in the array contains the name of the\n      field, along with the percentage of time it appeared in the log events that were\n      queried.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#GetLogRecord": {
@@ -2257,6 +2554,9 @@
                         "smithy.api#documentation": "<p>Specify <code>true</code> to display the log event fields with all sensitive data unmasked and visible.\n      The default is <code>false</code>.</p>\n         <p>To use this operation with this parameter, you must be signed into an account with the <code>logs:Unmask</code>\n      permission.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#GetLogRecordResponse": {
@@ -2268,6 +2568,9 @@
                         "smithy.api#documentation": "<p>The requested log event, as a JSON string.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#GetQueryResults": {
@@ -2303,6 +2606,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#GetQueryResultsResponse": {
@@ -2323,13 +2629,33 @@
                 "status": {
                     "target": "com.amazonaws.cloudwatchlogs#QueryStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the most recent running of the query. Possible values are <code>Cancelled</code>, \n      <code>Complete</code>, <code>Failed</code>, <code>Running</code>, <code>Scheduled</code>, \n      <code>Timeout</code>, and <code>Unknown</code>.</p>\n         <p>Queries time out after 15 minutes of runtime. To avoid having your queries time out,\n      reduce the time range being searched or partition your query into a number of queries.</p>"
+                        "smithy.api#documentation": "<p>The status of the most recent running of the query. Possible values are <code>Cancelled</code>, \n      <code>Complete</code>, <code>Failed</code>, <code>Running</code>, <code>Scheduled</code>, \n      <code>Timeout</code>, and <code>Unknown</code>.</p>\n         <p>Queries time out after 60 minutes of runtime. To avoid having your queries time out,\n      reduce the time range being searched or partition your query into a number of queries.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#IncludeLinkedAccounts": {
             "type": "boolean"
+        },
+        "com.amazonaws.cloudwatchlogs#InheritedProperties": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudwatchlogs#InheritedProperty"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#InheritedProperty": {
+            "type": "enum",
+            "members": {
+                "ACCOUNT_DATA_PROTECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCOUNT_DATA_PROTECTION"
+                    }
+                }
+            }
         },
         "com.amazonaws.cloudwatchlogs#InputLogEvent": {
             "type": "structure",
@@ -2344,7 +2670,7 @@
                 "message": {
                     "target": "com.amazonaws.cloudwatchlogs#EventMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The raw event message.</p>",
+                        "smithy.api#documentation": "<p>The raw event message. Each log event can be no larger than 256 KB.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2473,6 +2799,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#ListTagsForResourceResponse": {
@@ -2484,6 +2813,9 @@
                         "smithy.api#documentation": "<p>The list of tags associated with the requested resource.></p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#ListTagsLogGroup": {
@@ -2523,7 +2855,8 @@
             "traits": {
                 "smithy.api#deprecated": {
                     "message": "Please use the generic tagging API model ListTagsForResourceRequest and ListTagsForResourceResponse"
-                }
+                },
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#ListTagsLogGroupResponse": {
@@ -2539,7 +2872,8 @@
             "traits": {
                 "smithy.api#deprecated": {
                     "message": "Please use the generic tagging API model ListTagsForResourceRequest and ListTagsForResourceResponse"
-                }
+                },
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#LogEventIndex": {
@@ -2591,6 +2925,12 @@
                     "target": "com.amazonaws.cloudwatchlogs#DataProtectionStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>Displays whether this log group has a protection policy, or whether it had one in the past. For more information, see \n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDataProtectionPolicy.html\">PutDataProtectionPolicy</a>.</p>"
+                    }
+                },
+                "inheritedProperties": {
+                    "target": "com.amazonaws.cloudwatchlogs#InheritedProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Displays all the properties that this log group has inherited from account-level \n    settings.</p>"
                     }
                 }
             },
@@ -2783,6 +3123,9 @@
                     "target": "com.amazonaws.cloudwatchlogs#CreateLogStream"
                 },
                 {
+                    "target": "com.amazonaws.cloudwatchlogs#DeleteAccountPolicy"
+                },
+                {
                     "target": "com.amazonaws.cloudwatchlogs#DeleteDataProtectionPolicy"
                 },
                 {
@@ -2808,6 +3151,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudwatchlogs#DeleteSubscriptionFilter"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#DescribeAccountPolicies"
                 },
                 {
                     "target": "com.amazonaws.cloudwatchlogs#DescribeDestinations"
@@ -2862,6 +3208,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudwatchlogs#ListTagsLogGroup"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#PutAccountPolicy"
                 },
                 {
                     "target": "com.amazonaws.cloudwatchlogs#PutDataProtectionPolicy"
@@ -3328,8 +3677,8 @@
                             },
                             "params": {
                                 "Region": "af-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3341,8 +3690,8 @@
                             },
                             "params": {
                                 "Region": "ap-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3354,8 +3703,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3367,8 +3716,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3380,8 +3729,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3393,8 +3742,8 @@
                             },
                             "params": {
                                 "Region": "ap-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3406,8 +3755,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3419,8 +3768,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3432,8 +3781,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3445,8 +3794,8 @@
                             },
                             "params": {
                                 "Region": "ca-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3458,8 +3807,8 @@
                             },
                             "params": {
                                 "Region": "eu-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3471,8 +3820,8 @@
                             },
                             "params": {
                                 "Region": "eu-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3484,8 +3833,8 @@
                             },
                             "params": {
                                 "Region": "eu-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3497,8 +3846,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3510,8 +3859,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3523,8 +3872,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3536,8 +3885,8 @@
                             },
                             "params": {
                                 "Region": "me-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3549,8 +3898,8 @@
                             },
                             "params": {
                                 "Region": "sa-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3562,8 +3911,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3575,8 +3924,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3588,8 +3937,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3601,8 +3950,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3614,8 +3963,8 @@
                             },
                             "params": {
                                 "Region": "us-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3627,8 +3976,8 @@
                             },
                             "params": {
                                 "Region": "us-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3640,8 +3989,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3653,8 +4002,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3666,8 +4015,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3679,8 +4028,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3692,8 +4041,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3705,8 +4054,8 @@
                             },
                             "params": {
                                 "Region": "cn-northwest-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3718,8 +4067,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3731,8 +4080,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3744,8 +4093,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3757,8 +4106,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3770,8 +4119,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3783,8 +4132,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3796,8 +4145,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3809,8 +4158,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3822,8 +4171,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3835,8 +4184,8 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3848,8 +4197,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3861,8 +4221,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3874,8 +4245,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3887,8 +4269,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3900,8 +4293,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -3913,8 +4306,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -3925,8 +4318,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -3937,9 +4330,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -4221,6 +4620,92 @@
         "com.amazonaws.cloudwatchlogs#PolicyName": {
             "type": "string"
         },
+        "com.amazonaws.cloudwatchlogs#PolicyType": {
+            "type": "enum",
+            "members": {
+                "DATA_PROTECTION_POLICY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATA_PROTECTION_POLICY"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#PutAccountPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudwatchlogs#PutAccountPolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudwatchlogs#PutAccountPolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#OperationAbortedException"
+                },
+                {
+                    "target": "com.amazonaws.cloudwatchlogs#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an account-level data protection policy that applies to all log groups in the account. A data protection policy can help safeguard sensitive \n      data that's ingested by your log groups by auditing and masking the sensitive log data. Each account can have only\n    one account-level policy.</p>\n         <important>\n            <p>Sensitive data is detected and masked when it is ingested into a log group. When you set a \n      data protection policy, log events ingested into the log groups before that time are not masked.</p>\n         </important>\n         <p>If you use <code>PutAccountPolicy</code> to create a data protection policy for your whole account, it applies to both existing log groups\n    and all log groups that are created later in this account. The account policy is applied to existing log groups\n    with eventual consistency. It might take up to 5 minutes before sensitive data in existing log groups begins to be masked.</p>\n         <p>By default, when a user views a log event that includes masked data, the sensitive data is replaced by asterisks.\n      A user who has the <code>logs:Unmask</code> permission can use a \n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetLogEvents.html\">GetLogEvents</a> or \n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_FilterLogEvents.html\">FilterLogEvents</a>\n      operation with the <code>unmask</code> parameter set to <code>true</code> to view the unmasked \n      log events. Users with the <code>logs:Unmask</code> can also view unmasked data in the CloudWatch Logs\n      console by running a CloudWatch Logs Insights query with the <code>unmask</code> query command.</p>\n         <p>For more information, including a list of types of data that can be audited and masked, see\n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/mask-sensitive-log-data.html\">Protect sensitive log data with masking</a>.</p>\n         <p>To use the <code>PutAccountPolicy</code> operation, you must be signed on with the <code>logs:PutDataProtectionPolicy</code>\n    and <code>logs:PutAccountPolicy</code> permissions.</p>\n         <p>The <code>PutAccountPolicy</code> operation applies to all log groups in the account. You can also use \n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDataProtectionPolicy.html\">PutDataProtectionPolicy</a>\n      to create a data protection policy that applies to just one log group. \n      If a log group has its own data protection policy and \n      the account also has an account-level data protection policy, then the two policies are cumulative. Any sensitive term\n      specified in either policy is masked.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#PutAccountPolicyRequest": {
+            "type": "structure",
+            "members": {
+                "policyName": {
+                    "target": "com.amazonaws.cloudwatchlogs#PolicyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name for the policy. This must be unique within the account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "policyDocument": {
+                    "target": "com.amazonaws.cloudwatchlogs#AccountPolicyDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify the data protection policy, in JSON.</p>\n         <p>This policy must include two JSON blocks:</p>\n         <ul>\n            <li>\n               <p>The first block must include both a <code>DataIdentifer</code> array and an \n        <code>Operation</code> property with an <code>Audit</code> action. The <code>DataIdentifer</code> array lists the types of sensitive data that\n        you want to mask. For more information about the available options, see \n        <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/mask-sensitive-log-data-types.html\">Types of data that you can mask</a>.</p>\n               <p>The <code>Operation</code> property with an <code>Audit</code> action is required to find the \n          sensitive data terms. This <code>Audit</code> action must contain a <code>FindingsDestination</code>\n          object. You can optionally use that <code>FindingsDestination</code> object to list one or more \n          destinations to send audit findings to. If you specify destinations such as log groups, \n          Kinesis Data Firehose streams, and S3 buckets, they must already exist.</p>\n            </li>\n            <li>\n               <p>The second block must include both a <code>DataIdentifer</code> array and an\n        <code>Operation</code> property with an <code>Deidentify</code> action. The\n        <code>DataIdentifer</code> array must exactly match the <code>DataIdentifer</code> array\n        in the first block of the policy.</p>\n               <p>The <code>Operation</code> property with the <code>Deidentify</code> action is what actually masks the \n          data, and it must \n          contain the <code>\n            \"MaskConfig\": {}</code> object. The <code>\n              \"MaskConfig\": {}</code> object must be empty.</p>\n            </li>\n         </ul>\n         <p>For an example data protection policy, see the <b>Examples</b> section on this page.</p>\n         <important>\n            <p>The contents of the two <code>DataIdentifer</code> arrays must match exactly.</p>\n         </important>\n         <p>In addition to the two JSON blocks, the <code>policyDocument</code> can also include <code>Name</code>,\n    <code>Description</code>, and <code>Version</code> fields. The <code>Name</code> is different than the \n      operation's <code>policyName</code> parameter, and is used as a dimension when\n    CloudWatch Logs reports audit findings metrics to CloudWatch.</p>\n         <p>The JSON specified in <code>policyDocument</code> can be up to 30,720 characters.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "policyType": {
+                    "target": "com.amazonaws.cloudwatchlogs#PolicyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Currently the only valid value for this parameter is <code>DATA_PROTECTION_POLICY</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "scope": {
+                    "target": "com.amazonaws.cloudwatchlogs#Scope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Currently the only valid value for this parameter is <code>GLOBAL</code>, which specifies that the data \n      protection policy applies to all log groups in the account. If you omit this parameter, the default\n    of <code>GLOBAL</code> is used.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#PutAccountPolicyResponse": {
+            "type": "structure",
+            "members": {
+                "accountPolicy": {
+                    "target": "com.amazonaws.cloudwatchlogs#AccountPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account policy that you created.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cloudwatchlogs#PutDataProtectionPolicy": {
             "type": "operation",
             "input": {
@@ -4247,7 +4732,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a data protection policy for the specified log group. A data protection policy can help safeguard sensitive \n      data that's ingested by the log group by auditing and masking the sensitive log data.</p>\n         <important>\n            <p>Sensitive data is detected and masked when it is ingested into the log group. When you set a \n      data protection policy, log events ingested into the log group before that time are not masked.</p>\n         </important>\n         <p>By default, when a user views a log event that includes masked data, the sensitive data is replaced by asterisks.\n      A user who has the <code>logs:Unmask</code> permission can use a \n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetLogEvents.html\">GetLogEvents</a> or \n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_FilterLogEvents.html\">FilterLogEvents</a>\n      operation with the <code>unmask</code> parameter set to <code>true</code> to view the unmasked \n      log events. Users with the <code>logs:Unmask</code> can also view unmasked data in the CloudWatch Logs\n      console by running a CloudWatch Logs Insights query with the <code>unmask</code> query command.</p>\n         <p>For more information, including a list of types of data that can be audited and masked, see\n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/mask-sensitive-log-data.html\">Protect sensitive log data with masking</a>.</p>"
+                "smithy.api#documentation": "<p>Creates a data protection policy for the specified log group. A data protection policy can help safeguard sensitive \n      data that's ingested by the log group by auditing and masking the sensitive log data.</p>\n         <important>\n            <p>Sensitive data is detected and masked when it is ingested into the log group. When you set a \n      data protection policy, log events ingested into the log group before that time are not masked.</p>\n         </important>\n         <p>By default, when a user views a log event that includes masked data, the sensitive data is replaced by asterisks.\n      A user who has the <code>logs:Unmask</code> permission can use a \n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetLogEvents.html\">GetLogEvents</a> or \n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_FilterLogEvents.html\">FilterLogEvents</a>\n      operation with the <code>unmask</code> parameter set to <code>true</code> to view the unmasked \n      log events. Users with the <code>logs:Unmask</code> can also view unmasked data in the CloudWatch Logs\n      console by running a CloudWatch Logs Insights query with the <code>unmask</code> query command.</p>\n         <p>For more information, including a list of types of data that can be audited and masked, see\n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/mask-sensitive-log-data.html\">Protect sensitive log data with masking</a>.</p>\n         <p>The <code>PutDataProtectionPolicy</code> operation applies to only the specified log group. You can also use \n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutAccountPolicy.html\">PutAccountPolicy</a>\n      to create an account-level data protection policy that applies to all log groups in the account, \n    including both existing log groups and log groups that are created level. If a log group has its own data protection policy and \n    the account also has an account-level data protection policy, then the two policies are cumulative. Any sensitive term\n    specified in either policy is masked.</p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#PutDataProtectionPolicyRequest": {
@@ -4263,10 +4748,13 @@
                 "policyDocument": {
                     "target": "com.amazonaws.cloudwatchlogs#DataProtectionPolicyDocument",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify the data protection policy, in JSON.</p>\n         <p>This policy must include two JSON blocks:</p>\n         <ul>\n            <li>\n               <p>The first block must include both a <code>DataIdentifer</code> array and an \n        <code>Operation</code> property with an <code>Audit</code> action. The <code>DataIdentifer</code> array lists the types of sensitive data that\n        you want to mask. For more information about the available options, see \n        <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/mask-sensitive-log-data-types.html\">Types of data that you can mask</a>.</p>\n               <p>The <code>Operation</code> property with an <code>Audit</code> action is required to find the \n          sensitive data terms. This <code>Audit</code> action must contain a <code>FindingsDestination</code>\n          object. You can optionally use that <code>FindingsDestination</code> object to list one or more \n          destinations to send audit findings to. If you specify destinations such as log groups, \n          Kinesis Data Firehose streams, and S3 buckets, they must already exist.</p>\n            </li>\n            <li>\n               <p>The second block must include both a <code>DataIdentifer</code> array and an\n            <code>Operation</code> property with an <code>Deidentify</code> action. The\n            <code>DataIdentifer</code> array must exactly match the <code>DataIdentifer</code> array\n          in the first block of the policy.</p>\n               <p>The <code>Operation</code> property with the <code>Deidentify</code> action is what actually masks the \n        data, and it must \n        contain the <code>\n          \"MaskConfig\": {}</code> object. The <code>\n            \"MaskConfig\": {}</code> object must be empty.</p>\n            </li>\n         </ul>\n         <p>For an example data protection policy, see the <b>Examples</b> section on this page.</p>\n         <important>\n            <p>The contents of two <code>DataIdentifer</code> arrays must match exactly.</p>\n         </important>",
+                        "smithy.api#documentation": "<p>Specify the data protection policy, in JSON.</p>\n         <p>This policy must include two JSON blocks:</p>\n         <ul>\n            <li>\n               <p>The first block must include both a <code>DataIdentifer</code> array and an \n        <code>Operation</code> property with an <code>Audit</code> action. The <code>DataIdentifer</code> array lists the types of sensitive data that\n        you want to mask. For more information about the available options, see \n        <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/mask-sensitive-log-data-types.html\">Types of data that you can mask</a>.</p>\n               <p>The <code>Operation</code> property with an <code>Audit</code> action is required to find the \n          sensitive data terms. This <code>Audit</code> action must contain a <code>FindingsDestination</code>\n          object. You can optionally use that <code>FindingsDestination</code> object to list one or more \n          destinations to send audit findings to. If you specify destinations such as log groups, \n          Kinesis Data Firehose streams, and S3 buckets, they must already exist.</p>\n            </li>\n            <li>\n               <p>The second block must include both a <code>DataIdentifer</code> array and an\n            <code>Operation</code> property with an <code>Deidentify</code> action. The\n            <code>DataIdentifer</code> array must exactly match the <code>DataIdentifer</code> array\n          in the first block of the policy.</p>\n               <p>The <code>Operation</code> property with the <code>Deidentify</code> action is what actually masks the \n        data, and it must \n        contain the <code>\n          \"MaskConfig\": {}</code> object. The <code>\n            \"MaskConfig\": {}</code> object must be empty.</p>\n            </li>\n         </ul>\n         <p>For an example data protection policy, see the <b>Examples</b> section on this page.</p>\n         <important>\n            <p>The contents of the two <code>DataIdentifer</code> arrays must match exactly.</p>\n         </important>\n         <p>In addition to the two JSON blocks, the <code>policyDocument</code> can also include <code>Name</code>,\n      <code>Description</code>, and <code>Version</code> fields. The <code>Name</code> is used as a dimension when\n      CloudWatch Logs reports audit findings metrics to CloudWatch.</p>\n         <p>The JSON specified in <code>policyDocument</code> can be up to 30,720 characters.</p>",
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#PutDataProtectionPolicyResponse": {
@@ -4290,6 +4778,9 @@
                         "smithy.api#documentation": "<p>The date and time that this policy was most recently updated.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#PutDestination": {
@@ -4358,9 +4849,12 @@
                 "forceUpdate": {
                     "target": "com.amazonaws.cloudwatchlogs#ForceUpdate",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify true if you are updating an existing destination policy to grant permission to\n    an organization ID instead of granting permission to individual AWS accounts. Before\n    you update a destination policy this way, you must first update the subscription\n    filters in the accounts that send logs to this destination. If you do not, the subscription\n    filters might stop working. By specifying <code>true</code>\n      for <code>forceUpdate</code>, you are affirming that you have already updated the subscription \n      filters.\n    For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Cross-Account-Log_Subscription-Update.html\">\n      Updating an existing cross-account subscription</a>\n         </p>\n         <p>If you omit this parameter, the default of <code>false</code> is used.</p>"
+                        "smithy.api#documentation": "<p>Specify true if you are updating an existing destination policy to grant permission to\n      an organization ID instead of granting permission to individual Amazon Web Services accounts. Before\n    you update a destination policy this way, you must first update the subscription\n    filters in the accounts that send logs to this destination. If you do not, the subscription\n    filters might stop working. By specifying <code>true</code>\n      for <code>forceUpdate</code>, you are affirming that you have already updated the subscription \n      filters.\n    For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Cross-Account-Log_Subscription-Update.html\">\n      Updating an existing cross-account subscription</a>\n         </p>\n         <p>If you omit this parameter, the default of <code>false</code> is used.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#PutDestinationRequest": {
@@ -4393,6 +4887,9 @@
                         "smithy.api#documentation": "<p>An optional list of key-value pairs to associate with the resource.</p>\n         <p>For more information about tagging, see \n      <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a>\n         </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#PutDestinationResponse": {
@@ -4404,6 +4901,9 @@
                         "smithy.api#documentation": "<p>The destination.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#PutLogEvents": {
@@ -4435,7 +4935,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Uploads a batch of log events to the specified log stream.</p>\n         <important>\n            <p>The sequence token is now ignored in <code>PutLogEvents</code>\n      actions. <code>PutLogEvents</code>\n      actions are always accepted and never return <code>InvalidSequenceTokenException</code> or\n      <code>DataAlreadyAcceptedException</code> even if the sequence token is not valid. You can use\n      parallel <code>PutLogEvents</code> actions on the same log stream. </p>\n         </important>\n         <p>The batch of events must satisfy the following constraints:</p>\n         <ul>\n            <li>\n               <p>The maximum batch size is 1,048,576 bytes. This size is calculated as the sum of\n          all event messages in UTF-8, plus 26 bytes for each log event.</p>\n            </li>\n            <li>\n               <p>None of the log events in the batch can be more than 2 hours in the future.</p>\n            </li>\n            <li>\n               <p>None of the log events in the batch can be more than 14 days in the past. Also,\n          none of the log events can be from earlier than the retention period of the log\n          group.</p>\n            </li>\n            <li>\n               <p>The log events in the batch must be in chronological order by their timestamp. The\n          timestamp is the time that the event occurred, expressed as the number of milliseconds\n          after <code>Jan 1, 1970 00:00:00 UTC</code>. (In Amazon Web Services Tools for PowerShell\n          and the Amazon Web Services SDK for .NET, the timestamp is specified in .NET format:\n            <code>yyyy-mm-ddThh:mm:ss</code>. For example, <code>2017-09-15T13:45:30</code>.) </p>\n            </li>\n            <li>\n               <p>A batch of log events in a single request cannot span more than 24 hours. Otherwise, the operation fails.</p>\n            </li>\n            <li>\n               <p>The maximum number of log events in a batch is 10,000.</p>\n            </li>\n            <li>\n               <important>\n                  <p>The quota of five requests per second per log stream\n          has been removed. Instead, <code>PutLogEvents</code> actions are throttled based on a \n        per-second per-account quota. You can request an increase to the per-second throttling\n        quota by using the Service Quotas service.</p>\n               </important>\n            </li>\n         </ul>\n         <p>If a call to <code>PutLogEvents</code> returns \"UnrecognizedClientException\" the most\n      likely cause is a non-valid Amazon Web Services access key ID or secret key. </p>"
+                "smithy.api#documentation": "<p>Uploads a batch of log events to the specified log stream.</p>\n         <important>\n            <p>The sequence token is now ignored in <code>PutLogEvents</code>\n      actions. <code>PutLogEvents</code>\n      actions are always accepted and never return <code>InvalidSequenceTokenException</code> or\n      <code>DataAlreadyAcceptedException</code> even if the sequence token is not valid. You can use\n      parallel <code>PutLogEvents</code> actions on the same log stream. </p>\n         </important>\n         <p>The batch of events must satisfy the following constraints:</p>\n         <ul>\n            <li>\n               <p>The maximum batch size is 1,048,576 bytes. This size is calculated as the sum of\n          all event messages in UTF-8, plus 26 bytes for each log event.</p>\n            </li>\n            <li>\n               <p>None of the log events in the batch can be more than 2 hours in the future.</p>\n            </li>\n            <li>\n               <p>None of the log events in the batch can be more than 14 days in the past. Also,\n          none of the log events can be from earlier than the retention period of the log\n          group.</p>\n            </li>\n            <li>\n               <p>The log events in the batch must be in chronological order by their timestamp. The\n          timestamp is the time that the event occurred, expressed as the number of milliseconds\n          after <code>Jan 1, 1970 00:00:00 UTC</code>. (In Amazon Web Services Tools for PowerShell\n          and the Amazon Web Services SDK for .NET, the timestamp is specified in .NET format:\n            <code>yyyy-mm-ddThh:mm:ss</code>. For example, <code>2017-09-15T13:45:30</code>.) </p>\n            </li>\n            <li>\n               <p>A batch of log events in a single request cannot span more than 24 hours. Otherwise, the operation fails.</p>\n            </li>\n            <li>\n               <p>Each log event can be no larger than 256 KB.</p>\n            </li>\n            <li>\n               <p>The maximum number of log events in a batch is 10,000.</p>\n            </li>\n            <li>\n               <important>\n                  <p>The quota of five requests per second per log stream\n          has been removed. Instead, <code>PutLogEvents</code> actions are throttled based on a \n        per-second per-account quota. You can request an increase to the per-second throttling\n        quota by using the Service Quotas service.</p>\n               </important>\n            </li>\n         </ul>\n         <p>If a call to <code>PutLogEvents</code> returns \"UnrecognizedClientException\" the most\n      likely cause is a non-valid Amazon Web Services access key ID or secret key. </p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#PutLogEventsRequest": {
@@ -4468,6 +4968,9 @@
                         "smithy.api#documentation": "<p>The sequence token obtained from the response of the previous <code>PutLogEvents</code>\n      call.</p>\n         <important>\n            <p>The <code>sequenceToken</code> parameter is now ignored in <code>PutLogEvents</code>\n      actions. <code>PutLogEvents</code>\n      actions are now accepted and never return <code>InvalidSequenceTokenException</code> or\n      <code>DataAlreadyAcceptedException</code> even if the sequence token is not valid.</p>\n         </important>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#PutLogEventsResponse": {
@@ -4485,6 +4988,9 @@
                         "smithy.api#documentation": "<p>The rejected events.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#PutMetricFilter": {
@@ -4547,6 +5053,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#PutQueryDefinition": {
@@ -4604,6 +5113,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#PutQueryDefinitionResponse": {
@@ -4615,6 +5127,9 @@
                         "smithy.api#documentation": "<p>The ID of the query definition.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#PutResourcePolicy": {
@@ -4655,6 +5170,9 @@
                         "smithy.api#documentation": "<p>Details of the new policy, including the identity of the principal that is enabled to put logs to this account. This is formatted as a JSON string.\n    This parameter is required.</p>\n         <p>The following example creates a resource policy enabling the Route 53 service to put\n      DNS query logs in to the specified log group. Replace <code>\"logArn\"</code> with the ARN of \n      your CloudWatch Logs resource, such as a log group or log stream.</p>\n         <p>CloudWatch Logs also supports <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourcearn\">aws:SourceArn</a>\n      and <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourceaccount\">aws:SourceAccount</a>\ncondition context keys.</p>\n         <p>In the example resource policy, you would replace the value of <code>SourceArn</code> with\n      the resource making the call from Route 53 to CloudWatch Logs. You would also\n      replace the value of <code>SourceAccount</code> with the Amazon Web Services account ID making\n      that call.</p>\n         <p></p>\n         <p>\n            <code>{\n    \"Version\": \"2012-10-17\",\n    \"Statement\": [\n        {\n           \"Sid\": \"Route53LogsToCloudWatchLogs\",\n           \"Effect\": \"Allow\",\n           \"Principal\": {\n               \"Service\": [\n                   \"route53.amazonaws.com\"\n                ]\n            },\n           \"Action\": \"logs:PutLogEvents\",\n           \"Resource\": \"logArn\",\n           \"Condition\": {\n               \"ArnLike\": {\n                   \"aws:SourceArn\": \"myRoute53ResourceArn\"\n                },\n               \"StringEquals\": {\n                   \"aws:SourceAccount\": \"myAwsAccountId\"\n               }\n            }\n        }\n      ]\n}</code>\n         </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#PutResourcePolicyResponse": {
@@ -4666,6 +5184,9 @@
                         "smithy.api#documentation": "<p>The new policy.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#PutRetentionPolicy": {
@@ -4710,6 +5231,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#PutSubscriptionFilter": {
@@ -4738,7 +5262,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates or updates a subscription filter and associates it with the specified log\n      group. With subscription filters, you can subscribe to a real-time stream of log events\n      ingested through <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutLogEvents.html\">PutLogEvents</a>\n      and have them delivered to a specific destination. When log events are sent to the receiving\n      service, they are Base64 encoded and compressed with the GZIP format.</p>\n         <p>The following destinations are supported for subscription filters:</p>\n         <ul>\n            <li>\n               <p>An Amazon Kinesis data stream belonging to the same account as the subscription\n          filter, for same-account delivery.</p>\n            </li>\n            <li>\n               <p>A logical destination that belongs to a different account, for cross-account delivery.</p>\n            </li>\n            <li>\n               <p>An Amazon Kinesis Data Firehose delivery stream that belongs to the same account as\n          the subscription filter, for same-account delivery.</p>\n            </li>\n            <li>\n               <p>An Lambda function that belongs to the same account as the\n          subscription filter, for same-account delivery.</p>\n            </li>\n         </ul>\n         <p>Each log group can have up to two subscription filters associated with it. If you are\n      updating an existing filter, you must specify the correct name in <code>filterName</code>.\n      </p>\n         <p>To perform a <code>PutSubscriptionFilter</code> operation, you must also have the \n      <code>iam:PassRole</code> permission.</p>"
+                "smithy.api#documentation": "<p>Creates or updates a subscription filter and associates it with the specified log\n      group. With subscription filters, you can subscribe to a real-time stream of log events\n      ingested through <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutLogEvents.html\">PutLogEvents</a>\n      and have them delivered to a specific destination. When log events are sent to the receiving\n      service, they are Base64 encoded and compressed with the GZIP format.</p>\n         <p>The following destinations are supported for subscription filters:</p>\n         <ul>\n            <li>\n               <p>An Amazon Kinesis data stream belonging to the same account as the subscription\n          filter, for same-account delivery.</p>\n            </li>\n            <li>\n               <p>A logical destination that belongs to a different account, for cross-account delivery.</p>\n            </li>\n            <li>\n               <p>An Amazon Kinesis Data Firehose delivery stream that belongs to the same account as\n          the subscription filter, for same-account delivery.</p>\n            </li>\n            <li>\n               <p>An Lambda function that belongs to the same account as the\n          subscription filter, for same-account delivery.</p>\n            </li>\n         </ul>\n         <p>Each log group can have up to two subscription filters associated with it. If you are\n      updating an existing filter, you must specify the correct name in <code>filterName</code>.\n      </p>\n         <p>To perform a <code>PutSubscriptionFilter</code> operation for any destination except a Lambda function, \n    you must also have the \n      <code>iam:PassRole</code> permission.</p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#PutSubscriptionFilterRequest": {
@@ -4784,6 +5308,9 @@
                         "smithy.api#documentation": "<p>The method used to distribute log data to the destination. By default, log data is\n      grouped by log stream, but the grouping can be set to random for a more even distribution.\n      This property is only applicable when the destination is an Amazon Kinesis data stream. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#QueryCharOffset": {
@@ -5160,6 +5687,17 @@
                 }
             }
         },
+        "com.amazonaws.cloudwatchlogs#Scope": {
+            "type": "enum",
+            "members": {
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL"
+                    }
+                }
+            }
+        },
         "com.amazonaws.cloudwatchlogs#SearchedLogStream": {
             "type": "structure",
             "members": {
@@ -5402,7 +5940,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Schedules a query of a log group using CloudWatch Logs Insights. You specify the log group\n      and time range to query and the query string to use.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html\">CloudWatch Logs Insights Query Syntax</a>.</p>\n         <p>Queries time out after 15 minutes of runtime. If your queries are timing out, reduce the\n      time range being searched or partition your query into a number of queries.</p>\n         <p>If you are using CloudWatch cross-account observability, you can use this operation in a\n      monitoring account to start a query in a linked source account. For more information, see\n        <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html\">CloudWatch\n        cross-account observability</a>. For a cross-account <code>StartQuery</code> operation,\n      the query definition must be defined in the monitoring account.</p>\n         <p>You can have up to 20 concurrent CloudWatch Logs insights queries, including queries\n      that have been added to dashboards. </p>"
+                "smithy.api#documentation": "<p>Schedules a query of a log group using CloudWatch Logs Insights. You specify the log group\n      and time range to query and the query string to use.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html\">CloudWatch Logs Insights Query Syntax</a>.</p>\n         <p>Queries time out after 60 minutes of runtime. If your queries are timing out, reduce the\n      time range being searched or partition your query into a number of queries.</p>\n         <p>If you are using CloudWatch cross-account observability, you can use this operation in a\n      monitoring account to start a query in a linked source account. For more information, see\n        <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html\">CloudWatch\n        cross-account observability</a>. For a cross-account <code>StartQuery</code> operation,\n      the query definition must be defined in the monitoring account.</p>\n         <p>You can have up to 30 concurrent CloudWatch Logs insights queries, including queries\n      that have been added to dashboards. </p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#StartQueryRequest": {
@@ -5453,6 +5991,9 @@
                         "smithy.api#documentation": "<p>The maximum number of log events to return in the query. If the query string uses the <code>fields</code> command,\n    only the specified fields and their values are returned. The default is 1000.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#StartQueryResponse": {
@@ -5464,6 +6005,9 @@
                         "smithy.api#documentation": "<p>The unique ID of the query. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#StatsValue": {
@@ -5505,6 +6049,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#StopQueryResponse": {
@@ -5517,6 +6064,9 @@
                         "smithy.api#documentation": "<p>This is true if the query was stopped by the <code>StopQuery</code> operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#StoredBytes": {
@@ -5660,7 +6210,8 @@
             "traits": {
                 "smithy.api#deprecated": {
                     "message": "Please use the generic tagging API model TagResourceRequest"
-                }
+                },
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#TagResource": {
@@ -5706,6 +6257,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#TagValue": {
@@ -5789,6 +6343,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#TestMetricFilterResponse": {
@@ -5800,6 +6357,9 @@
                         "smithy.api#documentation": "<p>The matched events.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#Timestamp": {
@@ -5891,7 +6451,8 @@
             "traits": {
                 "smithy.api#deprecated": {
                     "message": "Please use the generic tagging API model UntagResourceRequest"
-                }
+                },
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#UntagResource": {
@@ -5934,6 +6495,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#Value": {
