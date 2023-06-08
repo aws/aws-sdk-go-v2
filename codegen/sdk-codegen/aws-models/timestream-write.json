@@ -236,13 +236,13 @@
                 "ReportConfiguration": {
                     "target": "com.amazonaws.timestreamwrite#ReportConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Report configuration for a batch load task. This contains details about where error reports are stored.</p>"
+                        "smithy.api#documentation": "<p>Report configuration for a batch load task. This contains details about where error\n         reports are stored.</p>"
                     }
                 },
                 "DataModelConfiguration": {
                     "target": "com.amazonaws.timestreamwrite#DataModelConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Data model configuration for a batch load task. This contains details about where a data model for a batch load task is stored.</p>"
+                        "smithy.api#documentation": "<p>Data model configuration for a batch load task. This contains details about where a data\n         model for a batch load task is stored.</p>"
                     }
                 },
                 "TargetDatabaseName": {
@@ -376,7 +376,7 @@
                 "aws.api#clientDiscoveredEndpoint": {
                     "required": true
                 },
-                "smithy.api#documentation": "<p>Creates a new Timestream batch load task. A batch load task processes data from\n         a CSV source in an S3 location and writes to a Timestream table. A mapping from\n         source to target is defined in a batch load task. Errors and events are written to a report\n         at an S3 location. For the report, if the KMS key is not specified, the\n         batch load task will be encrypted with a Timestream managed KMS key\n         located in your account. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk\">Amazon Web Services managed\n            keys</a>. <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html\">Service quotas apply</a>. For\n         details, see <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.create-batch-load.html\">code\n            sample</a>.</p>"
+                "smithy.api#documentation": "<p>Creates a new Timestream batch load task. A batch load task processes data from\n         a CSV source in an S3 location and writes to a Timestream table. A mapping from\n         source to target is defined in a batch load task. Errors and events are written to a report\n         at an S3 location. For the report, if the KMS key is not specified, the\n         report will be encrypted with an S3 managed key when <code>SSE_S3</code> is the option.\n         Otherwise an error is thrown. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk\">Amazon Web Services managed\n            keys</a>. <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html\">Service quotas apply</a>. For\n         details, see <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.create-batch-load.html\">code\n            sample</a>.</p>"
             }
         },
         "com.amazonaws.timestreamwrite#CreateBatchLoadTaskRequest": {
@@ -599,6 +599,12 @@
                     "target": "com.amazonaws.timestreamwrite#MagneticStoreWriteProperties",
                     "traits": {
                         "smithy.api#documentation": "<p>Contains properties to set on the table when enabling magnetic store writes.</p>"
+                    }
+                },
+                "Schema": {
+                    "target": "com.amazonaws.timestreamwrite#Schema",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The schema of the table. </p>"
                     }
                 }
             },
@@ -1709,7 +1715,7 @@
                 "Value": {
                     "target": "com.amazonaws.timestreamwrite#StringValue2048",
                     "traits": {
-                        "smithy.api#documentation": "<p> The value for the MeasureValue. </p>",
+                        "smithy.api#documentation": "<p> The value for the MeasureValue. For information, see <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/writes.html#writes.data-types\">Data\n         types</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1909,6 +1915,78 @@
                 }
             }
         },
+        "com.amazonaws.timestreamwrite#PartitionKey": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.timestreamwrite#PartitionKeyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The type of the partition key. Options are DIMENSION (dimension key) and MEASURE\n         (measure key). </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.timestreamwrite#SchemaName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The name of the attribute used for a dimension key. </p>"
+                    }
+                },
+                "EnforcementInRecord": {
+                    "target": "com.amazonaws.timestreamwrite#PartitionKeyEnforcementLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The level of enforcement for the specification of a dimension key in ingested records.\n         Options are REQUIRED (dimension key must be specified) and OPTIONAL (dimension key does not\n         have to be specified). </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> An attribute used in partitioning data in a table. A dimension key partitions data\n         using the values of the dimension specified by the dimension-name as partition key, while a\n         measure key partitions data using measure names (values of the 'measure_name' column).\n      </p>"
+            }
+        },
+        "com.amazonaws.timestreamwrite#PartitionKeyEnforcementLevel": {
+            "type": "enum",
+            "members": {
+                "REQUIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REQUIRED"
+                    }
+                },
+                "OPTIONAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OPTIONAL"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.timestreamwrite#PartitionKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.timestreamwrite#PartitionKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.timestreamwrite#PartitionKeyType": {
+            "type": "enum",
+            "members": {
+                "DIMENSION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIMENSION"
+                    }
+                },
+                "MEASURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MEASURE"
+                    }
+                }
+            }
+        },
         "com.amazonaws.timestreamwrite#Record": {
             "type": "structure",
             "members": {
@@ -1933,7 +2011,7 @@
                 "MeasureValueType": {
                     "target": "com.amazonaws.timestreamwrite#MeasureValueType",
                     "traits": {
-                        "smithy.api#documentation": "<p> Contains the data type of the measure value for the time-series data point. Default\n         type is <code>DOUBLE</code>. </p>"
+                        "smithy.api#documentation": "<p> Contains the data type of the measure value for the time-series data point. Default\n         type is <code>DOUBLE</code>. For more information, see <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/writes.html#writes.data-types\">Data\n         types</a>.</p>"
                     }
                 },
                 "Time": {
@@ -2083,7 +2161,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Report configuration for a batch load task. This contains details about where error reports are stored.</p>"
+                "smithy.api#documentation": "<p>Report configuration for a batch load task. This contains details about where error\n         reports are stored.</p>"
             }
         },
         "com.amazonaws.timestreamwrite#ReportS3Configuration": {
@@ -2336,6 +2414,20 @@
                 }
             }
         },
+        "com.amazonaws.timestreamwrite#Schema": {
+            "type": "structure",
+            "members": {
+                "CompositePartitionKey": {
+                    "target": "com.amazonaws.timestreamwrite#PartitionKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A non-empty list of partition keys defining the attributes used to partition the table\n         data. The order of the list determines the partition hierarchy. The name and type of each\n         partition key as well as the partition key order cannot be changed after the table is\n         created. However, the enforcement level of each partition key can be changed. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> A Schema specifies the expected data model of the table. </p>"
+            }
+        },
         "com.amazonaws.timestreamwrite#SchemaName": {
             "type": "string",
             "traits": {
@@ -2439,6 +2531,12 @@
                     "target": "com.amazonaws.timestreamwrite#MagneticStoreWriteProperties",
                     "traits": {
                         "smithy.api#documentation": "<p>Contains properties to set on the table when enabling magnetic store writes.</p>"
+                    }
+                },
+                "Schema": {
+                    "target": "com.amazonaws.timestreamwrite#Schema",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The schema of the table. </p>"
                     }
                 }
             },
@@ -3085,9 +3183,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3098,9 +3196,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3111,9 +3209,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3124,9 +3222,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3137,9 +3235,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "cn-north-1",
                                 "UseFIPS": true,
-                                "Region": "cn-north-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3150,9 +3248,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "cn-north-1",
                                 "UseFIPS": true,
-                                "Region": "cn-north-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3163,9 +3261,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "cn-north-1",
                                 "UseFIPS": false,
-                                "Region": "cn-north-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3176,9 +3274,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "cn-north-1",
                                 "UseFIPS": false,
-                                "Region": "cn-north-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3189,9 +3287,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3202,9 +3300,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3215,9 +3313,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3228,9 +3326,20 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3241,9 +3350,20 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3254,9 +3374,20 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3267,9 +3398,20 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3280,9 +3422,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3293,9 +3435,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -3307,8 +3449,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -3318,9 +3460,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
                                 "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -3330,10 +3472,16 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -3535,6 +3683,12 @@
                     "target": "com.amazonaws.timestreamwrite#MagneticStoreWriteProperties",
                     "traits": {
                         "smithy.api#documentation": "<p>Contains properties to set on the table when enabling magnetic store writes.</p>"
+                    }
+                },
+                "Schema": {
+                    "target": "com.amazonaws.timestreamwrite#Schema",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The schema of the table. </p>"
                     }
                 }
             },

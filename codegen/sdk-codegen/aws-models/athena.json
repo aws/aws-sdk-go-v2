@@ -2678,7 +2678,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the KMS key that is used to encrypt the user's data stores in Athena.</p>"
+                "smithy.api#documentation": "<p>Specifies the KMS key that is used to encrypt the user's data stores in Athena. This setting does not apply to Athena SQL workgroups.</p>"
             }
         },
         "com.amazonaws.athena#DataCatalog": {
@@ -3187,6 +3187,12 @@
                     "target": "com.amazonaws.athena#ParametersMap",
                     "traits": {
                         "smithy.api#documentation": "<p>Contains additional notebook engine <code>MAP<string, string></code> parameter\n            mappings in the form of key-value pairs. To specify an Athena notebook that\n            the Jupyter server will download and serve, specify a value for the <a>StartSessionRequest$NotebookVersion</a> field, and then add a key named\n                <code>NotebookId</code> to <code>AdditionalConfigs</code> that has the value of the\n                Athena notebook ID.</p>"
+                    }
+                },
+                "SparkProperties": {
+                    "target": "com.amazonaws.athena#ParametersMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies custom jar files and Spark properties for use cases like cluster encryption, table formats, and general Spark tuning.</p>"
                     }
                 }
             },
@@ -8656,7 +8662,7 @@
                 "CustomerContentEncryptionConfiguration": {
                     "target": "com.amazonaws.athena#CustomerContentEncryptionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the KMS key that is used to encrypt the user's data stores in Athena.</p>"
+                        "smithy.api#documentation": "<p>Specifies the KMS key that is used to encrypt the user's data stores in Athena. This setting does not apply to Athena SQL workgroups.</p>"
                     }
                 },
                 "EnableMinimumEncryptionConfiguration": {
@@ -8718,7 +8724,7 @@
                 "RemoveCustomerContentEncryptionConfiguration": {
                     "target": "com.amazonaws.athena#BoxedBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Removes content encryption configuration for a workgroup.</p>"
+                        "smithy.api#documentation": "<p>Removes content encryption configuration from an Apache Spark-enabled Athena workgroup.</p>"
                     }
                 },
                 "AdditionalConfiguration": {

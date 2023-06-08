@@ -786,8 +786,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -799,8 +799,8 @@
                             },
                             "params": {
                                 "Region": "ca-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -812,8 +812,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -825,8 +825,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -838,8 +838,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -851,8 +851,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -864,8 +864,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -877,8 +877,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -890,8 +890,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -903,8 +903,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -916,8 +916,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -929,8 +929,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -942,8 +942,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -955,8 +955,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -968,8 +968,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -981,8 +981,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -994,8 +994,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1007,8 +1007,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1020,8 +1020,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1033,8 +1033,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1046,8 +1046,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1059,8 +1059,19 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1072,8 +1083,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1085,8 +1107,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1098,8 +1131,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1111,8 +1155,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1124,8 +1168,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1137,8 +1181,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1149,8 +1193,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1161,9 +1205,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -1207,6 +1257,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.comprehendmedical#DescribeEntitiesDetectionV2JobResponse": {
@@ -1218,6 +1271,9 @@
                         "smithy.api#documentation": "<p>An object that contains the properties associated with a detection job.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.comprehendmedical#DescribeICD10CMInferenceJob": {
@@ -1256,6 +1312,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.comprehendmedical#DescribeICD10CMInferenceJobResponse": {
@@ -1267,6 +1326,9 @@
                         "smithy.api#documentation": "<p>An object that contains the properties associated with a detection job.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.comprehendmedical#DescribePHIDetectionJob": {
@@ -1305,6 +1367,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.comprehendmedical#DescribePHIDetectionJobResponse": {
@@ -1316,6 +1381,9 @@
                         "smithy.api#documentation": "<p>An object that contains the properties associated with a detection job.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.comprehendmedical#DescribeRxNormInferenceJob": {
@@ -1354,6 +1422,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.comprehendmedical#DescribeRxNormInferenceJobResponse": {
@@ -1365,6 +1436,9 @@
                         "smithy.api#documentation": "<p>An object that contains the properties associated with a detection job.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.comprehendmedical#DescribeSNOMEDCTInferenceJob": {
@@ -1403,6 +1477,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.comprehendmedical#DescribeSNOMEDCTInferenceJobResponse": {
@@ -1411,6 +1488,9 @@
                 "ComprehendMedicalAsyncJobProperties": {
                     "target": "com.amazonaws.comprehendmedical#ComprehendMedicalAsyncJobProperties"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.comprehendmedical#DetectEntities": {
@@ -1458,6 +1538,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.comprehendmedical#DetectEntitiesResponse": {
@@ -1489,6 +1572,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.comprehendmedical#DetectEntitiesV2": {
@@ -1533,6 +1619,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.comprehendmedical#DetectEntitiesV2Response": {
@@ -1564,6 +1653,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.comprehendmedical#DetectPHI": {
@@ -1608,6 +1700,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.comprehendmedical#DetectPHIResponse": {
@@ -1633,6 +1728,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.comprehendmedical#Entity": {
@@ -2297,6 +2395,12 @@
                     "traits": {
                         "smithy.api#enumValue": "SYSTEM_ORGAN_SITE"
                     }
+                },
+                "QUALITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUALITY"
+                    }
                 }
             }
         },
@@ -2425,6 +2529,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.comprehendmedical#InferICD10CMResponse": {
@@ -2449,6 +2556,9 @@
                         "smithy.api#documentation": "<p>The version of the model used to analyze the documents, in the format\n        <i>n</i>.<i>n</i>.<i>n</i> You can use this\n      information to track the model used for a particular batch of documents.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.comprehendmedical#InferRxNorm": {
@@ -2493,6 +2603,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.comprehendmedical#InferRxNormResponse": {
@@ -2517,6 +2630,9 @@
                         "smithy.api#documentation": "<p>The version of the model used to analyze the documents, in the format\n        <i>n</i>.<i>n</i>.<i>n</i> You can use this\n      information to track the model used for a particular batch of documents.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.comprehendmedical#InferSNOMEDCT": {
@@ -2561,6 +2677,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.comprehendmedical#InferSNOMEDCTResponse": {
@@ -2597,6 +2716,9 @@
                         "smithy.api#documentation": "<p>\n      The number of characters in the input request documentation. \n    </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.comprehendmedical#InputDataConfig": {
@@ -2797,6 +2919,9 @@
                         "smithy.api#documentation": "<p>The maximum number of results to return in each page. The default is 100.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.comprehendmedical#ListEntitiesDetectionV2JobsResponse": {
@@ -2814,6 +2939,9 @@
                         "smithy.api#documentation": "<p>Identifies the next page of results to return.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.comprehendmedical#ListICD10CMInferenceJobs": {
@@ -2863,6 +2991,9 @@
                         "smithy.api#documentation": "<p>The maximum number of results to return in each page. The default is 100.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.comprehendmedical#ListICD10CMInferenceJobsResponse": {
@@ -2880,6 +3011,9 @@
                         "smithy.api#documentation": "<p>Identifies the next page of results to return.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.comprehendmedical#ListPHIDetectionJobs": {
@@ -2929,6 +3063,9 @@
                         "smithy.api#documentation": "<p>The maximum number of results to return in each page. The default is 100.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.comprehendmedical#ListPHIDetectionJobsResponse": {
@@ -2946,6 +3083,9 @@
                         "smithy.api#documentation": "<p>Identifies the next page of results to return.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.comprehendmedical#ListRxNormInferenceJobs": {
@@ -2995,6 +3135,9 @@
                         "smithy.api#documentation": "<p>Identifies the next page of results to return.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.comprehendmedical#ListRxNormInferenceJobsResponse": {
@@ -3012,6 +3155,9 @@
                         "smithy.api#documentation": "<p>Identifies the next page of results to return.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.comprehendmedical#ListSNOMEDCTInferenceJobs": {
@@ -3058,6 +3204,9 @@
                         "smithy.api#documentation": "<p>\n      The maximum number of results to return in each page. The default is 100.\n    </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.comprehendmedical#ListSNOMEDCTInferenceJobsResponse": {
@@ -3075,6 +3224,9 @@
                         "smithy.api#documentation": "<p>\n      Identifies the next page of results to return.\n    </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.comprehendmedical#ManifestFilePath": {
@@ -3249,6 +3401,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "AMOUNT"
+                    }
+                },
+                "USAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USAGE"
+                    }
+                },
+                "QUALITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUALITY"
                     }
                 }
             }
@@ -3542,6 +3706,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "NEGATION"
+                    }
+                },
+                "PAST_HISTORY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PAST_HISTORY"
                     }
                 }
             }
@@ -3909,6 +4079,12 @@
                     "traits": {
                         "smithy.api#enumValue": "SYSTEM_ORGAN_SITE"
                     }
+                },
+                "TEST_UNIT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TEST_UNIT"
+                    }
                 }
             }
         },
@@ -4086,6 +4262,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.comprehendmedical#StartEntitiesDetectionV2JobResponse": {
@@ -4097,6 +4276,9 @@
                         "smithy.api#documentation": "<p>The identifier generated for the job. To get the status of a job, use this identifier with\n      the <code>DescribeEntitiesDetectionV2Job</code> operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.comprehendmedical#StartICD10CMInferenceJob": {
@@ -4175,6 +4357,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.comprehendmedical#StartICD10CMInferenceJobResponse": {
@@ -4186,6 +4371,9 @@
                         "smithy.api#documentation": "<p>The identifier generated for the job. To get the status of a job, use this identifier with\n      the <code>StartICD10CMInferenceJob</code> operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.comprehendmedical#StartPHIDetectionJob": {
@@ -4264,6 +4452,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.comprehendmedical#StartPHIDetectionJobResponse": {
@@ -4275,6 +4466,9 @@
                         "smithy.api#documentation": "<p>The identifier generated for the job. To get the status of a job, use this identifier with\n      the <code>DescribePHIDetectionJob</code> operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.comprehendmedical#StartRxNormInferenceJob": {
@@ -4353,6 +4547,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.comprehendmedical#StartRxNormInferenceJobResponse": {
@@ -4364,6 +4561,9 @@
                         "smithy.api#documentation": "<p>The identifier of the job.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.comprehendmedical#StartSNOMEDCTInferenceJob": {
@@ -4440,6 +4640,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.comprehendmedical#StartSNOMEDCTInferenceJobResponse": {
@@ -4451,6 +4654,9 @@
                         "smithy.api#documentation": "<p>\n      The identifier generated for the job. To get the status of a job, use this identifier with the StartSNOMEDCTInferenceJob operation.\n    </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.comprehendmedical#StopEntitiesDetectionV2Job": {
@@ -4486,6 +4692,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.comprehendmedical#StopEntitiesDetectionV2JobResponse": {
@@ -4497,6 +4706,9 @@
                         "smithy.api#documentation": "<p>The identifier of the medical entities detection job that was stopped.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.comprehendmedical#StopICD10CMInferenceJob": {
@@ -4532,6 +4744,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.comprehendmedical#StopICD10CMInferenceJobResponse": {
@@ -4543,6 +4758,9 @@
                         "smithy.api#documentation": "<p>The identifier generated for the job. To get the status of job, use this identifier with\n      the <code>DescribeICD10CMInferenceJob</code> operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.comprehendmedical#StopPHIDetectionJob": {
@@ -4578,6 +4796,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.comprehendmedical#StopPHIDetectionJobResponse": {
@@ -4589,6 +4810,9 @@
                         "smithy.api#documentation": "<p>The identifier of the PHI detection job that was stopped.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.comprehendmedical#StopRxNormInferenceJob": {
@@ -4624,6 +4848,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.comprehendmedical#StopRxNormInferenceJobResponse": {
@@ -4635,6 +4862,9 @@
                         "smithy.api#documentation": "<p>The identifier generated for the job. To get the status of job, use this identifier with\n      the <code>DescribeRxNormInferenceJob</code> operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.comprehendmedical#StopSNOMEDCTInferenceJob": {
@@ -4673,6 +4903,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.comprehendmedical#StopSNOMEDCTInferenceJobResponse": {
@@ -4684,6 +4917,9 @@
                         "smithy.api#documentation": "<p>\n      The identifier generated for the job. To get the status of job, use this identifier with the DescribeSNOMEDCTInferenceJob operation.\n    </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.comprehendmedical#String": {

@@ -1,0 +1,3381 @@
+{
+    "smithy": "2.0",
+    "shapes": {
+        "com.amazonaws.paymentcryptography#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You do not have sufficient access to perform this action.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.paymentcryptography#Alias": {
+            "type": "structure",
+            "members": {
+                "AliasName": {
+                    "target": "com.amazonaws.paymentcryptography#AliasName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A friendly name that you can use to refer to a key. The value must begin with <code>alias/</code>.</p>\n         <important>\n            <p>Do not include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>\n         </important>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KeyArn": {
+                    "target": "com.amazonaws.paymentcryptography#KeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>KeyARN</code> of the key associated with the alias.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about an alias.</p>"
+            }
+        },
+        "com.amazonaws.paymentcryptography#AliasName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 7,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^alias/[a-zA-Z0-9/_-]+$"
+            }
+        },
+        "com.amazonaws.paymentcryptography#Aliases": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.paymentcryptography#Alias"
+            }
+        },
+        "com.amazonaws.paymentcryptography#CertificateType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 32768
+                },
+                "smithy.api#pattern": "^[^\\[;\\]<>]+$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.paymentcryptography#ConflictException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This request can cause an inconsistent state for the resource.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.paymentcryptography#CreateAlias": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.paymentcryptography#CreateAliasInput"
+            },
+            "output": {
+                "target": "com.amazonaws.paymentcryptography#CreateAliasOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.paymentcryptography#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#controlPlane": {},
+                "smithy.api#documentation": "<p>Creates an <i>alias</i>, or a friendly name, for an Amazon Web Services Payment Cryptography key. You can use an alias to identify a key in the console and when you call cryptographic operations such as <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/DataAPIReference/API_EncryptData.html\">EncryptData</a> or <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/DataAPIReference/API_DecryptData.html\">DecryptData</a>.</p>\n         <p>You can associate the alias with any key in the same Amazon Web Services Region. Each alias is associated with only one key at a time, but a key can have multiple aliases. You can't create an alias without a key. The alias must be unique in the account and Amazon Web Services Region, but you can create another alias with the same name in a different Amazon Web Services Region.</p>\n         <p>To change the key that's associated with the alias, call <a>UpdateAlias</a>. To delete the alias, call <a>DeleteAlias</a>. These operations don't affect the underlying key. To get the alias that you created, call <a>ListAliases</a>.</p>\n         <p>\n            <b>Cross-account use</b>: This operation can't be used across different Amazon Web Services accounts.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>DeleteAlias</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GetAlias</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListAliases</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>UpdateAlias</a>\n               </p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.paymentcryptography#CreateAliasInput": {
+            "type": "structure",
+            "members": {
+                "AliasName": {
+                    "target": "com.amazonaws.paymentcryptography#AliasName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A friendly name that you can use to refer a key. An alias must begin with <code>alias/</code> followed by a name, for example <code>alias/ExampleAlias</code>. It can contain only alphanumeric characters, forward slashes (/), underscores (_), and dashes (-).</p>\n         <important>\n            <p>Don't include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>\n         </important>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KeyArn": {
+                    "target": "com.amazonaws.paymentcryptography#KeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>KeyARN</code> of the key to associate with the alias.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.paymentcryptography#CreateAliasOutput": {
+            "type": "structure",
+            "members": {
+                "Alias": {
+                    "target": "com.amazonaws.paymentcryptography#Alias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alias for the key.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.paymentcryptography#CreateKey": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.paymentcryptography#CreateKeyInput"
+            },
+            "output": {
+                "target": "com.amazonaws.paymentcryptography#CreateKeyOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.paymentcryptography#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#controlPlane": {},
+                "smithy.api#documentation": "<p>Creates an Amazon Web Services Payment Cryptography key, a logical representation of a cryptographic key, that is unique in your account and Amazon Web Services Region. You use keys for cryptographic functions such as encryption and decryption. </p>\n         <p>In addition to the key material used in cryptographic operations, an Amazon Web Services Payment Cryptography key includes metadata such as the key ARN, key usage, key origin, creation date, description, and key state.</p>\n         <p>When you create a key, you specify both immutable and mutable data about the key. The immutable data contains key attributes that defines the scope and cryptographic operations that you can perform using the key, for example key class (example: <code>SYMMETRIC_KEY</code>), key algorithm (example: <code>TDES_2KEY</code>), key usage (example: <code>TR31_P0_PIN_ENCRYPTION_KEY</code>) and key modes of use (example: <code>Encrypt</code>). For information about valid combinations of key attributes, see <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html\">Understanding key attributes</a> in the <i>Amazon Web Services Payment Cryptography User Guide</i>. The mutable data contained within a key includes usage timestamp and key deletion timestamp and can be modified after creation.</p>\n         <p>Amazon Web Services Payment Cryptography binds key attributes to keys using key blocks when you store or export them. Amazon Web Services Payment Cryptography stores the key contents wrapped and never stores or transmits them in the clear. </p>\n         <p>\n            <b>Cross-account use</b>: This operation can't be used across different Amazon Web Services accounts.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>DeleteKey</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GetKey</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListKeys</a>\n               </p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.paymentcryptography#CreateKeyInput": {
+            "type": "structure",
+            "members": {
+                "KeyAttributes": {
+                    "target": "com.amazonaws.paymentcryptography#KeyAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The role of the key, the algorithm it supports, and the cryptographic operations allowed with the key. This data is immutable after the key is created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KeyCheckValueAlgorithm": {
+                    "target": "com.amazonaws.paymentcryptography#KeyCheckValueAlgorithm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The algorithm that Amazon Web Services Payment Cryptography uses to calculate the key check value (KCV) for DES and AES keys.</p>\n         <p>For DES key, the KCV is computed by encrypting 8 bytes, each with value '00', with the key to be checked and retaining the 3 highest order bytes of the encrypted result. For AES key, the KCV is computed by encrypting 8 bytes, each with value '01', with the key to be checked and retaining the 3 highest order bytes of the encrypted result.</p>"
+                    }
+                },
+                "Exportable": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the key is exportable from the service.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Enabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to enable the key. If the key is enabled, it is activated for use within the service. If the key not enabled, then it is created but not activated. The default value is enabled.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.paymentcryptography#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to attach to the key. Each tag consists of a tag key and a tag value. Both the tag key and the tag value are required, but the tag value can be an empty (null) string. You can't have more than one tag on an Amazon Web Services Payment Cryptography key with the same tag key. </p>\n         <p>To use this parameter, you must have <code>TagResource</code> permission.</p>\n         <important>\n            <p>Don't include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>\n         </important>\n         <note>\n            <p>Tagging or untagging an Amazon Web Services Payment Cryptography key can allow or deny permission to the key.</p>\n         </note>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.paymentcryptography#CreateKeyOutput": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.paymentcryptography#Key",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key material that contains all the key attributes.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.paymentcryptography#DeleteAlias": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.paymentcryptography#DeleteAliasInput"
+            },
+            "output": {
+                "target": "com.amazonaws.paymentcryptography#DeleteAliasOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.paymentcryptography#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#controlPlane": {},
+                "smithy.api#documentation": "<p>Deletes the alias, but doesn't affect the underlying key.</p>\n         <p>Each key can have multiple aliases. To get the aliases of all keys, use the <a>ListAliases</a> operation. To change the alias of a key, first use <a>DeleteAlias</a> to delete the current alias and then use <a>CreateAlias</a> to create a new alias. To associate an existing alias with a different key, call <a>UpdateAlias</a>.</p>\n         <p>\n            <b>Cross-account use:</b> This operation can't be used across different Amazon Web Services accounts.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateAlias</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GetAlias</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListAliases</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>UpdateAlias</a>\n               </p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.paymentcryptography#DeleteAliasInput": {
+            "type": "structure",
+            "members": {
+                "AliasName": {
+                    "target": "com.amazonaws.paymentcryptography#AliasName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A friendly name that you can use to refer Amazon Web Services Payment Cryptography key. This value must begin with <code>alias/</code> followed by a name, such as <code>alias/ExampleAlias</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.paymentcryptography#DeleteAliasOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.paymentcryptography#DeleteKey": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.paymentcryptography#DeleteKeyInput"
+            },
+            "output": {
+                "target": "com.amazonaws.paymentcryptography#DeleteKeyOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.paymentcryptography#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#controlPlane": {},
+                "smithy.api#documentation": "<p>Deletes the key material and all metadata associated with Amazon Web Services Payment Cryptography key.</p>\n         <p>Key deletion is irreversible. After a key is deleted, you can't perform cryptographic operations using the key. For example, you can't decrypt data that was encrypted by a deleted Amazon Web Services Payment Cryptography key, and the data may become unrecoverable. Because key deletion is destructive, Amazon Web Services Payment Cryptography has a safety mechanism to prevent accidental deletion of a key. When you call this operation, Amazon Web Services Payment Cryptography disables the specified key but doesn't delete it until after a waiting period. The default waiting period is 7 days. To set a different waiting period, set <code>DeleteKeyInDays</code>. During the waiting period, the <code>KeyState</code> is <code>DELETE_PENDING</code>. After the key is deleted, the <code>KeyState</code> is <code>DELETE_COMPLETE</code>.</p>\n         <p>If you delete key material, you can use <a>ImportKey</a> to reimport the same key material into the Amazon Web Services Payment Cryptography key.</p>\n         <p>You should delete a key only when you are sure that you don't need to use it anymore and no other parties are utilizing this key. If you aren't sure, consider deactivating it instead by calling <a>StopKeyUsage</a>.</p>\n         <p>\n            <b>Cross-account use:</b> This operation can't be used across different Amazon Web Services accounts.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>RestoreKey</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>StartKeyUsage</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>StopKeyUsage</a>\n               </p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.paymentcryptography#DeleteKeyInput": {
+            "type": "structure",
+            "members": {
+                "KeyIdentifier": {
+                    "target": "com.amazonaws.paymentcryptography#KeyArnOrKeyAliasType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>KeyARN</code> of the key that is scheduled for deletion.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DeleteKeyInDays": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The waiting period for key deletion. The default value is seven days.</p>",
+                        "smithy.api#range": {
+                            "min": 3,
+                            "max": 180
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.paymentcryptography#DeleteKeyOutput": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.paymentcryptography#Key",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>KeyARN</code> of the key that is scheduled for deletion.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.paymentcryptography#ExportKey": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.paymentcryptography#ExportKeyInput"
+            },
+            "output": {
+                "target": "com.amazonaws.paymentcryptography#ExportKeyOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.paymentcryptography#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#controlPlane": {},
+                "smithy.api#documentation": "<p>Exports a key from Amazon Web Services Payment Cryptography using either ANSI X9 TR-34 or TR-31 key export standard.</p>\n         <p>Amazon Web Services Payment Cryptography simplifies main or root key exchange process by eliminating the need of a paper-based key exchange process. It takes a modern and secure approach based of the ANSI X9 TR-34 key exchange standard.</p>\n         <p>You can use <code>ExportKey</code> to export main or root keys such as KEK (Key Encryption Key), using asymmetric key exchange technique following ANSI X9 TR-34 standard. The ANSI X9 TR-34 standard uses asymmetric keys to establishes bi-directional trust between the two parties exchanging keys. After which you can export working keys using the ANSI X9 TR-31 symmetric key exchange standard as mandated by PCI PIN. Using this operation, you can share your Amazon Web Services Payment Cryptography generated keys with other service partners to perform cryptographic operations outside of Amazon Web Services Payment Cryptography </p>\n         <p>\n            <b>TR-34 key export</b>\n         </p>\n         <p>Amazon Web Services Payment Cryptography uses TR-34 asymmetric key exchange standard to export main keys such as KEK. In TR-34 terminology, the sending party of the key is called Key Distribution Host (KDH) and the receiving party of the key is called Key Receiving Host (KRH). In key export process, KDH is Amazon Web Services Payment Cryptography which initiates key export. KRH is the user receiving the key. Before you initiate TR-34 key export, you must obtain an export token by calling <a>GetParametersForExport</a>. This operation also returns the signing key certificate that KDH uses to sign the wrapped key to generate a TR-34 wrapped key block. The export token expires after 7 days.</p>\n         <p>Set the following parameters:</p>\n         <dl>\n            <dt>CertificateAuthorityPublicKeyIdentifier</dt>\n            <dd>\n               <p>The <code>KeyARN</code> of the certificate chain that will sign the wrapping key certificate. This must exist within Amazon Web Services Payment Cryptography before you initiate TR-34 key export. If it does not exist, you can import it by calling <a>ImportKey</a> for <code>RootCertificatePublicKey</code>.</p>\n            </dd>\n            <dt>ExportToken</dt>\n            <dd>\n               <p>Obtained from KDH by calling <a>GetParametersForExport</a>.</p>\n            </dd>\n            <dt>WrappingKeyCertificate</dt>\n            <dd>\n               <p>Amazon Web Services Payment Cryptography uses this to wrap the key under export.</p>\n            </dd>\n         </dl>\n         <p>When this operation is successful, Amazon Web Services Payment Cryptography returns the TR-34 wrapped key block. </p>\n         <p>\n            <b>TR-31 key export</b>\n         </p>\n         <p>Amazon Web Services Payment Cryptography uses TR-31 symmetric key exchange standard to export working keys. In TR-31, you must use a main key such as KEK to encrypt or wrap the key under export. To establish a KEK, you can use <a>CreateKey</a> or <a>ImportKey</a>. When this operation is successful, Amazon Web Services Payment Cryptography returns a TR-31 wrapped key block. </p>\n         <p>\n            <b>Cross-account use:</b> This operation can't be used across different Amazon Web Services accounts.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>GetParametersForExport</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ImportKey</a>\n               </p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.paymentcryptography#ExportKeyInput": {
+            "type": "structure",
+            "members": {
+                "KeyMaterial": {
+                    "target": "com.amazonaws.paymentcryptography#ExportKeyMaterial",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key block format type, for example, TR-34 or TR-31, to use during key material export.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExportKeyIdentifier": {
+                    "target": "com.amazonaws.paymentcryptography#KeyArnOrKeyAliasType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>KeyARN</code> of the key under export from Amazon Web Services Payment Cryptography.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.paymentcryptography#ExportKeyMaterial": {
+            "type": "union",
+            "members": {
+                "Tr31KeyBlock": {
+                    "target": "com.amazonaws.paymentcryptography#ExportTr31KeyBlock",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Parameter information for key material export using TR-31 standard.</p>"
+                    }
+                },
+                "Tr34KeyBlock": {
+                    "target": "com.amazonaws.paymentcryptography#ExportTr34KeyBlock",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Parameter information for key material export using TR-34 standard.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Parameter information for key material export from Amazon Web Services Payment Cryptography.</p>"
+            }
+        },
+        "com.amazonaws.paymentcryptography#ExportKeyOutput": {
+            "type": "structure",
+            "members": {
+                "WrappedKey": {
+                    "target": "com.amazonaws.paymentcryptography#WrappedKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key material under export as a TR-34 or TR-31 wrapped key block.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.paymentcryptography#ExportTokenId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^export-token-[0-9a-zA-Z]{16,64}$"
+            }
+        },
+        "com.amazonaws.paymentcryptography#ExportTr31KeyBlock": {
+            "type": "structure",
+            "members": {
+                "WrappingKeyIdentifier": {
+                    "target": "com.amazonaws.paymentcryptography#KeyArnOrKeyAliasType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>KeyARN</code> of the the wrapping key. This key encrypts or wraps the key under export for TR-31 key block generation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Parameter information for key material export using TR-31 standard.</p>"
+            }
+        },
+        "com.amazonaws.paymentcryptography#ExportTr34KeyBlock": {
+            "type": "structure",
+            "members": {
+                "CertificateAuthorityPublicKeyIdentifier": {
+                    "target": "com.amazonaws.paymentcryptography#KeyArnOrKeyAliasType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>KeyARN</code> of the certificate chain that signs the wrapping key certificate during TR-34 key export.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WrappingKeyCertificate": {
+                    "target": "com.amazonaws.paymentcryptography#CertificateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>KeyARN</code> of the wrapping key certificate. Amazon Web Services Payment Cryptography uses this certificate to wrap the key under export.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExportToken": {
+                    "target": "com.amazonaws.paymentcryptography#ExportTokenId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The export token to initiate key export from Amazon Web Services Payment Cryptography. It also contains the signing key certificate that will sign the wrapped key during TR-34 key block generation. Call <a>GetParametersForExport</a> to receive an export token. It expires after 7 days. You can use the same export token to export multiple keys from the same service account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KeyBlockFormat": {
+                    "target": "com.amazonaws.paymentcryptography#Tr34KeyBlockFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format of key block that Amazon Web Services Payment Cryptography will use during key export.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RandomNonce": {
+                    "target": "com.amazonaws.paymentcryptography#HexLength16",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A random number value that is unique to the TR-34 key block generated using 2 pass. The operation will fail, if a random nonce value is not provided for a TR-34 key block generated using 2 pass.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Parameter information for key material export using TR-34 standard.</p>"
+            }
+        },
+        "com.amazonaws.paymentcryptography#GetAlias": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.paymentcryptography#GetAliasInput"
+            },
+            "output": {
+                "target": "com.amazonaws.paymentcryptography#GetAliasOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.paymentcryptography#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#controlPlane": {},
+                "smithy.api#documentation": "<p>Gets the Amazon Web Services Payment Cryptography key associated with the alias.</p>\n         <p>\n            <b>Cross-account use:</b> This operation can't be used across different Amazon Web Services accounts.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateAlias</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteAlias</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListAliases</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>UpdateAlias</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.paymentcryptography#GetAliasInput": {
+            "type": "structure",
+            "members": {
+                "AliasName": {
+                    "target": "com.amazonaws.paymentcryptography#AliasName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alias of the Amazon Web Services Payment Cryptography key.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.paymentcryptography#GetAliasOutput": {
+            "type": "structure",
+            "members": {
+                "Alias": {
+                    "target": "com.amazonaws.paymentcryptography#Alias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alias of the Amazon Web Services Payment Cryptography key.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.paymentcryptography#GetKey": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.paymentcryptography#GetKeyInput"
+            },
+            "output": {
+                "target": "com.amazonaws.paymentcryptography#GetKeyOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.paymentcryptography#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#controlPlane": {},
+                "smithy.api#documentation": "<p>Gets the key material for an Amazon Web Services Payment Cryptography key, including the immutable and mutable data specified when the key was created.</p>\n         <p>\n            <b>Cross-account use:</b> This operation can't be used across different Amazon Web Services accounts.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateKey</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteKey</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListKeys</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.paymentcryptography#GetKeyInput": {
+            "type": "structure",
+            "members": {
+                "KeyIdentifier": {
+                    "target": "com.amazonaws.paymentcryptography#KeyArnOrKeyAliasType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>KeyARN</code> of the Amazon Web Services Payment Cryptography key.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.paymentcryptography#GetKeyOutput": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.paymentcryptography#Key",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key material, including the immutable and mutable data for the key.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.paymentcryptography#GetParametersForExport": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.paymentcryptography#GetParametersForExportInput"
+            },
+            "output": {
+                "target": "com.amazonaws.paymentcryptography#GetParametersForExportOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.paymentcryptography#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#controlPlane": {},
+                "smithy.api#documentation": "<p>Gets the export token and the signing key certificate to initiate a TR-34 key export from Amazon Web Services Payment Cryptography.</p>\n         <p>The signing key certificate signs the wrapped key under export within the TR-34 key payload. The export token and signing key certificate must be in place and operational before calling <a>ExportKey</a>. The export token expires in 7 days. You can use the same export token to export multiple keys from your service account.</p>\n         <p>\n            <b>Cross-account use:</b> This operation can't be used across different Amazon Web Services accounts.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>ExportKey</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GetParametersForImport</a>\n               </p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.paymentcryptography#GetParametersForExportInput": {
+            "type": "structure",
+            "members": {
+                "KeyMaterialType": {
+                    "target": "com.amazonaws.paymentcryptography#KeyMaterialType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key block format type (for example, TR-34 or TR-31) to use during key material export. Export token is only required for a TR-34 key export, <code>TR34_KEY_BLOCK</code>. Export token is not required for TR-31 key export.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SigningKeyAlgorithm": {
+                    "target": "com.amazonaws.paymentcryptography#KeyAlgorithm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The signing key algorithm to generate a signing key certificate. This certificate signs the wrapped key under export within the TR-34 key block cryptogram. <code>RSA_2048</code> is the only signing key algorithm allowed.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.paymentcryptography#GetParametersForExportOutput": {
+            "type": "structure",
+            "members": {
+                "SigningKeyCertificate": {
+                    "target": "com.amazonaws.paymentcryptography#CertificateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The signing key certificate of the public key for signature within the TR-34 key block cryptogram. The certificate expires after 7 days.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SigningKeyCertificateChain": {
+                    "target": "com.amazonaws.paymentcryptography#CertificateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The certificate chain that signed the signing key certificate. This is the root certificate authority (CA) within your service account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SigningKeyAlgorithm": {
+                    "target": "com.amazonaws.paymentcryptography#KeyAlgorithm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The algorithm of the signing key certificate for use in TR-34 key block generation. <code>RSA_2048</code> is the only signing key algorithm allowed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExportToken": {
+                    "target": "com.amazonaws.paymentcryptography#ExportTokenId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The export token to initiate key export from Amazon Web Services Payment Cryptography. The export token expires after 7 days. You can use the same export token to export multiple keys from the same service account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ParametersValidUntilTimestamp": {
+                    "target": "com.amazonaws.paymentcryptography#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The validity period of the export token.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.paymentcryptography#GetParametersForImport": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.paymentcryptography#GetParametersForImportInput"
+            },
+            "output": {
+                "target": "com.amazonaws.paymentcryptography#GetParametersForImportOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.paymentcryptography#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#controlPlane": {},
+                "smithy.api#documentation": "<p>Gets the import token and the wrapping key certificate to initiate a TR-34 key import into Amazon Web Services Payment Cryptography.</p>\n         <p>The wrapping key certificate wraps the key under import within the TR-34 key payload. The import token and wrapping key certificate must be in place and operational before calling <a>ImportKey</a>. The import token expires in 7 days. The same import token can be used to import multiple keys into your service account.</p>\n         <p>\n            <b>Cross-account use:</b> This operation can't be used across different Amazon Web Services accounts.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>GetParametersForExport</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ImportKey</a>\n               </p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.paymentcryptography#GetParametersForImportInput": {
+            "type": "structure",
+            "members": {
+                "KeyMaterialType": {
+                    "target": "com.amazonaws.paymentcryptography#KeyMaterialType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key block format type such as TR-34 or TR-31 to use during key material import. Import token is only required for TR-34 key import <code>TR34_KEY_BLOCK</code>. Import token is not required for TR-31 key import.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WrappingKeyAlgorithm": {
+                    "target": "com.amazonaws.paymentcryptography#KeyAlgorithm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The wrapping key algorithm to generate a wrapping key certificate. This certificate wraps the key under import within the TR-34 key block cryptogram. <code>RSA_2048</code> is the only wrapping key algorithm allowed.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.paymentcryptography#GetParametersForImportOutput": {
+            "type": "structure",
+            "members": {
+                "WrappingKeyCertificate": {
+                    "target": "com.amazonaws.paymentcryptography#CertificateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The wrapping key certificate of the wrapping key for use within the TR-34 key block. The certificate expires in 7 days.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WrappingKeyCertificateChain": {
+                    "target": "com.amazonaws.paymentcryptography#CertificateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Payment Cryptography certificate chain that signed the wrapping key certificate. This is the root certificate authority (CA) within your service account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WrappingKeyAlgorithm": {
+                    "target": "com.amazonaws.paymentcryptography#KeyAlgorithm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The algorithm of the wrapping key for use within TR-34 key block. <code>RSA_2048</code> is the only wrapping key algorithm allowed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ImportToken": {
+                    "target": "com.amazonaws.paymentcryptography#ImportTokenId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The import token to initiate key import into Amazon Web Services Payment Cryptography. The import token expires after 7 days. You can use the same import token to import multiple keys to the same service account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ParametersValidUntilTimestamp": {
+                    "target": "com.amazonaws.paymentcryptography#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The validity period of the import token.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.paymentcryptography#GetPublicKeyCertificate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.paymentcryptography#GetPublicKeyCertificateInput"
+            },
+            "output": {
+                "target": "com.amazonaws.paymentcryptography#GetPublicKeyCertificateOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.paymentcryptography#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#controlPlane": {},
+                "smithy.api#documentation": "<p>Gets the public key certificate of the asymmetric key pair that exists within Amazon Web Services Payment Cryptography.</p>\n         <p>Unlike the private key of an asymmetric key, which never leaves Amazon Web Services Payment Cryptography unencrypted, callers with <code>GetPublicKeyCertificate</code> permission can download the public key certificate of the asymmetric key. You can share the public key certificate to allow others to encrypt messages and verify signatures outside of Amazon Web Services Payment Cryptography</p>\n         <p>\n            <b>Cross-account use:</b> This operation can't be used across different Amazon Web Services accounts.</p>",
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.paymentcryptography#GetPublicKeyCertificateInput": {
+            "type": "structure",
+            "members": {
+                "KeyIdentifier": {
+                    "target": "com.amazonaws.paymentcryptography#KeyArnOrKeyAliasType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>KeyARN</code> of the asymmetric key pair.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.paymentcryptography#GetPublicKeyCertificateOutput": {
+            "type": "structure",
+            "members": {
+                "KeyCertificate": {
+                    "target": "com.amazonaws.paymentcryptography#CertificateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The public key component of the asymmetric key pair in a certificate (PEM) format. It is signed by the root certificate authority (CA) within your service account. The certificate expires in 90 days.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KeyCertificateChain": {
+                    "target": "com.amazonaws.paymentcryptography#CertificateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The certificate chain that signed the public key certificate of the asymmetric key pair. This is the root certificate authority (CA) within your service account.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.paymentcryptography#HexLength16": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 16,
+                    "max": 16
+                },
+                "smithy.api#pattern": "^[0-9A-F]+$"
+            }
+        },
+        "com.amazonaws.paymentcryptography#ImportKey": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.paymentcryptography#ImportKeyInput"
+            },
+            "output": {
+                "target": "com.amazonaws.paymentcryptography#ImportKeyOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.paymentcryptography#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#controlPlane": {},
+                "smithy.api#documentation": "<p>Imports keys and public key certificates into Amazon Web Services Payment Cryptography.</p>\n         <p>Amazon Web Services Payment Cryptography simplifies main or root key exchange process by eliminating the need of a paper-based key exchange process. It takes a modern and secure approach based of the ANSI X9 TR-34 key exchange standard. </p>\n         <p>You can use <code>ImportKey</code> to import main or root keys such as KEK (Key Encryption Key) using asymmetric key exchange technique following the ANSI X9 TR-34 standard. The ANSI X9 TR-34 standard uses asymmetric keys to establishes bi-directional trust between the two parties exchanging keys. </p>\n         <p>After you have imported a main or root key, you can import working keys to perform various cryptographic operations within Amazon Web Services Payment Cryptography using the ANSI X9 TR-31 symmetric key exchange standard as mandated by PCI PIN.</p>\n         <p>You can also import a <i>root public key certificate</i>, a self-signed certificate used to sign other public key certificates, or a <i>trusted public key certificate</i> under an already established root public key certificate. </p>\n         <p>\n            <b>To import a public root key certificate</b>\n         </p>\n         <p>Using this operation, you can import the public component (in PEM cerificate format) of your private root key. You can use the imported public root key certificate for digital signatures, for example signing wrapping key or signing key in TR-34, within your Amazon Web Services Payment Cryptography account.  </p>\n         <p>Set the following parameters:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>KeyMaterial</code>: <code>RootCertificatePublicKey</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>KeyClass</code>: <code>PUBLIC_KEY</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>KeyModesOfUse</code>: <code>Verify</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>KeyUsage</code>: <code>TR31_S0_ASYMMETRIC_KEY_FOR_DIGITAL_SIGNATURE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PublicKeyCertificate</code>: The certificate authority used to sign the root public key certificate.</p>\n            </li>\n         </ul>\n         <p>\n            <b>To import a trusted public key certificate</b>\n         </p>\n         <p>The root public key certificate must be in place and operational before you import a trusted public key certificate. Set the following parameters:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>KeyMaterial</code>: <code>TrustedCertificatePublicKey</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CertificateAuthorityPublicKeyIdentifier</code>: <code>KeyArn</code> of the <code>RootCertificatePublicKey</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>KeyModesOfUse</code> and <code>KeyUsage</code>: Corresponding to the cryptographic operations such as wrap, sign, or encrypt that you will allow the trusted public key certificate to perform.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PublicKeyCertificate</code>: The certificate authority used to sign the trusted public key certificate.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Import main keys</b>\n         </p>\n         <p>Amazon Web Services Payment Cryptography uses TR-34 asymmetric key exchange standard to import main keys such as KEK. In TR-34 terminology, the sending party of the key is called Key Distribution Host (KDH) and the receiving party of the key is called Key Receiving Host (KRH). During the key import process, KDH is the user who initiates the key import and KRH is Amazon Web Services Payment Cryptography who receives the key. Before initiating TR-34 key import, you must obtain an import token by calling <a>GetParametersForImport</a>. This operation also returns the wrapping key certificate that KDH uses wrap key under import to generate a TR-34 wrapped key block. The import token expires after 7 days.</p>\n         <p>Set the following parameters:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CertificateAuthorityPublicKeyIdentifier</code>: The <code>KeyArn</code> of the certificate chain that will sign the signing key certificate and should exist within Amazon Web Services Payment Cryptography before initiating TR-34 key import. If it does not exist, you can import it by calling by calling <code>ImportKey</code> for <code>RootCertificatePublicKey</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ImportToken</code>: Obtained from KRH by calling <a>GetParametersForImport</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>WrappedKeyBlock</code>: The TR-34 wrapped key block from KDH. It contains the KDH key under import, wrapped with KRH provided wrapping key certificate and signed by the KDH private signing key. This TR-34 key block is generated by the KDH Hardware Security Module (HSM) outside of Amazon Web Services Payment Cryptography.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SigningKeyCertificate</code>: The public component of the private key that signed the KDH TR-34 wrapped key block. In PEM certificate format.</p>\n            </li>\n         </ul>\n         <note>\n            <p>TR-34 is intended primarily to exchange 3DES keys. Your ability to export AES-128 and larger AES keys may be dependent on your source system.</p>\n         </note>\n         <p>\n            <b>Import working keys</b>\n         </p>\n         <p>Amazon Web Services Payment Cryptography uses TR-31 symmetric key exchange standard to import working keys. A KEK must be established within Amazon Web Services Payment Cryptography by using TR-34 key import. To initiate a TR-31 key import, set the following parameters:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>WrappedKeyBlock</code>: The key under import and encrypted using KEK. The TR-31 key block generated by your HSM outside of Amazon Web Services Payment Cryptography. </p>\n            </li>\n            <li>\n               <p>\n                  <code>WrappingKeyIdentifier</code>: The <code>KeyArn</code> of the KEK that Amazon Web Services Payment Cryptography uses to decrypt or unwrap the key under import.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Cross-account use:</b> This operation can't be used across different Amazon Web Services accounts.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>ExportKey</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GetParametersForImport</a>\n               </p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.paymentcryptography#ImportKeyInput": {
+            "type": "structure",
+            "members": {
+                "KeyMaterial": {
+                    "target": "com.amazonaws.paymentcryptography#ImportKeyMaterial",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key or public key certificate type to use during key material import, for example TR-34 or RootCertificatePublicKey.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KeyCheckValueAlgorithm": {
+                    "target": "com.amazonaws.paymentcryptography#KeyCheckValueAlgorithm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The algorithm that Amazon Web Services Payment Cryptography uses to calculate the key check value (KCV) for DES and AES keys.</p>\n         <p>For DES key, the KCV is computed by encrypting 8 bytes, each with value '00', with the key to be checked and retaining the 3 highest order bytes of the encrypted result. For AES key, the KCV is computed by encrypting 8 bytes, each with value '01', with the key to be checked and retaining the 3 highest order bytes of the encrypted result.</p>"
+                    }
+                },
+                "Enabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether import key is enabled.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.paymentcryptography#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to attach to the key. Each tag consists of a tag key and a tag value. Both the tag key and the tag value are required, but the tag value can be an empty (null) string. You can't have more than one tag on an Amazon Web Services Payment Cryptography key with the same tag key. </p>\n         <p>You can't have more than one tag on an Amazon Web Services Payment Cryptography key with the same tag key. If you specify an existing tag key with a different tag value, Amazon Web Services Payment Cryptography replaces the current tag value with the specified one.</p>\n         <p>To use this parameter, you must have <code>TagResource</code> permission.</p>\n         <important>\n            <p>Don't include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>\n         </important>\n         <note>\n            <p>Tagging or untagging an Amazon Web Services Payment Cryptography key can allow or deny permission to the key.</p>\n         </note>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.paymentcryptography#ImportKeyMaterial": {
+            "type": "union",
+            "members": {
+                "RootCertificatePublicKey": {
+                    "target": "com.amazonaws.paymentcryptography#RootCertificatePublicKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Parameter information for root public key certificate import.</p>"
+                    }
+                },
+                "TrustedCertificatePublicKey": {
+                    "target": "com.amazonaws.paymentcryptography#TrustedCertificatePublicKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Parameter information for trusted public key certificate import.</p>"
+                    }
+                },
+                "Tr31KeyBlock": {
+                    "target": "com.amazonaws.paymentcryptography#ImportTr31KeyBlock",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Parameter information for key material import using TR-31 standard.</p>"
+                    }
+                },
+                "Tr34KeyBlock": {
+                    "target": "com.amazonaws.paymentcryptography#ImportTr34KeyBlock",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Parameter information for key material import using TR-34 standard.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Parameter information for key material import.</p>"
+            }
+        },
+        "com.amazonaws.paymentcryptography#ImportKeyOutput": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.paymentcryptography#Key",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>KeyARN</code> of the key material imported within Amazon Web Services Payment Cryptography.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.paymentcryptography#ImportTokenId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^import-token-[0-9a-zA-Z]{16,64}$"
+            }
+        },
+        "com.amazonaws.paymentcryptography#ImportTr31KeyBlock": {
+            "type": "structure",
+            "members": {
+                "WrappingKeyIdentifier": {
+                    "target": "com.amazonaws.paymentcryptography#KeyArnOrKeyAliasType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>KeyARN</code> of the key that will decrypt or unwrap a TR-31 key block during import.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WrappedKeyBlock": {
+                    "target": "com.amazonaws.paymentcryptography#Tr31WrappedKeyBlock",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The TR-34 wrapped key block to import.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Parameter information for key material import using TR-31 standard.</p>"
+            }
+        },
+        "com.amazonaws.paymentcryptography#ImportTr34KeyBlock": {
+            "type": "structure",
+            "members": {
+                "CertificateAuthorityPublicKeyIdentifier": {
+                    "target": "com.amazonaws.paymentcryptography#KeyArnOrKeyAliasType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>KeyARN</code> of the certificate chain that signs the signing key certificate during TR-34 key import.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SigningKeyCertificate": {
+                    "target": "com.amazonaws.paymentcryptography#CertificateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The public key component in PEM certificate format of the private key that signs the KDH TR-34 wrapped key block.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ImportToken": {
+                    "target": "com.amazonaws.paymentcryptography#ImportTokenId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The import token that initiates key import into Amazon Web Services Payment Cryptography. It expires after 7 days. You can use the same import token to import multiple keys to the same service account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WrappedKeyBlock": {
+                    "target": "com.amazonaws.paymentcryptography#Tr34WrappedKeyBlock",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The TR-34 wrapped key block to import.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KeyBlockFormat": {
+                    "target": "com.amazonaws.paymentcryptography#Tr34KeyBlockFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key block format to use during key import. The only value allowed is <code>X9_TR34_2012</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RandomNonce": {
+                    "target": "com.amazonaws.paymentcryptography#HexLength16",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A random number value that is unique to the TR-34 key block generated using 2 pass. The operation will fail, if a random nonce value is not provided for a TR-34 key block generated using 2 pass.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Parameter information for key material import using TR-34 standard.</p>"
+            }
+        },
+        "com.amazonaws.paymentcryptography#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request processing has failed because of an unknown error, exception, or failure.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.paymentcryptography#Key": {
+            "type": "structure",
+            "members": {
+                "KeyArn": {
+                    "target": "com.amazonaws.paymentcryptography#KeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the key.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KeyAttributes": {
+                    "target": "com.amazonaws.paymentcryptography#KeyAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The role of the key, the algorithm it supports, and the cryptographic operations allowed with the key. This data is immutable after the key is created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KeyCheckValue": {
+                    "target": "com.amazonaws.paymentcryptography#KeyCheckValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key check value (KCV) is used to check if all parties holding a given key have the same key or to detect that a key has changed. Amazon Web Services Payment Cryptography calculates the KCV by using standard algorithms, typically by encrypting 8 or 16 bytes or \"00\" or \"01\" and then truncating the result to the first 3 bytes, or 6 hex digits, of the resulting cryptogram.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KeyCheckValueAlgorithm": {
+                    "target": "com.amazonaws.paymentcryptography#KeyCheckValueAlgorithm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The algorithm used for calculating key check value (KCV) for DES and AES keys. For a DES key, Amazon Web Services Payment Cryptography computes the KCV by encrypting 8 bytes, each with value '00', with the key to be checked and retaining the 3 highest order bytes of the encrypted result. For an AES key, Amazon Web Services Payment Cryptography computes the KCV by encrypting 8 bytes, each with value '01', with the key to be checked and retaining the 3 highest order bytes of the encrypted result.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Enabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the key is enabled. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Exportable": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the key is exportable. This data is immutable after the key is created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KeyState": {
+                    "target": "com.amazonaws.paymentcryptography#KeyState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of key that is being created or deleted.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KeyOrigin": {
+                    "target": "com.amazonaws.paymentcryptography#KeyOrigin",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source of the key material. For keys created within Amazon Web Services Payment Cryptography, the value is <code>AWS_PAYMENT_CRYPTOGRAPHY</code>. For keys imported into Amazon Web Services Payment Cryptography, the value is <code>EXTERNAL</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreateTimestamp": {
+                    "target": "com.amazonaws.paymentcryptography#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the key was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UsageStartTimestamp": {
+                    "target": "com.amazonaws.paymentcryptography#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time after which Amazon Web Services Payment Cryptography will start using the key material for cryptographic operations.</p>"
+                    }
+                },
+                "UsageStopTimestamp": {
+                    "target": "com.amazonaws.paymentcryptography#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time after which Amazon Web Services Payment Cryptography will stop using the key material for cryptographic operations.</p>"
+                    }
+                },
+                "DeletePendingTimestamp": {
+                    "target": "com.amazonaws.paymentcryptography#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time after which Amazon Web Services Payment Cryptography will delete the key. This value is present only when <code>KeyState</code> is <code>DELETE_PENDING</code> and the key is scheduled for deletion.</p>"
+                    }
+                },
+                "DeleteTimestamp": {
+                    "target": "com.amazonaws.paymentcryptography#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time after which Amazon Web Services Payment Cryptography will delete the key. This value is present only when when the <code>KeyState</code> is <code>DELETE_COMPLETE</code> and the Amazon Web Services Payment Cryptography key is deleted.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Metadata about an Amazon Web Services Payment Cryptography key.</p>"
+            }
+        },
+        "com.amazonaws.paymentcryptography#KeyAlgorithm": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "TDES_2KEY",
+                        "name": "TDES_2KEY"
+                    },
+                    {
+                        "value": "TDES_3KEY",
+                        "name": "TDES_3KEY"
+                    },
+                    {
+                        "value": "AES_128",
+                        "name": "AES_128"
+                    },
+                    {
+                        "value": "AES_192",
+                        "name": "AES_192"
+                    },
+                    {
+                        "value": "AES_256",
+                        "name": "AES_256"
+                    },
+                    {
+                        "value": "RSA_2048",
+                        "name": "RSA_2048"
+                    },
+                    {
+                        "value": "RSA_3072",
+                        "name": "RSA_3072"
+                    },
+                    {
+                        "value": "RSA_4096",
+                        "name": "RSA_4096"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.paymentcryptography#KeyArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 70,
+                    "max": 150
+                },
+                "smithy.api#pattern": "^arn:aws:payment-cryptography:[a-z]{2}-[a-z]{1,16}-[0-9]+:[0-9]{12}:key/[0-9a-zA-Z]{16,64}$"
+            }
+        },
+        "com.amazonaws.paymentcryptography#KeyArnOrKeyAliasType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 7,
+                    "max": 322
+                },
+                "smithy.api#pattern": "^arn:aws:payment-cryptography:[a-z]{2}-[a-z]{1,16}-[0-9]+:[0-9]{12}:(key/[0-9a-zA-Z]{16,64}|alias/[a-zA-Z0-9/_-]+)$|^alias/[a-zA-Z0-9/_-]+$"
+            }
+        },
+        "com.amazonaws.paymentcryptography#KeyAttributes": {
+            "type": "structure",
+            "members": {
+                "KeyUsage": {
+                    "target": "com.amazonaws.paymentcryptography#KeyUsage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cryptographic usage of an Amazon Web Services Payment Cryptography key as deﬁned in section A.5.2 of the TR-31 spec.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KeyClass": {
+                    "target": "com.amazonaws.paymentcryptography#KeyClass",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of Amazon Web Services Payment Cryptography key to create, which determines the classiﬁcation of the cryptographic method and whether Amazon Web Services Payment Cryptography key contains a symmetric key or an asymmetric key pair.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KeyAlgorithm": {
+                    "target": "com.amazonaws.paymentcryptography#KeyAlgorithm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key algorithm to be use during creation of an Amazon Web Services Payment Cryptography key.</p>\n         <p>For symmetric keys, Amazon Web Services Payment Cryptography supports <code>AES</code> and <code>TDES</code> algorithms. For asymmetric keys, Amazon Web Services Payment Cryptography supports <code>RSA</code> and <code>ECC_NIST</code> algorithms.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KeyModesOfUse": {
+                    "target": "com.amazonaws.paymentcryptography#KeyModesOfUse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of cryptographic operations that you can perform using the key.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The role of the key, the algorithm it supports, and the cryptographic operations allowed with the key. This data is immutable after the key is created.</p>"
+            }
+        },
+        "com.amazonaws.paymentcryptography#KeyCheckValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 4,
+                    "max": 16
+                },
+                "smithy.api#pattern": "^[0-9a-fA-F]+$"
+            }
+        },
+        "com.amazonaws.paymentcryptography#KeyCheckValueAlgorithm": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CMAC",
+                        "name": "CMAC"
+                    },
+                    {
+                        "value": "ANSI_X9_24",
+                        "name": "ANSI_X9_24"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.paymentcryptography#KeyClass": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SYMMETRIC_KEY",
+                        "name": "SYMMETRIC_KEY"
+                    },
+                    {
+                        "value": "ASYMMETRIC_KEY_PAIR",
+                        "name": "ASYMMETRIC_KEY_PAIR"
+                    },
+                    {
+                        "value": "PRIVATE_KEY",
+                        "name": "PRIVATE_KEY"
+                    },
+                    {
+                        "value": "PUBLIC_KEY",
+                        "name": "PUBLIC_KEY"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.paymentcryptography#KeyMaterial": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 48,
+                    "max": 16384
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.paymentcryptography#KeyMaterialType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "TR34_KEY_BLOCK",
+                        "name": "TR34_KEY_BLOCK"
+                    },
+                    {
+                        "value": "TR31_KEY_BLOCK",
+                        "name": "TR31_KEY_BLOCK"
+                    },
+                    {
+                        "value": "ROOT_PUBLIC_KEY_CERTIFICATE",
+                        "name": "ROOT_PUBLIC_KEY_CERTIFICATE"
+                    },
+                    {
+                        "value": "TRUSTED_PUBLIC_KEY_CERTIFICATE",
+                        "name": "TRUSTED_PUBLIC_KEY_CERTIFICATE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.paymentcryptography#KeyModesOfUse": {
+            "type": "structure",
+            "members": {
+                "Encrypt": {
+                    "target": "smithy.api#PrimitiveBoolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Speciﬁes whether an Amazon Web Services Payment Cryptography key can be used to encrypt data.</p>"
+                    }
+                },
+                "Decrypt": {
+                    "target": "smithy.api#PrimitiveBoolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Speciﬁes whether an Amazon Web Services Payment Cryptography key can be used to decrypt data.</p>"
+                    }
+                },
+                "Wrap": {
+                    "target": "smithy.api#PrimitiveBoolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Speciﬁes whether an Amazon Web Services Payment Cryptography key can be used to wrap other keys.</p>"
+                    }
+                },
+                "Unwrap": {
+                    "target": "smithy.api#PrimitiveBoolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Speciﬁes whether an Amazon Web Services Payment Cryptography key can be used to unwrap other keys.</p>"
+                    }
+                },
+                "Generate": {
+                    "target": "smithy.api#PrimitiveBoolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Speciﬁes whether an Amazon Web Services Payment Cryptography key can be used to generate and verify other card and PIN verification keys.</p>"
+                    }
+                },
+                "Sign": {
+                    "target": "smithy.api#PrimitiveBoolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Speciﬁes whether an Amazon Web Services Payment Cryptography key can be used for signing.</p>"
+                    }
+                },
+                "Verify": {
+                    "target": "smithy.api#PrimitiveBoolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Speciﬁes whether an Amazon Web Services Payment Cryptography key can be used to verify signatures.</p>"
+                    }
+                },
+                "DeriveKey": {
+                    "target": "smithy.api#PrimitiveBoolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Speciﬁes whether an Amazon Web Services Payment Cryptography key can be used to derive new keys.</p>"
+                    }
+                },
+                "NoRestrictions": {
+                    "target": "smithy.api#PrimitiveBoolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Speciﬁes whether an Amazon Web Services Payment Cryptography key has no special restrictions other than the restrictions implied by <code>KeyUsage</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The list of cryptographic operations that you can perform using the key. The modes of use are deﬁned in section A.5.3 of the TR-31 spec.</p>"
+            }
+        },
+        "com.amazonaws.paymentcryptography#KeyOrigin": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Defines the source of a key",
+                "smithy.api#enum": [
+                    {
+                        "value": "EXTERNAL",
+                        "name": "EXTERNAL"
+                    },
+                    {
+                        "value": "AWS_PAYMENT_CRYPTOGRAPHY",
+                        "name": "AWS_PAYMENT_CRYPTOGRAPHY"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.paymentcryptography#KeyState": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Defines the state of a key",
+                "smithy.api#enum": [
+                    {
+                        "value": "CREATE_IN_PROGRESS",
+                        "name": "CREATE_IN_PROGRESS"
+                    },
+                    {
+                        "value": "CREATE_COMPLETE",
+                        "name": "CREATE_COMPLETE"
+                    },
+                    {
+                        "value": "DELETE_PENDING",
+                        "name": "DELETE_PENDING"
+                    },
+                    {
+                        "value": "DELETE_COMPLETE",
+                        "name": "DELETE_COMPLETE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.paymentcryptography#KeySummary": {
+            "type": "structure",
+            "members": {
+                "KeyArn": {
+                    "target": "com.amazonaws.paymentcryptography#KeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the key.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KeyState": {
+                    "target": "com.amazonaws.paymentcryptography#KeyState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of an Amazon Web Services Payment Cryptography that is being created or deleted.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KeyAttributes": {
+                    "target": "com.amazonaws.paymentcryptography#KeyAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The role of the key, the algorithm it supports, and the cryptographic operations allowed with the key. This data is immutable after the key is created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KeyCheckValue": {
+                    "target": "com.amazonaws.paymentcryptography#KeyCheckValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key check value (KCV) is used to check if all parties holding a given key have the same key or to detect that a key has changed. Amazon Web Services Payment Cryptography calculates the KCV by using standard algorithms, typically by encrypting 8 or 16 bytes or \"00\" or \"01\" and then truncating the result to the first 3 bytes, or 6 hex digits, of the resulting cryptogram.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Exportable": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the key is exportable. This data is immutable after the key is created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Enabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the key is enabled. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Metadata about an Amazon Web Services Payment Cryptography key.</p>"
+            }
+        },
+        "com.amazonaws.paymentcryptography#KeySummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.paymentcryptography#KeySummary"
+            }
+        },
+        "com.amazonaws.paymentcryptography#KeyUsage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "TR31_B0_BASE_DERIVATION_KEY",
+                        "name": "TR31_B0_BASE_DERIVATION_KEY"
+                    },
+                    {
+                        "value": "TR31_C0_CARD_VERIFICATION_KEY",
+                        "name": "TR31_C0_CARD_VERIFICATION_KEY"
+                    },
+                    {
+                        "value": "TR31_D0_SYMMETRIC_DATA_ENCRYPTION_KEY",
+                        "name": "TR31_D0_SYMMETRIC_DATA_ENCRYPTION_KEY"
+                    },
+                    {
+                        "value": "TR31_D1_ASYMMETRIC_KEY_FOR_DATA_ENCRYPTION",
+                        "name": "TR31_D1_ASYMMETRIC_KEY_FOR_DATA_ENCRYPTION"
+                    },
+                    {
+                        "value": "TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS",
+                        "name": "TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS"
+                    },
+                    {
+                        "value": "TR31_E1_EMV_MKEY_CONFIDENTIALITY",
+                        "name": "TR31_E1_EMV_MKEY_CONFIDENTIALITY"
+                    },
+                    {
+                        "value": "TR31_E2_EMV_MKEY_INTEGRITY",
+                        "name": "TR31_E2_EMV_MKEY_INTEGRITY"
+                    },
+                    {
+                        "value": "TR31_E4_EMV_MKEY_DYNAMIC_NUMBERS",
+                        "name": "TR31_E4_EMV_MKEY_DYNAMIC_NUMBERS"
+                    },
+                    {
+                        "value": "TR31_E5_EMV_MKEY_CARD_PERSONALIZATION",
+                        "name": "TR31_E5_EMV_MKEY_CARD_PERSONALIZATION"
+                    },
+                    {
+                        "value": "TR31_E6_EMV_MKEY_OTHER",
+                        "name": "TR31_E6_EMV_MKEY_OTHER"
+                    },
+                    {
+                        "value": "TR31_K0_KEY_ENCRYPTION_KEY",
+                        "name": "TR31_K0_KEY_ENCRYPTION_KEY"
+                    },
+                    {
+                        "value": "TR31_K1_KEY_BLOCK_PROTECTION_KEY",
+                        "name": "TR31_K1_KEY_BLOCK_PROTECTION_KEY"
+                    },
+                    {
+                        "value": "TR31_K3_ASYMMETRIC_KEY_FOR_KEY_AGREEMENT",
+                        "name": "TR31_K3_ASYMMETRIC_KEY_FOR_KEY_AGREEMENT"
+                    },
+                    {
+                        "value": "TR31_M3_ISO_9797_3_MAC_KEY",
+                        "name": "TR31_M3_ISO_9797_3_MAC_KEY"
+                    },
+                    {
+                        "value": "TR31_M6_ISO_9797_5_CMAC_KEY",
+                        "name": "TR31_M6_ISO_9797_5_CMAC_KEY"
+                    },
+                    {
+                        "value": "TR31_M7_HMAC_KEY",
+                        "name": "TR31_M7_HMAC_KEY"
+                    },
+                    {
+                        "value": "TR31_P0_PIN_ENCRYPTION_KEY",
+                        "name": "TR31_P0_PIN_ENCRYPTION_KEY"
+                    },
+                    {
+                        "value": "TR31_P1_PIN_GENERATION_KEY",
+                        "name": "TR31_P1_PIN_GENERATION_KEY"
+                    },
+                    {
+                        "value": "TR31_S0_ASYMMETRIC_KEY_FOR_DIGITAL_SIGNATURE",
+                        "name": "TR31_S0_ASYMMETRIC_KEY_FOR_DIGITAL_SIGNATURE"
+                    },
+                    {
+                        "value": "TR31_V1_IBM3624_PIN_VERIFICATION_KEY",
+                        "name": "TR31_V1_IBM3624_PIN_VERIFICATION_KEY"
+                    },
+                    {
+                        "value": "TR31_V2_VISA_PIN_VERIFICATION_KEY",
+                        "name": "TR31_V2_VISA_PIN_VERIFICATION_KEY"
+                    },
+                    {
+                        "value": "TR31_K2_TR34_ASYMMETRIC_KEY",
+                        "name": "TR31_K2_TR34_ASYMMETRIC_KEY"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.paymentcryptography#ListAliases": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.paymentcryptography#ListAliasesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.paymentcryptography#ListAliasesOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.paymentcryptography#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#controlPlane": {},
+                "smithy.api#documentation": "<p>Lists the aliases for all keys in the caller's Amazon Web Services account and Amazon Web Services Region. You can filter the list of aliases. For more information, see <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-managealias.html\">Using aliases</a> in the <i>Amazon Web Services Payment Cryptography User Guide</i>.</p>\n         <p>This is a paginated operation, which means that each response might contain only a subset of all the aliases. When the response contains only a subset of aliases, it includes a <code>NextToken</code> value.\n         Use this value in a subsequent <code>ListAliases</code> request to get more aliases. When you receive a response with no NextToken (or an empty or null value), that means there are no more aliases to get.</p>\n         <p>\n            <b>Cross-account use:</b> This operation can't be used across different Amazon Web Services accounts.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateAlias</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteAlias</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GetAlias</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>UpdateAlias</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "Aliases"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.paymentcryptography#ListAliasesInput": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.paymentcryptography#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this parameter in a subsequent request after you receive a response with truncated results. Set it to the value of <code>NextToken</code> from the truncated response you just received.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.paymentcryptography#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this parameter to specify the maximum number of items to return. When this value is present, Amazon Web Services Payment Cryptography does not return more than the specified number of items, but it might return fewer.</p>\n         <p>This value is optional. If you include a value, it must be between 1 and 100, inclusive. If you do not include a value, it defaults to 50.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.paymentcryptography#ListAliasesOutput": {
+            "type": "structure",
+            "members": {
+                "Aliases": {
+                    "target": "com.amazonaws.paymentcryptography#Aliases",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of aliases. Each alias describes the <code>KeyArn</code> contained within.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.paymentcryptography#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or an empty or null value if there are no more results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.paymentcryptography#ListKeys": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.paymentcryptography#ListKeysInput"
+            },
+            "output": {
+                "target": "com.amazonaws.paymentcryptography#ListKeysOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.paymentcryptography#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#controlPlane": {},
+                "smithy.api#documentation": "<p>Lists the keys in the caller's Amazon Web Services account and Amazon Web Services Region. You can filter the list of keys.</p>\n         <p>This is a paginated operation, which means that each response might contain only a subset of all the keys.\n         When the response contains only a subset of keys, it includes a <code>NextToken</code> value. Use this value in a subsequent <code>ListKeys</code> request to get more keys.\n         When you receive a response with no NextToken (or an empty or null value), that means there are no more keys to get.</p>\n         <p>\n            <b>Cross-account use:</b> This operation can't be used across different Amazon Web Services accounts.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateKey</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteKey</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GetKey</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "Keys"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.paymentcryptography#ListKeysInput": {
+            "type": "structure",
+            "members": {
+                "KeyState": {
+                    "target": "com.amazonaws.paymentcryptography#KeyState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key state of the keys you want to list.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.paymentcryptography#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this parameter in a subsequent request after you receive a response with truncated results. Set it to the value of <code>NextToken</code> from the truncated response you just received.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.paymentcryptography#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this parameter to specify the maximum number of items to return. When this value is present, Amazon Web Services Payment Cryptography does not return more than the specified number of items, but it might return fewer.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.paymentcryptography#ListKeysOutput": {
+            "type": "structure",
+            "members": {
+                "Keys": {
+                    "target": "com.amazonaws.paymentcryptography#KeySummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of keys created within the caller's Amazon Web Services account and Amazon Web Services Region.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.paymentcryptography#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or an empty or null value if there are no more results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.paymentcryptography#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.paymentcryptography#ListTagsForResourceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.paymentcryptography#ListTagsForResourceOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.paymentcryptography#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#controlPlane": {},
+                "smithy.api#documentation": "<p>Lists the tags for an Amazon Web Services resource.</p>\n         <p>This is a paginated operation, which means that each response might contain only a subset of all the tags.\n         When the response contains only a subset of tags, it includes a <code>NextToken</code> value. Use this value in a subsequent <code>ListTagsForResource</code> request to get more tags.\n         When you receive a response with no NextToken (or an empty or null value), that means there are no more tags to get.</p>\n         <p>\n            <b>Cross-account use:</b> This operation can't be used across different Amazon Web Services accounts.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>TagResource</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>UntagResource</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "Tags"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.paymentcryptography#ListTagsForResourceInput": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.paymentcryptography#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>KeyARN</code> of the key whose tags you are getting.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.paymentcryptography#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this parameter in a subsequent request after you receive a response with truncated results. Set it to the value of <code>NextToken</code> from the truncated response you just received.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.paymentcryptography#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this parameter to specify the maximum number of items to return. When this value is present, Amazon Web Services Payment Cryptography does not return more than the specified number of items, but it might return fewer.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.paymentcryptography#ListTagsForResourceOutput": {
+            "type": "structure",
+            "members": {
+                "Tags": {
+                    "target": "com.amazonaws.paymentcryptography#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of tags associated with a <code>ResourceArn</code>. Each tag will list the key-value pair contained within that tag.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.paymentcryptography#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or an empty or null value if there are no more results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.paymentcryptography#MaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.paymentcryptography#NextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 8192
+                }
+            }
+        },
+        "com.amazonaws.paymentcryptography#PaymentCryptographyControlPlane": {
+            "type": "service",
+            "version": "2021-09-14",
+            "operations": [
+                {
+                    "target": "com.amazonaws.paymentcryptography#CreateAlias"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#CreateKey"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#DeleteAlias"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#DeleteKey"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ExportKey"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#GetAlias"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#GetKey"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#GetParametersForExport"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#GetParametersForImport"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#GetPublicKeyCertificate"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ImportKey"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ListAliases"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ListKeys"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#RestoreKey"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#StartKeyUsage"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#StopKeyUsage"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#UpdateAlias"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Payment Cryptography",
+                    "arnNamespace": "payment-cryptography",
+                    "endpointPrefix": "controlplane.payment-cryptography"
+                },
+                "aws.auth#sigv4": {
+                    "name": "payment-cryptography"
+                },
+                "aws.protocols#awsJson1_0": {},
+                "smithy.api#cors": {},
+                "smithy.api#documentation": "<p>You use the Amazon Web Services Payment Cryptography Control Plane to manage the encryption keys you use for payment-related cryptographic operations. You can create, import, export, share, manage, and delete keys. You can also manage Identity and Access Management (IAM) policies for keys. For more information, see <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security-iam.html\">Identity and access management</a> in the <i>Amazon Web Services Payment Cryptography User Guide.</i>\n         </p>\n         <p>To use encryption keys for payment-related transaction processing and associated cryptographic operations, you use the <a href=\"https://docs.aws.amazon.com/payment-cryptography/latest/DataAPIReference/Welcome.html\">Amazon Web Services Payment Cryptography Data Plane</a>. You can encrypt, decrypt, generate, verify, and translate payment-related cryptographic operations. </p>\n         <p>All Amazon Web Services Payment Cryptography API calls must be signed and transmitted using Transport Layer Security (TLS). We recommend you always use the latest supported TLS version for logging API requests. </p>\n         <p>Amazon Web Services Payment Cryptography supports CloudTrail, a service that logs Amazon Web Services API calls and related events for your Amazon Web Services account and delivers them to an Amazon S3 bucket that you specify. By using the information collected by CloudTrail, you can determine what requests were made to Amazon Web Services Payment Cryptography, who made the request, when it was made, and so on. If you don't conﬁgure a trail, you can still view the most recent events in the CloudTrail console. For more information, see the <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/\">CloudTrail User Guide</a>.</p>",
+                "smithy.api#title": "Payment Cryptography Control Plane",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://controlplane.payment-cryptography-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://controlplane.payment-cryptography-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://controlplane.payment-cryptography.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://controlplane.payment-cryptography.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://controlplane.payment-cryptography-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://controlplane.payment-cryptography-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://controlplane.payment-cryptography.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://controlplane.payment-cryptography.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://controlplane.payment-cryptography-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "cn-north-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://controlplane.payment-cryptography-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "cn-north-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://controlplane.payment-cryptography.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "cn-north-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://controlplane.payment-cryptography.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "cn-north-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://controlplane.payment-cryptography-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://controlplane.payment-cryptography.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://controlplane.payment-cryptography-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://controlplane.payment-cryptography-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://controlplane.payment-cryptography.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://controlplane.payment-cryptography.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://controlplane.payment-cryptography-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://controlplane.payment-cryptography.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.paymentcryptography#ResourceArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 70,
+                    "max": 150
+                },
+                "smithy.api#pattern": "^arn:aws:payment-cryptography:[a-z]{2}-[a-z]{1,16}-[0-9]+:[0-9]{12}:key/[0-9a-zA-Z]{16,64}$"
+            }
+        },
+        "com.amazonaws.paymentcryptography#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "ResourceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The string for the exception.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request was denied due to an invalid resource error.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.paymentcryptography#RestoreKey": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.paymentcryptography#RestoreKeyInput"
+            },
+            "output": {
+                "target": "com.amazonaws.paymentcryptography#RestoreKeyOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.paymentcryptography#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#controlPlane": {},
+                "smithy.api#documentation": "<p>Cancels a scheduled key deletion during the waiting period. Use this operation to restore a <code>Key</code> that is scheduled for deletion.</p>\n         <p>During the waiting period, the <code>KeyState</code> is <code>DELETE_PENDING</code> and <code>deletePendingTimestamp</code> contains the date and time after which the <code>Key</code> will be deleted.\n         After <code>Key</code> is restored, the <code>KeyState</code> is <code>CREATE_COMPLETE</code>, and the value for <code>deletePendingTimestamp</code> is removed.</p>\n         <p>\n            <b>Cross-account use:</b> This operation can't be used across different Amazon Web Services accounts.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>DeleteKey</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>StartKeyUsage</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>StopKeyUsage</a>\n               </p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.paymentcryptography#RestoreKeyInput": {
+            "type": "structure",
+            "members": {
+                "KeyIdentifier": {
+                    "target": "com.amazonaws.paymentcryptography#KeyArnOrKeyAliasType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>KeyARN</code> of the key to be restored within Amazon Web Services Payment Cryptography.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.paymentcryptography#RestoreKeyOutput": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.paymentcryptography#Key",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key material of the restored key. The <code>KeyState</code> will change to <code>CREATE_COMPLETE</code> and value for <code>DeletePendingTimestamp</code> gets removed. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.paymentcryptography#RootCertificatePublicKey": {
+            "type": "structure",
+            "members": {
+                "KeyAttributes": {
+                    "target": "com.amazonaws.paymentcryptography#KeyAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The role of the key, the algorithm it supports, and the cryptographic operations allowed with the key. This data is immutable after the root public key is imported.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PublicKeyCertificate": {
+                    "target": "com.amazonaws.paymentcryptography#CertificateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Parameter information for root public key certificate import.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Parameter information for root public key certificate import.</p>"
+            }
+        },
+        "com.amazonaws.paymentcryptography#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This request would cause a service quota to be exceeded.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.paymentcryptography#ServiceUnavailableException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The service cannot complete the request.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 503
+            }
+        },
+        "com.amazonaws.paymentcryptography#StartKeyUsage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.paymentcryptography#StartKeyUsageInput"
+            },
+            "output": {
+                "target": "com.amazonaws.paymentcryptography#StartKeyUsageOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.paymentcryptography#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#controlPlane": {},
+                "smithy.api#documentation": "<p>Enables an Amazon Web Services Payment Cryptography key, which makes it active for cryptographic operations within Amazon Web Services Payment Cryptography</p>\n         <p>\n            <b>Cross-account use:</b> This operation can't be used across different Amazon Web Services accounts.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>StopKeyUsage</a>\n               </p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.paymentcryptography#StartKeyUsageInput": {
+            "type": "structure",
+            "members": {
+                "KeyIdentifier": {
+                    "target": "com.amazonaws.paymentcryptography#KeyArnOrKeyAliasType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>KeyArn</code> of the key.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.paymentcryptography#StartKeyUsageOutput": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.paymentcryptography#Key",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>KeyARN</code> of the Amazon Web Services Payment Cryptography key activated for use.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.paymentcryptography#StopKeyUsage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.paymentcryptography#StopKeyUsageInput"
+            },
+            "output": {
+                "target": "com.amazonaws.paymentcryptography#StopKeyUsageOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.paymentcryptography#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#controlPlane": {},
+                "smithy.api#documentation": "<p>Disables an Amazon Web Services Payment Cryptography key, which makes it inactive within Amazon Web Services Payment Cryptography.</p>\n         <p>You can use this operation instead of <a>DeleteKey</a> to deactivate a key. You can enable the key in the future by calling <a>StartKeyUsage</a>.</p>\n         <p>\n            <b>Cross-account use:</b> This operation can't be used across different Amazon Web Services accounts.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>DeleteKey</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>StartKeyUsage</a>\n               </p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.paymentcryptography#StopKeyUsageInput": {
+            "type": "structure",
+            "members": {
+                "KeyIdentifier": {
+                    "target": "com.amazonaws.paymentcryptography#KeyArnOrKeyAliasType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>KeyArn</code> of the key.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.paymentcryptography#StopKeyUsageOutput": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.paymentcryptography#Key",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>KeyARN</code> of the key.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.paymentcryptography#Tag": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.paymentcryptography#TagKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key of the tag.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.paymentcryptography#TagValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the tag.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains information about a tag.</p>"
+            }
+        },
+        "com.amazonaws.paymentcryptography#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.paymentcryptography#TagKeys": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.paymentcryptography#TagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.paymentcryptography#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.paymentcryptography#TagResourceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.paymentcryptography#TagResourceOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.paymentcryptography#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#controlPlane": {},
+                "smithy.api#documentation": "<p>Adds or edits tags on an Amazon Web Services Payment Cryptography key.</p>\n         <note>\n            <p>Tagging or untagging an Amazon Web Services Payment Cryptography key can allow or deny permission to the key.</p>\n         </note>\n         <p>Each tag consists of a tag key and a tag value, both of which are case-sensitive strings. The tag value can be an empty (null) string. To add a tag, specify a new tag key and a tag value. To edit a tag, specify an existing tag key and a new tag value. You can also add tags to an Amazon Web Services Payment Cryptography key when you create it with <a>CreateKey</a>.</p>\n         <p>\n            <b>Cross-account use:</b> This operation can't be used across different Amazon Web Services accounts.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>ListTagsForResource</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>UntagResource</a>\n               </p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.paymentcryptography#TagResourceInput": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.paymentcryptography#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>KeyARN</code> of the key whose tags are being updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.paymentcryptography#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more tags. Each tag consists of a tag key and a tag value. The tag value can be an empty (null) string. You can't have more than one tag on an Amazon Web Services Payment Cryptography key with the same tag key. If you specify an existing tag key with a different tag value, Amazon Web Services Payment Cryptography replaces the current tag value with the new one.</p>\n         <important>\n            <p>Don't include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>\n         </important>\n         <p>To use this parameter, you must have <a>TagResource</a> permission in an IAM policy.</p>\n         <important>\n            <p>Don't include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>\n         </important>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.paymentcryptography#TagResourceOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.paymentcryptography#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.paymentcryptography#Tags": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.paymentcryptography#Tag"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.paymentcryptography#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request was denied due to request throttling.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.paymentcryptography#Timestamp": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.paymentcryptography#Tr31WrappedKeyBlock": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 56,
+                    "max": 9984
+                },
+                "smithy.api#pattern": "^[0-9A-Z]+$"
+            }
+        },
+        "com.amazonaws.paymentcryptography#Tr34KeyBlockFormat": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "X9_TR34_2012",
+                        "name": "X9_TR34_2012"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.paymentcryptography#Tr34WrappedKeyBlock": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 4096
+                },
+                "smithy.api#pattern": "^[0-9A-F]+$"
+            }
+        },
+        "com.amazonaws.paymentcryptography#TrustedCertificatePublicKey": {
+            "type": "structure",
+            "members": {
+                "KeyAttributes": {
+                    "target": "com.amazonaws.paymentcryptography#KeyAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The role of the key, the algorithm it supports, and the cryptographic operations allowed with the key. This data is immutable after a trusted public key is imported.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PublicKeyCertificate": {
+                    "target": "com.amazonaws.paymentcryptography#CertificateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Parameter information for trusted public key certificate import.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CertificateAuthorityPublicKeyIdentifier": {
+                    "target": "com.amazonaws.paymentcryptography#KeyArnOrKeyAliasType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>KeyARN</code> of the root public key certificate or certificate chain that signs the trusted public key certificate import.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Parameter information for trusted public key certificate import.</p>"
+            }
+        },
+        "com.amazonaws.paymentcryptography#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.paymentcryptography#UntagResourceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.paymentcryptography#UntagResourceOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.paymentcryptography#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#controlPlane": {},
+                "smithy.api#documentation": "<p>Deletes a tag from an Amazon Web Services Payment Cryptography key.</p>\n         <note>\n            <p>Tagging or untagging an Amazon Web Services Payment Cryptography key can allow or deny permission to the key.</p>\n         </note>\n         <p>\n            <b>Cross-account use:</b> This operation can't be used across different Amazon Web Services accounts.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>ListTagsForResource</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>TagResource</a>\n               </p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.paymentcryptography#UntagResourceInput": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.paymentcryptography#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>KeyARN</code> of the key whose tags are being removed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TagKeys": {
+                    "target": "com.amazonaws.paymentcryptography#TagKeys",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more tag keys. Don't include the tag values.</p>\n         <p>If the Amazon Web Services Payment Cryptography key doesn't have the specified tag key, Amazon Web Services Payment Cryptography doesn't throw an exception or return a response. To confirm that the operation succeeded, use the <a>ListTagsForResource</a> operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.paymentcryptography#UntagResourceOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.paymentcryptography#UpdateAlias": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.paymentcryptography#UpdateAliasInput"
+            },
+            "output": {
+                "target": "com.amazonaws.paymentcryptography#UpdateAliasOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.paymentcryptography#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.paymentcryptography#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#controlPlane": {},
+                "smithy.api#documentation": "<p>Associates an existing Amazon Web Services Payment Cryptography alias with a different key. Each alias is associated with only one Amazon Web Services Payment Cryptography key at a time, although a key can have multiple aliases. The alias and the Amazon Web Services Payment Cryptography key must be in the same Amazon Web Services account and Amazon Web Services Region</p>\n         <p>\n            <b>Cross-account use:</b> This operation can't be used across different Amazon Web Services accounts.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateAlias</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteAlias</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GetAlias</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListAliases</a>\n               </p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.paymentcryptography#UpdateAliasInput": {
+            "type": "structure",
+            "members": {
+                "AliasName": {
+                    "target": "com.amazonaws.paymentcryptography#AliasName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alias whose associated key is changing.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KeyArn": {
+                    "target": "com.amazonaws.paymentcryptography#KeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>KeyARN</code> for the key that you are updating or removing from the alias.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.paymentcryptography#UpdateAliasOutput": {
+            "type": "structure",
+            "members": {
+                "Alias": {
+                    "target": "com.amazonaws.paymentcryptography#Alias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alias name.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.paymentcryptography#ValidationException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request was denied due to an invalid request error.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.paymentcryptography#WrappedKey": {
+            "type": "structure",
+            "members": {
+                "WrappingKeyArn": {
+                    "target": "com.amazonaws.paymentcryptography#KeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>KeyARN</code> of the wrapped key.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WrappedKeyMaterialFormat": {
+                    "target": "com.amazonaws.paymentcryptography#WrappedKeyMaterialFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key block format of a wrapped key.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KeyMaterial": {
+                    "target": "com.amazonaws.paymentcryptography#KeyMaterial",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Parameter information for generating a wrapped key using TR-31 or TR-34 standard.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Parameter information for generating a wrapped key using TR-31 or TR-34 standard.</p>"
+            }
+        },
+        "com.amazonaws.paymentcryptography#WrappedKeyMaterialFormat": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "KEY_CRYPTOGRAM",
+                        "name": "KEY_CRYPTOGRAM"
+                    },
+                    {
+                        "value": "TR31_KEY_BLOCK",
+                        "name": "TR31_KEY_BLOCK"
+                    },
+                    {
+                        "value": "TR34_KEY_BLOCK",
+                        "name": "TR34_KEY_BLOCK"
+                    }
+                ]
+            }
+        }
+    }
+}
