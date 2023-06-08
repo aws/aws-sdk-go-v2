@@ -1,8 +1,0 @@
-{
-    "id": "6e9da70a-3698-4352-be5f-f995582fced8",
-    "type": "feature",
-    "description": "Initial release of AWS Payment Cryptography DataPlane Plane service for performing cryptographic operations typically used during card payment processing.",
-    "modules": [
-        "service/paymentcryptographydata"
-    ]
-}

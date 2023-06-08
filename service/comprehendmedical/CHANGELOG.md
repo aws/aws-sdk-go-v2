@@ -1,3 +1,7 @@
+# v1.16.0 (2023-06-08)
+
+* **Feature**: This release supports a new set of entities and traits.
+
 # v1.15.10 (2023-05-04)
 
 * No change notes available for this release.

@@ -1,3 +1,21 @@
+# Release (2023-06-08)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/athena`: [v1.30.0](service/athena/CHANGELOG.md#v1300-2023-06-08)
+  * **Feature**: You can now define custom spark properties at start of the session for use cases like cluster encryption, table formats, and general Spark tuning.
+* `github.com/aws/aws-sdk-go-v2/service/comprehendmedical`: [v1.16.0](service/comprehendmedical/CHANGELOG.md#v1160-2023-06-08)
+  * **Feature**: This release supports a new set of entities and traits.
+* `github.com/aws/aws-sdk-go-v2/service/paymentcryptography`: [v1.0.0](service/paymentcryptography/CHANGELOG.md#v100-2023-06-08)
+  * **Release**: New AWS service client module
+  * **Feature**: Initial release of AWS Payment Cryptography Control Plane service for creating and managing cryptographic keys used during card payment processing.
+* `github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata`: [v1.0.0](service/paymentcryptographydata/CHANGELOG.md#v100-2023-06-08)
+  * **Release**: New AWS service client module
+  * **Feature**: Initial release of AWS Payment Cryptography DataPlane Plane service for performing cryptographic operations typically used during card payment processing.
+* `github.com/aws/aws-sdk-go-v2/service/servicecatalog`: [v1.19.0](service/servicecatalog/CHANGELOG.md#v1190-2023-06-08)
+  * **Feature**: New parameter added in ServiceCatalog DescribeProvisioningArtifact api - IncludeProvisioningArtifactParameters. This parameter can be used to return information about the parameters used to provision the product
+* `github.com/aws/aws-sdk-go-v2/service/timestreamwrite`: [v1.17.0](service/timestreamwrite/CHANGELOG.md#v1170-2023-06-08)
+  * **Feature**: This release adds the capability for customers to define how their data should be partitioned, optimizing for certain access patterns. This definition will take place as a part of the table creation.
+
 # Release (2023-06-07)
 
 ## Module Highlights

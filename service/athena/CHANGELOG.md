@@ -1,3 +1,7 @@
+# v1.30.0 (2023-06-08)
+
+* **Feature**: You can now define custom spark properties at start of the session for use cases like cluster encryption, table formats, and general Spark tuning.
+
 # v1.29.0 (2023-06-02)
 
 * **Feature**: This release introduces the DeleteCapacityReservation API and the ability to manage capacity reservations using CloudFormation

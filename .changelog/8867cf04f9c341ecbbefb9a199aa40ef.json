@@ -1,8 +1,0 @@
-{
-    "id": "8867cf04-f9c3-41ec-bbef-b9a199aa40ef",
-    "type": "feature",
-    "description": "This release supports a new set of entities and traits.",
-    "modules": [
-        "service/comprehendmedical"
-    ]
-}

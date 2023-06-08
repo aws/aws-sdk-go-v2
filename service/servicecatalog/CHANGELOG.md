@@ -1,3 +1,7 @@
+# v1.19.0 (2023-06-08)
+
+* **Feature**: New parameter added in ServiceCatalog DescribeProvisioningArtifact api - IncludeProvisioningArtifactParameters. This parameter can be used to return information about the parameters used to provision the product
+
 # v1.18.5 (2023-05-31)
 
 * **Documentation**: Documentation updates for ServiceCatalog.

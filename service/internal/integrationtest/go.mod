@@ -8,7 +8,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.21.0
 	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.15.10
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.20.11
-	github.com/aws/aws-sdk-go-v2/service/athena v1.29.0
+	github.com/aws/aws-sdk-go-v2/service/athena v1.30.0
 	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.28.7
 	github.com/aws/aws-sdk-go-v2/service/batch v1.23.6
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.29.0
@@ -69,7 +69,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.33.1
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.31.5
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.19.8
-	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.18.5
+	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.19.0
 	github.com/aws/aws-sdk-go-v2/service/ses v1.15.9
 	github.com/aws/aws-sdk-go-v2/service/sfn v1.17.11
 	github.com/aws/aws-sdk-go-v2/service/shield v1.18.10
@@ -79,7 +79,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/ssm v1.36.4
 	github.com/aws/aws-sdk-go-v2/service/sts v1.19.0
 	github.com/aws/aws-sdk-go-v2/service/support v1.15.0
-	github.com/aws/aws-sdk-go-v2/service/timestreamwrite v1.16.6
+	github.com/aws/aws-sdk-go-v2/service/timestreamwrite v1.17.0
 	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.9.11
 	github.com/aws/aws-sdk-go-v2/service/waf v1.12.10
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.13.13
