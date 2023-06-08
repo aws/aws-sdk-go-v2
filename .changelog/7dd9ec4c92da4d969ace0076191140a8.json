@@ -1,0 +1,8 @@
+{
+    "id": "7dd9ec4c-92da-4d96-9ace-0076191140a8",
+    "type": "feature",
+    "description": "Initial release of AWS Payment Cryptography Control Plane service for creating and managing cryptographic keys used during card payment processing.",
+    "modules": [
+        "service/paymentcryptography"
+    ]
+}

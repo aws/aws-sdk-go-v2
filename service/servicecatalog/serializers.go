@@ -6573,6 +6573,11 @@ func awsAwsjson11_serializeOpDocumentDescribeProvisioningArtifactInput(v *Descri
 		ok.String(*v.AcceptLanguage)
 	}
 
+	if v.IncludeProvisioningArtifactParameters {
+		ok := object.Key("IncludeProvisioningArtifactParameters")
+		ok.Boolean(v.IncludeProvisioningArtifactParameters)
+	}
+
 	if v.ProductId != nil {
 		ok := object.Key("ProductId")
 		ok.String(*v.ProductId)

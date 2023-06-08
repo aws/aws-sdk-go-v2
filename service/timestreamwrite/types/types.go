@@ -335,7 +335,8 @@ type MeasureValue struct {
 	// This member is required.
 	Type MeasureValueType
 
-	// The value for the MeasureValue.
+	// The value for the MeasureValue. For information, see Data types (https://docs.aws.amazon.com/timestream/latest/developerguide/writes.html#writes.data-types)
+	// .
 	//
 	// This member is required.
 	Value *string
@@ -394,6 +395,29 @@ type MultiMeasureMappings struct {
 	noSmithyDocumentSerde
 }
 
+// An attribute used in partitioning data in a table. A dimension key partitions
+// data using the values of the dimension specified by the dimension-name as
+// partition key, while a measure key partitions data using measure names (values
+// of the 'measure_name' column).
+type PartitionKey struct {
+
+	// The type of the partition key. Options are DIMENSION (dimension key) and
+	// MEASURE (measure key).
+	//
+	// This member is required.
+	Type PartitionKeyType
+
+	// The level of enforcement for the specification of a dimension key in ingested
+	// records. Options are REQUIRED (dimension key must be specified) and OPTIONAL
+	// (dimension key does not have to be specified).
+	EnforcementInRecord PartitionKeyEnforcementLevel
+
+	// The name of the attribute used for a dimension key.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
 // Represents a time-series data point being written into Timestream. Each record
 // contains an array of dimensions. Dimensions represent the metadata attributes of
 // a time-series data point, such as the instance name or Availability Zone of an
@@ -421,7 +445,8 @@ type Record struct {
 	MeasureValue *string
 
 	// Contains the data type of the measure value for the time-series data point.
-	// Default type is DOUBLE .
+	// Default type is DOUBLE . For more information, see Data types (https://docs.aws.amazon.com/timestream/latest/developerguide/writes.html#writes.data-types)
+	// .
 	MeasureValueType MeasureValueType
 
 	// Contains the list of MeasureValue for time-series data points. This is only
@@ -574,6 +599,19 @@ type S3Configuration struct {
 	noSmithyDocumentSerde
 }
 
+// A Schema specifies the expected data model of the table.
+type Schema struct {
+
+	// A non-empty list of partition keys defining the attributes used to partition
+	// the table data. The order of the list determines the partition hierarchy. The
+	// name and type of each partition key as well as the partition key order cannot be
+	// changed after the table is created. However, the enforcement level of each
+	// partition key can be changed.
+	CompositePartitionKey []PartitionKey
+
+	noSmithyDocumentSerde
+}
+
 // Represents a database table in Timestream. Tables contain one or more related
 // time series. You can modify the retention duration of the memory store and the
 // magnetic store for a table.
@@ -596,6 +634,9 @@ type Table struct {
 
 	// The retention duration for the memory store and magnetic store.
 	RetentionProperties *RetentionProperties
+
+	// The schema of the table.
+	Schema *Schema
 
 	// The name of the Timestream table.
 	TableName *string

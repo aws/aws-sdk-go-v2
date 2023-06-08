@@ -1449,6 +1449,41 @@ func awsAwsjson10_serializeDocumentMultiMeasureMappings(v *types.MultiMeasureMap
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentPartitionKey(v *types.PartitionKey, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.EnforcementInRecord) > 0 {
+		ok := object.Key("EnforcementInRecord")
+		ok.String(string(v.EnforcementInRecord))
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentPartitionKeyList(v []types.PartitionKey, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson10_serializeDocumentPartitionKey(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentRecord(v *types.Record, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1598,6 +1633,20 @@ func awsAwsjson10_serializeDocumentS3Configuration(v *types.S3Configuration, val
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentSchema(v *types.Schema, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CompositePartitionKey != nil {
+		ok := object.Key("CompositePartitionKey")
+		if err := awsAwsjson10_serializeDocumentPartitionKeyList(v.CompositePartitionKey, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentTag(v *types.Tag, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1730,6 +1779,13 @@ func awsAwsjson10_serializeOpDocumentCreateTableInput(v *CreateTableInput, value
 	if v.RetentionProperties != nil {
 		ok := object.Key("RetentionProperties")
 		if err := awsAwsjson10_serializeDocumentRetentionProperties(v.RetentionProperties, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Schema != nil {
+		ok := object.Key("Schema")
+		if err := awsAwsjson10_serializeDocumentSchema(v.Schema, ok); err != nil {
 			return err
 		}
 	}
@@ -1985,6 +2041,13 @@ func awsAwsjson10_serializeOpDocumentUpdateTableInput(v *UpdateTableInput, value
 	if v.RetentionProperties != nil {
 		ok := object.Key("RetentionProperties")
 		if err := awsAwsjson10_serializeDocumentRetentionProperties(v.RetentionProperties, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Schema != nil {
+		ok := object.Key("Schema")
+		if err := awsAwsjson10_serializeDocumentSchema(v.Schema, ok); err != nil {
 			return err
 		}
 	}

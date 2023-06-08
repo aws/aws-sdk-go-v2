@@ -234,6 +234,7 @@ type ICD10CMRelationshipType string
 const (
 	ICD10CMRelationshipTypeOverlap         ICD10CMRelationshipType = "OVERLAP"
 	ICD10CMRelationshipTypeSystemOrganSite ICD10CMRelationshipType = "SYSTEM_ORGAN_SITE"
+	ICD10CMRelationshipTypeQuality         ICD10CMRelationshipType = "QUALITY"
 )
 
 // Values returns all known values for ICD10CMRelationshipType. Note that this can
@@ -243,6 +244,7 @@ func (ICD10CMRelationshipType) Values() []ICD10CMRelationshipType {
 	return []ICD10CMRelationshipType{
 		"OVERLAP",
 		"SYSTEM_ORGAN_SITE",
+		"QUALITY",
 	}
 }
 
@@ -342,6 +344,8 @@ const (
 	RelationshipTypeDirection       RelationshipType = "DIRECTION"
 	RelationshipTypeSystemOrganSite RelationshipType = "SYSTEM_ORGAN_SITE"
 	RelationshipTypeAmount          RelationshipType = "AMOUNT"
+	RelationshipTypeUsage           RelationshipType = "USAGE"
+	RelationshipTypeQuality         RelationshipType = "QUALITY"
 )
 
 // Values returns all known values for RelationshipType. Note that this can be
@@ -369,6 +373,8 @@ func (RelationshipType) Values() []RelationshipType {
 		"DIRECTION",
 		"SYSTEM_ORGAN_SITE",
 		"AMOUNT",
+		"USAGE",
+		"QUALITY",
 	}
 }
 
@@ -438,7 +444,8 @@ type RxNormTraitName string
 
 // Enum values for RxNormTraitName
 const (
-	RxNormTraitNameNegation RxNormTraitName = "NEGATION"
+	RxNormTraitNameNegation    RxNormTraitName = "NEGATION"
+	RxNormTraitNamePastHistory RxNormTraitName = "PAST_HISTORY"
 )
 
 // Values returns all known values for RxNormTraitName. Note that this can be
@@ -447,6 +454,7 @@ const (
 func (RxNormTraitName) Values() []RxNormTraitName {
 	return []RxNormTraitName{
 		"NEGATION",
+		"PAST_HISTORY",
 	}
 }
 
@@ -528,6 +536,7 @@ const (
 	SNOMEDCTRelationshipTypeTestUnits       SNOMEDCTRelationshipType = "TEST_UNITS"
 	SNOMEDCTRelationshipTypeDirection       SNOMEDCTRelationshipType = "DIRECTION"
 	SNOMEDCTRelationshipTypeSystemOrganSite SNOMEDCTRelationshipType = "SYSTEM_ORGAN_SITE"
+	SNOMEDCTRelationshipTypeTestUnit        SNOMEDCTRelationshipType = "TEST_UNIT"
 )
 
 // Values returns all known values for SNOMEDCTRelationshipType. Note that this
@@ -541,6 +550,7 @@ func (SNOMEDCTRelationshipType) Values() []SNOMEDCTRelationshipType {
 		"TEST_UNITS",
 		"DIRECTION",
 		"SYSTEM_ORGAN_SITE",
+		"TEST_UNIT",
 	}
 }
 

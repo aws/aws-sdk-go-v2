@@ -4220,6 +4220,98 @@ func awsAwsjson10_deserializeDocumentMultiMeasureMappings(v **types.MultiMeasure
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentPartitionKey(v **types.PartitionKey, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PartitionKey
+	if *v == nil {
+		sv = &types.PartitionKey{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "EnforcementInRecord":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PartitionKeyEnforcementLevel to be of type string, got %T instead", value)
+				}
+				sv.EnforcementInRecord = types.PartitionKeyEnforcementLevel(jtv)
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SchemaName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PartitionKeyType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.PartitionKeyType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentPartitionKeyList(v *[]types.PartitionKey, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.PartitionKey
+	if *v == nil {
+		cv = []types.PartitionKey{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.PartitionKey
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentPartitionKey(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentRecordsIngested(v **types.RecordsIngested, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4702,6 +4794,42 @@ func awsAwsjson10_deserializeDocumentS3Configuration(v **types.S3Configuration, 
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentSchema(v **types.Schema, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Schema
+	if *v == nil {
+		sv = &types.Schema{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CompositePartitionKey":
+			if err := awsAwsjson10_deserializeDocumentPartitionKeyList(&sv.CompositePartitionKey, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentServiceQuotaExceededException(v **types.ServiceQuotaExceededException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4821,6 +4949,11 @@ func awsAwsjson10_deserializeDocumentTable(v **types.Table, value interface{}) e
 
 		case "RetentionProperties":
 			if err := awsAwsjson10_deserializeDocumentRetentionProperties(&sv.RetentionProperties, value); err != nil {
+				return err
+			}
+
+		case "Schema":
+			if err := awsAwsjson10_deserializeDocumentSchema(&sv.Schema, value); err != nil {
 				return err
 			}
 

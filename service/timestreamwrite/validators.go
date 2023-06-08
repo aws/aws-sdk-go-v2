@@ -625,6 +625,38 @@ func validateMultiMeasureMappings(v *types.MultiMeasureMappings) error {
 	}
 }
 
+func validatePartitionKey(v *types.PartitionKey) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PartitionKey"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePartitionKeyList(v []types.PartitionKey) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PartitionKeyList"}
+	for i := range v {
+		if err := validatePartitionKey(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRecord(v *types.Record) error {
 	if v == nil {
 		return nil
@@ -701,6 +733,23 @@ func validateRetentionProperties(v *types.RetentionProperties) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RetentionProperties"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSchema(v *types.Schema) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Schema"}
+	if v.CompositePartitionKey != nil {
+		if err := validatePartitionKeyList(v.CompositePartitionKey); err != nil {
+			invalidParams.AddNested("CompositePartitionKey", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -824,6 +873,11 @@ func validateOpCreateTableInput(v *CreateTableInput) error {
 	if v.MagneticStoreWriteProperties != nil {
 		if err := validateMagneticStoreWriteProperties(v.MagneticStoreWriteProperties); err != nil {
 			invalidParams.AddNested("MagneticStoreWriteProperties", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Schema != nil {
+		if err := validateSchema(v.Schema); err != nil {
+			invalidParams.AddNested("Schema", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1021,6 +1075,11 @@ func validateOpUpdateTableInput(v *UpdateTableInput) error {
 	if v.MagneticStoreWriteProperties != nil {
 		if err := validateMagneticStoreWriteProperties(v.MagneticStoreWriteProperties); err != nil {
 			invalidParams.AddNested("MagneticStoreWriteProperties", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Schema != nil {
+		if err := validateSchema(v.Schema); err != nil {
+			invalidParams.AddNested("Schema", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

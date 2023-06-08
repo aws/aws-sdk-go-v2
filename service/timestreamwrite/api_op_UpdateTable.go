@@ -54,6 +54,9 @@ type UpdateTableInput struct {
 	// The retention duration of the memory store and the magnetic store.
 	RetentionProperties *types.RetentionProperties
 
+	// The schema of the table.
+	Schema *types.Schema
+
 	noSmithyDocumentSerde
 }
 

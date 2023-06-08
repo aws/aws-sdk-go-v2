@@ -35,6 +35,10 @@ type DescribeProvisioningArtifactInput struct {
 	//   - zh - Chinese
 	AcceptLanguage *string
 
+	// Indicates if the API call response does or does not include additional details
+	// about the provisioning parameters.
+	IncludeProvisioningArtifactParameters bool
+
 	// The product identifier.
 	ProductId *string
 
@@ -60,6 +64,9 @@ type DescribeProvisioningArtifactOutput struct {
 
 	// Information about the provisioning artifact.
 	ProvisioningArtifactDetail *types.ProvisioningArtifactDetail
+
+	// Information about the parameters used to provision the product.
+	ProvisioningArtifactParameters []types.ProvisioningArtifactParameter
 
 	// The status of the current request.
 	Status types.Status

@@ -3860,6 +3860,13 @@ func awsAwsjson11_serializeDocumentEngineConfiguration(v *types.EngineConfigurat
 		ok.Integer(v.MaxConcurrentDpus)
 	}
 
+	if v.SparkProperties != nil {
+		ok := object.Key("SparkProperties")
+		if err := awsAwsjson11_serializeDocumentParametersMap(v.SparkProperties, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 

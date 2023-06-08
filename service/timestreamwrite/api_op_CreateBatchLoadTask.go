@@ -17,8 +17,9 @@ import (
 // a CSV source in an S3 location and writes to a Timestream table. A mapping from
 // source to target is defined in a batch load task. Errors and events are written
 // to a report at an S3 location. For the report, if the KMS key is not specified,
-// the batch load task will be encrypted with a Timestream managed KMS key located
-// in your account. For more information, see Amazon Web Services managed keys (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk)
+// the report will be encrypted with an S3 managed key when SSE_S3 is the option.
+// Otherwise an error is thrown. For more information, see Amazon Web Services
+// managed keys (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk)
 // . Service quotas apply (https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html)
 // . For details, see code sample (https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.create-batch-load.html)
 // .

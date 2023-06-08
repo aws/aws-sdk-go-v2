@@ -86,6 +86,43 @@ func (MeasureValueType) Values() []MeasureValueType {
 	}
 }
 
+type PartitionKeyEnforcementLevel string
+
+// Enum values for PartitionKeyEnforcementLevel
+const (
+	PartitionKeyEnforcementLevelRequired PartitionKeyEnforcementLevel = "REQUIRED"
+	PartitionKeyEnforcementLevelOptional PartitionKeyEnforcementLevel = "OPTIONAL"
+)
+
+// Values returns all known values for PartitionKeyEnforcementLevel. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (PartitionKeyEnforcementLevel) Values() []PartitionKeyEnforcementLevel {
+	return []PartitionKeyEnforcementLevel{
+		"REQUIRED",
+		"OPTIONAL",
+	}
+}
+
+type PartitionKeyType string
+
+// Enum values for PartitionKeyType
+const (
+	PartitionKeyTypeDimension PartitionKeyType = "DIMENSION"
+	PartitionKeyTypeMeasure   PartitionKeyType = "MEASURE"
+)
+
+// Values returns all known values for PartitionKeyType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PartitionKeyType) Values() []PartitionKeyType {
+	return []PartitionKeyType{
+		"DIMENSION",
+		"MEASURE",
+	}
+}
+
 type S3EncryptionOption string
 
 // Enum values for S3EncryptionOption

@@ -295,6 +295,7 @@ type ColumnInfo struct {
 }
 
 // Specifies the KMS key that is used to encrypt the user's data stores in Athena.
+// This setting does not apply to Athena SQL workgroups.
 type CustomerContentEncryptionConfiguration struct {
 
 	// The KMS key that is used to encrypt the user's data stores in Athena.
@@ -440,6 +441,10 @@ type EngineConfiguration struct {
 	// unit of compute that a notebook session can request from Athena. The default is
 	// 1.
 	DefaultExecutorDpuSize *int32
+
+	// Specifies custom jar files and Spark properties for use cases like cluster
+	// encryption, table formats, and general Spark tuning.
+	SparkProperties map[string]string
 
 	noSmithyDocumentSerde
 }
@@ -1319,6 +1324,7 @@ type WorkGroupConfiguration struct {
 	BytesScannedCutoffPerQuery *int64
 
 	// Specifies the KMS key that is used to encrypt the user's data stores in Athena.
+	// This setting does not apply to Athena SQL workgroups.
 	CustomerContentEncryptionConfiguration *CustomerContentEncryptionConfiguration
 
 	// Enforces a minimal level of encryption for the workgroup for query and
@@ -1386,6 +1392,7 @@ type WorkGroupConfigurationUpdates struct {
 	BytesScannedCutoffPerQuery *int64
 
 	// Specifies the KMS key that is used to encrypt the user's data stores in Athena.
+	// This setting does not apply to Athena SQL workgroups.
 	CustomerContentEncryptionConfiguration *CustomerContentEncryptionConfiguration
 
 	// Enforces a minimal level of encryption for the workgroup for query and
@@ -1422,7 +1429,8 @@ type WorkGroupConfigurationUpdates struct {
 	// WorkGroupConfiguration$BytesScannedCutoffPerQuery
 	RemoveBytesScannedCutoffPerQuery *bool
 
-	// Removes content encryption configuration for a workgroup.
+	// Removes content encryption configuration from an Apache Spark-enabled Athena
+	// workgroup.
 	RemoveCustomerContentEncryptionConfiguration *bool
 
 	// If set to true , allows members assigned to a workgroup to specify Amazon S3

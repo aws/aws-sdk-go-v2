@@ -17838,6 +17838,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeProvisioningArtifactOutput(v **De
 				return err
 			}
 
+		case "ProvisioningArtifactParameters":
+			if err := awsAwsjson11_deserializeDocumentProvisioningArtifactParameters(&sv.ProvisioningArtifactParameters, value); err != nil {
+				return err
+			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)

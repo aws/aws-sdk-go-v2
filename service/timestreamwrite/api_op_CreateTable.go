@@ -55,6 +55,9 @@ type CreateTableInput struct {
 	// and the magnetic store.
 	RetentionProperties *types.RetentionProperties
 
+	// The schema of the table.
+	Schema *types.Schema
+
 	// A list of key-value pairs to label the table.
 	Tags []types.Tag
 
