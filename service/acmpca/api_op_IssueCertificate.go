@@ -60,7 +60,7 @@ type IssueCertificateInput struct {
 	// The name of the algorithm that will be used to sign the certificate to be
 	// issued. This parameter should not be confused with the SigningAlgorithm
 	// parameter used to sign a CSR in the CreateCertificateAuthority action. The
-	// specified signing algorithm family (RSA or ECDSA) much match the algorithm
+	// specified signing algorithm family (RSA or ECDSA) must match the algorithm
 	// family of the CA's secret key.
 	//
 	// This member is required.
@@ -120,7 +120,7 @@ type IssueCertificateInput struct {
 	// used to customize the “Not Before” value. Unlike the Validity parameter, the
 	// ValidityNotBefore parameter is optional. The ValidityNotBefore value is
 	// expressed as an explicit date and time, using the Validity type value ABSOLUTE .
-	// For more information, see Validity (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_Validity.html)
+	// For more information, see Validity (https://docs.aws.amazon.com/privateca/latest/APIReference/API_Validity.html)
 	// in this API reference and Validity (https://datatracker.ietf.org/doc/html/rfc5280#section-4.1.2.5)
 	// in RFC 5280.
 	ValidityNotBefore *types.Validity

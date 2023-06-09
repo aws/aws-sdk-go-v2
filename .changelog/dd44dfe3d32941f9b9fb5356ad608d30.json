@@ -1,0 +1,8 @@
+{
+    "id": "dd44dfe3-d329-41f9-b9fb-5356ad608d30",
+    "type": "feature",
+    "description": "This release adds search APIs for Prompts, Quick Connects and Hours of Operations, which can be used to search for those resources within a Connect Instance.",
+    "modules": [
+        "service/connect"
+    ]
+}

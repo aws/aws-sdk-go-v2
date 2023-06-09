@@ -1698,6 +1698,35 @@ type HoursOfOperationConfig struct {
 	noSmithyDocumentSerde
 }
 
+// The search criteria to be used to return hours of operations.
+type HoursOfOperationSearchCriteria struct {
+
+	// A list of conditions which would be applied together with an AND condition.
+	AndConditions []HoursOfOperationSearchCriteria
+
+	// A list of conditions which would be applied together with an OR condition.
+	OrConditions []HoursOfOperationSearchCriteria
+
+	// A leaf node condition which can be used to specify a string condition. The
+	// currently supported values for FieldName are name , description , timezone , and
+	// resourceID .
+	StringCondition *StringCondition
+
+	noSmithyDocumentSerde
+}
+
+// Filters to be applied to search results.
+type HoursOfOperationSearchFilter struct {
+
+	// An object that can be used to specify Tag conditions inside the SearchFilter .
+	// This accepts an OR of AND (List of List) input where:
+	//   - Top level list specifies conditions that need to be applied with OR operator
+	//   - Inner list specifies conditions that need to be applied with AND operator.
+	TagFilter *ControlPlaneTagFilter
+
+	noSmithyDocumentSerde
+}
+
 // Contains summary information about hours of operation for a contact center.
 type HoursOfOperationSummary struct {
 
@@ -2328,7 +2357,7 @@ type ProblemDetail struct {
 // Information about a prompt.
 type Prompt struct {
 
-	// A description for the prompt.
+	// The description of the prompt.
 	Description *string
 
 	// The name of the prompt.
@@ -2343,6 +2372,35 @@ type Prompt struct {
 	// The tags used to organize, track, or control access for this resource. For
 	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// The search criteria to be used to return prompts.
+type PromptSearchCriteria struct {
+
+	// A list of conditions which would be applied together with an AND condition.
+	AndConditions []PromptSearchCriteria
+
+	// A list of conditions which would be applied together with an OR condition.
+	OrConditions []PromptSearchCriteria
+
+	// A leaf node condition which can be used to specify a string condition. The
+	// currently supported values for FieldName are name , description , and resourceID
+	// .
+	StringCondition *StringCondition
+
+	noSmithyDocumentSerde
+}
+
+// Filters to be applied to search results.
+type PromptSearchFilter struct {
+
+	// An object that can be used to specify Tag conditions inside the SearchFilter .
+	// This accepts an OR of AND (List of List) input where:
+	//   - Top level list specifies conditions that need to be applied with OR operator
+	//   - Inner list specifies conditions that need to be applied with AND operator.
+	TagFilter *ControlPlaneTagFilter
 
 	noSmithyDocumentSerde
 }
@@ -2475,7 +2533,8 @@ type QueueSearchCriteria struct {
 	QueueTypeCondition SearchableQueueType
 
 	// A leaf node condition which can be used to specify a string condition. The
-	// currently supported value for FieldName : name
+	// currently supported values for FieldName are name , description , and resourceID
+	// .
 	StringCondition *StringCondition
 
 	noSmithyDocumentSerde
@@ -2555,6 +2614,35 @@ type QuickConnectConfig struct {
 
 	// The user configuration. This is required only if QuickConnectType is USER.
 	UserConfig *UserQuickConnectConfig
+
+	noSmithyDocumentSerde
+}
+
+// The search criteria to be used to return quick connects.
+type QuickConnectSearchCriteria struct {
+
+	// A list of conditions which would be applied together with an AND condition.
+	AndConditions []QuickConnectSearchCriteria
+
+	// A list of conditions which would be applied together with an OR condition.
+	OrConditions []QuickConnectSearchCriteria
+
+	// A leaf node condition which can be used to specify a string condition. The
+	// currently supported values for FieldName are name , description , and resourceID
+	// .
+	StringCondition *StringCondition
+
+	noSmithyDocumentSerde
+}
+
+// Filters to be applied to search results.
+type QuickConnectSearchFilter struct {
+
+	// An object that can be used to specify Tag conditions inside the SearchFilter .
+	// This accepts an OR of AND (List of List) input where:
+	//   - Top level list specifies conditions that need to be applied with OR operator
+	//   - Inner list specifies conditions that need to be applied with AND operator.
+	TagFilter *ControlPlaneTagFilter
 
 	noSmithyDocumentSerde
 }
@@ -2833,7 +2921,8 @@ type RoutingProfileSearchCriteria struct {
 	OrConditions []RoutingProfileSearchCriteria
 
 	// A leaf node condition which can be used to specify a string condition. The
-	// currently supported value for FieldName : name
+	// currently supported values for FieldName are name , description , and resourceID
+	// .
 	StringCondition *StringCondition
 
 	noSmithyDocumentSerde
@@ -3093,8 +3182,7 @@ type SecurityProfileSearchCriteria struct {
 	// A list of conditions which would be applied together with an OR condition.
 	OrConditions []SecurityProfileSearchCriteria
 
-	// A leaf node condition which can be used to specify a string condition. The
-	// currently supported value for FieldName : name
+	// A leaf node condition which can be used to specify a string condition.
 	StringCondition *StringCondition
 
 	noSmithyDocumentSerde
@@ -3210,8 +3298,7 @@ type SingleSelectQuestionRuleCategoryAutomation struct {
 	noSmithyDocumentSerde
 }
 
-// A leaf node condition which can be used to specify a string condition. The
-// currently supported value for FieldName : name
+// A leaf node condition which can be used to specify a string condition.
 type StringCondition struct {
 
 	// The type of comparison to be made when evaluating the string condition.
@@ -3732,7 +3819,9 @@ type UserSearchCriteria struct {
 	// A list of conditions which would be applied together with an OR condition.
 	OrConditions []UserSearchCriteria
 
-	// A leaf node condition which can be used to specify a string condition.
+	// A leaf node condition which can be used to specify a string condition. The
+	// currently supported values for FieldName are name , description , and resourceID
+	// .
 	StringCondition *StringCondition
 
 	noSmithyDocumentSerde

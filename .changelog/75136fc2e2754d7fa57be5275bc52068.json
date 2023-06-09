@@ -1,0 +1,8 @@
+{
+    "id": "75136fc2-e275-4d7f-a57b-e5275bc52068",
+    "type": "documentation",
+    "description": "Document-only update to refresh CLI  documentation for AWS Private CA. No change to the service.",
+    "modules": [
+        "service/acmpca"
+    ]
+}
