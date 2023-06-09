@@ -962,7 +962,16 @@
                     "target": "com.amazonaws.connect#SearchAvailablePhoneNumbers"
                 },
                 {
+                    "target": "com.amazonaws.connect#SearchHoursOfOperations"
+                },
+                {
+                    "target": "com.amazonaws.connect#SearchPrompts"
+                },
+                {
                     "target": "com.amazonaws.connect#SearchQueues"
+                },
+                {
+                    "target": "com.amazonaws.connect#SearchQuickConnects"
                 },
                 {
                     "target": "com.amazonaws.connect#SearchRoutingProfiles"
@@ -13190,8 +13199,57 @@
         "com.amazonaws.connect#HoursOfOperationId": {
             "type": "string"
         },
+        "com.amazonaws.connect#HoursOfOperationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#HoursOfOperation"
+            }
+        },
         "com.amazonaws.connect#HoursOfOperationName": {
             "type": "string"
+        },
+        "com.amazonaws.connect#HoursOfOperationSearchConditionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#HoursOfOperationSearchCriteria"
+            }
+        },
+        "com.amazonaws.connect#HoursOfOperationSearchCriteria": {
+            "type": "structure",
+            "members": {
+                "OrConditions": {
+                    "target": "com.amazonaws.connect#HoursOfOperationSearchConditionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of conditions which would be applied together with an OR condition.</p>"
+                    }
+                },
+                "AndConditions": {
+                    "target": "com.amazonaws.connect#HoursOfOperationSearchConditionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of conditions which would be applied together with an AND condition.</p>"
+                    }
+                },
+                "StringCondition": {
+                    "target": "com.amazonaws.connect#StringCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A leaf node condition which can be used to specify a string condition.</p>\n         <note>\n            <p>The currently supported values for <code>FieldName</code> are <code>name</code>, \n    <code>description</code>, <code>timezone</code>, and <code>resourceID</code>.</p>\n         </note>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The search criteria to be used to return hours of operations.</p>"
+            }
+        },
+        "com.amazonaws.connect#HoursOfOperationSearchFilter": {
+            "type": "structure",
+            "members": {
+                "TagFilter": {
+                    "target": "com.amazonaws.connect#ControlPlaneTagFilter"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Filters to be applied to search results.</p>"
+            }
         },
         "com.amazonaws.connect#HoursOfOperationSummary": {
             "type": "structure",
@@ -19963,7 +20021,7 @@
                 "Description": {
                     "target": "com.amazonaws.connect#PromptDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>A description for the prompt.</p>"
+                        "smithy.api#documentation": "<p>The description of the prompt.</p>"
                     }
                 },
                 "Tags": {
@@ -19995,6 +20053,12 @@
                 }
             }
         },
+        "com.amazonaws.connect#PromptList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#Prompt"
+            }
+        },
         "com.amazonaws.connect#PromptName": {
             "type": "string",
             "traits": {
@@ -20011,6 +20075,49 @@
                     "min": 1,
                     "max": 2000
                 }
+            }
+        },
+        "com.amazonaws.connect#PromptSearchConditionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#PromptSearchCriteria"
+            }
+        },
+        "com.amazonaws.connect#PromptSearchCriteria": {
+            "type": "structure",
+            "members": {
+                "OrConditions": {
+                    "target": "com.amazonaws.connect#PromptSearchConditionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of conditions which would be applied together with an OR condition.</p>"
+                    }
+                },
+                "AndConditions": {
+                    "target": "com.amazonaws.connect#PromptSearchConditionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of conditions which would be applied together with an AND condition.</p>"
+                    }
+                },
+                "StringCondition": {
+                    "target": "com.amazonaws.connect#StringCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A leaf node condition which can be used to specify a string condition.</p>\n         <note>\n            <p>The currently supported values for <code>FieldName</code> are <code>name</code>, \n    <code>description</code>, and <code>resourceID</code>.</p>\n         </note>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The search criteria to be used to return prompts.</p>"
+            }
+        },
+        "com.amazonaws.connect#PromptSearchFilter": {
+            "type": "structure",
+            "members": {
+                "TagFilter": {
+                    "target": "com.amazonaws.connect#ControlPlaneTagFilter"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Filters to be applied to search results.</p>"
             }
         },
         "com.amazonaws.connect#PromptSummary": {
@@ -20392,7 +20499,10 @@
                     }
                 },
                 "StringCondition": {
-                    "target": "com.amazonaws.connect#StringCondition"
+                    "target": "com.amazonaws.connect#StringCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A leaf node condition which can be used to specify a string condition.</p>\n         <note>\n            <p>The currently supported values for <code>FieldName</code> are <code>name</code>, \n    <code>description</code>, and <code>resourceID</code>.</p>\n         </note>"
+                    }
                 },
                 "QueueTypeCondition": {
                     "target": "com.amazonaws.connect#SearchableQueueType",
@@ -20614,6 +20724,55 @@
                     "min": 1,
                     "max": 127
                 }
+            }
+        },
+        "com.amazonaws.connect#QuickConnectSearchConditionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#QuickConnectSearchCriteria"
+            }
+        },
+        "com.amazonaws.connect#QuickConnectSearchCriteria": {
+            "type": "structure",
+            "members": {
+                "OrConditions": {
+                    "target": "com.amazonaws.connect#QuickConnectSearchConditionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of conditions which would be applied together with an OR condition.</p>"
+                    }
+                },
+                "AndConditions": {
+                    "target": "com.amazonaws.connect#QuickConnectSearchConditionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of conditions which would be applied together with an AND condition.</p>"
+                    }
+                },
+                "StringCondition": {
+                    "target": "com.amazonaws.connect#StringCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A leaf node condition which can be used to specify a string condition.</p>\n         <note>\n            <p>The currently supported values for <code>FieldName</code> are <code>name</code>, \n    <code>description</code>, and <code>resourceID</code>.</p>\n         </note>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The search criteria to be used to return quick connects.</p>"
+            }
+        },
+        "com.amazonaws.connect#QuickConnectSearchFilter": {
+            "type": "structure",
+            "members": {
+                "TagFilter": {
+                    "target": "com.amazonaws.connect#ControlPlaneTagFilter"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Filters to be applied to search results.</p>"
+            }
+        },
+        "com.amazonaws.connect#QuickConnectSearchSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#QuickConnect"
             }
         },
         "com.amazonaws.connect#QuickConnectSummary": {
@@ -21553,7 +21712,10 @@
                     }
                 },
                 "StringCondition": {
-                    "target": "com.amazonaws.connect#StringCondition"
+                    "target": "com.amazonaws.connect#StringCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A leaf node condition which can be used to specify a string condition.</p>\n         <note>\n            <p>The currently supported values for <code>FieldName</code> are <code>name</code>, \n    <code>description</code>, and <code>resourceID</code>.</p>\n         </note>"
+                    }
                 }
             },
             "traits": {
@@ -22017,6 +22179,218 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.connect#SearchHoursOfOperations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#SearchHoursOfOperationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#SearchHoursOfOperationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Searches the hours of operation in an Amazon Connect instance, with optional filtering.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/search-hours-of-operations",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "HoursOfOperations",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.connect#SearchHoursOfOperationsRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken2500",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous \nresponse in the next request to retrieve the next set of results.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.connect#MaxResult100",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>"
+                    }
+                },
+                "SearchFilter": {
+                    "target": "com.amazonaws.connect#HoursOfOperationSearchFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters to be applied to search results.</p>"
+                    }
+                },
+                "SearchCriteria": {
+                    "target": "com.amazonaws.connect#HoursOfOperationSearchCriteria",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The search criteria to be used to return hours of operations.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#SearchHoursOfOperationsResponse": {
+            "type": "structure",
+            "members": {
+                "HoursOfOperations": {
+                    "target": "com.amazonaws.connect#HoursOfOperationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the hours of operations.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken2500",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
+                    }
+                },
+                "ApproximateTotalCount": {
+                    "target": "com.amazonaws.connect#ApproximateTotalCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of hours of operations which matched your search query.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connect#SearchPrompts": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#SearchPromptsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#SearchPromptsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Searches prompts in an Amazon Connect instance, with optional filtering.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/search-prompts",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Prompts",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.connect#SearchPromptsRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken2500",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous \nresponse in the next request to retrieve the next set of results.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.connect#MaxResult100",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>"
+                    }
+                },
+                "SearchFilter": {
+                    "target": "com.amazonaws.connect#PromptSearchFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters to be applied to search results.</p>"
+                    }
+                },
+                "SearchCriteria": {
+                    "target": "com.amazonaws.connect#PromptSearchCriteria",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The search criteria to be used to return prompts.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#SearchPromptsResponse": {
+            "type": "structure",
+            "members": {
+                "Prompts": {
+                    "target": "com.amazonaws.connect#PromptList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the prompts.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken2500",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
+                    }
+                },
+                "ApproximateTotalCount": {
+                    "target": "com.amazonaws.connect#ApproximateTotalCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of quick connects which matched your search query.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.connect#SearchQueues": {
             "type": "operation",
             "input": {
@@ -22116,6 +22490,112 @@
                     "target": "com.amazonaws.connect#ApproximateTotalCount",
                     "traits": {
                         "smithy.api#documentation": "<p>The total number of queues which matched your search query.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connect#SearchQuickConnects": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#SearchQuickConnectsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#SearchQuickConnectsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Searches quick connects in an Amazon Connect instance, with optional filtering.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/search-quick-connects",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "QuickConnects",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.connect#SearchQuickConnectsRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken2500",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous \nresponse in the next request to retrieve the next set of results.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.connect#MaxResult100",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>"
+                    }
+                },
+                "SearchFilter": {
+                    "target": "com.amazonaws.connect#QuickConnectSearchFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters to be applied to search results.</p>"
+                    }
+                },
+                "SearchCriteria": {
+                    "target": "com.amazonaws.connect#QuickConnectSearchCriteria",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The search criteria to be used to return quick connects.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#SearchQuickConnectsResponse": {
+            "type": "structure",
+            "members": {
+                "QuickConnects": {
+                    "target": "com.amazonaws.connect#QuickConnectSearchSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the quick connects.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken2500",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
+                    }
+                },
+                "ApproximateTotalCount": {
+                    "target": "com.amazonaws.connect#ApproximateTotalCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of quick connects which matched your search query.</p>"
                     }
                 }
             },
@@ -23944,7 +24424,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A leaf node condition which can be used to specify a string condition. </p>\n         <note>\n            <p>The currently supported value for <code>FieldName</code>: <code>name</code>\n            </p>\n         </note>"
+                "smithy.api#documentation": "<p>A leaf node condition which can be used to specify a string condition. </p>"
             }
         },
         "com.amazonaws.connect#StringReference": {
@@ -28712,7 +29192,7 @@
                 "StringCondition": {
                     "target": "com.amazonaws.connect#StringCondition",
                     "traits": {
-                        "smithy.api#documentation": "<p>A leaf node condition which can be used to specify a string condition.</p>"
+                        "smithy.api#documentation": "<p>A leaf node condition which can be used to specify a string condition.</p>\n         <note>\n            <p>The currently supported values for <code>FieldName</code> are <code>name</code>, \n   <code>description</code>, and <code>resourceID</code>.</p>\n         </note>"
                     }
                 },
                 "HierarchyGroupCondition": {
