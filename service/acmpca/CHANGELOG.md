@@ -1,3 +1,7 @@
+# v1.21.13 (2023-06-09)
+
+* **Documentation**: Document-only update to refresh CLI  documentation for AWS Private CA. No change to the service.
+
 # v1.21.12 (2023-05-04)
 
 * No change notes available for this release.

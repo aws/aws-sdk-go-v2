@@ -1,3 +1,11 @@
+# Release (2023-06-09)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/acmpca`: [v1.21.13](service/acmpca/CHANGELOG.md#v12113-2023-06-09)
+  * **Documentation**: Document-only update to refresh CLI  documentation for AWS Private CA. No change to the service.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.58.0](service/connect/CHANGELOG.md#v1580-2023-06-09)
+  * **Feature**: This release adds search APIs for Prompts, Quick Connects and Hours of Operations, which can be used to search for those resources within a Connect Instance.
+
 # Release (2023-06-08)
 
 ## Module Highlights

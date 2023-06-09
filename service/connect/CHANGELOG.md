@@ -1,3 +1,7 @@
+# v1.58.0 (2023-06-09)
+
+* **Feature**: This release adds search APIs for Prompts, Quick Connects and Hours of Operations, which can be used to search for those resources within a Connect Instance.
+
 # v1.57.1 (2023-06-06)
 
 * **Documentation**: GetMetricDataV2 API is now available in AWS GovCloud(US) region.
