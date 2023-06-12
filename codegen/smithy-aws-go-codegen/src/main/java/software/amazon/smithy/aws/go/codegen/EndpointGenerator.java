@@ -38,6 +38,7 @@ import software.amazon.smithy.go.codegen.MiddlewareIdentifier;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.TriConsumer;
+import software.amazon.smithy.go.codegen.endpoints.EndpointResolutionGenerator;
 import software.amazon.smithy.go.codegen.integration.ConfigField;
 import software.amazon.smithy.go.codegen.integration.ProtocolUtils;
 import software.amazon.smithy.model.Model;
@@ -617,7 +618,9 @@ public final class EndpointGenerator implements Runnable {
         writer.openBlock("func $L(o $P) {", "}", CLIENT_CONFIG_RESOLVER,
                 SymbolUtils.createPointableSymbolBuilder("Options").build(), () -> {
                     writer.openBlock("if o.EndpointResolver != nil {", "}", () -> writer.write("return"));
-                    writer.write("o.EndpointResolver = $L()", RESOLVER_CONSTRUCTOR_NAME);
+                    writer.openBlock("o.EndpointResolver = &$L{", "}", AwsEndpointResolverAdapterGenerator.COMPATIBLE_ADAPTER_TYPE, () -> writer.write(
+                        "$L: $L(),", EndpointResolutionGenerator.RESOLVER_INTERFACE_NAME, EndpointResolutionGenerator.NEW_RESOLVER_FUNC_NAME
+                    ));
                 });
 
         // Generate EndpointResolverFromURL helper
