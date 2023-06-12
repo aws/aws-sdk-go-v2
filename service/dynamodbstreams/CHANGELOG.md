@@ -1,3 +1,7 @@
+# v1.14.12 (2023-06-12)
+
+* **Documentation**: Documentation updates for DynamoDB Streams
+
 # v1.14.11 (2023-05-04)
 
 * No change notes available for this release.

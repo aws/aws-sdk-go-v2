@@ -1,3 +1,7 @@
+# v1.11.0 (2023-06-12)
+
+* **Feature**: AWS Amplify UIBuilder is launching Codegen UI, a new feature that enables you to generate your amplify uibuilder components and forms.
+
 # v1.10.4 (2023-05-04)
 
 * No change notes available for this release.

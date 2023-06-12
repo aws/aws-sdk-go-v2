@@ -1,3 +1,24 @@
+# Release (2023-06-12)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder`: [v1.11.0](service/amplifyuibuilder/CHANGELOG.md#v1110-2023-06-12)
+  * **Feature**: AWS Amplify UIBuilder is launching Codegen UI, a new feature that enables you to generate your amplify uibuilder components and forms.
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.19.8](service/dynamodb/CHANGELOG.md#v1198-2023-06-12)
+  * **Documentation**: Documentation updates for DynamoDB
+* `github.com/aws/aws-sdk-go-v2/service/dynamodbstreams`: [v1.14.12](service/dynamodbstreams/CHANGELOG.md#v11412-2023-06-12)
+  * **Documentation**: Documentation updates for DynamoDB Streams
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.29.0](service/fsx/CHANGELOG.md#v1290-2023-06-12)
+  * **Feature**: Amazon FSx for NetApp ONTAP now supports joining a storage virtual machine (SVM) to Active Directory after the SVM has been created.
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.18.0](service/opensearch/CHANGELOG.md#v1180-2023-06-12)
+  * **Feature**: This release adds support for SkipUnavailable connection property for cross cluster search
+* `github.com/aws/aws-sdk-go-v2/service/rekognition`: [v1.29.0](service/rekognition/CHANGELOG.md#v1290-2023-06-12)
+  * **Feature**: This release adds support for improved accuracy with user vector in Amazon Rekognition Face Search. Adds new APIs: AssociateFaces, CreateUser, DeleteUser, DisassociateFaces, ListUsers, SearchUsers, SearchUsersByImage. Also adds new face metadata that can be stored: user vector.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.84.0](service/sagemaker/CHANGELOG.md#v1840-2023-06-12)
+  * **Feature**: Sagemaker Neo now supports compilation for inferentia2 (ML_INF2) and Trainium1 (ML_TRN1) as available targets. With these devices, you can run your workloads at highest performance with lowest cost. inferentia2 (ML_INF2) is available in CMH and Trainium1 (ML_TRN1) is available in IAD currently
+
 # Release (2023-06-09)
 
 ## Module Highlights

@@ -1,3 +1,7 @@
+# v1.18.0 (2023-06-12)
+
+* **Feature**: This release adds support for SkipUnavailable connection property for cross cluster search
+
 # v1.17.0 (2023-05-04)
 
 * **Feature**: DescribeDomainNodes: A new API that provides configuration information for nodes part of the domain
