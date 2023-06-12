@@ -100,9 +100,8 @@ type Options struct {
 
 	// The service endpoint resolver.
 	//
-	// Deprecated: Deprecated: EndpointResolver is deprecated along with its
-	// corresponding With__ helper. See EndpointResolverV2 and corresponding With__
-	// helper
+	// Deprecated: EndpointResolver and WithEndpointResolver are deprecated. See
+	// EndpointResolverV2 and WithEndpointResolverV2
 	EndpointResolver EndpointResolver
 
 	// Resolves the endpoint used for a particular service. This should be used over
@@ -193,8 +192,8 @@ func WithAPIOptions(optFns ...func(*middleware.Stack) error) func(*Options) {
 	}
 }
 
-// Deprecated: EndpointResolver is deprecated along with its corresponding With__
-// helper. See EndpointResolverV2 and corresponding With__ helper
+// EndpointResolver and WithEndpointResolver are deprecated. See
+// EndpointResolverV2 and WithEndpointResolverV2
 func WithEndpointResolver(v EndpointResolver) func(*Options) {
 	return func(o *Options) {
 		o.EndpointResolver = v

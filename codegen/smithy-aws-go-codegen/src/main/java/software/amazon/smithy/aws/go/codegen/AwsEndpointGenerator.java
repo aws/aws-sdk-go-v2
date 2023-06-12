@@ -72,10 +72,11 @@ public final class AwsEndpointGenerator implements GoIntegration {
                                         .documentation(String.format("The service endpoint resolver."))
                                         .deprecated(String.format(
                                             """
-                                            Deprecated: %s is deprecated along with its corresponding With__ helper.
-                                            See %s and corresponding With__ helper
+                                            %s and With%s are deprecated. See %s and With%s
                                             """,
                                             EndpointGenerator.RESOLVER_INTERFACE_NAME,
+                                            EndpointGenerator.RESOLVER_INTERFACE_NAME,
+                                            EndpointResolutionGenerator.RESOLVER_INTERFACE_NAME,
                                             EndpointResolutionGenerator.RESOLVER_INTERFACE_NAME
                                         ))
                                         .withHelper(true)
