@@ -50,3 +50,4 @@ software.amazon.smithy.aws.go.codegen.customization.S3100Continue
 software.amazon.smithy.aws.go.codegen.customization.ApiGatewayExportsNullabilityExceptionIntegration
 software.amazon.smithy.aws.go.codegen.customization.LambdaRecursionDetection
 software.amazon.smithy.aws.go.codegen.customization.SQSCustomizations
+software.amazon.smithy.aws.go.codegen.AwsEndpointResolverAdapterGenerator
