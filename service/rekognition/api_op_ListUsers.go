@@ -12,62 +12,50 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns metadata for faces in the specified collection. This metadata includes
-// information such as the bounding box coordinates, the confidence (that the
-// bounding box contains a face), and face ID. For an example, see Listing Faces in
-// a Collection in the Amazon Rekognition Developer Guide. This operation requires
-// permissions to perform the rekognition:ListFaces action.
-func (c *Client) ListFaces(ctx context.Context, params *ListFacesInput, optFns ...func(*Options)) (*ListFacesOutput, error) {
+// Returns metadata of the User such as UserID in the specified collection.
+// Anonymous User (to reserve faces without any identity) is not returned as part
+// of this request. The results are sorted by system generated primary key ID. If
+// the response is truncated, NextToken is returned in the response that can be
+// used in the subsequent request to retrieve the next set of identities.
+func (c *Client) ListUsers(ctx context.Context, params *ListUsersInput, optFns ...func(*Options)) (*ListUsersOutput, error) {
 	if params == nil {
-		params = &ListFacesInput{}
+		params = &ListUsersInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListFaces", params, optFns, c.addOperationListFacesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListUsers", params, optFns, c.addOperationListUsersMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*ListFacesOutput)
+	out := result.(*ListUsersOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type ListFacesInput struct {
+type ListUsersInput struct {
 
-	// ID of the collection from which to list the faces.
+	// The ID of an existing collection.
 	//
 	// This member is required.
 	CollectionId *string
 
-	// An array of face IDs to match when listing faces in a collection.
-	FaceIds []string
-
-	// Maximum number of faces to return.
+	// Maximum number of UsersID to return.
 	MaxResults *int32
 
-	// If the previous response was incomplete (because there is more data to
-	// retrieve), Amazon Rekognition returns a pagination token in the response. You
-	// can use this pagination token to retrieve the next set of faces.
+	// Pagingation token to receive the next set of UsersID.
 	NextToken *string
-
-	// An array of user IDs to match when listing faces in a collection.
-	UserId *string
 
 	noSmithyDocumentSerde
 }
 
-type ListFacesOutput struct {
+type ListUsersOutput struct {
 
-	// Version number of the face detection model associated with the input collection
-	// ( CollectionId ).
-	FaceModelVersion *string
-
-	// An array of Face objects.
-	Faces []types.Face
-
-	// If the response is truncated, Amazon Rekognition returns this token that you
-	// can use in the subsequent request to retrieve the next set of faces.
+	// A pagination token to be used with the subsequent request if the response is
+	// truncated.
 	NextToken *string
+
+	// List of UsersID associated with the specified collection.
+	Users []types.User
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -75,12 +63,12 @@ type ListFacesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationListFacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListFaces{}, middleware.After)
+func (c *Client) addOperationListUsersMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListUsers{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListFaces{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListUsers{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -120,10 +108,10 @@ func (c *Client) addOperationListFacesMiddlewares(stack *middleware.Stack, optio
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpListFacesValidationMiddleware(stack); err != nil {
+	if err = addOpListUsersValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListFaces(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListUsers(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -141,16 +129,16 @@ func (c *Client) addOperationListFacesMiddlewares(stack *middleware.Stack, optio
 	return nil
 }
 
-// ListFacesAPIClient is a client that implements the ListFaces operation.
-type ListFacesAPIClient interface {
-	ListFaces(context.Context, *ListFacesInput, ...func(*Options)) (*ListFacesOutput, error)
+// ListUsersAPIClient is a client that implements the ListUsers operation.
+type ListUsersAPIClient interface {
+	ListUsers(context.Context, *ListUsersInput, ...func(*Options)) (*ListUsersOutput, error)
 }
 
-var _ ListFacesAPIClient = (*Client)(nil)
+var _ ListUsersAPIClient = (*Client)(nil)
 
-// ListFacesPaginatorOptions is the paginator options for ListFaces
-type ListFacesPaginatorOptions struct {
-	// Maximum number of faces to return.
+// ListUsersPaginatorOptions is the paginator options for ListUsers
+type ListUsersPaginatorOptions struct {
+	// Maximum number of UsersID to return.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token
@@ -158,22 +146,22 @@ type ListFacesPaginatorOptions struct {
 	StopOnDuplicateToken bool
 }
 
-// ListFacesPaginator is a paginator for ListFaces
-type ListFacesPaginator struct {
-	options   ListFacesPaginatorOptions
-	client    ListFacesAPIClient
-	params    *ListFacesInput
+// ListUsersPaginator is a paginator for ListUsers
+type ListUsersPaginator struct {
+	options   ListUsersPaginatorOptions
+	client    ListUsersAPIClient
+	params    *ListUsersInput
 	nextToken *string
 	firstPage bool
 }
 
-// NewListFacesPaginator returns a new ListFacesPaginator
-func NewListFacesPaginator(client ListFacesAPIClient, params *ListFacesInput, optFns ...func(*ListFacesPaginatorOptions)) *ListFacesPaginator {
+// NewListUsersPaginator returns a new ListUsersPaginator
+func NewListUsersPaginator(client ListUsersAPIClient, params *ListUsersInput, optFns ...func(*ListUsersPaginatorOptions)) *ListUsersPaginator {
 	if params == nil {
-		params = &ListFacesInput{}
+		params = &ListUsersInput{}
 	}
 
-	options := ListFacesPaginatorOptions{}
+	options := ListUsersPaginatorOptions{}
 	if params.MaxResults != nil {
 		options.Limit = *params.MaxResults
 	}
@@ -182,7 +170,7 @@ func NewListFacesPaginator(client ListFacesAPIClient, params *ListFacesInput, op
 		fn(&options)
 	}
 
-	return &ListFacesPaginator{
+	return &ListUsersPaginator{
 		options:   options,
 		client:    client,
 		params:    params,
@@ -192,12 +180,12 @@ func NewListFacesPaginator(client ListFacesAPIClient, params *ListFacesInput, op
 }
 
 // HasMorePages returns a boolean indicating whether more pages are available
-func (p *ListFacesPaginator) HasMorePages() bool {
+func (p *ListUsersPaginator) HasMorePages() bool {
 	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
 }
 
-// NextPage retrieves the next ListFaces page.
-func (p *ListFacesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListFacesOutput, error) {
+// NextPage retrieves the next ListUsers page.
+func (p *ListUsersPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListUsersOutput, error) {
 	if !p.HasMorePages() {
 		return nil, fmt.Errorf("no more pages available")
 	}
@@ -211,7 +199,7 @@ func (p *ListFacesPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 	}
 	params.MaxResults = limit
 
-	result, err := p.client.ListFaces(ctx, &params, optFns...)
+	result, err := p.client.ListUsers(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
 	}
@@ -230,11 +218,11 @@ func (p *ListFacesPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 	return result, nil
 }
 
-func newServiceMetadataMiddleware_opListFaces(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opListUsers(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "rekognition",
-		OperationName: "ListFaces",
+		OperationName: "ListUsers",
 	}
 }

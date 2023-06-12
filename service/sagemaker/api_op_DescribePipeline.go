@@ -30,7 +30,7 @@ func (c *Client) DescribePipeline(ctx context.Context, params *DescribePipelineI
 
 type DescribePipelineInput struct {
 
-	// The name of the pipeline to describe.
+	// The name or Amazon Resource Name (ARN) of the pipeline to describe.
 	//
 	// This member is required.
 	PipelineName *string

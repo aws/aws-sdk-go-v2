@@ -60,6 +60,9 @@ type DescribeCollectionOutput struct {
 	// Guide.
 	FaceModelVersion *string
 
+	// The number of UserIDs assigned to the specified colleciton.
+	UserCount *int64
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

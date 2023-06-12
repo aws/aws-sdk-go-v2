@@ -251,7 +251,7 @@ type Backup struct {
 	// construct Amazon Resource Names (ARNs) for resources.
 	OwnerId *string
 
-	// The current percent of progress of an asynchronous task.
+	// Displays the current percent of progress of an asynchronous task.
 	ProgressPercent *int32
 
 	// The Amazon Resource Name (ARN) for the backup resource.
@@ -590,10 +590,10 @@ type CreateFileSystemOpenZFSConfiguration struct {
 	// configured for redundancy within a single Availability Zone in an Amazon Web
 	// Services Region . Valid values are the following:
 	//   - SINGLE_AZ_1 - (Default) Creates file systems with throughput capacities of
-	//   64 - 4,096 MB/s. Single_AZ_1 is available in all Amazon Web Services Regions
+	//   64 - 4,096 MBps. Single_AZ_1 is available in all Amazon Web Services Regions
 	//   where Amazon FSx for OpenZFS is available, except US West (Oregon).
 	//   - SINGLE_AZ_2 - Creates file systems with throughput capacities of 160 -
-	//   10,240 MB/s using an NVMe L2ARC cache. Single_AZ_2 is available only in the US
+	//   10,240 MBps using an NVMe L2ARC cache. Single_AZ_2 is available only in the US
 	//   East (N. Virginia), US East (Ohio), US West (Oregon), and Europe (Ireland)
 	//   Amazon Web Services Regions.
 	// For more information, see: Deployment type availability (https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/availability-durability.html#available-aws-regions)
@@ -604,12 +604,12 @@ type CreateFileSystemOpenZFSConfiguration struct {
 	DeploymentType OpenZFSDeploymentType
 
 	// Specifies the throughput of an Amazon FSx for OpenZFS file system, measured in
-	// megabytes per second (MB/s). Valid values depend on the DeploymentType you
+	// megabytes per second (MBps). Valid values depend on the DeploymentType you
 	// choose, as follows:
 	//   - For SINGLE_AZ_1 , valid values are 64, 128, 256, 512, 1024, 2048, 3072, or
-	//   4096 MB/s.
+	//   4096 MBps.
 	//   - For SINGLE_AZ_2 , valid values are 160, 320, 640, 1280, 2560, 3840, 5120,
-	//   7680, or 10240 MB/s.
+	//   7680, or 10240 MBps.
 	// You pay for additional throughput capacity that you provision.
 	//
 	// This member is required.
@@ -643,10 +643,11 @@ type CreateFileSystemOpenZFSConfiguration struct {
 	DailyAutomaticBackupStartTime *string
 
 	// The SSD IOPS (input/output operations per second) configuration for an Amazon
-	// FSx for NetApp ONTAP or Amazon FSx for OpenZFS file system. The default is 3
-	// IOPS per GB of storage capacity, but you can provision additional IOPS per GB of
-	// storage. The configuration consists of the total number of provisioned SSD IOPS
-	// and how the amount was provisioned (by the customer or by the system).
+	// FSx for NetApp ONTAP or FSx for OpenZFS file system. By default, Amazon FSx
+	// automatically provisions 3 IOPS per GB of storage capacity. You can provision
+	// additional IOPS per GB of storage. The configuration consists of the total
+	// number of provisioned SSD IOPS and how it is was provisioned, or the mode (by
+	// the customer or by Amazon FSx).
 	DiskIopsConfiguration *DiskIopsConfiguration
 
 	// The configuration Amazon FSx uses when creating the root value of the Amazon
@@ -746,11 +747,11 @@ type CreateFileSystemWindowsConfiguration struct {
 	PreferredSubnetId *string
 
 	// The configuration that Amazon FSx uses to join a FSx for Windows File Server
-	// file system or an ONTAP storage virtual machine (SVM) to a self-managed
+	// file system or an FSx for ONTAP storage virtual machine (SVM) to a self-managed
 	// (including on-premises) Microsoft Active Directory (AD) directory. For more
-	// information, see Using Amazon FSx with your self-managed Microsoft Active
-	// Directory (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/self-managed-AD.html)
-	// or Managing SVMs (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-svms.html)
+	// information, see Using Amazon FSx for Windows with your self-managed Microsoft
+	// Active Directory (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/self-managed-AD.html)
+	// or Managing FSx for ONTAP SVMs (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-svms.html)
 	// .
 	SelfManagedActiveDirectoryConfiguration *SelfManagedActiveDirectoryConfiguration
 
@@ -970,11 +971,11 @@ type CreateSvmActiveDirectoryConfiguration struct {
 	NetBiosName *string
 
 	// The configuration that Amazon FSx uses to join a FSx for Windows File Server
-	// file system or an ONTAP storage virtual machine (SVM) to a self-managed
+	// file system or an FSx for ONTAP storage virtual machine (SVM) to a self-managed
 	// (including on-premises) Microsoft Active Directory (AD) directory. For more
-	// information, see Using Amazon FSx with your self-managed Microsoft Active
-	// Directory (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/self-managed-AD.html)
-	// or Managing SVMs (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-svms.html)
+	// information, see Using Amazon FSx for Windows with your self-managed Microsoft
+	// Active Directory (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/self-managed-AD.html)
+	// or Managing FSx for ONTAP SVMs (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-svms.html)
 	// .
 	SelfManagedActiveDirectoryConfiguration *SelfManagedActiveDirectoryConfiguration
 
@@ -990,7 +991,8 @@ type CreateSvmActiveDirectoryConfiguration struct {
 //   - DescribeDataRepositoryAssociations
 //
 // Data repository associations are supported on Amazon File Cache resources and
-// all Amazon FSx for Lustre file systems excluding Scratch_1 deployment types.
+// all FSx for Lustre 2.12 and newer file systems, excluding scratch_1 deployment
+// type.
 type DataRepositoryAssociation struct {
 
 	// The system-generated, unique ID of the data repository association.
@@ -1485,17 +1487,18 @@ type DeleteVolumeOpenZFSConfiguration struct {
 }
 
 // The SSD IOPS (input/output operations per second) configuration for an Amazon
-// FSx for NetApp ONTAP or Amazon FSx for OpenZFS file system. The default is 3
-// IOPS per GB of storage capacity, but you can provision additional IOPS per GB of
-// storage. The configuration consists of the total number of provisioned SSD IOPS
-// and how the amount was provisioned (by the customer or by the system).
+// FSx for NetApp ONTAP or FSx for OpenZFS file system. By default, Amazon FSx
+// automatically provisions 3 IOPS per GB of storage capacity. You can provision
+// additional IOPS per GB of storage. The configuration consists of the total
+// number of provisioned SSD IOPS and how it is was provisioned, or the mode (by
+// the customer or by Amazon FSx).
 type DiskIopsConfiguration struct {
 
 	// The total number of SSD IOPS provisioned for the file system.
 	Iops *int64
 
-	// Specifies whether the number of IOPS for the file system is using the system
-	// default ( AUTOMATIC ) or was provisioned by the customer ( USER_PROVISIONED ).
+	// Specifies whether the file system is using the AUTOMATIC setting of SSD IOPS of
+	// 3 IOPS per GB of storage capacity, , or if it using a USER_PROVISIONED value.
 	Mode DiskIopsConfigurationMode
 
 	noSmithyDocumentSerde
@@ -1912,8 +1915,7 @@ type FileSystem struct {
 // or NetApp SnapMirror. They are the Management and Intercluster endpoints.
 type FileSystemEndpoint struct {
 
-	// The Domain Name Service (DNS) name for the file system. You can mount your file
-	// system using its DNS name.
+	// The file system's DNS name. You can mount your file system using its DNS name.
 	DNSName *string
 
 	// IP addresses of the file system endpoint.
@@ -2221,6 +2223,10 @@ type OntapFileSystemConfiguration struct {
 	// SnapMirror.
 	Endpoints *FileSystemEndpoints
 
+	// You can use the fsxadmin user account to access the NetApp ONTAP CLI and REST
+	// API. The password value is always redacted in the response.
+	FsxAdminPassword *string
+
 	// The ID for a subnet. A subnet is a range of IP addresses in your virtual
 	// private cloud (VPC). For more information, see VPC and subnets (https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Subnets.html)
 	// in the Amazon VPC User Guide.
@@ -2436,10 +2442,11 @@ type OpenZFSFileSystemConfiguration struct {
 	DeploymentType OpenZFSDeploymentType
 
 	// The SSD IOPS (input/output operations per second) configuration for an Amazon
-	// FSx for NetApp ONTAP or Amazon FSx for OpenZFS file system. The default is 3
-	// IOPS per GB of storage capacity, but you can provision additional IOPS per GB of
-	// storage. The configuration consists of the total number of provisioned SSD IOPS
-	// and how the amount was provisioned (by the customer or by the system).
+	// FSx for NetApp ONTAP or FSx for OpenZFS file system. By default, Amazon FSx
+	// automatically provisions 3 IOPS per GB of storage capacity. You can provision
+	// additional IOPS per GB of storage. The configuration consists of the total
+	// number of provisioned SSD IOPS and how it is was provisioned, or the mode (by
+	// the customer or by Amazon FSx).
 	DiskIopsConfiguration *DiskIopsConfiguration
 
 	// The ID of the root volume of the OpenZFS file system.
@@ -2638,11 +2645,11 @@ type SelfManagedActiveDirectoryAttributes struct {
 }
 
 // The configuration that Amazon FSx uses to join a FSx for Windows File Server
-// file system or an ONTAP storage virtual machine (SVM) to a self-managed
+// file system or an FSx for ONTAP storage virtual machine (SVM) to a self-managed
 // (including on-premises) Microsoft Active Directory (AD) directory. For more
-// information, see Using Amazon FSx with your self-managed Microsoft Active
-// Directory (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/self-managed-AD.html)
-// or Managing SVMs (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-svms.html)
+// information, see Using Amazon FSx for Windows with your self-managed Microsoft
+// Active Directory (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/self-managed-AD.html)
+// or Managing FSx for ONTAP SVMs (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-svms.html)
 // .
 type SelfManagedActiveDirectoryConfiguration struct {
 
@@ -2693,22 +2700,35 @@ type SelfManagedActiveDirectoryConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The configuration that Amazon FSx uses to join the Windows File Server instance
-// to a self-managed Microsoft Active Directory (AD) directory.
+// Specifies changes you are making to the self-managed Microsoft Active Directory
+// (AD) configuration to which an FSx for Windows File Server file system or an FSx
+// for ONTAP SVM is joined.
 type SelfManagedActiveDirectoryConfigurationUpdates struct {
 
-	// A list of up to three IP addresses of DNS servers or domain controllers in the
-	// self-managed AD directory.
+	// A list of up to three DNS server or domain controller IP addresses in your
+	// self-managed AD domain.
 	DnsIps []string
 
-	// The password for the service account on your self-managed AD domain that Amazon
-	// FSx will use to join to your AD domain.
+	// Specifies an updated fully qualified domain name of your self-managed AD
+	// configuration.
+	DomainName *string
+
+	// Specifies the updated name of the self-managed AD domain group whose members
+	// are granted administrative privileges for the Amazon FSx resource.
+	FileSystemAdministratorsGroup *string
+
+	// Specifies an updated fully qualified distinguished name of the organization
+	// unit within your self-managed AD.
+	OrganizationalUnitDistinguishedName *string
+
+	// Specifies the updated password for the service account on your self-managed AD
+	// domain. Amazon FSx uses this account to join to your self-managed AD domain.
 	Password *string
 
-	// The user name for the service account on your self-managed AD domain that
-	// Amazon FSx will use to join to your AD domain. This account must have the
-	// permission to join computers to the domain in the organizational unit provided
-	// in OrganizationalUnitDistinguishedName .
+	// Specifies the updated user name for the service account on your self-managed AD
+	// domain. Amazon FSx uses this account to join to your self-managed AD domain.
+	// This account must have the permissions required to join computers to the domain
+	// in the organizational unit provided in OrganizationalUnitDistinguishedName .
 	UserName *string
 
 	noSmithyDocumentSerde
@@ -2847,13 +2867,12 @@ type StorageVirtualMachineFilter struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the configuration of the Microsoft Active Directory (AD) directory to
-// which the Amazon FSx for ONTAP storage virtual machine (SVM) is joined. Pleae
-// note, account credentials are not returned in the response payload.
+// Describes the Microsoft Active Directory (AD) directory configuration to which
+// the FSx for ONTAP storage virtual machine (SVM) is joined. Note that account
+// credentials are not returned in the response payload.
 type SvmActiveDirectoryConfiguration struct {
 
-	// The NetBIOS name of the Active Directory computer object that is joined to your
-	// SVM.
+	// The NetBIOS name of the AD computer object to which the SVM is joined.
 	NetBiosName *string
 
 	// The configuration of the self-managed Microsoft Active Directory (AD) directory
@@ -2870,8 +2889,7 @@ type SvmActiveDirectoryConfiguration struct {
 // Smb endpoints.
 type SvmEndpoint struct {
 
-	// The Domain Name Service (DNS) name for the file system. You can mount your file
-	// system using its DNS name.
+	// The file system's DNS name. You can mount your file system using its DNS name.
 	DNSName *string
 
 	// The SVM endpoint's IP addresses.
@@ -3053,14 +3071,20 @@ type UpdateFileSystemOntapConfiguration struct {
 	// specifies 5 AM daily.
 	DailyAutomaticBackupStartTime *string
 
-	// The SSD IOPS (input/output operations per second) configuration for an Amazon
+	// The SSD IOPS (input output operations per second) configuration for an Amazon
 	// FSx for NetApp ONTAP file system. The default is 3 IOPS per GB of storage
 	// capacity, but you can provision additional IOPS per GB of storage. The
 	// configuration consists of an IOPS mode ( AUTOMATIC or USER_PROVISIONED ), and in
 	// the case of USER_PROVISIONED IOPS, the total number of SSD IOPS provisioned.
+	// For more information, see Updating SSD storage capacity and IOPS (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/increase-primary-storage.html)
+	// .
 	DiskIopsConfiguration *DiskIopsConfiguration
 
-	// The ONTAP administrative password for the fsxadmin user.
+	// Update the password for the fsxadmin user by entering a new password. You use
+	// the fsxadmin user to access the NetApp ONTAP CLI and REST API to manage your
+	// file system resources. For more information, see Managing resources using
+	// NetApp Applicaton (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-resources-ontap-apps.html)
+	// .
 	FsxAdminPassword *string
 
 	// (Multi-AZ only) A list of IDs of existing virtual private cloud (VPC) route
@@ -3069,9 +3093,11 @@ type UpdateFileSystemOntapConfiguration struct {
 	// IDs for a file system.
 	RemoveRouteTableIds []string
 
-	// Specifies the throughput of an FSx for NetApp ONTAP file system, measured in
-	// megabytes per second (MBps). Valid values are 128, 256, 512, 1024, 2048, and
-	// 4096 MBps.
+	// Enter a new value to change the amount of throughput capacity for the file
+	// system. Throughput capacity is measured in megabytes per second (MBps). Valid
+	// values are 128, 256, 512, 1024, 2048, and 4096 MBps. For more information, see
+	// Managing throughput capacity (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-throughput-capacity.html)
+	// in the FSx for ONTAP User Guide.
 	ThroughputCapacity *int32
 
 	// A recurring weekly time, in the format D:HH:MM . D is the day of the week, for
@@ -3115,10 +3141,11 @@ type UpdateFileSystemOpenZFSConfiguration struct {
 	DailyAutomaticBackupStartTime *string
 
 	// The SSD IOPS (input/output operations per second) configuration for an Amazon
-	// FSx for NetApp ONTAP or Amazon FSx for OpenZFS file system. The default is 3
-	// IOPS per GB of storage capacity, but you can provision additional IOPS per GB of
-	// storage. The configuration consists of the total number of provisioned SSD IOPS
-	// and how the amount was provisioned (by the customer or by the system).
+	// FSx for NetApp ONTAP or FSx for OpenZFS file system. By default, Amazon FSx
+	// automatically provisions 3 IOPS per GB of storage capacity. You can provision
+	// additional IOPS per GB of storage. The configuration consists of the total
+	// number of provisioned SSD IOPS and how it is was provisioned, or the mode (by
+	// the customer or by Amazon FSx).
 	DiskIopsConfiguration *DiskIopsConfiguration
 
 	// The throughput of an Amazon FSx for OpenZFS file system, measured in megabytes
@@ -3278,13 +3305,18 @@ type UpdateOpenZFSVolumeConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Updates the Microsoft Active Directory (AD) configuration of an SVM joined to
-// an AD. Please note, account credentials are not returned in the response
-// payload.
+// Specifies updates to an FSx for ONTAP storage virtual machine's (SVM) Microsoft
+// Active Directory (AD) configuration. Note that account credentials are not
+// returned in the response payload.
 type UpdateSvmActiveDirectoryConfiguration struct {
 
-	// The configuration that Amazon FSx uses to join the Windows File Server instance
-	// to a self-managed Microsoft Active Directory (AD) directory.
+	// Specifies an updated NetBIOS name of the AD computer object NetBiosName to
+	// which an SVM is joined.
+	NetBiosName *string
+
+	// Specifies changes you are making to the self-managed Microsoft Active Directory
+	// (AD) configuration to which an FSx for Windows File Server file system or an FSx
+	// for ONTAP SVM is joined.
 	SelfManagedActiveDirectoryConfiguration *SelfManagedActiveDirectoryConfigurationUpdates
 
 	noSmithyDocumentSerde

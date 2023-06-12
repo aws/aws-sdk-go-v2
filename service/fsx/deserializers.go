@@ -2544,6 +2544,9 @@ func awsAwsjson11_deserializeOpErrorDeleteVolume(response *smithyhttp.Response, 
 	case strings.EqualFold("InternalServerError", errorCode):
 		return awsAwsjson11_deserializeErrorInternalServerError(response, errorBody)
 
+	case strings.EqualFold("ServiceLimitExceeded", errorCode):
+		return awsAwsjson11_deserializeErrorServiceLimitExceeded(response, errorBody)
+
 	case strings.EqualFold("VolumeNotFound", errorCode):
 		return awsAwsjson11_deserializeErrorVolumeNotFound(response, errorBody)
 
@@ -10655,6 +10658,15 @@ func awsAwsjson11_deserializeDocumentOntapFileSystemConfiguration(v **types.Onta
 		case "Endpoints":
 			if err := awsAwsjson11_deserializeDocumentFileSystemEndpoints(&sv.Endpoints, value); err != nil {
 				return err
+			}
+
+		case "FsxAdminPassword":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AdminPassword to be of type string, got %T instead", value)
+				}
+				sv.FsxAdminPassword = ptr.String(jtv)
 			}
 
 		case "PreferredSubnetId":

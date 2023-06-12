@@ -49,6 +49,266 @@ type ActionParameters struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the feature flags that you can specify for a code generation job.
+type CodegenFeatureFlags struct {
+
+	// Specifies whether a code generation job supports non models.
+	IsNonModelSupported *bool
+
+	// Specifes whether a code generation job supports data relationships.
+	IsRelationshipSupported *bool
+
+	noSmithyDocumentSerde
+}
+
+// Describes the enums in a generic data schema.
+type CodegenGenericDataEnum struct {
+
+	// The list of enum values in the generic data schema.
+	//
+	// This member is required.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// Describes a field in a generic data schema.
+type CodegenGenericDataField struct {
+
+	// The data type for the generic data field.
+	//
+	// This member is required.
+	DataType CodegenGenericDataFieldDataType
+
+	// The value of the data type for the generic data field.
+	//
+	// This member is required.
+	DataTypeValue *string
+
+	// Specifies whether the generic data field is an array.
+	//
+	// This member is required.
+	IsArray *bool
+
+	// Specifies whether the generic data field is read-only.
+	//
+	// This member is required.
+	ReadOnly *bool
+
+	// Specifies whether the generic data field is required.
+	//
+	// This member is required.
+	Required *bool
+
+	// The relationship of the generic data schema.
+	Relationship *CodegenGenericDataRelationshipType
+
+	noSmithyDocumentSerde
+}
+
+// Describes a model in a generic data schema.
+type CodegenGenericDataModel struct {
+
+	// The fields in the generic data model.
+	//
+	// This member is required.
+	Fields map[string]CodegenGenericDataField
+
+	// The primary keys of the generic data model.
+	//
+	// This member is required.
+	PrimaryKeys []string
+
+	// Specifies whether the generic data model is a join table.
+	IsJoinTable *bool
+
+	noSmithyDocumentSerde
+}
+
+// Describes a non-model in a generic data schema.
+type CodegenGenericDataNonModel struct {
+
+	// The fields in a generic data schema non model.
+	//
+	// This member is required.
+	Fields map[string]CodegenGenericDataField
+
+	noSmithyDocumentSerde
+}
+
+// Describes the relationship between generic data models.
+type CodegenGenericDataRelationshipType struct {
+
+	// The name of the related model in the data relationship.
+	//
+	// This member is required.
+	RelatedModelName *string
+
+	// The data relationship type.
+	//
+	// This member is required.
+	Type GenericDataRelationshipType
+
+	// The associated fields of the data relationship.
+	AssociatedFields []string
+
+	// The value of the belongsTo field on the related data model.
+	BelongsToFieldOnRelatedModel *string
+
+	// Specifies whether the relationship can unlink the associated model.
+	CanUnlinkAssociatedModel *bool
+
+	// Specifies whether the @index directive is supported for a hasMany data
+	// relationship.
+	IsHasManyIndex *bool
+
+	// The name of the related join field in the data relationship.
+	RelatedJoinFieldName *string
+
+	// The name of the related join table in the data relationship.
+	RelatedJoinTableName *string
+
+	// The related model fields in the data relationship.
+	RelatedModelFields []string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the configuration for a code generation job that is associated with
+// an Amplify app.
+type CodegenJob struct {
+
+	// The ID of the Amplify app associated with the code generation job.
+	//
+	// This member is required.
+	AppId *string
+
+	// The name of the backend environment associated with the code generation job.
+	//
+	// This member is required.
+	EnvironmentName *string
+
+	// The unique ID for the code generation job.
+	//
+	// This member is required.
+	Id *string
+
+	// The CodegenJobAsset to use for the code generation job.
+	Asset *CodegenJobAsset
+
+	// Specifies whether to autogenerate forms in the code generation job.
+	AutoGenerateForms *bool
+
+	// The time that the code generation job was created.
+	CreatedAt *time.Time
+
+	// Describes the feature flags that you can specify for a code generation job.
+	Features *CodegenFeatureFlags
+
+	// Describes the data schema for a code generation job.
+	GenericDataSchema *CodegenJobGenericDataSchema
+
+	// The time that the code generation job was modified.
+	ModifiedAt *time.Time
+
+	// Describes the configuration information for rendering the UI component
+	// associated the code generation job.
+	RenderConfig CodegenJobRenderConfig
+
+	// The status of the code generation job.
+	Status CodegenJobStatus
+
+	// The customized status message for the code generation job.
+	StatusMessage *string
+
+	// One or more key-value pairs to use when tagging the code generation job.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Describes an asset for a code generation job.
+type CodegenJobAsset struct {
+
+	// The URL to use to access the asset.
+	DownloadUrl *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the data schema for a code generation job.
+type CodegenJobGenericDataSchema struct {
+
+	// The type of the data source for the schema. Currently, the only valid value is
+	// an Amplify DataStore .
+	//
+	// This member is required.
+	DataSourceType CodegenJobGenericDataSourceType
+
+	// The name of a CodegenGenericDataEnum .
+	//
+	// This member is required.
+	Enums map[string]CodegenGenericDataEnum
+
+	// The name of a CodegenGenericDataModel .
+	//
+	// This member is required.
+	Models map[string]CodegenGenericDataModel
+
+	// The name of a CodegenGenericDataNonModel .
+	//
+	// This member is required.
+	NonModels map[string]CodegenGenericDataNonModel
+
+	noSmithyDocumentSerde
+}
+
+// Describes the configuration information for rendering the UI component
+// associated the code generation job.
+//
+// The following types satisfy this interface:
+//
+//	CodegenJobRenderConfigMemberReact
+type CodegenJobRenderConfig interface {
+	isCodegenJobRenderConfig()
+}
+
+// The name of the ReactStartCodegenJobData object.
+type CodegenJobRenderConfigMemberReact struct {
+	Value ReactStartCodegenJobData
+
+	noSmithyDocumentSerde
+}
+
+func (*CodegenJobRenderConfigMemberReact) isCodegenJobRenderConfig() {}
+
+// A summary of the basic information about the code generation job.
+type CodegenJobSummary struct {
+
+	// The unique ID of the Amplify app associated with the code generation job.
+	//
+	// This member is required.
+	AppId *string
+
+	// The name of the backend environment associated with the code generation job.
+	//
+	// This member is required.
+	EnvironmentName *string
+
+	// The unique ID for the code generation job summary.
+	//
+	// This member is required.
+	Id *string
+
+	// The time that the code generation job summary was created.
+	CreatedAt *time.Time
+
+	// The time that the code generation job summary was modified.
+	ModifiedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Contains the configuration settings for a user interface (UI) element for an
 // Amplify app. A component is configured as a primary, stand-alone UI element. Use
 // ComponentChild to configure an instance of a Component . A ComponentChild
@@ -1070,6 +1330,27 @@ type PutMetadataFlagBody struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the code generation job configuration for a React project.
+type ReactStartCodegenJobData struct {
+
+	// Specifies whether the code generation job should render inline source maps.
+	InlineSourceMap bool
+
+	// The JavaScript module type.
+	Module JSModule
+
+	// Specifies whether the code generation job should render type declaration files.
+	RenderTypeDeclarations bool
+
+	// The file type to use for a JavaScript project.
+	Script JSScript
+
+	// The ECMAScript specification to use.
+	Target JSTarget
+
+	noSmithyDocumentSerde
+}
+
 // Describes a refresh token.
 type RefreshTokenRequestBody struct {
 
@@ -1128,6 +1409,29 @@ type SortProperty struct {
 	//
 	// This member is required.
 	Field *string
+
+	noSmithyDocumentSerde
+}
+
+// The code generation job resource configuration.
+type StartCodegenJobData struct {
+
+	// The code generation configuration for the codegen job.
+	//
+	// This member is required.
+	RenderConfig CodegenJobRenderConfig
+
+	// Specifies whether to autogenerate forms in the code generation job.
+	AutoGenerateForms *bool
+
+	// The feature flags for a code generation job.
+	Features *CodegenFeatureFlags
+
+	// The data schema to use for a code generation job.
+	GenericDataSchema *CodegenJobGenericDataSchema
+
+	// One or more key-value pairs to use when tagging the code generation job data.
+	Tags map[string]string
 
 	noSmithyDocumentSerde
 }
@@ -1368,5 +1672,6 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isFieldPosition()   {}
-func (*UnknownUnionMember) isFormStyleConfig() {}
+func (*UnknownUnionMember) isCodegenJobRenderConfig() {}
+func (*UnknownUnionMember) isFieldPosition()          {}
+func (*UnknownUnionMember) isFormStyleConfig()        {}

@@ -35,6 +35,15 @@ type Asset struct {
 	noSmithyDocumentSerde
 }
 
+// Provides face metadata for the faces that are associated to a specific UserID.
+type AssociatedFace struct {
+
+	// Unique identifier assigned to the face.
+	FaceId *string
+
+	noSmithyDocumentSerde
+}
+
 // Metadata information about an audio stream. An array of AudioMetadata objects
 // for the audio streams found in a stored video is returned by GetSegmentDetection
 // .
@@ -695,6 +704,16 @@ type DetectTextFilters struct {
 	noSmithyDocumentSerde
 }
 
+// Provides face metadata for the faces that are disassociated from a specific
+// UserID.
+type DisassociatedFace struct {
+
+	// Unique identifier assigned to the face.
+	FaceId *string
+
+	noSmithyDocumentSerde
+}
+
 // A training dataset or a test dataset used in a dataset distribution operation.
 // For more information, see DistributeDatasetEntries .
 type DistributeDataset struct {
@@ -850,6 +869,9 @@ type Face struct {
 	// The version of the face detect and storage model that was used when indexing
 	// the face vector.
 	IndexFacesModelVersion *string
+
+	// Unique identifier assigned to the user.
+	UserId *string
 
 	noSmithyDocumentSerde
 }
@@ -1416,6 +1438,18 @@ type LivenessOutputConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Contains metadata for a UserID matched with a given face.
+type MatchedUser struct {
+
+	// A provided ID for the UserID. Unique within the collection.
+	UserId *string
+
+	// The status of the user matched to a provided FaceID.
+	UserStatus UserStatus
+
+	noSmithyDocumentSerde
+}
+
 // Provides information about a single type of inappropriate, unwanted, or
 // offensive content found in an image or video. Each type of moderated content has
 // a label within a hierarchical taxonomy. For more information, see Content
@@ -1861,6 +1895,49 @@ type S3Object struct {
 
 	// If the bucket is versioning enabled, you can specify the object version.
 	Version *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides face metadata such as FaceId, BoundingBox, Confidence of the input
+// face used for search.
+type SearchedFace struct {
+
+	// Unique identifier assigned to the face.
+	FaceId *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains data regarding the input face used for a search.
+type SearchedFaceDetails struct {
+
+	// Structure containing attributes of the face that the algorithm detected. A
+	// FaceDetail object contains either the default facial attributes or all facial
+	// attributes. The default attributes are BoundingBox , Confidence , Landmarks ,
+	// Pose , and Quality . GetFaceDetection is the only Amazon Rekognition Video
+	// stored video operation that can return a FaceDetail object with all attributes.
+	// To specify which attributes to return, use the FaceAttributes input parameter
+	// for StartFaceDetection . The following Amazon Rekognition Video operations
+	// return only the default attributes. The corresponding Start operations don't
+	// have a FaceAttributes input parameter:
+	//   - GetCelebrityRecognition
+	//   - GetPersonTracking
+	//   - GetFaceSearch
+	// The Amazon Rekognition Image DetectFaces and IndexFaces operations can return
+	// all facial attributes. To specify which attributes to return, use the Attributes
+	// input parameter for DetectFaces . For IndexFaces , use the DetectAttributes
+	// input parameter.
+	FaceDetail *FaceDetail
+
+	noSmithyDocumentSerde
+}
+
+// Contains metadata about a User searched for within a collection.
+type SearchedUser struct {
+
+	// A provided ID for the UserID. Unique within the collection.
+	UserId *string
 
 	noSmithyDocumentSerde
 }
@@ -2333,6 +2410,112 @@ type UnindexedFace struct {
 	//   - LOW_CONFIDENCE - The face was detected with a low confidence.
 	//   - SMALL_BOUNDING_BOX - The bounding box around the face is too small.
 	Reasons []Reason
+
+	noSmithyDocumentSerde
+}
+
+// Face details inferred from the image but not used for search. The response
+// attribute contains reasons for why a face wasn't used for Search.
+type UnsearchedFace struct {
+
+	// Structure containing attributes of the face that the algorithm detected. A
+	// FaceDetail object contains either the default facial attributes or all facial
+	// attributes. The default attributes are BoundingBox , Confidence , Landmarks ,
+	// Pose , and Quality . GetFaceDetection is the only Amazon Rekognition Video
+	// stored video operation that can return a FaceDetail object with all attributes.
+	// To specify which attributes to return, use the FaceAttributes input parameter
+	// for StartFaceDetection . The following Amazon Rekognition Video operations
+	// return only the default attributes. The corresponding Start operations don't
+	// have a FaceAttributes input parameter:
+	//   - GetCelebrityRecognition
+	//   - GetPersonTracking
+	//   - GetFaceSearch
+	// The Amazon Rekognition Image DetectFaces and IndexFaces operations can return
+	// all facial attributes. To specify which attributes to return, use the Attributes
+	// input parameter for DetectFaces . For IndexFaces , use the DetectAttributes
+	// input parameter.
+	FaceDetails *FaceDetail
+
+	// Reasons why a face wasn't used for Search.
+	Reasons []UnsearchedFaceReason
+
+	noSmithyDocumentSerde
+}
+
+// Contains metadata like FaceId, UserID, and Reasons, for a face that was
+// unsuccessfully associated.
+type UnsuccessfulFaceAssociation struct {
+
+	// Match confidence with the UserID, provides information regarding if a face
+	// association was unsuccessful because it didn't meet UserMatchThreshold.
+	Confidence *float32
+
+	// A unique identifier assigned to the face.
+	FaceId *string
+
+	// The reason why the association was unsuccessful.
+	Reasons []UnsuccessfulFaceAssociationReason
+
+	// A provided ID for the UserID. Unique within the collection.
+	UserId *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains metadata like FaceId, UserID, and Reasons, for a face that was
+// unsuccessfully deleted.
+type UnsuccessfulFaceDeletion struct {
+
+	// A unique identifier assigned to the face.
+	FaceId *string
+
+	// The reason why the deletion was unsuccessful.
+	Reasons []UnsuccessfulFaceDeletionReason
+
+	// A provided ID for the UserID. Unique within the collection.
+	UserId *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains metadata like FaceId, UserID, and Reasons, for a face that was
+// unsuccessfully disassociated.
+type UnsuccessfulFaceDisassociation struct {
+
+	// A unique identifier assigned to the face.
+	FaceId *string
+
+	// The reason why the deletion was unsuccessful.
+	Reasons []UnsuccessfulFaceDisassociationReason
+
+	// A provided ID for the UserID. Unique within the collection.
+	UserId *string
+
+	noSmithyDocumentSerde
+}
+
+// Metadata of the user stored in a collection.
+type User struct {
+
+	// A provided ID for the User. Unique within the collection.
+	UserId *string
+
+	// Communicates if the UserID has been updated with latest set of faces to be
+	// associated with the UserID.
+	UserStatus UserStatus
+
+	noSmithyDocumentSerde
+}
+
+// Provides UserID metadata along with the confidence in the match of this UserID
+// with the input face.
+type UserMatch struct {
+
+	// Describes the UserID metadata.
+	Similarity *float32
+
+	// Confidence in the match of this UserID with the input face.
+	User *MatchedUser
 
 	noSmithyDocumentSerde
 }

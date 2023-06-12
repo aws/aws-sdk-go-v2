@@ -617,6 +617,13 @@ func awsRestjson1_serializeOpDocumentCreateOutboundConnectionInput(v *CreateOutb
 		ok.String(string(v.ConnectionMode))
 	}
 
+	if v.ConnectionProperties != nil {
+		ok := object.Key("ConnectionProperties")
+		if err := awsRestjson1_serializeDocumentConnectionProperties(v.ConnectionProperties, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.LocalDomainInfo != nil {
 		ok := object.Key("LocalDomainInfo")
 		if err := awsRestjson1_serializeDocumentDomainInformationContainer(v.LocalDomainInfo, ok); err != nil {
@@ -4198,6 +4205,37 @@ func awsRestjson1_serializeDocumentColdStorageOptions(v *types.ColdStorageOption
 	if v.Enabled != nil {
 		ok := object.Key("Enabled")
 		ok.Boolean(*v.Enabled)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentConnectionProperties(v *types.ConnectionProperties, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CrossClusterSearch != nil {
+		ok := object.Key("CrossClusterSearch")
+		if err := awsRestjson1_serializeDocumentCrossClusterSearchConnectionProperties(v.CrossClusterSearch, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Endpoint != nil {
+		ok := object.Key("Endpoint")
+		ok.String(*v.Endpoint)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCrossClusterSearchConnectionProperties(v *types.CrossClusterSearchConnectionProperties, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.SkipUnavailable) > 0 {
+		ok := object.Key("SkipUnavailable")
+		ok.String(string(v.SkipUnavailable))
 	}
 
 	return nil

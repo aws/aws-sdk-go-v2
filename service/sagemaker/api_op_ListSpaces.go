@@ -33,7 +33,10 @@ type ListSpacesInput struct {
 	// A parameter to search for the Domain ID.
 	DomainIdEquals *string
 
-	// Returns a list up to a specified limit.
+	// The total number of items to return in the response. If the total number of
+	// items available is more than the value specified, a NextToken is provided in
+	// the response. To resume pagination, provide the NextToken value in the as part
+	// of a subsequent call. The default value is 10.
 	MaxResults *int32
 
 	// If the previous response was truncated, you will receive this token. Use it in
@@ -139,7 +142,10 @@ var _ ListSpacesAPIClient = (*Client)(nil)
 
 // ListSpacesPaginatorOptions is the paginator options for ListSpaces
 type ListSpacesPaginatorOptions struct {
-	// Returns a list up to a specified limit.
+	// The total number of items to return in the response. If the total number of
+	// items available is more than the value specified, a NextToken is provided in
+	// the response. To resume pagination, provide the NextToken value in the as part
+	// of a subsequent call. The default value is 10.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

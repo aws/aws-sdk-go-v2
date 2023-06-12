@@ -760,6 +760,117 @@ func (TextTypes) Values() []TextTypes {
 	}
 }
 
+type UnsearchedFaceReason string
+
+// Enum values for UnsearchedFaceReason
+const (
+	UnsearchedFaceReasonFaceNotLargest   UnsearchedFaceReason = "FACE_NOT_LARGEST"
+	UnsearchedFaceReasonExceedsMaxFaces  UnsearchedFaceReason = "EXCEEDS_MAX_FACES"
+	UnsearchedFaceReasonExtremePose      UnsearchedFaceReason = "EXTREME_POSE"
+	UnsearchedFaceReasonLowBrightness    UnsearchedFaceReason = "LOW_BRIGHTNESS"
+	UnsearchedFaceReasonLowSharpness     UnsearchedFaceReason = "LOW_SHARPNESS"
+	UnsearchedFaceReasonLowConfidence    UnsearchedFaceReason = "LOW_CONFIDENCE"
+	UnsearchedFaceReasonSmallBoundingBox UnsearchedFaceReason = "SMALL_BOUNDING_BOX"
+	UnsearchedFaceReasonLowFaceQuality   UnsearchedFaceReason = "LOW_FACE_QUALITY"
+)
+
+// Values returns all known values for UnsearchedFaceReason. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (UnsearchedFaceReason) Values() []UnsearchedFaceReason {
+	return []UnsearchedFaceReason{
+		"FACE_NOT_LARGEST",
+		"EXCEEDS_MAX_FACES",
+		"EXTREME_POSE",
+		"LOW_BRIGHTNESS",
+		"LOW_SHARPNESS",
+		"LOW_CONFIDENCE",
+		"SMALL_BOUNDING_BOX",
+		"LOW_FACE_QUALITY",
+	}
+}
+
+type UnsuccessfulFaceAssociationReason string
+
+// Enum values for UnsuccessfulFaceAssociationReason
+const (
+	UnsuccessfulFaceAssociationReasonFaceNotFound               UnsuccessfulFaceAssociationReason = "FACE_NOT_FOUND"
+	UnsuccessfulFaceAssociationReasonAssociatedToADifferentUser UnsuccessfulFaceAssociationReason = "ASSOCIATED_TO_A_DIFFERENT_USER"
+	UnsuccessfulFaceAssociationReasonLowMatchConfidence         UnsuccessfulFaceAssociationReason = "LOW_MATCH_CONFIDENCE"
+)
+
+// Values returns all known values for UnsuccessfulFaceAssociationReason. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (UnsuccessfulFaceAssociationReason) Values() []UnsuccessfulFaceAssociationReason {
+	return []UnsuccessfulFaceAssociationReason{
+		"FACE_NOT_FOUND",
+		"ASSOCIATED_TO_A_DIFFERENT_USER",
+		"LOW_MATCH_CONFIDENCE",
+	}
+}
+
+type UnsuccessfulFaceDeletionReason string
+
+// Enum values for UnsuccessfulFaceDeletionReason
+const (
+	UnsuccessfulFaceDeletionReasonAssociatedToAnExistingUser UnsuccessfulFaceDeletionReason = "ASSOCIATED_TO_AN_EXISTING_USER"
+	UnsuccessfulFaceDeletionReasonFaceNotFound               UnsuccessfulFaceDeletionReason = "FACE_NOT_FOUND"
+)
+
+// Values returns all known values for UnsuccessfulFaceDeletionReason. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (UnsuccessfulFaceDeletionReason) Values() []UnsuccessfulFaceDeletionReason {
+	return []UnsuccessfulFaceDeletionReason{
+		"ASSOCIATED_TO_AN_EXISTING_USER",
+		"FACE_NOT_FOUND",
+	}
+}
+
+type UnsuccessfulFaceDisassociationReason string
+
+// Enum values for UnsuccessfulFaceDisassociationReason
+const (
+	UnsuccessfulFaceDisassociationReasonFaceNotFound               UnsuccessfulFaceDisassociationReason = "FACE_NOT_FOUND"
+	UnsuccessfulFaceDisassociationReasonAssociatedToADifferentUser UnsuccessfulFaceDisassociationReason = "ASSOCIATED_TO_A_DIFFERENT_USER"
+)
+
+// Values returns all known values for UnsuccessfulFaceDisassociationReason. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (UnsuccessfulFaceDisassociationReason) Values() []UnsuccessfulFaceDisassociationReason {
+	return []UnsuccessfulFaceDisassociationReason{
+		"FACE_NOT_FOUND",
+		"ASSOCIATED_TO_A_DIFFERENT_USER",
+	}
+}
+
+type UserStatus string
+
+// Enum values for UserStatus
+const (
+	UserStatusActive   UserStatus = "ACTIVE"
+	UserStatusUpdating UserStatus = "UPDATING"
+	UserStatusCreating UserStatus = "CREATING"
+	UserStatusCreated  UserStatus = "CREATED"
+)
+
+// Values returns all known values for UserStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (UserStatus) Values() []UserStatus {
+	return []UserStatus{
+		"ACTIVE",
+		"UPDATING",
+		"CREATING",
+		"CREATED",
+	}
+}
+
 type VideoColorRange string
 
 // Enum values for VideoColorRange

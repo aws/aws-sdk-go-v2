@@ -43,8 +43,10 @@ type ListStudioLifecycleConfigsInput struct {
 	// specified time.
 	CreationTimeBefore *time.Time
 
-	// The maximum number of Studio Lifecycle Configurations to return in the
-	// response. The default value is 10.
+	// The total number of items to return in the response. If the total number of
+	// items available is more than the value specified, a NextToken is provided in
+	// the response. To resume pagination, provide the NextToken value in the as part
+	// of a subsequent call. The default value is 10.
 	MaxResults *int32
 
 	// A filter that returns only Lifecycle Configurations modified after the
@@ -75,7 +77,8 @@ type ListStudioLifecycleConfigsInput struct {
 
 type ListStudioLifecycleConfigsOutput struct {
 
-	// A token for getting the next set of actions, if there are any.
+	// If the previous response was truncated, you will receive this token. Use it in
+	// your next request to receive the next set of results.
 	NextToken *string
 
 	// A list of Lifecycle Configurations and their properties.
@@ -161,8 +164,10 @@ var _ ListStudioLifecycleConfigsAPIClient = (*Client)(nil)
 // ListStudioLifecycleConfigsPaginatorOptions is the paginator options for
 // ListStudioLifecycleConfigs
 type ListStudioLifecycleConfigsPaginatorOptions struct {
-	// The maximum number of Studio Lifecycle Configurations to return in the
-	// response. The default value is 10.
+	// The total number of items to return in the response. If the total number of
+	// items available is more than the value specified, a NextToken is provided in
+	// the response. To resume pagination, provide the NextToken value in the as part
+	// of a subsequent call. The default value is 10.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

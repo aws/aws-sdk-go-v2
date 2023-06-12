@@ -7,6 +7,24 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder/types"
 )
 
+func ExampleCodegenJobRenderConfig_outputUsage() {
+	var union types.CodegenJobRenderConfig
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.CodegenJobRenderConfigMemberReact:
+		_ = v.Value // Value is types.ReactStartCodegenJobData
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ReactStartCodegenJobData
+
 func ExampleFieldPosition_outputUsage() {
 	var union types.FieldPosition
 	// type switches can be used to check the union value

@@ -33,7 +33,10 @@ type ListUserProfilesInput struct {
 	// A parameter by which to filter the results.
 	DomainIdEquals *string
 
-	// Returns a list up to a specified limit.
+	// The total number of items to return in the response. If the total number of
+	// items available is more than the value specified, a NextToken is provided in
+	// the response. To resume pagination, provide the NextToken value in the as part
+	// of a subsequent call. The default value is 10.
 	MaxResults *int32
 
 	// If the previous response was truncated, you will receive this token. Use it in
@@ -140,7 +143,10 @@ var _ ListUserProfilesAPIClient = (*Client)(nil)
 
 // ListUserProfilesPaginatorOptions is the paginator options for ListUserProfiles
 type ListUserProfilesPaginatorOptions struct {
-	// Returns a list up to a specified limit.
+	// The total number of items to return in the response. If the total number of
+	// items available is more than the value specified, a NextToken is provided in
+	// the response. To resume pagination, provide the NextToken value in the as part
+	// of a subsequent call. The default value is 10.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

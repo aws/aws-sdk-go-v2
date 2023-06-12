@@ -5227,6 +5227,8 @@ const (
 	TargetDeviceMlP3          TargetDevice = "ml_p3"
 	TargetDeviceMlG4dn        TargetDevice = "ml_g4dn"
 	TargetDeviceMlInf1        TargetDevice = "ml_inf1"
+	TargetDeviceMlInf2        TargetDevice = "ml_inf2"
+	TargetDeviceMlTrn1        TargetDevice = "ml_trn1"
 	TargetDeviceMlEia2        TargetDevice = "ml_eia2"
 	TargetDeviceJetsonTx1     TargetDevice = "jetson_tx1"
 	TargetDeviceJetsonTx2     TargetDevice = "jetson_tx2"
@@ -5266,6 +5268,8 @@ func (TargetDevice) Values() []TargetDevice {
 		"ml_p3",
 		"ml_g4dn",
 		"ml_inf1",
+		"ml_inf2",
+		"ml_trn1",
 		"ml_eia2",
 		"jetson_tx1",
 		"jetson_tx2",

@@ -12,49 +12,52 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new form for an Amplify.
-func (c *Client) CreateForm(ctx context.Context, params *CreateFormInput, optFns ...func(*Options)) (*CreateFormOutput, error) {
+// Starts a code generation job for for a specified Amplify app and backend
+// environment.
+func (c *Client) StartCodegenJob(ctx context.Context, params *StartCodegenJobInput, optFns ...func(*Options)) (*StartCodegenJobOutput, error) {
 	if params == nil {
-		params = &CreateFormInput{}
+		params = &StartCodegenJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "CreateForm", params, optFns, c.addOperationCreateFormMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "StartCodegenJob", params, optFns, c.addOperationStartCodegenJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*CreateFormOutput)
+	out := result.(*StartCodegenJobOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type CreateFormInput struct {
+type StartCodegenJobInput struct {
 
-	// The unique ID of the Amplify app to associate with the form.
+	// The unique ID for the Amplify app.
 	//
 	// This member is required.
 	AppId *string
+
+	// The code generation job resource configuration.
+	//
+	// This member is required.
+	CodegenJobToCreate *types.StartCodegenJobData
 
 	// The name of the backend environment that is a part of the Amplify app.
 	//
 	// This member is required.
 	EnvironmentName *string
 
-	// Represents the configuration of the form to create.
-	//
-	// This member is required.
-	FormToCreate *types.CreateFormData
-
-	// The unique client token.
+	// The idempotency token used to ensure that the code generation job request
+	// completes only once.
 	ClientToken *string
 
 	noSmithyDocumentSerde
 }
 
-type CreateFormOutput struct {
+type StartCodegenJobOutput struct {
 
-	// Describes the configuration of the new form.
-	Entity *types.Form
+	// The code generation job for a UI component that is associated with an Amplify
+	// app.
+	Entity *types.CodegenJob
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -62,12 +65,12 @@ type CreateFormOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationCreateFormMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateForm{}, middleware.After)
+func (c *Client) addOperationStartCodegenJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartCodegenJob{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateForm{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartCodegenJob{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -107,13 +110,13 @@ func (c *Client) addOperationCreateFormMiddlewares(stack *middleware.Stack, opti
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addIdempotencyToken_opCreateFormMiddleware(stack, options); err != nil {
+	if err = addIdempotencyToken_opStartCodegenJobMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addOpCreateFormValidationMiddleware(stack); err != nil {
+	if err = addOpStartCodegenJobValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateForm(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartCodegenJob(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -131,24 +134,24 @@ func (c *Client) addOperationCreateFormMiddlewares(stack *middleware.Stack, opti
 	return nil
 }
 
-type idempotencyToken_initializeOpCreateForm struct {
+type idempotencyToken_initializeOpStartCodegenJob struct {
 	tokenProvider IdempotencyTokenProvider
 }
 
-func (*idempotencyToken_initializeOpCreateForm) ID() string {
+func (*idempotencyToken_initializeOpStartCodegenJob) ID() string {
 	return "OperationIdempotencyTokenAutoFill"
 }
 
-func (m *idempotencyToken_initializeOpCreateForm) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+func (m *idempotencyToken_initializeOpStartCodegenJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
 	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
 ) {
 	if m.tokenProvider == nil {
 		return next.HandleInitialize(ctx, in)
 	}
 
-	input, ok := in.Parameters.(*CreateFormInput)
+	input, ok := in.Parameters.(*StartCodegenJobInput)
 	if !ok {
-		return out, metadata, fmt.Errorf("expected middleware input to be of type *CreateFormInput ")
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *StartCodegenJobInput ")
 	}
 
 	if input.ClientToken == nil {
@@ -160,15 +163,15 @@ func (m *idempotencyToken_initializeOpCreateForm) HandleInitialize(ctx context.C
 	}
 	return next.HandleInitialize(ctx, in)
 }
-func addIdempotencyToken_opCreateFormMiddleware(stack *middleware.Stack, cfg Options) error {
-	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateForm{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
+func addIdempotencyToken_opStartCodegenJobMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpStartCodegenJob{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
-func newServiceMetadataMiddleware_opCreateForm(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opStartCodegenJob(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "amplifyuibuilder",
-		OperationName: "CreateForm",
+		OperationName: "StartCodegenJob",
 	}
 }

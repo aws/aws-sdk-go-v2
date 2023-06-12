@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an Amazon FSx for ONTAP storage virtual machine (SVM).
+// Updates an FSx for ONTAP storage virtual machine (SVM).
 func (c *Client) UpdateStorageVirtualMachine(ctx context.Context, params *UpdateStorageVirtualMachineInput, optFns ...func(*Options)) (*UpdateStorageVirtualMachineOutput, error) {
 	if params == nil {
 		params = &UpdateStorageVirtualMachineInput{}
@@ -35,8 +35,7 @@ type UpdateStorageVirtualMachineInput struct {
 	// This member is required.
 	StorageVirtualMachineId *string
 
-	// Updates the Microsoft Active Directory (AD) configuration for an SVM that is
-	// joined to an AD.
+	// Specifies updates to an SVM's Microsoft Active Directory (AD) configuration.
 	ActiveDirectoryConfiguration *types.UpdateSvmActiveDirectoryConfiguration
 
 	// (Optional) An idempotency token for resource creation, in a string of up to 63
@@ -44,7 +43,7 @@ type UpdateStorageVirtualMachineInput struct {
 	// the Command Line Interface (CLI) or an Amazon Web Services SDK.
 	ClientRequestToken *string
 
-	// Enter a new SvmAdminPassword if you are updating it.
+	// Specifies a new SvmAdminPassword.
 	SvmAdminPassword *string
 
 	noSmithyDocumentSerde

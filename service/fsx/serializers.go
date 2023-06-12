@@ -3465,6 +3465,21 @@ func awsAwsjson11_serializeDocumentSelfManagedActiveDirectoryConfigurationUpdate
 		}
 	}
 
+	if v.DomainName != nil {
+		ok := object.Key("DomainName")
+		ok.String(*v.DomainName)
+	}
+
+	if v.FileSystemAdministratorsGroup != nil {
+		ok := object.Key("FileSystemAdministratorsGroup")
+		ok.String(*v.FileSystemAdministratorsGroup)
+	}
+
+	if v.OrganizationalUnitDistinguishedName != nil {
+		ok := object.Key("OrganizationalUnitDistinguishedName")
+		ok.String(*v.OrganizationalUnitDistinguishedName)
+	}
+
 	if v.Password != nil {
 		ok := object.Key("Password")
 		ok.String(*v.Password)
@@ -3966,6 +3981,11 @@ func awsAwsjson11_serializeDocumentUpdateOpenZFSVolumeConfiguration(v *types.Upd
 func awsAwsjson11_serializeDocumentUpdateSvmActiveDirectoryConfiguration(v *types.UpdateSvmActiveDirectoryConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.NetBiosName != nil {
+		ok := object.Key("NetBiosName")
+		ok.String(*v.NetBiosName)
+	}
 
 	if v.SelfManagedActiveDirectoryConfiguration != nil {
 		ok := object.Key("SelfManagedActiveDirectoryConfiguration")

@@ -1358,8 +1358,11 @@ type AutoMLJobChannel struct {
 
 	// The content type of the data from the input source. The following are the
 	// allowed content types for different problems:
-	//   - ImageClassification: image/png , image/jpeg , image/*
-	//   - TextClassification: text/csv;header=present
+	//   - ImageClassification: image/png , image/jpeg , or image/* . The default value
+	//   is image/* .
+	//   - TextClassification: text/csv;header=present or
+	//   x-application/vnd.amazon+parquet . The default value is
+	//   text/csv;header=present .
 	ContentType *string
 
 	// The data source for an AutoML channel.
@@ -5955,8 +5958,8 @@ type HyperParameterTrainingJobSummary struct {
 type HyperParameterTuningInstanceConfig struct {
 
 	// The number of instances of the type specified by InstanceType . Choose an
-	// instance count larger than 1 for distributed training algorithms. See SageMaker
-	// distributed training jobs (https://docs.aws.amazon.com/data-parallel-use-api.html)
+	// instance count larger than 1 for distributed training algorithms. See Step 2:
+	// Launch a SageMaker Distributed Training Job Using the SageMaker Python SDK (https://docs.aws.amazon.com/sagemaker/latest/dg/data-parallel-use-api.html)
 	// for more information.
 	//
 	// This member is required.
@@ -6315,7 +6318,7 @@ type HyperParameterTuningResourceConfig struct {
 	InstanceCount int32
 
 	// The instance type used to run hyperparameter optimization tuning jobs. See
-	// descriptions of instance types (https://docs.aws.amazon.com/notebooks-available-instance-types.html)
+	// descriptions of instance types (https://docs.aws.amazon.com/sagemaker/latest/dg/notebooks-available-instance-types.html)
 	// for more information.
 	InstanceType TrainingInstanceType
 

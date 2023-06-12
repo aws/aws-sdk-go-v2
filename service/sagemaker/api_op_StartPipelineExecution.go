@@ -36,7 +36,7 @@ type StartPipelineExecutionInput struct {
 	// This member is required.
 	ClientRequestToken *string
 
-	// The name of the pipeline.
+	// The name or Amazon Resource Name (ARN) of the pipeline.
 	//
 	// This member is required.
 	PipelineName *string

@@ -70,7 +70,9 @@ func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // specifications are complex, then DynamoDB might temporarily reduce the number of
 // concurrent operations. When importing into DynamoDB, up to 50 simultaneous
 // import table operations are allowed per account. There is a soft account quota
-// of 2,500 tables.
+// of 2,500 tables. GetRecords was called with a value of more than 1000 for the
+// limit request parameter. More than 2 processes are reading from the same streams
+// shard at the same time. Exceeding this limit may result in request throttling.
 type LimitExceededException struct {
 	Message *string
 

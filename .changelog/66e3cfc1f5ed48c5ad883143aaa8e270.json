@@ -1,0 +1,8 @@
+{
+    "id": "66e3cfc1-f5ed-48c5-ad88-3143aaa8e270",
+    "type": "feature",
+    "description": "This release adds support for SkipUnavailable connection property for cross cluster search",
+    "modules": [
+        "service/opensearch"
+    ]
+}

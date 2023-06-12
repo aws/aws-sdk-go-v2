@@ -51,6 +51,9 @@ type CreateOutboundConnectionInput struct {
 	// The connection mode.
 	ConnectionMode types.ConnectionMode
 
+	// The ConnectionProperties for the outbound connection.
+	ConnectionProperties *types.ConnectionProperties
+
 	noSmithyDocumentSerde
 }
 

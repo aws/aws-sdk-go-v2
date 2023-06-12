@@ -565,8 +565,21 @@ type CompatibleVersionsMap struct {
 // The connection properties of an outbound connection.
 type ConnectionProperties struct {
 
-	// The endpoint of the remote domain.
+	// The connection properties for cross cluster search.
+	CrossClusterSearch *CrossClusterSearchConnectionProperties
+
+	// The Endpoint attribute cannot be modified. The endpoint of the remote domain.
+	// Applicable for VPC_ENDPOINT connection mode.
 	Endpoint *string
+
+	noSmithyDocumentSerde
+}
+
+// Cross cluster search specific connection properties.
+type CrossClusterSearchConnectionProperties struct {
+
+	// Status of SkipUnavailable param for outbound connection.
+	SkipUnavailable SkipUnavailableStatus
 
 	noSmithyDocumentSerde
 }

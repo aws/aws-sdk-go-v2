@@ -31,7 +31,7 @@ func (c *Client) ListPipelineExecutions(ctx context.Context, params *ListPipelin
 
 type ListPipelineExecutionsInput struct {
 
-	// The name of the pipeline.
+	// The name or Amazon Resource Name (ARN) of the pipeline.
 	//
 	// This member is required.
 	PipelineName *string

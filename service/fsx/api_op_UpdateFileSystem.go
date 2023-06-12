@@ -87,7 +87,7 @@ type UpdateFileSystemInput struct {
 	// The configuration updates for an Amazon FSx for NetApp ONTAP file system.
 	OntapConfiguration *types.UpdateFileSystemOntapConfiguration
 
-	// The configuration updates for an Amazon FSx for OpenZFS file system.
+	// The configuration updates for an FSx for OpenZFS file system.
 	OpenZFSConfiguration *types.UpdateFileSystemOpenZFSConfiguration
 
 	// Use this parameter to increase the storage capacity of an FSx for Windows File
@@ -114,8 +114,8 @@ type UpdateFileSystemInput struct {
 	// storage capacity value. To increase storage capacity, the file system must have
 	// at least 16 MBps of throughput capacity. For more information, see Managing
 	// storage capacity (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html)
-	// in the Amazon FSx for Windows File Server User Guide. For ONTAP file systems,
-	// the storage capacity target value must be at least 10 percent greater than the
+	// in the Amazon FSxfor Windows File Server User Guide. For ONTAP file systems, the
+	// storage capacity target value must be at least 10 percent greater than the
 	// current storage capacity value. For more information, see Managing storage
 	// capacity and provisioned IOPS (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-storage-capacity.html)
 	// in the Amazon FSx for NetApp ONTAP User Guide.

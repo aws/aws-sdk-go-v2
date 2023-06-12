@@ -891,6 +891,24 @@ func (ScheduledBy) Values() []ScheduledBy {
 	}
 }
 
+type SkipUnavailableStatus string
+
+// Enum values for SkipUnavailableStatus
+const (
+	SkipUnavailableStatusEnabled  SkipUnavailableStatus = "ENABLED"
+	SkipUnavailableStatusDisabled SkipUnavailableStatus = "DISABLED"
+)
+
+// Values returns all known values for SkipUnavailableStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SkipUnavailableStatus) Values() []SkipUnavailableStatus {
+	return []SkipUnavailableStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type TimeUnit string
 
 // Enum values for TimeUnit

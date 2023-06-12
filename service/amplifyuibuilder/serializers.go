@@ -823,6 +823,82 @@ func awsRestjson1_serializeOpHttpBindingsExportThemesInput(v *ExportThemesInput,
 	return nil
 }
 
+type awsRestjson1_serializeOpGetCodegenJob struct {
+}
+
+func (*awsRestjson1_serializeOpGetCodegenJob) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetCodegenJob) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetCodegenJobInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/app/{appId}/environment/{environmentName}/codegen-jobs/{id}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetCodegenJobInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetCodegenJobInput(v *GetCodegenJobInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AppId == nil || len(*v.AppId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member appId must not be empty")}
+	}
+	if v.AppId != nil {
+		if err := encoder.SetURI("appId").String(*v.AppId); err != nil {
+			return err
+		}
+	}
+
+	if v.EnvironmentName == nil || len(*v.EnvironmentName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member environmentName must not be empty")}
+	}
+	if v.EnvironmentName != nil {
+		if err := encoder.SetURI("environmentName").String(*v.EnvironmentName); err != nil {
+			return err
+		}
+	}
+
+	if v.Id == nil || len(*v.Id) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member id must not be empty")}
+	}
+	if v.Id != nil {
+		if err := encoder.SetURI("id").String(*v.Id); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpGetComponent struct {
 }
 
@@ -1113,6 +1189,81 @@ func awsRestjson1_serializeOpHttpBindingsGetThemeInput(v *GetThemeInput, encoder
 		if err := encoder.SetURI("id").String(*v.Id); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListCodegenJobs struct {
+}
+
+func (*awsRestjson1_serializeOpListCodegenJobs) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListCodegenJobs) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListCodegenJobsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/app/{appId}/environment/{environmentName}/codegen-jobs")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListCodegenJobsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListCodegenJobsInput(v *ListCodegenJobsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AppId == nil || len(*v.AppId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member appId must not be empty")}
+	}
+	if v.AppId != nil {
+		if err := encoder.SetURI("appId").String(*v.AppId); err != nil {
+			return err
+		}
+	}
+
+	if v.EnvironmentName == nil || len(*v.EnvironmentName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member environmentName must not be empty")}
+	}
+	if v.EnvironmentName != nil {
+		if err := encoder.SetURI("environmentName").String(*v.EnvironmentName); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
 	}
 
 	return nil
@@ -1525,6 +1676,101 @@ func awsRestjson1_serializeOpHttpBindingsRefreshTokenInput(v *RefreshTokenInput,
 	return nil
 }
 
+type awsRestjson1_serializeOpStartCodegenJob struct {
+}
+
+func (*awsRestjson1_serializeOpStartCodegenJob) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpStartCodegenJob) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StartCodegenJobInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/app/{appId}/environment/{environmentName}/codegen-jobs")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsStartCodegenJobInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
+		restEncoder.SetHeader("Content-Type").String("application/json")
+	}
+
+	if input.CodegenJobToCreate != nil {
+		jsonEncoder := smithyjson.NewEncoder()
+		if err := awsRestjson1_serializeDocumentStartCodegenJobData(input.CodegenJobToCreate, jsonEncoder.Value); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+	} else {
+		jsonEncoder := smithyjson.NewEncoder()
+		jsonEncoder.Value.Object().Close()
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsStartCodegenJobInput(v *StartCodegenJobInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AppId == nil || len(*v.AppId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member appId must not be empty")}
+	}
+	if v.AppId != nil {
+		if err := encoder.SetURI("appId").String(*v.AppId); err != nil {
+			return err
+		}
+	}
+
+	if v.ClientToken != nil {
+		encoder.SetQuery("clientToken").String(*v.ClientToken)
+	}
+
+	if v.EnvironmentName == nil || len(*v.EnvironmentName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member environmentName must not be empty")}
+	}
+	if v.EnvironmentName != nil {
+		if err := encoder.SetURI("environmentName").String(*v.EnvironmentName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpUpdateComponent struct {
 }
 
@@ -1902,6 +2148,326 @@ func awsRestjson1_serializeDocumentActionParameters(v *types.ActionParameters, v
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssociatedFieldsList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCodegenFeatureFlags(v *types.CodegenFeatureFlags, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IsNonModelSupported != nil {
+		ok := object.Key("isNonModelSupported")
+		ok.Boolean(*v.IsNonModelSupported)
+	}
+
+	if v.IsRelationshipSupported != nil {
+		ok := object.Key("isRelationshipSupported")
+		ok.Boolean(*v.IsRelationshipSupported)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCodegenGenericDataEnum(v *types.CodegenGenericDataEnum, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Values != nil {
+		ok := object.Key("values")
+		if err := awsRestjson1_serializeDocumentCodegenGenericDataEnumValuesList(v.Values, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCodegenGenericDataEnums(v map[string]types.CodegenGenericDataEnum, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		mapVar := v[key]
+		if err := awsRestjson1_serializeDocumentCodegenGenericDataEnum(&mapVar, om); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCodegenGenericDataEnumValuesList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCodegenGenericDataField(v *types.CodegenGenericDataField, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.DataType) > 0 {
+		ok := object.Key("dataType")
+		ok.String(string(v.DataType))
+	}
+
+	if v.DataTypeValue != nil {
+		ok := object.Key("dataTypeValue")
+		ok.String(*v.DataTypeValue)
+	}
+
+	if v.IsArray != nil {
+		ok := object.Key("isArray")
+		ok.Boolean(*v.IsArray)
+	}
+
+	if v.ReadOnly != nil {
+		ok := object.Key("readOnly")
+		ok.Boolean(*v.ReadOnly)
+	}
+
+	if v.Relationship != nil {
+		ok := object.Key("relationship")
+		if err := awsRestjson1_serializeDocumentCodegenGenericDataRelationshipType(v.Relationship, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Required != nil {
+		ok := object.Key("required")
+		ok.Boolean(*v.Required)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCodegenGenericDataFields(v map[string]types.CodegenGenericDataField, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		mapVar := v[key]
+		if err := awsRestjson1_serializeDocumentCodegenGenericDataField(&mapVar, om); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCodegenGenericDataModel(v *types.CodegenGenericDataModel, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Fields != nil {
+		ok := object.Key("fields")
+		if err := awsRestjson1_serializeDocumentCodegenGenericDataFields(v.Fields, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.IsJoinTable != nil {
+		ok := object.Key("isJoinTable")
+		ok.Boolean(*v.IsJoinTable)
+	}
+
+	if v.PrimaryKeys != nil {
+		ok := object.Key("primaryKeys")
+		if err := awsRestjson1_serializeDocumentCodegenPrimaryKeysList(v.PrimaryKeys, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCodegenGenericDataModels(v map[string]types.CodegenGenericDataModel, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		mapVar := v[key]
+		if err := awsRestjson1_serializeDocumentCodegenGenericDataModel(&mapVar, om); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCodegenGenericDataNonModel(v *types.CodegenGenericDataNonModel, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Fields != nil {
+		ok := object.Key("fields")
+		if err := awsRestjson1_serializeDocumentCodegenGenericDataNonModelFields(v.Fields, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCodegenGenericDataNonModelFields(v map[string]types.CodegenGenericDataField, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		mapVar := v[key]
+		if err := awsRestjson1_serializeDocumentCodegenGenericDataField(&mapVar, om); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCodegenGenericDataNonModels(v map[string]types.CodegenGenericDataNonModel, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		mapVar := v[key]
+		if err := awsRestjson1_serializeDocumentCodegenGenericDataNonModel(&mapVar, om); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCodegenGenericDataRelationshipType(v *types.CodegenGenericDataRelationshipType, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AssociatedFields != nil {
+		ok := object.Key("associatedFields")
+		if err := awsRestjson1_serializeDocumentAssociatedFieldsList(v.AssociatedFields, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.BelongsToFieldOnRelatedModel != nil {
+		ok := object.Key("belongsToFieldOnRelatedModel")
+		ok.String(*v.BelongsToFieldOnRelatedModel)
+	}
+
+	if v.CanUnlinkAssociatedModel != nil {
+		ok := object.Key("canUnlinkAssociatedModel")
+		ok.Boolean(*v.CanUnlinkAssociatedModel)
+	}
+
+	if v.IsHasManyIndex != nil {
+		ok := object.Key("isHasManyIndex")
+		ok.Boolean(*v.IsHasManyIndex)
+	}
+
+	if v.RelatedJoinFieldName != nil {
+		ok := object.Key("relatedJoinFieldName")
+		ok.String(*v.RelatedJoinFieldName)
+	}
+
+	if v.RelatedJoinTableName != nil {
+		ok := object.Key("relatedJoinTableName")
+		ok.String(*v.RelatedJoinTableName)
+	}
+
+	if v.RelatedModelFields != nil {
+		ok := object.Key("relatedModelFields")
+		if err := awsRestjson1_serializeDocumentRelatedModelFieldsList(v.RelatedModelFields, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RelatedModelName != nil {
+		ok := object.Key("relatedModelName")
+		ok.String(*v.RelatedModelName)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCodegenJobGenericDataSchema(v *types.CodegenJobGenericDataSchema, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.DataSourceType) > 0 {
+		ok := object.Key("dataSourceType")
+		ok.String(string(v.DataSourceType))
+	}
+
+	if v.Enums != nil {
+		ok := object.Key("enums")
+		if err := awsRestjson1_serializeDocumentCodegenGenericDataEnums(v.Enums, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Models != nil {
+		ok := object.Key("models")
+		if err := awsRestjson1_serializeDocumentCodegenGenericDataModels(v.Models, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NonModels != nil {
+		ok := object.Key("nonModels")
+		if err := awsRestjson1_serializeDocumentCodegenGenericDataNonModels(v.NonModels, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCodegenJobRenderConfig(v types.CodegenJobRenderConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.CodegenJobRenderConfigMemberReact:
+		av := object.Key("react")
+		if err := awsRestjson1_serializeDocumentReactStartCodegenJobData(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCodegenPrimaryKeysList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 
@@ -3236,6 +3802,38 @@ func awsRestjson1_serializeDocumentPutMetadataFlagBody(v *types.PutMetadataFlagB
 	return nil
 }
 
+func awsRestjson1_serializeDocumentReactStartCodegenJobData(v *types.ReactStartCodegenJobData, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.InlineSourceMap {
+		ok := object.Key("inlineSourceMap")
+		ok.Boolean(v.InlineSourceMap)
+	}
+
+	if len(v.Module) > 0 {
+		ok := object.Key("module")
+		ok.String(string(v.Module))
+	}
+
+	if v.RenderTypeDeclarations {
+		ok := object.Key("renderTypeDeclarations")
+		ok.Boolean(v.RenderTypeDeclarations)
+	}
+
+	if len(v.Script) > 0 {
+		ok := object.Key("script")
+		ok.String(string(v.Script))
+	}
+
+	if len(v.Target) > 0 {
+		ok := object.Key("target")
+		ok.String(string(v.Target))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentRefreshTokenRequestBody(v *types.RefreshTokenRequestBody, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3250,6 +3848,17 @@ func awsRestjson1_serializeDocumentRefreshTokenRequestBody(v *types.RefreshToken
 		ok.String(*v.Token)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRelatedModelFieldsList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 
@@ -3333,6 +3942,46 @@ func awsRestjson1_serializeDocumentSortPropertyList(v []types.SortProperty, valu
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentStartCodegenJobData(v *types.StartCodegenJobData, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AutoGenerateForms != nil {
+		ok := object.Key("autoGenerateForms")
+		ok.Boolean(*v.AutoGenerateForms)
+	}
+
+	if v.Features != nil {
+		ok := object.Key("features")
+		if err := awsRestjson1_serializeDocumentCodegenFeatureFlags(v.Features, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.GenericDataSchema != nil {
+		ok := object.Key("genericDataSchema")
+		if err := awsRestjson1_serializeDocumentCodegenJobGenericDataSchema(v.GenericDataSchema, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RenderConfig != nil {
+		ok := object.Key("renderConfig")
+		if err := awsRestjson1_serializeDocumentCodegenJobRenderConfig(v.RenderConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentTags(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 

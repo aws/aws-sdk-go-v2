@@ -194,8 +194,8 @@ type Record struct {
 	//   - REMOVE - the item was deleted from the table
 	EventName OperationType
 
-	// The AWS service from which the stream record originated. For DynamoDB Streams,
-	// this is aws:dynamodb .
+	// The Amazon Web Services service from which the stream record originated. For
+	// DynamoDB Streams, this is aws:dynamodb .
 	EventSource *string
 
 	// The version number of the stream record format. This number is updated whenever
@@ -254,7 +254,7 @@ type Stream struct {
 	// is not a unique identifier for the stream, because it is possible that a stream
 	// from another table might have the same timestamp. However, the combination of
 	// the following three elements is guaranteed to be unique:
-	//   - the AWS customer ID.
+	//   - the Amazon Web Services customer ID.
 	//   - the table name
 	//   - the StreamLabel
 	StreamLabel *string
@@ -293,7 +293,7 @@ type StreamDescription struct {
 	// is not a unique identifier for the stream, because it is possible that a stream
 	// from another table might have the same timestamp. However, the combination of
 	// the following three elements is guaranteed to be unique:
-	//   - the AWS customer ID.
+	//   - the Amazon Web Services customer ID.
 	//   - the table name
 	//   - the StreamLabel
 	StreamLabel *string
@@ -327,7 +327,8 @@ type StreamDescription struct {
 type StreamRecord struct {
 
 	// The approximate date and time when the stream record was created, in UNIX epoch
-	// time (http://www.epochconverter.com/) format.
+	// time (http://www.epochconverter.com/) format and rounded down to the closest
+	// second.
 	ApproximateCreationDateTime *time.Time
 
 	// The primary key attribute(s) for the DynamoDB item that was modified.

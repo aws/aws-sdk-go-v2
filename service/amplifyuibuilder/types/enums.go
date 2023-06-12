@@ -2,6 +2,92 @@
 
 package types
 
+type CodegenGenericDataFieldDataType string
+
+// Enum values for CodegenGenericDataFieldDataType
+const (
+	CodegenGenericDataFieldDataTypeId           CodegenGenericDataFieldDataType = "ID"
+	CodegenGenericDataFieldDataTypeString       CodegenGenericDataFieldDataType = "String"
+	CodegenGenericDataFieldDataTypeInt          CodegenGenericDataFieldDataType = "Int"
+	CodegenGenericDataFieldDataTypeFloat        CodegenGenericDataFieldDataType = "Float"
+	CodegenGenericDataFieldDataTypeAwsDate      CodegenGenericDataFieldDataType = "AWSDate"
+	CodegenGenericDataFieldDataTypeAwsTime      CodegenGenericDataFieldDataType = "AWSTime"
+	CodegenGenericDataFieldDataTypeAwsDateTime  CodegenGenericDataFieldDataType = "AWSDateTime"
+	CodegenGenericDataFieldDataTypeAwsTimestamp CodegenGenericDataFieldDataType = "AWSTimestamp"
+	CodegenGenericDataFieldDataTypeAwsEmail     CodegenGenericDataFieldDataType = "AWSEmail"
+	CodegenGenericDataFieldDataTypeAwsUrl       CodegenGenericDataFieldDataType = "AWSURL"
+	CodegenGenericDataFieldDataTypeAwsIpAddress CodegenGenericDataFieldDataType = "AWSIPAddress"
+	CodegenGenericDataFieldDataTypeBoolean      CodegenGenericDataFieldDataType = "Boolean"
+	CodegenGenericDataFieldDataTypeAwsJson      CodegenGenericDataFieldDataType = "AWSJSON"
+	CodegenGenericDataFieldDataTypeAwsPhone     CodegenGenericDataFieldDataType = "AWSPhone"
+	CodegenGenericDataFieldDataTypeEnum         CodegenGenericDataFieldDataType = "Enum"
+	CodegenGenericDataFieldDataTypeModel        CodegenGenericDataFieldDataType = "Model"
+	CodegenGenericDataFieldDataTypeNonModel     CodegenGenericDataFieldDataType = "NonModel"
+)
+
+// Values returns all known values for CodegenGenericDataFieldDataType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (CodegenGenericDataFieldDataType) Values() []CodegenGenericDataFieldDataType {
+	return []CodegenGenericDataFieldDataType{
+		"ID",
+		"String",
+		"Int",
+		"Float",
+		"AWSDate",
+		"AWSTime",
+		"AWSDateTime",
+		"AWSTimestamp",
+		"AWSEmail",
+		"AWSURL",
+		"AWSIPAddress",
+		"Boolean",
+		"AWSJSON",
+		"AWSPhone",
+		"Enum",
+		"Model",
+		"NonModel",
+	}
+}
+
+type CodegenJobGenericDataSourceType string
+
+// Enum values for CodegenJobGenericDataSourceType
+const (
+	CodegenJobGenericDataSourceTypeDataStore CodegenJobGenericDataSourceType = "DataStore"
+)
+
+// Values returns all known values for CodegenJobGenericDataSourceType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (CodegenJobGenericDataSourceType) Values() []CodegenJobGenericDataSourceType {
+	return []CodegenJobGenericDataSourceType{
+		"DataStore",
+	}
+}
+
+type CodegenJobStatus string
+
+// Enum values for CodegenJobStatus
+const (
+	CodegenJobStatusInProgress CodegenJobStatus = "in_progress"
+	CodegenJobStatusFailed     CodegenJobStatus = "failed"
+	CodegenJobStatusSucceeded  CodegenJobStatus = "succeeded"
+)
+
+// Values returns all known values for CodegenJobStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CodegenJobStatus) Values() []CodegenJobStatus {
+	return []CodegenJobStatus{
+		"in_progress",
+		"failed",
+		"succeeded",
+	}
+}
+
 type FixedPosition string
 
 // Enum values for FixedPosition
@@ -73,6 +159,82 @@ func (FormDataSourceType) Values() []FormDataSourceType {
 	return []FormDataSourceType{
 		"DataStore",
 		"Custom",
+	}
+}
+
+type GenericDataRelationshipType string
+
+// Enum values for GenericDataRelationshipType
+const (
+	GenericDataRelationshipTypeHasMany   GenericDataRelationshipType = "HAS_MANY"
+	GenericDataRelationshipTypeHasOne    GenericDataRelationshipType = "HAS_ONE"
+	GenericDataRelationshipTypeBelongsTo GenericDataRelationshipType = "BELONGS_TO"
+)
+
+// Values returns all known values for GenericDataRelationshipType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GenericDataRelationshipType) Values() []GenericDataRelationshipType {
+	return []GenericDataRelationshipType{
+		"HAS_MANY",
+		"HAS_ONE",
+		"BELONGS_TO",
+	}
+}
+
+type JSModule string
+
+// Enum values for JSModule
+const (
+	JSModuleEs2020 JSModule = "es2020"
+	JSModuleEsnext JSModule = "esnext"
+)
+
+// Values returns all known values for JSModule. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (JSModule) Values() []JSModule {
+	return []JSModule{
+		"es2020",
+		"esnext",
+	}
+}
+
+type JSScript string
+
+// Enum values for JSScript
+const (
+	JSScriptJsx JSScript = "jsx"
+	JSScriptTsx JSScript = "tsx"
+	JSScriptJs  JSScript = "js"
+)
+
+// Values returns all known values for JSScript. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (JSScript) Values() []JSScript {
+	return []JSScript{
+		"jsx",
+		"tsx",
+		"js",
+	}
+}
+
+type JSTarget string
+
+// Enum values for JSTarget
+const (
+	JSTargetEs2015 JSTarget = "es2015"
+	JSTargetEs2020 JSTarget = "es2020"
+)
+
+// Values returns all known values for JSTarget. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (JSTarget) Values() []JSTarget {
+	return []JSTarget{
+		"es2015",
+		"es2020",
 	}
 }
 

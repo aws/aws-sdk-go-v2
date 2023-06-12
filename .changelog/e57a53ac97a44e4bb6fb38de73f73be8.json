@@ -1,0 +1,8 @@
+{
+    "id": "e57a53ac-97a4-4e4b-b6fb-38de73f73be8",
+    "type": "feature",
+    "description": "Amazon FSx for NetApp ONTAP now supports joining a storage virtual machine (SVM) to Active Directory after the SVM has been created.",
+    "modules": [
+        "service/fsx"
+    ]
+}

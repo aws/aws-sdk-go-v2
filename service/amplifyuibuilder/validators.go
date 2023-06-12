@@ -210,6 +210,26 @@ func (m *validateOpExportThemes) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetCodegenJob struct {
+}
+
+func (*validateOpGetCodegenJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCodegenJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCodegenJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCodegenJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetComponent struct {
 }
 
@@ -285,6 +305,26 @@ func (m *validateOpGetTheme) HandleInitialize(ctx context.Context, in middleware
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetThemeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListCodegenJobs struct {
+}
+
+func (*validateOpListCodegenJobs) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListCodegenJobs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListCodegenJobsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListCodegenJobsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -390,6 +430,26 @@ func (m *validateOpRefreshToken) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartCodegenJob struct {
+}
+
+func (*validateOpStartCodegenJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartCodegenJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartCodegenJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartCodegenJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateComponent struct {
 }
 
@@ -490,6 +550,10 @@ func addOpExportThemesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpExportThemes{}, middleware.After)
 }
 
+func addOpGetCodegenJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCodegenJob{}, middleware.After)
+}
+
 func addOpGetComponentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetComponent{}, middleware.After)
 }
@@ -504,6 +568,10 @@ func addOpGetMetadataValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetThemeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetTheme{}, middleware.After)
+}
+
+func addOpListCodegenJobsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListCodegenJobs{}, middleware.After)
 }
 
 func addOpListComponentsValidationMiddleware(stack *middleware.Stack) error {
@@ -524,6 +592,10 @@ func addOpPutMetadataFlagValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpRefreshTokenValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRefreshToken{}, middleware.After)
+}
+
+func addOpStartCodegenJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartCodegenJob{}, middleware.After)
 }
 
 func addOpUpdateComponentValidationMiddleware(stack *middleware.Stack) error {
@@ -581,6 +653,238 @@ func validateActionParameters(v *types.ActionParameters) error {
 	if v.State != nil {
 		if err := validateMutationActionSetStateParameter(v.State); err != nil {
 			invalidParams.AddNested("State", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCodegenGenericDataEnum(v *types.CodegenGenericDataEnum) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CodegenGenericDataEnum"}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCodegenGenericDataEnums(v map[string]types.CodegenGenericDataEnum) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CodegenGenericDataEnums"}
+	for key := range v {
+		value := v[key]
+		if err := validateCodegenGenericDataEnum(&value); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCodegenGenericDataField(v *types.CodegenGenericDataField) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CodegenGenericDataField"}
+	if len(v.DataType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DataType"))
+	}
+	if v.DataTypeValue == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataTypeValue"))
+	}
+	if v.Required == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Required"))
+	}
+	if v.ReadOnly == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReadOnly"))
+	}
+	if v.IsArray == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IsArray"))
+	}
+	if v.Relationship != nil {
+		if err := validateCodegenGenericDataRelationshipType(v.Relationship); err != nil {
+			invalidParams.AddNested("Relationship", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCodegenGenericDataFields(v map[string]types.CodegenGenericDataField) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CodegenGenericDataFields"}
+	for key := range v {
+		value := v[key]
+		if err := validateCodegenGenericDataField(&value); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCodegenGenericDataModel(v *types.CodegenGenericDataModel) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CodegenGenericDataModel"}
+	if v.Fields == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Fields"))
+	} else if v.Fields != nil {
+		if err := validateCodegenGenericDataFields(v.Fields); err != nil {
+			invalidParams.AddNested("Fields", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PrimaryKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrimaryKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCodegenGenericDataModels(v map[string]types.CodegenGenericDataModel) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CodegenGenericDataModels"}
+	for key := range v {
+		value := v[key]
+		if err := validateCodegenGenericDataModel(&value); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCodegenGenericDataNonModel(v *types.CodegenGenericDataNonModel) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CodegenGenericDataNonModel"}
+	if v.Fields == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Fields"))
+	} else if v.Fields != nil {
+		if err := validateCodegenGenericDataNonModelFields(v.Fields); err != nil {
+			invalidParams.AddNested("Fields", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCodegenGenericDataNonModelFields(v map[string]types.CodegenGenericDataField) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CodegenGenericDataNonModelFields"}
+	for key := range v {
+		value := v[key]
+		if err := validateCodegenGenericDataField(&value); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCodegenGenericDataNonModels(v map[string]types.CodegenGenericDataNonModel) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CodegenGenericDataNonModels"}
+	for key := range v {
+		value := v[key]
+		if err := validateCodegenGenericDataNonModel(&value); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCodegenGenericDataRelationshipType(v *types.CodegenGenericDataRelationshipType) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CodegenGenericDataRelationshipType"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.RelatedModelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RelatedModelName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCodegenJobGenericDataSchema(v *types.CodegenJobGenericDataSchema) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CodegenJobGenericDataSchema"}
+	if len(v.DataSourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSourceType"))
+	}
+	if v.Models == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Models"))
+	} else if v.Models != nil {
+		if err := validateCodegenGenericDataModels(v.Models); err != nil {
+			invalidParams.AddNested("Models", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Enums == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Enums"))
+	} else if v.Enums != nil {
+		if err := validateCodegenGenericDataEnums(v.Enums); err != nil {
+			invalidParams.AddNested("Enums", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.NonModels == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NonModels"))
+	} else if v.NonModels != nil {
+		if err := validateCodegenGenericDataNonModels(v.NonModels); err != nil {
+			invalidParams.AddNested("NonModels", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1283,6 +1587,26 @@ func validateSortPropertyList(v []types.SortProperty) error {
 	}
 }
 
+func validateStartCodegenJobData(v *types.StartCodegenJobData) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartCodegenJobData"}
+	if v.RenderConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RenderConfig"))
+	}
+	if v.GenericDataSchema != nil {
+		if err := validateCodegenJobGenericDataSchema(v.GenericDataSchema); err != nil {
+			invalidParams.AddNested("GenericDataSchema", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateUpdateComponentData(v *types.UpdateComponentData) error {
 	if v == nil {
 		return nil
@@ -1648,6 +1972,27 @@ func validateOpExportThemesInput(v *ExportThemesInput) error {
 	}
 }
 
+func validateOpGetCodegenJobInput(v *GetCodegenJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCodegenJobInput"}
+	if v.AppId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppId"))
+	}
+	if v.EnvironmentName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentName"))
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetComponentInput(v *GetComponentInput) error {
 	if v == nil {
 		return nil
@@ -1721,6 +2066,24 @@ func validateOpGetThemeInput(v *GetThemeInput) error {
 	}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListCodegenJobsInput(v *ListCodegenJobsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCodegenJobsInput"}
+	if v.AppId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppId"))
+	}
+	if v.EnvironmentName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1824,6 +2187,31 @@ func validateOpRefreshTokenInput(v *RefreshTokenInput) error {
 	} else if v.RefreshTokenBody != nil {
 		if err := validateRefreshTokenRequestBody(v.RefreshTokenBody); err != nil {
 			invalidParams.AddNested("RefreshTokenBody", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartCodegenJobInput(v *StartCodegenJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartCodegenJobInput"}
+	if v.AppId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AppId"))
+	}
+	if v.EnvironmentName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentName"))
+	}
+	if v.CodegenJobToCreate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CodegenJobToCreate"))
+	} else if v.CodegenJobToCreate != nil {
+		if err := validateStartCodegenJobData(v.CodegenJobToCreate); err != nil {
+			invalidParams.AddNested("CodegenJobToCreate", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

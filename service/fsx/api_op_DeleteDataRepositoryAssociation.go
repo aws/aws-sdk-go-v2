@@ -16,8 +16,8 @@ import (
 // Deleting the data repository association unlinks the file system from the Amazon
 // S3 bucket. When deleting a data repository association, you have the option of
 // deleting the data in the file system that corresponds to the data repository
-// association. Data repository associations are supported for all file systems
-// except for Scratch_1 deployment type.
+// association. Data repository associations are supported on all FSx for Lustre
+// 2.12 and newer file systems, excluding scratch_1 deployment type.
 func (c *Client) DeleteDataRepositoryAssociation(ctx context.Context, params *DeleteDataRepositoryAssociationInput, optFns ...func(*Options)) (*DeleteDataRepositoryAssociationOutput, error) {
 	if params == nil {
 		params = &DeleteDataRepositoryAssociationInput{}

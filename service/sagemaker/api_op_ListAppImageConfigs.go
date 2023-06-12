@@ -41,8 +41,10 @@ type ListAppImageConfigsInput struct {
 	// time.
 	CreationTimeBefore *time.Time
 
-	// The maximum number of AppImageConfigs to return in the response. The default
-	// value is 10.
+	// The total number of items to return in the response. If the total number of
+	// items available is more than the value specified, a NextToken is provided in
+	// the response. To resume pagination, provide the NextToken value in the as part
+	// of a subsequent call. The default value is 10.
 	MaxResults *int32
 
 	// A filter that returns only AppImageConfigs modified on or after the specified
@@ -159,8 +161,10 @@ var _ ListAppImageConfigsAPIClient = (*Client)(nil)
 // ListAppImageConfigsPaginatorOptions is the paginator options for
 // ListAppImageConfigs
 type ListAppImageConfigsPaginatorOptions struct {
-	// The maximum number of AppImageConfigs to return in the response. The default
-	// value is 10.
+	// The total number of items to return in the response. If the total number of
+	// items available is more than the value specified, a NextToken is provided in
+	// the response. To resume pagination, provide the NextToken value in the as part
+	// of a subsequent call. The default value is 10.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token
