@@ -82,6 +82,9 @@
             ],
             "resources": [
                 {
+                    "target": "com.amazonaws.amplifyuibuilder#CodegenJobResource"
+                },
+                {
                     "target": "com.amazonaws.amplifyuibuilder#ComponentResource"
                 },
                 {
@@ -489,8 +492,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -502,8 +505,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -515,8 +518,8 @@
                             },
                             "params": {
                                 "Region": "ap-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -528,8 +531,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -541,8 +544,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -554,8 +557,8 @@
                             },
                             "params": {
                                 "Region": "ca-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -567,8 +570,8 @@
                             },
                             "params": {
                                 "Region": "eu-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -580,8 +583,8 @@
                             },
                             "params": {
                                 "Region": "eu-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -593,8 +596,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -606,8 +609,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -619,8 +622,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -632,8 +635,8 @@
                             },
                             "params": {
                                 "Region": "me-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -645,8 +648,8 @@
                             },
                             "params": {
                                 "Region": "sa-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -658,8 +661,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -671,8 +674,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -684,8 +687,8 @@
                             },
                             "params": {
                                 "Region": "us-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -697,8 +700,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -710,8 +713,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -723,8 +726,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -736,8 +739,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -749,8 +752,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -762,8 +765,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -775,8 +778,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -788,8 +791,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -801,8 +804,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -814,8 +817,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -827,8 +830,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -840,8 +843,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -851,8 +854,8 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -864,8 +867,8 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -875,8 +878,8 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -888,8 +891,8 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -899,8 +902,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -912,8 +915,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -923,8 +926,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -936,8 +939,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -949,8 +952,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -962,8 +965,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -974,8 +977,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -986,8 +989,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1000,6 +1003,666 @@
                     ],
                     "version": "1.0"
                 }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#AppId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
+                },
+                "smithy.api#pattern": "^d[a-z0-9]+$"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#AssociatedFieldsList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#CodegenFeatureFlags": {
+            "type": "structure",
+            "members": {
+                "isRelationshipSupported": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifes whether a code generation job supports data relationships.</p>"
+                    }
+                },
+                "isNonModelSupported": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether a code generation job supports non models.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the feature flags that you can specify for a code generation job.</p>"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#CodegenGenericDataEnum": {
+            "type": "structure",
+            "members": {
+                "values": {
+                    "target": "com.amazonaws.amplifyuibuilder#CodegenGenericDataEnumValuesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of enum values in the generic data schema.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the enums in a generic data schema.</p>"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#CodegenGenericDataEnumValuesList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#CodegenGenericDataEnums": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "com.amazonaws.amplifyuibuilder#CodegenGenericDataEnum"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#CodegenGenericDataField": {
+            "type": "structure",
+            "members": {
+                "dataType": {
+                    "target": "com.amazonaws.amplifyuibuilder#CodegenGenericDataFieldDataType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data type for the generic data field.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "dataTypeValue": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the data type for the generic data field.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "required": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the generic data field is required.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "readOnly": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the generic data field is read-only.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "isArray": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the generic data field is an array.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "relationship": {
+                    "target": "com.amazonaws.amplifyuibuilder#CodegenGenericDataRelationshipType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The relationship of the generic data schema.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a field in a generic data schema.</p>"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#CodegenGenericDataFieldDataType": {
+            "type": "enum",
+            "members": {
+                "ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ID"
+                    }
+                },
+                "STRING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "String"
+                    }
+                },
+                "INT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Int"
+                    }
+                },
+                "FLOAT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Float"
+                    }
+                },
+                "AWS_DATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWSDate"
+                    }
+                },
+                "AWS_TIME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWSTime"
+                    }
+                },
+                "AWS_DATE_TIME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWSDateTime"
+                    }
+                },
+                "AWS_TIMESTAMP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWSTimestamp"
+                    }
+                },
+                "AWS_EMAIL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWSEmail"
+                    }
+                },
+                "AWS_URL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWSURL"
+                    }
+                },
+                "AWS_IP_ADDRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWSIPAddress"
+                    }
+                },
+                "BOOLEAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Boolean"
+                    }
+                },
+                "AWS_JSON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWSJSON"
+                    }
+                },
+                "AWS_PHONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWSPhone"
+                    }
+                },
+                "ENUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Enum"
+                    }
+                },
+                "MODEL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Model"
+                    }
+                },
+                "NON_MODEL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NonModel"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#CodegenGenericDataFields": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "com.amazonaws.amplifyuibuilder#CodegenGenericDataField"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#CodegenGenericDataModel": {
+            "type": "structure",
+            "members": {
+                "fields": {
+                    "target": "com.amazonaws.amplifyuibuilder#CodegenGenericDataFields",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fields in the generic data model.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "isJoinTable": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the generic data model is a join table.</p>"
+                    }
+                },
+                "primaryKeys": {
+                    "target": "com.amazonaws.amplifyuibuilder#CodegenPrimaryKeysList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The primary keys of the generic data model.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a model in a generic data schema.</p>"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#CodegenGenericDataModels": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "com.amazonaws.amplifyuibuilder#CodegenGenericDataModel"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#CodegenGenericDataNonModel": {
+            "type": "structure",
+            "members": {
+                "fields": {
+                    "target": "com.amazonaws.amplifyuibuilder#CodegenGenericDataNonModelFields",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fields in a generic data schema non model.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a non-model in a generic data schema.</p>"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#CodegenGenericDataNonModelFields": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "com.amazonaws.amplifyuibuilder#CodegenGenericDataField"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#CodegenGenericDataNonModels": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "com.amazonaws.amplifyuibuilder#CodegenGenericDataNonModel"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#CodegenGenericDataRelationshipType": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.amplifyuibuilder#GenericDataRelationshipType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data relationship type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "relatedModelName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the related model in the data relationship.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "relatedModelFields": {
+                    "target": "com.amazonaws.amplifyuibuilder#RelatedModelFieldsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The related model fields in the data relationship.</p>"
+                    }
+                },
+                "canUnlinkAssociatedModel": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the relationship can unlink the associated model.</p>"
+                    }
+                },
+                "relatedJoinFieldName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the related join field in the data relationship.</p>"
+                    }
+                },
+                "relatedJoinTableName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the related join table in the data relationship.</p>"
+                    }
+                },
+                "belongsToFieldOnRelatedModel": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the <code>belongsTo</code> field on the related data model. </p>"
+                    }
+                },
+                "associatedFields": {
+                    "target": "com.amazonaws.amplifyuibuilder#AssociatedFieldsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The associated fields of the data relationship.</p>"
+                    }
+                },
+                "isHasManyIndex": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the <code>@index</code> directive is supported for a <code>hasMany</code> data relationship.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the relationship between generic data models.</p>"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#CodegenJob": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.amplifyuibuilder#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID for the code generation job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "appId": {
+                    "target": "com.amazonaws.amplifyuibuilder#AppId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amplify app associated with the code generation job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "environmentName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment associated with the code generation job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "renderConfig": {
+                    "target": "com.amazonaws.amplifyuibuilder#CodegenJobRenderConfig",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "create-and-read"
+                    }
+                },
+                "genericDataSchema": {
+                    "target": "com.amazonaws.amplifyuibuilder#CodegenJobGenericDataSchema",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "create-and-read"
+                    }
+                },
+                "autoGenerateForms": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "create-and-read",
+                        "smithy.api#documentation": "<p>Specifies whether to autogenerate forms in the code generation job.</p>"
+                    }
+                },
+                "features": {
+                    "target": "com.amazonaws.amplifyuibuilder#CodegenFeatureFlags",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "create-and-read"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.amplifyuibuilder#CodegenJobStatus",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "read",
+                        "smithy.api#documentation": "<p>The status of the code generation job.</p>"
+                    }
+                },
+                "statusMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "read",
+                        "smithy.api#documentation": "<p>The customized status message for the code generation job.</p>"
+                    }
+                },
+                "asset": {
+                    "target": "com.amazonaws.amplifyuibuilder#CodegenJobAsset",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "read",
+                        "smithy.api#documentation": "<p>The <code>CodegenJobAsset</code> to use for the code generation job.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.amplifyuibuilder#Tags",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "create-and-read",
+                        "smithy.api#documentation": "<p>One or more key-value pairs to use when tagging the code generation job.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The time that the code generation job was created.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "modifiedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The time that the code generation job was modified.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the configuration for a code generation job that is associated with an Amplify app.</p>",
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.amplifyuibuilder#CodegenJobResource"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#CodegenJobAsset": {
+            "type": "structure",
+            "members": {
+                "downloadUrl": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL to use to access the asset.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an asset for a code generation job.</p>"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#CodegenJobGenericDataSchema": {
+            "type": "structure",
+            "members": {
+                "dataSourceType": {
+                    "target": "com.amazonaws.amplifyuibuilder#CodegenJobGenericDataSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the data source for the schema. Currently, the only valid value is an Amplify <code>DataStore</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "models": {
+                    "target": "com.amazonaws.amplifyuibuilder#CodegenGenericDataModels",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a <code>CodegenGenericDataModel</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "enums": {
+                    "target": "com.amazonaws.amplifyuibuilder#CodegenGenericDataEnums",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a <code>CodegenGenericDataEnum</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nonModels": {
+                    "target": "com.amazonaws.amplifyuibuilder#CodegenGenericDataNonModels",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a <code>CodegenGenericDataNonModel</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the data schema for a code generation job.</p>"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#CodegenJobGenericDataSourceType": {
+            "type": "enum",
+            "members": {
+                "DATA_STORE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DataStore"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#CodegenJobRenderConfig": {
+            "type": "union",
+            "members": {
+                "react": {
+                    "target": "com.amazonaws.amplifyuibuilder#ReactStartCodegenJobData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the <code>ReactStartCodegenJobData</code> object.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the configuration information for rendering the UI component associated the code generation job.</p>"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#CodegenJobResource": {
+            "type": "resource",
+            "identifiers": {
+                "id": {
+                    "target": "com.amazonaws.amplifyuibuilder#Uuid"
+                },
+                "appId": {
+                    "target": "com.amazonaws.amplifyuibuilder#AppId"
+                },
+                "environmentName": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.amplifyuibuilder#StartCodegenJob"
+            },
+            "read": {
+                "target": "com.amazonaws.amplifyuibuilder#GetCodegenJob"
+            },
+            "list": {
+                "target": "com.amazonaws.amplifyuibuilder#ListCodegenJobs"
+            },
+            "traits": {
+                "aws.api#arn": {
+                    "template": "app/{appId}/environment/{environmentName}/codegen-jobs/{id}"
+                },
+                "aws.cloudformation#cfnResource": {
+                    "name": "CodegenJob",
+                    "additionalSchemas": [
+                        "com.amazonaws.amplifyuibuilder#CodegenJob"
+                    ]
+                },
+                "aws.iam#conditionKeys": [
+                    "aws:ResourceTag/${TagKey}"
+                ]
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#CodegenJobStatus": {
+            "type": "enum",
+            "members": {
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "in_progress"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "failed"
+                    }
+                },
+                "SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "succeeded"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#CodegenJobSummary": {
+            "type": "structure",
+            "members": {
+                "appId": {
+                    "target": "com.amazonaws.amplifyuibuilder#AppId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the Amplify app associated with the code generation job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "environmentName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment associated with the code generation job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.amplifyuibuilder#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID for the code generation job summary.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The time that the code generation job summary was created.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "modifiedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The time that the code generation job summary was modified.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of the basic information about the code generation job.</p>"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#CodegenJobSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.amplifyuibuilder#CodegenJobSummary"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#CodegenPrimaryKeysList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
             }
         },
         "com.amazonaws.amplifyuibuilder#Component": {
@@ -1916,7 +2579,7 @@
                 "aws.iam#requiredActions": [
                     "amplify:GetApp"
                 ],
-                "smithy.api#documentation": "<p>Creates a new form for an Amplify app.</p>",
+                "smithy.api#documentation": "<p>Creates a new form for an Amplify.</p>",
                 "smithy.api#http": {
                     "uri": "/app/{appId}/environment/{environmentName}/forms",
                     "method": "POST"
@@ -3479,6 +4142,111 @@
                 "target": "com.amazonaws.amplifyuibuilder#FormSummary"
             }
         },
+        "com.amazonaws.amplifyuibuilder#GenericDataRelationshipType": {
+            "type": "enum",
+            "members": {
+                "HAS_MANY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HAS_MANY"
+                    }
+                },
+                "HAS_ONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HAS_ONE"
+                    }
+                },
+                "BELONGS_TO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BELONGS_TO"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#GetCodegenJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifyuibuilder#GetCodegenJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amplifyuibuilder#GetCodegenJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "aws.iam#requiredActions": [
+                    "amplify:GetApp"
+                ],
+                "smithy.api#documentation": "<p>Returns an existing code generation job.</p>",
+                "smithy.api#http": {
+                    "uri": "/app/{appId}/environment/{environmentName}/codegen-jobs/{id}",
+                    "method": "GET"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#GetCodegenJobRequest": {
+            "type": "structure",
+            "members": {
+                "appId": {
+                    "target": "com.amazonaws.amplifyuibuilder#AppId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the Amplify app associated with the code generation job.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "environmentName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment that is a part of the Amplify app associated with the code generation job.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "id": {
+                    "target": "com.amazonaws.amplifyuibuilder#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the code generation job.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#GetCodegenJobResponse": {
+            "type": "structure",
+            "members": {
+                "job": {
+                    "target": "com.amazonaws.amplifyuibuilder#CodegenJob",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The configuration settings for the code generation job.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.amplifyuibuilder#GetComponent": {
             "type": "operation",
             "input": {
@@ -3788,6 +4556,63 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.amplifyuibuilder#JSModule": {
+            "type": "enum",
+            "members": {
+                "ES2020": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "es2020"
+                    }
+                },
+                "ESNEXT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "esnext"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#JSScript": {
+            "type": "enum",
+            "members": {
+                "JSX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "jsx"
+                    }
+                },
+                "TSX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "tsx"
+                    }
+                },
+                "JS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "js"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#JSTarget": {
+            "type": "enum",
+            "members": {
+                "ES2015": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "es2015"
+                    }
+                },
+                "ES2020": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "es2020"
+                    }
+                }
+            }
+        },
         "com.amazonaws.amplifyuibuilder#LabelDecorator": {
             "type": "string",
             "traits": {
@@ -3805,6 +4630,112 @@
                         "name": "NONE"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ListCodegenJobs": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifyuibuilder#ListCodegenJobsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amplifyuibuilder#ListCodegenJobsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "aws.iam#requiredActions": [
+                    "amplify:GetApp"
+                ],
+                "smithy.api#documentation": "<p>Retrieves a list of code generation jobs for a specified Amplify app and backend environment.</p>",
+                "smithy.api#http": {
+                    "uri": "/app/{appId}/environment/{environmentName}/codegen-jobs",
+                    "method": "GET"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "entities"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ListCodegenJobsLimit": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ListCodegenJobsRequest": {
+            "type": "structure",
+            "members": {
+                "appId": {
+                    "target": "com.amazonaws.amplifyuibuilder#AppId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID for the Amplify app.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "environmentName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment that is a part of the Amplify app.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to request the next page of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.amplifyuibuilder#ListCodegenJobsLimit",
+                    "traits": {
+                        "smithy.api#default": 100,
+                        "smithy.api#documentation": "<p>The maximum number of jobs to retrieve.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ListCodegenJobsResponse": {
+            "type": "structure",
+            "members": {
+                "entities": {
+                    "target": "com.amazonaws.amplifyuibuilder#CodegenJobSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of code generation jobs for the Amplify app.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token that's included if more results are available.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.amplifyuibuilder#ListComponents": {
@@ -4268,6 +5199,46 @@
                 }
             }
         },
+        "com.amazonaws.amplifyuibuilder#ReactStartCodegenJobData": {
+            "type": "structure",
+            "members": {
+                "module": {
+                    "target": "com.amazonaws.amplifyuibuilder#JSModule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JavaScript module type.</p>"
+                    }
+                },
+                "target": {
+                    "target": "com.amazonaws.amplifyuibuilder#JSTarget",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ECMAScript specification to use.</p>"
+                    }
+                },
+                "script": {
+                    "target": "com.amazonaws.amplifyuibuilder#JSScript",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The file type to use for a JavaScript project.</p>"
+                    }
+                },
+                "renderTypeDeclarations": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies whether the code generation job should render type declaration files.</p>"
+                    }
+                },
+                "inlineSourceMap": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies whether the code generation job should render inline source maps.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the code generation job configuration for a React project.</p>"
+            }
+        },
         "com.amazonaws.amplifyuibuilder#RefreshToken": {
             "type": "operation",
             "input": {
@@ -4348,6 +5319,12 @@
                         "smithy.api#required": {}
                     }
                 }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#RelatedModelFieldsList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
             }
         },
         "com.amazonaws.amplifyuibuilder#ResourceConflictException": {
@@ -4488,6 +5465,132 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.amplifyuibuilder#SortProperty"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#StartCodegenJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amplifyuibuilder#StartCodegenJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amplifyuibuilder#StartCodegenJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.amplifyuibuilder#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "aws.iam#requiredActions": [
+                    "amplify:GetApp"
+                ],
+                "smithy.api#documentation": "<p>Starts a code generation job for for a specified Amplify app and backend environment.</p>",
+                "smithy.api#http": {
+                    "uri": "/app/{appId}/environment/{environmentName}/codegen-jobs",
+                    "method": "POST"
+                }
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#StartCodegenJobData": {
+            "type": "structure",
+            "members": {
+                "renderConfig": {
+                    "target": "com.amazonaws.amplifyuibuilder#CodegenJobRenderConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The code generation configuration for the codegen job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "genericDataSchema": {
+                    "target": "com.amazonaws.amplifyuibuilder#CodegenJobGenericDataSchema",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data schema to use for a code generation job.</p>"
+                    }
+                },
+                "autoGenerateForms": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to autogenerate forms in the code generation job.</p>"
+                    }
+                },
+                "features": {
+                    "target": "com.amazonaws.amplifyuibuilder#CodegenFeatureFlags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The feature flags for a code generation job.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.amplifyuibuilder#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more key-value pairs to use when tagging the code generation job data.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The code generation job resource configuration.</p>"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#StartCodegenJobRequest": {
+            "type": "structure",
+            "members": {
+                "appId": {
+                    "target": "com.amazonaws.amplifyuibuilder#AppId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID for the Amplify app.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "environmentName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the backend environment that is a part of the Amplify app.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The idempotency token used to ensure that the code generation job request completes only once.</p>",
+                        "smithy.api#httpQuery": "clientToken",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "codegenJobToCreate": {
+                    "target": "com.amazonaws.amplifyuibuilder#StartCodegenJobData",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The code generation job resource configuration.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#StartCodegenJobResponse": {
+            "type": "structure",
+            "members": {
+                "entity": {
+                    "target": "com.amazonaws.amplifyuibuilder#CodegenJob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The code generation job for a UI component that is associated with an Amplify app.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.amplifyuibuilder#StorageAccessLevel": {
@@ -4770,6 +5873,19 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.amplifyuibuilder#ThemeValues"
+            }
+        },
+        "com.amazonaws.amplifyuibuilder#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request was denied due to request throttling.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
             }
         },
         "com.amazonaws.amplifyuibuilder#TokenProviders": {

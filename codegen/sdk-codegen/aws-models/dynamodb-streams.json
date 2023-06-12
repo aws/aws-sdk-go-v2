@@ -174,7 +174,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the input of a <code>DescribeStream</code> operation.</p>"
+                "smithy.api#documentation": "<p>Represents the input of a <code>DescribeStream</code> operation.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.dynamodbstreams#DescribeStreamOutput": {
@@ -188,7 +189,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the output of a <code>DescribeStream</code> operation.</p>"
+                "smithy.api#documentation": "<p>Represents the output of a <code>DescribeStream</code> operation.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.dynamodbstreams#DynamoDBStreams_20120810": {
@@ -220,7 +222,7 @@
                     "name": "dynamodb"
                 },
                 "aws.protocols#awsJson1_0": {},
-                "smithy.api#documentation": "<fullname>Amazon DynamoDB</fullname>\n\n         <p>Amazon DynamoDB Streams provides API actions for accessing streams and processing\n         stream records. To learn more about application development with Streams, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html\">Capturing\n            Table Activity with DynamoDB Streams</a> in the Amazon DynamoDB Developer\n         Guide.</p>",
+                "smithy.api#documentation": "<fullname>Amazon DynamoDB</fullname>\n         <p>Amazon DynamoDB Streams provides API actions for accessing streams and processing\n         stream records. To learn more about application development with Streams, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Streams.html\">Capturing\n            Table Activity with DynamoDB Streams</a> in the Amazon DynamoDB Developer\n         Guide.</p>",
                 "smithy.api#title": "Amazon DynamoDB Streams",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://dynamodb.amazonaws.com/doc/2012-08-10/"
@@ -763,8 +765,8 @@
                             },
                             "params": {
                                 "Region": "af-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -776,8 +778,8 @@
                             },
                             "params": {
                                 "Region": "ap-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -789,8 +791,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -802,8 +804,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -815,8 +817,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -828,8 +830,8 @@
                             },
                             "params": {
                                 "Region": "ap-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -841,8 +843,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -854,8 +856,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -867,8 +869,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -880,8 +882,8 @@
                             },
                             "params": {
                                 "Region": "ca-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -893,8 +895,8 @@
                             },
                             "params": {
                                 "Region": "eu-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -906,8 +908,8 @@
                             },
                             "params": {
                                 "Region": "eu-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -919,8 +921,8 @@
                             },
                             "params": {
                                 "Region": "eu-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -932,8 +934,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -945,8 +947,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -958,8 +960,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -980,8 +982,8 @@
                             },
                             "params": {
                                 "Region": "local",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -993,8 +995,8 @@
                             },
                             "params": {
                                 "Region": "me-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1006,8 +1008,8 @@
                             },
                             "params": {
                                 "Region": "sa-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1019,8 +1021,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1032,8 +1034,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1045,8 +1047,8 @@
                             },
                             "params": {
                                 "Region": "us-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1058,8 +1060,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1071,8 +1073,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1084,8 +1086,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1097,8 +1099,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1110,8 +1112,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1123,8 +1125,8 @@
                             },
                             "params": {
                                 "Region": "cn-northwest-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1136,8 +1138,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1149,8 +1151,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1162,8 +1164,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1175,8 +1177,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1188,8 +1190,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1201,8 +1203,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1214,8 +1216,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1227,8 +1229,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1240,8 +1242,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1253,8 +1255,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1266,8 +1279,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1279,8 +1303,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1292,8 +1327,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1305,8 +1351,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1318,8 +1364,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1330,8 +1376,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1342,9 +1388,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -1417,7 +1469,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the input of a <code>GetRecords</code> operation.</p>"
+                "smithy.api#documentation": "<p>Represents the input of a <code>GetRecords</code> operation.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.dynamodbstreams#GetRecordsOutput": {
@@ -1437,7 +1490,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the output of a <code>GetRecords</code> operation.</p>"
+                "smithy.api#documentation": "<p>Represents the output of a <code>GetRecords</code> operation.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.dynamodbstreams#GetShardIterator": {
@@ -1495,7 +1549,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the input of a <code>GetShardIterator</code> operation.</p>"
+                "smithy.api#documentation": "<p>Represents the input of a <code>GetShardIterator</code> operation.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.dynamodbstreams#GetShardIteratorOutput": {
@@ -1509,7 +1564,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the output of a <code>GetShardIterator</code> operation.</p>"
+                "smithy.api#documentation": "<p>Represents the output of a <code>GetShardIterator</code> operation.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.dynamodbstreams#Identity": {
@@ -1581,7 +1637,7 @@
                 "KeyType": {
                     "target": "com.amazonaws.dynamodbstreams#KeyType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The role that this key attribute will assume:</p>\n         <ul>\n            <li>\n              <p>\n                  <code>HASH</code> - partition key</p>\n            </li>\n            <li>\n              <p>\n                  <code>RANGE</code> - sort key</p>\n            </li>\n         </ul>\n         <note>\n            <p>The partition key of an item is also known as its <i>hash\n                    attribute</i>. The term \"hash attribute\" derives from DynamoDB's usage of\n                an internal hash function to evenly distribute data items across partitions, based\n                on their partition key values.</p>\n            <p>The sort key of an item is also known as its <i>range\n                attribute</i>. The term \"range attribute\" derives from the way DynamoDB\n                stores items with the same partition key physically close together, in sorted order\n                by the sort key value.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The role that this key attribute will assume:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>HASH</code> - partition key</p>\n            </li>\n            <li>\n               <p>\n                  <code>RANGE</code> - sort key</p>\n            </li>\n         </ul>\n         <note>\n            <p>The partition key of an item is also known as its <i>hash\n                    attribute</i>. The term \"hash attribute\" derives from DynamoDB's usage of\n                an internal hash function to evenly distribute data items across partitions, based\n                on their partition key values.</p>\n            <p>The sort key of an item is also known as its <i>range\n                attribute</i>. The term \"range attribute\" derives from the way DynamoDB\n                stores items with the same partition key physically close together, in sorted order\n                by the sort key value.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1618,7 +1674,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>There is no limit to the number of daily on-demand backups that can be taken. </p>\n         <p>For most purposes, up to 500 simultaneous table operations are allowed per account. These operations\n          include <code>CreateTable</code>, <code>UpdateTable</code>,\n          <code>DeleteTable</code>,<code>UpdateTimeToLive</code>,\n          <code>RestoreTableFromBackup</code>, and <code>RestoreTableToPointInTime</code>. </p>\n         <p>When you are creating a table with one or more secondary\n          indexes, you can have up to 250 such requests running at a time. However, if the table or\n          index specifications are complex, then DynamoDB might temporarily reduce the number\n          of concurrent operations.</p>\n         <p>When importing into DynamoDB, up to 50 simultaneous import table operations are allowed per account.</p>\n         <p>There is a soft account quota of 2,500 tables.</p>",
+                "smithy.api#documentation": "<p>There is no limit to the number of daily on-demand backups that can be taken. </p>\n         <p>For most purposes, up to 500 simultaneous table operations are allowed per account. These operations\n          include <code>CreateTable</code>, <code>UpdateTable</code>,\n          <code>DeleteTable</code>,<code>UpdateTimeToLive</code>,\n          <code>RestoreTableFromBackup</code>, and <code>RestoreTableToPointInTime</code>. </p>\n         <p>When you are creating a table with one or more secondary\n          indexes, you can have up to 250 such requests running at a time. However, if the table or\n          index specifications are complex, then DynamoDB might temporarily reduce the number\n          of concurrent operations.</p>\n         <p>When importing into DynamoDB, up to 50 simultaneous import table operations are allowed per account.</p>\n         <p>There is a soft account quota of 2,500 tables.</p>\n         <p>GetRecords was called with a value of more than 1000 for the limit request parameter.</p>\n         <p>More than 2 processes are reading from the same streams shard at the same time. Exceeding\n          this limit may result in request throttling.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -1671,7 +1727,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the input of a <code>ListStreams</code> operation.</p>"
+                "smithy.api#documentation": "<p>Represents the input of a <code>ListStreams</code> operation.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.dynamodbstreams#ListStreamsOutput": {
@@ -1691,7 +1748,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the output of a <code>ListStreams</code> operation.</p>"
+                "smithy.api#documentation": "<p>Represents the output of a <code>ListStreams</code> operation.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.dynamodbstreams#MapAttributeValue": {
@@ -1778,7 +1836,7 @@
                 "eventSource": {
                     "target": "com.amazonaws.dynamodbstreams#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS service from which the stream record originated.  For DynamoDB Streams, this is <code>aws:dynamodb</code>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services service from which the stream record originated. For DynamoDB Streams, this is <code>aws:dynamodb</code>.</p>"
                     }
                 },
                 "awsRegion": {
@@ -1951,7 +2009,7 @@
                 "StreamLabel": {
                     "target": "com.amazonaws.dynamodbstreams#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A timestamp, in ISO 8601 format, for this stream.</p>\n         <p>Note that <code>LatestStreamLabel</code> is not a unique identifier for the stream, because it is\n      possible that a stream from another table might have the same timestamp. However, the\n      combination of the following three elements is guaranteed to be unique:</p>\n         <ul>\n            <li>\n               <p>the AWS customer ID.</p>\n            </li>\n            <li>\n               <p>the table name</p>\n            </li>\n            <li>\n               <p>the <code>StreamLabel</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A timestamp, in ISO 8601 format, for this stream.</p>\n         <p>Note that <code>LatestStreamLabel</code> is not a unique identifier for the stream, because it is\n      possible that a stream from another table might have the same timestamp. However, the\n      combination of the following three elements is guaranteed to be unique:</p>\n         <ul>\n            <li>\n               <p>the Amazon Web Services customer ID.</p>\n            </li>\n            <li>\n               <p>the table name</p>\n            </li>\n            <li>\n               <p>the <code>StreamLabel</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -1980,7 +2038,7 @@
                 "StreamLabel": {
                     "target": "com.amazonaws.dynamodbstreams#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A timestamp, in ISO 8601 format, for this stream.</p>\n         <p>Note that <code>LatestStreamLabel</code> is not a unique identifier for the stream, because it is\n      possible that a stream from another table might have the same timestamp. However, the\n      combination of the following three elements is guaranteed to be unique:</p>\n         <ul>\n            <li>\n               <p>the AWS customer ID.</p>\n            </li>\n            <li>\n               <p>the table name</p>\n            </li>\n            <li>\n               <p>the <code>StreamLabel</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A timestamp, in ISO 8601 format, for this stream.</p>\n         <p>Note that <code>LatestStreamLabel</code> is not a unique identifier for the stream, because it is\n      possible that a stream from another table might have the same timestamp. However, the\n      combination of the following three elements is guaranteed to be unique:</p>\n         <ul>\n            <li>\n               <p>the Amazon Web Services customer ID.</p>\n            </li>\n            <li>\n               <p>the table name</p>\n            </li>\n            <li>\n               <p>the <code>StreamLabel</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "StreamStatus": {
@@ -2042,7 +2100,7 @@
                 "ApproximateCreationDateTime": {
                     "target": "com.amazonaws.dynamodbstreams#Date",
                     "traits": {
-                        "smithy.api#documentation": "<p>The approximate date and time when the stream record was created, in <a href=\"http://www.epochconverter.com/\">UNIX epoch time</a> format.</p>"
+                        "smithy.api#documentation": "<p>The approximate date and time when the stream record was created, in <a href=\"http://www.epochconverter.com/\">UNIX epoch time</a> format and rounded down to the closest second.</p>"
                     }
                 },
                 "Keys": {

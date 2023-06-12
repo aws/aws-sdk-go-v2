@@ -2766,7 +2766,13 @@
                 "Endpoint": {
                     "target": "com.amazonaws.opensearch#Endpoint",
                     "traits": {
-                        "smithy.api#documentation": "<p>The endpoint of the remote domain.</p>"
+                        "smithy.api#documentation": "<important>\n            <p>The Endpoint attribute cannot be modified. </p>\n         </important>\n         <p>The endpoint of the remote domain. Applicable for VPC_ENDPOINT connection mode.</p>"
+                    }
+                },
+                "CrossClusterSearch": {
+                    "target": "com.amazonaws.opensearch#CrossClusterSearchConnectionProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection properties for cross cluster search.</p>"
                     }
                 }
             },
@@ -3009,6 +3015,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The connection mode.</p>"
                     }
+                },
+                "ConnectionProperties": {
+                    "target": "com.amazonaws.opensearch#ConnectionProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>ConnectionProperties</code> for the outbound connection.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3240,6 +3252,20 @@
         },
         "com.amazonaws.opensearch#CreatedAt": {
             "type": "timestamp"
+        },
+        "com.amazonaws.opensearch#CrossClusterSearchConnectionProperties": {
+            "type": "structure",
+            "members": {
+                "SkipUnavailable": {
+                    "target": "com.amazonaws.opensearch#SkipUnavailableStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Status of SkipUnavailable param for outbound connection.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Cross cluster search specific connection properties.</p>"
+            }
         },
         "com.amazonaws.opensearch#DeleteDomain": {
             "type": "operation",
@@ -4597,11 +4623,6 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.opensearch#DescribePackagesFilterValue"
-            },
-            "traits": {
-                "smithy.api#length": {
-                    "min": 1
-                }
             }
         },
         "com.amazonaws.opensearch#DescribePackagesRequest": {
@@ -9927,6 +9948,26 @@
             "type": "string",
             "traits": {
                 "smithy.api#documentation": "<p>The domain endpoint to which index and search requests are submitted. For example,\n    <code>search-imdb-movies-oopcnjfn6ugo.eu-west-1.es.amazonaws.com</code> or\n    <code>doc-imdb-movies-oopcnjfn6u.eu-west-1.es.amazonaws.com</code>.</p>"
+            }
+        },
+        "com.amazonaws.opensearch#SkipUnavailableStatus": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Status of SkipUnavailable param for outbound connection.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>ENABLED</b> - The SkipUnavailable param is enabled\n    for the connection.</p>\n            </li>\n            <li>\n               <p>\n                  <b>DISABLED</b> - The SkipUnavailable param is disabled\n     for the connection.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.opensearch#SlotList": {
