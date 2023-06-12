@@ -24,6 +24,7 @@ import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.TriConsumer;
+import software.amazon.smithy.go.codegen.endpoints.EndpointResolutionGenerator;
 import software.amazon.smithy.go.codegen.integration.ConfigField;
 import software.amazon.smithy.go.codegen.integration.ConfigFieldResolver;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
@@ -68,7 +69,16 @@ public final class AwsEndpointGenerator implements GoIntegration {
                                         .name(ENDPOINT_RESOLVER_CONFIG_NAME)
                                         .type(SymbolUtils.createValueSymbolBuilder(EndpointGenerator.RESOLVER_INTERFACE_NAME)
                                                 .build())
-                                        .documentation("The service endpoint resolver.")
+                                        .documentation(String.format("The service endpoint resolver."))
+                                        .deprecated(String.format(
+                                            """
+                                            %s and With%s are deprecated. See %s and With%s
+                                            """,
+                                            EndpointGenerator.RESOLVER_INTERFACE_NAME,
+                                            EndpointGenerator.RESOLVER_INTERFACE_NAME,
+                                            EndpointResolutionGenerator.RESOLVER_INTERFACE_NAME,
+                                            EndpointResolutionGenerator.RESOLVER_INTERFACE_NAME
+                                        ))
                                         .withHelper(true)
                                         .build(),
                                 ConfigField.builder()
