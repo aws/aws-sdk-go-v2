@@ -407,7 +407,7 @@
                 "parameters": {
                     "target": "com.amazonaws.imagebuilder#ComponentParameterDetailList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains parameter details for each of the parameters that the component document\n\t\t\tdefined for the component.</p>"
+                        "smithy.api#documentation": "<p>Contains parameter details for each of the parameters that the component document \n\t\t\tdefined for the component.</p>"
                     }
                 },
                 "owner": {
@@ -449,14 +449,14 @@
                 "publisher": {
                     "target": "com.amazonaws.imagebuilder#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains the name of the publisher if this is a third-party component. Otherwise, this\n\t\t\tproperty is empty.</p>"
+                        "smithy.api#documentation": "<p>Contains the name of the publisher if this is a third-party component. Otherwise, \n\t\t\tthis property is empty.</p>"
                     }
                 },
                 "obfuscate": {
                     "target": "com.amazonaws.imagebuilder#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Indicates whether component source is hidden from view in the console, and from\n\t\t\tcomponent detail results for API, CLI, or SDK operations.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether component source is hidden from view in the console, and from \n\t\t\tcomponent detail results for API, CLI, or SDK operations.</p>"
                     }
                 }
             },
@@ -743,14 +743,14 @@
                 "publisher": {
                     "target": "com.amazonaws.imagebuilder#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains the name of the publisher if this is a third-party component. Otherwise, this\n\t\t\tproperty is empty.</p>"
+                        "smithy.api#documentation": "<p>Contains the name of the publisher if this is a third-party component. Otherwise, \n\t\t\tthis property is empty.</p>"
                     }
                 },
                 "obfuscate": {
                     "target": "com.amazonaws.imagebuilder#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Indicates whether component source is hidden from view in the console, and from\n\t\t\tcomponent detail results for API, CLI, or SDK operations.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether component source is hidden from view in the console, \n\t\t\tand from component detail results for API, CLI, or SDK operations.</p>"
                     }
                 }
             },
@@ -4561,13 +4561,13 @@
                 "enhancedImageMetadataEnabled": {
                     "target": "com.amazonaws.imagebuilder#NullableBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether Image Builder collects additional information about the image, such as the\n\t\t\toperating system (OS) version and package list.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether Image Builder collects additional information about the image, such as \n\t\t\tthe operating system (OS) version and package list.</p>"
                     }
                 },
                 "osVersion": {
                     "target": "com.amazonaws.imagebuilder#OsVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The operating system version for instances that launch from this image. For example,\n\t\t\tAmazon Linux 2, Ubuntu 18, or Microsoft Windows Server 2019.</p>"
+                        "smithy.api#documentation": "<p>The operating system version for instances that launch from this image. For example, \n\t\t\tAmazon Linux 2, Ubuntu 18, or Microsoft Windows Server 2019.</p>"
                     }
                 },
                 "state": {
@@ -4579,13 +4579,13 @@
                 "imageRecipe": {
                     "target": "com.amazonaws.imagebuilder#ImageRecipe",
                     "traits": {
-                        "smithy.api#documentation": "<p>For images that distribute an AMI, this is the image recipe that Image Builder used to create\n\t\t\tthe image. For container images, this is empty.</p>"
+                        "smithy.api#documentation": "<p>For images that distribute an AMI, this is the image recipe that Image Builder used to \n\t\t\tcreate the image. For container images, this is empty.</p>"
                     }
                 },
                 "containerRecipe": {
                     "target": "com.amazonaws.imagebuilder#ContainerRecipe",
                     "traits": {
-                        "smithy.api#documentation": "<p>For container images, this is the container recipe that Image Builder used to create the image.\n\t\t\tFor images that distribute an AMI, this is empty.</p>"
+                        "smithy.api#documentation": "<p>For container images, this is the container recipe that Image Builder used to create the \n\t\t\timage. For images that distribute an AMI, this is empty.</p>"
                     }
                 },
                 "sourcePipelineName": {
@@ -4828,7 +4828,7 @@
                 "dateNextRun": {
                     "target": "com.amazonaws.imagebuilder#DateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>This is no longer supported, and does not return a value.</p>"
+                        "smithy.api#documentation": "<p>The next date when the pipeline is scheduled to run.</p>"
                     }
                 },
                 "tags": {
@@ -5463,7 +5463,7 @@
                 "osVersion": {
                     "target": "com.amazonaws.imagebuilder#OsVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The operating system version of the instances that launch from this image. For\n\t\t\texample, Amazon Linux 2, Ubuntu 18, or Microsoft Windows Server 2019.</p>"
+                        "smithy.api#documentation": "<p>The operating system version of the instances that launch from this image. For \n\t\t\texample, Amazon Linux 2, Ubuntu 18, or Microsoft Windows Server 2019.</p>"
                     }
                 },
                 "state": {
@@ -5595,7 +5595,7 @@
                 "platform": {
                     "target": "com.amazonaws.imagebuilder#Platform",
                     "traits": {
-                        "smithy.api#documentation": "<p>The operating system platform of the image version, for example \"Windows\" or\n\t\t\t\"Linux\".</p>"
+                        "smithy.api#documentation": "<p>The operating system platform of the image version, for example \"Windows\" or \n\t\t\t\"Linux\".</p>"
                     }
                 },
                 "osVersion": {
@@ -10803,9 +10803,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -10816,9 +10816,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -10829,9 +10829,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -10842,9 +10842,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -10855,9 +10855,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "cn-north-1",
                                 "UseFIPS": true,
-                                "Region": "cn-north-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -10868,9 +10868,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "cn-north-1",
                                 "UseFIPS": true,
-                                "Region": "cn-north-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -10881,9 +10881,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "cn-north-1",
                                 "UseFIPS": false,
-                                "Region": "cn-north-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -10894,9 +10894,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "cn-north-1",
                                 "UseFIPS": false,
-                                "Region": "cn-north-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -10907,9 +10907,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -10920,9 +10920,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -10933,9 +10933,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-gov-west-1",
                                 "UseFIPS": false,
-                                "Region": "us-gov-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -10946,9 +10946,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-gov-west-1",
                                 "UseFIPS": true,
-                                "Region": "us-gov-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -10959,9 +10959,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -10972,9 +10972,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -10983,9 +10983,9 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -10996,9 +10996,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -11007,9 +11007,9 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -11020,9 +11020,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -11031,9 +11031,9 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -11044,9 +11044,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -11055,9 +11055,9 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -11068,9 +11068,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -11081,9 +11081,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -11095,8 +11095,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -11106,9 +11106,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
                                 "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -11118,9 +11118,9 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
                             }
                         },

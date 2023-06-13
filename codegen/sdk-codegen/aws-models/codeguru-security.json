@@ -1,0 +1,3017 @@
+{
+    "smithy": "2.0",
+    "shapes": {
+        "com.amazonaws.codegurusecurity#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "errorCode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the error.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Description of the error.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the resource you don't have access to.</p>"
+                    }
+                },
+                "resourceType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of resource you don't have access to.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You do not have sufficient access to perform this action.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.codegurusecurity#AccountFindingsMetric": {
+            "type": "structure",
+            "members": {
+                "date": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date from which the finding metrics were retrieved.</p>"
+                    }
+                },
+                "newFindings": {
+                    "target": "com.amazonaws.codegurusecurity#FindingMetricsValuePerSeverity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of new findings of each severity in account on the specified date.</p>"
+                    }
+                },
+                "closedFindings": {
+                    "target": "com.amazonaws.codegurusecurity#FindingMetricsValuePerSeverity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of closed findings of each severity in an account on the specified date.</p>"
+                    }
+                },
+                "openFindings": {
+                    "target": "com.amazonaws.codegurusecurity#FindingMetricsValuePerSeverity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of open findings of each severity in an account as of the specified date.</p>"
+                    }
+                },
+                "meanTimeToClose": {
+                    "target": "com.amazonaws.codegurusecurity#FindingMetricsValuePerSeverity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The average time it takes to close findings of each severity in days.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of findings metrics in an account.</p>"
+            }
+        },
+        "com.amazonaws.codegurusecurity#AnalysisType": {
+            "type": "enum",
+            "members": {
+                "SECURITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Security"
+                    }
+                },
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "All"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.codegurusecurity#AwsCodeGuruSecurity": {
+            "type": "service",
+            "version": "2018-05-10",
+            "operations": [
+                {
+                    "target": "com.amazonaws.codegurusecurity#BatchGetFindings"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#CreateScan"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#CreateUploadUrl"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#GetAccountConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#GetFindings"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#GetMetricsSummary"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#GetScan"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#ListFindingsMetrics"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#ListScans"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#UpdateAccountConfiguration"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "CodeGuru Security",
+                    "arnNamespace": "codeguru-security",
+                    "cloudTrailEventSource": "codeguru-security.amazonaws.com"
+                },
+                "aws.auth#sigv4": {
+                    "name": "codeguru-security"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#cors": {
+                    "additionalAllowedHeaders": [
+                        "Authorization",
+                        "Content-Type",
+                        "Credentials",
+                        "X-Amz-Date",
+                        "X-Api-Key",
+                        "X-Amz-Security-Token",
+                        "x-amz-content-sha256",
+                        "X-Amz-User-Agent"
+                    ],
+                    "additionalExposedHeaders": [
+                        "x-amzn-errortype",
+                        "x-amzn-requestid",
+                        "x-amzn-errormessage",
+                        "x-amzn-trace-id",
+                        "x-amz-apigw-id",
+                        "date"
+                    ],
+                    "origin": "*"
+                },
+                "smithy.api#documentation": "<p>This section provides documentation for the <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/codeguru/latest/security-ug/what-is-codeguru-security.html\">Amazon CodeGuru Security</a> API operations.\n      CodeGuru Security is a service that uses program analysis and machine learning to detect\n      security policy violations and vulnerabilities, and recommends ways to address these security\n      risks.</p>\n         <p>By proactively detecting and providing recommendations for addressing security risks,\n      CodeGuru Security improves the overall security of your application code. For more information\n      about CodeGuru Security, see the \n      <a href=\"https://docs.aws.amazon.com/codeguru/latest/security-ug/what-is-codeguru-security.html\">Amazon CodeGuru Security User Guide</a>. </p>",
+                "smithy.api#title": "Amazon CodeGuru Security",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://codeguru-security-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://codeguru-security-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://codeguru-security.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://codeguru-security.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://codeguru-security-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://codeguru-security-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://codeguru-security.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://codeguru-security.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://codeguru-security-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://codeguru-security-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://codeguru-security.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://codeguru-security.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://codeguru-security-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://codeguru-security.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://codeguru-security-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://codeguru-security-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://codeguru-security.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://codeguru-security.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://codeguru-security-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://codeguru-security.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.codegurusecurity#BatchGetFindings": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.codegurusecurity#BatchGetFindingsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.codegurusecurity#BatchGetFindingsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.codegurusecurity#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of all requested findings.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/batchGetFindings"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.codegurusecurity#BatchGetFindingsError": {
+            "type": "structure",
+            "members": {
+                "scanName": {
+                    "target": "com.amazonaws.codegurusecurity#ScanName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the scan that generated the finding.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "findingId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The finding ID of the finding that was not fetched.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "errorCode": {
+                    "target": "com.amazonaws.codegurusecurity#ErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A code associated with the type of error.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the error.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the error that caused a finding to fail to be retrieved.</p>"
+            }
+        },
+        "com.amazonaws.codegurusecurity#BatchGetFindingsErrors": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.codegurusecurity#BatchGetFindingsError"
+            }
+        },
+        "com.amazonaws.codegurusecurity#BatchGetFindingsRequest": {
+            "type": "structure",
+            "members": {
+                "findingIdentifiers": {
+                    "target": "com.amazonaws.codegurusecurity#FindingIdentifiers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of finding identifiers. Each identifier consists of a <code>scanName</code> and a\n        <code>findingId</code>. You retrieve the <code>findingId</code> when you call\n        <code>GetFindings</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.codegurusecurity#BatchGetFindingsResponse": {
+            "type": "structure",
+            "members": {
+                "findings": {
+                    "target": "com.amazonaws.codegurusecurity#Findings",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A list of all requested findings.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "failedFindings": {
+                    "target": "com.amazonaws.codegurusecurity#BatchGetFindingsErrors",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of errors for individual findings which were not fetched. Each\n      BatchGetFindingsError contains the <code>scanName</code>, <code>findingId</code>,\n      <code>errorCode</code> and error <code>message</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.codegurusecurity#CategoriesWithMostFindings": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.codegurusecurity#CategoryWithFindingNum"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.codegurusecurity#CategoryWithFindingNum": {
+            "type": "structure",
+            "members": {
+                "categoryName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the finding category. A finding category is determined by the detector that\n      detected the finding.</p>"
+                    }
+                },
+                "findingNumber": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of open findings in the category.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a finding category with open findings.</p>"
+            }
+        },
+        "com.amazonaws.codegurusecurity#ClientToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[\\S]+$"
+            }
+        },
+        "com.amazonaws.codegurusecurity#CodeLine": {
+            "type": "structure",
+            "members": {
+                "number": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The code line number.</p>"
+                    }
+                },
+                "content": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The code that contains a vulnerability.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The line of code where a finding was detected.</p>"
+            }
+        },
+        "com.amazonaws.codegurusecurity#CodeSnippet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.codegurusecurity#CodeLine"
+            }
+        },
+        "com.amazonaws.codegurusecurity#ConflictException": {
+            "type": "structure",
+            "members": {
+                "errorCode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the error.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Description of the error.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the service resource associated with the request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of resource associated with the request.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The requested operation would cause a conflict with the current state of a service\n      resource associated with the request. Resolve the conflict before retrying this\n      request.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.codegurusecurity#CreateScan": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.codegurusecurity#CreateScanRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.codegurusecurity#CreateScanResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.codegurusecurity#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Use to create a scan using code uploaded to an S3 bucket.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/scans"
+                }
+            }
+        },
+        "com.amazonaws.codegurusecurity#CreateScanRequest": {
+            "type": "structure",
+            "members": {
+                "clientToken": {
+                    "target": "com.amazonaws.codegurusecurity#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The idempotency token for the request. Amazon CodeGuru Security uses this value to prevent\n      the accidental creation of duplicate scans if there are failures and retries.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "resourceId": {
+                    "target": "com.amazonaws.codegurusecurity#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for an input resource used to create a scan.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "scanName": {
+                    "target": "com.amazonaws.codegurusecurity#ScanName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name that CodeGuru Security uses to track revisions across multiple\n      scans of the same resource. Only allowed for a <code>STANDARD</code> scan type. If not\n      specified, it will be auto generated. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "scanType": {
+                    "target": "com.amazonaws.codegurusecurity#ScanType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of scan, either <code>Standard</code> or <code>Express</code>. Defaults to\n      <code>Standard</code> type if missing.</p>\n         <p>\n            <code>Express</code> scans run on limited resources and use a limited set of detectors to\n      analyze your code in near-real time. <code>Standard</code> scans have standard resource limits\n      and use the full set of detectors to analyze your code.</p>"
+                    }
+                },
+                "analysisType": {
+                    "target": "com.amazonaws.codegurusecurity#AnalysisType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of analysis you want CodeGuru Security to perform in the scan, either\n        <code>Security</code> or <code>All</code>. The <code>Secuirty</code> type only generates\n      findings related to security. The <code>All</code> type generates both security findings and\n      quality findings. Defaults to <code>Security</code> type if missing.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.codegurusecurity#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of key-value pairs used to tag a scan. A tag is a custom attribute\n      label with two parts:</p>\n         <ul>\n            <li>\n               <p>A tag key. For example, <code>CostCenter</code>, <code>Environment</code>, or\n            <code>Secret</code>. Tag keys are case sensitive.</p>\n            </li>\n            <li>\n               <p>An optional tag value field. For example, <code>111122223333</code>,\n            <code>Production</code>, or a team name. Omitting the tag value is the same as using an\n            empty string. Tag values are case sensitive.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.codegurusecurity#CreateScanResponse": {
+            "type": "structure",
+            "members": {
+                "scanName": {
+                    "target": "com.amazonaws.codegurusecurity#ScanName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the scan.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "runId": {
+                    "target": "com.amazonaws.codegurusecurity#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>UUID that identifies the individual scan run.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceId": {
+                    "target": "com.amazonaws.codegurusecurity#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the resource object that contains resources that were scanned.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "scanState": {
+                    "target": "com.amazonaws.codegurusecurity#ScanState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current state of the scan. Returns either <code>InProgress</code>,\n      <code>Successful</code>, or <code>Failed</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "scanNameArn": {
+                    "target": "com.amazonaws.codegurusecurity#ScanNameArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for the scan name.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.codegurusecurity#CreateUploadUrl": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.codegurusecurity#CreateUploadUrlRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.codegurusecurity#CreateUploadUrlResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.codegurusecurity#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Generates a pre-signed URL and request headers used to upload a code resource.</p>\n         <p>You can upload your code resource to the URL and add the request headers using any HTTP\n      client.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/uploadUrl"
+                }
+            }
+        },
+        "com.amazonaws.codegurusecurity#CreateUploadUrlRequest": {
+            "type": "structure",
+            "members": {
+                "scanName": {
+                    "target": "com.amazonaws.codegurusecurity#ScanName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the scan that will use the uploaded resource. CodeGuru Security uses the\n      unique scan name to track revisions across multiple scans of the same resource. Use this \n      <code>scanName</code> when you call <code>CreateScan</code> on the code resource you upload to this URL.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.codegurusecurity#CreateUploadUrlResponse": {
+            "type": "structure",
+            "members": {
+                "s3Url": {
+                    "target": "com.amazonaws.codegurusecurity#S3Url",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pre-signed S3 URL. You can upload the code file you want to scan and add the required\n      <code>requestHeaders</code> using any HTTP client.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "requestHeaders": {
+                    "target": "com.amazonaws.codegurusecurity#RequestHeaderMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A set of key-value pairs that contain the required headers when uploading your\n      resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "codeArtifactId": {
+                    "target": "com.amazonaws.codegurusecurity#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the uploaded code resource. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.codegurusecurity#DetectorTags": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            }
+        },
+        "com.amazonaws.codegurusecurity#EncryptionConfig": {
+            "type": "structure",
+            "members": {
+                "kmsKeyArn": {
+                    "target": "com.amazonaws.codegurusecurity#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The KMS key ARN to use for encryption. This must be provided as a header when uploading\n      your code resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about account-level configuration.</p>"
+            }
+        },
+        "com.amazonaws.codegurusecurity#ErrorCode": {
+            "type": "enum",
+            "members": {
+                "DUPLICATE_IDENTIFIER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DUPLICATE_IDENTIFIER"
+                    }
+                },
+                "ITEM_DOES_NOT_EXIST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ITEM_DOES_NOT_EXIST"
+                    }
+                },
+                "INTERNAL_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNAL_ERROR"
+                    }
+                },
+                "INVALID_FINDING_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_FINDING_ID"
+                    }
+                },
+                "INVALID_SCAN_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_SCAN_NAME"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.codegurusecurity#FilePath": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the file.</p>"
+                    }
+                },
+                "path": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path to the resource with the security vulnerability.</p>"
+                    }
+                },
+                "startLine": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The first line number of the code snippet where the security vulnerability appears in your code.</p>"
+                    }
+                },
+                "endLine": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last line number of the code snippet where the security vulnerability appears in your\n      code.</p>"
+                    }
+                },
+                "codeSnippet": {
+                    "target": "com.amazonaws.codegurusecurity#CodeSnippet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>CodeLine</code> objects that describe where the security vulnerability\n      appears in your code.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the location of security vulnerabilities that Amazon CodeGuru Security\n      detected in your code.</p>"
+            }
+        },
+        "com.amazonaws.codegurusecurity#Finding": {
+            "type": "structure",
+            "members": {
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the finding was created.</p>"
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the finding.</p>"
+                    }
+                },
+                "generatorId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the component that generated a finding such as AWSCodeGuruSecurity or\n      AWSInspector.</p>"
+                    }
+                },
+                "id": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for a finding.</p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the finding was last updated. Findings are updated when you remediate them\n      or when the finding code location changes. </p>"
+                    }
+                },
+                "type": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of finding. </p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.codegurusecurity#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the finding. A finding status can be open or closed. </p>"
+                    }
+                },
+                "resource": {
+                    "target": "com.amazonaws.codegurusecurity#Resource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource where Amazon CodeGuru Security detected a finding.</p>"
+                    }
+                },
+                "vulnerability": {
+                    "target": "com.amazonaws.codegurusecurity#Vulnerability",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that describes the detected security vulnerability.</p>"
+                    }
+                },
+                "severity": {
+                    "target": "com.amazonaws.codegurusecurity#Severity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The severity of the finding.</p>"
+                    }
+                },
+                "remediation": {
+                    "target": "com.amazonaws.codegurusecurity#Remediation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains the details about how to remediate a finding.</p>"
+                    }
+                },
+                "title": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title of the finding.</p>"
+                    }
+                },
+                "detectorTags": {
+                    "target": "com.amazonaws.codegurusecurity#DetectorTags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more tags or categorizations that are associated with a detector. These tags are\n      defined by type, programming language, or other classification such as maintainability or\n      consistency.</p>"
+                    }
+                },
+                "detectorId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the detector that detected the finding in your code. A detector is a\n      defined rule based on industry standards and AWS best practices. </p>"
+                    }
+                },
+                "detectorName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the detector that identified the security vulnerability in your code. </p>"
+                    }
+                },
+                "ruleId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the rule that generated the finding.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a finding that was detected in your code.</p>"
+            }
+        },
+        "com.amazonaws.codegurusecurity#FindingIdentifier": {
+            "type": "structure",
+            "members": {
+                "scanName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the scan that generated the finding. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "findingId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for a finding.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains information about a finding and the scan that generated it. </p>"
+            }
+        },
+        "com.amazonaws.codegurusecurity#FindingIdentifiers": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.codegurusecurity#FindingIdentifier"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 25
+                }
+            }
+        },
+        "com.amazonaws.codegurusecurity#FindingMetricsValuePerSeverity": {
+            "type": "structure",
+            "members": {
+                "info": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The finding is related to quality or readability improvements and not considered\n      actionable.</p>"
+                    }
+                },
+                "low": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The severity of the finding is low and does require action on its own.</p>"
+                    }
+                },
+                "medium": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The severity of the finding is medium and should be addressed as a mid-term priority.</p>"
+                    }
+                },
+                "high": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The severity of the finding is high and should be addressed as a near-term priority.</p>"
+                    }
+                },
+                "critical": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The severity of the finding is critical and should be addressed immediately.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The severity of the issue in the code that generated a finding.</p>"
+            }
+        },
+        "com.amazonaws.codegurusecurity#Findings": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.codegurusecurity#Finding"
+            }
+        },
+        "com.amazonaws.codegurusecurity#FindingsMetricList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.codegurusecurity#AccountFindingsMetric"
+            }
+        },
+        "com.amazonaws.codegurusecurity#GetAccountConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.codegurusecurity#GetAccountConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.codegurusecurity#GetAccountConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.codegurusecurity#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Use to get account level configuration.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/accountConfiguration/get"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.codegurusecurity#GetAccountConfigurationRequest": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.codegurusecurity#GetAccountConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "encryptionConfig": {
+                    "target": "com.amazonaws.codegurusecurity#EncryptionConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An <code>EncryptionConfig</code> object that contains the KMS key ARN to use for\n      encryption. By default, CodeGuru Security uses an AWS-managed key for encryption. To specify\n      your own key, call <code>UpdateAccountConfiguration</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.codegurusecurity#GetFindings": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.codegurusecurity#GetFindingsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.codegurusecurity#GetFindingsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.codegurusecurity#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of all findings generated by a particular scan.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/findings/{scanName}"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "findings"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.codegurusecurity#GetFindingsRequest": {
+            "type": "structure",
+            "members": {
+                "scanName": {
+                    "target": "com.amazonaws.codegurusecurity#ScanName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the scan you want to retrieve findings from.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.codegurusecurity#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token to use for paginating results that are returned in the response. Set the value of\n      this parameter to null for the first request. For subsequent calls, use the <code>nextToken</code> value\n      returned from the previous request to continue listing results after the first page.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in the response. Use this parameter when\n      paginating results. If additional results exist beyond the number you specify, the <code>nextToken</code>\n      element is returned in the response. Use <code>nextToken</code> in a subsequent request to retrieve\n      additional results.</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.codegurusecurity#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the findings you want to get. Pass either <code>Open</code>,\n      <code>Closed</code>, or <code>All</code>.</p>",
+                        "smithy.api#httpQuery": "status"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.codegurusecurity#GetFindingsResponse": {
+            "type": "structure",
+            "members": {
+                "findings": {
+                    "target": "com.amazonaws.codegurusecurity#Findings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of findings generated by the specified scan.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.codegurusecurity#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token. You can use this in future calls to <code>GetFindings</code> to continue listing\n      results after the current page. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.codegurusecurity#GetMetricsSummary": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.codegurusecurity#GetMetricsSummaryRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.codegurusecurity#GetMetricsSummaryResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.codegurusecurity#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns top level metrics about an account from a specified date, including number of open\n      findings, the categories with most findings, the scans with most open findings, and scans with\n      most open critical findings. </p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/metrics/summary"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.codegurusecurity#GetMetricsSummaryRequest": {
+            "type": "structure",
+            "members": {
+                "date": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date you want to retrieve summary metrics from, rounded to the nearest day. The date\n      must be within the past two years since metrics data is only stored for two years. If a date\n      outside of this range is passed, the response will be empty.</p>",
+                        "smithy.api#httpQuery": "date",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.codegurusecurity#GetMetricsSummaryResponse": {
+            "type": "structure",
+            "members": {
+                "metricsSummary": {
+                    "target": "com.amazonaws.codegurusecurity#MetricsSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The summary metrics from the specified date.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.codegurusecurity#GetScan": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.codegurusecurity#GetScanRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.codegurusecurity#GetScanResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.codegurusecurity#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns details about a scan, including whether or not a scan has completed.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/scans/{scanName}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.codegurusecurity#GetScanRequest": {
+            "type": "structure",
+            "members": {
+                "scanName": {
+                    "target": "com.amazonaws.codegurusecurity#ScanName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the scan you want to view details about.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "runId": {
+                    "target": "com.amazonaws.codegurusecurity#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>UUID that identifies the individual scan run you want to view details about. You retrieve\n      this when you call the <code>CreateScan</code> operation. Defaults to the latest scan run if missing.</p>",
+                        "smithy.api#httpQuery": "runId"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.codegurusecurity#GetScanResponse": {
+            "type": "structure",
+            "members": {
+                "scanName": {
+                    "target": "com.amazonaws.codegurusecurity#ScanName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the scan.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "runId": {
+                    "target": "com.amazonaws.codegurusecurity#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>UUID that identifies the individual scan run.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "scanState": {
+                    "target": "com.amazonaws.codegurusecurity#ScanState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current state of the scan. Pass either <code>InProgress</code>,\n      <code>Successful</code>, or <code>Failed</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the scan was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "analysisType": {
+                    "target": "com.amazonaws.codegurusecurity#AnalysisType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of analysis CodeGuru Security performed in the scan, either\n      <code>Security</code> or <code>All</code>. The <code>Security</code> type only generates\n      findings related to security. The <code>All</code> type generates both security findings and\n      quality findings.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the scan was last updated. Only available for <code>STANDARD</code> scan types.</p>"
+                    }
+                },
+                "numberOfRevisions": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of times a scan has been re-run on a revised resource.</p>"
+                    }
+                },
+                "scanNameArn": {
+                    "target": "com.amazonaws.codegurusecurity#ScanNameArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for the scan name.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.codegurusecurity#HeaderKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.codegurusecurity#HeaderValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.codegurusecurity#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "error": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The internal error encountered by the server.</p>"
+                    }
+                },
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Description of the error.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The server encountered an internal error and is unable to complete the request.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500,
+                "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.codegurusecurity#KmsKeyArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws:kms:[\\S]+:[\\d]{12}:key\\/(([a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})|(mrk-[0-9a-zA-Z]{32}))$"
+            }
+        },
+        "com.amazonaws.codegurusecurity#ListFindingsMetrics": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.codegurusecurity#ListFindingsMetricsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.codegurusecurity#ListFindingsMetricsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.codegurusecurity#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns metrics about all findings in an account within a specified time range.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/metrics/findings"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "findingsMetrics"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.codegurusecurity#ListFindingsMetricsRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.codegurusecurity#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token to use for paginating results that are returned in the response. Set the\n      value of this parameter to null for the first request. For subsequent calls, use the <code>nextToken</code>\n      value returned from the previous request to continue listing results after the first\n      page.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in the response. Use this parameter when\n      paginating results. If additional results exist beyond the number you specify, the <code>nextToken</code>\n      element is returned in the response. Use <code>nextToken</code> in a subsequent request to retrieve\n      additional results.</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 1000
+                        }
+                    }
+                },
+                "startDate": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start date of the interval which you want to retrieve metrics from.</p>",
+                        "smithy.api#httpQuery": "startDate",
+                        "smithy.api#required": {}
+                    }
+                },
+                "endDate": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end date of the interval which you want to retrieve metrics from.</p>",
+                        "smithy.api#httpQuery": "endDate",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.codegurusecurity#ListFindingsMetricsResponse": {
+            "type": "structure",
+            "members": {
+                "findingsMetrics": {
+                    "target": "com.amazonaws.codegurusecurity#FindingsMetricList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>AccountFindingsMetric</code> objects retrieved from the specified time interval.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.codegurusecurity#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token. You can use this in future calls to <code>ListFindingMetrics</code> to continue\n      listing results after the current page. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.codegurusecurity#ListScans": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.codegurusecurity#ListScansRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.codegurusecurity#ListScansResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.codegurusecurity#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of all the scans in an account.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/scans"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "summaries"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.codegurusecurity#ListScansRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.codegurusecurity#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token to use for paginating results that are returned in the response. Set the value of\n      this parameter to null for the first request. For subsequent calls, use the <code>nextToken</code> value\n      returned from the previous request to continue listing results after the first page.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in the response. Use this parameter when\n      paginating results. If additional results exist beyond the number you specify, the <code>nextToken</code>\n      element is returned in the response. Use <code>nextToken</code> in a subsequent request to retrieve\n      additional results.</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.codegurusecurity#ListScansResponse": {
+            "type": "structure",
+            "members": {
+                "summaries": {
+                    "target": "com.amazonaws.codegurusecurity#ScanSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>ScanSummary</code> objects with information about all scans in an account.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.codegurusecurity#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token. You can use this in future calls to <code>ListScans</code> to continue listing\n      results after the current page.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.codegurusecurity#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.codegurusecurity#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.codegurusecurity#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.codegurusecurity#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of all tags associated with a scan.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/tags/{resourceArn}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.codegurusecurity#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.codegurusecurity#ScanNameArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the <code>ScanName</code> object. You can retrieve this ARN by calling\n        <code>ListScans</code> or <code>GetScan</code>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.codegurusecurity#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "tags": {
+                    "target": "com.amazonaws.codegurusecurity#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of key-value pairs used to tag an existing scan. A tag is a custom attribute\n      label with two parts:</p>\n         <ul>\n            <li>\n               <p>A tag key. For example, <code>CostCenter</code>, <code>Environment</code>, or\n            <code>Secret</code>. Tag keys are case sensitive.</p>\n            </li>\n            <li>\n               <p>An optional tag value field. For example, <code>111122223333</code>,\n            <code>Production</code>, or a team name. Omitting the tag value is the same as using an\n          empty string. Tag values are case sensitive.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.codegurusecurity#MetricsSummary": {
+            "type": "structure",
+            "members": {
+                "date": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date from which the metrics summary information was retrieved.</p>"
+                    }
+                },
+                "openFindings": {
+                    "target": "com.amazonaws.codegurusecurity#FindingMetricsValuePerSeverity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of open findings of each severity in an account.</p>"
+                    }
+                },
+                "categoriesWithMostFindings": {
+                    "target": "com.amazonaws.codegurusecurity#CategoriesWithMostFindings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>CategoryWithFindingNum</code> objects for the top 5 finding categories\n      with the most open findings in an account.</p>"
+                    }
+                },
+                "scansWithMostOpenFindings": {
+                    "target": "com.amazonaws.codegurusecurity#ScansWithMostOpenFindings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>ScanNameWithFindingNum</code> objects for the top 3 scans with the most\n      number of open critical findings in an account.</p>"
+                    }
+                },
+                "scansWithMostOpenCriticalFindings": {
+                    "target": "com.amazonaws.codegurusecurity#ScansWithMostOpenCriticalFindings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>ScanNameWithFindingNum</code> objects for the top 3 scans with the most\n      number of open findings in an account.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about summary metrics in an account.</p>"
+            }
+        },
+        "com.amazonaws.codegurusecurity#NextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^[\\S]+$"
+            }
+        },
+        "com.amazonaws.codegurusecurity#Recommendation": {
+            "type": "structure",
+            "members": {
+                "text": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recommended course of action to remediate the finding.</p>"
+                    }
+                },
+                "url": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL address to the recommendation for remediating the finding. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the recommended course of action to remediate a finding.</p>"
+            }
+        },
+        "com.amazonaws.codegurusecurity#ReferenceUrls": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            }
+        },
+        "com.amazonaws.codegurusecurity#RelatedVulnerabilities": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            }
+        },
+        "com.amazonaws.codegurusecurity#Remediation": {
+            "type": "structure",
+            "members": {
+                "recommendation": {
+                    "target": "com.amazonaws.codegurusecurity#Recommendation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains information about the recommended course of action to remediate a finding.</p>"
+                    }
+                },
+                "suggestedFixes": {
+                    "target": "com.amazonaws.codegurusecurity#SuggestedFixes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>SuggestedFix</code> objects. Each object contains information about a suggested code\n      fix to remediate the finding.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about how to remediate a finding.</p>"
+            }
+        },
+        "com.amazonaws.codegurusecurity#RequestHeaderMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.codegurusecurity#HeaderKey"
+            },
+            "value": {
+                "target": "com.amazonaws.codegurusecurity#HeaderValue"
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.codegurusecurity#Resource": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the resource.</p>"
+                    }
+                },
+                "subResourceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for a section of the resource, such as an AWS Lambda layer.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a resource, such as an Amazon S3 bucket or AWS Lambda function, that\n      contains a finding.</p>"
+            }
+        },
+        "com.amazonaws.codegurusecurity#ResourceId": {
+            "type": "union",
+            "members": {
+                "codeArtifactId": {
+                    "target": "com.amazonaws.codegurusecurity#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the code file uploaded to the resource where a finding was detected.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The identifier for a resource object that contains resources where a finding was detected.</p>"
+            }
+        },
+        "com.amazonaws.codegurusecurity#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "errorCode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the error.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Description of the error.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the resource that was not found.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of resource that was not found.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The resource specified in the request was not found.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.codegurusecurity#S3Url": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.codegurusecurity#ScanName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 140
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-_$:.]*$"
+            }
+        },
+        "com.amazonaws.codegurusecurity#ScanNameArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 300
+                },
+                "smithy.api#pattern": "^arn:aws:codeguru-security:[\\S]+:[\\d]{12}:scans\\/[a-zA-Z0-9-_$:.]*$"
+            }
+        },
+        "com.amazonaws.codegurusecurity#ScanNameWithFindingNum": {
+            "type": "structure",
+            "members": {
+                "scanName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the scan.</p>"
+                    }
+                },
+                "findingNumber": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of open findings generated by a scan.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a scan with open findings.</p>"
+            }
+        },
+        "com.amazonaws.codegurusecurity#ScanState": {
+            "type": "enum",
+            "members": {
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InProgress"
+                    }
+                },
+                "SUCCESSFUL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Successful"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Failed"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.codegurusecurity#ScanSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.codegurusecurity#ScanSummary"
+            }
+        },
+        "com.amazonaws.codegurusecurity#ScanSummary": {
+            "type": "structure",
+            "members": {
+                "scanState": {
+                    "target": "com.amazonaws.codegurusecurity#ScanState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the scan. A scan can be <code>In Progress</code>, \n      <code>Complete</code>, or <code>Failed</code>. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The time when the scan was created. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the scan was last updated. A scan is updated when it is re-run.</p>"
+                    }
+                },
+                "scanName": {
+                    "target": "com.amazonaws.codegurusecurity#ScanName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the scan. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "runId": {
+                    "target": "com.amazonaws.codegurusecurity#Uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the scan run. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "scanNameArn": {
+                    "target": "com.amazonaws.codegurusecurity#ScanNameArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for the scan name.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a scan. </p>"
+            }
+        },
+        "com.amazonaws.codegurusecurity#ScanType": {
+            "type": "enum",
+            "members": {
+                "STANDARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Standard"
+                    }
+                },
+                "EXPRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Express"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.codegurusecurity#ScansWithMostOpenCriticalFindings": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.codegurusecurity#ScanNameWithFindingNum"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 3
+                }
+            }
+        },
+        "com.amazonaws.codegurusecurity#ScansWithMostOpenFindings": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.codegurusecurity#ScanNameWithFindingNum"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 3
+                }
+            }
+        },
+        "com.amazonaws.codegurusecurity#Severity": {
+            "type": "enum",
+            "members": {
+                "CRITICAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Critical"
+                    }
+                },
+                "HIGH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "High"
+                    }
+                },
+                "MEDIUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Medium"
+                    }
+                },
+                "LOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Low"
+                    }
+                },
+                "INFO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Info"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.codegurusecurity#Status": {
+            "type": "enum",
+            "members": {
+                "CLOSED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Closed"
+                    }
+                },
+                "OPEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Open"
+                    }
+                },
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "All"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.codegurusecurity#SuggestedFix": {
+            "type": "structure",
+            "members": {
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the suggested code fix and why it is being suggested. </p>"
+                    }
+                },
+                "code": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The suggested code to add to your file. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the suggested code fix to remediate a finding.</p>"
+            }
+        },
+        "com.amazonaws.codegurusecurity#SuggestedFixes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.codegurusecurity#SuggestedFix"
+            }
+        },
+        "com.amazonaws.codegurusecurity#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.codegurusecurity#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.codegurusecurity#TagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.codegurusecurity#TagMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.codegurusecurity#TagKey"
+            },
+            "value": {
+                "target": "com.amazonaws.codegurusecurity#TagValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.codegurusecurity#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.codegurusecurity#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.codegurusecurity#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.codegurusecurity#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Use to add one or more tags to an existing scan.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/tags/{resourceArn}",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.codegurusecurity#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.codegurusecurity#ScanNameArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the <code>ScanName</code> object. You can retrieve this ARN by calling\n      <code>ListScans</code> or <code>GetScan</code>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.codegurusecurity#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of key-value pairs used to tag an existing scan. A tag is a custom attribute\n    label with two parts:</p>\n         <ul>\n            <li>\n               <p>A tag key. For example, <code>CostCenter</code>, <code>Environment</code>, or\n          <code>Secret</code>. Tag keys are case sensitive.</p>\n            </li>\n            <li>\n               <p>An optional tag value field. For example, <code>111122223333</code>,\n          <code>Production</code>, or a team name. Omitting the tag value is the same as using an\n          empty string. Tag values are case sensitive.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.codegurusecurity#TagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.codegurusecurity#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.codegurusecurity#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "errorCode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the error.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Description of the error.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "serviceCode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the originating service.</p>"
+                    }
+                },
+                "quotaCode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the originating quota.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request was denied due to request throttling.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429,
+                "smithy.api#retryable": {
+                    "throttling": true
+                }
+            }
+        },
+        "com.amazonaws.codegurusecurity#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.codegurusecurity#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.codegurusecurity#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.codegurusecurity#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Use to remove one or more tags from an existing scan.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/tags/{resourceArn}",
+                    "code": 204
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.codegurusecurity#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.codegurusecurity#ScanNameArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the <code>ScanName</code> object. You can retrieve this ARN by calling\n      <code>ListScans</code> or <code>GetScan</code>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tagKeys": {
+                    "target": "com.amazonaws.codegurusecurity#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of keys for each tag you want to remove from a scan.</p>",
+                        "smithy.api#httpQuery": "tagKeys",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.codegurusecurity#UntagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.codegurusecurity#UpdateAccountConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.codegurusecurity#UpdateAccountConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.codegurusecurity#UpdateAccountConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.codegurusecurity#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.codegurusecurity#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Use to update account-level configuration with an encryption key.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PUT",
+                    "uri": "/updateAccountConfiguration"
+                }
+            }
+        },
+        "com.amazonaws.codegurusecurity#UpdateAccountConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "encryptionConfig": {
+                    "target": "com.amazonaws.codegurusecurity#EncryptionConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The KMS key ARN you want to use for encryption. Defaults to service-side encryption if missing.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.codegurusecurity#UpdateAccountConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "encryptionConfig": {
+                    "target": "com.amazonaws.codegurusecurity#EncryptionConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An <code>EncryptionConfig</code> object that contains the KMS key ARN to use for\n      encryption.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.codegurusecurity#Uuid": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+            }
+        },
+        "com.amazonaws.codegurusecurity#ValidationException": {
+            "type": "structure",
+            "members": {
+                "errorCode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the error.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Description of the error.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "reason": {
+                    "target": "com.amazonaws.codegurusecurity#ValidationExceptionReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason the request failed validation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "fieldList": {
+                    "target": "com.amazonaws.codegurusecurity#ValidationExceptionFieldList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The field that caused the error, if applicable.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input fails to satisfy the specified constraints.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.codegurusecurity#ValidationExceptionField": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the exception.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the exception.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a validation exception.</p>"
+            }
+        },
+        "com.amazonaws.codegurusecurity#ValidationExceptionFieldList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.codegurusecurity#ValidationExceptionField"
+            }
+        },
+        "com.amazonaws.codegurusecurity#ValidationExceptionReason": {
+            "type": "enum",
+            "members": {
+                "UNKNOWN_OPERATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "unknownOperation"
+                    }
+                },
+                "CANNOT_PARSE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cannotParse"
+                    }
+                },
+                "FIELD_VALIDATION_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "fieldValidationFailed"
+                    }
+                },
+                "OTHER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "other"
+                    }
+                },
+                "LAMBDA_CODE_SHA_MISMATCH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "lambdaCodeShaMisMatch"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.codegurusecurity#Vulnerability": {
+            "type": "structure",
+            "members": {
+                "referenceUrls": {
+                    "target": "com.amazonaws.codegurusecurity#ReferenceUrls",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more URL addresses that contain details about a vulnerability.</p>"
+                    }
+                },
+                "relatedVulnerabilities": {
+                    "target": "com.amazonaws.codegurusecurity#RelatedVulnerabilities",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more vulnerabilities that are related to the vulnerability being described.</p>"
+                    }
+                },
+                "id": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the vulnerability.</p>"
+                    }
+                },
+                "filePath": {
+                    "target": "com.amazonaws.codegurusecurity#FilePath",
+                    "traits": {
+                        "smithy.api#documentation": "<p> An object that describes the location of the detected security vulnerability in your\n      code.</p>"
+                    }
+                },
+                "itemCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The number of times the vulnerability appears in your code.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a security vulnerability that Amazon CodeGuru Security detected.</p>"
+            }
+        }
+    }
+}

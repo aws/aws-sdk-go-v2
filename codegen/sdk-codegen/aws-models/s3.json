@@ -33016,6 +33016,12 @@
                     "traits": {
                         "smithy.api#enumValue": "aws:kms"
                     }
+                },
+                "aws_kms_dsse": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "aws:kms:dsse"
+                    }
                 }
             }
         },

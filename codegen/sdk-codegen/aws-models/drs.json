@@ -86,6 +86,94 @@
                 }
             }
         },
+        "com.amazonaws.drs#AssociateSourceNetworkStack": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.drs#AssociateSourceNetworkStackRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.drs#AssociateSourceNetworkStackResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.drs#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.drs#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.drs#UninitializedAccountException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#requiredActions": [
+                    "cloudformation:DescribeStacks",
+                    "cloudformation:DescribeStackResource",
+                    "ec2:DescribeVpcs",
+                    "ec2:DescribeSubnets",
+                    "ec2:DescribeSecurityGroups",
+                    "ec2:DescribeLaunchTemplates",
+                    "ec2:DescribeLaunchTemplateVersions",
+                    "ec2:ModifyLaunchTemplate",
+                    "ec2:CreateLaunchTemplateVersion",
+                    "drs:GetLaunchConfiguration"
+                ],
+                "smithy.api#documentation": "<p>Associate a Source Network to an existing CloudFormation Stack and modify launch templates to use this network. Can be used for reverting to previously deployed CloudFormation stacks.</p>",
+                "smithy.api#http": {
+                    "uri": "/AssociateSourceNetworkStack",
+                    "method": "POST",
+                    "code": 202
+                }
+            }
+        },
+        "com.amazonaws.drs#AssociateSourceNetworkStackRequest": {
+            "type": "structure",
+            "members": {
+                "sourceNetworkID": {
+                    "target": "com.amazonaws.drs#SourceNetworkID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Source Network ID to associate with CloudFormation template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "cfnStackName": {
+                    "target": "com.amazonaws.drs#CfnStackName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>CloudFormation template to associate with a Source Network.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.drs#AssociateSourceNetworkStackResponse": {
+            "type": "structure",
+            "members": {
+                "job": {
+                    "target": "com.amazonaws.drs#Job",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Source Network association Job.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.drs#AwsAvailabilityZone": {
             "type": "string",
             "traits": {
@@ -134,6 +222,17 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information about a server's CPU.</p>"
+            }
+        },
+        "com.amazonaws.drs#CfnStackName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z][-a-zA-Z0-9]*$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.drs#ConflictException": {
@@ -367,6 +466,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Licensing.</p>"
                     }
+                },
+                "exportBucketArn": {
+                    "target": "com.amazonaws.drs#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>S3 bucket ARN to export Source Network templates.</p>"
+                    }
                 }
             }
         },
@@ -524,6 +629,99 @@
                         "smithy.api#documentation": "<p>Whether to allow the AWS replication agent to automatically replicate newly added disks.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.drs#CreateSourceNetwork": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.drs#CreateSourceNetworkRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.drs#CreateSourceNetworkResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.drs#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.drs#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.drs#UninitializedAccountException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#requiredActions": [
+                    "ec2:DescribeVpcs",
+                    "ec2:DescribeInstances"
+                ],
+                "smithy.api#documentation": "<p>Create a new Source Network resource for a provided VPC ID.</p>",
+                "smithy.api#http": {
+                    "uri": "/CreateSourceNetwork",
+                    "method": "POST",
+                    "code": 201
+                }
+            }
+        },
+        "com.amazonaws.drs#CreateSourceNetworkRequest": {
+            "type": "structure",
+            "members": {
+                "vpcID": {
+                    "target": "com.amazonaws.drs#VpcID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Which VPC ID to protect.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "originAccountID": {
+                    "target": "com.amazonaws.drs#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Account containing the VPC to protect.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "originRegion": {
+                    "target": "com.amazonaws.drs#AwsRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Region containing the VPC to protect.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.drs#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A set of tags to be associated with the Source Network resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.drs#CreateSourceNetworkResponse": {
+            "type": "structure",
+            "members": {
+                "sourceNetworkID": {
+                    "target": "com.amazonaws.drs#SourceNetworkID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ID of the created Source Network.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.drs#DataReplicationError": {
@@ -1088,6 +1286,63 @@
         "com.amazonaws.drs#DeleteReplicationConfigurationTemplateResponse": {
             "type": "structure",
             "members": {}
+        },
+        "com.amazonaws.drs#DeleteSourceNetwork": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.drs#DeleteSourceNetworkRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.drs#DeleteSourceNetworkResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.drs#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.drs#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.drs#UninitializedAccountException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Delete Source Network resource.</p>",
+                "smithy.api#http": {
+                    "uri": "/DeleteSourceNetwork",
+                    "method": "POST",
+                    "code": 204
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.drs#DeleteSourceNetworkRequest": {
+            "type": "structure",
+            "members": {
+                "sourceNetworkID": {
+                    "target": "com.amazonaws.drs#SourceNetworkID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ID of the Source Network to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.drs#DeleteSourceNetworkResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.drs#DeleteSourceServer": {
             "type": "operation",
@@ -1725,6 +1980,129 @@
                 }
             }
         },
+        "com.amazonaws.drs#DescribeSourceNetworks": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.drs#DescribeSourceNetworksRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.drs#DescribeSourceNetworksResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.drs#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.drs#UninitializedAccountException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all Source Networks or multiple Source Networks filtered by ID.</p>",
+                "smithy.api#http": {
+                    "uri": "/DescribeSourceNetworks",
+                    "method": "POST",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "items"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.drs#DescribeSourceNetworksRequest": {
+            "type": "structure",
+            "members": {
+                "filters": {
+                    "target": "com.amazonaws.drs#DescribeSourceNetworksRequestFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A set of filters by which to return Source Networks.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.drs#StrictlyPositiveInteger",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>Maximum number of Source Networks to retrieve.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.drs#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token of the next Source Networks to retrieve.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.drs#DescribeSourceNetworksRequestFilters": {
+            "type": "structure",
+            "members": {
+                "sourceNetworkIDs": {
+                    "target": "com.amazonaws.drs#DescribeSourceNetworksRequestFiltersIDs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of Source Network IDs that should be returned. An empty array means all Source Networks.</p>"
+                    }
+                },
+                "originAccountID": {
+                    "target": "com.amazonaws.drs#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter Source Networks by account ID containing the protected VPCs.</p>"
+                    }
+                },
+                "originRegion": {
+                    "target": "com.amazonaws.drs#AwsRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter Source Networks by the region containing the protected VPCs.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A set of filters by which to return Source Networks.</p>"
+            }
+        },
+        "com.amazonaws.drs#DescribeSourceNetworksRequestFiltersIDs": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.drs#SourceNetworkID"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.drs#DescribeSourceNetworksResponse": {
+            "type": "structure",
+            "members": {
+                "items": {
+                    "target": "com.amazonaws.drs#SourceNetworksList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of Source Networks.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.drs#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token of the next Source Networks to retrieve.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.drs#DescribeSourceServers": {
             "type": "operation",
             "input": {
@@ -2087,6 +2465,9 @@
                 },
                 {
                     "target": "com.amazonaws.drs#ReplicationConfigurationTemplateResource"
+                },
+                {
+                    "target": "com.amazonaws.drs#SourceNetworkResource"
                 },
                 {
                     "target": "com.amazonaws.drs#SourceServerResource"
@@ -3051,6 +3432,91 @@
                 }
             }
         },
+        "com.amazonaws.drs#EventResourceData": {
+            "type": "union",
+            "members": {
+                "sourceNetworkData": {
+                    "target": "com.amazonaws.drs#SourceNetworkData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Source Network properties.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Properties of resource related to a job event.</p>"
+            }
+        },
+        "com.amazonaws.drs#ExportSourceNetworkCfnTemplate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.drs#ExportSourceNetworkCfnTemplateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.drs#ExportSourceNetworkCfnTemplateResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.drs#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.drs#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.drs#UninitializedAccountException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#requiredActions": [
+                    "s3:GetBucketLocation",
+                    "s3:PutObject",
+                    "s3:GetObject"
+                ],
+                "smithy.api#documentation": "<p>Export the Source Network CloudFormation template to an S3 bucket.</p>",
+                "smithy.api#http": {
+                    "uri": "/ExportSourceNetworkCfnTemplate",
+                    "method": "POST",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.drs#ExportSourceNetworkCfnTemplateRequest": {
+            "type": "structure",
+            "members": {
+                "sourceNetworkID": {
+                    "target": "com.amazonaws.drs#SourceNetworkID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Source Network ID to export its CloudFormation template to an S3 bucket.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.drs#ExportSourceNetworkCfnTemplateResponse": {
+            "type": "structure",
+            "members": {
+                "s3DestinationUrl": {
+                    "target": "com.amazonaws.drs#LargeBoundedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>S3 bucket URL where the Source Network CloudFormation template was exported to.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.drs#ExtensionStatus": {
             "type": "string",
             "traits": {
@@ -3506,6 +3972,18 @@
                     {
                         "value": "TARGET_ACCOUNT",
                         "name": "TARGET_ACCOUNT"
+                    },
+                    {
+                        "value": "CREATE_NETWORK_RECOVERY",
+                        "name": "CREATE_NETWORK_RECOVERY"
+                    },
+                    {
+                        "value": "UPDATE_NETWORK_RECOVERY",
+                        "name": "UPDATE_NETWORK_RECOVERY"
+                    },
+                    {
+                        "value": "ASSOCIATE_NETWORK_RECOVERY",
+                        "name": "ASSOCIATE_NETWORK_RECOVERY"
                     }
                 ]
             }
@@ -3590,6 +4068,12 @@
                     "target": "com.amazonaws.drs#TagsMap",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of tags associated with the Job.</p>"
+                    }
+                },
+                "participatingResources": {
+                    "target": "com.amazonaws.drs#ParticipatingResources",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of resources that the Job is acting upon.</p>"
                     }
                 }
             },
@@ -3704,6 +4188,46 @@
                     {
                         "name": "JOB_END",
                         "value": "JOB_END"
+                    },
+                    {
+                        "name": "DEPLOY_NETWORK_CONFIGURATION_START",
+                        "value": "DEPLOY_NETWORK_CONFIGURATION_START"
+                    },
+                    {
+                        "name": "DEPLOY_NETWORK_CONFIGURATION_END",
+                        "value": "DEPLOY_NETWORK_CONFIGURATION_END"
+                    },
+                    {
+                        "name": "DEPLOY_NETWORK_CONFIGURATION_FAILED",
+                        "value": "DEPLOY_NETWORK_CONFIGURATION_FAILED"
+                    },
+                    {
+                        "name": "UPDATE_NETWORK_CONFIGURATION_START",
+                        "value": "UPDATE_NETWORK_CONFIGURATION_START"
+                    },
+                    {
+                        "name": "UPDATE_NETWORK_CONFIGURATION_END",
+                        "value": "UPDATE_NETWORK_CONFIGURATION_END"
+                    },
+                    {
+                        "name": "UPDATE_NETWORK_CONFIGURATION_FAILED",
+                        "value": "UPDATE_NETWORK_CONFIGURATION_FAILED"
+                    },
+                    {
+                        "name": "UPDATE_LAUNCH_TEMPLATE_START",
+                        "value": "UPDATE_LAUNCH_TEMPLATE_START"
+                    },
+                    {
+                        "name": "UPDATE_LAUNCH_TEMPLATE_END",
+                        "value": "UPDATE_LAUNCH_TEMPLATE_END"
+                    },
+                    {
+                        "name": "UPDATE_LAUNCH_TEMPLATE_FAILED",
+                        "value": "UPDATE_LAUNCH_TEMPLATE_FAILED"
+                    },
+                    {
+                        "name": "NETWORK_RECOVERY_FAIL",
+                        "value": "NETWORK_RECOVERY_FAIL"
                     }
                 ]
             }
@@ -3739,6 +4263,12 @@
                     "target": "com.amazonaws.drs#ConversionProperties",
                     "traits": {
                         "smithy.api#documentation": "<p>Properties of a conversion job</p>"
+                    }
+                },
+                "eventResourceData": {
+                    "target": "com.amazonaws.drs#EventResourceData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Properties of resource related to a job event.</p>"
                     }
                 }
             },
@@ -3973,6 +4503,12 @@
                     "target": "com.amazonaws.drs#Licensing",
                     "traits": {
                         "smithy.api#documentation": "<p>Licensing.</p>"
+                    }
+                },
+                "exportBucketArn": {
+                    "target": "com.amazonaws.drs#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>S3 bucket ARN to export Source Network templates.</p>"
                     }
                 }
             },
@@ -4570,6 +5106,46 @@
                     "min": 0,
                     "max": 2048
                 }
+            }
+        },
+        "com.amazonaws.drs#ParticipatingResource": {
+            "type": "structure",
+            "members": {
+                "participatingResourceID": {
+                    "target": "com.amazonaws.drs#ParticipatingResourceID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of a participating resource.</p>"
+                    }
+                },
+                "launchStatus": {
+                    "target": "com.amazonaws.drs#LaunchStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The launch status of a participating resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a resource participating in an asynchronous Job.</p>"
+            }
+        },
+        "com.amazonaws.drs#ParticipatingResourceID": {
+            "type": "union",
+            "members": {
+                "sourceNetworkID": {
+                    "target": "com.amazonaws.drs#SourceNetworkID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Source Network ID.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>ID of a resource participating in an asynchronous Job.</p>"
+            }
+        },
+        "com.amazonaws.drs#ParticipatingResources": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.drs#ParticipatingResource"
             }
         },
         "com.amazonaws.drs#ParticipatingServer": {
@@ -5277,6 +5853,68 @@
                 }
             }
         },
+        "com.amazonaws.drs#RecoveryLifeCycle": {
+            "type": "structure",
+            "members": {
+                "apiCallDateTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the last Source Network recovery was initiated.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "jobID": {
+                    "target": "com.amazonaws.drs#JobID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Job that was used to last recover the Source Network.</p>"
+                    }
+                },
+                "lastRecoveryResult": {
+                    "target": "com.amazonaws.drs#RecoveryResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the last recovery status of this Source Network.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object representing the Source Network recovery Lifecycle.</p>"
+            }
+        },
+        "com.amazonaws.drs#RecoveryResult": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "NOT_STARTED",
+                        "name": "NOT_STARTED"
+                    },
+                    {
+                        "value": "IN_PROGRESS",
+                        "name": "IN_PROGRESS"
+                    },
+                    {
+                        "value": "SUCCESS",
+                        "name": "SUCCESS"
+                    },
+                    {
+                        "value": "FAIL",
+                        "name": "FAIL"
+                    },
+                    {
+                        "value": "PARTIAL_SUCCESS",
+                        "name": "PARTIAL_SUCCESS"
+                    },
+                    {
+                        "value": "ASSOCIATE_SUCCESS",
+                        "name": "ASSOCIATE_SUCCESS"
+                    },
+                    {
+                        "value": "ASSOCIATE_FAIL",
+                        "name": "ASSOCIATE_FAIL"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.drs#RecoverySnapshot": {
             "type": "structure",
             "members": {
@@ -5506,6 +6144,10 @@
                     {
                         "value": "CUSTOM",
                         "name": "CUSTOM"
+                    },
+                    {
+                        "value": "NONE",
+                        "name": "NONE"
                     }
                 ]
             }
@@ -5797,6 +6439,29 @@
                 }
             }
         },
+        "com.amazonaws.drs#ReplicationStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "STOPPED",
+                        "name": "STOPPED"
+                    },
+                    {
+                        "value": "IN_PROGRESS",
+                        "name": "IN_PROGRESS"
+                    },
+                    {
+                        "value": "PROTECTED",
+                        "name": "PROTECTED"
+                    },
+                    {
+                        "value": "ERROR",
+                        "name": "ERROR"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.drs#ResourceNotFoundException": {
             "type": "structure",
             "members": {
@@ -5957,6 +6622,16 @@
                 "smithy.api#pattern": "^sg-[0-9a-fA-F]{8,}$"
             }
         },
+        "com.amazonaws.drs#SensitiveBoundedString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.drs#ServiceQuotaExceededException": {
             "type": "structure",
             "members": {
@@ -6030,6 +6705,178 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Properties of the cloud environment where this Source Server originated from.</p>"
+            }
+        },
+        "com.amazonaws.drs#SourceNetwork": {
+            "type": "structure",
+            "members": {
+                "sourceNetworkID": {
+                    "target": "com.amazonaws.drs#SourceNetworkID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Source Network ID.</p>"
+                    }
+                },
+                "sourceVpcID": {
+                    "target": "com.amazonaws.drs#VpcID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>VPC ID protected by the Source Network.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.drs#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Source Network.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.drs#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags associated with the Source Network.</p>"
+                    }
+                },
+                "replicationStatus": {
+                    "target": "com.amazonaws.drs#ReplicationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Status of Source Network Replication. Possible values:\n            (a) STOPPED - Source Network is not replicating.\n            (b) IN_PROGRESS - Source Network is being replicated.\n            (c) PROTECTED - Source Network was replicated successfully and is being synchronized for changes.\n            (d) ERROR - Source Network replication has failed</p>"
+                    }
+                },
+                "replicationStatusDetails": {
+                    "target": "com.amazonaws.drs#SensitiveBoundedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Error details in case Source Network replication status is ERROR.</p>"
+                    }
+                },
+                "cfnStackName": {
+                    "target": "com.amazonaws.drs#CfnStackName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>CloudFormation stack name that was deployed for recovering the Source Network.</p>"
+                    }
+                },
+                "sourceRegion": {
+                    "target": "com.amazonaws.drs#AwsRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Region containing the VPC protected by the Source Network.</p>"
+                    }
+                },
+                "sourceAccountID": {
+                    "target": "com.amazonaws.drs#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Account ID containing the VPC protected by the Source Network.</p>"
+                    }
+                },
+                "lastRecovery": {
+                    "target": "com.amazonaws.drs#RecoveryLifeCycle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object containing information regarding the last recovery of the Source Network.</p>"
+                    }
+                },
+                "launchedVpcID": {
+                    "target": "com.amazonaws.drs#VpcID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ID of the recovered VPC following Source Network recovery.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The ARN of the Source Network.</p>",
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.drs#SourceNetworkResource"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.drs#SourceNetworkData": {
+            "type": "structure",
+            "members": {
+                "sourceNetworkID": {
+                    "target": "com.amazonaws.drs#SourceNetworkID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Source Network ID.</p>"
+                    }
+                },
+                "sourceVpc": {
+                    "target": "com.amazonaws.drs#VpcID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>VPC ID protected by the Source Network.</p>"
+                    }
+                },
+                "targetVpc": {
+                    "target": "com.amazonaws.drs#VpcID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ID of the recovered VPC following Source Network recovery.</p>"
+                    }
+                },
+                "stackName": {
+                    "target": "com.amazonaws.drs#LargeBoundedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>CloudFormation stack name that was deployed for recovering the Source Network.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Properties of Source Network related to a job event.</p>"
+            }
+        },
+        "com.amazonaws.drs#SourceNetworkID": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 20
+                },
+                "smithy.api#pattern": "^sn-[0-9a-zA-Z]{17}$"
+            }
+        },
+        "com.amazonaws.drs#SourceNetworkResource": {
+            "type": "resource",
+            "identifiers": {
+                "sourceNetworkID": {
+                    "target": "com.amazonaws.drs#SourceNetworkID"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.drs#CreateSourceNetwork"
+            },
+            "delete": {
+                "target": "com.amazonaws.drs#DeleteSourceNetwork"
+            },
+            "list": {
+                "target": "com.amazonaws.drs#DescribeSourceNetworks"
+            },
+            "operations": [
+                {
+                    "target": "com.amazonaws.drs#AssociateSourceNetworkStack"
+                },
+                {
+                    "target": "com.amazonaws.drs#ExportSourceNetworkCfnTemplate"
+                },
+                {
+                    "target": "com.amazonaws.drs#StartSourceNetworkReplication"
+                },
+                {
+                    "target": "com.amazonaws.drs#StopSourceNetworkReplication"
+                }
+            ],
+            "collectionOperations": [
+                {
+                    "target": "com.amazonaws.drs#StartSourceNetworkRecovery"
+                }
+            ],
+            "traits": {
+                "aws.api#arn": {
+                    "template": "source-network/{sourceNetworkID}"
+                },
+                "aws.iam#conditionKeys": [
+                    "aws:ResourceTag"
+                ],
+                "aws.iam#disableConditionKeyInference": {}
+            }
+        },
+        "com.amazonaws.drs#SourceNetworksList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.drs#SourceNetwork"
             }
         },
         "com.amazonaws.drs#SourceProperties": {
@@ -6168,6 +7015,12 @@
                     "target": "com.amazonaws.drs#SourceServerARN",
                     "traits": {
                         "smithy.api#documentation": "<p>For EC2-originated Source Servers which have been failed over and then failed back, this value will mean the ARN of the Source Server on the opposite replication direction.</p>"
+                    }
+                },
+                "sourceNetworkID": {
+                    "target": "com.amazonaws.drs#SourceNetworkID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ID of the Source Network which is protecting this Source Server's network.</p>"
                     }
                 }
             },
@@ -6606,6 +7459,201 @@
                 }
             }
         },
+        "com.amazonaws.drs#StartSourceNetworkRecovery": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.drs#StartSourceNetworkRecoveryRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.drs#StartSourceNetworkRecoveryResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.drs#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.drs#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.drs#UninitializedAccountException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#requiredActions": [
+                    "ec2:DescribeSubnets",
+                    "ec2:DescribeSecurityGroups",
+                    "ec2:DescribeLaunchTemplates",
+                    "ec2:DescribeLaunchTemplateVersions",
+                    "ec2:ModifyLaunchTemplate",
+                    "ec2:CreateLaunchTemplateVersion",
+                    "ec2:DescribeVpcs",
+                    "ec2:DescribeSubnets",
+                    "ec2:DescribeSecurityGroups",
+                    "ec2:DescribeLaunchTemplates",
+                    "ec2:DescribeLaunchTemplateVersions",
+                    "cloudformation:DescribeStacks",
+                    "cloudformation:UpdateStack",
+                    "cloudformation:CreateStack",
+                    "cloudformation:DescribeStackResource",
+                    "cloudformation:DescribeStacks",
+                    "drs:GetLaunchConfiguration",
+                    "s3:PutObject",
+                    "s3:GetObject"
+                ],
+                "smithy.api#documentation": "<p>Deploy VPC for the specified Source Network and modify launch templates to use this network. The VPC will be deployed using a dedicated CloudFormation stack.</p>",
+                "smithy.api#http": {
+                    "uri": "/StartSourceNetworkRecovery",
+                    "method": "POST",
+                    "code": 202
+                }
+            }
+        },
+        "com.amazonaws.drs#StartSourceNetworkRecoveryRequest": {
+            "type": "structure",
+            "members": {
+                "sourceNetworks": {
+                    "target": "com.amazonaws.drs#StartSourceNetworkRecoveryRequestNetworkEntries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Source Networks that we want to start a Recovery Job for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "deployAsNew": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Don't update existing CloudFormation Stack, recover the network using a new stack.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.drs#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to be associated with the Source Network recovery Job.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.drs#StartSourceNetworkRecoveryRequestNetworkEntries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.drs#StartSourceNetworkRecoveryRequestNetworkEntry"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.drs#StartSourceNetworkRecoveryRequestNetworkEntry": {
+            "type": "structure",
+            "members": {
+                "sourceNetworkID": {
+                    "target": "com.amazonaws.drs#SourceNetworkID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Source Network you want to recover.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "cfnStackName": {
+                    "target": "com.amazonaws.drs#CfnStackName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>CloudFormation stack name to be used for recovering the network.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object representing the Source Network to recover.</p>"
+            }
+        },
+        "com.amazonaws.drs#StartSourceNetworkRecoveryResponse": {
+            "type": "structure",
+            "members": {
+                "job": {
+                    "target": "com.amazonaws.drs#Job",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Source Network recovery Job.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.drs#StartSourceNetworkReplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.drs#StartSourceNetworkReplicationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.drs#StartSourceNetworkReplicationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.drs#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.drs#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.drs#UninitializedAccountException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts replication for a Source Network. This action would make the Source Network protected.</p>",
+                "smithy.api#http": {
+                    "uri": "/StartSourceNetworkReplication",
+                    "method": "POST",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.drs#StartSourceNetworkReplicationRequest": {
+            "type": "structure",
+            "members": {
+                "sourceNetworkID": {
+                    "target": "com.amazonaws.drs#SourceNetworkID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ID of the Source Network to replicate.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.drs#StartSourceNetworkReplicationResponse": {
+            "type": "structure",
+            "members": {
+                "sourceNetwork": {
+                    "target": "com.amazonaws.drs#SourceNetwork",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Source Network which was requested for replication.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.drs#StopFailback": {
             "type": "operation",
             "input": {
@@ -6704,6 +7752,72 @@
                         "smithy.api#documentation": "<p>The Source Server that this action was targeted on.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.drs#StopSourceNetworkReplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.drs#StopSourceNetworkReplicationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.drs#StopSourceNetworkReplicationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.drs#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.drs#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.drs#UninitializedAccountException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Stops replication for a Source Network. This action would make the Source Network unprotected.</p>",
+                "smithy.api#http": {
+                    "uri": "/StopSourceNetworkReplication",
+                    "method": "POST",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.drs#StopSourceNetworkReplicationRequest": {
+            "type": "structure",
+            "members": {
+                "sourceNetworkID": {
+                    "target": "com.amazonaws.drs#SourceNetworkID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ID of the Source Network to stop replication.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.drs#StopSourceNetworkReplicationResponse": {
+            "type": "structure",
+            "members": {
+                "sourceNetwork": {
+                    "target": "com.amazonaws.drs#SourceNetwork",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Source Network which was requested to stop replication.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.drs#StrictlyPositiveInteger": {
@@ -7230,6 +8344,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Licensing.</p>"
                     }
+                },
+                "exportBucketArn": {
+                    "target": "com.amazonaws.drs#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>S3 bucket ARN to export Source Network templates.</p>"
+                    }
                 }
             }
         },
@@ -7627,6 +8747,16 @@
             },
             "value": {
                 "target": "com.amazonaws.drs#PositiveInteger"
+            }
+        },
+        "com.amazonaws.drs#VpcID": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 12,
+                    "max": 21
+                },
+                "smithy.api#pattern": "^vpc-[0-9a-fA-F]{8,}$"
             }
         }
     }

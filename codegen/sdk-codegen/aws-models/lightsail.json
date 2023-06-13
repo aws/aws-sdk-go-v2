@@ -586,6 +586,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#AppCategory": {
@@ -673,6 +676,9 @@
                         "smithy.api#documentation": "<p>An object that describes the result of the action, such as the status of the request, the\n      timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#AttachDisk": {
@@ -759,6 +765,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#AttachInstancesToLoadBalancer": {
@@ -832,6 +841,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#AttachLoadBalancerTlsCertificate": {
@@ -905,6 +917,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>\n         <p>These SSL/TLS certificates are only usable by Lightsail load balancers. You can't get\n      the certificate and use it for another purpose.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#AttachStaticIp": {
@@ -978,6 +993,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#AttachedDisk": {
@@ -1873,7 +1891,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the full details of an Amazon Lightsail SSL/TLS certificate.</p>\n         <note>\n            <p>To get a summary of a certificate, use the <code>GetCertificates</code> action and ommit\n          <code>includeCertificateDetails</code> from your request. The response will include only\n        the certificate Amazon Resource Name (ARN), certificate name, domain name, and tags.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Describes the full details of an Amazon Lightsail SSL/TLS certificate.</p>\n         <note>\n            <p>To get a summary of a certificate, use the <code>GetCertificates</code> action and omit\n          <code>includeCertificateDetails</code> from your request. The response will include only\n        the certificate Amazon Resource Name (ARN), certificate name, domain name, and tags.</p>\n         </note>"
             }
         },
         "com.amazonaws.lightsail#CertificateDomainValidationStatus": {
@@ -2070,6 +2088,9 @@
                         "smithy.api#documentation": "<p>An object that describes the result of the action, such as the status of the request, the\n      timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#CloudFormationStackRecord": {
@@ -3128,6 +3149,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe one or more container services.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#CookieObject": {
@@ -3245,6 +3269,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#CostEstimate": {
@@ -3368,6 +3395,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#CreateBucketRequest": {
@@ -3419,6 +3449,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#CreateCertificate": {
@@ -3504,6 +3537,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#CreateCloudFormationStack": {
@@ -3570,6 +3606,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#CreateContactMethod": {
@@ -3640,6 +3679,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#CreateContainerService": {
@@ -3747,6 +3789,9 @@
                         "smithy.api#documentation": "<p>An object that describes a container service.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#CreateContainerServiceRegistryLogin": {
@@ -3799,6 +3844,9 @@
                         "smithy.api#documentation": "<p>An object that describes the log in information for the container service registry of your\n      Lightsail account.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#CreateContainerServiceRequest": {
@@ -3863,6 +3911,9 @@
                         "smithy.api#documentation": "<p>An object that describes a container service.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#CreateDisk": {
@@ -4019,6 +4070,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#CreateDiskRequest": {
@@ -4071,6 +4125,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#CreateDiskSnapshot": {
@@ -4155,6 +4212,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#CreateDistribution": {
@@ -4269,6 +4329,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#CreateDomain": {
@@ -4382,6 +4445,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#CreateDomainRequest": {
@@ -4414,6 +4480,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#CreateGUISessionAccessDetails": {
@@ -4498,6 +4567,9 @@
                         "smithy.api#documentation": "<p>Returns information about the specified NICE DCV GUI session.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#CreateInstanceSnapshot": {
@@ -4577,6 +4649,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#CreateInstances": {
@@ -4757,6 +4832,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#CreateInstancesRequest": {
@@ -4841,6 +4919,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#CreateKeyPair": {
@@ -4931,6 +5012,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#CreateLoadBalancer": {
@@ -5047,6 +5131,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#CreateLoadBalancerTlsCertificate": {
@@ -5139,6 +5226,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#CreateRelationalDatabase": {
@@ -5293,6 +5383,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#CreateRelationalDatabaseRequest": {
@@ -5383,6 +5476,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#CreateRelationalDatabaseSnapshot": {
@@ -5462,6 +5558,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#Currency": {
@@ -5536,6 +5635,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#DeleteAutoSnapshot": {
@@ -5606,6 +5708,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#DeleteBucket": {
@@ -5707,6 +5812,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#DeleteBucketRequest": {
@@ -5739,6 +5847,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#DeleteCertificate": {
@@ -5799,6 +5910,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#DeleteContactMethod": {
@@ -5862,6 +5976,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#DeleteContainerImage": {
@@ -5924,7 +6041,10 @@
         },
         "com.amazonaws.lightsail#DeleteContainerImageResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.lightsail#DeleteContainerService": {
             "type": "operation",
@@ -5978,7 +6098,10 @@
         },
         "com.amazonaws.lightsail#DeleteContainerServiceResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.lightsail#DeleteDisk": {
             "type": "operation",
@@ -6050,6 +6173,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#DeleteDiskSnapshot": {
@@ -6116,6 +6242,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#DeleteDistribution": {
@@ -6178,6 +6307,9 @@
                         "smithy.api#documentation": "<p>An object that describes the result of the action, such as the status of the request, the\n      timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#DeleteDomain": {
@@ -6291,6 +6423,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#DeleteDomainRequest": {
@@ -6317,6 +6452,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#DeleteInstance": {
@@ -6389,6 +6527,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#DeleteInstanceSnapshot": {
@@ -6455,6 +6596,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#DeleteKeyPair": {
@@ -6527,6 +6671,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#DeleteKnownHostKeys": {
@@ -6593,6 +6740,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#DeleteLoadBalancer": {
@@ -6659,6 +6809,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#DeleteLoadBalancerTlsCertificate": {
@@ -6738,6 +6891,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#DeleteRelationalDatabase": {
@@ -6816,6 +6972,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#DeleteRelationalDatabaseSnapshot": {
@@ -6882,6 +7041,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#DestinationInfo": {
@@ -6965,6 +7127,9 @@
                         "smithy.api#documentation": "<p>An object that describes the result of the action, such as the status of the request, the\n      timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#DetachDisk": {
@@ -7031,6 +7196,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#DetachInstancesFromLoadBalancer": {
@@ -7104,6 +7272,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#DetachStaticIp": {
@@ -7170,6 +7341,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#DisableAddOn": {
@@ -7240,6 +7414,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#Disk": {
@@ -7995,6 +8172,9 @@
                         "smithy.api#documentation": "<p>The timestamp when the default key pair was created.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#EligibleToRenew": {
@@ -8068,6 +8248,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#EndpointRequest": {
@@ -8350,6 +8533,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#ForwardValues": {
@@ -8444,6 +8630,9 @@
                         "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>A next page token is not returned if there are no more results to display.</p>\n         <p>To get the next page of results, perform another <code>GetActiveNames</code> request and\n      specify the next page token using the <code>pageToken</code> parameter.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetAlarms": {
@@ -8524,6 +8713,9 @@
                         "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>A next page token is not returned if there are no more results to display.</p>\n         <p>To get the next page of results, perform another <code>GetAlarms</code> request and\n      specify the next page token using the <code>pageToken</code> parameter.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetAutoSnapshots": {
@@ -8599,6 +8791,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the automatic snapshots that are available for the\n      specified source instance or disk.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetBlueprints": {
@@ -8682,6 +8877,9 @@
                         "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>A next page token is not returned if there are no more results to display.</p>\n         <p>To get the next page of results, perform another <code>GetBlueprints</code> request and\n      specify the next page token using the <code>pageToken</code> parameter.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetBucketAccessKeys": {
@@ -8742,6 +8940,9 @@
                         "smithy.api#documentation": "<p>An object that describes the access keys for the specified bucket.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetBucketBundles": {
@@ -8798,6 +8999,9 @@
                         "smithy.api#documentation": "<p>An object that describes bucket bundles.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetBucketMetricData": {
@@ -8907,6 +9111,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the metric data returned.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetBuckets": {
@@ -8990,6 +9197,9 @@
                         "smithy.api#documentation": "<p>An object that describes the synchronization status of the Amazon S3 account-level\n      block public access feature for your Lightsail buckets.</p>\n         <p>For more information about this feature and how it affects Lightsail buckets, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-block-public-access-for-buckets\">Block public access for buckets in Amazon Lightsail</a>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetBundles": {
@@ -9073,6 +9283,9 @@
                         "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>A next page token is not returned if there are no more results to display.</p>\n         <p>To get the next page of results, perform another <code>GetBundles</code> request and\n      specify the next page token using the <code>pageToken</code> parameter.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetCertificates": {
@@ -9101,7 +9314,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns information about one or more Amazon Lightsail SSL/TLS certificates.</p>\n         <note>\n            <p>To get a summary of a certificate, ommit <code>includeCertificateDetails</code> from\n        your request. The response will include only the certificate Amazon Resource Name (ARN),\n        certificate name, domain name, and tags.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Returns information about one or more Amazon Lightsail SSL/TLS certificates.</p>\n         <note>\n            <p>To get a summary of a certificate, omit <code>includeCertificateDetails</code> from\n        your request. The response will include only the certificate Amazon Resource Name (ARN),\n        certificate name, domain name, and tags.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ls/api/2016-11-28/GetCertificates",
@@ -9130,6 +9343,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name for the certificate for which to return information.</p>\n         <p>When omitted, the response includes all of your certificates in the Amazon Web Services\n      Region where the request is made.</p>"
                     }
+                },
+                "pageToken": {
+                    "target": "com.amazonaws.lightsail#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>To get a page token, perform an initial <code>GetCertificates</code> request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.</p>"
+                    }
                 }
             },
             "traits": {
@@ -9144,7 +9363,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An object that describes certificates.</p>"
                     }
+                },
+                "nextPageToken": {
+                    "target": "com.amazonaws.lightsail#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>NextPageToken</code> is returned there are more results available. The value of <code>NextPageToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetCloudFormationStackRecords": {
@@ -9216,6 +9444,9 @@
                         "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>A next page token is not returned if there are no more results to display.</p>\n         <p>To get the next page of results, perform another\n        <code>GetCloudFormationStackRecords</code> request and specify the next page token using the\n        <code>pageToken</code> parameter.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetContactMethods": {
@@ -9278,6 +9509,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the contact methods.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetContainerAPIMetadata": {
@@ -9324,6 +9558,9 @@
                         "smithy.api#documentation": "<p>Metadata about Lightsail containers, such as the current version of the Lightsail\n      Control (lightsailctl) plugin.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetContainerImages": {
@@ -9385,6 +9622,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe container images that are registered to the container\n      service.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetContainerLog": {
@@ -9488,6 +9728,9 @@
                         "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>A next page token is not returned if there are no more results to display.</p>\n         <p>To get the next page of results, perform another <code>GetContainerLog</code> request and\n      specify the next page token using the <code>pageToken</code> parameter.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetContainerServiceDeployments": {
@@ -9549,6 +9792,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe deployments for a container service.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetContainerServiceMetricData": {
@@ -9657,6 +9903,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the metric data returned.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetContainerServicePowers": {
@@ -9709,6 +9958,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the powers that can be specified for a container\n      service.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetContainerServices": {
@@ -9807,14 +10059,14 @@
                 "startTime": {
                     "target": "com.amazonaws.lightsail#IsoDate",
                     "traits": {
-                        "smithy.api#documentation": "<p>The cost estimate start time.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Specified in Coordinated Universal Time (UTC).</p>\n            </li>\n            <li>\n               <p>Specified in the Unix time format.</p>\n               <p>For example, if you wish to use a start time of October 1, 2018, at 8 PM UTC, specify\n            <code>1538424000</code> as the start time.</p>\n            </li>\n         </ul>\n         <p>You can convert a human-friendly time to Unix time format using a converter like <a href=\"https://www.epochconverter.com/\">Epoch converter</a>.</p>",
+                        "smithy.api#documentation": "<p>The cost estimate start time.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Specified in Coordinated Universal Time (UTC).</p>\n            </li>\n            <li>\n               <p>Specified in the Unix time format.</p>\n               <p>For example, if you want to use a start time of October 1, 2018, at 8 PM UTC, specify\n            <code>1538424000</code> as the start time.</p>\n            </li>\n         </ul>\n         <p>You can convert a human-friendly time to Unix time format using a converter like <a href=\"https://www.epochconverter.com/\">Epoch converter</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "endTime": {
                     "target": "com.amazonaws.lightsail#IsoDate",
                     "traits": {
-                        "smithy.api#documentation": "<p>The cost estimate end time.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Specified in Coordinated Universal Time (UTC).</p>\n            </li>\n            <li>\n               <p>Specified in the Unix time format.</p>\n               <p>For example, if you wish to use an end time of October 1, 2018, at 9 PM UTC, specify\n            <code>1538427600</code> as the end time.</p>\n            </li>\n         </ul>\n         <p>You can convert a human-friendly time to Unix time format using a converter like <a href=\"https://www.epochconverter.com/\">Epoch converter</a>.</p>",
+                        "smithy.api#documentation": "<p>The cost estimate end time.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Specified in Coordinated Universal Time (UTC).</p>\n            </li>\n            <li>\n               <p>Specified in the Unix time format.</p>\n               <p>For example, if you want to use an end time of October 1, 2018, at 9 PM UTC, specify\n            <code>1538427600</code> as the end time.</p>\n            </li>\n         </ul>\n         <p>You can convert a human-friendly time to Unix time format using a converter like <a href=\"https://www.epochconverter.com/\">Epoch converter</a>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -9832,6 +10084,9 @@
                         "smithy.api#documentation": "<p>Returns the estimate's forecasted cost or usage.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetDisk": {
@@ -9898,6 +10153,9 @@
                         "smithy.api#documentation": "<p>An object containing information about the disk.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetDiskSnapshot": {
@@ -9964,6 +10222,9 @@
                         "smithy.api#documentation": "<p>An object containing information about the disk snapshot.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetDiskSnapshots": {
@@ -10035,6 +10296,9 @@
                         "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>A next page token is not returned if there are no more results to display.</p>\n         <p>To get the next page of results, perform another <code>GetDiskSnapshots</code> request and\n      specify the next page token using the <code>pageToken</code> parameter.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetDisks": {
@@ -10106,6 +10370,9 @@
                         "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>A next page token is not returned if there are no more results to display.</p>\n         <p>To get the next page of results, perform another <code>GetDisks</code> request and specify\n      the next page token using the <code>pageToken</code> parameter.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetDistributionBundles": {
@@ -10161,6 +10428,9 @@
                         "smithy.api#documentation": "<p>An object that describes a distribution bundle.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetDistributionLatestCacheReset": {
@@ -10229,6 +10499,9 @@
                         "smithy.api#documentation": "<p>The timestamp of the last cache reset (e.g., <code>1479734909.17</code>) in Unix time\n      format.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetDistributionMetricData": {
@@ -10341,6 +10614,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the metric data returned.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetDistributions": {
@@ -10415,6 +10691,9 @@
                         "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>A next page token is not returned if there are no more results to display.</p>\n         <p>To get the next page of results, perform another <code>GetDistributions</code> request and\n      specify the next page token using the <code>pageToken</code> parameter.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetDomain": {
@@ -10481,6 +10760,9 @@
                         "smithy.api#documentation": "<p>An array of key-value pairs containing information about your get domain request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetDomains": {
@@ -10552,6 +10834,9 @@
                         "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>A next page token is not returned if there are no more results to display.</p>\n         <p>To get the next page of results, perform another <code>GetDomains</code> request and\n      specify the next page token using the <code>pageToken</code> parameter.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetExportSnapshotRecords": {
@@ -10623,6 +10908,9 @@
                         "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>A next page token is not returned if there are no more results to display.</p>\n         <p>To get the next page of results, perform another <code>GetExportSnapshotRecords</code>\n      request and specify the next page token using the <code>pageToken</code> parameter.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetInstance": {
@@ -10735,6 +11023,9 @@
                         "smithy.api#documentation": "<p>An array of key-value pairs containing information about a get instance access\n      request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetInstanceMetricData": {
@@ -10850,6 +11141,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the metric data returned.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetInstancePortStates": {
@@ -10916,6 +11210,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the firewall port states for the specified\n      instance.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetInstanceRequest": {
@@ -10942,6 +11239,9 @@
                         "smithy.api#documentation": "<p>An array of key-value pairs containing information about the specified instance.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetInstanceSnapshot": {
@@ -11008,6 +11308,9 @@
                         "smithy.api#documentation": "<p>An array of key-value pairs containing information about the results of your get instance\n      snapshot request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetInstanceSnapshots": {
@@ -11079,6 +11382,9 @@
                         "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>A next page token is not returned if there are no more results to display.</p>\n         <p>To get the next page of results, perform another <code>GetInstanceSnapshots</code> request\n      and specify the next page token using the <code>pageToken</code> parameter.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetInstanceState": {
@@ -11145,6 +11451,9 @@
                         "smithy.api#documentation": "<p>The state of the instance.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetInstances": {
@@ -11216,6 +11525,9 @@
                         "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>A next page token is not returned if there are no more results to display.</p>\n         <p>To get the next page of results, perform another <code>GetInstances</code> request and\n      specify the next page token using the <code>pageToken</code> parameter.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetKeyPair": {
@@ -11282,6 +11594,9 @@
                         "smithy.api#documentation": "<p>An array of key-value pairs containing information about the key pair.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetKeyPairs": {
@@ -11359,6 +11674,9 @@
                         "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>A next page token is not returned if there are no more results to display.</p>\n         <p>To get the next page of results, perform another <code>GetKeyPairs</code> request and\n      specify the next page token using the <code>pageToken</code> parameter.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetLoadBalancer": {
@@ -11514,6 +11832,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the metric data returned.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetLoadBalancerRequest": {
@@ -11540,6 +11861,9 @@
                         "smithy.api#documentation": "<p>An object containing information about your load balancer.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetLoadBalancerTlsCertificates": {
@@ -11606,6 +11930,9 @@
                         "smithy.api#documentation": "<p>An array of LoadBalancerTlsCertificate objects describing your SSL/TLS\n      certificates.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetLoadBalancerTlsPolicies": {
@@ -11671,6 +11998,9 @@
                         "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>A next page token is not returned if there are no more results to display.</p>\n         <p>To get the next page of results, perform another <code>GetLoadBalancerTlsPolicies</code>\n      request and specify the next page token using the <code>pageToken</code> parameter.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetLoadBalancers": {
@@ -11742,6 +12072,9 @@
                         "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>A next page token is not returned if there are no more results to display.</p>\n         <p>To get the next page of results, perform another <code>GetLoadBalancers</code> request and\n      specify the next page token using the <code>pageToken</code> parameter.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetOperation": {
@@ -11808,6 +12141,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetOperations": {
@@ -11933,6 +12269,9 @@
                         "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>A next page token is not returned if there are no more results to display.</p>\n         <p>To get the next page of results, perform another <code>GetOperationsForResource</code>\n      request and specify the next page token using the <code>pageToken</code> parameter.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetOperationsRequest": {
@@ -11964,6 +12303,9 @@
                         "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>A next page token is not returned if there are no more results to display.</p>\n         <p>To get the next page of results, perform another <code>GetOperations</code> request and\n      specify the next page token using the <code>pageToken</code> parameter.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetRegions": {
@@ -12035,6 +12377,9 @@
                         "smithy.api#documentation": "<p>An array of key-value pairs containing information about your get regions request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetRelationalDatabase": {
@@ -12146,6 +12491,9 @@
                         "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>A next page token is not returned if there are no more results to display.</p>\n         <p>To get the next page of results, perform another\n        <code>GetRelationalDatabaseBlueprints</code> request and specify the next page token using\n      the <code>pageToken</code> parameter.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetRelationalDatabaseBundles": {
@@ -12223,6 +12571,9 @@
                         "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>A next page token is not returned if there are no more results to display.</p>\n         <p>To get the next page of results, perform another <code>GetRelationalDatabaseBundles</code>\n      request and specify the next page token using the <code>pageToken</code> parameter.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetRelationalDatabaseEvents": {
@@ -12307,6 +12658,9 @@
                         "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>A next page token is not returned if there are no more results to display.</p>\n         <p>To get the next page of results, perform another <code>GetRelationalDatabaseEvents</code>\n      request and specify the next page token using the <code>pageToken</code> parameter.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetRelationalDatabaseLogEvents": {
@@ -12416,6 +12770,9 @@
                         "smithy.api#documentation": "<p>A token used for advancing to the next page of results from your get relational database\n      log events request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetRelationalDatabaseLogStreams": {
@@ -12482,6 +12839,9 @@
                         "smithy.api#documentation": "<p>An object describing the result of your get relational database log streams\n      request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetRelationalDatabaseMasterUserPassword": {
@@ -12560,6 +12920,9 @@
                         "smithy.api#documentation": "<p>The timestamp when the specified version of the master user password was created.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetRelationalDatabaseMetricData": {
@@ -12675,6 +13038,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the metric data returned.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetRelationalDatabaseParameters": {
@@ -12753,6 +13119,9 @@
                         "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>A next page token is not returned if there are no more results to display.</p>\n         <p>To get the next page of results, perform another\n        <code>GetRelationalDatabaseParameters</code> request and specify the next page token using\n      the <code>pageToken</code> parameter.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetRelationalDatabaseRequest": {
@@ -12779,6 +13148,9 @@
                         "smithy.api#documentation": "<p>An object describing the specified database.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetRelationalDatabaseSnapshot": {
@@ -12845,6 +13217,9 @@
                         "smithy.api#documentation": "<p>An object describing the specified database snapshot.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetRelationalDatabaseSnapshots": {
@@ -12916,6 +13291,9 @@
                         "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>A next page token is not returned if there are no more results to display.</p>\n         <p>To get the next page of results, perform another\n        <code>GetRelationalDatabaseSnapshots</code> request and specify the next page token using\n      the <code>pageToken</code> parameter.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetRelationalDatabases": {
@@ -12987,6 +13365,9 @@
                         "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>A next page token is not returned if there are no more results to display.</p>\n         <p>To get the next page of results, perform another <code>GetRelationalDatabases</code>\n      request and specify the next page token using the <code>pageToken</code> parameter.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetStaticIp": {
@@ -13053,6 +13434,9 @@
                         "smithy.api#documentation": "<p>An array of key-value pairs containing information about the requested static IP.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#GetStaticIps": {
@@ -13124,6 +13508,9 @@
                         "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>A next page token is not returned if there are no more results to display.</p>\n         <p>To get the next page of results, perform another <code>GetStaticIps</code> request and\n      specify the next page token using the <code>pageToken</code> parameter.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#HeaderEnum": {
@@ -13436,6 +13823,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#InUseResourceCount": {
@@ -14508,6 +14898,9 @@
                         "smithy.api#documentation": "<p>Returns <code>true</code> if the Lightsail VPC is peered; otherwise,\n      <code>false</code>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#IsoDate": {
@@ -15883,6 +16276,17 @@
                             }
                         },
                         {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
                             "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -15893,6 +16297,17 @@
                                 "Region": "us-iso-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -15909,6 +16324,17 @@
                             }
                         },
                         {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
                             "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -15919,6 +16345,17 @@
                                 "Region": "us-isob-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -15983,6 +16420,12 @@
                                 "UseFIPS": false,
                                 "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -17547,6 +17990,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#Operation": {
@@ -18326,6 +18772,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#PendingMaintenanceAction": {
@@ -18715,6 +19164,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#PutInstancePublicPorts": {
@@ -18788,6 +19240,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#QueryStringObject": {
@@ -18923,6 +19378,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#RebootRelationalDatabase": {
@@ -18989,6 +19447,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#RecordState": {
@@ -19232,6 +19693,9 @@
                         "smithy.api#documentation": "<p>An object that describes a container image that is registered to a Lightsail container\n      service</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#RegisteredDomainDelegationInfo": {
@@ -19931,6 +20395,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#RenewalStatus": {
@@ -20072,6 +20539,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#ResourceArn": {
@@ -20408,6 +20878,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#SensitiveNonEmptyString": {
@@ -20558,6 +21031,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#SetResourceAccessForBucket": {
@@ -20632,6 +21108,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#StartGUISession": {
@@ -20692,6 +21171,9 @@
                         "smithy.api#documentation": "<p>The available API operations.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#StartInstance": {
@@ -20758,6 +21240,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#StartRelationalDatabase": {
@@ -20824,6 +21309,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#StaticIp": {
@@ -21034,6 +21522,9 @@
                         "smithy.api#documentation": "<p>The available API operations.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#StopInstance": {
@@ -21126,6 +21617,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#StopRelationalDatabase": {
@@ -21198,6 +21692,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#StringList": {
@@ -21333,6 +21830,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#TagValue": {
@@ -21406,6 +21906,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#TimeOfDay": {
@@ -21541,6 +22044,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#UntagResource": {
@@ -21620,6 +22126,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#UpdateBucket": {
@@ -21721,6 +22230,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#UpdateBucketRequest": {
@@ -21777,6 +22289,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#UpdateContainerService": {
@@ -21868,6 +22383,9 @@
                         "smithy.api#documentation": "<p>An object that describes a container service.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#UpdateDistribution": {
@@ -21973,6 +22491,9 @@
                         "smithy.api#documentation": "<p>An object that describes the result of the action, such as the status of the request, the\n      timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#UpdateDistributionRequest": {
@@ -22029,6 +22550,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#UpdateDomainEntry": {
@@ -22102,6 +22626,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#UpdateInstanceMetadataOptions": {
@@ -22192,6 +22719,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#UpdateLoadBalancerAttribute": {
@@ -22272,6 +22802,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#UpdateRelationalDatabase": {
@@ -22385,6 +22918,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#UpdateRelationalDatabaseRequest": {
@@ -22465,6 +23001,9 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the result of the action, such as the status of the\n      request, the timestamp of the request, and the resources affected by the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.lightsail#boolean": {

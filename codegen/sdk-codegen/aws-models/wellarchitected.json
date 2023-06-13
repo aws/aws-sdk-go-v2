@@ -244,6 +244,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The reason why a choice is non-applicable to a question in your workload.</p>"
                     }
+                },
+                "QuestionType": {
+                    "target": "com.amazonaws.wellarchitected#QuestionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the question.</p>"
+                    }
                 }
             },
             "traits": {
@@ -319,10 +325,73 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.wellarchitected#AssociateProfiles": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#AssociateProfilesInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Associate a profile with a workload.</p>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/workloads/{WorkloadId}/associateProfiles",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#AssociateProfilesInput": {
+            "type": "structure",
+            "members": {
+                "WorkloadId": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProfileArns": {
+                    "target": "com.amazonaws.wellarchitected#ProfileArns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of profile ARNs to associate with the workload.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
         "com.amazonaws.wellarchitected#AwsAccountId": {
             "type": "string",
             "traits": {
                 "smithy.api#documentation": "<p>An Amazon Web Services account ID.</p>",
+                "smithy.api#length": {
+                    "min": 12,
+                    "max": 12
+                },
                 "smithy.api#pattern": "^[0-9]{12}$"
             }
         },
@@ -910,7 +979,11 @@
         "com.amazonaws.wellarchitected#ClientRequestToken": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>A unique case-sensitive string used to ensure that this request is idempotent\n            (executes only once).</p>\n         <p>You should not reuse the same token for other requests. If you retry a request with\n            the same client request token and the same parameters after the original request has completed\n            successfully, the result of the original request is returned.</p>\n         <important>\n            <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs\n                automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI,\n                you must provide this token or the request will fail.</p>\n         </important>"
+                "smithy.api#documentation": "<p>A unique case-sensitive string used to ensure that this request is idempotent\n            (executes only once).</p>\n         <p>You should not reuse the same token for other requests. If you retry a request with\n            the same client request token and the same parameters after the original request has completed\n            successfully, the result of the original request is returned.</p>\n         <important>\n            <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs\n                automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI,\n                you must provide this token or the request will fail.</p>\n         </important>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
             }
         },
         "com.amazonaws.wellarchitected#ConflictException": {
@@ -1261,6 +1334,191 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.wellarchitected#CreateProfile": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#CreateProfileInput"
+            },
+            "output": {
+                "target": "com.amazonaws.wellarchitected#CreateProfileOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Create a profile.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/profiles",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#CreateProfileInput": {
+            "type": "structure",
+            "members": {
+                "ProfileName": {
+                    "target": "com.amazonaws.wellarchitected#ProfileName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the profile.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProfileDescription": {
+                    "target": "com.amazonaws.wellarchitected#ProfileDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The profile description.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProfileQuestions": {
+                    "target": "com.amazonaws.wellarchitected#ProfileQuestionUpdates",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The profile questions.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientRequestToken": {
+                    "target": "com.amazonaws.wellarchitected#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.wellarchitected#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags assigned to the profile.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.wellarchitected#CreateProfileOutput": {
+            "type": "structure",
+            "members": {
+                "ProfileArn": {
+                    "target": "com.amazonaws.wellarchitected#ProfileArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The profile ARN.</p>"
+                    }
+                },
+                "ProfileVersion": {
+                    "target": "com.amazonaws.wellarchitected#ProfileVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Version of the profile.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.wellarchitected#CreateProfileShare": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#CreateProfileShareInput"
+            },
+            "output": {
+                "target": "com.amazonaws.wellarchitected#CreateProfileShareOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Create a profile share.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/profiles/{ProfileArn}/shares",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#CreateProfileShareInput": {
+            "type": "structure",
+            "members": {
+                "ProfileArn": {
+                    "target": "com.amazonaws.wellarchitected#ProfileArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The profile ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "SharedWith": {
+                    "target": "com.amazonaws.wellarchitected#SharedWith",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientRequestToken": {
+                    "target": "com.amazonaws.wellarchitected#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.wellarchitected#CreateProfileShareOutput": {
+            "type": "structure",
+            "members": {
+                "ShareId": {
+                    "target": "com.amazonaws.wellarchitected#ShareId"
+                },
+                "ProfileArn": {
+                    "target": "com.amazonaws.wellarchitected#ProfileArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The profile ARN.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.wellarchitected#CreateWorkload": {
             "type": "operation",
             "input": {
@@ -1378,6 +1636,12 @@
                     "target": "com.amazonaws.wellarchitected#WorkloadApplications",
                     "traits": {
                         "smithy.api#documentation": "<p>List of AppRegistry application ARNs associated to the workload.</p>"
+                    }
+                },
+                "ProfileArns": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadProfileArns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of profile ARNs associated with the workload.</p>"
                     }
                 }
             },
@@ -1643,6 +1907,135 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.wellarchitected#DeleteProfile": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#DeleteProfileInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Delete a profile.</p>\n         <note>\n            <p>\n               <b>Disclaimer</b>\n            </p>\n            <p>By sharing your profile with other Amazon Web Services accounts, \n               you acknowledge that Amazon Web Services will make your profile available to those \n               other accounts. Those other accounts may continue to access and use your \n               shared profile even if you delete the profile \n               from your own Amazon Web Services account or terminate \n               your Amazon Web Services account.</p>\n         </note>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/profiles/{ProfileArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#DeleteProfileInput": {
+            "type": "structure",
+            "members": {
+                "ProfileArn": {
+                    "target": "com.amazonaws.wellarchitected#ProfileArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The profile ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientRequestToken": {
+                    "target": "com.amazonaws.wellarchitected#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#httpQuery": "ClientRequestToken",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.wellarchitected#DeleteProfileShare": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#DeleteProfileShareInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Delete a profile share.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/profiles/{ProfileArn}/shares/{ShareId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#DeleteProfileShareInput": {
+            "type": "structure",
+            "members": {
+                "ShareId": {
+                    "target": "com.amazonaws.wellarchitected#ShareId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProfileArn": {
+                    "target": "com.amazonaws.wellarchitected#ProfileArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The profile ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientRequestToken": {
+                    "target": "com.amazonaws.wellarchitected#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#httpQuery": "ClientRequestToken",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
         "com.amazonaws.wellarchitected#DeleteWorkload": {
             "type": "operation",
             "input": {
@@ -1851,6 +2244,65 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Input to disassociate lens reviews.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.wellarchitected#DisassociateProfiles": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#DisassociateProfilesInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Disassociate a profile from a workload.</p>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/workloads/{WorkloadId}/disassociateProfiles",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#DisassociateProfilesInput": {
+            "type": "structure",
+            "members": {
+                "WorkloadId": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProfileArns": {
+                    "target": "com.amazonaws.wellarchitected#ProfileArns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of profile ARNs to disassociate from the workload.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#input": {}
             }
         },
@@ -2600,6 +3052,132 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.wellarchitected#GetProfile": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#GetProfileInput"
+            },
+            "output": {
+                "target": "com.amazonaws.wellarchitected#GetProfileOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get profile information.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/profiles/{ProfileArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#GetProfileInput": {
+            "type": "structure",
+            "members": {
+                "ProfileArn": {
+                    "target": "com.amazonaws.wellarchitected#ProfileArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The profile ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProfileVersion": {
+                    "target": "com.amazonaws.wellarchitected#ProfileVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The profile version.</p>",
+                        "smithy.api#httpQuery": "ProfileVersion"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.wellarchitected#GetProfileOutput": {
+            "type": "structure",
+            "members": {
+                "Profile": {
+                    "target": "com.amazonaws.wellarchitected#Profile",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The profile.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.wellarchitected#GetProfileTemplate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#GetProfileTemplateInput"
+            },
+            "output": {
+                "target": "com.amazonaws.wellarchitected#GetProfileTemplateOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get profile template.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/profileTemplate",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#GetProfileTemplateInput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.wellarchitected#GetProfileTemplateOutput": {
+            "type": "structure",
+            "members": {
+                "ProfileTemplate": {
+                    "target": "com.amazonaws.wellarchitected#ProfileTemplate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The profile template.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.wellarchitected#GetWorkload": {
             "type": "operation",
             "input": {
@@ -3055,6 +3633,15 @@
                 },
                 "NextToken": {
                     "target": "com.amazonaws.wellarchitected#NextToken"
+                },
+                "Profiles": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadProfiles",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The profiles associated with the workload.</p>"
+                    }
+                },
+                "PrioritizedRiskCounts": {
+                    "target": "com.amazonaws.wellarchitected#RiskCounts"
                 }
             },
             "traits": {
@@ -3121,6 +3708,15 @@
                     "target": "com.amazonaws.wellarchitected#Timestamp"
                 },
                 "RiskCounts": {
+                    "target": "com.amazonaws.wellarchitected#RiskCounts"
+                },
+                "Profiles": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadProfiles",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The profiles associated with the workload.</p>"
+                    }
+                },
+                "PrioritizedRiskCounts": {
                     "target": "com.amazonaws.wellarchitected#RiskCounts"
                 }
             },
@@ -3431,6 +4027,13 @@
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of results to return for this request.</p>",
                         "smithy.api#httpQuery": "MaxResults"
+                    }
+                },
+                "QuestionPriority": {
+                    "target": "com.amazonaws.wellarchitected#QuestionPriority",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The priority of the question.</p>",
+                        "smithy.api#httpQuery": "QuestionPriority"
                     }
                 }
             },
@@ -3773,6 +4376,13 @@
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of results to return for this request.</p>",
                         "smithy.api#httpQuery": "MaxResults"
+                    }
+                },
+                "QuestionPriority": {
+                    "target": "com.amazonaws.wellarchitected#QuestionPriority",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The priority of the question.</p>",
+                        "smithy.api#httpQuery": "QuestionPriority"
                     }
                 }
             },
@@ -4280,6 +4890,283 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.wellarchitected#ListProfileNotifications": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#ListProfileNotificationsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.wellarchitected#ListProfileNotificationsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List profile notifications.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/profileNotifications",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#ListProfileNotificationsInput": {
+            "type": "structure",
+            "members": {
+                "WorkloadId": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadId",
+                    "traits": {
+                        "smithy.api#httpQuery": "WorkloadId"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.wellarchitected#NextToken",
+                    "traits": {
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.wellarchitected#MaxResults",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#httpQuery": "MaxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.wellarchitected#ListProfileNotificationsOutput": {
+            "type": "structure",
+            "members": {
+                "NotificationSummaries": {
+                    "target": "com.amazonaws.wellarchitected#ProfileNotificationSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Notification summaries.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.wellarchitected#NextToken"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.wellarchitected#ListProfileShares": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#ListProfileSharesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.wellarchitected#ListProfileSharesOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List profile shares.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/profiles/{ProfileArn}/shares",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#ListProfileSharesInput": {
+            "type": "structure",
+            "members": {
+                "ProfileArn": {
+                    "target": "com.amazonaws.wellarchitected#ProfileArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The profile ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "SharedWithPrefix": {
+                    "target": "com.amazonaws.wellarchitected#SharedWithPrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID, IAM role, organization ID, or organizational unit (OU) ID with which the profile is shared.</p>",
+                        "smithy.api#httpQuery": "SharedWithPrefix"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.wellarchitected#NextToken",
+                    "traits": {
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.wellarchitected#ListProfileSharesMaxResults",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The maximum number of results to return for this request.</p>",
+                        "smithy.api#httpQuery": "MaxResults"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.wellarchitected#ShareStatus",
+                    "traits": {
+                        "smithy.api#httpQuery": "Status"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.wellarchitected#ListProfileSharesMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#ListProfileSharesOutput": {
+            "type": "structure",
+            "members": {
+                "ProfileShareSummaries": {
+                    "target": "com.amazonaws.wellarchitected#ProfileShareSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Profile share summaries.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.wellarchitected#NextToken"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.wellarchitected#ListProfiles": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#ListProfilesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.wellarchitected#ListProfilesOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List profiles.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/profileSummaries",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#ListProfilesInput": {
+            "type": "structure",
+            "members": {
+                "ProfileNamePrefix": {
+                    "target": "com.amazonaws.wellarchitected#ProfileNamePrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Prefix for profile name.</p>",
+                        "smithy.api#httpQuery": "ProfileNamePrefix"
+                    }
+                },
+                "ProfileOwnerType": {
+                    "target": "com.amazonaws.wellarchitected#ProfileOwnerType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Profile owner type.</p>",
+                        "smithy.api#httpQuery": "ProfileOwnerType"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.wellarchitected#NextToken",
+                    "traits": {
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.wellarchitected#MaxResults",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#httpQuery": "MaxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.wellarchitected#ListProfilesOutput": {
+            "type": "structure",
+            "members": {
+                "ProfileSummaries": {
+                    "target": "com.amazonaws.wellarchitected#ProfileSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Profile summaries.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.wellarchitected#NextToken"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.wellarchitected#ListShareInvitations": {
             "type": "operation",
             "input": {
@@ -4352,6 +5239,13 @@
                         "smithy.api#documentation": "<p>The maximum number of results to return for this request.</p>",
                         "smithy.api#httpQuery": "MaxResults"
                     }
+                },
+                "ProfileNamePrefix": {
+                    "target": "com.amazonaws.wellarchitected#ProfileNamePrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Profile name prefix.</p>",
+                        "smithy.api#httpQuery": "ProfileNamePrefix"
+                    }
                 }
             },
             "traits": {
@@ -4404,7 +5298,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List the tags for a resource.</p>\n         <note>\n            <p>The WorkloadArn parameter can be either a workload ARN or a custom lens ARN.</p>\n         </note>",
+                "smithy.api#documentation": "<p>List the tags for a resource.</p>\n         <note>\n            <p>The WorkloadArn parameter can be a workload ARN, a custom lens ARN, or a profile ARN.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/tags/{WorkloadArn}",
@@ -4645,6 +5539,15 @@
                 }
             }
         },
+        "com.amazonaws.wellarchitected#MaxSelectedProfileChoices": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
         "com.amazonaws.wellarchitected#MetricType": {
             "type": "enum",
             "members": {
@@ -4730,6 +5633,15 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A milestone summary return object.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#MinSelectedProfileChoices": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 0
+                }
             }
         },
         "com.amazonaws.wellarchitected#NextToken": {
@@ -4825,7 +5737,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Permission granted on a workload share.</p>"
+                "smithy.api#documentation": "<p>Permission granted on a share request.</p>"
             }
         },
         "com.amazonaws.wellarchitected#PillarDifference": {
@@ -4941,10 +5853,474 @@
                 },
                 "RiskCounts": {
                     "target": "com.amazonaws.wellarchitected#RiskCounts"
+                },
+                "PrioritizedRiskCounts": {
+                    "target": "com.amazonaws.wellarchitected#RiskCounts"
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>A pillar review summary of a lens review.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#Profile": {
+            "type": "structure",
+            "members": {
+                "ProfileArn": {
+                    "target": "com.amazonaws.wellarchitected#ProfileArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The profile ARN.</p>"
+                    }
+                },
+                "ProfileVersion": {
+                    "target": "com.amazonaws.wellarchitected#ProfileVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The profile version.</p>"
+                    }
+                },
+                "ProfileName": {
+                    "target": "com.amazonaws.wellarchitected#ProfileName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The profile name.</p>"
+                    }
+                },
+                "ProfileDescription": {
+                    "target": "com.amazonaws.wellarchitected#ProfileDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The profile description.</p>"
+                    }
+                },
+                "ProfileQuestions": {
+                    "target": "com.amazonaws.wellarchitected#ProfileQuestions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Profile questions.</p>"
+                    }
+                },
+                "Owner": {
+                    "target": "com.amazonaws.wellarchitected#AwsAccountId"
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.wellarchitected#Timestamp"
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.wellarchitected#Timestamp"
+                },
+                "ShareInvitationId": {
+                    "target": "com.amazonaws.wellarchitected#ShareInvitationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID assigned to the share invitation.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.wellarchitected#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags assigned to the profile.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A profile.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#ProfileArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2084
+                },
+                "smithy.api#pattern": "^arn:aws[-a-z]*:wellarchitected:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:profile/[a-z0-9]+$"
+            }
+        },
+        "com.amazonaws.wellarchitected#ProfileArns": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wellarchitected#ProfileArn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#ProfileChoice": {
+            "type": "structure",
+            "members": {
+                "ChoiceId": {
+                    "target": "com.amazonaws.wellarchitected#ChoiceId"
+                },
+                "ChoiceTitle": {
+                    "target": "com.amazonaws.wellarchitected#ChoiceTitle"
+                },
+                "ChoiceDescription": {
+                    "target": "com.amazonaws.wellarchitected#ChoiceDescription"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The profile choice.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#ProfileDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9-_.,:/()@!&?#+'’\\s]+$"
+            }
+        },
+        "com.amazonaws.wellarchitected#ProfileName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9-_.,:/()@!&?#+'’\\s]+$"
+            }
+        },
+        "com.amazonaws.wellarchitected#ProfileNamePrefix": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9-_.,:/()@!&?#+'’\\s]+$"
+            }
+        },
+        "com.amazonaws.wellarchitected#ProfileNotificationSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wellarchitected#ProfileNotificationSummary"
+            }
+        },
+        "com.amazonaws.wellarchitected#ProfileNotificationSummary": {
+            "type": "structure",
+            "members": {
+                "CurrentProfileVersion": {
+                    "target": "com.amazonaws.wellarchitected#ProfileVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current profile version.</p>"
+                    }
+                },
+                "LatestProfileVersion": {
+                    "target": "com.amazonaws.wellarchitected#ProfileVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The latest profile version.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.wellarchitected#ProfileNotificationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type of notification.</p>"
+                    }
+                },
+                "ProfileArn": {
+                    "target": "com.amazonaws.wellarchitected#ProfileArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The profile ARN.</p>"
+                    }
+                },
+                "ProfileName": {
+                    "target": "com.amazonaws.wellarchitected#ProfileName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The profile name.</p>"
+                    }
+                },
+                "WorkloadId": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadId"
+                },
+                "WorkloadName": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadName"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The profile notification summary.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#ProfileNotificationType": {
+            "type": "enum",
+            "members": {
+                "PROFILE_ANSWERS_UPDATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROFILE_ANSWERS_UPDATED"
+                    }
+                },
+                "PROFILE_DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROFILE_DELETED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#ProfileOwnerType": {
+            "type": "enum",
+            "members": {
+                "SELF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SELF"
+                    }
+                },
+                "SHARED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SHARED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#ProfileQuestion": {
+            "type": "structure",
+            "members": {
+                "QuestionId": {
+                    "target": "com.amazonaws.wellarchitected#QuestionId"
+                },
+                "QuestionTitle": {
+                    "target": "com.amazonaws.wellarchitected#QuestionTitle"
+                },
+                "QuestionDescription": {
+                    "target": "com.amazonaws.wellarchitected#QuestionDescription"
+                },
+                "QuestionChoices": {
+                    "target": "com.amazonaws.wellarchitected#ProfileQuestionChoices",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The question choices.</p>"
+                    }
+                },
+                "SelectedChoiceIds": {
+                    "target": "com.amazonaws.wellarchitected#SelectedChoiceIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The selected choices.</p>"
+                    }
+                },
+                "MinSelectedChoices": {
+                    "target": "com.amazonaws.wellarchitected#MinSelectedProfileChoices",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The minimum number of selected choices.</p>"
+                    }
+                },
+                "MaxSelectedChoices": {
+                    "target": "com.amazonaws.wellarchitected#MaxSelectedProfileChoices",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The maximum number of selected choices.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A profile question.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#ProfileQuestionChoices": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wellarchitected#ProfileChoice"
+            }
+        },
+        "com.amazonaws.wellarchitected#ProfileQuestionUpdate": {
+            "type": "structure",
+            "members": {
+                "QuestionId": {
+                    "target": "com.amazonaws.wellarchitected#QuestionId"
+                },
+                "SelectedChoiceIds": {
+                    "target": "com.amazonaws.wellarchitected#SelectedProfileChoiceIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The selected choices.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An update to a profile question.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#ProfileQuestionUpdates": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wellarchitected#ProfileQuestionUpdate"
+            }
+        },
+        "com.amazonaws.wellarchitected#ProfileQuestions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wellarchitected#ProfileQuestion"
+            }
+        },
+        "com.amazonaws.wellarchitected#ProfileShareSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wellarchitected#ProfileShareSummary"
+            }
+        },
+        "com.amazonaws.wellarchitected#ProfileShareSummary": {
+            "type": "structure",
+            "members": {
+                "ShareId": {
+                    "target": "com.amazonaws.wellarchitected#ShareId"
+                },
+                "SharedWith": {
+                    "target": "com.amazonaws.wellarchitected#SharedWith"
+                },
+                "Status": {
+                    "target": "com.amazonaws.wellarchitected#ShareStatus"
+                },
+                "StatusMessage": {
+                    "target": "com.amazonaws.wellarchitected#StatusMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Profile share invitation status message.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary of a profile share.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#ProfileSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wellarchitected#ProfileSummary"
+            }
+        },
+        "com.amazonaws.wellarchitected#ProfileSummary": {
+            "type": "structure",
+            "members": {
+                "ProfileArn": {
+                    "target": "com.amazonaws.wellarchitected#ProfileArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The profile ARN.</p>"
+                    }
+                },
+                "ProfileVersion": {
+                    "target": "com.amazonaws.wellarchitected#ProfileVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The profile version.</p>"
+                    }
+                },
+                "ProfileName": {
+                    "target": "com.amazonaws.wellarchitected#ProfileName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The profile name.</p>"
+                    }
+                },
+                "ProfileDescription": {
+                    "target": "com.amazonaws.wellarchitected#ProfileDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The profile description.</p>"
+                    }
+                },
+                "Owner": {
+                    "target": "com.amazonaws.wellarchitected#AwsAccountId"
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.wellarchitected#Timestamp"
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.wellarchitected#Timestamp"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary of a profile.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#ProfileTemplate": {
+            "type": "structure",
+            "members": {
+                "TemplateName": {
+                    "target": "com.amazonaws.wellarchitected#ProfileName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the profile template.</p>"
+                    }
+                },
+                "TemplateQuestions": {
+                    "target": "com.amazonaws.wellarchitected#TemplateQuestions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Profile template questions.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.wellarchitected#Timestamp"
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.wellarchitected#Timestamp"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The profile template.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#ProfileTemplateChoice": {
+            "type": "structure",
+            "members": {
+                "ChoiceId": {
+                    "target": "com.amazonaws.wellarchitected#ChoiceId"
+                },
+                "ChoiceTitle": {
+                    "target": "com.amazonaws.wellarchitected#ChoiceTitle"
+                },
+                "ChoiceDescription": {
+                    "target": "com.amazonaws.wellarchitected#ChoiceDescription"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A profile template choice.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#ProfileTemplateQuestion": {
+            "type": "structure",
+            "members": {
+                "QuestionId": {
+                    "target": "com.amazonaws.wellarchitected#QuestionId"
+                },
+                "QuestionTitle": {
+                    "target": "com.amazonaws.wellarchitected#QuestionTitle"
+                },
+                "QuestionDescription": {
+                    "target": "com.amazonaws.wellarchitected#QuestionDescription"
+                },
+                "QuestionChoices": {
+                    "target": "com.amazonaws.wellarchitected#ProfileTemplateQuestionChoices",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The question choices.</p>"
+                    }
+                },
+                "MinSelectedChoices": {
+                    "target": "com.amazonaws.wellarchitected#MinSelectedProfileChoices",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The minimum number of choices selected.</p>"
+                    }
+                },
+                "MaxSelectedChoices": {
+                    "target": "com.amazonaws.wellarchitected#MaxSelectedProfileChoices",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The maximum number of choices selected.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A profile template question.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#ProfileTemplateQuestionChoices": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wellarchitected#ProfileTemplateChoice"
+            }
+        },
+        "com.amazonaws.wellarchitected#ProfileVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 32
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9-]+$"
             }
         },
         "com.amazonaws.wellarchitected#QuestionDescription": {
@@ -5019,6 +6395,23 @@
                 "target": "com.amazonaws.wellarchitected#QuestionMetric"
             }
         },
+        "com.amazonaws.wellarchitected#QuestionPriority": {
+            "type": "enum",
+            "members": {
+                "PRIORITIZED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRIORITIZED"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                }
+            }
+        },
         "com.amazonaws.wellarchitected#QuestionTitle": {
             "type": "string",
             "traits": {
@@ -5026,6 +6419,23 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 512
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#QuestionType": {
+            "type": "enum",
+            "members": {
+                "PRIORITIZED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRIORITIZED"
+                    }
+                },
+                "NON_PRIORITIZED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NON_PRIORITIZED"
+                    }
                 }
             }
         },
@@ -5130,6 +6540,12 @@
                 "smithy.api#documentation": "<p>A map from risk names to the count of how many questions have that rating.</p>"
             }
         },
+        "com.amazonaws.wellarchitected#SelectedChoiceIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wellarchitected#ChoiceId"
+            }
+        },
         "com.amazonaws.wellarchitected#SelectedChoices": {
             "type": "list",
             "member": {
@@ -5137,6 +6553,12 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>List of selected choice IDs in a question answer.</p>\n         <p>The values entered replace the previously selected choices.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#SelectedProfileChoiceIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wellarchitected#ChoiceId"
             }
         },
         "com.amazonaws.wellarchitected#ServiceCode": {
@@ -5182,7 +6604,7 @@
         "com.amazonaws.wellarchitected#ShareId": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The ID associated with the workload share.</p>",
+                "smithy.api#documentation": "<p>The ID associated with the share.</p>",
                 "smithy.api#pattern": "^[0-9a-f]{32}$"
             }
         },
@@ -5211,6 +6633,12 @@
                     "target": "com.amazonaws.wellarchitected#LensArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN for the lens.</p>"
+                    }
+                },
+                "ProfileArn": {
+                    "target": "com.amazonaws.wellarchitected#ProfileArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The profile ARN.</p>"
                     }
                 }
             },
@@ -5288,6 +6716,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN for the lens.</p>"
                     }
+                },
+                "ProfileName": {
+                    "target": "com.amazonaws.wellarchitected#ProfileName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The profile name.</p>"
+                    }
+                },
+                "ProfileArn": {
+                    "target": "com.amazonaws.wellarchitected#ProfileArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The profile ARN.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5307,6 +6747,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "LENS"
+                    }
+                },
+                "PROFILE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROFILE"
                     }
                 }
             }
@@ -5364,13 +6810,13 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The status of a workload share.</p>"
+                "smithy.api#documentation": "<p>The status of the share request.</p>"
             }
         },
         "com.amazonaws.wellarchitected#SharedWith": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The Amazon Web Services account ID, IAM role, organization ID, or organizational unit (OU) ID with which the workload is shared.</p>",
+                "smithy.api#documentation": "<p>The Amazon Web Services account ID, IAM role, organization ID, or organizational unit (OU) ID with which the workload, lens, or profile is shared.</p>",
                 "smithy.api#length": {
                     "min": 12,
                     "max": 2048
@@ -5448,7 +6894,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds one or more tags to the specified resource.</p>\n         <note>\n            <p>The WorkloadArn parameter can be either a workload ARN or a custom lens ARN.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Adds one or more tags to the specified resource.</p>\n         <note>\n            <p>The WorkloadArn parameter can be a workload ARN, a custom lens ARN, or a profile ARN.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/tags/{WorkloadArn}",
@@ -5492,6 +6938,12 @@
                     "min": 0,
                     "max": 256
                 }
+            }
+        },
+        "com.amazonaws.wellarchitected#TemplateQuestions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wellarchitected#ProfileTemplateQuestion"
             }
         },
         "com.amazonaws.wellarchitected#ThrottlingException": {
@@ -5556,7 +7008,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes specified tags from a resource.</p>\n         <note>\n            <p>The WorkloadArn parameter can be either a workload ARN or a custom lens ARN.</p>\n         </note>\n         <p>To specify multiple tags, use separate <b>tagKeys</b> parameters, for example:</p>\n         <p>\n            <code>DELETE /tags/WorkloadArn?tagKeys=key1&tagKeys=key2</code>\n         </p>",
+                "smithy.api#documentation": "<p>Deletes specified tags from a resource.</p>\n         <note>\n            <p>The WorkloadArn parameter can be a workload ARN, a custom lens ARN, or a profile ARN.</p>\n         </note>\n         <p>To specify multiple tags, use separate <b>tagKeys</b> parameters, for example:</p>\n         <p>\n            <code>DELETE /tags/WorkloadArn?tagKeys=key1&tagKeys=key2</code>\n         </p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/tags/{WorkloadArn}",
@@ -5841,6 +7293,85 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Output of a update lens review call.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.wellarchitected#UpdateProfile": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#UpdateProfileInput"
+            },
+            "output": {
+                "target": "com.amazonaws.wellarchitected#UpdateProfileOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Update a profile.</p>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/profiles/{ProfileArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#UpdateProfileInput": {
+            "type": "structure",
+            "members": {
+                "ProfileArn": {
+                    "target": "com.amazonaws.wellarchitected#ProfileArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The profile ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProfileDescription": {
+                    "target": "com.amazonaws.wellarchitected#ProfileDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The profile description.</p>"
+                    }
+                },
+                "ProfileQuestions": {
+                    "target": "com.amazonaws.wellarchitected#ProfileQuestionUpdates",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Profile questions.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.wellarchitected#UpdateProfileOutput": {
+            "type": "structure",
+            "members": {
+                "Profile": {
+                    "target": "com.amazonaws.wellarchitected#Profile",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The profile.</p>"
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#output": {}
             }
         },
@@ -6190,6 +7721,75 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.wellarchitected#UpgradeProfileVersion": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.wellarchitected#UpgradeProfileVersionInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.wellarchitected#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Upgrade a profile.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/workloads/{WorkloadId}/profiles/{ProfileArn}/upgrade",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#UpgradeProfileVersionInput": {
+            "type": "structure",
+            "members": {
+                "WorkloadId": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProfileArn": {
+                    "target": "com.amazonaws.wellarchitected#ProfileArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The profile ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MilestoneName": {
+                    "target": "com.amazonaws.wellarchitected#MilestoneName"
+                },
+                "ClientRequestToken": {
+                    "target": "com.amazonaws.wellarchitected#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
         "com.amazonaws.wellarchitected#Urls": {
             "type": "list",
             "member": {
@@ -6307,6 +7907,9 @@
                     "target": "com.amazonaws.wellarchitected#AssociateLenses"
                 },
                 {
+                    "target": "com.amazonaws.wellarchitected#AssociateProfiles"
+                },
+                {
                     "target": "com.amazonaws.wellarchitected#CreateLensShare"
                 },
                 {
@@ -6314,6 +7917,12 @@
                 },
                 {
                     "target": "com.amazonaws.wellarchitected#CreateMilestone"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#CreateProfile"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#CreateProfileShare"
                 },
                 {
                     "target": "com.amazonaws.wellarchitected#CreateWorkload"
@@ -6328,6 +7937,12 @@
                     "target": "com.amazonaws.wellarchitected#DeleteLensShare"
                 },
                 {
+                    "target": "com.amazonaws.wellarchitected#DeleteProfile"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#DeleteProfileShare"
+                },
+                {
                     "target": "com.amazonaws.wellarchitected#DeleteWorkload"
                 },
                 {
@@ -6335,6 +7950,9 @@
                 },
                 {
                     "target": "com.amazonaws.wellarchitected#DisassociateLenses"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#DisassociateProfiles"
                 },
                 {
                     "target": "com.amazonaws.wellarchitected#ExportLens"
@@ -6359,6 +7977,12 @@
                 },
                 {
                     "target": "com.amazonaws.wellarchitected#GetMilestone"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#GetProfile"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#GetProfileTemplate"
                 },
                 {
                     "target": "com.amazonaws.wellarchitected#GetWorkload"
@@ -6394,6 +8018,15 @@
                     "target": "com.amazonaws.wellarchitected#ListNotifications"
                 },
                 {
+                    "target": "com.amazonaws.wellarchitected#ListProfileNotifications"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ListProfiles"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#ListProfileShares"
+                },
+                {
                     "target": "com.amazonaws.wellarchitected#ListShareInvitations"
                 },
                 {
@@ -6421,6 +8054,9 @@
                     "target": "com.amazonaws.wellarchitected#UpdateLensReview"
                 },
                 {
+                    "target": "com.amazonaws.wellarchitected#UpdateProfile"
+                },
+                {
                     "target": "com.amazonaws.wellarchitected#UpdateShareInvitation"
                 },
                 {
@@ -6431,6 +8067,9 @@
                 },
                 {
                     "target": "com.amazonaws.wellarchitected#UpgradeLensReview"
+                },
+                {
+                    "target": "com.amazonaws.wellarchitected#UpgradeProfileVersion"
                 }
             ],
             "traits": {
@@ -7427,6 +9066,15 @@
                     "traits": {
                         "smithy.api#documentation": "<p>List of AppRegistry application ARNs associated to the workload.</p>"
                     }
+                },
+                "Profiles": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadProfiles",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Profile associated with a workload.</p>"
+                    }
+                },
+                "PrioritizedRiskCounts": {
+                    "target": "com.amazonaws.wellarchitected#RiskCounts"
                 }
             },
             "traits": {
@@ -7542,6 +9190,10 @@
             "type": "string",
             "traits": {
                 "smithy.api#documentation": "<p>The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.</p>",
+                "smithy.api#length": {
+                    "min": 32,
+                    "max": 32
+                },
                 "smithy.api#pattern": "^[0-9a-f]{32}$"
             }
         },
@@ -7663,6 +9315,50 @@
                 "smithy.api#documentation": "<p>The priorities of the pillars, which are used to order items in the improvement plan.\n            Each pillar is represented by its <a>PillarReviewSummary$PillarId</a>.</p>"
             }
         },
+        "com.amazonaws.wellarchitected#WorkloadProfile": {
+            "type": "structure",
+            "members": {
+                "ProfileArn": {
+                    "target": "com.amazonaws.wellarchitected#ProfileArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The profile ARN.</p>"
+                    }
+                },
+                "ProfileVersion": {
+                    "target": "com.amazonaws.wellarchitected#ProfileVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The profile version.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The profile associated with a workload.</p>"
+            }
+        },
+        "com.amazonaws.wellarchitected#WorkloadProfileArns": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wellarchitected#ProfileArn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.wellarchitected#WorkloadProfiles": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wellarchitected#WorkloadProfile"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                }
+            }
+        },
         "com.amazonaws.wellarchitected#WorkloadResourceDefinition": {
             "type": "list",
             "member": {
@@ -7778,6 +9474,15 @@
                 },
                 "ImprovementStatus": {
                     "target": "com.amazonaws.wellarchitected#WorkloadImprovementStatus"
+                },
+                "Profiles": {
+                    "target": "com.amazonaws.wellarchitected#WorkloadProfiles",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Profile associated with a workload.</p>"
+                    }
+                },
+                "PrioritizedRiskCounts": {
+                    "target": "com.amazonaws.wellarchitected#RiskCounts"
                 }
             },
             "traits": {

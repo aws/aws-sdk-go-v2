@@ -162,7 +162,7 @@
                 "Destination": {
                     "target": "com.amazonaws.simspaceweaver#S3Destination",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 bucket and optional folder (object key prefix) where SimSpace Weaver creates the snapshot file.</p>",
+                        "smithy.api#documentation": "<p>The Amazon S3 bucket and optional folder (object key prefix) where SimSpace Weaver creates the snapshot file.</p>\n         <p>The Amazon S3 bucket must be in the same Amazon Web Services Region as the simulation.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -911,7 +911,7 @@
                     "min": 0,
                     "max": 1600
                 },
-                "smithy.api#pattern": "^arn:(?:aws|aws-cn):log-group:([a-z]{2}-[a-z]+-\\d{1}):(\\d{12})?:role\\/(.+)$"
+                "smithy.api#pattern": "^arn:(?:aws|aws-cn|aws-us-gov):log-group:([a-z]{2}-[a-z]+-\\d{1}):(\\d{12})?:role\\/(.+)$"
             }
         },
         "com.amazonaws.simspaceweaver#LoggingConfiguration": {
@@ -995,7 +995,7 @@
                     "min": 0,
                     "max": 1600
                 },
-                "smithy.api#pattern": "^arn:(?:aws|aws-cn):iam::(\\d{12})?:role\\/(.+)$"
+                "smithy.api#pattern": "^arn:(?:aws|aws-cn|aws-us-gov):iam::(\\d{12})?:role\\/(.+)$"
             }
         },
         "com.amazonaws.simspaceweaver#S3Destination": {
@@ -1472,9 +1472,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "UseDualStack": true
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -1485,9 +1485,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "UseDualStack": false
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -1498,9 +1498,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "UseDualStack": true
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -1511,9 +1511,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "UseDualStack": false
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -1524,9 +1524,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "UseDualStack": true
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -1537,9 +1537,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "UseDualStack": false
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -1550,9 +1550,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "UseDualStack": true
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -1563,9 +1563,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "UseDualStack": false
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -1574,9 +1574,9 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "UseDualStack": true
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
@@ -1587,9 +1587,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "UseDualStack": false
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
@@ -1598,9 +1598,9 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "UseDualStack": true
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
@@ -1611,9 +1611,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "UseDualStack": false
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
@@ -1624,9 +1624,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "UseDualStack": true
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -1637,9 +1637,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "UseDualStack": false
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -1650,9 +1650,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "UseDualStack": true
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -1663,9 +1663,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "UseDualStack": false
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -1674,9 +1674,9 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "UseDualStack": true
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -1687,9 +1687,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "UseDualStack": false
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -1698,9 +1698,9 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "UseDualStack": true
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -1711,9 +1711,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "UseDualStack": false
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -1724,9 +1724,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
-                                "UseFIPS": false,
                                 "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1736,9 +1736,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "Region": "us-east-1",
-                                "UseFIPS": true,
                                 "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1748,9 +1748,9 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "Region": "us-east-1",
-                                "UseFIPS": false,
                                 "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         }
@@ -1766,7 +1766,7 @@
                     "min": 0,
                     "max": 1600
                 },
-                "smithy.api#pattern": "^arn:(?:aws|aws-cn):simspaceweaver:([a-z]{2}-[a-z]+-\\d{1}):(\\d{12})?:([a-z]+)\\/(.+)$"
+                "smithy.api#pattern": "^arn:(?:aws|aws-cn|aws-us-gov):simspaceweaver:([a-z]{2}-[a-z]+-\\d{1}):(\\d{12})?:([a-z]+)\\/(.+)$"
             }
         },
         "com.amazonaws.simspaceweaver#SimSpaceWeaverLongResourceName": {
@@ -2361,7 +2361,7 @@
                 "SnapshotS3Location": {
                     "target": "com.amazonaws.simspaceweaver#S3Location",
                     "traits": {
-                        "smithy.api#documentation": "<p>The location of the snapshot .zip file in Amazon Simple Storage Service (Amazon S3).\n   For more information about Amazon S3, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html\">\n               <i>Amazon Simple Storage Service User Guide</i>\n            </a>.</p>\n         <p>Provide a <code>SnapshotS3Location</code> to start your simulation from a snapshot.</p>\n         <p>If you provide a <code>SnapshotS3Location</code> then you can't provide a <code>SchemaS3Location</code>.</p>"
+                        "smithy.api#documentation": "<p>The location of the snapshot .zip file in Amazon Simple Storage Service (Amazon S3).\n   For more information about Amazon S3, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html\">\n               <i>Amazon Simple Storage Service User Guide</i>\n            </a>.</p>\n         <p>Provide a <code>SnapshotS3Location</code> to start your simulation from a snapshot.</p>\n         <p>The Amazon S3 bucket must be in the same Amazon Web Services Region as the simulation.</p>\n         <p>If you provide a <code>SnapshotS3Location</code> then you can't provide a <code>SchemaS3Location</code>.</p>"
                     }
                 }
             }

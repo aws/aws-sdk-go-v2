@@ -98,6 +98,48 @@
                 }
             }
         },
+        "com.amazonaws.wafv2#AWSManagedRulesACFPRuleSet": {
+            "type": "structure",
+            "members": {
+                "CreationPath": {
+                    "target": "com.amazonaws.wafv2#CreationPathString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path of the account creation endpoint for your application. This is the page on your website that accepts the completed registration form for a new user. This page must accept <code>POST</code> requests.</p>\n         <p>For example, for the URL <code>https://example.com/web/signup</code>, you would provide the path <code>/web/signup</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RegistrationPagePath": {
+                    "target": "com.amazonaws.wafv2#RegistrationPagePathString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path of the account registration endpoint for your application. This is the page on your website that presents the registration form to new users. </p>\n         <note>\n            <p>This page must accept <code>GET</code> text/html requests.</p>\n         </note>\n         <p>For example, for the URL <code>https://example.com/web/register</code>, you would provide the path <code>/web/register</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RequestInspection": {
+                    "target": "com.amazonaws.wafv2#RequestInspectionACFP",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The criteria for inspecting account creation requests, used by the ACFP rule group to validate and track account creation attempts.  </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResponseInspection": {
+                    "target": "com.amazonaws.wafv2#ResponseInspection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The criteria for inspecting responses to account creation requests, used by the ACFP rule group to track account creation success rates. </p>\n         <note>\n            <p>Response inspection is available only in web ACLs that protect Amazon CloudFront distributions.</p>\n         </note>\n         <p>The ACFP rule group evaluates the responses that your protected resources send back to client account creation attempts, keeping count of successful and failed attempts from each IP address and client session. Using this information, the rule group labels \n               and mitigates requests from client sessions and IP addresses that have had too many successful account creation attempts in a short amount of time. </p>"
+                    }
+                },
+                "EnableRegexInPath": {
+                    "target": "com.amazonaws.wafv2#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Allow the use of regular expressions in the registration page path and the account creation path. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details for your use of the account creation fraud prevention managed rule group, <code>AWSManagedRulesACFPRuleSet</code>. This configuration is used in <code>ManagedRuleGroupConfig</code>. </p>"
+            }
+        },
         "com.amazonaws.wafv2#AWSManagedRulesATPRuleSet": {
             "type": "structure",
             "members": {
@@ -117,7 +159,14 @@
                 "ResponseInspection": {
                     "target": "com.amazonaws.wafv2#ResponseInspection",
                     "traits": {
-                        "smithy.api#documentation": "<p>The criteria for inspecting responses to login requests, used by the ATP rule group to track login failure rates. </p>\n         <p>The ATP rule group evaluates the responses that your protected resources send back to client login attempts, keeping count of successful and failed attempts from each IP address and client session. Using this information, the rule group labels \n               and mitigates requests from client sessions and IP addresses that submit too many failed login attempts in a short amount of time. </p>\n         <note>\n            <p>Response inspection is available only in web ACLs that protect Amazon CloudFront distributions.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The criteria for inspecting responses to login requests, used by the ATP rule group to track login failure rates. </p>\n         <note>\n            <p>Response inspection is available only in web ACLs that protect Amazon CloudFront distributions.</p>\n         </note>\n         <p>The ATP rule group evaluates the responses that your protected resources send back to client login attempts, keeping count of successful and failed attempts for each IP address and client session. Using this information, the rule group labels \n               and mitigates requests from client sessions and IP addresses that have had too many failed login attempts in a short amount of time. </p>"
+                    }
+                },
+                "EnableRegexInPath": {
+                    "target": "com.amazonaws.wafv2#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Allow the use of regular expressions in the login page path. </p>"
                     }
                 }
             },
@@ -1642,6 +1691,27 @@
                         "smithy.api#enumValue": "EXCLUDED_AS_COUNT"
                     }
                 }
+            }
+        },
+        "com.amazonaws.wafv2#AddressField": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.wafv2#FieldIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a single primary address field. </p>\n         <p>How you specify the address fields depends on the request inspection payload type.</p>\n         <ul>\n            <li>\n               <p>For JSON payloads, specify the field identifiers in JSON\n               pointer syntax. For information about the JSON Pointer\n               syntax, see the Internet Engineering Task Force (IETF)\n               documentation <a href=\"https://tools.ietf.org/html/rfc6901\">JavaScript\n               \tObject Notation (JSON) Pointer</a>. </p>\n               <p>For example, for the JSON payload <code>{ \"form\": { \"primaryaddressline1\": \"THE_ADDRESS1\", \"primaryaddressline2\": \"THE_ADDRESS2\", \"primaryaddressline3\": \"THE_ADDRESS3\" } }</code>, \n                 the address field idenfiers are <code>/form/primaryaddressline1</code>, <code>/form/primaryaddressline2</code>, and <code>/form/primaryaddressline3</code>.</p>\n            </li>\n            <li>\n               <p>For form encoded payload types, use the HTML form names.</p>\n               <p>For example, for an HTML form with input elements\n                   named <code>primaryaddressline1</code>, <code>primaryaddressline2</code>, and <code>primaryaddressline3</code>, the address fields identifiers are <code>primaryaddressline1</code>, <code>primaryaddressline2</code>, and <code>primaryaddressline3</code>. </p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The name of a field in the request payload that contains part or all of your customer's primary physical address. </p>\n         <p>This data type is used in the <code>RequestInspectionACFP</code> data type. </p>"
+            }
+        },
+        "com.amazonaws.wafv2#AddressFields": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wafv2#AddressField"
             }
         },
         "com.amazonaws.wafv2#All": {
@@ -4270,6 +4340,16 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.wafv2#CreationPathString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "\\S"
+            }
+        },
         "com.amazonaws.wafv2#CustomHTTPHeader": {
             "type": "structure",
             "members": {
@@ -5183,6 +5263,21 @@
         "com.amazonaws.wafv2#DownloadUrl": {
             "type": "string"
         },
+        "com.amazonaws.wafv2#EmailField": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.wafv2#FieldIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the email field. </p>\n         <p>How you specify this depends on the request inspection payload type.</p>\n         <ul>\n            <li>\n               <p>For JSON payloads, specify the field name in JSON\n               pointer syntax. For information about the JSON Pointer\n               syntax, see the Internet Engineering Task Force (IETF)\n               documentation <a href=\"https://tools.ietf.org/html/rfc6901\">JavaScript\n               \tObject Notation (JSON) Pointer</a>. </p>\n               <p>For example, for the JSON payload <code>{ \"form\": { \"email\": \"THE_EMAIL\" } }</code>, \n                 the email field specification is <code>/form/email</code>.</p>\n            </li>\n            <li>\n               <p>For form encoded payload types, use the HTML form names.</p>\n               <p>For example, for an HTML form with the input element\n                   named <code>email1</code>, the email field specification is <code>email1</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The name of the field in the request payload that contains your customer's email. </p>\n         <p>This data type is used in the <code>RequestInspectionACFP</code> data type. </p>"
+            }
+        },
         "com.amazonaws.wafv2#EntityDescription": {
             "type": "string",
             "traits": {
@@ -5388,7 +5483,7 @@
                 "HeaderOrder": {
                     "target": "com.amazonaws.wafv2#HeaderOrder",
                     "traits": {
-                        "smithy.api#documentation": "<p>Inspect a string containing the list of the request's header names, ordered as they appear in the web request\nthat WAF receives for inspection. \n           WAF generates the string and then uses that as the field to match component in its inspection. \n    WAF separates the header names in the string using commas and no added spaces.</p>\n         <p>Matches against the header order string are case insensitive.</p>"
+                        "smithy.api#documentation": "<p>Inspect a string containing the list of the request's header names, ordered as they appear in the web request\nthat WAF receives for inspection. \n           WAF generates the string and then uses that as the field to match component in its inspection. \n    WAF separates the header names in the string using colons and no added spaces, for example <code>host:user-agent:accept:authorization:referer</code>.</p>"
                     }
                 }
             },
@@ -6543,7 +6638,7 @@
                 "ApplicationIntegrationURL": {
                     "target": "com.amazonaws.wafv2#OutputUrl",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URL to use in SDK integrations with Amazon Web Services managed rule groups. For example, you can use the integration SDKs with the account takeover prevention managed rule group <code>AWSManagedRulesATPRuleSet</code>. This is only populated if you are using a rule group in your web ACL that integrates with your applications in this way. For more information, see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/waf-application-integration.html\">WAF client application integration</a> \nin the <i>WAF Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The URL to use in SDK integrations with Amazon Web Services managed rule groups. For example, you can use the integration SDKs with the account takeover prevention managed rule group <code>AWSManagedRulesATPRuleSet</code> and the account creation fraud prevention managed rule group <code>AWSManagedRulesACFPRuleSet</code>. This is only populated if you are using a rule group in your web ACL that integrates with your applications in this way. For more information, see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/waf-application-integration.html\">WAF client application integration</a> \nin the <i>WAF Developer Guide</i>.</p>"
                     }
                 }
             },
@@ -6680,7 +6775,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Inspect a string containing the list of the request's header names, ordered as they appear in the web request\nthat WAF receives for inspection. \n           WAF generates the string and then uses that as the field to match component in its inspection. \n    WAF separates the header names in the string using commas and no added spaces.</p>\n         <p>Matches against the header order string are case insensitive.</p>"
+                "smithy.api#documentation": "<p>Inspect a string containing the list of the request's header names, ordered as they appear in the web request\nthat WAF receives for inspection. \n           WAF generates the string and then uses that as the field to match component in its inspection. \n    WAF separates the header names in the string using colons and no added spaces, for example <code>host:user-agent:accept:authorization:referer</code>.</p>"
             }
         },
         "com.amazonaws.wafv2#HeaderValue": {
@@ -8073,7 +8168,7 @@
                 "RedactedFields": {
                     "target": "com.amazonaws.wafv2#RedactedFields",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parts of the request that you want to keep out of the logs. For example, if you\n         redact the <code>SingleHeader</code> field, the <code>HEADER</code> field in the logs will\n         be <code>REDACTED</code>. </p>\n         <note>\n            <p>You can specify only the following fields for redaction: <code>UriPath</code>,\n               <code>QueryString</code>, <code>SingleHeader</code>, <code>Method</code>, and\n               <code>JsonBody</code>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The parts of the request that you want to keep out of the logs.</p>\n         <p>For example, if you\n         redact the <code>SingleHeader</code> field, the <code>HEADER</code> field in the logs will\n         be <code>REDACTED</code> for all rules that use the <code>SingleHeader</code>\n            <code>FieldToMatch</code> setting. </p>\n         <p>Redaction applies only to the component that's specified in the rule's <code>FieldToMatch</code> setting, so the <code>SingleHeader</code> redaction \n         doesn't apply to rules that use the <code>Headers</code>\n            <code>FieldToMatch</code>.</p>\n         <note>\n            <p>You can specify only the following fields for redaction: <code>UriPath</code>,\n         <code>QueryString</code>, <code>SingleHeader</code>, and <code>Method</code>.</p>\n         </note>"
                     }
                 },
                 "ManagedByFirewallManager": {
@@ -8220,7 +8315,7 @@
                         "smithy.api#deprecated": {
                             "message": "Deprecated. Use AWSManagedRulesATPRuleSet RequestInspection PayloadType"
                         },
-                        "smithy.api#documentation": "<note>\n            <p>Instead of this setting, provide your configuration under <code>AWSManagedRulesATPRuleSet</code>\n               <code>RequestInspection</code>. </p>\n         </note>"
+                        "smithy.api#documentation": "<note>\n            <p>Instead of this setting, provide your configuration under the request inspection configuration for <code>AWSManagedRulesATPRuleSet</code> or <code>AWSManagedRulesACFPRuleSet</code>. </p>\n         </note>"
                     }
                 },
                 "UsernameField": {
@@ -8229,7 +8324,7 @@
                         "smithy.api#deprecated": {
                             "message": "Deprecated. Use AWSManagedRulesATPRuleSet RequestInspection UsernameField"
                         },
-                        "smithy.api#documentation": "<note>\n            <p>Instead of this setting, provide your configuration under <code>AWSManagedRulesATPRuleSet</code>\n               <code>RequestInspection</code>. </p>\n         </note>"
+                        "smithy.api#documentation": "<note>\n            <p>Instead of this setting, provide your configuration under the request inspection configuration for <code>AWSManagedRulesATPRuleSet</code> or <code>AWSManagedRulesACFPRuleSet</code>. </p>\n         </note>"
                     }
                 },
                 "PasswordField": {
@@ -8238,7 +8333,7 @@
                         "smithy.api#deprecated": {
                             "message": "Deprecated. Use AWSManagedRulesATPRuleSet RequestInspection PasswordField"
                         },
-                        "smithy.api#documentation": "<note>\n            <p>Instead of this setting, provide your configuration under <code>AWSManagedRulesATPRuleSet</code>\n               <code>RequestInspection</code>. </p>\n         </note>"
+                        "smithy.api#documentation": "<note>\n            <p>Instead of this setting, provide your configuration under the request inspection configuration for <code>AWSManagedRulesATPRuleSet</code> or <code>AWSManagedRulesACFPRuleSet</code>. </p>\n         </note>"
                     }
                 },
                 "AWSManagedRulesBotControlRuleSet": {
@@ -8252,10 +8347,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Additional configuration for using the account takeover prevention (ATP) managed rule group, <code>AWSManagedRulesATPRuleSet</code>. \n       Use this to provide login request information to the rule group. For web ACLs that protect CloudFront distributions, use this to also provide\n           the information about how your distribution responds to login requests. </p>\n         <p>This configuration replaces the individual configuration fields in <code>ManagedRuleGroupConfig</code> and provides additional feature configuration. </p>\n         <p>For information \n       about using the ATP managed rule group, see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/aws-managed-rule-groups-atp.html\">WAF Fraud Control account takeover prevention (ATP) rule group</a> \n               and <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/waf-atp.html\">WAF Fraud Control account takeover prevention (ATP)</a>\n               in the <i>WAF Developer Guide</i>.</p>"
                     }
+                },
+                "AWSManagedRulesACFPRuleSet": {
+                    "target": "com.amazonaws.wafv2#AWSManagedRulesACFPRuleSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional configuration for using the account creation fraud prevention (ACFP) managed rule group, <code>AWSManagedRulesACFPRuleSet</code>. \n       Use this to provide account creation request information to the rule group. For web ACLs that protect CloudFront distributions, use this to also provide\n           the information about how your distribution responds to account creation requests. </p>\n         <p>For information \n       about using the ACFP managed rule group, see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/aws-managed-rule-groups-acfp.html\">WAF Fraud Control account creation fraud prevention (ACFP) rule group</a> \n               and <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/waf-acfp.html\">WAF Fraud Control account creation fraud prevention (ACFP)</a>\n               in the <i>WAF Developer Guide</i>.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Additional information that's used by a managed rule group. Many managed rule groups don't require this.</p>\n         <p>Use the <code>AWSManagedRulesATPRuleSet</code> configuration object for the account takeover prevention managed rule group, to provide information such as the sign-in page of your application and the type of content to accept or reject from the client. </p>\n         <p>Use the <code>AWSManagedRulesBotControlRuleSet</code> configuration object to configure the \n       protection level that you want the Bot Control rule group to use. </p>\n         <p>For example specifications, see the examples section of <a>CreateWebACL</a>.</p>"
+                "smithy.api#documentation": "<p>Additional information that's used by a managed rule group. Many managed rule groups don't require this.</p>\n         <p>The rule groups used for intelligent threat mitigation require additional configuration: </p>\n         <ul>\n            <li>\n               <p>Use the <code>AWSManagedRulesACFPRuleSet</code> configuration object to configure the account creation fraud prevention managed rule group. The configuration includes the registration and sign-up pages of your application and the locations in the account creation request payload of data, such as the user email and phone number fields. </p>\n            </li>\n            <li>\n               <p>Use the <code>AWSManagedRulesATPRuleSet</code> configuration object to configure the account takeover prevention managed rule group. The configuration includes the sign-in page of your application and the locations in the login request payload of data such as the username and password. </p>\n            </li>\n            <li>\n               <p>Use the <code>AWSManagedRulesBotControlRuleSet</code> configuration object to configure the \n       protection level that you want the Bot Control rule group to use. </p>\n            </li>\n         </ul>\n         <p>For example specifications, see the examples section of <a>CreateWebACL</a>.</p>"
             }
         },
         "com.amazonaws.wafv2#ManagedRuleGroupConfigs": {
@@ -8302,7 +8403,7 @@
                 "ManagedRuleGroupConfigs": {
                     "target": "com.amazonaws.wafv2#ManagedRuleGroupConfigs",
                     "traits": {
-                        "smithy.api#documentation": "<p>Additional information that's used by a managed rule group. Many managed rule groups don't require this.</p>\n         <p>Use the <code>AWSManagedRulesATPRuleSet</code> configuration object for the account takeover prevention managed rule group, to provide information such as the sign-in page of your application and the type of content to accept or reject from the client. </p>\n         <p>Use the <code>AWSManagedRulesBotControlRuleSet</code> configuration object to configure the \n       protection level that you want the Bot Control rule group to use. </p>"
+                        "smithy.api#documentation": "<p>Additional information that's used by a managed rule group. Many managed rule groups don't require this.</p>\n         <p>The rule groups used for intelligent threat mitigation require additional configuration: </p>\n         <ul>\n            <li>\n               <p>Use the <code>AWSManagedRulesACFPRuleSet</code> configuration object to configure the account creation fraud prevention managed rule group. The configuration includes the registration and sign-up pages of your application and the locations in the account creation request payload of data, such as the user email and phone number fields. </p>\n            </li>\n            <li>\n               <p>Use the <code>AWSManagedRulesATPRuleSet</code> configuration object to configure the account takeover prevention managed rule group. The configuration includes the sign-in page of your application and the locations in the login request payload of data such as the username and password. </p>\n            </li>\n            <li>\n               <p>Use the <code>AWSManagedRulesBotControlRuleSet</code> configuration object to configure the \n       protection level that you want the Bot Control rule group to use. </p>\n            </li>\n         </ul>"
                     }
                 },
                 "RuleActionOverrides": {
@@ -8313,7 +8414,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A rule statement used to run the rules that are defined in a managed rule group. To use this, provide the vendor name and the name of the rule group in this statement. You can retrieve the required names by calling <a>ListAvailableManagedRuleGroups</a>.</p>\n         <p>You cannot nest a <code>ManagedRuleGroupStatement</code>, for example for use inside a <code>NotStatement</code> or <code>OrStatement</code>. It can only be referenced as a top-level statement within a rule.</p>\n         <note>\n            <p>You are charged additional fees when you use the WAF Bot Control managed rule group <code>AWSManagedRulesBotControlRuleSet</code> or the WAF Fraud Control account takeover prevention (ATP) managed rule group <code>AWSManagedRulesATPRuleSet</code>. For more information, see <a href=\"http://aws.amazon.com/waf/pricing/\">WAF Pricing</a>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>A rule statement used to run the rules that are defined in a managed rule group. To use this, provide the vendor name and the name of the rule group in this statement. You can retrieve the required names by calling <a>ListAvailableManagedRuleGroups</a>.</p>\n         <p>You cannot nest a <code>ManagedRuleGroupStatement</code>, for example for use inside a <code>NotStatement</code> or <code>OrStatement</code>. It can only be referenced as a top-level statement within a rule.</p>\n         <note>\n            <p>You are charged additional fees when you use the WAF Bot Control managed rule group <code>AWSManagedRulesBotControlRuleSet</code>, the WAF Fraud Control account takeover prevention (ATP) managed rule group <code>AWSManagedRulesATPRuleSet</code>, or the WAF Fraud Control account creation fraud prevention (ACFP) managed rule group <code>AWSManagedRulesACFPRuleSet</code>. For more information, see <a href=\"http://aws.amazon.com/waf/pricing/\">WAF Pricing</a>.</p>\n         </note>"
             }
         },
         "com.amazonaws.wafv2#ManagedRuleGroupSummaries": {
@@ -9119,6 +9220,12 @@
                     "traits": {
                         "smithy.api#enumValue": "CUSTOM_KEYS"
                     }
+                },
+                "ACP_RULE_SET_RESPONSE_INSPECTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACP_RULE_SET_RESPONSE_INSPECTION"
+                    }
                 }
             }
         },
@@ -9136,13 +9243,13 @@
                 "Identifier": {
                     "target": "com.amazonaws.wafv2#FieldIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the password field. For example <code>/form/password</code>.</p>",
+                        "smithy.api#documentation": "<p>The name of the password field. </p>\n         <p>How you specify this depends on the request inspection payload type.</p>\n         <ul>\n            <li>\n               <p>For JSON payloads, specify the field name in JSON\n               pointer syntax. For information about the JSON Pointer\n               syntax, see the Internet Engineering Task Force (IETF)\n               documentation <a href=\"https://tools.ietf.org/html/rfc6901\">JavaScript\n               \tObject Notation (JSON) Pointer</a>. </p>\n               <p>For example, for the JSON payload <code>{ \"form\": { \"password\": \"THE_PASSWORD\" } }</code>, \n                 the password field specification is <code>/form/password</code>.</p>\n            </li>\n            <li>\n               <p>For form encoded payload types, use the HTML form names.</p>\n               <p>For example, for an HTML form with the input element\n                   named <code>password1</code>, the password field specification is <code>password1</code>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Details about your login page password field for request inspection, used in the \n      <code>AWSManagedRulesATPRuleSet</code>\n            <code>RequestInspection</code> configuration.</p>"
+                "smithy.api#documentation": "<p>The name of the field in the request payload that contains your customer's password. </p>\n         <p>This data type is used in the <code>RequestInspection</code> and <code>RequestInspectionACFP</code> data types. </p>"
             }
         },
         "com.amazonaws.wafv2#PayloadType": {
@@ -9160,6 +9267,27 @@
                         "smithy.api#enumValue": "FORM_ENCODED"
                     }
                 }
+            }
+        },
+        "com.amazonaws.wafv2#PhoneNumberField": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.wafv2#FieldIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a single primary phone number field. </p>\n         <p>How you specify the phone number fields depends on the request inspection payload type.</p>\n         <ul>\n            <li>\n               <p>For JSON payloads, specify the field identifiers in JSON\n               pointer syntax. For information about the JSON Pointer\n               syntax, see the Internet Engineering Task Force (IETF)\n               documentation <a href=\"https://tools.ietf.org/html/rfc6901\">JavaScript\n               \tObject Notation (JSON) Pointer</a>. </p>\n               <p>For example, for the JSON payload <code>{ \"form\": { \"primaryphoneline1\": \"THE_PHONE1\", \"primaryphoneline2\": \"THE_PHONE2\", \"primaryphoneline3\": \"THE_PHONE3\" } }</code>, \n                 the phone number field identifiers are <code>/form/primaryphoneline1</code>, <code>/form/primaryphoneline2</code>, and <code>/form/primaryphoneline3</code>.</p>\n            </li>\n            <li>\n               <p>For form encoded payload types, use the HTML form names.</p>\n               <p>For example, for an HTML form with input elements\n                   named <code>primaryphoneline1</code>, <code>primaryphoneline2</code>, and <code>primaryphoneline3</code>, the phone number field identifiers are <code>primaryphoneline1</code>, <code>primaryphoneline2</code>, and <code>primaryphoneline3</code>. </p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The name of a field in the request payload that contains part or all of your customer's primary phone number. </p>\n         <p>This data type is used in the <code>RequestInspectionACFP</code> data type. </p>"
+            }
+        },
+        "com.amazonaws.wafv2#PhoneNumberFields": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wafv2#PhoneNumberField"
             }
         },
         "com.amazonaws.wafv2#Platform": {
@@ -9958,6 +10086,16 @@
                 "smithy.api#pattern": ".*"
             }
         },
+        "com.amazonaws.wafv2#RegistrationPagePathString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "\\S"
+            }
+        },
         "com.amazonaws.wafv2#RegularExpressionList": {
             "type": "list",
             "member": {
@@ -10030,20 +10168,65 @@
                 "UsernameField": {
                     "target": "com.amazonaws.wafv2#UsernameField",
                     "traits": {
-                        "smithy.api#documentation": "<p>Details about your login page username field. </p>\n         <p>How you specify this depends on the payload type.</p>\n         <ul>\n            <li>\n               <p>For JSON payloads, specify the field name in JSON\n               pointer syntax. For information about the JSON Pointer\n               syntax, see the Internet Engineering Task Force (IETF)\n               documentation <a href=\"https://tools.ietf.org/html/rfc6901\">JavaScript\n               \tObject Notation (JSON) Pointer</a>. </p>\n               <p>For example, for the JSON payload <code>{ \"login\": { \"username\": \"THE_USERNAME\", \"password\": \"THE_PASSWORD\" } }</code>, \n               the username field specification is\n               <code>/login/username</code> and the password field\n               specification is <code>/login/password</code>.</p>\n            </li>\n            <li>\n               <p>For form encoded payload types, use the HTML form names.</p>\n               <p>For example, for an HTML form with input elements\n                   named <code>username1</code> and <code>password1</code>,\n                   the username field specification is\n                   <code>username1</code> and the password field\n                   specification is <code>password1</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The name of the field in the request payload that contains your customer's username. </p>\n         <p>How you specify this depends on the request inspection payload type.</p>\n         <ul>\n            <li>\n               <p>For JSON payloads, specify the field name in JSON\n               pointer syntax. For information about the JSON Pointer\n               syntax, see the Internet Engineering Task Force (IETF)\n               documentation <a href=\"https://tools.ietf.org/html/rfc6901\">JavaScript\n               \tObject Notation (JSON) Pointer</a>. </p>\n               <p>For example, for the JSON payload <code>{ \"form\": { \"username\": \"THE_USERNAME\" } }</code>, \n                 the username field specification is <code>/form/username</code>. </p>\n            </li>\n            <li>\n               <p>For form encoded payload types, use the HTML form names.</p>\n               <p>For example, for an HTML form with the input element\n                   named <code>username1</code>, the username field specification is\n                   <code>username1</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "PasswordField": {
                     "target": "com.amazonaws.wafv2#PasswordField",
                     "traits": {
-                        "smithy.api#documentation": "<p>Details about your login page password field. </p>\n         <p>How you specify this depends on the payload type.</p>\n         <ul>\n            <li>\n               <p>For JSON payloads, specify the field name in JSON\n               pointer syntax. For information about the JSON Pointer\n               syntax, see the Internet Engineering Task Force (IETF)\n               documentation <a href=\"https://tools.ietf.org/html/rfc6901\">JavaScript\n               \tObject Notation (JSON) Pointer</a>. </p>\n               <p>For example, for the JSON payload <code>{ \"login\": { \"username\": \"THE_USERNAME\", \"password\": \"THE_PASSWORD\" } }</code>, \n               the username field specification is\n               <code>/login/username</code> and the password field\n               specification is <code>/login/password</code>.</p>\n            </li>\n            <li>\n               <p>For form encoded payload types, use the HTML form names.</p>\n               <p>For example, for an HTML form with input elements\n                   named <code>username1</code> and <code>password1</code>,\n                   the username field specification is\n                   <code>username1</code> and the password field\n                   specification is <code>password1</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The name of the field in the request payload that contains your customer's password. </p>\n         <p>How you specify this depends on the request inspection payload type.</p>\n         <ul>\n            <li>\n               <p>For JSON payloads, specify the field name in JSON\n               pointer syntax. For information about the JSON Pointer\n               syntax, see the Internet Engineering Task Force (IETF)\n               documentation <a href=\"https://tools.ietf.org/html/rfc6901\">JavaScript\n               \tObject Notation (JSON) Pointer</a>. </p>\n               <p>For example, for the JSON payload <code>{ \"form\": { \"password\": \"THE_PASSWORD\" } }</code>, \n                 the password field specification is <code>/form/password</code>.</p>\n            </li>\n            <li>\n               <p>For form encoded payload types, use the HTML form names.</p>\n               <p>For example, for an HTML form with the input element\n                   named <code>password1</code>, the password field specification is <code>password1</code>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>The criteria for inspecting login requests, used by the ATP rule group to validate credentials usage.  </p>\n         <p>This is part of the <code>AWSManagedRulesATPRuleSet</code> configuration in <code>ManagedRuleGroupConfig</code>.</p>\n         <p>In these settings, you specify how your application accepts login attempts\n           by providing the request payload type and the names of the fields \n           within the request body where the username and password are provided. </p>"
+            }
+        },
+        "com.amazonaws.wafv2#RequestInspectionACFP": {
+            "type": "structure",
+            "members": {
+                "PayloadType": {
+                    "target": "com.amazonaws.wafv2#PayloadType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The payload type for your account creation endpoint, either JSON or form encoded.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UsernameField": {
+                    "target": "com.amazonaws.wafv2#UsernameField",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the field in the request payload that contains your customer's username. </p>\n         <p>How you specify this depends on the request inspection payload type.</p>\n         <ul>\n            <li>\n               <p>For JSON payloads, specify the field name in JSON\n               pointer syntax. For information about the JSON Pointer\n               syntax, see the Internet Engineering Task Force (IETF)\n               documentation <a href=\"https://tools.ietf.org/html/rfc6901\">JavaScript\n               \tObject Notation (JSON) Pointer</a>. </p>\n               <p>For example, for the JSON payload <code>{ \"form\": { \"username\": \"THE_USERNAME\" } }</code>, \n                 the username field specification is <code>/form/username</code>. </p>\n            </li>\n            <li>\n               <p>For form encoded payload types, use the HTML form names.</p>\n               <p>For example, for an HTML form with the input element\n                   named <code>username1</code>, the username field specification is\n                   <code>username1</code>\n               </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "PasswordField": {
+                    "target": "com.amazonaws.wafv2#PasswordField",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the field in the request payload that contains your customer's password. </p>\n         <p>How you specify this depends on the request inspection payload type.</p>\n         <ul>\n            <li>\n               <p>For JSON payloads, specify the field name in JSON\n               pointer syntax. For information about the JSON Pointer\n               syntax, see the Internet Engineering Task Force (IETF)\n               documentation <a href=\"https://tools.ietf.org/html/rfc6901\">JavaScript\n               \tObject Notation (JSON) Pointer</a>. </p>\n               <p>For example, for the JSON payload <code>{ \"form\": { \"password\": \"THE_PASSWORD\" } }</code>, \n                 the password field specification is <code>/form/password</code>.</p>\n            </li>\n            <li>\n               <p>For form encoded payload types, use the HTML form names.</p>\n               <p>For example, for an HTML form with the input element\n                   named <code>password1</code>, the password field specification is <code>password1</code>.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "EmailField": {
+                    "target": "com.amazonaws.wafv2#EmailField",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the field in the request payload that contains your customer's email. </p>\n         <p>How you specify this depends on the request inspection payload type.</p>\n         <ul>\n            <li>\n               <p>For JSON payloads, specify the field name in JSON\n               pointer syntax. For information about the JSON Pointer\n               syntax, see the Internet Engineering Task Force (IETF)\n               documentation <a href=\"https://tools.ietf.org/html/rfc6901\">JavaScript\n               \tObject Notation (JSON) Pointer</a>. </p>\n               <p>For example, for the JSON payload <code>{ \"form\": { \"email\": \"THE_EMAIL\" } }</code>, \n                 the email field specification is <code>/form/email</code>.</p>\n            </li>\n            <li>\n               <p>For form encoded payload types, use the HTML form names.</p>\n               <p>For example, for an HTML form with the input element\n                   named <code>email1</code>, the email field specification is <code>email1</code>.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "PhoneNumberFields": {
+                    "target": "com.amazonaws.wafv2#PhoneNumberFields",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The names of the fields in the request payload that contain your customer's primary phone number. </p>\n         <p>Order the phone number fields in the array exactly as they are ordered in the request payload. </p>\n         <p>How you specify the phone number fields depends on the request inspection payload type.</p>\n         <ul>\n            <li>\n               <p>For JSON payloads, specify the field identifiers in JSON\n               pointer syntax. For information about the JSON Pointer\n               syntax, see the Internet Engineering Task Force (IETF)\n               documentation <a href=\"https://tools.ietf.org/html/rfc6901\">JavaScript\n               \tObject Notation (JSON) Pointer</a>. </p>\n               <p>For example, for the JSON payload <code>{ \"form\": { \"primaryphoneline1\": \"THE_PHONE1\", \"primaryphoneline2\": \"THE_PHONE2\", \"primaryphoneline3\": \"THE_PHONE3\" } }</code>, \n                 the phone number field identifiers are <code>/form/primaryphoneline1</code>, <code>/form/primaryphoneline2</code>, and <code>/form/primaryphoneline3</code>.</p>\n            </li>\n            <li>\n               <p>For form encoded payload types, use the HTML form names.</p>\n               <p>For example, for an HTML form with input elements\n                   named <code>primaryphoneline1</code>, <code>primaryphoneline2</code>, and <code>primaryphoneline3</code>, the phone number field identifiers are <code>primaryphoneline1</code>, <code>primaryphoneline2</code>, and <code>primaryphoneline3</code>. </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "AddressFields": {
+                    "target": "com.amazonaws.wafv2#AddressFields",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The names of the fields in the request payload that contain your customer's primary physical address. </p>\n         <p>Order the address fields in the array exactly as they are ordered in the request payload. </p>\n         <p>How you specify the address fields depends on the request inspection payload type.</p>\n         <ul>\n            <li>\n               <p>For JSON payloads, specify the field identifiers in JSON\n               pointer syntax. For information about the JSON Pointer\n               syntax, see the Internet Engineering Task Force (IETF)\n               documentation <a href=\"https://tools.ietf.org/html/rfc6901\">JavaScript\n               \tObject Notation (JSON) Pointer</a>. </p>\n               <p>For example, for the JSON payload <code>{ \"form\": { \"primaryaddressline1\": \"THE_ADDRESS1\", \"primaryaddressline2\": \"THE_ADDRESS2\", \"primaryaddressline3\": \"THE_ADDRESS3\" } }</code>, \n                 the address field idenfiers are <code>/form/primaryaddressline1</code>, <code>/form/primaryaddressline2</code>, and <code>/form/primaryaddressline3</code>.</p>\n            </li>\n            <li>\n               <p>For form encoded payload types, use the HTML form names.</p>\n               <p>For example, for an HTML form with input elements\n                   named <code>primaryaddressline1</code>, <code>primaryaddressline2</code>, and <code>primaryaddressline3</code>, the address fields identifiers are <code>primaryaddressline1</code>, <code>primaryaddressline2</code>, and <code>primaryaddressline3</code>. </p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The criteria for inspecting account creation requests, used by the ACFP rule group to validate and track account creation attempts.  </p>\n         <p>This is part of the <code>AWSManagedRulesACFPRuleSet</code> configuration in <code>ManagedRuleGroupConfig</code>.</p>\n         <p>In these settings, you specify how your application accepts account creation attempts\n           by providing the request payload type and the names of the fields \n           within the request body where the username, password, email, and primary address and phone number fields are provided. </p>"
             }
         },
         "com.amazonaws.wafv2#ResourceArn": {
@@ -10145,30 +10328,30 @@
                 "StatusCode": {
                     "target": "com.amazonaws.wafv2#ResponseInspectionStatusCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configures inspection of the response status code. </p>"
+                        "smithy.api#documentation": "<p>Configures inspection of the response status code for success and failure indicators. </p>"
                     }
                 },
                 "Header": {
                     "target": "com.amazonaws.wafv2#ResponseInspectionHeader",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configures inspection of the response header. </p>"
+                        "smithy.api#documentation": "<p>Configures inspection of the response header for success and failure indicators. </p>"
                     }
                 },
                 "BodyContains": {
                     "target": "com.amazonaws.wafv2#ResponseInspectionBodyContains",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configures inspection of the response body. WAF can inspect the first 65,536 bytes (64 KB) of the response body. </p>"
+                        "smithy.api#documentation": "<p>Configures inspection of the response body for success and failure indicators. WAF can inspect the first 65,536 bytes (64 KB) of the response body. </p>"
                     }
                 },
                 "Json": {
                     "target": "com.amazonaws.wafv2#ResponseInspectionJson",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configures inspection of the response JSON. WAF can inspect the first 65,536 bytes (64 KB) of the response JSON. </p>"
+                        "smithy.api#documentation": "<p>Configures inspection of the response JSON for success and failure indicators. WAF can inspect the first 65,536 bytes (64 KB) of the response JSON. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The criteria for inspecting responses to login requests, used by the ATP rule group to track login failure rates. </p>\n         <p>The ATP rule group evaluates the responses that your protected resources send back to client login attempts, keeping count of successful and failed attempts from each IP address and client session. Using this information, the rule group labels \n               and mitigates requests from client sessions and IP addresses that submit too many failed login attempts in a short amount of time. </p>\n         <note>\n            <p>Response inspection is available only in web ACLs that protect Amazon CloudFront distributions.</p>\n         </note>\n         <p>This is part of the <code>AWSManagedRulesATPRuleSet</code> configuration in <code>ManagedRuleGroupConfig</code>.</p>\n         <p>Enable login response inspection by configuring exactly one component of the response to inspect. You can't configure more than one. If you don't configure any of the response inspection options, response inspection is disabled. </p>"
+                "smithy.api#documentation": "<p>The criteria for inspecting responses to login requests and account creation requests, used by the ATP and ACFP rule groups to track login and account creation success and failure rates. </p>\n         <note>\n            <p>Response inspection is available only in web ACLs that protect Amazon CloudFront distributions.</p>\n         </note>\n         <p>The rule groups evaluates the responses that your protected resources send back to client login and account creation attempts, keeping count of successful and failed attempts from each IP address and client session. Using this information, the rule group labels \n               and mitigates requests from client sessions and IP addresses with too much suspicious activity in a short amount of time. </p>\n         <p>This is part of the <code>AWSManagedRulesATPRuleSet</code> and <code>AWSManagedRulesACFPRuleSet</code> configurations in <code>ManagedRuleGroupConfig</code>.</p>\n         <p>Enable response inspection by configuring exactly one component of the response to inspect, for example, <code>Header</code> or <code>StatusCode</code>. You can't configure more than one component for inspection. If you don't configure any of the response inspection options, response inspection is disabled. </p>"
             }
         },
         "com.amazonaws.wafv2#ResponseInspectionBodyContains": {
@@ -10177,20 +10360,20 @@
                 "SuccessStrings": {
                     "target": "com.amazonaws.wafv2#ResponseInspectionBodyContainsSuccessStrings",
                     "traits": {
-                        "smithy.api#documentation": "<p>Strings in the body of the response that indicate a successful login attempt. To be counted as a successful login, the string can be anywhere in the body and must be an exact match, including case. Each string must be unique among the success and failure strings. </p>\n         <p>JSON example: <code>\"SuccessStrings\": [ \"Login successful\", \"Welcome to our site!\" ]</code>\n         </p>",
+                        "smithy.api#documentation": "<p>Strings in the body of the response that indicate a successful login or account creation attempt. To be counted as a success, the string can be anywhere in the body and must be an exact match, including case. Each string must be unique among the success and failure strings. </p>\n         <p>JSON examples: <code>\"SuccessStrings\": [ \"Login successful\" ]</code> and <code>\"SuccessStrings\": [ \"Account creation successful\", \"Welcome to our site!\" ]</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "FailureStrings": {
                     "target": "com.amazonaws.wafv2#ResponseInspectionBodyContainsFailureStrings",
                     "traits": {
-                        "smithy.api#documentation": "<p>Strings in the body of the response that indicate a failed login attempt. To be counted as a failed login, the string can be anywhere in the body and must be an exact match, including case. Each string must be unique among the success and failure strings. </p>\n         <p>JSON example: <code>\"FailureStrings\": [ \"Login failed\" ]</code>\n         </p>",
+                        "smithy.api#documentation": "<p>Strings in the body of the response that indicate a failed login or account creation attempt. To be counted as a failure, the string can be anywhere in the body and must be an exact match, including case. Each string must be unique among the success and failure strings. </p>\n         <p>JSON example: <code>\"FailureStrings\": [ \"Request failed\" ]</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configures inspection of the response body. WAF can inspect the first 65,536 bytes (64 KB) of the response body. This is part of the <code>ResponseInspection</code> configuration for <code>AWSManagedRulesATPRuleSet</code>. </p>\n         <note>\n            <p>Response inspection is available only in web ACLs that protect Amazon CloudFront distributions.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Configures inspection of the response body. WAF can inspect the first 65,536 bytes (64 KB) of the response body. \n           This is part of the <code>ResponseInspection</code> configuration for <code>AWSManagedRulesATPRuleSet</code> and  <code>AWSManagedRulesACFPRuleSet</code>. </p>\n         <note>\n            <p>Response inspection is available only in web ACLs that protect Amazon CloudFront distributions.</p>\n         </note>"
             }
         },
         "com.amazonaws.wafv2#ResponseInspectionBodyContainsFailureStrings": {
@@ -10223,27 +10406,27 @@
                 "Name": {
                     "target": "com.amazonaws.wafv2#ResponseInspectionHeaderName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the header to match against. The name must be an exact match, including case.</p>\n         <p>JSON example: <code>\"Name\": [ \"LoginResult\" ]</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The name of the header to match against. The name must be an exact match, including case.</p>\n         <p>JSON example: <code>\"Name\": [ \"RequestResult\" ]</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "SuccessValues": {
                     "target": "com.amazonaws.wafv2#ResponseInspectionHeaderSuccessValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>Values in the response header with the specified name that indicate a successful login attempt. To be counted as a successful login, the value must be an exact match, including case. Each value must be unique among the success and failure values. </p>\n         <p>JSON example: <code>\"SuccessValues\": [ \"LoginPassed\", \"Successful login\" ]</code>\n         </p>",
+                        "smithy.api#documentation": "<p>Values in the response header with the specified name that indicate a successful login or account creation attempt. To be counted as a success, the value must be an exact match, including case. Each value must be unique among the success and failure values. </p>\n         <p>JSON examples: <code>\"SuccessValues\": [ \"LoginPassed\", \"Successful login\" ]</code> and <code>\"SuccessValues\": [ \"AccountCreated\", \"Successful account creation\" ]</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "FailureValues": {
                     "target": "com.amazonaws.wafv2#ResponseInspectionHeaderFailureValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>Values in the response header with the specified name that indicate a failed login attempt. To be counted as a failed login, the value must be an exact match, including case. Each value must be unique among the success and failure values. </p>\n         <p>JSON example: <code>\"FailureValues\": [ \"LoginFailed\", \"Failed login\" ]</code>\n         </p>",
+                        "smithy.api#documentation": "<p>Values in the response header with the specified name that indicate a failed login or account creation attempt. To be counted as a failure, the value must be an exact match, including case. Each value must be unique among the success and failure values. </p>\n         <p>JSON examples: <code>\"FailureValues\": [ \"LoginFailed\", \"Failed login\" ]</code> and <code>\"FailureValues\": [ \"AccountCreationFailed\" ]</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configures inspection of the response header. This is part of the <code>ResponseInspection</code> configuration for <code>AWSManagedRulesATPRuleSet</code>. </p>\n         <note>\n            <p>Response inspection is available only in web ACLs that protect Amazon CloudFront distributions.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Configures inspection of the response header. \n           This is part of the <code>ResponseInspection</code> configuration for <code>AWSManagedRulesATPRuleSet</code> and  <code>AWSManagedRulesACFPRuleSet</code>. </p>\n         <note>\n            <p>Response inspection is available only in web ACLs that protect Amazon CloudFront distributions.</p>\n         </note>"
             }
         },
         "com.amazonaws.wafv2#ResponseInspectionHeaderFailureValues": {
@@ -10286,27 +10469,27 @@
                 "Identifier": {
                     "target": "com.amazonaws.wafv2#FieldIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the value to match against in the JSON. The identifier must be an exact match, including case.</p>\n         <p>JSON example: <code>\"Identifier\": [ \"/login/success\" ]</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The identifier for the value to match against in the JSON. The identifier must be an exact match, including case.</p>\n         <p>JSON examples: <code>\"Identifier\": [ \"/login/success\" ]</code> and <code>\"Identifier\": [ \"/sign-up/success\" ]</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "SuccessValues": {
                     "target": "com.amazonaws.wafv2#ResponseInspectionJsonSuccessValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>Values for the specified identifier in the response JSON that indicate a successful login attempt. To be counted as a successful login, the value must be an exact match, including case. Each value must be unique among the success and failure values. </p>\n         <p>JSON example: <code>\"SuccessValues\": [ \"True\", \"Succeeded\" ]</code>\n         </p>",
+                        "smithy.api#documentation": "<p>Values for the specified identifier in the response JSON that indicate a successful login or account creation attempt. To be counted as a success, the value must be an exact match, including case. Each value must be unique among the success and failure values. </p>\n         <p>JSON example: <code>\"SuccessValues\": [ \"True\", \"Succeeded\" ]</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "FailureValues": {
                     "target": "com.amazonaws.wafv2#ResponseInspectionJsonFailureValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>Values for the specified identifier in the response JSON that indicate a failed login attempt. To be counted as a failed login, the value must be an exact match, including case. Each value must be unique among the success and failure values. </p>\n         <p>JSON example: <code>\"FailureValues\": [ \"False\", \"Failed\" ]</code>\n         </p>",
+                        "smithy.api#documentation": "<p>Values for the specified identifier in the response JSON that indicate a failed login or account creation attempt. To be counted as a failure, the value must be an exact match, including case. Each value must be unique among the success and failure values. </p>\n         <p>JSON example: <code>\"FailureValues\": [ \"False\", \"Failed\" ]</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configures inspection of the response JSON. WAF can inspect the first 65,536 bytes (64 KB) of the response JSON. This is part of the <code>ResponseInspection</code> configuration for <code>AWSManagedRulesATPRuleSet</code>. </p>\n         <note>\n            <p>Response inspection is available only in web ACLs that protect Amazon CloudFront distributions.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Configures inspection of the response JSON. WAF can inspect the first 65,536 bytes (64 KB) of the response JSON. \n           This is part of the <code>ResponseInspection</code> configuration for <code>AWSManagedRulesATPRuleSet</code> and  <code>AWSManagedRulesACFPRuleSet</code>. </p>\n         <note>\n            <p>Response inspection is available only in web ACLs that protect Amazon CloudFront distributions.</p>\n         </note>"
             }
         },
         "com.amazonaws.wafv2#ResponseInspectionJsonFailureValues": {
@@ -10339,20 +10522,20 @@
                 "SuccessCodes": {
                     "target": "com.amazonaws.wafv2#ResponseInspectionStatusCodeSuccessCodes",
                     "traits": {
-                        "smithy.api#documentation": "<p>Status codes in the response that indicate a successful login attempt. To be counted as a successful login, the response status code must match one of these. Each code must be unique among the success and failure status codes. </p>\n         <p>JSON example: <code>\"SuccessCodes\": [ 200, 201 ]</code>\n         </p>",
+                        "smithy.api#documentation": "<p>Status codes in the response that indicate a successful login or account creation attempt. To be counted as a success, the response status code must match one of these. Each code must be unique among the success and failure status codes. </p>\n         <p>JSON example: <code>\"SuccessCodes\": [ 200, 201 ]</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "FailureCodes": {
                     "target": "com.amazonaws.wafv2#ResponseInspectionStatusCodeFailureCodes",
                     "traits": {
-                        "smithy.api#documentation": "<p>Status codes in the response that indicate a failed login attempt. To be counted as a failed login, the response status code must match one of these. Each code must be unique among the success and failure status codes. </p>\n         <p>JSON example: <code>\"FailureCodes\": [ 400, 404 ]</code>\n         </p>",
+                        "smithy.api#documentation": "<p>Status codes in the response that indicate a failed login or account creation attempt. To be counted as a failure, the response status code must match one of these. Each code must be unique among the success and failure status codes. </p>\n         <p>JSON example: <code>\"FailureCodes\": [ 400, 404 ]</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configures inspection of the response status code. This is part of the <code>ResponseInspection</code> configuration for <code>AWSManagedRulesATPRuleSet</code>. </p>\n         <note>\n            <p>Response inspection is available only in web ACLs that protect Amazon CloudFront distributions.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Configures inspection of the response status code. \n           This is part of the <code>ResponseInspection</code> configuration for <code>AWSManagedRulesATPRuleSet</code> and  <code>AWSManagedRulesACFPRuleSet</code>. </p>\n         <note>\n            <p>Response inspection is available only in web ACLs that protect Amazon CloudFront distributions.</p>\n         </note>"
             }
         },
         "com.amazonaws.wafv2#ResponseInspectionStatusCodeFailureCodes": {
@@ -11073,7 +11256,7 @@
                 "ManagedRuleGroupStatement": {
                     "target": "com.amazonaws.wafv2#ManagedRuleGroupStatement",
                     "traits": {
-                        "smithy.api#documentation": "<p>A rule statement used to run the rules that are defined in a managed rule group. To use this, provide the vendor name and the name of the rule group in this statement. You can retrieve the required names by calling <a>ListAvailableManagedRuleGroups</a>.</p>\n         <p>You cannot nest a <code>ManagedRuleGroupStatement</code>, for example for use inside a <code>NotStatement</code> or <code>OrStatement</code>. It can only be referenced as a top-level statement within a rule.</p>\n         <note>\n            <p>You are charged additional fees when you use the WAF Bot Control managed rule group <code>AWSManagedRulesBotControlRuleSet</code> or the WAF Fraud Control account takeover prevention (ATP) managed rule group <code>AWSManagedRulesATPRuleSet</code>. For more information, see <a href=\"http://aws.amazon.com/waf/pricing/\">WAF Pricing</a>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>A rule statement used to run the rules that are defined in a managed rule group. To use this, provide the vendor name and the name of the rule group in this statement. You can retrieve the required names by calling <a>ListAvailableManagedRuleGroups</a>.</p>\n         <p>You cannot nest a <code>ManagedRuleGroupStatement</code>, for example for use inside a <code>NotStatement</code> or <code>OrStatement</code>. It can only be referenced as a top-level statement within a rule.</p>\n         <note>\n            <p>You are charged additional fees when you use the WAF Bot Control managed rule group <code>AWSManagedRulesBotControlRuleSet</code>, the WAF Fraud Control account takeover prevention (ATP) managed rule group <code>AWSManagedRulesATPRuleSet</code>, or the WAF Fraud Control account creation fraud prevention (ACFP) managed rule group <code>AWSManagedRulesACFPRuleSet</code>. For more information, see <a href=\"http://aws.amazon.com/waf/pricing/\">WAF Pricing</a>.</p>\n         </note>"
                     }
                 },
                 "LabelMatchStatement": {
@@ -12155,13 +12338,13 @@
                 "Identifier": {
                     "target": "com.amazonaws.wafv2#FieldIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the username field. For example <code>/form/username</code>.</p>",
+                        "smithy.api#documentation": "<p>The name of the username field. </p>\n         <p>How you specify this depends on the request inspection payload type.</p>\n         <ul>\n            <li>\n               <p>For JSON payloads, specify the field name in JSON\n               pointer syntax. For information about the JSON Pointer\n               syntax, see the Internet Engineering Task Force (IETF)\n               documentation <a href=\"https://tools.ietf.org/html/rfc6901\">JavaScript\n               \tObject Notation (JSON) Pointer</a>. </p>\n               <p>For example, for the JSON payload <code>{ \"form\": { \"username\": \"THE_USERNAME\" } }</code>, \n                 the username field specification is <code>/form/username</code>. </p>\n            </li>\n            <li>\n               <p>For form encoded payload types, use the HTML form names.</p>\n               <p>For example, for an HTML form with the input element\n                   named <code>username1</code>, the username field specification is\n                   <code>username1</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Details about your login page username field for request inspection, used in the \n      <code>AWSManagedRulesATPRuleSet</code>\n            <code>RequestInspection</code> configuration.</p>"
+                "smithy.api#documentation": "<p>The name of the field in the request payload that contains your customer's username. </p>\n         <p>This data type is used in the <code>RequestInspection</code> and <code>RequestInspectionACFP</code> data types. </p>"
             }
         },
         "com.amazonaws.wafv2#VendorName": {
