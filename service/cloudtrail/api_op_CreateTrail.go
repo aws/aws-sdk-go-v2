@@ -163,7 +163,7 @@ type CreateTrailOutput struct {
 	// arn:aws:sns:us-east-2:123456789012:MyTopic
 	SnsTopicARN *string
 
-	// This field is no longer in use. Use SnsTopicARN.
+	// This field is no longer in use. Use SnsTopicARN .
 	//
 	// Deprecated: This member has been deprecated.
 	SnsTopicName *string

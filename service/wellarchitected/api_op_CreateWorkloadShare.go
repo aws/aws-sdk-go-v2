@@ -49,13 +49,13 @@ type CreateWorkloadShareInput struct {
 	// This member is required.
 	ClientRequestToken *string
 
-	// Permission granted on a workload share.
+	// Permission granted on a share request.
 	//
 	// This member is required.
 	PermissionType types.PermissionType
 
 	// The Amazon Web Services account ID, IAM role, organization ID, or
-	// organizational unit (OU) ID with which the workload is shared.
+	// organizational unit (OU) ID with which the workload, lens, or profile is shared.
 	//
 	// This member is required.
 	SharedWith *string
@@ -72,7 +72,7 @@ type CreateWorkloadShareInput struct {
 // Input for Create Workload Share
 type CreateWorkloadShareOutput struct {
 
-	// The ID associated with the workload share.
+	// The ID associated with the share.
 	ShareId *string
 
 	// The ID assigned to the workload. This ID is unique within an Amazon Web

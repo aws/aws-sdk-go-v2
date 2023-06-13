@@ -7301,6 +7301,80 @@ func awsAwsjson11_deserializeDocumentActionCondition(v **types.ActionCondition, 
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentAddressField(v **types.AddressField, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AddressField
+	if *v == nil {
+		sv = &types.AddressField{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Identifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FieldIdentifier to be of type string, got %T instead", value)
+				}
+				sv.Identifier = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAddressFields(v *[]types.AddressField, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AddressField
+	if *v == nil {
+		cv = []types.AddressField{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AddressField
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentAddressField(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentAll(v **types.All, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7579,6 +7653,74 @@ func awsAwsjson11_deserializeDocumentAssociationConfig(v **types.AssociationConf
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentAWSManagedRulesACFPRuleSet(v **types.AWSManagedRulesACFPRuleSet, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AWSManagedRulesACFPRuleSet
+	if *v == nil {
+		sv = &types.AWSManagedRulesACFPRuleSet{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CreationPath":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CreationPathString to be of type string, got %T instead", value)
+				}
+				sv.CreationPath = ptr.String(jtv)
+			}
+
+		case "EnableRegexInPath":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.EnableRegexInPath = jtv
+			}
+
+		case "RegistrationPagePath":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RegistrationPagePathString to be of type string, got %T instead", value)
+				}
+				sv.RegistrationPagePath = ptr.String(jtv)
+			}
+
+		case "RequestInspection":
+			if err := awsAwsjson11_deserializeDocumentRequestInspectionACFP(&sv.RequestInspection, value); err != nil {
+				return err
+			}
+
+		case "ResponseInspection":
+			if err := awsAwsjson11_deserializeDocumentResponseInspection(&sv.ResponseInspection, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentAWSManagedRulesATPRuleSet(v **types.AWSManagedRulesATPRuleSet, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7601,6 +7743,15 @@ func awsAwsjson11_deserializeDocumentAWSManagedRulesATPRuleSet(v **types.AWSMana
 
 	for key, value := range shape {
 		switch key {
+		case "EnableRegexInPath":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.EnableRegexInPath = jtv
+			}
+
 		case "LoginPath":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8658,6 +8809,46 @@ func awsAwsjson11_deserializeDocumentDefaultAction(v **types.DefaultAction, valu
 		case "Block":
 			if err := awsAwsjson11_deserializeDocumentBlockAction(&sv.Block, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentEmailField(v **types.EmailField, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EmailField
+	if *v == nil {
+		sv = &types.EmailField{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Identifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FieldIdentifier to be of type string, got %T instead", value)
+				}
+				sv.Identifier = ptr.String(jtv)
 			}
 
 		default:
@@ -10588,6 +10779,11 @@ func awsAwsjson11_deserializeDocumentManagedRuleGroupConfig(v **types.ManagedRul
 
 	for key, value := range shape {
 		switch key {
+		case "AWSManagedRulesACFPRuleSet":
+			if err := awsAwsjson11_deserializeDocumentAWSManagedRulesACFPRuleSet(&sv.AWSManagedRulesACFPRuleSet, value); err != nil {
+				return err
+			}
+
 		case "AWSManagedRulesATPRuleSet":
 			if err := awsAwsjson11_deserializeDocumentAWSManagedRulesATPRuleSet(&sv.AWSManagedRulesATPRuleSet, value); err != nil {
 				return err
@@ -11543,6 +11739,80 @@ func awsAwsjson11_deserializeDocumentPasswordField(v **types.PasswordField, valu
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentPhoneNumberField(v **types.PhoneNumberField, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PhoneNumberField
+	if *v == nil {
+		sv = &types.PhoneNumberField{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Identifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FieldIdentifier to be of type string, got %T instead", value)
+				}
+				sv.Identifier = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentPhoneNumberFields(v *[]types.PhoneNumberField, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.PhoneNumberField
+	if *v == nil {
+		cv = []types.PhoneNumberField{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.PhoneNumberField
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentPhoneNumberField(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -12723,6 +12993,71 @@ func awsAwsjson11_deserializeDocumentRequestInspection(v **types.RequestInspecti
 					return fmt.Errorf("expected PayloadType to be of type string, got %T instead", value)
 				}
 				sv.PayloadType = types.PayloadType(jtv)
+			}
+
+		case "UsernameField":
+			if err := awsAwsjson11_deserializeDocumentUsernameField(&sv.UsernameField, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRequestInspectionACFP(v **types.RequestInspectionACFP, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RequestInspectionACFP
+	if *v == nil {
+		sv = &types.RequestInspectionACFP{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AddressFields":
+			if err := awsAwsjson11_deserializeDocumentAddressFields(&sv.AddressFields, value); err != nil {
+				return err
+			}
+
+		case "EmailField":
+			if err := awsAwsjson11_deserializeDocumentEmailField(&sv.EmailField, value); err != nil {
+				return err
+			}
+
+		case "PasswordField":
+			if err := awsAwsjson11_deserializeDocumentPasswordField(&sv.PasswordField, value); err != nil {
+				return err
+			}
+
+		case "PayloadType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PayloadType to be of type string, got %T instead", value)
+				}
+				sv.PayloadType = types.PayloadType(jtv)
+			}
+
+		case "PhoneNumberFields":
+			if err := awsAwsjson11_deserializeDocumentPhoneNumberFields(&sv.PhoneNumberFields, value); err != nil {
+				return err
 			}
 
 		case "UsernameField":

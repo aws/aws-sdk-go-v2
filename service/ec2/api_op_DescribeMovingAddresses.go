@@ -12,10 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes your Elastic IP addresses that are being moved to the EC2-VPC
-// platform, or that are being restored to the EC2-Classic platform. This request
-// does not return information about any other Elastic IP addresses in your
-// account.
+// This action is deprecated. Describes your Elastic IP addresses that are being
+// moved from or being restored to the EC2-Classic platform. This request does not
+// return information about any other Elastic IP addresses in your account.
 func (c *Client) DescribeMovingAddresses(ctx context.Context, params *DescribeMovingAddressesInput, optFns ...func(*Options)) (*DescribeMovingAddressesOutput, error) {
 	if params == nil {
 		params = &DescribeMovingAddressesInput{}

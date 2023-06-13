@@ -56,6 +56,22 @@ func (AutoEnableStandards) Values() []AutoEnableStandards {
 	}
 }
 
+type AutomationRulesActionType string
+
+// Enum values for AutomationRulesActionType
+const (
+	AutomationRulesActionTypeFindingFieldsUpdate AutomationRulesActionType = "FINDING_FIELDS_UPDATE"
+)
+
+// Values returns all known values for AutomationRulesActionType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AutomationRulesActionType) Values() []AutomationRulesActionType {
+	return []AutomationRulesActionType{
+		"FINDING_FIELDS_UPDATE",
+	}
+}
+
 type AwsIamAccessKeyStatus string
 
 // Enum values for AwsIamAccessKeyStatus
@@ -359,6 +375,24 @@ func (RegionAvailabilityStatus) Values() []RegionAvailabilityStatus {
 	return []RegionAvailabilityStatus{
 		"AVAILABLE",
 		"UNAVAILABLE",
+	}
+}
+
+type RuleStatus string
+
+// Enum values for RuleStatus
+const (
+	RuleStatusEnabled  RuleStatus = "ENABLED"
+	RuleStatusDisabled RuleStatus = "DISABLED"
+)
+
+// Values returns all known values for RuleStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (RuleStatus) Values() []RuleStatus {
+	return []RuleStatus{
+		"ENABLED",
+		"DISABLED",
 	}
 }
 

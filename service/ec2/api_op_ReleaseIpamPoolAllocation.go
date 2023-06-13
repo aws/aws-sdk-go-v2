@@ -10,10 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Release an allocation within an IPAM pool. You can only use this action to
-// release manual allocations. To remove an allocation for a resource without
-// deleting the resource, set its monitored state to false using
-// ModifyIpamResourceCidr (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyIpamResourceCidr.html)
+// Release an allocation within an IPAM pool. The Region you use should be the
+// IPAM pool locale. The locale is the Amazon Web Services Region where this IPAM
+// pool is available for allocations. You can only use this action to release
+// manual allocations. To remove an allocation for a resource without deleting the
+// resource, set its monitored state to false using ModifyIpamResourceCidr (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyIpamResourceCidr.html)
 // . For more information, see Release an allocation (https://docs.aws.amazon.com/vpc/latest/ipam/release-pool-alloc-ipam.html)
 // in the Amazon VPC IPAM User Guide. All EC2 API actions follow an eventual
 // consistency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/query-api-troubleshooting.html#eventual-consistency)

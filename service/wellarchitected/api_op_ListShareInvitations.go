@@ -41,6 +41,9 @@ type ListShareInvitationsInput struct {
 	// The token to use to retrieve the next set of results.
 	NextToken *string
 
+	// Profile name prefix.
+	ProfileNamePrefix *string
+
 	// The type of share invitations to be returned.
 	ShareResourceType types.ShareResourceType
 

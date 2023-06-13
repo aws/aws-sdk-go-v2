@@ -61,6 +61,9 @@ type ListLensReviewImprovementsInput struct {
 	// by its PillarReviewSummary$PillarId .
 	PillarId *string
 
+	// The priority of the question.
+	QuestionPriority types.QuestionPriority
+
 	noSmithyDocumentSerde
 }
 

@@ -12,8 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Get a list of all the CIDR allocations in an IPAM pool. If you use this action
-// after AllocateIpamPoolCidr (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AllocateIpamPoolCidr.html)
+// Get a list of all the CIDR allocations in an IPAM pool. The Region you use
+// should be the IPAM pool locale. The locale is the Amazon Web Services Region
+// where this IPAM pool is available for allocations. If you use this action after
+// AllocateIpamPoolCidr (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AllocateIpamPoolCidr.html)
 // or ReleaseIpamPoolAllocation (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ReleaseIpamPoolAllocation.html)
 // , note that all EC2 API actions follow an eventual consistency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/query-api-troubleshooting.html#eventual-consistency)
 // model.

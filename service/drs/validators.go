@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpAssociateSourceNetworkStack struct {
+}
+
+func (*validateOpAssociateSourceNetworkStack) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateSourceNetworkStack) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateSourceNetworkStackInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateSourceNetworkStackInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateExtendedSourceServer struct {
 }
 
@@ -45,6 +65,26 @@ func (m *validateOpCreateReplicationConfigurationTemplate) HandleInitialize(ctx 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateReplicationConfigurationTemplateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateSourceNetwork struct {
+}
+
+func (*validateOpCreateSourceNetwork) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateSourceNetwork) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateSourceNetworkInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateSourceNetworkInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -125,6 +165,26 @@ func (m *validateOpDeleteReplicationConfigurationTemplate) HandleInitialize(ctx 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteReplicationConfigurationTemplateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteSourceNetwork struct {
+}
+
+func (*validateOpDeleteSourceNetwork) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteSourceNetwork) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteSourceNetworkInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteSourceNetworkInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -225,6 +285,26 @@ func (m *validateOpDisconnectSourceServer) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDisconnectSourceServerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpExportSourceNetworkCfnTemplate struct {
+}
+
+func (*validateOpExportSourceNetworkCfnTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpExportSourceNetworkCfnTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ExportSourceNetworkCfnTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpExportSourceNetworkCfnTemplateInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -430,6 +510,46 @@ func (m *validateOpStartReplication) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartSourceNetworkRecovery struct {
+}
+
+func (*validateOpStartSourceNetworkRecovery) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartSourceNetworkRecovery) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartSourceNetworkRecoveryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartSourceNetworkRecoveryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartSourceNetworkReplication struct {
+}
+
+func (*validateOpStartSourceNetworkReplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartSourceNetworkReplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartSourceNetworkReplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartSourceNetworkReplicationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStopFailback struct {
 }
 
@@ -465,6 +585,26 @@ func (m *validateOpStopReplication) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStopReplicationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStopSourceNetworkReplication struct {
+}
+
+func (*validateOpStopSourceNetworkReplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopSourceNetworkReplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopSourceNetworkReplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopSourceNetworkReplicationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -630,12 +770,20 @@ func (m *validateOpUpdateReplicationConfigurationTemplate) HandleInitialize(ctx 
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpAssociateSourceNetworkStackValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateSourceNetworkStack{}, middleware.After)
+}
+
 func addOpCreateExtendedSourceServerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateExtendedSourceServer{}, middleware.After)
 }
 
 func addOpCreateReplicationConfigurationTemplateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateReplicationConfigurationTemplate{}, middleware.After)
+}
+
+func addOpCreateSourceNetworkValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateSourceNetwork{}, middleware.After)
 }
 
 func addOpDeleteJobValidationMiddleware(stack *middleware.Stack) error {
@@ -652,6 +800,10 @@ func addOpDeleteRecoveryInstanceValidationMiddleware(stack *middleware.Stack) er
 
 func addOpDeleteReplicationConfigurationTemplateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteReplicationConfigurationTemplate{}, middleware.After)
+}
+
+func addOpDeleteSourceNetworkValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteSourceNetwork{}, middleware.After)
 }
 
 func addOpDeleteSourceServerValidationMiddleware(stack *middleware.Stack) error {
@@ -672,6 +824,10 @@ func addOpDisconnectRecoveryInstanceValidationMiddleware(stack *middleware.Stack
 
 func addOpDisconnectSourceServerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisconnectSourceServer{}, middleware.After)
+}
+
+func addOpExportSourceNetworkCfnTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpExportSourceNetworkCfnTemplate{}, middleware.After)
 }
 
 func addOpGetFailbackReplicationConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -714,12 +870,24 @@ func addOpStartReplicationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartReplication{}, middleware.After)
 }
 
+func addOpStartSourceNetworkRecoveryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartSourceNetworkRecovery{}, middleware.After)
+}
+
+func addOpStartSourceNetworkReplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartSourceNetworkReplication{}, middleware.After)
+}
+
 func addOpStopFailbackValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStopFailback{}, middleware.After)
 }
 
 func addOpStopReplicationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStopReplication{}, middleware.After)
+}
+
+func addOpStopSourceNetworkReplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopSourceNetworkReplication{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -818,6 +986,56 @@ func validateStartRecoveryRequestSourceServers(v []types.StartRecoveryRequestSou
 	}
 }
 
+func validateStartSourceNetworkRecoveryRequestNetworkEntries(v []types.StartSourceNetworkRecoveryRequestNetworkEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartSourceNetworkRecoveryRequestNetworkEntries"}
+	for i := range v {
+		if err := validateStartSourceNetworkRecoveryRequestNetworkEntry(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStartSourceNetworkRecoveryRequestNetworkEntry(v *types.StartSourceNetworkRecoveryRequestNetworkEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartSourceNetworkRecoveryRequestNetworkEntry"}
+	if v.SourceNetworkID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceNetworkID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAssociateSourceNetworkStackInput(v *AssociateSourceNetworkStackInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateSourceNetworkStackInput"}
+	if v.SourceNetworkID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceNetworkID"))
+	}
+	if v.CfnStackName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CfnStackName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateExtendedSourceServerInput(v *CreateExtendedSourceServerInput) error {
 	if v == nil {
 		return nil
@@ -882,6 +1100,27 @@ func validateOpCreateReplicationConfigurationTemplateInput(v *CreateReplicationC
 	}
 }
 
+func validateOpCreateSourceNetworkInput(v *CreateSourceNetworkInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateSourceNetworkInput"}
+	if v.VpcID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcID"))
+	}
+	if v.OriginAccountID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OriginAccountID"))
+	}
+	if v.OriginRegion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OriginRegion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteJobInput(v *DeleteJobInput) error {
 	if v == nil {
 		return nil
@@ -934,6 +1173,21 @@ func validateOpDeleteReplicationConfigurationTemplateInput(v *DeleteReplicationC
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteReplicationConfigurationTemplateInput"}
 	if v.ReplicationConfigurationTemplateID == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ReplicationConfigurationTemplateID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteSourceNetworkInput(v *DeleteSourceNetworkInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteSourceNetworkInput"}
+	if v.SourceNetworkID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceNetworkID"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1009,6 +1263,21 @@ func validateOpDisconnectSourceServerInput(v *DisconnectSourceServerInput) error
 	invalidParams := smithy.InvalidParamsError{Context: "DisconnectSourceServerInput"}
 	if v.SourceServerID == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceServerID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpExportSourceNetworkCfnTemplateInput(v *ExportSourceNetworkCfnTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExportSourceNetworkCfnTemplateInput"}
+	if v.SourceNetworkID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceNetworkID"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1171,6 +1440,40 @@ func validateOpStartReplicationInput(v *StartReplicationInput) error {
 	}
 }
 
+func validateOpStartSourceNetworkRecoveryInput(v *StartSourceNetworkRecoveryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartSourceNetworkRecoveryInput"}
+	if v.SourceNetworks == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceNetworks"))
+	} else if v.SourceNetworks != nil {
+		if err := validateStartSourceNetworkRecoveryRequestNetworkEntries(v.SourceNetworks); err != nil {
+			invalidParams.AddNested("SourceNetworks", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartSourceNetworkReplicationInput(v *StartSourceNetworkReplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartSourceNetworkReplicationInput"}
+	if v.SourceNetworkID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceNetworkID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStopFailbackInput(v *StopFailbackInput) error {
 	if v == nil {
 		return nil
@@ -1193,6 +1496,21 @@ func validateOpStopReplicationInput(v *StopReplicationInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "StopReplicationInput"}
 	if v.SourceServerID == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceServerID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopSourceNetworkReplicationInput(v *StopSourceNetworkReplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopSourceNetworkReplicationInput"}
+	if v.SourceNetworkID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceNetworkID"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

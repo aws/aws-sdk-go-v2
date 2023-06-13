@@ -2863,6 +2863,17 @@ func awsAwsjson11_serializeDocumentOperator(v []string, value smithyjson.Value) 
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentQueryParameters(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentResourceIdList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -3196,6 +3207,11 @@ func awsAwsjson11_serializeOpDocumentDescribeQueryInput(v *DescribeQueryInput, v
 	if v.EventDataStore != nil {
 		ok := object.Key("EventDataStore")
 		ok.String(*v.EventDataStore)
+	}
+
+	if v.QueryAlias != nil {
+		ok := object.Key("QueryAlias")
+		ok.String(*v.QueryAlias)
 	}
 
 	if v.QueryId != nil {
@@ -3732,6 +3748,18 @@ func awsAwsjson11_serializeOpDocumentStartQueryInput(v *StartQueryInput, value s
 	if v.DeliveryS3Uri != nil {
 		ok := object.Key("DeliveryS3Uri")
 		ok.String(*v.DeliveryS3Uri)
+	}
+
+	if v.QueryAlias != nil {
+		ok := object.Key("QueryAlias")
+		ok.String(*v.QueryAlias)
+	}
+
+	if v.QueryParameters != nil {
+		ok := object.Key("QueryParameters")
+		if err := awsAwsjson11_serializeDocumentQueryParameters(v.QueryParameters, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.QueryStatement != nil {

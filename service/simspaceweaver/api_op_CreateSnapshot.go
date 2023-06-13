@@ -48,7 +48,8 @@ func (c *Client) CreateSnapshot(ctx context.Context, params *CreateSnapshotInput
 type CreateSnapshotInput struct {
 
 	// The Amazon S3 bucket and optional folder (object key prefix) where SimSpace
-	// Weaver creates the snapshot file.
+	// Weaver creates the snapshot file. The Amazon S3 bucket must be in the same
+	// Amazon Web Services Region as the simulation.
 	//
 	// This member is required.
 	Destination *types.S3Destination

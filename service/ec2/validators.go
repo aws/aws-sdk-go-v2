@@ -1290,6 +1290,26 @@ func (m *validateOpCreateImage) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateInstanceConnectEndpoint struct {
+}
+
+func (*validateOpCreateInstanceConnectEndpoint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateInstanceConnectEndpoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateInstanceConnectEndpointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateInstanceConnectEndpointInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateInstanceExportTask struct {
 }
 
@@ -2565,6 +2585,26 @@ func (m *validateOpDeleteFpgaImage) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteFpgaImageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteInstanceConnectEndpoint struct {
+}
+
+func (*validateOpDeleteInstanceConnectEndpoint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteInstanceConnectEndpoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteInstanceConnectEndpointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteInstanceConnectEndpointInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -8626,6 +8666,10 @@ func addOpCreateImageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateImage{}, middleware.After)
 }
 
+func addOpCreateInstanceConnectEndpointValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateInstanceConnectEndpoint{}, middleware.After)
+}
+
 func addOpCreateInstanceExportTaskValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateInstanceExportTask{}, middleware.After)
 }
@@ -8880,6 +8924,10 @@ func addOpDeleteFlowLogsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteFpgaImageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteFpgaImage{}, middleware.After)
+}
+
+func addOpDeleteInstanceConnectEndpointValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteInstanceConnectEndpoint{}, middleware.After)
 }
 
 func addOpDeleteInstanceEventWindowValidationMiddleware(stack *middleware.Stack) error {
@@ -12024,6 +12072,21 @@ func validateOpCreateImageInput(v *CreateImageInput) error {
 	}
 }
 
+func validateOpCreateInstanceConnectEndpointInput(v *CreateInstanceConnectEndpointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateInstanceConnectEndpointInput"}
+	if v.SubnetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubnetId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateInstanceExportTaskInput(v *CreateInstanceExportTaskInput) error {
 	if v == nil {
 		return nil
@@ -13165,6 +13228,21 @@ func validateOpDeleteFpgaImageInput(v *DeleteFpgaImageInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteFpgaImageInput"}
 	if v.FpgaImageId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FpgaImageId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteInstanceConnectEndpointInput(v *DeleteInstanceConnectEndpointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteInstanceConnectEndpointInput"}
+	if v.InstanceConnectEndpointId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceConnectEndpointId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

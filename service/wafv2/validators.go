@@ -1273,6 +1273,38 @@ func validateActionCondition(v *types.ActionCondition) error {
 	}
 }
 
+func validateAddressField(v *types.AddressField) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AddressField"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAddressFields(v []types.AddressField) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AddressFields"}
+	for i := range v {
+		if err := validateAddressField(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAllowAction(v *types.AllowAction) error {
 	if v == nil {
 		return nil
@@ -1317,6 +1349,36 @@ func validateAssociationConfig(v *types.AssociationConfig) error {
 	if v.RequestBody != nil {
 		if err := validateRequestBody(v.RequestBody); err != nil {
 			invalidParams.AddNested("RequestBody", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAWSManagedRulesACFPRuleSet(v *types.AWSManagedRulesACFPRuleSet) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AWSManagedRulesACFPRuleSet"}
+	if v.CreationPath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CreationPath"))
+	}
+	if v.RegistrationPagePath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegistrationPagePath"))
+	}
+	if v.RequestInspection == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RequestInspection"))
+	} else if v.RequestInspection != nil {
+		if err := validateRequestInspectionACFP(v.RequestInspection); err != nil {
+			invalidParams.AddNested("RequestInspection", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ResponseInspection != nil {
+		if err := validateResponseInspection(v.ResponseInspection); err != nil {
+			invalidParams.AddNested("ResponseInspection", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1684,6 +1746,21 @@ func validateDefaultAction(v *types.DefaultAction) error {
 		if err := validateAllowAction(v.Allow); err != nil {
 			invalidParams.AddNested("Allow", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEmailField(v *types.EmailField) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EmailField"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2093,6 +2170,11 @@ func validateManagedRuleGroupConfig(v *types.ManagedRuleGroupConfig) error {
 			invalidParams.AddNested("AWSManagedRulesATPRuleSet", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.AWSManagedRulesACFPRuleSet != nil {
+		if err := validateAWSManagedRulesACFPRuleSet(v.AWSManagedRulesACFPRuleSet); err != nil {
+			invalidParams.AddNested("AWSManagedRulesACFPRuleSet", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2217,6 +2299,38 @@ func validatePasswordField(v *types.PasswordField) error {
 	invalidParams := smithy.InvalidParamsError{Context: "PasswordField"}
 	if v.Identifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePhoneNumberField(v *types.PhoneNumberField) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PhoneNumberField"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePhoneNumberFields(v []types.PhoneNumberField) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PhoneNumberFields"}
+	for i := range v {
+		if err := validatePhoneNumberField(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2537,6 +2651,46 @@ func validateRequestInspection(v *types.RequestInspection) error {
 	} else if v.PasswordField != nil {
 		if err := validatePasswordField(v.PasswordField); err != nil {
 			invalidParams.AddNested("PasswordField", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRequestInspectionACFP(v *types.RequestInspectionACFP) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RequestInspectionACFP"}
+	if len(v.PayloadType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PayloadType"))
+	}
+	if v.UsernameField != nil {
+		if err := validateUsernameField(v.UsernameField); err != nil {
+			invalidParams.AddNested("UsernameField", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PasswordField != nil {
+		if err := validatePasswordField(v.PasswordField); err != nil {
+			invalidParams.AddNested("PasswordField", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EmailField != nil {
+		if err := validateEmailField(v.EmailField); err != nil {
+			invalidParams.AddNested("EmailField", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PhoneNumberFields != nil {
+		if err := validatePhoneNumberFields(v.PhoneNumberFields); err != nil {
+			invalidParams.AddNested("PhoneNumberFields", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AddressFields != nil {
+		if err := validateAddressFields(v.AddressFields); err != nil {
+			invalidParams.AddNested("AddressFields", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

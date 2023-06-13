@@ -360,6 +360,78 @@ func (PermissionType) Values() []PermissionType {
 	}
 }
 
+type ProfileNotificationType string
+
+// Enum values for ProfileNotificationType
+const (
+	ProfileNotificationTypeProfileAnswersUpdated ProfileNotificationType = "PROFILE_ANSWERS_UPDATED"
+	ProfileNotificationTypeProfileDeleted        ProfileNotificationType = "PROFILE_DELETED"
+)
+
+// Values returns all known values for ProfileNotificationType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ProfileNotificationType) Values() []ProfileNotificationType {
+	return []ProfileNotificationType{
+		"PROFILE_ANSWERS_UPDATED",
+		"PROFILE_DELETED",
+	}
+}
+
+type ProfileOwnerType string
+
+// Enum values for ProfileOwnerType
+const (
+	ProfileOwnerTypeSelf   ProfileOwnerType = "SELF"
+	ProfileOwnerTypeShared ProfileOwnerType = "SHARED"
+)
+
+// Values returns all known values for ProfileOwnerType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ProfileOwnerType) Values() []ProfileOwnerType {
+	return []ProfileOwnerType{
+		"SELF",
+		"SHARED",
+	}
+}
+
+type QuestionPriority string
+
+// Enum values for QuestionPriority
+const (
+	QuestionPriorityPrioritized QuestionPriority = "PRIORITIZED"
+	QuestionPriorityNone        QuestionPriority = "NONE"
+)
+
+// Values returns all known values for QuestionPriority. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (QuestionPriority) Values() []QuestionPriority {
+	return []QuestionPriority{
+		"PRIORITIZED",
+		"NONE",
+	}
+}
+
+type QuestionType string
+
+// Enum values for QuestionType
+const (
+	QuestionTypePrioritized    QuestionType = "PRIORITIZED"
+	QuestionTypeNonPrioritized QuestionType = "NON_PRIORITIZED"
+)
+
+// Values returns all known values for QuestionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (QuestionType) Values() []QuestionType {
+	return []QuestionType{
+		"PRIORITIZED",
+		"NON_PRIORITIZED",
+	}
+}
+
 type ReportFormat string
 
 // Enum values for ReportFormat
@@ -426,6 +498,7 @@ type ShareResourceType string
 const (
 	ShareResourceTypeWorkload ShareResourceType = "WORKLOAD"
 	ShareResourceTypeLens     ShareResourceType = "LENS"
+	ShareResourceTypeProfile  ShareResourceType = "PROFILE"
 )
 
 // Values returns all known values for ShareResourceType. Note that this can be
@@ -435,6 +508,7 @@ func (ShareResourceType) Values() []ShareResourceType {
 	return []ShareResourceType{
 		"WORKLOAD",
 		"LENS",
+		"PROFILE",
 	}
 }
 

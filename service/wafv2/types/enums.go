@@ -887,6 +887,7 @@ const (
 	ParameterExceptionFieldAssociatedResourceType         ParameterExceptionField = "ASSOCIATED_RESOURCE_TYPE"
 	ParameterExceptionFieldScopeDown                      ParameterExceptionField = "SCOPE_DOWN"
 	ParameterExceptionFieldCustomKeys                     ParameterExceptionField = "CUSTOM_KEYS"
+	ParameterExceptionFieldAcpRuleSetResponseInspection   ParameterExceptionField = "ACP_RULE_SET_RESPONSE_INSPECTION"
 )
 
 // Values returns all known values for ParameterExceptionField. Note that this can
@@ -963,6 +964,7 @@ func (ParameterExceptionField) Values() []ParameterExceptionField {
 		"ASSOCIATED_RESOURCE_TYPE",
 		"SCOPE_DOWN",
 		"CUSTOM_KEYS",
+		"ACP_RULE_SET_RESPONSE_INSPECTION",
 	}
 }
 

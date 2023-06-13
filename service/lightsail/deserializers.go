@@ -35944,6 +35944,15 @@ func awsAwsjson11_deserializeOpDocumentGetCertificatesOutput(v **GetCertificates
 				return err
 			}
 
+		case "nextPageToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected string to be of type string, got %T instead", value)
+				}
+				sv.NextPageToken = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

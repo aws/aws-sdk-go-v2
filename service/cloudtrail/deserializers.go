@@ -6070,6 +6070,9 @@ func awsAwsjson11_deserializeOpErrorUpdateEventDataStore(response *smithyhttp.Re
 	case strings.EqualFold("EventDataStoreARNInvalidException", errorCode):
 		return awsAwsjson11_deserializeErrorEventDataStoreARNInvalidException(response, errorBody)
 
+	case strings.EqualFold("EventDataStoreAlreadyExistsException", errorCode):
+		return awsAwsjson11_deserializeErrorEventDataStoreAlreadyExistsException(response, errorBody)
+
 	case strings.EqualFold("EventDataStoreHasOngoingImportException", errorCode):
 		return awsAwsjson11_deserializeErrorEventDataStoreHasOngoingImportException(response, errorBody)
 

@@ -61,10 +61,11 @@ type GetWebACLOutput struct {
 
 	// The URL to use in SDK integrations with Amazon Web Services managed rule
 	// groups. For example, you can use the integration SDKs with the account takeover
-	// prevention managed rule group AWSManagedRulesATPRuleSet . This is only populated
-	// if you are using a rule group in your web ACL that integrates with your
-	// applications in this way. For more information, see WAF client application
-	// integration (https://docs.aws.amazon.com/waf/latest/developerguide/waf-application-integration.html)
+	// prevention managed rule group AWSManagedRulesATPRuleSet and the account
+	// creation fraud prevention managed rule group AWSManagedRulesACFPRuleSet . This
+	// is only populated if you are using a rule group in your web ACL that integrates
+	// with your applications in this way. For more information, see WAF client
+	// application integration (https://docs.aws.amazon.com/waf/latest/developerguide/waf-application-integration.html)
 	// in the WAF Developer Guide.
 	ApplicationIntegrationURL *string
 

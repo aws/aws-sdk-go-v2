@@ -1,0 +1,8 @@
+{
+    "id": "3c2d573a-92fe-4f08-9e9b-7000e612669e",
+    "type": "feature",
+    "description": "Initial release of Amazon CodeGuru Security APIs",
+    "modules": [
+        "service/codegurusecurity"
+    ]
+}

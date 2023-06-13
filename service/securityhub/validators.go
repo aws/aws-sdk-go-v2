@@ -50,6 +50,26 @@ func (m *validateOpAcceptInvitation) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpBatchDeleteAutomationRules struct {
+}
+
+func (*validateOpBatchDeleteAutomationRules) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchDeleteAutomationRules) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchDeleteAutomationRulesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchDeleteAutomationRulesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchDisableStandards struct {
 }
 
@@ -85,6 +105,26 @@ func (m *validateOpBatchEnableStandards) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpBatchEnableStandardsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpBatchGetAutomationRules struct {
+}
+
+func (*validateOpBatchGetAutomationRules) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetAutomationRules) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetAutomationRulesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetAutomationRulesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -150,6 +190,26 @@ func (m *validateOpBatchImportFindings) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpBatchUpdateAutomationRules struct {
+}
+
+func (*validateOpBatchUpdateAutomationRules) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchUpdateAutomationRules) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchUpdateAutomationRulesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchUpdateAutomationRulesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchUpdateFindings struct {
 }
 
@@ -205,6 +265,26 @@ func (m *validateOpCreateActionTarget) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateActionTargetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateAutomationRule struct {
+}
+
+func (*validateOpCreateAutomationRule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAutomationRule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAutomationRuleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAutomationRuleInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -818,12 +898,20 @@ func addOpAcceptInvitationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAcceptInvitation{}, middleware.After)
 }
 
+func addOpBatchDeleteAutomationRulesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchDeleteAutomationRules{}, middleware.After)
+}
+
 func addOpBatchDisableStandardsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchDisableStandards{}, middleware.After)
 }
 
 func addOpBatchEnableStandardsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchEnableStandards{}, middleware.After)
+}
+
+func addOpBatchGetAutomationRulesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetAutomationRules{}, middleware.After)
 }
 
 func addOpBatchGetSecurityControlsValidationMiddleware(stack *middleware.Stack) error {
@@ -838,6 +926,10 @@ func addOpBatchImportFindingsValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpBatchImportFindings{}, middleware.After)
 }
 
+func addOpBatchUpdateAutomationRulesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchUpdateAutomationRules{}, middleware.After)
+}
+
 func addOpBatchUpdateFindingsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchUpdateFindings{}, middleware.After)
 }
@@ -848,6 +940,10 @@ func addOpBatchUpdateStandardsControlAssociationsValidationMiddleware(stack *mid
 
 func addOpCreateActionTargetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateActionTarget{}, middleware.After)
+}
+
+func addOpCreateAutomationRuleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAutomationRule{}, middleware.After)
 }
 
 func addOpCreateFindingAggregatorValidationMiddleware(stack *middleware.Stack) error {
@@ -993,6 +1089,62 @@ func validateAccountDetailsList(v []types.AccountDetails) error {
 	for i := range v {
 		if err := validateAccountDetails(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateActionList(v []types.AutomationRulesAction) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ActionList"}
+	for i := range v {
+		if err := validateAutomationRulesAction(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutomationRulesAction(v *types.AutomationRulesAction) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutomationRulesAction"}
+	if v.FindingFieldsUpdate != nil {
+		if err := validateAutomationRulesFindingFieldsUpdate(v.FindingFieldsUpdate); err != nil {
+			invalidParams.AddNested("FindingFieldsUpdate", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutomationRulesFindingFieldsUpdate(v *types.AutomationRulesFindingFieldsUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutomationRulesFindingFieldsUpdate"}
+	if v.Note != nil {
+		if err := validateNoteUpdate(v.Note); err != nil {
+			invalidParams.AddNested("Note", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RelatedFindings != nil {
+		if err := validateRelatedFindingList(v.RelatedFindings); err != nil {
+			invalidParams.AddNested("RelatedFindings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1462,6 +1614,43 @@ func validateStatusReasonsList(v []types.StatusReason) error {
 	}
 }
 
+func validateUpdateAutomationRulesRequestItem(v *types.UpdateAutomationRulesRequestItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAutomationRulesRequestItem"}
+	if v.RuleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuleArn"))
+	}
+	if v.Actions != nil {
+		if err := validateActionList(v.Actions); err != nil {
+			invalidParams.AddNested("Actions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdateAutomationRulesRequestItemsList(v []types.UpdateAutomationRulesRequestItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAutomationRulesRequestItemsList"}
+	for i := range v {
+		if err := validateUpdateAutomationRulesRequestItem(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateVulnerability(v *types.Vulnerability) error {
 	if v == nil {
 		return nil
@@ -1550,6 +1739,21 @@ func validateOpAcceptInvitationInput(v *AcceptInvitationInput) error {
 	}
 }
 
+func validateOpBatchDeleteAutomationRulesInput(v *BatchDeleteAutomationRulesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchDeleteAutomationRulesInput"}
+	if v.AutomationRulesArns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AutomationRulesArns"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpBatchDisableStandardsInput(v *BatchDisableStandardsInput) error {
 	if v == nil {
 		return nil
@@ -1576,6 +1780,21 @@ func validateOpBatchEnableStandardsInput(v *BatchEnableStandardsInput) error {
 		if err := validateStandardsSubscriptionRequests(v.StandardsSubscriptionRequests); err != nil {
 			invalidParams.AddNested("StandardsSubscriptionRequests", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchGetAutomationRulesInput(v *BatchGetAutomationRulesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetAutomationRulesInput"}
+	if v.AutomationRulesArns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AutomationRulesArns"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1628,6 +1847,25 @@ func validateOpBatchImportFindingsInput(v *BatchImportFindingsInput) error {
 	} else if v.Findings != nil {
 		if err := validateBatchImportFindingsRequestFindingList(v.Findings); err != nil {
 			invalidParams.AddNested("Findings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchUpdateAutomationRulesInput(v *BatchUpdateAutomationRulesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchUpdateAutomationRulesInput"}
+	if v.UpdateAutomationRulesRequestItems == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UpdateAutomationRulesRequestItems"))
+	} else if v.UpdateAutomationRulesRequestItems != nil {
+		if err := validateUpdateAutomationRulesRequestItemsList(v.UpdateAutomationRulesRequestItems); err != nil {
+			invalidParams.AddNested("UpdateAutomationRulesRequestItems", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1698,6 +1936,34 @@ func validateOpCreateActionTargetInput(v *CreateActionTargetInput) error {
 	}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateAutomationRuleInput(v *CreateAutomationRuleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAutomationRuleInput"}
+	if v.RuleName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuleName"))
+	}
+	if v.Description == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Description"))
+	}
+	if v.Criteria == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Criteria"))
+	}
+	if v.Actions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Actions"))
+	} else if v.Actions != nil {
+		if err := validateActionList(v.Actions); err != nil {
+			invalidParams.AddNested("Actions", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -58,7 +58,7 @@ type CreateNetworkInterfaceInput struct {
 	Groups []string
 
 	// The type of network interface. The default is interface . The only supported
-	// values are efa and trunk .
+	// values are interface , efa , and trunk .
 	InterfaceType types.NetworkInterfaceCreationType
 
 	// The number of IPv4 prefixes that Amazon Web Services automatically assigns to

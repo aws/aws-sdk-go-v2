@@ -11278,6 +11278,11 @@ func awsAwsjson11_serializeOpDocumentGetCertificatesInput(v *GetCertificatesInpu
 		ok.Boolean(v.IncludeCertificateDetails)
 	}
 
+	if v.PageToken != nil {
+		ok := object.Key("pageToken")
+		ok.String(*v.PageToken)
+	}
+
 	return nil
 }
 

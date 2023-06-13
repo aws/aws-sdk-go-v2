@@ -2942,6 +2942,31 @@ func awsAwsjson11_serializeDocumentActionCondition(v *types.ActionCondition, val
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentAddressField(v *types.AddressField, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Identifier != nil {
+		ok := object.Key("Identifier")
+		ok.String(*v.Identifier)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentAddressFields(v []types.AddressField, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentAddressField(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentAll(v *types.All, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3009,9 +3034,50 @@ func awsAwsjson11_serializeDocumentAssociationConfig(v *types.AssociationConfig,
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentAWSManagedRulesACFPRuleSet(v *types.AWSManagedRulesACFPRuleSet, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CreationPath != nil {
+		ok := object.Key("CreationPath")
+		ok.String(*v.CreationPath)
+	}
+
+	if v.EnableRegexInPath {
+		ok := object.Key("EnableRegexInPath")
+		ok.Boolean(v.EnableRegexInPath)
+	}
+
+	if v.RegistrationPagePath != nil {
+		ok := object.Key("RegistrationPagePath")
+		ok.String(*v.RegistrationPagePath)
+	}
+
+	if v.RequestInspection != nil {
+		ok := object.Key("RequestInspection")
+		if err := awsAwsjson11_serializeDocumentRequestInspectionACFP(v.RequestInspection, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ResponseInspection != nil {
+		ok := object.Key("ResponseInspection")
+		if err := awsAwsjson11_serializeDocumentResponseInspection(v.ResponseInspection, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentAWSManagedRulesATPRuleSet(v *types.AWSManagedRulesATPRuleSet, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.EnableRegexInPath {
+		ok := object.Key("EnableRegexInPath")
+		ok.Boolean(v.EnableRegexInPath)
+	}
 
 	if v.LoginPath != nil {
 		ok := object.Key("LoginPath")
@@ -3397,6 +3463,18 @@ func awsAwsjson11_serializeDocumentDefaultAction(v *types.DefaultAction, value s
 		if err := awsAwsjson11_serializeDocumentBlockAction(v.Block, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentEmailField(v *types.EmailField, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Identifier != nil {
+		ok := object.Key("Identifier")
+		ok.String(*v.Identifier)
 	}
 
 	return nil
@@ -3912,6 +3990,13 @@ func awsAwsjson11_serializeDocumentManagedRuleGroupConfig(v *types.ManagedRuleGr
 	object := value.Object()
 	defer object.Close()
 
+	if v.AWSManagedRulesACFPRuleSet != nil {
+		ok := object.Key("AWSManagedRulesACFPRuleSet")
+		if err := awsAwsjson11_serializeDocumentAWSManagedRulesACFPRuleSet(v.AWSManagedRulesACFPRuleSet, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.AWSManagedRulesATPRuleSet != nil {
 		ok := object.Key("AWSManagedRulesATPRuleSet")
 		if err := awsAwsjson11_serializeDocumentAWSManagedRulesATPRuleSet(v.AWSManagedRulesATPRuleSet, ok); err != nil {
@@ -4088,6 +4173,31 @@ func awsAwsjson11_serializeDocumentPasswordField(v *types.PasswordField, value s
 		ok.String(*v.Identifier)
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPhoneNumberField(v *types.PhoneNumberField, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Identifier != nil {
+		ok := object.Key("Identifier")
+		ok.String(*v.Identifier)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPhoneNumberFields(v []types.PhoneNumberField, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentPhoneNumberField(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -4446,6 +4556,53 @@ func awsAwsjson11_serializeDocumentRequestInspection(v *types.RequestInspection,
 	if len(v.PayloadType) > 0 {
 		ok := object.Key("PayloadType")
 		ok.String(string(v.PayloadType))
+	}
+
+	if v.UsernameField != nil {
+		ok := object.Key("UsernameField")
+		if err := awsAwsjson11_serializeDocumentUsernameField(v.UsernameField, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRequestInspectionACFP(v *types.RequestInspectionACFP, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AddressFields != nil {
+		ok := object.Key("AddressFields")
+		if err := awsAwsjson11_serializeDocumentAddressFields(v.AddressFields, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EmailField != nil {
+		ok := object.Key("EmailField")
+		if err := awsAwsjson11_serializeDocumentEmailField(v.EmailField, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PasswordField != nil {
+		ok := object.Key("PasswordField")
+		if err := awsAwsjson11_serializeDocumentPasswordField(v.PasswordField, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.PayloadType) > 0 {
+		ok := object.Key("PayloadType")
+		ok.String(string(v.PayloadType))
+	}
+
+	if v.PhoneNumberFields != nil {
+		ok := object.Key("PhoneNumberFields")
+		if err := awsAwsjson11_serializeDocumentPhoneNumberFields(v.PhoneNumberFields, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.UsernameField != nil {

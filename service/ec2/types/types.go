@@ -236,10 +236,10 @@ type AddPrefixListEntry struct {
 // Describes an Elastic IP address, or a carrier IP address.
 type Address struct {
 
-	// The ID representing the allocation of the address for use with EC2-VPC.
+	// The ID representing the allocation of the address.
 	AllocationId *string
 
-	// The ID representing the association of the address with an instance in a VPC.
+	// The ID representing the association of the address with an instance.
 	AssociationId *string
 
 	// The carrier IP address associated. This option is only available for network
@@ -253,8 +253,7 @@ type Address struct {
 	// The ID of the customer-owned address pool.
 	CustomerOwnedIpv4Pool *string
 
-	// Indicates whether this Elastic IP address is for use with instances in
-	// EC2-Classic ( standard ) or instances in a VPC ( vpc ).
+	// The network ( vpc ).
 	Domain DomainType
 
 	// The ID of the instance that the address is associated with (if any).
@@ -3062,6 +3061,67 @@ type EbsOptimizedInfo struct {
 
 	// The maximum throughput performance for an EBS-optimized instance type, in MB/s.
 	MaximumThroughputInMBps *float64
+
+	noSmithyDocumentSerde
+}
+
+// The EC2 Instance Connect Endpoint.
+type Ec2InstanceConnectEndpoint struct {
+
+	// The Availability Zone of the EC2 Instance Connect Endpoint.
+	AvailabilityZone *string
+
+	// The date and time that the EC2 Instance Connect Endpoint was created.
+	CreatedAt *time.Time
+
+	// The DNS name of the EC2 Instance Connect Endpoint.
+	DnsName *string
+
+	//
+	FipsDnsName *string
+
+	// The Amazon Resource Name (ARN) of the EC2 Instance Connect Endpoint.
+	InstanceConnectEndpointArn *string
+
+	// The ID of the EC2 Instance Connect Endpoint.
+	InstanceConnectEndpointId *string
+
+	// The ID of the elastic network interface that Amazon EC2 automatically created
+	// when creating the EC2 Instance Connect Endpoint.
+	NetworkInterfaceIds []string
+
+	// The ID of the Amazon Web Services account that created the EC2 Instance Connect
+	// Endpoint.
+	OwnerId *string
+
+	// Indicates whether your client's IP address is preserved as the source. The
+	// value is true or false .
+	//   - If true , your client's IP address is used when you connect to a resource.
+	//   - If false , the elastic network interface IP address is used when you connect
+	//   to a resource.
+	// Default: true
+	PreserveClientIp *bool
+
+	// The security groups associated with the endpoint. If you didn't specify a
+	// security group, the default security group for your VPC is associated with the
+	// endpoint.
+	SecurityGroupIds []string
+
+	// The current state of the EC2 Instance Connect Endpoint.
+	State Ec2InstanceConnectEndpointState
+
+	// The message for the current state of the EC2 Instance Connect Endpoint. Can
+	// include a failure message.
+	StateMessage *string
+
+	// The ID of the subnet in which the EC2 Instance Connect Endpoint was created.
+	SubnetId *string
+
+	// The tags assigned to the EC2 Instance Connect Endpoint.
+	Tags []Tag
+
+	// The ID of the VPC in which the EC2 Instance Connect Endpoint was created.
+	VpcId *string
 
 	noSmithyDocumentSerde
 }
@@ -9542,14 +9602,10 @@ type Monitoring struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the status of a moving Elastic IP address. We are retiring
-// EC2-Classic. We recommend that you migrate from EC2-Classic to a VPC. For more
-// information, see Migrate from EC2-Classic to a VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html)
-// in the Amazon Elastic Compute Cloud User Guide.
+// This action is deprecated. Describes the status of a moving Elastic IP address.
 type MovingAddressStatus struct {
 
-	// The status of the Elastic IP address that's being moved to the EC2-VPC
-	// platform, or restored to the EC2-Classic platform.
+	// The status of the Elastic IP address that's being moved or restored.
 	MoveStatus MoveStatus
 
 	// The Elastic IP address.

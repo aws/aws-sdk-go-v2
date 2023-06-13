@@ -51,7 +51,7 @@ type ListLensSharesInput struct {
 	// organizational unit (OU) ID with which the lens is shared.
 	SharedWithPrefix *string
 
-	// The status of a workload share.
+	// The status of the share request.
 	Status types.ShareStatus
 
 	noSmithyDocumentSerde

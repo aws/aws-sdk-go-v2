@@ -300,6 +300,9 @@ const (
 	InitiatedByDiagnostic                 InitiatedBy = "DIAGNOSTIC"
 	InitiatedByTerminateRecoveryInstances InitiatedBy = "TERMINATE_RECOVERY_INSTANCES"
 	InitiatedByTargetAccount              InitiatedBy = "TARGET_ACCOUNT"
+	InitiatedByCreateNetworkRecovery      InitiatedBy = "CREATE_NETWORK_RECOVERY"
+	InitiatedByUpdateNetworkRecovery      InitiatedBy = "UPDATE_NETWORK_RECOVERY"
+	InitiatedByAssociateNetworkRecovery   InitiatedBy = "ASSOCIATE_NETWORK_RECOVERY"
 )
 
 // Values returns all known values for InitiatedBy. Note that this can be expanded
@@ -313,6 +316,9 @@ func (InitiatedBy) Values() []InitiatedBy {
 		"DIAGNOSTIC",
 		"TERMINATE_RECOVERY_INSTANCES",
 		"TARGET_ACCOUNT",
+		"CREATE_NETWORK_RECOVERY",
+		"UPDATE_NETWORK_RECOVERY",
+		"ASSOCIATE_NETWORK_RECOVERY",
 	}
 }
 
@@ -320,23 +326,33 @@ type JobLogEvent string
 
 // Enum values for JobLogEvent
 const (
-	JobLogEventJobStart                    JobLogEvent = "JOB_START"
-	JobLogEventServerSkipped               JobLogEvent = "SERVER_SKIPPED"
-	JobLogEventCleanupStart                JobLogEvent = "CLEANUP_START"
-	JobLogEventCleanupEnd                  JobLogEvent = "CLEANUP_END"
-	JobLogEventCleanupFail                 JobLogEvent = "CLEANUP_FAIL"
-	JobLogEventSnapshotStart               JobLogEvent = "SNAPSHOT_START"
-	JobLogEventSnapshotEnd                 JobLogEvent = "SNAPSHOT_END"
-	JobLogEventSnapshotFail                JobLogEvent = "SNAPSHOT_FAIL"
-	JobLogEventUsingPreviousSnapshot       JobLogEvent = "USING_PREVIOUS_SNAPSHOT"
-	JobLogEventUsingPreviousSnapshotFailed JobLogEvent = "USING_PREVIOUS_SNAPSHOT_FAILED"
-	JobLogEventConversionStart             JobLogEvent = "CONVERSION_START"
-	JobLogEventConversionEnd               JobLogEvent = "CONVERSION_END"
-	JobLogEventConversionFail              JobLogEvent = "CONVERSION_FAIL"
-	JobLogEventLaunchStart                 JobLogEvent = "LAUNCH_START"
-	JobLogEventLaunchFailed                JobLogEvent = "LAUNCH_FAILED"
-	JobLogEventJobCancel                   JobLogEvent = "JOB_CANCEL"
-	JobLogEventJobEnd                      JobLogEvent = "JOB_END"
+	JobLogEventJobStart                         JobLogEvent = "JOB_START"
+	JobLogEventServerSkipped                    JobLogEvent = "SERVER_SKIPPED"
+	JobLogEventCleanupStart                     JobLogEvent = "CLEANUP_START"
+	JobLogEventCleanupEnd                       JobLogEvent = "CLEANUP_END"
+	JobLogEventCleanupFail                      JobLogEvent = "CLEANUP_FAIL"
+	JobLogEventSnapshotStart                    JobLogEvent = "SNAPSHOT_START"
+	JobLogEventSnapshotEnd                      JobLogEvent = "SNAPSHOT_END"
+	JobLogEventSnapshotFail                     JobLogEvent = "SNAPSHOT_FAIL"
+	JobLogEventUsingPreviousSnapshot            JobLogEvent = "USING_PREVIOUS_SNAPSHOT"
+	JobLogEventUsingPreviousSnapshotFailed      JobLogEvent = "USING_PREVIOUS_SNAPSHOT_FAILED"
+	JobLogEventConversionStart                  JobLogEvent = "CONVERSION_START"
+	JobLogEventConversionEnd                    JobLogEvent = "CONVERSION_END"
+	JobLogEventConversionFail                   JobLogEvent = "CONVERSION_FAIL"
+	JobLogEventLaunchStart                      JobLogEvent = "LAUNCH_START"
+	JobLogEventLaunchFailed                     JobLogEvent = "LAUNCH_FAILED"
+	JobLogEventJobCancel                        JobLogEvent = "JOB_CANCEL"
+	JobLogEventJobEnd                           JobLogEvent = "JOB_END"
+	JobLogEventDeployNetworkConfigurationStart  JobLogEvent = "DEPLOY_NETWORK_CONFIGURATION_START"
+	JobLogEventDeployNetworkConfigurationEnd    JobLogEvent = "DEPLOY_NETWORK_CONFIGURATION_END"
+	JobLogEventDeployNetworkConfigurationFailed JobLogEvent = "DEPLOY_NETWORK_CONFIGURATION_FAILED"
+	JobLogEventUpdateNetworkConfigurationStart  JobLogEvent = "UPDATE_NETWORK_CONFIGURATION_START"
+	JobLogEventUpdateNetworkConfigurationEnd    JobLogEvent = "UPDATE_NETWORK_CONFIGURATION_END"
+	JobLogEventUpdateNetworkConfigurationFailed JobLogEvent = "UPDATE_NETWORK_CONFIGURATION_FAILED"
+	JobLogEventUpdateLaunchTemplateStart        JobLogEvent = "UPDATE_LAUNCH_TEMPLATE_START"
+	JobLogEventUpdateLaunchTemplateEnd          JobLogEvent = "UPDATE_LAUNCH_TEMPLATE_END"
+	JobLogEventUpdateLaunchTemplateFailed       JobLogEvent = "UPDATE_LAUNCH_TEMPLATE_FAILED"
+	JobLogEventNetworkRecoveryFail              JobLogEvent = "NETWORK_RECOVERY_FAIL"
 )
 
 // Values returns all known values for JobLogEvent. Note that this can be expanded
@@ -361,6 +377,16 @@ func (JobLogEvent) Values() []JobLogEvent {
 		"LAUNCH_FAILED",
 		"JOB_CANCEL",
 		"JOB_END",
+		"DEPLOY_NETWORK_CONFIGURATION_START",
+		"DEPLOY_NETWORK_CONFIGURATION_END",
+		"DEPLOY_NETWORK_CONFIGURATION_FAILED",
+		"UPDATE_NETWORK_CONFIGURATION_START",
+		"UPDATE_NETWORK_CONFIGURATION_END",
+		"UPDATE_NETWORK_CONFIGURATION_FAILED",
+		"UPDATE_LAUNCH_TEMPLATE_START",
+		"UPDATE_LAUNCH_TEMPLATE_END",
+		"UPDATE_LAUNCH_TEMPLATE_FAILED",
+		"NETWORK_RECOVERY_FAIL",
 	}
 }
 
@@ -639,6 +665,34 @@ func (RecoveryInstanceDataReplicationState) Values() []RecoveryInstanceDataRepli
 	}
 }
 
+type RecoveryResult string
+
+// Enum values for RecoveryResult
+const (
+	RecoveryResultNotStarted       RecoveryResult = "NOT_STARTED"
+	RecoveryResultInProgress       RecoveryResult = "IN_PROGRESS"
+	RecoveryResultSuccess          RecoveryResult = "SUCCESS"
+	RecoveryResultFail             RecoveryResult = "FAIL"
+	RecoveryResultPartialSuccess   RecoveryResult = "PARTIAL_SUCCESS"
+	RecoveryResultAssociateSuccess RecoveryResult = "ASSOCIATE_SUCCESS"
+	RecoveryResultAssociateFail    RecoveryResult = "ASSOCIATE_FAIL"
+)
+
+// Values returns all known values for RecoveryResult. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RecoveryResult) Values() []RecoveryResult {
+	return []RecoveryResult{
+		"NOT_STARTED",
+		"IN_PROGRESS",
+		"SUCCESS",
+		"FAIL",
+		"PARTIAL_SUCCESS",
+		"ASSOCIATE_SUCCESS",
+		"ASSOCIATE_FAIL",
+	}
+}
+
 type RecoverySnapshotsOrder string
 
 // Enum values for RecoverySnapshotsOrder
@@ -705,6 +759,7 @@ type ReplicationConfigurationEbsEncryption string
 const (
 	ReplicationConfigurationEbsEncryptionDefault ReplicationConfigurationEbsEncryption = "DEFAULT"
 	ReplicationConfigurationEbsEncryptionCustom  ReplicationConfigurationEbsEncryption = "CUSTOM"
+	ReplicationConfigurationEbsEncryptionNone    ReplicationConfigurationEbsEncryption = "NONE"
 )
 
 // Values returns all known values for ReplicationConfigurationEbsEncryption. Note
@@ -715,6 +770,7 @@ func (ReplicationConfigurationEbsEncryption) Values() []ReplicationConfiguration
 	return []ReplicationConfigurationEbsEncryption{
 		"DEFAULT",
 		"CUSTOM",
+		"NONE",
 	}
 }
 
@@ -762,6 +818,28 @@ func (ReplicationDirection) Values() []ReplicationDirection {
 	return []ReplicationDirection{
 		"FAILOVER",
 		"FAILBACK",
+	}
+}
+
+type ReplicationStatus string
+
+// Enum values for ReplicationStatus
+const (
+	ReplicationStatusStopped    ReplicationStatus = "STOPPED"
+	ReplicationStatusInProgress ReplicationStatus = "IN_PROGRESS"
+	ReplicationStatusProtected  ReplicationStatus = "PROTECTED"
+	ReplicationStatusError      ReplicationStatus = "ERROR"
+)
+
+// Values returns all known values for ReplicationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ReplicationStatus) Values() []ReplicationStatus {
+	return []ReplicationStatus{
+		"STOPPED",
+		"IN_PROGRESS",
+		"PROTECTED",
+		"ERROR",
 	}
 }
 

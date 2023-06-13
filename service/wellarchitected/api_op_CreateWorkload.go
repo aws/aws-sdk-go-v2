@@ -132,6 +132,9 @@ type CreateWorkloadInput struct {
 	// plan. Each pillar is represented by its PillarReviewSummary$PillarId .
 	PillarPriorities []string
 
+	// The list of profile ARNs associated with the workload.
+	ProfileArns []string
+
 	// The review owner of the workload. The name, email address, or identifier for
 	// the primary group or individual that owns the workload review process.
 	ReviewOwner *string

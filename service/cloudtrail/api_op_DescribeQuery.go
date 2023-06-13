@@ -12,8 +12,11 @@ import (
 )
 
 // Returns metadata about a query, including query run time in milliseconds,
-// number of events scanned and matched, and query status. You must specify an ARN
-// for EventDataStore , and a value for QueryID .
+// number of events scanned and matched, and query status. If the query results
+// were delivered to an S3 bucket, the response also provides the S3 URI and the
+// delivery status. You must specify either a QueryID or a QueryAlias . Specifying
+// the QueryAlias parameter returns information about the last query run for the
+// alias.
 func (c *Client) DescribeQuery(ctx context.Context, params *DescribeQueryInput, optFns ...func(*Options)) (*DescribeQueryOutput, error) {
 	if params == nil {
 		params = &DescribeQueryInput{}
@@ -31,16 +34,17 @@ func (c *Client) DescribeQuery(ctx context.Context, params *DescribeQueryInput, 
 
 type DescribeQueryInput struct {
 
-	// The query ID.
-	//
-	// This member is required.
-	QueryId *string
-
 	// The ARN (or the ID suffix of the ARN) of an event data store on which the
 	// specified query was run.
 	//
 	// Deprecated: EventDataStore is no longer required by DescribeQueryRequest
 	EventDataStore *string
+
+	// The alias that identifies a query template.
+	QueryAlias *string
+
+	// The query ID.
+	QueryId *string
 
 	noSmithyDocumentSerde
 }
@@ -121,9 +125,6 @@ func (c *Client) addOperationDescribeQueryMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addOpDescribeQueryValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeQuery(options.Region), middleware.Before); err != nil {

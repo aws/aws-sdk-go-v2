@@ -1,0 +1,8 @@
+{
+    "id": "0b22af5c-b7f8-4f51-8b1f-805aff932653",
+    "type": "feature",
+    "description": "Added APIs to support network replication and recovery using AWS Elastic Disaster Recovery.",
+    "modules": [
+        "service/drs"
+    ]
+}

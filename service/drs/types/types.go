@@ -4,6 +4,7 @@ package types
 
 import (
 	smithydocument "github.com/aws/smithy-go/document"
+	"time"
 )
 
 // AWS account.
@@ -176,6 +177,22 @@ type DescribeRecoverySnapshotsRequestFilters struct {
 	noSmithyDocumentSerde
 }
 
+// A set of filters by which to return Source Networks.
+type DescribeSourceNetworksRequestFilters struct {
+
+	// Filter Source Networks by account ID containing the protected VPCs.
+	OriginAccountID *string
+
+	// Filter Source Networks by the region containing the protected VPCs.
+	OriginRegion *string
+
+	// An array of Source Network IDs that should be returned. An empty array means
+	// all Source Networks.
+	SourceNetworkIDs []string
+
+	noSmithyDocumentSerde
+}
+
 // A set of filters by which to return Source Servers.
 type DescribeSourceServersRequestFilters struct {
 
@@ -205,6 +222,24 @@ type Disk struct {
 
 	noSmithyDocumentSerde
 }
+
+// Properties of resource related to a job event.
+//
+// The following types satisfy this interface:
+//
+//	EventResourceDataMemberSourceNetworkData
+type EventResourceData interface {
+	isEventResourceData()
+}
+
+// Source Network properties.
+type EventResourceDataMemberSourceNetworkData struct {
+	Value SourceNetworkData
+
+	noSmithyDocumentSerde
+}
+
+func (*EventResourceDataMemberSourceNetworkData) isEventResourceData() {}
 
 // Hints used to uniquely identify a machine.
 type IdentificationHints struct {
@@ -243,6 +278,9 @@ type Job struct {
 
 	// A string representing who initiated the Job.
 	InitiatedBy InitiatedBy
+
+	// A list of resources that the Job is acting upon.
+	ParticipatingResources []ParticipatingResource
 
 	// A list of servers that the Job is acting upon.
 	ParticipatingServers []ParticipatingServer
@@ -283,6 +321,9 @@ type JobLogEventData struct {
 	// The ID of a conversion server.
 	ConversionServerID *string
 
+	// Properties of resource related to a job event.
+	EventResourceData EventResourceData
+
 	// A string representing a job error.
 	RawError *string
 
@@ -306,6 +347,9 @@ type LaunchConfigurationTemplate struct {
 
 	// Copy tags.
 	CopyTags *bool
+
+	// S3 bucket ARN to export Source Network templates.
+	ExportBucketArn *string
 
 	// ID of the Launch Configuration Template.
 	LaunchConfigurationTemplateID *string
@@ -407,6 +451,36 @@ type OS struct {
 
 	noSmithyDocumentSerde
 }
+
+// Represents a resource participating in an asynchronous Job.
+type ParticipatingResource struct {
+
+	// The launch status of a participating resource.
+	LaunchStatus LaunchStatus
+
+	// The ID of a participating resource.
+	ParticipatingResourceID ParticipatingResourceID
+
+	noSmithyDocumentSerde
+}
+
+// ID of a resource participating in an asynchronous Job.
+//
+// The following types satisfy this interface:
+//
+//	ParticipatingResourceIDMemberSourceNetworkID
+type ParticipatingResourceID interface {
+	isParticipatingResourceID()
+}
+
+// Source Network ID.
+type ParticipatingResourceIDMemberSourceNetworkID struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*ParticipatingResourceIDMemberSourceNetworkID) isParticipatingResourceID() {}
 
 // Represents a server participating in an asynchronous Job.
 type ParticipatingServer struct {
@@ -669,6 +743,21 @@ type RecoveryInstanceProperties struct {
 	noSmithyDocumentSerde
 }
 
+// An object representing the Source Network recovery Lifecycle.
+type RecoveryLifeCycle struct {
+
+	// The date and time the last Source Network recovery was initiated.
+	ApiCallDateTime *time.Time
+
+	// The ID of the Job that was used to last recover the Source Network.
+	JobID *string
+
+	// The status of the last recovery status of this Source Network.
+	LastRecoveryResult RecoveryResult
+
+	noSmithyDocumentSerde
+}
+
 // A snapshot of a Source Server used during recovery.
 type RecoverySnapshot struct {
 
@@ -800,6 +889,68 @@ type SourceCloudProperties struct {
 	noSmithyDocumentSerde
 }
 
+// The ARN of the Source Network.
+type SourceNetwork struct {
+
+	// The ARN of the Source Network.
+	Arn *string
+
+	// CloudFormation stack name that was deployed for recovering the Source Network.
+	CfnStackName *string
+
+	// An object containing information regarding the last recovery of the Source
+	// Network.
+	LastRecovery *RecoveryLifeCycle
+
+	// ID of the recovered VPC following Source Network recovery.
+	LaunchedVpcID *string
+
+	// Status of Source Network Replication. Possible values: (a) STOPPED - Source
+	// Network is not replicating. (b) IN_PROGRESS - Source Network is being
+	// replicated. (c) PROTECTED - Source Network was replicated successfully and is
+	// being synchronized for changes. (d) ERROR - Source Network replication has
+	// failed
+	ReplicationStatus ReplicationStatus
+
+	// Error details in case Source Network replication status is ERROR.
+	ReplicationStatusDetails *string
+
+	// Account ID containing the VPC protected by the Source Network.
+	SourceAccountID *string
+
+	// Source Network ID.
+	SourceNetworkID *string
+
+	// Region containing the VPC protected by the Source Network.
+	SourceRegion *string
+
+	// VPC ID protected by the Source Network.
+	SourceVpcID *string
+
+	// A list of tags associated with the Source Network.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Properties of Source Network related to a job event.
+type SourceNetworkData struct {
+
+	// Source Network ID.
+	SourceNetworkID *string
+
+	// VPC ID protected by the Source Network.
+	SourceVpc *string
+
+	// CloudFormation stack name that was deployed for recovering the Source Network.
+	StackName *string
+
+	// ID of the recovered VPC following Source Network recovery.
+	TargetVpc *string
+
+	noSmithyDocumentSerde
+}
+
 // Properties of the Source Server machine.
 type SourceProperties struct {
 
@@ -861,6 +1012,9 @@ type SourceServer struct {
 
 	// Source cloud properties of the Source Server.
 	SourceCloudProperties *SourceCloudProperties
+
+	// ID of the Source Network which is protecting this Source Server's network.
+	SourceNetworkID *string
 
 	// The source properties of the Source Server.
 	SourceProperties *SourceProperties
@@ -933,6 +1087,20 @@ type StartRecoveryRequestSourceServer struct {
 	noSmithyDocumentSerde
 }
 
+// An object representing the Source Network to recover.
+type StartSourceNetworkRecoveryRequestNetworkEntry struct {
+
+	// The ID of the Source Network you want to recover.
+	//
+	// This member is required.
+	SourceNetworkID *string
+
+	// CloudFormation stack name to be used for recovering the network.
+	CfnStackName *string
+
+	noSmithyDocumentSerde
+}
+
 // Validate exception field.
 type ValidationExceptionField struct {
 
@@ -946,3 +1114,15 @@ type ValidationExceptionField struct {
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isEventResourceData()       {}
+func (*UnknownUnionMember) isParticipatingResourceID() {}

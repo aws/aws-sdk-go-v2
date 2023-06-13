@@ -19,10 +19,10 @@ import (
 // TerminationProtection is enabled. For event data stores for CloudTrail events,
 // AdvancedEventSelectors includes or excludes management and data events in your
 // event data store. For more information about AdvancedEventSelectors , see
-// PutEventSelectorsRequest$AdvancedEventSelectors . For event data stores for
-// Config configuration items, Audit Manager evidence, or non-Amazon Web Services
-// events, AdvancedEventSelectors includes events of that type in your event data
-// store.
+// AdvancedEventSelectors (https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_AdvancedEventSelector.html)
+// . For event data stores for Config configuration items, Audit Manager evidence,
+// or non-Amazon Web Services events, AdvancedEventSelectors includes events of
+// that type in your event data store.
 func (c *Client) UpdateEventDataStore(ctx context.Context, params *UpdateEventDataStoreInput, optFns ...func(*Options)) (*UpdateEventDataStoreOutput, error) {
 	if params == nil {
 		params = &UpdateEventDataStoreInput{}

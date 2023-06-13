@@ -30,12 +30,12 @@ func (c *Client) UpdateWorkloadShare(ctx context.Context, params *UpdateWorkload
 // Input for Update Workload Share
 type UpdateWorkloadShareInput struct {
 
-	// Permission granted on a workload share.
+	// Permission granted on a share request.
 	//
 	// This member is required.
 	PermissionType types.PermissionType
 
-	// The ID associated with the workload share.
+	// The ID associated with the share.
 	//
 	// This member is required.
 	ShareId *string

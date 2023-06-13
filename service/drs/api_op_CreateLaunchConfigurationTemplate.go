@@ -35,6 +35,9 @@ type CreateLaunchConfigurationTemplateInput struct {
 	// Copy tags.
 	CopyTags *bool
 
+	// S3 bucket ARN to export Source Network templates.
+	ExportBucketArn *string
+
 	// Launch disposition.
 	LaunchDisposition types.LaunchDisposition
 

@@ -65,9 +65,11 @@ type AdvancedFieldSelector struct {
 	//   - AWS::Lambda::Function
 	//   - AWS::S3::Object
 	//   - AWS::CloudTrail::Channel
+	//   - AWS::CodeWhisperer::Profile
 	//   - AWS::Cognito::IdentityPool
 	//   - AWS::DynamoDB::Stream
 	//   - AWS::EC2::Snapshot
+	//   - AWS::EMRWAL::Workspace
 	//   - AWS::FinSpace::Environment
 	//   - AWS::Glue::Table
 	//   - AWS::GuardDuty::Detector
@@ -100,6 +102,9 @@ type AdvancedFieldSelector struct {
 	//   , and the operator is set to Equals or NotEquals , the ARN must be in the
 	//   following format:
 	//   - arn::cloudtrail:::channel/ When resources.type equals
+	//   AWS::CodeWhisperer::Profile , and the operator is set to Equals or NotEquals ,
+	//   the ARN must be in the following format:
+	//   - arn::codewhisperer:::profile/ When resources.type equals
 	//   AWS::Cognito::IdentityPool , and the operator is set to Equals or NotEquals ,
 	//   the ARN must be in the following format:
 	//   - arn::cognito-identity:::identitypool/ When resources.type equals
@@ -108,9 +113,12 @@ type AdvancedFieldSelector struct {
 	//   - arn::dynamodb:::table//stream/ When resources.type equals AWS::EC2::Snapshot
 	//   , and the operator is set to Equals or NotEquals , the ARN must be in the
 	//   following format:
-	//   - arn::ec2:::snapshot/ When resources.type equals AWS::FinSpace::Environment ,
-	//   and the operator is set to Equals or NotEquals , the ARN must be in the
-	//   following format:
+	//   - arn::ec2:::snapshot/ When resources.type equals AWS::EMRWAL::Workspace , and
+	//   the operator is set to Equals or NotEquals , the ARN must be in the following
+	//   format:
+	//   - arn::emrwal:::workspace/ When resources.type equals
+	//   AWS::FinSpace::Environment , and the operator is set to Equals or NotEquals ,
+	//   the ARN must be in the following format:
 	//   - arn::finspace:::environment/ When resources.type equals AWS::Glue::Table ,
 	//   and the operator is set to Equals or NotEquals , the ARN must be in the
 	//   following format:
@@ -234,11 +242,14 @@ type DataResource struct {
 	// The following resource types are also available through advanced event
 	// selectors. Basic event selector resource types are valid in advanced event
 	// selectors, but advanced event selector resource types are not valid in basic
-	// event selectors. For more information, see AdvancedFieldSelector$Field .
+	// event selectors. For more information, see AdvancedFieldSelector (https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_AdvancedFieldSelector.html)
+	// .
 	//   - AWS::CloudTrail::Channel
+	//   - AWS::CodeWhisperer::Profile
 	//   - AWS::Cognito::IdentityPool
 	//   - AWS::DynamoDB::Stream
 	//   - AWS::EC2::Snapshot
+	//   - AWS::EMRWAL::Workspace
 	//   - AWS::FinSpace::Environment
 	//   - AWS::Glue::Table
 	//   - AWS::GuardDuty::Detector
@@ -795,7 +806,7 @@ type Trail struct {
 	// topic ARN. arn:aws:sns:us-east-2:123456789012:MyTopic
 	SnsTopicARN *string
 
-	// This field is no longer in use. Use SnsTopicARN.
+	// This field is no longer in use. Use SnsTopicARN .
 	//
 	// Deprecated: This member has been deprecated.
 	SnsTopicName *string

@@ -99,6 +99,9 @@ type AnswerSummary struct {
 	// The title of the question.
 	QuestionTitle *string
 
+	// The type of the question.
+	QuestionType QuestionType
+
 	// The reason why a choice is non-applicable to a question in your workload.
 	Reason AnswerReason
 
@@ -456,6 +459,12 @@ type LensReview struct {
 	PillarReviewSummaries []PillarReviewSummary
 
 	// A map from risk names to the count of how many questions have that rating.
+	PrioritizedRiskCounts map[string]int32
+
+	// The profiles associated with the workload.
+	Profiles []WorkloadProfile
+
+	// A map from risk names to the count of how many questions have that rating.
 	RiskCounts map[string]int32
 
 	// The date and time recorded.
@@ -512,6 +521,12 @@ type LensReviewSummary struct {
 	LensVersion *string
 
 	// A map from risk names to the count of how many questions have that rating.
+	PrioritizedRiskCounts map[string]int32
+
+	// The profiles associated with the workload.
+	Profiles []WorkloadProfile
+
+	// A map from risk names to the count of how many questions have that rating.
 	RiskCounts map[string]int32
 
 	// The date and time recorded.
@@ -523,14 +538,14 @@ type LensReviewSummary struct {
 // A lens share summary return object.
 type LensShareSummary struct {
 
-	// The ID associated with the workload share.
+	// The ID associated with the share.
 	ShareId *string
 
 	// The Amazon Web Services account ID, IAM role, organization ID, or
-	// organizational unit (OU) ID with which the workload is shared.
+	// organizational unit (OU) ID with which the workload, lens, or profile is shared.
 	SharedWith *string
 
-	// The status of a workload share.
+	// The status of the share request.
 	Status ShareStatus
 
 	// Optional message to compliment the Status field.
@@ -713,7 +728,233 @@ type PillarReviewSummary struct {
 	PillarName *string
 
 	// A map from risk names to the count of how many questions have that rating.
+	PrioritizedRiskCounts map[string]int32
+
+	// A map from risk names to the count of how many questions have that rating.
 	RiskCounts map[string]int32
+
+	noSmithyDocumentSerde
+}
+
+// A profile.
+type Profile struct {
+
+	// The date and time recorded.
+	CreatedAt *time.Time
+
+	// An Amazon Web Services account ID.
+	Owner *string
+
+	// The profile ARN.
+	ProfileArn *string
+
+	// The profile description.
+	ProfileDescription *string
+
+	// The profile name.
+	ProfileName *string
+
+	// Profile questions.
+	ProfileQuestions []ProfileQuestion
+
+	// The profile version.
+	ProfileVersion *string
+
+	// The ID assigned to the share invitation.
+	ShareInvitationId *string
+
+	// The tags assigned to the profile.
+	Tags map[string]string
+
+	// The date and time recorded.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The profile choice.
+type ProfileChoice struct {
+
+	// The description of a choice.
+	ChoiceDescription *string
+
+	// The ID of a choice.
+	ChoiceId *string
+
+	// The title of a choice.
+	ChoiceTitle *string
+
+	noSmithyDocumentSerde
+}
+
+// The profile notification summary.
+type ProfileNotificationSummary struct {
+
+	// The current profile version.
+	CurrentProfileVersion *string
+
+	// The latest profile version.
+	LatestProfileVersion *string
+
+	// The profile ARN.
+	ProfileArn *string
+
+	// The profile name.
+	ProfileName *string
+
+	// Type of notification.
+	Type ProfileNotificationType
+
+	// The ID assigned to the workload. This ID is unique within an Amazon Web
+	// Services Region.
+	WorkloadId *string
+
+	// The name of the workload. The name must be unique within an account within an
+	// Amazon Web Services Region. Spaces and capitalization are ignored when checking
+	// for uniqueness.
+	WorkloadName *string
+
+	noSmithyDocumentSerde
+}
+
+// A profile question.
+type ProfileQuestion struct {
+
+	// The maximum number of selected choices.
+	MaxSelectedChoices int32
+
+	// The minimum number of selected choices.
+	MinSelectedChoices int32
+
+	// The question choices.
+	QuestionChoices []ProfileChoice
+
+	// The description of the question.
+	QuestionDescription *string
+
+	// The ID of the question.
+	QuestionId *string
+
+	// The title of the question.
+	QuestionTitle *string
+
+	// The selected choices.
+	SelectedChoiceIds []string
+
+	noSmithyDocumentSerde
+}
+
+// An update to a profile question.
+type ProfileQuestionUpdate struct {
+
+	// The ID of the question.
+	QuestionId *string
+
+	// The selected choices.
+	SelectedChoiceIds []string
+
+	noSmithyDocumentSerde
+}
+
+// Summary of a profile share.
+type ProfileShareSummary struct {
+
+	// The ID associated with the share.
+	ShareId *string
+
+	// The Amazon Web Services account ID, IAM role, organization ID, or
+	// organizational unit (OU) ID with which the workload, lens, or profile is shared.
+	SharedWith *string
+
+	// The status of the share request.
+	Status ShareStatus
+
+	// Profile share invitation status message.
+	StatusMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// Summary of a profile.
+type ProfileSummary struct {
+
+	// The date and time recorded.
+	CreatedAt *time.Time
+
+	// An Amazon Web Services account ID.
+	Owner *string
+
+	// The profile ARN.
+	ProfileArn *string
+
+	// The profile description.
+	ProfileDescription *string
+
+	// The profile name.
+	ProfileName *string
+
+	// The profile version.
+	ProfileVersion *string
+
+	// The date and time recorded.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The profile template.
+type ProfileTemplate struct {
+
+	// The date and time recorded.
+	CreatedAt *time.Time
+
+	// The name of the profile template.
+	TemplateName *string
+
+	// Profile template questions.
+	TemplateQuestions []ProfileTemplateQuestion
+
+	// The date and time recorded.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// A profile template choice.
+type ProfileTemplateChoice struct {
+
+	// The description of a choice.
+	ChoiceDescription *string
+
+	// The ID of a choice.
+	ChoiceId *string
+
+	// The title of a choice.
+	ChoiceTitle *string
+
+	noSmithyDocumentSerde
+}
+
+// A profile template question.
+type ProfileTemplateQuestion struct {
+
+	// The maximum number of choices selected.
+	MaxSelectedChoices int32
+
+	// The minimum number of choices selected.
+	MinSelectedChoices int32
+
+	// The question choices.
+	QuestionChoices []ProfileTemplateChoice
+
+	// The description of the question.
+	QuestionDescription *string
+
+	// The ID of the question.
+	QuestionId *string
+
+	// The title of the question.
+	QuestionTitle *string
 
 	noSmithyDocumentSerde
 }
@@ -764,6 +1005,9 @@ type ShareInvitation struct {
 	// The ARN for the lens.
 	LensArn *string
 
+	// The profile ARN.
+	ProfileArn *string
+
 	// The ID assigned to the share invitation.
 	ShareInvitationId *string
 
@@ -786,8 +1030,14 @@ type ShareInvitationSummary struct {
 	// The full name of the lens.
 	LensName *string
 
-	// Permission granted on a workload share.
+	// Permission granted on a share request.
 	PermissionType PermissionType
+
+	// The profile ARN.
+	ProfileArn *string
+
+	// The profile name.
+	ProfileName *string
 
 	// The ID assigned to the share invitation.
 	ShareInvitationId *string
@@ -799,7 +1049,7 @@ type ShareInvitationSummary struct {
 	SharedBy *string
 
 	// The Amazon Web Services account ID, IAM role, organization ID, or
-	// organizational unit (OU) ID with which the workload is shared.
+	// organizational unit (OU) ID with which the workload, lens, or profile is shared.
 	SharedWith *string
 
 	// The ID assigned to the workload. This ID is unique within an Amazon Web
@@ -924,6 +1174,12 @@ type Workload struct {
 	// plan. Each pillar is represented by its PillarReviewSummary$PillarId .
 	PillarPriorities []string
 
+	// A map from risk names to the count of how many questions have that rating.
+	PrioritizedRiskCounts map[string]int32
+
+	// Profile associated with a workload.
+	Profiles []WorkloadProfile
+
 	// The review owner of the workload. The name, email address, or identifier for
 	// the primary group or individual that owns the workload review process.
 	ReviewOwner *string
@@ -971,23 +1227,35 @@ type WorkloadDiscoveryConfig struct {
 	noSmithyDocumentSerde
 }
 
+// The profile associated with a workload.
+type WorkloadProfile struct {
+
+	// The profile ARN.
+	ProfileArn *string
+
+	// The profile version.
+	ProfileVersion *string
+
+	noSmithyDocumentSerde
+}
+
 // A workload share return object.
 type WorkloadShare struct {
 
-	// Permission granted on a workload share.
+	// Permission granted on a share request.
 	PermissionType PermissionType
 
-	// The ID associated with the workload share.
+	// The ID associated with the share.
 	ShareId *string
 
 	// An Amazon Web Services account ID.
 	SharedBy *string
 
 	// The Amazon Web Services account ID, IAM role, organization ID, or
-	// organizational unit (OU) ID with which the workload is shared.
+	// organizational unit (OU) ID with which the workload, lens, or profile is shared.
 	SharedWith *string
 
-	// The status of a workload share.
+	// The status of the share request.
 	Status ShareStatus
 
 	// The ID assigned to the workload. This ID is unique within an Amazon Web
@@ -1005,17 +1273,17 @@ type WorkloadShare struct {
 // A workload share summary return object.
 type WorkloadShareSummary struct {
 
-	// Permission granted on a workload share.
+	// Permission granted on a share request.
 	PermissionType PermissionType
 
-	// The ID associated with the workload share.
+	// The ID associated with the share.
 	ShareId *string
 
 	// The Amazon Web Services account ID, IAM role, organization ID, or
-	// organizational unit (OU) ID with which the workload is shared.
+	// organizational unit (OU) ID with which the workload, lens, or profile is shared.
 	SharedWith *string
 
-	// The status of a workload share.
+	// The status of the share request.
 	Status ShareStatus
 
 	// Optional message to compliment the Status field.
@@ -1036,6 +1304,12 @@ type WorkloadSummary struct {
 
 	// An Amazon Web Services account ID.
 	Owner *string
+
+	// A map from risk names to the count of how many questions have that rating.
+	PrioritizedRiskCounts map[string]int32
+
+	// Profile associated with a workload.
+	Profiles []WorkloadProfile
 
 	// A map from risk names to the count of how many questions have that rating.
 	RiskCounts map[string]int32

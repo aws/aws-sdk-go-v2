@@ -1583,6 +1583,33 @@ func (EbsOptimizedSupport) Values() []EbsOptimizedSupport {
 	}
 }
 
+type Ec2InstanceConnectEndpointState string
+
+// Enum values for Ec2InstanceConnectEndpointState
+const (
+	Ec2InstanceConnectEndpointStateCreateInProgress Ec2InstanceConnectEndpointState = "create-in-progress"
+	Ec2InstanceConnectEndpointStateCreateComplete   Ec2InstanceConnectEndpointState = "create-complete"
+	Ec2InstanceConnectEndpointStateCreateFailed     Ec2InstanceConnectEndpointState = "create-failed"
+	Ec2InstanceConnectEndpointStateDeleteInProgress Ec2InstanceConnectEndpointState = "delete-in-progress"
+	Ec2InstanceConnectEndpointStateDeleteComplete   Ec2InstanceConnectEndpointState = "delete-complete"
+	Ec2InstanceConnectEndpointStateDeleteFailed     Ec2InstanceConnectEndpointState = "delete-failed"
+)
+
+// Values returns all known values for Ec2InstanceConnectEndpointState. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (Ec2InstanceConnectEndpointState) Values() []Ec2InstanceConnectEndpointState {
+	return []Ec2InstanceConnectEndpointState{
+		"create-in-progress",
+		"create-complete",
+		"create-failed",
+		"delete-in-progress",
+		"delete-complete",
+		"delete-failed",
+	}
+}
+
 type ElasticGpuState string
 
 // Enum values for ElasticGpuState
@@ -5955,6 +5982,7 @@ const (
 	ResourceTypeVpcBlockPublicAccessExclusion                          ResourceType = "vpc-block-public-access-exclusion"
 	ResourceTypeIpamResourceDiscovery                                  ResourceType = "ipam-resource-discovery"
 	ResourceTypeIpamResourceDiscoveryAssociation                       ResourceType = "ipam-resource-discovery-association"
+	ResourceTypeInstanceConnectEndpoint                                ResourceType = "instance-connect-endpoint"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -6047,6 +6075,7 @@ func (ResourceType) Values() []ResourceType {
 		"vpc-block-public-access-exclusion",
 		"ipam-resource-discovery",
 		"ipam-resource-discovery-association",
+		"instance-connect-endpoint",
 	}
 }
 

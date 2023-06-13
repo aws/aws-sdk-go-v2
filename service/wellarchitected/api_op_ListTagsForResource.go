@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List the tags for a resource. The WorkloadArn parameter can be either a
-// workload ARN or a custom lens ARN.
+// List the tags for a resource. The WorkloadArn parameter can be a workload ARN,
+// a custom lens ARN, or a profile ARN.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}

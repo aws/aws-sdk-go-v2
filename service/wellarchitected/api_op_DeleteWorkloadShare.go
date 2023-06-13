@@ -42,7 +42,7 @@ type DeleteWorkloadShareInput struct {
 	// This member is required.
 	ClientRequestToken *string
 
-	// The ID associated with the workload share.
+	// The ID associated with the share.
 	//
 	// This member is required.
 	ShareId *string

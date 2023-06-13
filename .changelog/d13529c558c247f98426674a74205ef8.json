@@ -1,0 +1,8 @@
+{
+    "id": "d13529c5-58c2-47f9-8426-674a74205ef8",
+    "type": "feature",
+    "description": "You can now detect and block fraudulent account creation attempts with the new AWS WAF Fraud Control account creation fraud prevention (ACFP) managed rule group AWSManagedRulesACFPRuleSet.",
+    "modules": [
+        "service/wafv2"
+    ]
+}

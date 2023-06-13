@@ -212,6 +212,316 @@ type AssociationStateDetails struct {
 	noSmithyDocumentSerde
 }
 
+// One or more actions to update finding fields if a finding matches the defined
+// criteria of the rule.
+type AutomationRulesAction struct {
+
+	// Specifies that the automation rule action is an update to a finding field.
+	FindingFieldsUpdate *AutomationRulesFindingFieldsUpdate
+
+	// Specifies that the rule action should update the Types finding field. The Types
+	// finding field provides one or more finding types in the format of
+	// namespace/category/classifier that classify a finding. For more information, see
+	// Types taxonomy for ASFF (https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format-type-taxonomy.html)
+	// in the Security Hub User Guide.
+	Type AutomationRulesActionType
+
+	noSmithyDocumentSerde
+}
+
+// Defines the configuration of an automation rule.
+type AutomationRulesConfig struct {
+
+	// One or more actions to update finding fields if a finding matches the defined
+	// criteria of the rule.
+	Actions []AutomationRulesAction
+
+	// A timestamp that indicates when the rule was created. Uses the date-time format
+	// specified in RFC 3339 section 5.6, Internet Date/Time Format (https://tools.ietf.org/html/rfc3339#section-5.6)
+	// . The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z .
+	CreatedAt *time.Time
+
+	// The principal that created a rule.
+	CreatedBy *string
+
+	// A set of Amazon Web Services Security Finding Format (https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html)
+	// finding field attributes and corresponding expected values that Security Hub
+	// uses to filter findings. If a finding matches the conditions specified in this
+	// parameter, Security Hub applies the rule action to the finding.
+	Criteria *AutomationRulesFindingFilters
+
+	// A description of the rule.
+	Description *string
+
+	// Specifies whether a rule is the last to be applied with respect to a finding
+	// that matches the rule criteria. This is useful when a finding matches the
+	// criteria for multiple rules, and each rule has different actions. If the value
+	// of this field is set to true for a rule, Security Hub applies the rule action
+	// to a finding that matches the rule criteria and won't evaluate other rules for
+	// the finding.  The default value of this field is false .
+	IsTerminal bool
+
+	// The Amazon Resource Name (ARN) of a rule.
+	RuleArn *string
+
+	// The name of the rule.
+	RuleName *string
+
+	// An integer ranging from 1 to 1000 that represents the order in which the rule
+	// action is applied to findings. Security Hub applies rules with lower values for
+	// this parameter first.
+	RuleOrder int32
+
+	// Whether the rule is active after it is created. If this parameter is equal to
+	// >ENABLED , Security Hub will apply the rule to findings and finding updates
+	// after the rule is created.
+	RuleStatus RuleStatus
+
+	// A timestamp that indicates when the rule was most recently updated. Uses the
+	// date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format (https://tools.ietf.org/html/rfc3339#section-5.6)
+	// . The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z .
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Identifies the finding fields that the automation rule action will update when
+// a finding matches the defined criteria.
+type AutomationRulesFindingFieldsUpdate struct {
+
+	// The rule action will update the Confidence field of a finding.
+	Confidence int32
+
+	// The rule action will update the Criticality field of a finding.
+	Criticality int32
+
+	// The updated note.
+	Note *NoteUpdate
+
+	// A list of findings that are related to a finding.
+	RelatedFindings []RelatedFinding
+
+	// Updates to the severity information for a finding.
+	Severity *SeverityUpdate
+
+	// The rule action will update the Types field of a finding.
+	Types []string
+
+	// The rule action will update the UserDefinedFields field of a finding.
+	UserDefinedFields map[string]string
+
+	// The rule action will update the VerificationState field of a finding.
+	VerificationState VerificationState
+
+	// Used to update information about the investigation into the finding.
+	Workflow *WorkflowUpdate
+
+	noSmithyDocumentSerde
+}
+
+// The criteria that determine which findings a rule applies to.
+type AutomationRulesFindingFilters struct {
+
+	// The Amazon Web Services account ID in which a finding was generated.
+	AwsAccountId []StringFilter
+
+	// The name of the company for the product that generated the finding. For
+	// control-based findings, the company is Amazon Web Services.
+	CompanyName []StringFilter
+
+	// The unique identifier of a standard in which a control is enabled. This field
+	// consists of the resource portion of the Amazon Resource Name (ARN) returned for
+	// a standard in the DescribeStandards (https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_DescribeStandards.html)
+	// API response.
+	ComplianceAssociatedStandardsId []StringFilter
+
+	// The security control ID for which a finding was generated. Security control IDs
+	// are the same across standards.
+	ComplianceSecurityControlId []StringFilter
+
+	// The result of a security check. This field is only used for findings generated
+	// from controls.
+	ComplianceStatus []StringFilter
+
+	// The likelihood that a finding accurately identifies the behavior or issue that
+	// it was intended to identify. Confidence is scored on a 0–100 basis using a
+	// ratio scale. A value of 0 means 0 percent confidence, and a value of 100 means
+	// 100 percent confidence. For example, a data exfiltration detection based on a
+	// statistical deviation of network traffic has low confidence because an actual
+	// exfiltration hasn't been verified. For more information, see Confidence (https://docs.aws.amazon.com/securityhub/latest/userguide/asff-top-level-attributes.html#asff-confidence)
+	// in the Security Hub User Guide.
+	Confidence []NumberFilter
+
+	// A timestamp that indicates when this finding record was created. Uses the
+	// date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format (https://tools.ietf.org/html/rfc3339#section-5.6)
+	// . The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z .
+	CreatedAt []DateFilter
+
+	// The level of importance that is assigned to the resources that are associated
+	// with a finding. Criticality is scored on a 0–100 basis, using a ratio scale
+	// that supports only full integers. A score of 0 means that the underlying
+	// resources have no criticality, and a score of 100 is reserved for the most
+	// critical resources. For more information, see Criticality (https://docs.aws.amazon.com/securityhub/latest/userguide/asff-top-level-attributes.html#asff-criticality)
+	// in the Security Hub User Guide.
+	Criticality []NumberFilter
+
+	// A finding's description.
+	Description []StringFilter
+
+	// A timestamp that indicates when the potential security issue captured by a
+	// finding was first observed by the security findings product. Uses the date-time
+	// format specified in RFC 3339 section 5.6, Internet Date/Time Format (https://tools.ietf.org/html/rfc3339#section-5.6)
+	// . The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z .
+	FirstObservedAt []DateFilter
+
+	// The identifier for the solution-specific component that generated a finding.
+	GeneratorId []StringFilter
+
+	// The product-specific identifier for a finding.
+	Id []StringFilter
+
+	// A timestamp that indicates when the potential security issue captured by a
+	// finding was most recently observed by the security findings product. Uses the
+	// date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format (https://tools.ietf.org/html/rfc3339#section-5.6)
+	// . The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z .
+	LastObservedAt []DateFilter
+
+	// The text of a user-defined note that's added to a finding.
+	NoteText []StringFilter
+
+	// The timestamp of when the note was updated. Uses the date-time format specified
+	// in RFC 3339 section 5.6, Internet Date/Time Format (https://www.rfc-editor.org/rfc/rfc3339#section-5.6)
+	// . The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z .
+	NoteUpdatedAt []DateFilter
+
+	// The principal that created a note.
+	NoteUpdatedBy []StringFilter
+
+	// The Amazon Resource Name (ARN) for a third-party product that generated a
+	// finding in Security Hub.
+	ProductArn []StringFilter
+
+	// Provides the name of the product that generated the finding. For control-based
+	// findings, the product name is Security Hub.
+	ProductName []StringFilter
+
+	// Provides the current state of a finding.
+	RecordState []StringFilter
+
+	// The product-generated identifier for a related finding.
+	RelatedFindingsId []StringFilter
+
+	// The ARN for the product that generated a related finding.
+	RelatedFindingsProductArn []StringFilter
+
+	// Custom fields and values about the resource that a finding pertains to.
+	ResourceDetailsOther []MapFilter
+
+	// The identifier for the given resource type. For Amazon Web Services resources
+	// that are identified by Amazon Resource Names (ARNs), this is the ARN. For Amazon
+	// Web Services resources that lack ARNs, this is the identifier as defined by the
+	// Amazon Web Service that created the resource. For non-Amazon Web Services
+	// resources, this is a unique identifier that is associated with the resource.
+	ResourceId []StringFilter
+
+	// The partition in which the resource that the finding pertains to is located. A
+	// partition is a group of Amazon Web Services Regions. Each Amazon Web Services
+	// account is scoped to one partition.
+	ResourcePartition []StringFilter
+
+	// The Amazon Web Services Region where the resource that a finding pertains to is
+	// located.
+	ResourceRegion []StringFilter
+
+	// A list of Amazon Web Services tags associated with a resource at the time the
+	// finding was processed.
+	ResourceTags []MapFilter
+
+	// The type of resource that the finding pertains to.
+	ResourceType []StringFilter
+
+	// The severity value of the finding.
+	SeverityLabel []StringFilter
+
+	// Provides a URL that links to a page about the current finding in the finding
+	// product.
+	SourceUrl []StringFilter
+
+	// A finding's title.
+	Title []StringFilter
+
+	// One or more finding types in the format of namespace/category/classifier that
+	// classify a finding. For a list of namespaces, classifiers, and categories, see
+	// Types taxonomy for ASFF (https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format-type-taxonomy.html)
+	// in the Security Hub User Guide.
+	Type []StringFilter
+
+	// A timestamp that indicates when the finding record was most recently updated.
+	// Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time
+	// Format (https://tools.ietf.org/html/rfc3339#section-5.6) . The value cannot
+	// contain spaces. For example, 2020-03-22T13:22:13.933Z .
+	UpdatedAt []DateFilter
+
+	// A list of user-defined name and value string pairs added to a finding.
+	UserDefinedFields []MapFilter
+
+	// Provides the veracity of a finding.
+	VerificationState []StringFilter
+
+	// Provides information about the status of the investigation into a finding.
+	WorkflowStatus []StringFilter
+
+	noSmithyDocumentSerde
+}
+
+// Metadata for automation rules in the calling account. The response includes
+// rules with a RuleStatus of ENABLED and DISABLED .
+type AutomationRulesMetadata struct {
+
+	// A timestamp that indicates when the rule was created. Uses the date-time format
+	// specified in RFC 3339 section 5.6, Internet Date/Time Format (https://tools.ietf.org/html/rfc3339#section-5.6)
+	// . The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z .
+	CreatedAt *time.Time
+
+	// The principal that created a rule.
+	CreatedBy *string
+
+	// A description of the rule.
+	Description *string
+
+	// Specifies whether a rule is the last to be applied with respect to a finding
+	// that matches the rule criteria. This is useful when a finding matches the
+	// criteria for multiple rules, and each rule has different actions. If the value
+	// of this field is set to true for a rule, Security Hub applies the rule action
+	// to a finding that matches the rule criteria and won't evaluate other rules for
+	// the finding.  The default value of this field is false .
+	IsTerminal bool
+
+	// The Amazon Resource Name (ARN) for the rule.
+	RuleArn *string
+
+	// The name of the rule.
+	RuleName *string
+
+	// An integer ranging from 1 to 1000 that represents the order in which the rule
+	// action is applied to findings. Security Hub applies rules with lower values for
+	// this parameter first.
+	RuleOrder int32
+
+	// Whether the rule is active after it is created. If this parameter is equal to
+	// ENABLED , Security Hub will apply the rule to findings and finding updates after
+	// the rule is created. To change the value of this parameter after creating a
+	// rule, use BatchUpdateAutomationRules .
+	RuleStatus RuleStatus
+
+	// A timestamp that indicates when the rule was most recently updated. Uses the
+	// date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format (https://tools.ietf.org/html/rfc3339#section-5.6)
+	// . The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z .
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Information about an Availability Zone.
 type AvailabilityZone struct {
 
@@ -14412,6 +14722,22 @@ type ThreatIntelIndicator struct {
 	noSmithyDocumentSerde
 }
 
+// A list of objects containing RuleArn , ErrorCode , and ErrorMessage . This
+// parameter tells you which automation rules the request didn't process and why.
+type UnprocessedAutomationRule struct {
+
+	// The error code associated with the unprocessed automation rule.
+	ErrorCode int32
+
+	// An error message describing why a request didn't process a specific rule.
+	ErrorMessage *string
+
+	// The Amazon Resource Name (ARN) for the unprocessed automation rule.
+	RuleArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Provides details about a security control for which a response couldn't be
 // returned.
 type UnprocessedSecurityControl struct {
@@ -14480,6 +14806,52 @@ type UnprocessedStandardsControlAssociationUpdate struct {
 	// The reason why a control's enablement status in the specified standard couldn't
 	// be updated.
 	ErrorReason *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the parameters to update in an existing automation rule.
+type UpdateAutomationRulesRequestItem struct {
+
+	// The Amazon Resource Name (ARN) for the rule.
+	//
+	// This member is required.
+	RuleArn *string
+
+	// One or more actions to update finding fields if a finding matches the
+	// conditions specified in Criteria .
+	Actions []AutomationRulesAction
+
+	// A set of ASFF finding field attributes and corresponding expected values that
+	// Security Hub uses to filter findings. If a finding matches the conditions
+	// specified in this parameter, Security Hub applies the rule action to the
+	// finding.
+	Criteria *AutomationRulesFindingFilters
+
+	// A description of the rule.
+	Description *string
+
+	// Specifies whether a rule is the last to be applied with respect to a finding
+	// that matches the rule criteria. This is useful when a finding matches the
+	// criteria for multiple rules, and each rule has different actions. If the value
+	// of this field is set to true for a rule, Security Hub applies the rule action
+	// to a finding that matches the rule criteria and won't evaluate other rules for
+	// the finding.  The default value of this field is false .
+	IsTerminal bool
+
+	// The name of the rule.
+	RuleName *string
+
+	// An integer ranging from 1 to 1000 that represents the order in which the rule
+	// action is applied to findings. Security Hub applies rules with lower values for
+	// this parameter first.
+	RuleOrder int32
+
+	// Whether the rule is active after it is created. If this parameter is equal to
+	// ENABLED , Security Hub will apply the rule to findings and finding updates after
+	// the rule is created. To change the value of this parameter after creating a
+	// rule, use BatchUpdateAutomationRules .
+	RuleStatus RuleStatus
 
 	noSmithyDocumentSerde
 }

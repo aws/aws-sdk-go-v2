@@ -766,7 +766,7 @@ type CacheSettings struct {
 }
 
 // Describes the full details of an Amazon Lightsail SSL/TLS certificate. To get a
-// summary of a certificate, use the GetCertificates action and ommit
+// summary of a certificate, use the GetCertificates action and omit
 // includeCertificateDetails from your request. The response will include only the
 // certificate Amazon Resource Name (ARN), certificate name, domain name, and tags.
 type Certificate struct {

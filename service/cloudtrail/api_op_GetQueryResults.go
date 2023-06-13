@@ -13,7 +13,7 @@ import (
 )
 
 // Gets event data results of a query. You must specify the QueryID value returned
-// by the StartQuery operation, and an ARN for EventDataStore .
+// by the StartQuery operation.
 func (c *Client) GetQueryResults(ctx context.Context, params *GetQueryResultsInput, optFns ...func(*Options)) (*GetQueryResultsOutput, error) {
 	if params == nil {
 		params = &GetQueryResultsInput{}

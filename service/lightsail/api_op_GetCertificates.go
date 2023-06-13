@@ -12,7 +12,7 @@ import (
 )
 
 // Returns information about one or more Amazon Lightsail SSL/TLS certificates. To
-// get a summary of a certificate, ommit includeCertificateDetails from your
+// get a summary of a certificate, omit includeCertificateDetails from your
 // request. The response will include only the certificate Amazon Resource Name
 // (ARN), certificate name, domain name, and tags.
 func (c *Client) GetCertificates(ctx context.Context, params *GetCertificatesInput, optFns ...func(*Options)) (*GetCertificatesOutput, error) {
@@ -48,6 +48,12 @@ type GetCertificatesInput struct {
 	// Resource Names (ARNs), domain names, and tags.
 	IncludeCertificateDetails bool
 
+	// The token to advance to the next page of results from your request. To get a
+	// page token, perform an initial GetCertificates request. If your results are
+	// paginated, the response will return a next page token that you can specify as
+	// the page token in a subsequent request.
+	PageToken *string
+
 	noSmithyDocumentSerde
 }
 
@@ -55,6 +61,12 @@ type GetCertificatesOutput struct {
 
 	// An object that describes certificates.
 	Certificates []types.CertificateSummary
+
+	// If NextPageToken is returned there are more results available. The value of
+	// NextPageToken is a unique pagination token for each page. Make the call again
+	// using the returned token to retrieve the next page. Keep all other arguments
+	// unchanged.
+	NextPageToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -71,6 +71,9 @@ type RetryDataReplicationOutput struct {
 	// Source cloud properties of the Source Server.
 	SourceCloudProperties *types.SourceCloudProperties
 
+	// ID of the Source Network which is protecting this Source Server's network.
+	SourceNetworkID *string
+
 	// The source properties of the Source Server.
 	SourceProperties *types.SourceProperties
 

@@ -10,9 +10,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts a CloudTrail Lake query. The required QueryStatement parameter provides
+// Starts a CloudTrail Lake query. Use the QueryStatement parameter to provide
 // your SQL query, enclosed in single quotation marks. Use the optional
-// DeliveryS3Uri parameter to deliver the query results to an S3 bucket.
+// DeliveryS3Uri parameter to deliver the query results to an S3 bucket. StartQuery
+// requires you specify either the QueryStatement parameter, or a QueryAlias and
+// any QueryParameters . In the current release, the QueryAlias and QueryParameters
+// parameters are used only for the queries that populate the CloudTrail Lake
+// dashboards.
 func (c *Client) StartQuery(ctx context.Context, params *StartQueryInput, optFns ...func(*Options)) (*StartQueryOutput, error) {
 	if params == nil {
 		params = &StartQueryInput{}
@@ -30,13 +34,17 @@ func (c *Client) StartQuery(ctx context.Context, params *StartQueryInput, optFns
 
 type StartQueryInput struct {
 
-	// The SQL code of your query.
-	//
-	// This member is required.
-	QueryStatement *string
-
 	// The URI for the S3 bucket where CloudTrail delivers the query results.
 	DeliveryS3Uri *string
+
+	// The alias that identifies a query template.
+	QueryAlias *string
+
+	// The query parameters for the specified QueryAlias .
+	QueryParameters []string
+
+	// The SQL code of your query.
+	QueryStatement *string
 
 	noSmithyDocumentSerde
 }
@@ -95,9 +103,6 @@ func (c *Client) addOperationStartQueryMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addOpStartQueryValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartQuery(options.Region), middleware.Before); err != nil {

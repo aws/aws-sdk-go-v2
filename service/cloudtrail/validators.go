@@ -210,26 +210,6 @@ func (m *validateOpDeregisterOrganizationDelegatedAdmin) HandleInitialize(ctx co
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpDescribeQuery struct {
-}
-
-func (*validateOpDescribeQuery) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpDescribeQuery) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*DescribeQueryInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpDescribeQueryInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpGetChannel struct {
 }
 
@@ -670,26 +650,6 @@ func (m *validateOpStartLogging) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpStartQuery struct {
-}
-
-func (*validateOpStartQuery) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpStartQuery) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*StartQueryInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpStartQueryInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpStopEventDataStoreIngestion struct {
 }
 
@@ -850,10 +810,6 @@ func addOpDeregisterOrganizationDelegatedAdminValidationMiddleware(stack *middle
 	return stack.Initialize.Add(&validateOpDeregisterOrganizationDelegatedAdmin{}, middleware.After)
 }
 
-func addOpDescribeQueryValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpDescribeQuery{}, middleware.After)
-}
-
 func addOpGetChannelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetChannel{}, middleware.After)
 }
@@ -940,10 +896,6 @@ func addOpStartImportValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpStartLoggingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartLogging{}, middleware.After)
-}
-
-func addOpStartQueryValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpStartQuery{}, middleware.After)
 }
 
 func addOpStopEventDataStoreIngestionValidationMiddleware(stack *middleware.Stack) error {
@@ -1370,21 +1322,6 @@ func validateOpDeregisterOrganizationDelegatedAdminInput(v *DeregisterOrganizati
 	}
 }
 
-func validateOpDescribeQueryInput(v *DescribeQueryInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "DescribeQueryInput"}
-	if v.QueryId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("QueryId"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateOpGetChannelInput(v *GetChannelInput) error {
 	if v == nil {
 		return nil
@@ -1729,21 +1666,6 @@ func validateOpStartLoggingInput(v *StartLoggingInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "StartLoggingInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpStartQueryInput(v *StartQueryInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "StartQueryInput"}
-	if v.QueryStatement == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("QueryStatement"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

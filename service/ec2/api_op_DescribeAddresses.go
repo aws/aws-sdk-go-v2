@@ -12,12 +12,7 @@ import (
 )
 
 // Describes the specified Elastic IP addresses or all of your Elastic IP
-// addresses. An Elastic IP address is for use in either the EC2-Classic platform
-// or in a VPC. For more information, see Elastic IP Addresses (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html)
-// in the Amazon Elastic Compute Cloud User Guide. We are retiring EC2-Classic. We
-// recommend that you migrate from EC2-Classic to a VPC. For more information, see
-// Migrate from EC2-Classic to a VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html)
-// in the Amazon Elastic Compute Cloud User Guide.
+// addresses.
 func (c *Client) DescribeAddresses(ctx context.Context, params *DescribeAddressesInput, optFns ...func(*Options)) (*DescribeAddressesOutput, error) {
 	if params == nil {
 		params = &DescribeAddressesInput{}
@@ -35,7 +30,7 @@ func (c *Client) DescribeAddresses(ctx context.Context, params *DescribeAddresse
 
 type DescribeAddressesInput struct {
 
-	// [EC2-VPC] Information about the allocation IDs.
+	// Information about the allocation IDs.
 	AllocationIds []string
 
 	// Checks whether you have the required permissions for the action, without
@@ -45,19 +40,17 @@ type DescribeAddressesInput struct {
 	DryRun *bool
 
 	// One or more filters. Filter names and values are case-sensitive.
-	//   - allocation-id - [EC2-VPC] The allocation ID for the address.
-	//   - association-id - [EC2-VPC] The association ID for the address.
-	//   - domain - Indicates whether the address is for use in EC2-Classic ( standard
-	//   ) or in a VPC ( vpc ).
+	//   - allocation-id - The allocation ID for the address.
+	//   - association-id - The association ID for the address.
 	//   - instance-id - The ID of the instance the address is associated with, if any.
 	//   - network-border-group - A unique set of Availability Zones, Local Zones, or
 	//   Wavelength Zones from where Amazon Web Services advertises IP addresses.
-	//   - network-interface-id - [EC2-VPC] The ID of the network interface that the
-	//   address is associated with, if any.
+	//   - network-interface-id - The ID of the network interface that the address is
+	//   associated with, if any.
 	//   - network-interface-owner-id - The Amazon Web Services account ID of the
 	//   owner.
-	//   - private-ip-address - [EC2-VPC] The private IP address associated with the
-	//   Elastic IP address.
+	//   - private-ip-address - The private IP address associated with the Elastic IP
+	//   address.
 	//   - public-ip - The Elastic IP address, or the carrier IP address.
 	//   - tag : - The key/value combination of a tag assigned to the resource. Use the
 	//   tag key in the filter name and the tag value as the filter value. For example,

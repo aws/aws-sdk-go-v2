@@ -60,7 +60,7 @@ type DeleteLensShareInput struct {
 	// This member is required.
 	LensAlias *string
 
-	// The ID associated with the workload share.
+	// The ID associated with the share.
 	//
 	// This member is required.
 	ShareId *string
