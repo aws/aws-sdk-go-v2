@@ -1,3 +1,7 @@
+# v1.30.1 (2023-06-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.30.0 (2023-06-08)
 
 * **Feature**: You can now define custom spark properties at start of the session for use cases like cluster encryption, table formats, and general Spark tuning.

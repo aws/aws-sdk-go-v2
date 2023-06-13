@@ -1,3 +1,7 @@
+# v1.21.1 (2023-06-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.0 (2023-06-07)
 
 * **Feature**: This change adds support for account level data protection policies using 3 new APIs, PutAccountPolicy, DeleteAccountPolicy and DescribeAccountPolicy. DescribeLogGroup API has been modified to indicate if account level policy is applied to the LogGroup via "inheritedProperties" list in the response.

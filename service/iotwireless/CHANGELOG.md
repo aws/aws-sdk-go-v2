@@ -1,3 +1,7 @@
+# v1.28.1 (2023-06-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.28.0 (2023-05-26)
 
 * **Feature**: Add Multicast Group support in Network Analyzer Configuration.

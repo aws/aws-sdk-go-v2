@@ -1,3 +1,7 @@
+# v1.15.1 (2023-06-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.15.0 (2023-05-11)
 
 * **Feature**: This release adds 2 new Support APIs, DescribeCreateCaseOptions and DescribeSupportedLanguages. You can use these new APIs to get available support languages.

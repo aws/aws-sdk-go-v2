@@ -1,3 +1,7 @@
+# v1.29.1 (2023-06-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.29.0 (2023-06-06)
 
 * **Feature**: This release adds support for Lex Developers to create test sets and to execute those test-sets against their bots.

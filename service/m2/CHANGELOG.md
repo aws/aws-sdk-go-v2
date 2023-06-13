@@ -1,3 +1,7 @@
+# v1.5.1 (2023-06-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.5.0 (2023-05-31)
 
 * **Feature**: Adds an optional create-only 'roleArn' property to Application resources.  Enables PS and PO data set org types.

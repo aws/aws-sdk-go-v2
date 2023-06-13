@@ -1,3 +1,7 @@
+# v1.22.1 (2023-06-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.22.0 (2023-06-01)
 
 * **Feature**: API Update for IVS Advanced Channel type

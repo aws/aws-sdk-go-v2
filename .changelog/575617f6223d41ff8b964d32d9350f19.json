@@ -1,8 +1,0 @@
-{
-    "id": "575617f6-223d-41ff-8b96-4d32d9350f19",
-    "type": "feature",
-    "description": "This release fixes using aws-us-gov ARNs in API calls and adds documentation for snapshot APIs.",
-    "modules": [
-        "service/simspaceweaver"
-    ]
-}

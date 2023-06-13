@@ -1,3 +1,8 @@
+# v1.100.0 (2023-06-13)
+
+* **Feature**: This release introduces a new feature, EC2 Instance Connect Endpoint, that enables you to connect to a resource over TCP, without requiring the resource to have a public IPv4 address.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.99.0 (2023-06-05)
 
 * **Feature**: Making InstanceTagAttribute as the required parameter for the DeregisterInstanceEventNotificationAttributes and RegisterInstanceEventNotificationAttributes APIs.

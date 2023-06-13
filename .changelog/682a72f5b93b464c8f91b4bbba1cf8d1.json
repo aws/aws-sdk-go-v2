@@ -1,8 +1,0 @@
-{
-    "id": "682a72f5-b93b-464c-8f91-b4bbba1cf8d1",
-    "type": "feature",
-    "description": "Integrate double encryption feature to SDKs.",
-    "modules": [
-        "service/s3"
-    ]
-}

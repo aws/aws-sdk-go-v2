@@ -1,3 +1,7 @@
+# v1.35.1 (2023-06-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.35.0 (2023-06-05)
 
 * **Feature**: Add Ruby 3.2 (ruby3.2) Runtime support to AWS Lambda.

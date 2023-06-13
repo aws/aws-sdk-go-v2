@@ -1,3 +1,8 @@
+# v1.27.0 (2023-06-13)
+
+* **Feature**: This feature allows users to view dashboards for CloudTrail Lake event data stores.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.26.0 (2023-06-02)
 
 * **Feature**: This feature allows users to start and stop event ingestion on a CloudTrail Lake event data store.

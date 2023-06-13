@@ -1,3 +1,7 @@
+# v1.17.1 (2023-06-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.17.0 (2023-06-08)
 
 * **Feature**: This release adds the capability for customers to define how their data should be partitioned, optimizing for certain access patterns. This definition will take place as a part of the table creation.

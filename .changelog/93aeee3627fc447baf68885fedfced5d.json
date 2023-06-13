@@ -1,8 +1,0 @@
-{
-    "id": "93aeee36-27fc-447b-af68-885fedfced5d",
-    "type": "feature",
-    "description": "Add support for Security Hub Automation Rules",
-    "modules": [
-        "service/securityhub"
-    ]
-}

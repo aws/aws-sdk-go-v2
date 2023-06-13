@@ -1,8 +1,0 @@
-{
-    "id": "6e6b0c56-49e6-466b-8e36-13f90f6f42ca",
-    "type": "feature",
-    "description": "This release adds pagination for the Get Certificates API operation.",
-    "modules": [
-        "service/lightsail"
-    ]
-}

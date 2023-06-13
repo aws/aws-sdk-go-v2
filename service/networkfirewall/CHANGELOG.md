@@ -1,3 +1,7 @@
+# v1.28.1 (2023-06-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.28.0 (2023-05-04)
 
 * **Feature**: This release adds support for the Suricata REJECT option in midstream exception configurations.

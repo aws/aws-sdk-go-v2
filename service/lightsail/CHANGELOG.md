@@ -1,3 +1,8 @@
+# v1.27.0 (2023-06-13)
+
+* **Feature**: This release adds pagination for the Get Certificates API operation.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.26.6 (2023-05-04)
 
 * No change notes available for this release.

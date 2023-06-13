@@ -3,4 +3,4 @@
 package cloudhsmv2
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.14.10"
+const goModuleVersion = "1.14.11"

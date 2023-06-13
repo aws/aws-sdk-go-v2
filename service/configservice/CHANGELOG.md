@@ -1,3 +1,7 @@
+# v1.33.1 (2023-06-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.33.0 (2023-05-31)
 
 * **Feature**: Resource Types Exclusion feature launch by AWS Config

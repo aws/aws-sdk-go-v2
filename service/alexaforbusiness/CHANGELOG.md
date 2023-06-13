@@ -1,3 +1,7 @@
+# v1.15.12 (2023-06-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.15.11 (2023-06-01)
 
 * **Documentation**: Alexa for Business has been deprecated and is no longer supported.

@@ -1,8 +1,0 @@
-{
-    "id": "de77d9e9-e665-4209-9d0c-d0bb67320fbd",
-    "type": "documentation",
-    "description": "Change the Image Builder ImagePipeline dateNextRun field to more accurately describe the data.",
-    "modules": [
-        "service/imagebuilder"
-    ]
-}

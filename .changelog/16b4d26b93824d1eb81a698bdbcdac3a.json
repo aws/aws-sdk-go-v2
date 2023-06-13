@@ -1,8 +1,0 @@
-{
-    "id": "16b4d26b-9382-4d1e-b81a-698bdbcdac3a",
-    "type": "feature",
-    "description": "GA release of Amazon Verified Permissions.",
-    "modules": [
-        "service/verifiedpermissions"
-    ]
-}

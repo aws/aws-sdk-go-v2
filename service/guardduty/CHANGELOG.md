@@ -1,3 +1,7 @@
+# v1.23.1 (2023-06-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.23.0 (2023-05-08)
 
 * **Feature**: Add AccessDeniedException 403 Error message code to support 3 Tagging related APIs

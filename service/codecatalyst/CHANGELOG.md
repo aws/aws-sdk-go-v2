@@ -1,3 +1,7 @@
+# v1.3.1 (2023-06-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.3.0 (2023-05-15)
 
 * **Feature**: With this release, the users can list the active sessions connected to their Dev Environment on AWS CodeCatalyst

@@ -1,3 +1,7 @@
+# v1.23.1 (2023-06-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.23.0 (2023-05-30)
 
 * **Feature**: This release adds API support for political views for the maps service APIs: CreateMap, UpdateMap, DescribeMap.

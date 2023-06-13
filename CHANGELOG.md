@@ -1,3 +1,37 @@
+# Release (2023-06-13)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudtrail`: [v1.27.0](service/cloudtrail/CHANGELOG.md#v1270-2023-06-13)
+  * **Feature**: This feature allows users to view dashboards for CloudTrail Lake event data stores.
+* `github.com/aws/aws-sdk-go-v2/service/codegurusecurity`: [v1.0.0](service/codegurusecurity/CHANGELOG.md#v100-2023-06-13)
+  * **Release**: New AWS service client module
+  * **Feature**: Initial release of Amazon CodeGuru Security APIs
+* `github.com/aws/aws-sdk-go-v2/service/drs`: [v1.14.0](service/drs/CHANGELOG.md#v1140-2023-06-13)
+  * **Feature**: Added APIs to support network replication and recovery using AWS Elastic Disaster Recovery.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.100.0](service/ec2/CHANGELOG.md#v11000-2023-06-13)
+  * **Feature**: This release introduces a new feature, EC2 Instance Connect Endpoint, that enables you to connect to a resource over TCP, without requiring the resource to have a public IPv4 address.
+* `github.com/aws/aws-sdk-go-v2/service/imagebuilder`: [v1.23.5](service/imagebuilder/CHANGELOG.md#v1235-2023-06-13)
+  * **Documentation**: Change the Image Builder ImagePipeline dateNextRun field to more accurately describe the data.
+* `github.com/aws/aws-sdk-go-v2/service/lightsail`: [v1.27.0](service/lightsail/CHANGELOG.md#v1270-2023-06-13)
+  * **Feature**: This release adds pagination for the Get Certificates API operation.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.34.0](service/s3/CHANGELOG.md#v1340-2023-06-13)
+  * **Feature**: Integrate double encryption feature to SDKs.
+  * **Bug Fix**: Fix HeadObject to return types.Nound when an object does not exist. Fixes [2084](https://github.com/aws/aws-sdk-go-v2/issues/2084)
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.33.0](service/securityhub/CHANGELOG.md#v1330-2023-06-13)
+  * **Feature**: Add support for Security Hub Automation Rules
+* `github.com/aws/aws-sdk-go-v2/service/simspaceweaver`: [v1.3.0](service/simspaceweaver/CHANGELOG.md#v130-2023-06-13)
+  * **Feature**: This release fixes using aws-us-gov ARNs in API calls and adds documentation for snapshot APIs.
+* `github.com/aws/aws-sdk-go-v2/service/verifiedpermissions`: [v1.0.0](service/verifiedpermissions/CHANGELOG.md#v100-2023-06-13)
+  * **Release**: New AWS service client module
+  * **Feature**: GA release of Amazon Verified Permissions.
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.35.0](service/wafv2/CHANGELOG.md#v1350-2023-06-13)
+  * **Feature**: You can now detect and block fraudulent account creation attempts with the new AWS WAF Fraud Control account creation fraud prevention (ACFP) managed rule group AWSManagedRulesACFPRuleSet.
+* `github.com/aws/aws-sdk-go-v2/service/wellarchitected`: [v1.21.0](service/wellarchitected/CHANGELOG.md#v1210-2023-06-13)
+  * **Feature**: AWS Well-Architected now supports Profiles that help customers prioritize which questions to focus on first by providing a list of prioritized questions that are better aligned with their business goals and outcomes.
+
 # Release (2023-06-12)
 
 ## General Highlights

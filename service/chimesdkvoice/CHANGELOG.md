@@ -1,3 +1,7 @@
+# v1.6.1 (2023-06-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.6.0 (2023-05-30)
 
 * **Feature**: Added optional CallLeg field to StartSpeakerSearchTask API request

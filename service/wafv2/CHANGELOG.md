@@ -1,3 +1,8 @@
+# v1.35.0 (2023-06-13)
+
+* **Feature**: You can now detect and block fraudulent account creation attempts with the new AWS WAF Fraud Control account creation fraud prevention (ACFP) managed rule group AWSManagedRulesACFPRuleSet.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.34.0 (2023-06-02)
 
 * **Feature**: Added APIs to describe managed products. The APIs retrieve information about rule groups that are managed by AWS and by AWS Marketplace sellers.

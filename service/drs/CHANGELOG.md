@@ -1,3 +1,8 @@
+# v1.14.0 (2023-06-13)
+
+* **Feature**: Added APIs to support network replication and recovery using AWS Elastic Disaster Recovery.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.13.2 (2023-05-04)
 
 * No change notes available for this release.

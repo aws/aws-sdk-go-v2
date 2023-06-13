@@ -1,3 +1,7 @@
+# v1.10.1 (2023-06-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.10.0 (2023-05-31)
 
 * **Feature**: WorkSpaces Web now allows you to control which IP addresses your WorkSpaces Web portal may be accessed from.

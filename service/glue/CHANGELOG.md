@@ -1,3 +1,7 @@
+# v1.50.1 (2023-06-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.50.0 (2023-05-30)
 
 * **Feature**: Added Runtime parameter to allow selection of Ray Runtime

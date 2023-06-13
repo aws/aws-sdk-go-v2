@@ -1,3 +1,8 @@
+# v1.33.0 (2023-06-13)
+
+* **Feature**: Add support for Security Hub Automation Rules
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.32.0 (2023-05-30)
 
 * **Feature**: Added new resource detail objects to ASFF, including resources for AwsGuardDutyDetector, AwsAmazonMqBroker, AwsEventSchemasRegistry, AwsAppSyncGraphQlApi and AwsStepFunctionStateMachine.

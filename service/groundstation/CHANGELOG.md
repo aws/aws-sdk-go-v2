@@ -1,3 +1,7 @@
+# v1.18.4 (2023-06-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.3 (2023-05-30)
 
 * **Documentation**: Updating description of GetMinuteUsage to be clearer.

@@ -1,3 +1,7 @@
+# v1.2.1 (2023-06-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.2.0 (2023-05-11)
 
 * **Feature**: Add methods for inspecting and debugging stages: ListStageSessions, GetStageSession, ListParticipants, GetParticipant, and ListParticipantEvents.

@@ -1,3 +1,7 @@
+# v1.19.1 (2023-06-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.19.0 (2023-05-16)
 
 * **Feature**: Added and updated API operations in Detective to support the integration of ASFF Security Hub findings.

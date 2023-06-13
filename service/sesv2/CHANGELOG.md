@@ -1,3 +1,7 @@
+# v1.18.1 (2023-06-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.0 (2023-05-19)
 
 * **Feature**: This release allows customers to update scaling mode property of dedicated IP pools with PutDedicatedIpPoolScalingAttributes call.

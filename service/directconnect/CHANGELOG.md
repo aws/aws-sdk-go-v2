@@ -1,3 +1,7 @@
+# v1.18.16 (2023-06-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.15 (2023-06-07)
 
 * **Documentation**: This update corrects the jumbo frames mtu values from 9100 to 8500 for transit virtual interfaces.

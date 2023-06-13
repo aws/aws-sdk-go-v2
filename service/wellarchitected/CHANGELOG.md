@@ -1,3 +1,8 @@
+# v1.21.0 (2023-06-13)
+
+* **Feature**: AWS Well-Architected now supports Profiles that help customers prioritize which questions to focus on first by providing a list of prioritized questions that are better aligned with their business goals and outcomes.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.20.1 (2023-05-04)
 
 * No change notes available for this release.

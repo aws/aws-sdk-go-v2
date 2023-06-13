@@ -1,3 +1,7 @@
+# v1.20.1 (2023-06-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.20.0 (2023-06-06)
 
 * **Feature**: This release updates the AccountAlias regex pattern with the same length restrictions enforced by the length constraint.

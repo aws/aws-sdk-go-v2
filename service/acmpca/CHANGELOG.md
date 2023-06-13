@@ -1,3 +1,7 @@
+# v1.21.14 (2023-06-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.13 (2023-06-09)
 
 * **Documentation**: Document-only update to refresh CLI  documentation for AWS Private CA. No change to the service.

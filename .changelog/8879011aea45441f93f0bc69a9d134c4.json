@@ -1,8 +1,0 @@
-{
-    "id": "8879011a-ea45-441f-93f0-bc69a9d134c4",
-    "type": "feature",
-    "description": "This feature allows users to view dashboards for CloudTrail Lake event data stores.",
-    "modules": [
-        "service/cloudtrail"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.3.1 (2023-06-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.3.0 (2023-05-18)
 
 * **Feature**: This release makes ExecutionRoleArn a required field in the StartEarthObservationJob API.

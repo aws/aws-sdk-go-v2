@@ -1,8 +1,0 @@
-{
-    "id": "d9de6f3d-d7c1-46c9-9666-48ecda1fa2a8",
-    "type": "bugfix",
-    "description": "Fix HeadObject to return types.Nound when an object does not exist. Fixes [2084](https://github.com/aws/aws-sdk-go-v2/issues/2084)",
-    "modules": [
-        "service/s3"
-    ]
-}

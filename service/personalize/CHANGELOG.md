@@ -1,3 +1,7 @@
+# v1.24.1 (2023-06-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.24.0 (2023-05-30)
 
 * **Feature**: This release provides support for the exclusion of certain columns for training when creating a solution and creating or updating a recommender with Amazon Personalize.

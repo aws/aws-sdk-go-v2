@@ -1,3 +1,7 @@
+# v1.37.1 (2023-06-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.37.0 (2023-06-06)
 
 * **Feature**: QuickSight support for pivot table field collapse state, radar chart range scale and multiple scope options in conditional formatting.
