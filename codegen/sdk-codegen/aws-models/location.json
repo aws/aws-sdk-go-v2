@@ -98,7 +98,7 @@
                         "smithy.api#documentation": "<p>A list of allowed actions that an API key resource grants permissions to\n            perform</p>\n         <note>\n            <p>Currently, the only valid action is <code>geo:GetMap*</code> as an input to the\n                list. For example, <code>[\"geo:GetMap*\"]</code> is valid but\n                    <code>[\"geo:GetMapTile\"]</code> is not.</p>\n         </note>",
                         "smithy.api#length": {
                             "min": 1,
-                            "max": 5
+                            "max": 7
                         },
                         "smithy.api#required": {}
                     }
@@ -783,6 +783,12 @@
                         "smithy.api#documentation": "<p>Contains the details of the position of the geofence. Can be either a \n            polygon or a circle. Including both will return a validation error.</p>\n         <note>\n            <p>Each <a href=\"https://docs.aws.amazon.com/location-geofences/latest/APIReference/API_GeofenceGeometry.html\">\n                geofence polygon</a> can have a maximum of 1,000 vertices.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
+                },
+                "GeofenceProperties": {
+                    "target": "com.amazonaws.location#PropertyMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies additional user-defined properties to store with the Geofence. An array \n            of key-value pairs.</p>"
+                    }
                 }
             },
             "traits": {
@@ -875,7 +881,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Uploads position update data for one or more devices to a tracker resource. Amazon Location\n           uses the data when it reports the last known device position and position history. Amazon Location retains location data for 30 \n           days.</p>\n         <note>\n            <p>Position updates are handled based on the <code>PositionFiltering</code> property of the tracker. \n               When <code>PositionFiltering</code> is set to <code>TimeBased</code>, updates are evaluated against linked geofence collections, \n               and location data is stored at a maximum of one position per 30 second interval. If your update frequency is more often than \n               every 30 seconds, only one update per 30 seconds is stored for each unique device ID.</p>\n            <p>When <code>PositionFiltering</code> is set to <code>DistanceBased</code> filtering, location data is stored and evaluated against linked geofence \n                collections only if the device has moved more than 30 m (98.4 ft).</p>\n            <p>When <code>PositionFiltering</code> is set to <code>AccuracyBased</code> filtering,\n                location data is stored and evaluated against linked geofence collections only if the\n                device has moved more than the measured accuracy. For example, if two consecutive\n                updates from a device have a horizontal accuracy of 5 m and 10 m, the second update\n                is neither stored or evaluated if the device has moved less than 15 m. If\n                <code>PositionFiltering</code> is set to <code>AccuracyBased</code> filtering, Amazon Location\n                uses the default value <code>{ \"Horizontal\": 0}</code> when accuracy is not provided on\n                a <code>DevicePositionUpdate</code>.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Uploads position update data for one or more devices to a tracker resource (up to \n           10 devices per batch). Amazon Location uses the data when it reports the last known device \n           position and position history. Amazon Location retains location data for 30 days.</p>\n         <note>\n            <p>Position updates are handled based on the <code>PositionFiltering</code> \n               property of the tracker. When <code>PositionFiltering</code> is set to \n               <code>TimeBased</code>, updates are evaluated against linked geofence collections, \n               and location data is stored at a maximum of one position per 30 second interval. \n               If your update frequency is more often than every 30 seconds, only one update per \n               30 seconds is stored for each unique device ID.</p>\n            <p>When <code>PositionFiltering</code> is set to <code>DistanceBased</code> \n                filtering, location data is stored and evaluated against linked geofence \n                collections only if the device has moved more than 30 m (98.4 ft).</p>\n            <p>When <code>PositionFiltering</code> is set to <code>AccuracyBased</code> \n                filtering, location data is stored and evaluated against linked geofence \n                collections only if the device has moved more than the measured accuracy. For \n                example, if two consecutive updates from a device have a horizontal accuracy of \n                5 m and 10 m, the second update is neither stored or evaluated if the device has \n                moved less than 15 m. If <code>PositionFiltering</code> is set to \n                <code>AccuracyBased</code> filtering, Amazon Location uses the default value \n                <code>{ \"Horizontal\": 0}</code> when accuracy is not provided on a\n                <code>DevicePositionUpdate</code>.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "tracking."
                 },
@@ -934,7 +940,7 @@
                 "Updates": {
                     "target": "com.amazonaws.location#DevicePositionUpdateList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains the position update details for each device.</p>",
+                        "smithy.api#documentation": "<p>Contains the position update details for each device, up to 10 devices.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 10
@@ -3415,6 +3421,18 @@
                 ]
             }
         },
+        "com.amazonaws.location#FilterPlaceCategoryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.location#PlaceCategory"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
         "com.amazonaws.location#GenericResource": {
             "type": "resource",
             "identifiers": {
@@ -3829,6 +3847,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp for when the geofence collection was last updated in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\">ISO 8601</a>\n            format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>\n         </p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "GeofenceProperties": {
+                    "target": "com.amazonaws.location#PropertyMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains additional user-defined properties stored with the geofence. An array of \n            key-value pairs.</p>"
                     }
                 }
             }
@@ -4795,6 +4819,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp for when the geofence was last updated in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\">ISO 8601</a>\n            format: <code>YYYY-MM-DDThh:mm:ss.sssZ</code>\n         </p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "GeofenceProperties": {
+                    "target": "com.amazonaws.location#PropertyMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains additional user-defined properties stored with the geofence. An array of \n            key-value pairs.</p>"
                     }
                 }
             },
@@ -6606,24 +6636,56 @@
                 "TimeZone": {
                     "target": "com.amazonaws.location#TimeZone",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time zone in which the <code>Place</code> is located. Returned only when using\n            HERE as the selected partner.</p>"
+                        "smithy.api#documentation": "<p>The time zone in which the <code>Place</code> is located. Returned only when using\n            HERE or Grab as the selected partner.</p>"
                     }
                 },
                 "UnitType": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>For addresses with a <code>UnitNumber</code>, the type of unit. For example,\n                <code>Apartment</code>.</p>"
+                        "smithy.api#documentation": "<p>For addresses with a <code>UnitNumber</code>, the type of unit. For example,\n                <code>Apartment</code>.</p>\n         <note>\n            <p>Returned only for a place index that uses Esri as a data provider.</p>\n         </note>"
                     }
                 },
                 "UnitNumber": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>For addresses with multiple units, the unit identifier. Can include numbers and\n            letters, for example <code>3B</code> or <code>Unit 123</code>.</p>\n         <note>\n            <p>Returned only for a place index that uses Esri as a data provider. Is not returned\n                for <code>SearchPlaceIndexForPosition</code>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>For addresses with multiple units, the unit identifier. Can include numbers and\n            letters, for example <code>3B</code> or <code>Unit 123</code>.</p>\n         <note>\n            <p>Returned only for a place index that uses Esri or Grab as a data provider. Is \n                not returned for <code>SearchPlaceIndexForPosition</code>.</p>\n         </note>"
+                    }
+                },
+                "Categories": {
+                    "target": "com.amazonaws.location#PlaceCategoryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Location categories that describe this Place.</p>\n         <p>For more information about using categories, including a list of Amazon Location\n            categories, see <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/category-filtering.html\">Categories and filtering</a>, in the <i>Amazon Location Service Developer \n                Guide</i>.</p>"
+                    }
+                },
+                "SupplementalCategories": {
+                    "target": "com.amazonaws.location#PlaceSupplementalCategoryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Categories from the data provider that describe the Place that are not mapped\n            to any Amazon Location categories.</p>"
                     }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains details about addresses or points of interest that match the search\n            criteria.</p>\n         <p>Not all details are included with all responses. Some details may only be returned by\n            specific data partners.</p>"
+            }
+        },
+        "com.amazonaws.location#PlaceCategory": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 35
+                }
+            }
+        },
+        "com.amazonaws.location#PlaceCategoryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.location#PlaceCategory"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
             }
         },
         "com.amazonaws.location#PlaceGeometry": {
@@ -6693,6 +6755,26 @@
                 "smithy.api#range": {
                     "min": 1,
                     "max": 50
+                }
+            }
+        },
+        "com.amazonaws.location#PlaceSupplementalCategory": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 35
+                }
+            }
+        },
+        "com.amazonaws.location#PlaceSupplementalCategoryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.location#PlaceSupplementalCategory"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
                 }
             }
         },
@@ -6866,6 +6948,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Contains the details to specify the position of the geofence. Can be either a \n            polygon or a circle. Including both will return a validation error.</p>\n         <note>\n            <p>Each <a href=\"https://docs.aws.amazon.com/location-geofences/latest/APIReference/API_GeofenceGeometry.html\">\n                geofence polygon</a> can have a maximum of 1,000 vertices.</p>\n         </note>",
                         "smithy.api#required": {}
+                    }
+                },
+                "GeofenceProperties": {
+                    "target": "com.amazonaws.location#PropertyMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies additional user-defined properties to store with the Geofence. An array \n            of key-value pairs.</p>"
                     }
                 }
             }
@@ -7124,7 +7212,19 @@
                 "PlaceId": {
                     "target": "com.amazonaws.location#PlaceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the place. You can use this with the <code>GetPlace</code>\n            operation to find the place again later.</p>\n         <note>\n            <p>For <code>SearchPlaceIndexForSuggestions</code> operations, the\n                    <code>PlaceId</code> is returned by place indexes that use Esri, Grab, or HERE\n                as data providers.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The unique identifier of the Place. You can use this with the <code>GetPlace</code>\n            operation to find the place again later, or to get full information for the Place.</p>\n         <p>The <code>GetPlace</code> request must use the same <code>PlaceIndex</code> \n            resource as the <code>SearchPlaceIndexForSuggestions</code> that generated the Place \n            ID.</p>\n         <note>\n            <p>For <code>SearchPlaceIndexForSuggestions</code> operations, the\n                    <code>PlaceId</code> is returned by place indexes that use Esri, Grab, or HERE\n                as data providers.</p>\n         </note>"
+                    }
+                },
+                "Categories": {
+                    "target": "com.amazonaws.location#PlaceCategoryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Location categories that describe the Place.</p>\n         <p>For more information about using categories, including a list of Amazon Location\n            categories, see <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/category-filtering.html\">Categories and filtering</a>, in the <i>Amazon Location Service Developer \n                    Guide</i>.</p>"
+                    }
+                },
+                "SupplementalCategories": {
+                    "target": "com.amazonaws.location#PlaceSupplementalCategoryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Categories from the data provider that describe the Place that are not mapped\n            to any Amazon Location categories.</p>"
                     }
                 }
             },
@@ -7400,6 +7500,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The preferred language used to return results. The value must be a valid <a href=\"https://tools.ietf.org/search/bcp47\">BCP 47</a> language tag, for example,\n                <code>en</code> for English.</p>\n         <p>This setting affects the languages used in the results. If no language is specified,\n            or not supported for a particular result, the partner automatically chooses a language\n            for the result.</p>\n         <p>For an example, we'll use the Greek language. You search for <code>Athens, Gr</code>\n            to get suggestions with the <code>language</code> parameter set to <code>en</code>. The\n            results found will most likely be returned as <code>Athens, Greece</code>.</p>\n         <p>If you set the <code>language</code> parameter to <code>el</code>, for Greek, then the\n            result found will more likely be returned as <code>Αθήνα, Ελλάδα</code>.</p>\n         <p>If the data provider does not have a value for Greek, the result will be in a language\n            that the provider does support.</p>"
                     }
+                },
+                "FilterCategories": {
+                    "target": "com.amazonaws.location#FilterPlaceCategoryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of one or more Amazon Location categories to filter the returned places. If you \n            include more than one category, the results will include results that match \n            <i>any</i> of the categories listed.</p>\n         <p>For more information about using categories, including a list of Amazon Location\n            categories, see <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/category-filtering.html\">Categories and filtering</a>, in the <i>Amazon Location Service Developer \n                    Guide</i>.</p>"
+                    }
                 }
             }
         },
@@ -7467,6 +7573,12 @@
                     "target": "com.amazonaws.location#LanguageTag",
                     "traits": {
                         "smithy.api#documentation": "<p>The preferred language used to return results. Matches the language in the request.\n            The value is a valid <a href=\"https://tools.ietf.org/search/bcp47\">BCP 47</a>\n            language tag, for example, <code>en</code> for English.</p>"
+                    }
+                },
+                "FilterCategories": {
+                    "target": "com.amazonaws.location#FilterPlaceCategoryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The optional category filter specified in the request.</p>"
                     }
                 }
             },
@@ -7563,6 +7675,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The preferred language used to return results. The value must be a valid <a href=\"https://tools.ietf.org/search/bcp47\">BCP 47</a> language tag, for example,\n                <code>en</code> for English.</p>\n         <p>This setting affects the languages used in the results, but not the results\n            themselves. If no language is specified, or not supported for a particular result, the\n            partner automatically chooses a language for the result.</p>\n         <p>For an example, we'll use the Greek language. You search for <code>Athens,\n                Greece</code>, with the <code>language</code> parameter set to <code>en</code>. The\n            result found will most likely be returned as <code>Athens</code>.</p>\n         <p>If you set the <code>language</code> parameter to <code>el</code>, for Greek, then the\n            result found will more likely be returned as <code>Αθήνα</code>.</p>\n         <p>If the data provider does not have a value for Greek, the result will be in a language\n            that the provider does support.</p>"
                     }
+                },
+                "FilterCategories": {
+                    "target": "com.amazonaws.location#FilterPlaceCategoryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of one or more Amazon Location categories to filter the returned places. If you \n            include more than one category, the results will include results that match \n            <i>any</i> of the categories listed.</p>\n         <p>For more information about using categories, including a list of Amazon Location\n            categories, see <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/category-filtering.html\">Categories and filtering</a>, in the <i>Amazon Location Service Developer \n                    Guide</i>.</p>"
+                    }
                 }
             }
         },
@@ -7637,6 +7755,12 @@
                     "target": "com.amazonaws.location#LanguageTag",
                     "traits": {
                         "smithy.api#documentation": "<p>The preferred language used to return results. Matches the language in the request.\n            The value is a valid <a href=\"https://tools.ietf.org/search/bcp47\">BCP 47</a>\n            language tag, for example, <code>en</code> for English.</p>"
+                    }
+                },
+                "FilterCategories": {
+                    "target": "com.amazonaws.location#FilterPlaceCategoryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The optional category filter specified in the request.</p>"
                     }
                 }
             },
