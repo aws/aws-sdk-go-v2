@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of evidence folders that are associated with a specified control
-// in an Audit Manager assessment.
+// Gets a list of evidence folders that are associated with a specified control in
+// an Audit Manager assessment.
 func (c *Client) GetEvidenceFoldersByAssessmentControl(ctx context.Context, params *GetEvidenceFoldersByAssessmentControlInput, optFns ...func(*Options)) (*GetEvidenceFoldersByAssessmentControlOutput, error) {
 	if params == nil {
 		params = &GetEvidenceFoldersByAssessmentControlInput{}

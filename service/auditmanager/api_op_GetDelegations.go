@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of delegations from an audit owner to a delegate.
+// Gets a list of delegations from an audit owner to a delegate.
 func (c *Client) GetDelegations(ctx context.Context, params *GetDelegationsInput, optFns ...func(*Options)) (*GetDelegationsOutput, error) {
 	if params == nil {
 		params = &GetDelegationsInput{}

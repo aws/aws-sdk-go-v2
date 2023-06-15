@@ -3644,6 +3644,13 @@ func awsRestjson1_serializeOpDocumentPutGeofenceInput(v *PutGeofenceInput, value
 	object := value.Object()
 	defer object.Close()
 
+	if v.GeofenceProperties != nil {
+		ok := object.Key("GeofenceProperties")
+		if err := awsRestjson1_serializeDocumentPropertyMap(v.GeofenceProperties, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Geometry != nil {
 		ok := object.Key("Geometry")
 		if err := awsRestjson1_serializeDocumentGeofenceGeometry(v.Geometry, ok); err != nil {
@@ -3834,6 +3841,13 @@ func awsRestjson1_serializeOpDocumentSearchPlaceIndexForSuggestionsInput(v *Sear
 		}
 	}
 
+	if v.FilterCategories != nil {
+		ok := object.Key("FilterCategories")
+		if err := awsRestjson1_serializeDocumentFilterPlaceCategoryList(v.FilterCategories, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.FilterCountries != nil {
 		ok := object.Key("FilterCountries")
 		if err := awsRestjson1_serializeDocumentCountryCodeList(v.FilterCountries, ok); err != nil {
@@ -3942,6 +3956,13 @@ func awsRestjson1_serializeOpDocumentSearchPlaceIndexForTextInput(v *SearchPlace
 	if v.FilterBBox != nil {
 		ok := object.Key("FilterBBox")
 		if err := awsRestjson1_serializeDocumentBoundingBox(v.FilterBBox, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FilterCategories != nil {
+		ok := object.Key("FilterCategories")
+		if err := awsRestjson1_serializeDocumentFilterPlaceCategoryList(v.FilterCategories, ok); err != nil {
 			return err
 		}
 	}
@@ -4740,6 +4761,13 @@ func awsRestjson1_serializeDocumentBatchPutGeofenceRequestEntry(v *types.BatchPu
 		ok.String(*v.GeofenceId)
 	}
 
+	if v.GeofenceProperties != nil {
+		ok := object.Key("GeofenceProperties")
+		if err := awsRestjson1_serializeDocumentPropertyMap(v.GeofenceProperties, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Geometry != nil {
 		ok := object.Key("Geometry")
 		if err := awsRestjson1_serializeDocumentGeofenceGeometry(v.Geometry, ok); err != nil {
@@ -4948,6 +4976,17 @@ func awsRestjson1_serializeDocumentDevicePositionUpdateList(v []types.DevicePosi
 		if err := awsRestjson1_serializeDocumentDevicePositionUpdate(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFilterPlaceCategoryList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
 	}
 	return nil
 }

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns an assessment from Audit Manager.
+// Gets information about a specified assessment.
 func (c *Client) GetAssessment(ctx context.Context, params *GetAssessmentInput, optFns ...func(*Options)) (*GetAssessmentOutput, error) {
 	if params == nil {
 		params = &GetAssessmentInput{}

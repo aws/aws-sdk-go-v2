@@ -705,7 +705,7 @@ type DnsRequestAction struct {
 	// Indicates whether the targeted port is blocked.
 	Blocked bool
 
-	// The domain information for the API request.
+	// The domain information for the DNS query.
 	Domain *string
 
 	// The network connection protocol observed in the activity that prompted

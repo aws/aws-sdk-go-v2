@@ -450,6 +450,26 @@ func (m *validateOpGetEvidenceByEvidenceFolder) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetEvidenceFileUploadUrl struct {
+}
+
+func (*validateOpGetEvidenceFileUploadUrl) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetEvidenceFileUploadUrl) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetEvidenceFileUploadUrlInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetEvidenceFileUploadUrlInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetEvidenceFolder struct {
 }
 
@@ -1076,6 +1096,10 @@ func addOpGetControlValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetEvidenceByEvidenceFolderValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetEvidenceByEvidenceFolder{}, middleware.After)
+}
+
+func addOpGetEvidenceFileUploadUrlValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetEvidenceFileUploadUrl{}, middleware.After)
 }
 
 func addOpGetEvidenceFolderValidationMiddleware(stack *middleware.Stack) error {
@@ -1728,6 +1752,21 @@ func validateOpGetEvidenceByEvidenceFolderInput(v *GetEvidenceByEvidenceFolderIn
 	}
 	if v.EvidenceFolderId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EvidenceFolderId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetEvidenceFileUploadUrlInput(v *GetEvidenceFileUploadUrlInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetEvidenceFileUploadUrlInput"}
+	if v.FileName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns all evidence from a specified evidence folder in Audit Manager.
+// Gets all evidence from a specified evidence folder in Audit Manager.
 func (c *Client) GetEvidenceByEvidenceFolder(ctx context.Context, params *GetEvidenceByEvidenceFolderInput, optFns ...func(*Options)) (*GetEvidenceByEvidenceFolderOutput, error) {
 	if params == nil {
 		params = &GetEvidenceByEvidenceFolderInput{}

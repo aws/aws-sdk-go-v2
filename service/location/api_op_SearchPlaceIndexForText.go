@@ -69,6 +69,13 @@ type SearchPlaceIndexForTextInput struct {
 	// BiasPosition are mutually exclusive. Specifying both options results in an error.
 	FilterBBox []float64
 
+	// A list of one or more Amazon Location categories to filter the returned places.
+	// If you include more than one category, the results will include results that
+	// match any of the categories listed. For more information about using categories,
+	// including a list of Amazon Location categories, see Categories and filtering (https://docs.aws.amazon.com/location/latest/developerguide/category-filtering.html)
+	// , in the Amazon Location Service Developer Guide.
+	FilterCategories []string
+
 	// An optional parameter that limits the search results by returning only places
 	// that are in a specified list of countries.
 	//   - Valid values include ISO 3166 (https://www.iso.org/iso-3166-country-codes.html)

@@ -21,11 +21,17 @@ import (
 // application's own directory and any subdirectories. To learn more, see Mounting
 // a file system using EFS access points (https://docs.aws.amazon.com/efs/latest/ug/efs-access-points.html)
 // . If multiple requests to create access points on the same file system are sent
-// in quick succession, and the file system is near the limit of 1000 access
+// in quick succession, and the file system is near the limit of 1,000 access
 // points, you may experience a throttling response for these requests. This is to
 // ensure that the file system does not exceed the stated access point limit. This
 // operation requires permissions for the elasticfilesystem:CreateAccessPoint
-// action.
+// action. Access points can be tagged on creation. If tags are specified in the
+// creation action, IAM performs additional authorization on the
+// elasticfilesystem:TagResource action to verify if users have permissions to
+// create tags. Therefore, you must grant explicit permissions to use the
+// elasticfilesystem:TagResource action. For more information, see Granting
+// permissions to tag resources during creation (https://docs.aws.amazon.com/efs/latest/ug/using-tags-efs.html#supported-iam-actions-tagging.html)
+// .
 func (c *Client) CreateAccessPoint(ctx context.Context, params *CreateAccessPointInput, optFns ...func(*Options)) (*CreateAccessPointOutput, error) {
 	if params == nil {
 		params = &CreateAccessPointInput{}

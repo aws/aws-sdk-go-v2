@@ -14,13 +14,20 @@ import (
 // Creates member accounts of the current Amazon Web Services account by
 // specifying a list of Amazon Web Services account IDs. This step is a
 // prerequisite for managing the associated member accounts either by invitation or
-// through an organization. When using Create Members as an organizations
-// delegated administrator this action will enable GuardDuty in the added member
-// accounts, with the exception of the organization delegated administrator
-// account, which must enable GuardDuty prior to being added as a member. If you
-// are adding accounts by invitation, use this action after GuardDuty has bee
-// enabled in potential member accounts and before using InviteMembers (https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html)
-// .
+// through an organization. As a delegated administrator, using CreateMembers will
+// enable GuardDuty in the added member accounts, with the exception of the
+// organization delegated administrator account. A delegated administrator must
+// enable GuardDuty prior to being added as a member. If you are adding accounts by
+// invitation, before using InviteMembers (https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html)
+// , use CreateMembers after GuardDuty has been enabled in potential member
+// accounts. If you disassociate a member from a GuardDuty delegated administrator,
+// the member account details obtained from this API, including the associated
+// email addresses, will be retained. This is done so that the delegated
+// administrator can invoke the InviteMembers (https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html)
+// API without the need to invoke the CreateMembers API again. To remove the
+// details associated with a member account, the delegated administrator must
+// invoke the DeleteMembers (https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DeleteMembers.html)
+// API.
 func (c *Client) CreateMembers(ctx context.Context, params *CreateMembersInput, optFns ...func(*Options)) (*CreateMembersOutput, error) {
 	if params == nil {
 		params = &CreateMembersInput{}

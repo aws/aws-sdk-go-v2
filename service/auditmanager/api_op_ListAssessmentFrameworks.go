@@ -47,7 +47,8 @@ type ListAssessmentFrameworksInput struct {
 
 type ListAssessmentFrameworksOutput struct {
 
-	// The list of metadata objects for the framework.
+	// A list of metadata that the ListAssessmentFrameworks API returns for each
+	// framework.
 	FrameworkMetadataList []types.AssessmentFrameworkMetadata
 
 	// The pagination token that's used to fetch the next set of results.

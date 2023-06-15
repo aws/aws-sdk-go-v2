@@ -432,7 +432,7 @@ type AssessmentReportMetadata struct {
 // assessment.
 type AssessmentReportsDestination struct {
 
-	// The destination of the assessment report.
+	// The destination bucket where Audit Manager stores assessment reports.
 	Destination *string
 
 	// The destination type, such as Amazon S3.
@@ -587,7 +587,7 @@ type Control struct {
 	// The steps that you should follow to determine if the control has been satisfied.
 	TestingInformation *string
 
-	// The type of control, such as a custom control or a standard control.
+	// Specifies whether the control is a standard control or a custom control.
 	Type ControlType
 
 	noSmithyDocumentSerde
@@ -690,18 +690,20 @@ type ControlMappingSource struct {
 	// The description of the source.
 	SourceDescription *string
 
-	// The frequency of evidence collection for the control mapping source.
+	// Specifies how often evidence is collected from the control mapping source.
 	SourceFrequency SourceFrequency
 
 	// The unique identifier for the source.
 	SourceId *string
 
-	// The keyword to search for in CloudTrail logs, Config rules, Security Hub
-	// checks, and Amazon Web Services API names. To learn more about the supported
-	// keywords that you can use when mapping a control data source, see the following
-	// pages in the Audit Manager User Guide:
-	//   - Config rules supported by Audit Manager (https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-ash.html)
-	//   - Security Hub controls supported by Audit Manager (https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-config.html)
+	// A keyword that relates to the control data source. For manual evidence, this
+	// keyword indicates if the manual evidence is a file or text. For automated
+	// evidence, this keyword identifies a specific CloudTrail event, Config rule,
+	// Security Hub control, or Amazon Web Services API name. To learn more about the
+	// supported keywords that you can use when mapping a control data source, see the
+	// following pages in the Audit Manager User Guide:
+	//   - Config rules supported by Audit Manager (https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-config.html)
+	//   - Security Hub controls supported by Audit Manager (https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-ash.html)
 	//   - API calls supported by Audit Manager (https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-api.html)
 	//   - CloudTrail event names supported by Audit Manager (https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-cloudtrail.html)
 	SourceKeyword *SourceKeyword
@@ -799,15 +801,17 @@ type CreateControlMappingSource struct {
 	// evidence from for the control.
 	SourceDescription *string
 
-	// The frequency of evidence collection for the control mapping source.
+	// Specifies how often evidence is collected from the control mapping source.
 	SourceFrequency SourceFrequency
 
-	// The keyword to search for in CloudTrail logs, Config rules, Security Hub
-	// checks, and Amazon Web Services API names. To learn more about the supported
-	// keywords that you can use when mapping a control data source, see the following
-	// pages in the Audit Manager User Guide:
-	//   - Config rules supported by Audit Manager (https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-ash.html)
-	//   - Security Hub controls supported by Audit Manager (https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-config.html)
+	// A keyword that relates to the control data source. For manual evidence, this
+	// keyword indicates if the manual evidence is a file or text. For automated
+	// evidence, this keyword identifies a specific CloudTrail event, Config rule,
+	// Security Hub control, or Amazon Web Services API name. To learn more about the
+	// supported keywords that you can use when mapping a control data source, see the
+	// following pages in the Audit Manager User Guide:
+	//   - Config rules supported by Audit Manager (https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-config.html)
+	//   - Security Hub controls supported by Audit Manager (https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-ash.html)
 	//   - API calls supported by Audit Manager (https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-api.html)
 	//   - CloudTrail event names supported by Audit Manager (https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-cloudtrail.html)
 	SourceKeyword *SourceKeyword
@@ -845,6 +849,19 @@ type CreateDelegationRequest struct {
 	// PROCESS_OWNER . In UpdateSettings , roleType can only be PROCESS_OWNER . In
 	// BatchCreateDelegationByAssessment , roleType can only be RESOURCE_OWNER .
 	RoleType RoleType
+
+	noSmithyDocumentSerde
+}
+
+// The default s3 bucket where Audit Manager saves the files that you export from
+// evidence finder.
+type DefaultExportDestination struct {
+
+	// The destination bucket where Audit Manager stores exported files.
+	Destination *string
+
+	// The destination type, such as Amazon S3.
+	DestinationType ExportDestinationType
 
 	noSmithyDocumentSerde
 }
@@ -1089,14 +1106,13 @@ type Framework struct {
 	// The Amazon Resource Name (ARN) of the framework.
 	Arn *string
 
-	// The compliance type that the new custom framework supports, such as CIS or
-	// HIPAA.
+	// The compliance type that the framework supports, such as CIS or HIPAA.
 	ComplianceType *string
 
 	// The control sets that are associated with the framework.
 	ControlSets []ControlSet
 
-	// The sources that Audit Manager collects evidence from for the control.
+	// The control data sources where Audit Manager collects evidence from.
 	ControlSources *string
 
 	// The time when the framework was created.
@@ -1126,7 +1142,7 @@ type Framework struct {
 	// The tags that are associated with the framework.
 	Tags map[string]string
 
-	// The framework type, such as a custom framework or a standard framework.
+	// Specifies whether the framework is a standard framework or a custom framework.
 	Type FrameworkType
 
 	noSmithyDocumentSerde
@@ -1254,11 +1270,21 @@ type InsightsByAssessment struct {
 	noSmithyDocumentSerde
 }
 
-// Evidence that's uploaded to Audit Manager manually.
+// Evidence that's manually added to a control in Audit Manager. manualEvidence
+// can be one of the following: evidenceFileName , s3ResourcePath , or textResponse
+// .
 type ManualEvidence struct {
 
-	// The Amazon S3 URL that points to a manual evidence object.
+	// The name of the file that's uploaded as manual evidence. This name is populated
+	// using the evidenceFileName value from the GetEvidenceFileUploadUrl (https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_GetEvidenceFileUploadUrl.html)
+	// API response.
+	EvidenceFileName *string
+
+	// The S3 URL of the object that's imported as manual evidence.
 	S3ResourcePath *string
+
+	// The plain text response that's entered and saved as manual evidence.
+	TextResponse *string
 
 	noSmithyDocumentSerde
 }
@@ -1377,8 +1403,11 @@ type ServiceMetadata struct {
 // The settings object that holds all supported Audit Manager settings.
 type Settings struct {
 
-	// The default storage destination for assessment reports.
+	// The default S3 destination bucket for storing assessment reports.
 	DefaultAssessmentReportsDestination *AssessmentReportsDestination
+
+	// The default S3 destination bucket for storing evidence finder exports.
+	DefaultExportDestination *DefaultExportDestination
 
 	// The designated default audit owners.
 	DefaultProcessOwners []Role
@@ -1403,17 +1432,30 @@ type Settings struct {
 	noSmithyDocumentSerde
 }
 
-// The keyword to search for in CloudTrail logs, Config rules, Security Hub
-// checks, and Amazon Web Services API names. To learn more about the supported
-// keywords that you can use when mapping a control data source, see the following
-// pages in the Audit Manager User Guide:
-//   - Config rules supported by Audit Manager (https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-ash.html)
-//   - Security Hub controls supported by Audit Manager (https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-config.html)
+// A keyword that relates to the control data source. For manual evidence, this
+// keyword indicates if the manual evidence is a file or text. For automated
+// evidence, this keyword identifies a specific CloudTrail event, Config rule,
+// Security Hub control, or Amazon Web Services API name. To learn more about the
+// supported keywords that you can use when mapping a control data source, see the
+// following pages in the Audit Manager User Guide:
+//   - Config rules supported by Audit Manager (https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-config.html)
+//   - Security Hub controls supported by Audit Manager (https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-ash.html)
 //   - API calls supported by Audit Manager (https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-api.html)
 //   - CloudTrail event names supported by Audit Manager (https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-cloudtrail.html)
 type SourceKeyword struct {
 
 	// The input method for the keyword.
+	//   - SELECT_FROM_LIST is used when mapping a data source for automated evidence.
+	//   - When keywordInputType is SELECT_FROM_LIST , a keyword must be selected to
+	//   collect automated evidence. For example, this keyword can be a CloudTrail event
+	//   name, a rule name for Config, a Security Hub control, or the name of an Amazon
+	//   Web Services API call.
+	//   - UPLOAD_FILE and INPUT_TEXT are only used when mapping a data source for
+	//   manual evidence.
+	//   - When keywordInputType is UPLOAD_FILE , a file must be uploaded as manual
+	//   evidence.
+	//   - When keywordInputType is INPUT_TEXT , text must be entered as manual
+	//   evidence.
 	KeywordInputType KeywordInputType
 
 	// The value of the keyword that's used when mapping a control data source. For
@@ -1424,22 +1466,55 @@ type SourceKeyword struct {
 	//   - For managed rules (https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_use-managed-rules.html)
 	//   , you can use the rule identifier as the keywordValue . You can find the rule
 	//   identifier from the list of Config managed rules (https://docs.aws.amazon.com/config/latest/developerguide/managed-rules-by-aws-config.html)
-	//   .
+	//   . For some rules, the rule identifier is different from the rule name. For
+	//   example, the rule name restricted-ssh has the following rule identifier:
+	//   INCOMING_SSH_DISABLED . Make sure to use the rule identifier, not the rule
+	//   name. Keyword example for managed rules:
 	//   - Managed rule name: s3-bucket-acl-prohibited (https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-acl-prohibited.html)
 	//   keywordValue : S3_BUCKET_ACL_PROHIBITED
 	//   - For custom rules (https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_develop-rules.html)
 	//   , you form the keywordValue by adding the Custom_ prefix to the rule name.
-	//   This prefix distinguishes the rule from a managed rule.
+	//   This prefix distinguishes the custom rule from a managed rule. Keyword example
+	//   for custom rules:
 	//   - Custom rule name: my-custom-config-rule keywordValue :
 	//   Custom_my-custom-config-rule
 	//   - For service-linked rules (https://docs.aws.amazon.com/config/latest/developerguide/service-linked-awsconfig-rules.html)
 	//   , you form the keywordValue by adding the Custom_ prefix to the rule name. In
 	//   addition, you remove the suffix ID that appears at the end of the rule name.
+	//   Keyword examples for service-linked rules:
 	//   - Service-linked rule name: CustomRuleForAccount-conformance-pack-szsm1uv0w
 	//   keywordValue : Custom_CustomRuleForAccount-conformance-pack
 	//   - Service-linked rule name:
 	//   OrgConfigRule-s3-bucket-versioning-enabled-dbgzf8ba keywordValue :
 	//   Custom_OrgConfigRule-s3-bucket-versioning-enabled
+	// The keywordValue is case sensitive. If you enter a value incorrectly, Audit
+	// Manager might not recognize the data source mapping. As a result, you might not
+	// successfully collect evidence from that data source as intended. Keep in mind
+	// the following requirements, depending on the data source type that you're using.
+	//
+	//   - For Config:
+	//   - For managed rules, make sure that the keywordValue is the rule identifier in
+	//   ALL_CAPS_WITH_UNDERSCORES . For example, CLOUDWATCH_LOG_GROUP_ENCRYPTED . For
+	//   accuracy, we recommend that you reference the list of supported Config
+	//   managed rules (https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-config.html)
+	//   .
+	//   - For custom rules, make sure that the keywordValue has the Custom_ prefix
+	//   followed by the custom rule name. The format of the custom rule name itself may
+	//   vary. For accuracy, we recommend that you visit the Config console (https://console.aws.amazon.com/config/)
+	//   to verify your custom rule name.
+	//   - For Security Hub: The format varies for Security Hub control names. For
+	//   accuracy, we recommend that you reference the list of supported Security Hub
+	//   controls (https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-ash.html)
+	//   .
+	//   - For Amazon Web Services API calls: Make sure that the keywordValue is
+	//   written as serviceprefix_ActionName . For example, iam_ListGroups . For
+	//   accuracy, we recommend that you reference the list of supported API calls (https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-api.html)
+	//   .
+	//   - For CloudTrail: Make sure that the keywordValue is written as
+	//   serviceprefix_ActionName . For example, cloudtrail_StartLogging . For
+	//   accuracy, we recommend that you review the Amazon Web Service prefix and action
+	//   names in the Service Authorization Reference (https://docs.aws.amazon.com/service-authorization/latest/reference/reference_policies_actions-resources-contextkeys.html)
+	//   .
 	KeywordValue *string
 
 	noSmithyDocumentSerde

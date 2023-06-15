@@ -29,8 +29,11 @@ func (c *Client) UpdateSettings(ctx context.Context, params *UpdateSettingsInput
 
 type UpdateSettingsInput struct {
 
-	// The default storage destination for assessment reports.
+	// The default S3 destination bucket for storing assessment reports.
 	DefaultAssessmentReportsDestination *types.AssessmentReportsDestination
+
+	// The default S3 destination bucket for storing evidence finder exports.
+	DefaultExportDestination *types.DefaultExportDestination
 
 	// A list of the default audit owners.
 	DefaultProcessOwners []types.Role

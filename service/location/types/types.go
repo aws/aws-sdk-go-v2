@@ -182,6 +182,10 @@ type BatchPutGeofenceRequestEntry struct {
 	// This member is required.
 	Geometry *GeofenceGeometry
 
+	// Specifies additional user-defined properties to store with the Geofence. An
+	// array of key-value pairs.
+	GeofenceProperties map[string]string
+
 	noSmithyDocumentSerde
 }
 
@@ -667,6 +671,10 @@ type ListGeofenceResponseEntry struct {
 	// This member is required.
 	UpdateTime *time.Time
 
+	// Contains additional user-defined properties stored with the geofence. An array
+	// of key-value pairs.
+	GeofenceProperties map[string]string
+
 	noSmithyDocumentSerde
 }
 
@@ -992,6 +1000,12 @@ type Place struct {
 	// The numerical portion of an address, such as a building number.
 	AddressNumber *string
 
+	// The Amazon Location categories that describe this Place. For more information
+	// about using categories, including a list of Amazon Location categories, see
+	// Categories and filtering (https://docs.aws.amazon.com/location/latest/developerguide/category-filtering.html)
+	// , in the Amazon Location Service Developer Guide.
+	Categories []string
+
 	// A country/region specified using ISO 3166 (https://www.iso.org/iso-3166-country-codes.html)
 	// 3-digit country/region code. For example, CAN .
 	Country *string
@@ -1030,16 +1044,22 @@ type Place struct {
 	// Vancouver .
 	SubRegion *string
 
-	// The time zone in which the Place is located. Returned only when using HERE as
-	// the selected partner.
+	// Categories from the data provider that describe the Place that are not mapped
+	// to any Amazon Location categories.
+	SupplementalCategories []string
+
+	// The time zone in which the Place is located. Returned only when using HERE or
+	// Grab as the selected partner.
 	TimeZone *TimeZone
 
 	// For addresses with multiple units, the unit identifier. Can include numbers and
 	// letters, for example 3B or Unit 123 . Returned only for a place index that uses
-	// Esri as a data provider. Is not returned for SearchPlaceIndexForPosition .
+	// Esri or Grab as a data provider. Is not returned for SearchPlaceIndexForPosition
+	// .
 	UnitNumber *string
 
 	// For addresses with a UnitNumber , the type of unit. For example, Apartment .
+	// Returned only for a place index that uses Esri as a data provider.
 	UnitType *string
 
 	noSmithyDocumentSerde
@@ -1153,11 +1173,23 @@ type SearchForSuggestionsResult struct {
 	// This member is required.
 	Text *string
 
-	// The unique identifier of the place. You can use this with the GetPlace
-	// operation to find the place again later. For SearchPlaceIndexForSuggestions
-	// operations, the PlaceId is returned by place indexes that use Esri, Grab, or
-	// HERE as data providers.
+	// The Amazon Location categories that describe the Place. For more information
+	// about using categories, including a list of Amazon Location categories, see
+	// Categories and filtering (https://docs.aws.amazon.com/location/latest/developerguide/category-filtering.html)
+	// , in the Amazon Location Service Developer Guide.
+	Categories []string
+
+	// The unique identifier of the Place. You can use this with the GetPlace
+	// operation to find the place again later, or to get full information for the
+	// Place. The GetPlace request must use the same PlaceIndex resource as the
+	// SearchPlaceIndexForSuggestions that generated the Place ID. For
+	// SearchPlaceIndexForSuggestions operations, the PlaceId is returned by place
+	// indexes that use Esri, Grab, or HERE as data providers.
 	PlaceId *string
+
+	// Categories from the data provider that describe the Place that are not mapped
+	// to any Amazon Location categories.
+	SupplementalCategories []string
 
 	noSmithyDocumentSerde
 }
@@ -1254,6 +1286,9 @@ type SearchPlaceIndexForSuggestionsSummary struct {
 	// Contains the coordinates for the optional bounding box specified in the request.
 	FilterBBox []float64
 
+	// The optional category filter specified in the request.
+	FilterCategories []string
+
 	// Contains the optional country filter specified in the request.
 	FilterCountries []string
 
@@ -1297,6 +1332,9 @@ type SearchPlaceIndexForTextSummary struct {
 
 	// Contains the coordinates for the optional bounding box specified in the request.
 	FilterBBox []float64
+
+	// The optional category filter specified in the request.
+	FilterCategories []string
 
 	// Contains the optional country filter specified in the request.
 	FilterCountries []string

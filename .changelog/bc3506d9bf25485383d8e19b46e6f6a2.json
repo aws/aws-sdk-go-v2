@@ -1,0 +1,8 @@
+{
+    "id": "bc3506d9-bf25-4853-83d8-e19b46e6f6a2",
+    "type": "feature",
+    "description": "This release introduces 2 Audit Manager features: CSV exports and new manual evidence options. You can now export your evidence finder results in CSV format. In addition, you can now add manual evidence to a control by entering free-form text or uploading a file from your browser.",
+    "modules": [
+        "service/auditmanager"
+    ]
+}

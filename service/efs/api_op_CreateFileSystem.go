@@ -49,7 +49,13 @@ import (
 // mount your Amazon EFS file system on an EC2 instances in your VPC by using the
 // mount target. For more information, see Amazon EFS: How it Works (https://docs.aws.amazon.com/efs/latest/ug/how-it-works.html)
 // . This operation requires permissions for the elasticfilesystem:CreateFileSystem
-// action.
+// action. File systems can be tagged on creation. If tags are specified in the
+// creation action, IAM performs additional authorization on the
+// elasticfilesystem:TagResource action to verify if users have permissions to
+// create tags. Therefore, you must grant explicit permissions to use the
+// elasticfilesystem:TagResource action. For more information, see Granting
+// permissions to tag resources during creation (https://docs.aws.amazon.com/efs/latest/ug/using-tags-efs.html#supported-iam-actions-tagging.html)
+// .
 func (c *Client) CreateFileSystem(ctx context.Context, params *CreateFileSystemInput, optFns ...func(*Options)) (*CreateFileSystemOutput, error) {
 	if params == nil {
 		params = &CreateFileSystemInput{}

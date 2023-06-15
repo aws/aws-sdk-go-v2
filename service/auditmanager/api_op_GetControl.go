@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a control from Audit Manager.
+// Gets information about a specified control.
 func (c *Client) GetControl(ctx context.Context, params *GetControlInput, optFns ...func(*Options)) (*GetControlOutput, error) {
 	if params == nil {
 		params = &GetControlInput{}
@@ -39,7 +39,7 @@ type GetControlInput struct {
 
 type GetControlOutput struct {
 
-	// The name of the control that the GetControl API returned.
+	// The details of the control that the GetControl API returned.
 	Control *types.Control
 
 	// Metadata pertaining to the operation's result.

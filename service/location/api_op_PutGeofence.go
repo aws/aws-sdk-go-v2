@@ -50,6 +50,10 @@ type PutGeofenceInput struct {
 	// This member is required.
 	Geometry *types.GeofenceGeometry
 
+	// Specifies additional user-defined properties to store with the Geofence. An
+	// array of key-value pairs.
+	GeofenceProperties map[string]string
+
 	noSmithyDocumentSerde
 }
 

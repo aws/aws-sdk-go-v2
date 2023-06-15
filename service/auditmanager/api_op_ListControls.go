@@ -46,7 +46,7 @@ type ListControlsInput struct {
 
 type ListControlsOutput struct {
 
-	// The list of control metadata objects that the ListControls API returned.
+	// A list of metadata that the ListControls API returns for each control.
 	ControlMetadataList []types.ControlMetadata
 
 	// The pagination token that's used to fetch the next set of results.

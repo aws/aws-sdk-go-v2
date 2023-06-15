@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of changelogs from Audit Manager.
+// Gets a list of changelogs from Audit Manager.
 func (c *Client) GetChangeLogs(ctx context.Context, params *GetChangeLogsInput, optFns ...func(*Options)) (*GetChangeLogsOutput, error) {
 	if params == nil {
 		params = &GetChangeLogsInput{}

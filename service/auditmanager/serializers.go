@@ -2012,6 +2012,59 @@ func awsRestjson1_serializeOpHttpBindingsGetEvidenceByEvidenceFolderInput(v *Get
 	return nil
 }
 
+type awsRestjson1_serializeOpGetEvidenceFileUploadUrl struct {
+}
+
+func (*awsRestjson1_serializeOpGetEvidenceFileUploadUrl) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetEvidenceFileUploadUrl) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetEvidenceFileUploadUrlInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/evidenceFileUploadUrl")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetEvidenceFileUploadUrlInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetEvidenceFileUploadUrlInput(v *GetEvidenceFileUploadUrlInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.FileName != nil {
+		encoder.SetQuery("fileName").String(*v.FileName)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpGetEvidenceFolder struct {
 }
 
@@ -4335,6 +4388,13 @@ func awsRestjson1_serializeOpDocumentUpdateSettingsInput(v *UpdateSettingsInput,
 		}
 	}
 
+	if v.DefaultExportDestination != nil {
+		ok := object.Key("defaultExportDestination")
+		if err := awsRestjson1_serializeDocumentDefaultExportDestination(v.DefaultExportDestination, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DefaultProcessOwners != nil {
 		ok := object.Key("defaultProcessOwners")
 		if err := awsRestjson1_serializeDocumentRoles(v.DefaultProcessOwners, ok); err != nil {
@@ -4728,6 +4788,23 @@ func awsRestjson1_serializeDocumentCreateDelegationRequests(v []types.CreateDele
 	return nil
 }
 
+func awsRestjson1_serializeDocumentDefaultExportDestination(v *types.DefaultExportDestination, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Destination != nil {
+		ok := object.Key("destination")
+		ok.String(*v.Destination)
+	}
+
+	if len(v.DestinationType) > 0 {
+		ok := object.Key("destinationType")
+		ok.String(string(v.DestinationType))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentDelegationIds(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -4766,9 +4843,19 @@ func awsRestjson1_serializeDocumentManualEvidence(v *types.ManualEvidence, value
 	object := value.Object()
 	defer object.Close()
 
+	if v.EvidenceFileName != nil {
+		ok := object.Key("evidenceFileName")
+		ok.String(*v.EvidenceFileName)
+	}
+
 	if v.S3ResourcePath != nil {
 		ok := object.Key("s3ResourcePath")
 		ok.String(*v.S3ResourcePath)
+	}
+
+	if v.TextResponse != nil {
+		ok := object.Key("textResponse")
+		ok.String(*v.TextResponse)
 	}
 
 	return nil

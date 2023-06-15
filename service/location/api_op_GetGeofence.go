@@ -79,6 +79,10 @@ type GetGeofenceOutput struct {
 	// This member is required.
 	UpdateTime *time.Time
 
+	// Contains additional user-defined properties stored with the geofence. An array
+	// of key-value pairs.
+	GeofenceProperties map[string]string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

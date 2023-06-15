@@ -11,9 +11,16 @@ import (
 )
 
 // Disassociates the current GuardDuty member account from its administrator
-// account. With autoEnableOrganizationMembers configuration for your organization
-// set to ALL , you'll receive an error if you attempt to disable GuardDuty in a
-// member account.
+// account. When you disassociate an invited member from a GuardDuty delegated
+// administrator, the member account details obtained from the CreateMembers (https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateMembers.html)
+// API, including the associated email addresses, are retained. This is done so
+// that the delegated administrator can invoke the InviteMembers (https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html)
+// API without the need to invoke the CreateMembers API again. To remove the
+// details associated with a member account, the delegated administrator must
+// invoke the DeleteMembers (https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DeleteMembers.html)
+// API. With autoEnableOrganizationMembers configuration for your organization set
+// to ALL , you'll receive an error if you attempt to disable GuardDuty in a member
+// account.
 func (c *Client) DisassociateFromAdministratorAccount(ctx context.Context, params *DisassociateFromAdministratorAccountInput, optFns ...func(*Options)) (*DisassociateFromAdministratorAccountOutput, error) {
 	if params == nil {
 		params = &DisassociateFromAdministratorAccountInput{}

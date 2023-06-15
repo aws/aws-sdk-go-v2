@@ -5190,6 +5190,11 @@ func awsRestjson1_deserializeOpDocumentGetGeofenceOutput(v **GetGeofenceOutput, 
 				sv.GeofenceId = ptr.String(jtv)
 			}
 
+		case "GeofenceProperties":
+			if err := awsRestjson1_deserializeDocumentPropertyMap(&sv.GeofenceProperties, value); err != nil {
+				return err
+			}
+
 		case "Geometry":
 			if err := awsRestjson1_deserializeDocumentGeofenceGeometry(&sv.Geometry, value); err != nil {
 				return err
@@ -11213,6 +11218,42 @@ func awsRestjson1_deserializeDocumentDevicePositionList(v *[]types.DevicePositio
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentFilterPlaceCategoryList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected PlaceCategory to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentGeoArnList(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -11886,6 +11927,11 @@ func awsRestjson1_deserializeDocumentListGeofenceResponseEntry(v **types.ListGeo
 					return fmt.Errorf("expected Id to be of type string, got %T instead", value)
 				}
 				sv.GeofenceId = ptr.String(jtv)
+			}
+
+		case "GeofenceProperties":
+			if err := awsRestjson1_deserializeDocumentPropertyMap(&sv.GeofenceProperties, value); err != nil {
+				return err
 			}
 
 		case "Geometry":
@@ -12673,6 +12719,11 @@ func awsRestjson1_deserializeDocumentPlace(v **types.Place, value interface{}) e
 				sv.AddressNumber = ptr.String(jtv)
 			}
 
+		case "Categories":
+			if err := awsRestjson1_deserializeDocumentPlaceCategoryList(&sv.Categories, value); err != nil {
+				return err
+			}
+
 		case "Country":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12759,6 +12810,11 @@ func awsRestjson1_deserializeDocumentPlace(v **types.Place, value interface{}) e
 				sv.SubRegion = ptr.String(jtv)
 			}
 
+		case "SupplementalCategories":
+			if err := awsRestjson1_deserializeDocumentPlaceSupplementalCategoryList(&sv.SupplementalCategories, value); err != nil {
+				return err
+			}
+
 		case "TimeZone":
 			if err := awsRestjson1_deserializeDocumentTimeZone(&sv.TimeZone, value); err != nil {
 				return err
@@ -12788,6 +12844,42 @@ func awsRestjson1_deserializeDocumentPlace(v **types.Place, value interface{}) e
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPlaceCategoryList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected PlaceCategory to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -12824,6 +12916,42 @@ func awsRestjson1_deserializeDocumentPlaceGeometry(v **types.PlaceGeometry, valu
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPlaceSupplementalCategoryList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected PlaceSupplementalCategory to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -13451,6 +13579,11 @@ func awsRestjson1_deserializeDocumentSearchForSuggestionsResult(v **types.Search
 
 	for key, value := range shape {
 		switch key {
+		case "Categories":
+			if err := awsRestjson1_deserializeDocumentPlaceCategoryList(&sv.Categories, value); err != nil {
+				return err
+			}
+
 		case "PlaceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13458,6 +13591,11 @@ func awsRestjson1_deserializeDocumentSearchForSuggestionsResult(v **types.Search
 					return fmt.Errorf("expected PlaceId to be of type string, got %T instead", value)
 				}
 				sv.PlaceId = ptr.String(jtv)
+			}
+
+		case "SupplementalCategories":
+			if err := awsRestjson1_deserializeDocumentPlaceSupplementalCategoryList(&sv.SupplementalCategories, value); err != nil {
+				return err
 			}
 
 		case "Text":
@@ -13767,6 +13905,11 @@ func awsRestjson1_deserializeDocumentSearchPlaceIndexForSuggestionsSummary(v **t
 				return err
 			}
 
+		case "FilterCategories":
+			if err := awsRestjson1_deserializeDocumentFilterPlaceCategoryList(&sv.FilterCategories, value); err != nil {
+				return err
+			}
+
 		case "FilterCountries":
 			if err := awsRestjson1_deserializeDocumentCountryCodeList(&sv.FilterCountries, value); err != nil {
 				return err
@@ -13850,6 +13993,11 @@ func awsRestjson1_deserializeDocumentSearchPlaceIndexForTextSummary(v **types.Se
 
 		case "FilterBBox":
 			if err := awsRestjson1_deserializeDocumentBoundingBox(&sv.FilterBBox, value); err != nil {
+				return err
+			}
+
+		case "FilterCategories":
+			if err := awsRestjson1_deserializeDocumentFilterPlaceCategoryList(&sv.FilterCategories, value); err != nil {
 				return err
 			}
 

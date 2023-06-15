@@ -44,7 +44,7 @@ type ListAssessmentsInput struct {
 
 type ListAssessmentsOutput struct {
 
-	// The metadata that's associated with the assessment.
+	// The metadata that the ListAssessments API returns for each assessment.
 	AssessmentMetadata []types.AssessmentMetadataItem
 
 	// The pagination token that's used to fetch the next set of results.

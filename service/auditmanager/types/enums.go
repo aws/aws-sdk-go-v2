@@ -269,6 +269,22 @@ func (EvidenceFinderEnablementStatus) Values() []EvidenceFinderEnablementStatus 
 	}
 }
 
+type ExportDestinationType string
+
+// Enum values for ExportDestinationType
+const (
+	ExportDestinationTypeS3 ExportDestinationType = "S3"
+)
+
+// Values returns all known values for ExportDestinationType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ExportDestinationType) Values() []ExportDestinationType {
+	return []ExportDestinationType{
+		"S3",
+	}
+}
+
 type FrameworkType string
 
 // Enum values for FrameworkType
@@ -292,6 +308,8 @@ type KeywordInputType string
 // Enum values for KeywordInputType
 const (
 	KeywordInputTypeSelectFromList KeywordInputType = "SELECT_FROM_LIST"
+	KeywordInputTypeUploadFile     KeywordInputType = "UPLOAD_FILE"
+	KeywordInputTypeInputText      KeywordInputType = "INPUT_TEXT"
 )
 
 // Values returns all known values for KeywordInputType. Note that this can be
@@ -300,6 +318,8 @@ const (
 func (KeywordInputType) Values() []KeywordInputType {
 	return []KeywordInputType{
 		"SELECT_FROM_LIST",
+		"UPLOAD_FILE",
+		"INPUT_TEXT",
 	}
 }
 
@@ -356,6 +376,7 @@ const (
 	SettingAttributeDefaultProcessOwners                SettingAttribute = "DEFAULT_PROCESS_OWNERS"
 	SettingAttributeEvidenceFinderEnablement            SettingAttribute = "EVIDENCE_FINDER_ENABLEMENT"
 	SettingAttributeDeregistrationPolicy                SettingAttribute = "DEREGISTRATION_POLICY"
+	SettingAttributeDefaultExportDestination            SettingAttribute = "DEFAULT_EXPORT_DESTINATION"
 )
 
 // Values returns all known values for SettingAttribute. Note that this can be
@@ -370,6 +391,7 @@ func (SettingAttribute) Values() []SettingAttribute {
 		"DEFAULT_PROCESS_OWNERS",
 		"EVIDENCE_FINDER_ENABLEMENT",
 		"DEREGISTRATION_POLICY",
+		"DEFAULT_EXPORT_DESTINATION",
 	}
 }
 

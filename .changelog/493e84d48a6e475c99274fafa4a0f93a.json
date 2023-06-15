@@ -1,0 +1,8 @@
+{
+    "id": "493e84d4-8a6e-475c-9927-4fafa4a0f93a",
+    "type": "documentation",
+    "description": "Updated descriptions for some APIs.",
+    "modules": [
+        "service/guardduty"
+    ]
+}

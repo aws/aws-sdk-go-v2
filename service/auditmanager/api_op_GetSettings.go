@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the settings for the specified Amazon Web Services account.
+// Gets the settings for a specified Amazon Web Services account.
 func (c *Client) GetSettings(ctx context.Context, params *GetSettingsInput, optFns ...func(*Options)) (*GetSettingsOutput, error) {
 	if params == nil {
 		params = &GetSettingsInput{}
