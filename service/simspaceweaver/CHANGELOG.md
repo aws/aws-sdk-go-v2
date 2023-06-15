@@ -1,3 +1,7 @@
+# v1.3.1 (2023-06-15)
+
+* No change notes available for this release.
+
 # v1.3.0 (2023-06-13)
 
 * **Feature**: This release fixes using aws-us-gov ARNs in API calls and adds documentation for snapshot APIs.

@@ -1,3 +1,7 @@
+# v1.100.1 (2023-06-15)
+
+* No change notes available for this release.
+
 # v1.100.0 (2023-06-13)
 
 * **Feature**: This release introduces a new feature, EC2 Instance Connect Endpoint, that enables you to connect to a resource over TCP, without requiring the resource to have a public IPv4 address.

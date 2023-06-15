@@ -1,3 +1,18 @@
+# Release (2023-06-15)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/auditmanager`: [v1.25.0](service/auditmanager/CHANGELOG.md#v1250-2023-06-15)
+  * **Feature**: This release introduces 2 Audit Manager features: CSV exports and new manual evidence options. You can now export your evidence finder results in CSV format. In addition, you can now add manual evidence to a control by entering free-form text or uploading a file from your browser.
+* `github.com/aws/aws-sdk-go-v2/service/efs`: [v1.20.3](service/efs/CHANGELOG.md#v1203-2023-06-15)
+  * **Documentation**: Documentation updates for EFS.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.23.2](service/guardduty/CHANGELOG.md#v1232-2023-06-15)
+  * **Documentation**: Updated descriptions for some APIs.
+* `github.com/aws/aws-sdk-go-v2/service/location`: [v1.24.0](service/location/CHANGELOG.md#v1240-2023-06-15)
+  * **Feature**: Amazon Location Service adds categories to places, including filtering on those categories in searches. Also, you can now add metadata properties to your geofences.
+
 # Release (2023-06-13)
 
 ## General Highlights

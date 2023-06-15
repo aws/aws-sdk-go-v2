@@ -1,3 +1,7 @@
+# v1.23.6 (2023-06-15)
+
+* No change notes available for this release.
+
 # v1.23.5 (2023-06-13)
 
 * **Documentation**: Change the Image Builder ImagePipeline dateNextRun field to more accurately describe the data.

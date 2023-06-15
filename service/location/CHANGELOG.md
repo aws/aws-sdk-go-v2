@@ -1,3 +1,7 @@
+# v1.24.0 (2023-06-15)
+
+* **Feature**: Amazon Location Service adds categories to places, including filtering on those categories in searches. Also, you can now add metadata properties to your geofences.
+
 # v1.23.1 (2023-06-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

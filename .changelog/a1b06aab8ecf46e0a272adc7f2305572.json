@@ -1,8 +1,0 @@
-{
-    "id": "a1b06aab-8ecf-46e0-a272-adc7f2305572",
-    "type": "feature",
-    "description": "Amazon Location Service adds categories to places, including filtering on those categories in searches. Also, you can now add metadata properties to your geofences.",
-    "modules": [
-        "service/location"
-    ]
-}

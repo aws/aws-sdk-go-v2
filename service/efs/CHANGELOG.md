@@ -1,3 +1,7 @@
+# v1.20.3 (2023-06-15)
+
+* **Documentation**: Documentation updates for EFS.
+
 # v1.20.2 (2023-06-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

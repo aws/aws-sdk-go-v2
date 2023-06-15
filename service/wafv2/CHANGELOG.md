@@ -1,3 +1,7 @@
+# v1.35.1 (2023-06-15)
+
+* No change notes available for this release.
+
 # v1.35.0 (2023-06-13)
 
 * **Feature**: You can now detect and block fraudulent account creation attempts with the new AWS WAF Fraud Control account creation fraud prevention (ACFP) managed rule group AWSManagedRulesACFPRuleSet.
