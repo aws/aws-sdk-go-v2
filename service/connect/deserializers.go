@@ -34380,6 +34380,15 @@ func awsRestjson1_deserializeDocumentInstance(v **types.Instance, value interfac
 				sv.InboundCallsEnabled = ptr.Bool(jtv)
 			}
 
+		case "InstanceAccessUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Url to be of type string, got %T instead", value)
+				}
+				sv.InstanceAccessUrl = ptr.String(jtv)
+			}
+
 		case "InstanceAlias":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -34645,6 +34654,15 @@ func awsRestjson1_deserializeDocumentInstanceSummary(v **types.InstanceSummary, 
 					return fmt.Errorf("expected InboundCallsEnabled to be of type *bool, got %T instead", value)
 				}
 				sv.InboundCallsEnabled = ptr.Bool(jtv)
+			}
+
+		case "InstanceAccessUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Url to be of type string, got %T instead", value)
+				}
+				sv.InstanceAccessUrl = ptr.String(jtv)
 			}
 
 		case "InstanceAlias":

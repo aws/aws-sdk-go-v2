@@ -18,8 +18,8 @@ import (
 //   - tagValue
 //   - configurationId
 //
-// Also, all configuration items associated with your user account that have tags
-// can be listed if you call DescribeTags as is without passing any parameters.
+// Also, all configuration items associated with your user that have tags can be
+// listed if you call DescribeTags as is without passing any parameters.
 func (c *Client) DescribeTags(ctx context.Context, params *DescribeTagsInput, optFns ...func(*Options)) (*DescribeTagsOutput, error) {
 	if params == nil {
 		params = &DescribeTagsInput{}

@@ -7,8 +7,8 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// The Amazon Web Services user account does not have permission to perform the
-// action. Check the IAM policy associated with this account.
+// The user does not have permission to perform the action. Check the IAM policy
+// associated with this user.
 type AuthorizationErrorException struct {
 	Message *string
 
@@ -59,7 +59,7 @@ func (e *ConflictErrorException) ErrorCode() string {
 }
 func (e *ConflictErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The home region is not set. Set the home region to continue.
+// The home Region is not set. Set the home Region to continue.
 type HomeRegionNotSetException struct {
 	Message *string
 

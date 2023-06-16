@@ -13,6 +13,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 	"path"
 	"strings"
 )
@@ -1443,6 +1444,67 @@ func awsAwsjson11_serializeDocumentDescribeImportTasksFilterList(v []types.Impor
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentEc2RecommendationsExportPreferences(v *types.Ec2RecommendationsExportPreferences, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CpuPerformanceMetricBasis != nil {
+		ok := object.Key("cpuPerformanceMetricBasis")
+		if err := awsAwsjson11_serializeDocumentUsageMetricBasis(v.CpuPerformanceMetricBasis, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Enabled {
+		ok := object.Key("enabled")
+		ok.Boolean(v.Enabled)
+	}
+
+	if v.ExcludedInstanceTypes != nil {
+		ok := object.Key("excludedInstanceTypes")
+		if err := awsAwsjson11_serializeDocumentExcludedInstanceTypes(v.ExcludedInstanceTypes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PreferredRegion != nil {
+		ok := object.Key("preferredRegion")
+		ok.String(*v.PreferredRegion)
+	}
+
+	if v.RamPerformanceMetricBasis != nil {
+		ok := object.Key("ramPerformanceMetricBasis")
+		if err := awsAwsjson11_serializeDocumentUsageMetricBasis(v.RamPerformanceMetricBasis, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ReservedInstanceOptions != nil {
+		ok := object.Key("reservedInstanceOptions")
+		if err := awsAwsjson11_serializeDocumentReservedInstanceOptions(v.ReservedInstanceOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Tenancy) > 0 {
+		ok := object.Key("tenancy")
+		ok.String(string(v.Tenancy))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentExcludedInstanceTypes(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentExportDataFormats(v []types.ExportDataFormat, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -1498,6 +1560,24 @@ func awsAwsjson11_serializeDocumentExportIds(v []string, value smithyjson.Value)
 	for i := range v {
 		av := array.Value()
 		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentExportPreferences(v types.ExportPreferences, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.ExportPreferencesMemberEc2RecommendationsPreferences:
+		av := object.Key("ec2RecommendationsPreferences")
+		if err := awsAwsjson11_serializeDocumentEc2RecommendationsExportPreferences(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
 	}
 	return nil
 }
@@ -1610,6 +1690,28 @@ func awsAwsjson11_serializeDocumentOrderByList(v []types.OrderByElement, value s
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentReservedInstanceOptions(v *types.ReservedInstanceOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.OfferingClass) > 0 {
+		ok := object.Key("offeringClass")
+		ok.String(string(v.OfferingClass))
+	}
+
+	if len(v.PurchasingOption) > 0 {
+		ok := object.Key("purchasingOption")
+		ok.String(string(v.PurchasingOption))
+	}
+
+	if len(v.TermLength) > 0 {
+		ok := object.Key("termLength")
+		ok.String(string(v.TermLength))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentTag(v *types.Tag, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1680,6 +1782,36 @@ func awsAwsjson11_serializeDocumentToDeleteIdentifierList(v []string, value smit
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentUsageMetricBasis(v *types.UsageMetricBasis, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.PercentageAdjust != nil {
+		ok := object.Key("percentageAdjust")
+		switch {
+		case math.IsNaN(*v.PercentageAdjust):
+			ok.String("NaN")
+
+		case math.IsInf(*v.PercentageAdjust, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.PercentageAdjust, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.PercentageAdjust)
+
+		}
+	}
+
 	return nil
 }
 
@@ -2097,6 +2229,13 @@ func awsAwsjson11_serializeOpDocumentStartExportTaskInput(v *StartExportTaskInpu
 	if v.Filters != nil {
 		ok := object.Key("filters")
 		if err := awsAwsjson11_serializeDocumentExportFilters(v.Filters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Preferences != nil {
+		ok := object.Key("preferences")
+		if err := awsAwsjson11_serializeDocumentExportPreferences(v.Preferences, ok); err != nil {
 			return err
 		}
 	}

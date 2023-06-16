@@ -119,8 +119,7 @@ type ExportDataFormat string
 
 // Enum values for ExportDataFormat
 const (
-	ExportDataFormatCsv     ExportDataFormat = "CSV"
-	ExportDataFormatGraphml ExportDataFormat = "GRAPHML"
+	ExportDataFormatCsv ExportDataFormat = "CSV"
 )
 
 // Values returns all known values for ExportDataFormat. Note that this can be
@@ -129,7 +128,6 @@ const (
 func (ExportDataFormat) Values() []ExportDataFormat {
 	return []ExportDataFormat{
 		"CSV",
-		"GRAPHML",
 	}
 }
 
@@ -209,6 +207,24 @@ func (ImportTaskFilterName) Values() []ImportTaskFilterName {
 	}
 }
 
+type OfferingClass string
+
+// Enum values for OfferingClass
+const (
+	OfferingClassStandard    OfferingClass = "STANDARD"
+	OfferingClassConvertible OfferingClass = "CONVERTIBLE"
+)
+
+// Values returns all known values for OfferingClass. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OfferingClass) Values() []OfferingClass {
+	return []OfferingClass{
+		"STANDARD",
+		"CONVERTIBLE",
+	}
+}
+
 type OrderString string
 
 // Enum values for OrderString
@@ -224,5 +240,61 @@ func (OrderString) Values() []OrderString {
 	return []OrderString{
 		"ASC",
 		"DESC",
+	}
+}
+
+type PurchasingOption string
+
+// Enum values for PurchasingOption
+const (
+	PurchasingOptionAllUpfront     PurchasingOption = "ALL_UPFRONT"
+	PurchasingOptionPartialUpfront PurchasingOption = "PARTIAL_UPFRONT"
+	PurchasingOptionNoUpfront      PurchasingOption = "NO_UPFRONT"
+)
+
+// Values returns all known values for PurchasingOption. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PurchasingOption) Values() []PurchasingOption {
+	return []PurchasingOption{
+		"ALL_UPFRONT",
+		"PARTIAL_UPFRONT",
+		"NO_UPFRONT",
+	}
+}
+
+type Tenancy string
+
+// Enum values for Tenancy
+const (
+	TenancyDedicated Tenancy = "DEDICATED"
+	TenancyShared    Tenancy = "SHARED"
+)
+
+// Values returns all known values for Tenancy. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Tenancy) Values() []Tenancy {
+	return []Tenancy{
+		"DEDICATED",
+		"SHARED",
+	}
+}
+
+type TermLength string
+
+// Enum values for TermLength
+const (
+	TermLengthOneYear   TermLength = "ONE_YEAR"
+	TermLengthThreeYear TermLength = "THREE_YEAR"
+)
+
+// Values returns all known values for TermLength. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (TermLength) Values() []TermLength {
+	return []TermLength{
+		"ONE_YEAR",
+		"THREE_YEAR",
 	}
 }

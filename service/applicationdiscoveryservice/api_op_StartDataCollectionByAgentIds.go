@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Instructs the specified agents or connectors to start collecting data.
+// Instructs the specified agents to start collecting data.
 func (c *Client) StartDataCollectionByAgentIds(ctx context.Context, params *StartDataCollectionByAgentIdsInput, optFns ...func(*Options)) (*StartDataCollectionByAgentIdsOutput, error) {
 	if params == nil {
 		params = &StartDataCollectionByAgentIdsInput{}
@@ -29,13 +29,13 @@ func (c *Client) StartDataCollectionByAgentIds(ctx context.Context, params *Star
 
 type StartDataCollectionByAgentIdsInput struct {
 
-	// The IDs of the agents or connectors from which to start collecting data. If you
-	// send a request to an agent/connector ID that you do not have permission to
-	// contact, according to your Amazon Web Services account, the service does not
-	// throw an exception. Instead, it returns the error in the Description field. If
-	// you send a request to multiple agents/connectors and you do not have permission
-	// to contact some of those agents/connectors, the system does not throw an
-	// exception. Instead, the system shows Failed in the Description field.
+	// The IDs of the agents from which to start collecting data. If you send a
+	// request to an agent ID that you do not have permission to contact, according to
+	// your Amazon Web Services account, the service does not throw an exception.
+	// Instead, it returns the error in the Description field. If you send a request to
+	// multiple agents and you do not have permission to contact some of those agents,
+	// the system does not throw an exception. Instead, the system shows Failed in the
+	// Description field.
 	//
 	// This member is required.
 	AgentIds []string
@@ -45,10 +45,9 @@ type StartDataCollectionByAgentIdsInput struct {
 
 type StartDataCollectionByAgentIdsOutput struct {
 
-	// Information about agents or the connector that were instructed to start
-	// collecting data. Information includes the agent/connector ID, a description of
-	// the operation performed, and whether the agent/connector configuration was
-	// updated.
+	// Information about agents that were instructed to start collecting data.
+	// Information includes the agent ID, a description of the operation performed, and
+	// whether the agent configuration was updated.
 	AgentsConfigurationStatus []types.AgentConfigurationStatus
 
 	// Metadata pertaining to the operation's result.

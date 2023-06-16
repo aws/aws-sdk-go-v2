@@ -1,0 +1,8 @@
+{
+    "id": "b3fa5d1d-0d93-4810-a6d1-2f8cd62ec230",
+    "type": "feature",
+    "description": "Updates the *InstanceStorageConfig APIs to support a new ResourceType: SCREEN_RECORDINGS to enable screen recording and specify the storage configurations for publishing the recordings. Also updates DescribeInstance and ListInstances APIs to include InstanceAccessUrl attribute in the API response.",
+    "modules": [
+        "service/connect"
+    ]
+}

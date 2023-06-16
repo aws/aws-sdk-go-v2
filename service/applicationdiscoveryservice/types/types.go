@@ -7,72 +7,72 @@ import (
 	"time"
 )
 
-// Information about agents or connectors that were instructed to start collecting
-// data. Information includes the agent/connector ID, a description of the
-// operation, and whether the agent/connector configuration was updated.
+// Information about agents that were instructed to start collecting data.
+// Information includes the agent ID, a description of the operation, and whether
+// the agent configuration was updated.
 type AgentConfigurationStatus struct {
 
-	// The agent/connector ID.
+	// The agent ID.
 	AgentId *string
 
 	// A description of the operation performed.
 	Description *string
 
 	// Information about the status of the StartDataCollection and StopDataCollection
-	// operations. The system has recorded the data collection operation. The
-	// agent/connector receives this command the next time it polls for a new command.
+	// operations. The system has recorded the data collection operation. The agent
+	// receives this command the next time it polls for a new command.
 	OperationSucceeded bool
 
 	noSmithyDocumentSerde
 }
 
-// Information about agents or connectors associated with the user’s Amazon Web
-// Services account. Information includes agent or connector IDs, IP addresses,
-// media access control (MAC) addresses, agent or connector health, hostname where
-// the agent or connector resides, and agent version for each agent.
+// Information about agents associated with the user’s Amazon Web Services
+// account. Information includes agent IDs, IP addresses, media access control
+// (MAC) addresses, agent or collector status, hostname where the agent resides,
+// and agent version for each agent.
 type AgentInfo struct {
 
-	// The agent or connector ID.
+	// The agent or collector ID.
 	AgentId *string
 
-	// Network details about the host where the agent or connector resides.
+	// Network details about the host where the agent or collector resides.
 	AgentNetworkInfoList []AgentNetworkInfo
 
 	// Type of agent.
 	AgentType *string
 
-	// Status of the collection process for an agent or connector.
+	// Status of the collection process for an agent.
 	CollectionStatus *string
 
 	// The ID of the connector.
 	ConnectorId *string
 
-	// The health of the agent or connector.
+	// The health of the agent.
 	Health AgentStatus
 
-	// The name of the host where the agent or connector resides. The host can be a
+	// The name of the host where the agent or collector resides. The host can be a
 	// server or virtual machine.
 	HostName *string
 
-	// Time since agent or connector health was reported.
+	// Time since agent health was reported.
 	LastHealthPingTime *string
 
 	// Agent's first registration timestamp in UTC.
 	RegisteredTime *string
 
-	// The agent or connector version.
+	// The agent or collector version.
 	Version *string
 
 	noSmithyDocumentSerde
 }
 
-// Network details about the host where the agent/connector resides.
+// Network details about the host where the agent/collector resides.
 type AgentNetworkInfo struct {
 
-	// The IP address for the host where the agent/connector resides.
+	// The IP address for the host where the agent/collector resides.
 	IpAddress *string
 
-	// The MAC address for the host where the agent/connector resides.
+	// The MAC address for the host where the agent/collector resides.
 	MacAddress *string
 
 	noSmithyDocumentSerde
@@ -162,13 +162,13 @@ type ContinuousExportDescription struct {
 	//   increase and try again. For more information, see Kinesis Data Streams Limits (http://docs.aws.amazon.com/streams/latest/dev/service-sizes-and-limits.html)
 	//   in the Amazon Kinesis Data Streams Developer Guide.
 	//   - FIREHOSE_ROLE_MISSING - The Data Exploration feature is in an error state
-	//   because your IAM User is missing the AWSApplicationDiscoveryServiceFirehose
-	//   role. Turn on Data Exploration in Amazon Athena and try again. For more
-	//   information, see Step 3: Provide Application Discovery Service Access to
-	//   Non-Administrator Users by Attaching Policies (http://docs.aws.amazon.com/application-discovery/latest/userguide/setting-up.html#setting-up-user-policy)
+	//   because your user is missing the Amazon Web
+	//   ServicesApplicationDiscoveryServiceFirehose role. Turn on Data Exploration in
+	//   Amazon Athena and try again. For more information, see Creating the Amazon
+	//   Web ServicesApplicationDiscoveryServiceFirehose Role (https://docs.aws.amazon.com/application-discovery/latest/userguide/security-iam-awsmanpol.html#security-iam-awsmanpol-create-firehose-role)
 	//   in the Application Discovery Service User Guide.
 	//   - FIREHOSE_STREAM_DOES_NOT_EXIST - The Data Exploration feature is in an
-	//   error state because your IAM User is missing one or more of the Kinesis data
+	//   error state because your user is missing one or more of the Kinesis data
 	//   delivery streams.
 	//   - INTERNAL_FAILURE - The Data Exploration feature is in an error state
 	//   because of an internal failure. Try again later. If this problem persists,
@@ -252,26 +252,41 @@ type CustomerAgentInfo struct {
 	noSmithyDocumentSerde
 }
 
+// The inventory data for installed Agentless Collector collectors.
 type CustomerAgentlessCollectorInfo struct {
 
+	// The number of active Agentless Collector collectors.
+	//
 	// This member is required.
 	ActiveAgentlessCollectors int32
 
+	// The number of deny-listed Agentless Collector collectors.
+	//
 	// This member is required.
 	DenyListedAgentlessCollectors int32
 
+	// The number of healthy Agentless Collector collectors.
+	//
 	// This member is required.
 	HealthyAgentlessCollectors int32
 
+	// The number of Agentless Collector collectors with SHUTDOWN status.
+	//
 	// This member is required.
 	ShutdownAgentlessCollectors int32
 
+	// The total number of Agentless Collector collectors.
+	//
 	// This member is required.
 	TotalAgentlessCollectors int32
 
+	// The number of unhealthy Agentless Collector collectors.
+	//
 	// This member is required.
 	UnhealthyAgentlessCollectors int32
 
+	// The number of unknown Agentless Collector collectors.
+	//
 	// This member is required.
 	UnknownAgentlessCollectors int32
 
@@ -360,6 +375,42 @@ type CustomerMeCollectorInfo struct {
 	noSmithyDocumentSerde
 }
 
+// Indicates that the exported data must include EC2 instance type matches for
+// on-premises servers that are discovered through Amazon Web Services Application
+// Discovery Service.
+type Ec2RecommendationsExportPreferences struct {
+
+	// The recommended EC2 instance type that matches the CPU usage metric of server
+	// performance data.
+	CpuPerformanceMetricBasis *UsageMetricBasis
+
+	// If set to true, the export preferences (https://docs.aws.amazon.com/application-discovery/latest/APIReference/API_StartExportTask.html#API_StartExportTask_RequestSyntax)
+	// is set to Ec2RecommendationsExportPreferences .
+	Enabled bool
+
+	// An array of instance types to exclude from recommendations.
+	ExcludedInstanceTypes []string
+
+	// The target Amazon Web Services Region for the recommendations. You can use any
+	// of the Region codes available for the chosen service, as listed in Amazon Web
+	// Services service endpoints (https://docs.aws.amazon.com/general/latest/gr/rande.html)
+	// in the Amazon Web Services General Reference.
+	PreferredRegion *string
+
+	// The recommended EC2 instance type that matches the Memory usage metric of
+	// server performance data.
+	RamPerformanceMetricBasis *UsageMetricBasis
+
+	// The contract type for a reserved instance. If blank, we assume an On-Demand
+	// instance is preferred.
+	ReservedInstanceOptions *ReservedInstanceOptions
+
+	// The target tenancy to use for your recommended EC2 instances.
+	Tenancy Tenancy
+
+	noSmithyDocumentSerde
+}
+
 // Used to select which agent's data is to be exported. A single agent ID may be
 // selected for export using the StartExportTask (http://docs.aws.amazon.com/application-discovery/latest/APIReference/API_StartExportTask.html)
 // action.
@@ -429,6 +480,27 @@ type ExportInfo struct {
 
 	noSmithyDocumentSerde
 }
+
+// Indicates the type of data that is being exported. Only one ExportPreferences
+// can be enabled for a StartExportTask (https://docs.aws.amazon.com/application-discovery/latest/APIReference/API_StartExportTask.html)
+// action.
+//
+// The following types satisfy this interface:
+//
+//	ExportPreferencesMemberEc2RecommendationsPreferences
+type ExportPreferences interface {
+	isExportPreferences()
+}
+
+// If enabled, exported data includes EC2 instance type matches for on-premises
+// servers discovered through Amazon Web Services Application Discovery Service.
+type ExportPreferencesMemberEc2RecommendationsPreferences struct {
+	Value Ec2RecommendationsExportPreferences
+
+	noSmithyDocumentSerde
+}
+
+func (*ExportPreferencesMemberEc2RecommendationsPreferences) isExportPreferences() {}
 
 // A filter that can use conditional operators. For more information about
 // filters, see Querying Discovered Configuration Items (https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html)
@@ -586,6 +658,27 @@ type OrderByElement struct {
 	noSmithyDocumentSerde
 }
 
+// Used to provide Reserved Instance preferences for the recommendation.
+type ReservedInstanceOptions struct {
+
+	// The flexibility to change the instance types needed for your Reserved Instance.
+	//
+	// This member is required.
+	OfferingClass OfferingClass
+
+	// The payment plan to use for your Reserved Instance.
+	//
+	// This member is required.
+	PurchasingOption PurchasingOption
+
+	// The preferred duration of the Reserved Instance term.
+	//
+	// This member is required.
+	TermLength TermLength
+
+	noSmithyDocumentSerde
+}
+
 // Metadata that help you categorize IT assets. Do not store sensitive information
 // (like personal data) in tags.
 type Tag struct {
@@ -619,4 +712,29 @@ type TagFilter struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies the performance metrics to use for the server that is used for
+// recommendations.
+type UsageMetricBasis struct {
+
+	// A utilization metric that is used by the recommendations.
+	Name *string
+
+	// Specifies the percentage of the specified utilization metric that is used by
+	// the recommendations.
+	PercentageAdjust *float64
+
+	noSmithyDocumentSerde
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isExportPreferences() {}

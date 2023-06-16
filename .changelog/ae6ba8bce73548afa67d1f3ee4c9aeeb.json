@@ -1,0 +1,8 @@
+{
+    "id": "ae6ba8bc-e735-48af-a67d-1f3ee4c9aeeb",
+    "type": "feature",
+    "description": "Add Amazon EC2 instance recommendations export",
+    "modules": [
+        "service/applicationdiscoveryservice"
+    ]
+}

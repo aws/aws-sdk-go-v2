@@ -1777,6 +1777,9 @@ type Instance struct {
 	// Whether inbound calls are enabled.
 	InboundCallsEnabled *bool
 
+	// This URL allows contact center users to access Amazon Connect admin website.
+	InstanceAccessUrl *string
+
 	// The alias of instance.
 	InstanceAlias *string
 
@@ -1848,6 +1851,9 @@ type InstanceSummary struct {
 
 	// Whether inbound calls are enabled.
 	InboundCallsEnabled *bool
+
+	// This URL allows contact center users to access Amazon Connect admin website.
+	InstanceAccessUrl *string
 
 	// The alias of the instance.
 	InstanceAlias *string

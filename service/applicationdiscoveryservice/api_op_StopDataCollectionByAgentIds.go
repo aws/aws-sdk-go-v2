@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Instructs the specified agents or connectors to stop collecting data.
+// Instructs the specified agents to stop collecting data.
 func (c *Client) StopDataCollectionByAgentIds(ctx context.Context, params *StopDataCollectionByAgentIdsInput, optFns ...func(*Options)) (*StopDataCollectionByAgentIdsOutput, error) {
 	if params == nil {
 		params = &StopDataCollectionByAgentIdsInput{}
@@ -29,7 +29,7 @@ func (c *Client) StopDataCollectionByAgentIds(ctx context.Context, params *StopD
 
 type StopDataCollectionByAgentIdsInput struct {
 
-	// The IDs of the agents or connectors from which to stop collecting data.
+	// The IDs of the agents from which to stop collecting data.
 	//
 	// This member is required.
 	AgentIds []string
@@ -39,10 +39,9 @@ type StopDataCollectionByAgentIdsInput struct {
 
 type StopDataCollectionByAgentIdsOutput struct {
 
-	// Information about the agents or connector that were instructed to stop
-	// collecting data. Information includes the agent/connector ID, a description of
-	// the operation performed, and whether the agent/connector configuration was
-	// updated.
+	// Information about the agents that were instructed to stop collecting data.
+	// Information includes the agent ID, a description of the operation performed, and
+	// whether the agent configuration was updated.
 	AgentsConfigurationStatus []types.AgentConfigurationStatus
 
 	// Metadata pertaining to the operation's result.

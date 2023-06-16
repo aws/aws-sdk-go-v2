@@ -12,15 +12,25 @@ import (
 	"time"
 )
 
-// Begins the export of discovered data to an S3 bucket. If you specify agentIds
-// in a filter, the task exports up to 72 hours of detailed data collected by the
-// identified Application Discovery Agent, including network, process, and
-// performance details. A time range for exported agent data may be set by using
-// startTime and endTime . Export of detailed agent data is limited to five
-// concurrently running exports. If you do not include an agentIds filter, summary
-// data is exported that includes both Amazon Web Services Agentless Discovery
-// Connector data and summary data from Amazon Web Services Discovery Agents.
-// Export of summary data is limited to two exports per day.
+// Begins the export of a discovered data report to an Amazon S3 bucket managed by
+// Amazon Web Services. Exports might provide an estimate of fees and savings based
+// on certain information that you provide. Fee estimates do not include any taxes
+// that might apply. Your actual fees and savings depend on a variety of factors,
+// including your actual usage of Amazon Web Services services, which might vary
+// from the estimates provided in this report. If you do not specify preferences
+// or agentIds in the filter, a summary of all servers, applications, tags, and
+// performance is generated. This data is an aggregation of all server data
+// collected through on-premises tooling, file import, application grouping and
+// applying tags. If you specify agentIds in a filter, the task exports up to 72
+// hours of detailed data collected by the identified Application Discovery Agent,
+// including network, process, and performance details. A time range for exported
+// agent data may be set by using startTime and endTime . Export of detailed agent
+// data is limited to five concurrently running exports. Export of detailed agent
+// data is limited to two exports per day. If you enable
+// ec2RecommendationsPreferences in preferences , an Amazon EC2 instance matching
+// the characteristics of each server in Application Discovery Service is
+// generated. Changing the attributes of the ec2RecommendationsPreferences changes
+// the criteria of the recommendation.
 func (c *Client) StartExportTask(ctx context.Context, params *StartExportTaskInput, optFns ...func(*Options)) (*StartExportTaskOutput, error) {
 	if params == nil {
 		params = &StartExportTaskInput{}
@@ -50,9 +60,14 @@ type StartExportTaskInput struct {
 	// If a filter is present, it selects the single agentId of the Application
 	// Discovery Agent for which data is exported. The agentId can be found in the
 	// results of the DescribeAgents API or CLI. If no filter is present, startTime
-	// and endTime are ignored and exported data includes both Agentless Discovery
-	// Connector data and summary data from Application Discovery agents.
+	// and endTime are ignored and exported data includes both Amazon Web Services
+	// Application Discovery Service Agentless Collector collectors data and summary
+	// data from Application Discovery Agent agents.
 	Filters []types.ExportFilter
+
+	// Indicates the type of data that needs to be exported. Only one ExportPreferences (https://docs.aws.amazon.com/application-discovery/latest/APIReference/API_ExportPreferences.html)
+	// can be enabled at any time.
+	Preferences types.ExportPreferences
 
 	// The start timestamp for exported data from the single Application Discovery
 	// Agent selected in the filters. If no value is specified, data is exported

@@ -1,0 +1,8 @@
+{
+    "id": "b51c4c46-6233-4891-bc89-22c545b64922",
+    "type": "feature",
+    "description": "This release adds SDK support for request-payer request header and request-charged response header in the \"GetBucketAccelerateConfiguration\", \"ListMultipartUploads\", \"ListObjects\", \"ListObjectsV2\" and \"ListObjectVersions\" S3 APIs.",
+    "modules": [
+        "service/s3"
+    ]
+}

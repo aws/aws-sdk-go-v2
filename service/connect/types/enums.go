@@ -678,6 +678,7 @@ const (
 	InstanceStorageResourceTypeRealTimeContactAnalysisSegments InstanceStorageResourceType = "REAL_TIME_CONTACT_ANALYSIS_SEGMENTS"
 	InstanceStorageResourceTypeAttachments                     InstanceStorageResourceType = "ATTACHMENTS"
 	InstanceStorageResourceTypeContactEvaluations              InstanceStorageResourceType = "CONTACT_EVALUATIONS"
+	InstanceStorageResourceTypeScreenRecordings                InstanceStorageResourceType = "SCREEN_RECORDINGS"
 )
 
 // Values returns all known values for InstanceStorageResourceType. Note that this
@@ -694,6 +695,7 @@ func (InstanceStorageResourceType) Values() []InstanceStorageResourceType {
 		"REAL_TIME_CONTACT_ANALYSIS_SEGMENTS",
 		"ATTACHMENTS",
 		"CONTACT_EVALUATIONS",
+		"SCREEN_RECORDINGS",
 	}
 }
 

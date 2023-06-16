@@ -16,10 +16,14 @@ import (
 // operation returns an empty list. For more information about roles, see Working
 // with roles (https://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html)
 // . IAM resource-listing operations return a subset of the available attributes
-// for the resource. For example, this operation does not return tags, even though
-// they are an attribute of the returned object. To view all of the information for
-// a role, see GetRole . You can paginate the results using the MaxItems and Marker
-// parameters.
+// for the resource. This operation does not return the following attributes, even
+// though they are an attribute of the returned object:
+//   - PermissionsBoundary
+//   - RoleLastUsed
+//   - Tags
+//
+// To view all of the information for a role, see GetRole . You can paginate the
+// results using the MaxItems and Marker parameters.
 func (c *Client) ListRoles(ctx context.Context, params *ListRolesInput, optFns ...func(*Options)) (*ListRolesOutput, error) {
 	if params == nil {
 		params = &ListRolesInput{}

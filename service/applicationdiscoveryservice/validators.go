@@ -466,6 +466,23 @@ func addOpUpdateApplicationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateApplication{}, middleware.After)
 }
 
+func validateEc2RecommendationsExportPreferences(v *types.Ec2RecommendationsExportPreferences) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Ec2RecommendationsExportPreferences"}
+	if v.ReservedInstanceOptions != nil {
+		if err := validateReservedInstanceOptions(v.ReservedInstanceOptions); err != nil {
+			invalidParams.AddNested("ReservedInstanceOptions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateExportFilter(v *types.ExportFilter) error {
 	if v == nil {
 		return nil
@@ -496,6 +513,25 @@ func validateExportFilters(v []types.ExportFilter) error {
 		if err := validateExportFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateExportPreferences(v types.ExportPreferences) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExportPreferences"}
+	switch uv := v.(type) {
+	case *types.ExportPreferencesMemberEc2RecommendationsPreferences:
+		if err := validateEc2RecommendationsExportPreferences(&uv.Value); err != nil {
+			invalidParams.AddNested("[ec2RecommendationsPreferences]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -566,6 +602,27 @@ func validateOrderByList(v []types.OrderByElement) error {
 		if err := validateOrderByElement(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateReservedInstanceOptions(v *types.ReservedInstanceOptions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ReservedInstanceOptions"}
+	if len(v.PurchasingOption) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PurchasingOption"))
+	}
+	if len(v.OfferingClass) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("OfferingClass"))
+	}
+	if len(v.TermLength) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TermLength"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -896,6 +953,11 @@ func validateOpStartExportTaskInput(v *StartExportTaskInput) error {
 	if v.Filters != nil {
 		if err := validateExportFilters(v.Filters); err != nil {
 			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Preferences != nil {
+		if err := validateExportPreferences(v.Preferences); err != nil {
+			invalidParams.AddNested("Preferences", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

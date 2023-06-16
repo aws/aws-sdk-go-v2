@@ -13,8 +13,8 @@ import (
 )
 
 // Lists exports as specified by ID. All continuous exports associated with your
-// user account can be listed if you call DescribeContinuousExports as is without
-// passing any parameters.
+// user can be listed if you call DescribeContinuousExports as is without passing
+// any parameters.
 func (c *Client) DescribeContinuousExports(ctx context.Context, params *DescribeContinuousExportsInput, optFns ...func(*Options)) (*DescribeContinuousExportsOutput, error) {
 	if params == nil {
 		params = &DescribeContinuousExportsInput{}
