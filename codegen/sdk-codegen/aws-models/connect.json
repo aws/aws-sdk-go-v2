@@ -13388,6 +13388,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Whether outbound calls are enabled.</p>"
                     }
+                },
+                "InstanceAccessUrl": {
+                    "target": "com.amazonaws.connect#Url",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This URL allows contact center users to access Amazon Connect admin website.</p>"
+                    }
                 }
             },
             "traits": {
@@ -13637,6 +13643,12 @@
                     "traits": {
                         "smithy.api#enumValue": "CONTACT_EVALUATIONS"
                     }
+                },
+                "SCREEN_RECORDINGS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SCREEN_RECORDINGS"
+                    }
                 }
             }
         },
@@ -13695,6 +13707,12 @@
                     "target": "com.amazonaws.connect#OutboundCallsEnabled",
                     "traits": {
                         "smithy.api#documentation": "<p>Whether outbound calls are enabled.</p>"
+                    }
+                },
+                "InstanceAccessUrl": {
+                    "target": "com.amazonaws.connect#Url",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This URL allows contact center users to access Amazon Connect admin website.</p>"
                     }
                 }
             },
@@ -21402,7 +21420,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>When a contact is being recorded, and the recording has been suspended using\n   SuspendContactRecording, this API resumes recording the call.</p>\n         <p>Only voice recordings are supported at this time.</p>",
+                "smithy.api#documentation": "<p>When a contact is being recorded, and the recording has been suspended using \n   SuspendContactRecording, this API resumes recording the call or screen.</p>\n         <p>Voice and screen recordings are supported.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/contact/resume-recording",
@@ -24583,7 +24601,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>When a contact is being recorded, this API suspends recording the call. For example, you\n   might suspend the call recording while collecting sensitive information, such as a credit card\n   number. Then use ResumeContactRecording to restart recording. </p>\n         <p>The period of time that the recording is suspended is filled with silence in the final\n   recording. </p>\n         <p>Only voice recordings are supported at this time.</p>",
+                "smithy.api#documentation": "<p>When a contact is being recorded, this API suspends recording the call or screen. For \n   example, you might suspend the call or screen recording while collecting sensitive \n   information, such as a credit card number. Then use ResumeContactRecording to restart recording.</p>\n         <p>The period of time that the recording is suspended is filled with silence in the final recording.</p>\n         <p>Voice and screen recordings are supported.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/contact/suspend-recording",
