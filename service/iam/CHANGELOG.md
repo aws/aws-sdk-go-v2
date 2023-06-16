@@ -1,3 +1,7 @@
+# v1.20.3 (2023-06-16)
+
+* **Documentation**: Documentation updates for AWS Identity and Access Management (IAM).
+
 # v1.20.2 (2023-06-15)
 
 * No change notes available for this release.

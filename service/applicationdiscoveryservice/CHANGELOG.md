@@ -1,3 +1,7 @@
+# v1.16.0 (2023-06-16)
+
+* **Feature**: Add Amazon EC2 instance recommendations export
+
 # v1.15.12 (2023-06-15)
 
 * No change notes available for this release.

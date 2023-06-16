@@ -1,3 +1,7 @@
+# v1.59.0 (2023-06-16)
+
+* **Feature**: Updates the *InstanceStorageConfig APIs to support a new ResourceType: SCREEN_RECORDINGS to enable screen recording and specify the storage configurations for publishing the recordings. Also updates DescribeInstance and ListInstances APIs to include InstanceAccessUrl attribute in the API response.
+
 # v1.58.2 (2023-06-15)
 
 * No change notes available for this release.

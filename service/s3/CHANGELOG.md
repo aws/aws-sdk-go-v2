@@ -1,3 +1,7 @@
+# v1.35.0 (2023-06-16)
+
+* **Feature**: This release adds SDK support for request-payer request header and request-charged response header in the "GetBucketAccelerateConfiguration", "ListMultipartUploads", "ListObjects", "ListObjectsV2" and "ListObjectVersions" S3 APIs.
+
 # v1.34.1 (2023-06-15)
 
 * No change notes available for this release.

@@ -1,8 +1,0 @@
-{
-    "id": "e0f360f9-81cb-43b2-9e47-d77bf7bd622c",
-    "type": "feature",
-    "description": "Improve pagination support for ListRegions",
-    "modules": [
-        "service/account"
-    ]
-}

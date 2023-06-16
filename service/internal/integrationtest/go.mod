@@ -6,7 +6,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/acm v1.17.13
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.16.13
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.21.2
-	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.15.12
+	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.16.0
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.20.13
 	github.com/aws/aws-sdk-go-v2/service/athena v1.30.2
 	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.28.9
@@ -48,7 +48,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.14.13
 	github.com/aws/aws-sdk-go-v2/service/glue v1.50.2
 	github.com/aws/aws-sdk-go-v2/service/health v1.17.2
-	github.com/aws/aws-sdk-go-v2/service/iam v1.20.2
+	github.com/aws/aws-sdk-go-v2/service/iam v1.20.3
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.13.12
 	github.com/aws/aws-sdk-go-v2/service/iot v1.38.2
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.17.14
@@ -66,7 +66,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.28.3
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.14.12
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.17.13
-	github.com/aws/aws-sdk-go-v2/service/s3 v1.34.1
+	github.com/aws/aws-sdk-go-v2/service/s3 v1.35.0
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.31.7
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.19.10
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.19.2

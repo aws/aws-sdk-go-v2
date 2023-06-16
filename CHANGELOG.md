@@ -1,3 +1,18 @@
+# Release (2023-06-16)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice`: [v1.16.0](service/applicationdiscoveryservice/CHANGELOG.md#v1160-2023-06-16)
+  * **Feature**: Add Amazon EC2 instance recommendations export
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.59.0](service/connect/CHANGELOG.md#v1590-2023-06-16)
+  * **Feature**: Updates the *InstanceStorageConfig APIs to support a new ResourceType: SCREEN_RECORDINGS to enable screen recording and specify the storage configurations for publishing the recordings. Also updates DescribeInstance and ListInstances APIs to include InstanceAccessUrl attribute in the API response.
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.20.3](service/iam/CHANGELOG.md#v1203-2023-06-16)
+  * **Documentation**: Documentation updates for AWS Identity and Access Management (IAM).
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.35.0](service/s3/CHANGELOG.md#v1350-2023-06-16)
+  * **Feature**: This release adds SDK support for request-payer request header and request-charged response header in the "GetBucketAccelerateConfiguration", "ListMultipartUploads", "ListObjects", "ListObjectsV2" and "ListObjectVersions" S3 APIs.
+
 # Release (2023-06-15)
 
 ## General Highlights
