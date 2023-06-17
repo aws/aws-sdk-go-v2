@@ -5,9 +5,7 @@ import static software.amazon.smithy.aws.go.codegen.EndpointGenerator.RESOLVER_O
 import static software.amazon.smithy.aws.go.codegen.EndpointGenerator.USE_FIPS_ENDPOINT_OPTION;
 import static software.amazon.smithy.aws.go.codegen.EndpointGenerator.DUAL_STACK_ENDPOINT_OPTION;
 
-
-
-
+import software.amazon.smithy.codegen.core.CodegenException;
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoCodegenPlugin;
@@ -31,12 +29,14 @@ import software.amazon.smithy.model.shapes.StructureShape;
 import software.amazon.smithy.model.shapes.ToShapeId;
 import software.amazon.smithy.rulesengine.language.EndpointRuleSet;
 import software.amazon.smithy.rulesengine.language.syntax.parameters.Parameter;
+import software.amazon.smithy.rulesengine.language.syntax.parameters.ParameterType;
 import software.amazon.smithy.rulesengine.language.syntax.parameters.Parameters;
 import software.amazon.smithy.utils.StringUtils;
 import software.amazon.smithy.rulesengine.traits.ClientContextParamDefinition;
 import software.amazon.smithy.rulesengine.traits.ClientContextParamsTrait;
 import software.amazon.smithy.rulesengine.traits.ContextParamTrait;
 import software.amazon.smithy.rulesengine.traits.EndpointRuleSetTrait;
+import software.amazon.smithy.rulesengine.traits.StaticContextParamsTrait;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.utils.MapUtils;
@@ -267,11 +267,15 @@ public class AwsEndpointResolverMiddlewareGenerator implements GoIntegration {
 
                     $W
 
+                    $W
+
                 """,
                 SymbolUtils.createPointableSymbolBuilder("Request", SmithyGoDependency.SMITHY_HTTP_TRANSPORT).build(),
                 SymbolUtils.createPointableSymbolBuilder("PutObjectInput").build(),
                 generateClientContextParamBinding(parameters, clientContextParamsTrait),
-                generateContextParamBinding(operationShape, model)
+                generateContextParamBinding(operationShape, model),
+                generateStaticContextParamBinding(parameters, operationShape)
+
             );
         };
     }
@@ -283,7 +287,15 @@ public class AwsEndpointResolverMiddlewareGenerator implements GoIntegration {
                 parameters.toList().stream().forEach(param -> {
                     if (clientContextParams.getParameters().containsKey(param.getName().asString())) {
                         var name = getExportedParameterName(param);
-                        writer.write("params.$L = &m.$L", name, name);
+                        Symbol valueWrapper;
+                        if (param.getType() == ParameterType.BOOLEAN) {
+                            valueWrapper = SymbolUtils.createValueSymbolBuilder("Bool", AwsGoDependency.AWS_CORE).build();
+                        } else if (param.getType() == ParameterType.STRING) {
+                            valueWrapper = SymbolUtils.createValueSymbolBuilder("String", AwsGoDependency.AWS_CORE).build();
+                        } else {
+                            throw new CodegenException(String.format("unexpected client context param type: %s", param.getType()));
+                        }
+                        writer.write("params.$L = $T(m.$L)", name, valueWrapper, name);
                     }
                 });
             }
@@ -291,7 +303,6 @@ public class AwsEndpointResolverMiddlewareGenerator implements GoIntegration {
     }
 
     private GoWriter.Writable generateContextParamBinding(OperationShape operationShape, Model model) {
-
         return (GoWriter writer) -> {
             var opIndex = OperationIndex.of(model);
             var inputOpt = opIndex.getInput(operationShape);
@@ -313,7 +324,34 @@ public class AwsEndpointResolverMiddlewareGenerator implements GoIntegration {
                 });
             }
             writer.write("");
+        };
+    }
 
+    private GoWriter.Writable generateStaticContextParamBinding(Parameters parameters, OperationShape operationShape) {
+        var staticContextParamTraitOpt = operationShape.getTrait(StaticContextParamsTrait.class);
+        return (GoWriter writer) -> {
+            parameters.toList().stream().forEach( param -> {
+                if (staticContextParamTraitOpt.isPresent()) {
+                    var paramName = param.getName().asString();
+
+                    var staticParam = staticContextParamTraitOpt
+                                            .get()
+                                            .getParameters()
+                                            .get(paramName);
+                    if (staticParam != null) {
+                        Symbol valueWrapper;
+                        if (param.getType() == ParameterType.BOOLEAN) {
+                            valueWrapper = SymbolUtils.createValueSymbolBuilder("Bool", AwsGoDependency.AWS_CORE).build();
+                        } else if (param.getType() == ParameterType.STRING) {
+                            valueWrapper = SymbolUtils.createValueSymbolBuilder("String", AwsGoDependency.AWS_CORE).build();
+                        } else {
+                            throw new CodegenException(String.format("unexpected static context param type: %s", param.getType()));
+                        }
+                        writer.write("params.$L = $T($L)", paramName, valueWrapper, staticParam.getValue());
+                    }
+                }
+            });
+            writer.write("");
         };
     }
 
