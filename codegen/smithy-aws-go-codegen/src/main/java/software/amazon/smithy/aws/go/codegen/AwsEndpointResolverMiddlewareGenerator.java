@@ -261,20 +261,22 @@ public class AwsEndpointResolverMiddlewareGenerator implements GoIntegration {
 
     private GoWriter.Writable generateMiddlewareResolverBody(OperationShape operationShape, Model model, Parameters parameters, Optional<ClientContextParamsTrait> clientContextParamsTrait) {
         return (GoWriter writer) -> {
+            var fmtErrorSymbol = SymbolUtils.createValueSymbolBuilder("Errorf", SmithyGoDependency.FMT).build();
+            
             writer.write(
                 """
-                    req, ok := in.Request.($P)
+                    _, ok := in.Request.($P)
                     if !ok {
-                        return out, metadata, fmt.Errorf(\"unknown transport type %T\", in.Request)
+                        return out, metadata, $T(\"unknown transport type %T\", in.Request)
                     }
                 
                     input, ok := in.Parameters.($P)
                     if !ok {
-                        return out, metadata, fmt.Errorf(\"unknown transport type %T\", in.Request)
+                        return out, metadata, $T(\"unknown transport type %T\", in.Request)
                     }
                 
                     if m.Resolver == nil {
-                        return out, metadata, fmt.Errorf(\"expected endpoint resolver to not be nil\")
+                        return out, metadata, $T(\"expected endpoint resolver to not be nil\")
                     }
                 
                     if m.BuiltInResolver == nil {
@@ -293,7 +295,10 @@ public class AwsEndpointResolverMiddlewareGenerator implements GoIntegration {
 
                 """,
                 SymbolUtils.createPointableSymbolBuilder("Request", SmithyGoDependency.SMITHY_HTTP_TRANSPORT).build(),
+                fmtErrorSymbol,
                 SymbolUtils.createPointableSymbolBuilder("PutObjectInput").build(),
+                fmtErrorSymbol,
+                fmtErrorSymbol,
                 generateClientContextParamBinding(parameters, clientContextParamsTrait),
                 generateContextParamBinding(operationShape, model),
                 generateStaticContextParamBinding(parameters, operationShape)
