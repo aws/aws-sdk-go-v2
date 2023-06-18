@@ -22,9 +22,9 @@ type BuiltInResolver struct {
 
 	DisableMultiRegionAccessPoints bool
 
-	S3UseARNRegion bool
+	S3UseArnRegion bool
 
-	S3ControlUseARNRegion bool
+	S3ControlUseArnRegion bool
 
 	// this is currently resolved via an elaborate S3 customization
 	// https://code.amazon.com/packages/AwsDrSeps/blobs/main/--/seps/accepted/shared/mrap.md

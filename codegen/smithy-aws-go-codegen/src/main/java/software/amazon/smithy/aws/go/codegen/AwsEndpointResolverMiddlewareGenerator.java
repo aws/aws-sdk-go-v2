@@ -16,6 +16,7 @@ import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.MiddlewareIdentifier;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.TriConsumer;
+import software.amazon.smithy.go.codegen.integration.ConfigField;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.MiddlewareRegistrar;
 import software.amazon.smithy.go.codegen.integration.ProtocolUtils;
@@ -39,10 +40,9 @@ import software.amazon.smithy.rulesengine.traits.EndpointRuleSetTrait;
 import software.amazon.smithy.rulesengine.traits.StaticContextParamsTrait;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
 import software.amazon.smithy.go.codegen.SymbolUtils;
+import software.amazon.smithy.utils.ListUtils;
 import software.amazon.smithy.utils.MapUtils;
-
-
-
+import software.amazon.smithy.utils.SetUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,9 +52,8 @@ import java.util.function.Consumer;
 
 public class AwsEndpointResolverMiddlewareGenerator implements GoIntegration {
 
-
-
     private final List<RuntimeClientPlugin> runtimeClientPlugins = new ArrayList<>();
+
 
     private static String getAddEndpointMiddlewareFuncName(String operationName) {
         return String.format("add%sResolveEndpointMiddleware", operationName);
@@ -64,11 +63,22 @@ public class AwsEndpointResolverMiddlewareGenerator implements GoIntegration {
         return String.format("op%sResolveEndpointMiddleware", operationName);
     }
 
+    @Override
+    public List<RuntimeClientPlugin> getClientPlugins() {
+        return runtimeClientPlugins;
+    }
+
 
 
     @Override
     public void processFinalizedModel(GoSettings settings, Model model) {
         ServiceShape service = settings.getService(model);
+        var rulesetTrait = service.getTrait(EndpointRuleSetTrait.class);
+        Optional<EndpointRuleSet> rulesetOpt = (rulesetTrait.isPresent()) 
+        ? Optional.of(EndpointRuleSet.fromNode(rulesetTrait.get().getRuleSet()))
+        : Optional.empty();
+        var clientContextParamsTrait = service.getTrait(ClientContextParamsTrait.class);
+
         for (ShapeId operationId : service.getAllOperations()) {
             final OperationShape operation = model.expectShape(operationId, OperationShape.class);
 
@@ -89,13 +99,31 @@ public class AwsEndpointResolverMiddlewareGenerator implements GoIntegration {
                             .useClientOptions()
                             .build())
                     .build());
+
+            if (clientContextParamsTrait.isPresent()) {
+                if (rulesetOpt.isPresent()) {
+                    var clientContextParams = clientContextParamsTrait.get();
+                    var parameters = rulesetOpt.get().getParameters();
+                    parameters.toList().stream().forEach(param -> {
+                        if (
+                            clientContextParams.getParameters().containsKey(param.getName().asString()) &&
+                            !param.getBuiltIn().isPresent()
+                        ) {
+                            var documentation = param.getDocumentation().isPresent() ?  param.getDocumentation().get() : "";
+                            runtimeClientPlugins.add(RuntimeClientPlugin.builder()
+                            .configFields(ListUtils.of(
+                                ConfigField.builder()
+                                        .name(getExportedParameterName(param))
+                                        .type(parameterAsSymbol(param))
+                                        .documentation(documentation)
+                                        .build()
+                            ))
+                            .build());
+                        }
+                    });
+                }
+            }
         }
-
-    }
-
-    @Override
-    public List<RuntimeClientPlugin> getClientPlugins() {
-        return runtimeClientPlugins;
     }
 
 
@@ -191,7 +219,7 @@ public class AwsEndpointResolverMiddlewareGenerator implements GoIntegration {
                         !param.getBuiltIn().isPresent()
                     ) {
                         var name = getExportedParameterName(param);
-                        writer.write("$L: options.$L", name, name);
+                        writer.write("$L: options.$L,", name, name);
                     }
                 });
             }
@@ -207,7 +235,7 @@ public class AwsEndpointResolverMiddlewareGenerator implements GoIntegration {
                     var clientContextParams = clientContextParamsTrait.get();
                     parameters.toList().stream().forEach(param -> {
                         if (clientContextParams.getParameters().containsKey(param.getName().asString())) {
-                            w.write("$L $T", getExportedParameterName(param), parameterAsSymbol(param));
+                            w.write("$L $P", getExportedParameterName(param), parameterAsSymbol(param));
                         }
                     });
                 }
@@ -312,17 +340,11 @@ public class AwsEndpointResolverMiddlewareGenerator implements GoIntegration {
             if (clientContextParamsTrait.isPresent()) {
                 var clientContextParams = clientContextParamsTrait.get();
                 parameters.toList().stream().forEach(param -> {
-                    if (clientContextParams.getParameters().containsKey(param.getName().asString())) {
+                    if (clientContextParams.getParameters().containsKey(param.getName().asString())
+                    && !param.getBuiltIn().isPresent()
+                    ) {
                         var name = getExportedParameterName(param);
-                        Symbol valueWrapper;
-                        if (param.getType() == ParameterType.BOOLEAN) {
-                            valueWrapper = SymbolUtils.createValueSymbolBuilder("Bool", AwsGoDependency.AWS_CORE).build();
-                        } else if (param.getType() == ParameterType.STRING) {
-                            valueWrapper = SymbolUtils.createValueSymbolBuilder("String", AwsGoDependency.AWS_CORE).build();
-                        } else {
-                            throw new CodegenException(String.format("unexpected client context param type: %s", param.getType()));
-                        }
-                        writer.write("params.$L = $T(m.$L)", name, valueWrapper, name);
+                        writer.write("params.$L = m.$L", name, name);
                     }
                 });
             }
