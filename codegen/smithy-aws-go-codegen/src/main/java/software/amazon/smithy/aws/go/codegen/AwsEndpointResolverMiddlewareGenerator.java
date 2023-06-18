@@ -61,7 +61,7 @@ public class AwsEndpointResolverMiddlewareGenerator implements GoIntegration {
     }
 
     private static String getMiddlewareObjectName(String operationName) {
-        return String.format("op%sResolveEndpointMiddlware", operationName);
+        return String.format("op%sResolveEndpointMiddleware", operationName);
     }
 
 
@@ -136,11 +136,11 @@ public class AwsEndpointResolverMiddlewareGenerator implements GoIntegration {
 
                         $W
   
+                        $W
                         """,
                         generateMiddlewareType(parameters, clientContextParamsTrait, operationName),
-                        generateMiddlewareMethods(parameters, clientContextParamsTrait, symbolProvider, operationShape, model)
-
-                        // generateMiddlewareAdder();
+                        generateMiddlewareMethods(parameters, clientContextParamsTrait, symbolProvider, operationShape, model),
+                        generateMiddlewareAdder(parameters, operationName, clientContextParamsTrait)
                     );
 
 
@@ -155,25 +155,48 @@ public class AwsEndpointResolverMiddlewareGenerator implements GoIntegration {
 
 
 
-    // private void generateMiddlewareAdder(GoWriter writer) {
-    //     writer.write(
-    //         """
-    //         func $L(stack $P, options Options) error {
-    //             return $L{
-    //                 BuiltInResolver: $T{
-    //                     $W
-    //                 },
-    //             }
-    //         }
-    //         """,
-    //         SymbolUtils.createValueSymbolBuilder(getAddEndpointMiddlewareFuncName(operationName)).build(),
-    //         SymbolUtils.createPointableSymbolBuilder("Stack", SmithyGoDependency.SMITHY_MIDDLEWARE).build(),
-    //         SymbolUtils.createValueSymbolBuilder(getMiddlewareObjectName(operationName)).build(),
-    //         SymbolUtils.createValueSymbolBuilder("BuiltInResolver", AwsGoDependency.INTERNAL_ENDPOINTS).build(),
-    //         generateBuiltInInitializeFieldMembers(parameters)
+    private GoWriter.Writable generateMiddlewareAdder(Parameters parameters, String operationName, Optional<ClientContextParamsTrait> clientContextParamsTrait) {
+        return (GoWriter writer) -> {
+            writer.write(
+                """
+                func $L(stack $P, options Options) error {
+                    return stack.Serialize.Insert(&$L{
+                        BuiltInResolver: $T{
+                            $W
+                        },
+                        EndpointResolver: options.EndpointResolverV2,
+                        $W
+                    }, \"ResolveEndpoint\", middleware.After)
+                }
+                """,
+                SymbolUtils.createValueSymbolBuilder(getAddEndpointMiddlewareFuncName(operationName)).build(),
+                SymbolUtils.createPointableSymbolBuilder("Stack", SmithyGoDependency.SMITHY_MIDDLEWARE).build(),
+                SymbolUtils.createValueSymbolBuilder(getMiddlewareObjectName(operationName)).build(),
+                SymbolUtils.createValueSymbolBuilder("BuiltInResolver", AwsGoDependency.INTERNAL_ENDPOINTS).build(),
+                generateBuiltInInitializeFieldMembers(parameters),
+                generateClientContextParamInitialization(parameters, clientContextParamsTrait)
 
-    //     );
-    // }
+    
+            );
+        };
+    }
+
+    private GoWriter.Writable generateClientContextParamInitialization(Parameters parameters, Optional<ClientContextParamsTrait> clientContextParamsTrait) {
+        return (GoWriter writer) -> {
+            if (clientContextParamsTrait.isPresent()) {
+                var clientContextParams = clientContextParamsTrait.get();
+                parameters.toList().stream().forEach(param -> {
+                    if (
+                        clientContextParams.getParameters().containsKey(param.getName().asString()) &&
+                        !param.getBuiltIn().isPresent()
+                    ) {
+                        var name = getExportedParameterName(param);
+                        writer.write("$L: options.$L", name, name);
+                    }
+                });
+            }
+        };
+    }
 
     private GoWriter.Writable generateMiddlewareType(Parameters parameters, Optional<ClientContextParamsTrait> clientContextParamsTrait, String operationName) {
         return (GoWriter w) -> {
@@ -188,7 +211,6 @@ public class AwsEndpointResolverMiddlewareGenerator implements GoIntegration {
                         }
                     });
                 }
-
             });
         };
     }
@@ -366,11 +388,11 @@ public class AwsEndpointResolverMiddlewareGenerator implements GoIntegration {
                         writer.insertTrailingNewline();
                     }
                     if (parameter.getBuiltIn().get().equals("AWS::UseFIPS")){
-                        writer.write("$L: options.$L.$L,", getExportedParameterName(parameter), RESOLVER_OPTIONS, USE_FIPS_ENDPOINT_OPTION);
+                        writer.write("$L: options.$L.$L,", getExportedParameterName(parameter), "EndpointOptions", USE_FIPS_ENDPOINT_OPTION);
                         writer.insertTrailingNewline();
                     }
                     if (parameter.getBuiltIn().get().equals("AWS::UseDualStack")) {
-                        writer.write("$L: options.$L.$L,", getExportedParameterName(parameter), RESOLVER_OPTIONS, DUAL_STACK_ENDPOINT_OPTION);
+                        writer.write("$L: options.$L.$L,", getExportedParameterName(parameter), "EndpointOptions", DUAL_STACK_ENDPOINT_OPTION);
                         writer.insertTrailingNewline();
                     }
                     if (parameter.getBuiltIn().get().equals("AWS::S3::ForcePathStyle")) {
