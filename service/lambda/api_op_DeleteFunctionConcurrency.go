@@ -4,8 +4,11 @@ package lambda
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/internal/endpoints"
+	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -93,6 +96,9 @@ func (c *Client) addOperationDeleteFunctionConcurrencyMiddlewares(stack *middlew
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addDeleteFunctionConcurrencyResolveEndpointMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteFunctionConcurrencyValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -112,6 +118,75 @@ func (c *Client) addOperationDeleteFunctionConcurrencyMiddlewares(stack *middlew
 		return err
 	}
 	return nil
+}
+
+type opDeleteFunctionConcurrencyResolveEndpointMiddleware struct {
+	EndpointResolver EndpointResolverV2
+	BuiltInResolver  endpoints.BuiltInParameterResolver
+}
+
+func (*opDeleteFunctionConcurrencyResolveEndpointMiddleware) ID() string {
+	return "opDeleteFunctionConcurrencyResolveEndpointMiddleware"
+}
+
+func (m *opDeleteFunctionConcurrencyResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	if m.EndpointResolver == nil {
+		return out, metadata, fmt.Errorf("expected endpoint resolver to not be nil")
+	}
+
+	if m.BuiltInResolver == nil {
+		m.BuiltInResolver = &endpoints.NopBuiltInResolver{}
+	}
+
+	params := EndpointParameters{}
+
+	resolveBuiltIns(params, m.BuiltInResolver)
+
+	var resolvedEndpoint smithyendpoints.Endpoint
+	resolvedEndpoint, err = m.EndpointResolver.ResolveEndpoint(ctx, params)
+	if err != nil {
+		return out, metadata, fmt.Errorf("failed to resolve service endpoint, %w", err)
+	}
+
+	req.URL = &resolvedEndpoint.URI
+
+	auth, ok := resolvedEndpoint.Properties.Get("authSchemes").([]interface{})
+	if ok {
+		for _, schemes := range auth {
+			scheme, ok := schemes.(map[string]interface{})
+			if !ok {
+				continue
+			}
+			if len(awsmiddleware.GetSigningName(ctx)) == 0 {
+				signingName := scheme["signingName"].(string)
+				if len(signingName) == 0 {
+					signingName = "s3"
+				}
+				ctx = awsmiddleware.SetSigningName(ctx, signingName)
+			}
+		}
+	}
+
+	return next.HandleSerialize(ctx, in)
+}
+
+func addDeleteFunctionConcurrencyResolveEndpointMiddleware(stack *middleware.Stack, options Options) error {
+	return stack.Serialize.Insert(&opDeleteFunctionConcurrencyResolveEndpointMiddleware{
+		BuiltInResolver: &endpoints.BuiltInResolver{
+			Region:       options.Region,
+			UseDualStack: options.EndpointOptions.UseDualStackEndpoint,
+			UseFIPS:      options.EndpointOptions.UseFIPSEndpoint,
+			Endpoint:     options.MutableBaseEndpoint,
+		},
+		EndpointResolver: options.EndpointResolverV2,
+	}, "ResolveEndpoint", middleware.After)
 }
 
 func newServiceMetadataMiddleware_opDeleteFunctionConcurrency(region string) *awsmiddleware.RegisterServiceMetadata {
