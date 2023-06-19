@@ -482,7 +482,7 @@ public class AwsEndpointResolverMiddlewareGenerator implements GoIntegration {
                             params.$L = input.$L     
                             """,
                             contextParamTrait.getName(),
-                            contextParamTrait.getName()
+                            inputMember.getMemberName()
                         );
                         writer.write("");
                     }
