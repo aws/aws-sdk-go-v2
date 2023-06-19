@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/endpoints"
 	"github.com/aws/aws-sdk-go-v2/internal/endpoints/awsrulesfn"
 	internalendpoints "github.com/aws/aws-sdk-go-v2/service/s3outposts/internal/endpoints"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
@@ -326,6 +327,30 @@ func finalizeEndpointResolverV2(options *Options) {
 	options.EndpointResolverV2 = &legacyEndpointResolverAdapter{
 		legacyResolver: options.EndpointResolver,
 		resolver:       NewDefaultEndpointResolverV2(),
+	}
+}
+
+func resolveBuiltIns(parameters EndpointParameters, resolver endpoints.BuiltInParameterResolver) {
+	var value interface{}
+	var present bool
+	value, present = resolver.ResolveBuiltIn("AWS::Region")
+	if v, ok := value.(string); present && ok {
+		parameters.Region = &v
+	}
+
+	value, present = resolver.ResolveBuiltIn("AWS::UseDualStack")
+	if v, ok := value.(bool); present && ok {
+		parameters.UseDualStack = &v
+	}
+
+	value, present = resolver.ResolveBuiltIn("AWS::UseFIPS")
+	if v, ok := value.(bool); present && ok {
+		parameters.UseFIPS = &v
+	}
+
+	value, present = resolver.ResolveBuiltIn("SDK::Endpoint")
+	if v, ok := value.(string); present && ok {
+		parameters.Endpoint = &v
 	}
 }
 
