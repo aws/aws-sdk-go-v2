@@ -1,3 +1,7 @@
+# v1.20.0 (2023-06-19)
+
+* **Feature**: This release updates the PriceListArn regex pattern.
+
 # v1.19.8 (2023-06-15)
 
 * No change notes available for this release.

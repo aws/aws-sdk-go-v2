@@ -1,3 +1,7 @@
+# v1.30.0 (2023-06-19)
+
+* **Feature**: Specify desired CloudFormation behavior in the event of ChangeSet execution failure using the CreateChangeSet OnStackFailure parameter
+
 # v1.29.2 (2023-06-15)
 
 * No change notes available for this release.

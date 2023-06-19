@@ -11,7 +11,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/athena v1.30.2
 	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.28.9
 	github.com/aws/aws-sdk-go-v2/service/batch v1.23.8
-	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.29.2
+	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.30.0
 	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.26.8
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.14.12
 	github.com/aws/aws-sdk-go-v2/service/cloudsearch v1.14.11
@@ -31,9 +31,9 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.17.3
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.21.5
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.19.10
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.100.1
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.101.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.18.13
-	github.com/aws/aws-sdk-go-v2/service/ecs v1.27.3
+	github.com/aws/aws-sdk-go-v2/service/ecs v1.27.4
 	github.com/aws/aws-sdk-go-v2/service/efs v1.20.3
 	github.com/aws/aws-sdk-go-v2/service/elasticache v1.27.2
 	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.15.12
@@ -46,7 +46,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.16.14
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.19.2
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.14.13
-	github.com/aws/aws-sdk-go-v2/service/glue v1.50.2
+	github.com/aws/aws-sdk-go-v2/service/glue v1.51.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.17.2
 	github.com/aws/aws-sdk-go-v2/service/iam v1.20.3
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.13.12
@@ -64,7 +64,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.27.13
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.29.2
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.28.3
-	github.com/aws/aws-sdk-go-v2/service/route53domains v1.14.12
+	github.com/aws/aws-sdk-go-v2/service/route53domains v1.15.0
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.17.13
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.35.0
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.31.7

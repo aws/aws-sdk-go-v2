@@ -1,3 +1,7 @@
+# v1.85.0 (2023-06-19)
+
+* **Feature**: Amazon Sagemaker Autopilot releases CreateAutoMLJobV2 and DescribeAutoMLJobV2 for Autopilot customers with ImageClassification, TextClassification and Tabular problem type config support.
+
 # v1.84.2 (2023-06-15)
 
 * No change notes available for this release.

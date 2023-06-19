@@ -1,3 +1,7 @@
+# v1.27.4 (2023-06-19)
+
+* **Documentation**: Documentation only update to address various tickets.
+
 # v1.27.3 (2023-06-15)
 
 * No change notes available for this release.

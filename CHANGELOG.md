@@ -1,3 +1,21 @@
+# Release (2023-06-19)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.30.0](service/cloudformation/CHANGELOG.md#v1300-2023-06-19)
+  * **Feature**: Specify desired CloudFormation behavior in the event of ChangeSet execution failure using the CreateChangeSet OnStackFailure parameter
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.101.0](service/ec2/CHANGELOG.md#v11010-2023-06-19)
+  * **Feature**: API changes to AWS Verified Access to include data from trust providers in logs
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.27.4](service/ecs/CHANGELOG.md#v1274-2023-06-19)
+  * **Documentation**: Documentation only update to address various tickets.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.51.0](service/glue/CHANGELOG.md#v1510-2023-06-19)
+  * **Feature**: This release adds support for creating cross region table/database resource links
+* `github.com/aws/aws-sdk-go-v2/service/pricing`: [v1.20.0](service/pricing/CHANGELOG.md#v1200-2023-06-19)
+  * **Feature**: This release updates the PriceListArn regex pattern.
+* `github.com/aws/aws-sdk-go-v2/service/route53domains`: [v1.15.0](service/route53domains/CHANGELOG.md#v1150-2023-06-19)
+  * **Feature**: Update MaxItems upper bound to 1000 for ListPricesRequest
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.85.0](service/sagemaker/CHANGELOG.md#v1850-2023-06-19)
+  * **Feature**: Amazon Sagemaker Autopilot releases CreateAutoMLJobV2 and DescribeAutoMLJobV2 for Autopilot customers with ImageClassification, TextClassification and Tabular problem type config support.
+
 # Release (2023-06-16)
 
 ## General Highlights

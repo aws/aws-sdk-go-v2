@@ -1,8 +1,0 @@
-{
-    "id": "aba9ea4e-a160-4bbc-9769-83dddd5f33fd",
-    "type": "feature",
-    "description": "This release adds support for creating cross region table/database resource links",
-    "modules": [
-        "service/glue"
-    ]
-}

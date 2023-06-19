@@ -1,3 +1,7 @@
+# v1.51.0 (2023-06-19)
+
+* **Feature**: This release adds support for creating cross region table/database resource links
+
 # v1.50.2 (2023-06-15)
 
 * No change notes available for this release.

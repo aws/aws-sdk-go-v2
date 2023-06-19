@@ -1,8 +1,0 @@
-{
-    "id": "89e9f7a9-8da5-4e16-acc0-163fe44d66b5",
-    "type": "feature",
-    "description": "Specify desired CloudFormation behavior in the event of ChangeSet execution failure using the CreateChangeSet OnStackFailure parameter",
-    "modules": [
-        "service/cloudformation"
-    ]
-}
