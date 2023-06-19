@@ -281,26 +281,20 @@ public class AwsEndpointResolverMiddlewareGenerator implements GoIntegration {
                             metadataType,
                     },
                     () -> {
-                        // TODO: isaiah fill in HandleSerialize method body
                         writer.write("$W", generateMiddlewareResolverBody(operationShape, model, parameters, clientContextParamsTrait));
                     });
         };
     }
 
     private GoWriter.Writable generateMiddlewareResolverBody(OperationShape operationShape, Model model, Parameters parameters, Optional<ClientContextParamsTrait> clientContextParamsTrait) {
+
         return (GoWriter writer) -> {
             var fmtErrorSymbol = SymbolUtils.createValueSymbolBuilder("Errorf", SmithyGoDependency.FMT).build();
             writer.write(
                 """
-                    req, ok := in.Request.($P)
-                    if !ok {
-                        return out, metadata, $T(\"unknown transport type %T\", in.Request)
-                    }
+                    $W
                 
-                    input, ok := in.Parameters.($P)
-                    if !ok {
-                        return out, metadata, $T(\"unknown transport type %T\", in.Request)
-                    }
+                    $W
                 
                     if m.EndpointResolver == nil {
                         return out, metadata, $T(\"expected endpoint resolver to not be nil\")
@@ -328,7 +322,70 @@ public class AwsEndpointResolverMiddlewareGenerator implements GoIntegration {
 
                     req.URL = &resolvedEndpoint.URI
 
-                    auth, ok := resolvedEndpoint.Properties.Get(authSchemes{}).([]interface{})
+                    $W
+
+                    return next.HandleSerialize(ctx, in)
+                """,
+                generateRequestValidator(),
+                generateInputValidator(model, operationShape),
+                fmtErrorSymbol,
+                SymbolUtils.createValueSymbolBuilder("NopBuiltInResolver", AwsGoDependency.INTERNAL_ENDPOINTS).build(),
+                generateClientContextParamBinding(parameters, clientContextParamsTrait),
+                generateContextParamBinding(operationShape, model),
+                generateStaticContextParamBinding(parameters, operationShape),
+                SymbolUtils.createValueSymbolBuilder("Endpoint", SmithyGoDependency.SMITHY_ENDPOINTS).build(),
+                fmtErrorSymbol,
+                generateAuthSchemeResolution()
+            );
+        };
+    }
+
+    private GoWriter.Writable generateRequestValidator() {
+        return (GoWriter writer) -> {
+            writer.write(
+                """
+                    req, ok := in.Request.($P)
+                    if !ok {
+                        return out, metadata, $T(\"unknown transport type %T\", in.Request)
+                    }
+                """,
+                SymbolUtils.createPointableSymbolBuilder("Request", SmithyGoDependency.SMITHY_HTTP_TRANSPORT).build(),
+                SymbolUtils.createValueSymbolBuilder("Errorf", SmithyGoDependency.FMT).build()
+            );
+        };
+    }
+
+    private GoWriter.Writable generateInputValidator(Model model, OperationShape operationShape) {
+        var opIndex = OperationIndex.of(model);
+        var inputOpt = opIndex.getInput(operationShape);
+        GoWriter.Writable inputValidator = (GoWriter writer) -> {writer.write("");};
+
+        if (inputOpt.isPresent()) {
+            var input = inputOpt.get();
+            for (var inputMember : input.getAllMembers().values()) {
+                var contextParamTraitOpt = inputMember.getTrait(ContextParamTrait.class);
+                if (contextParamTraitOpt.isPresent()) {
+                    inputValidator = (GoWriter writer) -> {writer.write(
+                        """
+                            input, ok := in.Parameters.($P)
+                            if !ok {
+                                return out, metadata, $T(\"unknown transport type %T\", in.Request)
+                            }     
+                        """,
+                        SymbolUtils.createPointableSymbolBuilder(operationShape.getInput().get().getName()).build(),
+                        SymbolUtils.createValueSymbolBuilder("Errorf", SmithyGoDependency.FMT).build()
+                    );};
+                }
+            }
+        }
+        return inputValidator;
+    }
+
+    private GoWriter.Writable generateAuthSchemeResolution() {
+        return (GoWriter writer) -> {
+            writer.write(
+                """
+                    auth, ok := resolvedEndpoint.Properties.Get(\"authSchemes\").([]interface{})
                     if ok {
                         for _, schemes := range auth {
                             scheme, ok := schemes.(map[string]interface{})
@@ -344,20 +401,7 @@ public class AwsEndpointResolverMiddlewareGenerator implements GoIntegration {
                             }
                         }
                     }
-
-                    return next.HandleSerialize(ctx, in)
                 """,
-                SymbolUtils.createPointableSymbolBuilder("Request", SmithyGoDependency.SMITHY_HTTP_TRANSPORT).build(),
-                fmtErrorSymbol,
-                SymbolUtils.createPointableSymbolBuilder(operationShape.getInput().get().getName()).build(),
-                fmtErrorSymbol,
-                fmtErrorSymbol,
-                SymbolUtils.createValueSymbolBuilder("NopBuiltInResolver", AwsGoDependency.INTERNAL_ENDPOINTS).build(),
-                generateClientContextParamBinding(parameters, clientContextParamsTrait),
-                generateContextParamBinding(operationShape, model),
-                generateStaticContextParamBinding(parameters, operationShape),
-                SymbolUtils.createValueSymbolBuilder("Endpoint", SmithyGoDependency.SMITHY_ENDPOINTS).build(),
-                fmtErrorSymbol,
                 SymbolUtils.createValueSymbolBuilder("GetSigningName", AwsGoDependency.AWS_MIDDLEWARE).build(),
                 SymbolUtils.createValueSymbolBuilder("SetSigningName", AwsGoDependency.AWS_MIDDLEWARE).build()
             );
