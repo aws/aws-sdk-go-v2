@@ -74,7 +74,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The AcceptDomainTransferFromAnotherAwsAccount request includes the following\n\t\t\telements.</p>"
+                "smithy.api#documentation": "<p>The AcceptDomainTransferFromAnotherAwsAccount request includes the following\n\t\t\telements.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53domains#AcceptDomainTransferFromAnotherAwsAccountResponse": {
@@ -88,7 +89,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The AcceptDomainTransferFromAnotherAwsAccount response includes the following\n\t\t\telement.</p>"
+                "smithy.api#documentation": "<p>The AcceptDomainTransferFromAnotherAwsAccount response includes the following\n\t\t\telement.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53domains#AccountId": {
@@ -159,6 +161,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53domains#AssociateDelegationSignerToDomainResponse": {
@@ -170,6 +175,9 @@
                         "smithy.api#documentation": "<p>The identifier for tracking the progress of the request. To query the operation\n\t\t\tstatus, use <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html\">GetOperationDetail</a>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53domains#BillingRecord": {
@@ -255,7 +263,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The CancelDomainTransferToAnotherAwsAccount request includes the following\n\t\t\telement.</p>"
+                "smithy.api#documentation": "<p>The CancelDomainTransferToAnotherAwsAccount request includes the following\n\t\t\telement.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53domains#CancelDomainTransferToAnotherAwsAccountResponse": {
@@ -269,7 +278,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The <code>CancelDomainTransferToAnotherAwsAccount</code> response includes the\n\t\t\tfollowing element.</p>"
+                "smithy.api#documentation": "<p>The <code>CancelDomainTransferToAnotherAwsAccount</code> response includes the\n\t\t\tfollowing element.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53domains#CheckDomainAvailability": {
@@ -310,7 +320,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The CheckDomainAvailability request contains the following elements.</p>"
+                "smithy.api#documentation": "<p>The CheckDomainAvailability request contains the following elements.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53domains#CheckDomainAvailabilityResponse": {
@@ -324,7 +335,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The CheckDomainAvailability response includes the following elements.</p>"
+                "smithy.api#documentation": "<p>The CheckDomainAvailability response includes the following elements.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53domains#CheckDomainTransferability": {
@@ -365,7 +377,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The CheckDomainTransferability request contains the following elements.</p>"
+                "smithy.api#documentation": "<p>The CheckDomainTransferability request contains the following elements.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53domains#CheckDomainTransferabilityResponse": {
@@ -379,7 +392,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The CheckDomainTransferability response includes the following elements.</p>"
+                "smithy.api#documentation": "<p>The CheckDomainTransferability response includes the following elements.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53domains#City": {
@@ -2125,6 +2139,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53domains#DeleteDomainResponse": {
@@ -2136,6 +2153,9 @@
                         "smithy.api#documentation": "<p>Identifier for tracking the progress of the request. To query the operation status,\n\t\t\tuse <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html\">GetOperationDetail</a>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53domains#DeleteTagsForDomain": {
@@ -2180,12 +2200,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The DeleteTagsForDomainRequest includes the following elements.</p>"
+                "smithy.api#documentation": "<p>The DeleteTagsForDomainRequest includes the following elements.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53domains#DeleteTagsForDomainResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.route53domains#DisableDomainAutoRenew": {
             "type": "operation",
@@ -2217,11 +2241,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53domains#DisableDomainAutoRenewResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.route53domains#DisableDomainTransferLock": {
             "type": "operation",
@@ -2264,7 +2294,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The DisableDomainTransferLock request includes the following element.</p>"
+                "smithy.api#documentation": "<p>The DisableDomainTransferLock request includes the following element.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53domains#DisableDomainTransferLockResponse": {
@@ -2278,7 +2309,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The DisableDomainTransferLock response includes the following element.</p>"
+                "smithy.api#documentation": "<p>The DisableDomainTransferLock response includes the following element.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53domains#DisassociateDelegationSignerFromDomain": {
@@ -2327,6 +2359,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53domains#DisassociateDelegationSignerFromDomainResponse": {
@@ -2338,6 +2373,9 @@
                         "smithy.api#documentation": "<p>Identifier for tracking the progress of the request. To query the operation status,\n\t\t\tuse <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html\">GetOperationDetail</a>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53domains#DnssecKey": {
@@ -2742,11 +2780,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53domains#EnableDomainAutoRenewResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.route53domains#EnableDomainTransferLock": {
             "type": "operation",
@@ -2789,7 +2833,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to set the transfer lock for the specified domain.</p>"
+                "smithy.api#documentation": "<p>A request to set the transfer lock for the specified domain.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53domains#EnableDomainTransferLockResponse": {
@@ -2803,7 +2848,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The EnableDomainTransferLock response includes the following elements.</p>"
+                "smithy.api#documentation": "<p>The EnableDomainTransferLock response includes the following elements.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53domains#ErrorMessage": {
@@ -2815,7 +2861,7 @@
                 "Name": {
                     "target": "com.amazonaws.route53domains#ExtraParamName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of an additional parameter that is required by a top-level domain. Here are\n\t\t\tthe top-level domains that require additional parameters and the names of the parameters\n\t\t\tthat they require:</p>\n         <dl>\n            <dt>.com.au and .net.au</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>\n                        <code>AU_ID_NUMBER</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AU_ID_TYPE</code>\n                     </p>\n                     <p>Valid values include the following:</p>\n                     <ul>\n                        <li>\n                           <p>\n                              <code>ABN</code> (Australian business number)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>ACN</code> (Australian company number)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>TM</code> (Trademark number)</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </dd>\n            <dt>.ca</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>\n                        <code>BRAND_NUMBER</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>CA_BUSINESS_ENTITY_TYPE</code>\n                     </p>\n                     <p>Valid values include the following:</p>\n                     <ul>\n                        <li>\n                           <p>\n                              <code>BANK</code> (Bank)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>COMMERCIAL_COMPANY</code> (Commercial\n\t\t\t\t\t\t\t\t\t\tcompany)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>COMPANY</code> (Company)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>COOPERATION</code> (Cooperation)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>COOPERATIVE</code> (Cooperative)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>COOPRIX</code> (Cooprix)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>CORP</code> (Corporation)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>CREDIT_UNION</code> (Credit union)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>FOMIA</code> (Federation of mutual insurance\n\t\t\t\t\t\t\t\t\t\tassociations)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>INC</code> (Incorporated)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>LTD</code> (Limited)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>LTEE</code> (Limitée)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>LLC</code> (Limited liability corporation)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>LLP</code> (Limited liability partnership)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>LTE</code> (Lte.)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>MBA</code> (Mutual benefit association)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>MIC</code> (Mutual insurance company)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>NFP</code> (Not-for-profit corporation)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>SA</code> (S.A.)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>SAVINGS_COMPANY</code> (Savings company)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>SAVINGS_UNION</code> (Savings union)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>SARL</code> (Société à responsabilité\n\t\t\t\t\t\t\t\t\t\tlimitée)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>TRUST</code> (Trust)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>ULC</code> (Unlimited liability corporation)</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>CA_LEGAL_TYPE</code>\n                     </p>\n                     <p>When <code>ContactType</code> is <code>PERSON</code>, valid values\n\t\t\t\t\t\t\t\tinclude the following:</p>\n                     <ul>\n                        <li>\n                           <p>\n                              <code>ABO</code> (Aboriginal Peoples indigenous to\n\t\t\t\t\t\t\t\t\t\tCanada)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>CCT</code> (Canadian citizen)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>LGR</code> (Legal Representative of a Canadian\n\t\t\t\t\t\t\t\t\t\tCitizen or Permanent Resident)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>RES</code> (Permanent resident of Canada)</p>\n                        </li>\n                     </ul>\n                     <p>When <code>ContactType</code> is a value other than\n\t\t\t\t\t\t\t\t\t<code>PERSON</code>, valid values include the following:</p>\n                     <ul>\n                        <li>\n                           <p>\n                              <code>ASS</code> (Canadian unincorporated\n\t\t\t\t\t\t\t\t\t\tassociation)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>CCO</code> (Canadian corporation)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>EDU</code> (Canadian educational institution)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>GOV</code> (Government or government entity in\n\t\t\t\t\t\t\t\t\t\tCanada)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>HOP</code> (Canadian Hospital)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>INB</code> (Indian Band recognized by the Indian Act\n\t\t\t\t\t\t\t\t\t\tof Canada)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>LAM</code> (Canadian Library, Archive, or\n\t\t\t\t\t\t\t\t\t\tMuseum)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>MAJ</code> (Her/His Majesty the Queen/King)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>OMK</code> (Official mark registered in\n\t\t\t\t\t\t\t\t\t\tCanada)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>PLT</code> (Canadian Political Party)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>PRT</code> (Partnership Registered in Canada)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>TDM</code> (Trademark registered in Canada)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>TRD</code> (Canadian Trade Union)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>TRS</code> (Trust established in Canada)</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </dd>\n            <dt>.es</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>\n                        <code>ES_IDENTIFICATION</code>\n                     </p>\n                     <p>The value of <code>ES_IDENTIFICATION</code> depends on the\n\t\t\t\t\t\t\t\tfollowing values:</p>\n                     <ul>\n                        <li>\n                           <p>The value of <code>ES_LEGAL_FORM</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>The value of <code>ES_IDENTIFICATION_TYPE</code>\n                           </p>\n                        </li>\n                     </ul>\n                     <p>\n                        <b>If <code>ES_LEGAL_FORM</code> is any value\n\t\t\t\t\t\t\t\t\tother than <code>INDIVIDUAL</code>:</b>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Specify 1 letter + 8 numbers (CIF [Certificado de\n\t\t\t\t\t\t\t\t\t\tIdentificación Fiscal])</p>\n                        </li>\n                        <li>\n                           <p>Example: B12345678</p>\n                        </li>\n                     </ul>\n                     <p>\n                        <b>If <code>ES_LEGAL_FORM</code> is\n\t\t\t\t\t\t\t\t\t\t<code>INDIVIDUAL</code>, the value that you specify for\n\t\t\t\t\t\t\t\t\t\t<code>ES_IDENTIFICATION</code> depends on the value of\n\t\t\t\t\t\t\t\t\t\t<code>ES_IDENTIFICATION_TYPE</code>:</b>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>If <code>ES_IDENTIFICATION_TYPE</code> is\n\t\t\t\t\t\t\t\t\t\t\t<code>DNI_AND_NIF</code> (for Spanish contacts):</p>\n                           <ul>\n                              <li>\n                                 <p>Specify 8 numbers + 1 letter (DNI [Documento\n\t\t\t\t\t\t\t\t\t\t\t\tNacional de Identidad], NIF [Número de\n\t\t\t\t\t\t\t\t\t\t\t\tIdentificación Fiscal])</p>\n                              </li>\n                              <li>\n                                 <p>Example: 12345678M</p>\n                              </li>\n                           </ul>\n                        </li>\n                        <li>\n                           <p>If <code>ES_IDENTIFICATION_TYPE</code> is <code>NIE</code>\n\t\t\t\t\t\t\t\t\t\t(for foreigners with legal residence):</p>\n                           <ul>\n                              <li>\n                                 <p>Specify 1 letter + 7 numbers + 1 letter ( NIE\n\t\t\t\t\t\t\t\t\t\t\t\t[Número de Identidad de Extranjero])</p>\n                              </li>\n                              <li>\n                                 <p>Example: Y1234567X</p>\n                              </li>\n                           </ul>\n                        </li>\n                        <li>\n                           <p>If <code>ES_IDENTIFICATION_TYPE</code> is\n\t\t\t\t\t\t\t\t\t\t\t<code>OTHER</code> (for contacts outside of\n\t\t\t\t\t\t\t\t\t\tSpain):</p>\n                           <ul>\n                              <li>\n                                 <p>Specify a passport number, drivers license number,\n\t\t\t\t\t\t\t\t\t\t\t\tor national identity card number</p>\n                              </li>\n                           </ul>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ES_IDENTIFICATION_TYPE</code>\n                     </p>\n                     <p>Valid values include the following:</p>\n                     <ul>\n                        <li>\n                           <p>\n                              <code>DNI_AND_NIF</code> (For Spanish contacts)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>NIE</code> (For foreigners with legal\n\t\t\t\t\t\t\t\t\t\tresidence)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>OTHER</code> (For contacts outside of Spain)</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ES_LEGAL_FORM</code>\n                     </p>\n                     <p>Valid values include the following:</p>\n                     <ul>\n                        <li>\n                           <p>\n                              <code>ASSOCIATION</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>CENTRAL_GOVERNMENT_BODY</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>CIVIL_SOCIETY</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>COMMUNITY_OF_OWNERS</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>COMMUNITY_PROPERTY</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>CONSULATE</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>COOPERATIVE</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>DESIGNATION_OF_ORIGIN_SUPERVISORY_COUNCIL</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>ECONOMIC_INTEREST_GROUP</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>EMBASSY</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>ENTITY_MANAGING_NATURAL_AREAS</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>FARM_PARTNERSHIP</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>FOUNDATION</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>GENERAL_AND_LIMITED_PARTNERSHIP</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>GENERAL_PARTNERSHIP</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>INDIVIDUAL</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>LIMITED_COMPANY</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>LOCAL_AUTHORITY</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>LOCAL_PUBLIC_ENTITY</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>MUTUAL_INSURANCE_COMPANY</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>NATIONAL_PUBLIC_ENTITY</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>ORDER_OR_RELIGIOUS_INSTITUTION</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>OTHERS (Only for contacts outside of\n\t\t\t\t\t\t\t\t\t\tSpain)</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>POLITICAL_PARTY</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>PROFESSIONAL_ASSOCIATION</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>PUBLIC_LAW_ASSOCIATION</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>PUBLIC_LIMITED_COMPANY</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>REGIONAL_GOVERNMENT_BODY</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>REGIONAL_PUBLIC_ENTITY</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>SAVINGS_BANK</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>SPANISH_OFFICE</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>SPORTS_ASSOCIATION</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>SPORTS_FEDERATION</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>SPORTS_LIMITED_COMPANY</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>TEMPORARY_ALLIANCE_OF_ENTERPRISES</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>TRADE_UNION</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>WORKER_OWNED_COMPANY</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>WORKER_OWNED_LIMITED_COMPANY</code>\n                           </p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </dd>\n            <dt>.eu</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>\n                        <code> EU_COUNTRY_OF_CITIZENSHIP</code>\n                     </p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>.fi</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>\n                        <code>BIRTH_DATE_IN_YYYY_MM_DD</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>FI_BUSINESS_NUMBER</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>FI_ID_NUMBER</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>FI_NATIONALITY</code>\n                     </p>\n                     <p>Valid values include the following:</p>\n                     <ul>\n                        <li>\n                           <p>\n                              <code>FINNISH</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>NOT_FINNISH</code>\n                           </p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>FI_ORGANIZATION_TYPE</code>\n                     </p>\n                     <p>Valid values include the following:</p>\n                     <ul>\n                        <li>\n                           <p>\n                              <code>COMPANY</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>CORPORATION</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>GOVERNMENT</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>INSTITUTION</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>POLITICAL_PARTY</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>PUBLIC_COMMUNITY</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>TOWNSHIP</code>\n                           </p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </dd>\n            <dt>.fr</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>\n                        <code>BIRTH_CITY</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>BIRTH_COUNTRY</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>BIRTH_DATE_IN_YYYY_MM_DD</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>BIRTH_DEPARTMENT</code>: Specify the INSEE code that\n\t\t\t\t\t\t\t\tcorresponds with the department where the contact was born. If the\n\t\t\t\t\t\t\t\tcontact was born somewhere other than France or its overseas\n\t\t\t\t\t\t\t\tdepartments, specify <code>99</code>. For more information,\n\t\t\t\t\t\t\t\tincluding a list of departments and the corresponding INSEE numbers,\n\t\t\t\t\t\t\t\tsee the Wikipedia entry <a href=\"https://en.wikipedia.org/wiki/Departments_of_France\">Departments of France</a>.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>BRAND_NUMBER</code>\n                     </p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>.it</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>\n                        <code>IT_NATIONALITY</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>IT_PIN</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>IT_REGISTRANT_ENTITY_TYPE</code>\n                     </p>\n                     <p>Valid values include the following:</p>\n                     <ul>\n                        <li>\n                           <p>\n                              <code>FOREIGNERS</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>FREELANCE_WORKERS</code> (Freelance workers and\n\t\t\t\t\t\t\t\t\t\tprofessionals)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>ITALIAN_COMPANIES</code> (Italian companies and\n\t\t\t\t\t\t\t\t\t\tone-person companies)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>NON_PROFIT_ORGANIZATIONS</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>OTHER_SUBJECTS</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>PUBLIC_ORGANIZATIONS</code>\n                           </p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </dd>\n            <dt>.ru</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>\n                        <code>BIRTH_DATE_IN_YYYY_MM_DD</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>RU_PASSPORT_DATA</code>\n                     </p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>.se</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>\n                        <code>BIRTH_COUNTRY</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>SE_ID_NUMBER</code>\n                     </p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>.sg</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>\n                        <code>SG_ID_NUMBER</code>\n                     </p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>.uk, .co.uk, .me.uk, and .org.uk</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>\n                        <code>UK_CONTACT_TYPE</code>\n                     </p>\n                     <p>Valid values include the following:</p>\n                     <ul>\n                        <li>\n                           <p>\n                              <code>CRC</code> (UK Corporation by Royal Charter)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>FCORP</code> (Non-UK Corporation)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>FIND</code> (Non-UK Individual, representing\n\t\t\t\t\t\t\t\t\t\tself)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>FOTHER</code> (Non-UK Entity that does not fit into\n\t\t\t\t\t\t\t\t\t\tany other category)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>GOV</code> (UK Government Body)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>IND</code> (UK Individual (representing\n\t\t\t\t\t\t\t\t\t\tself))</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>IP</code> (UK Industrial/Provident Registered\n\t\t\t\t\t\t\t\t\t\tCompany)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>LLP</code> (UK Limited Liability Partnership)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>LTD</code> (UK Limited Company)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>OTHER</code> (UK Entity that does not fit into any\n\t\t\t\t\t\t\t\t\t\tother category)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>PLC</code> (UK Public Limited Company)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>PTNR</code> (UK Partnership)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>RCHAR</code> (UK Registered Charity)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>SCH</code> (UK School)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>STAT</code> (UK Statutory Body)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>STRA</code> (UK Sole Trader)</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>UK_COMPANY_NUMBER</code>\n                     </p>\n                  </li>\n               </ul>\n            </dd>\n         </dl>\n         <p>In addition, many TLDs require a <code>VAT_NUMBER</code>.</p>",
+                        "smithy.api#documentation": "<p>The name of an additional parameter that is required by a top-level domain. Here are\n\t\t\tthe top-level domains that require additional parameters and the names of the parameters\n\t\t\tthat they require:</p>\n         <dl>\n            <dt>.com.au and .net.au</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>\n                        <code>AU_ID_NUMBER</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AU_ID_TYPE</code>\n                     </p>\n                     <p>Valid values include the following:</p>\n                     <ul>\n                        <li>\n                           <p>\n                              <code>ABN</code> (Australian business number)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>ACN</code> (Australian company number)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>TM</code> (Trademark number)</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </dd>\n            <dt>.ca</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>\n                        <code>BRAND_NUMBER</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>CA_BUSINESS_ENTITY_TYPE</code>\n                     </p>\n                     <p>Valid values include the following:</p>\n                     <ul>\n                        <li>\n                           <p>\n                              <code>BANK</code> (Bank)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>COMMERCIAL_COMPANY</code> (Commercial\n\t\t\t\t\t\t\t\t\t\tcompany)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>COMPANY</code> (Company)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>COOPERATION</code> (Cooperation)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>COOPERATIVE</code> (Cooperative)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>COOPRIX</code> (Cooprix)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>CORP</code> (Corporation)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>CREDIT_UNION</code> (Credit union)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>FOMIA</code> (Federation of mutual insurance\n\t\t\t\t\t\t\t\t\t\tassociations)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>INC</code> (Incorporated)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>LTD</code> (Limited)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>LTEE</code> (Limitée)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>LLC</code> (Limited liability corporation)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>LLP</code> (Limited liability partnership)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>LTE</code> (Lte.)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>MBA</code> (Mutual benefit association)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>MIC</code> (Mutual insurance company)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>NFP</code> (Not-for-profit corporation)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>SA</code> (S.A.)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>SAVINGS_COMPANY</code> (Savings company)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>SAVINGS_UNION</code> (Savings union)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>SARL</code> (Société à responsabilité\n\t\t\t\t\t\t\t\t\t\tlimitée)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>TRUST</code> (Trust)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>ULC</code> (Unlimited liability corporation)</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>CA_LEGAL_TYPE</code>\n                     </p>\n                     <p>When <code>ContactType</code> is <code>PERSON</code>, valid values\n\t\t\t\t\t\t\t\tinclude the following:</p>\n                     <ul>\n                        <li>\n                           <p>\n                              <code>ABO</code> (Aboriginal Peoples indigenous to\n\t\t\t\t\t\t\t\t\t\tCanada)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>CCT</code> (Canadian citizen)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>LGR</code> (Legal Representative of a Canadian\n\t\t\t\t\t\t\t\t\t\tCitizen or Permanent Resident)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>RES</code> (Permanent resident of Canada)</p>\n                        </li>\n                     </ul>\n                     <p>When <code>ContactType</code> is a value other than\n\t\t\t\t\t\t\t\t\t<code>PERSON</code>, valid values include the following:</p>\n                     <ul>\n                        <li>\n                           <p>\n                              <code>ASS</code> (Canadian unincorporated\n\t\t\t\t\t\t\t\t\t\tassociation)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>CCO</code> (Canadian corporation)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>EDU</code> (Canadian educational institution)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>GOV</code> (Government or government entity in\n\t\t\t\t\t\t\t\t\t\tCanada)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>HOP</code> (Canadian Hospital)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>INB</code> (Indian Band recognized by the Indian Act\n\t\t\t\t\t\t\t\t\t\tof Canada)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>LAM</code> (Canadian Library, Archive, or\n\t\t\t\t\t\t\t\t\t\tMuseum)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>MAJ</code> (Her/His Majesty the Queen/King)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>OMK</code> (Official mark registered in\n\t\t\t\t\t\t\t\t\t\tCanada)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>PLT</code> (Canadian Political Party)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>PRT</code> (Partnership Registered in Canada)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>TDM</code> (Trademark registered in Canada)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>TRD</code> (Canadian Trade Union)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>TRS</code> (Trust established in Canada)</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </dd>\n            <dt>.es</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>\n                        <code>ES_IDENTIFICATION</code>\n                     </p>\n                     <p>The value of <code>ES_IDENTIFICATION</code> depends on the\n\t\t\t\t\t\t\t\tfollowing values:</p>\n                     <ul>\n                        <li>\n                           <p>The value of <code>ES_LEGAL_FORM</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>The value of <code>ES_IDENTIFICATION_TYPE</code>\n                           </p>\n                        </li>\n                     </ul>\n                     <p>\n                        <b>If <code>ES_LEGAL_FORM</code> is any value\n\t\t\t\t\t\t\t\t\tother than <code>INDIVIDUAL</code>:</b>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>Specify 1 letter + 8 numbers (CIF [Certificado de\n\t\t\t\t\t\t\t\t\t\tIdentificación Fiscal])</p>\n                        </li>\n                        <li>\n                           <p>Example: B12345678</p>\n                        </li>\n                     </ul>\n                     <p>\n                        <b>If <code>ES_LEGAL_FORM</code> is\n\t\t\t\t\t\t\t\t\t\t<code>INDIVIDUAL</code>, the value that you specify for\n\t\t\t\t\t\t\t\t\t\t<code>ES_IDENTIFICATION</code> depends on the value of\n\t\t\t\t\t\t\t\t\t\t<code>ES_IDENTIFICATION_TYPE</code>:</b>\n                     </p>\n                     <ul>\n                        <li>\n                           <p>If <code>ES_IDENTIFICATION_TYPE</code> is\n\t\t\t\t\t\t\t\t\t\t\t<code>DNI_AND_NIF</code> (for Spanish contacts):</p>\n                           <ul>\n                              <li>\n                                 <p>Specify 8 numbers + 1 letter (DNI [Documento\n\t\t\t\t\t\t\t\t\t\t\t\tNacional de Identidad], NIF [Número de\n\t\t\t\t\t\t\t\t\t\t\t\tIdentificación Fiscal])</p>\n                              </li>\n                              <li>\n                                 <p>Example: 12345678M</p>\n                              </li>\n                           </ul>\n                        </li>\n                        <li>\n                           <p>If <code>ES_IDENTIFICATION_TYPE</code> is <code>NIE</code>\n\t\t\t\t\t\t\t\t\t\t(for foreigners with legal residence):</p>\n                           <ul>\n                              <li>\n                                 <p>Specify 1 letter + 7 numbers + 1 letter ( NIE\n\t\t\t\t\t\t\t\t\t\t\t\t[Número de Identidad de Extranjero])</p>\n                              </li>\n                              <li>\n                                 <p>Example: Y1234567X</p>\n                              </li>\n                           </ul>\n                        </li>\n                        <li>\n                           <p>If <code>ES_IDENTIFICATION_TYPE</code> is\n\t\t\t\t\t\t\t\t\t\t\t<code>OTHER</code> (for contacts outside of\n\t\t\t\t\t\t\t\t\t\tSpain):</p>\n                           <ul>\n                              <li>\n                                 <p>Specify a passport number, drivers license number,\n\t\t\t\t\t\t\t\t\t\t\t\tor national identity card number</p>\n                              </li>\n                           </ul>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ES_IDENTIFICATION_TYPE</code>\n                     </p>\n                     <p>Valid values include the following:</p>\n                     <ul>\n                        <li>\n                           <p>\n                              <code>DNI_AND_NIF</code> (For Spanish contacts)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>NIE</code> (For foreigners with legal\n\t\t\t\t\t\t\t\t\t\tresidence)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>OTHER</code> (For contacts outside of Spain)</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ES_LEGAL_FORM</code>\n                     </p>\n                     <p>Valid values include the following:</p>\n                     <ul>\n                        <li>\n                           <p>\n                              <code>ASSOCIATION</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>CENTRAL_GOVERNMENT_BODY</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>CIVIL_SOCIETY</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>COMMUNITY_OF_OWNERS</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>COMMUNITY_PROPERTY</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>CONSULATE</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>COOPERATIVE</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>DESIGNATION_OF_ORIGIN_SUPERVISORY_COUNCIL</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>ECONOMIC_INTEREST_GROUP</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>EMBASSY</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>ENTITY_MANAGING_NATURAL_AREAS</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>FARM_PARTNERSHIP</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>FOUNDATION</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>GENERAL_AND_LIMITED_PARTNERSHIP</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>GENERAL_PARTNERSHIP</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>INDIVIDUAL</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>LIMITED_COMPANY</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>LOCAL_AUTHORITY</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>LOCAL_PUBLIC_ENTITY</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>MUTUAL_INSURANCE_COMPANY</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>NATIONAL_PUBLIC_ENTITY</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>ORDER_OR_RELIGIOUS_INSTITUTION</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>OTHERS (Only for contacts outside of\n\t\t\t\t\t\t\t\t\t\tSpain)</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>POLITICAL_PARTY</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>PROFESSIONAL_ASSOCIATION</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>PUBLIC_LAW_ASSOCIATION</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>PUBLIC_LIMITED_COMPANY</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>REGIONAL_GOVERNMENT_BODY</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>REGIONAL_PUBLIC_ENTITY</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>SAVINGS_BANK</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>SPANISH_OFFICE</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>SPORTS_ASSOCIATION</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>SPORTS_FEDERATION</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>SPORTS_LIMITED_COMPANY</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>TEMPORARY_ALLIANCE_OF_ENTERPRISES</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>TRADE_UNION</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>WORKER_OWNED_COMPANY</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>WORKER_OWNED_LIMITED_COMPANY</code>\n                           </p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </dd>\n            <dt>.eu</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>\n                        <code> EU_COUNTRY_OF_CITIZENSHIP</code>\n                     </p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>.fi</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>\n                        <code>BIRTH_DATE_IN_YYYY_MM_DD</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>FI_BUSINESS_NUMBER</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>FI_ID_NUMBER</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>FI_NATIONALITY</code>\n                     </p>\n                     <p>Valid values include the following:</p>\n                     <ul>\n                        <li>\n                           <p>\n                              <code>FINNISH</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>NOT_FINNISH</code>\n                           </p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>FI_ORGANIZATION_TYPE</code>\n                     </p>\n                     <p>Valid values include the following:</p>\n                     <ul>\n                        <li>\n                           <p>\n                              <code>COMPANY</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>CORPORATION</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>GOVERNMENT</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>INSTITUTION</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>POLITICAL_PARTY</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>PUBLIC_COMMUNITY</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>TOWNSHIP</code>\n                           </p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </dd>\n            <dt>.it</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>\n                        <code>IT_NATIONALITY</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>IT_PIN</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>IT_REGISTRANT_ENTITY_TYPE</code>\n                     </p>\n                     <p>Valid values include the following:</p>\n                     <ul>\n                        <li>\n                           <p>\n                              <code>FOREIGNERS</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>FREELANCE_WORKERS</code> (Freelance workers and\n\t\t\t\t\t\t\t\t\t\tprofessionals)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>ITALIAN_COMPANIES</code> (Italian companies and\n\t\t\t\t\t\t\t\t\t\tone-person companies)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>NON_PROFIT_ORGANIZATIONS</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>OTHER_SUBJECTS</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>PUBLIC_ORGANIZATIONS</code>\n                           </p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </dd>\n            <dt>.ru</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>\n                        <code>BIRTH_DATE_IN_YYYY_MM_DD</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>RU_PASSPORT_DATA</code>\n                     </p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>.se</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>\n                        <code>BIRTH_COUNTRY</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>SE_ID_NUMBER</code>\n                     </p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>.sg</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>\n                        <code>SG_ID_NUMBER</code>\n                     </p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>.uk, .co.uk, .me.uk, and .org.uk</dt>\n            <dd>\n               <ul>\n                  <li>\n                     <p>\n                        <code>UK_CONTACT_TYPE</code>\n                     </p>\n                     <p>Valid values include the following:</p>\n                     <ul>\n                        <li>\n                           <p>\n                              <code>CRC</code> (UK Corporation by Royal Charter)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>FCORP</code> (Non-UK Corporation)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>FIND</code> (Non-UK Individual, representing\n\t\t\t\t\t\t\t\t\t\tself)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>FOTHER</code> (Non-UK Entity that does not fit into\n\t\t\t\t\t\t\t\t\t\tany other category)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>GOV</code> (UK Government Body)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>IND</code> (UK Individual (representing\n\t\t\t\t\t\t\t\t\t\tself))</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>IP</code> (UK Industrial/Provident Registered\n\t\t\t\t\t\t\t\t\t\tCompany)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>LLP</code> (UK Limited Liability Partnership)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>LTD</code> (UK Limited Company)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>OTHER</code> (UK Entity that does not fit into any\n\t\t\t\t\t\t\t\t\t\tother category)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>PLC</code> (UK Public Limited Company)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>PTNR</code> (UK Partnership)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>RCHAR</code> (UK Registered Charity)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>SCH</code> (UK School)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>STAT</code> (UK Statutory Body)</p>\n                        </li>\n                        <li>\n                           <p>\n                              <code>STRA</code> (UK Sole Trader)</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>\n                        <code>UK_COMPANY_NUMBER</code>\n                     </p>\n                  </li>\n               </ul>\n            </dd>\n         </dl>\n         <p>In addition, many TLDs require a <code>VAT_NUMBER</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3115,6 +3161,9 @@
                         "smithy.api#documentation": "<p>The name of the domain for which you want to know whether the registrant contact has\n\t\t\tconfirmed that the email address is valid.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53domains#GetContactReachabilityStatusResponse": {
@@ -3132,6 +3181,9 @@
                         "smithy.api#documentation": "<p>Whether the registrant contact has responded. Values include the following:</p>\n         <dl>\n            <dt>PENDING</dt>\n            <dd>\n               <p>We sent the confirmation email and haven't received a response yet.</p>\n            </dd>\n            <dt>DONE</dt>\n            <dd>\n               <p>We sent the email and got confirmation from the registrant contact.</p>\n            </dd>\n            <dt>EXPIRED</dt>\n            <dd>\n               <p>The time limit expired before the registrant contact responded.</p>\n            </dd>\n         </dl>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53domains#GetDomainDetail": {
@@ -3166,7 +3218,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The GetDomainDetail request includes the following element.</p>"
+                "smithy.api#documentation": "<p>The GetDomainDetail request includes the following element.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53domains#GetDomainDetailResponse": {
@@ -3306,7 +3359,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The GetDomainDetail response includes the following elements.</p>"
+                "smithy.api#documentation": "<p>The GetDomainDetail response includes the following elements.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53domains#GetDomainSuggestions": {
@@ -3354,6 +3408,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53domains#GetDomainSuggestionsResponse": {
@@ -3365,6 +3422,9 @@
                         "smithy.api#documentation": "<p>A list of possible domain names. If you specified <code>true</code> for\n\t\t\t\t<code>OnlyAvailable</code> in the request, the list contains only domains that are\n\t\t\tavailable for registration.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53domains#GetOperationDetail": {
@@ -3396,7 +3456,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html\">GetOperationDetail</a> request includes the following element.</p>"
+                "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html\">GetOperationDetail</a> request includes the following element.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53domains#GetOperationDetailResponse": {
@@ -3452,7 +3513,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The GetOperationDetail response includes the following elements.</p>"
+                "smithy.api#documentation": "<p>The GetOperationDetail response includes the following elements.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53domains#GlueIp": {
@@ -3592,7 +3654,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The ListDomains request includes the following elements.</p>"
+                "smithy.api#documentation": "<p>The ListDomains request includes the following elements.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53domains#ListDomainsResponse": {
@@ -3612,7 +3675,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The ListDomains response includes the following elements.</p>"
+                "smithy.api#documentation": "<p>The ListDomains response includes the following elements.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53domains#ListOperations": {
@@ -3685,7 +3749,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The ListOperations request includes the following elements.</p>"
+                "smithy.api#documentation": "<p>The ListOperations request includes the following elements.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53domains#ListOperationsResponse": {
@@ -3705,7 +3770,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The ListOperations response includes the following elements.</p>"
+                "smithy.api#documentation": "<p>The ListOperations response includes the following elements.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53domains#ListOperationsSortAttributeName": {
@@ -3745,6 +3811,14 @@
                 }
             }
         },
+        "com.amazonaws.route53domains#ListPricesPageMaxItems": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "max": 1000
+                }
+            }
+        },
         "com.amazonaws.route53domains#ListPricesRequest": {
             "type": "structure",
             "members": {
@@ -3761,11 +3835,14 @@
                     }
                 },
                 "MaxItems": {
-                    "target": "com.amazonaws.route53domains#PageMaxItems",
+                    "target": "com.amazonaws.route53domains#ListPricesPageMaxItems",
                     "traits": {
                         "smithy.api#documentation": "<p>Number of <code>Prices</code> to be returned.</p>\n         <p>Used only for all TLDs. If you specify a TLD, don't specify a\n\t\t\t<code>MaxItems</code>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53domains#ListPricesResponse": {
@@ -3783,6 +3860,9 @@
                         "smithy.api#documentation": "<p>If there are more prices than you specified for <code>MaxItems</code> in the request,\n\t\t\tsubmit another request and include the value of <code>NextPageMarker</code> in the value\n\t\t\tof <code>Marker</code>. </p>\n         <p>Used only for all TLDs. If you specify a TLD, don't specify a\n\t\t\t\t<code>NextPageMarker</code>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53domains#ListTagsForDomain": {
@@ -3820,7 +3900,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The ListTagsForDomainRequest includes the following elements.</p>"
+                "smithy.api#documentation": "<p>The ListTagsForDomainRequest includes the following elements.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53domains#ListTagsForDomainResponse": {
@@ -3834,7 +3915,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The ListTagsForDomain response includes the following elements.</p>"
+                "smithy.api#documentation": "<p>The ListTagsForDomain response includes the following elements.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53domains#Nameserver": {
@@ -4235,6 +4317,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53domains#ReachabilityStatus": {
@@ -4289,7 +4374,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This operation registers a domain. Domains are registered either by Amazon Registrar\n\t\t\t(for .com, .net, and .org domains) or by our registrar associate, Gandi (for all other\n\t\t\tdomains). For some top-level domains (TLDs), this operation requires extra\n\t\t\tparameters.</p>\n         <p>When you register a domain, Amazon Route 53 does the following:</p>\n         <ul>\n            <li>\n               <p>Creates a Route 53 hosted zone that has the same name as the domain. Route 53\n\t\t\t\t\tassigns four name servers to your hosted zone and automatically updates your\n\t\t\t\t\tdomain registration with the names of these name servers.</p>\n            </li>\n            <li>\n               <p>Enables auto renew, so your domain registration will renew automatically each\n\t\t\t\t\tyear. We'll notify you in advance of the renewal date so you can choose whether\n\t\t\t\t\tto renew the registration.</p>\n            </li>\n            <li>\n               <p>Optionally enables privacy protection, so WHOIS queries return contact\n\t\t\t\t\tinformation either for Amazon Registrar (for .com, .net, and .org domains) or\n\t\t\t\t\tfor our registrar associate, Gandi (for all other TLDs). If you don't enable\n\t\t\t\t\tprivacy protection, WHOIS queries return the information that you entered for\n\t\t\t\t\tthe administrative, registrant, and technical contacts.</p>\n               <note>\n                  <p>You must specify the same privacy setting for the administrative,\n\t\t\t\t\t\tregistrant, and technical contacts.</p>\n               </note>\n            </li>\n            <li>\n               <p>If registration is successful, returns an operation ID that you can use to\n\t\t\t\t\ttrack the progress and completion of the action. If the request is not completed\n\t\t\t\t\tsuccessfully, the domain registrant is notified by email.</p>\n            </li>\n            <li>\n               <p>Charges your Amazon Web Services account an amount based on the top-level\n\t\t\t\t\tdomain. For more information, see <a href=\"http://aws.amazon.com/route53/pricing/\">Amazon Route 53 Pricing</a>.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>This operation registers a domain. For some top-level domains (TLDs), this operation\n\t\t\trequires extra parameters.</p>\n         <p>When you register a domain, Amazon Route 53 does the following:</p>\n         <ul>\n            <li>\n               <p>Creates a Route 53 hosted zone that has the same name as the domain. Route 53\n\t\t\t\t\tassigns four name servers to your hosted zone and automatically updates your\n\t\t\t\t\tdomain registration with the names of these name servers.</p>\n            </li>\n            <li>\n               <p>Enables auto renew, so your domain registration will renew automatically each\n\t\t\t\t\tyear. We'll notify you in advance of the renewal date so you can choose whether\n\t\t\t\t\tto renew the registration.</p>\n            </li>\n            <li>\n               <p>Optionally enables privacy protection, so WHOIS queries return contact for the registrar\n\t\t\t\t\tor the phrase \"REDACTED FOR PRIVACY\", or \"On behalf of <domain name> owner.\"\n\t\t\t\t\tIf you don't enable privacy protection, WHOIS queries return the information\n\t\t\t\t\tthat you entered for the administrative, registrant, and technical\n\t\t\t\t\tcontacts.</p>\n               <note>\n                  <p>While some domains may allow different privacy settings per contact, we recommend\n\t\t\t\t\t\tspecifying the same privacy setting for all contacts.</p>\n               </note>\n            </li>\n            <li>\n               <p>If registration is successful, returns an operation ID that you can use to\n\t\t\t\t\ttrack the progress and completion of the action. If the request is not completed\n\t\t\t\t\tsuccessfully, the domain registrant is notified by email.</p>\n            </li>\n            <li>\n               <p>Charges your Amazon Web Services account an amount based on the top-level\n\t\t\t\t\tdomain. For more information, see <a href=\"http://aws.amazon.com/route53/pricing/\">Amazon Route 53 Pricing</a>.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.route53domains#RegisterDomainRequest": {
@@ -4362,7 +4447,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The RegisterDomain request includes the following elements.</p>"
+                "smithy.api#documentation": "<p>The RegisterDomain request includes the following elements.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53domains#RegisterDomainResponse": {
@@ -4376,7 +4462,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The RegisterDomain response includes the following element.</p>"
+                "smithy.api#documentation": "<p>The RegisterDomain response includes the following element.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53domains#RegistrarName": {
@@ -4426,7 +4513,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The RejectDomainTransferFromAnotherAwsAccount request includes the following\n\t\t\telement.</p>"
+                "smithy.api#documentation": "<p>The RejectDomainTransferFromAnotherAwsAccount request includes the following\n\t\t\telement.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53domains#RejectDomainTransferFromAnotherAwsAccountResponse": {
@@ -4440,7 +4528,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The RejectDomainTransferFromAnotherAwsAccount response includes the following\n\t\t\telement.</p>"
+                "smithy.api#documentation": "<p>The RejectDomainTransferFromAnotherAwsAccount response includes the following\n\t\t\telement.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53domains#RenewDomain": {
@@ -4498,7 +4587,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A <code>RenewDomain</code> request includes the number of years that you want to renew\n\t\t\tfor and the current expiration year.</p>"
+                "smithy.api#documentation": "<p>A <code>RenewDomain</code> request includes the number of years that you want to renew\n\t\t\tfor and the current expiration year.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53domains#RenewDomainResponse": {
@@ -4510,6 +4600,9 @@
                         "smithy.api#documentation": "<p>Identifier for tracking the progress of the request. To query the operation status,\n\t\t\tuse <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html\">GetOperationDetail</a>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53domains#Reseller": {
@@ -4547,6 +4640,9 @@
                         "smithy.api#documentation": "<p>The name of the domain for which you want Route 53 to resend a confirmation email to\n\t\t\tthe registrant contact.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53domains#ResendContactReachabilityEmailResponse": {
@@ -4570,6 +4666,9 @@
                         "smithy.api#documentation": "<p>\n            <code>True</code> if the email address for the registrant contact has already been\n\t\t\tverified, and <code>false</code> otherwise. If the email address has already been\n\t\t\tverified, we don't send another confirmation email.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53domains#ResendOperationAuthorization": {
@@ -4599,6 +4698,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53domains#RetrieveDomainAuthCode": {
@@ -4633,7 +4735,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request for the authorization code for the specified domain. To transfer a domain to\n\t\t\tanother registrar, you provide this value to the new registrar.</p>"
+                "smithy.api#documentation": "<p>A request for the authorization code for the specified domain. To transfer a domain to\n\t\t\tanother registrar, you provide this value to the new registrar.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53domains#RetrieveDomainAuthCodeResponse": {
@@ -4647,7 +4750,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The RetrieveDomainAuthCode response includes the following element.</p>"
+                "smithy.api#documentation": "<p>The RetrieveDomainAuthCode response includes the following element.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53domains#Route53Domains_v20140515": {
@@ -5135,8 +5239,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -5148,8 +5252,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -5161,8 +5265,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -5174,8 +5278,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -5187,8 +5291,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -5200,8 +5304,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -5213,8 +5317,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -5226,8 +5330,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -5239,8 +5343,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -5252,8 +5356,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -5265,8 +5369,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -5278,8 +5382,19 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -5291,8 +5406,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -5304,8 +5430,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -5317,8 +5454,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -5330,8 +5478,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -5343,8 +5491,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -5356,8 +5504,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -5368,8 +5516,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -5380,9 +5528,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -5583,7 +5737,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Transfers a domain from another registrar to Amazon Route 53. When the transfer is\n\t\t\tcomplete, the domain is registered either with Amazon Registrar (for .com, .net, and\n\t\t\t.org domains) or with our registrar associate, Gandi (for all other TLDs).</p>\n         <p>For more information about transferring domains, see the following topics:</p>\n         <ul>\n            <li>\n               <p>For transfer requirements, a detailed procedure, and information about viewing\n\t\t\t\t\tthe status of a domain that you're transferring to Route 53, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-transfer-to-route-53.html\">Transferring Registration for a Domain to Amazon Route 53</a> in the\n\t\t\t\t\t\t<i>Amazon Route 53 Developer Guide</i>.</p>\n            </li>\n            <li>\n               <p>For information about how to transfer a domain from one Amazon Web Services account to another, see <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html\">TransferDomainToAnotherAwsAccount</a>. </p>\n            </li>\n            <li>\n               <p>For information about how to transfer a domain to another domain registrar,\n\t\t\t\t\tsee <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-transfer-from-route-53.html\">Transferring a Domain from Amazon Route 53 to Another Registrar</a> in\n\t\t\t\t\tthe <i>Amazon Route 53 Developer Guide</i>.</p>\n            </li>\n         </ul>\n         <p>If the registrar for your domain is also the DNS service provider for the domain, we\n\t\t\thighly recommend that you transfer your DNS service to Route 53 or to another DNS\n\t\t\tservice provider before you transfer your registration. Some registrars provide free DNS\n\t\t\tservice when you purchase a domain registration. When you transfer the registration, the\n\t\t\tprevious registrar will not renew your domain registration and could end your DNS\n\t\t\tservice at any time.</p>\n         <important>\n            <p>If the registrar for your domain is also the DNS service provider for the domain\n\t\t\t\tand you don't transfer DNS service to another provider, your website, email, and the\n\t\t\t\tweb applications associated with the domain might become unavailable.</p>\n         </important>\n         <p>If the transfer is successful, this method returns an operation ID that you can use to\n\t\t\ttrack the progress and completion of the action. If the transfer doesn't complete\n\t\t\tsuccessfully, the domain registrant will be notified by email.</p>"
+                "smithy.api#documentation": "<p>Transfers a domain from another registrar to Amazon Route 53. </p>\n         <p>For more information about transferring domains, see the following topics:</p>\n         <ul>\n            <li>\n               <p>For transfer requirements, a detailed procedure, and information about viewing\n\t\t\t\t\tthe status of a domain that you're transferring to Route 53, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-transfer-to-route-53.html\">Transferring Registration for a Domain to Amazon Route 53</a> in the\n\t\t\t\t\t\t<i>Amazon Route 53 Developer Guide</i>.</p>\n            </li>\n            <li>\n               <p>For information about how to transfer a domain from one Amazon Web Services account to another, see <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html\">TransferDomainToAnotherAwsAccount</a>. </p>\n            </li>\n            <li>\n               <p>For information about how to transfer a domain to another domain registrar,\n\t\t\t\t\tsee <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-transfer-from-route-53.html\">Transferring a Domain from Amazon Route 53 to Another Registrar</a> in\n\t\t\t\t\tthe <i>Amazon Route 53 Developer Guide</i>.</p>\n            </li>\n         </ul>\n         <p>If the registrar for your domain is also the DNS service provider for the domain, we\n\t\t\thighly recommend that you transfer your DNS service to Route 53 or to another DNS\n\t\t\tservice provider before you transfer your registration. Some registrars provide free DNS\n\t\t\tservice when you purchase a domain registration. When you transfer the registration, the\n\t\t\tprevious registrar will not renew your domain registration and could end your DNS\n\t\t\tservice at any time.</p>\n         <important>\n            <p>If the registrar for your domain is also the DNS service provider for the domain\n\t\t\t\tand you don't transfer DNS service to another provider, your website, email, and the\n\t\t\t\tweb applications associated with the domain might become unavailable.</p>\n         </important>\n         <p>If the transfer is successful, this method returns an operation ID that you can use to\n\t\t\ttrack the progress and completion of the action. If the transfer doesn't complete\n\t\t\tsuccessfully, the domain registrant will be notified by email.</p>"
             }
         },
         "com.amazonaws.route53domains#TransferDomainRequest": {
@@ -5651,7 +5805,7 @@
                 "PrivacyProtectAdminContact": {
                     "target": "com.amazonaws.route53domains#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether you want to conceal contact information from WHOIS queries. If you specify\n\t\t\t\t<code>true</code>, WHOIS (\"who is\") queries return contact information either for\n\t\t\tAmazon Registrar (for .com, .net, and .org domains) or for our registrar associate,\n\t\t\tGandi (for all other TLDs). If you specify <code>false</code>, WHOIS queries return the\n\t\t\tinformation that you entered for the admin contact.</p>\n         <note>\n            <p>You must specify the same privacy setting for the administrative, registrant, and\n\t\t\t\ttechnical contacts.</p>\n         </note>\n         <p>Default: <code>true</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Whether you want to conceal contact information from WHOIS queries. If you specify\n\t\t\t\t<code>true</code>, WHOIS (\"who is\") queries return contact information for the\n\t\t\tregistrar, the phrase \"REDACTED FOR PRIVACY\", or \"On behalf of <domain name>\n\t\t\towner.\".</p>\n         <note>\n            <p>While some domains may allow different privacy settings per contact, we recommend\n\t\t\t\tspecifying the same privacy setting for all contacts.</p>\n         </note>\n         <p>Default: <code>true</code>\n         </p>"
                     }
                 },
                 "PrivacyProtectRegistrantContact": {
@@ -5668,7 +5822,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The TransferDomain request includes the following elements.</p>"
+                "smithy.api#documentation": "<p>The TransferDomain request includes the following elements.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53domains#TransferDomainResponse": {
@@ -5682,7 +5837,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The TransferDomain response includes the following element.</p>"
+                "smithy.api#documentation": "<p>The TransferDomain response includes the following element.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53domains#TransferDomainToAnotherAwsAccount": {
@@ -5730,7 +5886,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The TransferDomainToAnotherAwsAccount request includes the following elements.</p>"
+                "smithy.api#documentation": "<p>The TransferDomainToAnotherAwsAccount request includes the following elements.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53domains#TransferDomainToAnotherAwsAccountResponse": {
@@ -5750,7 +5907,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The <code>TransferDomainToAnotherAwsAccount</code> response includes the following\n\t\t\telements.</p>"
+                "smithy.api#documentation": "<p>The <code>TransferDomainToAnotherAwsAccount</code> response includes the following\n\t\t\telements.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53domains#Transferable": {
@@ -5868,7 +6026,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This operation updates the specified domain contact's privacy setting. When privacy\n\t\t\tprotection is enabled, contact information such as email address is replaced either with\n\t\t\tcontact information for Amazon Registrar (for .com, .net, and .org domains) or with\n\t\t\tcontact information for our registrar associate, Gandi.</p>\n         <note>\n            <p>You must specify the same privacy setting for the administrative, registrant, and\n\t\t\t\ttechnical contacts.</p>\n         </note>\n         <p>This operation affects only the contact information for the specified contact type\n\t\t\t(administrative, registrant, or technical). If the request succeeds, Amazon Route 53\n\t\t\treturns an operation ID that you can use with <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html\">GetOperationDetail</a> to track the progress and completion of the action. If\n\t\t\tthe request doesn't complete successfully, the domain registrant will be notified by\n\t\t\temail.</p>\n         <important>\n            <p>By disabling the privacy service via API, you consent to the publication of the\n\t\t\t\tcontact information provided for this domain via the public WHOIS database. You\n\t\t\t\tcertify that you are the registrant of this domain name and have the authority to\n\t\t\t\tmake this decision. You may withdraw your consent at any time by enabling privacy\n\t\t\t\tprotection using either <code>UpdateDomainContactPrivacy</code> or the Route 53\n\t\t\t\tconsole. Enabling privacy protection removes the contact information provided for\n\t\t\t\tthis domain from the WHOIS database. For more information on our privacy practices,\n\t\t\t\tsee <a href=\"https://aws.amazon.com/privacy/\">https://aws.amazon.com/privacy/</a>.</p>\n         </important>"
+                "smithy.api#documentation": "<p>This operation updates the specified domain contact's privacy setting. When privacy\n\t\t\tprotection is enabled, your contact information is replaced with contact information for\n\t\t\tthe registrar or with the phrase \"REDACTED FOR PRIVACY\", or \"On behalf of <domain\n\t\t\tname> owner.\"</p>\n         <note>\n            <p>While some domains may allow different privacy settings per contact, we recommend\n\t\t\t\tspecifying the same privacy setting for all contacts.</p>\n         </note>\n         <p>This operation affects only the contact information for the specified contact type\n\t\t\t(administrative, registrant, or technical). If the request succeeds, Amazon Route 53\n\t\t\treturns an operation ID that you can use with <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html\">GetOperationDetail</a> to track the progress and completion of the action. If\n\t\t\tthe request doesn't complete successfully, the domain registrant will be notified by\n\t\t\temail.</p>\n         <important>\n            <p>By disabling the privacy service via API, you consent to the publication of the\n\t\t\t\tcontact information provided for this domain via the public WHOIS database. You\n\t\t\t\tcertify that you are the registrant of this domain name and have the authority to\n\t\t\t\tmake this decision. You may withdraw your consent at any time by enabling privacy\n\t\t\t\tprotection using either <code>UpdateDomainContactPrivacy</code> or the Route 53\n\t\t\t\tconsole. Enabling privacy protection removes the contact information provided for\n\t\t\t\tthis domain from the WHOIS database. For more information on our privacy practices,\n\t\t\t\tsee <a href=\"https://aws.amazon.com/privacy/\">https://aws.amazon.com/privacy/</a>.</p>\n         </important>"
             }
         },
         "com.amazonaws.route53domains#UpdateDomainContactPrivacyRequest": {
@@ -5901,7 +6059,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The UpdateDomainContactPrivacy request includes the following elements.</p>"
+                "smithy.api#documentation": "<p>The UpdateDomainContactPrivacy request includes the following elements.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53domains#UpdateDomainContactPrivacyResponse": {
@@ -5915,7 +6074,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The UpdateDomainContactPrivacy response includes the following element.</p>"
+                "smithy.api#documentation": "<p>The UpdateDomainContactPrivacy response includes the following element.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53domains#UpdateDomainContactRequest": {
@@ -5949,12 +6109,13 @@
                 "Consent": {
                     "target": "com.amazonaws.route53domains#Consent",
                     "traits": {
-                        "smithy.api#documentation": "<p> Customer's consent for the owner change request. </p>"
+                        "smithy.api#documentation": "<p> Customer's consent for the owner change request. Required if the domain is not free (consent price is more than $0.00).</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The UpdateDomainContact request includes the following elements.</p>"
+                "smithy.api#documentation": "<p>The UpdateDomainContact request includes the following elements.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53domains#UpdateDomainContactResponse": {
@@ -5968,7 +6129,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The UpdateDomainContact response includes the following element.</p>"
+                "smithy.api#documentation": "<p>The UpdateDomainContact response includes the following element.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53domains#UpdateDomainNameservers": {
@@ -6026,7 +6188,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Replaces the current set of name servers for the domain with the specified set of name\n\t\t\tservers. If you use Amazon Route 53 as your DNS service, specify the four name servers\n\t\t\tin the delegation set for the hosted zone for the domain.</p>\n         <p>If successful, this operation returns an operation ID that you can use to track the\n\t\t\tprogress and completion of the action. If the request is not completed successfully, the\n\t\t\tdomain registrant will be notified by email. </p>"
+                "smithy.api#documentation": "<p>Replaces the current set of name servers for the domain with the specified set of name\n\t\t\tservers. If you use Amazon Route 53 as your DNS service, specify the four name servers\n\t\t\tin the delegation set for the hosted zone for the domain.</p>\n         <p>If successful, this operation returns an operation ID that you can use to track the\n\t\t\tprogress and completion of the action. If the request is not completed successfully, the\n\t\t\tdomain registrant will be notified by email. </p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53domains#UpdateDomainNameserversResponse": {
@@ -6040,7 +6203,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The UpdateDomainNameservers response includes the following element.</p>"
+                "smithy.api#documentation": "<p>The UpdateDomainNameservers response includes the following element.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53domains#UpdateTagsForDomain": {
@@ -6084,12 +6248,16 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The UpdateTagsForDomainRequest includes the following elements.</p>"
+                "smithy.api#documentation": "<p>The UpdateTagsForDomainRequest includes the following elements.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53domains#UpdateTagsForDomainResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.route53domains#Value": {
             "type": "string",
@@ -6164,7 +6332,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The ViewBilling request includes the following elements.</p>"
+                "smithy.api#documentation": "<p>The ViewBilling request includes the following elements.</p>",
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.route53domains#ViewBillingResponse": {
@@ -6184,7 +6353,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The ViewBilling response includes the following elements.</p>"
+                "smithy.api#documentation": "<p>The ViewBilling response includes the following elements.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.route53domains#ZipCode": {

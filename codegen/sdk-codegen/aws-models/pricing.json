@@ -1,33 +1,5 @@
 {
     "smithy": "2.0",
-    "metadata": {
-        "suppressions": [
-            {
-                "id": "HttpMethodSemantics",
-                "namespace": "*"
-            },
-            {
-                "id": "HttpResponseCodeSemantics",
-                "namespace": "*"
-            },
-            {
-                "id": "PaginatedTrait",
-                "namespace": "*"
-            },
-            {
-                "id": "HttpHeaderTrait",
-                "namespace": "*"
-            },
-            {
-                "id": "HttpUriConflict",
-                "namespace": "*"
-            },
-            {
-                "id": "Service",
-                "namespace": "*"
-            }
-        ]
-    },
     "shapes": {
         "com.amazonaws.pricing#AWSPriceListService": {
             "type": "service",
@@ -54,14 +26,14 @@
                     "sdkId": "Pricing",
                     "arnNamespace": "pricing",
                     "cloudFormationName": "Pricing",
-                    "cloudTrailEventSource": "pricing.amazonaws.com",
+                    "cloudTrailEventSource": "pricelist.amazonaws.com",
                     "endpointPrefix": "api.pricing"
                 },
                 "aws.auth#sigv4": {
                     "name": "pricing"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>Amazon Web Services Price List API is a centralized and convenient way to\n         programmatically query Amazon Web Services for services, products, and pricing information. The Amazon Web Services Price List\n         uses standardized product attributes such as <code>Location</code>, <code>Storage\n            Class</code>, and <code>Operating System</code>, and provides prices at the SKU\n         level. You can use the Amazon Web Services Price List to build cost control and scenario planning tools, reconcile\n         billing data, forecast future spend for budgeting purposes, and provide cost benefit\n         analysis that compare your internal workloads with Amazon Web Services.</p>\n         <p>Use <code>GetServices</code> without a service code to retrieve the service codes for all AWS services, then \n         <code>GetServices</code> with a service code to retrieve the attribute names for \n         that service. After you have the service code and attribute names, you can use <code>GetAttributeValues</code>\n         to see what values are available for an attribute. With the service code and an attribute name and value, \n         you can use <code>GetProducts</code> to find specific products that you're interested in, such as \n         an <code>AmazonEC2</code> instance, with a <code>Provisioned IOPS</code>\n            <code>volumeType</code>.</p>\n         <p>Service Endpoint</p>\n         <p>Amazon Web Services Price List service API provides the following two endpoints:</p>\n         <ul>\n            <li>\n               <p>https://api.pricing.us-east-1.amazonaws.com</p>\n            </li>\n            <li>\n               <p>https://api.pricing.ap-south-1.amazonaws.com</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>The Amazon Web Services Price List API is a centralized and convenient way to programmatically\n         query Amazon Web Services for services, products, and pricing information. The Amazon Web Services Price List uses standardized product attributes such as <code>Location</code>,\n            <code>Storage Class</code>, and <code>Operating System</code>, and provides prices at\n         the SKU level. You can use the Amazon Web Services Price List to do the following:</p>\n         <ul>\n            <li>\n               <p>Build cost control and scenario planning tools</p>\n            </li>\n            <li>\n               <p>Reconcile billing data</p>\n            </li>\n            <li>\n               <p>Forecast future spend for budgeting purposes</p>\n            </li>\n            <li>\n               <p>Provide cost benefit analysis that compare your internal workloads with Amazon Web Services</p>\n            </li>\n         </ul>\n         <p>Use <code>GetServices</code> without a service code to retrieve the service codes for\n         all Amazon Web Services, then <code>GetServices</code> with a service code to\n         retrieve the attribute names for that service. After you have the service code and\n         attribute names, you can use <code>GetAttributeValues</code> to see what values are\n         available for an attribute. With the service code and an attribute name and value, you can\n         use <code>GetProducts</code> to find specific products that you're interested in, such as\n         an <code>AmazonEC2</code> instance, with a <code>Provisioned IOPS</code>\n            <code>volumeType</code>.</p>\n         <p>You can use the following endpoints for the Amazon Web Services Price List API:</p>\n         <ul>\n            <li>\n               <p>https://api.pricing.us-east-1.amazonaws.com</p>\n            </li>\n            <li>\n               <p>https://api.pricing.ap-south-1.amazonaws.com</p>\n            </li>\n         </ul>",
                 "smithy.api#title": "AWS Price List Service",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -448,9 +420,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-south-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-south-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -461,9 +433,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -474,9 +446,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -487,9 +459,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -500,9 +472,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -513,9 +485,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "cn-north-1",
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "cn-north-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -526,9 +498,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "cn-north-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "cn-north-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -539,9 +511,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "cn-north-1",
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "cn-north-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -552,9 +524,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "cn-north-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "cn-north-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -565,9 +537,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -578,9 +550,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -591,9 +563,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -604,9 +576,20 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -617,9 +600,20 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -630,9 +624,20 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -643,9 +648,20 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -656,9 +672,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -669,9 +685,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
                                 "UseDualStack": false,
-                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -694,9 +710,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false,
-                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -706,10 +722,16 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
                                 "UseDualStack": true,
-                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -759,7 +781,7 @@
         "com.amazonaws.pricing#BoxedInteger": {
             "type": "integer",
             "traits": {
-                "smithy.api#default": 0,
+                "smithy.api#default": 100,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -1312,6 +1334,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.pricing#MaxResults",
                     "traits": {
+                        "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return in the response.\n      </p>"
                     }
                 }
@@ -1343,6 +1366,7 @@
         "com.amazonaws.pricing#MaxResults": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 100,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -1401,7 +1425,7 @@
                     "min": 18,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:.+:pricing::.*:price-list/.{1,255}/.{1,32}/[A-Z]{3}/[0-9]{14}/[^/]*$"
+                "smithy.api#pattern": "^arn:[A-Za-z0-9][-.A-Za-z0-9]{0,62}:pricing:::price-list/[A-Za-z0-9_/.-]{1,1023}$"
             }
         },
         "com.amazonaws.pricing#PriceListJsonItems": {

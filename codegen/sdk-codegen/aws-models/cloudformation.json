@@ -2543,6 +2543,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Creates a change set for the all nested stacks specified in the template. The default behavior of this action is\n   set to <code>False</code>. To include nested sets in a change set, specify <code>True</code>.</p>"
                     }
+                },
+                "OnStackFailure": {
+                    "target": "com.amazonaws.cloudformation#OnStackFailure",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines what action will be taken if stack creation fails. If this parameter is specified, the\n   <code>DisableRollback</code> parameter to the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ExecuteChangeSet.html\">ExecuteChangeSet</a> API operation must not\n   be specified. This must be one of these values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DELETE</code> - Deletes the change set if the stack creation fails. This is only valid when the\n     <code>ChangeSetType</code> parameter is set to <code>CREATE</code>. If the deletion of the stack fails, the status\n     of the stack is <code>DELETE_FAILED</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DO_NOTHING</code> - if the stack creation fails, do nothing. This is equivalent to specifying\n     <code>true</code> for the <code>DisableRollback</code> parameter to the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ExecuteChangeSet.html\">ExecuteChangeSet</a> API\n     operation.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ROLLBACK</code> - if the stack creation fails, roll back the stack. This is equivalent to specifying\n     <code>false</code> for the <code>DisableRollback</code> parameter to the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ExecuteChangeSet.html\">ExecuteChangeSet</a> API\n     operation.</p>\n            </li>\n         </ul>\n         <p>For nested stacks, when the <code>OnStackFailure</code> parameter is set to <code>DELETE</code> for the change\n   set for the parent stack, any failure in a child stack will cause the parent stack creation to fail and all stacks to\n   be deleted.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3786,6 +3792,12 @@
                     "target": "com.amazonaws.cloudformation#ChangeSetId",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the change set ID of the root change set in the current nested change set hierarchy.</p>"
+                    }
+                },
+                "OnStackFailure": {
+                    "target": "com.amazonaws.cloudformation#OnStackFailure",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines what action will be taken if stack creation fails. When this parameter is specified, the\n   <code>DisableRollback</code> parameter to the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ExecuteChangeSet.html\">ExecuteChangeSet</a> API operation must not\n   be specified. This must be one of these values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DELETE</code> - Deletes the change set if the stack creation fails. This is only valid when the\n     <code>ChangeSetType</code> parameter is set to <code>CREATE</code>. If the deletion of the stack fails, the status\n     of the stack is <code>DELETE_FAILED</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DO_NOTHING</code> - if the stack creation fails, do nothing. This is equivalent to specifying\n     <code>true</code> for the <code>DisableRollback</code> parameter to the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ExecuteChangeSet.html\">ExecuteChangeSet</a> API\n     operation.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ROLLBACK</code> - if the stack creation fails, roll back the stack. This is equivalent to specifying\n     <code>false</code> for the <code>DisableRollback</code> parameter to the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ExecuteChangeSet.html\">ExecuteChangeSet</a> API\n     operation.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -5511,7 +5523,7 @@
                 "DisableRollback": {
                     "target": "com.amazonaws.cloudformation#DisableRollback",
                     "traits": {
-                        "smithy.api#documentation": "<p>Preserves the state of previously provisioned resources when an operation fails.</p>\n         <p>Default: <code>True</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Preserves the state of previously provisioned resources when an operation\n   fails. This parameter can't be specified when\n   the <code>OnStackFailure</code> parameter to the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CreateChangeSet.html\">CreateChangeSet</a> API operation was\n   specified.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>True</code> - if the stack creation fails, do nothing. This is equivalent to specifying\n     <code>DO_NOTHING</code> for the <code>OnStackFailure</code> parameter to the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CreateChangeSet.html\">CreateChangeSet</a> API operation.</p>\n            </li>\n            <li>\n               <p>\n                  <code>False</code> - if the stack creation fails, roll back the stack. This is equivalent to specifying\n     <code>ROLLBACK</code> for the <code>OnStackFailure</code> parameter to the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CreateChangeSet.html\">CreateChangeSet</a> API operation.</p>\n            </li>\n         </ul>\n         <p>Default: <code>True</code>\n         </p>"
                     }
                 }
             },
@@ -7453,6 +7465,29 @@
             }
         },
         "com.amazonaws.cloudformation#OnFailure": {
+            "type": "enum",
+            "members": {
+                "DO_NOTHING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DO_NOTHING"
+                    }
+                },
+                "ROLLBACK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROLLBACK"
+                    }
+                },
+                "DELETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudformation#OnStackFailure": {
             "type": "enum",
             "members": {
                 "DO_NOTHING": {

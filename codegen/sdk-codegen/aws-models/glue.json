@@ -10514,6 +10514,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the catalog database.</p>"
                     }
+                },
+                "Region": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Region of the target database.</p>"
+                    }
                 }
             },
             "traits": {
@@ -30741,6 +30747,12 @@
                     "target": "com.amazonaws.glue#NameString",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the target table.</p>"
+                    }
+                },
+                "Region": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Region of the target table.</p>"
                     }
                 }
             },
