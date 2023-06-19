@@ -2001,6 +2001,9 @@ type DatabaseIdentifier struct {
 	// The name of the catalog database.
 	DatabaseName *string
 
+	// Region of the target database.
+	Region *string
+
 	noSmithyDocumentSerde
 }
 
@@ -7050,6 +7053,9 @@ type TableIdentifier struct {
 
 	// The name of the target table.
 	Name *string
+
+	// Region of the target table.
+	Region *string
 
 	noSmithyDocumentSerde
 }

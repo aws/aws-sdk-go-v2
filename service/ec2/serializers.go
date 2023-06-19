@@ -46459,11 +46459,21 @@ func awsEc2query_serializeDocumentVerifiedAccessLogOptions(v *types.VerifiedAcce
 		}
 	}
 
+	if v.IncludeTrustContext != nil {
+		objectKey := object.Key("IncludeTrustContext")
+		objectKey.Boolean(*v.IncludeTrustContext)
+	}
+
 	if v.KinesisDataFirehose != nil {
 		objectKey := object.Key("KinesisDataFirehose")
 		if err := awsEc2query_serializeDocumentVerifiedAccessLogKinesisDataFirehoseDestinationOptions(v.KinesisDataFirehose, objectKey); err != nil {
 			return err
 		}
+	}
+
+	if v.LogVersion != nil {
+		objectKey := object.Key("LogVersion")
+		objectKey.String(*v.LogVersion)
 	}
 
 	if v.S3 != nil {

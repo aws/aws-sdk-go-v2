@@ -43,7 +43,8 @@ type UpdateDomainContactInput struct {
 	// Provides detailed contact information.
 	AdminContact *types.ContactDetail
 
-	// Customer's consent for the owner change request.
+	// Customer's consent for the owner change request. Required if the domain is not
+	// free (consent price is more than $0.00).
 	Consent *types.Consent
 
 	// Provides detailed contact information.

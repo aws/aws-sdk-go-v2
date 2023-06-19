@@ -1,0 +1,8 @@
+{
+    "id": "399bca1d-2502-4163-a669-a0bfd35b42b7",
+    "type": "feature",
+    "description": "Update MaxItems upper bound to 1000 for ListPricesRequest",
+    "modules": [
+        "service/route53domains"
+    ]
+}

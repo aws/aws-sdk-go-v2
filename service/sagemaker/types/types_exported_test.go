@@ -14,6 +14,9 @@ func ExampleAutoMLProblemTypeConfig_outputUsage() {
 	case *types.AutoMLProblemTypeConfigMemberImageClassificationJobConfig:
 		_ = v.Value // Value is types.ImageClassificationJobConfig
 
+	case *types.AutoMLProblemTypeConfigMemberTabularJobConfig:
+		_ = v.Value // Value is types.TabularJobConfig
+
 	case *types.AutoMLProblemTypeConfigMemberTextClassificationJobConfig:
 		_ = v.Value // Value is types.TextClassificationJobConfig
 
@@ -28,6 +31,25 @@ func ExampleAutoMLProblemTypeConfig_outputUsage() {
 
 var _ *types.TextClassificationJobConfig
 var _ *types.ImageClassificationJobConfig
+var _ *types.TabularJobConfig
+
+func ExampleAutoMLProblemTypeResolvedAttributes_outputUsage() {
+	var union types.AutoMLProblemTypeResolvedAttributes
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AutoMLProblemTypeResolvedAttributesMemberTabularResolvedAttributes:
+		_ = v.Value // Value is types.TabularResolvedAttributes
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.TabularResolvedAttributes
 
 func ExampleTrialComponentParameterValue_outputUsage() {
 	var union types.TrialComponentParameterValue

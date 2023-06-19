@@ -1,0 +1,8 @@
+{
+    "id": "1317875f-637c-4ca0-bd48-9ceee78c7c8f",
+    "type": "feature",
+    "description": "This release updates the PriceListArn regex pattern.",
+    "modules": [
+        "service/pricing"
+    ]
+}

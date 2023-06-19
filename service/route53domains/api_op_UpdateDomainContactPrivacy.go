@@ -11,14 +11,13 @@ import (
 )
 
 // This operation updates the specified domain contact's privacy setting. When
-// privacy protection is enabled, contact information such as email address is
-// replaced either with contact information for Amazon Registrar (for .com, .net,
-// and .org domains) or with contact information for our registrar associate,
-// Gandi. You must specify the same privacy setting for the administrative,
-// registrant, and technical contacts. This operation affects only the contact
-// information for the specified contact type (administrative, registrant, or
-// technical). If the request succeeds, Amazon Route 53 returns an operation ID
-// that you can use with GetOperationDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html)
+// privacy protection is enabled, your contact information is replaced with contact
+// information for the registrar or with the phrase "REDACTED FOR PRIVACY", or "On
+// behalf of owner." While some domains may allow different privacy settings per
+// contact, we recommend specifying the same privacy setting for all contacts. This
+// operation affects only the contact information for the specified contact type
+// (administrative, registrant, or technical). If the request succeeds, Amazon
+// Route 53 returns an operation ID that you can use with GetOperationDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html)
 // to track the progress and completion of the action. If the request doesn't
 // complete successfully, the domain registrant will be notified by email. By
 // disabling the privacy service via API, you consent to the publication of the

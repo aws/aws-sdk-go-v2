@@ -19774,6 +19774,19 @@ func awsAwsquery_deserializeOpDocumentDescribeChangeSetOutput(v **DescribeChange
 				return err
 			}
 
+		case strings.EqualFold("OnStackFailure", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.OnStackFailure = types.OnStackFailure(xtv)
+			}
+
 		case strings.EqualFold("Parameters", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentParameters(&sv.Parameters, nodeDecoder); err != nil {

@@ -5123,6 +5123,11 @@ func awsAwsquery_serializeOpDocumentCreateChangeSetInput(v *CreateChangeSetInput
 		}
 	}
 
+	if len(v.OnStackFailure) > 0 {
+		objectKey := object.Key("OnStackFailure")
+		objectKey.String(string(v.OnStackFailure))
+	}
+
 	if v.Parameters != nil {
 		objectKey := object.Key("Parameters")
 		if err := awsAwsquery_serializeDocumentParameters(v.Parameters, objectKey); err != nil {

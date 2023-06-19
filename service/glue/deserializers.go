@@ -32116,6 +32116,15 @@ func awsAwsjson11_deserializeDocumentDatabaseIdentifier(v **types.DatabaseIdenti
 				sv.DatabaseName = ptr.String(jtv)
 			}
 
+		case "Region":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NameString to be of type string, got %T instead", value)
+				}
+				sv.Region = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -48968,6 +48977,15 @@ func awsAwsjson11_deserializeDocumentTableIdentifier(v **types.TableIdentifier, 
 					return fmt.Errorf("expected NameString to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "Region":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NameString to be of type string, got %T instead", value)
+				}
+				sv.Region = ptr.String(jtv)
 			}
 
 		default:

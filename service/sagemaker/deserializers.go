@@ -35976,6 +35976,16 @@ loop:
 			uv = &types.AutoMLProblemTypeConfigMemberImageClassificationJobConfig{Value: mv}
 			break loop
 
+		case "TabularJobConfig":
+			var mv types.TabularJobConfig
+			destAddr := &mv
+			if err := awsAwsjson11_deserializeDocumentTabularJobConfig(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.AutoMLProblemTypeConfigMemberTabularJobConfig{Value: mv}
+			break loop
+
 		case "TextClassificationJobConfig":
 			var mv types.TextClassificationJobConfig
 			destAddr := &mv
@@ -35993,6 +36003,92 @@ loop:
 		}
 	}
 	*v = uv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAutoMLProblemTypeResolvedAttributes(v *types.AutoMLProblemTypeResolvedAttributes, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.AutoMLProblemTypeResolvedAttributes
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "TabularResolvedAttributes":
+			var mv types.TabularResolvedAttributes
+			destAddr := &mv
+			if err := awsAwsjson11_deserializeDocumentTabularResolvedAttributes(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.AutoMLProblemTypeResolvedAttributesMemberTabularResolvedAttributes{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAutoMLResolvedAttributes(v **types.AutoMLResolvedAttributes, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AutoMLResolvedAttributes
+	if *v == nil {
+		sv = &types.AutoMLResolvedAttributes{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AutoMLJobObjective":
+			if err := awsAwsjson11_deserializeDocumentAutoMLJobObjective(&sv.AutoMLJobObjective, value); err != nil {
+				return err
+			}
+
+		case "AutoMLProblemTypeResolvedAttributes":
+			if err := awsAwsjson11_deserializeDocumentAutoMLProblemTypeResolvedAttributes(&sv.AutoMLProblemTypeResolvedAttributes, value); err != nil {
+				return err
+			}
+
+		case "CompletionCriteria":
+			if err := awsAwsjson11_deserializeDocumentAutoMLJobCompletionCriteria(&sv.CompletionCriteria, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -36945,6 +37041,42 @@ func awsAwsjson11_deserializeDocumentCandidateArtifactLocations(v **types.Candid
 					return fmt.Errorf("expected ModelInsightsLocation to be of type string, got %T instead", value)
 				}
 				sv.ModelInsights = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentCandidateGenerationConfig(v **types.CandidateGenerationConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CandidateGenerationConfig
+	if *v == nil {
+		sv = &types.CandidateGenerationConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AlgorithmsConfig":
+			if err := awsAwsjson11_deserializeDocumentAutoMLAlgorithmsConfig(&sv.AlgorithmsConfig, value); err != nil {
+				return err
 			}
 
 		default:
@@ -67179,6 +67311,141 @@ func awsAwsjson11_deserializeDocumentSubscribedWorkteams(v *[]types.SubscribedWo
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentTabularJobConfig(v **types.TabularJobConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TabularJobConfig
+	if *v == nil {
+		sv = &types.TabularJobConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CandidateGenerationConfig":
+			if err := awsAwsjson11_deserializeDocumentCandidateGenerationConfig(&sv.CandidateGenerationConfig, value); err != nil {
+				return err
+			}
+
+		case "CompletionCriteria":
+			if err := awsAwsjson11_deserializeDocumentAutoMLJobCompletionCriteria(&sv.CompletionCriteria, value); err != nil {
+				return err
+			}
+
+		case "FeatureSpecificationS3Uri":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3Uri to be of type string, got %T instead", value)
+				}
+				sv.FeatureSpecificationS3Uri = ptr.String(jtv)
+			}
+
+		case "GenerateCandidateDefinitionsOnly":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected GenerateCandidateDefinitionsOnly to be of type *bool, got %T instead", value)
+				}
+				sv.GenerateCandidateDefinitionsOnly = jtv
+			}
+
+		case "Mode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AutoMLMode to be of type string, got %T instead", value)
+				}
+				sv.Mode = types.AutoMLMode(jtv)
+			}
+
+		case "ProblemType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ProblemType to be of type string, got %T instead", value)
+				}
+				sv.ProblemType = types.ProblemType(jtv)
+			}
+
+		case "SampleWeightAttributeName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SampleWeightAttributeName to be of type string, got %T instead", value)
+				}
+				sv.SampleWeightAttributeName = ptr.String(jtv)
+			}
+
+		case "TargetAttributeName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TargetAttributeName to be of type string, got %T instead", value)
+				}
+				sv.TargetAttributeName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentTabularResolvedAttributes(v **types.TabularResolvedAttributes, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TabularResolvedAttributes
+	if *v == nil {
+		sv = &types.TabularResolvedAttributes{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ProblemType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ProblemType to be of type string, got %T instead", value)
+				}
+				sv.ProblemType = types.ProblemType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentTag(v **types.Tag, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -75853,6 +76120,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeAutoMLJobV2Output(v **DescribeAut
 				sv.AutoMLJobArn = ptr.String(jtv)
 			}
 
+		case "AutoMLJobArtifacts":
+			if err := awsAwsjson11_deserializeDocumentAutoMLJobArtifacts(&sv.AutoMLJobArtifacts, value); err != nil {
+				return err
+			}
+
 		case "AutoMLJobInputDataConfig":
 			if err := awsAwsjson11_deserializeDocumentAutoMLJobInputDataConfig(&sv.AutoMLJobInputDataConfig, value); err != nil {
 				return err
@@ -75893,6 +76165,15 @@ func awsAwsjson11_deserializeOpDocumentDescribeAutoMLJobV2Output(v **DescribeAut
 		case "AutoMLProblemTypeConfig":
 			if err := awsAwsjson11_deserializeDocumentAutoMLProblemTypeConfig(&sv.AutoMLProblemTypeConfig, value); err != nil {
 				return err
+			}
+
+		case "AutoMLProblemTypeConfigName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AutoMLProblemTypeConfigName to be of type string, got %T instead", value)
+				}
+				sv.AutoMLProblemTypeConfigName = types.AutoMLProblemTypeConfigName(jtv)
 			}
 
 		case "BestCandidate":
@@ -75979,6 +76260,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeAutoMLJobV2Output(v **DescribeAut
 
 		case "PartialFailureReasons":
 			if err := awsAwsjson11_deserializeDocumentAutoMLPartialFailureReasons(&sv.PartialFailureReasons, value); err != nil {
+				return err
+			}
+
+		case "ResolvedAttributes":
+			if err := awsAwsjson11_deserializeDocumentAutoMLResolvedAttributes(&sv.ResolvedAttributes, value); err != nil {
 				return err
 			}
 

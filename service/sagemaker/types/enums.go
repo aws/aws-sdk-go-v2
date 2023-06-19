@@ -712,6 +712,26 @@ func (AutoMLMode) Values() []AutoMLMode {
 	}
 }
 
+type AutoMLProblemTypeConfigName string
+
+// Enum values for AutoMLProblemTypeConfigName
+const (
+	AutoMLProblemTypeConfigNameImageClassification AutoMLProblemTypeConfigName = "ImageClassification"
+	AutoMLProblemTypeConfigNameTextClassification  AutoMLProblemTypeConfigName = "TextClassification"
+	AutoMLProblemTypeConfigNameTabular             AutoMLProblemTypeConfigName = "Tabular"
+)
+
+// Values returns all known values for AutoMLProblemTypeConfigName. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AutoMLProblemTypeConfigName) Values() []AutoMLProblemTypeConfigName {
+	return []AutoMLProblemTypeConfigName{
+		"ImageClassification",
+		"TextClassification",
+		"Tabular",
+	}
+}
+
 type AutoMLProcessingUnit string
 
 // Enum values for AutoMLProcessingUnit

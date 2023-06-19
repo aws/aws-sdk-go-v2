@@ -13301,6 +13301,11 @@ func awsAwsjson11_serializeDocumentDatabaseIdentifier(v *types.DatabaseIdentifie
 		ok.String(*v.DatabaseName)
 	}
 
+	if v.Region != nil {
+		ok := object.Key("Region")
+		ok.String(*v.Region)
+	}
+
 	return nil
 }
 
@@ -18513,6 +18518,11 @@ func awsAwsjson11_serializeDocumentTableIdentifier(v *types.TableIdentifier, val
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
+	}
+
+	if v.Region != nil {
+		ok := object.Key("Region")
+		ok.String(*v.Region)
 	}
 
 	return nil

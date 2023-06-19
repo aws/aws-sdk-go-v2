@@ -11,10 +11,17 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an Autopilot job. Find the best-performing model after you run an
-// Autopilot job by calling DescribeAutoMLJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJob.html)
-// . For information about how to use Autopilot, see Automate Model Development
-// with Amazon SageMaker Autopilot (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development.html)
+// Creates an Autopilot job also referred to as Autopilot experiment or AutoML
+// job. Find the best-performing model after you run an AutoML job by calling
+// DescribeAutoMLJobV2 (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJobV2.html)
+// (recommended) or DescribeAutoMLJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJob.html)
+// . CreateAutoMLJob only accepts tabular input data. We recommend using
+// CreateAutoMLJobV2 (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html)
+// for all problem types. CreateAutoMLJobV2 can process the same tabular data as
+// its previous version CreateAutoMLJob , as well as non-tabular data for problem
+// types such as image or text classification. Find guidelines about how to migrate
+// CreateAutoMLJob to CreateAutoMLJobV2 in Migrate a CreateAutoMLJob to
+// CreateAutoMLJobV2 (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development-create-experiment-api.html#autopilot-create-experiment-api-migrate-v1-v2)
 // .
 func (c *Client) CreateAutoMLJob(ctx context.Context, params *CreateAutoMLJobInput, optFns ...func(*Options)) (*CreateAutoMLJobOutput, error) {
 	if params == nil {
@@ -63,10 +70,10 @@ type CreateAutoMLJobInput struct {
 	// A collection of settings used to configure an AutoML job.
 	AutoMLJobConfig *types.AutoMLJobConfig
 
-	// Defines the objective metric used to measure the predictive quality of an
-	// AutoML job. You provide an AutoMLJobObjective$MetricName (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobObjective.html)
-	// and Autopilot infers whether to minimize or maximize it. For CreateAutoMLJobV2 (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html)
-	// , only Accuracy is supported.
+	// Specifies a metric to minimize or maximize as the objective of a job. If not
+	// specified, the default objective metric depends on the problem type. See
+	// AutoMLJobObjective (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobObjective.html)
+	// for the default values.
 	AutoMLJobObjective *types.AutoMLJobObjective
 
 	// Generates possible candidates without training the models. A candidate is a

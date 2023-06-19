@@ -12,7 +12,8 @@ import (
 	"time"
 )
 
-// Returns information about an Amazon SageMaker AutoML job.
+// Returns information about an AutoML job created by calling CreateAutoMLJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJob.html)
+// .
 func (c *Client) DescribeAutoMLJob(ctx context.Context, params *DescribeAutoMLJobInput, optFns ...func(*Options)) (*DescribeAutoMLJobOutput, error) {
 	if params == nil {
 		params = &DescribeAutoMLJobInput{}
@@ -125,8 +126,7 @@ type DescribeAutoMLJobOutput struct {
 	ProblemType types.ProblemType
 
 	// Contains ProblemType , AutoMLJobObjective , and CompletionCriteria . If you do
-	// not provide these values, they are auto-inferred. If you do provide them, the
-	// values used are the ones you provide.
+	// not provide these values, they are inferred.
 	ResolvedAttributes *types.ResolvedAttributes
 
 	// Metadata pertaining to the operation's result.

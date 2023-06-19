@@ -127771,10 +127771,39 @@ func awsEc2query_deserializeDocumentVerifiedAccessLogs(v **types.VerifiedAccessL
 				return err
 			}
 
+		case strings.EqualFold("includeTrustContext", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
+				}
+				sv.IncludeTrustContext = ptr.Bool(xtv)
+			}
+
 		case strings.EqualFold("kinesisDataFirehose", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsEc2query_deserializeDocumentVerifiedAccessLogKinesisDataFirehoseDestination(&sv.KinesisDataFirehose, nodeDecoder); err != nil {
 				return err
+			}
+
+		case strings.EqualFold("logVersion", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.LogVersion = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("s3", t.Name.Local):

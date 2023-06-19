@@ -1,0 +1,8 @@
+{
+    "id": "3c5cb720-f74d-45a2-9062-603382b6ae2c",
+    "type": "feature",
+    "description": "API changes to AWS Verified Access to include data from trust providers in logs",
+    "modules": [
+        "service/ec2"
+    ]
+}

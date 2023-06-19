@@ -11,11 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Transfers a domain from another registrar to Amazon Route 53. When the transfer
-// is complete, the domain is registered either with Amazon Registrar (for .com,
-// .net, and .org domains) or with our registrar associate, Gandi (for all other
-// TLDs). For more information about transferring domains, see the following
-// topics:
+// Transfers a domain from another registrar to Amazon Route 53. For more
+// information about transferring domains, see the following topics:
 //   - For transfer requirements, a detailed procedure, and information about
 //     viewing the status of a domain that you're transferring to Route 53, see
 //     Transferring Registration for a Domain to Amazon Route 53 (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-transfer-to-route-53.html)
@@ -109,12 +106,10 @@ type TransferDomainInput struct {
 	Nameservers []types.Nameserver
 
 	// Whether you want to conceal contact information from WHOIS queries. If you
-	// specify true , WHOIS ("who is") queries return contact information either for
-	// Amazon Registrar (for .com, .net, and .org domains) or for our registrar
-	// associate, Gandi (for all other TLDs). If you specify false , WHOIS queries
-	// return the information that you entered for the admin contact. You must specify
-	// the same privacy setting for the administrative, registrant, and technical
-	// contacts. Default: true
+	// specify true , WHOIS ("who is") queries return contact information for the
+	// registrar, the phrase "REDACTED FOR PRIVACY", or "On behalf of owner.". While
+	// some domains may allow different privacy settings per contact, we recommend
+	// specifying the same privacy setting for all contacts. Default: true
 	PrivacyProtectAdminContact *bool
 
 	// Whether you want to conceal contact information from WHOIS queries. If you

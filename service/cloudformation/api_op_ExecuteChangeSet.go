@@ -51,7 +51,16 @@ type ExecuteChangeSetInput struct {
 	ClientRequestToken *string
 
 	// Preserves the state of previously provisioned resources when an operation
-	// fails. Default: True
+	// fails. This parameter can't be specified when the OnStackFailure parameter to
+	// the CreateChangeSet (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CreateChangeSet.html)
+	// API operation was specified.
+	//   - True - if the stack creation fails, do nothing. This is equivalent to
+	//   specifying DO_NOTHING for the OnStackFailure parameter to the CreateChangeSet (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CreateChangeSet.html)
+	//   API operation.
+	//   - False - if the stack creation fails, roll back the stack. This is equivalent
+	//   to specifying ROLLBACK for the OnStackFailure parameter to the CreateChangeSet (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CreateChangeSet.html)
+	//   API operation.
+	// Default: True
 	DisableRollback *bool
 
 	// If you specified the name of a change set, specify the stack name or Amazon

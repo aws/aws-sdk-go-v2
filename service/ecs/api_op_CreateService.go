@@ -148,7 +148,8 @@ type CreateServiceInput struct {
 
 	// Specifies whether to turn on Amazon ECS managed tags for the tasks within the
 	// service. For more information, see Tagging your Amazon ECS resources (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html)
-	// in the Amazon Elastic Container Service Developer Guide.
+	// in the Amazon Elastic Container Service Developer Guide. When you use Amazon ECS
+	// managed tags, you need to set the propagateTags request parameter.
 	EnableECSManagedTags bool
 
 	// Determines whether the execute command functionality is turned on for the
@@ -252,7 +253,7 @@ type CreateServiceInput struct {
 	// If no value is specified, the tags aren't propagated. Tags can only be
 	// propagated to the task during task creation. To add tags to a task after task
 	// creation, use the TagResource (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_TagResource.html)
-	// API action.
+	// API action. The default is NONE .
 	PropagateTags types.PropagateTags
 
 	// The name or full Amazon Resource Name (ARN) of the IAM role that allows Amazon

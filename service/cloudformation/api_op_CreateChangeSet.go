@@ -138,6 +138,24 @@ type CreateChangeSetInput struct {
 	// associated notification topics, specify an empty list.
 	NotificationARNs []string
 
+	// Determines what action will be taken if stack creation fails. If this parameter
+	// is specified, the DisableRollback parameter to the ExecuteChangeSet (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ExecuteChangeSet.html)
+	// API operation must not be specified. This must be one of these values:
+	//   - DELETE - Deletes the change set if the stack creation fails. This is only
+	//   valid when the ChangeSetType parameter is set to CREATE . If the deletion of
+	//   the stack fails, the status of the stack is DELETE_FAILED .
+	//   - DO_NOTHING - if the stack creation fails, do nothing. This is equivalent to
+	//   specifying true for the DisableRollback parameter to the ExecuteChangeSet (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ExecuteChangeSet.html)
+	//   API operation.
+	//   - ROLLBACK - if the stack creation fails, roll back the stack. This is
+	//   equivalent to specifying false for the DisableRollback parameter to the
+	//   ExecuteChangeSet (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ExecuteChangeSet.html)
+	//   API operation.
+	// For nested stacks, when the OnStackFailure parameter is set to DELETE for the
+	// change set for the parent stack, any failure in a child stack will cause the
+	// parent stack creation to fail and all stacks to be deleted.
+	OnStackFailure types.OnStackFailure
+
 	// A list of Parameter structures that specify input parameters for the change
 	// set. For more information, see the Parameter data type.
 	Parameters []types.Parameter

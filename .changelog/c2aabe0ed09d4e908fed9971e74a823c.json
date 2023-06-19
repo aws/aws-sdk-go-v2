@@ -1,0 +1,8 @@
+{
+    "id": "c2aabe0e-d09d-4e90-8fed-9971e74a823c",
+    "type": "feature",
+    "description": "Amazon Sagemaker Autopilot releases CreateAutoMLJobV2 and DescribeAutoMLJobV2 for Autopilot customers with ImageClassification, TextClassification and Tabular problem type config support.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

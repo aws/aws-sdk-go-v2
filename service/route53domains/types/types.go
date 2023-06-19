@@ -398,17 +398,6 @@ type ExtraParam struct {
 	//   - POLITICAL_PARTY
 	//   - PUBLIC_COMMUNITY
 	//   - TOWNSHIP
-	// .fr
-	//   - BIRTH_CITY
-	//   - BIRTH_COUNTRY
-	//   - BIRTH_DATE_IN_YYYY_MM_DD
-	//   - BIRTH_DEPARTMENT : Specify the INSEE code that corresponds with the
-	//   department where the contact was born. If the contact was born somewhere other
-	//   than France or its overseas departments, specify 99 . For more information,
-	//   including a list of departments and the corresponding INSEE numbers, see the
-	//   Wikipedia entry Departments of France (https://en.wikipedia.org/wiki/Departments_of_France)
-	//   .
-	//   - BRAND_NUMBER
 	// .it
 	//   - IT_NATIONALITY
 	//   - IT_PIN

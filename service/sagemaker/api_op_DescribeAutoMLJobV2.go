@@ -12,9 +12,8 @@ import (
 	"time"
 )
 
-// Returns information about an Amazon SageMaker AutoML V2 job. This API action is
-// callable through SageMaker Canvas only. Calling it directly from the CLI or an
-// SDK results in an error.
+// Returns information about an AutoML job V2 created by calling CreateAutoMLJobV2 (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html)
+// .
 func (c *Client) DescribeAutoMLJobV2(ctx context.Context, params *DescribeAutoMLJobV2Input, optFns ...func(*Options)) (*DescribeAutoMLJobV2Output, error) {
 	if params == nil {
 		params = &DescribeAutoMLJobV2Input{}
@@ -32,7 +31,7 @@ func (c *Client) DescribeAutoMLJobV2(ctx context.Context, params *DescribeAutoML
 
 type DescribeAutoMLJobV2Input struct {
 
-	// Requests information about an AutoML V2 job using its unique name.
+	// Requests information about an AutoML job V2 using its unique name.
 	//
 	// This member is required.
 	AutoMLJobName *string
@@ -42,7 +41,7 @@ type DescribeAutoMLJobV2Input struct {
 
 type DescribeAutoMLJobV2Output struct {
 
-	// Returns the Amazon Resource Name (ARN) of the AutoML V2 job.
+	// Returns the Amazon Resource Name (ARN) of the AutoML job V2.
 	//
 	// This member is required.
 	AutoMLJobArn *string
@@ -53,22 +52,22 @@ type DescribeAutoMLJobV2Output struct {
 	// This member is required.
 	AutoMLJobInputDataConfig []types.AutoMLJobChannel
 
-	// Returns the name of the AutoML V2 job.
+	// Returns the name of the AutoML job V2.
 	//
 	// This member is required.
 	AutoMLJobName *string
 
-	// Returns the secondary status of the AutoML V2 job.
+	// Returns the secondary status of the AutoML job V2.
 	//
 	// This member is required.
 	AutoMLJobSecondaryStatus types.AutoMLJobSecondaryStatus
 
-	// Returns the status of the AutoML V2 job.
+	// Returns the status of the AutoML job V2.
 	//
 	// This member is required.
 	AutoMLJobStatus types.AutoMLJobStatus
 
-	// Returns the creation time of the AutoML V2 job.
+	// Returns the creation time of the AutoML job V2.
 	//
 	// This member is required.
 	CreationTime *time.Time
@@ -90,12 +89,18 @@ type DescribeAutoMLJobV2Output struct {
 	// This member is required.
 	RoleArn *string
 
+	// The artifacts that are generated during an AutoML job.
+	AutoMLJobArtifacts *types.AutoMLJobArtifacts
+
 	// Returns the job's objective.
 	AutoMLJobObjective *types.AutoMLJobObjective
 
-	// Returns the configuration settings of the problem type set for the AutoML V2
-	// job.
+	// Returns the configuration settings of the problem type set for the AutoML job
+	// V2.
 	AutoMLProblemTypeConfig types.AutoMLProblemTypeConfig
+
+	// Returns the name of the problem type configuration set for the AutoML job V2.
+	AutoMLProblemTypeConfigName types.AutoMLProblemTypeConfigName
 
 	// Information about the candidate produced by an AutoML training job V2,
 	// including its status, steps, and other properties.
@@ -105,10 +110,10 @@ type DescribeAutoMLJobV2Output struct {
 	// validation datasets.
 	DataSplitConfig *types.AutoMLDataSplitConfig
 
-	// Returns the end time of the AutoML V2 job.
+	// Returns the end time of the AutoML job V2.
 	EndTime *time.Time
 
-	// Returns the reason for the failure of the AutoML V2 job, when applicable.
+	// Returns the reason for the failure of the AutoML job V2, when applicable.
 	FailureReason *string
 
 	// Indicates whether the model was deployed automatically to an endpoint and the
@@ -118,8 +123,11 @@ type DescribeAutoMLJobV2Output struct {
 	// Provides information about endpoint for the model deployment.
 	ModelDeployResult *types.ModelDeployResult
 
-	// Returns a list of reasons for partial failures within an AutoML V2 job.
+	// Returns a list of reasons for partial failures within an AutoML job V2.
 	PartialFailureReasons []types.AutoMLPartialFailureReason
+
+	// Returns the resolved attributes used by the AutoML job V2.
+	ResolvedAttributes *types.AutoMLResolvedAttributes
 
 	// Returns the security configuration for traffic encryption or Amazon VPC
 	// settings.

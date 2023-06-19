@@ -484,6 +484,26 @@ func (OnFailure) Values() []OnFailure {
 	}
 }
 
+type OnStackFailure string
+
+// Enum values for OnStackFailure
+const (
+	OnStackFailureDoNothing OnStackFailure = "DO_NOTHING"
+	OnStackFailureRollback  OnStackFailure = "ROLLBACK"
+	OnStackFailureDelete    OnStackFailure = "DELETE"
+)
+
+// Values returns all known values for OnStackFailure. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OnStackFailure) Values() []OnStackFailure {
+	return []OnStackFailure{
+		"DO_NOTHING",
+		"ROLLBACK",
+		"DELETE",
+	}
+}
+
 type OperationResultFilterName string
 
 // Enum values for OperationResultFilterName

@@ -17396,6 +17396,12 @@ func awsAwsjson11_serializeDocumentAutoMLProblemTypeConfig(v types.AutoMLProblem
 			return err
 		}
 
+	case *types.AutoMLProblemTypeConfigMemberTabularJobConfig:
+		av := object.Key("TabularJobConfig")
+		if err := awsAwsjson11_serializeDocumentTabularJobConfig(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.AutoMLProblemTypeConfigMemberTextClassificationJobConfig:
 		av := object.Key("TextClassificationJobConfig")
 		if err := awsAwsjson11_serializeDocumentTextClassificationJobConfig(&uv.Value, av); err != nil {
@@ -17662,6 +17668,20 @@ func awsAwsjson11_serializeDocumentBlueGreenUpdatePolicy(v *types.BlueGreenUpdat
 	if v.TrafficRoutingConfiguration != nil {
 		ok := object.Key("TrafficRoutingConfiguration")
 		if err := awsAwsjson11_serializeDocumentTrafficRoutingConfig(v.TrafficRoutingConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCandidateGenerationConfig(v *types.CandidateGenerationConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AlgorithmsConfig != nil {
+		ok := object.Key("AlgorithmsConfig")
+		if err := awsAwsjson11_serializeDocumentAutoMLAlgorithmsConfig(v.AlgorithmsConfig, ok); err != nil {
 			return err
 		}
 	}
@@ -24657,6 +24677,57 @@ func awsAwsjson11_serializeDocumentSuggestionQuery(v *types.SuggestionQuery, val
 		if err := awsAwsjson11_serializeDocumentPropertyNameQuery(v.PropertyNameQuery, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentTabularJobConfig(v *types.TabularJobConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CandidateGenerationConfig != nil {
+		ok := object.Key("CandidateGenerationConfig")
+		if err := awsAwsjson11_serializeDocumentCandidateGenerationConfig(v.CandidateGenerationConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CompletionCriteria != nil {
+		ok := object.Key("CompletionCriteria")
+		if err := awsAwsjson11_serializeDocumentAutoMLJobCompletionCriteria(v.CompletionCriteria, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FeatureSpecificationS3Uri != nil {
+		ok := object.Key("FeatureSpecificationS3Uri")
+		ok.String(*v.FeatureSpecificationS3Uri)
+	}
+
+	if v.GenerateCandidateDefinitionsOnly {
+		ok := object.Key("GenerateCandidateDefinitionsOnly")
+		ok.Boolean(v.GenerateCandidateDefinitionsOnly)
+	}
+
+	if len(v.Mode) > 0 {
+		ok := object.Key("Mode")
+		ok.String(string(v.Mode))
+	}
+
+	if len(v.ProblemType) > 0 {
+		ok := object.Key("ProblemType")
+		ok.String(string(v.ProblemType))
+	}
+
+	if v.SampleWeightAttributeName != nil {
+		ok := object.Key("SampleWeightAttributeName")
+		ok.String(*v.SampleWeightAttributeName)
+	}
+
+	if v.TargetAttributeName != nil {
+		ok := object.Key("TargetAttributeName")
+		ok.String(*v.TargetAttributeName)
 	}
 
 	return nil

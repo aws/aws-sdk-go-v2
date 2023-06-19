@@ -11,13 +11,19 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an Amazon SageMaker AutoML job that uses non-tabular data such as
-// images or text for Computer Vision or Natural Language Processing problems. Find
-// the resulting model after you run an AutoML job V2 by calling
+// Creates an Autopilot job also referred to as Autopilot experiment or AutoML job
+// V2. We recommend using CreateAutoMLJobV2 (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html)
+// for all problem types. CreateAutoMLJobV2 can process the same tabular data as
+// its previous version CreateAutoMLJob , as well as non-tabular data for problem
+// types such as image or text classification. Find guidelines about how to migrate
+// CreateAutoMLJob to CreateAutoMLJobV2 in Migrate a CreateAutoMLJob to
+// CreateAutoMLJobV2 (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development-create-experiment-api.html#autopilot-create-experiment-api-migrate-v1-v2)
+// . For the list of available problem types supported by CreateAutoMLJobV2 , see
+// AutoMLProblemTypeConfig (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLProblemTypeConfig.html)
+// . Find the best-performing model after you run an AutoML job V2 by calling
 // DescribeAutoMLJobV2 (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJobV2.html)
-// . To create an AutoMLJob using tabular data, see CreateAutoMLJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJob.html)
-// . This API action is callable through SageMaker Canvas only. Calling it directly
-// from the CLI or an SDK results in an error.
+// . Calling DescribeAutoMLJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJob.html)
+// on a AutoML job V2 results in an error.
 func (c *Client) CreateAutoMLJobV2(ctx context.Context, params *CreateAutoMLJobV2Input, optFns ...func(*Options)) (*CreateAutoMLJobV2Output, error) {
 	if params == nil {
 		params = &CreateAutoMLJobV2Input{}
@@ -38,8 +44,9 @@ type CreateAutoMLJobV2Input struct {
 	// An array of channel objects describing the input data and their location. Each
 	// channel is a named input source. Similar to InputDataConfig (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJob.html#sagemaker-CreateAutoMLJob-request-InputDataConfig)
 	// supported by CreateAutoMLJob . The supported formats depend on the problem type:
-	//   - ImageClassification: S3Prefix, ManifestFile , AugmentedManifestFile
-	//   - TextClassification: S3Prefix
+	//   - For Tabular problem types: S3Prefix , ManifestFile .
+	//   - For ImageClassification: S3Prefix , ManifestFile , AugmentedManifestFile .
+	//   - For TextClassification: S3Prefix .
 	//
 	// This member is required.
 	AutoMLJobInputDataConfig []types.AutoMLJobChannel
@@ -50,7 +57,10 @@ type CreateAutoMLJobV2Input struct {
 	// This member is required.
 	AutoMLJobName *string
 
-	// Defines the configuration settings of one of the supported problem types.
+	// Defines the configuration settings of one of the supported problem types. For
+	// tabular problem types, you must either specify the type of supervised learning
+	// problem in AutoMLProblemTypeConfig ( TabularJobConfig.ProblemType ) and provide
+	// the AutoMLJobObjective , or none at all.
 	//
 	// This member is required.
 	AutoMLProblemTypeConfig types.AutoMLProblemTypeConfig
@@ -66,17 +76,18 @@ type CreateAutoMLJobV2Input struct {
 	// This member is required.
 	RoleArn *string
 
-	// Specifies a metric to minimize or maximize as the objective of a job. For
-	// CreateAutoMLJobV2 (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html)
-	// , only Accuracy is supported.
+	// Specifies a metric to minimize or maximize as the objective of a job. If not
+	// specified, the default objective metric depends on the problem type. For the
+	// list of default values per problem type, see AutoMLJobObjective (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobObjective.html)
+	// . For tabular problem types, you must either provide the AutoMLJobObjective and
+	// indicate the type of supervised learning problem in AutoMLProblemTypeConfig (
+	// TabularJobConfig.ProblemType ), or none.
 	AutoMLJobObjective *types.AutoMLJobObjective
 
 	// This structure specifies how to split the data into train and validation
-	// datasets. If you are using the V1 API (for example CreateAutoMLJob ) or the V2
-	// API for Natural Language Processing problems (for example CreateAutoMLJobV2
-	// with a TextClassificationJobConfig problem type), the validation and training
-	// datasets must contain the same headers. Also, for V1 API jobs, the validation
-	// dataset must be less than 2 GB in size.
+	// datasets. The validation and training datasets must contain the same headers.
+	// For jobs created by calling CreateAutoMLJob , the validation dataset must be
+	// less than 2 GB in size.
 	DataSplitConfig *types.AutoMLDataSplitConfig
 
 	// Specifies how to generate the endpoint name for an automatic one-click

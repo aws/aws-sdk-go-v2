@@ -6307,6 +6307,25 @@ func validateAutoMLOutputDataConfig(v *types.AutoMLOutputDataConfig) error {
 	}
 }
 
+func validateAutoMLProblemTypeConfig(v types.AutoMLProblemTypeConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutoMLProblemTypeConfig"}
+	switch uv := v.(type) {
+	case *types.AutoMLProblemTypeConfigMemberTabularJobConfig:
+		if err := validateTabularJobConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[TabularJobConfig]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAutoMLS3DataSource(v *types.AutoMLS3DataSource) error {
 	if v == nil {
 		return nil
@@ -6465,6 +6484,23 @@ func validateBlueGreenUpdatePolicy(v *types.BlueGreenUpdatePolicy) error {
 	} else if v.TrafficRoutingConfiguration != nil {
 		if err := validateTrafficRoutingConfig(v.TrafficRoutingConfiguration); err != nil {
 			invalidParams.AddNested("TrafficRoutingConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCandidateGenerationConfig(v *types.CandidateGenerationConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CandidateGenerationConfig"}
+	if v.AlgorithmsConfig != nil {
+		if err := validateAutoMLAlgorithmsConfig(v.AlgorithmsConfig); err != nil {
+			invalidParams.AddNested("AlgorithmsConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -10634,6 +10670,26 @@ func validateSuggestionQuery(v *types.SuggestionQuery) error {
 	}
 }
 
+func validateTabularJobConfig(v *types.TabularJobConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TabularJobConfig"}
+	if v.CandidateGenerationConfig != nil {
+		if err := validateCandidateGenerationConfig(v.CandidateGenerationConfig); err != nil {
+			invalidParams.AddNested("CandidateGenerationConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TargetAttributeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetAttributeName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTag(v *types.Tag) error {
 	if v == nil {
 		return nil
@@ -11380,6 +11436,10 @@ func validateOpCreateAutoMLJobV2Input(v *CreateAutoMLJobV2Input) error {
 	}
 	if v.AutoMLProblemTypeConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AutoMLProblemTypeConfig"))
+	} else if v.AutoMLProblemTypeConfig != nil {
+		if err := validateAutoMLProblemTypeConfig(v.AutoMLProblemTypeConfig); err != nil {
+			invalidParams.AddNested("AutoMLProblemTypeConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))

@@ -16498,14 +16498,20 @@ type VerifiedAccessLogKinesisDataFirehoseDestinationOptions struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the destinations for Verified Access logs.
+// Options for Verified Access logs.
 type VerifiedAccessLogOptions struct {
 
 	// Sends Verified Access logs to CloudWatch Logs.
 	CloudWatchLogs *VerifiedAccessLogCloudWatchLogsDestinationOptions
 
+	// Include trust data sent by trust providers into the logs.
+	IncludeTrustContext *bool
+
 	// Sends Verified Access logs to Kinesis.
 	KinesisDataFirehose *VerifiedAccessLogKinesisDataFirehoseDestinationOptions
+
+	// The logging version to use. Valid values: ocsf-0.1 | ocsf-1.0.0-rc.2
+	LogVersion *string
 
 	// Sends Verified Access logs to Amazon S3.
 	S3 *VerifiedAccessLogS3DestinationOptions
@@ -16513,14 +16519,20 @@ type VerifiedAccessLogOptions struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the destinations for Verified Access logs.
+// Describes the options for Verified Access logs.
 type VerifiedAccessLogs struct {
 
 	// CloudWatch Logs logging destination.
 	CloudWatchLogs *VerifiedAccessLogCloudWatchLogsDestination
 
+	// Describes current setting for including trust data into the logs.
+	IncludeTrustContext *bool
+
 	// Kinesis logging destination.
 	KinesisDataFirehose *VerifiedAccessLogKinesisDataFirehoseDestination
+
+	// Describes current setting for the logging version.
+	LogVersion *string
 
 	// Amazon S3 logging options.
 	S3 *VerifiedAccessLogS3Destination

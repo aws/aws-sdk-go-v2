@@ -1152,8 +1152,9 @@ type AutoMLCandidate struct {
 	FinalAutoMLJobObjectiveMetric *FinalAutoMLJobObjectiveMetric
 
 	// The mapping of all supported processing unit (CPU, GPU, etc...) to inference
-	// container definitions for the candidate. This field is populated for the V2 API
-	// only (for example, for jobs created by calling CreateAutoMLJobV2 ).
+	// container definitions for the candidate. This field is populated for the AutoML
+	// jobs V2 (for example, for jobs created by calling CreateAutoMLJobV2 ) related to
+	// image or text classification problem types only.
 	InferenceContainerDefinitions map[string][]AutoMLContainerDefinition
 
 	// Information about the recommended inference container definitions.
@@ -1310,11 +1311,9 @@ type AutoMLDataSource struct {
 }
 
 // This structure specifies how to split the data into train and validation
-// datasets. If you are using the V1 API (for example CreateAutoMLJob ) or the V2
-// API for Natural Language Processing problems (for example CreateAutoMLJobV2
-// with a TextClassificationJobConfig problem type), the validation and training
-// datasets must contain the same headers. Also, for V1 API jobs, the validation
-// dataset must be less than 2 GB in size.
+// datasets. The validation and training datasets must contain the same headers.
+// For jobs created by calling CreateAutoMLJob , the validation dataset must be
+// less than 2 GB in size.
 type AutoMLDataSplitConfig struct {
 
 	// The validation fraction (optional) is a float that specifies the portion of the
@@ -1339,10 +1338,8 @@ type AutoMLJobArtifacts struct {
 }
 
 // A channel is a named input source that training algorithms can consume. This
-// channel is used for the non tabular training data of an AutoML job using the V2
-// API. For tabular training data, see AutoMLChannel (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLChannel.html)
-// . For more information, see Channel (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Channel.html)
-// .
+// channel is used for AutoML jobs V2 (jobs created by calling CreateAutoMLJobV2 (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html)
+// ).
 type AutoMLJobChannel struct {
 
 	// The type of channel. Defines whether the data are used for training or
@@ -1350,22 +1347,25 @@ type AutoMLJobChannel struct {
 	// must share the same ContentType
 	ChannelType AutoMLChannelType
 
-	// The allowed compression types depend on the input format. We allow the
-	// compression type Gzip for S3Prefix inputs only. For all other inputs, the
-	// compression type should be None . If no compression type is provided, we default
-	// to None .
+	// The allowed compression types depend on the input format and problem type. We
+	// allow the compression type Gzip for S3Prefix inputs on tabular data only. For
+	// all other inputs, the compression type should be None . If no compression type
+	// is provided, we default to None .
 	CompressionType CompressionType
 
 	// The content type of the data from the input source. The following are the
 	// allowed content types for different problems:
-	//   - ImageClassification: image/png , image/jpeg , or image/* . The default value
-	//   is image/* .
-	//   - TextClassification: text/csv;header=present or
+	//   - For Tabular problem types: text/csv;header=present or
+	//   x-application/vnd.amazon+parquet . The default value is
+	//   text/csv;header=present .
+	//   - For ImageClassification: image/png , image/jpeg , or image/* . The default
+	//   value is image/* .
+	//   - For TextClassification: text/csv;header=present or
 	//   x-application/vnd.amazon+parquet . The default value is
 	//   text/csv;header=present .
 	ContentType *string
 
-	// The data source for an AutoML channel.
+	// The data source for an AutoML channel (Required).
 	DataSource *AutoMLDataSource
 
 	noSmithyDocumentSerde
@@ -1383,7 +1383,7 @@ type AutoMLJobCompletionCriteria struct {
 	// not completed.
 	MaxAutoMLJobRuntimeInSeconds *int32
 
-	// The maximum number of times a training job is allowed to run. For V2 jobs (jobs
+	// The maximum number of times a training job is allowed to run. For job V2s (jobs
 	// created by calling CreateAutoMLJobV2 ), the supported value is 1.
 	MaxCandidates *int32
 
@@ -1391,7 +1391,7 @@ type AutoMLJobCompletionCriteria struct {
 	// hyperparameter tuning is allowed to run as part of a hyperparameter tuning job.
 	// For more information, see the StoppingCondition (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_StoppingCondition.html)
 	// used by the CreateHyperParameterTuningJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateHyperParameterTuningJob.html)
-	// action. For V2 jobs (jobs created by calling CreateAutoMLJobV2 ), this field
+	// action. For job V2s (jobs created by calling CreateAutoMLJobV2 ), this field
 	// controls the runtime of the job candidate.
 	MaxRuntimePerTrainingJobInSeconds *int32
 
@@ -1421,12 +1421,12 @@ type AutoMLJobConfig struct {
 	// base models to produce an optimal predictive model. It then uses a stacking
 	// ensemble method to combine predictions from contributing members. A multi-stack
 	// ensemble model can provide better performance over a single model by combining
-	// the predictive capabilities of multiple models. See Autopilot algorithm support (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-suppprt)
+	// the predictive capabilities of multiple models. See Autopilot algorithm support (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-support)
 	// for a list of algorithms supported by ENSEMBLING mode. The HYPERPARAMETER_TUNING
 	// (HPO) mode uses the best hyperparameters to train the best version of a model.
 	// HPO automatically selects an algorithm for the type of problem you want to
 	// solve. Then HPO finds the best hyperparameters according to your objective
-	// metric. See Autopilot algorithm support (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-suppprt)
+	// metric. See Autopilot algorithm support (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-support)
 	// for a list of algorithms supported by HYPERPARAMETER_TUNING mode.
 	Mode AutoMLMode
 
@@ -1436,9 +1436,7 @@ type AutoMLJobConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies a metric to minimize or maximize as the objective of a job. V2 API
-// jobs (for example jobs created by calling CreateAutoMLJobV2 ), support Accuracy
-// only.
+// Specifies a metric to minimize or maximize as the objective of a job.
 type AutoMLJobObjective struct {
 
 	// The name of the objective metric used to measure the predictive quality of a
@@ -1448,9 +1446,11 @@ type AutoMLJobObjective struct {
 	// list of all available metrics supported by Autopilot, see Autopilot metrics (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-metrics-validation.html#autopilot-metrics)
 	// . If you do not specify a metric explicitly, the default behavior is to
 	// automatically use:
-	//   - MSE : for regression.
-	//   - F1 : for binary classification
-	//   - Accuracy : for multiclass classification.
+	//   - For tabular problem types:
+	//   - Regression: MSE .
+	//   - Binary classification: F1 .
+	//   - Multiclass classification: Accuracy .
+	//   - For image or text classification problem types: Accuracy
 	//
 	// This member is required.
 	MetricName AutoMLMetricEnum
@@ -1536,19 +1536,19 @@ type AutoMLPartialFailureReason struct {
 }
 
 // A collection of settings specific to the problem type used to configure an
-// AutoML job using the V2 API. There must be one and only one config of the
-// following type.
+// AutoML job V2. There must be one and only one config of the following type.
 //
 // The following types satisfy this interface:
 //
 //	AutoMLProblemTypeConfigMemberImageClassificationJobConfig
+//	AutoMLProblemTypeConfigMemberTabularJobConfig
 //	AutoMLProblemTypeConfigMemberTextClassificationJobConfig
 type AutoMLProblemTypeConfig interface {
 	isAutoMLProblemTypeConfig()
 }
 
-// Settings used to configure an AutoML job using the V2 API for the image
-// classification problem type.
+// Settings used to configure an AutoML job V2 for the image classification
+// problem type.
 type AutoMLProblemTypeConfigMemberImageClassificationJobConfig struct {
 	Value ImageClassificationJobConfig
 
@@ -1557,8 +1557,18 @@ type AutoMLProblemTypeConfigMemberImageClassificationJobConfig struct {
 
 func (*AutoMLProblemTypeConfigMemberImageClassificationJobConfig) isAutoMLProblemTypeConfig() {}
 
-// Settings used to configure an AutoML job using the V2 API for the text
-// classification problem type.
+// Settings used to configure an AutoML job V2 for a tabular problem type
+// (regression, classification).
+type AutoMLProblemTypeConfigMemberTabularJobConfig struct {
+	Value TabularJobConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*AutoMLProblemTypeConfigMemberTabularJobConfig) isAutoMLProblemTypeConfig() {}
+
+// Settings used to configure an AutoML job V2 for the text classification problem
+// type.
 type AutoMLProblemTypeConfigMemberTextClassificationJobConfig struct {
 	Value TextClassificationJobConfig
 
@@ -1566,6 +1576,41 @@ type AutoMLProblemTypeConfigMemberTextClassificationJobConfig struct {
 }
 
 func (*AutoMLProblemTypeConfigMemberTextClassificationJobConfig) isAutoMLProblemTypeConfig() {}
+
+// The resolved attributes specific to the problem type of an AutoML job V2.
+//
+// The following types satisfy this interface:
+//
+//	AutoMLProblemTypeResolvedAttributesMemberTabularResolvedAttributes
+type AutoMLProblemTypeResolvedAttributes interface {
+	isAutoMLProblemTypeResolvedAttributes()
+}
+
+// Defines the resolved attributes for the TABULAR problem type.
+type AutoMLProblemTypeResolvedAttributesMemberTabularResolvedAttributes struct {
+	Value TabularResolvedAttributes
+
+	noSmithyDocumentSerde
+}
+
+func (*AutoMLProblemTypeResolvedAttributesMemberTabularResolvedAttributes) isAutoMLProblemTypeResolvedAttributes() {
+}
+
+// The resolved attributes used to configure an AutoML job V2.
+type AutoMLResolvedAttributes struct {
+
+	// Specifies a metric to minimize or maximize as the objective of a job.
+	AutoMLJobObjective *AutoMLJobObjective
+
+	// Defines the resolved attributes specific to a problem type.
+	AutoMLProblemTypeResolvedAttributes AutoMLProblemTypeResolvedAttributes
+
+	// How long a job is allowed to run, or how many candidates a job is allowed to
+	// generate.
+	CompletionCriteria *AutoMLJobCompletionCriteria
+
+	noSmithyDocumentSerde
+}
 
 // Describes the Amazon S3 data source.
 type AutoMLS3DataSource struct {
@@ -1908,6 +1953,30 @@ type CandidateArtifactLocations struct {
 	// The Amazon S3 prefix to the model insight artifacts generated for the AutoML
 	// candidate.
 	ModelInsights *string
+
+	noSmithyDocumentSerde
+}
+
+// Stores the configuration information for how model candidates are generated
+// using an AutoML job V2.
+type CandidateGenerationConfig struct {
+
+	// Stores the configuration information for the selection of algorithms used to
+	// train model candidates on tabular data. The list of available algorithms to
+	// choose from depends on the training mode set in TabularJobConfig.Mode (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_TabularJobConfig.html)
+	// .
+	//   - AlgorithmsConfig should not be set in AUTO training mode.
+	//   - When AlgorithmsConfig is provided, one AutoMLAlgorithms attribute must be
+	//   set and one only. If the list of algorithms provided as values for
+	//   AutoMLAlgorithms is empty, CandidateGenerationConfig uses the full set of
+	//   algorithms for the given training mode.
+	//   - When AlgorithmsConfig is not provided, CandidateGenerationConfig uses the
+	//   full set of algorithms for the given training mode.
+	// For the list of all algorithms per problem type and training mode, see
+	// AutoMLAlgorithmConfig (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLAlgorithmConfig.html)
+	// . For more information on each algorithm, see the Algorithm support (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-support)
+	// section in Autopilot developer guide.
+	AlgorithmsConfig []AutoMLAlgorithmConfig
 
 	noSmithyDocumentSerde
 }
@@ -6410,7 +6479,7 @@ type Image struct {
 }
 
 // Stores the configuration information for the image classification problem of an
-// AutoML job using the V2 API.
+// AutoML job V2.
 type ImageClassificationJobConfig struct {
 
 	// How long a job is allowed to run, or how many candidates a job is allowed to
@@ -9804,7 +9873,9 @@ type OutputConfig struct {
 	// Identifies the target device or the machine learning instance that you want to
 	// run your model on after the compilation has completed. Alternatively, you can
 	// specify OS, architecture, and accelerator using TargetPlatform (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_TargetPlatform.html)
-	// fields. It can be used instead of TargetPlatform .
+	// fields. It can be used instead of TargetPlatform . Currently ml_trn1 is
+	// available only in US East (N. Virginia) Region, and ml_inf2 is available only
+	// in US East (Ohio) Region.
 	TargetDevice TargetDevice
 
 	// Contains information about a target platform that you want your model to run
@@ -11806,9 +11877,7 @@ type RepositoryAuthConfig struct {
 // The resolved attributes.
 type ResolvedAttributes struct {
 
-	// Specifies a metric to minimize or maximize as the objective of a job. V2 API
-	// jobs (for example jobs created by calling CreateAutoMLJobV2 ), support Accuracy
-	// only.
+	// Specifies a metric to minimize or maximize as the objective of a job.
 	AutoMLJobObjective *AutoMLJobObjective
 
 	// How long a job is allowed to run, or how many candidates a job is allowed to
@@ -12692,6 +12761,97 @@ type SuggestionQuery struct {
 	noSmithyDocumentSerde
 }
 
+// The collection of settings used by an AutoML job V2 for the TABULAR problem
+// type.
+type TabularJobConfig struct {
+
+	// The name of the target variable in supervised learning, usually represented by
+	// 'y'.
+	//
+	// This member is required.
+	TargetAttributeName *string
+
+	// The configuration information of how model candidates are generated.
+	CandidateGenerationConfig *CandidateGenerationConfig
+
+	// How long a job is allowed to run, or how many candidates a job is allowed to
+	// generate.
+	CompletionCriteria *AutoMLJobCompletionCriteria
+
+	// A URL to the Amazon S3 data source containing selected features from the input
+	// data source to run an Autopilot job V2. You can input FeatureAttributeNames
+	// (optional) in JSON format as shown below: { "FeatureAttributeNames":["col1",
+	// "col2", ...] } . You can also specify the data type of the feature (optional) in
+	// the format shown below: { "FeatureDataTypes":{"col1":"numeric",
+	// "col2":"categorical" ... } } These column keys may not include the target
+	// column. In ensembling mode, Autopilot only supports the following data types:
+	// numeric , categorical , text , and datetime . In HPO mode, Autopilot can support
+	// numeric , categorical , text , datetime , and sequence . If only
+	// FeatureDataTypes is provided, the column keys ( col1 , col2 ,..) should be a
+	// subset of the column names in the input data. If both FeatureDataTypes and
+	// FeatureAttributeNames are provided, then the column keys should be a subset of
+	// the column names provided in FeatureAttributeNames . The key name
+	// FeatureAttributeNames is fixed. The values listed in ["col1", "col2", ...] are
+	// case sensitive and should be a list of strings containing unique values that are
+	// a subset of the column names in the input data. The list of columns provided
+	// must not include the target column.
+	FeatureSpecificationS3Uri *string
+
+	// Generates possible candidates without training the models. A model candidate is
+	// a combination of data preprocessors, algorithms, and algorithm parameter
+	// settings.
+	GenerateCandidateDefinitionsOnly bool
+
+	// The method that Autopilot uses to train the data. You can either specify the
+	// mode manually or let Autopilot choose for you based on the dataset size by
+	// selecting AUTO . In AUTO mode, Autopilot chooses ENSEMBLING for datasets
+	// smaller than 100 MB, and HYPERPARAMETER_TUNING for larger ones. The ENSEMBLING
+	// mode uses a multi-stack ensemble model to predict classification and regression
+	// tasks directly from your dataset. This machine learning mode combines several
+	// base models to produce an optimal predictive model. It then uses a stacking
+	// ensemble method to combine predictions from contributing members. A multi-stack
+	// ensemble model can provide better performance over a single model by combining
+	// the predictive capabilities of multiple models. See Autopilot algorithm support (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-support)
+	// for a list of algorithms supported by ENSEMBLING mode. The HYPERPARAMETER_TUNING
+	// (HPO) mode uses the best hyperparameters to train the best version of a model.
+	// HPO automatically selects an algorithm for the type of problem you want to
+	// solve. Then HPO finds the best hyperparameters according to your objective
+	// metric. See Autopilot algorithm support (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-model-support-validation.html#autopilot-algorithm-support)
+	// for a list of algorithms supported by HYPERPARAMETER_TUNING mode.
+	Mode AutoMLMode
+
+	// The type of supervised learning problem available for the model candidates of
+	// the AutoML job V2. For more information, see Amazon SageMaker Autopilot problem
+	// types (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-datasets-problem-types.html#autopilot-problem-types)
+	// .
+	ProblemType ProblemType
+
+	// If specified, this column name indicates which column of the dataset should be
+	// treated as sample weights for use by the objective metric during the training,
+	// evaluation, and the selection of the best model. This column is not considered
+	// as a predictive feature. For more information on Autopilot metrics, see Metrics
+	// and validation (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-metrics-validation.html)
+	// . Sample weights should be numeric, non-negative, with larger values indicating
+	// which rows are more important than others. Data points that have invalid or no
+	// weight value are excluded. Support for sample weights is available in Ensembling (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLAlgorithmConfig.html)
+	// mode only.
+	SampleWeightAttributeName *string
+
+	noSmithyDocumentSerde
+}
+
+// The resolved attributes specific to the TABULAR problem type.
+type TabularResolvedAttributes struct {
+
+	// The type of supervised learning problem available for the model candidates of
+	// the AutoML job V2 (Binary Classification, Multiclass Classification,
+	// Regression). For more information, see Amazon SageMaker Autopilot problem types (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-datasets-problem-types.html#autopilot-problem-types)
+	// .
+	ProblemType ProblemType
+
+	noSmithyDocumentSerde
+}
+
 // A tag object that consists of a key and an optional value, used to manage
 // metadata for SageMaker Amazon Web Services resources. You can add tags to
 // notebook instances, training jobs, hyperparameter tuning jobs, batch transform
@@ -12779,7 +12939,7 @@ type TensorBoardOutputConfig struct {
 }
 
 // Stores the configuration information for the text classification problem of an
-// AutoML job using the V2 API.
+// AutoML job V2.
 type TextClassificationJobConfig struct {
 
 	// How long a job is allowed to run, or how many candidates a job is allowed to
@@ -12787,11 +12947,11 @@ type TextClassificationJobConfig struct {
 	CompletionCriteria *AutoMLJobCompletionCriteria
 
 	// The name of the column used to provide the sentences to be classified. It
-	// should not be the same as the target column.
+	// should not be the same as the target column (Required).
 	ContentColumn *string
 
 	// The name of the column used to provide the class labels. It should not be same
-	// as the content column.
+	// as the content column (Required).
 	TargetLabelColumn *string
 
 	noSmithyDocumentSerde
@@ -14465,5 +14625,6 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isAutoMLProblemTypeConfig()      {}
-func (*UnknownUnionMember) isTrialComponentParameterValue() {}
+func (*UnknownUnionMember) isAutoMLProblemTypeConfig()             {}
+func (*UnknownUnionMember) isAutoMLProblemTypeResolvedAttributes() {}
+func (*UnknownUnionMember) isTrialComponentParameterValue()        {}
