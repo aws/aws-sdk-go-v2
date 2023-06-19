@@ -6,6 +6,10 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 )
 
+type BuiltInParameterResolver interface {
+	ResolveBuiltIn(name string) (value interface{}, ok bool)
+}
+
 // these field names should either be identical to the config field source
 // or closely align to whatever is needed to perform the mapping
 // between the EndpointParameters (name + type) and the source
@@ -36,6 +40,12 @@ type BuiltInResolver struct {
 	// https://code.amazon.com/packages/AwsDrSeps/blobs/main/--/seps/accepted/shared/sts_regionlization.md
 	// STSUseGlobalEndpoint bool
 
+}
+
+type NopBuiltInResolver struct{}
+
+func (b *NopBuiltInResolver) ResolveBuiltIn(name string) (value interface{}, ok bool) {
+	return nil, true
 }
 
 func (b *BuiltInResolver) ResolveBuiltIn(name string) (value interface{}, ok bool) {
