@@ -1,6 +1,7 @@
 package endpoints
 
 import (
+	"net/url"
 	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -26,20 +27,11 @@ type BuiltInResolver struct {
 
 	DisableMultiRegionAccessPoints bool
 
+	Endpoint *url.URL
+
 	S3UseArnRegion bool
 
 	S3ControlUseArnRegion bool
-
-	// this is currently resolved via an elaborate S3 customization
-	// https://code.amazon.com/packages/AwsDrSeps/blobs/main/--/seps/accepted/shared/mrap.md
-	// the actual inputs needed are the: arn (parsed from the bucket).
-	// clarified: doesnt need to be supported since not already a field on the client config.
-	// UseGlobalEndpoint bool
-
-	// Go V2 does not appear to support sts global endpoints
-	// https://code.amazon.com/packages/AwsDrSeps/blobs/main/--/seps/accepted/shared/sts_regionlization.md
-	// STSUseGlobalEndpoint bool
-
 }
 
 type NopBuiltInResolver struct{}
@@ -64,6 +56,26 @@ func (b *BuiltInResolver) ResolveBuiltIn(name string) (value interface{}, ok boo
 
 	if name == "AWS::S3::ForcePathStyle" {
 		return b.resolveForcePathStyle()
+	}
+
+	if name == "AWS::S3::Accelerate" {
+		return b.resolveAccelerate()
+	}
+
+	if name == "AWS::S3::DisableMultiRegionAccessPoints" {
+		return b.resolveDisableMrap()
+	}
+
+	if name == "SDK::Endpoint" {
+		return b.resolveMutableBaseEndpoint()
+	}
+
+	if name == "AWS::S3::UseArnRegion" {
+		return b.resolveS3UseArnRegion()
+	}
+
+	if name == "AWS::S3Control::UseArnRegion" {
+		return b.resolveS3ControlUseArnRegion()
 	}
 
 	return nil, false
@@ -106,6 +118,18 @@ func (b *BuiltInResolver) resolveAccelerate() (value *bool, ok bool) {
 
 func (b *BuiltInResolver) resolveDisableMrap() (value *bool, ok bool) {
 	return aws.Bool(b.DisableMultiRegionAccessPoints), true
+}
+
+func (b *BuiltInResolver) resolveMutableBaseEndpoint() (value *string, ok bool) {
+	return aws.String(b.Endpoint.Host), true
+}
+
+func (b *BuiltInResolver) resolveS3UseArnRegion() (value *bool, ok bool) {
+	return aws.Bool(b.S3UseArnRegion), true
+}
+
+func (b *BuiltInResolver) resolveS3ControlUseArnRegion() (value *bool, ok bool) {
+	return aws.Bool(b.S3ControlUseArnRegion), true
 }
 
 // Utility function to aid with translating pseudo-regions to classical regions

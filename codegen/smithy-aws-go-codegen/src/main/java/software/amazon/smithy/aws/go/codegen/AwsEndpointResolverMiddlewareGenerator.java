@@ -33,11 +33,14 @@ import software.amazon.smithy.rulesengine.traits.EndpointRuleSetTrait;
 import software.amazon.smithy.rulesengine.traits.StaticContextParamsTrait;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
 import software.amazon.smithy.go.codegen.SymbolUtils;
+import software.amazon.smithy.go.codegen.TriConsumer;
+import software.amazon.smithy.go.codegen.endpoints.EndpointResolutionGenerator;
 import software.amazon.smithy.utils.ListUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 public class AwsEndpointResolverMiddlewareGenerator implements GoIntegration {
 
@@ -54,6 +57,21 @@ public class AwsEndpointResolverMiddlewareGenerator implements GoIntegration {
 
     @Override
     public List<RuntimeClientPlugin> getClientPlugins() {
+        runtimeClientPlugins.add(RuntimeClientPlugin.builder()
+        .configFields(ListUtils.of(
+            ConfigField.builder()
+                    .name("MutableBaseEndpoint")
+                    .type(SymbolUtils.createPointableSymbolBuilder("URL", SmithyGoDependency.NET_URL).build())
+                    .documentation(
+                        """
+                        This endpoint will be given as input to an EndpointResolverV2.
+                        It is used for providing a custom base endpoint that is subject 
+                        to modifications by the processing EndpointResolverV2.        
+                        """
+                    )
+                    .build()
+        ))
+        .build());
         return runtimeClientPlugins;
     }
 
@@ -66,19 +84,21 @@ public class AwsEndpointResolverMiddlewareGenerator implements GoIntegration {
         : Optional.empty();
         var clientContextParamsTrait = service.getTrait(ClientContextParamsTrait.class);
 
-        for (ShapeId operationId : service.getAllOperations()) {
-            final OperationShape operation = model.expectShape(operationId, OperationShape.class);
+        var topDownIndex = TopDownIndex.of(model);
+
+        for (ToShapeId operationId : topDownIndex.getContainedOperations(service)) {
+            OperationShape operationShape = model.expectShape(operationId.toShapeId(), OperationShape.class);
 
             // Create a symbol provider because one is not available in this call.
             SymbolProvider symbolProvider = GoCodegenPlugin.createSymbolProvider(model, settings);
 
             // Input helper
             String inputHelperFuncName = getAddEndpointMiddlewareFuncName(
-                    symbolProvider.toSymbol(operation).getName()
+                    symbolProvider.toSymbol(operationShape).getName()
             );
             runtimeClientPlugins.add(RuntimeClientPlugin.builder()
                     .operationPredicate((m, s, o) -> {
-                        return o.equals(operation);
+                        return o.equals(operationShape);
                     })
                     .registerMiddleware(MiddlewareRegistrar.builder()
                             .resolvedFunction(SymbolUtils.createValueSymbolBuilder(inputHelperFuncName)
@@ -111,6 +131,66 @@ public class AwsEndpointResolverMiddlewareGenerator implements GoIntegration {
                 }
             }
         }
+    }
+
+    @Override
+    public void writeAdditionalFiles(
+            GoSettings settings,
+            Model model,
+            SymbolProvider symbolProvider,
+            TriConsumer<String, String, Consumer<GoWriter>> writerFactory
+    ) {
+
+        var serviceShape = settings.getService(model);
+
+        Optional<EndpointRuleSet> ruleset = Optional.empty();
+        var rulesetTrait = serviceShape.getTrait(EndpointRuleSetTrait.class);
+        if (rulesetTrait.isPresent()) {
+            ruleset = Optional.of(EndpointRuleSet.fromNode(rulesetTrait.get().getRuleSet()));
+        }
+
+        Parameters parameters = ruleset.get().getParameters();
+
+        writerFactory.accept("endpoints.go", settings.getModuleName(), writer -> {
+            writer.write("$W", generateBuiltInResolverEntryPoint(parameters));
+        });
+    }
+
+    private GoWriter.Writable generateBuiltInResolverEntryPoint(Parameters parameters) {
+        return (GoWriter w) -> {
+            w.write(
+                """
+                func resolveBuiltIns(parameters $P, resolver $T) {
+                    var value interface{}; var present bool
+                    $W
+                }
+                """,
+                SymbolUtils.createValueSymbolBuilder(EndpointResolutionGenerator.PARAMETERS_TYPE_NAME).build(),
+                SymbolUtils.createValueSymbolBuilder("BuiltInParameterResolver", AwsGoDependency.INTERNAL_ENDPOINTS).build(),
+                generateBuiltInResolutionInvocation(parameters)
+            );
+        };
+    }
+
+    private GoWriter.Writable generateBuiltInResolutionInvocation(Parameters parameters) {
+        return (GoWriter w) -> {
+            parameters.toList().stream().filter(
+                p -> p.getBuiltIn().isPresent())
+                .forEach(parameter -> {
+                    w.write(
+                        """
+                            value, present = resolver.ResolveBuiltIn(\"$L\")
+                            if v, ok := value.($T); present && ok {
+                                parameters.$L = &v
+                            }
+                        """,
+                        parameter.getBuiltIn(),
+                        parameterAsSymbol(parameter),
+                        getExportedParameterName(parameter)
+                    );
+                    w.write("");
+            });
+        };
     }
 
     @Override
@@ -229,9 +309,6 @@ public class AwsEndpointResolverMiddlewareGenerator implements GoIntegration {
             });
     
             writer.write("");
-    
-            // each middleware must implement their given handlerMethodName in order to satisfy the interface for
-            // their respective step.
 
             String handleMethodName = "HandleSerialize";
             Symbol contextType = SymbolUtils.createValueSymbolBuilder("Context", SmithyGoDependency.CONTEXT).build();
@@ -451,6 +528,10 @@ public class AwsEndpointResolverMiddlewareGenerator implements GoIntegration {
             parameters.toList().stream().filter(
                 p -> p.getBuiltIn().isPresent())
                 .forEach(parameter -> {
+                    if (parameter.getBuiltIn().get().equals("SDK::Endpoint")) {
+                        writer.write("$L: options.MutableBaseEndpoint,", getExportedParameterName(parameter));
+                        writer.insertTrailingNewline();
+                    }
                     if (parameter.getBuiltIn().get().equals("AWS::Region")) {
                         writer.write("$L: options.Region,", getExportedParameterName(parameter));
                         writer.insertTrailingNewline();
