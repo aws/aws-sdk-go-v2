@@ -89,10 +89,8 @@ public class AwsEndpointResolverMiddlewareGenerator implements GoIntegration {
         for (ToShapeId operationId : topDownIndex.getContainedOperations(service)) {
             OperationShape operationShape = model.expectShape(operationId.toShapeId(), OperationShape.class);
 
-            // Create a symbol provider because one is not available in this call.
             SymbolProvider symbolProvider = GoCodegenPlugin.createSymbolProvider(model, settings);
 
-            // Input helper
             String inputHelperFuncName = getAddEndpointMiddlewareFuncName(
                     symbolProvider.toSymbol(operationShape).getName()
             );

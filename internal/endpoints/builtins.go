@@ -11,9 +11,6 @@ type BuiltInParameterResolver interface {
 	ResolveBuiltIn(name string) (value interface{}, ok bool)
 }
 
-// these field names should either be identical to the config field source
-// or closely align to whatever is needed to perform the mapping
-// between the EndpointParameters (name + type) and the source
 type BuiltInResolver struct {
 	Region string
 
@@ -81,11 +78,6 @@ func (b *BuiltInResolver) ResolveBuiltIn(name string) (value interface{}, ok boo
 	return nil, false
 }
 
-// the resolver functions is where we actually have knowledge of the name+type
-// of the client config field source
-// vs resolveBuiltIns
-// where we actually have knowledge of the name+type
-// of the endpoint params field destination
 func (b *BuiltInResolver) resolveRegion() (value *string, ok bool) {
 	region, _ := mapPseudoRegion(b.Region)
 	if len(region) == 0 {
