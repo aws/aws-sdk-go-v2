@@ -189,7 +189,7 @@ public class AwsEndpointResolverMiddlewareGenerator implements GoIntegration {
                 """
                 func $L(stack $P, options Options) error {
                     return stack.Serialize.Insert(&$L{
-                        BuiltInResolver: $T{
+                        BuiltInResolver: &$T{
                             $W
                         },
                         EndpointResolver: options.EndpointResolverV2,
@@ -230,7 +230,7 @@ public class AwsEndpointResolverMiddlewareGenerator implements GoIntegration {
         return (GoWriter w) -> {
             w.openBlock("type $L struct {", "}", getMiddlewareObjectName(operationName), () -> {
                 w.write("EndpointResolver $T", SymbolUtils.createValueSymbolBuilder("EndpointResolverV2").build());
-                w.write("BuiltInResolver $T", SymbolUtils.createValueSymbolBuilder("BuiltInResolver", AwsGoDependency.INTERNAL_ENDPOINTS).build());
+                w.write("BuiltInResolver $T", SymbolUtils.createValueSymbolBuilder("BuiltInParameterResolver", AwsGoDependency.INTERNAL_ENDPOINTS).build());
                 if (clientContextParamsTrait.isPresent()) {
                     var clientContextParams = clientContextParamsTrait.get();
                     parameters.toList().stream().forEach(param -> {
@@ -290,10 +290,9 @@ public class AwsEndpointResolverMiddlewareGenerator implements GoIntegration {
     private GoWriter.Writable generateMiddlewareResolverBody(OperationShape operationShape, Model model, Parameters parameters, Optional<ClientContextParamsTrait> clientContextParamsTrait) {
         return (GoWriter writer) -> {
             var fmtErrorSymbol = SymbolUtils.createValueSymbolBuilder("Errorf", SmithyGoDependency.FMT).build();
-            
             writer.write(
                 """
-                    _, ok := in.Request.($P)
+                    req, ok := in.Request.($P)
                     if !ok {
                         return out, metadata, $T(\"unknown transport type %T\", in.Request)
                     }
@@ -303,17 +302,17 @@ public class AwsEndpointResolverMiddlewareGenerator implements GoIntegration {
                         return out, metadata, $T(\"unknown transport type %T\", in.Request)
                     }
                 
-                    if m.Resolver == nil {
+                    if m.EndpointResolver == nil {
                         return out, metadata, $T(\"expected endpoint resolver to not be nil\")
                     }
                 
                     if m.BuiltInResolver == nil {
-                        m.BuiltInResolver = endpoint.NopBuiltInResolver{}
+                        m.BuiltInResolver = &$T{}
                     }
                 
                     params := EndpointParameters{}
 
-                    resolveBuiltIns(&params, m.BuiltInResolver)
+                    resolveBuiltIns(params, m.BuiltInResolver)
 
                     $W
 
@@ -321,16 +320,46 @@ public class AwsEndpointResolverMiddlewareGenerator implements GoIntegration {
 
                     $W
 
+                    var resolvedEndpoint $T
+                    resolvedEndpoint, err = m.EndpointResolver.ResolveEndpoint(ctx, params)
+                    if err != nil {
+                        return out, metadata, $T(\"failed to resolve service endpoint, %w\", err)
+                    }
+
+                    req.URL = &resolvedEndpoint.URI
+
+                    auth, ok := resolvedEndpoint.Properties.Get(authSchemes{}).([]interface{})
+                    if ok {
+                        for _, schemes := range auth {
+                            scheme, ok := schemes.(map[string]interface{})
+                            if !ok {
+                                continue
+                            }
+                            if len($T(ctx)) == 0 {
+                                signingName := scheme[\"signingName\"].(string)
+                                if len(signingName) == 0 {
+                                    signingName = \"s3\"
+                                }
+                                ctx = $T(ctx, signingName)
+                            }
+                        }
+                    }
+
+                    return next.HandleSerialize(ctx, in)
                 """,
                 SymbolUtils.createPointableSymbolBuilder("Request", SmithyGoDependency.SMITHY_HTTP_TRANSPORT).build(),
                 fmtErrorSymbol,
-                SymbolUtils.createPointableSymbolBuilder("PutObjectInput").build(),
+                SymbolUtils.createPointableSymbolBuilder(operationShape.getInput().get().getName()).build(),
                 fmtErrorSymbol,
                 fmtErrorSymbol,
+                SymbolUtils.createValueSymbolBuilder("NopBuiltInResolver", AwsGoDependency.INTERNAL_ENDPOINTS).build(),
                 generateClientContextParamBinding(parameters, clientContextParamsTrait),
                 generateContextParamBinding(operationShape, model),
-                generateStaticContextParamBinding(parameters, operationShape)
-
+                generateStaticContextParamBinding(parameters, operationShape),
+                SymbolUtils.createValueSymbolBuilder("Endpoint", SmithyGoDependency.SMITHY_ENDPOINTS).build(),
+                fmtErrorSymbol,
+                SymbolUtils.createValueSymbolBuilder("GetSigningName", AwsGoDependency.AWS_MIDDLEWARE).build(),
+                SymbolUtils.createValueSymbolBuilder("SetSigningName", AwsGoDependency.AWS_MIDDLEWARE).build()
             );
         };
     }
