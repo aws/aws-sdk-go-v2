@@ -1,7 +1,5 @@
 package software.amazon.smithy.aws.go.codegen;
 
-import static software.amazon.smithy.go.codegen.GoWriter.goTemplate;
-import static software.amazon.smithy.aws.go.codegen.EndpointGenerator.RESOLVER_OPTIONS;
 import static software.amazon.smithy.aws.go.codegen.EndpointGenerator.USE_FIPS_ENDPOINT_OPTION;
 import static software.amazon.smithy.aws.go.codegen.EndpointGenerator.DUAL_STACK_ENDPOINT_OPTION;
 
@@ -11,29 +9,24 @@ import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoCodegenPlugin;
 import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
-import software.amazon.smithy.go.codegen.GoStackStepMiddlewareGenerator;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.MiddlewareIdentifier;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
-import software.amazon.smithy.go.codegen.TriConsumer;
 import software.amazon.smithy.go.codegen.integration.ConfigField;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.MiddlewareRegistrar;
-import software.amazon.smithy.go.codegen.integration.ProtocolUtils;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.knowledge.OperationIndex;
 import software.amazon.smithy.model.knowledge.TopDownIndex;
 import software.amazon.smithy.model.shapes.OperationShape;
 import software.amazon.smithy.model.shapes.ServiceShape;
 import software.amazon.smithy.model.shapes.ShapeId;
-import software.amazon.smithy.model.shapes.StructureShape;
 import software.amazon.smithy.model.shapes.ToShapeId;
 import software.amazon.smithy.rulesengine.language.EndpointRuleSet;
 import software.amazon.smithy.rulesengine.language.syntax.parameters.Parameter;
 import software.amazon.smithy.rulesengine.language.syntax.parameters.ParameterType;
 import software.amazon.smithy.rulesengine.language.syntax.parameters.Parameters;
 import software.amazon.smithy.utils.StringUtils;
-import software.amazon.smithy.rulesengine.traits.ClientContextParamDefinition;
 import software.amazon.smithy.rulesengine.traits.ClientContextParamsTrait;
 import software.amazon.smithy.rulesengine.traits.ContextParamTrait;
 import software.amazon.smithy.rulesengine.traits.EndpointRuleSetTrait;
@@ -41,14 +34,10 @@ import software.amazon.smithy.rulesengine.traits.StaticContextParamsTrait;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.utils.ListUtils;
-import software.amazon.smithy.utils.MapUtils;
-import software.amazon.smithy.utils.SetUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
-import java.util.function.Consumer;
 
 public class AwsEndpointResolverMiddlewareGenerator implements GoIntegration {
 
@@ -67,8 +56,6 @@ public class AwsEndpointResolverMiddlewareGenerator implements GoIntegration {
     public List<RuntimeClientPlugin> getClientPlugins() {
         return runtimeClientPlugins;
     }
-
-
 
     @Override
     public void processFinalizedModel(GoSettings settings, Model model) {
@@ -126,10 +113,6 @@ public class AwsEndpointResolverMiddlewareGenerator implements GoIntegration {
         }
     }
 
-
-
-
-
     @Override
     public void writeAdditionalFiles(
             GoSettings settings,
@@ -156,8 +139,6 @@ public class AwsEndpointResolverMiddlewareGenerator implements GoIntegration {
                     var parameters = rulesetOpt.get().getParameters();
                     Symbol operationSymbol = symbolProvider.toSymbol(operationShape);
                     String operationName = operationSymbol.getName();
-
-
                     writer.write(
                         """
                         $W
@@ -170,18 +151,10 @@ public class AwsEndpointResolverMiddlewareGenerator implements GoIntegration {
                         generateMiddlewareMethods(parameters, clientContextParamsTrait, symbolProvider, operationShape, model),
                         generateMiddlewareAdder(parameters, operationName, clientContextParamsTrait)
                     );
-
-
                 }
-
             });
         }
     }
-
-
-
-
-
 
     private GoWriter.Writable generateMiddlewareAdder(Parameters parameters, String operationName, Optional<ClientContextParamsTrait> clientContextParamsTrait) {
         return (GoWriter writer) -> {
@@ -246,13 +219,8 @@ public class AwsEndpointResolverMiddlewareGenerator implements GoIntegration {
     private GoWriter.Writable generateMiddlewareMethods(Parameters parameters, Optional<ClientContextParamsTrait> clientContextParamsTrait, SymbolProvider symbolProvider, OperationShape operationShape, Model model) {
         Symbol operationSymbol = symbolProvider.toSymbol(operationShape);
         String operationName = operationSymbol.getName();
-
-
         String middlewareName = getMiddlewareObjectName(operationName);
         Symbol middlewareSymbol = SymbolUtils.createPointableSymbolBuilder(middlewareName).build();
-
-
-
         return (GoWriter writer) -> {
             writer.openBlock("func ($P) ID() string {", "}", middlewareSymbol, () -> {
                 writer.writeInline("return ");
