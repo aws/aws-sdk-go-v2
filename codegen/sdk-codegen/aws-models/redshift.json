@@ -359,6 +359,41 @@
                 }
             }
         },
+        "com.amazonaws.redshift#Association": {
+            "type": "structure",
+            "members": {
+                "CustomDomainCertificateArn": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the certificate associated with the custom domain.</p>"
+                    }
+                },
+                "CustomDomainCertificateExpiryDate": {
+                    "target": "com.amazonaws.redshift#TStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expiration date for the certificate.</p>"
+                    }
+                },
+                "CertificateAssociations": {
+                    "target": "com.amazonaws.redshift#CertificateAssociationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of all associated clusters and domain names tied to a specific certificate.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the custom domain name association.</p>"
+            }
+        },
+        "com.amazonaws.redshift#AssociationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.redshift#Association",
+                "traits": {
+                    "smithy.api#xmlName": "Association"
+                }
+            }
+        },
         "com.amazonaws.redshift#AttributeList": {
             "type": "list",
             "member": {
@@ -620,6 +655,9 @@
                 "ClusterSecurityGroup": {
                     "target": "com.amazonaws.redshift#ClusterSecurityGroup"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#AuthorizeDataShare": {
@@ -767,7 +805,7 @@
                 "SnapshotClusterIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the cluster the snapshot was created from. This parameter is\n            required if your IAM user or role has a policy containing a snapshot resource element that\n            specifies anything other than * for the cluster name.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the cluster the snapshot was created from. This parameter is\n            required if your IAM user has a policy containing a snapshot resource element that\n            specifies anything other than * for the cluster name.</p>"
                     }
                 },
                 "AccountWithRestoreAccess": {
@@ -788,6 +826,9 @@
                 "Snapshot": {
                     "target": "com.amazonaws.redshift#Snapshot"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#AvailabilityZone": {
@@ -866,6 +907,9 @@
                         "smithy.api#documentation": "<p>A list of any errors returned.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#BatchDeleteRequestSizeExceededFault": {
@@ -1043,6 +1087,35 @@
                         "smithy.api#documentation": "<p>The unique identifier for the cluster that you want to cancel a resize operation\n            for.</p>",
                         "smithy.api#required": {}
                     }
+                }
+            }
+        },
+        "com.amazonaws.redshift#CertificateAssociation": {
+            "type": "structure",
+            "members": {
+                "CustomDomainName": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom domain name for the certificate association.</p>"
+                    }
+                },
+                "ClusterIdentifier": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cluster identifier for the certificate association.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A cluster ID and custom domain name tied to a specific certificate. These are typically \n            returned in a list.</p>"
+            }
+        },
+        "com.amazonaws.redshift#CertificateAssociationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.redshift#CertificateAssociation",
+                "traits": {
+                    "smithy.api#xmlName": "CertificateAssociation"
                 }
             }
         },
@@ -1366,6 +1439,24 @@
                     "target": "com.amazonaws.redshift#ReservedNodeExchangeStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>The status of the reserved-node exchange request. Statuses include in-progress and requested.</p>"
+                    }
+                },
+                "CustomDomainName": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom domain name associated with the cluster.</p>"
+                    }
+                },
+                "CustomDomainCertificateArn": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The certificate Amazon Resource Name (ARN) for the custom domain name.</p>"
+                    }
+                },
+                "CustomDomainCertificateExpiryDate": {
+                    "target": "com.amazonaws.redshift#TStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expiration date for the certificate associated with the custom domain name.</p>"
                     }
                 }
             },
@@ -2353,7 +2444,7 @@
                 "SourceSnapshotClusterIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the cluster the source snapshot was created from. This parameter\n            is required if your IAM user or role has a policy containing a snapshot resource element that\n            specifies anything other than * for the cluster name.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must be the identifier for a valid cluster.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The identifier of the cluster the source snapshot was created from. This parameter\n            is required if your IAM user has a policy containing a snapshot resource element that\n            specifies anything other than * for the cluster name.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must be the identifier for a valid cluster.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "TargetSnapshotIdentifier": {
@@ -2380,6 +2471,9 @@
                 "Snapshot": {
                     "target": "com.amazonaws.redshift#Snapshot"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#CopyToRegionDisabledFault": {
@@ -2456,6 +2550,9 @@
                         "smithy.api#documentation": "<p>The content of the authentication profile in JSON format.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#CreateCluster": {
@@ -2570,14 +2667,14 @@
                 "MasterUsername": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user name associated with the admin user for the cluster that is being\n            created.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must be 1 - 128 alphanumeric characters or hyphens. The user name can't be\n                        <code>PUBLIC</code>.</p>\n            </li>\n            <li>\n               <p>Must contain only lowercase letters, numbers, underscore, plus sign, period (dot), at symbol (@), or hyphen.</p>\n            </li>\n            <li>\n               <p>The first character must be a letter.</p>\n            </li>\n            <li>\n               <p>Must not contain a colon (:) or a slash (/).</p>\n            </li>\n            <li>\n               <p>Cannot be a reserved word. A list of reserved words can be found in <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html\">Reserved\n                        Words</a> in the Amazon Redshift Database Developer Guide. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The user name associated with the admin user account for the cluster that is being\n            created.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must be 1 - 128 alphanumeric characters or hyphens. The user name can't be\n                        <code>PUBLIC</code>.</p>\n            </li>\n            <li>\n               <p>Must contain only lowercase letters, numbers, underscore, plus sign, period (dot), at symbol (@), or hyphen.</p>\n            </li>\n            <li>\n               <p>The first character must be a letter.</p>\n            </li>\n            <li>\n               <p>Must not contain a colon (:) or a slash (/).</p>\n            </li>\n            <li>\n               <p>Cannot be a reserved word. A list of reserved words can be found in <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html\">Reserved\n                        Words</a> in the Amazon Redshift Database Developer Guide. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "MasterUserPassword": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The password associated with the admin user for the cluster that is being\n            created.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must be between 8 and 64 characters in length.</p>\n            </li>\n            <li>\n               <p>Must contain at least one uppercase letter.</p>\n            </li>\n            <li>\n               <p>Must contain at least one lowercase letter.</p>\n            </li>\n            <li>\n               <p>Must contain one number.</p>\n            </li>\n            <li>\n               <p>Can be any printable ASCII character (ASCII code 33-126) except <code>'</code>\n                    (single quote), <code>\"</code> (double quote), <code>\\</code>, <code>/</code>, or <code>@</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The password associated with the admin user account for the cluster that is being\n            created.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must be between 8 and 64 characters in length.</p>\n            </li>\n            <li>\n               <p>Must contain at least one uppercase letter.</p>\n            </li>\n            <li>\n               <p>Must contain at least one lowercase letter.</p>\n            </li>\n            <li>\n               <p>Must contain one number.</p>\n            </li>\n            <li>\n               <p>Can be any printable ASCII character (ASCII code 33-126) except <code>'</code>\n                    (single quote), <code>\"</code> (double quote), <code>\\</code>, <code>/</code>, or <code>@</code>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2821,6 +2918,9 @@
                 "ClusterParameterGroup": {
                     "target": "com.amazonaws.redshift#ClusterParameterGroup"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#CreateClusterResult": {
@@ -2829,6 +2929,9 @@
                 "Cluster": {
                     "target": "com.amazonaws.redshift#Cluster"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#CreateClusterSecurityGroup": {
@@ -2891,6 +2994,9 @@
                 "ClusterSecurityGroup": {
                     "target": "com.amazonaws.redshift#ClusterSecurityGroup"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#CreateClusterSnapshot": {
@@ -2968,6 +3074,9 @@
                 "Snapshot": {
                     "target": "com.amazonaws.redshift#Snapshot"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#CreateClusterSubnetGroup": {
@@ -3049,6 +3158,90 @@
                 "ClusterSubnetGroup": {
                     "target": "com.amazonaws.redshift#ClusterSubnetGroup"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.redshift#CreateCustomDomainAssociation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshift#CreateCustomDomainAssociationMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.redshift#CreateCustomDomainAssociationResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshift#ClusterNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#CustomCnameAssociationFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#UnsupportedOperationFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Used to create a custom domain name for a cluster. Properties include the custom domain name, the \n            cluster the custom domain is associated with, and the certificate Amazon Resource Name (ARN).</p>"
+            }
+        },
+        "com.amazonaws.redshift#CreateCustomDomainAssociationMessage": {
+            "type": "structure",
+            "members": {
+                "CustomDomainName": {
+                    "target": "com.amazonaws.redshift#CustomDomainNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom domain name for a custom domain association.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CustomDomainCertificateArn": {
+                    "target": "com.amazonaws.redshift#CustomDomainCertificateArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The certificate Amazon Resource Name (ARN) for the custom domain name association.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClusterIdentifier": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cluster identifier that the custom domain is associated with.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.redshift#CreateCustomDomainAssociationResult": {
+            "type": "structure",
+            "members": {
+                "CustomDomainName": {
+                    "target": "com.amazonaws.redshift#CustomDomainNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom domain name for the association result.</p>"
+                    }
+                },
+                "CustomDomainCertificateArn": {
+                    "target": "com.amazonaws.redshift#CustomDomainCertificateArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the certificate associated with the custom domain name.</p>"
+                    }
+                },
+                "ClusterIdentifier": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the cluster that the custom domain is associated with.</p>"
+                    }
+                },
+                "CustomDomainCertExpiryTime": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expiration time for the certificate for the custom domain.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#CreateEndpointAccess": {
@@ -3243,6 +3436,9 @@
                 "EventSubscription": {
                     "target": "com.amazonaws.redshift#EventSubscription"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#CreateHsmClientCertificate": {
@@ -3298,6 +3494,9 @@
                 "HsmClientCertificate": {
                     "target": "com.amazonaws.redshift#HsmClientCertificate"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#CreateHsmConfiguration": {
@@ -3388,6 +3587,9 @@
                 "HsmConfiguration": {
                     "target": "com.amazonaws.redshift#HsmConfiguration"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#CreateScheduledAction": {
@@ -3544,6 +3746,9 @@
                 "SnapshotCopyGrant": {
                     "target": "com.amazonaws.redshift#SnapshotCopyGrant"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#CreateSnapshotSchedule": {
@@ -3752,6 +3957,77 @@
                         "smithy.api#documentation": "<p>A list of tag instances.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.redshift#CustomCnameAssociationFault": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.redshift#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "CustomCnameAssociationFault",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>An error occurred when an attempt was made to change the custom domain association.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.redshift#CustomDomainAssociationNotFoundFault": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.redshift#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "CustomDomainAssociationNotFoundFault",
+                    "httpResponseCode": 404
+                },
+                "smithy.api#documentation": "<p>An error occurred. The custom domain name couldn't be found.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.redshift#CustomDomainAssociationsMessage": {
+            "type": "structure",
+            "members": {
+                "Marker": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The marker for the custom domain association.</p>"
+                    }
+                },
+                "Associations": {
+                    "target": "com.amazonaws.redshift#AssociationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The associations for the custom domain.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.redshift#CustomDomainCertificateArnString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:[\\w+=/,.@-]+:acm:[\\w+=/,.@-]*:[0-9]+:[\\w+=,.@-]+(/[\\w+=,.@-]+)*$"
+            }
+        },
+        "com.amazonaws.redshift#CustomDomainNameString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 253
+                },
+                "smithy.api#pattern": "^((?!-)[A-Za-z0-9-]{1,63}(?<!-)\\.)+[A-Za-z]{2,6}$"
             }
         },
         "com.amazonaws.redshift#CustomerStorageMessage": {
@@ -4145,6 +4421,9 @@
                         "smithy.api#documentation": "<p>The name of the authentication profile that was deleted.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#DeleteCluster": {
@@ -4251,6 +4530,9 @@
                 "Cluster": {
                     "target": "com.amazonaws.redshift#Cluster"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#DeleteClusterSecurityGroup": {
@@ -4321,7 +4603,7 @@
                 "SnapshotClusterIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the cluster the snapshot was created from. This parameter\n            is required if your IAM user or role has a policy containing a snapshot resource element that\n            specifies anything other than * for the cluster name.</p>\n         <p>Constraints: Must be the name of valid cluster.</p>"
+                        "smithy.api#documentation": "<p>The unique identifier of the cluster the snapshot was created from. This parameter\n            is required if your IAM user has a policy containing a snapshot resource element that\n            specifies anything other than * for the cluster name.</p>\n         <p>Constraints: Must be the name of valid cluster.</p>"
                     }
                 }
             },
@@ -4344,6 +4626,9 @@
                 "Snapshot": {
                     "target": "com.amazonaws.redshift#Snapshot"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#DeleteClusterSubnetGroup": {
@@ -4382,6 +4667,41 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p></p>"
+            }
+        },
+        "com.amazonaws.redshift#DeleteCustomDomainAssociation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshift#DeleteCustomDomainAssociationMessage"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshift#ClusterNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#CustomCnameAssociationFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#UnsupportedOperationFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about deleting a custom domain association for a cluster.</p>"
+            }
+        },
+        "com.amazonaws.redshift#DeleteCustomDomainAssociationMessage": {
+            "type": "structure",
+            "members": {
+                "ClusterIdentifier": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the cluster to delete a custom domain association for.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
             }
         },
         "com.amazonaws.redshift#DeleteEndpointAccess": {
@@ -4823,6 +5143,9 @@
                         "smithy.api#documentation": "<p>The list of authentication profiles.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#DescribeClusterDbRevisions": {
@@ -5169,7 +5492,7 @@
                 "MaxRecords": {
                     "target": "com.amazonaws.redshift#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of response records to return in each call. If the number of\n            remaining response records exceeds the specified <code>MaxRecords</code> value, a value\n            is returned in a <code>marker</code> field of the response. You can retrieve the next\n            set of records by retrying the command with the returned marker value. </p>\n         <p>Default: <code>100</code>\n         </p>\n         <p>Constraints: minimum 20, maximum 500.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of response records to return in each call. If the number of\n            remaining response records exceeds the specified <code>MaxRecords</code> value, a value\n            is returned in a <code>marker</code> field of the response. You can retrieve the next\n            set of records by retrying the command with the returned marker value. </p>\n         <p>Default: <code>100</code>\n         </p>\n         <p>Constraints: minimum 20, maximum 100.</p>"
                     }
                 },
                 "Marker": {
@@ -5532,6 +5855,61 @@
                 "smithy.api#documentation": "<p></p>"
             }
         },
+        "com.amazonaws.redshift#DescribeCustomDomainAssociations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshift#DescribeCustomDomainAssociationsMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.redshift#CustomDomainAssociationsMessage"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshift#CustomDomainAssociationNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#UnsupportedOperationFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information for custom domain associations for a cluster.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "outputToken": "Marker",
+                    "items": "Associations",
+                    "pageSize": "MaxRecords"
+                }
+            }
+        },
+        "com.amazonaws.redshift#DescribeCustomDomainAssociationsMessage": {
+            "type": "structure",
+            "members": {
+                "CustomDomainName": {
+                    "target": "com.amazonaws.redshift#CustomDomainNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom domain name for the custom domain association.</p>"
+                    }
+                },
+                "CustomDomainCertificateArn": {
+                    "target": "com.amazonaws.redshift#CustomDomainCertificateArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The certificate Amazon Resource Name (ARN) for the custom domain association.</p>"
+                    }
+                },
+                "MaxRecords": {
+                    "target": "com.amazonaws.redshift#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum records setting for the associated custom domain.</p>"
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The marker for the custom domain association.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.redshift#DescribeDataShares": {
             "type": "operation",
             "input": {
@@ -5622,6 +6000,9 @@
                         "smithy.api#documentation": "<p>An optional parameter that specifies the starting point to return a set of response\n            records. When the results of a <a>DescribeDataSharesForConsumer</a> request\n            exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the\n            <code>Marker</code> field of the response. You can retrieve the next set of response\n            records by providing the returned marker value in the <code>Marker</code> parameter and\n            retrying the request. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#DescribeDataSharesForProducer": {
@@ -5691,6 +6072,9 @@
                         "smithy.api#documentation": "<p>An optional parameter that specifies the starting point to return a set of response\n            records. When the results of a <a>DescribeDataSharesForProducer</a> request\n            exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the\n            <code>Marker</code> field of the response. You can retrieve the next set of response\n            records by providing the returned marker value in the <code>Marker</code> parameter and\n            retrying the request. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#DescribeDataSharesMessage": {
@@ -5731,6 +6115,9 @@
                         "smithy.api#documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataShares</a> request exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#DescribeDefaultClusterParameters": {
@@ -5784,6 +6171,9 @@
                 "DefaultClusterParameters": {
                     "target": "com.amazonaws.redshift#DefaultClusterParameters"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#DescribeEndpointAccess": {
@@ -7168,6 +7558,9 @@
                 "Cluster": {
                     "target": "com.amazonaws.redshift#Cluster"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#DisassociateDataShareConsumer": {
@@ -7463,6 +7856,9 @@
                 "Cluster": {
                     "target": "com.amazonaws.redshift#Cluster"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#Endpoint": {
@@ -8122,8 +8518,7 @@
                 "ClusterIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the cluster that contains the database for which you are\n            requesting credentials. This parameter is case sensitive.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The unique identifier of the cluster that contains the database for which you are\n            requesting credentials. This parameter is case sensitive.</p>"
                     }
                 },
                 "DurationSeconds": {
@@ -8142,6 +8537,12 @@
                     "target": "com.amazonaws.redshift#DbGroupList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of the names of existing database groups that the user named in\n                <code>DbUser</code> will join for the current session, in addition to any group\n            memberships for an existing user. If not specified, a new user is added only to\n            PUBLIC.</p>\n         <p>Database group name constraints</p>\n         <ul>\n            <li>\n               <p>Must be 1 to 64 alphanumeric characters or hyphens</p>\n            </li>\n            <li>\n               <p>Must contain only lowercase letters, numbers, underscore, plus sign, period\n                    (dot), at symbol (@), or hyphen.</p>\n            </li>\n            <li>\n               <p>First character must be a letter.</p>\n            </li>\n            <li>\n               <p>Must not contain a colon ( : ) or slash ( / ). </p>\n            </li>\n            <li>\n               <p>Cannot be a reserved word. A list of reserved words can be found in <a href=\"http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html\">Reserved Words</a> in the Amazon\n                    Redshift Database Developer Guide.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "CustomDomainName": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom domain name for the cluster credentials.</p>"
                     }
                 }
             },
@@ -8181,14 +8582,19 @@
                 "ClusterIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the cluster that contains the database for which you are\n            requesting credentials. </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The unique identifier of the cluster that contains the database for which you are\n            requesting credentials. </p>"
                     }
                 },
                 "DurationSeconds": {
                     "target": "com.amazonaws.redshift#IntegerOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>The number of seconds until the returned temporary password expires.</p>\n         <p>Range: 900-3600. Default: 900.</p>"
+                    }
+                },
+                "CustomDomainName": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom domain name for the IAM message cluster credentials.</p>"
                     }
                 }
             }
@@ -9529,6 +9935,9 @@
                         "smithy.api#documentation": "<p>The updated content of the authentication profile in JSON format.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#ModifyCluster": {
@@ -9551,6 +9960,9 @@
                 },
                 {
                     "target": "com.amazonaws.redshift#ClusterSecurityGroupNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#CustomCnameAssociationFault"
                 },
                 {
                     "target": "com.amazonaws.redshift#DependentServiceRequestThrottlingFault"
@@ -9593,6 +10005,9 @@
                 },
                 {
                     "target": "com.amazonaws.redshift#UnauthorizedOperation"
+                },
+                {
+                    "target": "com.amazonaws.redshift#UnsupportedOperationFault"
                 },
                 {
                     "target": "com.amazonaws.redshift#UnsupportedOptionFault"
@@ -9650,6 +10065,9 @@
                 "Cluster": {
                     "target": "com.amazonaws.redshift#Cluster"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#ModifyClusterIamRoles": {
@@ -9711,6 +10129,9 @@
                 "Cluster": {
                     "target": "com.amazonaws.redshift#Cluster"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#ModifyClusterMaintenance": {
@@ -9781,6 +10202,9 @@
                 "Cluster": {
                     "target": "com.amazonaws.redshift#Cluster"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#ModifyClusterMessage": {
@@ -9826,7 +10250,7 @@
                 "MasterUserPassword": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new password for the cluster admin user. This change is asynchronously applied\n            as soon as possible. Between the time of the request and the completion of the request,\n            the <code>MasterUserPassword</code> element exists in the\n                <code>PendingModifiedValues</code> element of the operation response. </p>\n         <note>\n            <p>Operations never return the password, so this operation provides a way to\n                regain access to the admin user for a cluster if the password is\n                lost.</p>\n         </note>\n         <p>Default: Uses existing setting.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must be between 8 and 64 characters in length.</p>\n            </li>\n            <li>\n               <p>Must contain at least one uppercase letter.</p>\n            </li>\n            <li>\n               <p>Must contain at least one lowercase letter.</p>\n            </li>\n            <li>\n               <p>Must contain one number.</p>\n            </li>\n            <li>\n               <p>Can be any printable ASCII character (ASCII code 33-126) except <code>'</code>\n                    (single quote), <code>\"</code> (double quote), <code>\\</code>, <code>/</code>, or <code>@</code>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The new password for the cluster admin user. This change is asynchronously applied\n            as soon as possible. Between the time of the request and the completion of the request,\n            the <code>MasterUserPassword</code> element exists in the\n                <code>PendingModifiedValues</code> element of the operation response. </p>\n         <note>\n            <p>Operations never return the password, so this operation provides a way to\n                regain access to the admin user account for a cluster if the password is\n                lost.</p>\n         </note>\n         <p>Default: Uses existing setting.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must be between 8 and 64 characters in length.</p>\n            </li>\n            <li>\n               <p>Must contain at least one uppercase letter.</p>\n            </li>\n            <li>\n               <p>Must contain at least one lowercase letter.</p>\n            </li>\n            <li>\n               <p>Must contain one number.</p>\n            </li>\n            <li>\n               <p>Can be any printable ASCII character (ASCII code 33-126) except <code>'</code>\n                    (single quote), <code>\"</code> (double quote), <code>\\</code>, <code>/</code>, or <code>@</code>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ClusterParameterGroupName": {
@@ -9990,6 +10414,9 @@
                 "Cluster": {
                     "target": "com.amazonaws.redshift#Cluster"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#ModifyClusterSnapshot": {
@@ -10046,6 +10473,9 @@
                 "Snapshot": {
                     "target": "com.amazonaws.redshift#Snapshot"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#ModifyClusterSnapshotSchedule": {
@@ -10161,6 +10591,88 @@
                 "ClusterSubnetGroup": {
                     "target": "com.amazonaws.redshift#ClusterSubnetGroup"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.redshift#ModifyCustomDomainAssociation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshift#ModifyCustomDomainAssociationMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.redshift#ModifyCustomDomainAssociationResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshift#ClusterNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#CustomCnameAssociationFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#UnsupportedOperationFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information for changing a custom domain association.</p>"
+            }
+        },
+        "com.amazonaws.redshift#ModifyCustomDomainAssociationMessage": {
+            "type": "structure",
+            "members": {
+                "CustomDomainName": {
+                    "target": "com.amazonaws.redshift#CustomDomainNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom domain name for a changed custom domain association.</p>"
+                    }
+                },
+                "CustomDomainCertificateArn": {
+                    "target": "com.amazonaws.redshift#CustomDomainCertificateArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The certificate Amazon Resource Name (ARN) for the changed custom domain association.</p>"
+                    }
+                },
+                "ClusterIdentifier": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the cluster to change a custom domain association for.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.redshift#ModifyCustomDomainAssociationResult": {
+            "type": "structure",
+            "members": {
+                "CustomDomainName": {
+                    "target": "com.amazonaws.redshift#CustomDomainNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom domain name associated with the result for the changed custom domain association.</p>"
+                    }
+                },
+                "CustomDomainCertificateArn": {
+                    "target": "com.amazonaws.redshift#CustomDomainCertificateArnString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The certificate Amazon Resource Name (ARN) associated with the result for the changed custom domain association.</p>"
+                    }
+                },
+                "ClusterIdentifier": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the cluster associated with the result for the changed custom domain association.</p>"
+                    }
+                },
+                "CustomDomainCertExpiryTime": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The certificate expiration time associated with the result for the changed custom domain association.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#ModifyEndpointAccess": {
@@ -10311,6 +10823,9 @@
                 "EventSubscription": {
                     "target": "com.amazonaws.redshift#EventSubscription"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#ModifyScheduledAction": {
@@ -10461,6 +10976,9 @@
                 "Cluster": {
                     "target": "com.amazonaws.redshift#Cluster"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#ModifySnapshotSchedule": {
@@ -11197,6 +11715,9 @@
                 "Cluster": {
                     "target": "com.amazonaws.redshift#Cluster"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#PendingActionsList": {
@@ -11332,6 +11853,9 @@
                 "ReservedNode": {
                     "target": "com.amazonaws.redshift#ReservedNode"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#RebootCluster": {
@@ -11375,6 +11899,9 @@
                 "Cluster": {
                     "target": "com.amazonaws.redshift#Cluster"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#RecurringCharge": {
@@ -11463,6 +11990,9 @@
                     "target": "com.amazonaws.redshift#CreateClusterSubnetGroup"
                 },
                 {
+                    "target": "com.amazonaws.redshift#CreateCustomDomainAssociation"
+                },
+                {
                     "target": "com.amazonaws.redshift#CreateEndpointAccess"
                 },
                 {
@@ -11509,6 +12039,9 @@
                 },
                 {
                     "target": "com.amazonaws.redshift#DeleteClusterSubnetGroup"
+                },
+                {
+                    "target": "com.amazonaws.redshift#DeleteCustomDomainAssociation"
                 },
                 {
                     "target": "com.amazonaws.redshift#DeleteEndpointAccess"
@@ -11572,6 +12105,9 @@
                 },
                 {
                     "target": "com.amazonaws.redshift#DescribeClusterVersions"
+                },
+                {
+                    "target": "com.amazonaws.redshift#DescribeCustomDomainAssociations"
                 },
                 {
                     "target": "com.amazonaws.redshift#DescribeDataShares"
@@ -11707,6 +12243,9 @@
                 },
                 {
                     "target": "com.amazonaws.redshift#ModifyClusterSubnetGroup"
+                },
+                {
+                    "target": "com.amazonaws.redshift#ModifyCustomDomainAssociation"
                 },
                 {
                     "target": "com.amazonaws.redshift#ModifyEndpointAccess"
@@ -12138,44 +12677,6 @@
                                                     "type": "tree",
                                                     "rules": [
                                                         {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "stringEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "Region"
-                                                                        },
-                                                                        "us-gov-east-1"
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "endpoint": {
-                                                                "url": "https://redshift.us-gov-east-1.amazonaws.com",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        },
-                                                        {
-                                                            "conditions": [
-                                                                {
-                                                                    "fn": "stringEquals",
-                                                                    "argv": [
-                                                                        {
-                                                                            "ref": "Region"
-                                                                        },
-                                                                        "us-gov-west-1"
-                                                                    ]
-                                                                }
-                                                            ],
-                                                            "endpoint": {
-                                                                "url": "https://redshift.us-gov-west-1.amazonaws.com",
-                                                                "properties": {},
-                                                                "headers": {}
-                                                            },
-                                                            "type": "endpoint"
-                                                        },
-                                                        {
                                                             "conditions": [],
                                                             "endpoint": {
                                                                 "url": "https://redshift.{Region}.{PartitionResult#dnsSuffix}",
@@ -12209,9 +12710,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "af-south-1",
                                 "UseFIPS": false,
-                                "Region": "af-south-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -12222,9 +12723,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-east-1",
                                 "UseFIPS": false,
-                                "Region": "ap-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -12235,9 +12736,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-northeast-1",
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -12248,9 +12749,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-northeast-2",
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -12261,9 +12762,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-northeast-3",
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-3"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -12274,9 +12775,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-south-1",
                                 "UseFIPS": false,
-                                "Region": "ap-south-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -12287,9 +12788,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-southeast-1",
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -12300,9 +12801,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-southeast-2",
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -12313,9 +12814,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-southeast-3",
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-3"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -12326,9 +12827,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ca-central-1",
                                 "UseFIPS": false,
-                                "Region": "ca-central-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -12339,9 +12840,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ca-central-1",
                                 "UseFIPS": true,
-                                "Region": "ca-central-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -12352,9 +12853,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "eu-central-1",
                                 "UseFIPS": false,
-                                "Region": "eu-central-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -12365,9 +12866,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "eu-north-1",
                                 "UseFIPS": false,
-                                "Region": "eu-north-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -12378,9 +12879,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "eu-south-1",
                                 "UseFIPS": false,
-                                "Region": "eu-south-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -12391,9 +12892,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "eu-west-1",
                                 "UseFIPS": false,
-                                "Region": "eu-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -12404,9 +12905,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "eu-west-2",
                                 "UseFIPS": false,
-                                "Region": "eu-west-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -12417,9 +12918,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "eu-west-3",
                                 "UseFIPS": false,
-                                "Region": "eu-west-3"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -12430,9 +12931,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "me-south-1",
                                 "UseFIPS": false,
-                                "Region": "me-south-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -12443,9 +12944,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "sa-east-1",
                                 "UseFIPS": false,
-                                "Region": "sa-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -12456,9 +12957,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -12469,9 +12970,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -12482,9 +12983,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-east-2",
                                 "UseFIPS": false,
-                                "Region": "us-east-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -12495,9 +12996,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-east-2",
                                 "UseFIPS": true,
-                                "Region": "us-east-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -12508,9 +13009,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-west-1",
                                 "UseFIPS": false,
-                                "Region": "us-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -12521,9 +13022,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-west-1",
                                 "UseFIPS": true,
-                                "Region": "us-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -12534,9 +13035,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-west-2",
                                 "UseFIPS": false,
-                                "Region": "us-west-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -12547,9 +13048,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-west-2",
                                 "UseFIPS": true,
-                                "Region": "us-west-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -12560,9 +13061,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -12573,9 +13074,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -12586,9 +13087,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "cn-north-1",
                                 "UseFIPS": false,
-                                "Region": "cn-north-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -12599,9 +13100,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "cn-northwest-1",
                                 "UseFIPS": false,
-                                "Region": "cn-northwest-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -12612,9 +13113,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "cn-north-1",
                                 "UseFIPS": true,
-                                "Region": "cn-north-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -12625,9 +13126,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "cn-north-1",
                                 "UseFIPS": true,
-                                "Region": "cn-north-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -12638,9 +13139,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "cn-north-1",
                                 "UseFIPS": false,
-                                "Region": "cn-north-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -12651,9 +13152,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -12664,9 +13165,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -12677,9 +13178,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-gov-west-1",
                                 "UseFIPS": false,
-                                "Region": "us-gov-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -12690,9 +13191,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-gov-west-1",
                                 "UseFIPS": true,
-                                "Region": "us-gov-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -12703,9 +13204,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -12716,9 +13217,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -12729,9 +13230,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -12742,9 +13243,20 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-iso-west-1",
                                 "UseFIPS": false,
-                                "Region": "us-iso-west-1"
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -12755,9 +13267,20 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -12768,9 +13291,20 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -12781,9 +13315,20 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -12794,9 +13339,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -12808,8 +13353,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -12819,9 +13364,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
                                 "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -12831,10 +13376,16 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -13528,6 +14079,9 @@
                 "Cluster": {
                     "target": "com.amazonaws.redshift#Cluster"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#ResizeInfo": {
@@ -13833,7 +14387,7 @@
                 "SnapshotClusterIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the cluster the source snapshot was created from. This parameter is\n            required if your IAM user or role has a policy containing a snapshot resource element that\n            specifies anything other than * for the cluster name.</p>"
+                        "smithy.api#documentation": "<p>The name of the cluster the source snapshot was created from. This parameter is\n            required if your IAM user has a policy containing a snapshot resource element that\n            specifies anything other than * for the cluster name.</p>"
                     }
                 },
                 "Port": {
@@ -14021,6 +14575,9 @@
                 "Cluster": {
                     "target": "com.amazonaws.redshift#Cluster"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#RestoreStatus": {
@@ -14180,6 +14737,9 @@
                 "TableRestoreStatus": {
                     "target": "com.amazonaws.redshift#TableRestoreStatus"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#ResumeCluster": {
@@ -14226,6 +14786,9 @@
                 "Cluster": {
                     "target": "com.amazonaws.redshift#Cluster"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#RevisionTarget": {
@@ -14325,6 +14888,9 @@
                 "ClusterSecurityGroup": {
                     "target": "com.amazonaws.redshift#ClusterSecurityGroup"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#RevokeEndpointAccess": {
@@ -14436,7 +15002,7 @@
                 "SnapshotClusterIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the cluster the snapshot was created from. This parameter is\n            required if your IAM user or role has a policy containing a snapshot resource element that\n            specifies anything other than * for the cluster name.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the cluster the snapshot was created from. This parameter is\n            required if your IAM user has a policy containing a snapshot resource element that\n            specifies anything other than * for the cluster name.</p>"
                     }
                 },
                 "AccountWithRestoreAccess": {
@@ -14457,6 +15023,9 @@
                 "Snapshot": {
                     "target": "com.amazonaws.redshift#Snapshot"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#RotateEncryptionKey": {
@@ -14503,6 +15072,9 @@
                 "Cluster": {
                     "target": "com.amazonaws.redshift#Cluster"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.redshift#SNSInvalidTopicFault": {

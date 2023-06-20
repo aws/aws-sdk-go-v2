@@ -13333,6 +13333,132 @@
                     "traits": {
                         "smithy.api#enumValue": "AWS::SageMaker::Image"
                     }
+                },
+                "ECSTaskSet": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::ECS::TaskSet"
+                    }
+                },
+                "CassandraKeyspace": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::Cassandra::Keyspace"
+                    }
+                },
+                "SignerSigningProfile": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::Signer::SigningProfile"
+                    }
+                },
+                "AmplifyApp": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::Amplify::App"
+                    }
+                },
+                "AppMeshVirtualNode": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::AppMesh::VirtualNode"
+                    }
+                },
+                "AppMeshVirtualService": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::AppMesh::VirtualService"
+                    }
+                },
+                "AppRunnerVpcConnector": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::AppRunner::VpcConnector"
+                    }
+                },
+                "AppStreamApplication": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::AppStream::Application"
+                    }
+                },
+                "CodeArtifactRepository": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::CodeArtifact::Repository"
+                    }
+                },
+                "EC2PrefixList": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::EC2::PrefixList"
+                    }
+                },
+                "EC2SpotFleet": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::EC2::SpotFleet"
+                    }
+                },
+                "EvidentlyProject": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::Evidently::Project"
+                    }
+                },
+                "ForecastDataset": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::Forecast::Dataset"
+                    }
+                },
+                "IAMSAMLProvider": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::IAM::SAMLProvider"
+                    }
+                },
+                "IAMServerCertificate": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::IAM::ServerCertificate"
+                    }
+                },
+                "PinpointCampaign": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::Pinpoint::Campaign"
+                    }
+                },
+                "PinpointInAppTemplate": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::Pinpoint::InAppTemplate"
+                    }
+                },
+                "SageMakerDomain": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::SageMaker::Domain"
+                    }
+                },
+                "TransferAgreement": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::Transfer::Agreement"
+                    }
+                },
+                "TransferConnector": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::Transfer::Connector"
+                    }
+                },
+                "KinesisFirehoseDeliveryStream": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::KinesisFirehose::DeliveryStream"
+                    }
                 }
             }
         },

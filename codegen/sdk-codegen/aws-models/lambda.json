@@ -6451,6 +6451,9 @@
                     "target": "com.amazonaws.lambda#KMSNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.lambda#RecursiveInvocationException"
+                },
+                {
                     "target": "com.amazonaws.lambda#RequestTooLargeException"
                 },
                 {
@@ -6665,6 +6668,9 @@
                 },
                 {
                     "target": "com.amazonaws.lambda#KMSNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#RecursiveInvocationException"
                 },
                 {
                     "target": "com.amazonaws.lambda#RequestTooLargeException"
@@ -9483,6 +9489,28 @@
                     "min": 1,
                     "max": 1
                 }
+            }
+        },
+        "com.amazonaws.lambda#RecursiveInvocationException": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.lambda#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exception type.</p>"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.lambda#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exception message.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Lambda has detected your function being invoked in a recursive loop with other Amazon Web Services resources and stopped your function's invocation.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
             }
         },
         "com.amazonaws.lambda#RemoveLayerVersionPermission": {

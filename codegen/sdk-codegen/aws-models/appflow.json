@@ -2646,7 +2646,7 @@
                 "Type": {
                     "target": "com.amazonaws.appflow#DataTransferApiType",
                     "traits": {
-                        "smithy.api#documentation": "<p>You can specify one of the following types:</p>\n         <dl>\n            <dt>AUTOMATIC</dt>\n            <dd>\n               <p>The default. Optimizes a flow for datasets that fluctuate in size from small to\n            large. For each flow run, Amazon AppFlow chooses to use the SYNC or ASYNC API type based on\n            the amount of data that the run transfers.</p>\n            </dd>\n            <dt>SYNC</dt>\n            <dd>\n               <p>A synchronous API. This type of API optimizes a flow for small to medium-sized datasets.</p>\n            </dd>\n            <dt>ASYNC</dt>\n            <dd>\n               <p>An asynchronous API. This type of API optimizes a flow for large datasets.</p>\n            </dd>\n         </dl>"
+                        "smithy.api#documentation": "<p>You can specify one of the following types:</p>\n         <dl>\n            <dt>AUTOMATIC</dt>\n            <dd>\n               <p>The default. Optimizes a flow for datasets that fluctuate in size from small to\n            large. For each flow run, Amazon AppFlow chooses to use the SYNC or ASYNC API type\n            based on the amount of data that the run transfers.</p>\n            </dd>\n            <dt>SYNC</dt>\n            <dd>\n               <p>A synchronous API. This type of API optimizes a flow for small to medium-sized\n            datasets.</p>\n            </dd>\n            <dt>ASYNC</dt>\n            <dd>\n               <p>An asynchronous API. This type of API optimizes a flow for large datasets.</p>\n            </dd>\n         </dl>"
                     }
                 }
             },
@@ -7050,6 +7050,82 @@
                 "smithy.api#documentation": "<p>Describes the status of an attempt from Amazon AppFlow to register a resource.</p>\n         <p>When you run a flow that you've configured to use a metadata catalog, Amazon AppFlow\n      registers a metadata table and data partitions with that catalog. This operation provides the\n      status of that registration attempt. The operation also indicates how many related resources\n        Amazon AppFlow created or updated.</p>"
             }
         },
+        "com.amazonaws.appflow#ResetConnectorMetadataCache": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appflow#ResetConnectorMetadataCacheRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appflow#ResetConnectorMetadataCacheResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appflow#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.appflow#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.appflow#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.appflow#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Resets metadata about your connector entities that Amazon AppFlow stored in its\n      cache. Use this action when you want Amazon AppFlow to return the latest information\n      about the data that you have in a source application.</p>\n         <p>Amazon AppFlow returns metadata about your entities when you use the\n      ListConnectorEntities or DescribeConnectorEntities actions. Following these actions, Amazon AppFlow caches the metadata to reduce the number of API requests that it must send to\n      the source application. Amazon AppFlow automatically resets the cache once every hour,\n      but you can use this action when you want to get the latest metadata right away.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/reset-connector-metadata-cache",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.appflow#ResetConnectorMetadataCacheRequest": {
+            "type": "structure",
+            "members": {
+                "connectorProfileName": {
+                    "target": "com.amazonaws.appflow#ConnectorProfileName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the connector profile that you want to reset cached metadata for.</p>\n         <p>You can omit this parameter if you're resetting the cache for any of the following\n      connectors: Amazon Connect, Amazon EventBridge, Amazon Lookout for Metrics, Amazon S3, or Upsolver. If you're resetting the cache for any other connector, you must include this\n      parameter in your request.</p>"
+                    }
+                },
+                "connectorType": {
+                    "target": "com.amazonaws.appflow#ConnectorType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of connector to reset cached metadata for.</p>\n         <p>You must include this parameter in your request if you're resetting the cache for any of\n      the following connectors: Amazon Connect, Amazon EventBridge, Amazon Lookout for Metrics,\n        Amazon S3, or Upsolver. If you're resetting the cache for any other connector, you\n      can omit this parameter from your request. </p>"
+                    }
+                },
+                "connectorEntityName": {
+                    "target": "com.amazonaws.appflow#EntityName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this parameter if you want to reset cached metadata about the details for an\n      individual entity.</p>\n         <p>If you don't include this parameter in your request, Amazon AppFlow only resets\n      cached metadata about entity names, not entity details.</p>"
+                    }
+                },
+                "entitiesPath": {
+                    "target": "com.amazonaws.appflow#EntitiesPath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this parameter only if you’re resetting the cached metadata about a nested entity.\n      Only some connectors support nested entities. A nested entity is one that has another entity\n      as a parent. To use this parameter, specify the name of the parent entity.</p>\n         <p>To look up the parent-child relationship of entities, you can send a ListConnectorEntities\n      request that omits the entitiesPath parameter. Amazon AppFlow will return a list of\n      top-level entities. For each one, it indicates whether the entity has nested entities. Then,\n      in a subsequent ListConnectorEntities request, you can specify a parent entity name for the\n      entitiesPath parameter. Amazon AppFlow will return a list of the child entities for that\n      parent.</p>"
+                    }
+                },
+                "apiVersion": {
+                    "target": "com.amazonaws.appflow#ApiVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The API version that you specified in the connector profile that you’re resetting cached\n      metadata for. You must use this parameter only if the connector supports multiple API versions\n      or if the connector type is CustomConnector.</p>\n         <p>To look up how many versions a connector supports, use the DescribeConnectors action. In\n      the response, find the value that Amazon AppFlow returns for the connectorVersion\n      parameter.</p>\n         <p>To look up the connector type, use the DescribeConnectorProfiles action. In the response,\n      find the value that Amazon AppFlow returns for the connectorType parameter.</p>\n         <p>To look up the API version that you specified in a connector profile, use the\n      DescribeConnectorProfiles action.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.appflow#ResetConnectorMetadataCacheResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.appflow#ResourceNotFoundException": {
             "type": "structure",
             "members": {
@@ -7953,6 +8029,9 @@
                 },
                 {
                     "target": "com.amazonaws.appflow#RegisterConnector"
+                },
+                {
+                    "target": "com.amazonaws.appflow#ResetConnectorMetadataCache"
                 },
                 {
                     "target": "com.amazonaws.appflow#StartFlow"
