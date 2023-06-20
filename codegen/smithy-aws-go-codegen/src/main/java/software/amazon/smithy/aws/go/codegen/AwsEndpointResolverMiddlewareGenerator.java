@@ -285,7 +285,8 @@ public class AwsEndpointResolverMiddlewareGenerator implements GoIntegration {
                 if (clientContextParamsTrait.isPresent()) {
                     var clientContextParams = clientContextParamsTrait.get();
                     parameters.toList().stream().forEach(param -> {
-                        if (clientContextParams.getParameters().containsKey(param.getName().asString())) {
+                        if (clientContextParams.getParameters().containsKey(param.getName().asString())
+                        && !param.getBuiltIn().isPresent()) {
                             w.write("$L $P", getExportedParameterName(param), parameterAsSymbol(param));
                         }
                     });
