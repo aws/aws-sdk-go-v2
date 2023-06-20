@@ -810,6 +810,61 @@ func (e *CopyToRegionDisabledFault) ErrorCode() string {
 }
 func (e *CopyToRegionDisabledFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// An error occurred when an attempt was made to change the custom domain
+// association.
+type CustomCnameAssociationFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *CustomCnameAssociationFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *CustomCnameAssociationFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *CustomCnameAssociationFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "CustomCnameAssociationFault"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *CustomCnameAssociationFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// An error occurred. The custom domain name couldn't be found.
+type CustomDomainAssociationNotFoundFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *CustomDomainAssociationNotFoundFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *CustomDomainAssociationNotFoundFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *CustomDomainAssociationNotFoundFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "CustomDomainAssociationNotFoundFault"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *CustomDomainAssociationNotFoundFault) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 // The request cannot be completed because a dependent service is throttling
 // requests made by Amazon Redshift on your behalf. Wait and retry the request.
 type DependentServiceRequestThrottlingFault struct {

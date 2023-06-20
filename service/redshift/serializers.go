@@ -1104,6 +1104,70 @@ func (m *awsAwsquery_serializeOpCreateClusterSubnetGroup) HandleSerialize(ctx co
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsquery_serializeOpCreateCustomDomainAssociation struct {
+}
+
+func (*awsAwsquery_serializeOpCreateCustomDomainAssociation) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpCreateCustomDomainAssociation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateCustomDomainAssociationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("CreateCustomDomainAssociation")
+	body.Key("Version").String("2012-12-01")
+
+	if err := awsAwsquery_serializeOpDocumentCreateCustomDomainAssociationInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsquery_serializeOpCreateEndpointAccess struct {
 }
 
@@ -2108,6 +2172,70 @@ func (m *awsAwsquery_serializeOpDeleteClusterSubnetGroup) HandleSerialize(ctx co
 	body.Key("Version").String("2012-12-01")
 
 	if err := awsAwsquery_serializeOpDocumentDeleteClusterSubnetGroupInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsquery_serializeOpDeleteCustomDomainAssociation struct {
+}
+
+func (*awsAwsquery_serializeOpDeleteCustomDomainAssociation) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpDeleteCustomDomainAssociation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteCustomDomainAssociationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("DeleteCustomDomainAssociation")
+	body.Key("Version").String("2012-12-01")
+
+	if err := awsAwsquery_serializeOpDocumentDeleteCustomDomainAssociationInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3452,6 +3580,70 @@ func (m *awsAwsquery_serializeOpDescribeClusterVersions) HandleSerialize(ctx con
 	body.Key("Version").String("2012-12-01")
 
 	if err := awsAwsquery_serializeOpDocumentDescribeClusterVersionsInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsquery_serializeOpDescribeCustomDomainAssociations struct {
+}
+
+func (*awsAwsquery_serializeOpDescribeCustomDomainAssociations) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpDescribeCustomDomainAssociations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeCustomDomainAssociationsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("DescribeCustomDomainAssociations")
+	body.Key("Version").String("2012-12-01")
+
+	if err := awsAwsquery_serializeOpDocumentDescribeCustomDomainAssociationsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -6348,6 +6540,70 @@ func (m *awsAwsquery_serializeOpModifyClusterSubnetGroup) HandleSerialize(ctx co
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsquery_serializeOpModifyCustomDomainAssociation struct {
+}
+
+func (*awsAwsquery_serializeOpModifyCustomDomainAssociation) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpModifyCustomDomainAssociation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ModifyCustomDomainAssociationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("ModifyCustomDomainAssociation")
+	body.Key("Version").String("2012-12-01")
+
+	if err := awsAwsquery_serializeOpDocumentModifyCustomDomainAssociationInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsquery_serializeOpModifyEndpointAccess struct {
 }
 
@@ -8647,6 +8903,28 @@ func awsAwsquery_serializeOpDocumentCreateClusterSubnetGroupInput(v *CreateClust
 	return nil
 }
 
+func awsAwsquery_serializeOpDocumentCreateCustomDomainAssociationInput(v *CreateCustomDomainAssociationInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.ClusterIdentifier != nil {
+		objectKey := object.Key("ClusterIdentifier")
+		objectKey.String(*v.ClusterIdentifier)
+	}
+
+	if v.CustomDomainCertificateArn != nil {
+		objectKey := object.Key("CustomDomainCertificateArn")
+		objectKey.String(*v.CustomDomainCertificateArn)
+	}
+
+	if v.CustomDomainName != nil {
+		objectKey := object.Key("CustomDomainName")
+		objectKey.String(*v.CustomDomainName)
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeOpDocumentCreateEndpointAccessInput(v *CreateEndpointAccessInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -9078,6 +9356,18 @@ func awsAwsquery_serializeOpDocumentDeleteClusterSubnetGroupInput(v *DeleteClust
 	if v.ClusterSubnetGroupName != nil {
 		objectKey := object.Key("ClusterSubnetGroupName")
 		objectKey.String(*v.ClusterSubnetGroupName)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentDeleteCustomDomainAssociationInput(v *DeleteCustomDomainAssociationInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.ClusterIdentifier != nil {
+		objectKey := object.Key("ClusterIdentifier")
+		objectKey.String(*v.ClusterIdentifier)
 	}
 
 	return nil
@@ -9556,6 +9846,33 @@ func awsAwsquery_serializeOpDocumentDescribeClusterVersionsInput(v *DescribeClus
 	if v.ClusterVersion != nil {
 		objectKey := object.Key("ClusterVersion")
 		objectKey.String(*v.ClusterVersion)
+	}
+
+	if v.Marker != nil {
+		objectKey := object.Key("Marker")
+		objectKey.String(*v.Marker)
+	}
+
+	if v.MaxRecords != nil {
+		objectKey := object.Key("MaxRecords")
+		objectKey.Integer(*v.MaxRecords)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentDescribeCustomDomainAssociationsInput(v *DescribeCustomDomainAssociationsInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.CustomDomainCertificateArn != nil {
+		objectKey := object.Key("CustomDomainCertificateArn")
+		objectKey.String(*v.CustomDomainCertificateArn)
+	}
+
+	if v.CustomDomainName != nil {
+		objectKey := object.Key("CustomDomainName")
+		objectKey.String(*v.CustomDomainName)
 	}
 
 	if v.Marker != nil {
@@ -10469,6 +10786,11 @@ func awsAwsquery_serializeOpDocumentGetClusterCredentialsInput(v *GetClusterCred
 		objectKey.String(*v.ClusterIdentifier)
 	}
 
+	if v.CustomDomainName != nil {
+		objectKey := object.Key("CustomDomainName")
+		objectKey.String(*v.CustomDomainName)
+	}
+
 	if v.DbGroups != nil {
 		objectKey := object.Key("DbGroups")
 		if err := awsAwsquery_serializeDocumentDbGroupList(v.DbGroups, objectKey); err != nil {
@@ -10501,6 +10823,11 @@ func awsAwsquery_serializeOpDocumentGetClusterCredentialsWithIAMInput(v *GetClus
 	if v.ClusterIdentifier != nil {
 		objectKey := object.Key("ClusterIdentifier")
 		objectKey.String(*v.ClusterIdentifier)
+	}
+
+	if v.CustomDomainName != nil {
+		objectKey := object.Key("CustomDomainName")
+		objectKey.String(*v.CustomDomainName)
 	}
 
 	if v.DbName != nil {
@@ -10907,6 +11234,28 @@ func awsAwsquery_serializeOpDocumentModifyClusterSubnetGroupInput(v *ModifyClust
 		if err := awsAwsquery_serializeDocumentSubnetIdentifierList(v.SubnetIds, objectKey); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentModifyCustomDomainAssociationInput(v *ModifyCustomDomainAssociationInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.ClusterIdentifier != nil {
+		objectKey := object.Key("ClusterIdentifier")
+		objectKey.String(*v.ClusterIdentifier)
+	}
+
+	if v.CustomDomainCertificateArn != nil {
+		objectKey := object.Key("CustomDomainCertificateArn")
+		objectKey.String(*v.CustomDomainCertificateArn)
+	}
+
+	if v.CustomDomainName != nil {
+		objectKey := object.Key("CustomDomainName")
+		objectKey.String(*v.CustomDomainName)
 	}
 
 	return nil

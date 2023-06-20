@@ -955,6 +955,27 @@ const (
 	ResourceTypeRoute53ResolverFirewallRuleGroupAssociation ResourceType = "AWS::Route53Resolver::FirewallRuleGroupAssociation"
 	ResourceTypeSageMakerAppImageConfig                     ResourceType = "AWS::SageMaker::AppImageConfig"
 	ResourceTypeSageMakerImage                              ResourceType = "AWS::SageMaker::Image"
+	ResourceTypeECSTaskSet                                  ResourceType = "AWS::ECS::TaskSet"
+	ResourceTypeCassandraKeyspace                           ResourceType = "AWS::Cassandra::Keyspace"
+	ResourceTypeSignerSigningProfile                        ResourceType = "AWS::Signer::SigningProfile"
+	ResourceTypeAmplifyApp                                  ResourceType = "AWS::Amplify::App"
+	ResourceTypeAppMeshVirtualNode                          ResourceType = "AWS::AppMesh::VirtualNode"
+	ResourceTypeAppMeshVirtualService                       ResourceType = "AWS::AppMesh::VirtualService"
+	ResourceTypeAppRunnerVpcConnector                       ResourceType = "AWS::AppRunner::VpcConnector"
+	ResourceTypeAppStreamApplication                        ResourceType = "AWS::AppStream::Application"
+	ResourceTypeCodeArtifactRepository                      ResourceType = "AWS::CodeArtifact::Repository"
+	ResourceTypeEC2PrefixList                               ResourceType = "AWS::EC2::PrefixList"
+	ResourceTypeEC2SpotFleet                                ResourceType = "AWS::EC2::SpotFleet"
+	ResourceTypeEvidentlyProject                            ResourceType = "AWS::Evidently::Project"
+	ResourceTypeForecastDataset                             ResourceType = "AWS::Forecast::Dataset"
+	ResourceTypeIAMSAMLProvider                             ResourceType = "AWS::IAM::SAMLProvider"
+	ResourceTypeIAMServerCertificate                        ResourceType = "AWS::IAM::ServerCertificate"
+	ResourceTypePinpointCampaign                            ResourceType = "AWS::Pinpoint::Campaign"
+	ResourceTypePinpointInAppTemplate                       ResourceType = "AWS::Pinpoint::InAppTemplate"
+	ResourceTypeSageMakerDomain                             ResourceType = "AWS::SageMaker::Domain"
+	ResourceTypeTransferAgreement                           ResourceType = "AWS::Transfer::Agreement"
+	ResourceTypeTransferConnector                           ResourceType = "AWS::Transfer::Connector"
+	ResourceTypeKinesisFirehoseDeliveryStream               ResourceType = "AWS::KinesisFirehose::DeliveryStream"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -1259,6 +1280,27 @@ func (ResourceType) Values() []ResourceType {
 		"AWS::Route53Resolver::FirewallRuleGroupAssociation",
 		"AWS::SageMaker::AppImageConfig",
 		"AWS::SageMaker::Image",
+		"AWS::ECS::TaskSet",
+		"AWS::Cassandra::Keyspace",
+		"AWS::Signer::SigningProfile",
+		"AWS::Amplify::App",
+		"AWS::AppMesh::VirtualNode",
+		"AWS::AppMesh::VirtualService",
+		"AWS::AppRunner::VpcConnector",
+		"AWS::AppStream::Application",
+		"AWS::CodeArtifact::Repository",
+		"AWS::EC2::PrefixList",
+		"AWS::EC2::SpotFleet",
+		"AWS::Evidently::Project",
+		"AWS::Forecast::Dataset",
+		"AWS::IAM::SAMLProvider",
+		"AWS::IAM::ServerCertificate",
+		"AWS::Pinpoint::Campaign",
+		"AWS::Pinpoint::InAppTemplate",
+		"AWS::SageMaker::Domain",
+		"AWS::Transfer::Agreement",
+		"AWS::Transfer::Connector",
+		"AWS::KinesisFirehose::DeliveryStream",
 	}
 }
 

@@ -150,8 +150,8 @@ type ModifyClusterInput struct {
 	// of the request, the MasterUserPassword element exists in the
 	// PendingModifiedValues element of the operation response. Operations never return
 	// the password, so this operation provides a way to regain access to the admin
-	// user for a cluster if the password is lost. Default: Uses existing setting.
-	// Constraints:
+	// user account for a cluster if the password is lost. Default: Uses existing
+	// setting. Constraints:
 	//   - Must be between 8 and 64 characters in length.
 	//   - Must contain at least one uppercase letter.
 	//   - Must contain at least one lowercase letter.

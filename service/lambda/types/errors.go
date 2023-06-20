@@ -734,6 +734,35 @@ func (e *ProvisionedConcurrencyConfigNotFoundException) ErrorFault() smithy.Erro
 	return smithy.FaultClient
 }
 
+// Lambda has detected your function being invoked in a recursive loop with other
+// Amazon Web Services resources and stopped your function's invocation.
+type RecursiveInvocationException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *RecursiveInvocationException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *RecursiveInvocationException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *RecursiveInvocationException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "RecursiveInvocationException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *RecursiveInvocationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The request payload exceeded the Invoke request body JSON input quota. For more
 // information, see Lambda quotas (https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html)
 // .

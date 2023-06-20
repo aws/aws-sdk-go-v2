@@ -1,0 +1,8 @@
+{
+    "id": "68e0f755-a60c-4d98-82d0-7cf1bb5f9a9e",
+    "type": "feature",
+    "description": "Added support for custom domain names for Redshift Provisioned clusters. This feature enables customers to create a custom domain name and use ACM to generate fully secure connections to it.",
+    "modules": [
+        "service/redshift"
+    ]
+}

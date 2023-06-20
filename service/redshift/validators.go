@@ -350,6 +350,26 @@ func (m *validateOpCreateClusterSubnetGroup) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateCustomDomainAssociation struct {
+}
+
+func (*validateOpCreateCustomDomainAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateCustomDomainAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateCustomDomainAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateCustomDomainAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateEndpointAccess struct {
 }
 
@@ -645,6 +665,26 @@ func (m *validateOpDeleteClusterSubnetGroup) HandleInitialize(ctx context.Contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteClusterSubnetGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteCustomDomainAssociation struct {
+}
+
+func (*validateOpDeleteCustomDomainAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteCustomDomainAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteCustomDomainAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteCustomDomainAssociationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1130,26 +1170,6 @@ func (m *validateOpGetClusterCredentials) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpGetClusterCredentialsWithIAM struct {
-}
-
-func (*validateOpGetClusterCredentialsWithIAM) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpGetClusterCredentialsWithIAM) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*GetClusterCredentialsWithIAMInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpGetClusterCredentialsWithIAMInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpGetReservedNodeExchangeConfigurationOptions struct {
 }
 
@@ -1385,6 +1405,26 @@ func (m *validateOpModifyClusterSubnetGroup) HandleInitialize(ctx context.Contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpModifyClusterSubnetGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpModifyCustomDomainAssociation struct {
+}
+
+func (*validateOpModifyCustomDomainAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpModifyCustomDomainAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ModifyCustomDomainAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpModifyCustomDomainAssociationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1838,6 +1878,10 @@ func addOpCreateClusterSubnetGroupValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpCreateClusterSubnetGroup{}, middleware.After)
 }
 
+func addOpCreateCustomDomainAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateCustomDomainAssociation{}, middleware.After)
+}
+
 func addOpCreateEndpointAccessValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateEndpointAccess{}, middleware.After)
 }
@@ -1896,6 +1940,10 @@ func addOpDeleteClusterSnapshotValidationMiddleware(stack *middleware.Stack) err
 
 func addOpDeleteClusterSubnetGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteClusterSubnetGroup{}, middleware.After)
+}
+
+func addOpDeleteCustomDomainAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteCustomDomainAssociation{}, middleware.After)
 }
 
 func addOpDeleteEndpointAccessValidationMiddleware(stack *middleware.Stack) error {
@@ -1994,10 +2042,6 @@ func addOpGetClusterCredentialsValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpGetClusterCredentials{}, middleware.After)
 }
 
-func addOpGetClusterCredentialsWithIAMValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpGetClusterCredentialsWithIAM{}, middleware.After)
-}
-
 func addOpGetReservedNodeExchangeConfigurationOptionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetReservedNodeExchangeConfigurationOptions{}, middleware.After)
 }
@@ -2044,6 +2088,10 @@ func addOpModifyClusterSnapshotScheduleValidationMiddleware(stack *middleware.St
 
 func addOpModifyClusterSubnetGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpModifyClusterSubnetGroup{}, middleware.After)
+}
+
+func addOpModifyCustomDomainAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpModifyCustomDomainAssociation{}, middleware.After)
 }
 
 func addOpModifyEndpointAccessValidationMiddleware(stack *middleware.Stack) error {
@@ -2600,6 +2648,27 @@ func validateOpCreateClusterSubnetGroupInput(v *CreateClusterSubnetGroupInput) e
 	}
 }
 
+func validateOpCreateCustomDomainAssociationInput(v *CreateCustomDomainAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateCustomDomainAssociationInput"}
+	if v.CustomDomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CustomDomainName"))
+	}
+	if v.CustomDomainCertificateArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CustomDomainCertificateArn"))
+	}
+	if v.ClusterIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateEndpointAccessInput(v *CreateEndpointAccessInput) error {
 	if v == nil {
 		return nil
@@ -2863,6 +2932,21 @@ func validateOpDeleteClusterSubnetGroupInput(v *DeleteClusterSubnetGroupInput) e
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteClusterSubnetGroupInput"}
 	if v.ClusterSubnetGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterSubnetGroupName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteCustomDomainAssociationInput(v *DeleteCustomDomainAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteCustomDomainAssociationInput"}
+	if v.ClusterIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3246,24 +3330,6 @@ func validateOpGetClusterCredentialsInput(v *GetClusterCredentialsInput) error {
 	if v.DbUser == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DbUser"))
 	}
-	if v.ClusterIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpGetClusterCredentialsWithIAMInput(v *GetClusterCredentialsWithIAMInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "GetClusterCredentialsWithIAMInput"}
-	if v.ClusterIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3455,6 +3521,21 @@ func validateOpModifyClusterSubnetGroupInput(v *ModifyClusterSubnetGroupInput) e
 	}
 	if v.SubnetIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpModifyCustomDomainAssociationInput(v *ModifyCustomDomainAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModifyCustomDomainAssociationInput"}
+	if v.ClusterIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

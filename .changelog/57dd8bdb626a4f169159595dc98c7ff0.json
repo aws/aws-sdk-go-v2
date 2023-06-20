@@ -1,0 +1,8 @@
+{
+    "id": "57dd8bdb-626a-4f16-9159-595dc98c7ff0",
+    "type": "feature",
+    "description": "This release adds new API to reset connector metadata cache",
+    "modules": [
+        "service/appflow"
+    ]
+}

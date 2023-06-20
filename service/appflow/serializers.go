@@ -1320,6 +1320,94 @@ func awsRestjson1_serializeOpDocumentRegisterConnectorInput(v *RegisterConnector
 	return nil
 }
 
+type awsRestjson1_serializeOpResetConnectorMetadataCache struct {
+}
+
+func (*awsRestjson1_serializeOpResetConnectorMetadataCache) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpResetConnectorMetadataCache) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ResetConnectorMetadataCacheInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/reset-connector-metadata-cache")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentResetConnectorMetadataCacheInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsResetConnectorMetadataCacheInput(v *ResetConnectorMetadataCacheInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentResetConnectorMetadataCacheInput(v *ResetConnectorMetadataCacheInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ApiVersion != nil {
+		ok := object.Key("apiVersion")
+		ok.String(*v.ApiVersion)
+	}
+
+	if v.ConnectorEntityName != nil {
+		ok := object.Key("connectorEntityName")
+		ok.String(*v.ConnectorEntityName)
+	}
+
+	if v.ConnectorProfileName != nil {
+		ok := object.Key("connectorProfileName")
+		ok.String(*v.ConnectorProfileName)
+	}
+
+	if len(v.ConnectorType) > 0 {
+		ok := object.Key("connectorType")
+		ok.String(string(v.ConnectorType))
+	}
+
+	if v.EntitiesPath != nil {
+		ok := object.Key("entitiesPath")
+		ok.String(*v.EntitiesPath)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpStartFlow struct {
 }
 

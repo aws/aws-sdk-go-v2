@@ -74732,6 +74732,19 @@ func awsEc2query_deserializeDocumentHost(v **types.Host, decoder smithyxml.NodeD
 				sv.AllowsMultipleInstanceTypes = types.AllowsMultipleInstanceTypes(xtv)
 			}
 
+		case strings.EqualFold("assetId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.AssetId = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("autoPlacement", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {

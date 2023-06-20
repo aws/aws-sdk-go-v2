@@ -49,6 +49,23 @@ type AquaConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about the custom domain name association.
+type Association struct {
+
+	// A list of all associated clusters and domain names tied to a specific
+	// certificate.
+	CertificateAssociations []CertificateAssociation
+
+	// The Amazon Resource Name (ARN) for the certificate associated with the custom
+	// domain.
+	CustomDomainCertificateArn *string
+
+	// The expiration date for the certificate.
+	CustomDomainCertificateExpiryDate *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Describes an attribute value.
 type AttributeValueTarget struct {
 
@@ -79,6 +96,19 @@ type AvailabilityZone struct {
 
 	//
 	SupportedPlatforms []SupportedPlatform
+
+	noSmithyDocumentSerde
+}
+
+// A cluster ID and custom domain name tied to a specific certificate. These are
+// typically returned in a list.
+type CertificateAssociation struct {
+
+	// The cluster identifier for the certificate association.
+	ClusterIdentifier *string
+
+	// The custom domain name for the certificate association.
+	CustomDomainName *string
 
 	noSmithyDocumentSerde
 }
@@ -177,6 +207,15 @@ type Cluster struct {
 
 	// The version ID of the Amazon Redshift engine that is running on the cluster.
 	ClusterVersion *string
+
+	// The certificate Amazon Resource Name (ARN) for the custom domain name.
+	CustomDomainCertificateArn *string
+
+	// The expiration date for the certificate associated with the custom domain name.
+	CustomDomainCertificateExpiryDate *time.Time
+
+	// The custom domain name associated with the cluster.
+	CustomDomainName *string
 
 	// The name of the initial database that was created when the cluster was created.
 	// This same name is returned for the life of the cluster. If an initial database
@@ -661,9 +700,9 @@ type DeleteClusterSnapshotMessage struct {
 	SnapshotIdentifier *string
 
 	// The unique identifier of the cluster the snapshot was created from. This
-	// parameter is required if your IAM user or role has a policy containing a
-	// snapshot resource element that specifies anything other than * for the cluster
-	// name. Constraints: Must be the name of valid cluster.
+	// parameter is required if your IAM user has a policy containing a snapshot
+	// resource element that specifies anything other than * for the cluster name.
+	// Constraints: Must be the name of valid cluster.
 	SnapshotClusterIdentifier *string
 
 	noSmithyDocumentSerde

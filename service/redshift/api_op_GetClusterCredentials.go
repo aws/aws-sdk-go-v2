@@ -48,12 +48,6 @@ func (c *Client) GetClusterCredentials(ctx context.Context, params *GetClusterCr
 // The request parameters to get cluster credentials.
 type GetClusterCredentialsInput struct {
 
-	// The unique identifier of the cluster that contains the database for which you
-	// are requesting credentials. This parameter is case sensitive.
-	//
-	// This member is required.
-	ClusterIdentifier *string
-
 	// The name of a database user. If a user name matching DbUser exists in the
 	// database, the temporary user credentials have the same permissions as the
 	// existing user. If DbUser doesn't exist in the database and Autocreate is True ,
@@ -78,6 +72,13 @@ type GetClusterCredentialsInput struct {
 	// Create a database user with the name specified for the user named in DbUser if
 	// one does not exist.
 	AutoCreate *bool
+
+	// The unique identifier of the cluster that contains the database for which you
+	// are requesting credentials. This parameter is case sensitive.
+	ClusterIdentifier *string
+
+	// The custom domain name for the cluster credentials.
+	CustomDomainName *string
 
 	// A list of the names of existing database groups that the user named in DbUser
 	// will join for the current session, in addition to any group memberships for an

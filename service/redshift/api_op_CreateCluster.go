@@ -47,8 +47,8 @@ type CreateClusterInput struct {
 	// This member is required.
 	ClusterIdentifier *string
 
-	// The password associated with the admin user for the cluster that is being
-	// created. Constraints:
+	// The password associated with the admin user account for the cluster that is
+	// being created. Constraints:
 	//   - Must be between 8 and 64 characters in length.
 	//   - Must contain at least one uppercase letter.
 	//   - Must contain at least one lowercase letter.
@@ -59,8 +59,8 @@ type CreateClusterInput struct {
 	// This member is required.
 	MasterUserPassword *string
 
-	// The user name associated with the admin user for the cluster that is being
-	// created. Constraints:
+	// The user name associated with the admin user account for the cluster that is
+	// being created. Constraints:
 	//   - Must be 1 - 128 alphanumeric characters or hyphens. The user name can't be
 	//   PUBLIC .
 	//   - Must contain only lowercase letters, numbers, underscore, plus sign, period

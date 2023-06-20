@@ -2079,6 +2079,120 @@ func awsAwsquery_deserializeOpErrorCreateClusterSubnetGroup(response *smithyhttp
 	}
 }
 
+type awsAwsquery_deserializeOpCreateCustomDomainAssociation struct {
+}
+
+func (*awsAwsquery_deserializeOpCreateCustomDomainAssociation) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsquery_deserializeOpCreateCustomDomainAssociation) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsquery_deserializeOpErrorCreateCustomDomainAssociation(response, &metadata)
+	}
+	output := &CreateCustomDomainAssociationOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(response.Body, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return out, metadata, nil
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("CreateCustomDomainAssociationResult")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+	err = awsAwsquery_deserializeOpDocumentCreateCustomDomainAssociationOutput(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsquery_deserializeOpErrorCreateCustomDomainAssociation(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
+	if err != nil {
+		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
+	}
+	errorBody.Seek(0, io.SeekStart)
+	switch {
+	case strings.EqualFold("ClusterNotFound", errorCode):
+		return awsAwsquery_deserializeErrorClusterNotFoundFault(response, errorBody)
+
+	case strings.EqualFold("CustomCnameAssociationFault", errorCode):
+		return awsAwsquery_deserializeErrorCustomCnameAssociationFault(response, errorBody)
+
+	case strings.EqualFold("UnsupportedOperation", errorCode):
+		return awsAwsquery_deserializeErrorUnsupportedOperationFault(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsquery_deserializeOpCreateEndpointAccess struct {
 }
 
@@ -3833,6 +3947,85 @@ func awsAwsquery_deserializeOpErrorDeleteClusterSubnetGroup(response *smithyhttp
 
 	case strings.EqualFold("InvalidClusterSubnetStateFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidClusterSubnetStateFault(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsAwsquery_deserializeOpDeleteCustomDomainAssociation struct {
+}
+
+func (*awsAwsquery_deserializeOpDeleteCustomDomainAssociation) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsquery_deserializeOpDeleteCustomDomainAssociation) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsquery_deserializeOpErrorDeleteCustomDomainAssociation(response, &metadata)
+	}
+	output := &DeleteCustomDomainAssociationOutput{}
+	out.Result = output
+
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsquery_deserializeOpErrorDeleteCustomDomainAssociation(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
+	if err != nil {
+		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
+	}
+	errorBody.Seek(0, io.SeekStart)
+	switch {
+	case strings.EqualFold("ClusterNotFound", errorCode):
+		return awsAwsquery_deserializeErrorClusterNotFoundFault(response, errorBody)
+
+	case strings.EqualFold("CustomCnameAssociationFault", errorCode):
+		return awsAwsquery_deserializeErrorCustomCnameAssociationFault(response, errorBody)
+
+	case strings.EqualFold("UnsupportedOperation", errorCode):
+		return awsAwsquery_deserializeErrorUnsupportedOperationFault(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -5888,6 +6081,117 @@ func awsAwsquery_deserializeOpErrorDescribeClusterVersions(response *smithyhttp.
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsAwsquery_deserializeOpDescribeCustomDomainAssociations struct {
+}
+
+func (*awsAwsquery_deserializeOpDescribeCustomDomainAssociations) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsquery_deserializeOpDescribeCustomDomainAssociations) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsquery_deserializeOpErrorDescribeCustomDomainAssociations(response, &metadata)
+	}
+	output := &DescribeCustomDomainAssociationsOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(response.Body, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return out, metadata, nil
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("DescribeCustomDomainAssociationsResult")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+	err = awsAwsquery_deserializeOpDocumentDescribeCustomDomainAssociationsOutput(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsquery_deserializeOpErrorDescribeCustomDomainAssociations(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
+	if err != nil {
+		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
+	}
+	errorBody.Seek(0, io.SeekStart)
+	switch {
+	case strings.EqualFold("CustomDomainAssociationNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorCustomDomainAssociationNotFoundFault(response, errorBody)
+
+	case strings.EqualFold("UnsupportedOperation", errorCode):
+		return awsAwsquery_deserializeErrorUnsupportedOperationFault(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -10163,6 +10467,9 @@ func awsAwsquery_deserializeOpErrorModifyCluster(response *smithyhttp.Response, 
 	case strings.EqualFold("ClusterSecurityGroupNotFound", errorCode):
 		return awsAwsquery_deserializeErrorClusterSecurityGroupNotFoundFault(response, errorBody)
 
+	case strings.EqualFold("CustomCnameAssociationFault", errorCode):
+		return awsAwsquery_deserializeErrorCustomCnameAssociationFault(response, errorBody)
+
 	case strings.EqualFold("DependentServiceRequestThrottlingFault", errorCode):
 		return awsAwsquery_deserializeErrorDependentServiceRequestThrottlingFault(response, errorBody)
 
@@ -10204,6 +10511,9 @@ func awsAwsquery_deserializeOpErrorModifyCluster(response *smithyhttp.Response, 
 
 	case strings.EqualFold("UnauthorizedOperation", errorCode):
 		return awsAwsquery_deserializeErrorUnauthorizedOperation(response, errorBody)
+
+	case strings.EqualFold("UnsupportedOperation", errorCode):
+		return awsAwsquery_deserializeErrorUnsupportedOperationFault(response, errorBody)
 
 	case strings.EqualFold("UnsupportedOptionFault", errorCode):
 		return awsAwsquery_deserializeErrorUnsupportedOptionFault(response, errorBody)
@@ -10970,6 +11280,120 @@ func awsAwsquery_deserializeOpErrorModifyClusterSubnetGroup(response *smithyhttp
 
 	case strings.EqualFold("UnauthorizedOperation", errorCode):
 		return awsAwsquery_deserializeErrorUnauthorizedOperation(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsAwsquery_deserializeOpModifyCustomDomainAssociation struct {
+}
+
+func (*awsAwsquery_deserializeOpModifyCustomDomainAssociation) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsquery_deserializeOpModifyCustomDomainAssociation) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsquery_deserializeOpErrorModifyCustomDomainAssociation(response, &metadata)
+	}
+	output := &ModifyCustomDomainAssociationOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(response.Body, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return out, metadata, nil
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("ModifyCustomDomainAssociationResult")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+	err = awsAwsquery_deserializeOpDocumentModifyCustomDomainAssociationOutput(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsquery_deserializeOpErrorModifyCustomDomainAssociation(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
+	if err != nil {
+		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
+	}
+	errorBody.Seek(0, io.SeekStart)
+	switch {
+	case strings.EqualFold("ClusterNotFound", errorCode):
+		return awsAwsquery_deserializeErrorClusterNotFoundFault(response, errorBody)
+
+	case strings.EqualFold("CustomCnameAssociationFault", errorCode):
+		return awsAwsquery_deserializeErrorCustomCnameAssociationFault(response, errorBody)
+
+	case strings.EqualFold("UnsupportedOperation", errorCode):
+		return awsAwsquery_deserializeErrorUnsupportedOperationFault(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -14702,6 +15126,94 @@ func awsAwsquery_deserializeErrorCopyToRegionDisabledFault(response *smithyhttp.
 
 	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsAwsquery_deserializeDocumentCopyToRegionDisabledFault(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return output
+}
+
+func awsAwsquery_deserializeErrorCustomCnameAssociationFault(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.CustomCnameAssociationFault{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(errorBody, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return output
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+	err = awsAwsquery_deserializeDocumentCustomCnameAssociationFault(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return output
+}
+
+func awsAwsquery_deserializeErrorCustomDomainAssociationNotFoundFault(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.CustomDomainAssociationNotFoundFault{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(errorBody, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return output
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+	err = awsAwsquery_deserializeDocumentCustomDomainAssociationNotFoundFault(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -19395,6 +19907,146 @@ func awsAwsquery_deserializeDocumentAssociatedClusterListUnwrapped(v *[]types.Cl
 	*v = sv
 	return nil
 }
+func awsAwsquery_deserializeDocumentAssociation(v **types.Association, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.Association
+	if *v == nil {
+		sv = &types.Association{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("CertificateAssociations", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentCertificateAssociationList(&sv.CertificateAssociations, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("CustomDomainCertificateArn", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.CustomDomainCertificateArn = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("CustomDomainCertificateExpiryDate", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				t, err := smithytime.ParseDateTime(xtv)
+				if err != nil {
+					return err
+				}
+				sv.CustomDomainCertificateExpiryDate = ptr.Time(t)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentAssociationList(v *[]types.Association, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []types.Association
+	if *v == nil {
+		sv = make([]types.Association, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		switch {
+		case strings.EqualFold("Association", t.Name.Local):
+			var col types.Association
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &col
+			if err := awsAwsquery_deserializeDocumentAssociation(&destAddr, nodeDecoder); err != nil {
+				return err
+			}
+			col = *destAddr
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentAssociationListUnwrapped(v *[]types.Association, decoder smithyxml.NodeDecoder) error {
+	var sv []types.Association
+	if *v == nil {
+		sv = make([]types.Association, 0)
+	} else {
+		sv = *v
+	}
+
+	switch {
+	default:
+		var mv types.Association
+		t := decoder.StartEl
+		_ = t
+		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		destAddr := &mv
+		if err := awsAwsquery_deserializeDocumentAssociation(&destAddr, nodeDecoder); err != nil {
+			return err
+		}
+		mv = *destAddr
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
 func awsAwsquery_deserializeDocumentAttributeList(v *[]types.AccountAttribute, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -20410,6 +21062,136 @@ func awsAwsquery_deserializeDocumentBucketNotFoundFault(v **types.BucketNotFound
 	return nil
 }
 
+func awsAwsquery_deserializeDocumentCertificateAssociation(v **types.CertificateAssociation, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.CertificateAssociation
+	if *v == nil {
+		sv = &types.CertificateAssociation{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("ClusterIdentifier", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ClusterIdentifier = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("CustomDomainName", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.CustomDomainName = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentCertificateAssociationList(v *[]types.CertificateAssociation, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []types.CertificateAssociation
+	if *v == nil {
+		sv = make([]types.CertificateAssociation, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		switch {
+		case strings.EqualFold("CertificateAssociation", t.Name.Local):
+			var col types.CertificateAssociation
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &col
+			if err := awsAwsquery_deserializeDocumentCertificateAssociation(&destAddr, nodeDecoder); err != nil {
+				return err
+			}
+			col = *destAddr
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentCertificateAssociationListUnwrapped(v *[]types.CertificateAssociation, decoder smithyxml.NodeDecoder) error {
+	var sv []types.CertificateAssociation
+	if *v == nil {
+		sv = make([]types.CertificateAssociation, 0)
+	} else {
+		sv = *v
+	}
+
+	switch {
+	default:
+		var mv types.CertificateAssociation
+		t := decoder.StartEl
+		_ = t
+		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		destAddr := &mv
+		if err := awsAwsquery_deserializeDocumentCertificateAssociation(&destAddr, nodeDecoder); err != nil {
+			return err
+		}
+		mv = *destAddr
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
 func awsAwsquery_deserializeDocumentCluster(v **types.Cluster, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -20640,6 +21422,49 @@ func awsAwsquery_deserializeDocumentCluster(v **types.Cluster, decoder smithyxml
 			{
 				xtv := string(val)
 				sv.ClusterVersion = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("CustomDomainCertificateArn", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.CustomDomainCertificateArn = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("CustomDomainCertificateExpiryDate", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				t, err := smithytime.ParseDateTime(xtv)
+				if err != nil {
+					return err
+				}
+				sv.CustomDomainCertificateExpiryDate = ptr.Time(t)
+			}
+
+		case strings.EqualFold("CustomDomainName", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.CustomDomainName = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("DataTransferProgress", t.Name.Local):
@@ -23477,6 +24302,104 @@ func awsAwsquery_deserializeDocumentCopyToRegionDisabledFault(v **types.CopyToRe
 	var sv *types.CopyToRegionDisabledFault
 	if *v == nil {
 		sv = &types.CopyToRegionDisabledFault{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("message", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Message = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentCustomCnameAssociationFault(v **types.CustomCnameAssociationFault, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.CustomCnameAssociationFault
+	if *v == nil {
+		sv = &types.CustomCnameAssociationFault{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("message", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Message = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentCustomDomainAssociationNotFoundFault(v **types.CustomDomainAssociationNotFoundFault, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.CustomDomainAssociationNotFoundFault
+	if *v == nil {
+		sv = &types.CustomDomainAssociationNotFoundFault{}
 	} else {
 		sv = *v
 	}
@@ -38826,6 +39749,94 @@ func awsAwsquery_deserializeOpDocumentCreateClusterSubnetGroupOutput(v **CreateC
 	return nil
 }
 
+func awsAwsquery_deserializeOpDocumentCreateCustomDomainAssociationOutput(v **CreateCustomDomainAssociationOutput, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *CreateCustomDomainAssociationOutput
+	if *v == nil {
+		sv = &CreateCustomDomainAssociationOutput{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("ClusterIdentifier", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ClusterIdentifier = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("CustomDomainCertExpiryTime", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.CustomDomainCertExpiryTime = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("CustomDomainCertificateArn", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.CustomDomainCertificateArn = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("CustomDomainName", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.CustomDomainName = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsquery_deserializeOpDocumentCreateEndpointAccessOutput(v **CreateEndpointAccessOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -40542,6 +41553,61 @@ func awsAwsquery_deserializeOpDocumentDescribeClusterVersionsOutput(v **Describe
 		case strings.EqualFold("ClusterVersions", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentClusterVersionList(&sv.ClusterVersions, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("Marker", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Marker = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeOpDocumentDescribeCustomDomainAssociationsOutput(v **DescribeCustomDomainAssociationsOutput, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *DescribeCustomDomainAssociationsOutput
+	if *v == nil {
+		sv = &DescribeCustomDomainAssociationsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("Associations", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentAssociationList(&sv.Associations, nodeDecoder); err != nil {
 				return err
 			}
 
@@ -43419,6 +44485,94 @@ func awsAwsquery_deserializeOpDocumentModifyClusterSubnetGroupOutput(v **ModifyC
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentClusterSubnetGroup(&sv.ClusterSubnetGroup, nodeDecoder); err != nil {
 				return err
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeOpDocumentModifyCustomDomainAssociationOutput(v **ModifyCustomDomainAssociationOutput, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *ModifyCustomDomainAssociationOutput
+	if *v == nil {
+		sv = &ModifyCustomDomainAssociationOutput{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("ClusterIdentifier", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ClusterIdentifier = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("CustomDomainCertExpiryTime", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.CustomDomainCertExpiryTime = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("CustomDomainCertificateArn", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.CustomDomainCertificateArn = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("CustomDomainName", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.CustomDomainName = ptr.String(xtv)
 			}
 
 		default:

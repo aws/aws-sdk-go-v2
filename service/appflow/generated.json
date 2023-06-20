@@ -24,6 +24,7 @@
         "api_op_ListFlows.go",
         "api_op_ListTagsForResource.go",
         "api_op_RegisterConnector.go",
+        "api_op_ResetConnectorMetadataCache.go",
         "api_op_StartFlow.go",
         "api_op_StopFlow.go",
         "api_op_TagResource.go",

@@ -40,9 +40,10 @@ type GetClusterCredentialsWithIAMInput struct {
 
 	// The unique identifier of the cluster that contains the database for which you
 	// are requesting credentials.
-	//
-	// This member is required.
 	ClusterIdentifier *string
+
+	// The custom domain name for the IAM message cluster credentials.
+	CustomDomainName *string
 
 	// The name of the database for which you are requesting credentials. If the
 	// database name is specified, the IAM policy must allow access to the resource
@@ -122,9 +123,6 @@ func (c *Client) addOperationGetClusterCredentialsWithIAMMiddlewares(stack *midd
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addOpGetClusterCredentialsWithIAMValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetClusterCredentialsWithIAM(options.Region), middleware.Before); err != nil {
