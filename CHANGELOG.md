@@ -1,3 +1,17 @@
+# Release (2023-06-20)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appflow`: [v1.31.0](service/appflow/CHANGELOG.md#v1310-2023-06-20)
+  * **Feature**: This release adds new API to reset connector metadata cache
+* `github.com/aws/aws-sdk-go-v2/service/configservice`: [v1.34.0](service/configservice/CHANGELOG.md#v1340-2023-06-20)
+  * **Feature**: Updated ResourceType enum with new resource types onboarded by AWS Config in May 2023.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.102.0](service/ec2/CHANGELOG.md#v11020-2023-06-20)
+  * **Feature**: Adds support for targeting Dedicated Host allocations by assetIds in AWS Outposts
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.36.0](service/lambda/CHANGELOG.md#v1360-2023-06-20)
+  * **Feature**: This release adds RecursiveInvocationException to the Invoke API and InvokeWithResponseStream API.
+* `github.com/aws/aws-sdk-go-v2/service/redshift`: [v1.28.0](service/redshift/CHANGELOG.md#v1280-2023-06-20)
+  * **Feature**: Added support for custom domain names for Redshift Provisioned clusters. This feature enables customers to create a custom domain name and use ACM to generate fully secure connections to it.
+
 # Release (2023-06-19)
 
 ## Module Highlights

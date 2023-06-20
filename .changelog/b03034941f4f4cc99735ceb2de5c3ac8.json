@@ -1,8 +1,0 @@
-{
-    "id": "b0303494-1f4f-4cc9-9735-ceb2de5c3ac8",
-    "type": "feature",
-    "description": "Adds support for targeting Dedicated Host allocations by assetIds in AWS Outposts",
-    "modules": [
-        "service/ec2"
-    ]
-}

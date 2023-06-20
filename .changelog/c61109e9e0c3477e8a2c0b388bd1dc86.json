@@ -1,8 +1,0 @@
-{
-    "id": "c61109e9-e0c3-477e-8a2c-0b388bd1dc86",
-    "type": "feature",
-    "description": "This release adds RecursiveInvocationException to the Invoke API and InvokeWithResponseStream API.",
-    "modules": [
-        "service/lambda"
-    ]
-}

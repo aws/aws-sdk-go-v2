@@ -1,3 +1,7 @@
+# v1.28.0 (2023-06-20)
+
+* **Feature**: Added support for custom domain names for Redshift Provisioned clusters. This feature enables customers to create a custom domain name and use ACM to generate fully secure connections to it.
+
 # v1.27.13 (2023-06-15)
 
 * No change notes available for this release.

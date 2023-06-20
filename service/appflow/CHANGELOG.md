@@ -1,3 +1,7 @@
+# v1.31.0 (2023-06-20)
+
+* **Feature**: This release adds new API to reset connector metadata cache
+
 # v1.30.2 (2023-06-15)
 
 * No change notes available for this release.
