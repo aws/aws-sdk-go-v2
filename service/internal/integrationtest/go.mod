@@ -30,7 +30,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directconnect v1.18.17
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.17.3
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.21.5
-	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.19.10
+	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.19.11
 	github.com/aws/aws-sdk-go-v2/service/ec2 v1.102.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.18.13
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.27.4
@@ -41,7 +41,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2 v1.19.13
 	github.com/aws/aws-sdk-go-v2/service/elasticsearchservice v1.19.2
 	github.com/aws/aws-sdk-go-v2/service/elastictranscoder v1.14.12
-	github.com/aws/aws-sdk-go-v2/service/emr v1.26.2
+	github.com/aws/aws-sdk-go-v2/service/emr v1.27.0
 	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.19.4
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.16.14
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.19.2

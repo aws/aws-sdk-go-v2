@@ -1,3 +1,24 @@
+# Release (2023-06-21)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.19.11](service/dynamodb/CHANGELOG.md#v11911-2023-06-21)
+  * **Documentation**: Documentation updates for DynamoDB
+* `github.com/aws/aws-sdk-go-v2/service/emr`: [v1.27.0](service/emr/CHANGELOG.md#v1270-2023-06-21)
+  * **Feature**: This release introduces a new Amazon EMR EPI called ListSupportedInstanceTypes that returns a list of all instance types supported by a given EMR release.
+* `github.com/aws/aws-sdk-go-v2/service/inspector2`: [v1.15.0](service/inspector2/CHANGELOG.md#v1150-2023-06-21)
+  * **Feature**: This release adds support for Software Bill of Materials (SBOM) export and the general availability of code scanning for AWS Lambda functions.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.38.0](service/mediaconvert/CHANGELOG.md#v1380-2023-06-21)
+  * **Feature**: This release introduces the bandwidth reduction filter for the HEVC encoder, increases the limits of outputs per job, and updates support for the Nagra SDK to version 1.14.7.
+* `github.com/aws/aws-sdk-go-v2/service/mq`: [v1.15.0](service/mq/CHANGELOG.md#v1150-2023-06-21)
+  * **Feature**: The Cross Region Disaster Recovery feature allows to replicate a brokers state from one region to another in order to provide customers with multi-region resiliency in the event of a regional outage.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.86.0](service/sagemaker/CHANGELOG.md#v1860-2023-06-21)
+  * **Feature**: This release provides support in SageMaker for output files in training jobs to be uploaded without compression and enable customer to deploy uncompressed model from S3 to real-time inference Endpoints. In addition, ml.trn1n.32xlarge is added to supported instance type list in training job.
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.30.0](service/transfer/CHANGELOG.md#v1300-2023-06-21)
+  * **Feature**: This release adds a new parameter StructuredLogDestinations to CreateServer, UpdateServer APIs.
+
 # Release (2023-06-20)
 
 ## Module Highlights

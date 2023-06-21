@@ -1,3 +1,7 @@
+# v1.27.0 (2023-06-21)
+
+* **Feature**: This release introduces a new Amazon EMR EPI called ListSupportedInstanceTypes that returns a list of all instance types supported by a given EMR release.
+
 # v1.26.2 (2023-06-15)
 
 * No change notes available for this release.

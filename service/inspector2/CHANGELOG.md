@@ -1,3 +1,7 @@
+# v1.15.0 (2023-06-21)
+
+* **Feature**: This release adds support for Software Bill of Materials (SBOM) export and the general availability of code scanning for AWS Lambda functions.
+
 # v1.14.2 (2023-06-15)
 
 * No change notes available for this release.

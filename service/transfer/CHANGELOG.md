@@ -1,3 +1,7 @@
+# v1.30.0 (2023-06-21)
+
+* **Feature**: This release adds a new parameter StructuredLogDestinations to CreateServer, UpdateServer APIs.
+
 # v1.29.3 (2023-06-15)
 
 * No change notes available for this release.

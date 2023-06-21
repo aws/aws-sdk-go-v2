@@ -1,8 +1,0 @@
-{
-    "id": "2e6eb525-04cf-4344-91ca-7c2000f5d0de",
-    "type": "feature",
-    "description": "This release adds a new parameter StructuredLogDestinations to CreateServer, UpdateServer APIs.",
-    "modules": [
-        "service/transfer"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.15.0 (2023-06-21)
+
+* **Feature**: The Cross Region Disaster Recovery feature allows to replicate a brokers state from one region to another in order to provide customers with multi-region resiliency in the event of a regional outage.
+
 # v1.14.13 (2023-06-15)
 
 * No change notes available for this release.
