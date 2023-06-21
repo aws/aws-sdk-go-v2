@@ -1,0 +1,8 @@
+{
+    "id": "e735aa60-0a44-40ee-a99a-f103f4dd6ff7",
+    "type": "feature",
+    "description": "This release adds support for Software Bill of Materials (SBOM) export and the general availability of code scanning for AWS Lambda functions.",
+    "modules": [
+        "service/inspector2"
+    ]
+}

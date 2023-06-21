@@ -28,6 +28,7 @@ type AggregationFindingType string
 const (
 	AggregationFindingTypeNetworkReachability  AggregationFindingType = "NETWORK_REACHABILITY"
 	AggregationFindingTypePackageVulnerability AggregationFindingType = "PACKAGE_VULNERABILITY"
+	AggregationFindingTypeCodeVulnerability    AggregationFindingType = "CODE_VULNERABILITY"
 )
 
 // Values returns all known values for AggregationFindingType. Note that this can
@@ -37,6 +38,7 @@ func (AggregationFindingType) Values() []AggregationFindingType {
 	return []AggregationFindingType{
 		"NETWORK_REACHABILITY",
 		"PACKAGE_VULNERABILITY",
+		"CODE_VULNERABILITY",
 	}
 }
 
@@ -153,6 +155,28 @@ func (AwsEcrContainerSortBy) Values() []AwsEcrContainerSortBy {
 		"CRITICAL",
 		"HIGH",
 		"ALL",
+	}
+}
+
+type CodeSnippetErrorCode string
+
+// Enum values for CodeSnippetErrorCode
+const (
+	CodeSnippetErrorCodeInternalError       CodeSnippetErrorCode = "INTERNAL_ERROR"
+	CodeSnippetErrorCodeAccessDenied        CodeSnippetErrorCode = "ACCESS_DENIED"
+	CodeSnippetErrorCodeCodeSnippetNotFound CodeSnippetErrorCode = "CODE_SNIPPET_NOT_FOUND"
+	CodeSnippetErrorCodeInvalidInput        CodeSnippetErrorCode = "INVALID_INPUT"
+)
+
+// Values returns all known values for CodeSnippetErrorCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CodeSnippetErrorCode) Values() []CodeSnippetErrorCode {
+	return []CodeSnippetErrorCode{
+		"INTERNAL_ERROR",
+		"ACCESS_DENIED",
+		"CODE_SNIPPET_NOT_FOUND",
+		"INVALID_INPUT",
 	}
 }
 
@@ -496,6 +520,7 @@ type FindingType string
 const (
 	FindingTypeNetworkReachability  FindingType = "NETWORK_REACHABILITY"
 	FindingTypePackageVulnerability FindingType = "PACKAGE_VULNERABILITY"
+	FindingTypeCodeVulnerability    FindingType = "CODE_VULNERABILITY"
 )
 
 // Values returns all known values for FindingType. Note that this can be expanded
@@ -505,6 +530,7 @@ func (FindingType) Values() []FindingType {
 	return []FindingType{
 		"NETWORK_REACHABILITY",
 		"PACKAGE_VULNERABILITY",
+		"CODE_VULNERABILITY",
 	}
 }
 
@@ -588,9 +614,10 @@ type FreeTrialType string
 
 // Enum values for FreeTrialType
 const (
-	FreeTrialTypeEc2    FreeTrialType = "EC2"
-	FreeTrialTypeEcr    FreeTrialType = "ECR"
-	FreeTrialTypeLambda FreeTrialType = "LAMBDA"
+	FreeTrialTypeEc2        FreeTrialType = "EC2"
+	FreeTrialTypeEcr        FreeTrialType = "ECR"
+	FreeTrialTypeLambda     FreeTrialType = "LAMBDA"
+	FreeTrialTypeLambdaCode FreeTrialType = "LAMBDA_CODE"
 )
 
 // Values returns all known values for FreeTrialType. Note that this can be
@@ -601,6 +628,7 @@ func (FreeTrialType) Values() []FreeTrialType {
 		"EC2",
 		"ECR",
 		"LAMBDA",
+		"LAMBDA_CODE",
 	}
 }
 
@@ -934,13 +962,30 @@ func (RepositorySortBy) Values() []RepositorySortBy {
 	}
 }
 
+type ResourceMapComparison string
+
+// Enum values for ResourceMapComparison
+const (
+	ResourceMapComparisonEquals ResourceMapComparison = "EQUALS"
+)
+
+// Values returns all known values for ResourceMapComparison. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceMapComparison) Values() []ResourceMapComparison {
+	return []ResourceMapComparison{
+		"EQUALS",
+	}
+}
+
 type ResourceScanType string
 
 // Enum values for ResourceScanType
 const (
-	ResourceScanTypeEc2    ResourceScanType = "EC2"
-	ResourceScanTypeEcr    ResourceScanType = "ECR"
-	ResourceScanTypeLambda ResourceScanType = "LAMBDA"
+	ResourceScanTypeEc2        ResourceScanType = "EC2"
+	ResourceScanTypeEcr        ResourceScanType = "ECR"
+	ResourceScanTypeLambda     ResourceScanType = "LAMBDA"
+	ResourceScanTypeLambdaCode ResourceScanType = "LAMBDA_CODE"
 )
 
 // Values returns all known values for ResourceScanType. Note that this can be
@@ -951,6 +996,25 @@ func (ResourceScanType) Values() []ResourceScanType {
 		"EC2",
 		"ECR",
 		"LAMBDA",
+		"LAMBDA_CODE",
+	}
+}
+
+type ResourceStringComparison string
+
+// Enum values for ResourceStringComparison
+const (
+	ResourceStringComparisonEquals    ResourceStringComparison = "EQUALS"
+	ResourceStringComparisonNotEquals ResourceStringComparison = "NOT_EQUALS"
+)
+
+// Values returns all known values for ResourceStringComparison. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceStringComparison) Values() []ResourceStringComparison {
+	return []ResourceStringComparison{
+		"EQUALS",
+		"NOT_EQUALS",
 	}
 }
 
@@ -993,6 +1057,8 @@ const (
 	RuntimeUnsupported Runtime = "UNSUPPORTED"
 	RuntimeNodejs18X   Runtime = "NODEJS_18_X"
 	RuntimeGo1X        Runtime = "GO_1_X"
+	RuntimeJava17      Runtime = "JAVA_17"
+	RuntimePython310   Runtime = "PYTHON_3_10"
 )
 
 // Values returns all known values for Runtime. Note that this can be expanded in
@@ -1013,6 +1079,26 @@ func (Runtime) Values() []Runtime {
 		"UNSUPPORTED",
 		"NODEJS_18_X",
 		"GO_1_X",
+		"JAVA_17",
+		"PYTHON_3_10",
+	}
+}
+
+type SbomReportFormat string
+
+// Enum values for SbomReportFormat
+const (
+	SbomReportFormatCyclonedx14 SbomReportFormat = "CYCLONEDX_1_4"
+	SbomReportFormatSpdx23      SbomReportFormat = "SPDX_2_3"
+)
+
+// Values returns all known values for SbomReportFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SbomReportFormat) Values() []SbomReportFormat {
+	return []SbomReportFormat{
+		"CYCLONEDX_1_4",
+		"SPDX_2_3",
 	}
 }
 
@@ -1102,6 +1188,7 @@ type ScanType string
 const (
 	ScanTypeNetwork ScanType = "NETWORK"
 	ScanTypePackage ScanType = "PACKAGE"
+	ScanTypeCode    ScanType = "CODE"
 )
 
 // Values returns all known values for ScanType. Note that this can be expanded in
@@ -1111,6 +1198,7 @@ func (ScanType) Values() []ScanType {
 	return []ScanType{
 		"NETWORK",
 		"PACKAGE",
+		"CODE",
 	}
 }
 
@@ -1180,6 +1268,7 @@ const (
 	SortFieldVulnerabilitySource    SortField = "VULNERABILITY_SOURCE"
 	SortFieldInspectorScore         SortField = "INSPECTOR_SCORE"
 	SortFieldVendorSeverity         SortField = "VENDOR_SEVERITY"
+	SortFieldEpssScore              SortField = "EPSS_SCORE"
 )
 
 // Values returns all known values for SortField. Note that this can be expanded
@@ -1203,6 +1292,7 @@ func (SortField) Values() []SortField {
 		"VULNERABILITY_SOURCE",
 		"INSPECTOR_SCORE",
 		"VENDOR_SEVERITY",
+		"EPSS_SCORE",
 	}
 }
 
@@ -1294,10 +1384,11 @@ type UsageType string
 
 // Enum values for UsageType
 const (
-	UsageTypeEc2InstanceHours    UsageType = "EC2_INSTANCE_HOURS"
-	UsageTypeEcrInitialScan      UsageType = "ECR_INITIAL_SCAN"
-	UsageTypeEcrRescan           UsageType = "ECR_RESCAN"
-	UsageTypeLambdaFunctionHours UsageType = "LAMBDA_FUNCTION_HOURS"
+	UsageTypeEc2InstanceHours        UsageType = "EC2_INSTANCE_HOURS"
+	UsageTypeEcrInitialScan          UsageType = "ECR_INITIAL_SCAN"
+	UsageTypeEcrRescan               UsageType = "ECR_RESCAN"
+	UsageTypeLambdaFunctionHours     UsageType = "LAMBDA_FUNCTION_HOURS"
+	UsageTypeLambdaFunctionCodeHours UsageType = "LAMBDA_FUNCTION_CODE_HOURS"
 )
 
 // Values returns all known values for UsageType. Note that this can be expanded
@@ -1309,6 +1400,7 @@ func (UsageType) Values() []UsageType {
 		"ECR_INITIAL_SCAN",
 		"ECR_RESCAN",
 		"LAMBDA_FUNCTION_HOURS",
+		"LAMBDA_FUNCTION_CODE_HOURS",
 	}
 }
 

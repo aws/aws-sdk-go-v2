@@ -36,7 +36,8 @@ type UpdateConfigurationInput struct {
 	// This member is required.
 	ConfigurationId *string
 
-	// Required. The base64-encoded XML configuration.
+	// Amazon MQ for Active MQ: The base64-encoded XML configuration. Amazon MQ for
+	// RabbitMQ: the base64-encoded Cuttlefish configuration.
 	//
 	// This member is required.
 	Data *string
@@ -49,24 +50,24 @@ type UpdateConfigurationInput struct {
 
 type UpdateConfigurationOutput struct {
 
-	// Required. The Amazon Resource Name (ARN) of the configuration.
+	// The Amazon Resource Name (ARN) of the configuration.
 	Arn *string
 
 	// Required. The date and time of the configuration.
 	Created *time.Time
 
-	// Required. The unique ID that Amazon MQ generates for the configuration.
+	// The unique ID that Amazon MQ generates for the configuration.
 	Id *string
 
 	// The latest revision of the configuration.
 	LatestRevision *types.ConfigurationRevision
 
-	// Required. The name of the configuration. This value can contain only
-	// alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~).
-	// This value must be 1-150 characters long.
+	// The name of the configuration. This value can contain only alphanumeric
+	// characters, dashes, periods, underscores, and tildes (- . _ ~). This value must
+	// be 1-150 characters long.
 	Name *string
 
-	// The list of the first 20 warnings about the configuration XML elements or
+	// The list of the first 20 warnings about the configuration elements or
 	// attributes that were sanitized.
 	Warnings []types.SanitizationWarning
 

@@ -26,6 +26,7 @@
         "api_op_ListConfigurations.go",
         "api_op_ListTags.go",
         "api_op_ListUsers.go",
+        "api_op_Promote.go",
         "api_op_RebootBroker.go",
         "api_op_UpdateBroker.go",
         "api_op_UpdateConfiguration.go",

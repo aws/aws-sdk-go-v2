@@ -30,8 +30,9 @@ import (
 //   - ec2:DescribeSubnets
 //   - ec2:DescribeVpcs
 //
-// For more information, see Create an IAM User and Get Your AWS Credentials (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/amazon-mq-setting-up.html#create-iam-user)
-// and Never Modify or Delete the Amazon MQ Elastic Network Interface (https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/connecting-to-amazon-mq.html#never-modify-delete-elastic-network-interface)
+// For more information, see Create an IAM User and Get Your Amazon Web Services
+// Credentials (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/amazon-mq-setting-up.html#create-iam-user)
+// and Never Modify or Delete the Amazon MQ Elastic Network Interface (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/connecting-to-amazon-mq.html#never-modify-delete-elastic-network-interface)
 // in the Amazon MQ Developer Guide.
 func (c *Client) CreateBroker(ctx context.Context, params *CreateBrokerInput, optFns ...func(*Options)) (*CreateBrokerOutput, error) {
 	if params == nil {
@@ -59,10 +60,14 @@ type CreateBrokerInput struct {
 	// This member is required.
 	AutoMinorVersionUpgrade bool
 
-	// Required. The broker's name. This value must be unique in your AWS account,
-	// 1-50 characters long, must contain only letters, numbers, dashes, and
-	// underscores, and must not contain white spaces, brackets, wildcard characters,
-	// or special characters.
+	// Required. The broker's name. This value must be unique in your Amazon Web
+	// Services account, 1-50 characters long, must contain only letters, numbers,
+	// dashes, and underscores, and must not contain white spaces, brackets, wildcard
+	// characters, or special characters. Do not add personally identifiable
+	// information (PII) or other confidential or sensitive information in broker
+	// names. Broker names are accessible to other Amazon Web Services services,
+	// including CloudWatch Logs. Broker names are not intended to be used for private
+	// or sensitive data.
 	//
 	// This member is required.
 	BrokerName *string
@@ -96,13 +101,11 @@ type CreateBrokerInput struct {
 	// This member is required.
 	PubliclyAccessible bool
 
-	// Required. The list of broker users (persons or applications) who can access
-	// queues and topics. This value can contain only alphanumeric characters, dashes,
-	// periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters
-	// long. Amazon MQ for RabbitMQ When you create an Amazon MQ for RabbitMQ broker,
-	// one and only one administrative user is accepted and created when a broker is
-	// first provisioned. All subsequent broker users are created by making RabbitMQ
-	// API calls directly to brokers or via the RabbitMQ web console.
+	// The list of broker users (persons or applications) who can access queues and
+	// topics. For Amazon MQ for RabbitMQ brokers, one and only one administrative user
+	// is accepted and created when a broker is first provisioned. All subsequent
+	// broker users are created by making RabbitMQ API calls directly to brokers or via
+	// the RabbitMQ web console.
 	//
 	// This member is required.
 	Users []types.User
@@ -115,12 +118,20 @@ type CreateBrokerInput struct {
 	Configuration *types.ConfigurationId
 
 	// The unique ID that the requester receives for the created broker. Amazon MQ
-	// passes your ID with the API action. Note: We recommend using a Universally
-	// Unique Identifier (UUID) for the creatorRequestId. You may omit the
-	// creatorRequestId if your application doesn't require idempotency.
+	// passes your ID with the API action. We recommend using a Universally Unique
+	// Identifier (UUID) for the creatorRequestId. You may omit the creatorRequestId if
+	// your application doesn't require idempotency.
 	CreatorRequestId *string
 
-	// Encryption options for the broker. Does not apply to RabbitMQ brokers.
+	// Defines whether this broker is a part of a data replication pair.
+	DataReplicationMode types.DataReplicationMode
+
+	// The Amazon Resource Name (ARN) of the primary broker that is used to replicate
+	// data from in a data replication pair, and is applied to the replica broker. Must
+	// be set when dataReplicationMode is set to CRDR.
+	DataReplicationPrimaryBrokerArn *string
+
+	// Encryption options for the broker.
 	EncryptionOptions *types.EncryptionOptions
 
 	// Optional. The metadata of the LDAP server used to authenticate and authorize
@@ -151,8 +162,9 @@ type CreateBrokerInput struct {
 	// Deployment without public accessibility requires at least one subnet. If you
 	// specify subnets in a shared VPC (https://docs.aws.amazon.com/vpc/latest/userguide/vpc-sharing.html)
 	// for a RabbitMQ broker, the associated VPC to which the specified subnets belong
-	// must be owned by your AWS account. Amazon MQ will not be able to create VPC
-	// endpoints in VPCs that are not owned by your AWS account.
+	// must be owned by your Amazon Web Services account. Amazon MQ will not be able to
+	// create VPC endpoints in VPCs that are not owned by your Amazon Web Services
+	// account.
 	SubnetIds []string
 
 	// Create tags when creating the broker.

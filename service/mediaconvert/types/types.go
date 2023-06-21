@@ -1299,7 +1299,7 @@ type CaptionDestinationSettings struct {
 }
 
 // Use captions selectors to specify the captions data from your input that you
-// use in your outputs. You can use up to 20 captions selectors per input.
+// use in your outputs. You can use up to 100 captions selectors per input.
 type CaptionSelector struct {
 
 	// The specific language to extract from source, using the ISO 639-2 or ISO 639-3
@@ -3638,6 +3638,16 @@ type H265Settings struct {
 	// Gamma (HLG) Electro-Optical Transfer Function (EOTF).
 	AlternateTransferFunctionSei H265AlternateTransferFunctionSei
 
+	// The Bandwidth reduction filter increases the video quality of your output
+	// relative to its bitrate. Use to lower the bitrate of your constant quality QVBR
+	// output, with little or no perceptual decrease in quality. Or, use to increase
+	// the video quality of outputs with other rate control modes relative to the
+	// bitrate that you specify. Bandwidth reduction increases further when your input
+	// is low quality or noisy. Outputs that use this feature incur pro-tier pricing.
+	// When you include Bandwidth reduction filter, you cannot include the Noise
+	// reducer preprocessor.
+	BandwidthReductionFilter *BandwidthReductionFilter
+
 	// Specify the average bitrate in bits per second. Required for VBR and CBR. For
 	// MS Smooth outputs, bitrates must be unique when rounded down to the nearest
 	// multiple of 1000.
@@ -4252,6 +4262,18 @@ type HlsGroupSettings struct {
 	// Period of insertion of EXT-X-PROGRAM-DATE-TIME entry, in seconds.
 	ProgramDateTimePeriod int32
 
+	// Specify whether MediaConvert generates HLS manifests while your job is running
+	// or when your job is complete. To generate HLS manifests while your job is
+	// running: Choose Enabled. Use if you want to play back your content as soon as
+	// it's available. MediaConvert writes the parent and child manifests after the
+	// first three media segments are written to your destination S3 bucket. It then
+	// writes new updated manifests after each additional segment is written. The
+	// parent manifest includes the latest BANDWIDTH and AVERAGE-BANDWIDTH attributes,
+	// and child manifests include the latest available media segment. When your job
+	// completes, the final child playlists include an EXT-X-ENDLIST tag. To generate
+	// HLS manifests only when your job completes: Choose Disabled.
+	ProgressiveWriteHlsManifest HlsProgressiveWriteHlsManifest
+
 	// When set to SINGLE_FILE, emits program as a single media resource (.ts) file,
 	// uses #EXT-X-BYTERANGE tags to index segment for playback.
 	SegmentControl HlsSegmentControl
@@ -4555,7 +4577,7 @@ type Input struct {
 	AudioSelectors map[string]AudioSelector
 
 	// Use captions selectors to specify the captions data from your input that you
-	// use in your outputs. You can use up to 20 captions selectors per input.
+	// use in your outputs. You can use up to 100 captions selectors per input.
 	CaptionSelectors map[string]CaptionSelector
 
 	// Use Cropping selection (crop) to specify the video area that the service will
@@ -4792,7 +4814,7 @@ type InputTemplate struct {
 	AudioSelectors map[string]AudioSelector
 
 	// Use captions selectors to specify the captions data from your input that you
-	// use in your outputs. You can use up to 20 captions selectors per input.
+	// use in your outputs. You can use up to 100 captions selectors per input.
 	CaptionSelectors map[string]CaptionSelector
 
 	// Use Cropping selection (crop) to specify the video area that the service will

@@ -2473,14 +2473,10 @@ type SpotProvisioningSpecification struct {
 	// This member is required.
 	TimeoutDurationMinutes *int32
 
-	// Specifies one of the following strategies to launch Spot Instance fleets:
-	// price-capacity-optimized , capacity-optimized , lowest-price , or diversified .
-	// For more information on the provisioning strategies, see Allocation strategies
-	// for Spot Instances (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-allocation-strategy.html)
-	// in the Amazon EC2 User Guide for Linux Instances. When you launch a Spot
-	// Instance fleet with the old console, it automatically launches with the
-	// capacity-optimized strategy. You can't change the allocation strategy from the
-	// old console.
+	// Specifies the strategy to use in launching Spot Instance fleets. Currently, the
+	// only option is capacity-optimized (the default), which launches instances from
+	// Spot Instance pools with optimal capacity for the number of instances that are
+	// launching.
 	AllocationStrategy SpotProvisioningAllocationStrategy
 
 	// The defined duration for Spot Instances (also known as Spot blocks) in minutes.
@@ -2794,6 +2790,51 @@ type StudioSummary struct {
 	// The ID of the Virtual Private Cloud (Amazon VPC) associated with the Amazon EMR
 	// Studio.
 	VpcId *string
+
+	noSmithyDocumentSerde
+}
+
+// An instance type that the specified Amazon EMR release supports.
+type SupportedInstanceType struct {
+
+	// The CPU architecture, for example X86_64 or AARCH64 .
+	Architecture *string
+
+	// Indicates whether the SupportedInstanceType supports Amazon EBS optimization.
+	EbsOptimizedAvailable bool
+
+	// Indicates whether the SupportedInstanceType uses Amazon EBS optimization by
+	// default.
+	EbsOptimizedByDefault bool
+
+	// Indicates whether the SupportedInstanceType only supports Amazon EBS.
+	EbsStorageOnly bool
+
+	// The Amazon EC2 family and generation for the SupportedInstanceType .
+	InstanceFamilyId *string
+
+	// Indicates whether the SupportedInstanceType only supports 64-bit architecture.
+	Is64BitsOnly bool
+
+	// The amount of memory that is available to Amazon EMR from the
+	// SupportedInstanceType . The kernel and hypervisor software consume some memory,
+	// so this value might be lower than the overall memory for the instance type.
+	MemoryGB float32
+
+	// Number of disks for the SupportedInstanceType . This value is 0 for Amazon
+	// EBS-only instance types.
+	NumberOfDisks *int32
+
+	// StorageGB represents the storage capacity of the SupportedInstanceType . This
+	// value is 0 for Amazon EBS-only instance types.
+	StorageGB *int32
+
+	// The Amazon EC2 instance type (http://aws.amazon.com/ec2/instance-types/) , for
+	// example m5.xlarge , of the SupportedInstanceType .
+	Type *string
+
+	// The number of vCPUs available for the SupportedInstanceType .
+	VCPU *int32
 
 	noSmithyDocumentSerde
 }

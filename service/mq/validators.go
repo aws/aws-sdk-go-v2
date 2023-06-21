@@ -290,6 +290,26 @@ func (m *validateOpListUsers) HandleInitialize(ctx context.Context, in middlewar
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPromote struct {
+}
+
+func (*validateOpPromote) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPromote) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PromoteInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPromoteInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpRebootBroker struct {
 }
 
@@ -424,6 +444,10 @@ func addOpListTagsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListUsersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListUsers{}, middleware.After)
+}
+
+func addOpPromoteValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPromote{}, middleware.After)
 }
 
 func addOpRebootBrokerValidationMiddleware(stack *middleware.Stack) error {
@@ -820,6 +844,24 @@ func validateOpListUsersInput(v *ListUsersInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListUsersInput"}
 	if v.BrokerId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BrokerId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPromoteInput(v *PromoteInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PromoteInput"}
+	if v.BrokerId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BrokerId"))
+	}
+	if len(v.Mode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Mode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

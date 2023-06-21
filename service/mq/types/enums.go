@@ -30,6 +30,7 @@ const (
 	BrokerStateRunning                BrokerState = "RUNNING"
 	BrokerStateRebootInProgress       BrokerState = "REBOOT_IN_PROGRESS"
 	BrokerStateCriticalActionRequired BrokerState = "CRITICAL_ACTION_REQUIRED"
+	BrokerStateReplica                BrokerState = "REPLICA"
 )
 
 // Values returns all known values for BrokerState. Note that this can be expanded
@@ -43,6 +44,7 @@ func (BrokerState) Values() []BrokerState {
 		"RUNNING",
 		"REBOOT_IN_PROGRESS",
 		"CRITICAL_ACTION_REQUIRED",
+		"REPLICA",
 	}
 }
 
@@ -81,6 +83,24 @@ func (ChangeType) Values() []ChangeType {
 		"CREATE",
 		"UPDATE",
 		"DELETE",
+	}
+}
+
+type DataReplicationMode string
+
+// Enum values for DataReplicationMode
+const (
+	DataReplicationModeNone DataReplicationMode = "NONE"
+	DataReplicationModeCrdr DataReplicationMode = "CRDR"
+)
+
+// Values returns all known values for DataReplicationMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DataReplicationMode) Values() []DataReplicationMode {
+	return []DataReplicationMode{
+		"NONE",
+		"CRDR",
 	}
 }
 
@@ -147,6 +167,24 @@ func (EngineType) Values() []EngineType {
 	return []EngineType{
 		"ACTIVEMQ",
 		"RABBITMQ",
+	}
+}
+
+type PromoteMode string
+
+// Enum values for PromoteMode
+const (
+	PromoteModeSwitchover PromoteMode = "SWITCHOVER"
+	PromoteModeFailover   PromoteMode = "FAILOVER"
+)
+
+// Values returns all known values for PromoteMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (PromoteMode) Values() []PromoteMode {
+	return []PromoteMode{
+		"SWITCHOVER",
+		"FAILOVER",
 	}
 }
 

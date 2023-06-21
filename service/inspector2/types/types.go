@@ -412,6 +412,10 @@ type AutoEnable struct {
 	// members of your Amazon Inspector organization.
 	Lambda *bool
 
+	// Represents whether AWS Lambda code scans are automatically enabled for new
+	// members of your Amazon Inspector organization.
+	LambdaCode *bool
+
 	noSmithyDocumentSerde
 }
 
@@ -605,6 +609,143 @@ type CisaData struct {
 
 	// The date and time CISA expects a fix to have been provided vulnerability.
 	DateDue *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Contains information on where a code vulnerability is located in your Lambda
+// function.
+type CodeFilePath struct {
+
+	// The line number of the last line of code that a vulnerability was found in.
+	//
+	// This member is required.
+	EndLine *int32
+
+	// The name of the file the code vulnerability was found in.
+	//
+	// This member is required.
+	FileName *string
+
+	// The file path to the code that a vulnerability was found in.
+	//
+	// This member is required.
+	FilePath *string
+
+	// The line number of the first line of code that a vulnerability was found in.
+	//
+	// This member is required.
+	StartLine *int32
+
+	noSmithyDocumentSerde
+}
+
+// Contains information on the lines of code associated with a code snippet.
+type CodeLine struct {
+
+	// The content of a line of code
+	//
+	// This member is required.
+	Content *string
+
+	// The line number that a section of code is located at.
+	//
+	// This member is required.
+	LineNumber *int32
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about any errors encountered while trying to retrieve a
+// code snippet.
+type CodeSnippetError struct {
+
+	// The error code for the error that prevented a code snippet from being retrieved.
+	//
+	// This member is required.
+	ErrorCode CodeSnippetErrorCode
+
+	// The error message received when Amazon Inspector failed to retrieve a code
+	// snippet.
+	//
+	// This member is required.
+	ErrorMessage *string
+
+	// The ARN of the finding that a code snippet couldn't be retrieved for.
+	//
+	// This member is required.
+	FindingArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information on a code snippet retrieved by Amazon Inspector from a
+// code vulnerability finding.
+type CodeSnippetResult struct {
+
+	// Contains information on the retrieved code snippet.
+	CodeSnippet []CodeLine
+
+	// The line number of the last line of a code snippet.
+	EndLine *int32
+
+	// The ARN of a finding that the code snippet is associated with.
+	FindingArn *string
+
+	// The line number of the first line of a code snippet.
+	StartLine *int32
+
+	// Details of a suggested code fix.
+	SuggestedFixes []SuggestedFix
+
+	noSmithyDocumentSerde
+}
+
+// Contains information on the code vulnerability identified in your Lambda
+// function.
+type CodeVulnerabilityDetails struct {
+
+	// The Common Weakness Enumeration (CWE) item associated with the detected
+	// vulnerability.
+	//
+	// This member is required.
+	Cwes []string
+
+	// The ID for the Amazon CodeGuru detector associated with the finding. For more
+	// information on detectors see Amazon CodeGuru Detector Library (https://docs.aws.amazon.com/codeguru/detector-library)
+	// .
+	//
+	// This member is required.
+	DetectorId *string
+
+	// The name of the detector used to identify the code vulnerability. For more
+	// information on detectors see CodeGuru Detector Library (https://docs.aws.amazon.com/codeguru/detector-library)
+	// .
+	//
+	// This member is required.
+	DetectorName *string
+
+	// Contains information on where the code vulnerability is located in your code.
+	//
+	// This member is required.
+	FilePath *CodeFilePath
+
+	// The detector tag associated with the vulnerability. Detector tags group related
+	// vulnerabilities by common themes or tactics. For a list of available tags by
+	// programming language, see Java tags (https://docs.aws.amazon.com/codeguru/detector-library/java/tags/)
+	// , or Python tags (https://docs.aws.amazon.com/codeguru/detector-library/python/tags/)
+	// .
+	DetectorTags []string
+
+	// A URL containing supporting documentation about the code vulnerability detected.
+	ReferenceUrls []string
+
+	// The identifier for a rule that was used to detect the code vulnerability.
+	RuleId *string
+
+	// The Amazon Resource Name (ARN) of the Lambda layer that the code vulnerability
+	// was detected in.
+	SourceLambdaLayerArn *string
 
 	noSmithyDocumentSerde
 }
@@ -1054,6 +1195,15 @@ type Epss struct {
 	noSmithyDocumentSerde
 }
 
+// Details about the Exploit Prediction Scoring System (EPSS) score for a finding.
+type EpssDetails struct {
+
+	// The EPSS score.
+	Score float64
+
+	noSmithyDocumentSerde
+}
+
 // The details of an exploit available for a finding discovered in your
 // environment.
 type ExploitabilityDetails struct {
@@ -1182,6 +1332,21 @@ type FilterCriteria struct {
 	// Details of the Amazon Web Services account IDs used to filter findings.
 	AwsAccountId []StringFilter
 
+	// The name of the detector used to identify a code vulnerability in a Lambda
+	// function used to filter findings.
+	CodeVulnerabilityDetectorName []StringFilter
+
+	// The detector type tag associated with the vulnerability used to filter
+	// findings. Detector tags group related vulnerabilities by common themes or
+	// tactics. For a list of available tags by programming language, see Java tags (https://docs.aws.amazon.com/codeguru/detector-library/java/tags/)
+	// , or Python tags (https://docs.aws.amazon.com/codeguru/detector-library/python/tags/)
+	// .
+	CodeVulnerabilityDetectorTags []StringFilter
+
+	// The file path to the file in a Lambda function that contains a code
+	// vulnerability used to filter findings.
+	CodeVulnerabilityFilePath []StringFilter
+
 	// Details of the component IDs used to filter findings.
 	ComponentId []StringFilter
 
@@ -1214,6 +1379,9 @@ type FilterCriteria struct {
 
 	// The tags attached to the Amazon ECR container image.
 	EcrImageTags []StringFilter
+
+	// The EPSS score used to filter findings.
+	EpssScore []NumberFilter
 
 	// Filters the list of AWS Lambda findings by the availability of exploits.
 	ExploitAvailable []StringFilter
@@ -1355,6 +1523,13 @@ type Finding struct {
 	//
 	// This member is required.
 	Type FindingType
+
+	// Details about the code vulnerability identified in a Lambda function used to
+	// filter findings.
+	CodeVulnerabilityDetails *CodeVulnerabilityDetails
+
+	// The finding's EPSS score.
+	Epss *EpssDetails
 
 	// If a finding discovered in your environment has an exploit available.
 	ExploitAvailable ExploitAvailable
@@ -2059,6 +2234,55 @@ type ResourceDetails struct {
 	noSmithyDocumentSerde
 }
 
+// The resource filter criteria for a Software bill of materials (SBOM) report.
+type ResourceFilterCriteria struct {
+
+	// The account IDs used as resource filter criteria.
+	AccountId []ResourceStringFilter
+
+	// The EC2 instance tags used as resource filter criteria.
+	Ec2InstanceTags []ResourceMapFilter
+
+	// The ECR image tags used as resource filter criteria.
+	EcrImageTags []ResourceStringFilter
+
+	// The ECR repository names used as resource filter criteria.
+	EcrRepositoryName []ResourceStringFilter
+
+	// The AWS Lambda function name used as resource filter criteria.
+	LambdaFunctionName []ResourceStringFilter
+
+	// The AWS Lambda function tags used as resource filter criteria.
+	LambdaFunctionTags []ResourceMapFilter
+
+	// The resource IDs used as resource filter criteria.
+	ResourceId []ResourceStringFilter
+
+	// The resource types used as resource filter criteria.
+	ResourceType []ResourceStringFilter
+
+	noSmithyDocumentSerde
+}
+
+// A resource map filter for a software bill of material report.
+type ResourceMapFilter struct {
+
+	// The filter's comparison.
+	//
+	// This member is required.
+	Comparison ResourceMapComparison
+
+	// The filter's key.
+	//
+	// This member is required.
+	Key *string
+
+	// The filter's value.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // An object that contains details about the metadata for an Amazon ECR resource.
 type ResourceScanMetadata struct {
 
@@ -2098,6 +2322,9 @@ type ResourceState struct {
 	// An object that described the state of Amazon Inspector scans for an account.
 	Lambda *State
 
+	// An object that described the state of Amazon Inspector scans for an account.
+	LambdaCode *State
+
 	noSmithyDocumentSerde
 }
 
@@ -2117,6 +2344,26 @@ type ResourceStatus struct {
 
 	// The status of Amazon Inspector scanning for AWS Lambda function.
 	Lambda Status
+
+	// The status of Amazon Inspector scanning for custom application code for Amazon
+	// Web Services Lambda functions.
+	LambdaCode Status
+
+	noSmithyDocumentSerde
+}
+
+// A resource string filter for a software bill of materials report.
+type ResourceStringFilter struct {
+
+	// The filter's comparison.
+	//
+	// This member is required.
+	Comparison ResourceStringComparison
+
+	// The filter's value.
+	//
+	// This member is required.
+	Value *string
 
 	noSmithyDocumentSerde
 }
@@ -2235,8 +2482,23 @@ type StringFilter struct {
 	noSmithyDocumentSerde
 }
 
+// A suggested fix for a vulnerability in your Lambda function code.
+type SuggestedFix struct {
+
+	// The fix's code.
+	Code *string
+
+	// The fix's description.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
 // The details that define an aggregation based on finding title.
 type TitleAggregation struct {
+
+	// The type of finding to aggregate on.
+	FindingType AggregationFindingType
 
 	// The resource type to aggregate on.
 	ResourceType AggregationResourceType
@@ -2356,7 +2618,8 @@ type Vulnerability struct {
 	// Platforms that the vulnerability can be detected on.
 	DetectionPlatforms []string
 
-	// An object that contains the Exploit Prediction Scoring System (EPSS) score.
+	// An object that contains the Exploit Prediction Scoring System (EPSS) score for
+	// a vulnerability.
 	Epss *Epss
 
 	// An object that contains details on when the exploit was observed.

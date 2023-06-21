@@ -3700,6 +3700,17 @@ func awsAwsjson11_serializeDocumentSecurityGroupIds(v []string, value smithyjson
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentStructuredLogDestinations(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentSubnetIds(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -4116,6 +4127,13 @@ func awsAwsjson11_serializeOpDocumentCreateServerInput(v *CreateServerInput, val
 	if v.SecurityPolicyName != nil {
 		ok := object.Key("SecurityPolicyName")
 		ok.String(*v.SecurityPolicyName)
+	}
+
+	if v.StructuredLogDestinations != nil {
+		ok := object.Key("StructuredLogDestinations")
+		if err := awsAwsjson11_serializeDocumentStructuredLogDestinations(v.StructuredLogDestinations, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Tags != nil {
@@ -5287,6 +5305,13 @@ func awsAwsjson11_serializeOpDocumentUpdateServerInput(v *UpdateServerInput, val
 	if v.ServerId != nil {
 		ok := object.Key("ServerId")
 		ok.String(*v.ServerId)
+	}
+
+	if v.StructuredLogDestinations != nil {
+		ok := object.Key("StructuredLogDestinations")
+		if err := awsAwsjson11_serializeDocumentStructuredLogDestinations(v.StructuredLogDestinations, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.WorkflowDetails != nil {

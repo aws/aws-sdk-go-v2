@@ -1164,6 +1164,20 @@ func awsRestjson1_deserializeOpDocumentDescribeBrokerOutput(v **DescribeBrokerOu
 				sv.Created = ptr.Time(t)
 			}
 
+		case "dataReplicationMetadata":
+			if err := awsRestjson1_deserializeDocumentDataReplicationMetadataOutput(&sv.DataReplicationMetadata, value); err != nil {
+				return err
+			}
+
+		case "dataReplicationMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DataReplicationMode to be of type string, got %T instead", value)
+				}
+				sv.DataReplicationMode = types.DataReplicationMode(jtv)
+			}
+
 		case "deploymentMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1227,6 +1241,20 @@ func awsRestjson1_deserializeOpDocumentDescribeBrokerOutput(v **DescribeBrokerOu
 					return fmt.Errorf("expected AuthenticationStrategy to be of type string, got %T instead", value)
 				}
 				sv.PendingAuthenticationStrategy = types.AuthenticationStrategy(jtv)
+			}
+
+		case "pendingDataReplicationMetadata":
+			if err := awsRestjson1_deserializeDocumentDataReplicationMetadataOutput(&sv.PendingDataReplicationMetadata, value); err != nil {
+				return err
+			}
+
+		case "pendingDataReplicationMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DataReplicationMode to be of type string, got %T instead", value)
+				}
+				sv.PendingDataReplicationMode = types.DataReplicationMode(jtv)
 			}
 
 		case "pendingEngineVersion":
@@ -2252,6 +2280,15 @@ func awsRestjson1_deserializeOpDocumentDescribeUserOutput(v **DescribeUserOutput
 				return err
 			}
 
+		case "replicationUser":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
+				}
+				sv.ReplicationUser = jtv
+			}
+
 		case "username":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3137,6 +3174,166 @@ func awsRestjson1_deserializeOpDocumentListUsersOutput(v **ListUsersOutput, valu
 	return nil
 }
 
+type awsRestjson1_deserializeOpPromote struct {
+}
+
+func (*awsRestjson1_deserializeOpPromote) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpPromote) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorPromote(response, &metadata)
+	}
+	output := &PromoteOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentPromoteOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorPromote(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("BadRequestException", errorCode):
+		return awsRestjson1_deserializeErrorBadRequestException(response, errorBody)
+
+	case strings.EqualFold("ForbiddenException", errorCode):
+		return awsRestjson1_deserializeErrorForbiddenException(response, errorBody)
+
+	case strings.EqualFold("InternalServerErrorException", errorCode):
+		return awsRestjson1_deserializeErrorInternalServerErrorException(response, errorBody)
+
+	case strings.EqualFold("NotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorNotFoundException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentPromoteOutput(v **PromoteOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *PromoteOutput
+	if *v == nil {
+		sv = &PromoteOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "brokerId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.BrokerId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 type awsRestjson1_deserializeOpRebootBroker struct {
 }
 
@@ -3406,6 +3603,20 @@ func awsRestjson1_deserializeOpDocumentUpdateBrokerOutput(v **UpdateBrokerOutput
 				return err
 			}
 
+		case "dataReplicationMetadata":
+			if err := awsRestjson1_deserializeDocumentDataReplicationMetadataOutput(&sv.DataReplicationMetadata, value); err != nil {
+				return err
+			}
+
+		case "dataReplicationMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DataReplicationMode to be of type string, got %T instead", value)
+				}
+				sv.DataReplicationMode = types.DataReplicationMode(jtv)
+			}
+
 		case "engineVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3437,6 +3648,20 @@ func awsRestjson1_deserializeOpDocumentUpdateBrokerOutput(v **UpdateBrokerOutput
 		case "maintenanceWindowStartTime":
 			if err := awsRestjson1_deserializeDocumentWeeklyStartTime(&sv.MaintenanceWindowStartTime, value); err != nil {
 				return err
+			}
+
+		case "pendingDataReplicationMetadata":
+			if err := awsRestjson1_deserializeDocumentDataReplicationMetadataOutput(&sv.PendingDataReplicationMetadata, value); err != nil {
+				return err
+			}
+
+		case "pendingDataReplicationMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DataReplicationMode to be of type string, got %T instead", value)
+				}
+				sv.PendingDataReplicationMode = types.DataReplicationMode(jtv)
 			}
 
 		case "securityGroups":
@@ -5221,6 +5446,100 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDataReplicationCounterpart(v **types.DataReplicationCounterpart, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DataReplicationCounterpart
+	if *v == nil {
+		sv = &types.DataReplicationCounterpart{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "brokerId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.BrokerId = ptr.String(jtv)
+			}
+
+		case "region":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.Region = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDataReplicationMetadataOutput(v **types.DataReplicationMetadataOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DataReplicationMetadataOutput
+	if *v == nil {
+		sv = &types.DataReplicationMetadataOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "dataReplicationCounterpart":
+			if err := awsRestjson1_deserializeDocumentDataReplicationCounterpart(&sv.DataReplicationCounterpart, value); err != nil {
+				return err
+			}
+
+		case "dataReplicationRole":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.DataReplicationRole = ptr.String(jtv)
 			}
 
 		default:

@@ -6863,6 +6863,11 @@ func validateContainerDefinition(v *types.ContainerDefinition) error {
 			invalidParams.AddNested("ImageConfig", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ModelDataSource != nil {
+		if err := validateModelDataSource(v.ModelDataSource); err != nil {
+			invalidParams.AddNested("ModelDataSource", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -8795,6 +8800,25 @@ func validateModelDataQuality(v *types.ModelDataQuality) error {
 	}
 }
 
+func validateModelDataSource(v *types.ModelDataSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModelDataSource"}
+	if v.S3DataSource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3DataSource"))
+	} else if v.S3DataSource != nil {
+		if err := validateS3ModelDataSource(v.S3DataSource); err != nil {
+			invalidParams.AddNested("S3DataSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateModelExplainabilityAppSpecification(v *types.ModelExplainabilityAppSpecification) error {
 	if v == nil {
 		return nil
@@ -10348,6 +10372,27 @@ func validateS3DataSource(v *types.S3DataSource) error {
 	}
 	if v.S3Uri == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("S3Uri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3ModelDataSource(v *types.S3ModelDataSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3ModelDataSource"}
+	if v.S3Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Uri"))
+	}
+	if len(v.S3DataType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("S3DataType"))
+	}
+	if len(v.CompressionType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("CompressionType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

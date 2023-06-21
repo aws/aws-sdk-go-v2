@@ -1,0 +1,8 @@
+{
+    "id": "5de61eae-f880-49a4-bb52-f17f32d3e1db",
+    "type": "feature",
+    "description": "The Cross Region Disaster Recovery feature allows to replicate a brokers state from one region to another in order to provide customers with multi-region resiliency in the event of a regional outage.",
+    "modules": [
+        "service/mq"
+    ]
+}

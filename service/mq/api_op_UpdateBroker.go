@@ -47,6 +47,9 @@ type UpdateBrokerInput struct {
 	// A list of information about the configuration.
 	Configuration *types.ConfigurationId
 
+	// Defines whether this broker is a part of a data replication pair.
+	DataReplicationMode types.DataReplicationMode
+
 	// The broker engine version. For a list of supported engine versions, see
 	// Supported engines (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html)
 	// .
@@ -91,6 +94,13 @@ type UpdateBrokerOutput struct {
 	// The ID of the updated configuration.
 	Configuration *types.ConfigurationId
 
+	// The replication details of the data replication-enabled broker. Only returned
+	// if dataReplicationMode is set to CRDR.
+	DataReplicationMetadata *types.DataReplicationMetadataOutput
+
+	// Describes whether this broker is a part of a data replication pair.
+	DataReplicationMode types.DataReplicationMode
+
 	// The broker engine version to upgrade to. For a list of supported engine
 	// versions, see Supported engines (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html)
 	// .
@@ -110,6 +120,14 @@ type UpdateBrokerOutput struct {
 
 	// The parameters that determine the WeeklyStartTime.
 	MaintenanceWindowStartTime *types.WeeklyStartTime
+
+	// The pending replication details of the data replication-enabled broker. Only
+	// returned if pendingDataReplicationMode is set to CRDR.
+	PendingDataReplicationMetadata *types.DataReplicationMetadataOutput
+
+	// Describes whether this broker will be a part of a data replication pair after
+	// reboot.
+	PendingDataReplicationMode types.DataReplicationMode
 
 	// The list of security groups (1 minimum, 5 maximum) that authorizes connections
 	// to brokers.

@@ -43,6 +43,7 @@
         "api_op_ListSteps.go",
         "api_op_ListStudioSessionMappings.go",
         "api_op_ListStudios.go",
+        "api_op_ListSupportedInstanceTypes.go",
         "api_op_ModifyCluster.go",
         "api_op_ModifyInstanceFleet.go",
         "api_op_ModifyInstanceGroups.go",

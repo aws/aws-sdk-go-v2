@@ -50,7 +50,8 @@ type DescribeConfigurationRevisionOutput struct {
 	// Required. The date and time of the configuration.
 	Created *time.Time
 
-	// Required. The base64-encoded XML configuration.
+	// Amazon MQ for ActiveMQ: the base64-encoded XML configuration. Amazon MQ for
+	// RabbitMQ: base64-encoded Cuttlefish.
 	Data *string
 
 	// The description of the configuration.

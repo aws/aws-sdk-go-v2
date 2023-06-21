@@ -30,6 +30,26 @@ func (m *validateOpAssociateMember) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpBatchGetCodeSnippet struct {
+}
+
+func (*validateOpBatchGetCodeSnippet) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetCodeSnippet) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetCodeSnippetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetCodeSnippetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchGetFreeTrialInfo struct {
 }
 
@@ -90,6 +110,26 @@ func (m *validateOpCancelFindingsReport) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCancelSbomExport struct {
+}
+
+func (*validateOpCancelSbomExport) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCancelSbomExport) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CancelSbomExportInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCancelSbomExportInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateFilter struct {
 }
 
@@ -125,6 +165,26 @@ func (m *validateOpCreateFindingsReport) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateFindingsReportInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateSbomExport struct {
+}
+
+func (*validateOpCreateSbomExport) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateSbomExport) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateSbomExportInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateSbomExportInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -230,6 +290,26 @@ func (m *validateOpEnable) HandleInitialize(ctx context.Context, in middleware.I
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetEncryptionKey struct {
+}
+
+func (*validateOpGetEncryptionKey) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetEncryptionKey) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetEncryptionKeyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetEncryptionKeyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetMember struct {
 }
 
@@ -245,6 +325,26 @@ func (m *validateOpGetMember) HandleInitialize(ctx context.Context, in middlewar
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetMemberInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetSbomExport struct {
+}
+
+func (*validateOpGetSbomExport) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetSbomExport) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetSbomExportInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetSbomExportInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -350,6 +450,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpResetEncryptionKey struct {
+}
+
+func (*validateOpResetEncryptionKey) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpResetEncryptionKey) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ResetEncryptionKeyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpResetEncryptionKeyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpSearchVulnerabilities struct {
 }
 
@@ -430,6 +550,26 @@ func (m *validateOpUpdateConfiguration) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateEncryptionKey struct {
+}
+
+func (*validateOpUpdateEncryptionKey) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateEncryptionKey) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateEncryptionKeyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateEncryptionKeyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateFilter struct {
 }
 
@@ -494,6 +634,10 @@ func addOpAssociateMemberValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateMember{}, middleware.After)
 }
 
+func addOpBatchGetCodeSnippetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetCodeSnippet{}, middleware.After)
+}
+
 func addOpBatchGetFreeTrialInfoValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchGetFreeTrialInfo{}, middleware.After)
 }
@@ -506,12 +650,20 @@ func addOpCancelFindingsReportValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpCancelFindingsReport{}, middleware.After)
 }
 
+func addOpCancelSbomExportValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCancelSbomExport{}, middleware.After)
+}
+
 func addOpCreateFilterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateFilter{}, middleware.After)
 }
 
 func addOpCreateFindingsReportValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateFindingsReport{}, middleware.After)
+}
+
+func addOpCreateSbomExportValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateSbomExport{}, middleware.After)
 }
 
 func addOpDeleteFilterValidationMiddleware(stack *middleware.Stack) error {
@@ -534,8 +686,16 @@ func addOpEnableValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpEnable{}, middleware.After)
 }
 
+func addOpGetEncryptionKeyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetEncryptionKey{}, middleware.After)
+}
+
 func addOpGetMemberValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetMember{}, middleware.After)
+}
+
+func addOpGetSbomExportValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetSbomExport{}, middleware.After)
 }
 
 func addOpListCoverageValidationMiddleware(stack *middleware.Stack) error {
@@ -558,6 +718,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
 
+func addOpResetEncryptionKeyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpResetEncryptionKey{}, middleware.After)
+}
+
 func addOpSearchVulnerabilitiesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSearchVulnerabilities{}, middleware.After)
 }
@@ -572,6 +736,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateConfiguration{}, middleware.After)
+}
+
+func addOpUpdateEncryptionKeyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateEncryptionKey{}, middleware.After)
 }
 
 func addOpUpdateFilterValidationMiddleware(stack *middleware.Stack) error {
@@ -1084,6 +1252,21 @@ func validateFilterCriteria(v *types.FilterCriteria) error {
 			invalidParams.AddNested("ExploitAvailable", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.CodeVulnerabilityDetectorName != nil {
+		if err := validateStringFilterList(v.CodeVulnerabilityDetectorName); err != nil {
+			invalidParams.AddNested("CodeVulnerabilityDetectorName", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CodeVulnerabilityDetectorTags != nil {
+		if err := validateStringFilterList(v.CodeVulnerabilityDetectorTags); err != nil {
+			invalidParams.AddNested("CodeVulnerabilityDetectorTags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CodeVulnerabilityFilePath != nil {
+		if err := validateStringFilterList(v.CodeVulnerabilityFilePath); err != nil {
+			invalidParams.AddNested("CodeVulnerabilityFilePath", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1340,6 +1523,128 @@ func validateRepositoryAggregation(v *types.RepositoryAggregation) error {
 	}
 }
 
+func validateResourceFilterCriteria(v *types.ResourceFilterCriteria) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResourceFilterCriteria"}
+	if v.AccountId != nil {
+		if err := validateResourceStringFilterList(v.AccountId); err != nil {
+			invalidParams.AddNested("AccountId", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ResourceId != nil {
+		if err := validateResourceStringFilterList(v.ResourceId); err != nil {
+			invalidParams.AddNested("ResourceId", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ResourceType != nil {
+		if err := validateResourceStringFilterList(v.ResourceType); err != nil {
+			invalidParams.AddNested("ResourceType", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EcrRepositoryName != nil {
+		if err := validateResourceStringFilterList(v.EcrRepositoryName); err != nil {
+			invalidParams.AddNested("EcrRepositoryName", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LambdaFunctionName != nil {
+		if err := validateResourceStringFilterList(v.LambdaFunctionName); err != nil {
+			invalidParams.AddNested("LambdaFunctionName", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EcrImageTags != nil {
+		if err := validateResourceStringFilterList(v.EcrImageTags); err != nil {
+			invalidParams.AddNested("EcrImageTags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Ec2InstanceTags != nil {
+		if err := validateResourceMapFilterList(v.Ec2InstanceTags); err != nil {
+			invalidParams.AddNested("Ec2InstanceTags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LambdaFunctionTags != nil {
+		if err := validateResourceMapFilterList(v.LambdaFunctionTags); err != nil {
+			invalidParams.AddNested("LambdaFunctionTags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateResourceMapFilter(v *types.ResourceMapFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResourceMapFilter"}
+	if len(v.Comparison) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Comparison"))
+	}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateResourceMapFilterList(v []types.ResourceMapFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResourceMapFilterList"}
+	for i := range v {
+		if err := validateResourceMapFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateResourceStringFilter(v *types.ResourceStringFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResourceStringFilter"}
+	if len(v.Comparison) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Comparison"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateResourceStringFilterList(v []types.ResourceStringFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResourceStringFilterList"}
+	for i := range v {
+		if err := validateResourceStringFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSearchVulnerabilitiesFilterCriteria(v *types.SearchVulnerabilitiesFilterCriteria) error {
 	if v == nil {
 		return nil
@@ -1445,6 +1750,21 @@ func validateOpAssociateMemberInput(v *AssociateMemberInput) error {
 	}
 }
 
+func validateOpBatchGetCodeSnippetInput(v *BatchGetCodeSnippetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetCodeSnippetInput"}
+	if v.FindingArns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FindingArns"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpBatchGetFreeTrialInfoInput(v *BatchGetFreeTrialInfoInput) error {
 	if v == nil {
 		return nil
@@ -1494,6 +1814,21 @@ func validateOpCancelFindingsReportInput(v *CancelFindingsReportInput) error {
 	}
 }
 
+func validateOpCancelSbomExportInput(v *CancelSbomExportInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CancelSbomExportInput"}
+	if v.ReportId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReportId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateFilterInput(v *CreateFilterInput) error {
 	if v == nil {
 		return nil
@@ -1527,6 +1862,33 @@ func validateOpCreateFindingsReportInput(v *CreateFindingsReportInput) error {
 	if v.FilterCriteria != nil {
 		if err := validateFilterCriteria(v.FilterCriteria); err != nil {
 			invalidParams.AddNested("FilterCriteria", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.ReportFormat) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ReportFormat"))
+	}
+	if v.S3Destination == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Destination"))
+	} else if v.S3Destination != nil {
+		if err := validateDestination(v.S3Destination); err != nil {
+			invalidParams.AddNested("S3Destination", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateSbomExportInput(v *CreateSbomExportInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateSbomExportInput"}
+	if v.ResourceFilterCriteria != nil {
+		if err := validateResourceFilterCriteria(v.ResourceFilterCriteria); err != nil {
+			invalidParams.AddNested("ResourceFilterCriteria", err.(smithy.InvalidParamsError))
 		}
 	}
 	if len(v.ReportFormat) == 0 {
@@ -1621,6 +1983,24 @@ func validateOpEnableInput(v *EnableInput) error {
 	}
 }
 
+func validateOpGetEncryptionKeyInput(v *GetEncryptionKeyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetEncryptionKeyInput"}
+	if len(v.ScanType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ScanType"))
+	}
+	if len(v.ResourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetMemberInput(v *GetMemberInput) error {
 	if v == nil {
 		return nil
@@ -1628,6 +2008,21 @@ func validateOpGetMemberInput(v *GetMemberInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetMemberInput"}
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetSbomExportInput(v *GetSbomExportInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetSbomExportInput"}
+	if v.ReportId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReportId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1732,6 +2127,24 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	}
 }
 
+func validateOpResetEncryptionKeyInput(v *ResetEncryptionKeyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResetEncryptionKeyInput"}
+	if len(v.ScanType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ScanType"))
+	}
+	if len(v.ResourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpSearchVulnerabilitiesInput(v *SearchVulnerabilitiesInput) error {
 	if v == nil {
 		return nil
@@ -1798,6 +2211,27 @@ func validateOpUpdateConfigurationInput(v *UpdateConfigurationInput) error {
 		if err := validateEcrConfiguration(v.EcrConfiguration); err != nil {
 			invalidParams.AddNested("EcrConfiguration", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateEncryptionKeyInput(v *UpdateEncryptionKeyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateEncryptionKeyInput"}
+	if v.KmsKeyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KmsKeyId"))
+	}
+	if len(v.ScanType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ScanType"))
+	}
+	if len(v.ResourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

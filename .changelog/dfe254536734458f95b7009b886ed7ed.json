@@ -1,0 +1,8 @@
+{
+    "id": "dfe25453-6734-458f-95b7-009b886ed7ed",
+    "type": "documentation",
+    "description": "Documentation updates for DynamoDB",
+    "modules": [
+        "service/dynamodb"
+    ]
+}

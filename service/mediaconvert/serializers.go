@@ -5600,6 +5600,13 @@ func awsRestjson1_serializeDocumentH265Settings(v *types.H265Settings, value smi
 		ok.String(string(v.AlternateTransferFunctionSei))
 	}
 
+	if v.BandwidthReductionFilter != nil {
+		ok := object.Key("bandwidthReductionFilter")
+		if err := awsRestjson1_serializeDocumentBandwidthReductionFilter(v.BandwidthReductionFilter, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Bitrate != 0 {
 		ok := object.Key("bitrate")
 		ok.Integer(v.Bitrate)
@@ -6126,6 +6133,11 @@ func awsRestjson1_serializeDocumentHlsGroupSettings(v *types.HlsGroupSettings, v
 	if v.ProgramDateTimePeriod != 0 {
 		ok := object.Key("programDateTimePeriod")
 		ok.Integer(v.ProgramDateTimePeriod)
+	}
+
+	if len(v.ProgressiveWriteHlsManifest) > 0 {
+		ok := object.Key("progressiveWriteHlsManifest")
+		ok.String(string(v.ProgressiveWriteHlsManifest))
 	}
 
 	if len(v.SegmentControl) > 0 {

@@ -510,6 +510,26 @@ func (m *validateOpListSteps) HandleInitialize(ctx context.Context, in middlewar
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListSupportedInstanceTypes struct {
+}
+
+func (*validateOpListSupportedInstanceTypes) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListSupportedInstanceTypes) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListSupportedInstanceTypesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListSupportedInstanceTypesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpModifyCluster struct {
 }
 
@@ -988,6 +1008,10 @@ func addOpListInstancesValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListStepsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListSteps{}, middleware.After)
+}
+
+func addOpListSupportedInstanceTypesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListSupportedInstanceTypes{}, middleware.After)
 }
 
 func addOpModifyClusterValidationMiddleware(stack *middleware.Stack) error {
@@ -2313,6 +2337,21 @@ func validateOpListStepsInput(v *ListStepsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListStepsInput"}
 	if v.ClusterId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListSupportedInstanceTypesInput(v *ListSupportedInstanceTypesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListSupportedInstanceTypesInput"}
+	if v.ReleaseLabel == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReleaseLabel"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

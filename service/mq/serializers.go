@@ -101,6 +101,16 @@ func awsRestjson1_serializeOpDocumentCreateBrokerInput(v *CreateBrokerInput, val
 		ok.String(*v.CreatorRequestId)
 	}
 
+	if len(v.DataReplicationMode) > 0 {
+		ok := object.Key("dataReplicationMode")
+		ok.String(string(v.DataReplicationMode))
+	}
+
+	if v.DataReplicationPrimaryBrokerArn != nil {
+		ok := object.Key("dataReplicationPrimaryBrokerArn")
+		ok.String(*v.DataReplicationPrimaryBrokerArn)
+	}
+
 	if len(v.DeploymentMode) > 0 {
 		ok := object.Key("deploymentMode")
 		ok.String(string(v.DeploymentMode))
@@ -460,6 +470,11 @@ func awsRestjson1_serializeOpDocumentCreateUserInput(v *CreateUserInput, value s
 	if v.Password != nil {
 		ok := object.Key("password")
 		ok.String(*v.Password)
+	}
+
+	if v.ReplicationUser {
+		ok := object.Key("replicationUser")
+		ok.Boolean(v.ReplicationUser)
 	}
 
 	return nil
@@ -1338,6 +1353,87 @@ func awsRestjson1_serializeOpHttpBindingsListUsersInput(v *ListUsersInput, encod
 	return nil
 }
 
+type awsRestjson1_serializeOpPromote struct {
+}
+
+func (*awsRestjson1_serializeOpPromote) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpPromote) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*PromoteInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/brokers/{BrokerId}/promote")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsPromoteInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentPromoteInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsPromoteInput(v *PromoteInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.BrokerId == nil || len(*v.BrokerId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member BrokerId must not be empty")}
+	}
+	if v.BrokerId != nil {
+		if err := encoder.SetURI("BrokerId").String(*v.BrokerId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentPromoteInput(v *PromoteInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Mode) > 0 {
+		ok := object.Key("mode")
+		ok.String(string(v.Mode))
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpRebootBroker struct {
 }
 
@@ -1484,6 +1580,11 @@ func awsRestjson1_serializeOpDocumentUpdateBrokerInput(v *UpdateBrokerInput, val
 		if err := awsRestjson1_serializeDocumentConfigurationId(v.Configuration, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.DataReplicationMode) > 0 {
+		ok := object.Key("dataReplicationMode")
+		ok.String(string(v.DataReplicationMode))
 	}
 
 	if v.EngineVersion != nil {
@@ -1712,6 +1813,11 @@ func awsRestjson1_serializeOpDocumentUpdateUserInput(v *UpdateUserInput, value s
 		ok.String(*v.Password)
 	}
 
+	if v.ReplicationUser {
+		ok := object.Key("replicationUser")
+		ok.Boolean(v.ReplicationUser)
+	}
+
 	return nil
 }
 
@@ -1884,6 +1990,11 @@ func awsRestjson1_serializeDocumentUser(v *types.User, value smithyjson.Value) e
 	if v.Password != nil {
 		ok := object.Key("password")
 		ok.String(*v.Password)
+	}
+
+	if v.ReplicationUser {
+		ok := object.Key("replicationUser")
+		ok.Boolean(v.ReplicationUser)
 	}
 
 	if v.Username != nil {

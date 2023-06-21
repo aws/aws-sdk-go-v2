@@ -12,18 +12,20 @@ import (
 )
 
 // Creates an Autopilot job also referred to as Autopilot experiment or AutoML job
-// V2. We recommend using CreateAutoMLJobV2 (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html)
-// for all problem types. CreateAutoMLJobV2 can process the same tabular data as
-// its previous version CreateAutoMLJob , as well as non-tabular data for problem
-// types such as image or text classification. Find guidelines about how to migrate
-// CreateAutoMLJob to CreateAutoMLJobV2 in Migrate a CreateAutoMLJob to
-// CreateAutoMLJobV2 (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development-create-experiment-api.html#autopilot-create-experiment-api-migrate-v1-v2)
+// V2. CreateAutoMLJobV2 (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html)
+// and DescribeAutoMLJobV2 (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJobV2.html)
+// are new versions of CreateAutoMLJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJob.html)
+// and DescribeAutoMLJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJob.html)
+// which offer backward compatibility. CreateAutoMLJobV2 can manage tabular
+// problem types identical to those of its previous version CreateAutoMLJob , as
+// well as non-tabular problem types such as image or text classification. Find
+// guidelines about how to migrate a CreateAutoMLJob to CreateAutoMLJobV2 in
+// Migrate a CreateAutoMLJob to CreateAutoMLJobV2 (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development-create-experiment-api.html#autopilot-create-experiment-api-migrate-v1-v2)
 // . For the list of available problem types supported by CreateAutoMLJobV2 , see
 // AutoMLProblemTypeConfig (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLProblemTypeConfig.html)
-// . Find the best-performing model after you run an AutoML job V2 by calling
-// DescribeAutoMLJobV2 (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJobV2.html)
-// . Calling DescribeAutoMLJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJob.html)
-// on a AutoML job V2 results in an error.
+// . You can find the best-performing model after you run an AutoML job V2 by
+// calling DescribeAutoMLJobV2 (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJobV2.html)
+// .
 func (c *Client) CreateAutoMLJobV2(ctx context.Context, params *CreateAutoMLJobV2Input, optFns ...func(*Options)) (*CreateAutoMLJobV2Output, error) {
 	if params == nil {
 		params = &CreateAutoMLJobV2Input{}
@@ -42,8 +44,9 @@ func (c *Client) CreateAutoMLJobV2(ctx context.Context, params *CreateAutoMLJobV
 type CreateAutoMLJobV2Input struct {
 
 	// An array of channel objects describing the input data and their location. Each
-	// channel is a named input source. Similar to InputDataConfig (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJob.html#sagemaker-CreateAutoMLJob-request-InputDataConfig)
-	// supported by CreateAutoMLJob . The supported formats depend on the problem type:
+	// channel is a named input source. Similar to the InputDataConfig (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJob.html#sagemaker-CreateAutoMLJob-request-InputDataConfig)
+	// attribute in the CreateAutoMLJob input parameters. The supported formats depend
+	// on the problem type:
 	//   - For Tabular problem types: S3Prefix , ManifestFile .
 	//   - For ImageClassification: S3Prefix , ManifestFile , AugmentedManifestFile .
 	//   - For TextClassification: S3Prefix .
@@ -57,10 +60,7 @@ type CreateAutoMLJobV2Input struct {
 	// This member is required.
 	AutoMLJobName *string
 
-	// Defines the configuration settings of one of the supported problem types. For
-	// tabular problem types, you must either specify the type of supervised learning
-	// problem in AutoMLProblemTypeConfig ( TabularJobConfig.ProblemType ) and provide
-	// the AutoMLJobObjective , or none at all.
+	// Defines the configuration settings of one of the supported problem types.
 	//
 	// This member is required.
 	AutoMLProblemTypeConfig types.AutoMLProblemTypeConfig
@@ -79,9 +79,9 @@ type CreateAutoMLJobV2Input struct {
 	// Specifies a metric to minimize or maximize as the objective of a job. If not
 	// specified, the default objective metric depends on the problem type. For the
 	// list of default values per problem type, see AutoMLJobObjective (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobObjective.html)
-	// . For tabular problem types, you must either provide the AutoMLJobObjective and
-	// indicate the type of supervised learning problem in AutoMLProblemTypeConfig (
-	// TabularJobConfig.ProblemType ), or none.
+	// . For tabular problem types, you must either provide both the AutoMLJobObjective
+	// and indicate the type of supervised learning problem in AutoMLProblemTypeConfig
+	// ( TabularJobConfig.ProblemType ), or none at all.
 	AutoMLJobObjective *types.AutoMLJobObjective
 
 	// This structure specifies how to split the data into train and validation

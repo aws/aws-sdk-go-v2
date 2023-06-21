@@ -13,7 +13,8 @@ import (
 )
 
 // Returns information about an AutoML job created by calling CreateAutoMLJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJob.html)
-// .
+// . AutoML jobs created by calling CreateAutoMLJobV2 (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html)
+// cannot be described by DescribeAutoMLJob .
 func (c *Client) DescribeAutoMLJob(ctx context.Context, params *DescribeAutoMLJobInput, optFns ...func(*Options)) (*DescribeAutoMLJobOutput, error) {
 	if params == nil {
 		params = &DescribeAutoMLJobInput{}

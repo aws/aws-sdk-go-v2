@@ -39286,6 +39286,11 @@ func awsAwsjson11_deserializeDocumentContainerDefinition(v **types.ContainerDefi
 				sv.Mode = types.ContainerMode(jtv)
 			}
 
+		case "ModelDataSource":
+			if err := awsAwsjson11_deserializeDocumentModelDataSource(&sv.ModelDataSource, value); err != nil {
+				return err
+			}
+
 		case "ModelDataUrl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -54117,6 +54122,42 @@ func awsAwsjson11_deserializeDocumentModelDataQuality(v **types.ModelDataQuality
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentModelDataSource(v **types.ModelDataSource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ModelDataSource
+	if *v == nil {
+		sv = &types.ModelDataSource{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "S3DataSource":
+			if err := awsAwsjson11_deserializeDocumentS3ModelDataSource(&sv.S3DataSource, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentModelDeployConfig(v **types.ModelDeployConfig, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -59328,6 +59369,15 @@ func awsAwsjson11_deserializeDocumentOutputDataConfig(v **types.OutputDataConfig
 
 	for key, value := range shape {
 		switch key {
+		case "CompressionType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OutputCompressionType to be of type string, got %T instead", value)
+				}
+				sv.CompressionType = types.OutputCompressionType(jtv)
+			}
+
 		case "KmsKeyId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -65721,6 +65771,64 @@ func awsAwsjson11_deserializeDocumentS3DataSource(v **types.S3DataSource, value 
 				jtv, ok := value.(string)
 				if !ok {
 					return fmt.Errorf("expected S3Uri to be of type string, got %T instead", value)
+				}
+				sv.S3Uri = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentS3ModelDataSource(v **types.S3ModelDataSource, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.S3ModelDataSource
+	if *v == nil {
+		sv = &types.S3ModelDataSource{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CompressionType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ModelCompressionType to be of type string, got %T instead", value)
+				}
+				sv.CompressionType = types.ModelCompressionType(jtv)
+			}
+
+		case "S3DataType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3ModelDataType to be of type string, got %T instead", value)
+				}
+				sv.S3DataType = types.S3ModelDataType(jtv)
+			}
+
+		case "S3Uri":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3ModelUri to be of type string, got %T instead", value)
 				}
 				sv.S3Uri = ptr.String(jtv)
 			}

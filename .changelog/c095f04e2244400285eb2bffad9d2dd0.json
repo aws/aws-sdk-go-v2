@@ -1,0 +1,8 @@
+{
+    "id": "c095f04e-2244-4002-85eb-2bffad9d2dd0",
+    "type": "feature",
+    "description": "This release introduces a new Amazon EMR EPI called ListSupportedInstanceTypes that returns a list of all instance types supported by a given EMR release.",
+    "modules": [
+        "service/emr"
+    ]
+}

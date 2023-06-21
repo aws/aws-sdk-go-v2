@@ -18361,6 +18361,13 @@ func awsAwsjson11_serializeDocumentContainerDefinition(v *types.ContainerDefinit
 		ok.String(string(v.Mode))
 	}
 
+	if v.ModelDataSource != nil {
+		ok := object.Key("ModelDataSource")
+		if err := awsAwsjson11_serializeDocumentModelDataSource(v.ModelDataSource, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ModelDataUrl != nil {
 		ok := object.Key("ModelDataUrl")
 		ok.String(*v.ModelDataUrl)
@@ -21406,6 +21413,20 @@ func awsAwsjson11_serializeDocumentModelDataQuality(v *types.ModelDataQuality, v
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentModelDataSource(v *types.ModelDataSource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.S3DataSource != nil {
+		ok := object.Key("S3DataSource")
+		if err := awsAwsjson11_serializeDocumentS3ModelDataSource(v.S3DataSource, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentModelDeployConfig(v *types.ModelDeployConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -22720,6 +22741,11 @@ func awsAwsjson11_serializeDocumentOutputConfig(v *types.OutputConfig, value smi
 func awsAwsjson11_serializeDocumentOutputDataConfig(v *types.OutputDataConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.CompressionType) > 0 {
+		ok := object.Key("CompressionType")
+		ok.String(string(v.CompressionType))
+	}
 
 	if v.KmsKeyId != nil {
 		ok := object.Key("KmsKeyId")
@@ -24269,6 +24295,28 @@ func awsAwsjson11_serializeDocumentS3DataSource(v *types.S3DataSource, value smi
 	if len(v.S3DataDistributionType) > 0 {
 		ok := object.Key("S3DataDistributionType")
 		ok.String(string(v.S3DataDistributionType))
+	}
+
+	if len(v.S3DataType) > 0 {
+		ok := object.Key("S3DataType")
+		ok.String(string(v.S3DataType))
+	}
+
+	if v.S3Uri != nil {
+		ok := object.Key("S3Uri")
+		ok.String(*v.S3Uri)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentS3ModelDataSource(v *types.S3ModelDataSource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.CompressionType) > 0 {
+		ok := object.Key("CompressionType")
+		ok.String(string(v.CompressionType))
 	}
 
 	if len(v.S3DataType) > 0 {

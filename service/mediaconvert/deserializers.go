@@ -12641,6 +12641,11 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 				sv.AlternateTransferFunctionSei = types.H265AlternateTransferFunctionSei(jtv)
 			}
 
+		case "bandwidthReductionFilter":
+			if err := awsRestjson1_deserializeDocumentBandwidthReductionFilter(&sv.BandwidthReductionFilter, value); err != nil {
+				return err
+			}
+
 		case "bitrate":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13751,6 +13756,15 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 					return err
 				}
 				sv.ProgramDateTimePeriod = int32(i64)
+			}
+
+		case "progressiveWriteHlsManifest":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HlsProgressiveWriteHlsManifest to be of type string, got %T instead", value)
+				}
+				sv.ProgressiveWriteHlsManifest = types.HlsProgressiveWriteHlsManifest(jtv)
 			}
 
 		case "segmentControl":

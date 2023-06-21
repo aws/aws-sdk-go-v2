@@ -40,7 +40,7 @@ type DescribeBrokerInput struct {
 
 type DescribeBrokerOutput struct {
 
-	// A list of actions required for a broker.
+	// Actions required for a broker.
 	ActionsRequired []types.ActionRequired
 
 	// The authentication strategy used to secure the broker. The default is SIMPLE.
@@ -60,10 +60,10 @@ type DescribeBrokerOutput struct {
 	// A list of information about allocated brokers.
 	BrokerInstances []types.BrokerInstance
 
-	// The broker's name. This value must be unique in your AWS account, 1-50
-	// characters long, must contain only letters, numbers, dashes, and underscores,
-	// and must not contain white spaces, brackets, wildcard characters, or special
-	// characters.
+	// The broker's name. This value must be unique in your Amazon Web Services
+	// account account, 1-50 characters long, must contain only letters, numbers,
+	// dashes, and underscores, and must not contain white spaces, brackets, wildcard
+	// characters, or special characters.
 	BrokerName *string
 
 	// The broker's status.
@@ -75,10 +75,17 @@ type DescribeBrokerOutput struct {
 	// The time when the broker was created.
 	Created *time.Time
 
+	// The replication details of the data replication-enabled broker. Only returned
+	// if dataReplicationMode is set to CRDR.
+	DataReplicationMetadata *types.DataReplicationMetadataOutput
+
+	// Describes whether this broker is a part of a data replication pair.
+	DataReplicationMode types.DataReplicationMode
+
 	// The broker's deployment mode.
 	DeploymentMode types.DeploymentMode
 
-	// Encryption options for the broker. Does not apply to RabbitMQ brokers.
+	// Encryption options for the broker.
 	EncryptionOptions *types.EncryptionOptions
 
 	// The type of broker engine. Currently, Amazon MQ supports ACTIVEMQ and RABBITMQ.
@@ -106,6 +113,14 @@ type DescribeBrokerOutput struct {
 	// The authentication strategy that will be applied when the broker is rebooted.
 	// The default is SIMPLE.
 	PendingAuthenticationStrategy types.AuthenticationStrategy
+
+	// The pending replication details of the data replication-enabled broker. Only
+	// returned if pendingDataReplicationMode is set to CRDR.
+	PendingDataReplicationMetadata *types.DataReplicationMetadataOutput
+
+	// Describes whether this broker will be a part of a data replication pair after
+	// reboot.
+	PendingDataReplicationMode types.DataReplicationMode
 
 	// The broker engine version to upgrade to. For a list of supported engine
 	// versions, see Supported engines (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html)

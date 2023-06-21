@@ -3035,6 +3035,24 @@ func (ModelCardVersionSortBy) Values() []ModelCardVersionSortBy {
 	}
 }
 
+type ModelCompressionType string
+
+// Enum values for ModelCompressionType
+const (
+	ModelCompressionTypeNone ModelCompressionType = "None"
+	ModelCompressionTypeGzip ModelCompressionType = "Gzip"
+)
+
+// Values returns all known values for ModelCompressionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ModelCompressionType) Values() []ModelCompressionType {
+	return []ModelCompressionType{
+		"None",
+		"Gzip",
+	}
+}
+
 type ModelInfrastructureType string
 
 // Enum values for ModelInfrastructureType
@@ -3619,6 +3637,24 @@ func (OrderKey) Values() []OrderKey {
 	return []OrderKey{
 		"Ascending",
 		"Descending",
+	}
+}
+
+type OutputCompressionType string
+
+// Enum values for OutputCompressionType
+const (
+	OutputCompressionTypeGzip OutputCompressionType = "GZIP"
+	OutputCompressionTypeNone OutputCompressionType = "NONE"
+)
+
+// Values returns all known values for OutputCompressionType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OutputCompressionType) Values() []OutputCompressionType {
+	return []OutputCompressionType{
+		"GZIP",
+		"NONE",
 	}
 }
 
@@ -4705,6 +4741,24 @@ func (S3DataType) Values() []S3DataType {
 	}
 }
 
+type S3ModelDataType string
+
+// Enum values for S3ModelDataType
+const (
+	S3ModelDataTypeS3Prefix S3ModelDataType = "S3Prefix"
+	S3ModelDataTypeS3Object S3ModelDataType = "S3Object"
+)
+
+// Values returns all known values for S3ModelDataType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (S3ModelDataType) Values() []S3ModelDataType {
+	return []S3ModelDataType{
+		"S3Prefix",
+		"S3Object",
+	}
+}
+
 type SagemakerServicecatalogStatus string
 
 // Enum values for SagemakerServicecatalogStatus
@@ -5440,55 +5494,56 @@ type TrainingInstanceType string
 
 // Enum values for TrainingInstanceType
 const (
-	TrainingInstanceTypeMlM4Xlarge     TrainingInstanceType = "ml.m4.xlarge"
-	TrainingInstanceTypeMlM42xlarge    TrainingInstanceType = "ml.m4.2xlarge"
-	TrainingInstanceTypeMlM44xlarge    TrainingInstanceType = "ml.m4.4xlarge"
-	TrainingInstanceTypeMlM410xlarge   TrainingInstanceType = "ml.m4.10xlarge"
-	TrainingInstanceTypeMlM416xlarge   TrainingInstanceType = "ml.m4.16xlarge"
-	TrainingInstanceTypeMlG4dnXlarge   TrainingInstanceType = "ml.g4dn.xlarge"
-	TrainingInstanceTypeMlG4dn2xlarge  TrainingInstanceType = "ml.g4dn.2xlarge"
-	TrainingInstanceTypeMlG4dn4xlarge  TrainingInstanceType = "ml.g4dn.4xlarge"
-	TrainingInstanceTypeMlG4dn8xlarge  TrainingInstanceType = "ml.g4dn.8xlarge"
-	TrainingInstanceTypeMlG4dn12xlarge TrainingInstanceType = "ml.g4dn.12xlarge"
-	TrainingInstanceTypeMlG4dn16xlarge TrainingInstanceType = "ml.g4dn.16xlarge"
-	TrainingInstanceTypeMlM5Large      TrainingInstanceType = "ml.m5.large"
-	TrainingInstanceTypeMlM5Xlarge     TrainingInstanceType = "ml.m5.xlarge"
-	TrainingInstanceTypeMlM52xlarge    TrainingInstanceType = "ml.m5.2xlarge"
-	TrainingInstanceTypeMlM54xlarge    TrainingInstanceType = "ml.m5.4xlarge"
-	TrainingInstanceTypeMlM512xlarge   TrainingInstanceType = "ml.m5.12xlarge"
-	TrainingInstanceTypeMlM524xlarge   TrainingInstanceType = "ml.m5.24xlarge"
-	TrainingInstanceTypeMlC4Xlarge     TrainingInstanceType = "ml.c4.xlarge"
-	TrainingInstanceTypeMlC42xlarge    TrainingInstanceType = "ml.c4.2xlarge"
-	TrainingInstanceTypeMlC44xlarge    TrainingInstanceType = "ml.c4.4xlarge"
-	TrainingInstanceTypeMlC48xlarge    TrainingInstanceType = "ml.c4.8xlarge"
-	TrainingInstanceTypeMlP2Xlarge     TrainingInstanceType = "ml.p2.xlarge"
-	TrainingInstanceTypeMlP28xlarge    TrainingInstanceType = "ml.p2.8xlarge"
-	TrainingInstanceTypeMlP216xlarge   TrainingInstanceType = "ml.p2.16xlarge"
-	TrainingInstanceTypeMlP32xlarge    TrainingInstanceType = "ml.p3.2xlarge"
-	TrainingInstanceTypeMlP38xlarge    TrainingInstanceType = "ml.p3.8xlarge"
-	TrainingInstanceTypeMlP316xlarge   TrainingInstanceType = "ml.p3.16xlarge"
-	TrainingInstanceTypeMlP3dn24xlarge TrainingInstanceType = "ml.p3dn.24xlarge"
-	TrainingInstanceTypeMlP4d24xlarge  TrainingInstanceType = "ml.p4d.24xlarge"
-	TrainingInstanceTypeMlC5Xlarge     TrainingInstanceType = "ml.c5.xlarge"
-	TrainingInstanceTypeMlC52xlarge    TrainingInstanceType = "ml.c5.2xlarge"
-	TrainingInstanceTypeMlC54xlarge    TrainingInstanceType = "ml.c5.4xlarge"
-	TrainingInstanceTypeMlC59xlarge    TrainingInstanceType = "ml.c5.9xlarge"
-	TrainingInstanceTypeMlC518xlarge   TrainingInstanceType = "ml.c5.18xlarge"
-	TrainingInstanceTypeMlC5nXlarge    TrainingInstanceType = "ml.c5n.xlarge"
-	TrainingInstanceTypeMlC5n2xlarge   TrainingInstanceType = "ml.c5n.2xlarge"
-	TrainingInstanceTypeMlC5n4xlarge   TrainingInstanceType = "ml.c5n.4xlarge"
-	TrainingInstanceTypeMlC5n9xlarge   TrainingInstanceType = "ml.c5n.9xlarge"
-	TrainingInstanceTypeMlC5n18xlarge  TrainingInstanceType = "ml.c5n.18xlarge"
-	TrainingInstanceTypeMlG5Xlarge     TrainingInstanceType = "ml.g5.xlarge"
-	TrainingInstanceTypeMlG52xlarge    TrainingInstanceType = "ml.g5.2xlarge"
-	TrainingInstanceTypeMlG54xlarge    TrainingInstanceType = "ml.g5.4xlarge"
-	TrainingInstanceTypeMlG58xlarge    TrainingInstanceType = "ml.g5.8xlarge"
-	TrainingInstanceTypeMlG516xlarge   TrainingInstanceType = "ml.g5.16xlarge"
-	TrainingInstanceTypeMlG512xlarge   TrainingInstanceType = "ml.g5.12xlarge"
-	TrainingInstanceTypeMlG524xlarge   TrainingInstanceType = "ml.g5.24xlarge"
-	TrainingInstanceTypeMlG548xlarge   TrainingInstanceType = "ml.g5.48xlarge"
-	TrainingInstanceTypeMlTrn12xlarge  TrainingInstanceType = "ml.trn1.2xlarge"
-	TrainingInstanceTypeMlTrn132xlarge TrainingInstanceType = "ml.trn1.32xlarge"
+	TrainingInstanceTypeMlM4Xlarge      TrainingInstanceType = "ml.m4.xlarge"
+	TrainingInstanceTypeMlM42xlarge     TrainingInstanceType = "ml.m4.2xlarge"
+	TrainingInstanceTypeMlM44xlarge     TrainingInstanceType = "ml.m4.4xlarge"
+	TrainingInstanceTypeMlM410xlarge    TrainingInstanceType = "ml.m4.10xlarge"
+	TrainingInstanceTypeMlM416xlarge    TrainingInstanceType = "ml.m4.16xlarge"
+	TrainingInstanceTypeMlG4dnXlarge    TrainingInstanceType = "ml.g4dn.xlarge"
+	TrainingInstanceTypeMlG4dn2xlarge   TrainingInstanceType = "ml.g4dn.2xlarge"
+	TrainingInstanceTypeMlG4dn4xlarge   TrainingInstanceType = "ml.g4dn.4xlarge"
+	TrainingInstanceTypeMlG4dn8xlarge   TrainingInstanceType = "ml.g4dn.8xlarge"
+	TrainingInstanceTypeMlG4dn12xlarge  TrainingInstanceType = "ml.g4dn.12xlarge"
+	TrainingInstanceTypeMlG4dn16xlarge  TrainingInstanceType = "ml.g4dn.16xlarge"
+	TrainingInstanceTypeMlM5Large       TrainingInstanceType = "ml.m5.large"
+	TrainingInstanceTypeMlM5Xlarge      TrainingInstanceType = "ml.m5.xlarge"
+	TrainingInstanceTypeMlM52xlarge     TrainingInstanceType = "ml.m5.2xlarge"
+	TrainingInstanceTypeMlM54xlarge     TrainingInstanceType = "ml.m5.4xlarge"
+	TrainingInstanceTypeMlM512xlarge    TrainingInstanceType = "ml.m5.12xlarge"
+	TrainingInstanceTypeMlM524xlarge    TrainingInstanceType = "ml.m5.24xlarge"
+	TrainingInstanceTypeMlC4Xlarge      TrainingInstanceType = "ml.c4.xlarge"
+	TrainingInstanceTypeMlC42xlarge     TrainingInstanceType = "ml.c4.2xlarge"
+	TrainingInstanceTypeMlC44xlarge     TrainingInstanceType = "ml.c4.4xlarge"
+	TrainingInstanceTypeMlC48xlarge     TrainingInstanceType = "ml.c4.8xlarge"
+	TrainingInstanceTypeMlP2Xlarge      TrainingInstanceType = "ml.p2.xlarge"
+	TrainingInstanceTypeMlP28xlarge     TrainingInstanceType = "ml.p2.8xlarge"
+	TrainingInstanceTypeMlP216xlarge    TrainingInstanceType = "ml.p2.16xlarge"
+	TrainingInstanceTypeMlP32xlarge     TrainingInstanceType = "ml.p3.2xlarge"
+	TrainingInstanceTypeMlP38xlarge     TrainingInstanceType = "ml.p3.8xlarge"
+	TrainingInstanceTypeMlP316xlarge    TrainingInstanceType = "ml.p3.16xlarge"
+	TrainingInstanceTypeMlP3dn24xlarge  TrainingInstanceType = "ml.p3dn.24xlarge"
+	TrainingInstanceTypeMlP4d24xlarge   TrainingInstanceType = "ml.p4d.24xlarge"
+	TrainingInstanceTypeMlC5Xlarge      TrainingInstanceType = "ml.c5.xlarge"
+	TrainingInstanceTypeMlC52xlarge     TrainingInstanceType = "ml.c5.2xlarge"
+	TrainingInstanceTypeMlC54xlarge     TrainingInstanceType = "ml.c5.4xlarge"
+	TrainingInstanceTypeMlC59xlarge     TrainingInstanceType = "ml.c5.9xlarge"
+	TrainingInstanceTypeMlC518xlarge    TrainingInstanceType = "ml.c5.18xlarge"
+	TrainingInstanceTypeMlC5nXlarge     TrainingInstanceType = "ml.c5n.xlarge"
+	TrainingInstanceTypeMlC5n2xlarge    TrainingInstanceType = "ml.c5n.2xlarge"
+	TrainingInstanceTypeMlC5n4xlarge    TrainingInstanceType = "ml.c5n.4xlarge"
+	TrainingInstanceTypeMlC5n9xlarge    TrainingInstanceType = "ml.c5n.9xlarge"
+	TrainingInstanceTypeMlC5n18xlarge   TrainingInstanceType = "ml.c5n.18xlarge"
+	TrainingInstanceTypeMlG5Xlarge      TrainingInstanceType = "ml.g5.xlarge"
+	TrainingInstanceTypeMlG52xlarge     TrainingInstanceType = "ml.g5.2xlarge"
+	TrainingInstanceTypeMlG54xlarge     TrainingInstanceType = "ml.g5.4xlarge"
+	TrainingInstanceTypeMlG58xlarge     TrainingInstanceType = "ml.g5.8xlarge"
+	TrainingInstanceTypeMlG516xlarge    TrainingInstanceType = "ml.g5.16xlarge"
+	TrainingInstanceTypeMlG512xlarge    TrainingInstanceType = "ml.g5.12xlarge"
+	TrainingInstanceTypeMlG524xlarge    TrainingInstanceType = "ml.g5.24xlarge"
+	TrainingInstanceTypeMlG548xlarge    TrainingInstanceType = "ml.g5.48xlarge"
+	TrainingInstanceTypeMlTrn12xlarge   TrainingInstanceType = "ml.trn1.2xlarge"
+	TrainingInstanceTypeMlTrn132xlarge  TrainingInstanceType = "ml.trn1.32xlarge"
+	TrainingInstanceTypeMlTrn1n32xlarge TrainingInstanceType = "ml.trn1n.32xlarge"
 )
 
 // Values returns all known values for TrainingInstanceType. Note that this can be
@@ -5545,6 +5600,7 @@ func (TrainingInstanceType) Values() []TrainingInstanceType {
 		"ml.g5.48xlarge",
 		"ml.trn1.2xlarge",
 		"ml.trn1.32xlarge",
+		"ml.trn1n.32xlarge",
 	}
 }
 
