@@ -23,6 +23,9 @@ import software.amazon.smithy.model.shapes.ServiceShape;
  * Collection of static utilities for working with S3 services.
  */
 public final class S3ModelUtils {
+    public static String SERVICE_S3_MODEL_FILE = "s3.json";
+    public static String SERVICE_S3_CONTROL_MODEL_FILE = "s3-control.json";
+
     private S3ModelUtils() {}
 
     /**
