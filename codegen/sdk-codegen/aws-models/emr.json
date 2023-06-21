@@ -2678,6 +2678,9 @@
                     "target": "com.amazonaws.emr#ListStudioSessionMappings"
                 },
                 {
+                    "target": "com.amazonaws.emr#ListSupportedInstanceTypes"
+                },
+                {
                     "target": "com.amazonaws.emr#ModifyCluster"
                 },
                 {
@@ -3947,6 +3950,12 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The details of the step failure. The service attempts to detect the root cause for many\n         common failures.</p>"
+            }
+        },
+        "com.amazonaws.emr#Float": {
+            "type": "float",
+            "traits": {
+                "smithy.api#default": 0
             }
         },
         "com.amazonaws.emr#GetAutoTerminationPolicy": {
@@ -7037,6 +7046,71 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.emr#ListSupportedInstanceTypes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.emr#ListSupportedInstanceTypesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.emr#ListSupportedInstanceTypesOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.emr#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.emr#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>A list of the instance types that Amazon EMR supports. You can filter the\n         list by Amazon Web Services Region and Amazon EMR release. </p>",
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "outputToken": "Marker"
+                }
+            }
+        },
+        "com.amazonaws.emr#ListSupportedInstanceTypesInput": {
+            "type": "structure",
+            "members": {
+                "ReleaseLabel": {
+                    "target": "com.amazonaws.emr#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon EMR release label determines the <a href=\"https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-release-app-versions-6.x.html\">versions of open-source\n            application packages</a> that Amazon EMR has installed on the cluster.\n         Release labels are in the format <code>emr-x.x.x</code>, where x.x.x is an Amazon EMR release number such as <code>emr-6.10.0</code>. For more information about Amazon EMR releases and their included application versions and features, see the\n               <i>\n               <a href=\"https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-release-components.html\">Amazon EMR Release\n               Guide</a>\n            </i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.emr#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token that marks the next set of results to retrieve.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.emr#ListSupportedInstanceTypesOutput": {
+            "type": "structure",
+            "members": {
+                "SupportedInstanceTypes": {
+                    "target": "com.amazonaws.emr#SupportedInstanceTypesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of instance types that the release specified in\n            <code>ListSupportedInstanceTypesInput$ReleaseLabel</code> supports, filtered by Amazon Web Services Region.</p>"
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.emr#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token that marks the next set of results to retrieve.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.emr#Long": {
             "type": "long",
             "traits": {
@@ -8944,7 +9018,7 @@
                 "AllocationStrategy": {
                     "target": "com.amazonaws.emr#SpotProvisioningAllocationStrategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies one of the following strategies to launch Spot Instance fleets: <code>price-capacity-optimized</code>, <code>capacity-optimized</code>, <code>lowest-price</code>, or  <code>diversified</code>. For more information on the provisioning strategies, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-allocation-strategy.html\">Allocation strategies for Spot Instances</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>\n         <note>\n            <p>When you launch a Spot Instance fleet with the old console, it automatically launches with the <code>capacity-optimized</code> strategy. You can't change the allocation strategy from the old console.</p>\n         </note>"
+                        "smithy.api#documentation": "<p> Specifies the strategy to use in launching Spot Instance fleets. Currently, the only\n         option is capacity-optimized (the default), which launches instances from Spot Instance\n         pools with optimal capacity for the number of instances that are launching. </p>"
                     }
                 }
             },
@@ -9763,6 +9837,91 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.emr#String"
+            }
+        },
+        "com.amazonaws.emr#SupportedInstanceType": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.emr#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <a href=\"http://aws.amazon.com/ec2/instance-types/\">Amazon EC2 instance\n            type</a>, for example <code>m5.xlarge</code>, of the\n            <code>SupportedInstanceType</code>.</p>"
+                    }
+                },
+                "MemoryGB": {
+                    "target": "com.amazonaws.emr#Float",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The amount of memory that is available to Amazon EMR from the <code>SupportedInstanceType</code>. The kernel and hypervisor\n         software consume some memory, so this value might be lower than the overall memory for the\n         instance type.</p>"
+                    }
+                },
+                "StorageGB": {
+                    "target": "com.amazonaws.emr#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <code>StorageGB</code> represents the storage capacity of the\n            <code>SupportedInstanceType</code>. This value is <code>0</code> for Amazon EBS-only instance types.</p>"
+                    }
+                },
+                "VCPU": {
+                    "target": "com.amazonaws.emr#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of vCPUs available for the <code>SupportedInstanceType</code>.</p>"
+                    }
+                },
+                "Is64BitsOnly": {
+                    "target": "com.amazonaws.emr#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates whether the <code>SupportedInstanceType</code> only supports 64-bit\n         architecture.</p>"
+                    }
+                },
+                "InstanceFamilyId": {
+                    "target": "com.amazonaws.emr#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon EC2 family and generation for the\n         <code>SupportedInstanceType</code>.</p>"
+                    }
+                },
+                "EbsOptimizedAvailable": {
+                    "target": "com.amazonaws.emr#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates whether the <code>SupportedInstanceType</code> supports Amazon EBS\n         optimization.</p>"
+                    }
+                },
+                "EbsOptimizedByDefault": {
+                    "target": "com.amazonaws.emr#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates whether the <code>SupportedInstanceType</code> uses Amazon EBS\n         optimization by default.</p>"
+                    }
+                },
+                "NumberOfDisks": {
+                    "target": "com.amazonaws.emr#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Number of disks for the <code>SupportedInstanceType</code>. This value is <code>0</code>\n         for Amazon EBS-only instance types.</p>"
+                    }
+                },
+                "EbsStorageOnly": {
+                    "target": "com.amazonaws.emr#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates whether the <code>SupportedInstanceType</code> only supports Amazon EBS.</p>"
+                    }
+                },
+                "Architecture": {
+                    "target": "com.amazonaws.emr#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CPU architecture, for example <code>X86_64</code> or <code>AARCH64</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An instance type that the specified Amazon EMR release supports.</p>"
+            }
+        },
+        "com.amazonaws.emr#SupportedInstanceTypesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.emr#SupportedInstanceType"
             }
         },
         "com.amazonaws.emr#SupportedProductConfig": {

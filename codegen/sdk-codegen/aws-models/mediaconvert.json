@@ -3323,7 +3323,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Use captions selectors to specify the captions data from your input that you use in your outputs. You can use up to 20 captions selectors per input."
+                "smithy.api#documentation": "Use captions selectors to specify the captions data from your input that you use in your outputs. You can use up to 100 captions selectors per input."
             }
         },
         "com.amazonaws.mediaconvert#CaptionSourceConvertPaintOnToPopOn": {
@@ -10731,6 +10731,13 @@
                         "smithy.api#jsonName": "alternateTransferFunctionSei"
                     }
                 },
+                "BandwidthReductionFilter": {
+                    "target": "com.amazonaws.mediaconvert#BandwidthReductionFilter",
+                    "traits": {
+                        "smithy.api#documentation": "The Bandwidth reduction filter increases the video quality of your output relative to its bitrate. Use to lower the bitrate of your constant quality QVBR output, with little or no perceptual decrease in quality. Or, use to increase the video quality of outputs with other rate control modes relative to the bitrate that you specify. Bandwidth reduction increases further when your input is low quality or noisy. Outputs that use this feature incur pro-tier pricing. When you include Bandwidth reduction filter, you cannot include the Noise reducer preprocessor.",
+                        "smithy.api#jsonName": "bandwidthReductionFilter"
+                    }
+                },
                 "Bitrate": {
                     "target": "com.amazonaws.mediaconvert#__integerMin1000Max1466400000",
                     "traits": {
@@ -11819,6 +11826,13 @@
                         "smithy.api#jsonName": "programDateTimePeriod"
                     }
                 },
+                "ProgressiveWriteHlsManifest": {
+                    "target": "com.amazonaws.mediaconvert#HlsProgressiveWriteHlsManifest",
+                    "traits": {
+                        "smithy.api#documentation": "Specify whether MediaConvert generates HLS manifests while your job is running or when your job is complete. To generate HLS manifests while your job is running: Choose Enabled. Use if you want to play back your content as soon as it's available. MediaConvert writes the parent and child manifests after the first three media segments are written to your destination S3 bucket. It then writes new updated manifests after each additional segment is written. The parent manifest includes the latest BANDWIDTH and AVERAGE-BANDWIDTH attributes, and child manifests include the latest available media segment. When your job completes, the final child playlists include an EXT-X-ENDLIST tag. To generate HLS manifests only when your job completes: Choose Disabled.",
+                        "smithy.api#jsonName": "progressiveWriteHlsManifest"
+                    }
+                },
                 "SegmentControl": {
                     "target": "com.amazonaws.mediaconvert#HlsSegmentControl",
                     "traits": {
@@ -12147,6 +12161,26 @@
             },
             "traits": {
                 "smithy.api#documentation": "Includes or excludes EXT-X-PROGRAM-DATE-TIME tag in .m3u8 manifest files. The value is calculated as follows: either the program date and time are initialized using the input timecode source, or the time is initialized using the input timecode source and the date is initialized using the timestamp_offset."
+            }
+        },
+        "com.amazonaws.mediaconvert#HlsProgressiveWriteHlsManifest": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Specify whether MediaConvert generates HLS manifests while your job is running or when your job is complete. To generate HLS manifests while your job is running: Choose Enabled. Use if you want to play back your content as soon as it's available. MediaConvert writes the parent and child manifests after the first three media segments are written to your destination S3 bucket. It then writes new updated manifests after each additional segment is written. The parent manifest includes the latest BANDWIDTH and AVERAGE-BANDWIDTH attributes, and child manifests include the latest available media segment. When your job completes, the final child playlists include an EXT-X-ENDLIST tag. To generate HLS manifests only when your job completes: Choose Disabled."
             }
         },
         "com.amazonaws.mediaconvert#HlsRenditionGroupSettings": {
@@ -12510,7 +12544,7 @@
                 "CaptionSelectors": {
                     "target": "com.amazonaws.mediaconvert#__mapOfCaptionSelector",
                     "traits": {
-                        "smithy.api#documentation": "Use captions selectors to specify the captions data from your input that you use in your outputs. You can use up to 20 captions selectors per input.",
+                        "smithy.api#documentation": "Use captions selectors to specify the captions data from your input that you use in your outputs. You can use up to 100 captions selectors per input.",
                         "smithy.api#jsonName": "captionSelectors"
                     }
                 },
@@ -12934,7 +12968,7 @@
                 "CaptionSelectors": {
                     "target": "com.amazonaws.mediaconvert#__mapOfCaptionSelector",
                     "traits": {
-                        "smithy.api#documentation": "Use captions selectors to specify the captions data from your input that you use in your outputs. You can use up to 20 captions selectors per input.",
+                        "smithy.api#documentation": "Use captions selectors to specify the captions data from your input that you use in your outputs. You can use up to 100 captions selectors per input.",
                         "smithy.api#jsonName": "captionSelectors"
                     }
                 },

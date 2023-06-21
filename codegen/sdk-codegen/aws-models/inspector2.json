@@ -204,6 +204,10 @@
                     {
                         "value": "PACKAGE_VULNERABILITY",
                         "name": "PACKAGE_VULNERABILITY"
+                    },
+                    {
+                        "value": "CODE_VULNERABILITY",
+                        "name": "CODE_VULNERABILITY"
                     }
                 ]
             }
@@ -665,6 +669,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Represents whether AWS Lambda standard scans are automatically enabled for new members of your Amazon Inspector organization.\n      </p>"
                     }
+                },
+                "lambdaCode": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents whether AWS Lambda code scans are automatically enabled for new members of your Amazon Inspector organization.\n         \n      </p>"
+                    }
                 }
             },
             "traits": {
@@ -1070,6 +1080,76 @@
                 }
             }
         },
+        "com.amazonaws.inspector2#BatchGetCodeSnippet": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.inspector2#BatchGetCodeSnippetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.inspector2#BatchGetCodeSnippetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.inspector2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves code snippets from findings that Amazon Inspector detected code vulnerabilities in.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/codesnippet/batchget"
+                }
+            }
+        },
+        "com.amazonaws.inspector2#BatchGetCodeSnippetRequest": {
+            "type": "structure",
+            "members": {
+                "findingArns": {
+                    "target": "com.amazonaws.inspector2#FindingArns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of finding ARNs for the findings you want to retrieve code snippets from.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 10
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.inspector2#BatchGetCodeSnippetResponse": {
+            "type": "structure",
+            "members": {
+                "codeSnippetResults": {
+                    "target": "com.amazonaws.inspector2#CodeSnippetResultList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The retrieved code snippets associated with the provided finding ARNs.</p>"
+                    }
+                },
+                "errors": {
+                    "target": "com.amazonaws.inspector2#CodeSnippetErrorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Any errors Amazon Inspector encountered while trying to retrieve the requested code snippets.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.inspector2#BatchGetFreeTrialInfo": {
             "type": "operation",
             "input": {
@@ -1325,6 +1405,70 @@
                 }
             }
         },
+        "com.amazonaws.inspector2#CancelSbomExport": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.inspector2#CancelSbomExportRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.inspector2#CancelSbomExportResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.inspector2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Cancels a software bill of materials (SBOM) report.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/sbomexport/cancel"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.inspector2#CancelSbomExportRequest": {
+            "type": "structure",
+            "members": {
+                "reportId": {
+                    "target": "com.amazonaws.inspector2#ReportId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The report ID of the SBOM export to cancel.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.inspector2#CancelSbomExportResponse": {
+            "type": "structure",
+            "members": {
+                "reportId": {
+                    "target": "com.amazonaws.inspector2#ReportId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The report ID of the canceled SBOM export.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.inspector2#CisaAction": {
             "type": "string",
             "traits": {
@@ -1372,6 +1516,244 @@
                     "min": 1,
                     "max": 64
                 }
+            }
+        },
+        "com.amazonaws.inspector2#CodeFilePath": {
+            "type": "structure",
+            "members": {
+                "fileName": {
+                    "target": "com.amazonaws.inspector2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the file the code vulnerability was found in.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "filePath": {
+                    "target": "com.amazonaws.inspector2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The file path to the code that a vulnerability was found in.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "startLine": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The line number of the first line of code that a vulnerability was found in.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "endLine": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The line number of the last line of code that a vulnerability was found in.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information on where a code vulnerability is located in your Lambda function.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#CodeLine": {
+            "type": "structure",
+            "members": {
+                "content": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content of a line of code</p>",
+                        "smithy.api#length": {
+                            "min": 0,
+                            "max": 240
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "lineNumber": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The line number that a section of code is located at.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information on the lines of code associated with a code snippet.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#CodeLineList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#CodeLine"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.inspector2#CodeSnippetError": {
+            "type": "structure",
+            "members": {
+                "findingArn": {
+                    "target": "com.amazonaws.inspector2#FindingArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the finding that a code snippet couldn't be retrieved for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "errorCode": {
+                    "target": "com.amazonaws.inspector2#CodeSnippetErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code for the error that prevented a code snippet from being retrieved.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "errorMessage": {
+                    "target": "com.amazonaws.inspector2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message received when Amazon Inspector failed to retrieve a code snippet.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about any errors encountered while trying to retrieve a code snippet.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#CodeSnippetErrorCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "INTERNAL_ERROR",
+                        "name": "INTERNAL_ERROR"
+                    },
+                    {
+                        "value": "ACCESS_DENIED",
+                        "name": "ACCESS_DENIED"
+                    },
+                    {
+                        "value": "CODE_SNIPPET_NOT_FOUND",
+                        "name": "CODE_SNIPPET_NOT_FOUND"
+                    },
+                    {
+                        "value": "INVALID_INPUT",
+                        "name": "INVALID_INPUT"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.inspector2#CodeSnippetErrorList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#CodeSnippetError"
+            }
+        },
+        "com.amazonaws.inspector2#CodeSnippetResult": {
+            "type": "structure",
+            "members": {
+                "findingArn": {
+                    "target": "com.amazonaws.inspector2#FindingArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of a finding that the code snippet is associated with.</p>"
+                    }
+                },
+                "startLine": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The line number of the first line of a code snippet.</p>"
+                    }
+                },
+                "endLine": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The line number of the last line of a code snippet.</p>"
+                    }
+                },
+                "codeSnippet": {
+                    "target": "com.amazonaws.inspector2#CodeLineList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information on the retrieved code snippet.</p>"
+                    }
+                },
+                "suggestedFixes": {
+                    "target": "com.amazonaws.inspector2#SuggestedFixes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details of a suggested code fix.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information on a code snippet retrieved by Amazon Inspector from a code vulnerability finding.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#CodeSnippetResultList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#CodeSnippetResult"
+            }
+        },
+        "com.amazonaws.inspector2#CodeVulnerabilityDetails": {
+            "type": "structure",
+            "members": {
+                "filePath": {
+                    "target": "com.amazonaws.inspector2#CodeFilePath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information on where the code vulnerability is located in your code.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "detectorTags": {
+                    "target": "com.amazonaws.inspector2#DetectorTagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The detector tag associated with the vulnerability. Detector tags group related vulnerabilities by common themes or tactics. For a list of available tags by programming language, see <a href=\"https://docs.aws.amazon.com/codeguru/detector-library/java/tags/\">Java tags</a>, or <a href=\"https://docs.aws.amazon.com/codeguru/detector-library/python/tags/\">Python tags</a>. </p>"
+                    }
+                },
+                "referenceUrls": {
+                    "target": "com.amazonaws.inspector2#ReferenceUrls",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A URL containing supporting documentation about the code vulnerability detected.</p>"
+                    }
+                },
+                "ruleId": {
+                    "target": "com.amazonaws.inspector2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for a rule that was used to detect the code vulnerability.</p>"
+                    }
+                },
+                "sourceLambdaLayerArn": {
+                    "target": "com.amazonaws.inspector2#LambdaLayerArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Lambda layer that the code vulnerability was detected in.</p>"
+                    }
+                },
+                "detectorId": {
+                    "target": "com.amazonaws.inspector2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID for the Amazon CodeGuru detector associated with the finding. For more information on detectors see <a href=\"https://docs.aws.amazon.com/codeguru/detector-library\">Amazon CodeGuru\n         Detector Library</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "detectorName": {
+                    "target": "com.amazonaws.inspector2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the detector used to identify the code vulnerability. For more information on detectors see <a href=\"https://docs.aws.amazon.com/codeguru/detector-library\">CodeGuru Detector Library</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "cwes": {
+                    "target": "com.amazonaws.inspector2#CweList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Common Weakness Enumeration (CWE) item associated with the detected vulnerability.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information on the code vulnerability identified in your Lambda function.</p>"
             }
         },
         "com.amazonaws.inspector2#Component": {
@@ -1916,6 +2298,82 @@
                 }
             }
         },
+        "com.amazonaws.inspector2#CreateSbomExport": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.inspector2#CreateSbomExportRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.inspector2#CreateSbomExportResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.inspector2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a software bill of materials (SBOM) report.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/sbomexport/create"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.inspector2#CreateSbomExportRequest": {
+            "type": "structure",
+            "members": {
+                "resourceFilterCriteria": {
+                    "target": "com.amazonaws.inspector2#ResourceFilterCriteria",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource filter criteria for the software bill of materials (SBOM) report.</p>"
+                    }
+                },
+                "reportFormat": {
+                    "target": "com.amazonaws.inspector2#SbomReportFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The output format for the software bill of materials (SBOM) report.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "s3Destination": {
+                    "target": "com.amazonaws.inspector2#Destination",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.inspector2#CreateSbomExportResponse": {
+            "type": "structure",
+            "members": {
+                "reportId": {
+                    "target": "com.amazonaws.inspector2#ReportId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The report ID for the software bill of materials (SBOM) report.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.inspector2#Currency": {
             "type": "string",
             "traits": {
@@ -2120,6 +2578,18 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0
+                }
+            }
+        },
+        "com.amazonaws.inspector2#CweList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#NonEmptyString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
                 }
             }
         },
@@ -2383,6 +2853,18 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 100
+                }
+            }
+        },
+        "com.amazonaws.inspector2#DetectorTagList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#NonEmptyString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
                 }
             }
         },
@@ -3087,10 +3569,35 @@
                 "smithy.api#documentation": "<p>Details about the Exploit Prediction Scoring System (EPSS) score.</p>"
             }
         },
+        "com.amazonaws.inspector2#EpssDetails": {
+            "type": "structure",
+            "members": {
+                "score": {
+                    "target": "com.amazonaws.inspector2#EpssScoreValue",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The EPSS score.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about the Exploit Prediction Scoring System (EPSS) score for a finding.</p>"
+            }
+        },
         "com.amazonaws.inspector2#EpssScore": {
             "type": "double",
             "traits": {
                 "smithy.api#default": 0
+            }
+        },
+        "com.amazonaws.inspector2#EpssScoreValue": {
+            "type": "double",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 0.0,
+                    "max": 1.0
+                }
             }
         },
         "com.amazonaws.inspector2#ErrorCode": {
@@ -3673,6 +4180,30 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Filters the list of AWS Lambda findings by the availability of exploits.</p>"
                     }
+                },
+                "codeVulnerabilityDetectorName": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the detector used to identify a code vulnerability in a Lambda function used to filter findings.</p>"
+                    }
+                },
+                "codeVulnerabilityDetectorTags": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The detector type tag associated with the vulnerability used to filter findings. Detector tags group related vulnerabilities by common themes or tactics. For a list of available tags by programming language, see <a href=\"https://docs.aws.amazon.com/codeguru/detector-library/java/tags/\">Java tags</a>, or <a href=\"https://docs.aws.amazon.com/codeguru/detector-library/python/tags/\">Python tags</a>. </p>"
+                    }
+                },
+                "codeVulnerabilityFilePath": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The file path to the file in a Lambda function that contains a code vulnerability used to filter findings.</p>"
+                    }
+                },
+                "epssScore": {
+                    "target": "com.amazonaws.inspector2#NumberFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The EPSS score used to filter findings.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3838,6 +4369,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The details of an exploit available for a finding discovered in your environment.</p>"
                     }
+                },
+                "codeVulnerabilityDetails": {
+                    "target": "com.amazonaws.inspector2#CodeVulnerabilityDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the code vulnerability identified in a Lambda function used to filter findings.</p>"
+                    }
+                },
+                "epss": {
+                    "target": "com.amazonaws.inspector2#EpssDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The finding's EPSS score.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3852,6 +4395,12 @@
                     "max": 100
                 },
                 "smithy.api#pattern": "^arn:(aws[a-zA-Z-]*)?:inspector2:[a-z]{2}(-gov)?-[a-z]+-\\d{1}:\\d{12}:finding/[a-f0-9]{32}$"
+            }
+        },
+        "com.amazonaws.inspector2#FindingArns": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#FindingArn"
             }
         },
         "com.amazonaws.inspector2#FindingDescription": {
@@ -3913,6 +4462,10 @@
                     {
                         "value": "PACKAGE_VULNERABILITY",
                         "name": "PACKAGE_VULNERABILITY"
+                    },
+                    {
+                        "value": "CODE_VULNERABILITY",
+                        "name": "CODE_VULNERABILITY"
                     }
                 ]
             }
@@ -4160,6 +4713,10 @@
                     {
                         "name": "LAMBDA",
                         "value": "LAMBDA"
+                    },
+                    {
+                        "name": "LAMBDA_CODE",
+                        "value": "LAMBDA_CODE"
                     }
                 ]
             }
@@ -4332,6 +4889,80 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.inspector2#GetEncryptionKey": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.inspector2#GetEncryptionKeyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.inspector2#GetEncryptionKeyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.inspector2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets an encryption key.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/encryptionkey/get"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.inspector2#GetEncryptionKeyRequest": {
+            "type": "structure",
+            "members": {
+                "scanType": {
+                    "target": "com.amazonaws.inspector2#ScanType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scan type the key encrypts.</p>",
+                        "smithy.api#httpQuery": "scanType",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceType": {
+                    "target": "com.amazonaws.inspector2#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource type the key encrypts.</p>",
+                        "smithy.api#httpQuery": "resourceType",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.inspector2#GetEncryptionKeyResponse": {
+            "type": "structure",
+            "members": {
+                "kmsKeyId": {
+                    "target": "com.amazonaws.inspector2#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A kms key ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.inspector2#GetFindingsReportStatus": {
             "type": "operation",
             "input": {
@@ -4473,6 +5104,103 @@
                         "smithy.api#documentation": "<p>Details of the retrieved member account.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.inspector2#GetSbomExport": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.inspector2#GetSbomExportRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.inspector2#GetSbomExportResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.inspector2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets details of a software bill of materials (SBOM) report.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/sbomexport/get"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.inspector2#GetSbomExportRequest": {
+            "type": "structure",
+            "members": {
+                "reportId": {
+                    "target": "com.amazonaws.inspector2#ReportId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The report ID of the SBOM export to get details for.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.inspector2#GetSbomExportResponse": {
+            "type": "structure",
+            "members": {
+                "reportId": {
+                    "target": "com.amazonaws.inspector2#ReportId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The report ID of the software bill of materials (SBOM) report.</p>"
+                    }
+                },
+                "format": {
+                    "target": "com.amazonaws.inspector2#SbomReportFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format of the software bill of materials (SBOM) report.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.inspector2#ExternalReportStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the software bill of materials (SBOM) report.</p>"
+                    }
+                },
+                "errorCode": {
+                    "target": "com.amazonaws.inspector2#ReportingErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An error code.</p>"
+                    }
+                },
+                "errorMessage": {
+                    "target": "com.amazonaws.inspector2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An error message.</p>"
+                    }
+                },
+                "s3Destination": {
+                    "target": "com.amazonaws.inspector2#Destination"
+                },
+                "filterCriteria": {
+                    "target": "com.amazonaws.inspector2#ResourceFilterCriteria",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains details about the resource filter criteria used for the software bill of materials (SBOM) report.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.inspector2#GroupKey": {
@@ -4628,6 +5356,9 @@
                     "target": "com.amazonaws.inspector2#BatchGetAccountStatus"
                 },
                 {
+                    "target": "com.amazonaws.inspector2#BatchGetCodeSnippet"
+                },
+                {
                     "target": "com.amazonaws.inspector2#BatchGetFreeTrialInfo"
                 },
                 {
@@ -4640,10 +5371,16 @@
                     "target": "com.amazonaws.inspector2#CancelFindingsReport"
                 },
                 {
+                    "target": "com.amazonaws.inspector2#CancelSbomExport"
+                },
+                {
                     "target": "com.amazonaws.inspector2#CreateFilter"
                 },
                 {
                     "target": "com.amazonaws.inspector2#CreateFindingsReport"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#CreateSbomExport"
                 },
                 {
                     "target": "com.amazonaws.inspector2#DeleteFilter"
@@ -4676,10 +5413,16 @@
                     "target": "com.amazonaws.inspector2#GetEc2DeepInspectionConfiguration"
                 },
                 {
+                    "target": "com.amazonaws.inspector2#GetEncryptionKey"
+                },
+                {
                     "target": "com.amazonaws.inspector2#GetFindingsReportStatus"
                 },
                 {
                     "target": "com.amazonaws.inspector2#GetMember"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#GetSbomExport"
                 },
                 {
                     "target": "com.amazonaws.inspector2#ListAccountPermissions"
@@ -4712,6 +5455,9 @@
                     "target": "com.amazonaws.inspector2#ListUsageTotals"
                 },
                 {
+                    "target": "com.amazonaws.inspector2#ResetEncryptionKey"
+                },
+                {
                     "target": "com.amazonaws.inspector2#SearchVulnerabilities"
                 },
                 {
@@ -4725,6 +5471,9 @@
                 },
                 {
                     "target": "com.amazonaws.inspector2#UpdateEc2DeepInspectionConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#UpdateEncryptionKey"
                 },
                 {
                     "target": "com.amazonaws.inspector2#UpdateFilter"
@@ -5721,6 +6470,12 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.inspector2#IpV6Address"
+            }
+        },
+        "com.amazonaws.inspector2#KmsKeyArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:aws(-(us-gov|cn))?:kms:([a-z0-9][-.a-z0-9]{0,62})?:[0-9]{12}?:key/(([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})|(mrk-[0-9a-zA-Z]{32}))$"
             }
         },
         "com.amazonaws.inspector2#LambdaFunctionAggregation": {
@@ -7702,6 +8457,18 @@
                 "smithy.api#documentation": "<p>Details about the recommended course of action to remediate the finding.</p>"
             }
         },
+        "com.amazonaws.inspector2#ReferenceUrls": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#NonEmptyString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.inspector2#RelatedVulnerabilities": {
             "type": "list",
             "member": {
@@ -7925,6 +8692,70 @@
                 ]
             }
         },
+        "com.amazonaws.inspector2#ResetEncryptionKey": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.inspector2#ResetEncryptionKeyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.inspector2#ResetEncryptionKeyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.inspector2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Resets an encryption key. After the key is reset your resources will be encrypted by an Amazon Web Services owned key.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PUT",
+                    "uri": "/encryptionkey/reset"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.inspector2#ResetEncryptionKeyRequest": {
+            "type": "structure",
+            "members": {
+                "scanType": {
+                    "target": "com.amazonaws.inspector2#ScanType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scan type the key encrypts.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceType": {
+                    "target": "com.amazonaws.inspector2#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource type the key encrypts.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.inspector2#ResetEncryptionKeyResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.inspector2#Resource": {
             "type": "structure",
             "members": {
@@ -7997,6 +8828,62 @@
                 "smithy.api#documentation": "<p>Contains details about the resource involved in the finding.</p>"
             }
         },
+        "com.amazonaws.inspector2#ResourceFilterCriteria": {
+            "type": "structure",
+            "members": {
+                "accountId": {
+                    "target": "com.amazonaws.inspector2#ResourceStringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account IDs used as resource filter criteria.</p>"
+                    }
+                },
+                "resourceId": {
+                    "target": "com.amazonaws.inspector2#ResourceStringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource IDs used as resource filter criteria.</p>"
+                    }
+                },
+                "resourceType": {
+                    "target": "com.amazonaws.inspector2#ResourceStringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource types used as resource filter criteria.</p>"
+                    }
+                },
+                "ecrRepositoryName": {
+                    "target": "com.amazonaws.inspector2#ResourceStringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ECR repository names used as resource filter criteria.</p>"
+                    }
+                },
+                "lambdaFunctionName": {
+                    "target": "com.amazonaws.inspector2#ResourceStringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Lambda function name used as resource filter criteria.</p>"
+                    }
+                },
+                "ecrImageTags": {
+                    "target": "com.amazonaws.inspector2#ResourceStringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ECR image tags used as resource filter criteria.</p>"
+                    }
+                },
+                "ec2InstanceTags": {
+                    "target": "com.amazonaws.inspector2#ResourceMapFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The EC2 instance tags used as resource filter criteria.</p>"
+                    }
+                },
+                "lambdaFunctionTags": {
+                    "target": "com.amazonaws.inspector2#ResourceMapFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Lambda function tags used as resource filter criteria.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The resource filter criteria for a Software bill of materials (SBOM) report.</p>"
+            }
+        },
         "com.amazonaws.inspector2#ResourceId": {
             "type": "string",
             "traits": {
@@ -8011,6 +8898,57 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.inspector2#Resource"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.inspector2#ResourceMapComparison": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "EQUALS",
+                        "name": "EQUALS"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.inspector2#ResourceMapFilter": {
+            "type": "structure",
+            "members": {
+                "comparison": {
+                    "target": "com.amazonaws.inspector2#ResourceMapComparison",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter's comparison.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "key": {
+                    "target": "com.amazonaws.inspector2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter's key.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.inspector2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter's value.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A resource map filter for a software bill of material report.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#ResourceMapFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#ResourceMapFilter"
             },
             "traits": {
                 "smithy.api#length": {
@@ -8082,6 +9020,10 @@
                     {
                         "value": "LAMBDA",
                         "name": "LAMBDA"
+                    },
+                    {
+                        "value": "LAMBDA_CODE",
+                        "name": "LAMBDA_CODE"
                     }
                 ]
             }
@@ -8104,6 +9046,9 @@
                     }
                 },
                 "lambda": {
+                    "target": "com.amazonaws.inspector2#State"
+                },
+                "lambdaCode": {
                     "target": "com.amazonaws.inspector2#State"
                 }
             },
@@ -8133,10 +9078,74 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The status of Amazon Inspector scanning for AWS Lambda function.</p>"
                     }
+                },
+                "lambdaCode": {
+                    "target": "com.amazonaws.inspector2#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of Amazon Inspector scanning for custom application code for Amazon Web Services Lambda functions.     \n      </p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Details the status of Amazon Inspector for each resource type Amazon Inspector scans.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#ResourceStringComparison": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "EQUALS",
+                        "name": "EQUALS"
+                    },
+                    {
+                        "value": "NOT_EQUALS",
+                        "name": "NOT_EQUALS"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.inspector2#ResourceStringFilter": {
+            "type": "structure",
+            "members": {
+                "comparison": {
+                    "target": "com.amazonaws.inspector2#ResourceStringComparison",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter's comparison.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.inspector2#ResourceStringInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter's value.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A resource string filter for a software bill of materials report.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#ResourceStringFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#ResourceStringFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.inspector2#ResourceStringInput": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
             }
         },
         "com.amazonaws.inspector2#ResourceType": {
@@ -8217,6 +9226,29 @@
                     {
                         "value": "GO_1_X",
                         "name": "GO_1_X"
+                    },
+                    {
+                        "value": "JAVA_17",
+                        "name": "JAVA_17"
+                    },
+                    {
+                        "value": "PYTHON_3_10",
+                        "name": "PYTHON_3_10"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.inspector2#SbomReportFormat": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CYCLONEDX_1_4",
+                        "name": "CYCLONEDX_1_4"
+                    },
+                    {
+                        "value": "SPDX_2_3",
+                        "name": "SPDX_2_3"
                     }
                 ]
             }
@@ -8372,6 +9404,10 @@
                     {
                         "value": "PACKAGE",
                         "name": "PACKAGE"
+                    },
+                    {
+                        "value": "CODE",
+                        "name": "CODE"
                     }
                 ]
             }
@@ -8680,6 +9716,10 @@
                     {
                         "value": "VENDOR_SEVERITY",
                         "name": "VENDOR_SEVERITY"
+                    },
+                    {
+                        "value": "EPSS_SCORE",
+                        "name": "EPSS_SCORE"
                     }
                 ]
             }
@@ -8888,6 +9928,46 @@
                 }
             }
         },
+        "com.amazonaws.inspector2#SuggestedFix": {
+            "type": "structure",
+            "members": {
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fix's description.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 1000
+                        }
+                    }
+                },
+                "code": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fix's code.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 2500
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A suggested fix for a vulnerability in your Lambda function code.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#SuggestedFixes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#SuggestedFix"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
         "com.amazonaws.inspector2#TagKey": {
             "type": "string",
             "traits": {
@@ -9060,6 +10140,12 @@
                     "target": "com.amazonaws.inspector2#TitleSortBy",
                     "traits": {
                         "smithy.api#documentation": "<p>The value to sort results by.</p>"
+                    }
+                },
+                "findingType": {
+                    "target": "com.amazonaws.inspector2#AggregationFindingType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of finding to aggregate on.</p>"
                     }
                 }
             },
@@ -9320,6 +10406,77 @@
                     }
                 }
             },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.inspector2#UpdateEncryptionKey": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.inspector2#UpdateEncryptionKeyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.inspector2#UpdateEncryptionKeyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.inspector2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.inspector2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an encryption key. A <code>ResourceNotFoundException</code> means that an AWS owned key is being used for encryption.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PUT",
+                    "uri": "/encryptionkey/update"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.inspector2#UpdateEncryptionKeyRequest": {
+            "type": "structure",
+            "members": {
+                "kmsKeyId": {
+                    "target": "com.amazonaws.inspector2#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A KMS key ID for the encryption key.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "scanType": {
+                    "target": "com.amazonaws.inspector2#ScanType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scan type for the encryption key.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceType": {
+                    "target": "com.amazonaws.inspector2#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource type for the encryption key.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.inspector2#UpdateEncryptionKeyResponse": {
+            "type": "structure",
+            "members": {},
             "traits": {
                 "smithy.api#output": {}
             }
@@ -9623,6 +10780,10 @@
                     {
                         "name": "LAMBDA_FUNCTION_HOURS",
                         "value": "LAMBDA_FUNCTION_HOURS"
+                    },
+                    {
+                        "name": "LAMBDA_FUNCTION_CODE_HOURS",
+                        "value": "LAMBDA_FUNCTION_CODE_HOURS"
                     }
                 ]
             }
@@ -9872,7 +11033,7 @@
                 "epss": {
                     "target": "com.amazonaws.inspector2#Epss",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that contains the Exploit Prediction Scoring System (EPSS) score.</p>"
+                        "smithy.api#documentation": "<p>An object that contains the Exploit Prediction Scoring System (EPSS) score for a vulnerability.</p>"
                     }
                 }
             },

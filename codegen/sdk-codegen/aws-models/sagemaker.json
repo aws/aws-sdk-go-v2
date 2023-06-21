@@ -5994,6 +5994,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies additional configuration for multi-model endpoints.</p>"
                     }
+                },
+                "ModelDataSource": {
+                    "target": "com.amazonaws.sagemaker#ModelDataSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the location of ML model data to deploy.</p>\n         <note>\n            <p>Currently you cannot use <code>ModelDataSource</code> in conjuction with\n                SageMaker batch transform, SageMaker serverless endpoints, SageMaker multi-model endpoints, and SageMaker\n                Marketplace.</p>\n         </note>"
+                    }
                 }
             },
             "traits": {
@@ -6708,7 +6714,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Autopilot job also referred to as Autopilot experiment or AutoML job.</p>\n         <p>Find the best-performing model after you run an AutoML job by calling <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJobV2.html\">DescribeAutoMLJobV2</a> (recommended) or <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJob.html\">DescribeAutoMLJob</a>.</p>\n         <note>\n            <p>\n               <code>CreateAutoMLJob</code> only accepts tabular input data. We recommend using\n               <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html\">CreateAutoMLJobV2</a> for all problem types. <code>CreateAutoMLJobV2</code> can\n            process the same tabular data as its previous version <code>CreateAutoMLJob</code>, as\n            well as non-tabular data for problem types such as image or text classification.</p>\n            <p>Find guidelines about how to migrate <code>CreateAutoMLJob</code> to\n               <code>CreateAutoMLJobV2</code> in <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development-create-experiment-api.html#autopilot-create-experiment-api-migrate-v1-v2\">Migrate a CreateAutoMLJob to CreateAutoMLJobV2</a>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Creates an Autopilot job also referred to as Autopilot experiment or AutoML job.</p>\n         <note>\n            <p>We recommend using the new versions <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html\">CreateAutoMLJobV2</a> and <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJobV2.html\">DescribeAutoMLJobV2</a>, which offer backward compatibility.</p>\n            <p>\n               <code>CreateAutoMLJobV2</code> can manage tabular problem types identical to those of\n            its previous version <code>CreateAutoMLJob</code>, as well as non-tabular problem types\n            such as image or text classification.</p>\n            <p>Find guidelines about how to migrate a <code>CreateAutoMLJob</code> to\n               <code>CreateAutoMLJobV2</code> in <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development-create-experiment-api.html#autopilot-create-experiment-api-migrate-v1-v2\">Migrate a CreateAutoMLJob to CreateAutoMLJobV2</a>.</p>\n         </note>\n         <p>You can find the best-performing model after you run an AutoML job by calling <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJobV2.html\">DescribeAutoMLJobV2</a> (recommended) or <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJob.html\">DescribeAutoMLJob</a>.</p>"
             }
         },
         "com.amazonaws.sagemaker#CreateAutoMLJobRequest": {
@@ -6816,7 +6822,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Autopilot job also referred to as Autopilot experiment or AutoML job V2.</p>\n         <p>We recommend using <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html\">CreateAutoMLJobV2</a>\n         for all problem types. <code>CreateAutoMLJobV2</code> can process the same tabular data as\n         its previous version <code>CreateAutoMLJob</code>, as well as non-tabular data for problem\n         types such as image or text classification.</p>\n         <p>Find guidelines about how to migrate <code>CreateAutoMLJob</code> to\n            <code>CreateAutoMLJobV2</code> in <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development-create-experiment-api.html#autopilot-create-experiment-api-migrate-v1-v2\">Migrate a CreateAutoMLJob to CreateAutoMLJobV2</a>.</p>\n         <p>For the list of available problem types supported by <code>CreateAutoMLJobV2</code>, see\n            <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLProblemTypeConfig.html\">AutoMLProblemTypeConfig</a>.</p>\n         <p>Find the best-performing model after you run an AutoML job V2 by calling <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJobV2.html\">DescribeAutoMLJobV2</a>. Calling <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJob.html\">DescribeAutoMLJob</a>\n         on a AutoML job V2 results in an error.</p>"
+                "smithy.api#documentation": "<p>Creates an Autopilot job also referred to as Autopilot experiment or AutoML job V2.</p>\n         <note>\n            <p>\n               <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html\">CreateAutoMLJobV2</a> and <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJobV2.html\">DescribeAutoMLJobV2</a> are new versions of <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJob.html\">CreateAutoMLJob</a>\n            and <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJob.html\">DescribeAutoMLJob</a> which offer backward compatibility.</p>\n            <p>\n               <code>CreateAutoMLJobV2</code> can manage tabular problem types identical to those of its previous version\n               <code>CreateAutoMLJob</code>, as well as non-tabular problem types such as\n            image or text classification.</p>\n            <p>Find guidelines about how to migrate a <code>CreateAutoMLJob</code> to\n               <code>CreateAutoMLJobV2</code> in <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development-create-experiment-api.html#autopilot-create-experiment-api-migrate-v1-v2\">Migrate a CreateAutoMLJob to CreateAutoMLJobV2</a>.</p>\n         </note>\n         <p>For the list of available problem types supported by <code>CreateAutoMLJobV2</code>, see\n            <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLProblemTypeConfig.html\">AutoMLProblemTypeConfig</a>.</p>\n         <p>You can find the best-performing model after you run an AutoML job V2 by calling <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJobV2.html\">DescribeAutoMLJobV2</a>.</p>"
             }
         },
         "com.amazonaws.sagemaker#CreateAutoMLJobV2Request": {
@@ -6832,7 +6838,7 @@
                 "AutoMLJobInputDataConfig": {
                     "target": "com.amazonaws.sagemaker#AutoMLJobInputDataConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of channel objects describing the input data and their location. Each channel\n         is a named input source. Similar to <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJob.html#sagemaker-CreateAutoMLJob-request-InputDataConfig\">InputDataConfig</a> supported by <code>CreateAutoMLJob</code>. The supported\n         formats depend on the problem type:</p>\n         <ul>\n            <li>\n               <p>For Tabular problem types: <code>S3Prefix</code>,\n               <code>ManifestFile</code>.</p>\n            </li>\n            <li>\n               <p>For ImageClassification: <code>S3Prefix</code>, <code>ManifestFile</code>,\n                  <code>AugmentedManifestFile</code>.</p>\n            </li>\n            <li>\n               <p>For TextClassification: <code>S3Prefix</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>An array of channel objects describing the input data and their location. Each channel\n         is a named input source. Similar to the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJob.html#sagemaker-CreateAutoMLJob-request-InputDataConfig\">InputDataConfig</a> attribute in the <code>CreateAutoMLJob</code> input parameters.\n         The supported formats depend on the problem type:</p>\n         <ul>\n            <li>\n               <p>For Tabular problem types: <code>S3Prefix</code>,\n               <code>ManifestFile</code>.</p>\n            </li>\n            <li>\n               <p>For ImageClassification: <code>S3Prefix</code>, <code>ManifestFile</code>,\n                  <code>AugmentedManifestFile</code>.</p>\n            </li>\n            <li>\n               <p>For TextClassification: <code>S3Prefix</code>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6846,7 +6852,7 @@
                 "AutoMLProblemTypeConfig": {
                     "target": "com.amazonaws.sagemaker#AutoMLProblemTypeConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines the configuration settings of one of the supported problem types.</p>\n         <note>\n            <p>For tabular problem types, you must either specify the type of supervised learning\n            problem in <code>AutoMLProblemTypeConfig</code>\n               (<code>TabularJobConfig.ProblemType</code>) and provide the\n               <code>AutoMLJobObjective</code>, or none at all.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>Defines the configuration settings of one of the supported problem types.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6872,7 +6878,7 @@
                 "AutoMLJobObjective": {
                     "target": "com.amazonaws.sagemaker#AutoMLJobObjective",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a metric to minimize or maximize as the objective of a job. If not specified,\n         the default objective metric depends on the problem type. For the list of default values\n         per problem type, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobObjective.html\">AutoMLJobObjective</a>.</p>\n         <note>\n            <p>For tabular problem types, you must either provide the\n               <code>AutoMLJobObjective</code> and indicate the type of supervised learning problem\n            in <code>AutoMLProblemTypeConfig</code> (<code>TabularJobConfig.ProblemType</code>), or\n            none.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies a metric to minimize or maximize as the objective of a job. If not specified,\n         the default objective metric depends on the problem type. For the list of default values\n         per problem type, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobObjective.html\">AutoMLJobObjective</a>.</p>\n         <note>\n            <p>For tabular problem types, you must either provide both the\n               <code>AutoMLJobObjective</code> and indicate the type of supervised learning problem\n            in <code>AutoMLProblemTypeConfig</code> (<code>TabularJobConfig.ProblemType</code>), or\n            none at all.</p>\n         </note>"
                     }
                 },
                 "ModelDeployConfig": {
@@ -14136,7 +14142,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns information about an AutoML job created by calling <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJob.html\">CreateAutoMLJob</a>.</p>"
+                "smithy.api#documentation": "<p>Returns information about an AutoML job created by calling <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJob.html\">CreateAutoMLJob</a>.</p>\n         <note>\n            <p>AutoML jobs created by calling <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html\">CreateAutoMLJobV2</a> cannot be described by\n            <code>DescribeAutoMLJob</code>.</p>\n         </note>"
             }
         },
         "com.amazonaws.sagemaker#DescribeAutoMLJobRequest": {
@@ -14312,7 +14318,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns information about an AutoML job V2 created by calling <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html\">CreateAutoMLJobV2</a>.</p>"
+                "smithy.api#documentation": "<p>Returns information about an AutoML job created by calling <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html\">CreateAutoMLJobV2</a>\n         or <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJob.html\">CreateAutoMLJob</a>.</p>"
             }
         },
         "com.amazonaws.sagemaker#DescribeAutoMLJobV2Request": {
@@ -37726,6 +37732,23 @@
                 "smithy.api#documentation": "<p>Configures the timeout and maximum number of retries for processing a transform job\n            invocation.</p>"
             }
         },
+        "com.amazonaws.sagemaker#ModelCompressionType": {
+            "type": "enum",
+            "members": {
+                "None": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "None"
+                    }
+                },
+                "Gzip": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Gzip"
+                    }
+                }
+            }
+        },
         "com.amazonaws.sagemaker#ModelConfiguration": {
             "type": "structure",
             "members": {
@@ -38018,6 +38041,21 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Data quality constraints and statistics for a model.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#ModelDataSource": {
+            "type": "structure",
+            "members": {
+                "S3DataSource": {
+                    "target": "com.amazonaws.sagemaker#S3ModelDataSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the S3 location of ML model data to deploy.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the location of ML model data to deploy. If specified, you must specify\n            one and only one of the available data sources.</p>"
             }
         },
         "com.amazonaws.sagemaker#ModelDeployConfig": {
@@ -41628,6 +41666,23 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#OutputCompressionType": {
+            "type": "enum",
+            "members": {
+                "GZIP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GZIP"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                }
+            }
+        },
         "com.amazonaws.sagemaker#OutputConfig": {
             "type": "structure",
             "members": {
@@ -41681,6 +41736,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Identifies the S3 path where you want SageMaker to store the model artifacts. For\n            example, <code>s3://bucket-name/key-name-prefix</code>. </p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "CompressionType": {
+                    "target": "com.amazonaws.sagemaker#OutputCompressionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The model output compression type. Select <code>None</code> to output an uncompressed model, recommended for large model outputs. Defaults to gzip.</p>"
                     }
                 }
             },
@@ -47770,6 +47831,62 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#S3ModelDataSource": {
+            "type": "structure",
+            "members": {
+                "S3Uri": {
+                    "target": "com.amazonaws.sagemaker#S3ModelUri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the S3 path of ML model data to deploy.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "S3DataType": {
+                    "target": "com.amazonaws.sagemaker#S3ModelDataType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the type of ML model data to deploy.</p>\n         <p>If you choose <code>S3Prefix</code>, <code>S3Uri</code> identifies a key name prefix.\n            SageMaker uses all objects that match the specified key name prefix as part of the ML model\n            data to deploy. A valid key name prefix identified by <code>S3Uri</code> always ends\n            with a forward slash (/).</p>\n         <p>If you choose S3Object, S3Uri identifies an object that is the ML model data to\n            deploy.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CompressionType": {
+                    "target": "com.amazonaws.sagemaker#ModelCompressionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies how the ML model data is prepared.</p>\n         <p>If you choose <code>Gzip</code> and choose <code>S3Object</code> as the value of\n            <code>S3DataType</code>, <code>S3Uri</code> identifies an object that is a\n            gzip-compressed TAR archive. SageMaker will attempt to decompress and untar the object\n            during model deployment.</p>\n         <p>If you choose <code>None</code> and chooose <code>S3Object</code> as the value of\n            <code>S3DataType</code>, <code>S3Uri</code> identifies an object that represents an\n            uncompressed ML model to deploy.</p>\n         <p>If you choose None and choose <code>S3Prefix</code> as the value of\n            <code>S3DataType</code>, <code>S3Uri</code> identifies a key name prefix, under which\n            all objects represents the uncompressed ML model to deploy.</p>\n         <p>If you choose None, then SageMaker will follow rules below when creating model data files\n            under /opt/ml/model directory for use by your inference code:</p>\n         <ul>\n            <li>\n               <p>If you choose <code>S3Object</code> as the value of <code>S3DataType</code>,\n                    then SageMaker will split the key of the S3 object referenced by <code>S3Uri</code> by\n                    slash (/), and use the last part as the filename of the file holding the content\n                    of the S3 object.</p>\n            </li>\n            <li>\n               <p>If you choose <code>S3Prefix</code> as the value of <code>S3DataType</code>,\n                    then for each S3 object under the key name pefix referenced by <code>S3Uri</code>,\n                    SageMaker will trim its key by the prefix, and use the remainder as the path\n                    (relative to <code>/opt/ml/model</code>) of the file holding the content of the\n                    S3 object. SageMaker will split the remainder by slash (/), using intermediate parts as\n                    directory names and the last part as filename of the file holding the content of\n                    the S3 object.</p>\n            </li>\n            <li>\n               <p>Do not use any of the following as file names or directory names:</p>\n               <ul>\n                  <li>\n                     <p>An empty or blank string</p>\n                  </li>\n                  <li>\n                     <p>A string which contains null bytes</p>\n                  </li>\n                  <li>\n                     <p>A string longer than 255 bytes</p>\n                  </li>\n                  <li>\n                     <p>A single dot (<code>.</code>)</p>\n                  </li>\n                  <li>\n                     <p>A double dot (<code>..</code>)</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Ambiguous file names will result in model deployment failure. For example,\n                    if your uncompressed ML model consists of two S3 objects\n                    <code>s3://mybucket/model/weights</code> and <code>s3://mybucket/model/weights/part1</code>\n                    and you specify <code>s3://mybucket/model/</code> as the value of <code>S3Uri</code> and\n                    <code>S3Prefix</code> as the value of S3DataType, then it will result in name clash between\n                    <code>/opt/ml/model/weights</code> (a regular file) and <code>/opt/ml/model/weights/</code>\n                    (a directory).</p>\n            </li>\n            <li>\n               <p>Do not organize the model artifacts in\n                    <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html\">S3 console using folders</a>.\n                    When you create a folder in S3 console, S3 creates a 0-byte object with a key set to the\n                    folder name you provide. They key of the 0-byte object ends with a slash (/) which violates\n                    SageMaker restrictions on model artifact file names, leading to model deployment failure.\n                </p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the S3 location of ML model data to deploy.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#S3ModelDataType": {
+            "type": "enum",
+            "members": {
+                "S3Prefix": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "S3Prefix"
+                    }
+                },
+                "S3Object": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "S3Object"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#S3ModelUri": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^(https|s3)://([^/]+)/?(.*)$"
+            }
+        },
         "com.amazonaws.sagemaker#S3OutputPath": {
             "type": "string",
             "traits": {
@@ -52502,7 +52619,7 @@
                 "ProblemType": {
                     "target": "com.amazonaws.sagemaker#ProblemType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of supervised learning problem available for the model candidates of the AutoML\n         job V2. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-datasets-problem-types.html#autopilot-problem-types\">\n            Amazon SageMaker Autopilot problem types</a>.</p>"
+                        "smithy.api#documentation": "<p>The type of supervised learning problem available for the model candidates of the AutoML\n         job V2. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-datasets-problem-types.html#autopilot-problem-types\">\n            Amazon SageMaker Autopilot problem types</a>.</p>\n         <note>\n            <p>You must either specify the type of supervised learning problem in\n               <code>ProblemType</code> and provide the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html#sagemaker-CreateAutoMLJobV2-request-AutoMLJobObjective\">AutoMLJobObjective</a> metric, or none at all.</p>\n         </note>"
                     }
                 },
                 "TargetAttributeName": {
@@ -53684,6 +53801,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ml.trn1.32xlarge"
+                    }
+                },
+                "ML_TRN1N_32XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ml.trn1n.32xlarge"
                     }
                 }
             }
@@ -56268,7 +56391,7 @@
                 "AppSecurityGroupManagement": {
                     "target": "com.amazonaws.sagemaker#AppSecurityGroupManagement",
                     "traits": {
-                        "smithy.api#documentation": "<p>The entity that creates and manages the required security groups for inter-app\n            communication in <code>VPCOnly</code> mode. Required when\n                <code>CreateDomain.AppNetworkAccessType</code> is <code>VPCOnly</code> and\n                <code>DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn</code> is\n            provided. If setting up the domain for use with RStudio, this value must be set to <code>Service</code>.</p>"
+                        "smithy.api#documentation": "<p>The entity that creates and manages the required security groups for inter-app\n            communication in <code>VPCOnly</code> mode. Required when\n                <code>CreateDomain.AppNetworkAccessType</code> is <code>VPCOnly</code> and\n                <code>DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn</code> is\n            provided. If setting up the domain for use with RStudio, this value must be set to\n                <code>Service</code>.</p>"
                     }
                 }
             },

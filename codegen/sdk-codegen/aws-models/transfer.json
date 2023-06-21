@@ -891,6 +891,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the workflow ID for the workflow to assign and the execution role that's used for executing the workflow.</p>\n         <p>In addition to a workflow to execute when a file is uploaded completely, <code>WorkflowDetails</code> can also contain a\n    workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when the server session disconnects\n    while the file is still being uploaded.</p>"
                     }
+                },
+                "StructuredLogDestinations": {
+                    "target": "com.amazonaws.transfer#StructuredLogDestinations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the log groups to which your server logs are sent.</p>\n         <p>To specify a log group, you must provide the ARN for an existing log group. In this case, the format of the log group is as follows:</p>\n         <p>\n            <code>arn:aws:logs:region-name:amazon-account-id:log-group:log-group-name:*</code>\n         </p>\n         <p>For example, <code>arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*</code>\n         </p>\n         <p>If you have previously specified a log group for a server, you can clear it, and in effect turn off structured logging, by providing an empty\n        value for this parameter in an <code>update-server</code> call. For example:</p>\n         <p>\n            <code>update-server --server-id s-1234567890abcdef0 --structured-log-destinations</code>\n         </p>"
+                    }
                 }
             },
             "traits": {
@@ -3003,6 +3009,12 @@
                     "target": "com.amazonaws.transfer#WorkflowDetails",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the workflow ID for the workflow to assign and the execution role that's used for executing the workflow.</p>\n         <p>In addition to a workflow to execute when a file is uploaded completely, <code>WorkflowDetails</code> can also contain a\n    workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when the server session disconnects\n    while the file is still being uploaded.</p>"
+                    }
+                },
+                "StructuredLogDestinations": {
+                    "target": "com.amazonaws.transfer#StructuredLogDestinations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the log groups to which your server logs are sent.</p>\n         <p>To specify a log group, you must provide the ARN for an existing log group. In this case, the format of the log group is as follows:</p>\n         <p>\n            <code>arn:aws:logs:region-name:amazon-account-id:log-group:log-group-name:*</code>\n         </p>\n         <p>For example, <code>arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*</code>\n         </p>\n         <p>If you have previously specified a log group for a server, you can clear it, and in effect turn off structured logging, by providing an empty\n        value for this parameter in an <code>update-server</code> call. For example:</p>\n         <p>\n            <code>update-server --server-id s-1234567890abcdef0 --structured-log-destinations</code>\n         </p>"
                     }
                 }
             },
@@ -6657,6 +6669,18 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.transfer#StructuredLogDestinations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.transfer#Arn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                }
+            }
+        },
         "com.amazonaws.transfer#SubnetId": {
             "type": "string"
         },
@@ -8852,6 +8876,12 @@
                     "target": "com.amazonaws.transfer#WorkflowDetails",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the workflow ID for the workflow to assign and the execution role that's used for executing the workflow.</p>\n         <p>In addition to a workflow to execute when a file is uploaded completely, <code>WorkflowDetails</code> can also contain a\n    workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when the server session disconnects\n    while the file is still being uploaded.</p>\n         <p>To remove an associated workflow from a server, you can provide an empty <code>OnUpload</code> object, as in the following example.</p>\n         <p>\n            <code>aws transfer update-server --server-id s-01234567890abcdef --workflow-details '{\"OnUpload\":[]}'</code>\n         </p>"
+                    }
+                },
+                "StructuredLogDestinations": {
+                    "target": "com.amazonaws.transfer#StructuredLogDestinations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the log groups to which your server logs are sent.</p>\n         <p>To specify a log group, you must provide the ARN for an existing log group. In this case, the format of the log group is as follows:</p>\n         <p>\n            <code>arn:aws:logs:region-name:amazon-account-id:log-group:log-group-name:*</code>\n         </p>\n         <p>For example, <code>arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*</code>\n         </p>\n         <p>If you have previously specified a log group for a server, you can clear it, and in effect turn off structured logging, by providing an empty\n        value for this parameter in an <code>update-server</code> call. For example:</p>\n         <p>\n            <code>update-server --server-id s-1234567890abcdef0 --structured-log-destinations</code>\n         </p>"
                     }
                 }
             },
