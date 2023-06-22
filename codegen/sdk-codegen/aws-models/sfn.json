@@ -40,10 +40,19 @@
                     "target": "com.amazonaws.sfn#CreateStateMachine"
                 },
                 {
+                    "target": "com.amazonaws.sfn#CreateStateMachineAlias"
+                },
+                {
                     "target": "com.amazonaws.sfn#DeleteActivity"
                 },
                 {
                     "target": "com.amazonaws.sfn#DeleteStateMachine"
+                },
+                {
+                    "target": "com.amazonaws.sfn#DeleteStateMachineAlias"
+                },
+                {
+                    "target": "com.amazonaws.sfn#DeleteStateMachineVersion"
                 },
                 {
                     "target": "com.amazonaws.sfn#DescribeActivity"
@@ -56,6 +65,9 @@
                 },
                 {
                     "target": "com.amazonaws.sfn#DescribeStateMachine"
+                },
+                {
+                    "target": "com.amazonaws.sfn#DescribeStateMachineAlias"
                 },
                 {
                     "target": "com.amazonaws.sfn#DescribeStateMachineForExecution"
@@ -76,10 +88,19 @@
                     "target": "com.amazonaws.sfn#ListMapRuns"
                 },
                 {
+                    "target": "com.amazonaws.sfn#ListStateMachineAliases"
+                },
+                {
                     "target": "com.amazonaws.sfn#ListStateMachines"
                 },
                 {
+                    "target": "com.amazonaws.sfn#ListStateMachineVersions"
+                },
+                {
                     "target": "com.amazonaws.sfn#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.sfn#PublishStateMachineVersion"
                 },
                 {
                     "target": "com.amazonaws.sfn#SendTaskFailure"
@@ -110,6 +131,9 @@
                 },
                 {
                     "target": "com.amazonaws.sfn#UpdateStateMachine"
+                },
+                {
+                    "target": "com.amazonaws.sfn#UpdateStateMachineAlias"
                 }
             ],
             "traits": {
@@ -509,8 +533,8 @@
                             },
                             "params": {
                                 "Region": "af-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -522,8 +546,8 @@
                             },
                             "params": {
                                 "Region": "ap-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -535,8 +559,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -548,8 +572,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -561,8 +585,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -574,8 +598,8 @@
                             },
                             "params": {
                                 "Region": "ap-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -587,8 +611,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -600,8 +624,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -613,8 +637,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -626,8 +650,8 @@
                             },
                             "params": {
                                 "Region": "ca-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -639,8 +663,8 @@
                             },
                             "params": {
                                 "Region": "eu-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -652,8 +676,8 @@
                             },
                             "params": {
                                 "Region": "eu-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -665,8 +689,8 @@
                             },
                             "params": {
                                 "Region": "eu-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -678,8 +702,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -691,8 +715,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -704,8 +728,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -717,8 +741,8 @@
                             },
                             "params": {
                                 "Region": "me-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -730,8 +754,8 @@
                             },
                             "params": {
                                 "Region": "sa-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -743,8 +767,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -756,8 +780,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -769,8 +793,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -782,8 +806,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -795,8 +819,8 @@
                             },
                             "params": {
                                 "Region": "us-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -808,8 +832,8 @@
                             },
                             "params": {
                                 "Region": "us-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -821,8 +845,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -834,8 +858,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -847,8 +871,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -860,8 +884,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -873,8 +897,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -886,8 +910,8 @@
                             },
                             "params": {
                                 "Region": "cn-northwest-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -899,8 +923,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -912,8 +936,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -925,8 +949,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -938,8 +962,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -951,8 +975,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -964,8 +988,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -977,8 +1001,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -990,8 +1014,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1003,8 +1027,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1016,8 +1040,8 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1029,8 +1053,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1042,8 +1077,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1055,8 +1101,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1068,8 +1125,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1081,8 +1149,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1094,8 +1162,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1106,8 +1174,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1118,9 +1186,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -1191,7 +1265,7 @@
                 "name": {
                     "target": "com.amazonaws.sfn#Name",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the activity.</p> \n         <p>A name must <i>not</i> contain:</p>\n         <ul>\n            <li>\n               <p>white space</p>\n            </li>\n            <li>\n               <p>brackets <code>< > { } [ ]</code>\n               </p>\n            </li>\n            <li>\n               <p>wildcard characters <code>? *</code>\n               </p>\n            </li>\n            <li>\n               <p>special characters <code>\" # % \\ ^ | ~ ` $ & , ; : /</code>\n               </p>\n            </li>\n            <li>\n               <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p>\n            </li>\n         </ul>\n         <p>To enable logging with CloudWatch Logs, the name should only contain  0-9, A-Z, a-z, - and _.</p>",
+                        "smithy.api#documentation": "<p>The name of the activity.</p>\n         <p>A name must <i>not</i> contain:</p>\n         <ul>\n            <li>\n               <p>white space</p>\n            </li>\n            <li>\n               <p>brackets <code>< > { } [ ]</code>\n               </p>\n            </li>\n            <li>\n               <p>wildcard characters <code>? *</code>\n               </p>\n            </li>\n            <li>\n               <p>special characters <code>\" # % \\ ^ | ~ ` $ & , ; : /</code>\n               </p>\n            </li>\n            <li>\n               <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p>\n            </li>\n         </ul>\n         <p>To enable logging with CloudWatch Logs, the name should only contain  0-9, A-Z, a-z, - and _.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1334,6 +1408,16 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.sfn#AliasDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.sfn#Arn": {
             "type": "string",
             "traits": {
@@ -1383,6 +1467,16 @@
                 "smithy.api#documentation": "<p>An object that describes workflow billing details.</p>"
             }
         },
+        "com.amazonaws.sfn#CharacterRestrictedName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 80
+                },
+                "smithy.api#pattern": "^(?=.*[a-zA-Z_\\-\\.])[a-zA-Z0-9_\\-\\.]+$"
+            }
+        },
         "com.amazonaws.sfn#CloudWatchEventsExecutionDataDetails": {
             "type": "structure",
             "members": {
@@ -1410,6 +1504,19 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p></p>"
+            }
+        },
+        "com.amazonaws.sfn#ConflictException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.sfn#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Updating or deleting a resource can cause an inconsistent state. This error occurs when there're concurrent requests for <a>DeleteStateMachineVersion</a>, <a>PublishStateMachineVersion</a>, or <a>UpdateStateMachine</a> with the <code>publish</code> parameter set to <code>true</code>.</p>\n         <p>HTTP Status Code: 409</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
             }
         },
         "com.amazonaws.sfn#ConnectorParameters": {
@@ -1442,7 +1549,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an activity. An activity is a task that you write in any programming language and\n      host on any machine that has access to Step Functions. Activities must poll Step Functions using the\n        <code>GetActivityTask</code> API action and respond using <code>SendTask*</code> API\n      actions. This function lets Step Functions know the existence of your activity and returns an\n      identifier for use in a state machine and when polling from the activity.</p>\n         <note>\n            <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p>\n         </note> \n         <note>\n            <p>\n               <code>CreateActivity</code> is an idempotent API. Subsequent requests won’t create a\n        duplicate resource if it was already created. <code>CreateActivity</code>'s idempotency\n        check is based on the activity <code>name</code>. If a following request has different\n          <code>tags</code> values, Step Functions will ignore these differences and treat it as an\n        idempotent request of the previous. In this case, <code>tags</code> will not be updated,\n        even if they are different.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Creates an activity. An activity is a task that you write in any programming language and\n      host on any machine that has access to Step Functions. Activities must poll Step Functions using the\n        <code>GetActivityTask</code> API action and respond using <code>SendTask*</code> API\n      actions. This function lets Step Functions know the existence of your activity and returns an\n      identifier for use in a state machine and when polling from the activity.</p>\n         <note>\n            <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p>\n         </note>\n         <note>\n            <p>\n               <code>CreateActivity</code> is an idempotent API. Subsequent requests won’t create a\n        duplicate resource if it was already created. <code>CreateActivity</code>'s idempotency\n        check is based on the activity <code>name</code>. If a following request has different\n          <code>tags</code> values, Step Functions will ignore these differences and treat it as an\n        idempotent request of the previous. In this case, <code>tags</code> will not be updated,\n        even if they are different.</p>\n         </note>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -1452,16 +1559,19 @@
                 "name": {
                     "target": "com.amazonaws.sfn#Name",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the activity to create. This name must be unique for your Amazon Web Services account and region for 90 days. For more information,\n    see <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions\">\n    Limits Related to State Machine Executions</a> in the <i>Step Functions Developer Guide</i>.</p> \n         <p>A name must <i>not</i> contain:</p>\n         <ul>\n            <li>\n               <p>white space</p>\n            </li>\n            <li>\n               <p>brackets <code>< > { } [ ]</code>\n               </p>\n            </li>\n            <li>\n               <p>wildcard characters <code>? *</code>\n               </p>\n            </li>\n            <li>\n               <p>special characters <code>\" # % \\ ^ | ~ ` $ & , ; : /</code>\n               </p>\n            </li>\n            <li>\n               <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p>\n            </li>\n         </ul>\n         <p>To enable logging with CloudWatch Logs, the name should only contain  0-9, A-Z, a-z, - and _.</p>",
+                        "smithy.api#documentation": "<p>The name of the activity to create. This name must be unique for your Amazon Web Services account and region for 90 days. For more information,\n    see <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions\">\n    Limits Related to State Machine Executions</a> in the <i>Step Functions Developer Guide</i>.</p>\n         <p>A name must <i>not</i> contain:</p>\n         <ul>\n            <li>\n               <p>white space</p>\n            </li>\n            <li>\n               <p>brackets <code>< > { } [ ]</code>\n               </p>\n            </li>\n            <li>\n               <p>wildcard characters <code>? *</code>\n               </p>\n            </li>\n            <li>\n               <p>special characters <code>\" # % \\ ^ | ~ ` $ & , ; : /</code>\n               </p>\n            </li>\n            <li>\n               <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p>\n            </li>\n         </ul>\n         <p>To enable logging with CloudWatch Logs, the name should only contain  0-9, A-Z, a-z, - and _.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "tags": {
                     "target": "com.amazonaws.sfn#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of tags to add to a resource.</p> \n         <p>An array of key-value pairs. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Using\n      Cost Allocation Tags</a> in the <i>Amazon Web Services Billing and Cost Management User\n        Guide</i>, and <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html\">Controlling Access Using IAM\n          Tags</a>.</p> \n         <p>Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.</p>"
+                        "smithy.api#documentation": "<p>The list of tags to add to a resource.</p>\n         <p>An array of key-value pairs. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Using\n      Cost Allocation Tags</a> in the <i>Amazon Web Services Billing and Cost Management User\n        Guide</i>, and <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html\">Controlling Access Using IAM\n          Tags</a>.</p>\n         <p>Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.sfn#CreateActivityOutput": {
@@ -1481,6 +1591,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.sfn#CreateStateMachine": {
@@ -1492,6 +1605,9 @@
                 "target": "com.amazonaws.sfn#CreateStateMachineOutput"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.sfn#ConflictException"
+                },
                 {
                     "target": "com.amazonaws.sfn#InvalidArn"
                 },
@@ -1521,11 +1637,99 @@
                 },
                 {
                     "target": "com.amazonaws.sfn#TooManyTags"
+                },
+                {
+                    "target": "com.amazonaws.sfn#ValidationException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a state machine. A state machine consists of a collection of states that can do\n      work (<code>Task</code> states), determine to which states to transition next\n        (<code>Choice</code> states), stop an execution with an error (<code>Fail</code> states),\n      and so on. State machines are specified using a JSON-based, structured language. For more\n      information, see <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html\">Amazon States\n        Language</a> in the Step Functions User Guide.</p> \n         <note>\n            <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p>\n         </note> \n         <note>\n            <p>\n               <code>CreateStateMachine</code> is an idempotent API. Subsequent requests won’t create a\n        duplicate resource if it was already created. <code>CreateStateMachine</code>'s idempotency\n        check is based on the state machine <code>name</code>, <code>definition</code>,\n          <code>type</code>, <code>LoggingConfiguration</code> and\n        <code>TracingConfiguration</code>. If a following request has a different\n          <code>roleArn</code> or <code>tags</code>, Step Functions will ignore these differences and treat\n        it as an idempotent request of the previous. In this case, <code>roleArn</code> and\n          <code>tags</code> will not be updated, even if they are different.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Creates a state machine. A state machine consists of a collection of states that can do\n      work (<code>Task</code> states), determine to which states to transition next\n        (<code>Choice</code> states), stop an execution with an error (<code>Fail</code> states),\n      and so on. State machines are specified using a JSON-based, structured language. For more\n      information, see <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html\">Amazon States\n        Language</a> in the Step Functions User Guide.</p>\n         <p>If you set the <code>publish</code> parameter of this API action to <code>true</code>, it\n      publishes version <code>1</code> as the first revision of the state machine.</p>\n         <note>\n            <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p>\n         </note>\n         <note>\n            <p>\n               <code>CreateStateMachine</code> is an idempotent API. Subsequent requests won’t create a\n        duplicate resource if it was already created. <code>CreateStateMachine</code>'s idempotency\n        check is based on the state machine <code>name</code>, <code>definition</code>,\n          <code>type</code>, <code>LoggingConfiguration</code>, and\n        <code>TracingConfiguration</code>. The check is also based on the <code>publish</code> and <code>versionDescription</code> parameters. If a following request has a different\n          <code>roleArn</code> or <code>tags</code>, Step Functions will ignore these differences and treat\n        it as an idempotent request of the previous. In this case, <code>roleArn</code> and\n          <code>tags</code> will not be updated, even if they are different.</p>\n         </note>",
                 "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.sfn#CreateStateMachineAlias": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sfn#CreateStateMachineAliasInput"
+            },
+            "output": {
+                "target": "com.amazonaws.sfn#CreateStateMachineAliasOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sfn#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.sfn#InvalidArn"
+                },
+                {
+                    "target": "com.amazonaws.sfn#InvalidName"
+                },
+                {
+                    "target": "com.amazonaws.sfn#ResourceNotFound"
+                },
+                {
+                    "target": "com.amazonaws.sfn#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.sfn#StateMachineDeleting"
+                },
+                {
+                    "target": "com.amazonaws.sfn#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html\">alias</a> for a state machine that points to one or two <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-version.html\">versions</a> of the same state machine. You can set your application to call <a>StartExecution</a> with an alias and update the version the alias uses without changing the client's code.</p>\n         <p>You can also map an alias to split <a>StartExecution</a> requests between two\n      versions of a state machine. To do this, add a second <code>RoutingConfig</code> object in the\n        <code>routingConfiguration</code> parameter. You must also specify the percentage of\n      execution run requests each version should receive in both <code>RoutingConfig</code> objects.\n        Step Functions randomly chooses which version runs a given execution based on the\n      percentage you specify.</p>\n         <p>To create an alias that points to a single version, specify a single\n        <code>RoutingConfig</code> object with a <code>weight</code> set to 100.</p>\n         <p>You can create up to 100 aliases for each state machine. You must delete unused aliases using the <a>DeleteStateMachineAlias</a> API action.</p>\n         <p>\n            <code>CreateStateMachineAlias</code> is an idempotent API. Step Functions bases the\n      idempotency check on the <code>stateMachineArn</code>, <code>description</code>,\n        <code>name</code>, and <code>routingConfiguration</code> parameters. Requests that contain\n      the same values for these parameters return a successful idempotent response without creating\n      a duplicate resource.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>DescribeStateMachineAlias</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListStateMachineAliases</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>UpdateStateMachineAlias</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteStateMachineAlias</a>\n               </p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.sfn#CreateStateMachineAliasInput": {
+            "type": "structure",
+            "members": {
+                "description": {
+                    "target": "com.amazonaws.sfn#AliasDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description for the state machine alias.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.sfn#CharacterRestrictedName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the state machine alias.</p>\n         <p>To avoid conflict with version ARNs, don't use an integer in the name of the alias.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "routingConfiguration": {
+                    "target": "com.amazonaws.sfn#RoutingConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The routing configuration of a state machine alias. The routing configuration shifts\n      execution traffic between two state machine versions. <code>routingConfiguration</code>\n      contains an array of <code>RoutingConfig</code> objects that specify up to two state machine\n      versions. Step Functions then randomly choses which version to run an execution with based\n      on the weight assigned to each <code>RoutingConfig</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sfn#CreateStateMachineAliasOutput": {
+            "type": "structure",
+            "members": {
+                "stateMachineAliasArn": {
+                    "target": "com.amazonaws.sfn#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies the created state machine alias.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "creationDate": {
+                    "target": "com.amazonaws.sfn#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date the state machine alias was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.sfn#CreateStateMachineInput": {
@@ -1534,7 +1738,7 @@
                 "name": {
                     "target": "com.amazonaws.sfn#Name",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the state machine. </p> \n         <p>A name must <i>not</i> contain:</p>\n         <ul>\n            <li>\n               <p>white space</p>\n            </li>\n            <li>\n               <p>brackets <code>< > { } [ ]</code>\n               </p>\n            </li>\n            <li>\n               <p>wildcard characters <code>? *</code>\n               </p>\n            </li>\n            <li>\n               <p>special characters <code>\" # % \\ ^ | ~ ` $ & , ; : /</code>\n               </p>\n            </li>\n            <li>\n               <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p>\n            </li>\n         </ul>\n         <p>To enable logging with CloudWatch Logs, the name should only contain  0-9, A-Z, a-z, - and _.</p>",
+                        "smithy.api#documentation": "<p>The name of the state machine. </p>\n         <p>A name must <i>not</i> contain:</p>\n         <ul>\n            <li>\n               <p>white space</p>\n            </li>\n            <li>\n               <p>brackets <code>< > { } [ ]</code>\n               </p>\n            </li>\n            <li>\n               <p>wildcard characters <code>? *</code>\n               </p>\n            </li>\n            <li>\n               <p>special characters <code>\" # % \\ ^ | ~ ` $ & , ; : /</code>\n               </p>\n            </li>\n            <li>\n               <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p>\n            </li>\n         </ul>\n         <p>To enable logging with CloudWatch Logs, the name should only contain  0-9, A-Z, a-z, - and _.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1567,7 +1771,7 @@
                 "tags": {
                     "target": "com.amazonaws.sfn#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Tags to be added when creating a state machine.</p> \n         <p>An array of key-value pairs. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Using\n      Cost Allocation Tags</a> in the <i>Amazon Web Services Billing and Cost Management User\n        Guide</i>, and <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html\">Controlling Access Using IAM\n          Tags</a>.</p> \n         <p>Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.</p>"
+                        "smithy.api#documentation": "<p>Tags to be added when creating a state machine.</p>\n         <p>An array of key-value pairs. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Using\n      Cost Allocation Tags</a> in the <i>Amazon Web Services Billing and Cost Management User\n        Guide</i>, and <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html\">Controlling Access Using IAM\n          Tags</a>.</p>\n         <p>Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.</p>"
                     }
                 },
                 "tracingConfiguration": {
@@ -1575,7 +1779,23 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Selects whether X-Ray tracing is enabled.</p>"
                     }
+                },
+                "publish": {
+                    "target": "com.amazonaws.sfn#Publish",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Set to <code>true</code> to publish the first version of the state machine during creation. The default is <code>false</code>.</p>"
+                    }
+                },
+                "versionDescription": {
+                    "target": "com.amazonaws.sfn#VersionDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets description about the state machine version. You can only set the description if the <code>publish</code> parameter is set to <code>true</code>. Otherwise, if you set <code>versionDescription</code>, but <code>publish</code> to <code>false</code>, this API action throws <code>ValidationException</code>.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.sfn#CreateStateMachineOutput": {
@@ -1594,7 +1814,16 @@
                         "smithy.api#documentation": "<p>The date the state machine is created.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "stateMachineVersionArn": {
+                    "target": "com.amazonaws.sfn#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies the created state machine version. If you do not set the <code>publish</code> parameter to <code>true</code>, this field returns null value.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.sfn#Definition": {
@@ -1634,11 +1863,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.sfn#DeleteActivityOutput": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.sfn#DeleteStateMachine": {
             "type": "operation",
@@ -1657,7 +1892,55 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a state machine. This is an asynchronous operation: It sets the state machine's\n      status to <code>DELETING</code> and begins the deletion process. </p>\n    \n         <p>If the given state machine Amazon Resource Name (ARN) is a qualified state machine ARN, it will fail with ValidationException.</p>\n    \n         <p>A qualified state machine ARN refers to a <i>Distributed Map state</i> defined within a state machine. For example, the qualified state machine ARN <code>arn:partition:states:region:account-id:stateMachine:stateMachineName/mapStateLabel</code> refers to a <i>Distributed Map state</i> with a label <code>mapStateLabel</code> in the state machine named <code>stateMachineName</code>.</p>\n    \n         <note>\n            <p>For <code>EXPRESS</code> state machines, the deletion will happen eventually (usually\n        less than a minute). Running executions may emit logs after <code>DeleteStateMachine</code>\n        API is called.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Deletes a state machine. This is an asynchronous operation: It sets the state machine's\n      status to <code>DELETING</code> and begins the deletion process. </p>\n         <p>A qualified state machine ARN can either refer to a <i>Distributed Map state</i> defined within a state machine, a version ARN, or an alias ARN.</p>\n         <p>The following are some examples of qualified and unqualified state machine ARNs:</p>\n         <ul>\n            <li>\n               <p>The following qualified state machine ARN refers to a <i>Distributed Map state</i> with a label <code>mapStateLabel</code> in a state machine named <code>myStateMachine</code>.</p>\n               <p>\n                  <code>arn:partition:states:region:account-id:stateMachine:myStateMachine/mapStateLabel</code>\n               </p>\n               <note>\n                  <p>If you provide a qualified state machine ARN that refers to a <i>Distributed Map state</i>, the request fails with <code>ValidationException</code>.</p>\n               </note>\n            </li>\n            <li>\n               <p>The following unqualified state machine ARN refers to a state machine named <code>myStateMachine</code>.</p>\n               <p>\n                  <code>arn:partition:states:region:account-id:stateMachine:myStateMachine</code>\n               </p>\n            </li>\n         </ul>\n         <p>This API action also deletes all <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-version.html\">versions</a> and <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html\">aliases</a> associated with a state machine.</p>\n         <note>\n            <p>For <code>EXPRESS</code> state machines, the deletion happens eventually (usually in\n        less than a minute). Running executions may emit logs after <code>DeleteStateMachine</code>\n        API is called.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.sfn#DeleteStateMachineAlias": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sfn#DeleteStateMachineAliasInput"
+            },
+            "output": {
+                "target": "com.amazonaws.sfn#DeleteStateMachineAliasOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sfn#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.sfn#InvalidArn"
+                },
+                {
+                    "target": "com.amazonaws.sfn#ResourceNotFound"
+                },
+                {
+                    "target": "com.amazonaws.sfn#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a state machine <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html\">alias</a>.</p>\n         <p>After you delete a state machine alias, you can't use it to start executions. When you\n      delete a state machine alias, Step Functions doesn't delete the state machine versions\n      that alias references.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateStateMachineAlias</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DescribeStateMachineAlias</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListStateMachineAliases</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>UpdateStateMachineAlias</a>\n               </p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.sfn#DeleteStateMachineAliasInput": {
+            "type": "structure",
+            "members": {
+                "stateMachineAliasArn": {
+                    "target": "com.amazonaws.sfn#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the state machine alias to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sfn#DeleteStateMachineAliasOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.sfn#DeleteStateMachineInput": {
@@ -1670,11 +1953,62 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.sfn#DeleteStateMachineOutput": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sfn#DeleteStateMachineVersion": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sfn#DeleteStateMachineVersionInput"
+            },
+            "output": {
+                "target": "com.amazonaws.sfn#DeleteStateMachineVersionOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sfn#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.sfn#InvalidArn"
+                },
+                {
+                    "target": "com.amazonaws.sfn#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a state machine <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-version.html\">version</a>. After\n      you delete a version, you can't call <a>StartExecution</a> using that version's ARN\n      or use\n      the\n      version with a state machine <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html\">alias</a>.</p>\n         <note>\n            <p>Deleting a state machine version won't terminate its in-progress executions.</p>\n         </note>\n         <note>\n            <p>You can't delete a state machine version currently referenced by one or more aliases. Before you delete a version, you must either delete the aliases or update them to point to another state machine version.</p>\n         </note>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>PublishStateMachineVersion</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListStateMachineVersions</a>\n               </p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.sfn#DeleteStateMachineVersionInput": {
+            "type": "structure",
+            "members": {
+                "stateMachineVersionArn": {
+                    "target": "com.amazonaws.sfn#LongArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the state machine version to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sfn#DeleteStateMachineVersionOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.sfn#DescribeActivity": {
             "type": "operation",
@@ -1693,7 +2027,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes an activity.</p> \n         <note>\n            <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Describes an activity.</p>\n         <note>\n            <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p>\n         </note>"
             }
         },
         "com.amazonaws.sfn#DescribeActivityInput": {
@@ -1706,6 +2040,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.sfn#DescribeActivityOutput": {
@@ -1721,7 +2058,7 @@
                 "name": {
                     "target": "com.amazonaws.sfn#Name",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the activity.</p> \n         <p>A name must <i>not</i> contain:</p>\n         <ul>\n            <li>\n               <p>white space</p>\n            </li>\n            <li>\n               <p>brackets <code>< > { } [ ]</code>\n               </p>\n            </li>\n            <li>\n               <p>wildcard characters <code>? *</code>\n               </p>\n            </li>\n            <li>\n               <p>special characters <code>\" # % \\ ^ | ~ ` $ & , ; : /</code>\n               </p>\n            </li>\n            <li>\n               <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p>\n            </li>\n         </ul>\n         <p>To enable logging with CloudWatch Logs, the name should only contain  0-9, A-Z, a-z, - and _.</p>",
+                        "smithy.api#documentation": "<p>The name of the activity.</p>\n         <p>A name must <i>not</i> contain:</p>\n         <ul>\n            <li>\n               <p>white space</p>\n            </li>\n            <li>\n               <p>brackets <code>< > { } [ ]</code>\n               </p>\n            </li>\n            <li>\n               <p>wildcard characters <code>? *</code>\n               </p>\n            </li>\n            <li>\n               <p>special characters <code>\" # % \\ ^ | ~ ` $ & , ; : /</code>\n               </p>\n            </li>\n            <li>\n               <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p>\n            </li>\n         </ul>\n         <p>To enable logging with CloudWatch Logs, the name should only contain  0-9, A-Z, a-z, - and _.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1732,6 +2069,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.sfn#DescribeExecution": {
@@ -1751,7 +2091,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides all information about a state machine execution, such as the state machine associated with the execution, the execution input and output, and relevant execution metadata. Use this API action to return the Map Run ARN if the execution was dispatched by a Map Run.</p>\n         <note>\n            <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p>\n         </note>\n         <p>This API action is not supported by <code>EXPRESS</code> state machine executions unless they were dispatched by a Map Run.</p>"
+                "smithy.api#documentation": "<p>Provides information about a state machine execution, such as the state machine\n      associated with the execution, the execution input and output, and relevant execution\n      metadata. Use this API action to return the Map Run Amazon Resource Name (ARN) if the execution was\n      dispatched by a Map Run.</p>\n         <p>If you specify a version or alias ARN when you call the <a>StartExecution</a>\n      API action, <code>DescribeExecution</code> returns that ARN.</p>\n         <note>\n            <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p>\n         </note>\n         <p>Executions of an <code>EXPRESS</code> state machinearen't supported by <code>DescribeExecution</code> unless a Map Run dispatched them.</p>"
             }
         },
         "com.amazonaws.sfn#DescribeExecutionInput": {
@@ -1764,6 +2104,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.sfn#DescribeExecutionOutput": {
@@ -1786,7 +2129,7 @@
                 "name": {
                     "target": "com.amazonaws.sfn#Name",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the execution.</p> \n         <p>A name must <i>not</i> contain:</p>\n         <ul>\n            <li>\n               <p>white space</p>\n            </li>\n            <li>\n               <p>brackets <code>< > { } [ ]</code>\n               </p>\n            </li>\n            <li>\n               <p>wildcard characters <code>? *</code>\n               </p>\n            </li>\n            <li>\n               <p>special characters <code>\" # % \\ ^ | ~ ` $ & , ; : /</code>\n               </p>\n            </li>\n            <li>\n               <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p>\n            </li>\n         </ul>\n         <p>To enable logging with CloudWatch Logs, the name should only contain  0-9, A-Z, a-z, - and _.</p>"
+                        "smithy.api#documentation": "<p>The name of the execution.</p>\n         <p>A name must <i>not</i> contain:</p>\n         <ul>\n            <li>\n               <p>white space</p>\n            </li>\n            <li>\n               <p>brackets <code>< > { } [ ]</code>\n               </p>\n            </li>\n            <li>\n               <p>wildcard characters <code>? *</code>\n               </p>\n            </li>\n            <li>\n               <p>special characters <code>\" # % \\ ^ | ~ ` $ & , ; : /</code>\n               </p>\n            </li>\n            <li>\n               <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p>\n            </li>\n         </ul>\n         <p>To enable logging with CloudWatch Logs, the name should only contain  0-9, A-Z, a-z, - and _.</p>"
                     }
                 },
                 "status": {
@@ -1806,7 +2149,7 @@
                 "stopDate": {
                     "target": "com.amazonaws.sfn#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the execution has already ended, the date the execution stopped.</p>"
+                        "smithy.api#documentation": "<p>If the execution ended, the date the execution stopped.</p>"
                     }
                 },
                 "input": {
@@ -1850,7 +2193,22 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The cause string if the state machine execution failed.</p>"
                     }
+                },
+                "stateMachineVersionArn": {
+                    "target": "com.amazonaws.sfn#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the state machine version associated with the execution. The version ARN is a combination of state machine ARN and the version number separated by a colon (:). For example, <code>stateMachineARN:1</code>.</p>\n         <p>If you start an execution from a <code>StartExecution</code> request without specifying a\n      state machine version or alias ARN, Step Functions returns a null value.</p>"
+                    }
+                },
+                "stateMachineAliasArn": {
+                    "target": "com.amazonaws.sfn#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the state machine alias associated with the execution. The alias ARN is a combination of state machine ARN and the alias name separated by a colon (:). For example, <code>stateMachineARN:PROD</code>.</p>\n         <p>If you start an execution from a <code>StartExecution</code> request with a\n      state machine version ARN, this field will be null.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.sfn#DescribeMapRun": {
@@ -1883,6 +2241,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.sfn#DescribeMapRunOutput": {
@@ -1960,6 +2321,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.sfn#DescribeStateMachine": {
@@ -1979,7 +2343,89 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides information about a state machine's definition, its IAM role Amazon Resource Name (ARN), and configuration. If the state machine ARN is a qualified state machine ARN, the response returned includes the <code>Map</code> state's label.</p>\n    \n         <p>A qualified state machine ARN refers to a <i>Distributed Map state</i> defined within a state machine. For example, the qualified state machine ARN <code>arn:partition:states:region:account-id:stateMachine:stateMachineName/mapStateLabel</code> refers to a <i>Distributed Map state</i> with a label <code>mapStateLabel</code> in the state machine named <code>stateMachineName</code>.</p>\n    \n         <note>\n            <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Provides information about a state machine's definition, its IAM role Amazon Resource Name (ARN), and configuration.</p>\n         <p>A qualified state machine ARN can either refer to a <i>Distributed Map state</i> defined within a state machine, a version ARN, or an alias ARN.</p>\n         <p>The following are some examples of qualified and unqualified state machine ARNs:</p>\n         <ul>\n            <li>\n               <p>The following qualified state machine ARN refers to a <i>Distributed Map state</i> with a label <code>mapStateLabel</code> in a state machine named <code>myStateMachine</code>.</p>\n               <p>\n                  <code>arn:partition:states:region:account-id:stateMachine:myStateMachine/mapStateLabel</code>\n               </p>\n               <note>\n                  <p>If you provide a qualified state machine ARN that refers to a <i>Distributed Map state</i>, the request fails with <code>ValidationException</code>.</p>\n               </note>\n            </li>\n            <li>\n               <p>The following qualified state machine ARN refers to an alias named <code>PROD</code>.</p>\n               <p>\n                  <code>arn:<partition>:states:<region>:<account-id>:stateMachine:<myStateMachine:PROD></code>\n               </p>\n               <note>\n                  <p>If you provide a qualified state machine ARN that refers to a version ARN or an alias ARN, the request starts execution for that version or alias.</p>\n               </note>\n            </li>\n            <li>\n               <p>The following unqualified state machine ARN refers to a state machine named <code>myStateMachine</code>.</p>\n               <p>\n                  <code>arn:<partition>:states:<region>:<account-id>:stateMachine:<myStateMachine></code>\n               </p>\n            </li>\n         </ul>\n         <p>This API action returns the details for a state machine version if the\n        <code>stateMachineArn</code> you specify is a state machine version ARN.</p>\n         <note>\n            <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.sfn#DescribeStateMachineAlias": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sfn#DescribeStateMachineAliasInput"
+            },
+            "output": {
+                "target": "com.amazonaws.sfn#DescribeStateMachineAliasOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sfn#InvalidArn"
+                },
+                {
+                    "target": "com.amazonaws.sfn#ResourceNotFound"
+                },
+                {
+                    "target": "com.amazonaws.sfn#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns details about a state machine <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html\">alias</a>.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateStateMachineAlias</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListStateMachineAliases</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>UpdateStateMachineAlias</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteStateMachineAlias</a>\n               </p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.sfn#DescribeStateMachineAliasInput": {
+            "type": "structure",
+            "members": {
+                "stateMachineAliasArn": {
+                    "target": "com.amazonaws.sfn#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the state machine alias.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sfn#DescribeStateMachineAliasOutput": {
+            "type": "structure",
+            "members": {
+                "stateMachineAliasArn": {
+                    "target": "com.amazonaws.sfn#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the state machine alias.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.sfn#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the state machine alias.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.sfn#AliasDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the alias.</p>"
+                    }
+                },
+                "routingConfiguration": {
+                    "target": "com.amazonaws.sfn#RoutingConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The routing configuration of the alias.</p>"
+                    }
+                },
+                "creationDate": {
+                    "target": "com.amazonaws.sfn#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date the state machine alias was created.</p>"
+                    }
+                },
+                "updateDate": {
+                    "target": "com.amazonaws.sfn#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date the state machine alias was last updated.</p>\n         <p>For a newly created state machine, this is the same as the creation date.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.sfn#DescribeStateMachineForExecution": {
@@ -1999,7 +2445,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides information about a state machine's definition, its execution role ARN, and configuration. If an execution was dispatched by a Map Run, the Map Run is returned in the response. Additionally, the state machine returned will be the state machine associated with the Map Run.</p>\n         <note>\n            <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p>\n         </note> \n         <p>This API action is not supported by <code>EXPRESS</code> state machines.</p>"
+                "smithy.api#documentation": "<p>Provides information about a state machine's definition, its execution role ARN, and\n      configuration. If a Map Run dispatched the execution, this action returns the Map Run\n      Amazon Resource Name (ARN) in the response.\n      The\n      state machine returned is the state machine associated with the\n      Map Run.</p>\n         <note>\n            <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p>\n         </note>\n         <p>This API action is not supported by <code>EXPRESS</code> state machines.</p>"
             }
         },
         "com.amazonaws.sfn#DescribeStateMachineForExecutionInput": {
@@ -2012,6 +2458,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.sfn#DescribeStateMachineForExecutionOutput": {
@@ -2072,7 +2521,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A user-defined or an auto-generated string that identifies a <code>Map</code> state. This ﬁeld is returned only if the <code>executionArn</code> is a child workflow execution that was started by a Distributed Map state.</p>"
                     }
+                },
+                "revisionId": {
+                    "target": "com.amazonaws.sfn#RevisionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The revision identifier for the state machine. The first revision ID when you create the state machine is null.</p>\n         <p>Use the state machine <code>revisionId</code> parameter to compare the revision of a state machine with the configuration of the state machine used for executions without performing a diff of the properties, such as <code>definition</code> and <code>roleArn</code>.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.sfn#DescribeStateMachineInput": {
@@ -2081,10 +2539,13 @@
                 "stateMachineArn": {
                     "target": "com.amazonaws.sfn#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the state machine to describe.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the state machine for which you want the information.</p>\n         <p>If you specify a state machine version ARN, this API returns details about that version. The version ARN is a combination of state machine ARN and the version number separated by a colon (:). For example, <code>stateMachineARN:1</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.sfn#DescribeStateMachineOutput": {
@@ -2093,14 +2554,14 @@
                 "stateMachineArn": {
                     "target": "com.amazonaws.sfn#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies the state machine.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies the state machine.</p>\n         <p>If you specified a state machine version ARN in your request, the API returns the version ARN. The version ARN is a combination of state machine ARN and the version number separated by a colon (:). For example, <code>stateMachineARN:1</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "name": {
                     "target": "com.amazonaws.sfn#Name",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the state machine.</p> \n         <p>A name must <i>not</i> contain:</p>\n         <ul>\n            <li>\n               <p>white space</p>\n            </li>\n            <li>\n               <p>brackets <code>< > { } [ ]</code>\n               </p>\n            </li>\n            <li>\n               <p>wildcard characters <code>? *</code>\n               </p>\n            </li>\n            <li>\n               <p>special characters <code>\" # % \\ ^ | ~ ` $ & , ; : /</code>\n               </p>\n            </li>\n            <li>\n               <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p>\n            </li>\n         </ul>\n         <p>To enable logging with CloudWatch Logs, the name should only contain  0-9, A-Z, a-z, - and _.</p>",
+                        "smithy.api#documentation": "<p>The name of the state machine.</p>\n         <p>A name must <i>not</i> contain:</p>\n         <ul>\n            <li>\n               <p>white space</p>\n            </li>\n            <li>\n               <p>brackets <code>< > { } [ ]</code>\n               </p>\n            </li>\n            <li>\n               <p>wildcard characters <code>? *</code>\n               </p>\n            </li>\n            <li>\n               <p>special characters <code>\" # % \\ ^ | ~ ` $ & , ; : /</code>\n               </p>\n            </li>\n            <li>\n               <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p>\n            </li>\n         </ul>\n         <p>To enable logging with CloudWatch Logs, the name should only contain  0-9, A-Z, a-z, - and _.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2134,7 +2595,7 @@
                 "creationDate": {
                     "target": "com.amazonaws.sfn#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date the state machine is created.</p>",
+                        "smithy.api#documentation": "<p>The date the state machine is created.</p>\n         <p>For a state machine version, <code>creationDate</code> is the date the version was created.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2152,7 +2613,22 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A user-defined or an auto-generated string that identifies a <code>Map</code> state. This parameter is present only if the <code>stateMachineArn</code> specified in input is a qualified state machine ARN.</p>"
                     }
+                },
+                "revisionId": {
+                    "target": "com.amazonaws.sfn#RevisionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The revision identifier for the state machine.</p>\n         <p>Use the <code>revisionId</code> parameter to compare between versions of a state machine\n      configuration used for executions without performing a diff of the properties, such as\n        <code>definition</code> and <code>roleArn</code>.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.sfn#VersionDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the state machine version.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.sfn#Enabled": {
@@ -2265,14 +2741,14 @@
                 "stateMachineArn": {
                     "target": "com.amazonaws.sfn#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the executed state machine.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the state machine that ran the execution.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "name": {
                     "target": "com.amazonaws.sfn#Name",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the execution.</p> \n         <p>A name must <i>not</i> contain:</p>\n         <ul>\n            <li>\n               <p>white space</p>\n            </li>\n            <li>\n               <p>brackets <code>< > { } [ ]</code>\n               </p>\n            </li>\n            <li>\n               <p>wildcard characters <code>? *</code>\n               </p>\n            </li>\n            <li>\n               <p>special characters <code>\" # % \\ ^ | ~ ` $ & , ; : /</code>\n               </p>\n            </li>\n            <li>\n               <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p>\n            </li>\n         </ul>\n         <p>To enable logging with CloudWatch Logs, the name should only contain  0-9, A-Z, a-z, - and _.</p>",
+                        "smithy.api#documentation": "<p>The name of the execution.</p>\n         <p>A name must <i>not</i> contain:</p>\n         <ul>\n            <li>\n               <p>white space</p>\n            </li>\n            <li>\n               <p>brackets <code>< > { } [ ]</code>\n               </p>\n            </li>\n            <li>\n               <p>wildcard characters <code>? *</code>\n               </p>\n            </li>\n            <li>\n               <p>special characters <code>\" # % \\ ^ | ~ ` $ & , ; : /</code>\n               </p>\n            </li>\n            <li>\n               <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p>\n            </li>\n         </ul>\n         <p>To enable logging with CloudWatch Logs, the name should only contain  0-9, A-Z, a-z, - and _.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2308,6 +2784,18 @@
                         "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The total number of items processed in a child workflow execution. This field is returned only if <code>mapRunArn</code> was specified in the <code>ListExecutions</code> API action. If <code>stateMachineArn</code> was specified in <code>ListExecutions</code>, the <code>itemCount</code> field isn't returned.</p>"
                     }
+                },
+                "stateMachineVersionArn": {
+                    "target": "com.amazonaws.sfn#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the state machine version associated with the execution.</p>\n         <p>If the state machine execution was started with an unqualified ARN, it returns null.</p>\n         <p>If the execution was started using a <code>stateMachineAliasArn</code>, both the <code>stateMachineAliasArn</code> and <code>stateMachineVersionArn</code> parameters contain the respective values.</p>"
+                    }
+                },
+                "stateMachineAliasArn": {
+                    "target": "com.amazonaws.sfn#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the state machine alias used to start an execution.</p>\n         <p>If the state machine execution was started with an unqualified ARN or a version ARN, it returns null.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2333,6 +2821,18 @@
                     "target": "com.amazonaws.sfn#Arn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role used for executing Lambda tasks.</p>"
+                    }
+                },
+                "stateMachineAliasArn": {
+                    "target": "com.amazonaws.sfn#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies a state machine alias used for starting the state machine execution.</p>"
+                    }
+                },
+                "stateMachineVersionArn": {
+                    "target": "com.amazonaws.sfn#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies a state machine version used for starting the state machine execution.</p>"
                     }
                 }
             },
@@ -2435,7 +2935,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Used by workers to retrieve a task (with the specified activity ARN) which has been\n      scheduled for execution by a running state machine. This initiates a long poll, where the\n      service holds the HTTP connection open and responds as soon as a task becomes available (i.e.\n      an execution of a task of this type is needed.) The maximum time the service holds on to the\n      request before responding is 60 seconds. If no task is available within 60 seconds, the poll\n      returns a <code>taskToken</code> with a null string.</p>\n    \n         <note>\n            <p>This API action isn't logged in CloudTrail.</p>\n         </note>\n    \n         <important>\n            <p>Workers should set their client side socket timeout to at least 65 seconds (5 seconds\n        higher than the maximum time the service may hold the poll request).</p>\n            <p>Polling with <code>GetActivityTask</code> can cause latency in some implementations. See\n          <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/bp-activity-pollers.html\">Avoid\n          Latency When Polling for Activity Tasks</a> in the Step Functions Developer Guide.</p>\n         </important>"
+                "smithy.api#documentation": "<p>Used by workers to retrieve a task (with the specified activity ARN) which has been\n      scheduled for execution by a running state machine. This initiates a long poll, where the\n      service holds the HTTP connection open and responds as soon as a task becomes available (i.e.\n      an execution of a task of this type is needed.) The maximum time the service holds on to the\n      request before responding is 60 seconds. If no task is available within 60 seconds, the poll\n      returns a <code>taskToken</code> with a null string.</p>\n         <note>\n            <p>This API action isn't logged in CloudTrail.</p>\n         </note>\n         <important>\n            <p>Workers should set their client side socket timeout to at least 65 seconds (5 seconds\n        higher than the maximum time the service may hold the poll request).</p>\n            <p>Polling with <code>GetActivityTask</code> can cause latency in some implementations. See\n          <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/bp-activity-pollers.html\">Avoid\n          Latency When Polling for Activity Tasks</a> in the Step Functions Developer Guide.</p>\n         </important>"
             }
         },
         "com.amazonaws.sfn#GetActivityTaskInput": {
@@ -2454,6 +2954,9 @@
                         "smithy.api#documentation": "<p>You can provide an arbitrary name in order to identify the worker that the task is\n      assigned to. This name is used when it is logged in the execution history.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.sfn#GetActivityTaskOutput": {
@@ -2471,6 +2974,9 @@
                         "smithy.api#documentation": "<p>The string that contains the JSON input data for the task. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.sfn#GetExecutionHistory": {
@@ -2493,7 +2999,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the history of the specified execution as a list of events. By default, the\n      results are returned in ascending order of the <code>timeStamp</code> of the events. Use the\n        <code>reverseOrder</code> parameter to get the latest events first.</p> \n         <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page.\n    Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p> \n         <p>This API action is not supported by <code>EXPRESS</code> state machines.</p>",
+                "smithy.api#documentation": "<p>Returns the history of the specified execution as a list of events. By default, the\n      results are returned in ascending order of the <code>timeStamp</code> of the events. Use the\n        <code>reverseOrder</code> parameter to get the latest events first.</p>\n         <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page.\n    Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p>\n         <p>This API action is not supported by <code>EXPRESS</code> state machines.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -2516,7 +3022,7 @@
                     "target": "com.amazonaws.sfn#PageSize",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results.\n    The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default.</p> \n         <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results.\n    The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default.</p>\n         <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>"
                     }
                 },
                 "reverseOrder": {
@@ -2538,6 +3044,9 @@
                         "smithy.api#documentation": "<p>You can select whether execution data (input or output of a history event) is returned.\n      The default is <code>true</code>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.sfn#GetExecutionHistoryOutput": {
@@ -2556,6 +3065,9 @@
                         "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page.\n    Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.sfn#HistoryEvent": {
@@ -3402,7 +3914,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the existing activities.</p> \n         <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page.\n    Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p> \n         <note>\n            <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Lists the existing activities.</p>\n         <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page.\n    Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p>\n         <note>\n            <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p>\n         </note>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -3418,7 +3930,7 @@
                     "target": "com.amazonaws.sfn#PageSize",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results.\n    The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default.</p> \n         <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results.\n    The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default.</p>\n         <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>"
                     }
                 },
                 "nextToken": {
@@ -3427,6 +3939,9 @@
                         "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page.\n    Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.sfn#ListActivitiesOutput": {
@@ -3445,6 +3960,9 @@
                         "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page.\n    Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.sfn#ListExecutions": {
@@ -3476,7 +3994,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all executions of a state machine or a Map Run. You can list all executions related to a state machine by specifying a state machine Amazon Resource Name (ARN), or those related to a Map Run by specifying a Map Run ARN.</p>\n         <p>Results are\n      sorted by time, with the most recent execution first.</p>\n         <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page.\n    Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p>\n         <note>\n            <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p>\n         </note> \n         <p>This API action is not supported by <code>EXPRESS</code> state machines.</p>",
+                "smithy.api#documentation": "<p>Lists all executions of a state machine or a Map Run. You can list all executions related to a state machine by specifying a state machine Amazon Resource Name (ARN), or those related to a Map Run by specifying a Map Run ARN.</p>\n         <p>You can also provide a state machine <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html\">alias</a> ARN or <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-version.html\">version</a> ARN to list the executions associated with a specific alias or version.</p>\n         <p>Results are\n      sorted by time, with the most recent execution first.</p>\n         <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page.\n    Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p>\n         <note>\n            <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p>\n         </note>\n         <p>This API action is not supported by <code>EXPRESS</code> state machines.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -3491,7 +4009,7 @@
                 "stateMachineArn": {
                     "target": "com.amazonaws.sfn#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the state machine whose executions is listed.</p>\n         <p>You can specify either a <code>mapRunArn</code> or a <code>stateMachineArn</code>, but not both.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the state machine whose executions is listed.</p>\n         <p>You can specify either a <code>mapRunArn</code> or a <code>stateMachineArn</code>, but not both.</p>\n         <p>You can also return a list of executions associated with a specific <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html\">alias</a> or <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-version.html\">version</a>, by specifying an alias ARN or a version ARN in the <code>stateMachineArn</code> parameter.</p>"
                     }
                 },
                 "statusFilter": {
@@ -3504,7 +4022,7 @@
                     "target": "com.amazonaws.sfn#PageSize",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results.\n    The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default.</p> \n         <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results.\n    The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default.</p>\n         <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>"
                     }
                 },
                 "nextToken": {
@@ -3519,6 +4037,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Map Run that started the child workflow executions. If the <code>mapRunArn</code> field is specified, a list of all of the child workflow executions started by a Map Run is returned. For more information, see <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-examine-map-run.html\">Examining Map Run</a> in the <i>Step Functions Developer Guide</i>.</p>\n         <p>You can specify either a <code>mapRunArn</code> or a <code>stateMachineArn</code>, but not both.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.sfn#ListExecutionsOutput": {
@@ -3537,6 +4058,9 @@
                         "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page.\n    Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.sfn#ListExecutionsPageToken": {
@@ -3591,7 +4115,7 @@
                     "target": "com.amazonaws.sfn#PageSize",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results.\n    The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default.</p> \n         <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results.\n    The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default.</p>\n         <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>"
                     }
                 },
                 "nextToken": {
@@ -3600,6 +4124,9 @@
                         "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page.\n    Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.sfn#ListMapRunsOutput": {
@@ -3618,6 +4145,159 @@
                         "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page.\n    Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sfn#ListStateMachineAliases": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sfn#ListStateMachineAliasesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.sfn#ListStateMachineAliasesOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sfn#InvalidArn"
+                },
+                {
+                    "target": "com.amazonaws.sfn#InvalidToken"
+                },
+                {
+                    "target": "com.amazonaws.sfn#ResourceNotFound"
+                },
+                {
+                    "target": "com.amazonaws.sfn#StateMachineDeleting"
+                },
+                {
+                    "target": "com.amazonaws.sfn#StateMachineDoesNotExist"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html\">aliases</a> for a specified state machine ARN. Results are sorted by time, with the most recently created aliases listed first. </p>\n         <p>To list aliases that reference a state machine <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-version.html\">version</a>, you can specify the version ARN in the <code>stateMachineArn</code> parameter.</p>\n         <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page.\n    Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateStateMachineAlias</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DescribeStateMachineAlias</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>UpdateStateMachineAlias</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteStateMachineAlias</a>\n               </p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.sfn#ListStateMachineAliasesInput": {
+            "type": "structure",
+            "members": {
+                "stateMachineArn": {
+                    "target": "com.amazonaws.sfn#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the state machine for which you want to list aliases.</p>\n         <p>If you specify a state machine version ARN, this API returns a list of aliases for that version.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.sfn#PageToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page.\n    Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.sfn#PageSize",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results.\n    The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default.</p>\n         <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sfn#ListStateMachineAliasesOutput": {
+            "type": "structure",
+            "members": {
+                "stateMachineAliases": {
+                    "target": "com.amazonaws.sfn#StateMachineAliasList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Aliases for the state machine.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.sfn#PageToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page.\n    Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sfn#ListStateMachineVersions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sfn#ListStateMachineVersionsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.sfn#ListStateMachineVersionsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sfn#InvalidArn"
+                },
+                {
+                    "target": "com.amazonaws.sfn#InvalidToken"
+                },
+                {
+                    "target": "com.amazonaws.sfn#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-version.html\">versions</a> for the specified state machine Amazon Resource Name (ARN).</p>\n         <p>The results are sorted in descending order of the version creation time.</p>\n         <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page.\n    Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>PublishStateMachineVersion</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteStateMachineVersion</a>\n               </p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.sfn#ListStateMachineVersionsInput": {
+            "type": "structure",
+            "members": {
+                "stateMachineArn": {
+                    "target": "com.amazonaws.sfn#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the state machine.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.sfn#PageToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page.\n    Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.sfn#PageSize",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results.\n    The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default.</p>\n         <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sfn#ListStateMachineVersionsOutput": {
+            "type": "structure",
+            "members": {
+                "stateMachineVersions": {
+                    "target": "com.amazonaws.sfn#StateMachineVersionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Versions for the state machine.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.sfn#PageToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page.\n    Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.sfn#ListStateMachines": {
@@ -3634,7 +4314,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the existing state machines.</p> \n         <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page.\n    Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p> \n         <note>\n            <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Lists the existing state machines.</p>\n         <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page.\n    Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p>\n         <note>\n            <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p>\n         </note>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -3650,7 +4330,7 @@
                     "target": "com.amazonaws.sfn#PageSize",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results.\n    The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default.</p> \n         <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results.\n    The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default.</p>\n         <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>"
                     }
                 },
                 "nextToken": {
@@ -3659,6 +4339,9 @@
                         "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page.\n    Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.sfn#ListStateMachinesOutput": {
@@ -3676,6 +4359,9 @@
                         "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page.\n    Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.sfn#ListTagsForResource": {
@@ -3695,7 +4381,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List tags for a given resource.</p> \n         <p>Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.</p>"
+                "smithy.api#documentation": "<p>List tags for a given resource.</p>\n         <p>Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.</p>"
             }
         },
         "com.amazonaws.sfn#ListTagsForResourceInput": {
@@ -3708,6 +4394,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.sfn#ListTagsForResourceOutput": {
@@ -3719,6 +4408,9 @@
                         "smithy.api#documentation": "<p>An array of tags associated with the resource.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.sfn#LogDestination": {
@@ -4149,6 +4841,94 @@
                 }
             }
         },
+        "com.amazonaws.sfn#Publish": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
+        },
+        "com.amazonaws.sfn#PublishStateMachineVersion": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sfn#PublishStateMachineVersionInput"
+            },
+            "output": {
+                "target": "com.amazonaws.sfn#PublishStateMachineVersionOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sfn#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.sfn#InvalidArn"
+                },
+                {
+                    "target": "com.amazonaws.sfn#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.sfn#StateMachineDeleting"
+                },
+                {
+                    "target": "com.amazonaws.sfn#StateMachineDoesNotExist"
+                },
+                {
+                    "target": "com.amazonaws.sfn#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-version.html\">version</a> from the\n      current revision of a state machine. Use versions to create immutable snapshots of your state\n      machine. You can start executions from versions either directly or with an alias. To create an\n      alias, use <a>CreateStateMachineAlias</a>.</p>\n         <p>You can publish up to 1000 versions for each state machine. You must manually delete unused versions using the <a>DeleteStateMachineVersion</a> API action.</p>\n         <p>\n            <code>PublishStateMachineVersion</code> is an idempotent API. It doesn't create a\n      duplicate state machine version if it already exists for the current revision. Step Functions bases <code>PublishStateMachineVersion</code>'s idempotency check on the\n        <code>stateMachineArn</code>, <code>name</code>, and <code>revisionId</code> parameters.\n      Requests with the same parameters return a successful idempotent response. If you don't\n      specify a <code>revisionId</code>, Step Functions checks for a previously published\n      version of the state machine's current revision.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>DeleteStateMachineVersion</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListStateMachineVersions</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.sfn#PublishStateMachineVersionInput": {
+            "type": "structure",
+            "members": {
+                "stateMachineArn": {
+                    "target": "com.amazonaws.sfn#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the state machine.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "revisionId": {
+                    "target": "com.amazonaws.sfn#RevisionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Only publish the state machine version if the current state machine's revision ID matches the specified ID.</p>\n         <p>Use this option to avoid publishing a version if the state machine changed since you last\n      updated it. If the specified revision ID doesn't match the state machine's current revision\n      ID, the API returns <code>ConflictException</code>.</p>\n         <note>\n            <p>To specify an initial revision ID for a state machine with no revision ID assigned,\n        specify the string <code>INITIAL</code> for the <code>revisionId</code> parameter. For\n        example, you can specify a <code>revisionID</code> of <code>INITIAL</code> when you create a\n        state machine using the <a>CreateStateMachine</a> API action.</p>\n         </note>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.sfn#VersionDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional description of the state machine version.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sfn#PublishStateMachineVersionOutput": {
+            "type": "structure",
+            "members": {
+                "creationDate": {
+                    "target": "com.amazonaws.sfn#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date the version was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "stateMachineVersionArn": {
+                    "target": "com.amazonaws.sfn#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) (ARN) that identifies the state machine version.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.sfn#ResourceNotFound": {
             "type": "structure",
             "members": {
@@ -4160,7 +4940,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Could not find the referenced resource. Only state machine and activity ARNs are\n      supported.</p>",
+                "smithy.api#documentation": "<p>Could not find the referenced resource.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
             }
@@ -4169,6 +4949,44 @@
             "type": "boolean",
             "traits": {
                 "smithy.api#default": false
+            }
+        },
+        "com.amazonaws.sfn#RevisionId": {
+            "type": "string"
+        },
+        "com.amazonaws.sfn#RoutingConfigurationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sfn#RoutingConfigurationListItem"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
+                }
+            }
+        },
+        "com.amazonaws.sfn#RoutingConfigurationListItem": {
+            "type": "structure",
+            "members": {
+                "stateMachineVersionArn": {
+                    "target": "com.amazonaws.sfn#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies one or two state machine versions defined in the routing configuration.</p>\n         <p>If you specify the ARN of a second version, it must belong to the same state machine as the first version.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "weight": {
+                    "target": "com.amazonaws.sfn#VersionWeight",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The percentage of traffic you want to route to the second state machine\n      version. The sum of the weights in the routing\n      configuration must be equal to 100.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about the routing configuration of a state machine alias. In a routing\n      configuration, you define an array of objects that specify up to two state machine versions.\n      You also specify the percentage of traffic to be routed to each version.</p>"
             }
         },
         "com.amazonaws.sfn#SendTaskFailure": {
@@ -4216,11 +5034,17 @@
                         "smithy.api#documentation": "<p>A more detailed explanation of the cause of the failure.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.sfn#SendTaskFailureOutput": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.sfn#SendTaskHeartbeat": {
             "type": "operation",
@@ -4255,11 +5079,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.sfn#SendTaskHeartbeatOutput": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.sfn#SendTaskSuccess": {
             "type": "operation",
@@ -4304,11 +5134,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.sfn#SendTaskSuccessOutput": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.sfn#SensitiveCause": {
             "type": "string",
@@ -4350,6 +5186,19 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.sfn#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.sfn#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request would cause a service quota to be exceeded.</p>\n         <p>HTTP Status Code: 402</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 402
+            }
+        },
         "com.amazonaws.sfn#StartExecution": {
             "type": "operation",
             "input": {
@@ -4385,7 +5234,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts a state machine execution. If the given state machine Amazon Resource Name (ARN) is a qualified state machine ARN, it will fail with ValidationException.</p>\n    \n         <p>A qualified state machine ARN refers to a <i>Distributed Map state</i> defined within a state machine. For example, the qualified state machine ARN <code>arn:partition:states:region:account-id:stateMachine:stateMachineName/mapStateLabel</code> refers to a <i>Distributed Map state</i> with a label <code>mapStateLabel</code> in the state machine named <code>stateMachineName</code>.</p>\n    \n         <note>\n            <p>\n               <code>StartExecution</code> is idempotent for <code>STANDARD</code> workflows. For a\n          <code>STANDARD</code> workflow, if <code>StartExecution</code> is called with the same\n        name and input as a running execution, the call will succeed and return the same response as\n        the original request. If the execution is closed or if the input is different, it will\n        return a <code>400 ExecutionAlreadyExists</code> error. Names can be reused after 90 days. </p>\n            <p>\n               <code>StartExecution</code> is not idempotent for <code>EXPRESS</code> workflows. </p>\n         </note>",
+                "smithy.api#documentation": "<p>Starts a state machine execution.</p>\n         <p>A qualified state machine ARN can either refer to a <i>Distributed Map state</i> defined within a state machine, a version ARN, or an alias ARN.</p>\n         <p>The following are some examples of qualified and unqualified state machine ARNs:</p>\n         <ul>\n            <li>\n               <p>The following qualified state machine ARN refers to a <i>Distributed Map state</i> with a label <code>mapStateLabel</code> in a state machine named <code>myStateMachine</code>.</p>\n               <p>\n                  <code>arn:partition:states:region:account-id:stateMachine:myStateMachine/mapStateLabel</code>\n               </p>\n               <note>\n                  <p>If you provide a qualified state machine ARN that refers to a <i>Distributed Map state</i>, the request fails with <code>ValidationException</code>.</p>\n               </note>\n            </li>\n            <li>\n               <p>The following qualified state machine ARN refers to an alias named <code>PROD</code>.</p>\n               <p>\n                  <code>arn:<partition>:states:<region>:<account-id>:stateMachine:<myStateMachine:PROD></code>\n               </p>\n               <note>\n                  <p>If you provide a qualified state machine ARN that refers to a version ARN or an alias ARN, the request starts execution for that version or alias.</p>\n               </note>\n            </li>\n            <li>\n               <p>The following unqualified state machine ARN refers to a state machine named <code>myStateMachine</code>.</p>\n               <p>\n                  <code>arn:<partition>:states:<region>:<account-id>:stateMachine:<myStateMachine></code>\n               </p>\n            </li>\n         </ul>\n         <p>If you start an execution with an unqualified state machine ARN, Step Functions uses the latest revision of the state machine for the execution.</p>\n         <p>To start executions of a state machine <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-version.html\">version</a>, call\n        <code>StartExecution</code> and provide the version ARN or the ARN of an <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html\">alias</a> that points to the version.</p>\n         <note>\n            <p>\n               <code>StartExecution</code> is idempotent for <code>STANDARD</code> workflows. For a\n          <code>STANDARD</code> workflow, if you call <code>StartExecution</code> with the same name\n        and input as a running execution, the call succeeds and return the same response as the\n        original request. If the execution is closed or if the input is different, it returns a\n          <code>400 ExecutionAlreadyExists</code> error. You can reuse names after 90 days. </p>\n            <p>\n               <code>StartExecution</code> isn't idempotent for <code>EXPRESS</code> workflows. </p>\n         </note>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -4395,14 +5244,14 @@
                 "stateMachineArn": {
                     "target": "com.amazonaws.sfn#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the state machine to execute.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the state machine to execute.</p>\n         <p>The <code>stateMachineArn</code> parameter accepts one of the following inputs:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>An unqualified state machine ARN</b> – Refers to a state machine ARN that isn't qualified with a version or alias ARN. The following is an example of an unqualified state machine ARN.</p>\n               <p>\n                  <code>arn:<partition>:states:<region>:<account-id>:stateMachine:<myStateMachine></code>\n               </p>\n               <p>Step Functions doesn't associate state machine executions that you start with an unqualified ARN with a version. This is true even if that version uses the same revision that the execution used.</p>\n            </li>\n            <li>\n               <p>\n                  <b>A state machine version ARN</b> – Refers to a version ARN, which is a combination of state machine ARN and the version number separated by a colon (:). The following is an example of the ARN for version 10. </p>\n               <p>\n                  <code>arn:<partition>:states:<region>:<account-id>:stateMachine:<myStateMachine>:10</code>\n               </p>\n               <p>Step Functions doesn't associate executions that you start with a version ARN with any aliases that point to that version.</p>\n            </li>\n            <li>\n               <p>\n                  <b>A state machine alias ARN</b> – Refers to an alias ARN, which is a combination of state machine ARN and the alias name separated by a colon (:). The following is an example of the ARN for an alias named <code>PROD</code>.</p>\n               <p>\n                  <code>arn:<partition>:states:<region>:<account-id>:stateMachine:<myStateMachine:PROD></code>\n               </p>\n               <p>Step Functions associates executions\n          that you start with an alias ARN with that alias and the state machine version used for\n          that execution.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "name": {
                     "target": "com.amazonaws.sfn#Name",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the execution. This name must be unique for your Amazon Web Services account, region, and state machine for 90 days. For more information,\n    see <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions\">\n    Limits Related to State Machine Executions</a> in the <i>Step Functions Developer Guide</i>.</p> \n         <p>A name must <i>not</i> contain:</p>\n         <ul>\n            <li>\n               <p>white space</p>\n            </li>\n            <li>\n               <p>brackets <code>< > { } [ ]</code>\n               </p>\n            </li>\n            <li>\n               <p>wildcard characters <code>? *</code>\n               </p>\n            </li>\n            <li>\n               <p>special characters <code>\" # % \\ ^ | ~ ` $ & , ; : /</code>\n               </p>\n            </li>\n            <li>\n               <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p>\n            </li>\n         </ul>\n         <p>To enable logging with CloudWatch Logs, the name should only contain  0-9, A-Z, a-z, - and _.</p>"
+                        "smithy.api#documentation": "<p>Optional name of the execution.\n      This name must be unique for your Amazon Web Services account, Region, and state machine for 90 days. For more information,\n    see <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions\">\n    Limits Related to State Machine Executions</a> in the <i>Step Functions Developer Guide</i>.</p>\n         <p>A name must <i>not</i> contain:</p>\n         <ul>\n            <li>\n               <p>white space</p>\n            </li>\n            <li>\n               <p>brackets <code>< > { } [ ]</code>\n               </p>\n            </li>\n            <li>\n               <p>wildcard characters <code>? *</code>\n               </p>\n            </li>\n            <li>\n               <p>special characters <code>\" # % \\ ^ | ~ ` $ & , ; : /</code>\n               </p>\n            </li>\n            <li>\n               <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p>\n            </li>\n         </ul>\n         <p>To enable logging with CloudWatch Logs, the name should only contain  0-9, A-Z, a-z, - and _.</p>"
                     }
                 },
                 "input": {
@@ -4417,6 +5266,9 @@
                         "smithy.api#documentation": "<p>Passes the X-Ray trace header. The trace header can also be passed in the request\n      payload.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.sfn#StartExecutionOutput": {
@@ -4436,6 +5288,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.sfn#StartSyncExecution": {
@@ -4501,6 +5356,9 @@
                         "smithy.api#documentation": "<p>Passes the X-Ray trace header. The trace header can also be passed in the request\n      payload.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.sfn#StartSyncExecutionOutput": {
@@ -4588,6 +5446,9 @@
                         "smithy.api#documentation": "<p>An object that describes workflow billing details, including billed duration and memory\n      use.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.sfn#StateEnteredEventDetails": {
@@ -4642,6 +5503,34 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains details about an exit from a state during an execution.</p>"
+            }
+        },
+        "com.amazonaws.sfn#StateMachineAliasList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sfn#StateMachineAliasListItem"
+            }
+        },
+        "com.amazonaws.sfn#StateMachineAliasListItem": {
+            "type": "structure",
+            "members": {
+                "stateMachineAliasArn": {
+                    "target": "com.amazonaws.sfn#LongArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies a state machine alias. The alias ARN is a combination of state machine ARN and the alias name separated by a colon (:). For example, <code>stateMachineARN:PROD</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "creationDate": {
+                    "target": "com.amazonaws.sfn#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The creation date of a state machine alias.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about a specific state machine alias.</p>"
             }
         },
         "com.amazonaws.sfn#StateMachineAlreadyExists": {
@@ -4711,7 +5600,7 @@
                 "name": {
                     "target": "com.amazonaws.sfn#Name",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the state machine.</p> \n         <p>A name must <i>not</i> contain:</p>\n         <ul>\n            <li>\n               <p>white space</p>\n            </li>\n            <li>\n               <p>brackets <code>< > { } [ ]</code>\n               </p>\n            </li>\n            <li>\n               <p>wildcard characters <code>? *</code>\n               </p>\n            </li>\n            <li>\n               <p>special characters <code>\" # % \\ ^ | ~ ` $ & , ; : /</code>\n               </p>\n            </li>\n            <li>\n               <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p>\n            </li>\n         </ul>\n         <p>To enable logging with CloudWatch Logs, the name should only contain  0-9, A-Z, a-z, - and _.</p>",
+                        "smithy.api#documentation": "<p>The name of the state machine.</p>\n         <p>A name must <i>not</i> contain:</p>\n         <ul>\n            <li>\n               <p>white space</p>\n            </li>\n            <li>\n               <p>brackets <code>< > { } [ ]</code>\n               </p>\n            </li>\n            <li>\n               <p>wildcard characters <code>? *</code>\n               </p>\n            </li>\n            <li>\n               <p>special characters <code>\" # % \\ ^ | ~ ` $ & , ; : /</code>\n               </p>\n            </li>\n            <li>\n               <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p>\n            </li>\n         </ul>\n         <p>To enable logging with CloudWatch Logs, the name should only contain  0-9, A-Z, a-z, - and _.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4780,6 +5669,34 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.sfn#StateMachineVersionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sfn#StateMachineVersionListItem"
+            }
+        },
+        "com.amazonaws.sfn#StateMachineVersionListItem": {
+            "type": "structure",
+            "members": {
+                "stateMachineVersionArn": {
+                    "target": "com.amazonaws.sfn#LongArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies a state machine version. The version ARN is a combination of state machine ARN and the version number separated by a colon (:). For example, <code>stateMachineARN:1</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "creationDate": {
+                    "target": "com.amazonaws.sfn#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The creation date of a state machine version.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about a specific state machine version.</p>"
+            }
+        },
         "com.amazonaws.sfn#StopExecution": {
             "type": "operation",
             "input": {
@@ -4800,7 +5717,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Stops an execution.</p> \n         <p>This API action is not supported by <code>EXPRESS</code> state machines.</p>"
+                "smithy.api#documentation": "<p>Stops an execution.</p>\n         <p>This API action is not supported by <code>EXPRESS</code> state machines.</p>"
             }
         },
         "com.amazonaws.sfn#StopExecutionInput": {
@@ -4825,6 +5742,9 @@
                         "smithy.api#documentation": "<p>A more detailed explanation of the cause of the failure.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.sfn#StopExecutionOutput": {
@@ -4837,6 +5757,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.sfn#SyncExecutionStatus": {
@@ -4879,7 +5802,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Tags are key-value pairs that can be associated with Step Functions state machines and\n      activities.</p> \n         <p>An array of key-value pairs. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Using\n      Cost Allocation Tags</a> in the <i>Amazon Web Services Billing and Cost Management User\n        Guide</i>, and <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html\">Controlling Access Using IAM\n          Tags</a>.</p> \n         <p>Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.</p>"
+                "smithy.api#documentation": "<p>Tags are key-value pairs that can be associated with Step Functions state machines and\n      activities.</p>\n         <p>An array of key-value pairs. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Using\n      Cost Allocation Tags</a> in the <i>Amazon Web Services Billing and Cost Management User\n        Guide</i>, and <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html\">Controlling Access Using IAM\n          Tags</a>.</p>\n         <p>Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.</p>"
             }
         },
         "com.amazonaws.sfn#TagKey": {
@@ -4923,7 +5846,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Add a tag to a Step Functions resource.</p> \n         <p>An array of key-value pairs. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Using\n      Cost Allocation Tags</a> in the <i>Amazon Web Services Billing and Cost Management User\n        Guide</i>, and <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html\">Controlling Access Using IAM\n          Tags</a>.</p> \n         <p>Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.</p>"
+                "smithy.api#documentation": "<p>Add a tag to a Step Functions resource.</p>\n         <p>An array of key-value pairs. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Using\n      Cost Allocation Tags</a> in the <i>Amazon Web Services Billing and Cost Management User\n        Guide</i>, and <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html\">Controlling Access Using IAM\n          Tags</a>.</p>\n         <p>Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.</p>"
             }
         },
         "com.amazonaws.sfn#TagResourceInput": {
@@ -4939,15 +5862,21 @@
                 "tags": {
                     "target": "com.amazonaws.sfn#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of tags to add to a resource.</p> \n         <p>Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.</p>",
+                        "smithy.api#documentation": "<p>The list of tags to add to a resource.</p>\n         <p>Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.sfn#TagResourceOutput": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.sfn#TagValue": {
             "type": "string",
@@ -5409,11 +6338,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.sfn#UntagResourceOutput": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.sfn#UpdateMapRun": {
             "type": "operation",
@@ -5469,11 +6404,17 @@
                         "smithy.api#documentation": "<p>The maximum number of failed items before the Map Run fails.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.sfn#UpdateMapRunOutput": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.sfn#UpdateStateMachine": {
             "type": "operation",
@@ -5484,6 +6425,9 @@
                 "target": "com.amazonaws.sfn#UpdateStateMachineOutput"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.sfn#ConflictException"
+                },
                 {
                     "target": "com.amazonaws.sfn#InvalidArn"
                 },
@@ -5500,6 +6444,9 @@
                     "target": "com.amazonaws.sfn#MissingRequiredParameter"
                 },
                 {
+                    "target": "com.amazonaws.sfn#ServiceQuotaExceededException"
+                },
+                {
                     "target": "com.amazonaws.sfn#StateMachineDeleting"
                 },
                 {
@@ -5510,8 +6457,76 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an existing state machine by modifying its <code>definition</code>,\n        <code>roleArn</code>, or <code>loggingConfiguration</code>. Running executions will continue\n      to use the previous <code>definition</code> and <code>roleArn</code>. You must include at\n      least one of <code>definition</code> or <code>roleArn</code> or you will receive a\n        <code>MissingRequiredParameter</code> error.</p>\n    \n         <p>If the given state machine Amazon Resource Name (ARN) is a qualified state machine ARN, it will fail with ValidationException.</p>\n    \n         <p>A qualified state machine ARN refers to a <i>Distributed Map state</i> defined within a state machine. For example, the qualified state machine ARN <code>arn:partition:states:region:account-id:stateMachine:stateMachineName/mapStateLabel</code> refers to a <i>Distributed Map state</i> with a label <code>mapStateLabel</code> in the state machine named <code>stateMachineName</code>.</p>\n    \n         <note>\n            <p>All <code>StartExecution</code> calls within a few seconds will use the updated\n          <code>definition</code> and <code>roleArn</code>. Executions started immediately after\n        calling <code>UpdateStateMachine</code> may use the previous state machine\n          <code>definition</code> and <code>roleArn</code>. </p>\n         </note>",
+                "smithy.api#documentation": "<p>Updates an existing state machine by modifying its <code>definition</code>,\n        <code>roleArn</code>, or <code>loggingConfiguration</code>. Running executions will continue\n      to use the previous <code>definition</code> and <code>roleArn</code>. You must include at\n      least one of <code>definition</code> or <code>roleArn</code> or you will receive a\n        <code>MissingRequiredParameter</code> error.</p>\n         <p>A qualified state machine ARN refers to a <i>Distributed Map state</i> defined within a state machine. For example, the qualified state machine ARN <code>arn:partition:states:region:account-id:stateMachine:stateMachineName/mapStateLabel</code> refers to a <i>Distributed Map state</i> with a label <code>mapStateLabel</code> in the state machine named <code>stateMachineName</code>.</p>\n         <p>A qualified state machine ARN can either refer to a <i>Distributed Map state</i> defined within a state machine, a version ARN, or an alias ARN.</p>\n         <p>The following are some examples of qualified and unqualified state machine ARNs:</p>\n         <ul>\n            <li>\n               <p>The following qualified state machine ARN refers to a <i>Distributed Map state</i> with a label <code>mapStateLabel</code> in a state machine named <code>myStateMachine</code>.</p>\n               <p>\n                  <code>arn:partition:states:region:account-id:stateMachine:myStateMachine/mapStateLabel</code>\n               </p>\n               <note>\n                  <p>If you provide a qualified state machine ARN that refers to a <i>Distributed Map state</i>, the request fails with <code>ValidationException</code>.</p>\n               </note>\n            </li>\n            <li>\n               <p>The following qualified state machine ARN refers to an alias named <code>PROD</code>.</p>\n               <p>\n                  <code>arn:<partition>:states:<region>:<account-id>:stateMachine:<myStateMachine:PROD></code>\n               </p>\n               <note>\n                  <p>If you provide a qualified state machine ARN that refers to a version ARN or an alias ARN, the request starts execution for that version or alias.</p>\n               </note>\n            </li>\n            <li>\n               <p>The following unqualified state machine ARN refers to a state machine named <code>myStateMachine</code>.</p>\n               <p>\n                  <code>arn:<partition>:states:<region>:<account-id>:stateMachine:<myStateMachine></code>\n               </p>\n            </li>\n         </ul>\n         <p>After you update your state machine, you can set the <code>publish</code> parameter to\n        <code>true</code> in the same action to publish a new <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-version.html\">version</a>. This\n      way, you can opt-in to strict versioning of your state machine.</p>\n         <note>\n            <p>Step Functions assigns monotonically increasing integers for state machine versions, starting at version number 1.</p>\n         </note>\n         <note>\n            <p>All <code>StartExecution</code> calls within a few seconds use the updated\n          <code>definition</code> and <code>roleArn</code>. Executions started immediately after you\n        call <code>UpdateStateMachine</code> may use the previous state machine\n          <code>definition</code> and <code>roleArn</code>. </p>\n         </note>",
                 "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.sfn#UpdateStateMachineAlias": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sfn#UpdateStateMachineAliasInput"
+            },
+            "output": {
+                "target": "com.amazonaws.sfn#UpdateStateMachineAliasOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sfn#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.sfn#InvalidArn"
+                },
+                {
+                    "target": "com.amazonaws.sfn#ResourceNotFound"
+                },
+                {
+                    "target": "com.amazonaws.sfn#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the configuration of an existing state machine <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html\">alias</a> by modifying its <code>description</code> or <code>routingConfiguration</code>.</p>\n         <p>You must specify at least one of the <code>description</code> or <code>routingConfiguration</code> parameters to update a state machine alias.</p>\n         <note>\n            <p>\n               <code>UpdateStateMachineAlias</code> is an idempotent API. Step Functions bases the\n        idempotency check on the <code>stateMachineAliasArn</code>, <code>description</code>, and\n          <code>routingConfiguration</code> parameters. Requests with the same parameters return an\n        idempotent response.</p>\n         </note>\n         <note>\n            <p>This operation is eventually consistent. All <a>StartExecution</a> requests\n        made within a few seconds use the latest alias configuration. Executions started immediately\n        after calling <code>UpdateStateMachineAlias</code> may use the previous routing\n        configuration.</p>\n         </note>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateStateMachineAlias</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DescribeStateMachineAlias</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListStateMachineAliases</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteStateMachineAlias</a>\n               </p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.sfn#UpdateStateMachineAliasInput": {
+            "type": "structure",
+            "members": {
+                "stateMachineAliasArn": {
+                    "target": "com.amazonaws.sfn#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the state machine alias.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.sfn#AliasDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the state machine alias.</p>"
+                    }
+                },
+                "routingConfiguration": {
+                    "target": "com.amazonaws.sfn#RoutingConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The routing configuration of the state machine alias.</p>\n         <p>An array of <code>RoutingConfig</code> objects that specifies up to two state machine versions that the alias starts executions for.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sfn#UpdateStateMachineAliasOutput": {
+            "type": "structure",
+            "members": {
+                "updateDate": {
+                    "target": "com.amazonaws.sfn#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the state machine alias was updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.sfn#UpdateStateMachineInput": {
@@ -5539,7 +6554,7 @@
                 "loggingConfiguration": {
                     "target": "com.amazonaws.sfn#LoggingConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>LoggingConfiguration</code> data type is used to set CloudWatch Logs\n      options.</p>"
+                        "smithy.api#documentation": "<p>Use the <code>LoggingConfiguration</code> data type to set CloudWatch Logs\n      options.</p>"
                     }
                 },
                 "tracingConfiguration": {
@@ -5547,7 +6562,23 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Selects whether X-Ray tracing is enabled.</p>"
                     }
+                },
+                "publish": {
+                    "target": "com.amazonaws.sfn#Publish",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies whether the state machine version is published. The default is\n        <code>false</code>. To publish a version after updating the state machine, set\n        <code>publish</code> to <code>true</code>.</p>"
+                    }
+                },
+                "versionDescription": {
+                    "target": "com.amazonaws.sfn#VersionDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional description of the state machine version to publish.</p>\n         <p>You can only specify the <code>versionDescription</code> parameter if you've set <code>publish</code> to <code>true</code>.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.sfn#UpdateStateMachineOutput": {
@@ -5559,7 +6590,22 @@
                         "smithy.api#documentation": "<p>The date and time the state machine was updated.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "revisionId": {
+                    "target": "com.amazonaws.sfn#RevisionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The revision identifier for the updated state machine.</p>"
+                    }
+                },
+                "stateMachineVersionArn": {
+                    "target": "com.amazonaws.sfn#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the published state machine version.</p>\n         <p>If the <code>publish</code> parameter isn't set to <code>true</code>, this field returns null.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.sfn#ValidationException": {
@@ -5601,6 +6647,32 @@
                     "traits": {
                         "smithy.api#enumValue": "CANNOT_UPDATE_COMPLETED_MAP_RUN"
                     }
+                },
+                "INVALID_ROUTING_CONFIGURATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_ROUTING_CONFIGURATION"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sfn#VersionDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.sfn#VersionWeight": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 100
                 }
             }
         },

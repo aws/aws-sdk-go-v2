@@ -300,13 +300,13 @@
             "type": "structure",
             "members": {
                 "AppInstanceUserArn": {
-                    "target": "com.amazonaws.chimesdkidentity#SensitiveChimeArn",
+                    "target": "com.amazonaws.chimesdkidentity#ChimeArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the <code>AppInstanceUser</code>.</p>"
                     }
                 },
                 "EndpointId": {
-                    "target": "com.amazonaws.chimesdkidentity#SensitiveString64",
+                    "target": "com.amazonaws.chimesdkidentity#String64",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier of the <code>AppInstanceUserEndpoint</code>.</p>"
                     }
@@ -368,13 +368,13 @@
             "type": "structure",
             "members": {
                 "AppInstanceUserArn": {
-                    "target": "com.amazonaws.chimesdkidentity#SensitiveChimeArn",
+                    "target": "com.amazonaws.chimesdkidentity#ChimeArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the <code>AppInstanceUser</code>.</p>"
                     }
                 },
                 "EndpointId": {
-                    "target": "com.amazonaws.chimesdkidentity#SensitiveString64",
+                    "target": "com.amazonaws.chimesdkidentity#String64",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier of the <code>AppInstanceUserEndpoint</code>.</p>"
                     }
@@ -978,9 +978,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-central-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-central-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -991,9 +991,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1004,9 +1004,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1017,9 +1017,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1030,9 +1030,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1043,9 +1043,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "cn-north-1",
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "cn-north-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1056,9 +1056,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "cn-north-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "cn-north-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1069,9 +1069,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "cn-north-1",
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "cn-north-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1082,9 +1082,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "cn-north-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "cn-north-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1095,9 +1095,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1108,9 +1108,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1121,9 +1121,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1134,9 +1134,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1145,9 +1145,9 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1158,9 +1158,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1169,9 +1169,9 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1182,9 +1182,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1193,9 +1193,9 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1206,9 +1206,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1217,9 +1217,9 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1230,9 +1230,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1243,9 +1243,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
                                 "UseDualStack": false,
-                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1268,9 +1268,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false,
-                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1280,9 +1280,9 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
                                 "UseDualStack": true,
-                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2015,7 +2015,7 @@
             "type": "structure",
             "members": {
                 "AppInstanceUserArn": {
-                    "target": "com.amazonaws.chimesdkidentity#SensitiveChimeArn",
+                    "target": "com.amazonaws.chimesdkidentity#ChimeArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the <code>AppInstanceUser</code>.</p>",
                         "smithy.api#httpLabel": {},
@@ -2023,7 +2023,7 @@
                     }
                 },
                 "EndpointId": {
-                    "target": "com.amazonaws.chimesdkidentity#SensitiveString64",
+                    "target": "com.amazonaws.chimesdkidentity#String64",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier of the <code>AppInstanceUserEndpoint</code>.</p>",
                         "smithy.api#httpLabel": {},
@@ -2325,7 +2325,7 @@
             "type": "structure",
             "members": {
                 "AppInstanceUserArn": {
-                    "target": "com.amazonaws.chimesdkidentity#SensitiveString1600",
+                    "target": "com.amazonaws.chimesdkidentity#String1600",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the <code>AppInstanceUser</code>.</p>",
                         "smithy.api#httpLabel": {},
@@ -2333,7 +2333,7 @@
                     }
                 },
                 "EndpointId": {
-                    "target": "com.amazonaws.chimesdkidentity#SensitiveString64",
+                    "target": "com.amazonaws.chimesdkidentity#String64",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier of the <code>AppInstanceUserEndpoint</code>.</p>",
                         "smithy.api#httpLabel": {},
@@ -2711,6 +2711,28 @@
                 "smithy.api#documentation": "<p>The details of a user or bot.</p>"
             }
         },
+        "com.amazonaws.chimesdkidentity#InvokedBy": {
+            "type": "structure",
+            "members": {
+                "StandardMessages": {
+                    "target": "com.amazonaws.chimesdkidentity#StandardMessages",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets standard messages as the bot trigger. For standard messages:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ALL</code>: The bot processes all standard messages.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AUTO</code>: The bot responds to ALL messages when the channel has one other non-hidden member, and responds to MENTIONS when the \n            channel has more than one other non-hidden member.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MENTIONS</code>: The bot processes all standard messages that have a message attribute with <code>CHIME.mentions</code> and a \n            value of the bot ARN.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NONE</code>: The bot processes no standard messages.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TargetedMessages": {
+                    "target": "com.amazonaws.chimesdkidentity#TargetedMessages",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets targeted messages as the bot trigger. For targeted messages:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ALL</code>: The bot processes all <code>TargetedMessages</code> sent to it. The bot then responds with a targeted message back to the sender.\n            </p>\n            </li>\n            <li>\n               <p>\n                  <code>NONE</code>: The bot processes no targeted messages.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the type of message that triggers a bot.</p>"
+            }
+        },
         "com.amazonaws.chimesdkidentity#LexBotAliasArn": {
             "type": "string",
             "traits": {
@@ -2727,8 +2749,13 @@
                 "RespondsTo": {
                     "target": "com.amazonaws.chimesdkidentity#RespondsTo",
                     "traits": {
-                        "smithy.api#documentation": "<p>Determines whether the Amazon Lex V2 bot responds to all standard messages. Control messages are not supported.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<important>\n            <p>\n               <b>Deprecated</b>. Use <code>InvokedBy</code> instead.</p>\n         </important>\n         <p>Determines whether the Amazon Lex V2 bot responds to all standard messages. Control messages are not supported.</p>"
+                    }
+                },
+                "InvokedBy": {
+                    "target": "com.amazonaws.chimesdkidentity#InvokedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the type of message that triggers a bot.</p>"
                     }
                 },
                 "LexBotAliasArn": {
@@ -3644,13 +3671,13 @@
             "type": "structure",
             "members": {
                 "AppInstanceUserArn": {
-                    "target": "com.amazonaws.chimesdkidentity#SensitiveChimeArn",
+                    "target": "com.amazonaws.chimesdkidentity#ChimeArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the <code>AppInstanceUser</code>.</p>"
                     }
                 },
                 "EndpointId": {
-                    "target": "com.amazonaws.chimesdkidentity#SensitiveString64",
+                    "target": "com.amazonaws.chimesdkidentity#String64",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier of the <code>AppInstanceUserEndpoint</code>.</p>"
                     }
@@ -3729,17 +3756,6 @@
                 "smithy.api#sensitive": {}
             }
         },
-        "com.amazonaws.chimesdkidentity#SensitiveString64": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 0,
-                    "max": 64
-                },
-                "smithy.api#pattern": ".*",
-                "smithy.api#sensitive": {}
-            }
-        },
         "com.amazonaws.chimesdkidentity#ServiceFailureException": {
             "type": "structure",
             "members": {
@@ -3772,8 +3788,57 @@
                 "smithy.api#httpError": 503
             }
         },
+        "com.amazonaws.chimesdkidentity#StandardMessages": {
+            "type": "enum",
+            "members": {
+                "AUTO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTO"
+                    }
+                },
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL"
+                    }
+                },
+                "MENTIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MENTIONS"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                }
+            }
+        },
         "com.amazonaws.chimesdkidentity#String": {
             "type": "string"
+        },
+        "com.amazonaws.chimesdkidentity#String1600": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1600
+                },
+                "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.chimesdkidentity#String64": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 64
+                },
+                "smithy.api#pattern": ".*"
+            }
         },
         "com.amazonaws.chimesdkidentity#Tag": {
             "type": "structure",
@@ -3901,6 +3966,23 @@
                     "max": 256
                 },
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.chimesdkidentity#TargetedMessages": {
+            "type": "enum",
+            "members": {
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                }
             }
         },
         "com.amazonaws.chimesdkidentity#ThrottledClientException": {
@@ -4104,6 +4186,12 @@
                         "smithy.api#documentation": "<p>The metadata of the <code>AppInstanceBot</code>.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "Configuration": {
+                    "target": "com.amazonaws.chimesdkidentity#Configuration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for the bot update.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4255,7 +4343,7 @@
             "type": "structure",
             "members": {
                 "AppInstanceUserArn": {
-                    "target": "com.amazonaws.chimesdkidentity#SensitiveChimeArn",
+                    "target": "com.amazonaws.chimesdkidentity#ChimeArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the <code>AppInstanceUser</code>.</p>",
                         "smithy.api#httpLabel": {},
@@ -4263,7 +4351,7 @@
                     }
                 },
                 "EndpointId": {
-                    "target": "com.amazonaws.chimesdkidentity#SensitiveString64",
+                    "target": "com.amazonaws.chimesdkidentity#String64",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier of the <code>AppInstanceUserEndpoint</code>.</p>",
                         "smithy.api#httpLabel": {},
@@ -4291,13 +4379,13 @@
             "type": "structure",
             "members": {
                 "AppInstanceUserArn": {
-                    "target": "com.amazonaws.chimesdkidentity#SensitiveChimeArn",
+                    "target": "com.amazonaws.chimesdkidentity#ChimeArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the <code>AppInstanceUser</code>.</p>"
                     }
                 },
                 "EndpointId": {
-                    "target": "com.amazonaws.chimesdkidentity#SensitiveString64",
+                    "target": "com.amazonaws.chimesdkidentity#String64",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier of the <code>AppInstanceUserEndpoint</code>.</p>"
                     }
