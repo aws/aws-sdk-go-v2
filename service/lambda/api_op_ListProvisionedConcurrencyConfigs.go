@@ -7,7 +7,6 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	"github.com/aws/aws-sdk-go-v2/internal/endpoints"
 	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
@@ -135,75 +134,6 @@ func (c *Client) addOperationListProvisionedConcurrencyConfigsMiddlewares(stack 
 	return nil
 }
 
-type opListProvisionedConcurrencyConfigsResolveEndpointMiddleware struct {
-	EndpointResolver EndpointResolverV2
-	BuiltInResolver  endpoints.BuiltInParameterResolver
-}
-
-func (*opListProvisionedConcurrencyConfigsResolveEndpointMiddleware) ID() string {
-	return "opListProvisionedConcurrencyConfigsResolveEndpointMiddleware"
-}
-
-func (m *opListProvisionedConcurrencyConfigsResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	if m.EndpointResolver == nil {
-		return out, metadata, fmt.Errorf("expected endpoint resolver to not be nil")
-	}
-
-	if m.BuiltInResolver == nil {
-		m.BuiltInResolver = &endpoints.NopBuiltInResolver{}
-	}
-
-	params := EndpointParameters{}
-
-	resolveBuiltIns(params, m.BuiltInResolver)
-
-	var resolvedEndpoint smithyendpoints.Endpoint
-	resolvedEndpoint, err = m.EndpointResolver.ResolveEndpoint(ctx, params)
-	if err != nil {
-		return out, metadata, fmt.Errorf("failed to resolve service endpoint, %w", err)
-	}
-
-	req.URL = &resolvedEndpoint.URI
-
-	auth, ok := resolvedEndpoint.Properties.Get("authSchemes").([]interface{})
-	if ok {
-		for _, schemes := range auth {
-			scheme, ok := schemes.(map[string]interface{})
-			if !ok {
-				continue
-			}
-			if len(awsmiddleware.GetSigningName(ctx)) == 0 {
-				signingName := scheme["signingName"].(string)
-				if len(signingName) == 0 {
-					signingName = "s3"
-				}
-				ctx = awsmiddleware.SetSigningName(ctx, signingName)
-			}
-		}
-	}
-
-	return next.HandleSerialize(ctx, in)
-}
-
-func addListProvisionedConcurrencyConfigsResolveEndpointMiddleware(stack *middleware.Stack, options Options) error {
-	return stack.Serialize.Insert(&opListProvisionedConcurrencyConfigsResolveEndpointMiddleware{
-		BuiltInResolver: &endpoints.BuiltInResolver{
-			Region:       options.Region,
-			UseDualStack: options.EndpointOptions.UseDualStackEndpoint,
-			UseFIPS:      options.EndpointOptions.UseFIPSEndpoint,
-			Endpoint:     options.MutableBaseEndpoint,
-		},
-		EndpointResolver: options.EndpointResolverV2,
-	}, "ResolveEndpoint", middleware.After)
-}
-
 // ListProvisionedConcurrencyConfigsAPIClient is a client that implements the
 // ListProvisionedConcurrencyConfigs operation.
 type ListProvisionedConcurrencyConfigsAPIClient interface {
@@ -304,4 +234,59 @@ func newServiceMetadataMiddleware_opListProvisionedConcurrencyConfigs(region str
 		SigningName:   "lambda",
 		OperationName: "ListProvisionedConcurrencyConfigs",
 	}
+}
+
+type opListProvisionedConcurrencyConfigsResolveEndpointMiddleware struct {
+	EndpointResolver EndpointResolverV2
+	BuiltInResolver  BuiltInParameterResolver
+}
+
+func (*opListProvisionedConcurrencyConfigsResolveEndpointMiddleware) ID() string {
+	return "opListProvisionedConcurrencyConfigsResolveEndpointMiddleware"
+}
+
+func (m *opListProvisionedConcurrencyConfigsResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	if m.EndpointResolver == nil {
+		return out, metadata, fmt.Errorf("expected endpoint resolver to not be nil")
+	}
+
+	params := EndpointParameters{}
+
+	m.BuiltInResolver.ResolveBuiltIns(&params)
+
+	var resolvedEndpoint smithyendpoints.Endpoint
+	resolvedEndpoint, err = m.EndpointResolver.ResolveEndpoint(ctx, params)
+	if err != nil {
+		return out, metadata, fmt.Errorf("failed to resolve service endpoint, %w", err)
+	}
+
+	req.URL = &resolvedEndpoint.URI
+
+	for k := range resolvedEndpoint.Headers {
+		req.Header.Set(
+			k,
+			resolvedEndpoint.Headers.Get(k),
+		)
+	}
+
+	return next.HandleSerialize(ctx, in)
+}
+
+func addListProvisionedConcurrencyConfigsResolveEndpointMiddleware(stack *middleware.Stack, options Options) error {
+	return stack.Serialize.Insert(&opListProvisionedConcurrencyConfigsResolveEndpointMiddleware{
+		EndpointResolver: options.EndpointResolverV2,
+		BuiltInResolver: &BuiltInResolver{
+			Region:       options.Region,
+			UseDualStack: options.EndpointOptions.UseDualStackEndpoint,
+			UseFIPS:      options.EndpointOptions.UseFIPSEndpoint,
+			Endpoint:     options.BaseEndpoint,
+		},
+	}, "ResolveEndpoint", middleware.After)
 }

@@ -18,7 +18,6 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"net"
 	"net/http"
-	"net/url"
 	"time"
 )
 
@@ -65,6 +64,11 @@ type Options struct {
 	// modify this list for per operation behavior.
 	APIOptions []func(*middleware.Stack) error
 
+	// This endpoint will be given as input to an EndpointResolverV2. It is used for
+	// providing a custom base endpoint that is subject to modifications by the
+	// processing EndpointResolverV2.
+	BaseEndpoint *string
+
 	// Configures the events that will be sent to the configured logger.
 	ClientLogMode aws.ClientLogMode
 
@@ -93,11 +97,6 @@ type Options struct {
 
 	// The logger writer interface to write logging messages to.
 	Logger logging.Logger
-
-	// This endpoint will be given as input to an EndpointResolverV2. It is used for
-	// providing a custom base endpoint that is subject to modifications by the
-	// processing EndpointResolverV2.
-	MutableBaseEndpoint *url.URL
 
 	// The region to send requests to. (Required)
 	Region string

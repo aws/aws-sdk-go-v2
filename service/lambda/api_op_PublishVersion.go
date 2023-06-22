@@ -7,7 +7,6 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	"github.com/aws/aws-sdk-go-v2/internal/endpoints"
 	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
@@ -272,9 +271,18 @@ func (c *Client) addOperationPublishVersionMiddlewares(stack *middleware.Stack, 
 	return nil
 }
 
+func newServiceMetadataMiddleware_opPublishVersion(region string) *awsmiddleware.RegisterServiceMetadata {
+	return &awsmiddleware.RegisterServiceMetadata{
+		Region:        region,
+		ServiceID:     ServiceID,
+		SigningName:   "lambda",
+		OperationName: "PublishVersion",
+	}
+}
+
 type opPublishVersionResolveEndpointMiddleware struct {
 	EndpointResolver EndpointResolverV2
-	BuiltInResolver  endpoints.BuiltInParameterResolver
+	BuiltInResolver  BuiltInParameterResolver
 }
 
 func (*opPublishVersionResolveEndpointMiddleware) ID() string {
@@ -293,13 +301,9 @@ func (m *opPublishVersionResolveEndpointMiddleware) HandleSerialize(ctx context.
 		return out, metadata, fmt.Errorf("expected endpoint resolver to not be nil")
 	}
 
-	if m.BuiltInResolver == nil {
-		m.BuiltInResolver = &endpoints.NopBuiltInResolver{}
-	}
-
 	params := EndpointParameters{}
 
-	resolveBuiltIns(params, m.BuiltInResolver)
+	m.BuiltInResolver.ResolveBuiltIns(&params)
 
 	var resolvedEndpoint smithyendpoints.Endpoint
 	resolvedEndpoint, err = m.EndpointResolver.ResolveEndpoint(ctx, params)
@@ -309,21 +313,11 @@ func (m *opPublishVersionResolveEndpointMiddleware) HandleSerialize(ctx context.
 
 	req.URL = &resolvedEndpoint.URI
 
-	auth, ok := resolvedEndpoint.Properties.Get("authSchemes").([]interface{})
-	if ok {
-		for _, schemes := range auth {
-			scheme, ok := schemes.(map[string]interface{})
-			if !ok {
-				continue
-			}
-			if len(awsmiddleware.GetSigningName(ctx)) == 0 {
-				signingName := scheme["signingName"].(string)
-				if len(signingName) == 0 {
-					signingName = "s3"
-				}
-				ctx = awsmiddleware.SetSigningName(ctx, signingName)
-			}
-		}
+	for k := range resolvedEndpoint.Headers {
+		req.Header.Set(
+			k,
+			resolvedEndpoint.Headers.Get(k),
+		)
 	}
 
 	return next.HandleSerialize(ctx, in)
@@ -331,21 +325,12 @@ func (m *opPublishVersionResolveEndpointMiddleware) HandleSerialize(ctx context.
 
 func addPublishVersionResolveEndpointMiddleware(stack *middleware.Stack, options Options) error {
 	return stack.Serialize.Insert(&opPublishVersionResolveEndpointMiddleware{
-		BuiltInResolver: &endpoints.BuiltInResolver{
+		EndpointResolver: options.EndpointResolverV2,
+		BuiltInResolver: &BuiltInResolver{
 			Region:       options.Region,
 			UseDualStack: options.EndpointOptions.UseDualStackEndpoint,
 			UseFIPS:      options.EndpointOptions.UseFIPSEndpoint,
-			Endpoint:     options.MutableBaseEndpoint,
+			Endpoint:     options.BaseEndpoint,
 		},
-		EndpointResolver: options.EndpointResolverV2,
 	}, "ResolveEndpoint", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opPublishVersion(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		SigningName:   "lambda",
-		OperationName: "PublishVersion",
-	}
 }
