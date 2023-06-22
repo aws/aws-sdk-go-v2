@@ -44,8 +44,6 @@ import java.util.function.Consumer;
 
 public class AwsEndpointResolverMiddlewareGenerator implements GoIntegration {
 
-    private final List<RuntimeClientPlugin> runtimeClientPlugins = new ArrayList<>();
-
 
     private static String getAddEndpointMiddlewareFuncName(String operationName) {
         return String.format("add%sResolveEndpointMiddleware", operationName);
@@ -55,81 +53,20 @@ public class AwsEndpointResolverMiddlewareGenerator implements GoIntegration {
         return String.format("op%sResolveEndpointMiddleware", operationName);
     }
 
-    @Override
-    public List<RuntimeClientPlugin> getClientPlugins() {
-        runtimeClientPlugins.add(RuntimeClientPlugin.builder()
-        .configFields(ListUtils.of(
-            ConfigField.builder()
-                    .name("MutableBaseEndpoint")
-                    .type(SymbolUtils.createPointableSymbolBuilder("URL", SmithyGoDependency.NET_URL).build())
-                    .documentation(
-                        """
-                        This endpoint will be given as input to an EndpointResolverV2.
-                        It is used for providing a custom base endpoint that is subject 
-                        to modifications by the processing EndpointResolverV2.        
-                        """
-                    )
-                    .build()
-        ))
-        .build());
-        return runtimeClientPlugins;
+    public static String getExportedParameterName(Parameter parameter) {
+        return StringUtils.capitalize(parameter.getName().asString());
     }
 
-    @Override
-    public void processFinalizedModel(GoSettings settings, Model model) {
-        ServiceShape service = settings.getService(model);
-        var rulesetTrait = service.getTrait(EndpointRuleSetTrait.class);
-        Optional<EndpointRuleSet> rulesetOpt = (rulesetTrait.isPresent()) 
-        ? Optional.of(EndpointRuleSet.fromNode(rulesetTrait.get().getRuleSet()))
-        : Optional.empty();
-        var clientContextParamsTrait = service.getTrait(ClientContextParamsTrait.class);
+    public static Symbol parameterAsSymbol(Parameter parameter) {
+        return switch (parameter.getType()) {
+            case STRING -> SymbolUtils.createPointableSymbolBuilder("string")
+                    .putProperty(SymbolUtils.GO_UNIVERSE_TYPE, true).build();
 
-        var topDownIndex = TopDownIndex.of(model);
-
-        for (ToShapeId operationId : topDownIndex.getContainedOperations(service)) {
-            OperationShape operationShape = model.expectShape(operationId.toShapeId(), OperationShape.class);
-
-            SymbolProvider symbolProvider = GoCodegenPlugin.createSymbolProvider(model, settings);
-
-            String inputHelperFuncName = getAddEndpointMiddlewareFuncName(
-                    symbolProvider.toSymbol(operationShape).getName()
-            );
-            runtimeClientPlugins.add(RuntimeClientPlugin.builder()
-                    .operationPredicate((m, s, o) -> {
-                        return o.equals(operationShape);
-                    })
-                    .registerMiddleware(MiddlewareRegistrar.builder()
-                            .resolvedFunction(SymbolUtils.createValueSymbolBuilder(inputHelperFuncName)
-                                    .build())
-                            .useClientOptions()
-                            .build())
-                    .build());
-
-            if (clientContextParamsTrait.isPresent()) {
-                if (rulesetOpt.isPresent()) {
-                    var clientContextParams = clientContextParamsTrait.get();
-                    var parameters = rulesetOpt.get().getParameters();
-                    parameters.toList().stream().forEach(param -> {
-                        if (
-                            clientContextParams.getParameters().containsKey(param.getName().asString()) &&
-                            !param.getBuiltIn().isPresent()
-                        ) {
-                            var documentation = param.getDocumentation().isPresent() ?  param.getDocumentation().get() : "";
-                            runtimeClientPlugins.add(RuntimeClientPlugin.builder()
-                            .configFields(ListUtils.of(
-                                ConfigField.builder()
-                                        .name(getExportedParameterName(param))
-                                        .type(parameterAsSymbol(param))
-                                        .documentation(documentation)
-                                        .build()
-                            ))
-                            .build());
-                        }
-                    });
-                }
-            }
-        }
+            case BOOLEAN -> SymbolUtils.createPointableSymbolBuilder("bool")
+                    .putProperty(SymbolUtils.GO_UNIVERSE_TYPE, true).build();
+        };
     }
+
 
     @Override
     public void writeAdditionalFiles(
@@ -281,7 +218,11 @@ public class AwsEndpointResolverMiddlewareGenerator implements GoIntegration {
         return (GoWriter w) -> {
             w.openBlock("type $L struct {", "}", getMiddlewareObjectName(operationName), () -> {
                 w.write("EndpointResolver $T", SymbolUtils.createValueSymbolBuilder("EndpointResolverV2").build());
+
+                // loop through all the integrations and call renderBuiltInResolverField
                 w.write("BuiltInResolver $T", SymbolUtils.createValueSymbolBuilder("BuiltInParameterResolver", AwsGoDependency.INTERNAL_ENDPOINTS).build());
+                // move this line above into GoIntegration
+                
                 if (clientContextParamsTrait.isPresent()) {
                     var clientContextParams = clientContextParamsTrait.get();
                     parameters.toList().stream().forEach(param -> {
@@ -291,6 +232,9 @@ public class AwsEndpointResolverMiddlewareGenerator implements GoIntegration {
                         }
                     });
                 }
+
+
+
             });
         };
     }
@@ -350,7 +294,7 @@ public class AwsEndpointResolverMiddlewareGenerator implements GoIntegration {
                 
                     params := EndpointParameters{}
 
-                    resolveBuiltIns(params, m.BuiltInResolver)
+                    m.BuiltInResolver.ResolveBuiltIns(&params)
 
                     $W
 
@@ -565,21 +509,6 @@ public class AwsEndpointResolverMiddlewareGenerator implements GoIntegration {
                     }
                 }
             );
-        };
-    }
-
-
-    public static String getExportedParameterName(Parameter parameter) {
-        return StringUtils.capitalize(parameter.getName().asString());
-    }
-
-    public static Symbol parameterAsSymbol(Parameter parameter) {
-        return switch (parameter.getType()) {
-            case STRING -> SymbolUtils.createPointableSymbolBuilder("string")
-                    .putProperty(SymbolUtils.GO_UNIVERSE_TYPE, true).build();
-
-            case BOOLEAN -> SymbolUtils.createPointableSymbolBuilder("bool")
-                    .putProperty(SymbolUtils.GO_UNIVERSE_TYPE, true).build();
         };
     }
 }
