@@ -1,0 +1,8 @@
+{
+    "id": "afa2eada-2495-4a51-a8bd-35c7ffad5df9",
+    "type": "feature",
+    "description": "Introducing Amazon Kendra Retrieve API that can be used to retrieve relevant passages or text excerpts given an input query.",
+    "modules": [
+        "service/kendra"
+    ]
+}

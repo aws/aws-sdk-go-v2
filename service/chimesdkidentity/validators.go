@@ -758,13 +758,33 @@ func validateExpirationSettings(v *types.ExpirationSettings) error {
 	}
 }
 
+func validateInvokedBy(v *types.InvokedBy) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InvokedBy"}
+	if len(v.StandardMessages) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("StandardMessages"))
+	}
+	if len(v.TargetedMessages) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetedMessages"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateLexConfiguration(v *types.LexConfiguration) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "LexConfiguration"}
-	if len(v.RespondsTo) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("RespondsTo"))
+	if v.InvokedBy != nil {
+		if err := validateInvokedBy(v.InvokedBy); err != nil {
+			invalidParams.AddNested("InvokedBy", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.LexBotAliasArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LexBotAliasArn"))
@@ -1293,6 +1313,11 @@ func validateOpUpdateAppInstanceBotInput(v *UpdateAppInstanceBotInput) error {
 	}
 	if v.Metadata == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Metadata"))
+	}
+	if v.Configuration != nil {
+		if err := validateConfiguration(v.Configuration); err != nil {
+			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

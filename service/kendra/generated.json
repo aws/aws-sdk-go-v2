@@ -60,6 +60,7 @@
         "api_op_ListThesauri.go",
         "api_op_PutPrincipalMapping.go",
         "api_op_Query.go",
+        "api_op_Retrieve.go",
         "api_op_StartDataSourceSyncJob.go",
         "api_op_StopDataSourceSyncJob.go",
         "api_op_SubmitFeedback.go",

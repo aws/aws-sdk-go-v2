@@ -2000,6 +2000,13 @@ func awsRestjson1_serializeOpDocumentUpdateAppInstanceBotInput(v *UpdateAppInsta
 	object := value.Object()
 	defer object.Close()
 
+	if v.Configuration != nil {
+		ok := object.Key("Configuration")
+		if err := awsRestjson1_serializeDocumentConfiguration(v.Configuration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Metadata != nil {
 		ok := object.Key("Metadata")
 		ok.String(*v.Metadata)
@@ -2268,9 +2275,33 @@ func awsRestjson1_serializeDocumentExpirationSettings(v *types.ExpirationSetting
 	return nil
 }
 
+func awsRestjson1_serializeDocumentInvokedBy(v *types.InvokedBy, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.StandardMessages) > 0 {
+		ok := object.Key("StandardMessages")
+		ok.String(string(v.StandardMessages))
+	}
+
+	if len(v.TargetedMessages) > 0 {
+		ok := object.Key("TargetedMessages")
+		ok.String(string(v.TargetedMessages))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentLexConfiguration(v *types.LexConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.InvokedBy != nil {
+		ok := object.Key("InvokedBy")
+		if err := awsRestjson1_serializeDocumentInvokedBy(v.InvokedBy, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.LexBotAliasArn != nil {
 		ok := object.Key("LexBotAliasArn")

@@ -77,9 +77,10 @@ type AdditionalResultAttributeValue struct {
 }
 
 // Provides the configuration information to connect to Alfresco as your data
-// source. Alfresco data source connector is currently in preview mode. Basic
-// authentication is currently supported. If you would like to use Alfresco
-// connector in production, contact Support (http://aws.amazon.com/contact-us/) .
+// source. Support for AlfrescoConfiguration ended May 2023. We recommend
+// migrating to or using the Alfresco data source template schema /
+// TemplateConfiguration (https://docs.aws.amazon.com/kendra/latest/APIReference/API_TemplateConfiguration.html)
+// API.
 type AlfrescoConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the
@@ -989,7 +990,12 @@ type DatabaseConfiguration struct {
 type DataSourceConfiguration struct {
 
 	// Provides the configuration information to connect to Alfresco as your data
-	// source.
+	// source. Support for AlfrescoConfiguration ended May 2023. We recommend
+	// migrating to or using the Alfresco data source template schema /
+	// TemplateConfiguration (https://docs.aws.amazon.com/kendra/latest/APIReference/API_TemplateConfiguration.html)
+	// API.
+	//
+	// Deprecated: Deprecated AlfrescoConfiguration in favor of TemplateConfiguration
 	AlfrescoConfiguration *AlfrescoConfiguration
 
 	// Provides the configuration information to connect to Box as your data source.
@@ -1269,7 +1275,9 @@ type Document struct {
 	// the contents before sending.
 	Blob []byte
 
-	// The file type of the document in the Blob field.
+	// The file type of the document in the Blob field. If you want to index snippets
+	// or subsets of HTML documents instead of the entirety of the HTML documents, you
+	// must add the HTML start and closing tags ( content ) around the content.
 	ContentType ContentType
 
 	// The list of principal (https://docs.aws.amazon.com/kendra/latest/dg/API_Principal.html)
@@ -2770,12 +2778,12 @@ type ProxyConfiguration struct {
 // that satisfies the query.
 type QueryResultItem struct {
 
-	// One or more additional attributes associated with the query result.
+	// One or more additional fields/attributes associated with the query result.
 	AdditionalAttributes []AdditionalResultAttribute
 
-	// An array of document attributes assigned to a document in the search results.
-	// For example, the document author ( _author ) or the source URI ( _source_uri )
-	// of the document.
+	// An array of document fields/attributes assigned to a document in the search
+	// results. For example, the document author ( _author ) or the source URI (
+	// _source_uri ) of the document.
 	DocumentAttributes []DocumentAttribute
 
 	// An extract of the text in the document. Contains information about highlighting
@@ -2794,7 +2802,7 @@ type QueryResultItem struct {
 
 	// A token that identifies a particular result from a particular query. Use this
 	// token to provide click-through feedback for the result. For more information,
-	// see Submitting feedback  (https://docs.aws.amazon.com/kendra/latest/dg/submitting-feedback.html)
+	// see Submitting feedback (https://docs.aws.amazon.com/kendra/latest/dg/submitting-feedback.html)
 	// .
 	FeedbackToken *string
 
@@ -2807,12 +2815,12 @@ type QueryResultItem struct {
 	// The identifier for the query result.
 	Id *string
 
-	// Indicates the confidence that Amazon Kendra has that a result matches the query
-	// that you provided. Each result is placed into a bin that indicates the
-	// confidence, VERY_HIGH , HIGH , MEDIUM and LOW . You can use the score to
-	// determine if a response meets the confidence needed for your application. The
-	// field is only set to LOW when the Type field is set to DOCUMENT and Amazon
-	// Kendra is not confident that the result matches the query.
+	// Indicates the confidence level of Amazon Kendra providing a relevant result for
+	// the query. Each result is placed into a bin that indicates the confidence,
+	// VERY_HIGH , HIGH , MEDIUM and LOW . You can use the score to determine if a
+	// response meets the confidence needed for your application. The field is only set
+	// to LOW when the Type field is set to DOCUMENT and Amazon Kendra is not
+	// confident that the result is relevant to the query.
 	ScoreAttributes *ScoreAttributes
 
 	// An excerpt from a table within a document.
@@ -2990,6 +2998,32 @@ type RelevanceFeedback struct {
 	//
 	// This member is required.
 	ResultId *string
+
+	noSmithyDocumentSerde
+}
+
+// A single retrieved relevant passage result.
+type RetrieveResultItem struct {
+
+	// The contents of the relevant passage.
+	Content *string
+
+	// An array of document fields/attributes assigned to a document in the search
+	// results. For example, the document author ( _author ) or the source URI (
+	// _source_uri ) of the document.
+	DocumentAttributes []DocumentAttribute
+
+	// The identifier of the document.
+	DocumentId *string
+
+	// The title of the document.
+	DocumentTitle *string
+
+	// The URI of the original location of the document.
+	DocumentURI *string
+
+	// The identifier of the relevant passage result.
+	Id *string
 
 	noSmithyDocumentSerde
 }
@@ -3281,10 +3315,10 @@ type SalesforceStandardObjectConfiguration struct {
 }
 
 // Provides a relative ranking that indicates how confident Amazon Kendra is that
-// the response matches the query.
+// the response is relevant to the query.
 type ScoreAttributes struct {
 
-	// A relative ranking for how well the response matches the query.
+	// A relative ranking for how relevant the response is to the query.
 	ScoreConfidence ScoreConfidence
 
 	noSmithyDocumentSerde
@@ -3329,13 +3363,13 @@ type SeedUrlConfiguration struct {
 	SeedUrls []string
 
 	// You can choose one of the following modes:
-	//   - HOST_ONLY – crawl only the website host names. For example, if the seed URL
+	//   - HOST_ONLY —crawl only the website host names. For example, if the seed URL
 	//   is "abc.example.com", then only URLs with host name "abc.example.com" are
 	//   crawled.
-	//   - SUBDOMAINS – crawl the website host names with subdomains. For example, if
+	//   - SUBDOMAINS —crawl the website host names with subdomains. For example, if
 	//   the seed URL is "abc.example.com", then "a.abc.example.com" and
 	//   "b.abc.example.com" are also crawled.
-	//   - EVERYTHING – crawl the website host names with subdomains and other domains
+	//   - EVERYTHING —crawl the website host names with subdomains and other domains
 	//   that the web pages link to.
 	// The default mode is set to HOST_ONLY .
 	WebCrawlerMode WebCrawlerMode
@@ -3415,12 +3449,11 @@ type ServiceNowKnowledgeArticleConfiguration struct {
 	// field.
 	DocumentTitleFieldName *string
 
-	// A list of regular expression patterns to exclude certain attachments of
-	// knowledge articles in your ServiceNow. Item that match the patterns are excluded
-	// from the index. Items that don't match the patterns are included in the index.
-	// If an item matches both an inclusion and exclusion pattern, the exclusion
-	// pattern takes precedence and the item isn't included in the index. The regex is
-	// applied to the field specified in the PatternTargetField .
+	// A list of regular expression patterns applied to exclude certain knowledge
+	// article attachments. Attachments that match the patterns are excluded from the
+	// index. Items that don't match the patterns are included in the index. If an item
+	// matches both an inclusion and exclusion pattern, the exclusion pattern takes
+	// precedence and the item isn't included in the index.
 	ExcludeAttachmentFilePatterns []string
 
 	// Maps attributes or field names of knoweldge articles to Amazon Kendra index
@@ -3437,12 +3470,11 @@ type ServiceNowKnowledgeArticleConfiguration struct {
 	// .
 	FilterQuery *string
 
-	// A list of regular expression patterns to include certain attachments of
-	// knowledge articles in your ServiceNow. Item that match the patterns are included
-	// in the index. Items that don't match the patterns are excluded from the index.
-	// If an item matches both an inclusion and exclusion pattern, the exclusion
-	// pattern takes precedence and the item isn't included in the index. The regex is
-	// applied to the field specified in the PatternTargetField .
+	// A list of regular expression patterns applied to include knowledge article
+	// attachments. Attachments that match the patterns are included in the index.
+	// Items that don't match the patterns are excluded from the index. If an item
+	// matches both an inclusion and exclusion pattern, the exclusion pattern takes
+	// precedence and the item isn't included in the index.
 	IncludeAttachmentFilePatterns []string
 
 	noSmithyDocumentSerde
@@ -4169,12 +4201,9 @@ type WebCrawlerConfiguration struct {
 	// is "a.example.com" and the port is 443, the standard port for HTTPS.
 	AuthenticationConfiguration *AuthenticationConfiguration
 
-	// Specifies the number of levels in a website that you want to crawl. The first
-	// level begins from the website seed or starting point URL. For example, if a
-	// website has three levels—index level (the seed in this example), sections level,
-	// and subsections level—and you are only interested in crawling information up to
-	// the sections level (levels 0-1), you can set your depth to 1. The default crawl
-	// depth is set to 2.
+	// The 'depth' or number of levels from the seed level to crawl. For example, the
+	// seed URL page is depth 1 and any hyperlinks on this page that are also crawled
+	// are depth 2.
 	CrawlDepth *int32
 
 	// The maximum size (in MB) of a web page or attachment to crawl. Files larger

@@ -249,10 +249,17 @@ type ChannelMessage struct {
 	// The ARN of the channel.
 	ChannelArn *string
 
-	// The message content.
+	// The content of the channel message. For Amazon Lex V2 bot responses, this field
+	// holds a list of messages originating from the bot. For more information, refer
+	// to Processing responses from an AppInstanceBot (https://docs.aws.amazon.com/chime-sdk/latest/dg/appinstance-bots#process-response.html)
+	// in the Amazon Chime SDK Messaging Developer Guide.
 	Content *string
 
-	// The content type of the channel message.
+	// The content type of the channel message. For Amazon Lex V2 bot responses, the
+	// content type is application/amz-chime-lex-msgs for success responses and
+	// application/amz-chime-lex-error for failure responses. For more information,
+	// refer to Processing responses from an AppInstanceBot (https://docs.aws.amazon.com/chime-sdk/latest/dg/appinstance-bots#process-response.html)
+	// in the Amazon Chime SDK Messaging Developer Guide.
 	ContentType *string
 
 	// The time at which the message was created.
@@ -264,8 +271,10 @@ type ChannelMessage struct {
 	// The time at which a message was updated.
 	LastUpdatedTimestamp *time.Time
 
-	// The attributes for the message, used for message filtering along with a
-	// FilterRule defined in the PushNotificationPreferences .
+	// The attributes for the channel message. For Amazon Lex V2 bot responses, the
+	// attributes are mapped to specific fields from the bot. For more information,
+	// refer to Processing responses from an AppInstanceBot (https://docs.aws.amazon.com/chime-sdk/latest/dg/appinstance-bots#process-response.html)
+	// in the Amazon Chime SDK Messaging Developer Guide.
 	MessageAttributes map[string]MessageAttributeValue
 
 	// The ID of a message.
@@ -289,6 +298,12 @@ type ChannelMessage struct {
 	// The ID of the SubChannel.
 	SubChannelId *string
 
+	// The target of a message, a sender, a user, or a bot. Only the target and the
+	// sender can view targeted messages. Only users who can see targeted messages can
+	// take actions on them. However, administrators can delete targeted messages that
+	// they can’t see.
+	Target []Target
+
 	// The message type.
 	Type ChannelMessageType
 
@@ -303,14 +318,23 @@ type ChannelMessageCallback struct {
 	// This member is required.
 	MessageId *string
 
-	// The message content.
+	// The message content. For Amazon Lex V2 bot responses, this field holds a list
+	// of messages originating from the bot. For more information, refer to Processing
+	// responses from an AppInstanceBot (https://docs.aws.amazon.com/chime-sdk/latest/dg/appinstance-bots#process-response.html)
+	// in the Amazon Chime SDK Messaging Developer Guide.
 	Content *string
 
-	// The content type of the call-back message.
+	// The content type of the call-back message. For Amazon Lex V2 bot responses, the
+	// content type is application/amz-chime-lex-msgs for success responses and
+	// application/amz-chime-lex-error for failure responses. For more information,
+	// refer to Processing responses from an AppInstanceBot (https://docs.aws.amazon.com/chime-sdk/latest/dg/appinstance-bots#process-response.html)
+	// in the Amazon Chime SDK Messaging Developer Guide.
 	ContentType *string
 
-	// The attributes for the message, used for message filtering along with a
-	// FilterRule defined in the PushNotificationPreferences .
+	// The attributes for the channel message. For Amazon Lex V2 bot responses, the
+	// attributes are mapped to specific fields from the bot. For more information,
+	// refer to Processing responses from an AppInstanceBot (https://docs.aws.amazon.com/chime-sdk/latest/dg/appinstance-bots#process-response.html)
+	// in the Amazon Chime SDK Messaging Developer Guide.
 	MessageAttributes map[string]MessageAttributeValue
 
 	// The message metadata.
@@ -328,7 +352,7 @@ type ChannelMessageCallback struct {
 // Stores information about a message status.
 type ChannelMessageStatusStructure struct {
 
-	// Contains more details about the messasge status.
+	// Contains more details about the message status.
 	Detail *string
 
 	// The message status value.
@@ -340,10 +364,17 @@ type ChannelMessageStatusStructure struct {
 // Summary of the messages in a Channel .
 type ChannelMessageSummary struct {
 
-	// The content of the message.
+	// The content of the channel message. For Amazon Lex V2 bot responses, this field
+	// holds a list of messages originating from the bot. For more information, refer
+	// to Processing responses from an AppInstanceBot (https://docs.aws.amazon.com/chime-sdk/latest/dg/appinstance-bots#process-response.html)
+	// in the Amazon Chime SDK Messaging Developer Guide.
 	Content *string
 
-	// The content type of the channel messsage listed in the summary.
+	// The content type of the channel message listed in the summary. For Amazon Lex
+	// V2 bot responses, the content type is application/amz-chime-lex-msgs for
+	// success responses and application/amz-chime-lex-error for failure responses.
+	// For more information, refer to Processing responses from an AppInstanceBot (https://docs.aws.amazon.com/chime-sdk/latest/dg/appinstance-bots#process-response.html)
+	// in the Amazon Chime SDK Messaging Developer Guide.
 	ContentType *string
 
 	// The time at which the message summary was created.
@@ -355,7 +386,10 @@ type ChannelMessageSummary struct {
 	// The time at which a message was last updated.
 	LastUpdatedTimestamp *time.Time
 
-	// The message attribues listed in a the summary of a channel message.
+	// The attributes for the channel message. For Amazon Lex V2 bot responses, the
+	// attributes are mapped to specific fields from the bot. For more information,
+	// refer to Processing responses from an AppInstanceBot (https://docs.aws.amazon.com/chime-sdk/latest/dg/appinstance-bots#process-response.html)
+	// in the Amazon Chime SDK Messaging Developer Guide.
 	MessageAttributes map[string]MessageAttributeValue
 
 	// The ID of the message.
@@ -374,6 +408,12 @@ type ChannelMessageSummary struct {
 	// without a channel flow. For channels associated with channel flow, the value
 	// determines the processing stage.
 	Status *ChannelMessageStatusStructure
+
+	// The target of a message, a sender, a user, or a bot. Only the target and the
+	// sender can view targeted messages. Only users who can see targeted messages can
+	// take actions on them. However, administrators can delete targeted messages that
+	// they can’t see.
+	Target []Target
 
 	// The type of message.
 	Type ChannelMessageType
@@ -423,7 +463,8 @@ type ChannelSummary struct {
 	// The ARN of the channel.
 	ChannelArn *string
 
-	// The time at which the last persistent message in a channel was sent.
+	// The time at which the last persistent message visible to the caller in a
+	// channel was sent.
 	LastMessageTimestamp *time.Time
 
 	// The metadata of the channel.
@@ -676,6 +717,18 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// The target of a message, a sender, a user, or a bot. Only the target and the
+// sender can view targeted messages. Only users who can see targeted messages can
+// take actions on them. However, administrators can delete targeted messages that
+// they can’t see.
+type Target struct {
+
+	// The ARN of the target channel member.
+	MemberArn *string
 
 	noSmithyDocumentSerde
 }

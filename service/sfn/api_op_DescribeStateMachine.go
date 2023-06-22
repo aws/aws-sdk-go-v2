@@ -13,14 +13,26 @@ import (
 )
 
 // Provides information about a state machine's definition, its IAM role Amazon
-// Resource Name (ARN), and configuration. If the state machine ARN is a qualified
-// state machine ARN, the response returned includes the Map state's label. A
-// qualified state machine ARN refers to a Distributed Map state defined within a
-// state machine. For example, the qualified state machine ARN
-// arn:partition:states:region:account-id:stateMachine:stateMachineName/mapStateLabel
-// refers to a Distributed Map state with a label mapStateLabel in the state
-// machine named stateMachineName . This operation is eventually consistent. The
-// results are best effort and may not reflect very recent updates and changes.
+// Resource Name (ARN), and configuration. A qualified state machine ARN can either
+// refer to a Distributed Map state defined within a state machine, a version ARN,
+// or an alias ARN. The following are some examples of qualified and unqualified
+// state machine ARNs:
+//   - The following qualified state machine ARN refers to a Distributed Map state
+//     with a label mapStateLabel in a state machine named myStateMachine .
+//     arn:partition:states:region:account-id:stateMachine:myStateMachine/mapStateLabel
+//     If you provide a qualified state machine ARN that refers to a Distributed Map
+//     state, the request fails with ValidationException .
+//   - The following qualified state machine ARN refers to an alias named PROD .
+//     arn::states:::stateMachine: If you provide a qualified state machine ARN that
+//     refers to a version ARN or an alias ARN, the request starts execution for that
+//     version or alias.
+//   - The following unqualified state machine ARN refers to a state machine named
+//     myStateMachine . arn::states:::stateMachine:
+//
+// This API action returns the details for a state machine version if the
+// stateMachineArn you specify is a state machine version ARN. This operation is
+// eventually consistent. The results are best effort and may not reflect very
+// recent updates and changes.
 func (c *Client) DescribeStateMachine(ctx context.Context, params *DescribeStateMachineInput, optFns ...func(*Options)) (*DescribeStateMachineOutput, error) {
 	if params == nil {
 		params = &DescribeStateMachineInput{}
@@ -38,7 +50,11 @@ func (c *Client) DescribeStateMachine(ctx context.Context, params *DescribeState
 
 type DescribeStateMachineInput struct {
 
-	// The Amazon Resource Name (ARN) of the state machine to describe.
+	// The Amazon Resource Name (ARN) of the state machine for which you want the
+	// information. If you specify a state machine version ARN, this API returns
+	// details about that version. The version ARN is a combination of state machine
+	// ARN and the version number separated by a colon (:). For example,
+	// stateMachineARN:1 .
 	//
 	// This member is required.
 	StateMachineArn *string
@@ -48,7 +64,8 @@ type DescribeStateMachineInput struct {
 
 type DescribeStateMachineOutput struct {
 
-	// The date the state machine is created.
+	// The date the state machine is created. For a state machine version, creationDate
+	// is the date the version was created.
 	//
 	// This member is required.
 	CreationDate *time.Time
@@ -79,7 +96,10 @@ type DescribeStateMachineOutput struct {
 	// This member is required.
 	RoleArn *string
 
-	// The Amazon Resource Name (ARN) that identifies the state machine.
+	// The Amazon Resource Name (ARN) that identifies the state machine. If you
+	// specified a state machine version ARN in your request, the API returns the
+	// version ARN. The version ARN is a combination of state machine ARN and the
+	// version number separated by a colon (:). For example, stateMachineARN:1 .
 	//
 	// This member is required.
 	StateMachineArn *string
@@ -89,6 +109,9 @@ type DescribeStateMachineOutput struct {
 	// This member is required.
 	Type types.StateMachineType
 
+	// The description of the state machine version.
+	Description *string
+
 	// A user-defined or an auto-generated string that identifies a Map state. This
 	// parameter is present only if the stateMachineArn specified in input is a
 	// qualified state machine ARN.
@@ -96,6 +119,11 @@ type DescribeStateMachineOutput struct {
 
 	// The LoggingConfiguration data type is used to set CloudWatch Logs options.
 	LoggingConfiguration *types.LoggingConfiguration
+
+	// The revision identifier for the state machine. Use the revisionId parameter to
+	// compare between versions of a state machine configuration used for executions
+	// without performing a diff of the properties, such as definition and roleArn .
+	RevisionId *string
 
 	// The current status of the state machine.
 	Status types.StateMachineStatus

@@ -12,13 +12,15 @@ import (
 	"time"
 )
 
-// Provides all information about a state machine execution, such as the state
-// machine associated with the execution, the execution input and output, and
-// relevant execution metadata. Use this API action to return the Map Run ARN if
-// the execution was dispatched by a Map Run. This operation is eventually
-// consistent. The results are best effort and may not reflect very recent updates
-// and changes. This API action is not supported by EXPRESS state machine
-// executions unless they were dispatched by a Map Run.
+// Provides information about a state machine execution, such as the state machine
+// associated with the execution, the execution input and output, and relevant
+// execution metadata. Use this API action to return the Map Run Amazon Resource
+// Name (ARN) if the execution was dispatched by a Map Run. If you specify a
+// version or alias ARN when you call the StartExecution API action,
+// DescribeExecution returns that ARN. This operation is eventually consistent. The
+// results are best effort and may not reflect very recent updates and changes.
+// Executions of an EXPRESS state machinearen't supported by DescribeExecution
+// unless a Map Run dispatched them.
 func (c *Client) DescribeExecution(ctx context.Context, params *DescribeExecutionInput, optFns ...func(*Options)) (*DescribeExecutionOutput, error) {
 	if params == nil {
 		params = &DescribeExecutionInput{}
@@ -102,7 +104,21 @@ type DescribeExecutionOutput struct {
 	// Provides details about execution input or output.
 	OutputDetails *types.CloudWatchEventsExecutionDataDetails
 
-	// If the execution has already ended, the date the execution stopped.
+	// The Amazon Resource Name (ARN) of the state machine alias associated with the
+	// execution. The alias ARN is a combination of state machine ARN and the alias
+	// name separated by a colon (:). For example, stateMachineARN:PROD . If you start
+	// an execution from a StartExecution request with a state machine version ARN,
+	// this field will be null.
+	StateMachineAliasArn *string
+
+	// The Amazon Resource Name (ARN) of the state machine version associated with the
+	// execution. The version ARN is a combination of state machine ARN and the version
+	// number separated by a colon (:). For example, stateMachineARN:1 . If you start
+	// an execution from a StartExecution request without specifying a state machine
+	// version or alias ARN, Step Functions returns a null value.
+	StateMachineVersionArn *string
+
+	// If the execution ended, the date the execution stopped.
 	StopDate *time.Time
 
 	// The X-Ray trace header that was passed to the execution.

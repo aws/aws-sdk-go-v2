@@ -9696,6 +9696,11 @@ func awsRestjson1_deserializeDocumentChannelMessage(v **types.ChannelMessage, va
 				sv.SubChannelId = ptr.String(jtv)
 			}
 
+		case "Target":
+			if err := awsRestjson1_deserializeDocumentTargetList(&sv.Target, value); err != nil {
+				return err
+			}
+
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9890,6 +9895,11 @@ func awsRestjson1_deserializeDocumentChannelMessageSummary(v **types.ChannelMess
 
 		case "Status":
 			if err := awsRestjson1_deserializeDocumentChannelMessageStatusStructure(&sv.Status, value); err != nil {
+				return err
+			}
+
+		case "Target":
+			if err := awsRestjson1_deserializeDocumentTargetList(&sv.Target, value); err != nil {
 				return err
 			}
 
@@ -11402,6 +11412,80 @@ func awsRestjson1_deserializeDocumentTagList(v *[]types.Tag, value interface{}) 
 		var col types.Tag
 		destAddr := &col
 		if err := awsRestjson1_deserializeDocumentTag(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTarget(v **types.Target, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Target
+	if *v == nil {
+		sv = &types.Target{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "MemberArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ChimeArn to be of type string, got %T instead", value)
+				}
+				sv.MemberArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTargetList(v *[]types.Target, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.Target
+	if *v == nil {
+		cv = []types.Target{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.Target
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentTarget(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr

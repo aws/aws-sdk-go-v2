@@ -3805,7 +3805,7 @@ func awsRestjson1_deserializeOpDocumentRegisterAppInstanceUserEndpointOutput(v *
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected SensitiveChimeArn to be of type string, got %T instead", value)
+					return fmt.Errorf("expected ChimeArn to be of type string, got %T instead", value)
 				}
 				sv.AppInstanceUserArn = ptr.String(jtv)
 			}
@@ -3814,7 +3814,7 @@ func awsRestjson1_deserializeOpDocumentRegisterAppInstanceUserEndpointOutput(v *
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected SensitiveString64 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String64 to be of type string, got %T instead", value)
 				}
 				sv.EndpointId = ptr.String(jtv)
 			}
@@ -4707,7 +4707,7 @@ func awsRestjson1_deserializeOpDocumentUpdateAppInstanceUserEndpointOutput(v **U
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected SensitiveChimeArn to be of type string, got %T instead", value)
+					return fmt.Errorf("expected ChimeArn to be of type string, got %T instead", value)
 				}
 				sv.AppInstanceUserArn = ptr.String(jtv)
 			}
@@ -4716,7 +4716,7 @@ func awsRestjson1_deserializeOpDocumentUpdateAppInstanceUserEndpointOutput(v **U
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected SensitiveString64 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String64 to be of type string, got %T instead", value)
 				}
 				sv.EndpointId = ptr.String(jtv)
 			}
@@ -5720,7 +5720,7 @@ func awsRestjson1_deserializeDocumentAppInstanceUserEndpoint(v **types.AppInstan
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected SensitiveChimeArn to be of type string, got %T instead", value)
+					return fmt.Errorf("expected ChimeArn to be of type string, got %T instead", value)
 				}
 				sv.AppInstanceUserArn = ptr.String(jtv)
 			}
@@ -5750,7 +5750,7 @@ func awsRestjson1_deserializeDocumentAppInstanceUserEndpoint(v **types.AppInstan
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected SensitiveString64 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String64 to be of type string, got %T instead", value)
 				}
 				sv.EndpointId = ptr.String(jtv)
 			}
@@ -5847,7 +5847,7 @@ func awsRestjson1_deserializeDocumentAppInstanceUserEndpointSummary(v **types.Ap
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected SensitiveChimeArn to be of type string, got %T instead", value)
+					return fmt.Errorf("expected ChimeArn to be of type string, got %T instead", value)
 				}
 				sv.AppInstanceUserArn = ptr.String(jtv)
 			}
@@ -5856,7 +5856,7 @@ func awsRestjson1_deserializeDocumentAppInstanceUserEndpointSummary(v **types.Ap
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected SensitiveString64 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String64 to be of type string, got %T instead", value)
 				}
 				sv.EndpointId = ptr.String(jtv)
 			}
@@ -6446,6 +6446,55 @@ func awsRestjson1_deserializeDocumentIdentity(v **types.Identity, value interfac
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentInvokedBy(v **types.InvokedBy, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InvokedBy
+	if *v == nil {
+		sv = &types.InvokedBy{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "StandardMessages":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StandardMessages to be of type string, got %T instead", value)
+				}
+				sv.StandardMessages = types.StandardMessages(jtv)
+			}
+
+		case "TargetedMessages":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TargetedMessages to be of type string, got %T instead", value)
+				}
+				sv.TargetedMessages = types.TargetedMessages(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentLexConfiguration(v **types.LexConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6468,6 +6517,11 @@ func awsRestjson1_deserializeDocumentLexConfiguration(v **types.LexConfiguration
 
 	for key, value := range shape {
 		switch key {
+		case "InvokedBy":
+			if err := awsRestjson1_deserializeDocumentInvokedBy(&sv.InvokedBy, value); err != nil {
+				return err
+			}
+
 		case "LexBotAliasArn":
 			if value != nil {
 				jtv, ok := value.(string)

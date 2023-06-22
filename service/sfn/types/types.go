@@ -200,7 +200,7 @@ type ExecutionListItem struct {
 	// This member is required.
 	StartDate *time.Time
 
-	// The Amazon Resource Name (ARN) of the executed state machine.
+	// The Amazon Resource Name (ARN) of the state machine that ran the execution.
 	//
 	// This member is required.
 	StateMachineArn *string
@@ -221,6 +221,18 @@ type ExecutionListItem struct {
 	// was specified in ListExecutions , the mapRunArn isn't returned.
 	MapRunArn *string
 
+	// The Amazon Resource Name (ARN) of the state machine alias used to start an
+	// execution. If the state machine execution was started with an unqualified ARN or
+	// a version ARN, it returns null.
+	StateMachineAliasArn *string
+
+	// The Amazon Resource Name (ARN) of the state machine version associated with the
+	// execution. If the state machine execution was started with an unqualified ARN,
+	// it returns null. If the execution was started using a stateMachineAliasArn ,
+	// both the stateMachineAliasArn and stateMachineVersionArn parameters contain the
+	// respective values.
+	StateMachineVersionArn *string
+
 	// If the execution already ended, the date the execution stopped.
 	StopDate *time.Time
 
@@ -239,6 +251,14 @@ type ExecutionStartedEventDetails struct {
 
 	// The Amazon Resource Name (ARN) of the IAM role used for executing Lambda tasks.
 	RoleArn *string
+
+	// The Amazon Resource Name (ARN) that identifies a state machine alias used for
+	// starting the state machine execution.
+	StateMachineAliasArn *string
+
+	// The Amazon Resource Name (ARN) that identifies a state machine version used for
+	// starting the state machine execution.
+	StateMachineVersionArn *string
 
 	noSmithyDocumentSerde
 }
@@ -712,6 +732,29 @@ type MapStateStartedEventDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Contains details about the routing configuration of a state machine alias. In a
+// routing configuration, you define an array of objects that specify up to two
+// state machine versions. You also specify the percentage of traffic to be routed
+// to each version.
+type RoutingConfigurationListItem struct {
+
+	// The Amazon Resource Name (ARN) that identifies one or two state machine
+	// versions defined in the routing configuration. If you specify the ARN of a
+	// second version, it must belong to the same state machine as the first version.
+	//
+	// This member is required.
+	StateMachineVersionArn *string
+
+	// The percentage of traffic you want to route to the second state machine
+	// version. The sum of the weights in the routing configuration must be equal to
+	// 100.
+	//
+	// This member is required.
+	Weight int32
+
+	noSmithyDocumentSerde
+}
+
 // Contains details about a state entered during an execution.
 type StateEnteredEventDetails struct {
 
@@ -755,6 +798,24 @@ type StateExitedEventDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Contains details about a specific state machine alias.
+type StateMachineAliasListItem struct {
+
+	// The creation date of a state machine alias.
+	//
+	// This member is required.
+	CreationDate *time.Time
+
+	// The Amazon Resource Name (ARN) that identifies a state machine alias. The alias
+	// ARN is a combination of state machine ARN and the alias name separated by a
+	// colon (:). For example, stateMachineARN:PROD .
+	//
+	// This member is required.
+	StateMachineAliasArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains details about the state machine.
 type StateMachineListItem struct {
 
@@ -784,6 +845,24 @@ type StateMachineListItem struct {
 	//
 	// This member is required.
 	Type StateMachineType
+
+	noSmithyDocumentSerde
+}
+
+// Contains details about a specific state machine version.
+type StateMachineVersionListItem struct {
+
+	// The creation date of a state machine version.
+	//
+	// This member is required.
+	CreationDate *time.Time
+
+	// The Amazon Resource Name (ARN) that identifies a state machine version. The
+	// version ARN is a combination of state machine ARN and the version number
+	// separated by a colon (:). For example, stateMachineARN:1 .
+	//
+	// This member is required.
+	StateMachineVersionArn *string
 
 	noSmithyDocumentSerde
 }

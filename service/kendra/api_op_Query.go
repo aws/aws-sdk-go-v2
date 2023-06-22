@@ -11,19 +11,23 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Searches an active index. Use this API to search your documents using query.
-// The Query API enables to do faceted search and to filter results based on
-// document attributes. It also enables you to provide user context that Amazon
-// Kendra uses to enforce document access control in the search results. Amazon
-// Kendra searches your index for text content and question and answer (FAQ)
-// content. By default the response contains three types of results.
-//   - Relevant passages
-//   - Matching FAQs
-//   - Relevant documents
+// Searches an index given an input query. You can configure boosting or relevance
+// tuning at the query level to override boosting at the index level, filter based
+// on document fields/attributes and faceted search, and filter based on the user
+// or their group access to documents. You can also include certain fields in the
+// response that might provide useful additional information. A query response
+// contains three types of results.
+//   - Relevant suggested answers. The answers can be either a text excerpt or
+//     table excerpt. The answer can be highlighted in the excerpt.
+//   - Matching FAQs or questions-answer from your FAQ file.
+//   - Relevant documents. This result type includes an excerpt of the document
+//     with the document title. The searched terms can be highlighted in the excerpt.
 //
 // You can specify that the query return only one type of result using the
 // QueryResultTypeFilter parameter. Each query returns the 100 most relevant
-// results.
+// results. If you filter result type to only question-answers, a maximum of four
+// results are returned. If you filter result type to only answers, a maximum of
+// three results are returned.
 func (c *Client) Query(ctx context.Context, params *QueryInput, optFns ...func(*Options)) (*QueryOutput, error) {
 	if params == nil {
 		params = &QueryInput{}
@@ -41,33 +45,30 @@ func (c *Client) Query(ctx context.Context, params *QueryInput, optFns ...func(*
 
 type QueryInput struct {
 
-	// The identifier of the index to search. The identifier is returned in the
-	// response from the CreateIndex API.
+	// The identifier of the index for the search.
 	//
 	// This member is required.
 	IndexId *string
 
-	// Enables filtered searches based on document attributes. You can only provide
-	// one attribute filter; however, the AndAllFilters , NotFilter , and OrAllFilters
-	// parameters contain a list of other filters. The AttributeFilter parameter
-	// enables you to create a set of filtering rules that a document must satisfy to
-	// be included in the query results.
+	// Filters search results by document fields/attributes. You can only provide one
+	// attribute filter; however, the AndAllFilters , NotFilter , and OrAllFilters
+	// parameters contain a list of other filters. The AttributeFilter parameter means
+	// you can create a set of filtering rules that a document must satisfy to be
+	// included in the query results.
 	AttributeFilter *types.AttributeFilter
 
-	// Overrides relevance tuning configurations of fields or attributes set at the
-	// index level. If you use this API to override the relevance tuning configured at
-	// the index level, but there is no relevance tuning configured at the index level,
+	// Overrides relevance tuning configurations of fields/attributes set at the index
+	// level. If you use this API to override the relevance tuning configured at the
+	// index level, but there is no relevance tuning configured at the index level,
 	// then Amazon Kendra does not apply any relevance tuning. If there is relevance
-	// tuning configured at the index level, but you do not use this API to override
-	// any relevance tuning in the index, then Amazon Kendra uses the relevance tuning
-	// that is configured at the index level. If there is relevance tuning configured
-	// for fields at the index level, but you use this API to override only some of
-	// these fields, then for the fields you did not override, the importance is set to
-	// 1.
+	// tuning configured for fields at the index level, and you use this API to
+	// override only some of these fields, then for the fields you did not override,
+	// the importance is set to 1.
 	DocumentRelevanceOverrideConfigurations []types.DocumentRelevanceConfiguration
 
-	// An array of documents attributes. Amazon Kendra returns a count for each
-	// attribute key specified. This helps your users narrow their search.
+	// An array of documents fields/attributes for faceted search. Amazon Kendra
+	// returns a count for each field key specified. This helps your users narrow their
+	// search.
 	Facets []types.Facet
 
 	// Query results are returned in pages the size of the PageSize parameter. By
@@ -80,7 +81,8 @@ type QueryInput struct {
 	// ask for more than 100 results, only 100 are returned.
 	PageSize *int32
 
-	// Sets the type of query. Only results for the specified query type are returned.
+	// Sets the type of query result or response. Only results for the specified type
+	// are returned.
 	QueryResultTypeFilter types.QueryResultType
 
 	// The input query text for the search. Amazon Kendra truncates queries at 30
@@ -88,8 +90,8 @@ type QueryInput struct {
 	// if you use Boolean or more advanced, complex queries.
 	QueryText *string
 
-	// An array of document attributes to include in the response. You can limit the
-	// response to include certain document attributes. By default all document
+	// An array of document fields/attributes to include in the response. You can
+	// limit the response to include certain document fields. By default, all document
 	// attributes are included in the response.
 	RequestedDocumentAttributes []string
 
@@ -118,7 +120,7 @@ type QueryInput struct {
 type QueryOutput struct {
 
 	// Contains the facet results. A FacetResult contains the counts for each
-	// attribute key that was specified in the Facets input parameter.
+	// field/attribute key that was specified in the Facets input parameter.
 	FacetResults []types.FacetResult
 
 	// The list of featured result items. Featured results are displayed at the top of
@@ -127,8 +129,9 @@ type QueryOutput struct {
 	// search results.
 	FeaturedResultsItems []types.FeaturedResultsItem
 
-	// The identifier for the search. You use QueryId to identify the search when
-	// using the feedback API.
+	// The identifier for the search. You also use QueryId to identify the search when
+	// using the SubmitFeedback (https://docs.aws.amazon.com/kendra/latest/APIReference/API_SubmitFeedback.html)
+	// API.
 	QueryId *string
 
 	// The results of the search.
@@ -137,7 +140,7 @@ type QueryOutput struct {
 	// A list of information related to suggested spell corrections for a query.
 	SpellCorrectedQueries []types.SpellCorrectedQuery
 
-	// The total number of items found by the search; however, you can only retrieve
+	// The total number of items found by the search. However, you can only retrieve
 	// up to 100 items. For example, if the search found 192 items, you can only
 	// retrieve the first 100 of the items.
 	TotalNumberOfResults *int32

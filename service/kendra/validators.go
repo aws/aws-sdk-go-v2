@@ -1030,6 +1030,26 @@ func (m *validateOpQuery) HandleInitialize(ctx context.Context, in middleware.In
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRetrieve struct {
+}
+
+func (*validateOpRetrieve) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRetrieve) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RetrieveInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRetrieveInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartDataSourceSyncJob struct {
 }
 
@@ -1492,6 +1512,10 @@ func addOpPutPrincipalMappingValidationMiddleware(stack *middleware.Stack) error
 
 func addOpQueryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpQuery{}, middleware.After)
+}
+
+func addOpRetrieveValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRetrieve{}, middleware.After)
 }
 
 func addOpStartDataSourceSyncJobValidationMiddleware(stack *middleware.Stack) error {
@@ -4780,6 +4804,39 @@ func validateOpQueryInput(v *QueryInput) error {
 	if v.SpellCorrectionConfiguration != nil {
 		if err := validateSpellCorrectionConfiguration(v.SpellCorrectionConfiguration); err != nil {
 			invalidParams.AddNested("SpellCorrectionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRetrieveInput(v *RetrieveInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RetrieveInput"}
+	if v.IndexId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexId"))
+	}
+	if v.QueryText == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryText"))
+	}
+	if v.AttributeFilter != nil {
+		if err := validateAttributeFilter(v.AttributeFilter); err != nil {
+			invalidParams.AddNested("AttributeFilter", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DocumentRelevanceOverrideConfigurations != nil {
+		if err := validateDocumentRelevanceOverrideConfigurationList(v.DocumentRelevanceOverrideConfigurations); err != nil {
+			invalidParams.AddNested("DocumentRelevanceOverrideConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.UserContext != nil {
+		if err := validateUserContext(v.UserContext); err != nil {
+			invalidParams.AddNested("UserContext", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

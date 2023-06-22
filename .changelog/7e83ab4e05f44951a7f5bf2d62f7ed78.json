@@ -1,0 +1,8 @@
+{
+    "id": "7e83ab4e-05f4-4951-a7f5-bf2d62f7ed78",
+    "type": "feature",
+    "description": "Adds support for Versions and Aliases. Adds 8 operations: PublishStateMachineVersion, DeleteStateMachineVersion, ListStateMachineVersions, CreateStateMachineAlias, DescribeStateMachineAlias, UpdateStateMachineAlias, DeleteStateMachineAlias, ListStateMachineAliases",
+    "modules": [
+        "service/sfn"
+    ]
+}

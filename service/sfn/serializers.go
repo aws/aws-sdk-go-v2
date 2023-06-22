@@ -126,6 +126,61 @@ func (m *awsAwsjson10_serializeOpCreateStateMachine) HandleSerialize(ctx context
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpCreateStateMachineAlias struct {
+}
+
+func (*awsAwsjson10_serializeOpCreateStateMachineAlias) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpCreateStateMachineAlias) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateStateMachineAliasInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSStepFunctions.CreateStateMachineAlias")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentCreateStateMachineAliasInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpDeleteActivity struct {
 }
 
@@ -221,6 +276,116 @@ func (m *awsAwsjson10_serializeOpDeleteStateMachine) HandleSerialize(ctx context
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson10_serializeOpDocumentDeleteStateMachineInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson10_serializeOpDeleteStateMachineAlias struct {
+}
+
+func (*awsAwsjson10_serializeOpDeleteStateMachineAlias) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpDeleteStateMachineAlias) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteStateMachineAliasInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSStepFunctions.DeleteStateMachineAlias")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentDeleteStateMachineAliasInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson10_serializeOpDeleteStateMachineVersion struct {
+}
+
+func (*awsAwsjson10_serializeOpDeleteStateMachineVersion) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpDeleteStateMachineVersion) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteStateMachineVersionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSStepFunctions.DeleteStateMachineVersion")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentDeleteStateMachineVersionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -441,6 +606,61 @@ func (m *awsAwsjson10_serializeOpDescribeStateMachine) HandleSerialize(ctx conte
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson10_serializeOpDocumentDescribeStateMachineInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson10_serializeOpDescribeStateMachineAlias struct {
+}
+
+func (*awsAwsjson10_serializeOpDescribeStateMachineAlias) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpDescribeStateMachineAlias) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeStateMachineAliasInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSStepFunctions.DescribeStateMachineAlias")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentDescribeStateMachineAliasInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -786,6 +1006,61 @@ func (m *awsAwsjson10_serializeOpListMapRuns) HandleSerialize(ctx context.Contex
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpListStateMachineAliases struct {
+}
+
+func (*awsAwsjson10_serializeOpListStateMachineAliases) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpListStateMachineAliases) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListStateMachineAliasesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSStepFunctions.ListStateMachineAliases")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentListStateMachineAliasesInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpListStateMachines struct {
 }
 
@@ -841,6 +1116,61 @@ func (m *awsAwsjson10_serializeOpListStateMachines) HandleSerialize(ctx context.
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpListStateMachineVersions struct {
+}
+
+func (*awsAwsjson10_serializeOpListStateMachineVersions) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpListStateMachineVersions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListStateMachineVersionsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSStepFunctions.ListStateMachineVersions")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentListStateMachineVersionsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpListTagsForResource struct {
 }
 
@@ -881,6 +1211,61 @@ func (m *awsAwsjson10_serializeOpListTagsForResource) HandleSerialize(ctx contex
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson10_serializeOpDocumentListTagsForResourceInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson10_serializeOpPublishStateMachineVersion struct {
+}
+
+func (*awsAwsjson10_serializeOpPublishStateMachineVersion) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpPublishStateMachineVersion) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*PublishStateMachineVersionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSStepFunctions.PublishStateMachineVersion")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentPublishStateMachineVersionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1445,6 +1830,61 @@ func (m *awsAwsjson10_serializeOpUpdateStateMachine) HandleSerialize(ctx context
 
 	return next.HandleSerialize(ctx, in)
 }
+
+type awsAwsjson10_serializeOpUpdateStateMachineAlias struct {
+}
+
+func (*awsAwsjson10_serializeOpUpdateStateMachineAlias) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpUpdateStateMachineAlias) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateStateMachineAliasInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSStepFunctions.UpdateStateMachineAlias")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentUpdateStateMachineAliasInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
 func awsAwsjson10_serializeDocumentCloudWatchLogsLogGroup(v *types.CloudWatchLogsLogGroup, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1503,6 +1943,36 @@ func awsAwsjson10_serializeDocumentLoggingConfiguration(v *types.LoggingConfigur
 	if len(v.Level) > 0 {
 		ok := object.Key("level")
 		ok.String(string(v.Level))
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentRoutingConfigurationList(v []types.RoutingConfigurationListItem, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson10_serializeDocumentRoutingConfigurationListItem(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentRoutingConfigurationListItem(v *types.RoutingConfigurationListItem, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.StateMachineVersionArn != nil {
+		ok := object.Key("stateMachineVersionArn")
+		ok.String(*v.StateMachineVersionArn)
+	}
+
+	{
+		ok := object.Key("weight")
+		ok.Integer(v.Weight)
 	}
 
 	return nil
@@ -1580,6 +2050,30 @@ func awsAwsjson10_serializeOpDocumentCreateActivityInput(v *CreateActivityInput,
 	return nil
 }
 
+func awsAwsjson10_serializeOpDocumentCreateStateMachineAliasInput(v *CreateStateMachineAliasInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Description != nil {
+		ok := object.Key("description")
+		ok.String(*v.Description)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.RoutingConfiguration != nil {
+		ok := object.Key("routingConfiguration")
+		if err := awsAwsjson10_serializeDocumentRoutingConfigurationList(v.RoutingConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeOpDocumentCreateStateMachineInput(v *CreateStateMachineInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1599,6 +2093,11 @@ func awsAwsjson10_serializeOpDocumentCreateStateMachineInput(v *CreateStateMachi
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
+	}
+
+	if v.Publish {
+		ok := object.Key("publish")
+		ok.Boolean(v.Publish)
 	}
 
 	if v.RoleArn != nil {
@@ -1625,6 +2124,11 @@ func awsAwsjson10_serializeOpDocumentCreateStateMachineInput(v *CreateStateMachi
 		ok.String(string(v.Type))
 	}
 
+	if v.VersionDescription != nil {
+		ok := object.Key("versionDescription")
+		ok.String(*v.VersionDescription)
+	}
+
 	return nil
 }
 
@@ -1640,6 +2144,18 @@ func awsAwsjson10_serializeOpDocumentDeleteActivityInput(v *DeleteActivityInput,
 	return nil
 }
 
+func awsAwsjson10_serializeOpDocumentDeleteStateMachineAliasInput(v *DeleteStateMachineAliasInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.StateMachineAliasArn != nil {
+		ok := object.Key("stateMachineAliasArn")
+		ok.String(*v.StateMachineAliasArn)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeOpDocumentDeleteStateMachineInput(v *DeleteStateMachineInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1647,6 +2163,18 @@ func awsAwsjson10_serializeOpDocumentDeleteStateMachineInput(v *DeleteStateMachi
 	if v.StateMachineArn != nil {
 		ok := object.Key("stateMachineArn")
 		ok.String(*v.StateMachineArn)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentDeleteStateMachineVersionInput(v *DeleteStateMachineVersionInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.StateMachineVersionArn != nil {
+		ok := object.Key("stateMachineVersionArn")
+		ok.String(*v.StateMachineVersionArn)
 	}
 
 	return nil
@@ -1683,6 +2211,18 @@ func awsAwsjson10_serializeOpDocumentDescribeMapRunInput(v *DescribeMapRunInput,
 	if v.MapRunArn != nil {
 		ok := object.Key("mapRunArn")
 		ok.String(*v.MapRunArn)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentDescribeStateMachineAliasInput(v *DescribeStateMachineAliasInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.StateMachineAliasArn != nil {
+		ok := object.Key("stateMachineAliasArn")
+		ok.String(*v.StateMachineAliasArn)
 	}
 
 	return nil
@@ -1832,6 +2372,28 @@ func awsAwsjson10_serializeOpDocumentListMapRunsInput(v *ListMapRunsInput, value
 	return nil
 }
 
+func awsAwsjson10_serializeOpDocumentListStateMachineAliasesInput(v *ListStateMachineAliasesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxResults != 0 {
+		ok := object.Key("maxResults")
+		ok.Integer(v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.StateMachineArn != nil {
+		ok := object.Key("stateMachineArn")
+		ok.String(*v.StateMachineArn)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeOpDocumentListStateMachinesInput(v *ListStateMachinesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1849,6 +2411,28 @@ func awsAwsjson10_serializeOpDocumentListStateMachinesInput(v *ListStateMachines
 	return nil
 }
 
+func awsAwsjson10_serializeOpDocumentListStateMachineVersionsInput(v *ListStateMachineVersionsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxResults != 0 {
+		ok := object.Key("maxResults")
+		ok.Integer(v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.StateMachineArn != nil {
+		ok := object.Key("stateMachineArn")
+		ok.String(*v.StateMachineArn)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeOpDocumentListTagsForResourceInput(v *ListTagsForResourceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1856,6 +2440,28 @@ func awsAwsjson10_serializeOpDocumentListTagsForResourceInput(v *ListTagsForReso
 	if v.ResourceArn != nil {
 		ok := object.Key("resourceArn")
 		ok.String(*v.ResourceArn)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentPublishStateMachineVersionInput(v *PublishStateMachineVersionInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Description != nil {
+		ok := object.Key("description")
+		ok.String(*v.Description)
+	}
+
+	if v.RevisionId != nil {
+		ok := object.Key("revisionId")
+		ok.String(*v.RevisionId)
+	}
+
+	if v.StateMachineArn != nil {
+		ok := object.Key("stateMachineArn")
+		ok.String(*v.StateMachineArn)
 	}
 
 	return nil
@@ -2066,6 +2672,30 @@ func awsAwsjson10_serializeOpDocumentUpdateMapRunInput(v *UpdateMapRunInput, val
 	return nil
 }
 
+func awsAwsjson10_serializeOpDocumentUpdateStateMachineAliasInput(v *UpdateStateMachineAliasInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Description != nil {
+		ok := object.Key("description")
+		ok.String(*v.Description)
+	}
+
+	if v.RoutingConfiguration != nil {
+		ok := object.Key("routingConfiguration")
+		if err := awsAwsjson10_serializeDocumentRoutingConfigurationList(v.RoutingConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.StateMachineAliasArn != nil {
+		ok := object.Key("stateMachineAliasArn")
+		ok.String(*v.StateMachineAliasArn)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeOpDocumentUpdateStateMachineInput(v *UpdateStateMachineInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2080,6 +2710,11 @@ func awsAwsjson10_serializeOpDocumentUpdateStateMachineInput(v *UpdateStateMachi
 		if err := awsAwsjson10_serializeDocumentLoggingConfiguration(v.LoggingConfiguration, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.Publish {
+		ok := object.Key("publish")
+		ok.Boolean(v.Publish)
 	}
 
 	if v.RoleArn != nil {
@@ -2097,6 +2732,11 @@ func awsAwsjson10_serializeOpDocumentUpdateStateMachineInput(v *UpdateStateMachi
 		if err := awsAwsjson10_serializeDocumentTracingConfiguration(v.TracingConfiguration, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.VersionDescription != nil {
+		ok := object.Key("versionDescription")
+		ok.String(*v.VersionDescription)
 	}
 
 	return nil

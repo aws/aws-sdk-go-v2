@@ -5,6 +5,7 @@ package sfn
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sfn/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
@@ -24,6 +25,26 @@ func (m *validateOpCreateActivity) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateActivityInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateStateMachineAlias struct {
+}
+
+func (*validateOpCreateStateMachineAlias) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateStateMachineAlias) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateStateMachineAliasInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateStateMachineAliasInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -69,6 +90,26 @@ func (m *validateOpDeleteActivity) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteStateMachineAlias struct {
+}
+
+func (*validateOpDeleteStateMachineAlias) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteStateMachineAlias) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteStateMachineAliasInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteStateMachineAliasInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteStateMachine struct {
 }
 
@@ -84,6 +125,26 @@ func (m *validateOpDeleteStateMachine) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteStateMachineInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteStateMachineVersion struct {
+}
+
+func (*validateOpDeleteStateMachineVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteStateMachineVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteStateMachineVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteStateMachineVersionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -144,6 +205,26 @@ func (m *validateOpDescribeMapRun) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeMapRunInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeStateMachineAlias struct {
+}
+
+func (*validateOpDescribeStateMachineAlias) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeStateMachineAlias) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeStateMachineAliasInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeStateMachineAliasInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -249,6 +330,46 @@ func (m *validateOpListMapRuns) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListStateMachineAliases struct {
+}
+
+func (*validateOpListStateMachineAliases) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListStateMachineAliases) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListStateMachineAliasesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListStateMachineAliasesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListStateMachineVersions struct {
+}
+
+func (*validateOpListStateMachineVersions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListStateMachineVersions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListStateMachineVersionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListStateMachineVersionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -264,6 +385,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPublishStateMachineVersion struct {
+}
+
+func (*validateOpPublishStateMachineVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPublishStateMachineVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PublishStateMachineVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPublishStateMachineVersionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -449,6 +590,26 @@ func (m *validateOpUpdateMapRun) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateStateMachineAlias struct {
+}
+
+func (*validateOpUpdateStateMachineAlias) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateStateMachineAlias) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateStateMachineAliasInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateStateMachineAliasInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateStateMachine struct {
 }
 
@@ -473,6 +634,10 @@ func addOpCreateActivityValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateActivity{}, middleware.After)
 }
 
+func addOpCreateStateMachineAliasValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateStateMachineAlias{}, middleware.After)
+}
+
 func addOpCreateStateMachineValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateStateMachine{}, middleware.After)
 }
@@ -481,8 +646,16 @@ func addOpDeleteActivityValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteActivity{}, middleware.After)
 }
 
+func addOpDeleteStateMachineAliasValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteStateMachineAlias{}, middleware.After)
+}
+
 func addOpDeleteStateMachineValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteStateMachine{}, middleware.After)
+}
+
+func addOpDeleteStateMachineVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteStateMachineVersion{}, middleware.After)
 }
 
 func addOpDescribeActivityValidationMiddleware(stack *middleware.Stack) error {
@@ -495,6 +668,10 @@ func addOpDescribeExecutionValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDescribeMapRunValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeMapRun{}, middleware.After)
+}
+
+func addOpDescribeStateMachineAliasValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeStateMachineAlias{}, middleware.After)
 }
 
 func addOpDescribeStateMachineForExecutionValidationMiddleware(stack *middleware.Stack) error {
@@ -517,8 +694,20 @@ func addOpListMapRunsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListMapRuns{}, middleware.After)
 }
 
+func addOpListStateMachineAliasesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListStateMachineAliases{}, middleware.After)
+}
+
+func addOpListStateMachineVersionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListStateMachineVersions{}, middleware.After)
+}
+
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpPublishStateMachineVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPublishStateMachineVersion{}, middleware.After)
 }
 
 func addOpSendTaskFailureValidationMiddleware(stack *middleware.Stack) error {
@@ -557,8 +746,44 @@ func addOpUpdateMapRunValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateMapRun{}, middleware.After)
 }
 
+func addOpUpdateStateMachineAliasValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateStateMachineAlias{}, middleware.After)
+}
+
 func addOpUpdateStateMachineValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateStateMachine{}, middleware.After)
+}
+
+func validateRoutingConfigurationList(v []types.RoutingConfigurationListItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RoutingConfigurationList"}
+	for i := range v {
+		if err := validateRoutingConfigurationListItem(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRoutingConfigurationListItem(v *types.RoutingConfigurationListItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RoutingConfigurationListItem"}
+	if v.StateMachineVersionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StateMachineVersionArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateOpCreateActivityInput(v *CreateActivityInput) error {
@@ -568,6 +793,28 @@ func validateOpCreateActivityInput(v *CreateActivityInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CreateActivityInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateStateMachineAliasInput(v *CreateStateMachineAliasInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateStateMachineAliasInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.RoutingConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoutingConfiguration"))
+	} else if v.RoutingConfiguration != nil {
+		if err := validateRoutingConfigurationList(v.RoutingConfiguration); err != nil {
+			invalidParams.AddNested("RoutingConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -612,6 +859,21 @@ func validateOpDeleteActivityInput(v *DeleteActivityInput) error {
 	}
 }
 
+func validateOpDeleteStateMachineAliasInput(v *DeleteStateMachineAliasInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteStateMachineAliasInput"}
+	if v.StateMachineAliasArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StateMachineAliasArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteStateMachineInput(v *DeleteStateMachineInput) error {
 	if v == nil {
 		return nil
@@ -619,6 +881,21 @@ func validateOpDeleteStateMachineInput(v *DeleteStateMachineInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteStateMachineInput"}
 	if v.StateMachineArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StateMachineArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteStateMachineVersionInput(v *DeleteStateMachineVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteStateMachineVersionInput"}
+	if v.StateMachineVersionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StateMachineVersionArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -664,6 +941,21 @@ func validateOpDescribeMapRunInput(v *DescribeMapRunInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeMapRunInput"}
 	if v.MapRunArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MapRunArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeStateMachineAliasInput(v *DescribeStateMachineAliasInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeStateMachineAliasInput"}
+	if v.StateMachineAliasArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StateMachineAliasArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -747,6 +1039,36 @@ func validateOpListMapRunsInput(v *ListMapRunsInput) error {
 	}
 }
 
+func validateOpListStateMachineAliasesInput(v *ListStateMachineAliasesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListStateMachineAliasesInput"}
+	if v.StateMachineArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StateMachineArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListStateMachineVersionsInput(v *ListStateMachineVersionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListStateMachineVersionsInput"}
+	if v.StateMachineArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StateMachineArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	if v == nil {
 		return nil
@@ -754,6 +1076,21 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPublishStateMachineVersionInput(v *PublishStateMachineVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PublishStateMachineVersionInput"}
+	if v.StateMachineArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StateMachineArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -898,6 +1235,26 @@ func validateOpUpdateMapRunInput(v *UpdateMapRunInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateMapRunInput"}
 	if v.MapRunArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MapRunArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateStateMachineAliasInput(v *UpdateStateMachineAliasInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateStateMachineAliasInput"}
+	if v.StateMachineAliasArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StateMachineAliasArn"))
+	}
+	if v.RoutingConfiguration != nil {
+		if err := validateRoutingConfigurationList(v.RoutingConfiguration); err != nil {
+			invalidParams.AddNested("RoutingConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

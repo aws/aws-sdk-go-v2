@@ -17,15 +17,18 @@ import (
 // Choice states), stop an execution with an error ( Fail states), and so on.
 // State machines are specified using a JSON-based, structured language. For more
 // information, see Amazon States Language (https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html)
-// in the Step Functions User Guide. This operation is eventually consistent. The
-// results are best effort and may not reflect very recent updates and changes.
-// CreateStateMachine is an idempotent API. Subsequent requests won’t create a
-// duplicate resource if it was already created. CreateStateMachine 's idempotency
-// check is based on the state machine name , definition , type ,
-// LoggingConfiguration and TracingConfiguration . If a following request has a
-// different roleArn or tags , Step Functions will ignore these differences and
-// treat it as an idempotent request of the previous. In this case, roleArn and
-// tags will not be updated, even if they are different.
+// in the Step Functions User Guide. If you set the publish parameter of this API
+// action to true , it publishes version 1 as the first revision of the state
+// machine. This operation is eventually consistent. The results are best effort
+// and may not reflect very recent updates and changes. CreateStateMachine is an
+// idempotent API. Subsequent requests won’t create a duplicate resource if it was
+// already created. CreateStateMachine 's idempotency check is based on the state
+// machine name , definition , type , LoggingConfiguration , and
+// TracingConfiguration . The check is also based on the publish and
+// versionDescription parameters. If a following request has a different roleArn
+// or tags , Step Functions will ignore these differences and treat it as an
+// idempotent request of the previous. In this case, roleArn and tags will not be
+// updated, even if they are different.
 func (c *Client) CreateStateMachine(ctx context.Context, params *CreateStateMachineInput, optFns ...func(*Options)) (*CreateStateMachineOutput, error) {
 	if params == nil {
 		params = &CreateStateMachineInput{}
@@ -72,6 +75,10 @@ type CreateStateMachineInput struct {
 	// in the Step Functions User Guide.
 	LoggingConfiguration *types.LoggingConfiguration
 
+	// Set to true to publish the first version of the state machine during creation.
+	// The default is false .
+	Publish bool
+
 	// Tags to be added when creating a state machine. An array of key-value pairs.
 	// For more information, see Using Cost Allocation Tags (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
 	// in the Amazon Web Services Billing and Cost Management User Guide, and
@@ -88,6 +95,12 @@ type CreateStateMachineInput struct {
 	// created.
 	Type types.StateMachineType
 
+	// Sets description about the state machine version. You can only set the
+	// description if the publish parameter is set to true . Otherwise, if you set
+	// versionDescription , but publish to false , this API action throws
+	// ValidationException .
+	VersionDescription *string
+
 	noSmithyDocumentSerde
 }
 
@@ -102,6 +115,11 @@ type CreateStateMachineOutput struct {
 	//
 	// This member is required.
 	StateMachineArn *string
+
+	// The Amazon Resource Name (ARN) that identifies the created state machine
+	// version. If you do not set the publish parameter to true , this field returns
+	// null value.
+	StateMachineVersionArn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

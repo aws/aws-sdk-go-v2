@@ -16,7 +16,7 @@ import (
 // provides an alternative to retrieving message status if the event was not
 // received because a client wasn't connected to a websocket. Messages can have any
 // one of these statuses. SENT Message processed successfully PENDING Ongoing
-// processing FAILED Processing failed DENIED Messasge denied by the processor
+// processing FAILED Processing failed DENIED Message denied by the processor
 //   - This API does not return statuses for denied messages, because we don't
 //     store them once the processor denies them.
 //   - Only the message sender can invoke this API.

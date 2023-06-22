@@ -151,3 +151,43 @@ func (RespondsTo) Values() []RespondsTo {
 		"STANDARD_MESSAGES",
 	}
 }
+
+type StandardMessages string
+
+// Enum values for StandardMessages
+const (
+	StandardMessagesAuto     StandardMessages = "AUTO"
+	StandardMessagesAll      StandardMessages = "ALL"
+	StandardMessagesMentions StandardMessages = "MENTIONS"
+	StandardMessagesNone     StandardMessages = "NONE"
+)
+
+// Values returns all known values for StandardMessages. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (StandardMessages) Values() []StandardMessages {
+	return []StandardMessages{
+		"AUTO",
+		"ALL",
+		"MENTIONS",
+		"NONE",
+	}
+}
+
+type TargetedMessages string
+
+// Enum values for TargetedMessages
+const (
+	TargetedMessagesAll  TargetedMessages = "ALL"
+	TargetedMessagesNone TargetedMessages = "NONE"
+)
+
+// Values returns all known values for TargetedMessages. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TargetedMessages) Values() []TargetedMessages {
+	return []TargetedMessages{
+		"ALL",
+		"NONE",
+	}
+}

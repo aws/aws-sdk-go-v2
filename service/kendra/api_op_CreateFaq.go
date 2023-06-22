@@ -66,9 +66,9 @@ type CreateFaqInput struct {
 
 	// The format of the FAQ input file. You can choose between a basic CSV format, a
 	// CSV format that includes customs attributes in a header, and a JSON format that
-	// includes custom attributes. The format must match the format of the file stored
-	// in the S3 bucket identified in the S3Path parameter. For more information, see
-	// Adding questions and answers (https://docs.aws.amazon.com/kendra/latest/dg/in-creating-faq.html)
+	// includes custom attributes. The default format is CSV. The format must match the
+	// format of the file stored in the S3 bucket identified in the S3Path parameter.
+	// For more information, see Adding questions and answers (https://docs.aws.amazon.com/kendra/latest/dg/in-creating-faq.html)
 	// .
 	FileFormat types.FaqFileFormat
 

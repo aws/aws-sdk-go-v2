@@ -1,0 +1,8 @@
+{
+    "id": "77fab5b7-5122-4d68-bf58-74f78678bb7f",
+    "type": "feature",
+    "description": "AppInstanceBots can be configured to be invoked or not using the Target or the CHIME.mentions attribute for ChannelMessages",
+    "modules": [
+        "service/chimesdkidentity"
+    ]
+}

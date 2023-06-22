@@ -87,6 +87,35 @@ func (e *ActivityWorkerLimitExceeded) ErrorCode() string {
 }
 func (e *ActivityWorkerLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// Updating or deleting a resource can cause an inconsistent state. This error
+// occurs when there're concurrent requests for DeleteStateMachineVersion ,
+// PublishStateMachineVersion , or UpdateStateMachine with the publish parameter
+// set to true . HTTP Status Code: 409
+type ConflictException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ConflictException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ConflictException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ConflictException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ConflictException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The execution has the same name as another execution (but a different input ).
 // Executions with the same name and input are considered idempotent.
 type ExecutionAlreadyExists struct {
@@ -402,8 +431,7 @@ func (e *MissingRequiredParameter) ErrorCode() string {
 }
 func (e *MissingRequiredParameter) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Could not find the referenced resource. Only state machine and activity ARNs
-// are supported.
+// Could not find the referenced resource.
 type ResourceNotFound struct {
 	Message *string
 
@@ -430,6 +458,32 @@ func (e *ResourceNotFound) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The request would cause a service quota to be exceeded. HTTP Status Code: 402
+type ServiceQuotaExceededException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ServiceQuotaExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ServiceQuotaExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ServiceQuotaExceededException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ServiceQuotaExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A state machine with the same name but a different definition or role ARN
 // already exists.

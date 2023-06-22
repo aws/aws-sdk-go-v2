@@ -15,13 +15,16 @@ import (
 // Lists all executions of a state machine or a Map Run. You can list all
 // executions related to a state machine by specifying a state machine Amazon
 // Resource Name (ARN), or those related to a Map Run by specifying a Map Run ARN.
-// Results are sorted by time, with the most recent execution first. If nextToken
-// is returned, there are more results available. The value of nextToken is a
-// unique pagination token for each page. Make the call again using the returned
-// token to retrieve the next page. Keep all other arguments unchanged. Each
-// pagination token expires after 24 hours. Using an expired pagination token will
-// return an HTTP 400 InvalidToken error. This operation is eventually consistent.
-// The results are best effort and may not reflect very recent updates and changes.
+// You can also provide a state machine alias (https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html)
+// ARN or version (https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-version.html)
+// ARN to list the executions associated with a specific alias or version. Results
+// are sorted by time, with the most recent execution first. If nextToken is
+// returned, there are more results available. The value of nextToken is a unique
+// pagination token for each page. Make the call again using the returned token to
+// retrieve the next page. Keep all other arguments unchanged. Each pagination
+// token expires after 24 hours. Using an expired pagination token will return an
+// HTTP 400 InvalidToken error. This operation is eventually consistent. The
+// results are best effort and may not reflect very recent updates and changes.
 // This API action is not supported by EXPRESS state machines.
 func (c *Client) ListExecutions(ctx context.Context, params *ListExecutionsInput, optFns ...func(*Options)) (*ListExecutionsOutput, error) {
 	if params == nil {
@@ -63,7 +66,10 @@ type ListExecutionsInput struct {
 	NextToken *string
 
 	// The Amazon Resource Name (ARN) of the state machine whose executions is listed.
-	// You can specify either a mapRunArn or a stateMachineArn , but not both.
+	// You can specify either a mapRunArn or a stateMachineArn , but not both. You can
+	// also return a list of executions associated with a specific alias (https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html)
+	// or version (https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-version.html)
+	// , by specifying an alias ARN or a version ARN in the stateMachineArn parameter.
 	StateMachineArn *string
 
 	// If specified, only list the executions whose current execution status matches

@@ -15,8 +15,10 @@ import (
 // Sends a message to a particular channel that the member is a part of. The
 // x-amz-chime-bearer request header is mandatory. Use the ARN of the
 // AppInstanceUser or AppInstanceBot that makes the API call as the value in the
-// header. Also, STANDARD messages can contain 4KB of data and the 1KB of
-// metadata. CONTROL messages can contain 30 bytes of data and no metadata.
+// header. Also, STANDARD messages can be up to 4KB in size and contain metadata.
+// Metadata is arbitrary, and you can use it in a variety of ways, such as
+// containing a link to an attachment. CONTROL messages are limited to 30 bytes
+// and do not contain metadata.
 func (c *Client) SendChannelMessage(ctx context.Context, params *SendChannelMessageInput, optFns ...func(*Options)) (*SendChannelMessageOutput, error) {
 	if params == nil {
 		params = &SendChannelMessageInput{}
@@ -49,7 +51,7 @@ type SendChannelMessageInput struct {
 	// This member is required.
 	ClientRequestToken *string
 
-	// The content of the message.
+	// The content of the channel message.
 	//
 	// This member is required.
 	Content *string
@@ -60,7 +62,10 @@ type SendChannelMessageInput struct {
 	// This member is required.
 	Persistence types.ChannelMessagePersistenceType
 
-	// The type of message, STANDARD or CONTROL .
+	// The type of message, STANDARD or CONTROL . STANDARD messages can be up to 4KB
+	// in size and contain metadata. Metadata is arbitrary, and you can use it in a
+	// variety of ways, such as containing a link to an attachment. CONTROL messages
+	// are limited to 30 bytes and do not contain metadata.
 	//
 	// This member is required.
 	Type types.ChannelMessageType
@@ -80,6 +85,12 @@ type SendChannelMessageInput struct {
 
 	// The ID of the SubChannel in the request.
 	SubChannelId *string
+
+	// The target of a message. Must be a member of the channel, such as another user,
+	// a bot, or the sender. Only the target and the sender can view targeted messages.
+	// Only users who can see targeted messages can take actions on them. However,
+	// administrators can delete targeted messages that they can’t see.
+	Target []types.Target
 
 	noSmithyDocumentSerde
 }

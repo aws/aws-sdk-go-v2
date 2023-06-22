@@ -41,7 +41,7 @@ type UpdateChannelMessageInput struct {
 	// This member is required.
 	ChimeBearer *string
 
-	// The content of the message being updated.
+	// The content of the channel message.
 	//
 	// This member is required.
 	Content *string

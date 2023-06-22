@@ -13,7 +13,7 @@ import (
 
 // Gets the membership preferences of an AppInstanceUser or AppInstanceBot for the
 // specified channel. A user or a bot must be a member of the channel and own the
-// membership to be able to retrieve membership preferences. Users or bots in the
+// membership in order to retrieve membership preferences. Users or bots in the
 // AppInstanceAdmin and channel moderator roles can't retrieve preferences for
 // other users or bots. Banned users or bots can't retrieve membership preferences
 // for the channel from which they are banned. The x-amz-chime-bearer request

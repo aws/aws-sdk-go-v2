@@ -265,6 +265,7 @@ const (
 	ValidationExceptionReasonApiDoesNotSupportLabeledArns ValidationExceptionReason = "API_DOES_NOT_SUPPORT_LABELED_ARNS"
 	ValidationExceptionReasonMissingRequiredParameter     ValidationExceptionReason = "MISSING_REQUIRED_PARAMETER"
 	ValidationExceptionReasonCannotUpdateCompletedMapRun  ValidationExceptionReason = "CANNOT_UPDATE_COMPLETED_MAP_RUN"
+	ValidationExceptionReasonInvalidRoutingConfiguration  ValidationExceptionReason = "INVALID_ROUTING_CONFIGURATION"
 )
 
 // Values returns all known values for ValidationExceptionReason. Note that this
@@ -275,5 +276,6 @@ func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 		"API_DOES_NOT_SUPPORT_LABELED_ARNS",
 		"MISSING_REQUIRED_PARAMETER",
 		"CANNOT_UPDATE_COMPLETED_MAP_RUN",
+		"INVALID_ROUTING_CONFIGURATION",
 	}
 }

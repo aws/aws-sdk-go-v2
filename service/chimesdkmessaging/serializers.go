@@ -3471,6 +3471,13 @@ func awsRestjson1_serializeOpDocumentSendChannelMessageInput(v *SendChannelMessa
 		ok.String(*v.SubChannelId)
 	}
 
+	if v.Target != nil {
+		ok := object.Key("Target")
+		if err := awsRestjson1_serializeDocumentTargetList(v.Target, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.Type) > 0 {
 		ok := object.Key("Type")
 		ok.String(string(v.Type))
@@ -4382,6 +4389,31 @@ func awsRestjson1_serializeDocumentTagList(v []types.Tag, value smithyjson.Value
 	for i := range v {
 		av := array.Value()
 		if err := awsRestjson1_serializeDocumentTag(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTarget(v *types.Target, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MemberArn != nil {
+		ok := object.Key("MemberArn")
+		ok.String(*v.MemberArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTargetList(v []types.Target, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentTarget(&v[i], av); err != nil {
 			return err
 		}
 	}
