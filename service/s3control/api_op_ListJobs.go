@@ -5,15 +5,14 @@ package s3control
 import (
 	"context"
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	"github.com/aws/aws-sdk-go-v2/internal/endpoints"
 	s3controlcust "github.com/aws/aws-sdk-go-v2/service/s3control/internal/customizations"
 	"github.com/aws/aws-sdk-go-v2/service/s3control/types"
 	smithy "github.com/aws/smithy-go"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"strings"
 )
@@ -127,10 +126,10 @@ func (c *Client) addOperationListJobsMiddlewares(stack *middleware.Stack, option
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addListJobsResolveEndpointMiddleware(stack, options); err != nil {
+	if err = addEndpointPrefix_opListJobsMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addEndpointPrefix_opListJobsMiddleware(stack); err != nil {
+	if err = addListJobsResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListJobsValidationMiddleware(stack); err != nil {
@@ -158,86 +157,6 @@ func (c *Client) addOperationListJobsMiddlewares(stack *middleware.Stack, option
 		return err
 	}
 	return nil
-}
-
-type opListJobsResolveEndpointMiddleware struct {
-	EndpointResolver EndpointResolverV2
-	BuiltInResolver  endpoints.BuiltInParameterResolver
-	UseArnRegion     *bool
-}
-
-func (*opListJobsResolveEndpointMiddleware) ID() string {
-	return "opListJobsResolveEndpointMiddleware"
-}
-
-func (m *opListJobsResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	input, ok := in.Parameters.(*ListJobsInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	if m.EndpointResolver == nil {
-		return out, metadata, fmt.Errorf("expected endpoint resolver to not be nil")
-	}
-
-	if m.BuiltInResolver == nil {
-		m.BuiltInResolver = &endpoints.NopBuiltInResolver{}
-	}
-
-	params := EndpointParameters{}
-
-	resolveBuiltIns(params, m.BuiltInResolver)
-
-	params.AccountId = input.AccountId
-
-	params.RequiresAccountId = aws.Bool(true)
-
-	var resolvedEndpoint smithyendpoints.Endpoint
-	resolvedEndpoint, err = m.EndpointResolver.ResolveEndpoint(ctx, params)
-	if err != nil {
-		return out, metadata, fmt.Errorf("failed to resolve service endpoint, %w", err)
-	}
-
-	req.URL = &resolvedEndpoint.URI
-
-	auth, ok := resolvedEndpoint.Properties.Get("authSchemes").([]interface{})
-	if ok {
-		for _, schemes := range auth {
-			scheme, ok := schemes.(map[string]interface{})
-			if !ok {
-				continue
-			}
-			if len(awsmiddleware.GetSigningName(ctx)) == 0 {
-				signingName := scheme["signingName"].(string)
-				if len(signingName) == 0 {
-					signingName = "s3"
-				}
-				ctx = awsmiddleware.SetSigningName(ctx, signingName)
-			}
-		}
-	}
-
-	return next.HandleSerialize(ctx, in)
-}
-
-func addListJobsResolveEndpointMiddleware(stack *middleware.Stack, options Options) error {
-	return stack.Serialize.Insert(&opListJobsResolveEndpointMiddleware{
-		BuiltInResolver: &endpoints.BuiltInResolver{
-			Region:                options.Region,
-			UseFIPS:               options.EndpointOptions.UseFIPSEndpoint,
-			UseDualStack:          options.EndpointOptions.UseDualStackEndpoint,
-			Endpoint:              options.MutableBaseEndpoint,
-			S3ControlUseArnRegion: options.UseARNRegion,
-		},
-		EndpointResolver: options.EndpointResolverV2,
-	}, "ResolveEndpoint", middleware.After)
 }
 
 type endpointPrefix_opListJobsMiddleware struct {
@@ -413,4 +332,69 @@ func addListJobsUpdateEndpoint(stack *middleware.Stack, options Options) error {
 		EndpointResolverOptions: options.EndpointOptions,
 		UseARNRegion:            options.UseARNRegion,
 	})
+}
+
+type opListJobsResolveEndpointMiddleware struct {
+	EndpointResolver EndpointResolverV2
+	BuiltInResolver  BuiltInParameterResolver
+}
+
+func (*opListJobsResolveEndpointMiddleware) ID() string {
+	return "opListJobsResolveEndpointMiddleware"
+}
+
+func (m *opListJobsResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	input, ok := in.Parameters.(*ListJobsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	if m.EndpointResolver == nil {
+		return out, metadata, fmt.Errorf("expected endpoint resolver to not be nil")
+	}
+
+	params := EndpointParameters{}
+
+	m.BuiltInResolver.ResolveBuiltIns(&params)
+
+	params.AccountId = input.AccountId
+
+	params.RequiresAccountId = ptr.Bool(true)
+
+	var resolvedEndpoint smithyendpoints.Endpoint
+	resolvedEndpoint, err = m.EndpointResolver.ResolveEndpoint(ctx, params)
+	if err != nil {
+		return out, metadata, fmt.Errorf("failed to resolve service endpoint, %w", err)
+	}
+
+	req.URL = &resolvedEndpoint.URI
+
+	for k := range resolvedEndpoint.Headers {
+		req.Header.Set(
+			k,
+			resolvedEndpoint.Headers.Get(k),
+		)
+	}
+
+	return next.HandleSerialize(ctx, in)
+}
+
+func addListJobsResolveEndpointMiddleware(stack *middleware.Stack, options Options) error {
+	return stack.Serialize.Insert(&opListJobsResolveEndpointMiddleware{
+		EndpointResolver: options.EndpointResolverV2,
+		BuiltInResolver: &BuiltInResolver{
+			Region:       options.Region,
+			UseFIPS:      options.EndpointOptions.UseFIPSEndpoint,
+			UseDualStack: options.EndpointOptions.UseDualStackEndpoint,
+			Endpoint:     options.BaseEndpoint,
+			UseArnRegion: options.UseARNRegion,
+		},
+	}, "ResolveEndpoint", middleware.After)
 }

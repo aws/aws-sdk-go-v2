@@ -8,7 +8,6 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/internal/endpoints"
 	"github.com/aws/aws-sdk-go-v2/internal/endpoints/awsrulesfn"
 	internalendpoints "github.com/aws/aws-sdk-go-v2/service/s3control/internal/endpoints"
 	smithy "github.com/aws/smithy-go"
@@ -340,33 +339,56 @@ func finalizeEndpointResolverV2(options *Options) {
 	}
 }
 
-func resolveBuiltIns(parameters EndpointParameters, resolver endpoints.BuiltInParameterResolver) {
-	var value interface{}
-	var present bool
-	value, present = resolver.ResolveBuiltIn("AWS::Region")
-	if v, ok := value.(string); present && ok {
-		parameters.Region = &v
-	}
+// BuiltInParameterResolver is the interface responsible for resolving BuiltIn
+// values during the sourcing of EndpointParameters
+type BuiltInParameterResolver interface {
+	ResolveBuiltIns(*EndpointParameters) error
+}
 
-	value, present = resolver.ResolveBuiltIn("AWS::UseFIPS")
-	if v, ok := value.(bool); present && ok {
-		parameters.UseFIPS = &v
-	}
+// BuiltInResolver resolves modeled BuiltIn values using only the members defined
+// below.
+type BuiltInResolver struct {
+	// The AWS region used to dispatch the request.
+	Region string
 
-	value, present = resolver.ResolveBuiltIn("AWS::UseDualStack")
-	if v, ok := value.(bool); present && ok {
-		parameters.UseDualStack = &v
-	}
+	// Sourced BuiltIn value in a historical enabled or disabled state.
+	UseFIPS aws.FIPSEndpointState
 
-	value, present = resolver.ResolveBuiltIn("SDK::Endpoint")
-	if v, ok := value.(string); present && ok {
-		parameters.Endpoint = &v
-	}
+	// Sourced BuiltIn value in a historical enabled or disabled state.
+	UseDualStack aws.DualStackEndpointState
 
-	value, present = resolver.ResolveBuiltIn("AWS::S3Control::UseArnRegion")
-	if v, ok := value.(bool); present && ok {
-		parameters.UseArnRegion = &v
+	// Base endpoint that can potentially be modified during Endpoint resolution.
+	Endpoint *string
+
+	// When an Access Point ARN is provided and this flag is enabled, the SDK MUST use
+	// the ARN's region when constructing the endpoint instead of the client's
+	// configured region.
+	UseArnRegion bool
+}
+
+// Invoked at runtime to resolve BuiltIn Values. Only resolution code specific to
+// each BuiltIn value is generated.
+func (b *BuiltInResolver) ResolveBuiltIns(params *EndpointParameters) error {
+
+	region, _ := mapPseudoRegion(b.Region)
+	if len(region) == 0 {
+		return fmt.Errorf("Could not resolve AWS::Region")
+	} else {
+		params.Region = aws.String(region)
 	}
+	if b.UseFIPS == aws.FIPSEndpointStateEnabled {
+		params.UseFIPS = aws.Bool(true)
+	} else {
+		params.UseFIPS = aws.Bool(false)
+	}
+	if b.UseDualStack == aws.DualStackEndpointStateEnabled {
+		params.UseDualStack = aws.Bool(true)
+	} else {
+		params.UseDualStack = aws.Bool(false)
+	}
+	params.Endpoint = b.Endpoint
+	params.UseArnRegion = aws.Bool(b.UseArnRegion)
+	return nil
 }
 
 // EndpointParameters provides the parameters that influence how endpoints are

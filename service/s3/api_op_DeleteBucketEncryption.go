@@ -7,7 +7,6 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	"github.com/aws/aws-sdk-go-v2/internal/endpoints"
 	s3cust "github.com/aws/aws-sdk-go-v2/service/s3/internal/customizations"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
@@ -147,90 +146,6 @@ func (c *Client) addOperationDeleteBucketEncryptionMiddlewares(stack *middleware
 	return nil
 }
 
-type opDeleteBucketEncryptionResolveEndpointMiddleware struct {
-	EndpointResolver               EndpointResolverV2
-	BuiltInResolver                endpoints.BuiltInParameterResolver
-	ForcePathStyle                 *bool
-	Accelerate                     *bool
-	DisableMultiRegionAccessPoints *bool
-	UseArnRegion                   *bool
-}
-
-func (*opDeleteBucketEncryptionResolveEndpointMiddleware) ID() string {
-	return "opDeleteBucketEncryptionResolveEndpointMiddleware"
-}
-
-func (m *opDeleteBucketEncryptionResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	input, ok := in.Parameters.(*DeleteBucketEncryptionInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	if m.EndpointResolver == nil {
-		return out, metadata, fmt.Errorf("expected endpoint resolver to not be nil")
-	}
-
-	if m.BuiltInResolver == nil {
-		m.BuiltInResolver = &endpoints.NopBuiltInResolver{}
-	}
-
-	params := EndpointParameters{}
-
-	resolveBuiltIns(params, m.BuiltInResolver)
-
-	params.Bucket = input.Bucket
-
-	var resolvedEndpoint smithyendpoints.Endpoint
-	resolvedEndpoint, err = m.EndpointResolver.ResolveEndpoint(ctx, params)
-	if err != nil {
-		return out, metadata, fmt.Errorf("failed to resolve service endpoint, %w", err)
-	}
-
-	req.URL = &resolvedEndpoint.URI
-
-	auth, ok := resolvedEndpoint.Properties.Get("authSchemes").([]interface{})
-	if ok {
-		for _, schemes := range auth {
-			scheme, ok := schemes.(map[string]interface{})
-			if !ok {
-				continue
-			}
-			if len(awsmiddleware.GetSigningName(ctx)) == 0 {
-				signingName := scheme["signingName"].(string)
-				if len(signingName) == 0 {
-					signingName = "s3"
-				}
-				ctx = awsmiddleware.SetSigningName(ctx, signingName)
-			}
-		}
-	}
-
-	return next.HandleSerialize(ctx, in)
-}
-
-func addDeleteBucketEncryptionResolveEndpointMiddleware(stack *middleware.Stack, options Options) error {
-	return stack.Serialize.Insert(&opDeleteBucketEncryptionResolveEndpointMiddleware{
-		BuiltInResolver: &endpoints.BuiltInResolver{
-			Region:                         options.Region,
-			UseFIPS:                        options.EndpointOptions.UseFIPSEndpoint,
-			UseDualStack:                   options.EndpointOptions.UseDualStackEndpoint,
-			Endpoint:                       options.MutableBaseEndpoint,
-			ForcePathStyle:                 options.UsePathStyle,
-			Accelerate:                     options.UseAccelerate,
-			DisableMultiRegionAccessPoints: options.DisableMultiRegionAccessPoints,
-			S3UseArnRegion:                 options.UseARNRegion,
-		},
-		EndpointResolver: options.EndpointResolverV2,
-	}, "ResolveEndpoint", middleware.After)
-}
-
 func newServiceMetadataMiddleware_opDeleteBucketEncryption(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
@@ -264,4 +179,70 @@ func addDeleteBucketEncryptionUpdateEndpoint(stack *middleware.Stack, options Op
 		UseARNRegion:                   options.UseARNRegion,
 		DisableMultiRegionAccessPoints: options.DisableMultiRegionAccessPoints,
 	})
+}
+
+type opDeleteBucketEncryptionResolveEndpointMiddleware struct {
+	EndpointResolver EndpointResolverV2
+	BuiltInResolver  BuiltInParameterResolver
+}
+
+func (*opDeleteBucketEncryptionResolveEndpointMiddleware) ID() string {
+	return "opDeleteBucketEncryptionResolveEndpointMiddleware"
+}
+
+func (m *opDeleteBucketEncryptionResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	input, ok := in.Parameters.(*DeleteBucketEncryptionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	if m.EndpointResolver == nil {
+		return out, metadata, fmt.Errorf("expected endpoint resolver to not be nil")
+	}
+
+	params := EndpointParameters{}
+
+	m.BuiltInResolver.ResolveBuiltIns(&params)
+
+	params.Bucket = input.Bucket
+
+	var resolvedEndpoint smithyendpoints.Endpoint
+	resolvedEndpoint, err = m.EndpointResolver.ResolveEndpoint(ctx, params)
+	if err != nil {
+		return out, metadata, fmt.Errorf("failed to resolve service endpoint, %w", err)
+	}
+
+	req.URL = &resolvedEndpoint.URI
+
+	for k := range resolvedEndpoint.Headers {
+		req.Header.Set(
+			k,
+			resolvedEndpoint.Headers.Get(k),
+		)
+	}
+
+	return next.HandleSerialize(ctx, in)
+}
+
+func addDeleteBucketEncryptionResolveEndpointMiddleware(stack *middleware.Stack, options Options) error {
+	return stack.Serialize.Insert(&opDeleteBucketEncryptionResolveEndpointMiddleware{
+		EndpointResolver: options.EndpointResolverV2,
+		BuiltInResolver: &BuiltInResolver{
+			Region:                         options.Region,
+			UseFIPS:                        options.EndpointOptions.UseFIPSEndpoint,
+			UseDualStack:                   options.EndpointOptions.UseDualStackEndpoint,
+			Endpoint:                       options.BaseEndpoint,
+			ForcePathStyle:                 options.UsePathStyle,
+			Accelerate:                     options.UseAccelerate,
+			DisableMultiRegionAccessPoints: options.DisableMultiRegionAccessPoints,
+			UseArnRegion:                   options.UseARNRegion,
+		},
+	}, "ResolveEndpoint", middleware.After)
 }
