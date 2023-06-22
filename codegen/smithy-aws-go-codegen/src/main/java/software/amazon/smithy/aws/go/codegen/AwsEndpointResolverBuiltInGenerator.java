@@ -363,7 +363,7 @@ public class AwsEndpointResolverBuiltInGenerator implements GoIntegration {
                 p -> p.getBuiltIn().isPresent())
                 .forEach(parameter -> {
                     if (parameter.getBuiltIn().get().equals("SDK::Endpoint")) {
-                        writer.write("$L: options.MutableBaseEndpoint,", getExportedParameterName(parameter));
+                        writer.write("$L: options.BaseEndpoint,", getExportedParameterName(parameter));
                         writer.insertTrailingNewline();
                     }
                     if (parameter.getBuiltIn().get().equals("AWS::Region")) {
