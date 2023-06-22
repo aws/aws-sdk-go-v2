@@ -1,8 +1,0 @@
-{
-    "id": "dec6ccae-a1bd-43b4-84cf-c36ec3bf7564",
-    "type": "feature",
-    "description": "ChannelMessages can be made visible to sender and intended recipient rather than all channel members with the target attribute. For example, a user can send messages to a bot and receive messages back in a group channel without other members seeing them.",
-    "modules": [
-        "service/chimesdkmessaging"
-    ]
-}

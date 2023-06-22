@@ -1,3 +1,15 @@
+# Release (2023-06-22)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkidentity`: [v1.12.0](service/chimesdkidentity/CHANGELOG.md#v1120-2023-06-22)
+  * **Feature**: AppInstanceBots can be configured to be invoked or not using the Target or the CHIME.mentions attribute for ChannelMessages
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging`: [v1.16.0](service/chimesdkmessaging/CHANGELOG.md#v1160-2023-06-22)
+  * **Feature**: ChannelMessages can be made visible to sender and intended recipient rather than all channel members with the target attribute. For example, a user can send messages to a bot and receive messages back in a group channel without other members seeing them.
+* `github.com/aws/aws-sdk-go-v2/service/kendra`: [v1.41.0](service/kendra/CHANGELOG.md#v1410-2023-06-22)
+  * **Feature**: Introducing Amazon Kendra Retrieve API that can be used to retrieve relevant passages or text excerpts given an input query.
+* `github.com/aws/aws-sdk-go-v2/service/sfn`: [v1.18.0](service/sfn/CHANGELOG.md#v1180-2023-06-22)
+  * **Feature**: Adds support for Versions and Aliases. Adds 8 operations: PublishStateMachineVersion, DeleteStateMachineVersion, ListStateMachineVersions, CreateStateMachineAlias, DescribeStateMachineAlias, UpdateStateMachineAlias, DeleteStateMachineAlias, ListStateMachineAliases
+
 # Release (2023-06-21)
 
 ## General Highlights

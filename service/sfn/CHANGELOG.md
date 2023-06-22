@@ -1,3 +1,7 @@
+# v1.18.0 (2023-06-22)
+
+* **Feature**: Adds support for Versions and Aliases. Adds 8 operations: PublishStateMachineVersion, DeleteStateMachineVersion, ListStateMachineVersions, CreateStateMachineAlias, DescribeStateMachineAlias, UpdateStateMachineAlias, DeleteStateMachineAlias, ListStateMachineAliases
+
 # v1.17.13 (2023-06-15)
 
 * No change notes available for this release.

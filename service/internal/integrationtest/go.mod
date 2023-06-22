@@ -71,7 +71,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.19.10
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.19.2
 	github.com/aws/aws-sdk-go-v2/service/ses v1.15.11
-	github.com/aws/aws-sdk-go-v2/service/sfn v1.17.13
+	github.com/aws/aws-sdk-go-v2/service/sfn v1.18.0
 	github.com/aws/aws-sdk-go-v2/service/shield v1.18.12
 	github.com/aws/aws-sdk-go-v2/service/snowball v1.19.4
 	github.com/aws/aws-sdk-go-v2/service/sns v1.20.13

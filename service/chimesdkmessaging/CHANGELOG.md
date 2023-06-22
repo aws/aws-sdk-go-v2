@@ -1,3 +1,7 @@
+# v1.16.0 (2023-06-22)
+
+* **Feature**: ChannelMessages can be made visible to sender and intended recipient rather than all channel members with the target attribute. For example, a user can send messages to a bot and receive messages back in a group channel without other members seeing them.
+
 # v1.15.3 (2023-06-15)
 
 * No change notes available for this release.
