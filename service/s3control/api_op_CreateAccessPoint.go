@@ -10,7 +10,9 @@ import (
 	s3controlcust "github.com/aws/aws-sdk-go-v2/service/s3control/internal/customizations"
 	"github.com/aws/aws-sdk-go-v2/service/s3control/types"
 	smithy "github.com/aws/smithy-go"
+	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"strings"
 )
@@ -148,6 +150,9 @@ func (c *Client) addOperationCreateAccessPointMiddlewares(stack *middleware.Stac
 	if err = addEndpointPrefix_opCreateAccessPointMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addCreateAccessPointResolveEndpointMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateAccessPointValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -268,4 +273,71 @@ func addCreateAccessPointUpdateEndpoint(stack *middleware.Stack, options Options
 		EndpointResolverOptions: options.EndpointOptions,
 		UseARNRegion:            options.UseARNRegion,
 	})
+}
+
+type opCreateAccessPointResolveEndpointMiddleware struct {
+	EndpointResolver EndpointResolverV2
+	BuiltInResolver  BuiltInParameterResolver
+}
+
+func (*opCreateAccessPointResolveEndpointMiddleware) ID() string {
+	return "opCreateAccessPointResolveEndpointMiddleware"
+}
+
+func (m *opCreateAccessPointResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	input, ok := in.Parameters.(*CreateAccessPointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	if m.EndpointResolver == nil {
+		return out, metadata, fmt.Errorf("expected endpoint resolver to not be nil")
+	}
+
+	params := EndpointParameters{}
+
+	m.BuiltInResolver.ResolveBuiltIns(&params)
+
+	params.AccountId = input.AccountId
+
+	params.Bucket = input.Bucket
+
+	params.RequiresAccountId = ptr.Bool(true)
+
+	var resolvedEndpoint smithyendpoints.Endpoint
+	resolvedEndpoint, err = m.EndpointResolver.ResolveEndpoint(ctx, params)
+	if err != nil {
+		return out, metadata, fmt.Errorf("failed to resolve service endpoint, %w", err)
+	}
+
+	req.URL = &resolvedEndpoint.URI
+
+	for k := range resolvedEndpoint.Headers {
+		req.Header.Set(
+			k,
+			resolvedEndpoint.Headers.Get(k),
+		)
+	}
+
+	return next.HandleSerialize(ctx, in)
+}
+
+func addCreateAccessPointResolveEndpointMiddleware(stack *middleware.Stack, options Options) error {
+	return stack.Serialize.Insert(&opCreateAccessPointResolveEndpointMiddleware{
+		EndpointResolver: options.EndpointResolverV2,
+		BuiltInResolver: &BuiltInResolver{
+			Region:       options.Region,
+			UseFIPS:      options.EndpointOptions.UseFIPSEndpoint,
+			UseDualStack: options.EndpointOptions.UseDualStackEndpoint,
+			Endpoint:     options.BaseEndpoint,
+			UseArnRegion: options.UseARNRegion,
+		},
+	}, "ResolveEndpoint", middleware.After)
 }

@@ -65,6 +65,11 @@ type Options struct {
 	// modify this list for per operation behavior.
 	APIOptions []func(*middleware.Stack) error
 
+	// This endpoint will be given as input to an EndpointResolverV2. It is used for
+	// providing a custom base endpoint that is subject to modifications by the
+	// processing EndpointResolverV2.
+	BaseEndpoint *string
+
 	// Configures the events that will be sent to the configured logger.
 	ClientLogMode aws.ClientLogMode
 

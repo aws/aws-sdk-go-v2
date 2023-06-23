@@ -9,7 +9,9 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	s3controlcust "github.com/aws/aws-sdk-go-v2/service/s3control/internal/customizations"
 	smithy "github.com/aws/smithy-go"
+	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"strings"
 )
@@ -98,6 +100,9 @@ func (c *Client) addOperationDeletePublicAccessBlockMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addEndpointPrefix_opDeletePublicAccessBlockMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addDeletePublicAccessBlockResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeletePublicAccessBlockValidationMiddleware(stack); err != nil {
@@ -208,4 +213,69 @@ func addDeletePublicAccessBlockUpdateEndpoint(stack *middleware.Stack, options O
 		EndpointResolverOptions: options.EndpointOptions,
 		UseARNRegion:            options.UseARNRegion,
 	})
+}
+
+type opDeletePublicAccessBlockResolveEndpointMiddleware struct {
+	EndpointResolver EndpointResolverV2
+	BuiltInResolver  BuiltInParameterResolver
+}
+
+func (*opDeletePublicAccessBlockResolveEndpointMiddleware) ID() string {
+	return "opDeletePublicAccessBlockResolveEndpointMiddleware"
+}
+
+func (m *opDeletePublicAccessBlockResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	input, ok := in.Parameters.(*DeletePublicAccessBlockInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	if m.EndpointResolver == nil {
+		return out, metadata, fmt.Errorf("expected endpoint resolver to not be nil")
+	}
+
+	params := EndpointParameters{}
+
+	m.BuiltInResolver.ResolveBuiltIns(&params)
+
+	params.AccountId = input.AccountId
+
+	params.RequiresAccountId = ptr.Bool(true)
+
+	var resolvedEndpoint smithyendpoints.Endpoint
+	resolvedEndpoint, err = m.EndpointResolver.ResolveEndpoint(ctx, params)
+	if err != nil {
+		return out, metadata, fmt.Errorf("failed to resolve service endpoint, %w", err)
+	}
+
+	req.URL = &resolvedEndpoint.URI
+
+	for k := range resolvedEndpoint.Headers {
+		req.Header.Set(
+			k,
+			resolvedEndpoint.Headers.Get(k),
+		)
+	}
+
+	return next.HandleSerialize(ctx, in)
+}
+
+func addDeletePublicAccessBlockResolveEndpointMiddleware(stack *middleware.Stack, options Options) error {
+	return stack.Serialize.Insert(&opDeletePublicAccessBlockResolveEndpointMiddleware{
+		EndpointResolver: options.EndpointResolverV2,
+		BuiltInResolver: &BuiltInResolver{
+			Region:       options.Region,
+			UseFIPS:      options.EndpointOptions.UseFIPSEndpoint,
+			UseDualStack: options.EndpointOptions.UseDualStackEndpoint,
+			Endpoint:     options.BaseEndpoint,
+			UseArnRegion: options.UseARNRegion,
+		},
+	}, "ResolveEndpoint", middleware.After)
 }

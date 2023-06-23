@@ -10,7 +10,9 @@ import (
 	s3controlcust "github.com/aws/aws-sdk-go-v2/service/s3control/internal/customizations"
 	"github.com/aws/aws-sdk-go-v2/service/s3control/types"
 	smithy "github.com/aws/smithy-go"
+	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"strings"
 )
@@ -118,6 +120,9 @@ func (c *Client) addOperationGetMultiRegionAccessPointPolicyMiddlewares(stack *m
 		return err
 	}
 	if err = addEndpointPrefix_opGetMultiRegionAccessPointPolicyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addGetMultiRegionAccessPointPolicyResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetMultiRegionAccessPointPolicyValidationMiddleware(stack); err != nil {
@@ -228,4 +233,69 @@ func addGetMultiRegionAccessPointPolicyUpdateEndpoint(stack *middleware.Stack, o
 		EndpointResolverOptions: options.EndpointOptions,
 		UseARNRegion:            options.UseARNRegion,
 	})
+}
+
+type opGetMultiRegionAccessPointPolicyResolveEndpointMiddleware struct {
+	EndpointResolver EndpointResolverV2
+	BuiltInResolver  BuiltInParameterResolver
+}
+
+func (*opGetMultiRegionAccessPointPolicyResolveEndpointMiddleware) ID() string {
+	return "opGetMultiRegionAccessPointPolicyResolveEndpointMiddleware"
+}
+
+func (m *opGetMultiRegionAccessPointPolicyResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	input, ok := in.Parameters.(*GetMultiRegionAccessPointPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	if m.EndpointResolver == nil {
+		return out, metadata, fmt.Errorf("expected endpoint resolver to not be nil")
+	}
+
+	params := EndpointParameters{}
+
+	m.BuiltInResolver.ResolveBuiltIns(&params)
+
+	params.AccountId = input.AccountId
+
+	params.RequiresAccountId = ptr.Bool(true)
+
+	var resolvedEndpoint smithyendpoints.Endpoint
+	resolvedEndpoint, err = m.EndpointResolver.ResolveEndpoint(ctx, params)
+	if err != nil {
+		return out, metadata, fmt.Errorf("failed to resolve service endpoint, %w", err)
+	}
+
+	req.URL = &resolvedEndpoint.URI
+
+	for k := range resolvedEndpoint.Headers {
+		req.Header.Set(
+			k,
+			resolvedEndpoint.Headers.Get(k),
+		)
+	}
+
+	return next.HandleSerialize(ctx, in)
+}
+
+func addGetMultiRegionAccessPointPolicyResolveEndpointMiddleware(stack *middleware.Stack, options Options) error {
+	return stack.Serialize.Insert(&opGetMultiRegionAccessPointPolicyResolveEndpointMiddleware{
+		EndpointResolver: options.EndpointResolverV2,
+		BuiltInResolver: &BuiltInResolver{
+			Region:       options.Region,
+			UseFIPS:      options.EndpointOptions.UseFIPSEndpoint,
+			UseDualStack: options.EndpointOptions.UseDualStackEndpoint,
+			Endpoint:     options.BaseEndpoint,
+			UseArnRegion: options.UseARNRegion,
+		},
+	}, "ResolveEndpoint", middleware.After)
 }
