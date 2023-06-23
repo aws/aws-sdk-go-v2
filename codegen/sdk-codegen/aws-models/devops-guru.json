@@ -137,7 +137,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Adds a notification channel to DevOps Guru. A notification channel is used to notify you\n\t\t\tabout important DevOps Guru events, such as when an insight is generated. </p>\n         <p>If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission \n\t\t\t\tto it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account. DevOps Guru only supports standard SNS topics. \n\t\t\t\tFor more information, see <a href=\"https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-required-permissions.html\">Permissions \n\t\t\t\tfor cross account Amazon SNS topics</a>.</p>\n         <p>If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission to it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account. For more information, see Permissions for cross account Amazon SNS topics.</p>\n         <p>If you use an Amazon SNS topic that is encrypted by an Amazon Web Services Key Management Service customer-managed key (CMK), then you must add permissions \n\t\t\t\tto the CMK. For more information, see <a href=\"https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html\">Permissions for \n\t\t\t\tAmazon Web Services KMS–encrypted Amazon SNS topics</a>.</p>",
+                "smithy.api#documentation": "<p> Adds a notification channel to DevOps Guru. A notification channel is used to notify you\n\t\t\tabout important DevOps Guru events, such as when an insight is generated. </p>\n         <p>If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission \n\t\t\t\tto send it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account. DevOps Guru only supports standard SNS topics. \n\t\t\t\tFor more information, see <a href=\"https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-required-permissions.html\">Permissions \n\t\t\t\tfor Amazon SNS topics</a>.</p>\n         <p>If you use an Amazon SNS topic that is encrypted by an Amazon Web Services Key Management Service customer-managed key (CMK), then you must add permissions \n\t\t\t\tto the CMK. For more information, see <a href=\"https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html\">Permissions for \n\t\t\t\tAmazon Web Services KMS–encrypted Amazon SNS topics</a>.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/channels",
@@ -929,8 +929,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -942,8 +942,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -955,8 +955,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -968,8 +968,8 @@
                             },
                             "params": {
                                 "Region": "eu-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -981,8 +981,8 @@
                             },
                             "params": {
                                 "Region": "eu-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -994,8 +994,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1007,8 +1007,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1020,8 +1020,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1033,8 +1033,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1046,8 +1046,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1059,8 +1059,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1072,8 +1072,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1085,8 +1085,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1098,8 +1098,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1111,8 +1111,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1124,8 +1124,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1137,8 +1137,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1150,8 +1150,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1163,8 +1163,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1176,8 +1176,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1189,8 +1189,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1202,8 +1202,19 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1215,8 +1226,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1228,8 +1250,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1241,8 +1274,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1254,8 +1298,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1267,8 +1311,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1280,8 +1324,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1292,8 +1336,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1304,9 +1348,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -3367,6 +3417,68 @@
                 "smithy.api#httpError": 500
             }
         },
+        "com.amazonaws.devopsguru#KMSKeyId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^.*$"
+            }
+        },
+        "com.amazonaws.devopsguru#KMSServerSideEncryptionIntegration": {
+            "type": "structure",
+            "members": {
+                "KMSKeyId": {
+                    "target": "com.amazonaws.devopsguru#KMSKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tDescribes the specified KMS key.\n\t\t</p>\n         <p>To specify a KMS key, use its key ID, key ARN, \n\t\t\talias name, or alias ARN. When using an alias name,\n\t\t\tprefix it with \"alias/\". If you specify a predefined Amazon Web Services alias\n\t\t\t(an Amazon Web Services alias with no key ID), Amazon Web Services KMS associates the alias with an\n\t\t\tAmazon Web Services managed key and returns its KeyId and Arn in the response. \n\t\t\tTo specify a KMS key in a different Amazon Web Services account, you must use the key ARN or alias ARN.</p>\n         <p>For example: </p>\n         <p>Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab</p>\n         <p>Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</p>\n         <p>Alias name: alias/ExampleAlias</p>\n         <p>Alias ARN: arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias</p>"
+                    }
+                },
+                "OptInStatus": {
+                    "target": "com.amazonaws.devopsguru#OptInStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tSpecifies if DevOps Guru is enabled for customer managed keys.\n\t\t</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.devopsguru#ServerSideEncryptionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe type of KMS key used. Customer managed keys are the KMS keys that you create. Amazon Web Services owned keys are keys that are owned and managed by DevOps Guru.\n\t\t</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n\t\t\tInformation about the KMS encryption used with DevOps Guru.\n\t\t</p>"
+            }
+        },
+        "com.amazonaws.devopsguru#KMSServerSideEncryptionIntegrationConfig": {
+            "type": "structure",
+            "members": {
+                "KMSKeyId": {
+                    "target": "com.amazonaws.devopsguru#KMSKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\t\tDescribes the specified KMS key.</p>\n         <p>To specify a KMS key, use its key ID, key ARN, \n\t\t\t\talias name, or alias ARN. When using an alias name,\n\t\t\t\tprefix it with \"alias/\". If you specify a predefined Amazon Web Services alias\n\t\t\t\t(an Amazon Web Services alias with no key ID), Amazon Web Services KMS associates the alias with an\n\t\t\t\tAmazon Web Services managed key and returns its KeyId and Arn in the response. \n\t\t\t\tTo specify a KMS key in a different Amazon Web Services account, you must use the key ARN or alias ARN.</p>\n         <p>For example: </p>\n         <p>Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab</p>\n         <p>Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</p>\n         <p>Alias name: alias/ExampleAlias</p>\n         <p>Alias ARN: arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias</p>"
+                    }
+                },
+                "OptInStatus": {
+                    "target": "com.amazonaws.devopsguru#OptInStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tSpecifies if DevOps Guru is enabled for KMS integration.\n\t\t</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.devopsguru#ServerSideEncryptionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe type of KMS key used. Customer managed keys are the KMS keys that you create. Amazon Web Services owned keys are keys that are owned and managed by DevOps Guru.\n\t\t</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n\t\t\tInformation about whether DevOps Guru is configured to encrypt server-side data using KMS. \n\t\t</p>"
+            }
+        },
         "com.amazonaws.devopsguru#ListAnomaliesForInsight": {
             "type": "operation",
             "input": {
@@ -4679,7 +4791,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> Information about a notification channel. A notification channel is used to notify\n\t\t\tyou when DevOps Guru creates an insight. The one \n      \tsupported notification channel is Amazon Simple Notification Service (Amazon SNS). </p>\n         <p>If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission \n\t\t\t\tto it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account. DevOps Guru only supports standard SNS topics. \n\t\t\t\tFor more information, see <a href=\"https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-required-permissions.html\">Permissions \n\t\t\t\tfor cross account Amazon SNS topics</a>.</p>\n         <p>If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission to it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account. For more information, see Permissions for cross account Amazon SNS topics.</p>\n         <p>If you use an Amazon SNS topic that is encrypted by an Amazon Web Services Key Management Service customer-managed key (CMK), then you must add permissions \n\t\t\t\tto the CMK. For more information, see <a href=\"https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html\">Permissions for \n\t\t\t\tAmazon Web Services KMS–encrypted Amazon SNS topics</a>.</p>"
+                "smithy.api#documentation": "<p> Information about a notification channel. A notification channel is used to notify\n\t\t\tyou when DevOps Guru creates an insight. The one \n      \tsupported notification channel is Amazon Simple Notification Service (Amazon SNS). </p>\n         <p>If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission \n\t\t\t\tto send it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account. DevOps Guru only supports standard SNS topics. \n\t\t\t\tFor more information, see <a href=\"https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-required-permissions.html\">Permissions \n\t\t\t\tfor Amazon SNS topics</a>.</p>\n         <p>If you use an Amazon SNS topic that is encrypted by an Amazon Web Services Key Management Service customer-managed key (CMK), then you must add permissions \n\t\t\t\tto the CMK. For more information, see <a href=\"https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html\">Permissions for \n\t\t\t\tAmazon Web Services KMS–encrypted Amazon SNS topics</a>.</p>"
             }
         },
         "com.amazonaws.devopsguru#NotificationChannelConfig": {
@@ -4688,7 +4800,7 @@
                 "Sns": {
                     "target": "com.amazonaws.devopsguru#SnsChannelConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p> Information about a notification channel configured in DevOps Guru to send notifications\n\t\t\twhen insights are created. </p>\n         <p>If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission \n\t\t\t\tto it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account. DevOps Guru only supports standard SNS topics. \n\t\t\t\tFor more information, see <a href=\"https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-required-permissions.html\">Permissions \n\t\t\t\tfor cross account Amazon SNS topics</a>.</p>\n         <p>If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission to it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account. For more information, see Permissions for cross account Amazon SNS topics.</p>\n         <p>If you use an Amazon SNS topic that is encrypted by an Amazon Web Services Key Management Service customer-managed key (CMK), then you must add permissions \n\t\t\t\tto the CMK. For more information, see <a href=\"https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html\">Permissions for \n\t\t\t\tAmazon Web Services KMS–encrypted Amazon SNS topics</a>.</p>",
+                        "smithy.api#documentation": "<p> Information about a notification channel configured in DevOps Guru to send notifications\n\t\t\twhen insights are created. </p>\n         <p>If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission \n\t\t\t\tto send it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account. DevOps Guru only supports standard SNS topics. \n\t\t\t\tFor more information, see <a href=\"https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-required-permissions.html\">Permissions \n\t\t\t\tfor Amazon SNS topics</a>.</p>\n         <p>If you use an Amazon SNS topic that is encrypted by an Amazon Web Services Key Management Service customer-managed key (CMK), then you must add permissions \n\t\t\t\tto the CMK. For more information, see <a href=\"https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html\">Permissions for \n\t\t\t\tAmazon Web Services KMS–encrypted Amazon SNS topics</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6871,6 +6983,23 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.devopsguru#ServerSideEncryptionType": {
+            "type": "enum",
+            "members": {
+                "CUSTOMER_MANAGED_KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOMER_MANAGED_KEY"
+                    }
+                },
+                "AWS_OWNED_KMS_KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_OWNED_KMS_KEY"
+                    }
+                }
+            }
+        },
         "com.amazonaws.devopsguru#ServiceCollection": {
             "type": "structure",
             "members": {
@@ -6952,6 +7081,12 @@
                     "target": "com.amazonaws.devopsguru#LogsAnomalyDetectionIntegration",
                     "traits": {
                         "smithy.api#documentation": "<p>\n\t\t\tInformation about whether DevOps Guru is configured to perform log anomaly detection on Amazon CloudWatch log groups.\n\t\t</p>"
+                    }
+                },
+                "KMSServerSideEncryption": {
+                    "target": "com.amazonaws.devopsguru#KMSServerSideEncryptionIntegration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tInformation about whether DevOps Guru is configured to encrypt server-side data using KMS. \n\t\t</p>"
                     }
                 }
             },
@@ -7191,7 +7326,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> Contains the Amazon Resource Name (ARN) of an Amazon Simple Notification Service topic. </p>\n         <p>If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission \n\t\t\t\tto it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account. DevOps Guru only supports standard SNS topics. \n\t\t\t\tFor more information, see <a href=\"https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-required-permissions.html\">Permissions \n\t\t\t\tfor cross account Amazon SNS topics</a>.</p>\n         <p>If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission to it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account. For more information, see Permissions for cross account Amazon SNS topics.</p>\n         <p>If you use an Amazon SNS topic that is encrypted by an Amazon Web Services Key Management Service customer-managed key (CMK), then you must add permissions \n\t\t\t\tto the CMK. For more information, see <a href=\"https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html\">Permissions for \n\t\t\t\tAmazon Web Services KMS–encrypted Amazon SNS topics</a>.</p>"
+                "smithy.api#documentation": "<p> Contains the Amazon Resource Name (ARN) of an Amazon Simple Notification Service topic. </p>\n         <p>If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission \n\t\t\t\tto send it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account. DevOps Guru only supports standard SNS topics. \n\t\t\t\tFor more information, see <a href=\"https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-required-permissions.html\">Permissions \n\t\t\t\tfor Amazon SNS topics</a>.</p>\n         <p>If you use an Amazon SNS topic that is encrypted by an Amazon Web Services Key Management Service customer-managed key (CMK), then you must add permissions \n\t\t\t\tto the CMK. For more information, see <a href=\"https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html\">Permissions for \n\t\t\t\tAmazon Web Services KMS–encrypted Amazon SNS topics</a>.</p>"
             }
         },
         "com.amazonaws.devopsguru#SsmOpsItemId": {
@@ -7728,6 +7863,12 @@
                     "target": "com.amazonaws.devopsguru#LogsAnomalyDetectionIntegrationConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>\n\t\t\tInformation about whether DevOps Guru is configured to perform log anomaly detection on Amazon CloudWatch log groups.\n\t\t</p>"
+                    }
+                },
+                "KMSServerSideEncryption": {
+                    "target": "com.amazonaws.devopsguru#KMSServerSideEncryptionIntegrationConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tInformation about whether DevOps Guru is configured to encrypt server-side data using KMS. \n\t\t</p>"
                     }
                 }
             },

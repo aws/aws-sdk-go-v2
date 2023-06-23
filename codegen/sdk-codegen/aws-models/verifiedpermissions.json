@@ -134,7 +134,7 @@
                 "userPoolArn": {
                     "target": "com.amazonaws.verifiedpermissions#UserPoolArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Name (ARN)</a> of the Amazon Cognito user pool that contains the identities to be\n            authorized.</p>\n         <p>Example: <code>\"UserPoolArn\":\n                \"cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5\"</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Name (ARN)</a> of the Amazon Cognito user pool that contains the identities to be\n            authorized.</p>\n         <p>Example: <code>\"UserPoolArn\":\n                \"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5\"</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -146,7 +146,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration for an identity source that represents a connection to an Amazon Cognito user pool used\n            as an identity provider for Verified Permissions.</p>\n         <p>This data type is used as a field that is part of an <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_Configuration.html\">Configuration</a> structure that is\n            used as a parameter to the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_Configuration.html\">Configuration</a>.</p>\n         <p>Example:<code>\"CognitoUserPoolConfiguration\":{\"UserPoolArn\":\"cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5\",\"ClientIds\":\n                [\"a1b2c3d4e5f6g7h8i9j0kalbmc\"]}</code>\n         </p>"
+                "smithy.api#documentation": "<p>The configuration for an identity source that represents a connection to an Amazon Cognito user pool used\n            as an identity provider for Verified Permissions.</p>\n         <p>This data type is used as a field that is part of an <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_Configuration.html\">Configuration</a> structure that is\n            used as a parameter to the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_Configuration.html\">Configuration</a>.</p>\n         <p>Example:<code>\"CognitoUserPoolConfiguration\":{\"UserPoolArn\":\"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5\",\"ClientIds\":\n                [\"a1b2c3d4e5f6g7h8i9j0kalbmc\"]}</code>\n         </p>"
             }
         },
         "com.amazonaws.verifiedpermissions#Configuration": {
@@ -155,7 +155,7 @@
                 "cognitoUserPoolConfiguration": {
                     "target": "com.amazonaws.verifiedpermissions#CognitoUserPoolConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains configuration details of a Amazon Cognito user pool that Verified Permissions can use as a source of\n            authenticated identities as entities. It specifies the <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Name (ARN)</a> of a Amazon Cognito user pool\n            and one or more application client IDs.</p>\n         <p>Example:\n                <code>\"configuration\":{\"cognitoUserPoolConfiguration\":{\"userPoolArn\":\"cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5\",\"clientIds\":\n                [\"a1b2c3d4e5f6g7h8i9j0kalbmc\"]}}</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Contains configuration details of a Amazon Cognito user pool that Verified Permissions can use as a source of\n            authenticated identities as entities. It specifies the <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Name (ARN)</a> of a Amazon Cognito user pool\n            and one or more application client IDs.</p>\n         <p>Example:\n                <code>\"configuration\":{\"cognitoUserPoolConfiguration\":{\"userPoolArn\":\"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5\",\"clientIds\":\n                [\"a1b2c3d4e5f6g7h8i9j0kalbmc\"]}}</code>\n         </p>"
                     }
                 }
             },
@@ -428,7 +428,7 @@
             ],
             "traits": {
                 "aws.iam#actionPermissionDescription": "Grants permission to create a Cedar policy and save it in the specified policy store",
-                "smithy.api#documentation": "<p>Creates a policy store. A policy store is a container for policy resources.</p>",
+                "smithy.api#documentation": "<p>Creates a policy store. A policy store is a container for policy resources.</p>\n         <note>\n            <p>Although <a href=\"https://docs.cedarpolicy.com/schema.html#namespace\">Cedar\n                    supports multiple namespaces</a>, Verified Permissions currently supports only one\n                namespace per policy store.</p>\n         </note>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -1684,7 +1684,7 @@
                 "entities": {
                     "target": "com.amazonaws.verifiedpermissions#EntitiesDefinition",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the list of entities and their associated attributes that Verified Permissions can examine\n            when evaluating the policies.</p>"
+                        "smithy.api#documentation": "<p>Specifies the list of resources and principals and their associated attributes that\n            Verified Permissions can examine when evaluating the policies. </p>\n         <note>\n            <p>You can include only principal and resource entities in this parameter; you can't\n                include actions. You must specify actions in the schema.</p>\n         </note>"
                     }
                 }
             },
@@ -1783,7 +1783,7 @@
                 "entities": {
                     "target": "com.amazonaws.verifiedpermissions#EntitiesDefinition",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the list of entities and their associated attributes that Verified Permissions can examine\n            when evaluating the policies.</p>"
+                        "smithy.api#documentation": "<p>Specifies the list of resources and principals and their associated attributes that\n            Verified Permissions can examine when evaluating the policies. </p>\n         <note>\n            <p>You can include only principal and resource entities in this parameter; you can't\n                include actions. You must specify actions in the schema.</p>\n         </note>"
                     }
                 }
             },
@@ -3661,7 +3661,7 @@
                     "FederatedUser"
                 ],
                 "aws.protocols#awsJson1_0": {},
-                "smithy.api#documentation": "<p>Amazon Verified Permissions is a permissions management service from Amazon Web Services. You can use Verified Permissions to manage\n            permissions for your application, and authorize user access based on those permissions.\n            Using Verified Permissions, application developers can grant access based on information about the\n            users, resources, and requested actions. You can also evaluate additional information\n            like group membership, attributes of the resources, and session context, such as time of\n            request and IP addresses. Verified Permissions manages these permissions by letting you create and\n            store authorization policies for your applications, such as consumer-facing web sites\n            and enterprise business systems.</p>\n         <p>Verified Permissions uses Cedar as the policy language to express your permission requirements.\n            Cedar supports both role-based access control (RBAC) and attribute-based access\n            control (ABAC) authorization models.</p>\n         <p>For more information about configuring, administering, and using Amazon Verified Permissions in your\n            applications, see the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/userguide/\">Amazon Verified Permissions User Guide</a>.</p>\n         <p>For more information about the Cedar policy language, see the <a href=\"docs.cedarpolicy.com\">Cedar Policy Language Guide</a>.</p>\n         <important>\n            <p>When you write Cedar policies that reference principals, resources and actions,\n                you can define the unique identifiers used for each of those elements. We strongly\n                recommend that you follow these best practices:</p>\n            <ul>\n               <li>\n                  <p>\n                     <b>Use values like universally unique identifiers\n                            (UUIDs) for all principal and resource identifiers.</b>\n                  </p>\n                  <p>For example, if user <code>jane</code> leaves the company, and you later\n                        let someone else use the name <code>jane</code>, then that new user\n                        automatically gets access to everything granted by policies that still\n                        reference <code>User::\"jane\"</code>. Cedar can’t distinguish between the\n                        new user and the old. This applies to both principal and resource\n                        identifiers. Always use identifiers that are guaranteed unique and never\n                        reused to ensure that you don’t unintentionally grant access because of the\n                        presence of an old identifier in a policy.</p>\n                  <p>Where you use a UUID for an entity, we recommend that you follow it with\n                        the // comment specifier and the ‘friendly’ name of your entity. This helps\n                        to make your policies easier to understand. For example: principal ==\n                        User::\"a1b2c3d4-e5f6-a1b2-c3d4-EXAMPLE11111\", // alice</p>\n               </li>\n               <li>\n                  <p>\n                     <b>Do not include personally identifying, confidential,\n                            or sensitive information as part of the unique identifier for your\n                            principals or resources.</b> These identifiers are included in\n                        log entries shared in CloudTrail trails.</p>\n               </li>\n            </ul>\n         </important>\n         <p>Several operations return structures that appear similar, but have different purposes.\n            As new functionality is added to the product, the structure used in a parameter of one\n            operation might need to change in a way that wouldn't make sense for the same parameter\n            in a different operation. To help you understand the purpose of each, the following\n            naming convention is used for the structures:</p>\n         <ul>\n            <li>\n               <p>Parameters that end in <code>Detail</code> are used in <code>Get</code>\n                    operations.</p>\n            </li>\n            <li>\n               <p>Parameters that end in <code>Item</code> are used in <code>List</code>\n                    operations.</p>\n            </li>\n            <li>\n               <p>Parameters that use neither suffix are used in the mutating (create and\n                    update) operations.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Amazon Verified Permissions is a permissions management service from Amazon Web Services. You can use Verified Permissions to manage\n            permissions for your application, and authorize user access based on those permissions.\n            Using Verified Permissions, application developers can grant access based on information about the\n            users, resources, and requested actions. You can also evaluate additional information\n            like group membership, attributes of the resources, and session context, such as time of\n            request and IP addresses. Verified Permissions manages these permissions by letting you create and\n            store authorization policies for your applications, such as consumer-facing web sites\n            and enterprise business systems.</p>\n         <p>Verified Permissions uses Cedar as the policy language to express your permission requirements.\n            Cedar supports both role-based access control (RBAC) and attribute-based access\n            control (ABAC) authorization models.</p>\n         <p>For more information about configuring, administering, and using Amazon Verified Permissions in your\n            applications, see the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/userguide/\">Amazon Verified Permissions User Guide</a>.</p>\n         <p>For more information about the Cedar policy language, see the <a href=\"docs.cedarpolicy.com\">Cedar Policy Language Guide</a>.</p>\n         <important>\n            <p>When you write Cedar policies that reference principals, resources and actions,\n                you can define the unique identifiers used for each of those elements. We strongly\n                recommend that you follow these best practices:</p>\n            <ul>\n               <li>\n                  <p>\n                     <b>Use values like universally unique identifiers\n                            (UUIDs) for all principal and resource identifiers.</b>\n                  </p>\n                  <p>For example, if user <code>jane</code> leaves the company, and you later\n                        let someone else use the name <code>jane</code>, then that new user\n                        automatically gets access to everything granted by policies that still\n                        reference <code>User::\"jane\"</code>. Cedar can’t distinguish between the\n                        new user and the old. This applies to both principal and resource\n                        identifiers. Always use identifiers that are guaranteed unique and never\n                        reused to ensure that you don’t unintentionally grant access because of the\n                        presence of an old identifier in a policy.</p>\n                  <p>Where you use a UUID for an entity, we recommend that you follow it with\n                        the // comment specifier and the ‘friendly’ name of your entity. This helps\n                        to make your policies easier to understand. For example: principal ==\n                        User::\"a1b2c3d4-e5f6-a1b2-c3d4-EXAMPLE11111\", // alice</p>\n               </li>\n               <li>\n                  <p>\n                     <b>Do not include personally identifying, confidential,\n                            or sensitive information as part of the unique identifier for your\n                            principals or resources.</b> These identifiers are included in\n                        log entries shared in CloudTrail trails.</p>\n               </li>\n            </ul>\n         </important>\n         <p>Several operations return structures that appear similar, but have different purposes.\n            As new functionality is added to the product, the structure used in a parameter of one\n            operation might need to change in a way that wouldn't make sense for the same parameter\n            in a different operation. To help you understand the purpose of each, the following\n            naming convention is used for the structures:</p>\n         <ul>\n            <li>\n               <p>Parameter type structures that end in <code>Detail</code> are used in\n                        <code>Get</code> operations.</p>\n            </li>\n            <li>\n               <p>Parameter type structures that end in <code>Item</code> are used in\n                        <code>List</code> operations.</p>\n            </li>\n            <li>\n               <p>Parameter type structures that use neither suffix are used in the mutating\n                    (create and update) operations.</p>\n            </li>\n         </ul>",
                 "smithy.api#title": "Amazon Verified Permissions",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -4023,9 +4023,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "us-gov-east-1"
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4036,9 +4036,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-gov-east-1"
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4049,9 +4049,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-gov-east-1"
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4062,9 +4062,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-gov-east-1"
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4075,9 +4075,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "cn-north-1"
+                                "Region": "cn-north-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4088,9 +4088,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "cn-north-1"
+                                "Region": "cn-north-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4101,9 +4101,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "cn-north-1"
+                                "Region": "cn-north-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4114,9 +4114,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "cn-north-1"
+                                "Region": "cn-north-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4125,9 +4125,9 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "us-iso-east-1"
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4138,9 +4138,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-iso-east-1"
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4149,9 +4149,9 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-iso-east-1"
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4162,9 +4162,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-iso-east-1"
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4175,9 +4175,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4188,9 +4188,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4201,9 +4201,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4214,9 +4214,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4225,9 +4225,9 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "us-isob-east-1"
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4238,9 +4238,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-isob-east-1"
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4249,9 +4249,9 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-isob-east-1"
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4262,9 +4262,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-isob-east-1"
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4275,9 +4275,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -4287,9 +4287,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
                                 "Region": "us-east-1",
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -4299,9 +4299,9 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
                             }
                         }
