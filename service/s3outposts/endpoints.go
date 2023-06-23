@@ -329,6 +329,52 @@ func finalizeEndpointResolverV2(options *Options) {
 	}
 }
 
+// BuiltInParameterResolver is the interface responsible for resolving BuiltIn
+// values during the sourcing of EndpointParameters
+type BuiltInParameterResolver interface {
+	ResolveBuiltIns(*EndpointParameters) error
+}
+
+// BuiltInResolver resolves modeled BuiltIn values using only the members defined
+// below.
+type BuiltInResolver struct {
+	// The AWS region used to dispatch the request.
+	Region string
+
+	// Sourced BuiltIn value in a historical enabled or disabled state.
+	UseDualStack aws.DualStackEndpointState
+
+	// Sourced BuiltIn value in a historical enabled or disabled state.
+	UseFIPS aws.FIPSEndpointState
+
+	// Base endpoint that can potentially be modified during Endpoint resolution.
+	Endpoint *string
+}
+
+// Invoked at runtime to resolve BuiltIn Values. Only resolution code specific to
+// each BuiltIn value is generated.
+func (b *BuiltInResolver) ResolveBuiltIns(params *EndpointParameters) error {
+
+	region, _ := mapPseudoRegion(b.Region)
+	if len(region) == 0 {
+		return fmt.Errorf("Could not resolve AWS::Region")
+	} else {
+		params.Region = aws.String(region)
+	}
+	if b.UseDualStack == aws.DualStackEndpointStateEnabled {
+		params.UseDualStack = aws.Bool(true)
+	} else {
+		params.UseDualStack = aws.Bool(false)
+	}
+	if b.UseFIPS == aws.FIPSEndpointStateEnabled {
+		params.UseFIPS = aws.Bool(true)
+	} else {
+		params.UseFIPS = aws.Bool(false)
+	}
+	params.Endpoint = b.Endpoint
+	return nil
+}
+
 // EndpointParameters provides the parameters that influence how endpoints are
 // resolved.
 type EndpointParameters struct {
