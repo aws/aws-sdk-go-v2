@@ -18,9 +18,9 @@ import (
 	"time"
 )
 
-// Returns information about Amazon Aurora DB clusters and Multi-AZ DB clusters.
-// This API supports pagination. For more information on Amazon Aurora DB clusters,
-// see What is Amazon Aurora? (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
+// Describes existing Amazon Aurora DB clusters and Multi-AZ DB clusters. This API
+// supports pagination. For more information on Amazon Aurora DB clusters, see
+// What is Amazon Aurora? (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
 // in the Amazon Aurora User Guide. For more information on Multi-AZ DB clusters,
 // see Multi-AZ DB cluster deployments (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)
 // in the Amazon RDS User Guide. This operation can also return information for
@@ -43,13 +43,13 @@ func (c *Client) DescribeDBClusters(ctx context.Context, params *DescribeDBClust
 type DescribeDBClustersInput struct {
 
 	// The user-supplied DB cluster identifier or the Amazon Resource Name (ARN) of
-	// the DB cluster. If this parameter is specified, information from only the
+	// the DB cluster. If this parameter is specified, information for only the
 	// specific DB cluster is returned. This parameter isn't case-sensitive.
 	// Constraints:
-	//   - If supplied, must match an existing DBClusterIdentifier.
+	//   - If supplied, must match an existing DB cluster identifier.
 	DBClusterIdentifier *string
 
-	// A filter that specifies one or more DB clusters to describe. Supported filters:
+	// A filter that specifies one or more DB clusters to describe. Supported Filters:
 	//   - clone-group-id - Accepts clone group identifiers. The results list only
 	//   includes information about the DB clusters associated with these clone groups.
 	//   - db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon
@@ -64,8 +64,8 @@ type DescribeDBClustersInput struct {
 	//   about the DB clusters for these engines.
 	Filters []types.Filter
 
-	// Optional Boolean parameter that specifies whether the output includes
-	// information about clusters shared from other Amazon Web Services accounts.
+	// Specifies whether the output includes information about clusters shared from
+	// other Amazon Web Services accounts.
 	IncludeShared bool
 
 	// An optional pagination token provided by a previous DescribeDBClusters request.

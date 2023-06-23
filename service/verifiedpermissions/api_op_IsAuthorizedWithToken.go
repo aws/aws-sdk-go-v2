@@ -57,8 +57,10 @@ type IsAuthorizedWithTokenInput struct {
 	// authorization decisions.
 	Context types.ContextDefinition
 
-	// Specifies the list of entities and their associated attributes that Verified
-	// Permissions can examine when evaluating the policies.
+	// Specifies the list of resources and principals and their associated attributes
+	// that Verified Permissions can examine when evaluating the policies. You can
+	// include only principal and resource entities in this parameter; you can't
+	// include actions. You must specify actions in the schema.
 	Entities types.EntitiesDefinition
 
 	// Specifies an identity token for the principal to be authorized. This token is
