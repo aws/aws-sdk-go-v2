@@ -1,0 +1,8 @@
+{
+    "id": "62d82bd5-f2a7-45b0-84f8-596b1cfc918f",
+    "type": "documentation",
+    "description": "Documentation improvements for create, describe, and modify DB clusters and DB instances.",
+    "modules": [
+        "service/rds"
+    ]
+}

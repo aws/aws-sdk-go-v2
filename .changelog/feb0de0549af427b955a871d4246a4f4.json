@@ -1,0 +1,8 @@
+{
+    "id": "feb0de05-49af-427b-955a-871d4246a4f4",
+    "type": "documentation",
+    "description": "Update to Amazon FSx documentation.",
+    "modules": [
+        "service/fsx"
+    ]
+}

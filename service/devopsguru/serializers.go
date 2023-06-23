@@ -2439,6 +2439,28 @@ func awsRestjson1_serializeDocumentInsightStatuses(v []types.InsightStatus, valu
 	return nil
 }
 
+func awsRestjson1_serializeDocumentKMSServerSideEncryptionIntegrationConfig(v *types.KMSServerSideEncryptionIntegrationConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.KMSKeyId != nil {
+		ok := object.Key("KMSKeyId")
+		ok.String(*v.KMSKeyId)
+	}
+
+	if len(v.OptInStatus) > 0 {
+		ok := object.Key("OptInStatus")
+		ok.String(string(v.OptInStatus))
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentListAnomaliesForInsightFilters(v *types.ListAnomaliesForInsightFilters, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2992,6 +3014,13 @@ func awsRestjson1_serializeDocumentUpdateResourceCollectionFilter(v *types.Updat
 func awsRestjson1_serializeDocumentUpdateServiceIntegrationConfig(v *types.UpdateServiceIntegrationConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.KMSServerSideEncryption != nil {
+		ok := object.Key("KMSServerSideEncryption")
+		if err := awsRestjson1_serializeDocumentKMSServerSideEncryptionIntegrationConfig(v.KMSServerSideEncryption, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.LogsAnomalyDetection != nil {
 		ok := object.Key("LogsAnomalyDetection")

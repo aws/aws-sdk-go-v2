@@ -19,9 +19,9 @@ import (
 	"time"
 )
 
-// Returns information about provisioned RDS instances. This API supports
-// pagination. This operation can also return information for Amazon Neptune DB
-// instances and Amazon DocumentDB instances.
+// Describes provisioned RDS instances. This API supports pagination. This
+// operation can also return information for Amazon Neptune DB instances and Amazon
+// DocumentDB instances.
 func (c *Client) DescribeDBInstances(ctx context.Context, params *DescribeDBInstancesInput, optFns ...func(*Options)) (*DescribeDBInstancesOutput, error) {
 	if params == nil {
 		params = &DescribeDBInstancesInput{}
@@ -42,11 +42,11 @@ type DescribeDBInstancesInput struct {
 	// The user-supplied instance identifier or the Amazon Resource Name (ARN) of the
 	// DB instance. If this parameter is specified, information from only the specific
 	// DB instance is returned. This parameter isn't case-sensitive. Constraints:
-	//   - If supplied, must match the identifier of an existing DBInstance.
+	//   - If supplied, must match the identifier of an existing DB instance.
 	DBInstanceIdentifier *string
 
 	// A filter that specifies one or more DB instances to describe. Supported
-	// filters:
+	// Filters:
 	//   - db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon
 	//   Resource Names (ARNs). The results list only includes information about the DB
 	//   instances associated with the DB clusters identified by these ARNs.
@@ -54,8 +54,8 @@ type DescribeDBInstancesInput struct {
 	//   Resource Names (ARNs). The results list only includes information about the DB
 	//   instances identified by these ARNs.
 	//   - dbi-resource-id - Accepts DB instance resource identifiers. The results list
-	//   will only include information about the DB instances identified by these DB
-	//   instance resource identifiers.
+	//   only includes information about the DB instances identified by these DB instance
+	//   resource identifiers.
 	//   - domain - Accepts Active Directory directory IDs. The results list only
 	//   includes information about the DB instances associated with these domains.
 	//   - engine - Accepts engine names. The results list only includes information
