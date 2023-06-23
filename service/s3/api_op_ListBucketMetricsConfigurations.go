@@ -4,10 +4,12 @@ package s3
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	s3cust "github.com/aws/aws-sdk-go-v2/service/s3/internal/customizations"
 	"github.com/aws/aws-sdk-go-v2/service/s3/types"
+	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -143,6 +145,9 @@ func (c *Client) addOperationListBucketMetricsConfigurationsMiddlewares(stack *m
 	if err = swapWithCustomHTTPSignerMiddleware(stack, options); err != nil {
 		return err
 	}
+	if err = addListBucketMetricsConfigurationsResolveEndpointMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpListBucketMetricsConfigurationsValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -206,4 +211,70 @@ func addListBucketMetricsConfigurationsUpdateEndpoint(stack *middleware.Stack, o
 		UseARNRegion:                   options.UseARNRegion,
 		DisableMultiRegionAccessPoints: options.DisableMultiRegionAccessPoints,
 	})
+}
+
+type opListBucketMetricsConfigurationsResolveEndpointMiddleware struct {
+	EndpointResolver EndpointResolverV2
+	BuiltInResolver  BuiltInParameterResolver
+}
+
+func (*opListBucketMetricsConfigurationsResolveEndpointMiddleware) ID() string {
+	return "opListBucketMetricsConfigurationsResolveEndpointMiddleware"
+}
+
+func (m *opListBucketMetricsConfigurationsResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	input, ok := in.Parameters.(*ListBucketMetricsConfigurationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	if m.EndpointResolver == nil {
+		return out, metadata, fmt.Errorf("expected endpoint resolver to not be nil")
+	}
+
+	params := EndpointParameters{}
+
+	m.BuiltInResolver.ResolveBuiltIns(&params)
+
+	params.Bucket = input.Bucket
+
+	var resolvedEndpoint smithyendpoints.Endpoint
+	resolvedEndpoint, err = m.EndpointResolver.ResolveEndpoint(ctx, params)
+	if err != nil {
+		return out, metadata, fmt.Errorf("failed to resolve service endpoint, %w", err)
+	}
+
+	req.URL = &resolvedEndpoint.URI
+
+	for k := range resolvedEndpoint.Headers {
+		req.Header.Set(
+			k,
+			resolvedEndpoint.Headers.Get(k),
+		)
+	}
+
+	return next.HandleSerialize(ctx, in)
+}
+
+func addListBucketMetricsConfigurationsResolveEndpointMiddleware(stack *middleware.Stack, options Options) error {
+	return stack.Serialize.Insert(&opListBucketMetricsConfigurationsResolveEndpointMiddleware{
+		EndpointResolver: options.EndpointResolverV2,
+		BuiltInResolver: &BuiltInResolver{
+			Region:                         options.Region,
+			UseFIPS:                        options.EndpointOptions.UseFIPSEndpoint,
+			UseDualStack:                   options.EndpointOptions.UseDualStackEndpoint,
+			Endpoint:                       options.BaseEndpoint,
+			ForcePathStyle:                 options.UsePathStyle,
+			Accelerate:                     options.UseAccelerate,
+			DisableMultiRegionAccessPoints: options.DisableMultiRegionAccessPoints,
+			UseArnRegion:                   options.UseARNRegion,
+		},
+	}, "ResolveEndpoint", middleware.After)
 }
