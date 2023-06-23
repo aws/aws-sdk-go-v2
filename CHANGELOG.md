@@ -1,3 +1,15 @@
+# Release (2023-06-23)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/devopsguru`: [v1.24.0](service/devopsguru/CHANGELOG.md#v1240-2023-06-23)
+  * **Feature**: This release adds support for encryption via customer managed keys.
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.29.3](service/fsx/CHANGELOG.md#v1293-2023-06-23)
+  * **Documentation**: Update to Amazon FSx documentation.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.45.3](service/rds/CHANGELOG.md#v1453-2023-06-23)
+  * **Documentation**: Documentation improvements for create, describe, and modify DB clusters and DB instances.
+* `github.com/aws/aws-sdk-go-v2/service/verifiedpermissions`: [v1.0.2](service/verifiedpermissions/CHANGELOG.md#v102-2023-06-23)
+  * **Documentation**: Added improved descriptions and new code samples to SDK documentation.
+
 # Release (2023-06-22)
 
 ## Module Highlights

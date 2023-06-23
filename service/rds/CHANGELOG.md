@@ -1,3 +1,7 @@
+# v1.45.3 (2023-06-23)
+
+* **Documentation**: Documentation improvements for create, describe, and modify DB clusters and DB instances.
+
 # v1.45.2 (2023-06-15)
 
 * No change notes available for this release.

@@ -1,3 +1,7 @@
+# v1.0.2 (2023-06-23)
+
+* **Documentation**: Added improved descriptions and new code samples to SDK documentation.
+
 # v1.0.1 (2023-06-15)
 
 * No change notes available for this release.

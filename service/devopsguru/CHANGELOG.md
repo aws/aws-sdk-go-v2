@@ -1,3 +1,7 @@
+# v1.24.0 (2023-06-23)
+
+* **Feature**: This release adds support for encryption via customer managed keys.
+
 # v1.23.9 (2023-06-15)
 
 * No change notes available for this release.

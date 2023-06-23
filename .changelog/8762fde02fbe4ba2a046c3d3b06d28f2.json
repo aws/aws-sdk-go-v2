@@ -1,8 +1,0 @@
-{
-    "id": "8762fde0-2fbe-4ba2-a046-c3d3b06d28f2",
-    "type": "feature",
-    "description": "This release adds support for encryption via customer managed keys.",
-    "modules": [
-        "service/devopsguru"
-    ]
-}
