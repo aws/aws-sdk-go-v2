@@ -64,6 +64,9 @@ type Options struct {
 	// modify this list for per operation behavior.
 	APIOptions []func(*middleware.Stack) error
 
+	// The sdk user agent app id to be added to http request's User-Agent header
+	AppID string
+
 	// Configures the events that will be sent to the configured logger.
 	ClientLogMode aws.ClientLogMode
 
@@ -233,6 +236,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		APIOptions:         cfg.APIOptions,
 		Logger:             cfg.Logger,
 		ClientLogMode:      cfg.ClientLogMode,
+		AppID:              cfg.AppID,
 	}
 	resolveAWSRetryerProvider(cfg, &opts)
 	resolveAWSRetryMaxAttempts(cfg, &opts)
@@ -346,8 +350,8 @@ func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
 	o.EndpointResolver = withEndpointResolver(cfg.EndpointResolver, cfg.EndpointResolverWithOptions, NewDefaultEndpointResolver())
 }
 
-func addClientUserAgent(stack *middleware.Stack) error {
-	return awsmiddleware.AddSDKAgentKeyValue(awsmiddleware.APIMetadata, "gamelift", goModuleVersion)(stack)
+func addClientUserAgent(stack *middleware.Stack, options Options) error {
+	return awsmiddleware.AddSDKAgentKeyValue(awsmiddleware.APIMetadata, "gamelift", goModuleVersion, options.AppID)(stack)
 }
 
 func addHTTPSignerV4Middleware(stack *middleware.Stack, o Options) error {

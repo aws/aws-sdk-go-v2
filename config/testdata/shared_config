@@ -275,3 +275,6 @@ max_attempts = invalid
 
 [profile with_ca_bundle]
 ca_bundle = custom_ca_bundle_file.pem
+
+[profile sdk_app_id]
+sdk_ua_app_id = 12345

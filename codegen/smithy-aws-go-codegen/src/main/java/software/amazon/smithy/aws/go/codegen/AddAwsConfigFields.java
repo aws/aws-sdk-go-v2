@@ -69,6 +69,8 @@ public class AddAwsConfigFields implements GoIntegration {
 
     private static final String FINALIZE_RETRY_MAX_ATTEMPTS_OPTIONS = "finalizeRetryMaxAttemptOptions";
 
+    private static final String SDK_APP_ID = "AppID";
+
     private static final List<AwsConfigField> AWS_CONFIG_FIELDS = ListUtils.of(
             AwsConfigField.builder()
                     .name(REGION_CONFIG_NAME)
@@ -199,6 +201,13 @@ public class AddAwsConfigFields implements GoIntegration {
                     .name(LOG_MODE_CONFIG_NAME)
                     .type(getAwsCoreSymbol("ClientLogMode"))
                     .documentation("Configures the events that will be sent to the configured logger.")
+                    .build(),
+            AwsConfigField.builder()
+                    .name(SDK_APP_ID)
+                    .type(getUniversalSymbol("string"))
+                    .documentation("The aws sdk app ID that could be retrieved from env var or shared config file" +
+                            "to be added to request's User-Agent header")
+                    .generatedOnClient(false)
                     .build()
     );
 

@@ -132,6 +132,10 @@ type Config struct {
 	// `config.LoadDefaultConfig`. You should not populate this structure
 	// programmatically, or rely on the values here within your applications.
 	RuntimeEnvironment RuntimeEnvironment
+
+	// The AppID that could be retrieved from env var or shared config to be
+	// added to request's user agent header
+	AppID string
 }
 
 // NewConfig returns a new Config pointer that can be chained with builder

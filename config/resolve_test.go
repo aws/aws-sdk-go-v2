@@ -125,6 +125,31 @@ func TestResolveRegion(t *testing.T) {
 	}
 }
 
+func TestResolveAppID(t *testing.T) {
+	var options LoadOptions
+	optFns := []func(options *LoadOptions) error{
+		WithAppID("1234"),
+
+		WithAppID("5678"),
+	}
+
+	for _, optFn := range optFns {
+		optFn(&options)
+	}
+
+	configs := configs{options}
+
+	var cfg aws.Config
+
+	if err := resolveAppID(context.Background(), &cfg, configs); err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	if e, a := "5678", cfg.AppID; e != a {
+		t.Errorf("expect %v app ID, got %v", e, a)
+	}
+}
+
 func TestResolveCredentialsProvider(t *testing.T) {
 	var options LoadOptions
 	optFns := []func(options *LoadOptions) error{

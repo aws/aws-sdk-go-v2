@@ -644,6 +644,14 @@ func TestNewSharedConfig(t *testing.T) {
 				CustomCABundle:      "/path/to/bundle.b",
 			},
 		},
+		"Profile with app ID": {
+			ConfigFilenames: []string{testConfigFilename},
+			Profile:         "sdk_app_id",
+			Expected: SharedConfig{
+				Profile: "sdk_app_id",
+				AppID:   "12345",
+			},
+		},
 	}
 
 	for name, c := range cases {

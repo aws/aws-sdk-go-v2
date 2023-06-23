@@ -22,11 +22,19 @@ import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SymbolUtils;
+import software.amazon.smithy.go.codegen.integration.ConfigField;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
+import software.amazon.smithy.go.codegen.integration.MiddlewareRegistrar;
+import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
 import software.amazon.smithy.model.Model;
+import software.amazon.smithy.utils.ListUtils;
+
+import java.util.List;
 
 public class AwsClientUserAgent implements GoIntegration {
     public static final String MIDDLEWARE_RESOLVER = "addClientUserAgent";
+
+    public static final String SDK_UA_APP_ID = "AppID";
 
     @Override
     public byte getOrder() {
@@ -44,9 +52,9 @@ public class AwsClientUserAgent implements GoIntegration {
         String serviceId = serviceTrait.getSdkId().replace("-", "").replace(" ", "").toLowerCase();
 
         goDelegator.useShapeWriter(settings.getService(model), writer -> {
-            writer.openBlock("func $L(stack $P) error {", "}", MIDDLEWARE_RESOLVER, SymbolUtils.createPointableSymbolBuilder("Stack",
+            writer.openBlock("func $L(stack $P, options Options) error {", "}", MIDDLEWARE_RESOLVER, SymbolUtils.createPointableSymbolBuilder("Stack",
                     SmithyGoDependency.SMITHY_MIDDLEWARE).build(), () -> {
-                writer.write("return $T($T, $S, $T)(stack)",
+                writer.write("return $T($T, $S, $T, options.AppID)(stack)",
                         SymbolUtils.createValueSymbolBuilder("AddSDKAgentKeyValue", AwsGoDependency.AWS_MIDDLEWARE)
                                 .build(),
                         SymbolUtils.createValueSymbolBuilder("APIMetadata",
@@ -56,5 +64,22 @@ public class AwsClientUserAgent implements GoIntegration {
             });
             writer.write("");
         });
+    }
+
+    @Override
+    public List<RuntimeClientPlugin> getClientPlugins() {
+        return ListUtils.of(
+                RuntimeClientPlugin.builder()
+                        .configFields(ListUtils.of(
+                                ConfigField.builder()
+                                        .name(SDK_UA_APP_ID)
+                                        .type(SymbolUtils.createValueSymbolBuilder("string")
+                                                .putProperty(SymbolUtils.GO_UNIVERSE_TYPE, true)
+                                                .build())
+                                        .documentation("The sdk user agent app id to be added to http request's User-Agent header")
+                                        .build()
+                        ))
+                        .build()
+        );
     }
 }
