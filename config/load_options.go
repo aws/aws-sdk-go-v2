@@ -261,6 +261,8 @@ func WithRegion(v string) LoadOptionsFunc {
 	}
 }
 
+// WithAppID is a helper function to construct functional options
+// that sets AppID on config's LoadOptions.
 func WithAppID(ID string) LoadOptionsFunc {
 	return func(o *LoadOptions) error {
 		o.AppID = ID
