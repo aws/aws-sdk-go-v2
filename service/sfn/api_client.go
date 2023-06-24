@@ -35,6 +35,10 @@ type Client struct {
 func New(options Options, optFns ...func(*Options)) *Client {
 	options = options.Copy()
 
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
 	resolveDefaultLogger(&options)
 
 	setResolvedDefaultsMode(&options)
@@ -46,10 +50,6 @@ func New(options Options, optFns ...func(*Options)) *Client {
 	resolveHTTPSignerV4(&options)
 
 	resolveDefaultEndpointConfiguration(&options)
-
-	for _, fn := range optFns {
-		fn(&options)
-	}
 
 	client := &Client{
 		options: options,
