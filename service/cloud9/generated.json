@@ -16,6 +16,7 @@
         "api_op_DescribeEnvironmentMemberships.go",
         "api_op_DescribeEnvironmentStatus.go",
         "api_op_DescribeEnvironments.go",
+        "api_op_DescribeSSHRemote.go",
         "api_op_ListEnvironments.go",
         "api_op_ListTagsForResource.go",
         "api_op_TagResource.go",

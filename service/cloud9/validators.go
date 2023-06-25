@@ -150,6 +150,26 @@ func (m *validateOpDescribeEnvironmentStatus) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeSSHRemote struct {
+}
+
+func (*validateOpDescribeSSHRemote) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeSSHRemote) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeSSHRemoteInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeSSHRemoteInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -276,6 +296,10 @@ func addOpDescribeEnvironmentsValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpDescribeEnvironmentStatusValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeEnvironmentStatus{}, middleware.After)
+}
+
+func addOpDescribeSSHRemoteValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeSSHRemote{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -459,6 +483,21 @@ func validateOpDescribeEnvironmentStatusInput(v *DescribeEnvironmentStatusInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeEnvironmentStatusInput"}
+	if v.EnvironmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeSSHRemoteInput(v *DescribeSSHRemoteInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeSSHRemoteInput"}
 	if v.EnvironmentId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentId"))
 	}

@@ -117,6 +117,35 @@ type EnvironmentMember struct {
 	noSmithyDocumentSerde
 }
 
+type SSHRemoteEnvironmentDescription struct {
+
+	// The host the environment will connect to.
+	//
+	// This member is required.
+	Host *string
+
+	// The login name of the user the environment will connect to.
+	//
+	// This member is required.
+	LoginName *string
+
+	// The port to the SSH server on the host.
+	//
+	// This member is required.
+	Port *int32
+
+	// The jump host to use to connect to the remote host.
+	BastionHost *string
+
+	// The path of the environment on the remote host
+	EnvironmentPath *string
+
+	// The path to node.js on the remote host (default: /usr/bin/node).
+	NodePath *string
+
+	noSmithyDocumentSerde
+}
+
 // Metadata that is associated with Amazon Web Services resources. In particular,
 // a name-value pair that can be associated with an Cloud9 development environment.
 // There are two types of tags: user tags and system tags. A user tag is created by

@@ -17,6 +17,8 @@
 //     environment.
 //   - DescribeEnvironmentMemberships : Gets information about environment members
 //     for an environment.
+//   - DescribeSSHRemote : Gets information about the ssh config for this
+//     environment.
 //   - DescribeEnvironments : Gets information about environments.
 //   - DescribeEnvironmentStatus : Gets status information for an environment.
 //   - ListEnvironments : Gets a list of environment identifiers.
