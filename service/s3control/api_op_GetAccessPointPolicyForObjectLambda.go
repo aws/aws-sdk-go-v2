@@ -7,8 +7,8 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	internalauth "github.com/aws/aws-sdk-go-v2/internal/auth"
 	s3controlcust "github.com/aws/aws-sdk-go-v2/service/s3control/internal/customizations"
-	smithy "github.com/aws/smithy-go"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
@@ -107,9 +107,6 @@ func (c *Client) addOperationGetAccessPointPolicyForObjectLambdaMiddlewares(stac
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addEndpointPrefix_opGetAccessPointPolicyForObjectLambdaMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addGetAccessPointPolicyForObjectLambdaResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -138,47 +135,6 @@ func (c *Client) addOperationGetAccessPointPolicyForObjectLambdaMiddlewares(stac
 		return err
 	}
 	return nil
-}
-
-type endpointPrefix_opGetAccessPointPolicyForObjectLambdaMiddleware struct {
-}
-
-func (*endpointPrefix_opGetAccessPointPolicyForObjectLambdaMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opGetAccessPointPolicyForObjectLambdaMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleSerialize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	input, ok := in.Parameters.(*GetAccessPointPolicyForObjectLambdaInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input type %T", in.Parameters)
-	}
-
-	var prefix strings.Builder
-	if input.AccountId == nil {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("AccountId forms part of the endpoint host and so may not be nil")}
-	} else if !smithyhttp.ValidHostLabel(*input.AccountId) {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("AccountId forms part of the endpoint host and so must match \"[a-zA-Z0-9-]{1,63}\", but was \"%s\"", *input.AccountId)}
-	} else {
-		prefix.WriteString(*input.AccountId)
-	}
-	prefix.WriteString(".")
-	req.URL.Host = prefix.String() + req.URL.Host
-
-	return next.HandleSerialize(ctx, in)
-}
-func addEndpointPrefix_opGetAccessPointPolicyForObjectLambdaMiddleware(stack *middleware.Stack) error {
-	return stack.Serialize.Insert(&endpointPrefix_opGetAccessPointPolicyForObjectLambdaMiddleware{}, `OperationSerializer`, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opGetAccessPointPolicyForObjectLambda(region string) *awsmiddleware.RegisterServiceMetadata {
@@ -269,6 +225,52 @@ func (m *opGetAccessPointPolicyForObjectLambdaResolveEndpointMiddleware) HandleS
 		req.Header.Set(
 			k,
 			resolvedEndpoint.Headers.Get(k),
+		)
+	}
+
+	authSchemes, err := internalauth.GetAuthenticationSchemes(&resolvedEndpoint.Properties)
+	if err != nil || len(authSchemes) == 0 {
+		return out, metadata, fmt.Errorf("Failed to resolve authentication scheme")
+	}
+
+	supportedAuthSchemeFound := false
+	for _, authScheme := range authSchemes {
+		name := authScheme.GetName()
+		_, supportedAuthSchemeFound = internalauth.SupportedSchemes[name]
+		if supportedAuthSchemeFound {
+			if name == internalauth.SigV4 {
+				v4Scheme, _ := authScheme.(*internalauth.AuthenticationSchemeV4)
+				var signingName, signingRegion string
+				if v4Scheme.SigningName == nil {
+					signingName = "s3"
+				}
+				if v4Scheme.SigningRegion == nil {
+					signingRegion = m.BuiltInResolver.(*BuiltInResolver).Region
+				}
+				ctx = awsmiddleware.SetSigningName(ctx, signingName)
+				ctx = awsmiddleware.SetSigningRegion(ctx, signingRegion)
+				break
+			}
+			if name == internalauth.SigV4A {
+				v4aScheme, _ := authScheme.(*internalauth.AuthenticationSchemeV4A)
+				var signingName string
+				if v4aScheme.SigningName == nil {
+					signingName = "s3"
+				}
+				ctx = awsmiddleware.SetSigningName(ctx, signingName)
+				ctx = awsmiddleware.SetSigningRegion(ctx, v4aScheme.SigningRegionSet[0])
+				break
+			}
+			if name == internalauth.None {
+				break
+			}
+		}
+	}
+	if !supportedAuthSchemeFound {
+		return out, metadata, fmt.Errorf(
+			"This operation requests signer version %s but the client only supports %v",
+			authSchemes[0].GetName(),
+			internalauth.SupportedSchemes,
 		)
 	}
 

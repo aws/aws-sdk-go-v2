@@ -7,6 +7,7 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	internalauth "github.com/aws/aws-sdk-go-v2/internal/auth"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -269,6 +270,52 @@ func (m *opListFunctionsByCodeSigningConfigResolveEndpointMiddleware) HandleSeri
 		req.Header.Set(
 			k,
 			resolvedEndpoint.Headers.Get(k),
+		)
+	}
+
+	authSchemes, err := internalauth.GetAuthenticationSchemes(&resolvedEndpoint.Properties)
+	if err != nil || len(authSchemes) == 0 {
+		return out, metadata, fmt.Errorf("Failed to resolve authentication scheme")
+	}
+
+	supportedAuthSchemeFound := false
+	for _, authScheme := range authSchemes {
+		name := authScheme.GetName()
+		_, supportedAuthSchemeFound = internalauth.SupportedSchemes[name]
+		if supportedAuthSchemeFound {
+			if name == internalauth.SigV4 {
+				v4Scheme, _ := authScheme.(*internalauth.AuthenticationSchemeV4)
+				var signingName, signingRegion string
+				if v4Scheme.SigningName == nil {
+					signingName = "lambda"
+				}
+				if v4Scheme.SigningRegion == nil {
+					signingRegion = m.BuiltInResolver.(*BuiltInResolver).Region
+				}
+				ctx = awsmiddleware.SetSigningName(ctx, signingName)
+				ctx = awsmiddleware.SetSigningRegion(ctx, signingRegion)
+				break
+			}
+			if name == internalauth.SigV4A {
+				v4aScheme, _ := authScheme.(*internalauth.AuthenticationSchemeV4A)
+				var signingName string
+				if v4aScheme.SigningName == nil {
+					signingName = "lambda"
+				}
+				ctx = awsmiddleware.SetSigningName(ctx, signingName)
+				ctx = awsmiddleware.SetSigningRegion(ctx, v4aScheme.SigningRegionSet[0])
+				break
+			}
+			if name == internalauth.None {
+				break
+			}
+		}
+	}
+	if !supportedAuthSchemeFound {
+		return out, metadata, fmt.Errorf(
+			"This operation requests signer version %s but the client only supports %v",
+			authSchemes[0].GetName(),
+			internalauth.SupportedSchemes,
 		)
 	}
 

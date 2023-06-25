@@ -7,6 +7,7 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	internalauth "github.com/aws/aws-sdk-go-v2/internal/auth"
 	s3cust "github.com/aws/aws-sdk-go-v2/service/s3/internal/customizations"
 	"github.com/aws/aws-sdk-go-v2/service/s3/types"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
@@ -253,6 +254,54 @@ func (m *opGetBucketNotificationConfigurationResolveEndpointMiddleware) HandleSe
 		req.Header.Set(
 			k,
 			resolvedEndpoint.Headers.Get(k),
+		)
+	}
+
+	authSchemes, err := internalauth.GetAuthenticationSchemes(&resolvedEndpoint.Properties)
+	if err != nil || len(authSchemes) == 0 {
+		return out, metadata, fmt.Errorf("Failed to resolve authentication scheme")
+	}
+
+	supportedAuthSchemeFound := false
+	for _, authScheme := range authSchemes {
+		name := authScheme.GetName()
+		_, supportedAuthSchemeFound = internalauth.SupportedSchemes[name]
+		if supportedAuthSchemeFound {
+			if name == internalauth.SigV4 {
+				v4Scheme, _ := authScheme.(*internalauth.AuthenticationSchemeV4)
+				var signingName, signingRegion string
+				if v4Scheme.SigningName == nil {
+					signingName = "s3"
+				}
+				if v4Scheme.SigningRegion == nil {
+					signingRegion = m.BuiltInResolver.(*BuiltInResolver).Region
+				}
+				ctx = awsmiddleware.SetSigningName(ctx, signingName)
+				ctx = awsmiddleware.SetSigningRegion(ctx, signingRegion)
+				ctx = s3cust.SetSignerVersion(ctx, v4Scheme.Name)
+				break
+			}
+			if name == internalauth.SigV4A {
+				v4aScheme, _ := authScheme.(*internalauth.AuthenticationSchemeV4A)
+				var signingName string
+				if v4aScheme.SigningName == nil {
+					signingName = "s3"
+				}
+				ctx = awsmiddleware.SetSigningName(ctx, signingName)
+				ctx = awsmiddleware.SetSigningRegion(ctx, v4aScheme.SigningRegionSet[0])
+				ctx = s3cust.SetSignerVersion(ctx, v4aScheme.Name)
+				break
+			}
+			if name == internalauth.None {
+				break
+			}
+		}
+	}
+	if !supportedAuthSchemeFound {
+		return out, metadata, fmt.Errorf(
+			"This operation requests signer version %s but the client only supports %v",
+			authSchemes[0].GetName(),
+			internalauth.SupportedSchemes,
 		)
 	}
 
