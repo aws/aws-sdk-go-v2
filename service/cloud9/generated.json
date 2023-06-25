@@ -23,6 +23,7 @@
         "api_op_UntagResource.go",
         "api_op_UpdateEnvironment.go",
         "api_op_UpdateEnvironmentMembership.go",
+        "api_op_UpdateSSHRemote.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

@@ -270,6 +270,26 @@ func (m *validateOpUpdateEnvironmentMembership) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateSSHRemote struct {
+}
+
+func (*validateOpUpdateSSHRemote) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateSSHRemote) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateSSHRemoteInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateSSHRemoteInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpCreateEnvironmentEC2ValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateEnvironmentEC2{}, middleware.After)
 }
@@ -320,6 +340,10 @@ func addOpUpdateEnvironmentValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateEnvironmentMembershipValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateEnvironmentMembership{}, middleware.After)
+}
+
+func addOpUpdateSSHRemoteValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateSSHRemote{}, middleware.After)
 }
 
 func validateTag(v *types.Tag) error {
@@ -591,6 +615,30 @@ func validateOpUpdateEnvironmentMembershipInput(v *UpdateEnvironmentMembershipIn
 	}
 	if len(v.Permissions) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Permissions"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateSSHRemoteInput(v *UpdateSSHRemoteInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateSSHRemoteInput"}
+	if v.EnvironmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentId"))
+	}
+	if v.LoginName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LoginName"))
+	}
+	if v.Host == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Host"))
+	}
+	if v.Port == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Port"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

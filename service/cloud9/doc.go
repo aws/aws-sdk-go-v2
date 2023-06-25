@@ -26,6 +26,7 @@
 //   - TagResource : Adds tags to an environment.
 //   - UntagResource : Removes tags from an environment.
 //   - UpdateEnvironment : Changes the settings of an existing environment.
+//   - UpdateSSHRemote : Changes the settings of an existing SSH environment.
 //   - UpdateEnvironmentMembership : Changes the settings of an existing
 //     environment member for an environment.
 package cloud9

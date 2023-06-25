@@ -839,6 +839,61 @@ func (m *awsAwsjson11_serializeOpUpdateEnvironmentMembership) HandleSerialize(ct
 
 	return next.HandleSerialize(ctx, in)
 }
+
+type awsAwsjson11_serializeOpUpdateSSHRemote struct {
+}
+
+func (*awsAwsjson11_serializeOpUpdateSSHRemote) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpUpdateSSHRemote) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateSSHRemoteInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSCloud9WorkspaceManagementService.UpdateSSHRemote")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentUpdateSSHRemoteInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
 func awsAwsjson11_serializeDocumentBoundedEnvironmentIdList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -1259,6 +1314,48 @@ func awsAwsjson11_serializeOpDocumentUpdateEnvironmentMembershipInput(v *UpdateE
 	if v.UserArn != nil {
 		ok := object.Key("userArn")
 		ok.String(*v.UserArn)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentUpdateSSHRemoteInput(v *UpdateSSHRemoteInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BastionHost != nil {
+		ok := object.Key("bastionHost")
+		ok.String(*v.BastionHost)
+	}
+
+	if v.EnvironmentId != nil {
+		ok := object.Key("environmentId")
+		ok.String(*v.EnvironmentId)
+	}
+
+	if v.EnvironmentPath != nil {
+		ok := object.Key("environmentPath")
+		ok.String(*v.EnvironmentPath)
+	}
+
+	if v.Host != nil {
+		ok := object.Key("host")
+		ok.String(*v.Host)
+	}
+
+	if v.LoginName != nil {
+		ok := object.Key("loginName")
+		ok.String(*v.LoginName)
+	}
+
+	if v.NodePath != nil {
+		ok := object.Key("nodePath")
+		ok.String(*v.NodePath)
+	}
+
+	if v.Port != nil {
+		ok := object.Key("port")
+		ok.Integer(*v.Port)
 	}
 
 	return nil
