@@ -50,6 +50,26 @@ func (m *validateOpCreateEnvironmentMembership) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateEnvironmentSSH struct {
+}
+
+func (*validateOpCreateEnvironmentSSH) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateEnvironmentSSH) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateEnvironmentSSHInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateEnvironmentSSHInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteEnvironment struct {
 }
 
@@ -238,6 +258,10 @@ func addOpCreateEnvironmentMembershipValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpCreateEnvironmentMembership{}, middleware.After)
 }
 
+func addOpCreateEnvironmentSSHValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateEnvironmentSSH{}, middleware.After)
+}
+
 func addOpDeleteEnvironmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteEnvironment{}, middleware.After)
 }
@@ -345,6 +369,35 @@ func validateOpCreateEnvironmentMembershipInput(v *CreateEnvironmentMembershipIn
 	}
 	if len(v.Permissions) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Permissions"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateEnvironmentSSHInput(v *CreateEnvironmentSSHInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateEnvironmentSSHInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.LoginName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LoginName"))
+	}
+	if v.Host == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Host"))
+	}
+	if v.Port == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Port"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

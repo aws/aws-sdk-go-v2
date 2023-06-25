@@ -9,6 +9,7 @@
 // . Cloud9 supports these operations:
 //   - CreateEnvironmentEC2 : Creates an Cloud9 development environment, launches
 //     an Amazon EC2 instance, and then connects from the instance to the environment.
+//   - CreateEnvironmentSSH : Creates an Cloud9 SSH development environment.
 //   - CreateEnvironmentMembership : Adds an environment member to an environment.
 //   - DeleteEnvironment : Deletes an environment. If an Amazon EC2 instance is
 //     connected to the environment, also terminates the instance.

@@ -10,6 +10,7 @@
         "api_client_test.go",
         "api_op_CreateEnvironmentEC2.go",
         "api_op_CreateEnvironmentMembership.go",
+        "api_op_CreateEnvironmentSSH.go",
         "api_op_DeleteEnvironment.go",
         "api_op_DeleteEnvironmentMembership.go",
         "api_op_DescribeEnvironmentMemberships.go",

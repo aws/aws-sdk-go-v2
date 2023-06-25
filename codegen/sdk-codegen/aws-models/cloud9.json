@@ -37,6 +37,9 @@
                     "target": "com.amazonaws.cloud9#CreateEnvironmentEC2"
                 },
                 {
+                    "target": "com.amazonaws.cloud9#CreateEnvironmentSSH"
+                },
+                {
                     "target": "com.amazonaws.cloud9#CreateEnvironmentMembership"
                 },
                 {
@@ -85,7 +88,7 @@
                     "name": "cloud9"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<fullname>Cloud9</fullname>\n         <p>Cloud9 is a collection of tools that you can use to code, build, run, test, debug, and\n      release software in the cloud.</p>\n         <p>For more information about Cloud9, see the <a href=\"https://docs.aws.amazon.com/cloud9/latest/user-guide\">Cloud9 User Guide</a>.</p>\n         <p>Cloud9 supports these operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CreateEnvironmentEC2</code>: Creates an Cloud9 development environment, launches\n          an Amazon EC2 instance, and then connects from the instance to the environment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CreateEnvironmentMembership</code>: Adds an environment member to an\n          environment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DeleteEnvironment</code>: Deletes an environment. If an Amazon EC2 instance is\n          connected to the environment, also terminates the instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DeleteEnvironmentMembership</code>: Deletes an environment member from an\n          environment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribeEnvironmentMemberships</code>: Gets information about environment\n          members for an environment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribeEnvironments</code>: Gets information about environments.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribeEnvironmentStatus</code>: Gets status information for an\n          environment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ListEnvironments</code>: Gets a list of environment identifiers.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ListTagsForResource</code>: Gets the tags for an environment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TagResource</code>: Adds tags to an environment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UntagResource</code>: Removes tags from an environment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UpdateEnvironment</code>: Changes the settings of an existing\n          environment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UpdateEnvironmentMembership</code>: Changes the settings of an existing\n          environment member for an environment.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<fullname>Cloud9</fullname>\n         <p>Cloud9 is a collection of tools that you can use to code, build, run, test, debug, and\n      release software in the cloud.</p>\n         <p>For more information about Cloud9, see the <a href=\"https://docs.aws.amazon.com/cloud9/latest/user-guide\">Cloud9 User Guide</a>.</p>\n         <p>Cloud9 supports these operations:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CreateEnvironmentEC2</code>: Creates an Cloud9 development environment, launches\n          an Amazon EC2 instance, and then connects from the instance to the environment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CreateEnvironmentSSH</code>: Creates an Cloud9 SSH development environment.</p>\n            </li>\n           <li>\n               <p>\n                  <code>CreateEnvironmentMembership</code>: Adds an environment member to an\n          environment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DeleteEnvironment</code>: Deletes an environment. If an Amazon EC2 instance is\n          connected to the environment, also terminates the instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DeleteEnvironmentMembership</code>: Deletes an environment member from an\n          environment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribeEnvironmentMemberships</code>: Gets information about environment\n          members for an environment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribeEnvironments</code>: Gets information about environments.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribeEnvironmentStatus</code>: Gets status information for an\n          environment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ListEnvironments</code>: Gets a list of environment identifiers.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ListTagsForResource</code>: Gets the tags for an environment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TagResource</code>: Adds tags to an environment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UntagResource</code>: Removes tags from an environment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UpdateEnvironment</code>: Changes the settings of an existing\n          environment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UpdateEnvironmentMembership</code>: Changes the settings of an existing\n          environment member for an environment.</p>\n            </li>\n         </ul>",
                 "smithy.api#title": "AWS Cloud9",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -1190,6 +1193,122 @@
                 }
             }
         },
+        "com.amazonaws.cloud9#CreateEnvironmentSSH": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloud9#CreateEnvironmentSSHRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloud9#CreateEnvironmentSSHResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloud9#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.cloud9#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.cloud9#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.cloud9#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.cloud9#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.cloud9#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cloud9#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a cloud9 SSH environment.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.cloud9#CreateEnvironmentSSHRequest": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.cloud9#EnvironmentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the environment to create.</p>\n         <p>This name is visible to other IAM users in the same Amazon Web Services account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.cloud9#EnvironmentDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the environment to create.</p>"
+                    }
+                },
+                "loginName": {
+                    "target": "com.amazonaws.cloud9#LoginName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The login name of the user the environment will connect to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "host": {
+                    "target": "com.amazonaws.cloud9#Host",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The host the environment will connect to.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "port": {
+                    "target": "com.amazonaws.cloud9#Port",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port to the SSH server on the host.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "environmentPath": {
+                    "target": "com.amazonaws.cloud9#RemotePath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path on the host the environment will connect to (default: The home of the user).</p>"
+                    }
+                },
+                "nodePath": {
+                    "target": "com.amazonaws.cloud9#RemotePath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path to node.js on the remote host (default: <i>/usr/bin/node</i>)."
+                    }
+                },
+                "bastionHost": {
+                    "target": "com.amazonaws.cloud9#SSHJumpHost",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The jump host to use to connect to the remote host.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.cloud9#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of key-value pairs that will be associated with the new Cloud9 development\n      environment.</p>"
+                    }
+                },
+                "dryRun": {
+                    "target": "com.amazonaws.cloud9#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloud9#CreateEnvironmentSSHResult": {
+            "type": "structure",
+            "members": {
+                "environmentId": {
+                    "target": "com.amazonaws.cloud9#EnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the environment that was created.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.cloud9#CreateEnvironmentMembership": {
             "type": "operation",
             "input": {
@@ -1670,6 +1789,52 @@
                     "max": 200
                 },
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.cloud9#LoginName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.cloud9#RemotePath": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^~?(\\/[\\w\\-\\.]+)+\\/?$",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.cloud9#SSHJumpHost": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.cloud9#Host": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.cloud9#Port": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 65535
+                }
             }
         },
         "com.amazonaws.cloud9#EnvironmentId": {
