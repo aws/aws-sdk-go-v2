@@ -1,3 +1,7 @@
+# v1.24.0 (2023-06-26)
+
+* **Feature**: Add support for user.extra.sessionName in Kubernetes Audit Logs Findings.
+
 # v1.23.2 (2023-06-15)
 
 * **Documentation**: Updated descriptions for some APIs.

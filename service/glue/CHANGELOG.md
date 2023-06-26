@@ -1,3 +1,7 @@
+# v1.52.0 (2023-06-26)
+
+* **Feature**: Timestamp Starting Position For Kinesis and Kafka Data Sources in a Glue Streaming Job
+
 # v1.51.0 (2023-06-19)
 
 * **Feature**: This release adds support for creating cross region table/database resource links

@@ -1,3 +1,17 @@
+# Release (2023-06-26)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.60.0](service/connect/CHANGELOG.md#v1600-2023-06-26)
+  * **Feature**: This release provides a way to search for existing tags within an instance. Before tagging a resource, ensure consistency by searching for pre-existing key:value pairs.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.52.0](service/glue/CHANGELOG.md#v1520-2023-06-26)
+  * **Feature**: Timestamp Starting Position For Kinesis and Kafka Data Sources in a Glue Streaming Job
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.24.0](service/guardduty/CHANGELOG.md#v1240-2023-06-26)
+  * **Feature**: Add support for user.extra.sessionName in Kubernetes Audit Logs Findings.
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.21.0](service/iam/CHANGELOG.md#v1210-2023-06-26)
+  * **Feature**: Support for a new API "GetMFADevice" to present MFA device metadata such as device certifications
+* `github.com/aws/aws-sdk-go-v2/service/pinpoint`: [v1.20.0](service/pinpoint/CHANGELOG.md#v1200-2023-06-26)
+  * **Feature**: Added time zone estimation support for journeys
+
 # Release (2023-06-23)
 
 ## Module Highlights
