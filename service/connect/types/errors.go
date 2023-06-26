@@ -324,6 +324,33 @@ func (e *LimitExceededException) ErrorCode() string {
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// Maximum number (1000) of tags have been returned with current request. Consider
+// changing request parameters to get more tags.
+type MaximumResultReturnedException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *MaximumResultReturnedException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *MaximumResultReturnedException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *MaximumResultReturnedException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "MaximumResultReturnedException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *MaximumResultReturnedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The contact is not permitted.
 type OutboundContactNotPermittedException struct {
 	Message *string

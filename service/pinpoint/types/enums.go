@@ -42,6 +42,25 @@ func (EndpointTypesElement) Values() []EndpointTypesElement {
 	}
 }
 
+type TimezoneEstimationMethodsElement string
+
+// Enum values for TimezoneEstimationMethodsElement
+const (
+	TimezoneEstimationMethodsElementPhoneNumber TimezoneEstimationMethodsElement = "PHONE_NUMBER"
+	TimezoneEstimationMethodsElementPostalCode  TimezoneEstimationMethodsElement = "POSTAL_CODE"
+)
+
+// Values returns all known values for TimezoneEstimationMethodsElement. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (TimezoneEstimationMethodsElement) Values() []TimezoneEstimationMethodsElement {
+	return []TimezoneEstimationMethodsElement{
+		"PHONE_NUMBER",
+		"POSTAL_CODE",
+	}
+}
+
 type Action string
 
 // Enum values for Action

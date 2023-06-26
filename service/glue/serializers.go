@@ -15425,6 +15425,11 @@ func awsAwsjson11_serializeDocumentKafkaStreamingSourceOptions(v *types.KafkaStr
 		ok.String(*v.StartingOffsets)
 	}
 
+	if v.StartingTimestamp != nil {
+		ok := object.Key("StartingTimestamp")
+		ok.String(smithytime.FormatDateTime(*v.StartingTimestamp))
+	}
+
 	if v.SubscribePattern != nil {
 		ok := object.Key("SubscribePattern")
 		ok.String(*v.SubscribePattern)
@@ -15541,6 +15546,11 @@ func awsAwsjson11_serializeDocumentKinesisStreamingSourceOptions(v *types.Kinesi
 	if len(v.StartingPosition) > 0 {
 		ok := object.Key("StartingPosition")
 		ok.String(string(v.StartingPosition))
+	}
+
+	if v.StartingTimestamp != nil {
+		ok := object.Key("StartingTimestamp")
+		ok.String(smithytime.FormatDateTime(*v.StartingTimestamp))
 	}
 
 	if v.StreamArn != nil {

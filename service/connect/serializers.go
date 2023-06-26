@@ -10668,6 +10668,98 @@ func awsRestjson1_serializeOpDocumentSearchQuickConnectsInput(v *SearchQuickConn
 	return nil
 }
 
+type awsRestjson1_serializeOpSearchResourceTags struct {
+}
+
+func (*awsRestjson1_serializeOpSearchResourceTags) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpSearchResourceTags) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*SearchResourceTagsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/search-resource-tags")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentSearchResourceTagsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsSearchResourceTagsInput(v *SearchResourceTagsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentSearchResourceTagsInput(v *SearchResourceTagsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.InstanceId != nil {
+		ok := object.Key("InstanceId")
+		ok.String(*v.InstanceId)
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.ResourceTypes != nil {
+		ok := object.Key("ResourceTypes")
+		if err := awsRestjson1_serializeDocumentResourceTypeList(v.ResourceTypes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SearchCriteria != nil {
+		ok := object.Key("SearchCriteria")
+		if err := awsRestjson1_serializeDocumentResourceTagsSearchCriteria(v.SearchCriteria, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpSearchRoutingProfiles struct {
 }
 
@@ -17932,6 +18024,31 @@ func awsRestjson1_serializeDocumentRequiredTaskTemplateFields(v []types.Required
 	return nil
 }
 
+func awsRestjson1_serializeDocumentResourceTagsSearchCriteria(v *types.ResourceTagsSearchCriteria, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TagSearchCondition != nil {
+		ok := object.Key("TagSearchCondition")
+		if err := awsRestjson1_serializeDocumentTagSearchCondition(v.TagSearchCondition, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentResourceTypeList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentRoutingProfileQueueConfig(v *types.RoutingProfileQueueConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -18390,6 +18507,33 @@ func awsRestjson1_serializeDocumentTagRestrictedResourceList(v []string, value s
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTagSearchCondition(v *types.TagSearchCondition, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TagKey != nil {
+		ok := object.Key("tagKey")
+		ok.String(*v.TagKey)
+	}
+
+	if len(v.TagKeyComparisonType) > 0 {
+		ok := object.Key("tagKeyComparisonType")
+		ok.String(string(v.TagKeyComparisonType))
+	}
+
+	if v.TagValue != nil {
+		ok := object.Key("tagValue")
+		ok.String(*v.TagValue)
+	}
+
+	if len(v.TagValueComparisonType) > 0 {
+		ok := object.Key("tagValueComparisonType")
+		ok.String(string(v.TagValueComparisonType))
+	}
+
 	return nil
 }
 

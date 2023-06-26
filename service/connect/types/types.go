@@ -2779,6 +2779,15 @@ type RequiredFieldInfo struct {
 	noSmithyDocumentSerde
 }
 
+// The search criteria to be used to search tags.
+type ResourceTagsSearchCriteria struct {
+
+	// The search criteria to be used to return tags.
+	TagSearchCondition *TagSearchCondition
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about a routing profile.
 type RoutingProfile struct {
 
@@ -3340,6 +3349,38 @@ type TagCondition struct {
 
 	// The tag value in the tag condition.
 	TagValue *string
+
+	noSmithyDocumentSerde
+}
+
+// The search criteria to be used to return tags.
+type TagSearchCondition struct {
+
+	// The tag key used in the tag search condition.
+	TagKey *string
+
+	// The type of comparison to be made when evaluating the tag key in tag search
+	// condition.
+	TagKeyComparisonType StringComparisonType
+
+	// The tag value used in the tag search condition.
+	TagValue *string
+
+	// The type of comparison to be made when evaluating the tag value in tag search
+	// condition.
+	TagValueComparisonType StringComparisonType
+
+	noSmithyDocumentSerde
+}
+
+// A tag set contains tag key and tag value.
+type TagSet struct {
+
+	// The tag key in the tagSet.
+	Key *string
+
+	// The tag value in the tagSet.
+	Value *string
 
 	noSmithyDocumentSerde
 }

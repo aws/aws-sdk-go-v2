@@ -1,0 +1,8 @@
+{
+    "id": "bdaf6ddc-0eb9-4599-9113-5ce8b23a778a",
+    "type": "feature",
+    "description": "Timestamp Starting Position For Kinesis and Kafka Data Sources in a Glue Streaming Job",
+    "modules": [
+        "service/glue"
+    ]
+}

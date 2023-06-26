@@ -1,0 +1,8 @@
+{
+    "id": "bd821371-12cb-4445-a5b1-8d172f5fbbb9",
+    "type": "feature",
+    "description": "Added time zone estimation support for journeys",
+    "modules": [
+        "service/pinpoint"
+    ]
+}

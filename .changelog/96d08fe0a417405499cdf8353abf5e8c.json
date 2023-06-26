@@ -1,0 +1,8 @@
+{
+    "id": "96d08fe0-a417-4054-99cd-f8353abf5e8c",
+    "type": "feature",
+    "description": "Support for a new API \"GetMFADevice\" to present MFA device metadata such as device certifications",
+    "modules": [
+        "service/iam"
+    ]
+}

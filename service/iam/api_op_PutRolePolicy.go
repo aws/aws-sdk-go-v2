@@ -13,13 +13,14 @@ import (
 // Adds or updates an inline policy document that is embedded in the specified IAM
 // role. When you embed an inline policy in a role, the inline policy is used as
 // part of the role's access (permissions) policy. The role's trust policy is
-// created at the same time as the role, using CreateRole . You can update a role's
-// trust policy using UpdateAssumeRolePolicy . For more information about IAM
-// roles, see Using roles to delegate permissions and federate identities (https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html)
+// created at the same time as the role, using CreateRole (https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html)
+// . You can update a role's trust policy using UpdateAssumerolePolicy (https://docs.aws.amazon.com/IAM/latest/APIReference/API_UpdateAssumeRolePolicy.html)
+// . For more information about IAM roles, see Using roles to delegate permissions
+// and federate identities (https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html)
 // . A role can also have a managed policy attached to it. To attach a managed
-// policy to a role, use AttachRolePolicy . To create a new managed policy, use
-// CreatePolicy . For information about policies, see Managed policies and inline
-// policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
+// policy to a role, use AttachRolePolicy (https://docs.aws.amazon.com/IAM/latest/APIReference/API_AttachRolePolicy.html)
+// . To create a new managed policy, use CreatePolicy (https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreatePolicy.html)
+// . For information about policies, see Managed policies and inline policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide. For information about the maximum number of inline
 // policies that you can embed with a role, see IAM and STS quotas (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html)
 // in the IAM User Guide. Because policy documents can be large, you should use

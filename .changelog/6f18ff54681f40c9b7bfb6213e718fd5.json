@@ -1,0 +1,8 @@
+{
+    "id": "6f18ff54-681f-40c9-b7bf-b6213e718fd5",
+    "type": "feature",
+    "description": "This release provides a way to search for existing tags within an instance. Before tagging a resource, ensure consistency by searching for pre-existing key:value pairs.",
+    "modules": [
+        "service/connect"
+    ]
+}

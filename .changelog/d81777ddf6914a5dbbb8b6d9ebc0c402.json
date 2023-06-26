@@ -1,0 +1,8 @@
+{
+    "id": "d81777dd-f691-4a5d-bbb8-b6d9ebc0c402",
+    "type": "feature",
+    "description": "Add support for user.extra.sessionName in Kubernetes Audit Logs Findings.",
+    "modules": [
+        "service/guardduty"
+    ]
+}

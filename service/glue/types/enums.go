@@ -1652,6 +1652,7 @@ const (
 	StartingPositionLatest      StartingPosition = "latest"
 	StartingPositionTrimHorizon StartingPosition = "trim_horizon"
 	StartingPositionEarliest    StartingPosition = "earliest"
+	StartingPositionTimestamp   StartingPosition = "timestamp"
 )
 
 // Values returns all known values for StartingPosition. Note that this can be
@@ -1662,6 +1663,7 @@ func (StartingPosition) Values() []StartingPosition {
 		"latest",
 		"trim_horizon",
 		"earliest",
+		"timestamp",
 	}
 }
 

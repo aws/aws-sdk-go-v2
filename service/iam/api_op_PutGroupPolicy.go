@@ -12,9 +12,9 @@ import (
 
 // Adds or updates an inline policy document that is embedded in the specified IAM
 // group. A user can also have managed policies attached to it. To attach a managed
-// policy to a group, use AttachGroupPolicy . To create a new managed policy, use
-// CreatePolicy . For information about policies, see Managed policies and inline
-// policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
+// policy to a group, use AttachGroupPolicy (https://docs.aws.amazon.com/IAM/latest/APIReference/API_AttachGroupPolicy.html)
+// . To create a new managed policy, use CreatePolicy (https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreatePolicy.html)
+// . For information about policies, see Managed policies and inline policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide. For information about the maximum number of inline
 // policies that you can embed in a group, see IAM and STS quotas (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html)
 // in the IAM User Guide. Because policy documents can be large, you should use
