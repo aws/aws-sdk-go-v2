@@ -19969,6 +19969,12 @@
                 "smithy.api#default": false
             }
         },
+        "com.amazonaws.glue#Iso8601DateTime": {
+            "type": "timestamp",
+            "traits": {
+                "smithy.api#timestampFormat": "date-time"
+            }
+        },
         "com.amazonaws.glue#JDBCConnectionType": {
             "type": "enum",
             "members": {
@@ -21411,6 +21417,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>When this option is set to 'true', for each batch, it will emit the metrics for the duration between the oldest record received by the topic and the time it arrives in Glue to CloudWatch. The metric's name is \"glue.driver.streaming.maxConsumerLagInMs\". The default value is 'false'. This option is supported in Glue version 4.0 or later.</p>"
                     }
+                },
+                "StartingTimestamp": {
+                    "target": "com.amazonaws.glue#Iso8601DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of the record in the Kafka topic to start reading data from. The possible values are a timestamp string in UTC format of the pattern <code>yyyy-mm-ddTHH:MM:SSZ</code> (where Z represents a UTC timezone offset with a +/-. For example: \"2023-04-04T08:00:00+08:00\"). </p>\n         <p>Only one of <code>StartingTimestamp</code> or <code>StartingOffsets</code> must be set.</p>"
+                    }
                 }
             },
             "traits": {
@@ -21501,7 +21513,7 @@
                 "StartingPosition": {
                     "target": "com.amazonaws.glue#StartingPosition",
                     "traits": {
-                        "smithy.api#documentation": "<p>The starting position in the Kinesis data stream to read data from. The possible values are <code>\"latest\"</code>, <code>\"trim_horizon\"</code>, or <code>\"earliest\"</code>. The default value is <code>\"latest\"</code>.</p>"
+                        "smithy.api#documentation": "<p>The starting position in the Kinesis data stream to read data from. The possible values are <code>\"latest\"</code>, <code>\"trim_horizon\"</code>, <code>\"earliest\"</code>, or a timestamp string in UTC format in the pattern <code>yyyy-mm-ddTHH:MM:SSZ</code> (where <code>Z</code> represents a UTC timezone offset with a +/-. For example: \"2023-04-04T08:00:00-04:00\"). The default value is <code>\"latest\"</code>.</p>\n         <p>Note: Using a value that is a timestamp string in UTC format for \"startingPosition\" is supported only for Glue version 4.0 or later.</p>"
                     }
                 },
                 "MaxFetchTimeInMs": {
@@ -21592,6 +21604,12 @@
                     "target": "com.amazonaws.glue#EnclosedInStringProperty",
                     "traits": {
                         "smithy.api#documentation": "<p>When this option is set to 'true', for each batch, it will emit the metrics for the duration between the oldest record received by the stream and the time it arrives in Glue  to CloudWatch. The metric's name is \"glue.driver.streaming.maxConsumerLagInMs\". The default value is 'false'. This option is supported in Glue version 4.0 or later.</p>"
+                    }
+                },
+                "StartingTimestamp": {
+                    "target": "com.amazonaws.glue#Iso8601DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of the record in the Kinesis data stream to start reading data from. The possible values are a timestamp string in UTC format of the pattern <code>yyyy-mm-ddTHH:MM:SSZ</code> (where Z represents a UTC timezone offset with a +/-. For example: \"2023-04-04T08:00:00+08:00\"). </p>"
                     }
                 }
             },
@@ -29961,6 +29979,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "earliest"
+                    }
+                },
+                "TIMESTAMP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "timestamp"
                     }
                 }
             }

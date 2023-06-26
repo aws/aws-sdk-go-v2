@@ -7902,6 +7902,13 @@
                         "smithy.api#documentation": "<p>The groups that include the user who called the Kubernetes API.</p>",
                         "smithy.api#jsonName": "groups"
                     }
+                },
+                "SessionName": {
+                    "target": "com.amazonaws.guardduty#SessionNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Entity that assumes the IAM role \n      when Kubernetes RBAC permissions are assigned to that role.</p>",
+                        "smithy.api#jsonName": "sessionName"
+                    }
                 }
             },
             "traits": {
@@ -8931,7 +8938,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists tags for a resource. Tagging is currently supported for detectors, finding filters,\n      IP sets, and threat intel sets, with a limit of 50 tags per resource. When invoked, this\n      operation returns all assigned tags for a given resource.</p>",
+                "smithy.api#documentation": "<p>Lists tags for a resource. Tagging is currently supported for detectors, finding filters,\n      IP sets, threat intel sets, publishing destination, with a limit of 50 tags per resource. When invoked, this\n      operation returns all assigned tags for a given resource.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/tags/{ResourceArn}",
@@ -11770,6 +11777,12 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Additional information about the generated finding.</p>"
+            }
+        },
+        "com.amazonaws.guardduty#SessionNameList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.guardduty#String"
             }
         },
         "com.amazonaws.guardduty#SortCriteria": {
