@@ -4,6 +4,7 @@ package lambda
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
@@ -186,49 +187,51 @@ func (m *opGetFunctionCodeSigningConfigResolveEndpointMiddleware) HandleSerializ
 	}
 
 	authSchemes, err := internalauth.GetAuthenticationSchemes(&resolvedEndpoint.Properties)
-	if err != nil || len(authSchemes) == 0 {
-		return out, metadata, fmt.Errorf("Failed to resolve authentication scheme")
+	if err != nil {
+		var nfe *internalauth.NoAuthenticationSchemesFoundError
+		if errors.As(err, &nfe) {
+			// if no auth scheme is found, default to sigv4
+			signingName := "lambda"
+			signingRegion := m.BuiltInResolver.(*BuiltInResolver).Region
+			ctx = awsmiddleware.SetSigningName(ctx, signingName)
+			ctx = awsmiddleware.SetSigningRegion(ctx, signingRegion)
+
+		}
+		authSchemes = []internalauth.AuthenticationScheme{}
 	}
 
-	supportedAuthSchemeFound := false
 	for _, authScheme := range authSchemes {
-		name := authScheme.GetName()
-		_, supportedAuthSchemeFound = internalauth.SupportedSchemes[name]
-		if supportedAuthSchemeFound {
-			if name == internalauth.SigV4 {
-				v4Scheme, _ := authScheme.(*internalauth.AuthenticationSchemeV4)
-				var signingName, signingRegion string
-				if v4Scheme.SigningName == nil {
-					signingName = "lambda"
-				}
-				if v4Scheme.SigningRegion == nil {
-					signingRegion = m.BuiltInResolver.(*BuiltInResolver).Region
-				}
-				ctx = awsmiddleware.SetSigningName(ctx, signingName)
-				ctx = awsmiddleware.SetSigningRegion(ctx, signingRegion)
-				break
+		switch v := authScheme.(type) {
+		case *internalauth.AuthenticationSchemeV4:
+			v4Scheme, _ := authScheme.(*internalauth.AuthenticationSchemeV4)
+			var signingName, signingRegion string
+			if v4Scheme.SigningName == nil {
+				signingName = "lambda"
 			}
-			if name == internalauth.SigV4A {
-				v4aScheme, _ := authScheme.(*internalauth.AuthenticationSchemeV4A)
-				var signingName string
-				if v4aScheme.SigningName == nil {
-					signingName = "lambda"
-				}
-				ctx = awsmiddleware.SetSigningName(ctx, signingName)
-				ctx = awsmiddleware.SetSigningRegion(ctx, v4aScheme.SigningRegionSet[0])
-				break
+			if v4Scheme.SigningRegion == nil {
+				signingRegion = m.BuiltInResolver.(*BuiltInResolver).Region
 			}
-			if name == internalauth.None {
-				break
+			ctx = awsmiddleware.SetSigningName(ctx, signingName)
+			ctx = awsmiddleware.SetSigningRegion(ctx, signingRegion)
+			break
+		case *internalauth.AuthenticationSchemeV4A:
+			v4aScheme, _ := authScheme.(*internalauth.AuthenticationSchemeV4A)
+			var signingName string
+			if v4aScheme.SigningName == nil {
+				signingName = "lambda"
 			}
+			ctx = awsmiddleware.SetSigningName(ctx, signingName)
+			ctx = awsmiddleware.SetSigningRegion(ctx, v4aScheme.SigningRegionSet[0])
+			break
+		case *internalauth.AuthenticationSchemeNone:
+			break
+		default:
+			return out, metadata, fmt.Errorf(
+				"This operation requests signer version %v but the client only supports %v",
+				v,
+				internalauth.SupportedSchemes,
+			)
 		}
-	}
-	if !supportedAuthSchemeFound {
-		return out, metadata, fmt.Errorf(
-			"This operation requests signer version %s but the client only supports %v",
-			authSchemes[0].GetName(),
-			internalauth.SupportedSchemes,
-		)
 	}
 
 	return next.HandleSerialize(ctx, in)
