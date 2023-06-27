@@ -5998,7 +5998,7 @@
                 "ModelDataSource": {
                     "target": "com.amazonaws.sagemaker#ModelDataSource",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the location of ML model data to deploy.</p>\n         <note>\n            <p>Currently you cannot use <code>ModelDataSource</code> in conjuction with\n                SageMaker batch transform, SageMaker serverless endpoints, SageMaker multi-model endpoints, and SageMaker\n                Marketplace.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies the location of ML model data to deploy.</p>\n         <note>\n            <p>Currently you cannot use <code>ModelDataSource</code> in conjunction with\n                SageMaker batch transform, SageMaker serverless endpoints, SageMaker multi-model endpoints, and SageMaker\n                Marketplace.</p>\n         </note>"
                     }
                 }
             },
@@ -41546,10 +41546,30 @@
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Turn <code>OnlineStore</code> off by specifying <code>False</code> \n      for the <code>EnableOnlineStore</code> flag. Turn <code>OnlineStore</code> \n      on by specifying <code>True</code> \n      for the <code>EnableOnlineStore</code> flag. </p>\n         <p>The default value is <code>False</code>.</p>"
                     }
+                },
+                "TtlDuration": {
+                    "target": "com.amazonaws.sagemaker#TtlDuration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Time to live duration, where the record is hard deleted after the expiration time is\n         reached; <code>ExpiresAt</code> = <code>EventTime</code> + <code>TtlDuration</code>. For\n         information on HardDelete, see the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_DeleteRecord.html\">DeleteRecord</a> API in the Amazon SageMaker API Reference guide.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Use this to specify the Amazon Web Services Key Management Service (KMS) Key ID, or\n            <code>KMSKeyId</code>, for at rest data encryption. You can turn\n            <code>OnlineStore</code> on or off by specifying the <code>EnableOnlineStore</code> flag\n         at General Assembly.</p>\n         <p>The default value is <code>False</code>.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#OnlineStoreConfigUpdate": {
+            "type": "structure",
+            "members": {
+                "TtlDuration": {
+                    "target": "com.amazonaws.sagemaker#TtlDuration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Time to live duration, where the record is hard deleted after the expiration time is\n         reached; <code>ExpiresAt</code> = <code>EventTime</code> + <code>TtlDuration</code>. For\n         information on HardDelete, see the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_DeleteRecord.html\">DeleteRecord</a> API in the Amazon SageMaker API Reference guide.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the feature group online store configuration.</p>"
             }
         },
         "com.amazonaws.sagemaker#OnlineStoreSecurityConfig": {
@@ -47844,14 +47864,14 @@
                 "S3DataType": {
                     "target": "com.amazonaws.sagemaker#S3ModelDataType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the type of ML model data to deploy.</p>\n         <p>If you choose <code>S3Prefix</code>, <code>S3Uri</code> identifies a key name prefix.\n            SageMaker uses all objects that match the specified key name prefix as part of the ML model\n            data to deploy. A valid key name prefix identified by <code>S3Uri</code> always ends\n            with a forward slash (/).</p>\n         <p>If you choose S3Object, S3Uri identifies an object that is the ML model data to\n            deploy.</p>",
+                        "smithy.api#documentation": "<p>Specifies the type of ML model data to deploy.</p>\n         <p>If you choose <code>S3Prefix</code>, <code>S3Uri</code> identifies a key name prefix.\n            SageMaker uses all objects that match the specified key name prefix as part of the ML model\n            data to deploy. A valid key name prefix identified by <code>S3Uri</code> always ends\n            with a forward slash (/).</p>\n         <p>If you choose <code>S3Object</code>, <code>S3Uri</code> identifies an object that is\n            the ML model data to deploy.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "CompressionType": {
                     "target": "com.amazonaws.sagemaker#ModelCompressionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies how the ML model data is prepared.</p>\n         <p>If you choose <code>Gzip</code> and choose <code>S3Object</code> as the value of\n            <code>S3DataType</code>, <code>S3Uri</code> identifies an object that is a\n            gzip-compressed TAR archive. SageMaker will attempt to decompress and untar the object\n            during model deployment.</p>\n         <p>If you choose <code>None</code> and chooose <code>S3Object</code> as the value of\n            <code>S3DataType</code>, <code>S3Uri</code> identifies an object that represents an\n            uncompressed ML model to deploy.</p>\n         <p>If you choose None and choose <code>S3Prefix</code> as the value of\n            <code>S3DataType</code>, <code>S3Uri</code> identifies a key name prefix, under which\n            all objects represents the uncompressed ML model to deploy.</p>\n         <p>If you choose None, then SageMaker will follow rules below when creating model data files\n            under /opt/ml/model directory for use by your inference code:</p>\n         <ul>\n            <li>\n               <p>If you choose <code>S3Object</code> as the value of <code>S3DataType</code>,\n                    then SageMaker will split the key of the S3 object referenced by <code>S3Uri</code> by\n                    slash (/), and use the last part as the filename of the file holding the content\n                    of the S3 object.</p>\n            </li>\n            <li>\n               <p>If you choose <code>S3Prefix</code> as the value of <code>S3DataType</code>,\n                    then for each S3 object under the key name pefix referenced by <code>S3Uri</code>,\n                    SageMaker will trim its key by the prefix, and use the remainder as the path\n                    (relative to <code>/opt/ml/model</code>) of the file holding the content of the\n                    S3 object. SageMaker will split the remainder by slash (/), using intermediate parts as\n                    directory names and the last part as filename of the file holding the content of\n                    the S3 object.</p>\n            </li>\n            <li>\n               <p>Do not use any of the following as file names or directory names:</p>\n               <ul>\n                  <li>\n                     <p>An empty or blank string</p>\n                  </li>\n                  <li>\n                     <p>A string which contains null bytes</p>\n                  </li>\n                  <li>\n                     <p>A string longer than 255 bytes</p>\n                  </li>\n                  <li>\n                     <p>A single dot (<code>.</code>)</p>\n                  </li>\n                  <li>\n                     <p>A double dot (<code>..</code>)</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Ambiguous file names will result in model deployment failure. For example,\n                    if your uncompressed ML model consists of two S3 objects\n                    <code>s3://mybucket/model/weights</code> and <code>s3://mybucket/model/weights/part1</code>\n                    and you specify <code>s3://mybucket/model/</code> as the value of <code>S3Uri</code> and\n                    <code>S3Prefix</code> as the value of S3DataType, then it will result in name clash between\n                    <code>/opt/ml/model/weights</code> (a regular file) and <code>/opt/ml/model/weights/</code>\n                    (a directory).</p>\n            </li>\n            <li>\n               <p>Do not organize the model artifacts in\n                    <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html\">S3 console using folders</a>.\n                    When you create a folder in S3 console, S3 creates a 0-byte object with a key set to the\n                    folder name you provide. They key of the 0-byte object ends with a slash (/) which violates\n                    SageMaker restrictions on model artifact file names, leading to model deployment failure.\n                </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies how the ML model data is prepared.</p>\n         <p>If you choose <code>Gzip</code> and choose <code>S3Object</code> as the value of\n            <code>S3DataType</code>, <code>S3Uri</code> identifies an object that is a\n            gzip-compressed TAR archive. SageMaker will attempt to decompress and untar the object\n            during model deployment.</p>\n         <p>If you choose <code>None</code> and chooose <code>S3Object</code> as the value of\n            <code>S3DataType</code>, <code>S3Uri</code> identifies an object that represents an\n            uncompressed ML model to deploy.</p>\n         <p>If you choose None and choose <code>S3Prefix</code> as the value of\n            <code>S3DataType</code>, <code>S3Uri</code> identifies a key name prefix, under which\n            all objects represents the uncompressed ML model to deploy.</p>\n         <p>If you choose None, then SageMaker will follow rules below when creating model data files\n            under /opt/ml/model directory for use by your inference code:</p>\n         <ul>\n            <li>\n               <p>If you choose <code>S3Object</code> as the value of <code>S3DataType</code>,\n                    then SageMaker will split the key of the S3 object referenced by <code>S3Uri</code> by\n                    slash (/), and use the last part as the filename of the file holding the content\n                    of the S3 object.</p>\n            </li>\n            <li>\n               <p>If you choose <code>S3Prefix</code> as the value of <code>S3DataType</code>,\n                    then for each S3 object under the key name pefix referenced by <code>S3Uri</code>,\n                    SageMaker will trim its key by the prefix, and use the remainder as the path\n                    (relative to <code>/opt/ml/model</code>) of the file holding the content of the\n                    S3 object. SageMaker will split the remainder by slash (/), using intermediate parts as\n                    directory names and the last part as filename of the file holding the content of\n                    the S3 object.</p>\n            </li>\n            <li>\n               <p>Do not use any of the following as file names or directory names:</p>\n               <ul>\n                  <li>\n                     <p>An empty or blank string</p>\n                  </li>\n                  <li>\n                     <p>A string which contains null bytes</p>\n                  </li>\n                  <li>\n                     <p>A string longer than 255 bytes</p>\n                  </li>\n                  <li>\n                     <p>A single dot (<code>.</code>)</p>\n                  </li>\n                  <li>\n                     <p>A double dot (<code>..</code>)</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Ambiguous file names will result in model deployment failure. For example,\n                    if your uncompressed ML model consists of two S3 objects\n                    <code>s3://mybucket/model/weights</code> and <code>s3://mybucket/model/weights/part1</code>\n                    and you specify <code>s3://mybucket/model/</code> as the value of <code>S3Uri</code> and\n                    <code>S3Prefix</code> as the value of <code>S3DataType</code>, then it will result in name\n                    clash between <code>/opt/ml/model/weights</code> (a regular file) and\n                    <code>/opt/ml/model/weights/</code> (a directory).</p>\n            </li>\n            <li>\n               <p>Do not organize the model artifacts in\n                    <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html\">S3 console using folders</a>.\n                    When you create a folder in S3 console, S3 creates a 0-byte object with a key set to the\n                    folder name you provide. They key of the 0-byte object ends with a slash (/) which violates\n                    SageMaker restrictions on model artifact file names, leading to model deployment failure.\n                </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -55815,6 +55835,69 @@
                 "smithy.api#documentation": "<p>A summary of the properties of a trial. To get the complete set of properties, call the\n      <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeTrial.html\">DescribeTrial</a> API and provide the <code>TrialName</code>.</p>"
             }
         },
+        "com.amazonaws.sagemaker#TtlDuration": {
+            "type": "structure",
+            "members": {
+                "Unit": {
+                    "target": "com.amazonaws.sagemaker#TtlDurationUnit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <code>TtlDuration</code> time unit.</p>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.sagemaker#TtlDurationValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <code>TtlDuration</code> time value.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Time to live duration, where the record is hard deleted after the expiration time is\n         reached; <code>ExpiresAt</code> = <code>EventTime</code> + <code>TtlDuration</code>. For\n         information on HardDelete, see the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_DeleteRecord.html\">DeleteRecord</a> API in the Amazon SageMaker API Reference guide.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#TtlDurationUnit": {
+            "type": "enum",
+            "members": {
+                "SECONDS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Seconds"
+                    }
+                },
+                "MINUTES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Minutes"
+                    }
+                },
+                "HOURS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Hours"
+                    }
+                },
+                "DAYS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Days"
+                    }
+                },
+                "WEEKS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Weeks"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#TtlDurationValue": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
         "com.amazonaws.sagemaker#TuningJobCompletionCriteria": {
             "type": "structure",
             "members": {
@@ -56639,6 +56722,12 @@
                     "target": "com.amazonaws.sagemaker#FeatureAdditions",
                     "traits": {
                         "smithy.api#documentation": "<p>Updates the feature group. Updating a feature group is an asynchronous operation. When\n         you get an HTTP 200 response, you've made a valid request. It takes some time after you've\n         made a valid request for Feature Store to update the feature group.</p>"
+                    }
+                },
+                "OnlineStoreConfig": {
+                    "target": "com.amazonaws.sagemaker#OnlineStoreConfigUpdate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updates the feature group online store configuration.</p>"
                     }
                 }
             },
