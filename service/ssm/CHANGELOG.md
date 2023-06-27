@@ -1,3 +1,7 @@
+# v1.36.7 (2023-06-27)
+
+* **Documentation**: Systems Manager doc-only update for June 2023.
+
 # v1.36.6 (2023-06-15)
 
 * No change notes available for this release.
