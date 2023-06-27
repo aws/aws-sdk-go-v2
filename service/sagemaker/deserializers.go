@@ -59226,6 +59226,11 @@ func awsAwsjson11_deserializeDocumentOnlineStoreConfig(v **types.OnlineStoreConf
 				return err
 			}
 
+		case "TtlDuration":
+			if err := awsAwsjson11_deserializeDocumentTtlDuration(&sv.TtlDuration, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -71297,6 +71302,59 @@ func awsAwsjson11_deserializeDocumentTrialSummary(v **types.TrialSummary, value 
 		case "TrialSource":
 			if err := awsAwsjson11_deserializeDocumentTrialSource(&sv.TrialSource, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentTtlDuration(v **types.TtlDuration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TtlDuration
+	if *v == nil {
+		sv = &types.TtlDuration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Unit":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TtlDurationUnit to be of type string, got %T instead", value)
+				}
+				sv.Unit = types.TtlDurationUnit(jtv)
+			}
+
+		case "Value":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TtlDurationValue to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Value = ptr.Int32(int32(i64))
 			}
 
 		default:

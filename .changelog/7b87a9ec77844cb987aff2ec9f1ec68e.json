@@ -1,0 +1,8 @@
+{
+    "id": "7b87a9ec-7784-4cb9-87af-f2ec9f1ec68e",
+    "type": "feature",
+    "description": "This release allows Private5G customers to choose different commitment plans (60-days, 1-year, 3-years) when placing new orders, enables automatic renewal option for 1-year and 3-years commitments. It also allows customers to update the commitment plan of an existing radio unit.",
+    "modules": [
+        "service/privatenetworks"
+    ]
+}

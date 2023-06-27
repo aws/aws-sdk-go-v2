@@ -75,6 +75,9 @@ type BatchGetRecordResultDetail struct {
 	// This member is required.
 	RecordIdentifierValueAsString *string
 
+	// The ExpiresAt ISO string of the requested record.
+	ExpiresAt *string
+
 	noSmithyDocumentSerde
 }
 
@@ -92,6 +95,25 @@ type FeatureValue struct {
 	//
 	// This member is required.
 	ValueAsString *string
+
+	noSmithyDocumentSerde
+}
+
+// Time to live duration, where the record is hard deleted after the expiration
+// time is reached; ExpiresAt = EventTime + TtlDuration . For information on
+// HardDelete, see the DeleteRecord (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_DeleteRecord.html)
+// API in the Amazon SageMaker API Reference guide.
+type TtlDuration struct {
+
+	// TtlDuration time unit.
+	//
+	// This member is required.
+	Unit TtlDurationUnit
+
+	// TtlDuration time value.
+	//
+	// This member is required.
+	Value *int32
 
 	noSmithyDocumentSerde
 }

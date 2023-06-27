@@ -2660,7 +2660,7 @@ type ContainerDefinition struct {
 	Mode ContainerMode
 
 	// Specifies the location of ML model data to deploy. Currently you cannot use
-	// ModelDataSource in conjuction with SageMaker batch transform, SageMaker
+	// ModelDataSource in conjunction with SageMaker batch transform, SageMaker
 	// serverless endpoints, SageMaker multi-model endpoints, and SageMaker
 	// Marketplace.
 	ModelDataSource *ModelDataSource
@@ -9780,6 +9780,24 @@ type OnlineStoreConfig struct {
 	// OnlineStore .
 	SecurityConfig *OnlineStoreSecurityConfig
 
+	// Time to live duration, where the record is hard deleted after the expiration
+	// time is reached; ExpiresAt = EventTime + TtlDuration . For information on
+	// HardDelete, see the DeleteRecord (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_DeleteRecord.html)
+	// API in the Amazon SageMaker API Reference guide.
+	TtlDuration *TtlDuration
+
+	noSmithyDocumentSerde
+}
+
+// Updates the feature group online store configuration.
+type OnlineStoreConfigUpdate struct {
+
+	// Time to live duration, where the record is hard deleted after the expiration
+	// time is reached; ExpiresAt = EventTime + TtlDuration . For information on
+	// HardDelete, see the DeleteRecord (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_DeleteRecord.html)
+	// API in the Amazon SageMaker API Reference guide.
+	TtlDuration *TtlDuration
+
 	noSmithyDocumentSerde
 }
 
@@ -12235,8 +12253,9 @@ type S3ModelDataSource struct {
 	//   if your uncompressed ML model consists of two S3 objects
 	//   s3://mybucket/model/weights and s3://mybucket/model/weights/part1 and you
 	//   specify s3://mybucket/model/ as the value of S3Uri and S3Prefix as the value
-	//   of S3DataType, then it will result in name clash between /opt/ml/model/weights
-	//   (a regular file) and /opt/ml/model/weights/ (a directory).
+	//   of S3DataType , then it will result in name clash between
+	//   /opt/ml/model/weights (a regular file) and /opt/ml/model/weights/ (a
+	//   directory).
 	//   - Do not organize the model artifacts in S3 console using folders (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html)
 	//   . When you create a folder in S3 console, S3 creates a 0-byte object with a key
 	//   set to the folder name you provide. They key of the 0-byte object ends with a
@@ -12250,7 +12269,8 @@ type S3ModelDataSource struct {
 	// identifies a key name prefix. SageMaker uses all objects that match the
 	// specified key name prefix as part of the ML model data to deploy. A valid key
 	// name prefix identified by S3Uri always ends with a forward slash (/). If you
-	// choose S3Object, S3Uri identifies an object that is the ML model data to deploy.
+	// choose S3Object , S3Uri identifies an object that is the ML model data to
+	// deploy.
 	//
 	// This member is required.
 	S3DataType S3ModelDataType
@@ -14256,6 +14276,21 @@ type TrialSummary struct {
 
 	// The source of the trial.
 	TrialSource *TrialSource
+
+	noSmithyDocumentSerde
+}
+
+// Time to live duration, where the record is hard deleted after the expiration
+// time is reached; ExpiresAt = EventTime + TtlDuration . For information on
+// HardDelete, see the DeleteRecord (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_DeleteRecord.html)
+// API in the Amazon SageMaker API Reference guide.
+type TtlDuration struct {
+
+	// TtlDuration time unit.
+	Unit TtlDurationUnit
+
+	// TtlDuration time value.
+	Value *int32
 
 	noSmithyDocumentSerde
 }

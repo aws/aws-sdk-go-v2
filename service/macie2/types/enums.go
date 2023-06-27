@@ -633,10 +633,11 @@ type ManagedDataIdentifierSelector string
 
 // Enum values for ManagedDataIdentifierSelector
 const (
-	ManagedDataIdentifierSelectorAll     ManagedDataIdentifierSelector = "ALL"
-	ManagedDataIdentifierSelectorExclude ManagedDataIdentifierSelector = "EXCLUDE"
-	ManagedDataIdentifierSelectorInclude ManagedDataIdentifierSelector = "INCLUDE"
-	ManagedDataIdentifierSelectorNone    ManagedDataIdentifierSelector = "NONE"
+	ManagedDataIdentifierSelectorAll         ManagedDataIdentifierSelector = "ALL"
+	ManagedDataIdentifierSelectorExclude     ManagedDataIdentifierSelector = "EXCLUDE"
+	ManagedDataIdentifierSelectorInclude     ManagedDataIdentifierSelector = "INCLUDE"
+	ManagedDataIdentifierSelectorNone        ManagedDataIdentifierSelector = "NONE"
+	ManagedDataIdentifierSelectorRecommended ManagedDataIdentifierSelector = "RECOMMENDED"
 )
 
 // Values returns all known values for ManagedDataIdentifierSelector. Note that
@@ -649,6 +650,7 @@ func (ManagedDataIdentifierSelector) Values() []ManagedDataIdentifierSelector {
 		"EXCLUDE",
 		"INCLUDE",
 		"NONE",
+		"RECOMMENDED",
 	}
 }
 

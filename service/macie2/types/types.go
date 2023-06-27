@@ -790,7 +790,7 @@ type ClassificationResult struct {
 	// occurrences of sensitive data. This value can help you determine whether to
 	// investigate additional occurrences of sensitive data in an object. You can do
 	// this by referring to the corresponding sensitive data discovery result for the
-	// finding (ClassificationDetails.detailedResultsLocation).
+	// finding (classificationDetails.detailedResultsLocation).
 	AdditionalOccurrences bool
 
 	// The custom data identifiers that detected the sensitive data and the number of
@@ -836,7 +836,7 @@ type ClassificationResultStatus struct {
 	//   Macie extracted and analyzed only some or none of the files in the archive. To
 	//   determine which files Macie analyzed, if any, refer to the corresponding
 	//   sensitive data discovery result for the finding
-	//   (ClassificationDetails.detailedResultsLocation).
+	//   (classificationDetails.detailedResultsLocation).
 	//   - ARCHIVE_EXCEEDS_SIZE_LIMIT - The object is an archive file whose total
 	//   storage size exceeds the size quota for this type of archive.
 	//   - ARCHIVE_NESTING_LEVEL_OVER_LIMIT - The object is an archive file whose
@@ -2122,22 +2122,25 @@ type ResourceStatistics struct {
 	// data in.
 	TotalItemsSensitive int64
 
-	// The total number of objects that Amazon Macie hasn't analyzed in the bucket due
-	// to an error or issue. For example, the object is a malformed file. This value
-	// includes objects that Macie hasn't analyzed for reasons reported by other
-	// statistics in the ResourceStatistics object.
+	// The total number of objects that Amazon Macie wasn't able to analyze in the
+	// bucket due to an object-level issue or error. For example, the object is a
+	// malformed file. This value includes objects that Macie wasn't able to analyze
+	// for reasons reported by other statistics in the ResourceStatistics object.
 	TotalItemsSkipped int64
 
-	// The total number of objects that Amazon Macie hasn't analyzed in the bucket
-	// because the objects are encrypted with a key that Macie isn't allowed to use.
+	// The total number of objects that Amazon Macie wasn't able to analyze in the
+	// bucket because the objects are encrypted with a key that Macie can't access. The
+	// objects use server-side encryption with customer-provided keys (SSE-C).
 	TotalItemsSkippedInvalidEncryption int64
 
-	// The total number of objects that Amazon Macie hasn't analyzed in the bucket
-	// because the objects are encrypted with an KMS key that was disabled or deleted.
+	// The total number of objects that Amazon Macie wasn't able to analyze in the
+	// bucket because the objects are encrypted with KMS keys that were disabled, are
+	// scheduled for deletion, or were deleted.
 	TotalItemsSkippedInvalidKms int64
 
-	// The total number of objects that Amazon Macie hasn't analyzed in the bucket
-	// because Macie isn't allowed to access the objects.
+	// The total number of objects that Amazon Macie wasn't able to analyze in the
+	// bucket due to the permissions settings for the objects or the permissions
+	// settings for the keys that were used to encrypt the objects.
 	TotalItemsSkippedPermissionDenied int64
 
 	noSmithyDocumentSerde
@@ -2397,14 +2400,15 @@ type S3Object struct {
 	// extension, this value is "".
 	Extension *string
 
-	// The full key (name) that's assigned to the object.
+	// The full name (key) of the object, including the object's prefix if applicable.
 	Key *string
 
 	// The date and time, in UTC and extended ISO 8601 format, when the object was
 	// last modified.
 	LastModified *time.Time
 
-	// The path to the object, including the full key (name).
+	// The full path to the affected object, including the name of the affected bucket
+	// and the object's name (key).
 	Path *string
 
 	// Specifies whether the object is publicly accessible due to the combination of
@@ -2819,7 +2823,7 @@ type Severity struct {
 
 // Specifies a severity level for findings that a custom data identifier produces.
 // A severity level determines which severity is assigned to the findings, based on
-// the number of occurrences of text that matches the custom data identifier's
+// the number of occurrences of text that match the custom data identifier's
 // detection criteria.
 type SeverityLevel struct {
 
@@ -2911,8 +2915,10 @@ type SimpleScopeTerm struct {
 // Specifies criteria for sorting the results of a request for findings.
 type SortCriteria struct {
 
-	// The name of the property to sort the results by. This value can be the name of
-	// any property that Amazon Macie defines for a finding.
+	// The name of the property to sort the results by. Valid values are: count,
+	// createdAt, policyDetails.action.apiCallDetails.firstSeen,
+	// policyDetails.action.apiCallDetails.lastSeen, resourcesAffected, severity.score,
+	// type, and updatedAt.
 	AttributeName *string
 
 	// The sort order to apply to the results, based on the value for the property

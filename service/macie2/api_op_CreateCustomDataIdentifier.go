@@ -79,7 +79,7 @@ type CreateCustomDataIdentifierInput struct {
 	MaximumMatchDistance int32
 
 	// The severity to assign to findings that the custom data identifier produces,
-	// based on the number of occurrences of text that matches the custom data
+	// based on the number of occurrences of text that match the custom data
 	// identifier's detection criteria. You can specify as many as three SeverityLevel
 	// objects in this array, one for each severity: LOW, MEDIUM, or HIGH. If you
 	// specify more than one, the occurrences thresholds must be in ascending order by

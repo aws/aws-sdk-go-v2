@@ -7,7 +7,8 @@ import (
 	"time"
 )
 
-// Information about an application. EMR Serverless uses applications to run jobs.
+// Information about an application. Amazon EMR Serverless uses applications to
+// run jobs.
 type Application struct {
 
 	// The ID of the application.
@@ -25,7 +26,7 @@ type Application struct {
 	// This member is required.
 	CreatedAt *time.Time
 
-	// The EMR release associated with the application.
+	// The Amazon EMR release associated with the application.
 	//
 	// This member is required.
 	ReleaseLabel *string
@@ -102,7 +103,7 @@ type ApplicationSummary struct {
 	// This member is required.
 	Id *string
 
-	// The EMR release associated with the application.
+	// The Amazon EMR release associated with the application.
 	//
 	// This member is required.
 	ReleaseLabel *string
@@ -278,7 +279,8 @@ type JobDriverMemberSparkSubmit struct {
 func (*JobDriverMemberSparkSubmit) isJobDriver() {}
 
 // Information about a job run. A job run is a unit of work, such as a Spark JAR,
-// Hive query, or SparkSQL query, that you submit to an EMR Serverless application.
+// Hive query, or SparkSQL query, that you submit to an Amazon EMR Serverless
+// application.
 type JobRun struct {
 
 	// The ID of the application the job is running on.
@@ -316,7 +318,7 @@ type JobRun struct {
 	// This member is required.
 	JobRunId *string
 
-	// The EMR release associated with the application your job is running on.
+	// The Amazon EMR release associated with the application your job is running on.
 	//
 	// This member is required.
 	ReleaseLabel *string
@@ -336,9 +338,9 @@ type JobRun struct {
 	// This member is required.
 	UpdatedAt *time.Time
 
-	// The aggregate vCPU, memory, and storage that AWS has billed for the job run.
-	// The billed resources include a 1-minute minimum usage for workers, plus
-	// additional storage over 20 GB per worker. Note that billed resources do not
+	// The aggregate vCPU, memory, and storage that Amazon Web Services has billed for
+	// the job run. The billed resources include a 1-minute minimum usage for workers,
+	// plus additional storage over 20 GB per worker. Note that billed resources do not
 	// include usage for idle pre-initialized workers.
 	BilledResourceUtilization *ResourceUtilization
 
@@ -403,7 +405,7 @@ type JobRunSummary struct {
 	// This member is required.
 	Id *string
 
-	// The EMR release associated with the application your job is running on.
+	// The Amazon EMR release associated with the application your job is running on.
 	//
 	// This member is required.
 	ReleaseLabel *string

@@ -1,0 +1,8 @@
+{
+    "id": "734aa39b-d025-452f-94ec-36e8e308ee11",
+    "type": "feature",
+    "description": "Introducing TTL for online store records in feature groups.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "1a1da5ea-9b0c-4760-baa4-1d314c575114",
+    "type": "feature",
+    "description": "Initial release of AWS AppFabric for connecting SaaS applications for better productivity and security.",
+    "modules": [
+        "service/appfabric"
+    ]
+}

@@ -10631,6 +10631,15 @@ func awsRestjson1_deserializeDocumentSAPODataConnectorProfileProperties(v **type
 				sv.ClientNumber = ptr.String(jtv)
 			}
 
+		case "disableSSO":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.DisableSSO = jtv
+			}
+
 		case "logonLanguage":
 			if value != nil {
 				jtv, ok := value.(string)

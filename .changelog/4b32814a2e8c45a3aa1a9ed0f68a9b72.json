@@ -1,0 +1,8 @@
+{
+    "id": "4b32814a-2e8c-45a3-aa1a-9ed0f68a9b72",
+    "type": "feature",
+    "description": "IVS customers can now revoke the viewer session associated with an auth token, to prevent and stop playback using that token.",
+    "modules": [
+        "service/ivs"
+    ]
+}

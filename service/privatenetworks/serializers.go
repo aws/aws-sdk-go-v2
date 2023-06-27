@@ -221,6 +221,13 @@ func awsRestjson1_serializeOpDocumentActivateNetworkSiteInput(v *ActivateNetwork
 		ok.String(*v.ClientToken)
 	}
 
+	if v.CommitmentConfiguration != nil {
+		ok := object.Key("commitmentConfiguration")
+		if err := awsRestjson1_serializeDocumentCommitmentConfiguration(v.CommitmentConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.NetworkSiteArn != nil {
 		ok := object.Key("networkSiteArn")
 		ok.String(*v.NetworkSiteArn)
@@ -1593,6 +1600,13 @@ func awsRestjson1_serializeOpDocumentStartNetworkResourceUpdateInput(v *StartNet
 	object := value.Object()
 	defer object.Close()
 
+	if v.CommitmentConfiguration != nil {
+		ok := object.Key("commitmentConfiguration")
+		if err := awsRestjson1_serializeDocumentCommitmentConfiguration(v.CommitmentConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.NetworkResourceArn != nil {
 		ok := object.Key("networkResourceArn")
 		ok.String(*v.NetworkResourceArn)
@@ -1942,6 +1956,11 @@ func awsRestjson1_serializeDocumentAddress(v *types.Address, value smithyjson.Va
 		ok.String(*v.Country)
 	}
 
+	if v.EmailAddress != nil {
+		ok := object.Key("emailAddress")
+		ok.String(*v.EmailAddress)
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
@@ -1975,6 +1994,23 @@ func awsRestjson1_serializeDocumentAddress(v *types.Address, value smithyjson.Va
 	if v.Street3 != nil {
 		ok := object.Key("street3")
 		ok.String(*v.Street3)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCommitmentConfiguration(v *types.CommitmentConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AutomaticRenewal != nil {
+		ok := object.Key("automaticRenewal")
+		ok.Boolean(*v.AutomaticRenewal)
+	}
+
+	if len(v.CommitmentLength) > 0 {
+		ok := object.Key("commitmentLength")
+		ok.String(string(v.CommitmentLength))
 	}
 
 	return nil

@@ -13,8 +13,8 @@ import (
 )
 
 // Creates a new OpsItem. You must have permission in Identity and Access
-// Management (IAM) to create a new OpsItem. For more information, see Getting
-// started with OpsCenter (https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html)
+// Management (IAM) to create a new OpsItem. For more information, see Set up
+// OpsCenter (https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-setup.html)
 // in the Amazon Web Services Systems Manager User Guide. Operations engineers and
 // IT professionals use Amazon Web Services Systems Manager OpsCenter to view,
 // investigate, and remediate operational issues impacting the performance and
@@ -57,8 +57,7 @@ type CreateOpsItemInput struct {
 
 	// The target Amazon Web Services account where you want to create an OpsItem. To
 	// make this call, your account must be configured to work with OpsItems across
-	// accounts. For more information, see Setting up OpsCenter to work with OpsItems
-	// across accounts (https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-OpsCenter-multiple-accounts.html)
+	// accounts. For more information, see Set up OpsCenter (https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-setup.html)
 	// in the Amazon Web Services Systems Manager User Guide.
 	AccountId *string
 
@@ -92,7 +91,7 @@ type CreateOpsItemInput struct {
 	// specify a related resource in the request. Use the /aws/automations key in
 	// OperationalData to associate an Automation runbook with the OpsItem. To view
 	// Amazon Web Services CLI example commands that use these keys, see Creating
-	// OpsItems manually (https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-creating-OpsItems.html#OpsCenter-manually-create-OpsItems)
+	// OpsItems manually (https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-manually-create-OpsItems.html)
 	// in the Amazon Web Services Systems Manager User Guide.
 	OperationalData map[string]types.OpsItemDataValue
 
@@ -125,14 +124,11 @@ type CreateOpsItemInput struct {
 	// Specify a severity to assign to an OpsItem.
 	Severity *string
 
-	// Optional metadata that you assign to a resource. You can restrict access to
-	// OpsItems by using an inline IAM policy that specifies tags. For more
-	// information, see Getting started with OpsCenter (https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html#OpsCenter-getting-started-user-permissions)
-	// in the Amazon Web Services Systems Manager User Guide. Tags use a key-value
-	// pair. For example: Key=Department,Value=Finance To add tags to a new OpsItem, a
-	// user must have IAM permissions for both the ssm:CreateOpsItems operation and
-	// the ssm:AddTagsToResource operation. To add tags to an existing OpsItem, use
-	// the AddTagsToResource operation.
+	// Optional metadata that you assign to a resource. Tags use a key-value pair. For
+	// example: Key=Department,Value=Finance To add tags to a new OpsItem, a user must
+	// have IAM permissions for both the ssm:CreateOpsItems operation and the
+	// ssm:AddTagsToResource operation. To add tags to an existing OpsItem, use the
+	// AddTagsToResource operation.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

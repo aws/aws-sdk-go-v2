@@ -119,7 +119,7 @@
 //     batching your data into a single PutMetadata call.) At most 155 requests per
 //     second per account are allowed.
 //
-// PlaybackKeyPair Endpoints For more information, see Setting Up Private Channels (https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html)
+// Private Channel Endpoints For more information, see Setting Up Private Channels (https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html)
 // in the Amazon IVS User Guide.
 //   - ImportPlaybackKeyPair — Imports the public portion of a new key pair and
 //     returns its arn and fingerprint . The privateKey can then be used to generate
@@ -132,6 +132,12 @@
 //   - ListPlaybackKeyPairs — Gets summary information about playback key pairs.
 //   - DeletePlaybackKeyPair — Deletes a specified authorization key pair. This
 //     invalidates future viewer tokens generated using the key pair’s privateKey .
+//   - StartViewerSessionRevocation — Starts the process of revoking the viewer
+//     session associated with a specified channel ARN and viewer ID. Optionally, you
+//     can provide a version to revoke viewer sessions less than and including that
+//     version.
+//   - BatchStartViewerSessionRevocation — Performs StartViewerSessionRevocation on
+//     multiple channel ARN and viewer ID pairs simultaneously.
 //
 // RecordingConfiguration Endpoints
 //   - CreateRecordingConfiguration — Creates a new recording configuration, used

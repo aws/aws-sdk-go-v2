@@ -4313,6 +4313,15 @@ func awsRestjson1_deserializeDocumentAddress(v **types.Address, value interface{
 				sv.Country = ptr.String(jtv)
 			}
 
+		case "emailAddress":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AddressContent to be of type string, got %T instead", value)
+				}
+				sv.EmailAddress = ptr.String(jtv)
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4374,6 +4383,117 @@ func awsRestjson1_deserializeDocumentAddress(v **types.Address, value interface{
 					return fmt.Errorf("expected AddressContent to be of type string, got %T instead", value)
 				}
 				sv.Street3 = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCommitmentConfiguration(v **types.CommitmentConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CommitmentConfiguration
+	if *v == nil {
+		sv = &types.CommitmentConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "automaticRenewal":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.AutomaticRenewal = ptr.Bool(jtv)
+			}
+
+		case "commitmentLength":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CommitmentLength to be of type string, got %T instead", value)
+				}
+				sv.CommitmentLength = types.CommitmentLength(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCommitmentInformation(v **types.CommitmentInformation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CommitmentInformation
+	if *v == nil {
+		sv = &types.CommitmentInformation{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "commitmentConfiguration":
+			if err := awsRestjson1_deserializeDocumentCommitmentConfiguration(&sv.CommitmentConfiguration, value); err != nil {
+				return err
+			}
+
+		case "expiresOn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.ExpiresOn = ptr.Time(t)
+			}
+
+		case "startAt":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.StartAt = ptr.Time(t)
 			}
 
 		default:
@@ -4858,6 +4978,11 @@ func awsRestjson1_deserializeDocumentNetworkResource(v **types.NetworkResource, 
 		switch key {
 		case "attributes":
 			if err := awsRestjson1_deserializeDocumentNameValuePairs(&sv.Attributes, value); err != nil {
+				return err
+			}
+
+		case "commitmentInformation":
+			if err := awsRestjson1_deserializeDocumentCommitmentInformation(&sv.CommitmentInformation, value); err != nil {
 				return err
 			}
 
@@ -5392,6 +5517,11 @@ func awsRestjson1_deserializeDocumentOrder(v **types.Order, value interface{}) e
 				sv.OrderArn = ptr.String(jtv)
 			}
 
+		case "orderedResources":
+			if err := awsRestjson1_deserializeDocumentOrderedResourceDefinitions(&sv.OrderedResources, value); err != nil {
+				return err
+			}
+
 		case "shippingAddress":
 			if err := awsRestjson1_deserializeDocumentAddress(&sv.ShippingAddress, value); err != nil {
 				return err
@@ -5408,6 +5538,98 @@ func awsRestjson1_deserializeDocumentOrder(v **types.Order, value interface{}) e
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentOrderedResourceDefinition(v **types.OrderedResourceDefinition, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OrderedResourceDefinition
+	if *v == nil {
+		sv = &types.OrderedResourceDefinition{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "commitmentConfiguration":
+			if err := awsRestjson1_deserializeDocumentCommitmentConfiguration(&sv.CommitmentConfiguration, value); err != nil {
+				return err
+			}
+
+		case "count":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Count = ptr.Int32(int32(i64))
+			}
+
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetworkResourceDefinitionType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.NetworkResourceDefinitionType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentOrderedResourceDefinitions(v *[]types.OrderedResourceDefinition, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.OrderedResourceDefinition
+	if *v == nil {
+		cv = []types.OrderedResourceDefinition{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.OrderedResourceDefinition
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentOrderedResourceDefinition(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

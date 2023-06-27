@@ -1,0 +1,8 @@
+{
+    "id": "309eaa5d-18c4-454f-8a14-15816911b56d",
+    "type": "feature",
+    "description": "This release adds support to update the release label of an EMR Serverless application to upgrade it to a different version of Amazon EMR via UpdateApplication API.",
+    "modules": [
+        "service/emrserverless"
+    ]
+}

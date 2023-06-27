@@ -130,6 +130,26 @@ func (m *validateOpGetSignalingChannelEndpoint) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListEdgeAgentConfigurations struct {
+}
+
+func (*validateOpListEdgeAgentConfigurations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListEdgeAgentConfigurations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListEdgeAgentConfigurationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListEdgeAgentConfigurationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -392,6 +412,10 @@ func addOpGetDataEndpointValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetSignalingChannelEndpointValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetSignalingChannelEndpoint{}, middleware.After)
+}
+
+func addOpListEdgeAgentConfigurationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListEdgeAgentConfigurations{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -788,6 +812,21 @@ func validateOpGetSignalingChannelEndpointInput(v *GetSignalingChannelEndpointIn
 	invalidParams := smithy.InvalidParamsError{Context: "GetSignalingChannelEndpointInput"}
 	if v.ChannelARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ChannelARN"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListEdgeAgentConfigurationsInput(v *ListEdgeAgentConfigurationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListEdgeAgentConfigurationsInput"}
+	if v.HubDeviceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HubDeviceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

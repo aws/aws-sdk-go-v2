@@ -59,7 +59,7 @@ type DeletionConfig struct {
 	// to true , such as when the limit for the EdgeRetentionInHours , or the
 	// MaxLocalMediaSizeInMB , has been reached. Since the default value is set to true
 	// , configure the uploader schedule such that the media files are not being
-	// deleted before they are initially uploaded to AWS cloud.
+	// deleted before they are initially uploaded to the Amazon Web Services cloud.
 	DeleteAfterUpload *bool
 
 	// The number of hours that you want to retain the data in the stream on the Edge
@@ -69,6 +69,20 @@ type DeletionConfig struct {
 
 	// The value of the local size required in order to delete the edge configuration.
 	LocalSizeConfig *LocalSizeConfig
+
+	noSmithyDocumentSerde
+}
+
+// An object that contains the latest status details for an edge agent's recorder
+// and uploader jobs. Use this information to determine the current health of an
+// edge agent.
+type EdgeAgentStatus struct {
+
+	// The latest status of a stream’s edge recording job.
+	LastRecorderStatus *LastRecorderStatus
+
+	// The latest status of a stream’s edge to cloud uploader job.
+	LastUploaderStatus *LastUploaderStatus
 
 	noSmithyDocumentSerde
 }
@@ -170,8 +184,8 @@ type ImageGenerationConfiguration struct {
 // customer.
 type ImageGenerationDestinationConfig struct {
 
-	// The AWS Region of the S3 bucket where images will be delivered. This
-	// DestinationRegion must match the Region where the stream is located.
+	// The Amazon Web Services Region of the S3 bucket where images will be delivered.
+	// This DestinationRegion must match the Region where the stream is located.
 	//
 	// This member is required.
 	DestinationRegion *string
@@ -181,6 +195,73 @@ type ImageGenerationDestinationConfig struct {
 	//
 	// This member is required.
 	Uri *string
+
+	noSmithyDocumentSerde
+}
+
+// The latest status of a stream's edge recording job.
+type LastRecorderStatus struct {
+
+	// A description of a recorder job’s latest status.
+	JobStatusDetails *string
+
+	// The timestamp at which the recorder job was last executed and media stored to
+	// local disk.
+	LastCollectedTime *time.Time
+
+	// The timestamp at which the recorder status was last updated.
+	LastUpdatedTime *time.Time
+
+	// The status of the latest recorder job.
+	RecorderStatus RecorderStatus
+
+	noSmithyDocumentSerde
+}
+
+// The latest status of a stream’s edge to cloud uploader job.
+type LastUploaderStatus struct {
+
+	// A description of an uploader job’s latest status.
+	JobStatusDetails *string
+
+	// The timestamp at which the uploader job was last executed and media collected
+	// to the cloud.
+	LastCollectedTime *time.Time
+
+	// The timestamp at which the uploader status was last updated.
+	LastUpdatedTime *time.Time
+
+	// The status of the latest uploader job.
+	UploaderStatus UploaderStatus
+
+	noSmithyDocumentSerde
+}
+
+// A description of a single stream's edge configuration.
+type ListEdgeAgentConfigurationsEdgeConfig struct {
+
+	// The timestamp when the stream first created the edge config.
+	CreationTime *time.Time
+
+	// A description of the stream's edge configuration that will be used to sync with
+	// the Edge Agent IoT Greengrass component. The Edge Agent component will run on an
+	// IoT Hub Device setup at your premise.
+	EdgeConfig *EdgeConfig
+
+	// A description of the generated failure status.
+	FailedStatusDetails *string
+
+	// The timestamp when the stream last updated the edge config.
+	LastUpdatedTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the stream.
+	StreamARN *string
+
+	// The name of the stream.
+	StreamName *string
+
+	// The current sync status of the stream's edge configuration.
+	SyncStatus SyncStatus
 
 	noSmithyDocumentSerde
 }
@@ -220,8 +301,8 @@ type MappedResourceConfigurationListItem struct {
 // to the camera.
 type MediaSourceConfig struct {
 
-	// The AWS Secrets Manager ARN for the username and password of the camera, or a
-	// local media file location.
+	// The Amazon Web Services Secrets Manager ARN for the username and password of
+	// the camera, or a local media file location.
 	//
 	// This member is required.
 	MediaUriSecretArn *string
@@ -303,7 +384,8 @@ type RecorderConfig struct {
 }
 
 // An object that describes the endpoint of the signaling channel returned by the
-// GetSignalingChannelEndpoint API.
+// GetSignalingChannelEndpoint API. The media server endpoint will correspond to
+// the WEBRTC Protocol.
 type ResourceEndpointListItem struct {
 
 	// The protocol of the signaling channel returned by the
@@ -319,9 +401,10 @@ type ResourceEndpointListItem struct {
 
 // This API enables you to specify the duration that the camera, or local media
 // file, should record onto the Edge Agent. The ScheduleConfig consists of the
-// ScheduleExpression and the DurationInMinutes attributes. If the
-// ScheduleExpression is not provided, then the Edge Agent will always be set to
-// recording mode.
+// ScheduleExpression and the DurationInMinutes attributes. If the ScheduleConfig
+// is not provided in the RecorderConfig , then the Edge Agent will always be set
+// to recording mode. If the ScheduleConfig is not provided in the UploaderConfig ,
+// then the Edge Agent will upload at regular intervals (every 1 hour).
 type ScheduleConfig struct {
 
 	// The total duration to record the media. If the ScheduleExpression attribute is
@@ -440,15 +523,17 @@ type Tag struct {
 }
 
 // The configuration that consists of the ScheduleExpression and the
-// DurationInMinutesdetails , that specify the scheduling to record from a camera,
-// or local media file, onto the Edge Agent. If the ScheduleExpression is not
-// provided, then the Edge Agent will always be in upload mode.
+// DurationInMinutes details that specify the scheduling to record from a camera,
+// or local media file, onto the Edge Agent. If the ScheduleConfig is not provided
+// in the UploaderConfig , then the Edge Agent will upload at regular intervals
+// (every 1 hour).
 type UploaderConfig struct {
 
 	// The configuration that consists of the ScheduleExpression and the
 	// DurationInMinutes details that specify the scheduling to record from a camera,
-	// or local media file, onto the Edge Agent. If the ScheduleExpression is not
-	// provided, then the Edge Agent will always be in recording mode.
+	// or local media file, onto the Edge Agent. If the ScheduleConfig is not provided
+	// in this UploaderConfig , then the Edge Agent will upload at regular intervals
+	// (every 1 hour).
 	//
 	// This member is required.
 	ScheduleConfig *ScheduleConfig

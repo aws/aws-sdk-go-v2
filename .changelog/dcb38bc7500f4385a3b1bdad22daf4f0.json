@@ -1,0 +1,8 @@
+{
+    "id": "dcb38bc7-500f-4385-a3b1-bdad22daf4f0",
+    "type": "feature",
+    "description": "This release adds support for configuring new classification jobs to use the set of managed data identifiers that we recommend for jobs. For the managed data identifier selection type (managedDataIdentifierSelector), specify RECOMMENDED.",
+    "modules": [
+        "service/macie2"
+    ]
+}

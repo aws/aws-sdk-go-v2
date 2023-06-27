@@ -1,0 +1,8 @@
+{
+    "id": "65348d01-94a7-417a-aa3f-3cdb8e055160",
+    "type": "feature",
+    "description": "This release adds support to bypass SSO with the SAPOData connector when connecting to an SAP instance.",
+    "modules": [
+        "service/appflow"
+    ]
+}
