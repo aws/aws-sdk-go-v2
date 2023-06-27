@@ -237,11 +237,18 @@ func (m *opDeleteAccessPointForObjectLambdaResolveEndpointMiddleware) HandleSeri
 			ctx = awsmiddleware.SetSigningRegion(ctx, signingRegion)
 
 		}
-		authSchemes = []internalauth.AuthenticationScheme{}
+		var ue *internalauth.UnSupportedAuthenticationSchemeSpecifiedError
+		if errors.As(err, &ue) {
+			return out, metadata, fmt.Errorf(
+				"This operation requests signer version %s but the client only supports %v",
+				ue.UnsupportedName,
+				internalauth.SupportedSchemes,
+			)
+		}
 	}
 
 	for _, authScheme := range authSchemes {
-		switch v := authScheme.(type) {
+		switch authScheme.(type) {
 		case *internalauth.AuthenticationSchemeV4:
 			v4Scheme, _ := authScheme.(*internalauth.AuthenticationSchemeV4)
 			var signingName, signingRegion string
@@ -265,12 +272,6 @@ func (m *opDeleteAccessPointForObjectLambdaResolveEndpointMiddleware) HandleSeri
 			break
 		case *internalauth.AuthenticationSchemeNone:
 			break
-		default:
-			return out, metadata, fmt.Errorf(
-				"This operation requests signer version %v but the client only supports %v",
-				v,
-				internalauth.SupportedSchemes,
-			)
 		}
 	}
 
