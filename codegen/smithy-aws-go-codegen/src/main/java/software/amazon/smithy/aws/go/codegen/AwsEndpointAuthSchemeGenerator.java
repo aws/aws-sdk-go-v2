@@ -43,7 +43,7 @@ public class AwsEndpointAuthSchemeGenerator implements GoIntegration {
             $W
 
             for _, authScheme := range authSchemes {
-                switch v := authScheme.(type) {
+                switch authScheme.(type) {
                     case $P:
                         $W
                         break
@@ -52,12 +52,6 @@ public class AwsEndpointAuthSchemeGenerator implements GoIntegration {
                         break
                     case $P:
                         break
-                    default:
-                        return out, metadata, $T(
-                            \"This operation requests signer version %v but the client only supports %v\",
-                            v,
-                            $T,
-                        )
                 }
             }
             """,
@@ -66,9 +60,7 @@ public class AwsEndpointAuthSchemeGenerator implements GoIntegration {
             generateSigV4Resolution(serviceShape),
             SymbolUtils.createPointableSymbolBuilder("AuthenticationSchemeV4A", AwsGoDependency.INTERNAL_AUTH).build(),
             generateSigV4AResolution(serviceShape),
-            SymbolUtils.createPointableSymbolBuilder("AuthenticationSchemeNone", AwsGoDependency.INTERNAL_AUTH).build(),
-            SymbolUtils.createValueSymbolBuilder("Errorf", SmithyGoDependency.FMT).build(),
-            SymbolUtils.createValueSymbolBuilder("SupportedSchemes", AwsGoDependency.INTERNAL_AUTH).build()
+            SymbolUtils.createPointableSymbolBuilder("AuthenticationSchemeNone", AwsGoDependency.INTERNAL_AUTH).build()
         );
     }
 
@@ -102,7 +94,14 @@ public class AwsEndpointAuthSchemeGenerator implements GoIntegration {
                             ctx = $T(ctx, signingRegion)
                             $W
                         }
-                        authSchemes = []$T{}
+                        var ue $P
+                        if errors.As(err, &ue) {
+                            return out, metadata, $T(
+                                \"This operation requests signer version %s but the client only supports %v\",
+                                ue.UnsupportedName,
+                                $T,
+                            )
+                        }
                     }
                 """,
                 SymbolUtils.createValueSymbolBuilder("GetAuthenticationSchemes", AwsGoDependency.INTERNAL_AUTH).build(),
@@ -112,7 +111,10 @@ public class AwsEndpointAuthSchemeGenerator implements GoIntegration {
                 SymbolUtils.createValueSymbolBuilder("SetSigningName", AwsGoDependency.AWS_MIDDLEWARE).build(),
                 SymbolUtils.createValueSymbolBuilder("SetSigningRegion", AwsGoDependency.AWS_MIDDLEWARE).build(),
                 signerVersion,
-                SymbolUtils.createValueSymbolBuilder("AuthenticationScheme", AwsGoDependency.INTERNAL_AUTH).build()
+                SymbolUtils.createPointableSymbolBuilder("UnSupportedAuthenticationSchemeSpecifiedError", AwsGoDependency.INTERNAL_AUTH).build(),
+                SymbolUtils.createValueSymbolBuilder("Errorf", SmithyGoDependency.FMT).build(),
+                SymbolUtils.createValueSymbolBuilder("SupportedSchemes", AwsGoDependency.INTERNAL_AUTH).build()
+
             );
         };
     }

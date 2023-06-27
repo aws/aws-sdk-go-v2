@@ -64,24 +64,34 @@ type NoAuthenticationSchemesFoundError struct{}
 func (e *NoAuthenticationSchemesFoundError) Error() string {
 	return fmt.Sprint("No authentication schemes specified.")
 }
+// UnSupportedAuthenticationSchemeSpecifiedError is used in
+// signaling that only unsupported authentication schemes
+// were specified.
+type UnSupportedAuthenticationSchemeSpecifiedError struct {
+	UnsupportedName string
+}
+
+func (e *UnSupportedAuthenticationSchemeSpecifiedError) Error() string {
+	return fmt.Sprint("Unsupported authentication scheme specified.")
+}
 
 // GetAuthenticationSchemes extracts the relevant authentication scheme data
 // into a custom strongly typed Go data structure.
 func GetAuthenticationSchemes(p *smithy.Properties) ([]AuthenticationScheme, error) {
 	var result []AuthenticationScheme
-	authSchemes, ok := p.Get("authSchemes").([]interface{})
-	if !ok {
+	if !p.Has("authSchemes") {
 		return nil, &NoAuthenticationSchemesFoundError{}
 	}
 
+	authSchemes, _ := p.Get("authSchemes").([]interface{})
+
+	unsupportedAuthSchemeSpecified := false
+	var unsupportedName string
 	for _, scheme := range authSchemes {
-		authScheme, ok := scheme.(map[string]interface{})
-		if !ok {
-			return nil, fmt.Errorf("Invalid authSchemes")
-		}
+		authScheme, _ := scheme.(map[string]interface{})
 
-		if authScheme["name"] == SigV4 {
-
+		switch authScheme["name"] {
+		case SigV4:
 			v4Scheme := AuthenticationSchemeV4{
 				Name:                  SigV4,
 				SigningName:           getSigningName(authScheme),
@@ -89,10 +99,7 @@ func GetAuthenticationSchemes(p *smithy.Properties) ([]AuthenticationScheme, err
 				DisableDoubleEncoding: getDisableDoubleEncoding(authScheme),
 			}
 			result = append(result, AuthenticationScheme(&v4Scheme))
-
-		}
-
-		if authScheme["name"] == SigV4A {
+		case SigV4A:
 			v4aScheme := AuthenticationSchemeV4A{
 				Name:                  SigV4A,
 				SigningName:           getSigningName(authScheme),
@@ -100,8 +107,20 @@ func GetAuthenticationSchemes(p *smithy.Properties) ([]AuthenticationScheme, err
 				DisableDoubleEncoding: getDisableDoubleEncoding(authScheme),
 			}
 			result = append(result, AuthenticationScheme(&v4aScheme))
+		case None:
+			noneScheme := AuthenticationSchemeNone{}
+			result = append(result, AuthenticationScheme(&noneScheme))
+		default:
+			unsupportedAuthSchemeSpecified = true
+			unsupportedName = authScheme["name"].(string)
+			continue
 		}
+	}
 
+	if unsupportedAuthSchemeSpecified && len(result) == 0 {
+		return nil, &UnSupportedAuthenticationSchemeSpecifiedError{
+			UnsupportedName: unsupportedName,
+		}
 	}
 
 	return result, nil
