@@ -30,7 +30,6 @@ var SupportedSchemes = map[string]bool{
 // AWS authentication schemes
 type AuthenticationScheme interface {
 	isAuthenticationScheme()
-	GetName() string
 }
 
 // AuthenticationSchemeV4 is a AWS SigV4 representation
@@ -43,11 +42,6 @@ type AuthenticationSchemeV4 struct {
 
 func (a *AuthenticationSchemeV4) isAuthenticationScheme() {}
 
-// GetName provides the name of the AWS Authentication Scheme
-func (a *AuthenticationSchemeV4) GetName() string {
-	return a.Name
-}
-
 // AuthenticationSchemeV4A is a AWS SigV4A representation
 type AuthenticationSchemeV4A struct {
 	Name                  string
@@ -58,9 +52,17 @@ type AuthenticationSchemeV4A struct {
 
 func (a *AuthenticationSchemeV4A) isAuthenticationScheme() {}
 
-// GetName provides the name of the AWS Authentication Scheme
-func (a *AuthenticationSchemeV4A) GetName() string {
-	return a.Name
+// AuthenticationSchemeNone is a representation for the none auth scheme
+type AuthenticationSchemeNone struct{}
+
+func (a *AuthenticationSchemeNone) isAuthenticationScheme() {}
+
+// NoAuthenticationSchemesFoundError is used in signaling
+// that no authentication schemes have been specified.
+type NoAuthenticationSchemesFoundError struct{}
+
+func (e *NoAuthenticationSchemesFoundError) Error() string {
+	return fmt.Sprint("No authentication schemes specified.")
 }
 
 // GetAuthenticationSchemes extracts the relevant authentication scheme data
@@ -69,7 +71,7 @@ func GetAuthenticationSchemes(p *smithy.Properties) ([]AuthenticationScheme, err
 	var result []AuthenticationScheme
 	authSchemes, ok := p.Get("authSchemes").([]interface{})
 	if !ok {
-		return nil, fmt.Errorf("Invalid authSchemes")
+		return nil, &NoAuthenticationSchemesFoundError{}
 	}
 
 	for _, scheme := range authSchemes {
