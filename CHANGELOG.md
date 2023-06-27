@@ -1,3 +1,44 @@
+# Release (2023-06-27)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appfabric`: [v1.0.0](service/appfabric/CHANGELOG.md#v100-2023-06-27)
+  * **Release**: New AWS service client module
+  * **Feature**: Initial release of AWS AppFabric for connecting SaaS applications for better productivity and security.
+* `github.com/aws/aws-sdk-go-v2/service/appflow`: [v1.32.0](service/appflow/CHANGELOG.md#v1320-2023-06-27)
+  * **Feature**: This release adds support to bypass SSO with the SAPOData connector when connecting to an SAP instance.
+* `github.com/aws/aws-sdk-go-v2/service/emrserverless`: [v1.8.0](service/emrserverless/CHANGELOG.md#v180-2023-06-27)
+  * **Feature**: This release adds support to update the release label of an EMR Serverless application to upgrade it to a different version of Amazon EMR via UpdateApplication API.
+* `github.com/aws/aws-sdk-go-v2/service/ivs`: [v1.23.0](service/ivs/CHANGELOG.md#v1230-2023-06-27)
+  * **Feature**: IVS customers can now revoke the viewer session associated with an auth token, to prevent and stop playback using that token.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideo`: [v1.16.0](service/kinesisvideo/CHANGELOG.md#v1160-2023-06-27)
+  * **Feature**: General Availability (GA) release of Kinesis Video Streams at Edge, enabling customers to provide a configuration for the Kinesis Video Streams EdgeAgent running on an on-premise IoT device. Customers can now locally record from cameras and stream videos to the cloud on a configured schedule.
+* `github.com/aws/aws-sdk-go-v2/service/macie2`: [v1.28.0](service/macie2/CHANGELOG.md#v1280-2023-06-27)
+  * **Feature**: This release adds support for configuring new classification jobs to use the set of managed data identifiers that we recommend for jobs. For the managed data identifier selection type (managedDataIdentifierSelector), specify RECOMMENDED.
+* `github.com/aws/aws-sdk-go-v2/service/privatenetworks`: [v1.3.0](service/privatenetworks/CHANGELOG.md#v130-2023-06-27)
+  * **Feature**: This release allows Private5G customers to choose different commitment plans (60-days, 1-year, 3-years) when placing new orders, enables automatic renewal option for 1-year and 3-years commitments. It also allows customers to update the commitment plan of an existing radio unit.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.87.0](service/sagemaker/CHANGELOG.md#v1870-2023-06-27)
+  * **Feature**: Introducing TTL for online store records in feature groups.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakerfeaturestoreruntime`: [v1.15.0](service/sagemakerfeaturestoreruntime/CHANGELOG.md#v1150-2023-06-27)
+  * **Feature**: Introducing TTL for online store records for feature groups.
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.36.7](service/ssm/CHANGELOG.md#v1367-2023-06-27)
+  * **Documentation**: Systems Manager doc-only update for June 2023.
+* `github.com/aws/aws-sdk-go-v2/service/verifiedpermissions`: [v1.0.3](service/verifiedpermissions/CHANGELOG.md#v103-2023-06-27)
+  * **Documentation**: This update fixes several broken links to the Cedar documentation.
+
+# Release (2023-06-26)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.60.0](service/connect/CHANGELOG.md#v1600-2023-06-26)
+  * **Feature**: This release provides a way to search for existing tags within an instance. Before tagging a resource, ensure consistency by searching for pre-existing key:value pairs.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.52.0](service/glue/CHANGELOG.md#v1520-2023-06-26)
+  * **Feature**: Timestamp Starting Position For Kinesis and Kafka Data Sources in a Glue Streaming Job
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.24.0](service/guardduty/CHANGELOG.md#v1240-2023-06-26)
+  * **Feature**: Add support for user.extra.sessionName in Kubernetes Audit Logs Findings.
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.21.0](service/iam/CHANGELOG.md#v1210-2023-06-26)
+  * **Feature**: Support for a new API "GetMFADevice" to present MFA device metadata such as device certifications
+* `github.com/aws/aws-sdk-go-v2/service/pinpoint`: [v1.20.0](service/pinpoint/CHANGELOG.md#v1200-2023-06-26)
+  * **Feature**: Added time zone estimation support for journeys
+
 # Release (2023-06-23)
 
 ## Module Highlights

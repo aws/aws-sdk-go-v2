@@ -60,7 +60,8 @@ type AddTagsToResourceInput struct {
 	// opsmetadata in the ARN. For example, an OpsMetadata object with an ARN of
 	// arn:aws:ssm:us-east-2:1234567890:opsmetadata/aws/ssm/MyGroup/appmanager has a
 	// ResourceID of either aws/ssm/MyGroup/appmanager or /aws/ssm/MyGroup/appmanager .
-	// For the Document and Parameter values, use the name of the resource.
+	// For the Document and Parameter values, use the name of the resource. If you're
+	// tagging a shared document, you must use the full ARN of the document.
 	// ManagedInstance : mi-012345abcde The ManagedInstance type for this API
 	// operation is only for on-premises managed nodes. You must specify the name of
 	// the managed node in the following format: mi-ID_number . For example,

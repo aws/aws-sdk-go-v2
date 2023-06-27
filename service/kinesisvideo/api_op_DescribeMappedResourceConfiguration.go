@@ -12,9 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the most current information about the stream. Either streamName or
-// streamARN should be provided in the input. Returns the most current information
-// about the stream. The streamName or streamARN should be provided in the input.
+// Returns the most current information about the stream. The streamName or
+// streamARN should be provided in the input.
 func (c *Client) DescribeMappedResourceConfiguration(ctx context.Context, params *DescribeMappedResourceConfigurationInput, optFns ...func(*Options)) (*DescribeMappedResourceConfigurationOutput, error) {
 	if params == nil {
 		params = &DescribeMappedResourceConfigurationInput{}

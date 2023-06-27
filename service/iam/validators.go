@@ -1130,6 +1130,26 @@ func (m *validateOpGetLoginProfile) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetMFADevice struct {
+}
+
+func (*validateOpGetMFADevice) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetMFADevice) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetMFADeviceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetMFADeviceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetOpenIDConnectProvider struct {
 }
 
@@ -2914,6 +2934,10 @@ func addOpGetLoginProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetLoginProfile{}, middleware.After)
 }
 
+func addOpGetMFADeviceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetMFADevice{}, middleware.After)
+}
+
 func addOpGetOpenIDConnectProviderValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetOpenIDConnectProvider{}, middleware.After)
 }
@@ -4209,6 +4233,21 @@ func validateOpGetLoginProfileInput(v *GetLoginProfileInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetLoginProfileInput"}
 	if v.UserName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetMFADeviceInput(v *GetMFADeviceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetMFADeviceInput"}
+	if v.SerialNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SerialNumber"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

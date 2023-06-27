@@ -3947,6 +3947,11 @@ func awsRestjson1_serializeDocumentSAPODataConnectorProfileProperties(v *types.S
 		ok.String(*v.ClientNumber)
 	}
 
+	if v.DisableSSO {
+		ok := object.Key("disableSSO")
+		ok.Boolean(v.DisableSSO)
+	}
+
 	if v.LogonLanguage != nil {
 		ok := object.Key("logonLanguage")
 		ok.String(*v.LogonLanguage)

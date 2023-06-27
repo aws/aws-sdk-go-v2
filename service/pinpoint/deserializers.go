@@ -27370,6 +27370,11 @@ func awsRestjson1_deserializeDocumentJourneyResponse(v **types.JourneyResponse, 
 				return err
 			}
 
+		case "TimezoneEstimationMethods":
+			if err := awsRestjson1_deserializeDocumentListOf__TimezoneEstimationMethodsElement(&sv.TimezoneEstimationMethods, value); err != nil {
+				return err
+			}
+
 		case "WaitForQuietTime":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -27913,6 +27918,42 @@ func awsRestjson1_deserializeDocumentListOf__string(v *[]string, value interface
 				return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 			}
 			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentListOf__TimezoneEstimationMethodsElement(v *[]types.TimezoneEstimationMethodsElement, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.TimezoneEstimationMethodsElement
+	if *v == nil {
+		cv = []types.TimezoneEstimationMethodsElement{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.TimezoneEstimationMethodsElement
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected __TimezoneEstimationMethodsElement to be of type string, got %T instead", value)
+			}
+			col = types.TimezoneEstimationMethodsElement(jtv)
 		}
 		cv = append(cv, col)
 

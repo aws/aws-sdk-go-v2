@@ -19,9 +19,10 @@
 // Verified Permissions in your applications, see the Amazon Verified Permissions
 // User Guide (https://docs.aws.amazon.com/verifiedpermissions/latest/userguide/) .
 // For more information about the Cedar policy language, see the Cedar Policy
-// Language Guide . When you write Cedar policies that reference principals,
-// resources and actions, you can define the unique identifiers used for each of
-// those elements. We strongly recommend that you follow these best practices:
+// Language Guide (https://docs.cedarpolicy.com/) . When you write Cedar policies
+// that reference principals, resources and actions, you can define the unique
+// identifiers used for each of those elements. We strongly recommend that you
+// follow these best practices:
 //   - Use values like universally unique identifiers (UUIDs) for all principal
 //     and resource identifiers. For example, if user jane leaves the company, and
 //     you later let someone else use the name jane , then that new user

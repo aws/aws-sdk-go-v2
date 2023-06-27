@@ -39703,6 +39703,19 @@ func awsAwsjson11_deserializeDocumentKafkaStreamingSourceOptions(v **types.Kafka
 				sv.StartingOffsets = ptr.String(jtv)
 			}
 
+		case "StartingTimestamp":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Iso8601DateTime to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.StartingTimestamp = ptr.Time(t)
+			}
+
 		case "SubscribePattern":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -40027,6 +40040,19 @@ func awsAwsjson11_deserializeDocumentKinesisStreamingSourceOptions(v **types.Kin
 					return fmt.Errorf("expected StartingPosition to be of type string, got %T instead", value)
 				}
 				sv.StartingPosition = types.StartingPosition(jtv)
+			}
+
+		case "StartingTimestamp":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Iso8601DateTime to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.StartingTimestamp = ptr.Time(t)
 			}
 
 		case "StreamArn":

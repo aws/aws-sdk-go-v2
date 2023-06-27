@@ -1,3 +1,7 @@
+# v1.32.0 (2023-06-27)
+
+* **Feature**: This release adds support to bypass SSO with the SAPOData connector when connecting to an SAP instance.
+
 # v1.31.0 (2023-06-20)
 
 * **Feature**: This release adds new API to reset connector metadata cache

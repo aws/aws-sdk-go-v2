@@ -1,3 +1,7 @@
+# v1.20.0 (2023-06-26)
+
+* **Feature**: Added time zone estimation support for journeys
+
 # v1.19.4 (2023-06-15)
 
 * No change notes available for this release.

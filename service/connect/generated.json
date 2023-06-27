@@ -144,6 +144,7 @@
         "api_op_SearchPrompts.go",
         "api_op_SearchQueues.go",
         "api_op_SearchQuickConnects.go",
+        "api_op_SearchResourceTags.go",
         "api_op_SearchRoutingProfiles.go",
         "api_op_SearchSecurityProfiles.go",
         "api_op_SearchUsers.go",

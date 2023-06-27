@@ -13,8 +13,8 @@ import (
 )
 
 // Query a set of OpsItems. You must have permission in Identity and Access
-// Management (IAM) to query a list of OpsItems. For more information, see Getting
-// started with OpsCenter (https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html)
+// Management (IAM) to query a list of OpsItems. For more information, see Set up
+// OpsCenter (https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-setup.html)
 // in the Amazon Web Services Systems Manager User Guide. Operations engineers and
 // IT professionals use Amazon Web Services Systems Manager OpsCenter to view,
 // investigate, and remediate operational issues impacting the performance and
@@ -59,6 +59,7 @@ type DescribeOpsItemsInput struct {
 	//   - Key: OpsItemId Operations: Equals
 	//   - Key: ResourceId Operations: Contains
 	//   - Key: AutomationId Operations: Equals
+	//   - Key: AccountId Operations: Equals
 	// *The Equals operator for Title matches the first 100 characters. If you specify
 	// more than 100 characters, they system returns an error that the filter value
 	// exceeds the length limit. **If you filter the response by using the

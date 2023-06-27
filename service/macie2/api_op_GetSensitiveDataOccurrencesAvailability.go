@@ -50,7 +50,7 @@ type GetSensitiveDataOccurrencesAvailabilityOutput struct {
 	//   - INVALID_CLASSIFICATION_RESULT - Amazon Macie can't verify the location of
 	//   the sensitive data to retrieve. There isn't a corresponding sensitive data
 	//   discovery result for the finding. Or the sensitive data discovery result
-	//   specified by the ClassificationDetails.detailedResultsLocation field of the
+	//   specified by the classificationDetails.detailedResultsLocation field of the
 	//   finding isn't available, is malformed or corrupted, or uses an unsupported
 	//   storage format.
 	//   - OBJECT_EXCEEDS_SIZE_QUOTA - The storage size of the affected S3 object

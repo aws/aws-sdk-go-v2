@@ -223,6 +223,9 @@
                     "target": "com.amazonaws.iam#GetLoginProfile"
                 },
                 {
+                    "target": "com.amazonaws.iam#GetMFADevice"
+                },
+                {
                     "target": "com.amazonaws.iam#GetOpenIDConnectProvider"
                 },
                 {
@@ -2128,7 +2131,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Attaches the specified managed policy to the specified IAM group.</p>\n         <p>You use this operation to attach a managed policy to a group. To embed an inline\n            policy in a group, use <a>PutGroupPolicy</a>.</p>\n         <p>As a best practice, you can validate your IAM policies. \n     To learn more, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_policy-validator.html\">Validating IAM policies</a> \n            in the <i>IAM User Guide</i>.</p>\n         <p>For more information about policies, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed policies and inline\n                policies</a> in the <i>IAM User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Attaches the specified managed policy to the specified IAM group.</p>\n         <p>You use this operation to attach a managed policy to a group. To embed an inline\n            policy in a group, use <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_PutGroupPolicy.html\">\n               <code>PutGroupPolicy</code>\n            </a>.</p>\n         <p>As a best practice, you can validate your IAM policies. \n     To learn more, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_policy-validator.html\">Validating IAM policies</a> \n            in the <i>IAM User Guide</i>.</p>\n         <p>For more information about policies, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed policies and inline\n                policies</a> in the <i>IAM User Guide</i>.</p>"
             }
         },
         "com.amazonaws.iam#AttachGroupPolicyRequest": {
@@ -2182,7 +2185,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Attaches the specified managed policy to the specified IAM role. When you attach a\n            managed policy to a role, the managed policy becomes part of the role's permission\n            (access) policy.</p>\n         <note>\n            <p>You cannot use a managed policy as the role's trust policy. The role's trust\n                policy is created at the same time as the role, using <a>CreateRole</a>.\n                You can update a role's trust policy using <a>UpdateAssumeRolePolicy</a>.</p>\n         </note>\n         <p>Use this operation to attach a <i>managed</i> policy to a role. To embed\n            an inline policy in a role, use <a>PutRolePolicy</a>. For more information\n            about policies, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed policies and inline\n                policies</a> in the <i>IAM User Guide</i>.</p>\n         <p>As a best practice, you can validate your IAM policies. \n     To learn more, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_policy-validator.html\">Validating IAM policies</a> \n            in the <i>IAM User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Attaches the specified managed policy to the specified IAM role. When you attach a\n            managed policy to a role, the managed policy becomes part of the role's permission\n            (access) policy.</p>\n         <note>\n            <p>You cannot use a managed policy as the role's trust policy. The role's trust\n                policy is created at the same time as the role, using <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html\">\n                  <code>CreateRole</code>\n               </a>. You can update a role's trust policy using\n                    <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_UpdateAssumeRolePolicy.html\">\n                  <code>UpdateAssumerolePolicy</code>\n               </a>.</p>\n         </note>\n         <p>Use this operation to attach a <i>managed</i> policy to a role. To embed\n            an inline policy in a role, use <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_PutRolePolicy.html\">\n               <code>PutRolePolicy</code>\n            </a>. For more information about policies, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed\n                policies and inline policies</a> in the\n            <i>IAM User Guide</i>.</p>\n         <p>As a best practice, you can validate your IAM policies. \n     To learn more, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_policy-validator.html\">Validating IAM policies</a> \n            in the <i>IAM User Guide</i>.</p>"
             }
         },
         "com.amazonaws.iam#AttachRolePolicyRequest": {
@@ -2233,7 +2236,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Attaches the specified managed policy to the specified user.</p>\n         <p>You use this operation to attach a <i>managed</i> policy to a user. To\n            embed an inline policy in a user, use <a>PutUserPolicy</a>.</p>\n         <p>As a best practice, you can validate your IAM policies. \n     To learn more, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_policy-validator.html\">Validating IAM policies</a> \n            in the <i>IAM User Guide</i>.</p>\n         <p>For more information about policies, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed policies and inline\n                policies</a> in the <i>IAM User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Attaches the specified managed policy to the specified user.</p>\n         <p>You use this operation to attach a <i>managed</i> policy to a user. To\n            embed an inline policy in a user, use <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_PutUserPolicy.html\">\n               <code>PutUserPolicy</code>\n            </a>.</p>\n         <p>As a best practice, you can validate your IAM policies. \n     To learn more, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_policy-validator.html\">Validating IAM policies</a> \n            in the <i>IAM User Guide</i>.</p>\n         <p>For more information about policies, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed policies and inline\n                policies</a> in the <i>IAM User Guide</i>.</p>"
             }
         },
         "com.amazonaws.iam#AttachUserPolicyRequest": {
@@ -2299,6 +2302,35 @@
             "type": "blob",
             "traits": {
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.iam#CertificationKeyType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[\\u0020-\\u00FF]+$"
+            }
+        },
+        "com.amazonaws.iam#CertificationMapType": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.iam#CertificationKeyType"
+            },
+            "value": {
+                "target": "com.amazonaws.iam#CertificationValueType"
+            }
+        },
+        "com.amazonaws.iam#CertificationValueType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 32
+                },
+                "smithy.api#pattern": "^[\\u0020-\\u00FF]+$"
             }
         },
         "com.amazonaws.iam#ChangePassword": {
@@ -5941,6 +5973,80 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.iam#GetMFADevice": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iam#GetMFADeviceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iam#GetMFADeviceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iam#NoSuchEntityException"
+                },
+                {
+                    "target": "com.amazonaws.iam#ServiceFailureException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves information about an MFA device for a specified user.</p>"
+            }
+        },
+        "com.amazonaws.iam#GetMFADeviceRequest": {
+            "type": "structure",
+            "members": {
+                "SerialNumber": {
+                    "target": "com.amazonaws.iam#serialNumberType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Serial number that uniquely identifies the MFA device. For this API, we only accept\n            FIDO security key <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html\">ARNs</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UserName": {
+                    "target": "com.amazonaws.iam#userNameType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The friendly name identifying the user.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.iam#GetMFADeviceResponse": {
+            "type": "structure",
+            "members": {
+                "UserName": {
+                    "target": "com.amazonaws.iam#userNameType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The friendly name identifying the user.</p>"
+                    }
+                },
+                "SerialNumber": {
+                    "target": "com.amazonaws.iam#serialNumberType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Serial number that uniquely identifies the MFA device. For this API, we only accept\n            FIDO security key <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html\">ARNs</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EnableDate": {
+                    "target": "com.amazonaws.iam#dateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date that a specified user's MFA device was first enabled.</p>"
+                    }
+                },
+                "Certifications": {
+                    "target": "com.amazonaws.iam#CertificationMapType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The certifications of a specified user's MFA device. We currently provide FIPS-140-2, FIPS-140-3, and FIDO certification levels\n            obtained from <a href=\"https://fidoalliance.org/metadata/\"> FIDO Alliance Metadata Service (MDS)</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.iam#GetOpenIDConnectProvider": {
             "type": "operation",
             "input": {
@@ -8082,7 +8188,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the tags that are attached to the specified IAM instance profile. The returned list of tags is sorted by tag key.\n      For more information about tagging, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html\">Tagging IAM resources</a> in the\n      <i>IAM User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Lists the tags that are attached to the specified IAM instance profile. The returned list of tags is sorted by tag key.\n      For more information about tagging, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html\">Tagging IAM resources</a> in the\n      <i>IAM User Guide</i>.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "outputToken": "Marker",
+                    "items": "Tags",
+                    "pageSize": "MaxItems"
+                }
             }
         },
         "com.amazonaws.iam#ListInstanceProfileTagsRequest": {
@@ -8320,7 +8432,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the tags that are attached to the specified IAM virtual multi-factor authentication (MFA) device. The returned list of tags is\n      sorted by tag key. For more information about tagging, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html\">Tagging IAM resources</a> in the\n      <i>IAM User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Lists the tags that are attached to the specified IAM virtual multi-factor authentication (MFA) device. The returned list of tags is\n      sorted by tag key. For more information about tagging, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html\">Tagging IAM resources</a> in the\n      <i>IAM User Guide</i>.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "outputToken": "Marker",
+                    "items": "Tags",
+                    "pageSize": "MaxItems"
+                }
             }
         },
         "com.amazonaws.iam#ListMFADeviceTagsRequest": {
@@ -8479,7 +8597,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the tags that are attached to the specified OpenID Connect (OIDC)-compatible\n      identity provider. The returned list of tags is sorted by tag key. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_oidc.html\">About web identity\n      federation</a>.</p>\n         <p>For more information about tagging, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html\">Tagging IAM resources</a> in the\n      <i>IAM User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Lists the tags that are attached to the specified OpenID Connect (OIDC)-compatible\n      identity provider. The returned list of tags is sorted by tag key. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_oidc.html\">About web identity\n      federation</a>.</p>\n         <p>For more information about tagging, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html\">Tagging IAM resources</a> in the\n      <i>IAM User Guide</i>.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "outputToken": "Marker",
+                    "items": "Tags",
+                    "pageSize": "MaxItems"
+                }
             }
         },
         "com.amazonaws.iam#ListOpenIDConnectProviderTagsRequest": {
@@ -8788,7 +8912,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the tags that are attached to the specified IAM customer managed policy.\n      The returned list of tags is sorted by tag key. For more information about tagging, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html\">Tagging IAM resources</a> in the\n      <i>IAM User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Lists the tags that are attached to the specified IAM customer managed policy.\n      The returned list of tags is sorted by tag key. For more information about tagging, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html\">Tagging IAM resources</a> in the\n      <i>IAM User Guide</i>.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "outputToken": "Marker",
+                    "items": "Tags",
+                    "pageSize": "MaxItems"
+                }
             }
         },
         "com.amazonaws.iam#ListPolicyTagsRequest": {
@@ -9029,7 +9159,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the tags that are attached to the specified role. The returned list of tags is\n      sorted by tag key. For more information about tagging, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html\">Tagging IAM resources</a> in the\n      <i>IAM User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Lists the tags that are attached to the specified role. The returned list of tags is\n      sorted by tag key. For more information about tagging, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html\">Tagging IAM resources</a> in the\n      <i>IAM User Guide</i>.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "outputToken": "Marker",
+                    "items": "Tags",
+                    "pageSize": "MaxItems"
+                }
             }
         },
         "com.amazonaws.iam#ListRoleTagsRequest": {
@@ -9185,7 +9321,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the tags that are attached to the specified Security Assertion Markup Language\n      (SAML) identity provider. The returned list of tags is sorted by tag key. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_saml.html\">About SAML 2.0-based\n      federation</a>.</p>\n         <p>For more information about tagging, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html\">Tagging IAM resources</a> in the\n      <i>IAM User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Lists the tags that are attached to the specified Security Assertion Markup Language\n      (SAML) identity provider. The returned list of tags is sorted by tag key. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_saml.html\">About SAML 2.0-based\n      federation</a>.</p>\n         <p>For more information about tagging, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html\">Tagging IAM resources</a> in the\n      <i>IAM User Guide</i>.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "outputToken": "Marker",
+                    "items": "Tags",
+                    "pageSize": "MaxItems"
+                }
             }
         },
         "com.amazonaws.iam#ListSAMLProviderTagsRequest": {
@@ -9376,7 +9518,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the tags that are attached to the specified IAM server certificate. The\n      returned list of tags is sorted by tag key. For more information about tagging, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html\">Tagging IAM resources</a> in the\n      <i>IAM User Guide</i>.</p>\n         <note>\n            <p>For certificates in a Region supported by Certificate Manager (ACM), we\n        recommend that you don't use IAM server certificates. Instead, use ACM to provision,\n        manage, and deploy your server certificates. For more information about IAM server\n        certificates, <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html\">Working with server\n          certificates</a> in the <i>IAM User Guide</i>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Lists the tags that are attached to the specified IAM server certificate. The\n      returned list of tags is sorted by tag key. For more information about tagging, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html\">Tagging IAM resources</a> in the\n      <i>IAM User Guide</i>.</p>\n         <note>\n            <p>For certificates in a Region supported by Certificate Manager (ACM), we\n        recommend that you don't use IAM server certificates. Instead, use ACM to provision,\n        manage, and deploy your server certificates. For more information about IAM server\n        certificates, <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html\">Working with server\n          certificates</a> in the <i>IAM User Guide</i>.</p>\n         </note>",
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "outputToken": "Marker",
+                    "items": "Tags",
+                    "pageSize": "MaxItems"
+                }
             }
         },
         "com.amazonaws.iam#ListServerCertificateTagsRequest": {
@@ -10734,7 +10882,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds or updates an inline policy document that is embedded in the specified IAM\n            group.</p>\n         <p>A user can also have managed policies attached to it. To attach a managed policy to a\n            group, use <a>AttachGroupPolicy</a>. To create a new managed policy, use\n                <a>CreatePolicy</a>. For information about policies, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed\n                policies and inline policies</a> in the\n            <i>IAM User Guide</i>.</p>\n         <p>For information about the maximum number of inline policies that you can embed in a\n            group, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html\">IAM and STS quotas</a> in the <i>IAM User Guide</i>.</p>\n         <note>\n            <p>Because policy documents can be large, you should use POST rather than GET when\n                calling <code>PutGroupPolicy</code>. For general information about using the Query\n                API with IAM, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html\">Making query requests</a> in the\n                    <i>IAM User Guide</i>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Adds or updates an inline policy document that is embedded in the specified IAM\n            group.</p>\n         <p>A user can also have managed policies attached to it. To attach a managed policy to a\n            group, use <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_AttachGroupPolicy.html\">\n               <code>AttachGroupPolicy</code>\n            </a>. To create a new managed policy, use\n                <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreatePolicy.html\">\n               <code>CreatePolicy</code>\n            </a>. For information about policies, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed\n                policies and inline policies</a> in the\n            <i>IAM User Guide</i>.</p>\n         <p>For information about the maximum number of inline policies that you can embed in a\n            group, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html\">IAM and STS quotas</a> in the <i>IAM User Guide</i>.</p>\n         <note>\n            <p>Because policy documents can be large, you should use POST rather than GET when\n                calling <code>PutGroupPolicy</code>. For general information about using the Query\n                API with IAM, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html\">Making query requests</a> in the\n                    <i>IAM User Guide</i>.</p>\n         </note>"
             }
         },
         "com.amazonaws.iam#PutGroupPolicyRequest": {
@@ -10843,7 +10991,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds or updates an inline policy document that is embedded in the specified IAM\n            role.</p>\n         <p>When you embed an inline policy in a role, the inline policy is used as part of the\n            role's access (permissions) policy. The role's trust policy is created at the same time\n            as the role, using <a>CreateRole</a>. You can update a role's trust policy\n            using <a>UpdateAssumeRolePolicy</a>. For more information about IAM roles,\n            see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html\">Using roles to\n                delegate permissions and federate identities</a>.</p>\n         <p>A role can also have a managed policy attached to it. To attach a managed policy to a\n            role, use <a>AttachRolePolicy</a>. To create a new managed policy, use <a>CreatePolicy</a>. For information about policies, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed\n                policies and inline policies</a> in the\n            <i>IAM User Guide</i>.</p>\n         <p>For information about the maximum number of inline policies that you can embed with a\n            role, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html\">IAM and STS quotas</a> in the <i>IAM User Guide</i>.</p>\n         <note>\n            <p>Because policy documents can be large, you should use POST rather than GET when\n                calling <code>PutRolePolicy</code>. For general information about using the Query\n                API with IAM, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html\">Making query requests</a> in the\n                    <i>IAM User Guide</i>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Adds or updates an inline policy document that is embedded in the specified IAM\n            role.</p>\n         <p>When you embed an inline policy in a role, the inline policy is used as part of the\n            role's access (permissions) policy. The role's trust policy is created at the same time\n            as the role, using <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html\">\n               <code>CreateRole</code>\n            </a>.\n            You can update a role's trust policy using <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_UpdateAssumeRolePolicy.html\">\n               <code>UpdateAssumerolePolicy</code>\n            </a>. For more information about IAM\n            roles, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html\">Using\n                roles to delegate permissions and federate identities</a>.</p>\n         <p>A role can also have a managed policy attached to it. To attach a managed policy to a\n            role, use <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_AttachRolePolicy.html\">\n               <code>AttachRolePolicy</code>\n            </a>. To create a new managed policy, use\n                <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreatePolicy.html\">\n               <code>CreatePolicy</code>\n            </a>. For information about policies, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed\n                policies and inline policies</a> in the\n            <i>IAM User Guide</i>.</p>\n         <p>For information about the maximum number of inline policies that you can embed with a\n            role, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html\">IAM and STS quotas</a> in the <i>IAM User Guide</i>.</p>\n         <note>\n            <p>Because policy documents can be large, you should use POST rather than GET when\n                calling <code>PutRolePolicy</code>. For general information about using the Query\n                API with IAM, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html\">Making query requests</a> in the\n                    <i>IAM User Guide</i>.</p>\n         </note>"
             }
         },
         "com.amazonaws.iam#PutRolePolicyRequest": {
@@ -10946,7 +11094,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds or updates an inline policy document that is embedded in the specified IAM\n            user.</p>\n         <p>An IAM user can also have a managed policy attached to it. To attach a managed\n            policy to a user, use <a>AttachUserPolicy</a>. To create a new managed\n            policy, use <a>CreatePolicy</a>. For information about policies, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed\n                policies and inline policies</a> in the\n            <i>IAM User Guide</i>.</p>\n         <p>For information about the maximum number of inline policies that you can embed in a\n            user, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html\">IAM and STS quotas</a> in the <i>IAM User Guide</i>.</p>\n         <note>\n            <p>Because policy documents can be large, you should use POST rather than GET when\n                calling <code>PutUserPolicy</code>. For general information about using the Query\n                API with IAM, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html\">Making query requests</a> in the\n                    <i>IAM User Guide</i>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Adds or updates an inline policy document that is embedded in the specified IAM\n            user.</p>\n         <p>An IAM user can also have a managed policy attached to it. To attach a managed\n            policy to a user, use <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_AttachUserPolicy.html\">\n               <code>AttachUserPolicy</code>\n            </a>. To create a new managed policy, use\n                <a href=\"https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreatePolicy.html\">\n               <code>CreatePolicy</code>\n            </a>. For information about policies, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html\">Managed\n                policies and inline policies</a> in the\n            <i>IAM User Guide</i>.</p>\n         <p>For information about the maximum number of inline policies that you can embed in a\n            user, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html\">IAM and STS quotas</a> in the <i>IAM User Guide</i>.</p>\n         <note>\n            <p>Because policy documents can be large, you should use POST rather than GET when\n                calling <code>PutUserPolicy</code>. For general information about using the Query\n                API with IAM, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/IAM_UsingQueryAPI.html\">Making query requests</a> in the\n                    <i>IAM User Guide</i>.</p>\n         </note>"
             }
         },
         "com.amazonaws.iam#PutUserPolicyRequest": {

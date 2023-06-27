@@ -40,6 +40,9 @@ type UpdateFeatureGroupInput struct {
 	// the feature group.
 	FeatureAdditions []types.FeatureDefinition
 
+	// Updates the feature group online store configuration.
+	OnlineStoreConfig *types.OnlineStoreConfigUpdate
+
 	noSmithyDocumentSerde
 }
 

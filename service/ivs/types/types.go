@@ -43,6 +43,51 @@ type BatchError struct {
 	noSmithyDocumentSerde
 }
 
+// Error for a request in the batch for BatchStartViewerSessionRevocation. Each
+// error is related to a specific channel-ARN and viewer-ID pair.
+type BatchStartViewerSessionRevocationError struct {
+
+	// Channel ARN.
+	//
+	// This member is required.
+	ChannelArn *string
+
+	// The ID of the viewer session to revoke.
+	//
+	// This member is required.
+	ViewerId *string
+
+	// Error code.
+	Code *string
+
+	// Error message, determined by the application.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// A viewer session to revoke in the call to BatchStartViewerSessionRevocation .
+type BatchStartViewerSessionRevocationViewerSession struct {
+
+	// The ARN of the channel associated with the viewer session to revoke.
+	//
+	// This member is required.
+	ChannelArn *string
+
+	// The ID of the viewer associated with the viewer session to revoke. Do not use
+	// this field for personally identifying, confidential, or sensitive information.
+	//
+	// This member is required.
+	ViewerId *string
+
+	// An optional filter on which versions of the viewer session to revoke. All
+	// versions less than or equal to the specified version will be revoked. Default:
+	// 0.
+	ViewerSessionVersionsLessThanOrEqualTo int32
+
+	noSmithyDocumentSerde
+}
+
 // Object specifying a channel.
 type Channel struct {
 

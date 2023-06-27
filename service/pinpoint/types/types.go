@@ -4118,6 +4118,19 @@ type JourneyResponse struct {
 	// This object is not used or supported.
 	Tags map[string]string
 
+	// An array of time zone estimation methods, if any, to use for determining an
+	// Endpoints (https://docs.aws.amazon.com/pinpoint/latest/apireference/apps-application-id-endpoints-endpoint-id.html)
+	// time zone if the Endpoint does not have a value for the Demographic.Timezone
+	// attribute.
+	//   - PHONE_NUMBER - A time zone is determined based on the Endpoint.Address and
+	//   Endpoint.Location.Country.
+	//   - POSTAL_CODE - A time zone is determined based on the
+	//   Endpoint.Location.PostalCode and Endpoint.Location.Country. POSTAL_CODE
+	//   detection is only supported in the United States, United Kingdom, Australia, New
+	//   Zealand, Canada, France, Italy, Spain, Germany and in regions where Amazon
+	//   Pinpoint is available.
+	TimezoneEstimationMethods []TimezoneEstimationMethodsElement
+
 	// Indicates whether endpoints in quiet hours should enter a wait activity until
 	// quiet hours have elapsed.
 	WaitForQuietTime bool
@@ -6841,6 +6854,19 @@ type WriteJourneyRequest struct {
 	// to create or update a journey. To cancel, pause, or resume a journey, use the
 	// Journey State resource.
 	State State
+
+	// An array of time zone estimation methods, if any, to use for determining an
+	// Endpoints (https://docs.aws.amazon.com/pinpoint/latest/apireference/apps-application-id-endpoints-endpoint-id.html)
+	// time zone if the Endpoint does not have a value for the Demographic.Timezone
+	// attribute.
+	//   - PHONE_NUMBER - A time zone is determined based on the Endpoint.Address and
+	//   Endpoint.Location.Country.
+	//   - POSTAL_CODE - A time zone is determined based on the
+	//   Endpoint.Location.PostalCode and Endpoint.Location.Country. POSTAL_CODE
+	//   detection is only supported in the United States, United Kingdom, Australia, New
+	//   Zealand, Canada, France, Italy, Spain, Germany and in regions where Amazon
+	//   Pinpoint is available.
+	TimezoneEstimationMethods []TimezoneEstimationMethodsElement
 
 	// Specifies whether endpoints in quiet hours should enter a wait till the end of
 	// their quiet hours.

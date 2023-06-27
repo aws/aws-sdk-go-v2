@@ -154,6 +154,76 @@ func awsRestjson1_serializeOpDocumentBatchGetStreamKeyInput(v *BatchGetStreamKey
 	return nil
 }
 
+type awsRestjson1_serializeOpBatchStartViewerSessionRevocation struct {
+}
+
+func (*awsRestjson1_serializeOpBatchStartViewerSessionRevocation) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpBatchStartViewerSessionRevocation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*BatchStartViewerSessionRevocationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/BatchStartViewerSessionRevocation")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentBatchStartViewerSessionRevocationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsBatchStartViewerSessionRevocationInput(v *BatchStartViewerSessionRevocationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentBatchStartViewerSessionRevocationInput(v *BatchStartViewerSessionRevocationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ViewerSessions != nil {
+		ok := object.Key("viewerSessions")
+		if err := awsRestjson1_serializeDocumentBatchStartViewerSessionRevocationViewerSessionList(v.ViewerSessions, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpCreateChannel struct {
 }
 
@@ -1789,6 +1859,84 @@ func awsRestjson1_serializeOpDocumentPutMetadataInput(v *PutMetadataInput, value
 	return nil
 }
 
+type awsRestjson1_serializeOpStartViewerSessionRevocation struct {
+}
+
+func (*awsRestjson1_serializeOpStartViewerSessionRevocation) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpStartViewerSessionRevocation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StartViewerSessionRevocationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/StartViewerSessionRevocation")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentStartViewerSessionRevocationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsStartViewerSessionRevocationInput(v *StartViewerSessionRevocationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentStartViewerSessionRevocationInput(v *StartViewerSessionRevocationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ChannelArn != nil {
+		ok := object.Key("channelArn")
+		ok.String(*v.ChannelArn)
+	}
+
+	if v.ViewerId != nil {
+		ok := object.Key("viewerId")
+		ok.String(*v.ViewerId)
+	}
+
+	if v.ViewerSessionVersionsLessThanOrEqualTo != 0 {
+		ok := object.Key("viewerSessionVersionsLessThanOrEqualTo")
+		ok.Integer(v.ViewerSessionVersionsLessThanOrEqualTo)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpStopStream struct {
 }
 
@@ -2104,6 +2252,41 @@ func awsRestjson1_serializeOpDocumentUpdateChannelInput(v *UpdateChannelInput, v
 		ok.String(string(v.Type))
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentBatchStartViewerSessionRevocationViewerSession(v *types.BatchStartViewerSessionRevocationViewerSession, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ChannelArn != nil {
+		ok := object.Key("channelArn")
+		ok.String(*v.ChannelArn)
+	}
+
+	if v.ViewerId != nil {
+		ok := object.Key("viewerId")
+		ok.String(*v.ViewerId)
+	}
+
+	if v.ViewerSessionVersionsLessThanOrEqualTo != 0 {
+		ok := object.Key("viewerSessionVersionsLessThanOrEqualTo")
+		ok.Integer(v.ViewerSessionVersionsLessThanOrEqualTo)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentBatchStartViewerSessionRevocationViewerSessionList(v []types.BatchStartViewerSessionRevocationViewerSession, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentBatchStartViewerSessionRevocationViewerSession(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

@@ -4,6 +4,7 @@ package iam
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
@@ -152,6 +153,103 @@ func (c *Client) addOperationListSAMLProviderTagsMiddlewares(stack *middleware.S
 		return err
 	}
 	return nil
+}
+
+// ListSAMLProviderTagsAPIClient is a client that implements the
+// ListSAMLProviderTags operation.
+type ListSAMLProviderTagsAPIClient interface {
+	ListSAMLProviderTags(context.Context, *ListSAMLProviderTagsInput, ...func(*Options)) (*ListSAMLProviderTagsOutput, error)
+}
+
+var _ ListSAMLProviderTagsAPIClient = (*Client)(nil)
+
+// ListSAMLProviderTagsPaginatorOptions is the paginator options for
+// ListSAMLProviderTags
+type ListSAMLProviderTagsPaginatorOptions struct {
+	// Use this only when paginating results to indicate the maximum number of items
+	// you want in the response. If additional items exist beyond the maximum you
+	// specify, the IsTruncated response element is true . If you do not include this
+	// parameter, the number of items defaults to 100. Note that IAM might return fewer
+	// results, even when there are more results available. In that case, the
+	// IsTruncated response element returns true , and Marker contains a value to
+	// include in the subsequent call that tells the service where to continue from.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListSAMLProviderTagsPaginator is a paginator for ListSAMLProviderTags
+type ListSAMLProviderTagsPaginator struct {
+	options   ListSAMLProviderTagsPaginatorOptions
+	client    ListSAMLProviderTagsAPIClient
+	params    *ListSAMLProviderTagsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListSAMLProviderTagsPaginator returns a new ListSAMLProviderTagsPaginator
+func NewListSAMLProviderTagsPaginator(client ListSAMLProviderTagsAPIClient, params *ListSAMLProviderTagsInput, optFns ...func(*ListSAMLProviderTagsPaginatorOptions)) *ListSAMLProviderTagsPaginator {
+	if params == nil {
+		params = &ListSAMLProviderTagsInput{}
+	}
+
+	options := ListSAMLProviderTagsPaginatorOptions{}
+	if params.MaxItems != nil {
+		options.Limit = *params.MaxItems
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListSAMLProviderTagsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.Marker,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListSAMLProviderTagsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ListSAMLProviderTags page.
+func (p *ListSAMLProviderTagsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListSAMLProviderTagsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxItems = limit
+
+	result, err := p.client.ListSAMLProviderTags(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListSAMLProviderTags(region string) *awsmiddleware.RegisterServiceMetadata {

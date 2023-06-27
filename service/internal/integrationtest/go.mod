@@ -76,7 +76,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/snowball v1.19.4
 	github.com/aws/aws-sdk-go-v2/service/sns v1.20.13
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.23.2
-	github.com/aws/aws-sdk-go-v2/service/ssm v1.36.6
+	github.com/aws/aws-sdk-go-v2/service/ssm v1.36.7
 	github.com/aws/aws-sdk-go-v2/service/sts v1.19.2
 	github.com/aws/aws-sdk-go-v2/service/support v1.15.2
 	github.com/aws/aws-sdk-go-v2/service/timestreamwrite v1.17.2

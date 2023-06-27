@@ -35,6 +35,11 @@ type BatchGetRecordInput struct {
 	// This member is required.
 	Identifiers []types.BatchGetRecordIdentifier
 
+	// Parameter to request ExpiresAt in response. If Enabled , BatchGetRecord will
+	// return the value of ExpiresAt , if it is not null. If Disabled and null,
+	// BatchGetRecord will return null.
+	ExpirationTimeResponse types.ExpirationTimeResponse
+
 	noSmithyDocumentSerde
 }
 

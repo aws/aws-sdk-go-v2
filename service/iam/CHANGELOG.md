@@ -1,3 +1,7 @@
+# v1.21.0 (2023-06-26)
+
+* **Feature**: Support for a new API "GetMFADevice" to present MFA device metadata such as device certifications
+
 # v1.20.3 (2023-06-16)
 
 * **Documentation**: Documentation updates for AWS Identity and Access Management (IAM).

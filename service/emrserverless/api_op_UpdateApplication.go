@@ -69,6 +69,10 @@ type UpdateApplicationInput struct {
 	// The network configuration for customer VPC connectivity.
 	NetworkConfiguration *types.NetworkConfiguration
 
+	// The Amazon EMR release label for the application. You can change the release
+	// label to use a different release of Amazon EMR.
+	ReleaseLabel *string
+
 	// The key-value pairs that specify worker type to WorkerTypeSpecificationInput .
 	// This parameter must contain all valid worker types for a Spark or Hive
 	// application. Valid worker types include Driver and Executor for Spark

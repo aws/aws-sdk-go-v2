@@ -44,6 +44,18 @@ type ActivateNetworkSiteInput struct {
 	// .
 	ClientToken *string
 
+	// Determines the duration and renewal status of the commitment period for all
+	// pending radio units. If you include commitmentConfiguration in the
+	// ActivateNetworkSiteRequest action, you must specify the following:
+	//   - The commitment period for the radio unit. You can choose a 60-day, 1-year,
+	//   or 3-year period.
+	//   - Whether you want your commitment period to automatically renew for one more
+	//   year after your current commitment period expires.
+	// For pricing, see Amazon Web Services Private 5G Pricing (http://aws.amazon.com/private5g/pricing)
+	// . If you do not include commitmentConfiguration in the
+	// ActivateNetworkSiteRequest action, the commitment period is set to 60-days.
+	CommitmentConfiguration *types.CommitmentConfiguration
+
 	noSmithyDocumentSerde
 }
 

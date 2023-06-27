@@ -22689,6 +22689,27 @@ func awsAwsjson11_serializeDocumentOnlineStoreConfig(v *types.OnlineStoreConfig,
 		}
 	}
 
+	if v.TtlDuration != nil {
+		ok := object.Key("TtlDuration")
+		if err := awsAwsjson11_serializeDocumentTtlDuration(v.TtlDuration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentOnlineStoreConfigUpdate(v *types.OnlineStoreConfigUpdate, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TtlDuration != nil {
+		ok := object.Key("TtlDuration")
+		if err := awsAwsjson11_serializeDocumentTtlDuration(v.TtlDuration, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -25429,6 +25450,23 @@ func awsAwsjson11_serializeDocumentTrialComponentStatus(v *types.TrialComponentS
 	if len(v.PrimaryStatus) > 0 {
 		ok := object.Key("PrimaryStatus")
 		ok.String(string(v.PrimaryStatus))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentTtlDuration(v *types.TtlDuration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Unit) > 0 {
+		ok := object.Key("Unit")
+		ok.String(string(v.Unit))
+	}
+
+	if v.Value != nil {
+		ok := object.Key("Value")
+		ok.Integer(*v.Value)
 	}
 
 	return nil
@@ -34344,6 +34382,13 @@ func awsAwsjson11_serializeOpDocumentUpdateFeatureGroupInput(v *UpdateFeatureGro
 	if v.FeatureGroupName != nil {
 		ok := object.Key("FeatureGroupName")
 		ok.String(*v.FeatureGroupName)
+	}
+
+	if v.OnlineStoreConfig != nil {
+		ok := object.Key("OnlineStoreConfig")
+		if err := awsAwsjson11_serializeDocumentOnlineStoreConfigUpdate(v.OnlineStoreConfig, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

@@ -71,6 +71,7 @@
         "api_op_GetGroupPolicy.go",
         "api_op_GetInstanceProfile.go",
         "api_op_GetLoginProfile.go",
+        "api_op_GetMFADevice.go",
         "api_op_GetOpenIDConnectProvider.go",
         "api_op_GetOrganizationsAccessReport.go",
         "api_op_GetPolicy.go",

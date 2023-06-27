@@ -12,15 +12,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes one or more of your managed nodes, including information about the
-// operating system platform, the version of SSM Agent installed on the managed
-// node, node status, and so on. If you specify one or more managed node IDs, it
+// Provides information about one or more of your managed nodes, including the
+// operating system platform, SSM Agent version, association status, and IP
+// address. This operation does not return information for nodes that are either
+// Stopped or Terminated. If you specify one or more node IDs, the operation
 // returns information for those managed nodes. If you don't specify node IDs, it
 // returns information for all your managed nodes. If you specify a node ID that
 // isn't valid or a node that you don't own, you receive an error. The IamRole
-// field for this API operation is the Identity and Access Management (IAM) role
-// assigned to on-premises managed nodes. This call doesn't return the IAM role for
-// EC2 instances.
+// field returned for this API operation is the Identity and Access Management
+// (IAM) role assigned to on-premises managed nodes. This operation does not return
+// the IAM role for EC2 instances.
 func (c *Client) DescribeInstanceInformation(ctx context.Context, params *DescribeInstanceInformationInput, optFns ...func(*Options)) (*DescribeInstanceInformationOutput, error) {
 	if params == nil {
 		params = &DescribeInstanceInformationInput{}
@@ -39,8 +40,9 @@ func (c *Client) DescribeInstanceInformation(ctx context.Context, params *Descri
 type DescribeInstanceInformationInput struct {
 
 	// One or more filters. Use a filter to return a more specific list of managed
-	// nodes. You can filter based on tags applied to your managed nodes. Use this
-	// Filters data type instead of InstanceInformationFilterList , which is deprecated.
+	// nodes. You can filter based on tags applied to your managed nodes. Tag filters
+	// can't be combined with other filter types. Use this Filters data type instead
+	// of InstanceInformationFilterList , which is deprecated.
 	Filters []types.InstanceInformationStringFilter
 
 	// This is a legacy method. We recommend that you don't use this method. Instead,
@@ -51,6 +53,7 @@ type DescribeInstanceInformationInput struct {
 
 	// The maximum number of items to return for this call. The call also returns a
 	// token that you can specify in a subsequent call to get the next set of results.
+	// The default value is 10 items.
 	MaxResults *int32
 
 	// The token for the next set of items to return. (You received this token from a
@@ -154,6 +157,7 @@ var _ DescribeInstanceInformationAPIClient = (*Client)(nil)
 type DescribeInstanceInformationPaginatorOptions struct {
 	// The maximum number of items to return for this call. The call also returns a
 	// token that you can specify in a subsequent call to get the next set of results.
+	// The default value is 10 items.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token
