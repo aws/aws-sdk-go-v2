@@ -340,7 +340,15 @@ func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
 }
 
 func addClientUserAgent(stack *middleware.Stack, options Options) error {
-	return awsmiddleware.AddSDKAgentKeyValue(awsmiddleware.APIMetadata, "restxmlprotocolnamespace", goModuleVersion, options.AppID)(stack)
+	if err := awsmiddleware.AddSDKAgentKeyValue(awsmiddleware.APIMetadata, "restxmlprotocolnamespace", goModuleVersion)(stack); err != nil {
+		return err
+	}
+
+	if len(options.AppID) > 0 {
+		return awsmiddleware.AddSDKAgentKey(awsmiddleware.ApplicationIdentifier, options.AppID)(stack)
+	}
+
+	return nil
 }
 
 func addRetryMiddlewares(stack *middleware.Stack, o Options) error {

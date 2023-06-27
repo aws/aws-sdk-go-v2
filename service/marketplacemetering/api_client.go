@@ -352,7 +352,15 @@ func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
 }
 
 func addClientUserAgent(stack *middleware.Stack, options Options) error {
-	return awsmiddleware.AddSDKAgentKeyValue(awsmiddleware.APIMetadata, "marketplacemetering", goModuleVersion, options.AppID)(stack)
+	if err := awsmiddleware.AddSDKAgentKeyValue(awsmiddleware.APIMetadata, "marketplacemetering", goModuleVersion)(stack); err != nil {
+		return err
+	}
+
+	if len(options.AppID) > 0 {
+		return awsmiddleware.AddSDKAgentKey(awsmiddleware.ApplicationIdentifier, options.AppID)(stack)
+	}
+
+	return nil
 }
 
 func addHTTPSignerV4Middleware(stack *middleware.Stack, o Options) error {

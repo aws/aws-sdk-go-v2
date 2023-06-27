@@ -17,8 +17,6 @@ import (
 
 var expectedAgent = aws.SDKName + "/" + aws.SDKVersion + " os/" + getNormalizedOSName() + " lang/go#" + languageVersion + " md/GOOS#" + runtime.GOOS + " md/GOARCH#" + runtime.GOARCH
 
-//var expectedSDKAgent = aws.SDKName + "/" + aws.SDKVersion + " os/" + getNormalizedOSName() + " lang/go/" + languageVersion + " md/GOOS/" + runtime.GOOS + " md/GOARCH/" + runtime.GOARCH
-
 func TestRequestUserAgent_HandleBuild(t *testing.T) {
 	cases := map[string]struct {
 		Env    map[string]string

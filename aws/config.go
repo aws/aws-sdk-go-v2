@@ -133,8 +133,11 @@ type Config struct {
 	// programmatically, or rely on the values here within your applications.
 	RuntimeEnvironment RuntimeEnvironment
 
-	// The AppID that could be retrieved from env var or shared config to be
-	// added to request's user agent header
+	// The AppID could be retrieved from environment variable AWS_SDK_UA_APP_ID
+	// or shared config profile attribute sdk_ua_app_id, it will finally be added
+	// to http request's User-Agent header string.
+	// For more information of configuring shared config file via AWS CLI, see
+	// https://docs.aws.amazon.com/cli/latest/userguide/getting-started-quickstart.html
 	AppID string
 }
 

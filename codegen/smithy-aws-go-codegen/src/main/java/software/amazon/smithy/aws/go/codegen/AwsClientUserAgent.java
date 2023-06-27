@@ -54,15 +54,26 @@ public class AwsClientUserAgent implements GoIntegration {
         goDelegator.useShapeWriter(settings.getService(model), writer -> {
             writer.openBlock("func $L(stack $P, options Options) error {", "}", MIDDLEWARE_RESOLVER, SymbolUtils.createPointableSymbolBuilder("Stack",
                     SmithyGoDependency.SMITHY_MIDDLEWARE).build(), () -> {
-                writer.write("return $T($T, $S, $T, options.AppID)(stack)",
+                writer.write("if err := $T($T, $S, $T)(stack); err != nil { return err }",
                         SymbolUtils.createValueSymbolBuilder("AddSDKAgentKeyValue", AwsGoDependency.AWS_MIDDLEWARE)
                                 .build(),
                         SymbolUtils.createValueSymbolBuilder("APIMetadata",
                                 AwsGoDependency.AWS_MIDDLEWARE).build(),
                         serviceId,
-                        SymbolUtils.createValueSymbolBuilder("goModuleVersion").build());
+                        SymbolUtils.createValueSymbolBuilder("goModuleVersion").build()
+                );
+                writer.write("");
+                writer.openBlock("if len(options.AppID) > 0 {", "}", () -> {
+                    writer.write("return $T($T, options.AppID)(stack)",
+                            SymbolUtils.createValueSymbolBuilder("AddSDKAgentKey", AwsGoDependency.AWS_MIDDLEWARE)
+                                    .build(),
+                            SymbolUtils.createValueSymbolBuilder("ApplicationIdentifier",
+                                    AwsGoDependency.AWS_MIDDLEWARE).build()
+                    );
+                });
+                writer.write("");
+                writer.write("return nil");
             });
-            writer.write("");
         });
     }
 

@@ -79,7 +79,7 @@ type requestUserAgent struct {
 // X-Amz-User-Agent example:
 //
 //	aws-sdk-go-v2/1.2.3 md/GOOS/linux md/GOARCH/amd64 lang/go/1.15
-func newRequestUserAgent(appID ...string) *requestUserAgent {
+func newRequestUserAgent() *requestUserAgent {
 	userAgent, sdkAgent := smithyhttp.NewUserAgentBuilder(), smithyhttp.NewUserAgentBuilder()
 	addProductName(userAgent)
 	addProductName(sdkAgent)
@@ -90,10 +90,6 @@ func newRequestUserAgent(appID ...string) *requestUserAgent {
 	}
 
 	addSDKMetadata(r)
-
-	if len(appID) > 0 && len(appID[0]) > 0 {
-		r.AddSDKAgentKey(ApplicationIdentifier, appID[0])
-	}
 
 	return r
 }
@@ -149,9 +145,9 @@ func AddSDKAgentKey(keyType SDKAgentKeyType, key string) func(*middleware.Stack)
 }
 
 // AddSDKAgentKeyValue retrieves a requestUserAgent from the provided stack, or initializes one.
-func AddSDKAgentKeyValue(keyType SDKAgentKeyType, key, value string, appID ...string) func(*middleware.Stack) error {
+func AddSDKAgentKeyValue(keyType SDKAgentKeyType, key, value string) func(*middleware.Stack) error {
 	return func(stack *middleware.Stack) error {
-		requestUserAgent, err := getOrAddRequestUserAgent(stack, appID...)
+		requestUserAgent, err := getOrAddRequestUserAgent(stack)
 		if err != nil {
 			return err
 		}
@@ -166,11 +162,11 @@ func AddRequestUserAgentMiddleware(stack *middleware.Stack) error {
 	return err
 }
 
-func getOrAddRequestUserAgent(stack *middleware.Stack, appID ...string) (*requestUserAgent, error) {
+func getOrAddRequestUserAgent(stack *middleware.Stack) (*requestUserAgent, error) {
 	id := (*requestUserAgent)(nil).ID()
 	bm, ok := stack.Build.Get(id)
 	if !ok {
-		bm = newRequestUserAgent(appID...)
+		bm = newRequestUserAgent()
 		err := stack.Build.Add(bm, middleware.After)
 		if err != nil {
 			return nil, err
