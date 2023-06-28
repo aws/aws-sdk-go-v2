@@ -321,6 +321,9 @@ func (m *opCreateMultiRegionAccessPointResolveEndpointMiddleware) HandleSerializ
 			if v4Scheme.SigningRegion == nil {
 				signingRegion = m.BuiltInResolver.(*BuiltInResolver).Region
 			}
+			if v4Scheme.DisableDoubleEncoding != nil {
+				ctx = internalauth.SetDisableDoubleEncoding(ctx, *v4Scheme.DisableDoubleEncoding)
+			}
 			ctx = awsmiddleware.SetSigningName(ctx, signingName)
 			ctx = awsmiddleware.SetSigningRegion(ctx, signingRegion)
 			break
@@ -329,6 +332,9 @@ func (m *opCreateMultiRegionAccessPointResolveEndpointMiddleware) HandleSerializ
 			var signingName string
 			if v4aScheme.SigningName == nil {
 				signingName = "s3"
+			}
+			if v4aScheme.DisableDoubleEncoding != nil {
+				ctx = internalauth.SetDisableDoubleEncoding(ctx, *v4aScheme.DisableDoubleEncoding)
 			}
 			ctx = awsmiddleware.SetSigningName(ctx, signingName)
 			ctx = awsmiddleware.SetSigningRegion(ctx, v4aScheme.SigningRegionSet[0])

@@ -210,6 +210,9 @@ func (m *opGetLayerVersionPolicyResolveEndpointMiddleware) HandleSerialize(ctx c
 			if v4Scheme.SigningRegion == nil {
 				signingRegion = m.BuiltInResolver.(*BuiltInResolver).Region
 			}
+			if v4Scheme.DisableDoubleEncoding != nil {
+				ctx = internalauth.SetDisableDoubleEncoding(ctx, *v4Scheme.DisableDoubleEncoding)
+			}
 			ctx = awsmiddleware.SetSigningName(ctx, signingName)
 			ctx = awsmiddleware.SetSigningRegion(ctx, signingRegion)
 			break
@@ -218,6 +221,9 @@ func (m *opGetLayerVersionPolicyResolveEndpointMiddleware) HandleSerialize(ctx c
 			var signingName string
 			if v4aScheme.SigningName == nil {
 				signingName = "lambda"
+			}
+			if v4aScheme.DisableDoubleEncoding != nil {
+				ctx = internalauth.SetDisableDoubleEncoding(ctx, *v4aScheme.DisableDoubleEncoding)
 			}
 			ctx = awsmiddleware.SetSigningName(ctx, signingName)
 			ctx = awsmiddleware.SetSigningRegion(ctx, v4aScheme.SigningRegionSet[0])
