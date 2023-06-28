@@ -1,3 +1,24 @@
+# Release (2023-06-28)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/internetmonitor`: [v1.3.0](service/internetmonitor/CHANGELOG.md#v130-2023-06-28)
+  * **Feature**: This release adds a new feature for Amazon CloudWatch Internet Monitor that enables customers to set custom thresholds, for performance and availability drops, for triggering when to create a health event.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2`: [v1.17.0](service/kinesisanalyticsv2/CHANGELOG.md#v1170-2023-06-28)
+  * **Feature**: Support for new runtime environment in Kinesis Data Analytics Studio: Zeppelin-0.10, Apache Flink-1.15
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.37.0](service/lambda/CHANGELOG.md#v1370-2023-06-28)
+  * **Feature**: Surface ResourceConflictException in DeleteEventSourceMapping
+* `github.com/aws/aws-sdk-go-v2/service/omics`: [v1.5.0](service/omics/CHANGELOG.md#v150-2023-06-28)
+  * **Feature**: Add Common Workflow Language (CWL) as a supported language for Omics workflows
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.46.0](service/rds/CHANGELOG.md#v1460-2023-06-28)
+  * **Feature**: Amazon Relational Database Service (RDS) now supports joining a RDS for SQL Server instance to a self-managed Active Directory.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.36.0](service/s3/CHANGELOG.md#v1360-2023-06-28)
+  * **Feature**: The S3 LISTObjects, ListObjectsV2 and ListObjectVersions API now supports a new optional header x-amz-optional-object-attributes. If header contains RestoreStatus as the value, then S3 will include Glacier restore status i.e. isRestoreInProgress and RestoreExpiryDate in List response.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.88.0](service/sagemaker/CHANGELOG.md#v1880-2023-06-28)
+  * **Feature**: This release adds support for Model Cards Model Registry integration.
+
 # Release (2023-06-27)
 
 ## Module Highlights

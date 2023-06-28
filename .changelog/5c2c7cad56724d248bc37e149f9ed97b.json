@@ -1,8 +1,0 @@
-{
-    "id": "5c2c7cad-5672-4d24-8bc3-7e149f9ed97b",
-    "type": "feature",
-    "description": "Amazon Relational Database Service (RDS) now supports joining a RDS for SQL Server instance to a self-managed Active Directory.",
-    "modules": [
-        "service/rds"
-    ]
-}

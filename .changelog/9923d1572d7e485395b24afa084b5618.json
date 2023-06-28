@@ -1,8 +1,0 @@
-{
-    "id": "9923d157-2d7e-4853-95b2-4afa084b5618",
-    "type": "feature",
-    "description": "This release adds support for Model Cards Model Registry integration.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

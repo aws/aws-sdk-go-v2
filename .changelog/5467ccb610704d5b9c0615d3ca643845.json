@@ -1,8 +1,0 @@
-{
-    "id": "5467ccb6-1070-4d5b-9c06-15d3ca643845",
-    "type": "feature",
-    "description": "Add Common Workflow Language (CWL) as a supported language for Omics workflows",
-    "modules": [
-        "service/omics"
-    ]
-}
