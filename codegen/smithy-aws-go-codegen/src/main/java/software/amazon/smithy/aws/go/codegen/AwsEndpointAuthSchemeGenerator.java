@@ -147,6 +147,9 @@ public class AwsEndpointAuthSchemeGenerator implements GoIntegration {
                         signingRegion = m.BuiltInResolver.(*BuiltInResolver).Region
                     }
                     if v4Scheme.DisableDoubleEncoding != nil {
+                        // The signer sets an equivalent value at client initialization time.
+                        // Setting this context value will cause the signer to extract it
+                        // and override the value set at client initialization time.
                         ctx = $T(ctx, *v4Scheme.DisableDoubleEncoding)
                     }
                     ctx = $T(ctx, signingName)
@@ -188,6 +191,9 @@ public class AwsEndpointAuthSchemeGenerator implements GoIntegration {
                         signingName = \"$L\"
                     }
                     if v4aScheme.DisableDoubleEncoding != nil {
+                        // The signer sets an equivalent value at client initialization time.
+                        // Setting this context value will cause the signer to extract it
+                        // and override the value set at client initialization time.
                         ctx = $T(ctx, *v4aScheme.DisableDoubleEncoding)
                     }
                     ctx = $T(ctx, signingName)
