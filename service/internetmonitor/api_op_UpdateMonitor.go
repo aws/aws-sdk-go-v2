@@ -46,6 +46,11 @@ type UpdateMonitorInput struct {
 	// for other API requests.
 	ClientToken *string
 
+	// The list of health event thresholds. A health event threshold percentage, for
+	// performance and availability, determines when Internet Monitor creates a health
+	// event when there's an internet issue that affects your application end users.
+	HealthEventsConfig *types.HealthEventsConfig
+
 	// Publish internet measurements for Internet Monitor to another location, such as
 	// an Amazon S3 bucket. The measurements are also published to Amazon CloudWatch
 	// Logs.

@@ -1,0 +1,8 @@
+{
+    "id": "35a45483-0281-4366-a43f-22fb76eff048",
+    "type": "feature",
+    "description": "Surface ResourceConflictException in DeleteEventSourceMapping",
+    "modules": [
+        "service/lambda"
+    ]
+}

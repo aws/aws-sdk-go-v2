@@ -1,0 +1,8 @@
+{
+    "id": "cb17df61-bc21-4cae-8604-a343d8e148ae",
+    "type": "feature",
+    "description": "Support for new runtime environment in Kinesis Data Analytics Studio: Zeppelin-0.10, Apache Flink-1.15",
+    "modules": [
+        "service/kinesisanalyticsv2"
+    ]
+}

@@ -207,6 +207,9 @@ type ModifyDBInstanceInput struct {
 	// .
 	DeletionProtection *bool
 
+	// Boolean. If present, removes the instance from the Active Directory domain.
+	DisableDomain *bool
+
 	// The Active Directory directory ID to move the DB instance to. Specify none to
 	// remove the instance from its current domain. You must create the domain before
 	// this operation. Currently, you can create only MySQL, Microsoft SQL Server,
@@ -216,9 +219,35 @@ type ModifyDBInstanceInput struct {
 	// instances.
 	Domain *string
 
+	// The ARN for the Secrets Manager secret that contains the credentials for the
+	// user performing the domain join. Example:
+	// arn:aws:secretsmanager:region:account-number:secret:myselfmanagedADtestsecret-123456
+	DomainAuthSecretArn *string
+
+	// The IPv4 DNS IP addresses of your primary and secondary Active Directory domain
+	// controllers. Constraints:
+	//   - Two IP addresses must be provided. If there isn't a secondary domain
+	//   controller, use the IP address of the primary domain controller for both entries
+	//   in the list.
+	// Example: 123.124.125.126,234.235.236.237
+	DomainDnsIps []string
+
+	// Specifies the fully qualified domain name of an Active Directory domain.
+	// Constraints:
+	//   - Cannot be greater than 64 characters.
+	// Example: mymanagedADtest.mymanagedAD.mydomain
+	DomainFqdn *string
+
 	// The name of the IAM role to use when making API calls to the Directory Service.
 	// This setting doesn't apply to RDS Custom DB instances.
 	DomainIAMRoleName *string
+
+	// The Active Directory organizational unit for your DB instance to join.
+	// Constraints:
+	//   - Must be in the distinguished name format.
+	//   - Cannot be greater than 64 characters.
+	// Example: OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain
+	DomainOu *string
 
 	// Specifies whether to enable a customer-owned IP address (CoIP) for an RDS on
 	// Outposts DB instance. A CoIP provides local or external connectivity to

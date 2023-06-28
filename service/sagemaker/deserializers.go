@@ -52888,6 +52888,15 @@ func awsAwsjson11_deserializeDocumentModelCard(v **types.ModelCard, value interf
 				sv.ModelId = ptr.String(jtv)
 			}
 
+		case "ModelPackageGroupName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ModelPackageGroupName = ptr.String(jtv)
+			}
+
 		case "RiskRating":
 			if value != nil {
 				jtv, ok := value.(string)

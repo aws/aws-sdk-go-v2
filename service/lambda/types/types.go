@@ -398,11 +398,13 @@ type EventSourceMappingConfiguration struct {
 	SourceAccessConfigurations []SourceAccessConfiguration
 
 	// The position in a stream from which to start reading. Required for Amazon
-	// Kinesis, Amazon DynamoDB, and Amazon MSK stream sources. AT_TIMESTAMP is
-	// supported only for Amazon Kinesis streams and Amazon DocumentDB.
+	// Kinesis and Amazon DynamoDB Stream event sources. AT_TIMESTAMP is supported
+	// only for Amazon Kinesis streams, Amazon DocumentDB, Amazon MSK, and self-managed
+	// Apache Kafka.
 	StartingPosition EventSourcePosition
 
-	// With StartingPosition set to AT_TIMESTAMP , the time from which to start reading.
+	// With StartingPosition set to AT_TIMESTAMP , the time from which to start
+	// reading. StartingPositionTimestamp cannot be in the future.
 	StartingPositionTimestamp *time.Time
 
 	// The state of the event source mapping. It can be one of the following: Creating
@@ -1039,11 +1041,9 @@ type SelfManagedKafkaEventSourceConfig struct {
 	noSmithyDocumentSerde
 }
 
-// The function's Lambda SnapStart setting. Set ApplyOn to PublishedVersions to
-// create a snapshot of the initialized execution environment when you publish a
-// function version. SnapStart is supported with the java11 runtime. For more
-// information, see Improving startup performance with Lambda SnapStart (https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html)
-// .
+// The function's Lambda SnapStart (https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html)
+// setting. Set ApplyOn to PublishedVersions to create a snapshot of the
+// initialized execution environment when you publish a function version.
 type SnapStart struct {
 
 	// Set to PublishedVersions to create a snapshot of the initialized execution

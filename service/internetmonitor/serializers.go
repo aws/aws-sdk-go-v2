@@ -13,6 +13,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 )
 
 type awsRestjson1_serializeOpCreateMonitor struct {
@@ -78,6 +79,13 @@ func awsRestjson1_serializeOpDocumentCreateMonitorInput(v *CreateMonitorInput, v
 	if v.ClientToken != nil {
 		ok := object.Key("ClientToken")
 		ok.String(*v.ClientToken)
+	}
+
+	if v.HealthEventsConfig != nil {
+		ok := object.Key("HealthEventsConfig")
+		if err := awsRestjson1_serializeDocumentHealthEventsConfig(v.HealthEventsConfig, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.InternetMeasurementsLogDelivery != nil {
@@ -724,6 +732,13 @@ func awsRestjson1_serializeOpDocumentUpdateMonitorInput(v *UpdateMonitorInput, v
 		ok.String(*v.ClientToken)
 	}
 
+	if v.HealthEventsConfig != nil {
+		ok := object.Key("HealthEventsConfig")
+		if err := awsRestjson1_serializeDocumentHealthEventsConfig(v.HealthEventsConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.InternetMeasurementsLogDelivery != nil {
 		ok := object.Key("InternetMeasurementsLogDelivery")
 		if err := awsRestjson1_serializeDocumentInternetMeasurementsLogDelivery(v.InternetMeasurementsLogDelivery, ok); err != nil {
@@ -758,6 +773,49 @@ func awsRestjson1_serializeOpDocumentUpdateMonitorInput(v *UpdateMonitorInput, v
 	if v.TrafficPercentageToMonitor != 0 {
 		ok := object.Key("TrafficPercentageToMonitor")
 		ok.Integer(v.TrafficPercentageToMonitor)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentHealthEventsConfig(v *types.HealthEventsConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AvailabilityScoreThreshold != 0 {
+		ok := object.Key("AvailabilityScoreThreshold")
+		switch {
+		case math.IsNaN(v.AvailabilityScoreThreshold):
+			ok.String("NaN")
+
+		case math.IsInf(v.AvailabilityScoreThreshold, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.AvailabilityScoreThreshold, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.AvailabilityScoreThreshold)
+
+		}
+	}
+
+	if v.PerformanceScoreThreshold != 0 {
+		ok := object.Key("PerformanceScoreThreshold")
+		switch {
+		case math.IsNaN(v.PerformanceScoreThreshold):
+			ok.String("NaN")
+
+		case math.IsInf(v.PerformanceScoreThreshold, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.PerformanceScoreThreshold, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.PerformanceScoreThreshold)
+
+		}
 	}
 
 	return nil

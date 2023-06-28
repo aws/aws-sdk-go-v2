@@ -102,8 +102,29 @@ type HealthEvent struct {
 	// the end time is not set.
 	EndedAt *time.Time
 
+	// The value of the threshold percentage for performance or availability that was
+	// configured when Amazon CloudWatch Internet Monitor created the health event.
+	HealthScoreThreshold float64
+
 	// The impact on global traffic monitored by this monitor for this health event.
 	PercentOfTotalTrafficImpacted *float64
+
+	noSmithyDocumentSerde
+}
+
+// A complex type for the configuration. Defines the health event threshold
+// percentages, for performance score and availability score. Amazon CloudWatch
+// Internet Monitor creates a health event when there's an internet issue that
+// affects your application end users where a health score percentage is at or
+// below a set threshold. If you don't set a health event threshold, the default
+// value is 95%.
+type HealthEventsConfig struct {
+
+	// The health event threshold percentage set for availability scores.
+	AvailabilityScoreThreshold float64
+
+	// The health event threshold percentage set for performance scores.
+	PerformanceScoreThreshold float64
 
 	noSmithyDocumentSerde
 }

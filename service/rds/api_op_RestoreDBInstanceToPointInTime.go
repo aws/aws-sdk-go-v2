@@ -130,9 +130,37 @@ type RestoreDBInstanceToPointInTimeInput struct {
 	// in the Amazon RDS User Guide.
 	Domain *string
 
+	// The ARN for the Secrets Manager secret that contains the credentials for the
+	// user performing the domain join. Constraints:
+	//   - Cannot be greater than 64 characters.
+	// Example:
+	// arn:aws:secretsmanager:region:account-number:secret:myselfmanagedADtestsecret-123456
+	DomainAuthSecretArn *string
+
+	// The IPv4 DNS IP addresses of your primary and secondary Active Directory domain
+	// controllers. Constraints:
+	//   - Two IP addresses must be provided. If there isn't a secondary domain
+	//   controller, use the IP address of the primary domain controller for both entries
+	//   in the list.
+	// Example: 123.124.125.126,234.235.236.237
+	DomainDnsIps []string
+
+	// Specifies the fully qualified domain name of an Active Directory domain.
+	// Constraints:
+	//   - Cannot be greater than 64 characters.
+	// Example: mymanagedADtest.mymanagedAD.mydomain
+	DomainFqdn *string
+
 	// Specify the name of the IAM role to be used when making API calls to the
 	// Directory Service. This setting doesn't apply to RDS Custom.
 	DomainIAMRoleName *string
+
+	// The Active Directory organizational unit for your DB instance to join.
+	// Constraints:
+	//   - Must be in the distinguished name format.
+	//   - Cannot be greater than 64 characters.
+	// Example: OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain
+	DomainOu *string
 
 	// The list of logs that the restored DB instance is to export to CloudWatch Logs.
 	// The values in the list depend on the DB engine being used. For more information,

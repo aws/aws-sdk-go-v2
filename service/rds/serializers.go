@@ -10551,9 +10551,31 @@ func awsAwsquery_serializeOpDocumentCreateDBInstanceInput(v *CreateDBInstanceInp
 		objectKey.String(*v.Domain)
 	}
 
+	if v.DomainAuthSecretArn != nil {
+		objectKey := object.Key("DomainAuthSecretArn")
+		objectKey.String(*v.DomainAuthSecretArn)
+	}
+
+	if v.DomainDnsIps != nil {
+		objectKey := object.Key("DomainDnsIps")
+		if err := awsAwsquery_serializeDocumentStringList(v.DomainDnsIps, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.DomainFqdn != nil {
+		objectKey := object.Key("DomainFqdn")
+		objectKey.String(*v.DomainFqdn)
+	}
+
 	if v.DomainIAMRoleName != nil {
 		objectKey := object.Key("DomainIAMRoleName")
 		objectKey.String(*v.DomainIAMRoleName)
+	}
+
+	if v.DomainOu != nil {
+		objectKey := object.Key("DomainOu")
+		objectKey.String(*v.DomainOu)
 	}
 
 	if v.EnableCloudwatchLogsExports != nil {
@@ -10811,9 +10833,31 @@ func awsAwsquery_serializeOpDocumentCreateDBInstanceReadReplicaInput(v *CreateDB
 		objectKey.String(*v.Domain)
 	}
 
+	if v.DomainAuthSecretArn != nil {
+		objectKey := object.Key("DomainAuthSecretArn")
+		objectKey.String(*v.DomainAuthSecretArn)
+	}
+
+	if v.DomainDnsIps != nil {
+		objectKey := object.Key("DomainDnsIps")
+		if err := awsAwsquery_serializeDocumentStringList(v.DomainDnsIps, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.DomainFqdn != nil {
+		objectKey := object.Key("DomainFqdn")
+		objectKey.String(*v.DomainFqdn)
+	}
+
 	if v.DomainIAMRoleName != nil {
 		objectKey := object.Key("DomainIAMRoleName")
 		objectKey.String(*v.DomainIAMRoleName)
+	}
+
+	if v.DomainOu != nil {
+		objectKey := object.Key("DomainOu")
+		objectKey.String(*v.DomainOu)
 	}
 
 	if v.EnableCloudwatchLogsExports != nil {
@@ -13464,14 +13508,41 @@ func awsAwsquery_serializeOpDocumentModifyDBInstanceInput(v *ModifyDBInstanceInp
 		objectKey.Boolean(*v.DeletionProtection)
 	}
 
+	if v.DisableDomain != nil {
+		objectKey := object.Key("DisableDomain")
+		objectKey.Boolean(*v.DisableDomain)
+	}
+
 	if v.Domain != nil {
 		objectKey := object.Key("Domain")
 		objectKey.String(*v.Domain)
 	}
 
+	if v.DomainAuthSecretArn != nil {
+		objectKey := object.Key("DomainAuthSecretArn")
+		objectKey.String(*v.DomainAuthSecretArn)
+	}
+
+	if v.DomainDnsIps != nil {
+		objectKey := object.Key("DomainDnsIps")
+		if err := awsAwsquery_serializeDocumentStringList(v.DomainDnsIps, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.DomainFqdn != nil {
+		objectKey := object.Key("DomainFqdn")
+		objectKey.String(*v.DomainFqdn)
+	}
+
 	if v.DomainIAMRoleName != nil {
 		objectKey := object.Key("DomainIAMRoleName")
 		objectKey.String(*v.DomainIAMRoleName)
+	}
+
+	if v.DomainOu != nil {
+		objectKey := object.Key("DomainOu")
+		objectKey.String(*v.DomainOu)
 	}
 
 	if v.EnableCustomerOwnedIp != nil {
@@ -14798,9 +14869,31 @@ func awsAwsquery_serializeOpDocumentRestoreDBInstanceFromDBSnapshotInput(v *Rest
 		objectKey.String(*v.Domain)
 	}
 
+	if v.DomainAuthSecretArn != nil {
+		objectKey := object.Key("DomainAuthSecretArn")
+		objectKey.String(*v.DomainAuthSecretArn)
+	}
+
+	if v.DomainDnsIps != nil {
+		objectKey := object.Key("DomainDnsIps")
+		if err := awsAwsquery_serializeDocumentStringList(v.DomainDnsIps, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.DomainFqdn != nil {
+		objectKey := object.Key("DomainFqdn")
+		objectKey.String(*v.DomainFqdn)
+	}
+
 	if v.DomainIAMRoleName != nil {
 		objectKey := object.Key("DomainIAMRoleName")
 		objectKey.String(*v.DomainIAMRoleName)
+	}
+
+	if v.DomainOu != nil {
+		objectKey := object.Key("DomainOu")
+		objectKey.String(*v.DomainOu)
 	}
 
 	if v.EnableCloudwatchLogsExports != nil {
@@ -15230,9 +15323,31 @@ func awsAwsquery_serializeOpDocumentRestoreDBInstanceToPointInTimeInput(v *Resto
 		objectKey.String(*v.Domain)
 	}
 
+	if v.DomainAuthSecretArn != nil {
+		objectKey := object.Key("DomainAuthSecretArn")
+		objectKey.String(*v.DomainAuthSecretArn)
+	}
+
+	if v.DomainDnsIps != nil {
+		objectKey := object.Key("DomainDnsIps")
+		if err := awsAwsquery_serializeDocumentStringList(v.DomainDnsIps, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.DomainFqdn != nil {
+		objectKey := object.Key("DomainFqdn")
+		objectKey.String(*v.DomainFqdn)
+	}
+
 	if v.DomainIAMRoleName != nil {
 		objectKey := object.Key("DomainIAMRoleName")
 		objectKey.String(*v.DomainIAMRoleName)
+	}
+
+	if v.DomainOu != nil {
+		objectKey := object.Key("DomainOu")
+		objectKey.String(*v.DomainOu)
 	}
 
 	if v.EnableCloudwatchLogsExports != nil {
