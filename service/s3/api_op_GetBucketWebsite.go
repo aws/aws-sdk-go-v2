@@ -273,6 +273,9 @@ func (m *opGetBucketWebsiteResolveEndpointMiddleware) HandleSerialize(ctx contex
 				signingRegion = m.BuiltInResolver.(*BuiltInResolver).Region
 			}
 			if v4Scheme.DisableDoubleEncoding != nil {
+				// The signer sets an equivalent value at client initialization time.
+				// Setting this context value will cause the signer to extract it
+				// and override the value set at client initialization time.
 				ctx = internalauth.SetDisableDoubleEncoding(ctx, *v4Scheme.DisableDoubleEncoding)
 			}
 			ctx = awsmiddleware.SetSigningName(ctx, signingName)
@@ -286,6 +289,9 @@ func (m *opGetBucketWebsiteResolveEndpointMiddleware) HandleSerialize(ctx contex
 				signingName = "s3"
 			}
 			if v4aScheme.DisableDoubleEncoding != nil {
+				// The signer sets an equivalent value at client initialization time.
+				// Setting this context value will cause the signer to extract it
+				// and override the value set at client initialization time.
 				ctx = internalauth.SetDisableDoubleEncoding(ctx, *v4aScheme.DisableDoubleEncoding)
 			}
 			ctx = awsmiddleware.SetSigningName(ctx, signingName)
