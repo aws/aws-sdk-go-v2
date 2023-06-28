@@ -135,7 +135,7 @@ type Config struct {
 
 	// The AppID could be retrieved from environment variable AWS_SDK_UA_APP_ID
 	// or shared config profile attribute sdk_ua_app_id, it will finally be added
-	// to http request's User-Agent header string.
+	// to http request's User-Agent header string in the form of app/{AppID}.
 	// For more information of configuring shared config file via AWS CLI, see
 	// https://docs.aws.amazon.com/cli/latest/userguide/getting-started-quickstart.html
 	AppID string
