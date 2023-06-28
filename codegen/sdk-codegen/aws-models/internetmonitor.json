@@ -165,6 +165,12 @@
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The percentage of the internet-facing traffic for your application that you want to monitor with this monitor.</p>"
                     }
+                },
+                "HealthEventsConfig": {
+                    "target": "com.amazonaws.internetmonitor#HealthEventsConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the health event threshold percentages, for performance score and availability score. Internet Monitor creates a health event when \n\t\t\tthere's an internet issue that affects your application end users where a health score percentage is at or below a set threshold. If you \n\t\t\tdon't set a health event threshold, the default calue is 95%.</p>"
+                    }
                 }
             }
         },
@@ -360,6 +366,13 @@
                         "smithy.api#documentation": "<p>The type of impairment of a specific health event.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "HealthScoreThreshold": {
+                    "target": "com.amazonaws.internetmonitor#Percentage",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The threshold percentage for health events when Amazon CloudWatch Internet Monitor creates a health event.</p>"
+                    }
                 }
             }
         },
@@ -491,6 +504,12 @@
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The percentage of the internet-facing traffic for your application that you want to monitor with this monitor.</p>"
                     }
+                },
+                "HealthEventsConfig": {
+                    "target": "com.amazonaws.internetmonitor#HealthEventsConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of health event thresholds. A health event threshold percentage, for performance and availability, determines the level\n\t\t\tof impact at which Amazon CloudWatch Internet Monitor creates a health event when there's an internet issue that affects your application end users.</p>"
+                    }
                 }
             }
         },
@@ -567,6 +586,13 @@
                         "smithy.api#documentation": "<p>The type of impairment for a health event.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "HealthScoreThreshold": {
+                    "target": "com.amazonaws.internetmonitor#Percentage",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The value of the threshold percentage for performance or availability that was configured when Amazon CloudWatch Internet Monitor created the health event.</p>"
+                    }
                 }
             },
             "traits": {
@@ -640,6 +666,28 @@
                         "name": "RESOLVED"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.internetmonitor#HealthEventsConfig": {
+            "type": "structure",
+            "members": {
+                "AvailabilityScoreThreshold": {
+                    "target": "com.amazonaws.internetmonitor#Percentage",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The health event threshold percentage set for availability scores.</p>"
+                    }
+                },
+                "PerformanceScoreThreshold": {
+                    "target": "com.amazonaws.internetmonitor#Percentage",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The health event threshold percentage set for performance scores.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A complex type for the configuration. Defines the health event threshold percentages, for performance score and availability score. Amazon CloudWatch Internet Monitor creates a health event when \n\t\t\tthere's an internet issue that affects your application end users where a health score percentage is at or below a set threshold. If you \n\t\t\tdon't set a health event threshold, the default value is 95%.</p>"
             }
         },
         "com.amazonaws.internetmonitor#ImpactedLocation": {
@@ -1784,6 +1832,16 @@
                 "smithy.api#httpError": 404
             }
         },
+        "com.amazonaws.internetmonitor#Percentage": {
+            "type": "double",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.internetmonitor#PerformanceMeasurement": {
             "type": "structure",
             "members": {
@@ -2241,6 +2299,12 @@
                     "traits": {
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The percentage of the internet-facing traffic for your application that you want to monitor with this monitor.</p>"
+                    }
+                },
+                "HealthEventsConfig": {
+                    "target": "com.amazonaws.internetmonitor#HealthEventsConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of health event thresholds. A health event threshold percentage, for performance and availability, determines when Internet Monitor creates \n\t\t\ta health event when there's an internet issue that affects your application end users.</p>"
                     }
                 }
             }
