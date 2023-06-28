@@ -1,8 +1,10 @@
 package auth
 
 import (
+	"context"
 	"fmt"
 	smithy "github.com/aws/smithy-go"
+	"github.com/aws/smithy-go/middleware"
 )
 
 // SigV4 is a constant representing
@@ -64,6 +66,7 @@ type NoAuthenticationSchemesFoundError struct{}
 func (e *NoAuthenticationSchemesFoundError) Error() string {
 	return fmt.Sprint("No authentication schemes specified.")
 }
+
 // UnSupportedAuthenticationSchemeSpecifiedError is used in
 // signaling that only unsupported authentication schemes
 // were specified.
@@ -124,6 +127,27 @@ func GetAuthenticationSchemes(p *smithy.Properties) ([]AuthenticationScheme, err
 	}
 
 	return result, nil
+}
+
+type disableDoubleEncoding struct{}
+
+// SetDisableDoubleEncoding sets or modifies the disable double encoding option
+// on the context.
+//
+// Scoped to stack values. Use github.com/aws/smithy-go/middleware#ClearStackValues
+// to clear all stack values.
+func SetDisableDoubleEncoding(ctx context.Context, value bool) context.Context {
+	return middleware.WithStackValue(ctx, disableDoubleEncoding{}, value)
+}
+
+// GetDisableDoubleEncoding retrieves the disable double encoding option
+// from the context.
+//
+// Scoped to stack values. Use github.com/aws/smithy-go/middleware#ClearStackValues
+// to clear all stack values.
+func GetDisableDoubleEncoding(ctx context.Context) (value bool, ok bool) {
+	value, ok = middleware.GetStackValue(ctx, disableDoubleEncoding{}).(bool)
+	return value, ok
 }
 
 func getSigningName(authScheme map[string]interface{}) *string {

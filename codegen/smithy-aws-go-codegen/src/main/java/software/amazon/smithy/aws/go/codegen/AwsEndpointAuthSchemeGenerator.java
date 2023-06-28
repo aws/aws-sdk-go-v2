@@ -146,12 +146,16 @@ public class AwsEndpointAuthSchemeGenerator implements GoIntegration {
                     if v4Scheme.SigningRegion == nil {
                         signingRegion = m.BuiltInResolver.(*BuiltInResolver).Region
                     }
+                    if v4Scheme.DisableDoubleEncoding != nil {
+                        ctx = $T(ctx, *v4Scheme.DisableDoubleEncoding)
+                    }
                     ctx = $T(ctx, signingName)
                     ctx = $T(ctx, signingRegion)
                     $W
                 """,
                 SymbolUtils.createPointableSymbolBuilder("AuthenticationSchemeV4", AwsGoDependency.INTERNAL_AUTH).build(),
                 signingNameDefault,
+                SymbolUtils.createValueSymbolBuilder("SetDisableDoubleEncoding", AwsGoDependency.INTERNAL_AUTH).build(),
                 SymbolUtils.createValueSymbolBuilder("SetSigningName", AwsGoDependency.AWS_MIDDLEWARE).build(),
                 SymbolUtils.createValueSymbolBuilder("SetSigningRegion", AwsGoDependency.AWS_MIDDLEWARE).build(),
                 signerVersion
@@ -183,12 +187,16 @@ public class AwsEndpointAuthSchemeGenerator implements GoIntegration {
                     if v4aScheme.SigningName == nil {
                         signingName = \"$L\"
                     }
+                    if v4aScheme.DisableDoubleEncoding != nil {
+                        ctx = $T(ctx, *v4aScheme.DisableDoubleEncoding)
+                    }
                     ctx = $T(ctx, signingName)
                     ctx = $T(ctx, v4aScheme.SigningRegionSet[0]) 
                     $W
                 """,
                 SymbolUtils.createPointableSymbolBuilder("AuthenticationSchemeV4A", AwsGoDependency.INTERNAL_AUTH).build(),
                 SymbolUtils.createValueSymbolBuilder(signingNameDefault).build(),
+                SymbolUtils.createValueSymbolBuilder("SetDisableDoubleEncoding", AwsGoDependency.INTERNAL_AUTH).build(),
                 SymbolUtils.createValueSymbolBuilder("SetSigningName", AwsGoDependency.AWS_MIDDLEWARE).build(),
                 SymbolUtils.createValueSymbolBuilder("SetSigningRegion", AwsGoDependency.AWS_MIDDLEWARE).build(),
                 signerVersion
