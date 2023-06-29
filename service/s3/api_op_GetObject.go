@@ -623,7 +623,7 @@ func (m *opGetObjectResolveEndpointMiddleware) HandleSerialize(ctx context.Conte
 		if errors.As(err, &ue) {
 			return out, metadata, fmt.Errorf(
 				"This operation requests signer version(s) %v but the client only supports %v",
-				ue.UnsupportedSchemges,
+				ue.UnsupportedSchemes,
 				internalauth.SupportedSchemes,
 			)
 		}
