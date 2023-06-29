@@ -236,8 +236,8 @@ func (m *opPublishLayerVersionResolveEndpointMiddleware) HandleSerialize(ctx con
 		var ue *internalauth.UnSupportedAuthenticationSchemeSpecifiedError
 		if errors.As(err, &ue) {
 			return out, metadata, fmt.Errorf(
-				"This operation requests signer version %s but the client only supports %v",
-				ue.UnsupportedName,
+				"This operation requests signer version(s) %v but the client only supports %v",
+				ue.UnsupportedSchemes,
 				internalauth.SupportedSchemes,
 			)
 		}
