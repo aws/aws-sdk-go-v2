@@ -31434,6 +31434,11 @@ func awsAwsjson11_deserializeDocumentCrawlerTargets(v **types.CrawlerTargets, va
 				return err
 			}
 
+		case "IcebergTargets":
+			if err := awsAwsjson11_deserializeDocumentIcebergTargetList(&sv.IcebergTargets, value); err != nil {
+				return err
+			}
+
 		case "JdbcTargets":
 			if err := awsAwsjson11_deserializeDocumentJdbcTargetList(&sv.JdbcTargets, value); err != nil {
 				return err
@@ -37573,6 +37578,103 @@ func awsAwsjson11_deserializeDocumentGrokClassifier(v **types.GrokClassifier, va
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentIcebergTarget(v **types.IcebergTarget, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.IcebergTarget
+	if *v == nil {
+		sv = &types.IcebergTarget{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ConnectionName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConnectionName to be of type string, got %T instead", value)
+				}
+				sv.ConnectionName = ptr.String(jtv)
+			}
+
+		case "Exclusions":
+			if err := awsAwsjson11_deserializeDocumentPathList(&sv.Exclusions, value); err != nil {
+				return err
+			}
+
+		case "MaximumTraversalDepth":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected NullableInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaximumTraversalDepth = ptr.Int32(int32(i64))
+			}
+
+		case "Paths":
+			if err := awsAwsjson11_deserializeDocumentPathList(&sv.Paths, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentIcebergTargetList(v *[]types.IcebergTarget, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.IcebergTarget
+	if *v == nil {
+		cv = []types.IcebergTarget{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.IcebergTarget
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentIcebergTarget(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

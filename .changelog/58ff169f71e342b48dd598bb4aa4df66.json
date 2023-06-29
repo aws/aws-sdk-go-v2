@@ -1,0 +1,8 @@
+{
+    "id": "58ff169f-71e3-42b4-8dd5-98bb4aa4df66",
+    "type": "feature",
+    "description": "Amazon GameLift now supports game builds that use the Amazon Linux 2023 (AL2023) operating system.",
+    "modules": [
+        "service/gamelift"
+    ]
+}

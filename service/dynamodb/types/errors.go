@@ -66,6 +66,8 @@ type ConditionalCheckFailedException struct {
 
 	ErrorCodeOverride *string
 
+	Item map[string]AttributeValue
+
 	noSmithyDocumentSerde
 }
 

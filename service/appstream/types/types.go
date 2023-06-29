@@ -44,10 +44,8 @@ type AppBlock struct {
 	// This member is required.
 	Name *string
 
-	// The setup script details of the app block.
-	//
-	// This member is required.
-	SetupScriptDetails *ScriptDetails
+	// The errors of the app block.
+	AppBlockErrors []ErrorDetails
 
 	// The created time of the app block.
 	CreatedTime *time.Time
@@ -58,8 +56,116 @@ type AppBlock struct {
 	// The display name of the app block.
 	DisplayName *string
 
+	// The packaging type of the app block.
+	PackagingType PackagingType
+
+	// The post setup script details of the app block. This only applies to app blocks
+	// with PackagingType APPSTREAM2 .
+	PostSetupScriptDetails *ScriptDetails
+
+	// The setup script details of the app block. This only applies to app blocks with
+	// PackagingType CUSTOM .
+	SetupScriptDetails *ScriptDetails
+
 	// The source S3 location of the app block.
 	SourceS3Location *S3Location
+
+	// The state of the app block. An app block with AppStream 2.0 packaging will be
+	// in the INACTIVE state if no application package (VHD) is assigned to it. After
+	// an application package (VHD) is created by an app block builder for an app
+	// block, it becomes ACTIVE . Custom app blocks are always in the ACTIVE state and
+	// no action is required to use them.
+	State AppBlockState
+
+	noSmithyDocumentSerde
+}
+
+// Describes an app block builder.
+type AppBlockBuilder struct {
+
+	// The ARN of the app block builder.
+	//
+	// This member is required.
+	Arn *string
+
+	// The instance type of the app block builder.
+	//
+	// This member is required.
+	InstanceType *string
+
+	// The name of the app block builder.
+	//
+	// This member is required.
+	Name *string
+
+	// The platform of the app block builder. WINDOWS_SERVER_2019 is the only valid
+	// value.
+	//
+	// This member is required.
+	Platform AppBlockBuilderPlatformType
+
+	// The state of the app block builder.
+	//
+	// This member is required.
+	State AppBlockBuilderState
+
+	// The VPC configuration for the app block builder.
+	//
+	// This member is required.
+	VpcConfig *VpcConfig
+
+	// The list of interface VPC endpoint (interface endpoint) objects. Administrators
+	// can connect to the app block builder only through the specified endpoints.
+	AccessEndpoints []AccessEndpoint
+
+	// The app block builder errors.
+	AppBlockBuilderErrors []ResourceError
+
+	// The creation time of the app block builder.
+	CreatedTime *time.Time
+
+	// The description of the app block builder.
+	Description *string
+
+	// The display name of the app block builder.
+	DisplayName *string
+
+	// Indicates whether default internet access is enabled for the app block builder.
+	EnableDefaultInternetAccess *bool
+
+	// The ARN of the IAM role that is applied to the app block builder.
+	IamRoleArn *string
+
+	// The state change reason.
+	StateChangeReason *AppBlockBuilderStateChangeReason
+
+	noSmithyDocumentSerde
+}
+
+// Describes an association between an app block builder and app block.
+type AppBlockBuilderAppBlockAssociation struct {
+
+	// The ARN of the app block.
+	//
+	// This member is required.
+	AppBlockArn *string
+
+	// The name of the app block builder.
+	//
+	// This member is required.
+	AppBlockBuilderName *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the reason why the last app block builder state change occurred.
+type AppBlockBuilderStateChangeReason struct {
+
+	// The state change reason code.
+	Code AppBlockBuilderStateChangeReasonCode
+
+	// The state change reason message.
+	Message *string
 
 	noSmithyDocumentSerde
 }
@@ -341,6 +447,18 @@ type EntitlementAttribute struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// The error details.
+type ErrorDetails struct {
+
+	// The error code.
+	ErrorCode *string
+
+	// The error message.
+	ErrorMessage *string
 
 	noSmithyDocumentSerde
 }
@@ -781,9 +899,16 @@ type S3Location struct {
 	// This member is required.
 	S3Bucket *string
 
-	// The S3 key of the S3 object.
-	//
-	// This member is required.
+	// The S3 key of the S3 object. This is required when used for the following:
+	//   - IconS3Location (Actions: CreateApplication and UpdateApplication)
+	//   - SessionScriptS3Location (Actions: CreateFleet and UpdateFleet)
+	//   - ScriptDetails (Actions: CreateAppBlock)
+	//   - SourceS3Location when creating an app block with CUSTOM PackagingType
+	//   (Actions: CreateAppBlock)
+	//   - SourceS3Location when creating an app block with APPSTREAM2 PackagingType,
+	//   and using an existing application package (VHD file). In this case, S3Key
+	//   refers to the VHD file. If a new application package is required, then S3Key
+	//   is not required. (Actions: CreateAppBlock)
 	S3Key *string
 
 	noSmithyDocumentSerde

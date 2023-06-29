@@ -16,7 +16,15 @@ import (
 // Region. Enabling CreateVoiceConnectorRequest$RequireEncryption configures your
 // Amazon Chime Voice Connector to use TLS transport for SIP signaling and Secure
 // RTP (SRTP) for media. Inbound calls use TLS transport, and unencrypted outbound
-// calls are blocked.
+// calls are blocked. This API is is no longer supported and will not be updated.
+// We recommend using the latest version, CreateVoiceConnector (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_CreateVoiceConnector.html)
+// , in the Amazon Chime SDK. Using the latest version requires migrating to a
+// dedicated namespace. For more information, refer to Migrating from the Amazon
+// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
+// in the Amazon Chime SDK Developer Guide.
+//
+// Deprecated: Replaced by CreateVoiceConnector in the Amazon Chime SDK Voice
+// Namespace
 func (c *Client) CreateVoiceConnector(ctx context.Context, params *CreateVoiceConnectorInput, optFns ...func(*Options)) (*CreateVoiceConnectorOutput, error) {
 	if params == nil {
 		params = &CreateVoiceConnectorInput{}

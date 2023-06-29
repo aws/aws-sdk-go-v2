@@ -8631,6 +8631,11 @@ func awsAwsjson10_deserializeDocumentBatchStatementError(v **types.BatchStatemen
 				sv.Code = types.BatchStatementErrorCodeEnum(jtv)
 			}
 
+		case "Item":
+			if err := awsAwsjson10_deserializeDocumentAttributeMap(&sv.Item, value); err != nil {
+				return err
+			}
+
 		case "Message":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9072,6 +9077,11 @@ func awsAwsjson10_deserializeDocumentConditionalCheckFailedException(v **types.C
 
 	for key, value := range shape {
 		switch key {
+		case "Item":
+			if err := awsAwsjson10_deserializeDocumentAttributeMap(&sv.Item, value); err != nil {
+				return err
+			}
+
 		case "message":
 			if value != nil {
 				jtv, ok := value.(string)

@@ -28,6 +28,31 @@ func (ActionStatus) Values() []ActionStatus {
 	}
 }
 
+type AggregationTransformationValue string
+
+// Enum values for AggregationTransformationValue
+const (
+	AggregationTransformationValueSum   AggregationTransformationValue = "sum"
+	AggregationTransformationValueAvg   AggregationTransformationValue = "avg"
+	AggregationTransformationValueFirst AggregationTransformationValue = "first"
+	AggregationTransformationValueMin   AggregationTransformationValue = "min"
+	AggregationTransformationValueMax   AggregationTransformationValue = "max"
+)
+
+// Values returns all known values for AggregationTransformationValue. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (AggregationTransformationValue) Values() []AggregationTransformationValue {
+	return []AggregationTransformationValue{
+		"sum",
+		"avg",
+		"first",
+		"min",
+		"max",
+	}
+}
+
 type AlgorithmSortBy string
 
 // Enum values for AlgorithmSortBy
@@ -556,6 +581,7 @@ const (
 	AutoMLJobSecondaryStatusGeneratingModelInsightsReport  AutoMLJobSecondaryStatus = "GeneratingModelInsightsReport"
 	AutoMLJobSecondaryStatusModelInsightsError             AutoMLJobSecondaryStatus = "ModelInsightsError"
 	AutoMLJobSecondaryStatusTrainingModels                 AutoMLJobSecondaryStatus = "TrainingModels"
+	AutoMLJobSecondaryStatusPreTraining                    AutoMLJobSecondaryStatus = "PreTraining"
 )
 
 // Values returns all known values for AutoMLJobSecondaryStatus. Note that this
@@ -581,6 +607,7 @@ func (AutoMLJobSecondaryStatus) Values() []AutoMLJobSecondaryStatus {
 		"GeneratingModelInsightsReport",
 		"ModelInsightsError",
 		"TrainingModels",
+		"PreTraining",
 	}
 }
 
@@ -612,19 +639,23 @@ type AutoMLMetricEnum string
 
 // Enum values for AutoMLMetricEnum
 const (
-	AutoMLMetricEnumAccuracy         AutoMLMetricEnum = "Accuracy"
-	AutoMLMetricEnumMse              AutoMLMetricEnum = "MSE"
-	AutoMLMetricEnumF1               AutoMLMetricEnum = "F1"
-	AutoMLMetricEnumF1Macro          AutoMLMetricEnum = "F1macro"
-	AutoMLMetricEnumAuc              AutoMLMetricEnum = "AUC"
-	AutoMLMetricEnumRmse             AutoMLMetricEnum = "RMSE"
-	AutoMLMetricEnumMae              AutoMLMetricEnum = "MAE"
-	AutoMLMetricEnumR2               AutoMLMetricEnum = "R2"
-	AutoMLMetricEnumBalancedAccuracy AutoMLMetricEnum = "BalancedAccuracy"
-	AutoMLMetricEnumPrecision        AutoMLMetricEnum = "Precision"
-	AutoMLMetricEnumPrecisionMacro   AutoMLMetricEnum = "PrecisionMacro"
-	AutoMLMetricEnumRecall           AutoMLMetricEnum = "Recall"
-	AutoMLMetricEnumRecallMacro      AutoMLMetricEnum = "RecallMacro"
+	AutoMLMetricEnumAccuracy                    AutoMLMetricEnum = "Accuracy"
+	AutoMLMetricEnumMse                         AutoMLMetricEnum = "MSE"
+	AutoMLMetricEnumF1                          AutoMLMetricEnum = "F1"
+	AutoMLMetricEnumF1Macro                     AutoMLMetricEnum = "F1macro"
+	AutoMLMetricEnumAuc                         AutoMLMetricEnum = "AUC"
+	AutoMLMetricEnumRmse                        AutoMLMetricEnum = "RMSE"
+	AutoMLMetricEnumMae                         AutoMLMetricEnum = "MAE"
+	AutoMLMetricEnumR2                          AutoMLMetricEnum = "R2"
+	AutoMLMetricEnumBalancedAccuracy            AutoMLMetricEnum = "BalancedAccuracy"
+	AutoMLMetricEnumPrecision                   AutoMLMetricEnum = "Precision"
+	AutoMLMetricEnumPrecisionMacro              AutoMLMetricEnum = "PrecisionMacro"
+	AutoMLMetricEnumRecall                      AutoMLMetricEnum = "Recall"
+	AutoMLMetricEnumRecallMacro                 AutoMLMetricEnum = "RecallMacro"
+	AutoMLMetricEnumMape                        AutoMLMetricEnum = "MAPE"
+	AutoMLMetricEnumMase                        AutoMLMetricEnum = "MASE"
+	AutoMLMetricEnumWape                        AutoMLMetricEnum = "WAPE"
+	AutoMLMetricEnumAverageWeightedQuantileLoss AutoMLMetricEnum = "AverageWeightedQuantileLoss"
 )
 
 // Values returns all known values for AutoMLMetricEnum. Note that this can be
@@ -645,6 +676,10 @@ func (AutoMLMetricEnum) Values() []AutoMLMetricEnum {
 		"PrecisionMacro",
 		"Recall",
 		"RecallMacro",
+		"MAPE",
+		"MASE",
+		"WAPE",
+		"AverageWeightedQuantileLoss",
 	}
 }
 
@@ -652,21 +687,25 @@ type AutoMLMetricExtendedEnum string
 
 // Enum values for AutoMLMetricExtendedEnum
 const (
-	AutoMLMetricExtendedEnumAccuracy         AutoMLMetricExtendedEnum = "Accuracy"
-	AutoMLMetricExtendedEnumMse              AutoMLMetricExtendedEnum = "MSE"
-	AutoMLMetricExtendedEnumF1               AutoMLMetricExtendedEnum = "F1"
-	AutoMLMetricExtendedEnumF1Macro          AutoMLMetricExtendedEnum = "F1macro"
-	AutoMLMetricExtendedEnumAuc              AutoMLMetricExtendedEnum = "AUC"
-	AutoMLMetricExtendedEnumRmse             AutoMLMetricExtendedEnum = "RMSE"
-	AutoMLMetricExtendedEnumMae              AutoMLMetricExtendedEnum = "MAE"
-	AutoMLMetricExtendedEnumR2               AutoMLMetricExtendedEnum = "R2"
-	AutoMLMetricExtendedEnumBalancedAccuracy AutoMLMetricExtendedEnum = "BalancedAccuracy"
-	AutoMLMetricExtendedEnumPrecision        AutoMLMetricExtendedEnum = "Precision"
-	AutoMLMetricExtendedEnumPrecisionMacro   AutoMLMetricExtendedEnum = "PrecisionMacro"
-	AutoMLMetricExtendedEnumRecall           AutoMLMetricExtendedEnum = "Recall"
-	AutoMLMetricExtendedEnumRecallMacro      AutoMLMetricExtendedEnum = "RecallMacro"
-	AutoMLMetricExtendedEnumLogLoss          AutoMLMetricExtendedEnum = "LogLoss"
-	AutoMLMetricExtendedEnumInferenceLatency AutoMLMetricExtendedEnum = "InferenceLatency"
+	AutoMLMetricExtendedEnumAccuracy                    AutoMLMetricExtendedEnum = "Accuracy"
+	AutoMLMetricExtendedEnumMse                         AutoMLMetricExtendedEnum = "MSE"
+	AutoMLMetricExtendedEnumF1                          AutoMLMetricExtendedEnum = "F1"
+	AutoMLMetricExtendedEnumF1Macro                     AutoMLMetricExtendedEnum = "F1macro"
+	AutoMLMetricExtendedEnumAuc                         AutoMLMetricExtendedEnum = "AUC"
+	AutoMLMetricExtendedEnumRmse                        AutoMLMetricExtendedEnum = "RMSE"
+	AutoMLMetricExtendedEnumMae                         AutoMLMetricExtendedEnum = "MAE"
+	AutoMLMetricExtendedEnumR2                          AutoMLMetricExtendedEnum = "R2"
+	AutoMLMetricExtendedEnumBalancedAccuracy            AutoMLMetricExtendedEnum = "BalancedAccuracy"
+	AutoMLMetricExtendedEnumPrecision                   AutoMLMetricExtendedEnum = "Precision"
+	AutoMLMetricExtendedEnumPrecisionMacro              AutoMLMetricExtendedEnum = "PrecisionMacro"
+	AutoMLMetricExtendedEnumRecall                      AutoMLMetricExtendedEnum = "Recall"
+	AutoMLMetricExtendedEnumRecallMacro                 AutoMLMetricExtendedEnum = "RecallMacro"
+	AutoMLMetricExtendedEnumLogLoss                     AutoMLMetricExtendedEnum = "LogLoss"
+	AutoMLMetricExtendedEnumInferenceLatency            AutoMLMetricExtendedEnum = "InferenceLatency"
+	AutoMLMetricExtendedEnumMape                        AutoMLMetricExtendedEnum = "MAPE"
+	AutoMLMetricExtendedEnumMase                        AutoMLMetricExtendedEnum = "MASE"
+	AutoMLMetricExtendedEnumWape                        AutoMLMetricExtendedEnum = "WAPE"
+	AutoMLMetricExtendedEnumAverageWeightedQuantileLoss AutoMLMetricExtendedEnum = "AverageWeightedQuantileLoss"
 )
 
 // Values returns all known values for AutoMLMetricExtendedEnum. Note that this
@@ -689,6 +728,10 @@ func (AutoMLMetricExtendedEnum) Values() []AutoMLMetricExtendedEnum {
 		"RecallMacro",
 		"LogLoss",
 		"InferenceLatency",
+		"MAPE",
+		"MASE",
+		"WAPE",
+		"AverageWeightedQuantileLoss",
 	}
 }
 
@@ -716,9 +759,10 @@ type AutoMLProblemTypeConfigName string
 
 // Enum values for AutoMLProblemTypeConfigName
 const (
-	AutoMLProblemTypeConfigNameImageClassification AutoMLProblemTypeConfigName = "ImageClassification"
-	AutoMLProblemTypeConfigNameTextClassification  AutoMLProblemTypeConfigName = "TextClassification"
-	AutoMLProblemTypeConfigNameTabular             AutoMLProblemTypeConfigName = "Tabular"
+	AutoMLProblemTypeConfigNameImageClassification   AutoMLProblemTypeConfigName = "ImageClassification"
+	AutoMLProblemTypeConfigNameTextClassification    AutoMLProblemTypeConfigName = "TextClassification"
+	AutoMLProblemTypeConfigNameTabular               AutoMLProblemTypeConfigName = "Tabular"
+	AutoMLProblemTypeConfigNameTimeseriesForecasting AutoMLProblemTypeConfigName = "TimeSeriesForecasting"
 )
 
 // Values returns all known values for AutoMLProblemTypeConfigName. Note that this
@@ -729,6 +773,7 @@ func (AutoMLProblemTypeConfigName) Values() []AutoMLProblemTypeConfigName {
 		"ImageClassification",
 		"TextClassification",
 		"Tabular",
+		"TimeSeriesForecasting",
 	}
 }
 
@@ -1826,6 +1871,36 @@ func (FileSystemType) Values() []FileSystemType {
 	return []FileSystemType{
 		"EFS",
 		"FSxLustre",
+	}
+}
+
+type FillingType string
+
+// Enum values for FillingType
+const (
+	FillingTypeFrontfill       FillingType = "frontfill"
+	FillingTypeMiddlefill      FillingType = "middlefill"
+	FillingTypeBackfill        FillingType = "backfill"
+	FillingTypeFuturefill      FillingType = "futurefill"
+	FillingTypeFrontfillValue  FillingType = "frontfill_value"
+	FillingTypeMiddlefillValue FillingType = "middlefill_value"
+	FillingTypeBackfillValue   FillingType = "backfill_value"
+	FillingTypeFuturefillValue FillingType = "futurefill_value"
+)
+
+// Values returns all known values for FillingType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (FillingType) Values() []FillingType {
+	return []FillingType{
+		"frontfill",
+		"middlefill",
+		"backfill",
+		"futurefill",
+		"frontfill_value",
+		"middlefill_value",
+		"backfill_value",
+		"futurefill_value",
 	}
 }
 

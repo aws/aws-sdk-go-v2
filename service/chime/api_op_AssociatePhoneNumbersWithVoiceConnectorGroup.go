@@ -12,6 +12,15 @@ import (
 )
 
 // Associates phone numbers with the specified Amazon Chime Voice Connector group.
+// This API is is no longer supported and will not be updated. We recommend using
+// the latest version, AssociatePhoneNumbersWithVoiceConnectorGroup (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_AssociatePhoneNumbersWithVoiceConnectorGroup.html)
+// , in the Amazon Chime SDK. Using the latest version requires migrating to a
+// dedicated namespace. For more information, refer to Migrating from the Amazon
+// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
+// in the Amazon Chime SDK Developer Guide.
+//
+// Deprecated: Replaced by AssociatePhoneNumbersWithVoiceConnectorGroup in the
+// Amazon Chime SDK Voice Namespace
 func (c *Client) AssociatePhoneNumbersWithVoiceConnectorGroup(ctx context.Context, params *AssociatePhoneNumbersWithVoiceConnectorGroupInput, optFns ...func(*Options)) (*AssociatePhoneNumbersWithVoiceConnectorGroupOutput, error) {
 	if params == nil {
 		params = &AssociatePhoneNumbersWithVoiceConnectorGroupInput{}

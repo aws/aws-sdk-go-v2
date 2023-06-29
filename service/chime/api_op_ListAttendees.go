@@ -14,7 +14,14 @@ import (
 
 // Lists the attendees for the specified Amazon Chime SDK meeting. For more
 // information about the Amazon Chime SDK, see Using the Amazon Chime SDK (https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html)
+// in the Amazon Chime SDK Developer Guide. This API is is no longer supported and
+// will not be updated. We recommend using the latest version, ListAttendees (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_meeting-chime_ListAttendees.html)
+// , in the Amazon Chime SDK. Using the latest version requires migrating to a
+// dedicated namespace. For more information, refer to Migrating from the Amazon
+// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
 // in the Amazon Chime SDK Developer Guide.
+//
+// Deprecated: Replaced by ListAttendees in the Amazon Chime SDK Meetings Namespace
 func (c *Client) ListAttendees(ctx context.Context, params *ListAttendeesInput, optFns ...func(*Options)) (*ListAttendeesOutput, error) {
 	if params == nil {
 		params = &ListAttendeesInput{}

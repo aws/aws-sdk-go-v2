@@ -167,6 +167,24 @@ func (FilterableMemberStatus) Values() []FilterableMemberStatus {
 	}
 }
 
+type JoinOperator string
+
+// Enum values for JoinOperator
+const (
+	JoinOperatorOr  JoinOperator = "OR"
+	JoinOperatorAnd JoinOperator = "AND"
+)
+
+// Values returns all known values for JoinOperator. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (JoinOperator) Values() []JoinOperator {
+	return []JoinOperator{
+		"OR",
+		"AND",
+	}
+}
+
 type JoinRequiredOption string
 
 // Enum values for JoinRequiredOption

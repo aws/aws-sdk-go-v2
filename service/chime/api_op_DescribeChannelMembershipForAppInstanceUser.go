@@ -15,7 +15,15 @@ import (
 // Returns the details of a channel based on the membership of the specified
 // AppInstanceUser . The x-amz-chime-bearer request header is mandatory. Use the
 // AppInstanceUserArn of the user that makes the API call as the value in the
-// header.
+// header. This API is is no longer supported and will not be updated. We recommend
+// using the latest version, DescribeChannelMembershipForAppInstanceUser (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_DescribeChannelMembershipForAppInstanceUser.html)
+// , in the Amazon Chime SDK. Using the latest version requires migrating to a
+// dedicated namespace. For more information, refer to Migrating from the Amazon
+// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
+// in the Amazon Chime SDK Developer Guide.
+//
+// Deprecated: Replaced by DescribeChannelMembershipForAppInstanceUser in the
+// Amazon Chime SDK Messaging Namespace
 func (c *Client) DescribeChannelMembershipForAppInstanceUser(ctx context.Context, params *DescribeChannelMembershipForAppInstanceUserInput, optFns ...func(*Options)) (*DescribeChannelMembershipForAppInstanceUserOutput, error) {
 	if params == nil {
 		params = &DescribeChannelMembershipForAppInstanceUserInput{}

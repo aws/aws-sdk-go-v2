@@ -11,7 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the details of the specified SIP rule.
+// Updates the details of the specified SIP rule. This API is is no longer
+// supported and will not be updated. We recommend using the latest version,
+// UpdateSipRule (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_UpdateSipRule.html)
+// , in the Amazon Chime SDK. Using the latest version requires migrating to a
+// dedicated namespace. For more information, refer to Migrating from the Amazon
+// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
+// in the Amazon Chime SDK Developer Guide.
+//
+// Deprecated: Replaced by UpdateSipRule in the Amazon Chime SDK Voice Namespace
 func (c *Client) UpdateSipRule(ctx context.Context, params *UpdateSipRuleInput, optFns ...func(*Options)) (*UpdateSipRuleOutput, error) {
 	if params == nil {
 		params = &UpdateSipRuleInput{}

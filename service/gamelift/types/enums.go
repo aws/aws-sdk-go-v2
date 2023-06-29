@@ -1135,10 +1135,11 @@ type OperatingSystem string
 
 // Enum values for OperatingSystem
 const (
-	OperatingSystemWindows2012  OperatingSystem = "WINDOWS_2012"
-	OperatingSystemAmazonLinux  OperatingSystem = "AMAZON_LINUX"
-	OperatingSystemAmazonLinux2 OperatingSystem = "AMAZON_LINUX_2"
-	OperatingSystemWindows2016  OperatingSystem = "WINDOWS_2016"
+	OperatingSystemWindows2012     OperatingSystem = "WINDOWS_2012"
+	OperatingSystemAmazonLinux     OperatingSystem = "AMAZON_LINUX"
+	OperatingSystemAmazonLinux2    OperatingSystem = "AMAZON_LINUX_2"
+	OperatingSystemWindows2016     OperatingSystem = "WINDOWS_2016"
+	OperatingSystemAmazonLinux2023 OperatingSystem = "AMAZON_LINUX_2023"
 )
 
 // Values returns all known values for OperatingSystem. Note that this can be
@@ -1150,6 +1151,7 @@ func (OperatingSystem) Values() []OperatingSystem {
 		"AMAZON_LINUX",
 		"AMAZON_LINUX_2",
 		"WINDOWS_2016",
+		"AMAZON_LINUX_2023",
 	}
 }
 

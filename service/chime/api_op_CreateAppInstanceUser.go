@@ -13,7 +13,16 @@ import (
 )
 
 // Creates a user under an Amazon Chime AppInstance . The request consists of a
-// unique appInstanceUserId and Name for that user.
+// unique appInstanceUserId and Name for that user. This API is is no longer
+// supported and will not be updated. We recommend using the latest version,
+// CreateAppInstanceUser (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_identity-chime_CreateAppInstanceUser.html)
+// , in the Amazon Chime SDK. Using the latest version requires migrating to a
+// dedicated namespace. For more information, refer to Migrating from the Amazon
+// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
+// in the Amazon Chime SDK Developer Guide.
+//
+// Deprecated: Replaced by CreateAppInstanceUser in the Amazon Chime SDK Identity
+// Namespace
 func (c *Client) CreateAppInstanceUser(ctx context.Context, params *CreateAppInstanceUserInput, optFns ...func(*Options)) (*CreateAppInstanceUserOutput, error) {
 	if params == nil {
 		params = &CreateAppInstanceUserInput{}

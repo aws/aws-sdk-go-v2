@@ -11,7 +11,16 @@ import (
 )
 
 // Deletes the specified SIP credentials used by your equipment to authenticate
-// during call termination.
+// during call termination. This API is is no longer supported and will not be
+// updated. We recommend using the latest version,
+// DeleteVoiceConnectorTerminationCredentials (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_DeleteVoiceConnectorTerminationCredentials.html)
+// , in the Amazon Chime SDK. Using the latest version requires migrating to a
+// dedicated namespace. For more information, refer to Migrating from the Amazon
+// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
+// in the Amazon Chime SDK Developer Guide.
+//
+// Deprecated: Replaced by DeleteVoiceConnectorTerminationCredentials in the
+// Amazon Chime SDK Voice Namespace
 func (c *Client) DeleteVoiceConnectorTerminationCredentials(ctx context.Context, params *DeleteVoiceConnectorTerminationCredentialsInput, optFns ...func(*Options)) (*DeleteVoiceConnectorTerminationCredentialsOutput, error) {
 	if params == nil {
 		params = &DeleteVoiceConnectorTerminationCredentialsInput{}

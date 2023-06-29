@@ -1131,21 +1131,6 @@ func validateProtectedQueryS3OutputConfiguration(v *types.ProtectedQueryS3Output
 	}
 }
 
-func validateProtectedQuerySQLParameters(v *types.ProtectedQuerySQLParameters) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "ProtectedQuerySQLParameters"}
-	if v.QueryString == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("QueryString"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateTableReference(v types.TableReference) error {
 	if v == nil {
 		return nil
@@ -1642,10 +1627,6 @@ func validateOpStartProtectedQueryInput(v *StartProtectedQueryInput) error {
 	}
 	if v.SqlParameters == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SqlParameters"))
-	} else if v.SqlParameters != nil {
-		if err := validateProtectedQuerySQLParameters(v.SqlParameters); err != nil {
-			invalidParams.AddNested("SqlParameters", err.(smithy.InvalidParamsError))
-		}
 	}
 	if v.ResultConfiguration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResultConfiguration"))

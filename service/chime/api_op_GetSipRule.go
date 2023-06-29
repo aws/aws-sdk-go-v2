@@ -12,7 +12,14 @@ import (
 )
 
 // Retrieves the details of a SIP rule, such as the rule ID, name, triggers, and
-// target endpoints.
+// target endpoints. This API is is no longer supported and will not be updated. We
+// recommend using the latest version, GetSipRule (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_GetSipRule.html)
+// , in the Amazon Chime SDK. Using the latest version requires migrating to a
+// dedicated namespace. For more information, refer to Migrating from the Amazon
+// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
+// in the Amazon Chime SDK Developer Guide.
+//
+// Deprecated: Replaced by GetSipRule in the Amazon Chime SDK Voice Namespace
 func (c *Client) GetSipRule(ctx context.Context, params *GetSipRuleInput, optFns ...func(*Options)) (*GetSipRuleOutput, error) {
 	if params == nil {
 		params = &GetSipRuleInput{}

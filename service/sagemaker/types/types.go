@@ -1344,7 +1344,8 @@ type AutoMLJobChannel struct {
 
 	// The type of channel. Defines whether the data are used for training or
 	// validation. The default value is training . Channels for training and validation
-	// must share the same ContentType
+	// must share the same ContentType The type of channel defaults to training for
+	// the time-series forecasting problem type.
 	ChannelType AutoMLChannelType
 
 	// The allowed compression types depend on the input format and problem type. We
@@ -1355,12 +1356,15 @@ type AutoMLJobChannel struct {
 
 	// The content type of the data from the input source. The following are the
 	// allowed content types for different problems:
-	//   - For Tabular problem types: text/csv;header=present or
+	//   - For tabular problem types: text/csv;header=present or
 	//   x-application/vnd.amazon+parquet . The default value is
 	//   text/csv;header=present .
-	//   - For ImageClassification: image/png , image/jpeg , or image/* . The default
+	//   - For image classification: image/png , image/jpeg , or image/* . The default
 	//   value is image/* .
-	//   - For TextClassification: text/csv;header=present or
+	//   - For text classification: text/csv;header=present or
+	//   x-application/vnd.amazon+parquet . The default value is
+	//   text/csv;header=present .
+	//   - For time-series forecasting: text/csv;header=present or
 	//   x-application/vnd.amazon+parquet . The default value is
 	//   text/csv;header=present .
 	ContentType *string
@@ -1383,8 +1387,9 @@ type AutoMLJobCompletionCriteria struct {
 	// not completed.
 	MaxAutoMLJobRuntimeInSeconds *int32
 
-	// The maximum number of times a training job is allowed to run. For job V2s (jobs
-	// created by calling CreateAutoMLJobV2 ), the supported value is 1.
+	// The maximum number of times a training job is allowed to run. For text and
+	// image classification, as well as time-series forecasting problem types, the
+	// supported value is 1. For tabular problem types, the maximum value is 750.
 	MaxCandidates *int32
 
 	// The maximum time, in seconds, that each training job executed inside
@@ -1451,6 +1456,7 @@ type AutoMLJobObjective struct {
 	//   - Binary classification: F1 .
 	//   - Multiclass classification: Accuracy .
 	//   - For image or text classification problem types: Accuracy
+	//   - For time-series forecasting problem types: AverageWeightedQuantileLoss
 	//
 	// This member is required.
 	MetricName AutoMLMetricEnum
@@ -1543,6 +1549,7 @@ type AutoMLPartialFailureReason struct {
 //	AutoMLProblemTypeConfigMemberImageClassificationJobConfig
 //	AutoMLProblemTypeConfigMemberTabularJobConfig
 //	AutoMLProblemTypeConfigMemberTextClassificationJobConfig
+//	AutoMLProblemTypeConfigMemberTimeSeriesForecastingJobConfig
 type AutoMLProblemTypeConfig interface {
 	isAutoMLProblemTypeConfig()
 }
@@ -1576,6 +1583,16 @@ type AutoMLProblemTypeConfigMemberTextClassificationJobConfig struct {
 }
 
 func (*AutoMLProblemTypeConfigMemberTextClassificationJobConfig) isAutoMLProblemTypeConfig() {}
+
+// Settings used to configure an AutoML job V2 for a time-series forecasting
+// problem type.
+type AutoMLProblemTypeConfigMemberTimeSeriesForecastingJobConfig struct {
+	Value TimeSeriesForecastingJobConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*AutoMLProblemTypeConfigMemberTimeSeriesForecastingJobConfig) isAutoMLProblemTypeConfig() {}
 
 // The resolved attributes specific to the problem type of an AutoML job V2.
 //
@@ -1949,6 +1966,11 @@ type CandidateArtifactLocations struct {
 	//
 	// This member is required.
 	Explainability *string
+
+	// The Amazon S3 prefix to the accuracy metrics and the inference results observed
+	// over the testing window. Available only for the time-series forecasting problem
+	// type.
+	BacktestResults *string
 
 	// The Amazon S3 prefix to the model insight artifacts generated for the AutoML
 	// candidate.
@@ -13065,6 +13087,106 @@ type TextClassificationJobConfig struct {
 	noSmithyDocumentSerde
 }
 
+// The collection of components that defines the time-series.
+type TimeSeriesConfig struct {
+
+	// The name of the column that represents the set of item identifiers for which
+	// you want to predict the target value.
+	//
+	// This member is required.
+	ItemIdentifierAttributeName *string
+
+	// The name of the column representing the target variable that you want to
+	// predict for each item in your dataset. The data type of the target variable must
+	// be numerical.
+	//
+	// This member is required.
+	TargetAttributeName *string
+
+	// The name of the column indicating a point in time at which the target value of
+	// a given item is recorded.
+	//
+	// This member is required.
+	TimestampAttributeName *string
+
+	// A set of columns names that can be grouped with the item identifier column to
+	// create a composite key for which a target value is predicted.
+	GroupingAttributeNames []string
+
+	noSmithyDocumentSerde
+}
+
+// The collection of settings used by an AutoML job V2 for the time-series
+// forecasting problem type. The TimeSeriesForecastingJobConfig problem type is
+// only available in private beta. Contact Amazon Web Services Support or your
+// account manager to learn more about access privileges.
+type TimeSeriesForecastingJobConfig struct {
+
+	// The frequency of predictions in a forecast. Valid intervals are an integer
+	// followed by Y (Year), M (Month), W (Week), D (Day), H (Hour), and min (Minute).
+	// For example, 1D indicates every day and 15min indicates every 15 minutes. The
+	// value of a frequency must not overlap with the next larger frequency. For
+	// example, you must use a frequency of 1H instead of 60min . The valid values for
+	// each frequency are the following:
+	//   - Minute - 1-59
+	//   - Hour - 1-23
+	//   - Day - 1-6
+	//   - Week - 1-4
+	//   - Month - 1-11
+	//   - Year - 1
+	//
+	// This member is required.
+	ForecastFrequency *string
+
+	// The number of time-steps that the model predicts. The forecast horizon is also
+	// called the prediction length. The maximum forecast horizon is the lesser of 500
+	// time-steps or 1/4 of the time-steps in the dataset.
+	//
+	// This member is required.
+	ForecastHorizon *int32
+
+	// The collection of components that defines the time-series.
+	//
+	// This member is required.
+	TimeSeriesConfig *TimeSeriesConfig
+
+	// How long a job is allowed to run, or how many candidates a job is allowed to
+	// generate.
+	CompletionCriteria *AutoMLJobCompletionCriteria
+
+	// A URL to the Amazon S3 data source containing additional selected features that
+	// complement the target, itemID, timestamp, and grouped columns set in
+	// TimeSeriesConfig . When not provided, the AutoML job V2 includes all the columns
+	// from the original dataset that are not already declared in TimeSeriesConfig . If
+	// provided, the AutoML job V2 only considers these additional columns as a
+	// complement to the ones declared in TimeSeriesConfig . You can input
+	// FeatureAttributeNames (optional) in JSON format as shown below: {
+	// "FeatureAttributeNames":["col1", "col2", ...] } . You can also specify the data
+	// type of the feature (optional) in the format shown below: {
+	// "FeatureDataTypes":{"col1":"numeric", "col2":"categorical" ... } } Autopilot
+	// supports the following data types: numeric , categorical , text , and datetime .
+	// These column keys must not include any column set in TimeSeriesConfig . When not
+	// provided, the AutoML job V2 includes all the columns from the original dataset
+	// that are not already declared in TimeSeriesConfig . If provided, the AutoML job
+	// V2 only considers these additional columns as a complement to the ones declared
+	// in TimeSeriesConfig . Autopilot supports the following data types: numeric ,
+	// categorical , text , and datetime .
+	FeatureSpecificationS3Uri *string
+
+	// The quantiles used to train the model for forecasts at a specified quantile.
+	// You can specify quantiles from 0.01 (p1) to 0.99 (p99), by increments of 0.01
+	// or higher. Up to five forecast quantiles can be specified. When
+	// ForecastQuantiles is not provided, the AutoML job uses the quantiles p10, p50,
+	// and p90 as default.
+	ForecastQuantiles []string
+
+	// The transformations modifying specific attributes of the time-series, such as
+	// filling strategies for missing values.
+	Transformations *TimeSeriesTransformations
+
+	noSmithyDocumentSerde
+}
+
 // Time series forecast settings for the SageMaker Canvas application.
 type TimeSeriesForecastingSettings struct {
 
@@ -13081,6 +13203,36 @@ type TimeSeriesForecastingSettings struct {
 	// Describes whether time series forecasting is enabled or disabled in the Canvas
 	// application.
 	Status FeatureStatus
+
+	noSmithyDocumentSerde
+}
+
+// Transformations allowed on the dataset. Supported transformations are Filling
+// and Aggregation . Filling specifies how to add values to missing values in the
+// dataset. Aggregation defines how to aggregate data that does not align with
+// forecast frequency.
+type TimeSeriesTransformations struct {
+
+	// A key value pair defining the aggregation method for a column, where the key is
+	// the column name and the value is the aggregation method. The supported
+	// aggregation methods are sum (default), avg , first , min , max . Aggregation is
+	// only supported for the target column.
+	Aggregation map[string]AggregationTransformationValue
+
+	// A key value pair defining the filling method for a column, where the key is the
+	// column name and the value is an object which defines the filling logic. You can
+	// specify multiple filling methods for a single column. The supported filling
+	// methods and their corresponding options are:
+	//   - frontfill : none (Supported only for target column)
+	//   - middlefill : zero , value , median , mean , min , max
+	//   - backfill : zero , value , median , mean , min , max
+	//   - futurefill : zero , value , median , mean , min , max
+	// To set a filling method to a specific value, set the fill parameter to the
+	// chosen filling method value (for example "backfill" : "value" ), and define the
+	// filling value in an additional parameter prefixed with "_value". For example, to
+	// set backfill to a value of 2 , you must include two parameters: "backfill":
+	// "value" and "backfill_value":"2" .
+	Filling map[string]map[string]string
 
 	noSmithyDocumentSerde
 }
