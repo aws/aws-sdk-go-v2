@@ -87,7 +87,7 @@ public class AwsClientUserAgent implements GoIntegration {
                                         .type(SymbolUtils.createValueSymbolBuilder("string")
                                                 .putProperty(SymbolUtils.GO_UNIVERSE_TYPE, true)
                                                 .build())
-                                        .documentation("The sdk user agent app id to be added to http request's User-Agent header")
+                                        .documentation("The optional application specific identifier appended to the User-Agent header.")
                                         .build()
                         ))
                         .build()

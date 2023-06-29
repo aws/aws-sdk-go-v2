@@ -205,8 +205,7 @@ public class AddAwsConfigFields implements GoIntegration {
             AwsConfigField.builder()
                     .name(SDK_APP_ID)
                     .type(getUniversalSymbol("string"))
-                    .documentation("The aws sdk app ID that could be retrieved from env var or shared config file" +
-                            "to be added to request's User-Agent header")
+                    .documentation("The optional application specific identifier appended to the User-Agent header.")
                     .generatedOnClient(false)
                     .build()
     );

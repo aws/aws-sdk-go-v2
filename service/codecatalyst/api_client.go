@@ -63,7 +63,7 @@ type Options struct {
 	// modify this list for per operation behavior.
 	APIOptions []func(*middleware.Stack) error
 
-	// The sdk user agent app id to be added to http request's User-Agent header
+	// The optional application specific identifier appended to the User-Agent header.
 	AppID string
 
 	// Signer for authenticating requests with bearer auth
