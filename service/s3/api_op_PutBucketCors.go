@@ -4,9 +4,11 @@ package s3
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	internalauth "github.com/aws/aws-sdk-go-v2/internal/auth"
 	internalChecksum "github.com/aws/aws-sdk-go-v2/service/internal/checksum"
 	s3cust "github.com/aws/aws-sdk-go-v2/service/s3/internal/customizations"
 	"github.com/aws/aws-sdk-go-v2/service/s3/types"
@@ -288,6 +290,69 @@ func (m *opPutBucketCorsResolveEndpointMiddleware) HandleSerialize(ctx context.C
 			k,
 			resolvedEndpoint.Headers.Get(k),
 		)
+	}
+
+	authSchemes, err := internalauth.GetAuthenticationSchemes(&resolvedEndpoint.Properties)
+	if err != nil {
+		var nfe *internalauth.NoAuthenticationSchemesFoundError
+		if errors.As(err, &nfe) {
+			// if no auth scheme is found, default to sigv4
+			signingName := "s3"
+			signingRegion := m.BuiltInResolver.(*BuiltInResolver).Region
+			ctx = awsmiddleware.SetSigningName(ctx, signingName)
+			ctx = awsmiddleware.SetSigningRegion(ctx, signingRegion)
+			ctx = s3cust.SetSignerVersion(ctx, internalauth.SigV4)
+		}
+		var ue *internalauth.UnSupportedAuthenticationSchemeSpecifiedError
+		if errors.As(err, &ue) {
+			return out, metadata, fmt.Errorf(
+				"This operation requests signer version(s) %v but the client only supports %v",
+				ue.UnsupportedSchemes,
+				internalauth.SupportedSchemes,
+			)
+		}
+	}
+
+	for _, authScheme := range authSchemes {
+		switch authScheme.(type) {
+		case *internalauth.AuthenticationSchemeV4:
+			v4Scheme, _ := authScheme.(*internalauth.AuthenticationSchemeV4)
+			var signingName, signingRegion string
+			if v4Scheme.SigningName == nil {
+				signingName = "s3"
+			}
+			if v4Scheme.SigningRegion == nil {
+				signingRegion = m.BuiltInResolver.(*BuiltInResolver).Region
+			}
+			if v4Scheme.DisableDoubleEncoding != nil {
+				// The signer sets an equivalent value at client initialization time.
+				// Setting this context value will cause the signer to extract it
+				// and override the value set at client initialization time.
+				ctx = internalauth.SetDisableDoubleEncoding(ctx, *v4Scheme.DisableDoubleEncoding)
+			}
+			ctx = awsmiddleware.SetSigningName(ctx, signingName)
+			ctx = awsmiddleware.SetSigningRegion(ctx, signingRegion)
+			ctx = s3cust.SetSignerVersion(ctx, v4Scheme.Name)
+			break
+		case *internalauth.AuthenticationSchemeV4A:
+			v4aScheme, _ := authScheme.(*internalauth.AuthenticationSchemeV4A)
+			var signingName string
+			if v4aScheme.SigningName == nil {
+				signingName = "s3"
+			}
+			if v4aScheme.DisableDoubleEncoding != nil {
+				// The signer sets an equivalent value at client initialization time.
+				// Setting this context value will cause the signer to extract it
+				// and override the value set at client initialization time.
+				ctx = internalauth.SetDisableDoubleEncoding(ctx, *v4aScheme.DisableDoubleEncoding)
+			}
+			ctx = awsmiddleware.SetSigningName(ctx, signingName)
+			ctx = awsmiddleware.SetSigningRegion(ctx, v4aScheme.SigningRegionSet[0])
+			ctx = s3cust.SetSignerVersion(ctx, v4aScheme.Name)
+			break
+		case *internalauth.AuthenticationSchemeNone:
+			break
+		}
 	}
 
 	return next.HandleSerialize(ctx, in)

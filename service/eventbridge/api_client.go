@@ -70,6 +70,11 @@ type Options struct {
 	// modify this list for per operation behavior.
 	APIOptions []func(*middleware.Stack) error
 
+	// This endpoint will be given as input to an EndpointResolverV2. It is used for
+	// providing a custom base endpoint that is subject to modifications by the
+	// processing EndpointResolverV2.
+	BaseEndpoint *string
+
 	// Configures the events that will be sent to the configured logger.
 	ClientLogMode aws.ClientLogMode
 
@@ -84,7 +89,14 @@ type Options struct {
 	EndpointOptions EndpointResolverOptions
 
 	// The service endpoint resolver.
+	//
+	// Deprecated: EndpointResolver and WithEndpointResolver are deprecated. See
+	// EndpointResolverV2 and WithEndpointResolverV2
 	EndpointResolver EndpointResolver
+
+	// Resolves the endpoint used for a particular service. This should be used over
+	// the deprecated EndpointResolver
+	EndpointResolverV2 EndpointResolverV2
 
 	// Signature Version 4 (SigV4) Signer
 	HTTPSignerV4 HTTPSignerV4
@@ -147,11 +159,19 @@ func WithAPIOptions(optFns ...func(*middleware.Stack) error) func(*Options) {
 	}
 }
 
-// WithEndpointResolver returns a functional option for setting the Client's
-// EndpointResolver option.
+// EndpointResolver and WithEndpointResolver are deprecated. See
+// EndpointResolverV2 and WithEndpointResolverV2
 func WithEndpointResolver(v EndpointResolver) func(*Options) {
 	return func(o *Options) {
 		o.EndpointResolver = v
+	}
+}
+
+// WithEndpointResolverV2 returns a functional option for setting the Client's
+// EndpointResolverV2 option.
+func WithEndpointResolverV2(v EndpointResolverV2) func(*Options) {
+	return func(o *Options) {
+		o.EndpointResolverV2 = v
 	}
 }
 
@@ -180,6 +200,8 @@ func (c *Client) invokeOperation(ctx context.Context, opID string, params interf
 	finalizeClientEndpointResolverOptions(&options)
 
 	resolveCredentialProvider(&options)
+
+	finalizeEndpointResolverV2(&options)
 
 	for _, fn := range stackFns {
 		if err := fn(stack, options); err != nil {

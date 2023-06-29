@@ -4,11 +4,12 @@ package s3control
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	internalauth "github.com/aws/aws-sdk-go-v2/internal/auth"
 	s3controlcust "github.com/aws/aws-sdk-go-v2/service/s3control/internal/customizations"
-	smithy "github.com/aws/smithy-go"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
@@ -144,9 +145,6 @@ func (c *Client) addOperationPutBucketPolicyMiddlewares(stack *middleware.Stack,
 	if err = smithyhttp.AddContentChecksumMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addEndpointPrefix_opPutBucketPolicyMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addPutBucketPolicyResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -175,47 +173,6 @@ func (c *Client) addOperationPutBucketPolicyMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	return nil
-}
-
-type endpointPrefix_opPutBucketPolicyMiddleware struct {
-}
-
-func (*endpointPrefix_opPutBucketPolicyMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opPutBucketPolicyMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleSerialize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	input, ok := in.Parameters.(*PutBucketPolicyInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input type %T", in.Parameters)
-	}
-
-	var prefix strings.Builder
-	if input.AccountId == nil {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("AccountId forms part of the endpoint host and so may not be nil")}
-	} else if !smithyhttp.ValidHostLabel(*input.AccountId) {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("AccountId forms part of the endpoint host and so must match \"[a-zA-Z0-9-]{1,63}\", but was \"%s\"", *input.AccountId)}
-	} else {
-		prefix.WriteString(*input.AccountId)
-	}
-	prefix.WriteString(".")
-	req.URL.Host = prefix.String() + req.URL.Host
-
-	return next.HandleSerialize(ctx, in)
-}
-func addEndpointPrefix_opPutBucketPolicyMiddleware(stack *middleware.Stack) error {
-	return stack.Serialize.Insert(&endpointPrefix_opPutBucketPolicyMiddleware{}, `OperationSerializer`, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opPutBucketPolicy(region string) *awsmiddleware.RegisterServiceMetadata {
@@ -321,6 +278,67 @@ func (m *opPutBucketPolicyResolveEndpointMiddleware) HandleSerialize(ctx context
 			k,
 			resolvedEndpoint.Headers.Get(k),
 		)
+	}
+
+	authSchemes, err := internalauth.GetAuthenticationSchemes(&resolvedEndpoint.Properties)
+	if err != nil {
+		var nfe *internalauth.NoAuthenticationSchemesFoundError
+		if errors.As(err, &nfe) {
+			// if no auth scheme is found, default to sigv4
+			signingName := "s3"
+			signingRegion := m.BuiltInResolver.(*BuiltInResolver).Region
+			ctx = awsmiddleware.SetSigningName(ctx, signingName)
+			ctx = awsmiddleware.SetSigningRegion(ctx, signingRegion)
+
+		}
+		var ue *internalauth.UnSupportedAuthenticationSchemeSpecifiedError
+		if errors.As(err, &ue) {
+			return out, metadata, fmt.Errorf(
+				"This operation requests signer version(s) %v but the client only supports %v",
+				ue.UnsupportedSchemes,
+				internalauth.SupportedSchemes,
+			)
+		}
+	}
+
+	for _, authScheme := range authSchemes {
+		switch authScheme.(type) {
+		case *internalauth.AuthenticationSchemeV4:
+			v4Scheme, _ := authScheme.(*internalauth.AuthenticationSchemeV4)
+			var signingName, signingRegion string
+			if v4Scheme.SigningName == nil {
+				signingName = "s3"
+			}
+			if v4Scheme.SigningRegion == nil {
+				signingRegion = m.BuiltInResolver.(*BuiltInResolver).Region
+			}
+			if v4Scheme.DisableDoubleEncoding != nil {
+				// The signer sets an equivalent value at client initialization time.
+				// Setting this context value will cause the signer to extract it
+				// and override the value set at client initialization time.
+				ctx = internalauth.SetDisableDoubleEncoding(ctx, *v4Scheme.DisableDoubleEncoding)
+			}
+			ctx = awsmiddleware.SetSigningName(ctx, signingName)
+			ctx = awsmiddleware.SetSigningRegion(ctx, signingRegion)
+			break
+		case *internalauth.AuthenticationSchemeV4A:
+			v4aScheme, _ := authScheme.(*internalauth.AuthenticationSchemeV4A)
+			var signingName string
+			if v4aScheme.SigningName == nil {
+				signingName = "s3"
+			}
+			if v4aScheme.DisableDoubleEncoding != nil {
+				// The signer sets an equivalent value at client initialization time.
+				// Setting this context value will cause the signer to extract it
+				// and override the value set at client initialization time.
+				ctx = internalauth.SetDisableDoubleEncoding(ctx, *v4aScheme.DisableDoubleEncoding)
+			}
+			ctx = awsmiddleware.SetSigningName(ctx, signingName)
+			ctx = awsmiddleware.SetSigningRegion(ctx, v4aScheme.SigningRegionSet[0])
+			break
+		case *internalauth.AuthenticationSchemeNone:
+			break
+		}
 	}
 
 	return next.HandleSerialize(ctx, in)
