@@ -66,17 +66,25 @@ public class AwsEndpointAuthSchemeGenerator implements GoIntegration {
 
     private GoWriter.Writable generateAuthSchemeDetection(ServiceShape serviceShape) {
         GoWriter.Writable signerVersion = (GoWriter writer) -> {
-            if (isS3ServiceShape(serviceShape)) {
+            String serviceId = serviceShape.expectTrait(ServiceTrait.class).getSdkId();
+            if (serviceId.equalsIgnoreCase("S3")) {
                 writer.write(
                     """
-                    ctx = $T(ctx, $T)
+                        ctx = $T(ctx, $T)
                     """,
                     SymbolUtils.createValueSymbolBuilder("SetSignerVersion", AwsCustomGoDependency.S3_CUSTOMIZATION).build(),
                     SymbolUtils.createValueSymbolBuilder("SigV4", AwsGoDependency.INTERNAL_AUTH).build()
                 );
-            } else {
+            } else if (serviceId.equalsIgnoreCase("EventBridge")) {
+                writer.write(
+                    """
+                        ctx = $T(ctx, $T)
+                    """,
+                    SymbolUtils.createValueSymbolBuilder("SetSignerVersion", AwsCustomGoDependency.EVENTBRIDGE_CUSTOMIZATION).build(),
+                    SymbolUtils.createValueSymbolBuilder("SigV4", AwsGoDependency.INTERNAL_AUTH).build()
+                );            } else {
                 writer.write("");
-            }   
+            } 
         };
         return (GoWriter writer) -> {
             var signingNameDefaultOpt = getDefaultSigningName(serviceShape);
@@ -121,16 +129,23 @@ public class AwsEndpointAuthSchemeGenerator implements GoIntegration {
 
     private GoWriter.Writable generateSigV4Resolution(ServiceShape serviceShape) {
         GoWriter.Writable signerVersion = (GoWriter writer) -> {
-            if (isS3ServiceShape(serviceShape)) {
+            String serviceId = serviceShape.expectTrait(ServiceTrait.class).getSdkId();
+            if (serviceId.equalsIgnoreCase("S3")) {
                 writer.write(
                     """
-                    ctx = $T(ctx, v4Scheme.Name)
+                        ctx = $T(ctx, v4Scheme.Name)
                     """,
                     SymbolUtils.createValueSymbolBuilder("SetSignerVersion", AwsCustomGoDependency.S3_CUSTOMIZATION).build()
                 );
-            } else {
+            } else if (serviceId.equalsIgnoreCase("EventBridge")) {
+                writer.write(
+                    """
+                        ctx = $T(ctx, v4Scheme.Name)
+                    """,
+                    SymbolUtils.createValueSymbolBuilder("SetSignerVersion", AwsCustomGoDependency.EVENTBRIDGE_CUSTOMIZATION).build()
+                );            } else {
                 writer.write("");
-            }   
+            } 
         };
 
         return (GoWriter writer) -> {
@@ -168,16 +183,23 @@ public class AwsEndpointAuthSchemeGenerator implements GoIntegration {
 
     private GoWriter.Writable generateSigV4AResolution(ServiceShape serviceShape) {
         GoWriter.Writable signerVersion = (GoWriter writer) -> {
-            if (isS3ServiceShape(serviceShape)) {
+            String serviceId = serviceShape.expectTrait(ServiceTrait.class).getSdkId();
+            if (serviceId.equalsIgnoreCase("S3")) {
                 writer.write(
                     """
                     ctx = $T(ctx, v4aScheme.Name)
                     """,
                     SymbolUtils.createValueSymbolBuilder("SetSignerVersion", AwsCustomGoDependency.S3_CUSTOMIZATION).build()
                 );
-            } else {
+            } else if (serviceId.equalsIgnoreCase("EventBridge")) {
+                writer.write(
+                    """
+                    ctx = $T(ctx, v4aScheme.Name)
+                    """,
+                    SymbolUtils.createValueSymbolBuilder("SetSignerVersion", AwsCustomGoDependency.EVENTBRIDGE_CUSTOMIZATION).build()
+                );            } else {
                 writer.write("");
-            }   
+            }
         };
         
         return (GoWriter writer) -> {
@@ -219,11 +241,6 @@ public class AwsEndpointAuthSchemeGenerator implements GoIntegration {
             return Optional.of(signingNameDefault);
         }
         return Optional.empty();
-    }
-
-    private final boolean isS3ServiceShape(ServiceShape serviceShape) {
-        String serviceId = serviceShape.expectTrait(ServiceTrait.class).getSdkId();
-        return serviceId.equalsIgnoreCase("S3");
     }
     
 }
