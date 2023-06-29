@@ -29,6 +29,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import software.amazon.smithy.aws.go.codegen.customization.S3ModelUtils;
 import software.amazon.smithy.aws.traits.ServiceTrait;
+import software.amazon.smithy.aws.traits.auth.SigV4Trait;
 import software.amazon.smithy.codegen.core.CodegenException;
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.go.codegen.GoSettings;
@@ -536,6 +537,7 @@ public final class EndpointGenerator implements Runnable {
         w.openBlock("if len(awsmiddleware.GetSigningName(ctx)) == 0 {", "}", () -> {
             w.write("signingName := endpoint.SigningName");
             w.openBlock("if len(signingName) == 0 {", "}", () -> {
+                serviceShape.expectTrait(SigV4Trait.class).getName();
                 w.write("signingName = $S", serviceShape.expectTrait(ServiceTrait.class).getArnNamespace());
             });
             w.write("ctx = awsmiddleware.SetSigningName(ctx, signingName)");
