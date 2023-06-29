@@ -1,3 +1,7 @@
+# v1.21.0 (2023-06-29)
+
+* **Feature**: This release introduces app block builder, allowing customers to provision a resource to package applications into an app block
+
 # v1.20.13 (2023-06-15)
 
 * No change notes available for this release.

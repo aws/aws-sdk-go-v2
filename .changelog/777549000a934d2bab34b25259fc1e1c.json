@@ -1,8 +1,0 @@
-{
-    "id": "77754900-0a93-4d2b-ab34-b25259fc1e1c",
-    "type": "feature",
-    "description": "The Amazon Chime SDK APIs in the Chime namespace are no longer supported.  Customers should use APIs in the dedicated Amazon Chime SDK namespaces: ChimeSDKIdentity, ChimeSDKMediaPipelines, ChimeSDKMeetings, ChimeSDKMessaging, and ChimeSDKVoice.",
-    "modules": [
-        "service/chime"
-    ]
-}

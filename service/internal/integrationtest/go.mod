@@ -7,7 +7,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.16.13
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.21.2
 	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.16.0
-	github.com/aws/aws-sdk-go-v2/service/appstream v1.20.13
+	github.com/aws/aws-sdk-go-v2/service/appstream v1.21.0
 	github.com/aws/aws-sdk-go-v2/service/athena v1.30.2
 	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.28.9
 	github.com/aws/aws-sdk-go-v2/service/batch v1.23.8
@@ -30,7 +30,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directconnect v1.18.17
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.17.3
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.21.5
-	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.19.11
+	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.20.0
 	github.com/aws/aws-sdk-go-v2/service/ec2 v1.102.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.18.13
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.27.4
@@ -44,9 +44,9 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/emr v1.27.0
 	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.19.4
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.16.14
-	github.com/aws/aws-sdk-go-v2/service/gamelift v1.19.2
+	github.com/aws/aws-sdk-go-v2/service/gamelift v1.20.0
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.14.13
-	github.com/aws/aws-sdk-go-v2/service/glue v1.52.0
+	github.com/aws/aws-sdk-go-v2/service/glue v1.53.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.17.2
 	github.com/aws/aws-sdk-go-v2/service/iam v1.21.0
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.13.12

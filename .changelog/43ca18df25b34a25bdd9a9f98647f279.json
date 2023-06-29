@@ -1,8 +1,0 @@
-{
-    "id": "43ca18df-25b3-4a25-bdd9-a9f98647f279",
-    "type": "feature",
-    "description": "This release adds ReturnValuesOnConditionCheckFailure parameter to PutItem, UpdateItem, DeleteItem, ExecuteStatement, BatchExecuteStatement and ExecuteTransaction APIs. When set to ALL_OLD,  API returns a copy of the item as it was when a conditional write failed",
-    "modules": [
-        "service/dynamodb"
-    ]
-}

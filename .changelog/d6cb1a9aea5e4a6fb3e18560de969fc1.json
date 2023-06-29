@@ -1,8 +1,0 @@
-{
-    "id": "d6cb1a9a-ea5e-4a6f-b3e1-8560de969fc1",
-    "type": "feature",
-    "description": "This release adds support for AWS Glue Crawler with Iceberg Tables, allowing Crawlers to discover Iceberg Tables in S3 and register them in Glue Data Catalog for query engines to query against.",
-    "modules": [
-        "service/glue"
-    ]
-}

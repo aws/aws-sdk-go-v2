@@ -1,8 +1,0 @@
-{
-    "id": "835a4e81-377c-44e3-923e-348d9fdbb424",
-    "type": "feature",
-    "description": "Adding support for timeseries forecasting in the CreateAutoMLJobV2 API.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

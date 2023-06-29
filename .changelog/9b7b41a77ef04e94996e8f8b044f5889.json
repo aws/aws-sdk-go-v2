@@ -1,8 +1,0 @@
-{
-    "id": "9b7b41a7-7ef0-4e94-996e-8f8b044f5889",
-    "type": "feature",
-    "description": "This release adds support for the OR operator in RSQL join match conditions and the ability to control which operators (AND, OR) are allowed in a join match condition.",
-    "modules": [
-        "service/cleanrooms"
-    ]
-}
