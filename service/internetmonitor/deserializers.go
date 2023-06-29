@@ -473,6 +473,40 @@ func awsRestjson1_deserializeOpDocumentGetHealthEventOutput(v **GetHealthEventOu
 				sv.EventId = ptr.String(jtv)
 			}
 
+		case "HealthScoreThreshold":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.HealthScoreThreshold = f64
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.HealthScoreThreshold = f64
+
+				default:
+					return fmt.Errorf("expected Percentage to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "ImpactedLocations":
 			if err := awsRestjson1_deserializeDocumentImpactedLocationsList(&sv.ImpactedLocations, value); err != nil {
 				return err
@@ -718,6 +752,11 @@ func awsRestjson1_deserializeOpDocumentGetMonitorOutput(v **GetMonitorOutput, va
 					return err
 				}
 				sv.CreatedAt = ptr.Time(t)
+			}
+
+		case "HealthEventsConfig":
+			if err := awsRestjson1_deserializeDocumentHealthEventsConfig(&sv.HealthEventsConfig, value); err != nil {
+				return err
 			}
 
 		case "InternetMeasurementsLogDelivery":
@@ -2397,6 +2436,40 @@ func awsRestjson1_deserializeDocumentHealthEvent(v **types.HealthEvent, value in
 				sv.EventId = ptr.String(jtv)
 			}
 
+		case "HealthScoreThreshold":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.HealthScoreThreshold = f64
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.HealthScoreThreshold = f64
+
+				default:
+					return fmt.Errorf("expected Percentage to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "ImpactedLocations":
 			if err := awsRestjson1_deserializeDocumentImpactedLocationsList(&sv.ImpactedLocations, value); err != nil {
 				return err
@@ -2520,6 +2593,105 @@ func awsRestjson1_deserializeDocumentHealthEventList(v *[]types.HealthEvent, val
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentHealthEventsConfig(v **types.HealthEventsConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.HealthEventsConfig
+	if *v == nil {
+		sv = &types.HealthEventsConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AvailabilityScoreThreshold":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.AvailabilityScoreThreshold = f64
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.AvailabilityScoreThreshold = f64
+
+				default:
+					return fmt.Errorf("expected Percentage to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "PerformanceScoreThreshold":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.PerformanceScoreThreshold = f64
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.PerformanceScoreThreshold = f64
+
+				default:
+					return fmt.Errorf("expected Percentage to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

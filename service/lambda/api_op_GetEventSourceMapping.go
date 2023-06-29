@@ -139,11 +139,13 @@ type GetEventSourceMappingOutput struct {
 	SourceAccessConfigurations []types.SourceAccessConfiguration
 
 	// The position in a stream from which to start reading. Required for Amazon
-	// Kinesis, Amazon DynamoDB, and Amazon MSK stream sources. AT_TIMESTAMP is
-	// supported only for Amazon Kinesis streams and Amazon DocumentDB.
+	// Kinesis and Amazon DynamoDB Stream event sources. AT_TIMESTAMP is supported
+	// only for Amazon Kinesis streams, Amazon DocumentDB, Amazon MSK, and self-managed
+	// Apache Kafka.
 	StartingPosition types.EventSourcePosition
 
-	// With StartingPosition set to AT_TIMESTAMP , the time from which to start reading.
+	// With StartingPosition set to AT_TIMESTAMP , the time from which to start
+	// reading. StartingPositionTimestamp cannot be in the future.
 	StartingPositionTimestamp *time.Time
 
 	// The state of the event source mapping. It can be one of the following: Creating

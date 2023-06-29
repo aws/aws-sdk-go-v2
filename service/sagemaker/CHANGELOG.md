@@ -1,3 +1,7 @@
+# v1.88.0 (2023-06-28)
+
+* **Feature**: This release adds support for Model Cards Model Registry integration.
+
 # v1.87.0 (2023-06-27)
 
 * **Feature**: Introducing TTL for online store records in feature groups.

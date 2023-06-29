@@ -33935,6 +33935,25 @@ func awsAwsquery_deserializeDocumentDomainMembership(v **types.DomainMembership,
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("AuthSecretArn", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.AuthSecretArn = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("DnsIps", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentStringList(&sv.DnsIps, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("Domain", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -33972,6 +33991,19 @@ func awsAwsquery_deserializeDocumentDomainMembership(v **types.DomainMembership,
 			{
 				xtv := string(val)
 				sv.IAMRoleName = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("OU", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.OU = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Status", t.Name.Local):

@@ -74,6 +74,12 @@ type GetMonitorOutput struct {
 	// This member is required.
 	Status types.MonitorConfigState
 
+	// The list of health event thresholds. A health event threshold percentage, for
+	// performance and availability, determines the level of impact at which Amazon
+	// CloudWatch Internet Monitor creates a health event when there's an internet
+	// issue that affects your application end users.
+	HealthEventsConfig *types.HealthEventsConfig
+
 	// Publish internet measurements for Internet Monitor to another location, such as
 	// an Amazon S3 bucket. The measurements are also published to Amazon CloudWatch
 	// Logs.

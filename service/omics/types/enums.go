@@ -642,6 +642,7 @@ type WorkflowEngine string
 const (
 	WorkflowEngineWdl      WorkflowEngine = "WDL"
 	WorkflowEngineNextflow WorkflowEngine = "NEXTFLOW"
+	WorkflowEngineCwl      WorkflowEngine = "CWL"
 )
 
 // Values returns all known values for WorkflowEngine. Note that this can be
@@ -651,6 +652,7 @@ func (WorkflowEngine) Values() []WorkflowEngine {
 	return []WorkflowEngine{
 		"WDL",
 		"NEXTFLOW",
+		"CWL",
 	}
 }
 

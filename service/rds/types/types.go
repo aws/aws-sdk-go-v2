@@ -2243,15 +2243,26 @@ type DescribeDBLogFilesDetails struct {
 // cluster.
 type DomainMembership struct {
 
+	// The ARN for the Secrets Manager secret that contains the credentials for the
+	// user performing the domain join.
+	AuthSecretArn *string
+
+	// The IPv4 DNS IP addresses of your primary and secondary Active Directory domain
+	// controllers.
+	DnsIps []string
+
 	// The identifier of the Active Directory Domain.
 	Domain *string
 
-	// The fully qualified domain name of the Active Directory Domain.
+	// The fully qualified domain name (FQDN) of the Active Directory Domain.
 	FQDN *string
 
 	// The name of the IAM role to be used when making API calls to the Directory
 	// Service.
 	IAMRoleName *string
+
+	// The Active Directory organizational unit for your DB instance to join.
+	OU *string
 
 	// The status of the Active Directory Domain membership for the DB instance or
 	// cluster. Values include joined, pending-join, failed, and so on.

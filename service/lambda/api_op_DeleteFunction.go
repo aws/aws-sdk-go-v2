@@ -11,8 +11,9 @@ import (
 )
 
 // Deletes a Lambda function. To delete a specific function version, use the
-// Qualifier parameter. Otherwise, all versions and aliases are deleted. To delete
-// Lambda event source mappings that invoke a function, use
+// Qualifier parameter. Otherwise, all versions and aliases are deleted. This
+// doesn't require the user to have explicit permissions for DeleteAlias . To
+// delete Lambda event source mappings that invoke a function, use
 // DeleteEventSourceMapping . For Amazon Web Services and resources that invoke
 // your function directly, delete the trigger in the service where you originally
 // configured it.

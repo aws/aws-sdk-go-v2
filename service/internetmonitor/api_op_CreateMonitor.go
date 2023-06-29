@@ -53,6 +53,13 @@ type CreateMonitorInput struct {
 	// API requests.
 	ClientToken *string
 
+	// Defines the health event threshold percentages, for performance score and
+	// availability score. Internet Monitor creates a health event when there's an
+	// internet issue that affects your application end users where a health score
+	// percentage is at or below a set threshold. If you don't set a health event
+	// threshold, the default calue is 95%.
+	HealthEventsConfig *types.HealthEventsConfig
+
 	// Publish internet measurements for Internet Monitor to an Amazon S3 bucket in
 	// addition to CloudWatch Logs.
 	InternetMeasurementsLogDelivery *types.InternetMeasurementsLogDelivery
