@@ -97,8 +97,8 @@ public class AwsEndpointAuthSchemeGenerator implements GoIntegration {
                         var ue $P
                         if errors.As(err, &ue) {
                             return out, metadata, $T(
-                                \"This operation requests signer version %s but the client only supports %v\",
-                                ue.UnsupportedName,
+                                \"This operation requests signer version(s) %v but the client only supports %v\",
+                                ue.UnsupportedSchemes,
                                 $T,
                             )
                         }

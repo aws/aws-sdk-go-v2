@@ -71,7 +71,7 @@ func (e *NoAuthenticationSchemesFoundError) Error() string {
 // signaling that only unsupported authentication schemes
 // were specified.
 type UnSupportedAuthenticationSchemeSpecifiedError struct {
-	UnsupportedName string
+	UnsupportedSchemes []string
 }
 
 func (e *UnSupportedAuthenticationSchemeSpecifiedError) Error() string {
@@ -88,8 +88,7 @@ func GetAuthenticationSchemes(p *smithy.Properties) ([]AuthenticationScheme, err
 
 	authSchemes, _ := p.Get("authSchemes").([]interface{})
 
-	unsupportedAuthSchemeSpecified := false
-	var unsupportedName string
+	var unsupportedSchemes []string
 	for _, scheme := range authSchemes {
 		authScheme, _ := scheme.(map[string]interface{})
 
@@ -114,15 +113,14 @@ func GetAuthenticationSchemes(p *smithy.Properties) ([]AuthenticationScheme, err
 			noneScheme := AuthenticationSchemeNone{}
 			result = append(result, AuthenticationScheme(&noneScheme))
 		default:
-			unsupportedAuthSchemeSpecified = true
-			unsupportedName = authScheme["name"].(string)
+			unsupportedSchemes = append(unsupportedSchemes, authScheme["name"].(string))
 			continue
 		}
 	}
 
-	if unsupportedAuthSchemeSpecified && len(result) == 0 {
+	if len(result) == 0 {
 		return nil, &UnSupportedAuthenticationSchemeSpecifiedError{
-			UnsupportedName: unsupportedName,
+			UnsupportedSchemes: unsupportedSchemes,
 		}
 	}
 
