@@ -55,3 +55,4 @@ software.amazon.smithy.aws.go.codegen.AwsEndpointResolverBuiltInGenerator
 software.amazon.smithy.aws.go.codegen.customization.S3ControlHostPrefixAccountIdFilterIntegration
 software.amazon.smithy.aws.go.codegen.customization.S3HttpPathBucketFilterIntegration
 software.amazon.smithy.aws.go.codegen.customization.S3HostPrefixRequestRouteFilterIntegration
+software.amazon.smithy.aws.go.codegen.AwsEndpointAuthSchemeGenerator
