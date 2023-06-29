@@ -6980,6 +6980,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies Delta data store targets.</p>"
                     }
+                },
+                "IcebergTargets": {
+                    "target": "com.amazonaws.glue#IcebergTargetList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies Apache Iceberg data store targets.</p>"
+                    }
                 }
             },
             "traits": {
@@ -19756,6 +19762,44 @@
                         "smithy.api#enumValue": "snappy"
                     }
                 }
+            }
+        },
+        "com.amazonaws.glue#IcebergTarget": {
+            "type": "structure",
+            "members": {
+                "Paths": {
+                    "target": "com.amazonaws.glue#PathList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more Amazon S3 paths that contains Iceberg metadata folders as <code>s3://bucket/prefix</code>.</p>"
+                    }
+                },
+                "ConnectionName": {
+                    "target": "com.amazonaws.glue#ConnectionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the connection to use to connect to the Iceberg target.</p>"
+                    }
+                },
+                "Exclusions": {
+                    "target": "com.amazonaws.glue#PathList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of glob patterns used to exclude from the crawl.\n      For more information, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/add-crawler.html\">Catalog Tables with a Crawler</a>.</p>"
+                    }
+                },
+                "MaximumTraversalDepth": {
+                    "target": "com.amazonaws.glue#NullableInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum depth of Amazon S3 paths that the crawler can traverse to discover the Iceberg metadata folder in your Amazon S3 path. Used to limit the crawler run time.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies an Apache Iceberg data source where Iceberg tables are stored in Amazon S3.</p>"
+            }
+        },
+        "com.amazonaws.glue#IcebergTargetList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#IcebergTarget"
             }
         },
         "com.amazonaws.glue#IdString": {
