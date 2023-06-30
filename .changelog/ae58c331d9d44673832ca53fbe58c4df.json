@@ -1,0 +1,9 @@
+{
+    "id": "ae58c331-d9d4-4673-832c-a53fbe58c4df",
+    "type": "release",
+    "collapse": true,
+    "description": "Modify user agent syntax and introduce support for sdk app ID section in UA header",
+    "modules": [
+        "."
+    ]
+}
