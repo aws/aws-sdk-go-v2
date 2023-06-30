@@ -1,0 +1,8 @@
+{
+    "id": "56ec5e29-190a-490f-b813-0a65c2130092",
+    "type": "feature",
+    "description": "AWS SDK service model  generation tool version upgrade.",
+    "modules": [
+        "service/amp"
+    ]
+}

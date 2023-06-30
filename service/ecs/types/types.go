@@ -567,6 +567,20 @@ type ContainerDefinition struct {
 	// Docker as 0 , which Windows interprets as 1% of one CPU.
 	Cpu int32
 
+	// A list of ARNs in SSM or Amazon S3 to a credential spec ( credspec code>) file
+	// that configures a container for Active Directory authentication. This parameter
+	// is only used with domainless authentication. The format for each ARN is
+	// credentialspecdomainless:MyARN . Replace MyARN with the ARN in SSM or Amazon
+	// S3. The credspec must provide a ARN in Secrets Manager for a secret containing
+	// the username, password, and the domain to connect to. For better security, the
+	// instance isn't joined to the domain for domainless authentication. Other
+	// applications on the instance can't use the domainless credentials. You can use
+	// this parameter to run tasks on the same instance, even it the tasks need to join
+	// different domains. For more information, see Using gMSAs for Windows Containers (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/windows-gmsa.html)
+	// and Using gMSAs for Linux Containers (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/linux-gmsa.html)
+	// .
+	CredentialSpecs []string
+
 	// The dependencies defined for container startup and shutdown. A container can
 	// contain multiple dependencies on other containers in a task definition. When a
 	// dependency is defined for container startup, for container shutdown it is
@@ -1870,8 +1884,10 @@ type FSxWindowsFileServerVolumeConfiguration struct {
 // Health check parameters that are specified in a container definition override
 // any Docker health checks that exist in the container image. You can view the
 // health status of both individual containers and a task with the DescribeTasks
-// API operation or when viewing the task details in the console. The following
-// describes the possible healthStatus values for a container:
+// API operation or when viewing the task details in the console. The health check
+// is designed to make sure that your containers survive agent restarts, upgrades,
+// or temporary unavailability. The following describes the possible healthStatus
+// values for a container:
 //   - HEALTHY -The container health check has passed successfully.
 //   - UNHEALTHY -The container health check has failed.
 //   - UNKNOWN -The container health check is being evaluated or there's no
@@ -1892,6 +1908,11 @@ type FSxWindowsFileServerVolumeConfiguration struct {
 // service, if the task reports as unhealthy then the task will be stopped and the
 // service scheduler will replace it. The following are notes about container
 // health check support:
+//   - When the Amazon ECS agent cannot connect to the Amazon ECS service, the
+//     service reports the container as UNHEALTHY .
+//   - The health check statuses are the "last heard from" response from the
+//     Amazon ECS agent. There are no assumptions made about the status of the
+//     container health checks.
 //   - Container health checks require version 1.17.0 or greater of the Amazon ECS
 //     container agent. For more information, see Updating the Amazon ECS container
 //     agent (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html)

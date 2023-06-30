@@ -1,0 +1,8 @@
+{
+    "id": "e6760fdd-740d-42bf-b7cc-984d0209f1ef",
+    "type": "documentation",
+    "description": "This release includes improved color handling of overlays and general updates to user documentation.",
+    "modules": [
+        "service/mediaconvert"
+    ]
+}

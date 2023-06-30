@@ -7226,6 +7226,15 @@ func awsAwsjson11_deserializeDocumentAs2ConnectorConfig(v **types.As2ConnectorCo
 
 	for key, value := range shape {
 		switch key {
+		case "BasicAuthSecretId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected As2ConnectorSecretId to be of type string, got %T instead", value)
+				}
+				sv.BasicAuthSecretId = ptr.String(jtv)
+			}
+
 		case "Compression":
 			if value != nil {
 				jtv, ok := value.(string)

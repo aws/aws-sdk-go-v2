@@ -1,0 +1,8 @@
+{
+    "id": "4fb684a4-28b0-4779-b929-173aeb86ea46",
+    "type": "feature",
+    "description": "Added new field  \"credentialspecs\" to the ecs task definition to support gMSA of windows/linux in both domainless and domain-joined mode",
+    "modules": [
+        "service/ecs"
+    ]
+}

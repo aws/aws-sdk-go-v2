@@ -1,0 +1,8 @@
+{
+    "id": "4f4c7e5d-89bc-4080-abad-3578adbc6410",
+    "type": "feature",
+    "description": "This release adds support for rolling deployment in SageMaker Inference.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

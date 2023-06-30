@@ -59,7 +59,7 @@ type CreatePolicyInput struct {
 	// idempotency of the request. This lets you safely retry the request without
 	// accidentally performing the same operation a second time. Passing the same value
 	// to a later call to an operation requires that you also pass the same value for
-	// all other parameters. We recommend that you use a UUID type of value. (https://wikipedia.org/wiki/Universally_unique_Id)
+	// all other parameters. We recommend that you use a UUID type of value. (https://wikipedia.org/wiki/Universally_unique_identifier)
 	// . If you don't provide this value, then Amazon Web Services generates a random
 	// one for you. If you retry the operation with the same ClientToken , but with
 	// different parameters, the retry fails with an IdempotentParameterMismatch error.

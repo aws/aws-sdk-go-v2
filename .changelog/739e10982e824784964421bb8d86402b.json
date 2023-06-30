@@ -1,0 +1,8 @@
+{
+    "id": "739e1098-2e82-4784-9644-21bb8d86402b",
+    "type": "feature",
+    "description": "Add outbound Basic authentication support to AS2 connectors",
+    "modules": [
+        "service/transfer"
+    ]
+}

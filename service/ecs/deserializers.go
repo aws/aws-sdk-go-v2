@@ -9223,6 +9223,11 @@ func awsAwsjson11_deserializeDocumentContainerDefinition(v **types.ContainerDefi
 				sv.Cpu = int32(i64)
 			}
 
+		case "credentialSpecs":
+			if err := awsAwsjson11_deserializeDocumentStringList(&sv.CredentialSpecs, value); err != nil {
+				return err
+			}
+
 		case "dependsOn":
 			if err := awsAwsjson11_deserializeDocumentContainerDependencies(&sv.DependsOn, value); err != nil {
 				return err

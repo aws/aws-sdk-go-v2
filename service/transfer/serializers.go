@@ -3220,6 +3220,11 @@ func awsAwsjson11_serializeDocumentAs2ConnectorConfig(v *types.As2ConnectorConfi
 	object := value.Object()
 	defer object.Close()
 
+	if v.BasicAuthSecretId != nil {
+		ok := object.Key("BasicAuthSecretId")
+		ok.String(*v.BasicAuthSecretId)
+	}
+
 	if len(v.Compression) > 0 {
 		ok := object.Key("Compression")
 		ok.String(string(v.Compression))

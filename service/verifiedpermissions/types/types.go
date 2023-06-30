@@ -304,8 +304,8 @@ type EntityReferenceMemberUnspecified struct {
 func (*EntityReferenceMemberUnspecified) isEntityReference() {}
 
 // Contains a description of an evaluation error. This data type is used as a
-// request parameter in the IsAuthorized (https://docs.aws.amazon.com/amazon-verified-permissions/latest/APIReference/API_IsAuthorized.html)
-// and IsAuthorizedWithToken (https://docs.aws.amazon.com/amazon-verified-permissions/latest/APIReference/API_IsAuthorizedWithToken.html)
+// request parameter in the IsAuthorized (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html)
+// and IsAuthorizedWithToken (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html)
 // operations.
 type EvaluationErrorItem struct {
 

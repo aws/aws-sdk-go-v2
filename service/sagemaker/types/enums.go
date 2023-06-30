@@ -1646,14 +1646,15 @@ type EndpointStatus string
 
 // Enum values for EndpointStatus
 const (
-	EndpointStatusOutOfService   EndpointStatus = "OutOfService"
-	EndpointStatusCreating       EndpointStatus = "Creating"
-	EndpointStatusUpdating       EndpointStatus = "Updating"
-	EndpointStatusSystemUpdating EndpointStatus = "SystemUpdating"
-	EndpointStatusRollingBack    EndpointStatus = "RollingBack"
-	EndpointStatusInService      EndpointStatus = "InService"
-	EndpointStatusDeleting       EndpointStatus = "Deleting"
-	EndpointStatusFailed         EndpointStatus = "Failed"
+	EndpointStatusOutOfService         EndpointStatus = "OutOfService"
+	EndpointStatusCreating             EndpointStatus = "Creating"
+	EndpointStatusUpdating             EndpointStatus = "Updating"
+	EndpointStatusSystemUpdating       EndpointStatus = "SystemUpdating"
+	EndpointStatusRollingBack          EndpointStatus = "RollingBack"
+	EndpointStatusInService            EndpointStatus = "InService"
+	EndpointStatusDeleting             EndpointStatus = "Deleting"
+	EndpointStatusFailed               EndpointStatus = "Failed"
+	EndpointStatusUpdateRollbackFailed EndpointStatus = "UpdateRollbackFailed"
 )
 
 // Values returns all known values for EndpointStatus. Note that this can be
@@ -1669,6 +1670,7 @@ func (EndpointStatus) Values() []EndpointStatus {
 		"InService",
 		"Deleting",
 		"Failed",
+		"UpdateRollbackFailed",
 	}
 }
 

@@ -1,0 +1,8 @@
+{
+    "id": "39579c63-62fa-4d7f-bfe4-c2ab74ce498b",
+    "type": "documentation",
+    "description": "This release corrects several broken links in the documentation.",
+    "modules": [
+        "service/verifiedpermissions"
+    ]
+}

@@ -18981,6 +18981,13 @@ func awsAwsjson11_serializeDocumentDeploymentConfig(v *types.DeploymentConfig, v
 		}
 	}
 
+	if v.RollingUpdatePolicy != nil {
+		ok := object.Key("RollingUpdatePolicy")
+		if err := awsAwsjson11_serializeDocumentRollingUpdatePolicy(v.RollingUpdatePolicy, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -24249,6 +24256,37 @@ func awsAwsjson11_serializeDocumentRetryStrategy(v *types.RetryStrategy, value s
 	{
 		ok := object.Key("MaximumRetryAttempts")
 		ok.Integer(v.MaximumRetryAttempts)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRollingUpdatePolicy(v *types.RollingUpdatePolicy, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaximumBatchSize != nil {
+		ok := object.Key("MaximumBatchSize")
+		if err := awsAwsjson11_serializeDocumentCapacitySize(v.MaximumBatchSize, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaximumExecutionTimeoutInSeconds != nil {
+		ok := object.Key("MaximumExecutionTimeoutInSeconds")
+		ok.Integer(*v.MaximumExecutionTimeoutInSeconds)
+	}
+
+	if v.RollbackMaximumBatchSize != nil {
+		ok := object.Key("RollbackMaximumBatchSize")
+		if err := awsAwsjson11_serializeDocumentCapacitySize(v.RollbackMaximumBatchSize, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.WaitIntervalInSeconds != nil {
+		ok := object.Key("WaitIntervalInSeconds")
+		ok.Integer(*v.WaitIntervalInSeconds)
 	}
 
 	return nil

@@ -3375,6 +3375,13 @@ func awsAwsjson11_serializeDocumentContainerDefinition(v *types.ContainerDefinit
 		ok.Integer(v.Cpu)
 	}
 
+	if v.CredentialSpecs != nil {
+		ok := object.Key("credentialSpecs")
+		if err := awsAwsjson11_serializeDocumentStringList(v.CredentialSpecs, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DependsOn != nil {
 		ok := object.Key("dependsOn")
 		if err := awsAwsjson11_serializeDocumentContainerDependencies(v.DependsOn, ok); err != nil {

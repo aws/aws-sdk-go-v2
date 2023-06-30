@@ -1,0 +1,8 @@
+{
+    "id": "100425ad-7fab-4ccc-ba27-2f5042093b47",
+    "type": "feature",
+    "description": "Corrects the HTTP response code in the generated docs for PutMetadata and DeleteRecordingConfiguration APIs.",
+    "modules": [
+        "service/ivs"
+    ]
+}

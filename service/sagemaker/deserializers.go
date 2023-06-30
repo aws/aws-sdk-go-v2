@@ -41105,6 +41105,11 @@ func awsAwsjson11_deserializeDocumentDeploymentConfig(v **types.DeploymentConfig
 				return err
 			}
 
+		case "RollingUpdatePolicy":
+			if err := awsAwsjson11_deserializeDocumentRollingUpdatePolicy(&sv.RollingUpdatePolicy, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -65727,6 +65732,73 @@ func awsAwsjson11_deserializeDocumentRetryStrategy(v **types.RetryStrategy, valu
 					return err
 				}
 				sv.MaximumRetryAttempts = int32(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRollingUpdatePolicy(v **types.RollingUpdatePolicy, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RollingUpdatePolicy
+	if *v == nil {
+		sv = &types.RollingUpdatePolicy{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "MaximumBatchSize":
+			if err := awsAwsjson11_deserializeDocumentCapacitySize(&sv.MaximumBatchSize, value); err != nil {
+				return err
+			}
+
+		case "MaximumExecutionTimeoutInSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MaximumExecutionTimeoutInSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaximumExecutionTimeoutInSeconds = ptr.Int32(int32(i64))
+			}
+
+		case "RollbackMaximumBatchSize":
+			if err := awsAwsjson11_deserializeDocumentCapacitySize(&sv.RollbackMaximumBatchSize, value); err != nil {
+				return err
+			}
+
+		case "WaitIntervalInSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected WaitIntervalInSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.WaitIntervalInSeconds = ptr.Int32(int32(i64))
 			}
 
 		default:

@@ -2027,7 +2027,12 @@ type CanvasAppSettings struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the endpoint capacity to activate for production.
+// Specifies the type and size of the endpoint capacity to activate for a
+// blue/green deployment, a rolling deployment, or a rollback strategy. You can
+// specify your batches as either instance count or the overall percentage or your
+// fleet. For a rollback strategy, if you don't specify the fields in this object,
+// or if you set the Value to 100%, then SageMaker uses a blue/green rollback
+// strategy and rolls all traffic back to the blue fleet.
 type CapacitySize struct {
 
 	// Specifies the endpoint capacity type.
@@ -3218,19 +3223,20 @@ type DeployedImage struct {
 // deployment strategy and rollback configurations.
 type DeploymentConfig struct {
 
+	// Automatic rollback configuration for handling endpoint deployment failures and
+	// recovery.
+	AutoRollbackConfiguration *AutoRollbackConfig
+
 	// Update policy for a blue/green deployment. If this update policy is specified,
 	// SageMaker creates a new fleet during the deployment while maintaining the old
 	// fleet. SageMaker flips traffic to the new fleet according to the specified
 	// traffic routing configuration. Only one update policy should be used in the
 	// deployment configuration. If no update policy is specified, SageMaker uses a
 	// blue/green deployment strategy with all at once traffic shifting by default.
-	//
-	// This member is required.
 	BlueGreenUpdatePolicy *BlueGreenUpdatePolicy
 
-	// Automatic rollback configuration for handling endpoint deployment failures and
-	// recovery.
-	AutoRollbackConfiguration *AutoRollbackConfig
+	// Specifies a rolling deployment strategy for updating a SageMaker endpoint.
+	RollingUpdatePolicy *RollingUpdatePolicy
 
 	noSmithyDocumentSerde
 }
@@ -12105,6 +12111,35 @@ type RetryStrategy struct {
 	//
 	// This member is required.
 	MaximumRetryAttempts int32
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a rolling deployment strategy for updating a SageMaker endpoint.
+type RollingUpdatePolicy struct {
+
+	// Batch size for each rolling step to provision capacity and turn on traffic on
+	// the new endpoint fleet, and terminate capacity on the old endpoint fleet. Value
+	// must be between 5% to 50% of the variant's total instance count.
+	//
+	// This member is required.
+	MaximumBatchSize *CapacitySize
+
+	// The length of the baking period, during which SageMaker monitors alarms for
+	// each batch on the new fleet.
+	//
+	// This member is required.
+	WaitIntervalInSeconds *int32
+
+	// The time limit for the total deployment. Exceeding this limit causes a timeout.
+	MaximumExecutionTimeoutInSeconds *int32
+
+	// Batch size for rollback to the old endpoint fleet. Each rolling step to
+	// provision capacity and turn on traffic on the old endpoint fleet, and terminate
+	// capacity on the new endpoint fleet. If this field is absent, the default value
+	// will be set to 100% of total capacity which means to bring up the whole capacity
+	// of the old fleet at once during rollback.
+	RollbackMaximumBatchSize *CapacitySize
 
 	noSmithyDocumentSerde
 }

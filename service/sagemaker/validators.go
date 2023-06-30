@@ -7207,11 +7207,14 @@ func validateDeploymentConfig(v *types.DeploymentConfig) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeploymentConfig"}
-	if v.BlueGreenUpdatePolicy == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BlueGreenUpdatePolicy"))
-	} else if v.BlueGreenUpdatePolicy != nil {
+	if v.BlueGreenUpdatePolicy != nil {
 		if err := validateBlueGreenUpdatePolicy(v.BlueGreenUpdatePolicy); err != nil {
 			invalidParams.AddNested("BlueGreenUpdatePolicy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RollingUpdatePolicy != nil {
+		if err := validateRollingUpdatePolicy(v.RollingUpdatePolicy); err != nil {
+			invalidParams.AddNested("RollingUpdatePolicy", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -10313,6 +10316,33 @@ func validateRetryStrategy(v *types.RetryStrategy) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RetryStrategy"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRollingUpdatePolicy(v *types.RollingUpdatePolicy) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RollingUpdatePolicy"}
+	if v.MaximumBatchSize == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaximumBatchSize"))
+	} else if v.MaximumBatchSize != nil {
+		if err := validateCapacitySize(v.MaximumBatchSize); err != nil {
+			invalidParams.AddNested("MaximumBatchSize", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.WaitIntervalInSeconds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WaitIntervalInSeconds"))
+	}
+	if v.RollbackMaximumBatchSize != nil {
+		if err := validateCapacitySize(v.RollbackMaximumBatchSize); err != nil {
+			invalidParams.AddNested("RollbackMaximumBatchSize", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
