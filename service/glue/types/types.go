@@ -1708,6 +1708,9 @@ type CrawlerTargets struct {
 	// Specifies Amazon DynamoDB targets.
 	DynamoDBTargets []DynamoDBTarget
 
+	// Specifies Apache Iceberg data store targets.
+	IcebergTargets []IcebergTarget
+
 	// Specifies JDBC targets.
 	JdbcTargets []JdbcTarget
 
@@ -3464,6 +3467,30 @@ type GrokClassifier struct {
 
 	// The version of this classifier.
 	Version int64
+
+	noSmithyDocumentSerde
+}
+
+// Specifies an Apache Iceberg data source where Iceberg tables are stored in
+// Amazon S3.
+type IcebergTarget struct {
+
+	// The name of the connection to use to connect to the Iceberg target.
+	ConnectionName *string
+
+	// A list of glob patterns used to exclude from the crawl. For more information,
+	// see Catalog Tables with a Crawler (https://docs.aws.amazon.com/glue/latest/dg/add-crawler.html)
+	// .
+	Exclusions []string
+
+	// The maximum depth of Amazon S3 paths that the crawler can traverse to discover
+	// the Iceberg metadata folder in your Amazon S3 path. Used to limit the crawler
+	// run time.
+	MaximumTraversalDepth *int32
+
+	// One or more Amazon S3 paths that contains Iceberg metadata folders as
+	// s3://bucket/prefix .
+	Paths []string
 
 	noSmithyDocumentSerde
 }

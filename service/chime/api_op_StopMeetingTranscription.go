@@ -10,7 +10,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Stops transcription for the specified meetingId .
+// Stops transcription for the specified meetingId . This API is is no longer
+// supported and will not be updated. We recommend using the latest version,
+// StopMeetingTranscription (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_meeting-chime_StopMeetingTranscription.html)
+// , in the Amazon Chime SDK. Using the latest version requires migrating to a
+// dedicated namespace. For more information, refer to Migrating from the Amazon
+// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
+// in the Amazon Chime SDK Developer Guide.
+//
+// Deprecated: Replaced by StopMeetingTranscription in the Amazon Chime SDK
+// Meetings Namespace
 func (c *Client) StopMeetingTranscription(ctx context.Context, params *StopMeetingTranscriptionInput, optFns ...func(*Options)) (*StopMeetingTranscriptionOutput, error) {
 	if params == nil {
 		params = &StopMeetingTranscriptionInput{}

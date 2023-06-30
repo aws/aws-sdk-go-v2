@@ -13,7 +13,16 @@ import (
 
 // The details of the time when a user last read messages in a channel. The
 // x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of
-// the user that makes the API call as the value in the header.
+// the user that makes the API call as the value in the header. This API is is no
+// longer supported and will not be updated. We recommend using the latest version,
+// UpdateChannelReadMarker (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_UpdateChannelReadMarker.html)
+// , in the Amazon Chime SDK. Using the latest version requires migrating to a
+// dedicated namespace. For more information, refer to Migrating from the Amazon
+// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
+// in the Amazon Chime SDK Developer Guide.
+//
+// Deprecated: Replaced by UpdateChannelReadMarker in the Amazon Chime SDK
+// Messaging Namespace
 func (c *Client) UpdateChannelReadMarker(ctx context.Context, params *UpdateChannelReadMarkerInput, optFns ...func(*Options)) (*UpdateChannelReadMarkerOutput, error) {
 	if params == nil {
 		params = &UpdateChannelReadMarkerInput{}

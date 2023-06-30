@@ -11,7 +11,15 @@ import (
 )
 
 // Deletes the specified proxy session from the specified Amazon Chime Voice
-// Connector.
+// Connector. This API is is no longer supported and will not be updated. We
+// recommend using the latest version, DeleteProxySession (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_DeleteProxySession.html)
+// , in the Amazon Chime SDK. Using the latest version requires migrating to a
+// dedicated namespace. For more information, refer to Migrating from the Amazon
+// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
+// in the Amazon Chime SDK Developer Guide.
+//
+// Deprecated: Replaced by DeleteProxySession in the Amazon Chime SDK Voice
+// Namespace
 func (c *Client) DeleteProxySession(ctx context.Context, params *DeleteProxySessionInput, optFns ...func(*Options)) (*DeleteProxySessionOutput, error) {
 	if params == nil {
 		params = &DeleteProxySessionInput{}

@@ -2841,6 +2841,13 @@ func awsRestjson1_serializeDocumentAnalysisRuleAggregation(v *types.AnalysisRule
 		}
 	}
 
+	if v.AllowedJoinOperators != nil {
+		ok := object.Key("allowedJoinOperators")
+		if err := awsRestjson1_serializeDocumentJoinOperatorsList(v.AllowedJoinOperators, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DimensionColumns != nil {
 		ok := object.Key("dimensionColumns")
 		if err := awsRestjson1_serializeDocumentAnalysisRuleColumnList(v.DimensionColumns, ok); err != nil {
@@ -2902,6 +2909,13 @@ func awsRestjson1_serializeDocumentAnalysisRuleColumnNameList(v []string, value 
 func awsRestjson1_serializeDocumentAnalysisRuleList(v *types.AnalysisRuleList, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AllowedJoinOperators != nil {
+		ok := object.Key("allowedJoinOperators")
+		if err := awsRestjson1_serializeDocumentJoinOperatorsList(v.AllowedJoinOperators, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.JoinColumns != nil {
 		ok := object.Key("joinColumns")
@@ -3003,6 +3017,17 @@ func awsRestjson1_serializeDocumentGlueTableReference(v *types.GlueTableReferenc
 		ok.String(*v.TableName)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentJoinOperatorsList(v []types.JoinOperator, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
 	return nil
 }
 

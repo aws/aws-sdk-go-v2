@@ -13,6 +13,15 @@ import (
 )
 
 // Lists the Amazon Chime Voice Connectors for the administrator's AWS account.
+// This API is is no longer supported and will not be updated. We recommend using
+// the latest version, ListVoiceConnectors (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_ListVoiceConnectors.html)
+// , in the Amazon Chime SDK. Using the latest version requires migrating to a
+// dedicated namespace. For more information, refer to Migrating from the Amazon
+// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
+// in the Amazon Chime SDK Developer Guide.
+//
+// Deprecated: Replaced by ListVoiceConnectors in the Amazon Chime SDK Voice
+// Namespace
 func (c *Client) ListVoiceConnectors(ctx context.Context, params *ListVoiceConnectorsInput, optFns ...func(*Options)) (*ListVoiceConnectorsOutput, error) {
 	if params == nil {
 		params = &ListVoiceConnectorsInput{}

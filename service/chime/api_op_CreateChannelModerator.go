@@ -20,7 +20,16 @@ import (
 //   - List messages in the channel.
 //
 // The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn
-// of the user that makes the API call as the value in the header.
+// of the user that makes the API call as the value in the header. This API is is
+// no longer supported and will not be updated. We recommend using the latest
+// version, CreateChannelModerator (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_CreateChannelModerator.html)
+// , in the Amazon Chime SDK. Using the latest version requires migrating to a
+// dedicated namespace. For more information, refer to Migrating from the Amazon
+// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
+// in the Amazon Chime SDK Developer Guide.
+//
+// Deprecated: Replaced by CreateChannelModerator in the Amazon Chime SDK
+// Messaging Namespace
 func (c *Client) CreateChannelModerator(ctx context.Context, params *CreateChannelModeratorInput, optFns ...func(*Options)) (*CreateChannelModeratorOutput, error) {
 	if params == nil {
 		params = &CreateChannelModeratorInput{}

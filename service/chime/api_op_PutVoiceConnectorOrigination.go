@@ -13,7 +13,16 @@ import (
 
 // Adds origination settings for the specified Amazon Chime Voice Connector. If
 // emergency calling is configured for the Amazon Chime Voice Connector, it must be
-// deleted prior to turning off origination settings.
+// deleted prior to turning off origination settings. This API is is no longer
+// supported and will not be updated. We recommend using the latest version,
+// PutVoiceConnectorOrigination (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_PutVoiceConnectorOrigination.html)
+// , in the Amazon Chime SDK. Using the latest version requires migrating to a
+// dedicated namespace. For more information, refer to Migrating from the Amazon
+// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
+// in the Amazon Chime SDK Developer Guide.
+//
+// Deprecated: Replaced by PutVoiceConnectorOrigination in the Amazon Chime SDK
+// Voice Namespace
 func (c *Client) PutVoiceConnectorOrigination(ctx context.Context, params *PutVoiceConnectorOriginationInput, optFns ...func(*Options)) (*PutVoiceConnectorOriginationOutput, error) {
 	if params == nil {
 		params = &PutVoiceConnectorOriginationInput{}

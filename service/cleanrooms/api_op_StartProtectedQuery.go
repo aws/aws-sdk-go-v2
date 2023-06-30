@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a protected query that is started by AWS Clean Rooms.
+// Creates a protected query that is started by Clean Rooms .
 func (c *Client) StartProtectedQuery(ctx context.Context, params *StartProtectedQueryInput, optFns ...func(*Options)) (*StartProtectedQueryOutput, error) {
 	if params == nil {
 		params = &StartProtectedQueryInput{}

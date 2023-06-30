@@ -12,6 +12,11 @@ import (
 )
 
 // Lists the tags applied to an Amazon Chime SDK attendee resource.
+// ListAttendeeTags is not supported in the Amazon Chime SDK Meetings Namespace.
+// Update your application to remove calls to this API.
+//
+// Deprecated: Attendee Tags are not supported in the Amazon Chime SDK Meetings
+// Namespace. Update your application to remove calls to this API.
 func (c *Client) ListAttendeeTags(ctx context.Context, params *ListAttendeeTagsInput, optFns ...func(*Options)) (*ListAttendeeTagsOutput, error) {
 	if params == nil {
 		params = &ListAttendeeTagsInput{}

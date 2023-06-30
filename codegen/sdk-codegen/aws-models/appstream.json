@@ -177,8 +177,7 @@
                 "SetupScriptDetails": {
                     "target": "com.amazonaws.appstream#ScriptDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>The setup script details of the app block.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The setup script details of the app block.</p>\n         <p>This only applies to app blocks with PackagingType <code>CUSTOM</code>.</p>"
                     }
                 },
                 "CreatedTime": {
@@ -186,10 +185,289 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The created time of the app block.</p>"
                     }
+                },
+                "PostSetupScriptDetails": {
+                    "target": "com.amazonaws.appstream#ScriptDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The post setup script details of the app block.</p>\n         <p>This only applies to app blocks with PackagingType <code>APPSTREAM2</code>.</p>"
+                    }
+                },
+                "PackagingType": {
+                    "target": "com.amazonaws.appstream#PackagingType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The packaging type of the app block.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.appstream#AppBlockState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the app block.</p>\n         <p>An app block with AppStream 2.0 packaging will be in the <code>INACTIVE</code> state\n            if no application package (VHD) is assigned to it. After an application package (VHD) is\n            created by an app block builder for an app block, it becomes <code>ACTIVE</code>. </p>\n         <p>Custom app blocks are always in the <code>ACTIVE</code> state and no action is required to use them.</p>"
+                    }
+                },
+                "AppBlockErrors": {
+                    "target": "com.amazonaws.appstream#ErrorDetailsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The errors of the app block.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes an app block.</p>\n         <p>App blocks are an Amazon AppStream 2.0 resource that stores the details about the\n           virtual hard disk in an S3 bucket. It also stores the setup script with details about\n           how to mount the virtual hard disk. The virtual hard disk includes the application\n           binaries and other files necessary to launch your applications. Multiple applications\n           can be assigned to a single app block.</p>\n         <p>This is only supported for Elastic fleets.</p>"
+            }
+        },
+        "com.amazonaws.appstream#AppBlockBuilder": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.appstream#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the app block builder.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.appstream#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the app block builder.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.appstream#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the app block builder.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.appstream#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the app block builder.</p>"
+                    }
+                },
+                "Platform": {
+                    "target": "com.amazonaws.appstream#AppBlockBuilderPlatformType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The platform of the app block builder.</p>\n         <p>\n            <code>WINDOWS_SERVER_2019</code> is the only valid value.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstanceType": {
+                    "target": "com.amazonaws.appstream#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The instance type of the app block builder.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EnableDefaultInternetAccess": {
+                    "target": "com.amazonaws.appstream#BooleanObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether default internet access is enabled for the app block builder.</p>"
+                    }
+                },
+                "IamRoleArn": {
+                    "target": "com.amazonaws.appstream#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM role that is applied to the app block builder.</p>"
+                    }
+                },
+                "VpcConfig": {
+                    "target": "com.amazonaws.appstream#VpcConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC configuration for the app block builder.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.appstream#AppBlockBuilderState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the app block builder.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedTime": {
+                    "target": "com.amazonaws.appstream#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The creation time of the app block builder.</p>"
+                    }
+                },
+                "AppBlockBuilderErrors": {
+                    "target": "com.amazonaws.appstream#ResourceErrors",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The app block builder errors.</p>"
+                    }
+                },
+                "StateChangeReason": {
+                    "target": "com.amazonaws.appstream#AppBlockBuilderStateChangeReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state change reason.</p>"
+                    }
+                },
+                "AccessEndpoints": {
+                    "target": "com.amazonaws.appstream#AccessEndpointList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of interface VPC endpoint (interface endpoint) objects. Administrators can connect to the app block builder only through the specified endpoints.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an app block builder.</p>"
+            }
+        },
+        "com.amazonaws.appstream#AppBlockBuilderAppBlockAssociation": {
+            "type": "structure",
+            "members": {
+                "AppBlockArn": {
+                    "target": "com.amazonaws.appstream#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the app block.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AppBlockBuilderName": {
+                    "target": "com.amazonaws.appstream#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the app block builder.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an association between an app block builder and app block.</p>"
+            }
+        },
+        "com.amazonaws.appstream#AppBlockBuilderAppBlockAssociationsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.appstream#AppBlockBuilderAppBlockAssociation"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 25
+                }
+            }
+        },
+        "com.amazonaws.appstream#AppBlockBuilderAttribute": {
+            "type": "enum",
+            "members": {
+                "IAM_ROLE_ARN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IAM_ROLE_ARN"
+                    }
+                },
+                "ACCESS_ENDPOINTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCESS_ENDPOINTS"
+                    }
+                },
+                "VPC_CONFIGURATION_SECURITY_GROUP_IDS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VPC_CONFIGURATION_SECURITY_GROUP_IDS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.appstream#AppBlockBuilderAttributes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.appstream#AppBlockBuilderAttribute"
+            }
+        },
+        "com.amazonaws.appstream#AppBlockBuilderList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.appstream#AppBlockBuilder"
+            }
+        },
+        "com.amazonaws.appstream#AppBlockBuilderPlatformType": {
+            "type": "enum",
+            "members": {
+                "WINDOWS_SERVER_2019": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WINDOWS_SERVER_2019"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.appstream#AppBlockBuilderState": {
+            "type": "enum",
+            "members": {
+                "STARTING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STARTING"
+                    }
+                },
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING"
+                    }
+                },
+                "STOPPING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPING"
+                    }
+                },
+                "STOPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.appstream#AppBlockBuilderStateChangeReason": {
+            "type": "structure",
+            "members": {
+                "Code": {
+                    "target": "com.amazonaws.appstream#AppBlockBuilderStateChangeReasonCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state change reason code.</p>"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.appstream#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state change reason message.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the reason why the last app block builder state change occurred.</p>"
+            }
+        },
+        "com.amazonaws.appstream#AppBlockBuilderStateChangeReasonCode": {
+            "type": "enum",
+            "members": {
+                "INTERNAL_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNAL_ERROR"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.appstream#AppBlockState": {
+            "type": "enum",
+            "members": {
+                "INACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INACTIVE"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                }
             }
         },
         "com.amazonaws.appstream#AppBlocks": {
@@ -453,6 +731,71 @@
                 "target": "com.amazonaws.appstream#Arn"
             }
         },
+        "com.amazonaws.appstream#AssociateAppBlockBuilderAppBlock": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appstream#AssociateAppBlockBuilderAppBlockRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appstream#AssociateAppBlockBuilderAppBlockResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appstream#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#InvalidParameterCombinationException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#OperationNotPermittedException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Associates the specified app block builder with the specified app block.</p>"
+            }
+        },
+        "com.amazonaws.appstream#AssociateAppBlockBuilderAppBlockRequest": {
+            "type": "structure",
+            "members": {
+                "AppBlockArn": {
+                    "target": "com.amazonaws.appstream#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the app block.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AppBlockBuilderName": {
+                    "target": "com.amazonaws.appstream#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the app block builder.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.appstream#AssociateAppBlockBuilderAppBlockResult": {
+            "type": "structure",
+            "members": {
+                "AppBlockBuilderAppBlockAssociation": {
+                    "target": "com.amazonaws.appstream#AppBlockBuilderAppBlockAssociation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of app block builders associated with app blocks.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.appstream#AssociateApplicationFleet": {
             "type": "operation",
             "input": {
@@ -513,6 +856,9 @@
                         "smithy.api#documentation": "<p>If fleet name is specified, this returns the list of applications that are associated\n            to it. If application ARN is specified, this returns the list of fleets to which it is\n            associated.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appstream#AssociateApplicationToEntitlement": {
@@ -572,7 +918,10 @@
         },
         "com.amazonaws.appstream#AssociateApplicationToEntitlementResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.appstream#AssociateFleet": {
             "type": "operation",
@@ -630,7 +979,10 @@
         },
         "com.amazonaws.appstream#AssociateFleetResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.appstream#AuthenticationType": {
             "type": "enum",
@@ -723,6 +1075,9 @@
                         "smithy.api#documentation": "<p>The list of UserStackAssociationError objects.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appstream#BatchDisassociateUserStack": {
@@ -769,6 +1124,9 @@
                         "smithy.api#documentation": "<p>The list of UserStackAssociationError objects.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appstream#Boolean": {
@@ -991,6 +1349,194 @@
                 "smithy.api#documentation": "<p>Creates an app block.</p>\n         <p>App blocks are an Amazon AppStream 2.0 resource that stores the details about the\n            virtual hard disk in an S3 bucket. It also stores the setup script with details about\n            how to mount the virtual hard disk. The virtual hard disk includes the application\n            binaries and other files necessary to launch your applications. Multiple applications\n            can be assigned to a single app block.</p>\n         <p>This is only supported for Elastic fleets.</p>"
             }
         },
+        "com.amazonaws.appstream#CreateAppBlockBuilder": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appstream#CreateAppBlockBuilderRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appstream#CreateAppBlockBuilderResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appstream#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#InvalidAccountStatusException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#InvalidParameterCombinationException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#InvalidRoleException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#OperationNotPermittedException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#RequestLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#ResourceAlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#ResourceNotAvailableException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an app block builder.</p>"
+            }
+        },
+        "com.amazonaws.appstream#CreateAppBlockBuilderRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.appstream#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name for the app block builder.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.appstream#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the app block builder.</p>"
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.appstream#DisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the app block builder.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.appstream#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to associate with the app block builder. A tag is a key-value pair, and the\n            value is optional. For example, Environment=Test. If you do not specify a value,\n            Environment=. </p>\n         <p>If you do not specify a value, the value is set to an empty string.</p>\n         <p>Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters: </p>\n         <p>_ . : / = + \\ - @</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>"
+                    }
+                },
+                "Platform": {
+                    "target": "com.amazonaws.appstream#AppBlockBuilderPlatformType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The platform of the app block builder.</p>\n         <p>\n            <code>WINDOWS_SERVER_2019</code> is the only valid value.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstanceType": {
+                    "target": "com.amazonaws.appstream#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The instance type to use when launching the app block builder. The following instance\n            types are available:</p>\n         <ul>\n            <li>\n               <p>stream.standard.small</p>\n            </li>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.standard.xlarge</p>\n            </li>\n            <li>\n               <p>stream.standard.2xlarge</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "VpcConfig": {
+                    "target": "com.amazonaws.appstream#VpcConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC configuration for the app block builder.</p>\n         <p>App block builders require that you specify at least two subnets in different availability\n            zones.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EnableDefaultInternetAccess": {
+                    "target": "com.amazonaws.appstream#BooleanObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enables or disables default internet access for the app block builder.</p>"
+                    }
+                },
+                "IamRoleArn": {
+                    "target": "com.amazonaws.appstream#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to apply to the app block builder. To\n            assume a role, the app block builder calls the AWS Security Token Service (STS)\n                <code>AssumeRole</code> API operation and passes the ARN of the role to use. The\n            operation creates a new session with temporary credentials. AppStream 2.0 retrieves the\n            temporary credentials and creates the <b>appstream_machine_role</b> credential profile on the instance.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html\">Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>"
+                    }
+                },
+                "AccessEndpoints": {
+                    "target": "com.amazonaws.appstream#AccessEndpointList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of interface VPC endpoint (interface endpoint) objects. Administrators can connect to the app block builder only through the specified endpoints.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.appstream#CreateAppBlockBuilderResult": {
+            "type": "structure",
+            "members": {
+                "AppBlockBuilder": {
+                    "target": "com.amazonaws.appstream#AppBlockBuilder"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.appstream#CreateAppBlockBuilderStreamingURL": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appstream#CreateAppBlockBuilderStreamingURLRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appstream#CreateAppBlockBuilderStreamingURLResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appstream#OperationNotPermittedException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a URL to start a create app block builder streaming session.</p>"
+            }
+        },
+        "com.amazonaws.appstream#CreateAppBlockBuilderStreamingURLRequest": {
+            "type": "structure",
+            "members": {
+                "AppBlockBuilderName": {
+                    "target": "com.amazonaws.appstream#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the app block builder.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Validity": {
+                    "target": "com.amazonaws.appstream#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the streaming URL will be valid, in seconds. \n            Specify a value between 1 and 604800 seconds. The default is 3600 seconds.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.appstream#CreateAppBlockBuilderStreamingURLResult": {
+            "type": "structure",
+            "members": {
+                "StreamingURL": {
+                    "target": "com.amazonaws.appstream#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL to start the streaming session.</p>"
+                    }
+                },
+                "Expires": {
+                    "target": "com.amazonaws.appstream#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The elapsed time, in seconds after the Unix epoch, when this URL expires.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.appstream#CreateAppBlockRequest": {
             "type": "structure",
             "members": {
@@ -1023,14 +1569,25 @@
                 "SetupScriptDetails": {
                     "target": "com.amazonaws.appstream#ScriptDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>The setup script details of the app block.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The setup script details of the app block. This must be provided for the\n                <code>CUSTOM</code> PackagingType.</p>"
                     }
                 },
                 "Tags": {
                     "target": "com.amazonaws.appstream#Tags",
                     "traits": {
                         "smithy.api#documentation": "<p>The tags assigned to the app block.</p>"
+                    }
+                },
+                "PostSetupScriptDetails": {
+                    "target": "com.amazonaws.appstream#ScriptDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The post setup script details of the app block. This can only be provided for the\n                <code>APPSTREAM2</code> PackagingType.</p>"
+                    }
+                },
+                "PackagingType": {
+                    "target": "com.amazonaws.appstream#PackagingType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The packaging type of the app block.</p>"
                     }
                 }
             },
@@ -1047,6 +1604,9 @@
                         "smithy.api#documentation": "<p>The app block.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appstream#CreateApplication": {
@@ -1164,6 +1724,9 @@
                 "Application": {
                     "target": "com.amazonaws.appstream#Application"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appstream#CreateDirectoryConfig": {
@@ -1241,6 +1804,9 @@
                         "smithy.api#documentation": "<p>Information about the directory configuration.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appstream#CreateEntitlement": {
@@ -1320,6 +1886,9 @@
                         "smithy.api#documentation": "<p>The entitlement.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appstream#CreateFleet": {
@@ -1380,7 +1949,7 @@
                     }
                 },
                 "ImageName": {
-                    "target": "com.amazonaws.appstream#String",
+                    "target": "com.amazonaws.appstream#Name",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the image used to create the fleet.</p>"
                     }
@@ -1514,6 +2083,9 @@
                         "smithy.api#documentation": "<p>Information about the fleet.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appstream#CreateImageBuilder": {
@@ -1660,6 +2232,9 @@
                         "smithy.api#documentation": "<p>Information about the image builder.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appstream#CreateImageBuilderStreamingURL": {
@@ -1718,6 +2293,9 @@
                         "smithy.api#documentation": "<p>The elapsed time, in seconds after the Unix epoch, when this URL expires.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appstream#CreateStack": {
@@ -1845,6 +2423,9 @@
                         "smithy.api#documentation": "<p>Information about the stack.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appstream#CreateStreamingURL": {
@@ -1935,6 +2516,9 @@
                         "smithy.api#documentation": "<p>The elapsed time, in seconds after the Unix epoch, when this URL expires.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appstream#CreateUpdatedImage": {
@@ -2032,6 +2616,9 @@
                         "smithy.api#documentation": "<p>Indicates whether a new image can be created.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appstream#CreateUsageReportSubscription": {
@@ -2079,6 +2666,9 @@
                         "smithy.api#documentation": "<p>The schedule for generating usage reports.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appstream#CreateUser": {
@@ -2152,7 +2742,10 @@
         },
         "com.amazonaws.appstream#CreateUserResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.appstream#DeleteAppBlock": {
             "type": "operation",
@@ -2177,6 +2770,54 @@
                 "smithy.api#documentation": "<p>Deletes an app block.</p>"
             }
         },
+        "com.amazonaws.appstream#DeleteAppBlockBuilder": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appstream#DeleteAppBlockBuilderRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appstream#DeleteAppBlockBuilderResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appstream#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#OperationNotPermittedException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an app block builder.</p>\n         <p>An app block builder can only be deleted when it has no association with an app\n            block.</p>"
+            }
+        },
+        "com.amazonaws.appstream#DeleteAppBlockBuilderRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.appstream#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the app block builder.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.appstream#DeleteAppBlockBuilderResult": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.appstream#DeleteAppBlockRequest": {
             "type": "structure",
             "members": {
@@ -2194,7 +2835,10 @@
         },
         "com.amazonaws.appstream#DeleteAppBlockResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.appstream#DeleteApplication": {
             "type": "operation",
@@ -2239,7 +2883,10 @@
         },
         "com.amazonaws.appstream#DeleteApplicationResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.appstream#DeleteDirectoryConfig": {
             "type": "operation",
@@ -2278,7 +2925,10 @@
         },
         "com.amazonaws.appstream#DeleteDirectoryConfigResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.appstream#DeleteEntitlement": {
             "type": "operation",
@@ -2330,7 +2980,10 @@
         },
         "com.amazonaws.appstream#DeleteEntitlementResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.appstream#DeleteFleet": {
             "type": "operation",
@@ -2372,7 +3025,10 @@
         },
         "com.amazonaws.appstream#DeleteFleetResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.appstream#DeleteImage": {
             "type": "operation",
@@ -2447,6 +3103,9 @@
                         "smithy.api#documentation": "<p>Information about the image builder.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appstream#DeleteImagePermissions": {
@@ -2493,7 +3152,10 @@
         },
         "com.amazonaws.appstream#DeleteImagePermissionsResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.appstream#DeleteImageRequest": {
             "type": "structure",
@@ -2519,6 +3181,9 @@
                         "smithy.api#documentation": "<p>Information about the image.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appstream#DeleteStack": {
@@ -2564,7 +3229,10 @@
         },
         "com.amazonaws.appstream#DeleteStackResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.appstream#DeleteUsageReportSubscription": {
             "type": "operation",
@@ -2595,7 +3263,10 @@
         },
         "com.amazonaws.appstream#DeleteUsageReportSubscriptionResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.appstream#DeleteUser": {
             "type": "operation",
@@ -2638,7 +3309,158 @@
         },
         "com.amazonaws.appstream#DeleteUserResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.appstream#DescribeAppBlockBuilderAppBlockAssociations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appstream#DescribeAppBlockBuilderAppBlockAssociationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appstream#DescribeAppBlockBuilderAppBlockAssociationsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appstream#InvalidParameterCombinationException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#OperationNotPermittedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a list that describes one or more app block builder associations.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.appstream#DescribeAppBlockBuilderAppBlockAssociationsRequest": {
+            "type": "structure",
+            "members": {
+                "AppBlockArn": {
+                    "target": "com.amazonaws.appstream#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the app block.</p>"
+                    }
+                },
+                "AppBlockBuilderName": {
+                    "target": "com.amazonaws.appstream#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the app block builder.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.appstream#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum size of each page of results.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.appstream#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token used to retrieve the next page of results for this\n            operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.appstream#DescribeAppBlockBuilderAppBlockAssociationsResult": {
+            "type": "structure",
+            "members": {
+                "AppBlockBuilderAppBlockAssociations": {
+                    "target": "com.amazonaws.appstream#AppBlockBuilderAppBlockAssociationsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This list of app block builders associated with app blocks.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.appstream#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token used to retrieve the next page of results for this\n            operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.appstream#DescribeAppBlockBuilders": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appstream#DescribeAppBlockBuildersRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appstream#DescribeAppBlockBuildersResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appstream#OperationNotPermittedException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a list that describes one or more app block builders.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.appstream#DescribeAppBlockBuildersRequest": {
+            "type": "structure",
+            "members": {
+                "Names": {
+                    "target": "com.amazonaws.appstream#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The names of the app block builders.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.appstream#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token used to retrieve the next page of results for this\n            operation.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.appstream#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum size of each page of results. The maximum value is 25.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.appstream#DescribeAppBlockBuildersResult": {
+            "type": "structure",
+            "members": {
+                "AppBlockBuilders": {
+                    "target": "com.amazonaws.appstream#AppBlockBuilderList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list that describes one or more app block builders.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.appstream#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token used to retrieve the next page of results for this\n            operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.appstream#DescribeAppBlocks": {
             "type": "operation",
@@ -2701,6 +3523,9 @@
                         "smithy.api#documentation": "<p>The pagination token used to retrieve the next page of results for this\n            operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appstream#DescribeApplicationFleetAssociations": {
@@ -2770,6 +3595,9 @@
                         "smithy.api#documentation": "<p>The pagination token used to retrieve the next page of results for this\n            operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appstream#DescribeApplications": {
@@ -2833,6 +3661,9 @@
                         "smithy.api#documentation": "<p>The pagination token used to retrieve the next page of results for this\n            operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appstream#DescribeDirectoryConfigs": {
@@ -2893,6 +3724,9 @@
                         "smithy.api#documentation": "<p>The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appstream#DescribeEntitlements": {
@@ -2966,6 +3800,9 @@
                         "smithy.api#documentation": "<p>The pagination token used to retrieve the next page of results for this\n            operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appstream#DescribeFleets": {
@@ -3092,6 +3929,9 @@
                         "smithy.api#documentation": "<p>The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appstream#DescribeImageBuilders": {
@@ -3152,6 +3992,9 @@
                         "smithy.api#documentation": "<p>The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appstream#DescribeImagePermissions": {
@@ -3230,6 +4073,9 @@
                         "smithy.api#documentation": "<p>The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appstream#DescribeImages": {
@@ -3319,6 +4165,9 @@
                         "smithy.api#documentation": "<p>The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appstream#DescribeSessions": {
@@ -3399,6 +4248,9 @@
                         "smithy.api#documentation": "<p>The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appstream#DescribeStacks": {
@@ -3453,6 +4305,9 @@
                         "smithy.api#documentation": "<p>The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appstream#DescribeUsageReportSubscriptions": {
@@ -3510,6 +4365,9 @@
                         "smithy.api#documentation": "<p>The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appstream#DescribeUserStackAssociations": {
@@ -3585,6 +4443,9 @@
                         "smithy.api#documentation": "<p>The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appstream#DescribeUsers": {
@@ -3652,6 +4513,9 @@
                         "smithy.api#documentation": "<p>The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appstream#Description": {
@@ -3758,7 +4622,65 @@
         },
         "com.amazonaws.appstream#DisableUserResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.appstream#DisassociateAppBlockBuilderAppBlock": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appstream#DisassociateAppBlockBuilderAppBlockRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appstream#DisassociateAppBlockBuilderAppBlockResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appstream#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#InvalidParameterCombinationException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#OperationNotPermittedException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Disassociates a specified app block builder from a specified app block.</p>"
+            }
+        },
+        "com.amazonaws.appstream#DisassociateAppBlockBuilderAppBlockRequest": {
+            "type": "structure",
+            "members": {
+                "AppBlockArn": {
+                    "target": "com.amazonaws.appstream#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the app block.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AppBlockBuilderName": {
+                    "target": "com.amazonaws.appstream#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the app block builder.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.appstream#DisassociateAppBlockBuilderAppBlockResult": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.appstream#DisassociateApplicationFleet": {
             "type": "operation",
@@ -3807,7 +4729,10 @@
         },
         "com.amazonaws.appstream#DisassociateApplicationFleetResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.appstream#DisassociateApplicationFromEntitlement": {
             "type": "operation",
@@ -3863,7 +4788,10 @@
         },
         "com.amazonaws.appstream#DisassociateApplicationFromEntitlementResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.appstream#DisassociateFleet": {
             "type": "operation",
@@ -3915,7 +4843,10 @@
         },
         "com.amazonaws.appstream#DisassociateFleetResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.appstream#DisplayName": {
             "type": "string",
@@ -4035,7 +4966,10 @@
         },
         "com.amazonaws.appstream#EnableUserResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.appstream#EntitledApplication": {
             "type": "structure",
@@ -4177,6 +5111,32 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.appstream#ErrorDetails": {
+            "type": "structure",
+            "members": {
+                "ErrorCode": {
+                    "target": "com.amazonaws.appstream#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code.</p>"
+                    }
+                },
+                "ErrorMessage": {
+                    "target": "com.amazonaws.appstream#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The error details.</p>"
+            }
+        },
+        "com.amazonaws.appstream#ErrorDetailsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.appstream#ErrorDetails"
+            }
+        },
         "com.amazonaws.appstream#ErrorMessage": {
             "type": "string",
             "traits": {
@@ -4212,7 +5172,10 @@
         },
         "com.amazonaws.appstream#ExpireSessionResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.appstream#FeedbackURL": {
             "type": "string",
@@ -5303,6 +6266,9 @@
                         "smithy.api#documentation": "<p>The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appstream#ListAssociatedStacks": {
@@ -5353,6 +6319,9 @@
                         "smithy.api#documentation": "<p>The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appstream#ListEntitledApplications": {
@@ -5427,6 +6396,9 @@
                         "smithy.api#documentation": "<p>The pagination token used to retrieve the next page of results for this operation.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appstream#ListTagsForResource": {
@@ -5567,6 +6539,23 @@
                 "target": "com.amazonaws.appstream#OrganizationalUnitDistinguishedName"
             }
         },
+        "com.amazonaws.appstream#PackagingType": {
+            "type": "enum",
+            "members": {
+                "CUSTOM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOM"
+                    }
+                },
+                "APPSTREAM2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPSTREAM2"
+                    }
+                }
+            }
+        },
         "com.amazonaws.appstream#Permission": {
             "type": "enum",
             "members": {
@@ -5589,6 +6578,9 @@
             "version": "2016-12-01",
             "operations": [
                 {
+                    "target": "com.amazonaws.appstream#AssociateAppBlockBuilderAppBlock"
+                },
+                {
                     "target": "com.amazonaws.appstream#AssociateApplicationFleet"
                 },
                 {
@@ -5608,6 +6600,12 @@
                 },
                 {
                     "target": "com.amazonaws.appstream#CreateAppBlock"
+                },
+                {
+                    "target": "com.amazonaws.appstream#CreateAppBlockBuilder"
+                },
+                {
+                    "target": "com.amazonaws.appstream#CreateAppBlockBuilderStreamingURL"
                 },
                 {
                     "target": "com.amazonaws.appstream#CreateApplication"
@@ -5646,6 +6644,9 @@
                     "target": "com.amazonaws.appstream#DeleteAppBlock"
                 },
                 {
+                    "target": "com.amazonaws.appstream#DeleteAppBlockBuilder"
+                },
+                {
                     "target": "com.amazonaws.appstream#DeleteApplication"
                 },
                 {
@@ -5674,6 +6675,12 @@
                 },
                 {
                     "target": "com.amazonaws.appstream#DeleteUser"
+                },
+                {
+                    "target": "com.amazonaws.appstream#DescribeAppBlockBuilderAppBlockAssociations"
+                },
+                {
+                    "target": "com.amazonaws.appstream#DescribeAppBlockBuilders"
                 },
                 {
                     "target": "com.amazonaws.appstream#DescribeAppBlocks"
@@ -5721,6 +6728,9 @@
                     "target": "com.amazonaws.appstream#DisableUser"
                 },
                 {
+                    "target": "com.amazonaws.appstream#DisassociateAppBlockBuilderAppBlock"
+                },
+                {
                     "target": "com.amazonaws.appstream#DisassociateApplicationFleet"
                 },
                 {
@@ -5748,10 +6758,16 @@
                     "target": "com.amazonaws.appstream#ListTagsForResource"
                 },
                 {
+                    "target": "com.amazonaws.appstream#StartAppBlockBuilder"
+                },
+                {
                     "target": "com.amazonaws.appstream#StartFleet"
                 },
                 {
                     "target": "com.amazonaws.appstream#StartImageBuilder"
+                },
+                {
+                    "target": "com.amazonaws.appstream#StopAppBlockBuilder"
                 },
                 {
                     "target": "com.amazonaws.appstream#StopFleet"
@@ -5764,6 +6780,9 @@
                 },
                 {
                     "target": "com.amazonaws.appstream#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.appstream#UpdateAppBlockBuilder"
                 },
                 {
                     "target": "com.amazonaws.appstream#UpdateApplication"
@@ -6209,8 +7228,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6222,8 +7241,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6235,8 +7254,8 @@
                             },
                             "params": {
                                 "Region": "ap-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6248,8 +7267,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6261,8 +7280,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6274,8 +7293,8 @@
                             },
                             "params": {
                                 "Region": "ca-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6287,8 +7306,8 @@
                             },
                             "params": {
                                 "Region": "eu-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6300,8 +7319,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6313,8 +7332,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6326,8 +7345,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6339,8 +7358,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6352,8 +7371,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6365,8 +7384,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6378,8 +7397,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6391,8 +7410,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -6404,8 +7423,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -6417,8 +7436,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -6430,8 +7449,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6443,8 +7462,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -6456,8 +7475,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6469,8 +7488,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6482,8 +7501,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6495,8 +7514,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -6508,8 +7527,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6521,8 +7540,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -6534,8 +7553,19 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -6547,8 +7577,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -6560,8 +7601,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -6573,8 +7625,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -6586,8 +7649,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -6599,8 +7662,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -6612,8 +7675,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -6624,8 +7687,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -6636,9 +7699,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -6861,8 +7930,7 @@
                 "S3Key": {
                     "target": "com.amazonaws.appstream#S3Key",
                     "traits": {
-                        "smithy.api#documentation": "<p>The S3 key of the S3 object.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The S3 key of the S3 object.</p>\n         <p>This is required when used for the following:</p>\n         <ul>\n            <li>\n               <p>IconS3Location (Actions: CreateApplication and UpdateApplication)</p>\n            </li>\n            <li>\n               <p>SessionScriptS3Location (Actions: CreateFleet and UpdateFleet)</p>\n            </li>\n            <li>\n               <p>ScriptDetails (Actions: CreateAppBlock)</p>\n            </li>\n            <li>\n               <p>SourceS3Location when creating an app block with <code>CUSTOM</code> PackagingType (Actions:\n                    CreateAppBlock)</p>\n            </li>\n            <li>\n               <p>SourceS3Location when creating an app block with <code>APPSTREAM2</code> PackagingType, and\n                    using an existing application package (VHD file). In this case,\n                        <code>S3Key</code> refers to the VHD file. If a new application package is\n                    required, then <code>S3Key</code> is not required. (Actions:\n                    CreateAppBlock)</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -7333,6 +8401,67 @@
                 "smithy.api#documentation": "<p>The stacks.</p>"
             }
         },
+        "com.amazonaws.appstream#StartAppBlockBuilder": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appstream#StartAppBlockBuilderRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appstream#StartAppBlockBuilderResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appstream#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#InvalidAccountStatusException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#OperationNotPermittedException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#RequestLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#ResourceNotAvailableException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts an app block builder.</p>\n         <p>An app block builder can only be started when it's associated with an app\n            block.</p>\n         <p>Starting an app block builder starts a new instance, which is equivalent to an elastic\n            fleet instance with application builder assistance functionality.</p>"
+            }
+        },
+        "com.amazonaws.appstream#StartAppBlockBuilderRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.appstream#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the app block builder.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.appstream#StartAppBlockBuilderResult": {
+            "type": "structure",
+            "members": {
+                "AppBlockBuilder": {
+                    "target": "com.amazonaws.appstream#AppBlockBuilder"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.appstream#StartFleet": {
             "type": "operation",
             "input": {
@@ -7388,7 +8517,10 @@
         },
         "com.amazonaws.appstream#StartFleetResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.appstream#StartImageBuilder": {
             "type": "operation",
@@ -7449,6 +8581,58 @@
                         "smithy.api#documentation": "<p>Information about the image builder.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.appstream#StopAppBlockBuilder": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appstream#StopAppBlockBuilderRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appstream#StopAppBlockBuilderResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appstream#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#OperationNotPermittedException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Stops an app block builder.</p>\n         <p>Stopping an app block builder terminates the instance, and the instance state is not\n            persisted.</p>"
+            }
+        },
+        "com.amazonaws.appstream#StopAppBlockBuilderRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.appstream#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the app block builder.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.appstream#StopAppBlockBuilderResult": {
+            "type": "structure",
+            "members": {
+                "AppBlockBuilder": {
+                    "target": "com.amazonaws.appstream#AppBlockBuilder"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appstream#StopFleet": {
@@ -7488,7 +8672,10 @@
         },
         "com.amazonaws.appstream#StopFleetResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.appstream#StopImageBuilder": {
             "type": "operation",
@@ -7537,6 +8724,9 @@
                         "smithy.api#documentation": "<p>Information about the image builder.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appstream#StorageConnector": {
@@ -7813,6 +9003,130 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.appstream#UpdateAppBlockBuilder": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appstream#UpdateAppBlockBuilderRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appstream#UpdateAppBlockBuilderResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appstream#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#InvalidAccountStatusException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#InvalidParameterCombinationException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#InvalidRoleException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#OperationNotPermittedException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#RequestLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#ResourceNotAvailableException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an app block builder.</p>\n         <p>If the app block builder is in the <code>STARTING</code> or <code>STOPPING</code>\n            state, you can't update it. If the app block builder is in the <code>RUNNING</code>\n            state, you can only update the DisplayName and Description. If the app block builder is\n            in the <code>STOPPED</code> state, you can update any attribute except the Name.</p>"
+            }
+        },
+        "com.amazonaws.appstream#UpdateAppBlockBuilderRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.appstream#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name for the app block builder.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.appstream#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the app block builder.</p>"
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.appstream#DisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the app block builder.</p>"
+                    }
+                },
+                "Platform": {
+                    "target": "com.amazonaws.appstream#PlatformType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The platform of the app block builder.</p>\n         <p>\n            <code>WINDOWS_SERVER_2019</code> is the only valid value.</p>"
+                    }
+                },
+                "InstanceType": {
+                    "target": "com.amazonaws.appstream#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The instance type to use when launching the app block builder. The following instance\n                types are available:</p>\n         <ul>\n            <li>\n               <p>stream.standard.small</p>\n            </li>\n            <li>\n               <p>stream.standard.medium</p>\n            </li>\n            <li>\n               <p>stream.standard.large</p>\n            </li>\n            <li>\n               <p>stream.standard.xlarge</p>\n            </li>\n            <li>\n               <p>stream.standard.2xlarge</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "VpcConfig": {
+                    "target": "com.amazonaws.appstream#VpcConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC configuration for the app block builder.</p>\n         <p>App block builders require that you specify at least two subnets in different availability\n            zones.</p>"
+                    }
+                },
+                "EnableDefaultInternetAccess": {
+                    "target": "com.amazonaws.appstream#BooleanObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enables or disables default internet access for the app block builder.</p>"
+                    }
+                },
+                "IamRoleArn": {
+                    "target": "com.amazonaws.appstream#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to apply to the app block builder. To\n            assume a role, the app block builder calls the AWS Security Token Service (STS)\n            <code>AssumeRole</code> API operation and passes the ARN of the role to use. The\n            operation creates a new session with temporary credentials. AppStream 2.0 retrieves the\n            temporary credentials and creates the <b>appstream_machine_role</b> credential profile on the instance.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html\">Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>"
+                    }
+                },
+                "AccessEndpoints": {
+                    "target": "com.amazonaws.appstream#AccessEndpointList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of interface VPC endpoint (interface endpoint) objects. Administrators can connect to the app block builder only through the specified endpoints.</p>"
+                    }
+                },
+                "AttributesToDelete": {
+                    "target": "com.amazonaws.appstream#AppBlockBuilderAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attributes to delete from the app block builder.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.appstream#UpdateAppBlockBuilderResult": {
+            "type": "structure",
+            "members": {
+                "AppBlockBuilder": {
+                    "target": "com.amazonaws.appstream#AppBlockBuilder"
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.appstream#UpdateApplication": {
             "type": "operation",
             "input": {
@@ -7905,6 +9219,9 @@
                 "Application": {
                     "target": "com.amazonaws.appstream#Application"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appstream#UpdateDirectoryConfig": {
@@ -7978,6 +9295,9 @@
                         "smithy.api#documentation": "<p>Information about the Directory Config object.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appstream#UpdateEntitlement": {
@@ -8055,6 +9375,9 @@
                         "smithy.api#documentation": "<p>The entitlement.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appstream#UpdateFleet": {
@@ -8146,7 +9469,7 @@
                 "MaxUserDurationInSeconds": {
                     "target": "com.amazonaws.appstream#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum amount of time that a streaming session can remain active, in seconds. If users are still connected to a streaming instance five minutes before this limit is reached, they are prompted to save any open documents before being disconnected. After this time elapses, the instance is terminated and replaced by a new instance.</p>\n         <p>Specify a value between 600 and 360000.</p>"
+                        "smithy.api#documentation": "<p>The maximum amount of time that a streaming session can remain active, in seconds. If users are still connected to a streaming instance five minutes before this limit is reached, they are prompted to save any open documents before being disconnected. After this time elapses, the instance is terminated and replaced by a new instance.</p>\n         <p>Specify a value between 600 and 432000.</p>"
                     }
                 },
                 "DisconnectTimeoutInSeconds": {
@@ -8249,6 +9572,9 @@
                         "smithy.api#documentation": "<p>Information about the fleet.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appstream#UpdateImagePermissions": {
@@ -8305,7 +9631,10 @@
         },
         "com.amazonaws.appstream#UpdateImagePermissionsResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.appstream#UpdateStack": {
             "type": "operation",
@@ -8446,6 +9775,9 @@
                         "smithy.api#documentation": "<p>Information about the stack.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.appstream#UsageReportExecutionErrorCode": {

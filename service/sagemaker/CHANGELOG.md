@@ -1,3 +1,7 @@
+# v1.89.0 (2023-06-29)
+
+* **Feature**: Adding support for timeseries forecasting in the CreateAutoMLJobV2 API.
+
 # v1.88.0 (2023-06-28)
 
 * **Feature**: This release adds support for Model Cards Model Registry integration.

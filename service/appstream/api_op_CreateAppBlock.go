@@ -39,11 +39,6 @@ type CreateAppBlockInput struct {
 	// This member is required.
 	Name *string
 
-	// The setup script details of the app block.
-	//
-	// This member is required.
-	SetupScriptDetails *types.ScriptDetails
-
 	// The source S3 location of the app block.
 	//
 	// This member is required.
@@ -54,6 +49,17 @@ type CreateAppBlockInput struct {
 
 	// The display name of the app block. This is not displayed to the user.
 	DisplayName *string
+
+	// The packaging type of the app block.
+	PackagingType types.PackagingType
+
+	// The post setup script details of the app block. This can only be provided for
+	// the APPSTREAM2 PackagingType.
+	PostSetupScriptDetails *types.ScriptDetails
+
+	// The setup script details of the app block. This must be provided for the CUSTOM
+	// PackagingType.
+	SetupScriptDetails *types.ScriptDetails
 
 	// The tags assigned to the app block.
 	Tags map[string]string

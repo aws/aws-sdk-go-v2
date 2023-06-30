@@ -14,7 +14,16 @@ import (
 // Puts emergency calling configuration details to the specified Amazon Chime
 // Voice Connector, such as emergency phone numbers and calling countries.
 // Origination and termination settings must be enabled for the Amazon Chime Voice
-// Connector before emergency calling can be configured.
+// Connector before emergency calling can be configured. This API is is no longer
+// supported and will not be updated. We recommend using the latest version,
+// PutVoiceConnectorEmergencyCallingConfiguration (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_PutVoiceConnectorEmergencyCallingConfiguration.html)
+// , in the Amazon Chime SDK. Using the latest version requires migrating to a
+// dedicated namespace. For more information, refer to Migrating from the Amazon
+// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
+// in the Amazon Chime SDK Developer Guide.
+//
+// Deprecated: Replaced by PutVoiceConnectorEmergencyCallingConfiguration in the
+// Amazon Chime SDK Voice Namespace
 func (c *Client) PutVoiceConnectorEmergencyCallingConfiguration(ctx context.Context, params *PutVoiceConnectorEmergencyCallingConfigurationInput, optFns ...func(*Options)) (*PutVoiceConnectorEmergencyCallingConfigurationOutput, error) {
 	if params == nil {
 		params = &PutVoiceConnectorEmergencyCallingConfigurationInput{}

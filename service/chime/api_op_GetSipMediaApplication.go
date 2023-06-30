@@ -12,7 +12,15 @@ import (
 )
 
 // Retrieves the information for a SIP media application, including name, AWS
-// Region, and endpoints.
+// Region, and endpoints. This API is is no longer supported and will not be
+// updated. We recommend using the latest version, GetSipMediaApplication (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_GetSipMediaApplication.html)
+// , in the Amazon Chime SDK. Using the latest version requires migrating to a
+// dedicated namespace. For more information, refer to Migrating from the Amazon
+// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
+// in the Amazon Chime SDK Developer Guide.
+//
+// Deprecated: Replaced by GetSipMediaApplication in the Amazon Chime SDK Voice
+// Namespace
 func (c *Client) GetSipMediaApplication(ctx context.Context, params *GetSipMediaApplicationInput, optFns ...func(*Options)) (*GetSipMediaApplicationOutput, error) {
 	if params == nil {
 		params = &GetSipMediaApplicationInput{}

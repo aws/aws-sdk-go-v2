@@ -3,11 +3,11 @@
 // Package cleanrooms provides the API client, operations, and parameter types for
 // AWS Clean Rooms Service.
 //
-// Welcome to the AWS Clean Rooms API Reference. AWS Clean Rooms is an AWS service
-// that helps multiple parties to join their data together in a secure
+// Welcome to the Clean Rooms API Reference. Clean Rooms is an Amazon Web Services
+// service that helps multiple parties to join their data together in a secure
 // collaboration workspace. In the collaboration, members who can query and receive
 // results can get insights into the collective datasets without either party
-// getting access to the other party's raw data. To learn more about AWS Clean
-// Rooms concepts, procedures, and best practices, see the AWS Clean Rooms User
-// Guide (https://docs.aws.amazon.com/clean-rooms/latest/userguide/what-is.html) .
+// getting access to the other party's raw data. To learn more about Clean Rooms
+// concepts, procedures, and best practices, see the Clean Rooms User Guide (https://docs.aws.amazon.com/clean-rooms/latest/userguide/what-is.html)
+// .
 package cleanrooms

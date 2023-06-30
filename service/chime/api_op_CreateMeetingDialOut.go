@@ -15,7 +15,8 @@ import (
 // telephone network (PSTN) and join them into a Chime meeting. Also ensures that
 // the From number belongs to the customer. To play welcome audio or implement an
 // interactive voice response (IVR), use the CreateSipMediaApplicationCall action
-// with the corresponding SIP media application ID.
+// with the corresponding SIP media application ID. This API is is not available in
+// a dedicated namespace.
 func (c *Client) CreateMeetingDialOut(ctx context.Context, params *CreateMeetingDialOutInput, optFns ...func(*Options)) (*CreateMeetingDialOutOutput, error) {
 	if params == nil {
 		params = &CreateMeetingDialOutInput{}

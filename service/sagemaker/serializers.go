@@ -16724,6 +16724,17 @@ func awsAwsjson11_serializeDocumentAdditionalInferenceSpecifications(v []types.A
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentAggregationTransformations(v map[string]types.AggregationTransformationValue, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(string(v[key]))
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentAlarm(v *types.Alarm, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -17405,6 +17416,12 @@ func awsAwsjson11_serializeDocumentAutoMLProblemTypeConfig(v types.AutoMLProblem
 	case *types.AutoMLProblemTypeConfigMemberTextClassificationJobConfig:
 		av := object.Key("TextClassificationJobConfig")
 		if err := awsAwsjson11_serializeDocumentTextClassificationJobConfig(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.AutoMLProblemTypeConfigMemberTimeSeriesForecastingJobConfig:
+		av := object.Key("TimeSeriesForecastingJobConfig")
+		if err := awsAwsjson11_serializeDocumentTimeSeriesForecastingJobConfig(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -19761,6 +19778,33 @@ func awsAwsjson11_serializeDocumentFileSystemDataSource(v *types.FileSystemDataS
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentFillingTransformationMap(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentFillingTransformations(v map[string]map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		if vv := v[key]; vv == nil {
+			continue
+		}
+		if err := awsAwsjson11_serializeDocumentFillingTransformationMap(v[key], om); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentFilter(v *types.Filter, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -19824,6 +19868,17 @@ func awsAwsjson11_serializeDocumentFlowDefinitionTaskKeywords(v []string, value 
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentForecastQuantiles(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentGitConfig(v *types.GitConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -19855,6 +19910,17 @@ func awsAwsjson11_serializeDocumentGitConfigForUpdate(v *types.GitConfigForUpdat
 		ok.String(*v.SecretArn)
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentGroupingAttributeNames(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 
@@ -24931,6 +24997,85 @@ func awsAwsjson11_serializeDocumentTextClassificationJobConfig(v *types.TextClas
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentTimeSeriesConfig(v *types.TimeSeriesConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.GroupingAttributeNames != nil {
+		ok := object.Key("GroupingAttributeNames")
+		if err := awsAwsjson11_serializeDocumentGroupingAttributeNames(v.GroupingAttributeNames, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ItemIdentifierAttributeName != nil {
+		ok := object.Key("ItemIdentifierAttributeName")
+		ok.String(*v.ItemIdentifierAttributeName)
+	}
+
+	if v.TargetAttributeName != nil {
+		ok := object.Key("TargetAttributeName")
+		ok.String(*v.TargetAttributeName)
+	}
+
+	if v.TimestampAttributeName != nil {
+		ok := object.Key("TimestampAttributeName")
+		ok.String(*v.TimestampAttributeName)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentTimeSeriesForecastingJobConfig(v *types.TimeSeriesForecastingJobConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CompletionCriteria != nil {
+		ok := object.Key("CompletionCriteria")
+		if err := awsAwsjson11_serializeDocumentAutoMLJobCompletionCriteria(v.CompletionCriteria, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FeatureSpecificationS3Uri != nil {
+		ok := object.Key("FeatureSpecificationS3Uri")
+		ok.String(*v.FeatureSpecificationS3Uri)
+	}
+
+	if v.ForecastFrequency != nil {
+		ok := object.Key("ForecastFrequency")
+		ok.String(*v.ForecastFrequency)
+	}
+
+	if v.ForecastHorizon != nil {
+		ok := object.Key("ForecastHorizon")
+		ok.Integer(*v.ForecastHorizon)
+	}
+
+	if v.ForecastQuantiles != nil {
+		ok := object.Key("ForecastQuantiles")
+		if err := awsAwsjson11_serializeDocumentForecastQuantiles(v.ForecastQuantiles, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TimeSeriesConfig != nil {
+		ok := object.Key("TimeSeriesConfig")
+		if err := awsAwsjson11_serializeDocumentTimeSeriesConfig(v.TimeSeriesConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Transformations != nil {
+		ok := object.Key("Transformations")
+		if err := awsAwsjson11_serializeDocumentTimeSeriesTransformations(v.Transformations, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentTimeSeriesForecastingSettings(v *types.TimeSeriesForecastingSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -24943,6 +25088,27 @@ func awsAwsjson11_serializeDocumentTimeSeriesForecastingSettings(v *types.TimeSe
 	if len(v.Status) > 0 {
 		ok := object.Key("Status")
 		ok.String(string(v.Status))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentTimeSeriesTransformations(v *types.TimeSeriesTransformations, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Aggregation != nil {
+		ok := object.Key("Aggregation")
+		if err := awsAwsjson11_serializeDocumentAggregationTransformations(v.Aggregation, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Filling != nil {
+		ok := object.Key("Filling")
+		if err := awsAwsjson11_serializeDocumentFillingTransformations(v.Filling, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

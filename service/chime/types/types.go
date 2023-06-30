@@ -1061,19 +1061,23 @@ type MediaPlacement struct {
 	// The event ingestion URL to which you send client meeting events.
 	EventIngestionUrl *string
 
-	// The screen data URL.
+	// The screen data URL. This parameter is is no longer supported and no longer
+	// used by the Amazon Chime SDK.
 	ScreenDataUrl *string
 
-	// The screen sharing URL.
+	// The screen sharing URL. This parameter is is no longer supported and no longer
+	// used by the Amazon Chime SDK..
 	ScreenSharingUrl *string
 
-	// The screen viewing URL.
+	// The screen viewing URL. This parameter is is no longer supported and no longer
+	// used by the Amazon Chime SDK.
 	ScreenViewingUrl *string
 
 	// The signaling URL.
 	SignalingUrl *string
 
-	// The turn control URL.
+	// The turn control URL. This parameter is is no longer supported and no longer
+	// used by the Amazon Chime SDK.
 	TurnControlUrl *string
 
 	noSmithyDocumentSerde

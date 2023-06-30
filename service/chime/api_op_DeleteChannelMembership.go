@@ -13,7 +13,15 @@ import (
 
 // Removes a member from a channel. The x-amz-chime-bearer request header is
 // mandatory. Use the AppInstanceUserArn of the user that makes the API call as
-// the value in the header.
+// the value in the header. This API is is no longer supported and will not be
+// updated. We recommend using the latest version, DeleteChannelMembership (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_DeleteChannelMembership.html)
+// , in the Amazon Chime SDK. Using the latest version requires migrating to a
+// dedicated namespace. For more information, refer to Migrating from the Amazon
+// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
+// in the Amazon Chime SDK Developer Guide.
+//
+// Deprecated: Replaced by DeleteChannelMembership in the Amazon Chime SDK
+// Messaging Namespace
 func (c *Client) DeleteChannelMembership(ctx context.Context, params *DeleteChannelMembershipInput, optFns ...func(*Options)) (*DeleteChannelMembershipOutput, error) {
 	if params == nil {
 		params = &DeleteChannelMembershipInput{}

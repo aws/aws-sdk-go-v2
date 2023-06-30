@@ -1,3 +1,24 @@
+# Release (2023-06-29)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appstream`: [v1.21.0](service/appstream/CHANGELOG.md#v1210-2023-06-29)
+  * **Feature**: This release introduces app block builder, allowing customers to provision a resource to package applications into an app block
+* `github.com/aws/aws-sdk-go-v2/service/chime`: [v1.24.0](service/chime/CHANGELOG.md#v1240-2023-06-29)
+  * **Feature**: The Amazon Chime SDK APIs in the Chime namespace are no longer supported.  Customers should use APIs in the dedicated Amazon Chime SDK namespaces: ChimeSDKIdentity, ChimeSDKMediaPipelines, ChimeSDKMeetings, ChimeSDKMessaging, and ChimeSDKVoice.
+* `github.com/aws/aws-sdk-go-v2/service/cleanrooms`: [v1.2.0](service/cleanrooms/CHANGELOG.md#v120-2023-06-29)
+  * **Feature**: This release adds support for the OR operator in RSQL join match conditions and the ability to control which operators (AND, OR) are allowed in a join match condition.
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.20.0](service/dynamodb/CHANGELOG.md#v1200-2023-06-29)
+  * **Feature**: This release adds ReturnValuesOnConditionCheckFailure parameter to PutItem, UpdateItem, DeleteItem, ExecuteStatement, BatchExecuteStatement and ExecuteTransaction APIs. When set to ALL_OLD,  API returns a copy of the item as it was when a conditional write failed
+* `github.com/aws/aws-sdk-go-v2/service/gamelift`: [v1.20.0](service/gamelift/CHANGELOG.md#v1200-2023-06-29)
+  * **Feature**: Amazon GameLift now supports game builds that use the Amazon Linux 2023 (AL2023) operating system.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.53.0](service/glue/CHANGELOG.md#v1530-2023-06-29)
+  * **Feature**: This release adds support for AWS Glue Crawler with Iceberg Tables, allowing Crawlers to discover Iceberg Tables in S3 and register them in Glue Data Catalog for query engines to query against.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.89.0](service/sagemaker/CHANGELOG.md#v1890-2023-06-29)
+  * **Feature**: Adding support for timeseries forecasting in the CreateAutoMLJobV2 API.
+
 # Release (2023-06-28)
 
 ## General Highlights

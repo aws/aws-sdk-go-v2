@@ -46,6 +46,99 @@ func (Action) Values() []Action {
 	}
 }
 
+type AppBlockBuilderAttribute string
+
+// Enum values for AppBlockBuilderAttribute
+const (
+	AppBlockBuilderAttributeIamRoleArn                       AppBlockBuilderAttribute = "IAM_ROLE_ARN"
+	AppBlockBuilderAttributeAccessEndpoints                  AppBlockBuilderAttribute = "ACCESS_ENDPOINTS"
+	AppBlockBuilderAttributeVpcConfigurationSecurityGroupIds AppBlockBuilderAttribute = "VPC_CONFIGURATION_SECURITY_GROUP_IDS"
+)
+
+// Values returns all known values for AppBlockBuilderAttribute. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AppBlockBuilderAttribute) Values() []AppBlockBuilderAttribute {
+	return []AppBlockBuilderAttribute{
+		"IAM_ROLE_ARN",
+		"ACCESS_ENDPOINTS",
+		"VPC_CONFIGURATION_SECURITY_GROUP_IDS",
+	}
+}
+
+type AppBlockBuilderPlatformType string
+
+// Enum values for AppBlockBuilderPlatformType
+const (
+	AppBlockBuilderPlatformTypeWindowsServer2019 AppBlockBuilderPlatformType = "WINDOWS_SERVER_2019"
+)
+
+// Values returns all known values for AppBlockBuilderPlatformType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AppBlockBuilderPlatformType) Values() []AppBlockBuilderPlatformType {
+	return []AppBlockBuilderPlatformType{
+		"WINDOWS_SERVER_2019",
+	}
+}
+
+type AppBlockBuilderState string
+
+// Enum values for AppBlockBuilderState
+const (
+	AppBlockBuilderStateStarting AppBlockBuilderState = "STARTING"
+	AppBlockBuilderStateRunning  AppBlockBuilderState = "RUNNING"
+	AppBlockBuilderStateStopping AppBlockBuilderState = "STOPPING"
+	AppBlockBuilderStateStopped  AppBlockBuilderState = "STOPPED"
+)
+
+// Values returns all known values for AppBlockBuilderState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AppBlockBuilderState) Values() []AppBlockBuilderState {
+	return []AppBlockBuilderState{
+		"STARTING",
+		"RUNNING",
+		"STOPPING",
+		"STOPPED",
+	}
+}
+
+type AppBlockBuilderStateChangeReasonCode string
+
+// Enum values for AppBlockBuilderStateChangeReasonCode
+const (
+	AppBlockBuilderStateChangeReasonCodeInternalError AppBlockBuilderStateChangeReasonCode = "INTERNAL_ERROR"
+)
+
+// Values returns all known values for AppBlockBuilderStateChangeReasonCode. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (AppBlockBuilderStateChangeReasonCode) Values() []AppBlockBuilderStateChangeReasonCode {
+	return []AppBlockBuilderStateChangeReasonCode{
+		"INTERNAL_ERROR",
+	}
+}
+
+type AppBlockState string
+
+// Enum values for AppBlockState
+const (
+	AppBlockStateInactive AppBlockState = "INACTIVE"
+	AppBlockStateActive   AppBlockState = "ACTIVE"
+)
+
+// Values returns all known values for AppBlockState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AppBlockState) Values() []AppBlockState {
+	return []AppBlockState{
+		"INACTIVE",
+		"ACTIVE",
+	}
+}
+
 type ApplicationAttribute string
 
 // Enum values for ApplicationAttribute
@@ -384,6 +477,24 @@ func (MessageAction) Values() []MessageAction {
 	return []MessageAction{
 		"SUPPRESS",
 		"RESEND",
+	}
+}
+
+type PackagingType string
+
+// Enum values for PackagingType
+const (
+	PackagingTypeCustom     PackagingType = "CUSTOM"
+	PackagingTypeAppstream2 PackagingType = "APPSTREAM2"
+)
+
+// Values returns all known values for PackagingType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PackagingType) Values() []PackagingType {
+	return []PackagingType{
+		"CUSTOM",
+		"APPSTREAM2",
 	}
 }
 

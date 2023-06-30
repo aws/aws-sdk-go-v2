@@ -3206,6 +3206,11 @@ func awsAwsjson10_serializeDocumentBatchStatementRequest(v *types.BatchStatement
 		}
 	}
 
+	if len(v.ReturnValuesOnConditionCheckFailure) > 0 {
+		ok := object.Key("ReturnValuesOnConditionCheckFailure")
+		ok.String(string(v.ReturnValuesOnConditionCheckFailure))
+	}
+
 	if v.Statement != nil {
 		ok := object.Key("Statement")
 		ok.String(*v.Statement)
@@ -4013,6 +4018,11 @@ func awsAwsjson10_serializeDocumentParameterizedStatement(v *types.Parameterized
 		if err := awsAwsjson10_serializeDocumentPreparedStatementParameters(v.Parameters, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.ReturnValuesOnConditionCheckFailure) > 0 {
+		ok := object.Key("ReturnValuesOnConditionCheckFailure")
+		ok.String(string(v.ReturnValuesOnConditionCheckFailure))
 	}
 
 	if v.Statement != nil {
@@ -5131,6 +5141,11 @@ func awsAwsjson10_serializeOpDocumentDeleteItemInput(v *DeleteItemInput, value s
 		ok.String(string(v.ReturnValues))
 	}
 
+	if len(v.ReturnValuesOnConditionCheckFailure) > 0 {
+		ok := object.Key("ReturnValuesOnConditionCheckFailure")
+		ok.String(string(v.ReturnValuesOnConditionCheckFailure))
+	}
+
 	if v.TableName != nil {
 		ok := object.Key("TableName")
 		ok.String(*v.TableName)
@@ -5365,6 +5380,11 @@ func awsAwsjson10_serializeOpDocumentExecuteStatementInput(v *ExecuteStatementIn
 	if len(v.ReturnConsumedCapacity) > 0 {
 		ok := object.Key("ReturnConsumedCapacity")
 		ok.String(string(v.ReturnConsumedCapacity))
+	}
+
+	if len(v.ReturnValuesOnConditionCheckFailure) > 0 {
+		ok := object.Key("ReturnValuesOnConditionCheckFailure")
+		ok.String(string(v.ReturnValuesOnConditionCheckFailure))
 	}
 
 	if v.Statement != nil {
@@ -5756,6 +5776,11 @@ func awsAwsjson10_serializeOpDocumentPutItemInput(v *PutItemInput, value smithyj
 	if len(v.ReturnValues) > 0 {
 		ok := object.Key("ReturnValues")
 		ok.String(string(v.ReturnValues))
+	}
+
+	if len(v.ReturnValuesOnConditionCheckFailure) > 0 {
+		ok := object.Key("ReturnValuesOnConditionCheckFailure")
+		ok.String(string(v.ReturnValuesOnConditionCheckFailure))
 	}
 
 	if v.TableName != nil {
@@ -6333,6 +6358,11 @@ func awsAwsjson10_serializeOpDocumentUpdateItemInput(v *UpdateItemInput, value s
 	if len(v.ReturnValues) > 0 {
 		ok := object.Key("ReturnValues")
 		ok.String(string(v.ReturnValues))
+	}
+
+	if len(v.ReturnValuesOnConditionCheckFailure) > 0 {
+		ok := object.Key("ReturnValuesOnConditionCheckFailure")
+		ok.String(string(v.ReturnValuesOnConditionCheckFailure))
 	}
 
 	if v.TableName != nil {

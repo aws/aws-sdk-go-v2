@@ -6318,6 +6318,11 @@ func validateAutoMLProblemTypeConfig(v types.AutoMLProblemTypeConfig) error {
 			invalidParams.AddNested("[TabularJobConfig]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.AutoMLProblemTypeConfigMemberTimeSeriesForecastingJobConfig:
+		if err := validateTimeSeriesForecastingJobConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[TimeSeriesForecastingJobConfig]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -10795,6 +10800,52 @@ func validateTensorBoardOutputConfig(v *types.TensorBoardOutputConfig) error {
 	invalidParams := smithy.InvalidParamsError{Context: "TensorBoardOutputConfig"}
 	if v.S3OutputPath == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("S3OutputPath"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTimeSeriesConfig(v *types.TimeSeriesConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TimeSeriesConfig"}
+	if v.TargetAttributeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetAttributeName"))
+	}
+	if v.TimestampAttributeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TimestampAttributeName"))
+	}
+	if v.ItemIdentifierAttributeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ItemIdentifierAttributeName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTimeSeriesForecastingJobConfig(v *types.TimeSeriesForecastingJobConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TimeSeriesForecastingJobConfig"}
+	if v.ForecastFrequency == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ForecastFrequency"))
+	}
+	if v.ForecastHorizon == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ForecastHorizon"))
+	}
+	if v.TimeSeriesConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TimeSeriesConfig"))
+	} else if v.TimeSeriesConfig != nil {
+		if err := validateTimeSeriesConfig(v.TimeSeriesConfig); err != nil {
+			invalidParams.AddNested("TimeSeriesConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
