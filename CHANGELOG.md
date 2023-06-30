@@ -1,3 +1,17 @@
+# Release (2023-06-30)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.28.0](service/ecs/CHANGELOG.md#v1280-2023-06-30)
+  * **Feature**: Added new field  "credentialspecs" to the ecs task definition to support gMSA of windows/linux in both domainless and domain-joined mode
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.38.1](service/mediaconvert/CHANGELOG.md#v1381-2023-06-30)
+  * **Documentation**: This release includes improved color handling of overlays and general updates to user documentation.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.90.0](service/sagemaker/CHANGELOG.md#v1900-2023-06-30)
+  * **Feature**: This release adds support for rolling deployment in SageMaker Inference.
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.31.0](service/transfer/CHANGELOG.md#v1310-2023-06-30)
+  * **Feature**: Add outbound Basic authentication support to AS2 connectors
+* `github.com/aws/aws-sdk-go-v2/service/verifiedpermissions`: [v1.0.4](service/verifiedpermissions/CHANGELOG.md#v104-2023-06-30)
+  * **Documentation**: This release corrects several broken links in the documentation.
+
 # Release (2023-06-29)
 
 ## General Highlights

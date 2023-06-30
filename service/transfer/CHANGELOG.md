@@ -1,3 +1,7 @@
+# v1.31.0 (2023-06-30)
+
+* **Feature**: Add outbound Basic authentication support to AS2 connectors
+
 # v1.30.0 (2023-06-21)
 
 * **Feature**: This release adds a new parameter StructuredLogDestinations to CreateServer, UpdateServer APIs.

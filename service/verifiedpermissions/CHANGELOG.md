@@ -1,3 +1,7 @@
+# v1.0.4 (2023-06-30)
+
+* **Documentation**: This release corrects several broken links in the documentation.
+
 # v1.0.3 (2023-06-27)
 
 * **Documentation**: This update fixes several broken links to the Cedar documentation.

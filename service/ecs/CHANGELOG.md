@@ -1,3 +1,7 @@
+# v1.28.0 (2023-06-30)
+
+* **Feature**: Added new field  "credentialspecs" to the ecs task definition to support gMSA of windows/linux in both domainless and domain-joined mode
+
 # v1.27.4 (2023-06-19)
 
 * **Documentation**: Documentation only update to address various tickets.
