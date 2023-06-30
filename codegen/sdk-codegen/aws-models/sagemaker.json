@@ -4275,7 +4275,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the endpoint capacity to activate for production.</p>"
+                "smithy.api#documentation": "<p>Specifies the type and size of the endpoint capacity to activate for a blue/green deployment, a rolling deployment, or a rollback strategy.\n        You can specify your batches as either instance count or the overall percentage or your fleet.</p>\n         <p>For a rollback strategy, if you don't specify the fields in this object, or if you set the <code>Value</code> to 100%, then SageMaker\n        uses a blue/green rollback strategy and rolls all traffic back to the blue fleet.</p>"
             }
         },
         "com.amazonaws.sagemaker#CapacitySizeType": {
@@ -13581,14 +13581,19 @@
                 "BlueGreenUpdatePolicy": {
                     "target": "com.amazonaws.sagemaker#BlueGreenUpdatePolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>Update policy for a blue/green deployment. If this update policy is specified, SageMaker\n            creates a new fleet during the deployment while maintaining the old fleet. SageMaker flips\n            traffic to the new fleet according to the specified traffic routing configuration. Only\n            one update policy should be used in the deployment configuration. If no update policy is\n            specified, SageMaker uses a blue/green deployment strategy with all at once traffic shifting\n            by default.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Update policy for a blue/green deployment. If this update policy is specified, SageMaker\n            creates a new fleet during the deployment while maintaining the old fleet. SageMaker flips\n            traffic to the new fleet according to the specified traffic routing configuration. Only\n            one update policy should be used in the deployment configuration. If no update policy is\n            specified, SageMaker uses a blue/green deployment strategy with all at once traffic shifting\n            by default.</p>"
                     }
                 },
                 "AutoRollbackConfiguration": {
                     "target": "com.amazonaws.sagemaker#AutoRollbackConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>Automatic rollback configuration for handling endpoint deployment failures and\n            recovery.</p>"
+                    }
+                },
+                "RollingUpdatePolicy": {
+                    "target": "com.amazonaws.sagemaker#RollingUpdatePolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a rolling deployment strategy for updating a SageMaker endpoint.</p>"
                     }
                 }
             },
@@ -23107,6 +23112,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "Failed"
+                    }
+                },
+                "UPDATE_ROLLBACK_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UpdateRollbackFailed"
                     }
                 }
             }
@@ -37009,7 +37020,7 @@
             "traits": {
                 "smithy.api#range": {
                     "min": 600,
-                    "max": 14400
+                    "max": 28800
                 }
             }
         },
@@ -47985,6 +47996,40 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"
+            }
+        },
+        "com.amazonaws.sagemaker#RollingUpdatePolicy": {
+            "type": "structure",
+            "members": {
+                "MaximumBatchSize": {
+                    "target": "com.amazonaws.sagemaker#CapacitySize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Batch size for each rolling step to provision capacity and turn on traffic on the new\n            endpoint fleet, and terminate capacity on the old endpoint fleet. Value must be between\n            5% to 50% of the variant's total instance count.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WaitIntervalInSeconds": {
+                    "target": "com.amazonaws.sagemaker#WaitIntervalInSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The length of the baking period, during which SageMaker monitors alarms for each batch on the new fleet.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaximumExecutionTimeoutInSeconds": {
+                    "target": "com.amazonaws.sagemaker#MaximumExecutionTimeoutInSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time limit for the total deployment. Exceeding this limit causes a timeout.</p>"
+                    }
+                },
+                "RollbackMaximumBatchSize": {
+                    "target": "com.amazonaws.sagemaker#CapacitySize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Batch size for rollback to the old endpoint fleet. Each rolling step to provision\n            capacity and turn on traffic on the old endpoint fleet, and terminate capacity on the new\n            endpoint fleet. If this field is absent, the default value will be set to 100% of total\n            capacity which means to bring up the whole capacity of the old fleet at once during rollback.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies a rolling deployment strategy for updating a SageMaker endpoint.</p>"
             }
         },
         "com.amazonaws.sagemaker#RootAccess": {
