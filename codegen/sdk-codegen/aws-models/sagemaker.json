@@ -3316,7 +3316,7 @@
                 "TimeSeriesForecastingJobConfig": {
                     "target": "com.amazonaws.sagemaker#TimeSeriesForecastingJobConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Settings used to configure an AutoML job V2 for a time-series forecasting problem\n         type.</p>"
+                        "smithy.api#documentation": "<p>Settings used to configure an AutoML job V2 for a time-series forecasting problem\n         type.</p>\n         <note>\n            <p>The <code>TimeSeriesForecastingJobConfig</code> problem type is only available in\n            private beta. Contact Amazon Web Services Support or your account manager to learn more\n            about access privileges.</p>\n         </note>"
                     }
                 }
             },
@@ -22884,8 +22884,7 @@
                 "InstanceType": {
                     "target": "com.amazonaws.sagemaker#ProductionVariantInstanceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The instance types to use for the load test.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The instance types to use for the load test.</p>"
                     }
                 },
                 "InferenceSpecificationName": {
@@ -22899,6 +22898,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p> The parameter you want to benchmark against.</p>"
                     }
+                },
+                "ServerlessConfig": {
+                    "target": "com.amazonaws.sagemaker#ProductionVariantServerlessConfig"
                 }
             },
             "traits": {
@@ -22990,17 +22992,17 @@
                 "InstanceType": {
                     "target": "com.amazonaws.sagemaker#ProductionVariantInstanceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The instance type recommended by Amazon SageMaker Inference Recommender.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The instance type recommended by Amazon SageMaker Inference Recommender.</p>"
                     }
                 },
                 "InitialInstanceCount": {
-                    "target": "com.amazonaws.sagemaker#Integer",
+                    "target": "com.amazonaws.sagemaker#InitialInstanceCount",
                     "traits": {
-                        "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The number of instances recommended to launch initially.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The number of instances recommended to launch initially.</p>"
                     }
+                },
+                "ServerlessConfig": {
+                    "target": "com.amazonaws.sagemaker#ProductionVariantServerlessConfig"
                 }
             },
             "traits": {
@@ -28168,6 +28170,14 @@
                     "max": 63
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"
+            }
+        },
+        "com.amazonaws.sagemaker#InitialInstanceCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1
+                }
             }
         },
         "com.amazonaws.sagemaker#InitialNumberOfUsers": {
@@ -39588,6 +39598,14 @@
                 "smithy.api#documentation": "<p>The model registry settings for the SageMaker Canvas application.</p>"
             }
         },
+        "com.amazonaws.sagemaker#ModelSetupTime": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
         "com.amazonaws.sagemaker#ModelSortKey": {
             "type": "enum",
             "members": {
@@ -45298,7 +45316,7 @@
                 "ProvisionedConcurrency": {
                     "target": "com.amazonaws.sagemaker#ServerlessProvisionedConcurrency",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of provisioned concurrency to allocate for the serverless endpoint.\n   Should be less than or equal to <code>MaxConcurrency</code>.</p>"
+                        "smithy.api#documentation": "<p>The amount of provisioned concurrency to allocate for the serverless endpoint.\n   Should be less than or equal to <code>MaxConcurrency</code>.</p>\n         <note>\n            <p>This field is not supported for serverless endpoint recommendations for Inference Recommender jobs.\n   For more information about creating an Inference Recommender job, see\n   <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateInferenceRecommendationsJob.html\">CreateInferenceRecommendationsJobs</a>.</p>\n         </note>"
                     }
                 }
             },
@@ -46669,6 +46687,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the name and shape of the expected data inputs for your trained model with a JSON dictionary form.\n         This field is used for optimizing your model using SageMaker Neo. For more information, see\n         <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_InputConfig.html#sagemaker-Type-InputConfig-DataInputConfig\">DataInputConfig</a>.</p>"
                     }
+                },
+                "SupportedEndpointType": {
+                    "target": "com.amazonaws.sagemaker#RecommendationJobSupportedEndpointType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The endpoint type to receive recommendations for. By default this is null, and the results of \n         the inference recommendation job return a combined list of both real-time and serverless benchmarks.\n         By specifying a value for this field, you can receive a longer list of benchmarks for the desired endpoint type.</p>"
+                    }
                 }
             },
             "traits": {
@@ -46941,6 +46965,23 @@
                 "target": "com.amazonaws.sagemaker#String"
             }
         },
+        "com.amazonaws.sagemaker#RecommendationJobSupportedEndpointType": {
+            "type": "enum",
+            "members": {
+                "REALTIME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RealTime"
+                    }
+                },
+                "SERVERLESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Serverless"
+                    }
+                }
+            }
+        },
         "com.amazonaws.sagemaker#RecommendationJobSupportedInstanceTypes": {
             "type": "list",
             "member": {
@@ -47075,6 +47116,12 @@
                     "target": "com.amazonaws.sagemaker#UtilizationMetric",
                     "traits": {
                         "smithy.api#documentation": "<p>The expected memory utilization at maximum invocations per minute for the instance.</p>\n         <p>\n            <code>NaN</code> indicates that the value is not available.</p>"
+                    }
+                },
+                "ModelSetupTime": {
+                    "target": "com.amazonaws.sagemaker#ModelSetupTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time it takes to launch new compute resources for a serverless endpoint.\n         The time can vary depending on the model size, how long it takes to download the\n         model, and the start-up time of the container.</p>\n         <p>\n            <code>NaN</code> indicates that the value is not available.</p>"
                     }
                 }
             },
@@ -48004,7 +48051,6 @@
                 "MaximumBatchSize": {
                     "target": "com.amazonaws.sagemaker#CapacitySize",
                     "traits": {
-                        "smithy.api#documentation": "<p>Batch size for each rolling step to provision capacity and turn on traffic on the new\n            endpoint fleet, and terminate capacity on the old endpoint fleet. Value must be between\n            5% to 50% of the variant's total instance count.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -48022,10 +48068,7 @@
                     }
                 },
                 "RollbackMaximumBatchSize": {
-                    "target": "com.amazonaws.sagemaker#CapacitySize",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Batch size for rollback to the old endpoint fleet. Each rolling step to provision\n            capacity and turn on traffic on the old endpoint fleet, and terminate capacity on the new\n            endpoint fleet. If this field is absent, the default value will be set to 100% of total\n            capacity which means to bring up the whole capacity of the old fleet at once during rollback.</p>"
-                    }
+                    "target": "com.amazonaws.sagemaker#CapacitySize"
                 }
             },
             "traits": {
