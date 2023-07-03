@@ -4502,6 +4502,25 @@ func (RecommendationJobStatus) Values() []RecommendationJobStatus {
 	}
 }
 
+type RecommendationJobSupportedEndpointType string
+
+// Enum values for RecommendationJobSupportedEndpointType
+const (
+	RecommendationJobSupportedEndpointTypeRealtime   RecommendationJobSupportedEndpointType = "RealTime"
+	RecommendationJobSupportedEndpointTypeServerless RecommendationJobSupportedEndpointType = "Serverless"
+)
+
+// Values returns all known values for RecommendationJobSupportedEndpointType.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (RecommendationJobSupportedEndpointType) Values() []RecommendationJobSupportedEndpointType {
+	return []RecommendationJobSupportedEndpointType{
+		"RealTime",
+		"Serverless",
+	}
+}
+
 type RecommendationJobType string
 
 // Enum values for RecommendationJobType

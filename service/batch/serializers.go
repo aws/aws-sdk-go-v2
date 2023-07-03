@@ -2441,6 +2441,13 @@ func awsRestjson1_serializeDocumentContainerProperties(v *types.ContainerPropert
 		}
 	}
 
+	if v.RuntimePlatform != nil {
+		ok := object.Key("runtimePlatform")
+		if err := awsRestjson1_serializeDocumentRuntimePlatform(v.RuntimePlatform, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Secrets != nil {
 		ok := object.Key("secrets")
 		if err := awsRestjson1_serializeDocumentSecretList(v.Secrets, ok); err != nil {
@@ -3629,6 +3636,23 @@ func awsRestjson1_serializeDocumentRetryStrategy(v *types.RetryStrategy, value s
 		if err := awsRestjson1_serializeDocumentEvaluateOnExitList(v.EvaluateOnExit, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRuntimePlatform(v *types.RuntimePlatform, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CpuArchitecture != nil {
+		ok := object.Key("cpuArchitecture")
+		ok.String(*v.CpuArchitecture)
+	}
+
+	if v.OperatingSystemFamily != nil {
+		ok := object.Key("operatingSystemFamily")
+		ok.String(*v.OperatingSystemFamily)
 	}
 
 	return nil

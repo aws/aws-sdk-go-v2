@@ -57,7 +57,9 @@ import (
 //   - Set the allocation strategy ( allocationStrategy ) parameter to
 //     BEST_FIT_PROGRESSIVE or SPOT_CAPACITY_OPTIMIZED .
 //   - Set the update to latest image version ( updateToLatestImageVersion )
-//     parameter to true .
+//     parameter to true . The updateToLatestImageVersion parameter is used when you
+//     update a compute environment. This parameter is ignored when you create a
+//     compute environment.
 //   - Don't specify an AMI ID in imageId , imageIdOverride (in ec2Configuration (https://docs.aws.amazon.com/batch/latest/APIReference/API_Ec2Configuration.html)
 //     ), or in the launch template ( launchTemplate ). In that case, Batch selects
 //     the latest Amazon ECS optimized AMI that's supported by Batch at the time the

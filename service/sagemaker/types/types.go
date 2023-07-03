@@ -1585,7 +1585,9 @@ type AutoMLProblemTypeConfigMemberTextClassificationJobConfig struct {
 func (*AutoMLProblemTypeConfigMemberTextClassificationJobConfig) isAutoMLProblemTypeConfig() {}
 
 // Settings used to configure an AutoML job V2 for a time-series forecasting
-// problem type.
+// problem type. The TimeSeriesForecastingJobConfig problem type is only available
+// in private beta. Contact Amazon Web Services Support or your account manager to
+// learn more about access privileges.
 type AutoMLProblemTypeConfigMemberTimeSeriesForecastingJobConfig struct {
 	Value TimeSeriesForecastingJobConfig
 
@@ -4093,16 +4095,17 @@ type EndpointInput struct {
 // The endpoint configuration for the load test.
 type EndpointInputConfiguration struct {
 
-	// The instance types to use for the load test.
-	//
-	// This member is required.
-	InstanceType ProductionVariantInstanceType
-
 	// The parameter you want to benchmark against.
 	EnvironmentParameterRanges *EnvironmentParameterRanges
 
 	// The inference specification name in the model package version.
 	InferenceSpecificationName *string
+
+	// The instance types to use for the load test.
+	InstanceType ProductionVariantInstanceType
+
+	// Specifies the serverless configuration for an endpoint variant.
+	ServerlessConfig *ProductionVariantServerlessConfig
 
 	noSmithyDocumentSerde
 }
@@ -4139,21 +4142,20 @@ type EndpointOutputConfiguration struct {
 	// This member is required.
 	EndpointName *string
 
-	// The number of instances recommended to launch initially.
-	//
-	// This member is required.
-	InitialInstanceCount int32
-
-	// The instance type recommended by Amazon SageMaker Inference Recommender.
-	//
-	// This member is required.
-	InstanceType ProductionVariantInstanceType
-
 	// The name of the production variant (deployed model) made during a
 	// recommendation job.
 	//
 	// This member is required.
 	VariantName *string
+
+	// The number of instances recommended to launch initially.
+	InitialInstanceCount *int32
+
+	// The instance type recommended by Amazon SageMaker Inference Recommender.
+	InstanceType ProductionVariantInstanceType
+
+	// Specifies the serverless configuration for an endpoint variant.
+	ServerlessConfig *ProductionVariantServerlessConfig
 
 	noSmithyDocumentSerde
 }
@@ -11021,7 +11023,11 @@ type ProductionVariantServerlessConfig struct {
 	MemorySizeInMB *int32
 
 	// The amount of provisioned concurrency to allocate for the serverless endpoint.
-	// Should be less than or equal to MaxConcurrency .
+	// Should be less than or equal to MaxConcurrency . This field is not supported for
+	// serverless endpoint recommendations for Inference Recommender jobs. For more
+	// information about creating an Inference Recommender job, see
+	// CreateInferenceRecommendationsJobs (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateInferenceRecommendationsJob.html)
+	// .
 	ProvisionedConcurrency *int32
 
 	noSmithyDocumentSerde
@@ -11625,6 +11631,12 @@ type RecommendationJobContainerConfig struct {
 	// Specifies the SamplePayloadUrl and all other sample payload-related fields.
 	PayloadConfig *RecommendationJobPayloadConfig
 
+	// The endpoint type to receive recommendations for. By default this is null, and
+	// the results of the inference recommendation job return a combined list of both
+	// real-time and serverless benchmarks. By specifying a value for this field, you
+	// can receive a longer list of benchmarks for the desired endpoint type.
+	SupportedEndpointType RecommendationJobSupportedEndpointType
+
 	// A list of the instance types that are used to generate inferences in real-time.
 	SupportedInstanceTypes []string
 
@@ -11835,6 +11847,12 @@ type RecommendationMetrics struct {
 	// The expected memory utilization at maximum invocations per minute for the
 	// instance. NaN indicates that the value is not available.
 	MemoryUtilization *float32
+
+	// The time it takes to launch new compute resources for a serverless endpoint.
+	// The time can vary depending on the model size, how long it takes to download the
+	// model, and the start-up time of the container. NaN indicates that the value is
+	// not available.
+	ModelSetupTime *int32
 
 	noSmithyDocumentSerde
 }
@@ -12118,9 +12136,12 @@ type RetryStrategy struct {
 // Specifies a rolling deployment strategy for updating a SageMaker endpoint.
 type RollingUpdatePolicy struct {
 
-	// Batch size for each rolling step to provision capacity and turn on traffic on
-	// the new endpoint fleet, and terminate capacity on the old endpoint fleet. Value
-	// must be between 5% to 50% of the variant's total instance count.
+	// Specifies the type and size of the endpoint capacity to activate for a
+	// blue/green deployment, a rolling deployment, or a rollback strategy. You can
+	// specify your batches as either instance count or the overall percentage or your
+	// fleet. For a rollback strategy, if you don't specify the fields in this object,
+	// or if you set the Value to 100%, then SageMaker uses a blue/green rollback
+	// strategy and rolls all traffic back to the blue fleet.
 	//
 	// This member is required.
 	MaximumBatchSize *CapacitySize
@@ -12134,11 +12155,12 @@ type RollingUpdatePolicy struct {
 	// The time limit for the total deployment. Exceeding this limit causes a timeout.
 	MaximumExecutionTimeoutInSeconds *int32
 
-	// Batch size for rollback to the old endpoint fleet. Each rolling step to
-	// provision capacity and turn on traffic on the old endpoint fleet, and terminate
-	// capacity on the new endpoint fleet. If this field is absent, the default value
-	// will be set to 100% of total capacity which means to bring up the whole capacity
-	// of the old fleet at once during rollback.
+	// Specifies the type and size of the endpoint capacity to activate for a
+	// blue/green deployment, a rolling deployment, or a rollback strategy. You can
+	// specify your batches as either instance count or the overall percentage or your
+	// fleet. For a rollback strategy, if you don't specify the fields in this object,
+	// or if you set the Value to 100%, then SageMaker uses a blue/green rollback
+	// strategy and rolls all traffic back to the blue fleet.
 	RollbackMaximumBatchSize *CapacitySize
 
 	noSmithyDocumentSerde

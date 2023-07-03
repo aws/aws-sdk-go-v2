@@ -7609,12 +7609,14 @@ func validateEndpointInputConfiguration(v *types.EndpointInputConfiguration) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "EndpointInputConfiguration"}
-	if len(v.InstanceType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceType"))
-	}
 	if v.EnvironmentParameterRanges != nil {
 		if err := validateEnvironmentParameterRanges(v.EnvironmentParameterRanges); err != nil {
 			invalidParams.AddNested("EnvironmentParameterRanges", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ServerlessConfig != nil {
+		if err := validateProductionVariantServerlessConfig(v.ServerlessConfig); err != nil {
+			invalidParams.AddNested("ServerlessConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

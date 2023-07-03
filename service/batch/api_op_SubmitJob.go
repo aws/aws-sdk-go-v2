@@ -120,9 +120,10 @@ type SubmitJobInput struct {
 	// value is 9999.
 	SchedulingPriorityOverride *int32
 
-	// The share identifier for the job. If the job queue doesn't have a scheduling
-	// policy, then this parameter must not be specified. If the job queue has a
-	// scheduling policy, then this parameter must be specified.
+	// The share identifier for the job. Don't specify this parameter if the job queue
+	// doesn't have a scheduling policy. If the job queue has a scheduling policy, then
+	// this parameter must be specified. This string is limited to 255 alphanumeric
+	// characters, and can be followed by an asterisk (*).
 	ShareIdentifier *string
 
 	// The tags that you apply to the job request to help you categorize and organize

@@ -43933,6 +43933,11 @@ func awsAwsjson11_deserializeDocumentEndpointInputConfiguration(v **types.Endpoi
 				sv.InstanceType = types.ProductionVariantInstanceType(jtv)
 			}
 
+		case "ServerlessConfig":
+			if err := awsAwsjson11_deserializeDocumentProductionVariantServerlessConfig(&sv.ServerlessConfig, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -44078,13 +44083,13 @@ func awsAwsjson11_deserializeDocumentEndpointOutputConfiguration(v **types.Endpo
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected InitialInstanceCount to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {
 					return err
 				}
-				sv.InitialInstanceCount = int32(i64)
+				sv.InitialInstanceCount = ptr.Int32(int32(i64))
 			}
 
 		case "InstanceType":
@@ -44094,6 +44099,11 @@ func awsAwsjson11_deserializeDocumentEndpointOutputConfiguration(v **types.Endpo
 					return fmt.Errorf("expected ProductionVariantInstanceType to be of type string, got %T instead", value)
 				}
 				sv.InstanceType = types.ProductionVariantInstanceType(jtv)
+			}
+
+		case "ServerlessConfig":
+			if err := awsAwsjson11_deserializeDocumentProductionVariantServerlessConfig(&sv.ServerlessConfig, value); err != nil {
+				return err
 			}
 
 		case "VariantName":
@@ -64243,6 +64253,15 @@ func awsAwsjson11_deserializeDocumentRecommendationJobContainerConfig(v **types.
 				return err
 			}
 
+		case "SupportedEndpointType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RecommendationJobSupportedEndpointType to be of type string, got %T instead", value)
+				}
+				sv.SupportedEndpointType = types.RecommendationJobSupportedEndpointType(jtv)
+			}
+
 		case "SupportedInstanceTypes":
 			if err := awsAwsjson11_deserializeDocumentRecommendationJobSupportedInstanceTypes(&sv.SupportedInstanceTypes, value); err != nil {
 				return err
@@ -64977,6 +64996,19 @@ func awsAwsjson11_deserializeDocumentRecommendationMetrics(v **types.Recommendat
 					return err
 				}
 				sv.ModelLatency = int32(i64)
+			}
+
+		case "ModelSetupTime":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ModelSetupTime to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ModelSetupTime = ptr.Int32(int32(i64))
 			}
 
 		default:

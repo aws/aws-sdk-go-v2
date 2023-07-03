@@ -217,13 +217,13 @@ type ComputeEnvironmentOrder struct {
 // in the Batch User Guide.
 type ComputeResource struct {
 
-	// The maximum number of Amazon EC2 vCPUs that a compute environment can reach.
-	// With both BEST_FIT_PROGRESSIVE and SPOT_CAPACITY_OPTIMIZED allocation
-	// strategies using On-Demand or Spot Instances, and the BEST_FIT strategy using
-	// Spot Instances, Batch might need to exceed maxvCpus to meet your capacity
-	// requirements. In this event, Batch never exceeds maxvCpus by more than a single
-	// instance. For example, no more than a single instance from among those specified
-	// in your compute environment is allocated.
+	// The maximum number of vCPUs that a compute environment can support. With both
+	// BEST_FIT_PROGRESSIVE and SPOT_CAPACITY_OPTIMIZED allocation strategies using
+	// On-Demand or Spot Instances, and the BEST_FIT strategy using Spot Instances,
+	// Batch might need to exceed maxvCpus to meet your capacity requirements. In this
+	// event, Batch never exceeds maxvCpus by more than a single instance. For
+	// example, no more than a single instance from among those specified in your
+	// compute environment is allocated.
 	//
 	// This member is required.
 	MaxvCpus *int32
@@ -295,10 +295,10 @@ type ComputeResource struct {
 	// applicable to jobs that are running on Fargate resources. Don't specify it.
 	BidPercentage *int32
 
-	// The desired number of Amazon EC2 vCPUS in the compute environment. Batch
-	// modifies this value between the minimum and maximum values based on job queue
-	// demand. This parameter isn't applicable to jobs that are running on Fargate
-	// resources. Don't specify it.
+	// The desired number of vCPUS in the compute environment. Batch modifies this
+	// value between the minimum and maximum values based on job queue demand. This
+	// parameter isn't applicable to jobs that are running on Fargate resources. Don't
+	// specify it.
 	DesiredvCpus *int32
 
 	// Provides information that's used to select Amazon Machine Images (AMIs) for EC2
@@ -361,9 +361,9 @@ type ComputeResource struct {
 	// running on Fargate resources. Don't specify it.
 	LaunchTemplate *LaunchTemplateSpecification
 
-	// The minimum number of Amazon EC2 vCPUs that an environment should maintain
-	// (even if the compute environment is DISABLED ). This parameter isn't applicable
-	// to jobs that are running on Fargate resources. Don't specify it.
+	// The minimum number of vCPUs that a compute environment should maintain (even if
+	// the compute environment is DISABLED ). This parameter isn't applicable to jobs
+	// that are running on Fargate resources. Don't specify it.
 	MinvCpus *int32
 
 	// The Amazon EC2 placement group to associate with your compute resources. If you
@@ -456,12 +456,12 @@ type ComputeResourceUpdate struct {
 	// running on Fargate resources. Don't specify it.
 	BidPercentage *int32
 
-	// The desired number of Amazon EC2 vCPUS in the compute environment. Batch
-	// modifies this value between the minimum and maximum values based on job queue
-	// demand. This parameter isn't applicable to jobs that are running on Fargate
-	// resources. Don't specify it. Batch doesn't support changing the desired number
-	// of vCPUs of an existing compute environment. Don't specify this parameter for
-	// compute environments using Amazon EKS clusters. When you update the desiredvCpus
+	// The desired number of vCPUS in the compute environment. Batch modifies this
+	// value between the minimum and maximum values based on job queue demand. This
+	// parameter isn't applicable to jobs that are running on Fargate resources. Don't
+	// specify it. Batch doesn't support changing the desired number of vCPUs of an
+	// existing compute environment. Don't specify this parameter for compute
+	// environments using Amazon EKS clusters. When you update the desiredvCpus
 	// setting, the value must be between the minvCpus and maxvCpus values.
 	// Additionally, the updated desiredvCpus value must be greater than or equal to
 	// the current desiredvCpus value. For more information, see Troubleshooting Batch (https://docs.aws.amazon.com/batch/latest/userguide/troubleshooting.html#error-desired-vcpus-update)
@@ -560,9 +560,9 @@ type ComputeResourceUpdate struct {
 	// environment.
 	MaxvCpus *int32
 
-	// The minimum number of Amazon EC2 vCPUs that an environment should maintain
-	// (even if the compute environment is DISABLED ). This parameter isn't applicable
-	// to jobs that are running on Fargate resources. Don't specify it.
+	// The minimum number of vCPUs that an environment should maintain (even if the
+	// compute environment is DISABLED ). This parameter isn't applicable to jobs that
+	// are running on Fargate resources. Don't specify it.
 	MinvCpus *int32
 
 	// The Amazon EC2 placement group to associate with your compute resources. If you
@@ -764,6 +764,10 @@ type ContainerDetail struct {
 	// resources include GPU , MEMORY , and VCPU .
 	ResourceRequirements []ResourceRequirement
 
+	// An object that represents the compute environment architecture for Batch jobs
+	// on Fargate.
+	RuntimePlatform *RuntimePlatform
+
 	// The secrets to pass to the container. For more information, see Specifying
 	// sensitive data (https://docs.aws.amazon.com/batch/latest/userguide/specifying-sensitive-data.html)
 	// in the Batch User Guide.
@@ -808,11 +812,15 @@ type ContainerDetail struct {
 	noSmithyDocumentSerde
 }
 
-// The overrides that should be sent to a container.
+// The overrides that should be sent to a container. For information about using
+// Batch overrides when you connect event sources to targets, see
+// BatchContainerOverrides (https://docs.aws.amazon.com/eventbridge/latest/pipes-reference/API_BatchContainerOverrides.html)
+// .
 type ContainerOverrides struct {
 
 	// The command to send to the container that overrides the default command from
-	// the Docker image or the job definition.
+	// the Docker image or the job definition. This parameter can't contain an empty
+	// string.
 	Command []string
 
 	// The environment variables to send to the container. You can add new environment
@@ -1007,6 +1015,10 @@ type ContainerProperties struct {
 	// The type and amount of resources to assign to a container. The supported
 	// resources include GPU , MEMORY , and VCPU .
 	ResourceRequirements []ResourceRequirement
+
+	// An object that represents the compute environment architecture for Batch jobs
+	// on Fargate.
+	RuntimePlatform *RuntimePlatform
 
 	// The secrets for the container. For more information, see Specifying sensitive
 	// data (https://docs.aws.amazon.com/batch/latest/userguide/specifying-sensitive-data.html)
@@ -2714,6 +2726,32 @@ type RetryStrategy struct {
 	// failed. If this parameter is specified, then the attempts parameter must also
 	// be specified. If none of the listed conditions match, then the job is retried.
 	EvaluateOnExit []EvaluateOnExit
+
+	noSmithyDocumentSerde
+}
+
+// An object that represents the compute environment architecture for Batch jobs
+// on Fargate.
+type RuntimePlatform struct {
+
+	// The vCPU architecture. The default value is X86_64 . Valid values are X86_64
+	// and ARM64 . This parameter must be set to X86_64 for Windows containers.
+	CpuArchitecture *string
+
+	// The operating system for the compute environment. Valid values are: LINUX
+	// (default), WINDOWS_SERVER_2019_CORE , WINDOWS_SERVER_2019_FULL ,
+	// WINDOWS_SERVER_2022_CORE , and WINDOWS_SERVER_2022_FULL . The following
+	// parameters can’t be set for Windows containers: linuxParameters , privileged ,
+	// user , ulimits , readonlyRootFilesystem , and efsVolumeConfiguration . The Batch
+	// Scheduler checks before registering a task definition with Fargate. If the job
+	// requires a Windows container and the first compute environment is LINUX , the
+	// compute environment is skipped and the next is checked until a Windows-based
+	// compute environment is found. Fargate Spot is not supported for Windows-based
+	// containers on Fargate. A job queue will be blocked if a Fargate Windows job is
+	// submitted to a job queue with only Fargate Spot compute environments. However,
+	// you can attach both FARGATE and FARGATE_SPOT compute environments to the same
+	// job queue.
+	OperatingSystemFamily *string
 
 	noSmithyDocumentSerde
 }

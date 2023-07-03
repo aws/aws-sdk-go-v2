@@ -1,0 +1,8 @@
+{
+    "id": "96370bd0-38fb-4f73-ab76-ca50857a575c",
+    "type": "feature",
+    "description": "SageMaker Inference Recommender now accepts new fields SupportedEndpointType and ServerlessConfiguration to support serverless endpoints.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

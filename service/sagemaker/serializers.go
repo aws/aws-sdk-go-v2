@@ -19521,6 +19521,13 @@ func awsAwsjson11_serializeDocumentEndpointInputConfiguration(v *types.EndpointI
 		ok.String(string(v.InstanceType))
 	}
 
+	if v.ServerlessConfig != nil {
+		ok := object.Key("ServerlessConfig")
+		if err := awsAwsjson11_serializeDocumentProductionVariantServerlessConfig(v.ServerlessConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -23825,6 +23832,11 @@ func awsAwsjson11_serializeDocumentRecommendationJobContainerConfig(v *types.Rec
 		if err := awsAwsjson11_serializeDocumentRecommendationJobPayloadConfig(v.PayloadConfig, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.SupportedEndpointType) > 0 {
+		ok := object.Key("SupportedEndpointType")
+		ok.String(string(v.SupportedEndpointType))
 	}
 
 	if v.SupportedInstanceTypes != nil {
