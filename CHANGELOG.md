@@ -1,3 +1,11 @@
+# Release (2023-07-03)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.24.0](service/batch/CHANGELOG.md#v1240-2023-07-03)
+  * **Feature**: This feature allows customers to use AWS Batch with Linux with ARM64 CPU Architecture and X86_64 CPU Architecture with Windows OS on Fargate Platform.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.91.0](service/sagemaker/CHANGELOG.md#v1910-2023-07-03)
+  * **Feature**: SageMaker Inference Recommender now accepts new fields SupportedEndpointType and ServerlessConfiguration to support serverless endpoints.
+
 # Release (2023-06-30)
 
 ## Module Highlights

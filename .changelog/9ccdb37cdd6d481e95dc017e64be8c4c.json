@@ -1,8 +1,0 @@
-{
-    "id": "9ccdb37c-dd6d-481e-95dc-017e64be8c4c",
-    "type": "feature",
-    "description": "This feature allows customers to use AWS Batch with Linux with ARM64 CPU Architecture and X86_64 CPU Architecture with Windows OS on Fargate Platform.",
-    "modules": [
-        "service/batch"
-    ]
-}
