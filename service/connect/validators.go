@@ -2670,6 +2670,26 @@ func (m *validateOpSearchQuickConnects) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSearchResourceTags struct {
+}
+
+func (*validateOpSearchResourceTags) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSearchResourceTags) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SearchResourceTagsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSearchResourceTagsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpSearchRoutingProfiles struct {
 }
 
@@ -4320,6 +4340,10 @@ func addOpSearchQueuesValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpSearchQuickConnectsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSearchQuickConnects{}, middleware.After)
+}
+
+func addOpSearchResourceTagsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSearchResourceTags{}, middleware.After)
 }
 
 func addOpSearchRoutingProfilesValidationMiddleware(stack *middleware.Stack) error {
@@ -8251,6 +8275,21 @@ func validateOpSearchQuickConnectsInput(v *SearchQuickConnectsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SearchQuickConnectsInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSearchResourceTagsInput(v *SearchResourceTagsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchResourceTagsInput"}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}

@@ -140,6 +140,12 @@ type DeleteItemInput struct {
 	// other than NONE or ALL_OLD .
 	ReturnValues types.ReturnValue
 
+	// An optional parameter that returns the item attributes for a DeleteItem
+	// operation that failed a condition check. There is no additional cost associated
+	// with requesting a return value aside from the small network and processing
+	// overhead of receiving a larger response. No read capacity units are consumed.
+	ReturnValuesOnConditionCheckFailure types.ReturnValuesOnConditionCheckFailure
+
 	noSmithyDocumentSerde
 }
 

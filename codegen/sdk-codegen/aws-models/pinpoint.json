@@ -12662,6 +12662,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The time when a journey will not send messages. QuietTime should be configured first and SendingSchedule should be set to true.</p>"
                     }
+                },
+                "TimezoneEstimationMethods": {
+                    "target": "com.amazonaws.pinpoint#ListOf__TimezoneEstimationMethodsElement",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of time zone estimation methods, if any, to use for determining an <a href=\"https://docs.aws.amazon.com/pinpoint/latest/apireference/apps-application-id-endpoints-endpoint-id.html\">Endpoints</a> time zone if the Endpoint does not have a value for the Demographic.Timezone attribute.</p> <ul> <li><p>PHONE_NUMBER - A time zone is determined based on the Endpoint.Address and Endpoint.Location.Country.</p></li> <li><p>POSTAL_CODE - A time zone is determined based on the Endpoint.Location.PostalCode and Endpoint.Location.Country.</p> <note><p>POSTAL_CODE detection is only supported in the United States, United Kingdom, Australia, New Zealand, Canada, France, Italy, Spain, Germany and in regions where Amazon Pinpoint is available.</p></note></li> </ul>"
+                    }
                 }
             },
             "traits": {
@@ -13251,6 +13257,12 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.pinpoint#__EndpointTypesElement"
+            }
+        },
+        "com.amazonaws.pinpoint#ListOf__TimezoneEstimationMethodsElement": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pinpoint#__TimezoneEstimationMethodsElement"
             }
         },
         "com.amazonaws.pinpoint#ListOf__string": {
@@ -21116,6 +21128,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The time when journey will stop sending messages. QuietTime should be configured first and SendingSchedule should be set to true.</p>"
                     }
+                },
+                "TimezoneEstimationMethods": {
+                    "target": "com.amazonaws.pinpoint#ListOf__TimezoneEstimationMethodsElement",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of time zone estimation methods, if any, to use for determining an <a href=\"https://docs.aws.amazon.com/pinpoint/latest/apireference/apps-application-id-endpoints-endpoint-id.html\">Endpoints</a> time zone if the Endpoint does not have a value for the Demographic.Timezone attribute.</p> <ul> <li><p>PHONE_NUMBER - A time zone is determined based on the Endpoint.Address and Endpoint.Location.Country.</p></li> <li><p>POSTAL_CODE - A time zone is determined based on the Endpoint.Location.PostalCode and Endpoint.Location.Country.</p> <note><p>POSTAL_CODE detection is only supported in the United States, United Kingdom, Australia, New Zealand, Canada, France, Italy, Spain, Germany and in regions where Amazon Pinpoint is available.</p></note></li> </ul>"
+                    }
                 }
             },
             "traits": {
@@ -21285,6 +21303,23 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "IN_APP"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.pinpoint#__TimezoneEstimationMethodsElement": {
+            "type": "enum",
+            "members": {
+                "PHONE_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PHONE_NUMBER"
+                    }
+                },
+                "POSTAL_CODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "POSTAL_CODE"
                     }
                 }
             }

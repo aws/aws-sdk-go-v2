@@ -46,7 +46,8 @@ type AttributeValue interface {
 	isAttributeValue()
 }
 
-// An attribute value of Boolean type. Example: {"boolean": true}
+// An attribute value of Boolean (https://docs.cedarpolicy.com/syntax-datatypes.html#boolean)
+// type. Example: {"boolean": true}
 type AttributeValueMemberBoolean struct {
 	Value bool
 
@@ -66,7 +67,8 @@ type AttributeValueMemberEntityIdentifier struct {
 
 func (*AttributeValueMemberEntityIdentifier) isAttributeValue() {}
 
-// An attribute value of Long type. Example: {"long": 0}
+// An attribute value of Long (https://docs.cedarpolicy.com/syntax-datatypes.html#long)
+// type. Example: {"long": 0}
 type AttributeValueMemberLong struct {
 	Value int64
 
@@ -75,7 +77,8 @@ type AttributeValueMemberLong struct {
 
 func (*AttributeValueMemberLong) isAttributeValue() {}
 
-// An attribute value of Record type. Example: {"record": { "keyName": {} } }
+// An attribute value of Record (https://docs.cedarpolicy.com/syntax-datatypes.html#record)
+// type. Example: {"record": { "keyName": {} } }
 type AttributeValueMemberRecord struct {
 	Value map[string]AttributeValue
 
@@ -84,7 +87,8 @@ type AttributeValueMemberRecord struct {
 
 func (*AttributeValueMemberRecord) isAttributeValue() {}
 
-// An attribute value of Set type. Example: {"set": [ {} ] }
+// An attribute value of Set (https://docs.cedarpolicy.com/syntax-datatypes.html#set)
+// type. Example: {"set": [ {} ] }
 type AttributeValueMemberSet struct {
 	Value []AttributeValue
 
@@ -93,7 +97,8 @@ type AttributeValueMemberSet struct {
 
 func (*AttributeValueMemberSet) isAttributeValue() {}
 
-// An attribute value of String type. Example: {"string": "abc"}
+// An attribute value of String (https://docs.cedarpolicy.com/syntax-datatypes.html#string)
+// type. Example: {"string": "abc"}
 type AttributeValueMemberString struct {
 	Value string
 
@@ -107,14 +112,14 @@ func (*AttributeValueMemberString) isAttributeValue() {}
 // This data type is used as a field that is part of an Configuration (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_Configuration.html)
 // structure that is used as a parameter to the Configuration (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_Configuration.html)
 // . Example:
-// "CognitoUserPoolConfiguration":{"UserPoolArn":"cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","ClientIds":
+// "CognitoUserPoolConfiguration":{"UserPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","ClientIds":
 // ["a1b2c3d4e5f6g7h8i9j0kalbmc"]}
 type CognitoUserPoolConfiguration struct {
 
 	// The Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 	// of the Amazon Cognito user pool that contains the identities to be authorized.
 	// Example: "UserPoolArn":
-	// "cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5"
+	// "arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5"
 	//
 	// This member is required.
 	UserPoolArn *string
@@ -143,7 +148,7 @@ type Configuration interface {
 // Permissions can use as a source of authenticated identities as entities. It
 // specifies the Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
 // of a Amazon Cognito user pool and one or more application client IDs. Example:
-// "configuration":{"cognitoUserPoolConfiguration":{"userPoolArn":"cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","clientIds":
+// "configuration":{"cognitoUserPoolConfiguration":{"userPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","clientIds":
 // ["a1b2c3d4e5f6g7h8i9j0kalbmc"]}}
 type ConfigurationMemberCognitoUserPoolConfiguration struct {
 	Value CognitoUserPoolConfiguration
@@ -299,8 +304,8 @@ type EntityReferenceMemberUnspecified struct {
 func (*EntityReferenceMemberUnspecified) isEntityReference() {}
 
 // Contains a description of an evaluation error. This data type is used as a
-// request parameter in the IsAuthorized (https://docs.aws.amazon.com/amazon-verified-permissions/latest/APIReference/API_IsAuthorized.html)
-// and IsAuthorizedWithToken (https://docs.aws.amazon.com/amazon-verified-permissions/latest/APIReference/API_IsAuthorizedWithToken.html)
+// request parameter in the IsAuthorized (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html)
+// and IsAuthorizedWithToken (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html)
 // operations.
 type EvaluationErrorItem struct {
 

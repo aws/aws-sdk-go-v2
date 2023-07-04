@@ -11,7 +11,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets an existing media capture pipeline.
+// Gets an existing media capture pipeline. This API is is no longer supported and
+// will not be updated. We recommend using the latest version,
+// GetMediaCapturePipeline (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_media-pipelines-chime_GetMediaCapturePipeline.html)
+// , in the Amazon Chime SDK. Using the latest version requires migrating to a
+// dedicated namespace. For more information, refer to Migrating from the Amazon
+// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
+// in the Amazon Chime SDK Developer Guide.
+//
+// Deprecated: Replaced by GetMediaCapturePipeline in the Amazon Chime SDK Media
+// Pipelines Namespace
 func (c *Client) GetMediaCapturePipeline(ctx context.Context, params *GetMediaCapturePipelineInput, optFns ...func(*Options)) (*GetMediaCapturePipelineOutput, error) {
 	if params == nil {
 		params = &GetMediaCapturePipelineInput{}

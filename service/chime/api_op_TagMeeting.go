@@ -11,7 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Applies the specified tags to the specified Amazon Chime SDK meeting.
+// Applies the specified tags to the specified Amazon Chime SDK meeting. This API
+// is is no longer supported and will not be updated. We recommend using the latest
+// version, TagResource (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_meeting-chime_TagResource.html)
+// , in the Amazon Chime SDK. Using the latest version requires migrating to a
+// dedicated namespace. For more information, refer to Migrating from the Amazon
+// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
+// in the Amazon Chime SDK Developer Guide.
+//
+// Deprecated: Use TagResource in the Amazon Chime SDK Meetings Namespace.
 func (c *Client) TagMeeting(ctx context.Context, params *TagMeetingInput, optFns ...func(*Options)) (*TagMeetingOutput, error) {
 	if params == nil {
 		params = &TagMeetingInput{}

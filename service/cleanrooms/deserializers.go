@@ -6102,6 +6102,11 @@ func awsRestjson1_deserializeDocumentAnalysisRuleAggregation(v **types.AnalysisR
 				return err
 			}
 
+		case "allowedJoinOperators":
+			if err := awsRestjson1_deserializeDocumentJoinOperatorsList(&sv.AllowedJoinOperators, value); err != nil {
+				return err
+			}
+
 		case "dimensionColumns":
 			if err := awsRestjson1_deserializeDocumentAnalysisRuleColumnList(&sv.DimensionColumns, value); err != nil {
 				return err
@@ -6234,6 +6239,11 @@ func awsRestjson1_deserializeDocumentAnalysisRuleList(v **types.AnalysisRuleList
 
 	for key, value := range shape {
 		switch key {
+		case "allowedJoinOperators":
+			if err := awsRestjson1_deserializeDocumentJoinOperatorsList(&sv.AllowedJoinOperators, value); err != nil {
+				return err
+			}
+
 		case "joinColumns":
 			if err := awsRestjson1_deserializeDocumentAnalysisRuleColumnList(&sv.JoinColumns, value); err != nil {
 				return err
@@ -7814,7 +7824,7 @@ func awsRestjson1_deserializeDocumentGlueTableReference(v **types.GlueTableRefer
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected GlueResourceName to be of type string, got %T instead", value)
+					return fmt.Errorf("expected GlueDatabaseName to be of type string, got %T instead", value)
 				}
 				sv.DatabaseName = ptr.String(jtv)
 			}
@@ -7823,7 +7833,7 @@ func awsRestjson1_deserializeDocumentGlueTableReference(v **types.GlueTableRefer
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected GlueResourceName to be of type string, got %T instead", value)
+					return fmt.Errorf("expected GlueTableName to be of type string, got %T instead", value)
 				}
 				sv.TableName = ptr.String(jtv)
 			}
@@ -7874,6 +7884,42 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentJoinOperatorsList(v *[]types.JoinOperator, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.JoinOperator
+	if *v == nil {
+		cv = []types.JoinOperator{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.JoinOperator
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected JoinOperator to be of type string, got %T instead", value)
+			}
+			col = types.JoinOperator(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

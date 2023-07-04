@@ -616,6 +616,24 @@ func validateAddress(v *types.Address) error {
 	}
 }
 
+func validateCommitmentConfiguration(v *types.CommitmentConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CommitmentConfiguration"}
+	if len(v.CommitmentLength) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("CommitmentLength"))
+	}
+	if v.AutomaticRenewal == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AutomaticRenewal"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateNameValuePair(v *types.NameValuePair) error {
 	if v == nil {
 		return nil
@@ -753,6 +771,11 @@ func validateOpActivateNetworkSiteInput(v *ActivateNetworkSiteInput) error {
 	} else if v.ShippingAddress != nil {
 		if err := validateAddress(v.ShippingAddress); err != nil {
 			invalidParams.AddNested("ShippingAddress", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CommitmentConfiguration != nil {
+		if err := validateCommitmentConfiguration(v.CommitmentConfiguration); err != nil {
+			invalidParams.AddNested("CommitmentConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1024,6 +1047,11 @@ func validateOpStartNetworkResourceUpdateInput(v *StartNetworkResourceUpdateInpu
 	if v.ShippingAddress != nil {
 		if err := validateAddress(v.ShippingAddress); err != nil {
 			invalidParams.AddNested("ShippingAddress", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CommitmentConfiguration != nil {
+		if err := validateCommitmentConfiguration(v.CommitmentConfiguration); err != nil {
+			invalidParams.AddNested("CommitmentConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

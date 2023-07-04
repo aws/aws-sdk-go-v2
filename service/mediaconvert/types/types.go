@@ -1305,18 +1305,18 @@ type CaptionSelector struct {
 	// The specific language to extract from source, using the ISO 639-2 or ISO 639-3
 	// three-letter language code. If input is SCTE-27, complete this field and/or PID
 	// to select the caption language to extract. If input is DVB-Sub and output is
-	// Burn-in or SMPTE-TT, complete this field and/or PID to select the caption
-	// language to extract. If input is DVB-Sub that is being passed through, omit this
-	// field (and PID field); there is no way to extract a specific language with
-	// pass-through captions.
+	// Burn-in, complete this field and/or PID to select the caption language to
+	// extract. If input is DVB-Sub that is being passed through, omit this field (and
+	// PID field); there is no way to extract a specific language with pass-through
+	// captions.
 	CustomLanguageCode *string
 
 	// The specific language to extract from source. If input is SCTE-27, complete
 	// this field and/or PID to select the caption language to extract. If input is
-	// DVB-Sub and output is Burn-in or SMPTE-TT, complete this field and/or PID to
-	// select the caption language to extract. If input is DVB-Sub that is being passed
-	// through, omit this field (and PID field); there is no way to extract a specific
-	// language with pass-through captions.
+	// DVB-Sub and output is Burn-in, complete this field and/or PID to select the
+	// caption language to extract. If input is DVB-Sub that is being passed through,
+	// omit this field (and PID field); there is no way to extract a specific language
+	// with pass-through captions.
 	LanguageCode LanguageCode
 
 	// If your input captions are SCC, TTML, STL, SMI, SRT, or IMSC in an xml file,
@@ -2599,9 +2599,9 @@ type DvbSubDestinationSettings struct {
 // DVB Sub Source Settings
 type DvbSubSourceSettings struct {
 
-	// When using DVB-Sub with Burn-In or SMPTE-TT, use this PID for the source
-	// content. Unused for DVB-Sub passthrough. All DVB-Sub content is passed through,
-	// regardless of selectors.
+	// When using DVB-Sub with Burn-in, use this PID for the source content. Unused
+	// for DVB-Sub passthrough. All DVB-Sub content is passed through, regardless of
+	// selectors.
 	Pid int32
 
 	noSmithyDocumentSerde
@@ -6504,9 +6504,9 @@ type MxfSettings struct {
 	// the console, find AFD signaling under the output's video encoding settings.
 	AfdSignaling MxfAfdSignaling
 
-	// Specify the MXF profile, also called shim, for this output. When you choose
-	// Auto, MediaConvert chooses a profile based on the video codec and resolution.
-	// For a list of codecs supported with each MXF profile, see
+	// Specify the MXF profile, also called shim, for this output. To automatically
+	// select a profile according to your output video codec and resolution, leave
+	// blank. For a list of codecs supported with each MXF profile, see
 	// https://docs.aws.amazon.com/mediaconvert/latest/ug/codecs-supported-with-each-mxf-profile.html.
 	// For more information about the automatic selection behavior, see
 	// https://docs.aws.amazon.com/mediaconvert/latest/ug/default-automatic-selection-of-mxf-profiles.html.
@@ -8048,7 +8048,7 @@ type VideoPreprocessor struct {
 	// Enable Dolby Vision feature to produce Dolby Vision compatible video output.
 	DolbyVision *DolbyVision
 
-	// Enable HDR10+ analyis and metadata injection. Compatible with HEVC only.
+	// Enable HDR10+ analysis and metadata injection. Compatible with HEVC only.
 	Hdr10Plus *Hdr10Plus
 
 	// Enable the Image inserter (ImageInserter) feature to include a graphic overlay

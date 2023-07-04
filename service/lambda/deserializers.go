@@ -2059,6 +2059,9 @@ func awsRestjson1_deserializeOpErrorDeleteEventSourceMapping(response *smithyhtt
 	case strings.EqualFold("InvalidParameterValueException", errorCode):
 		return awsRestjson1_deserializeErrorInvalidParameterValueException(response, errorBody)
 
+	case strings.EqualFold("ResourceConflictException", errorCode):
+		return awsRestjson1_deserializeErrorResourceConflictException(response, errorBody)
+
 	case strings.EqualFold("ResourceInUseException", errorCode):
 		return awsRestjson1_deserializeErrorResourceInUseException(response, errorBody)
 

@@ -1,3 +1,7 @@
+# v1.2.0 (2023-06-29)
+
+* **Feature**: This release adds support for the OR operator in RSQL join match conditions and the ability to control which operators (AND, OR) are allowed in a join match condition.
+
 # v1.1.6 (2023-06-15)
 
 * No change notes available for this release.

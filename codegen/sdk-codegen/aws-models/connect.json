@@ -974,6 +974,9 @@
                     "target": "com.amazonaws.connect#SearchQuickConnects"
                 },
                 {
+                    "target": "com.amazonaws.connect#SearchResourceTags"
+                },
+                {
                     "target": "com.amazonaws.connect#SearchRoutingProfiles"
                 },
                 {
@@ -3055,7 +3058,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Claims an available phone number to your Amazon Connect instance or traffic distribution\n   group. You can call this API only in the same Amazon Web Services Region where the Amazon Connect instance or traffic distribution group was created.</p>\n         <p>For more information about how to use this operation, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/claim-phone-number.html\">Claim a phone number in your\n    country</a> and <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/claim-phone-numbers-traffic-distribution-groups.html\">Claim phone\n    numbers to traffic distribution groups</a> in the <i>Amazon Connect Administrator\n    Guide</i>. </p>\n         <important>\n            <p>You can call the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_SearchAvailablePhoneNumbers.html\">SearchAvailablePhoneNumbers</a> API for available phone numbers that you can claim. Call\n    the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html\">DescribePhoneNumber</a> API to verify the status of a previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimPhoneNumber.html\">ClaimPhoneNumber</a>\n    operation.</p>\n         </important>",
+                "smithy.api#documentation": "<p>Claims an available phone number to your Amazon Connect instance or traffic distribution\n   group. You can call this API only in the same Amazon Web Services Region where the Amazon Connect instance or traffic distribution group was created.</p>\n         <p>For more information about how to use this operation, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/claim-phone-number.html\">Claim a phone number in your\n    country</a> and <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/claim-phone-numbers-traffic-distribution-groups.html\">Claim phone\n    numbers to traffic distribution groups</a> in the <i>Amazon Connect Administrator\n    Guide</i>. </p>\n         <important>\n            <p>You can call the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_SearchAvailablePhoneNumbers.html\">SearchAvailablePhoneNumbers</a> API for available phone numbers that you can claim. Call\n    the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html\">DescribePhoneNumber</a> API to verify the status of a previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimPhoneNumber.html\">ClaimPhoneNumber</a>\n    operation.</p>\n         </important>\n         <p>If you plan to claim and release numbers frequently during a 30 day period,\n                contact us for a service quota exception. Otherwise, it is possible you will be blocked from\n                claiming and releasing any more numbers until 30 days past the oldest number\n                released has expired.</p>\n         <p>By default you can claim and release up to 200% of your maximum number of active\n                phone numbers during any 30 day period. If you claim and release phone numbers using\n                the UI or API during a rolling 30 day cycle that exceeds 200% of your phone number\n                service level quota, you will be blocked from claiming any more numbers until 30\n                days past the oldest number released has expired. </p>\n         <p>For example, if you already have 99 claimed numbers and a service level quota of 99 phone numbers, and in any 30\n                day period you release 99, claim 99, and then release 99, you will have exceeded the\n                200% limit. At that point you are blocked from claiming any more numbers until you\n                open an Amazon Web Services support ticket.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/phone-number/claim",
@@ -17550,6 +17553,19 @@
                 }
             }
         },
+        "com.amazonaws.connect#MaximumResultReturnedException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.connect#Message"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Maximum number (1000) of tags have been returned with current request. Consider \n   changing request parameters to get more tags.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
         "com.amazonaws.connect#MediaConcurrencies": {
             "type": "list",
             "member": {
@@ -21116,7 +21132,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Releases a phone number previously claimed to an Amazon Connect instance or traffic distribution group. You\n   can call this API only in the Amazon Web Services Region where the number was claimed.</p>\n         <important>\n            <p>To release phone numbers from a traffic distribution group, use the <code>ReleasePhoneNumber</code> API, not the\n     Amazon Connect console.</p>\n            <p>After releasing a phone number, the phone number enters into a cooldown period of 30 days.\n    It cannot be searched for or claimed again until the period has ended. If you accidentally\n    release a phone number, contact Amazon Web Services Support.</p>\n         </important>",
+                "smithy.api#documentation": "<p>Releases a phone number previously claimed to an Amazon Connect instance or traffic distribution group. You\n   can call this API only in the Amazon Web Services Region where the number was claimed.</p>\n         <important>\n            <p>To release phone numbers from a traffic distribution group, use the <code>ReleasePhoneNumber</code> API, not the\n     Amazon Connect console.</p>\n            <p>After releasing a phone number, the phone number enters into a cooldown period of 30 days.\n    It cannot be searched for or claimed again until the period has ended. If you accidentally\n    release a phone number, contact Amazon Web Services Support.</p>\n         </important>\n         <p>If you plan to claim and release numbers frequently during a 30 day period,\n                contact us for a service quota exception. Otherwise, it is possible you will be blocked from\n                claiming and releasing any more numbers until 30 days past the oldest number\n                released has expired.</p>\n         <p>By default you can claim and release up to 200% of your maximum number of active\n                phone numbers during any 30 day period. If you claim and release phone numbers using\n                the UI or API during a rolling 30 day cycle that exceeds 200% of your phone number\n                service level quota, you will be blocked from claiming any more numbers until 30\n                days past the oldest number released has expired. </p>\n         <p>For example, if you already have 99 claimed numbers and a service level quota of 99 phone numbers, and in any 30\n                day period you release 99, claim 99, and then release 99, you will have exceeded the\n                200% limit. At that point you are blocked from claiming any more numbers until you\n                open an Amazon Web Services support ticket.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/phone-number/{PhoneNumberId}",
@@ -21353,6 +21369,20 @@
                 "smithy.api#httpError": 409
             }
         },
+        "com.amazonaws.connect#ResourceTagsSearchCriteria": {
+            "type": "structure",
+            "members": {
+                "TagSearchCondition": {
+                    "target": "com.amazonaws.connect#TagSearchCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The search criteria to be used to return tags.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The search criteria to be used to search tags.</p>"
+            }
+        },
         "com.amazonaws.connect#ResourceType": {
             "type": "enum",
             "members": {
@@ -21398,6 +21428,12 @@
                         "smithy.api#enumValue": "USER"
                     }
                 }
+            }
+        },
+        "com.amazonaws.connect#ResourceTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#String"
             }
         },
         "com.amazonaws.connect#ResumeContactRecording": {
@@ -22614,6 +22650,109 @@
                     "target": "com.amazonaws.connect#ApproximateTotalCount",
                     "traits": {
                         "smithy.api#documentation": "<p>The total number of quick connects which matched your search query.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connect#SearchResourceTags": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#SearchResourceTagsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#SearchResourceTagsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#MaximumResultReturnedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Searches tags used in an Amazon Connect instance using optional search criteria.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/search-resource-tags",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Tags",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.connect#SearchResourceTagsRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the Amazon \n   Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceTypes": {
+                    "target": "com.amazonaws.connect#ResourceTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of resource types to be used to search tags from. If not provided or if any empty list \n   is provided, this API will search from all supported resource types.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken2500",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the \n   next request to retrieve the next set of results.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.connect#MaxResult100",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>"
+                    }
+                },
+                "SearchCriteria": {
+                    "target": "com.amazonaws.connect#ResourceTagsSearchCriteria",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The search criteria to be used to return tags.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#SearchResourceTagsResponse": {
+            "type": "structure",
+            "members": {
+                "Tags": {
+                    "target": "com.amazonaws.connect#TagsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags used in the Amazon Connect instance.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken2500",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
                     }
                 }
             },
@@ -24693,6 +24832,15 @@
                 }
             }
         },
+        "com.amazonaws.connect#TagKeyString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 128
+                }
+            }
+        },
         "com.amazonaws.connect#TagMap": {
             "type": "map",
             "key": {
@@ -24792,6 +24940,58 @@
                 }
             }
         },
+        "com.amazonaws.connect#TagSearchCondition": {
+            "type": "structure",
+            "members": {
+                "tagKey": {
+                    "target": "com.amazonaws.connect#TagKeyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag key used in the tag search condition.</p>"
+                    }
+                },
+                "tagValue": {
+                    "target": "com.amazonaws.connect#TagValueString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag value used in the tag search condition.</p>"
+                    }
+                },
+                "tagKeyComparisonType": {
+                    "target": "com.amazonaws.connect#StringComparisonType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of comparison to be made when evaluating the tag key in tag search condition.</p>"
+                    }
+                },
+                "tagValueComparisonType": {
+                    "target": "com.amazonaws.connect#StringComparisonType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of comparison to be made when evaluating the tag value in tag search condition.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The search criteria to be used to return tags.</p>"
+            }
+        },
+        "com.amazonaws.connect#TagSet": {
+            "type": "structure",
+            "members": {
+                "key": {
+                    "target": "com.amazonaws.connect#TagKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag key in the tagSet.</p>"
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.connect#TagValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag value in the tagSet.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A tag set contains tag key and tag value.</p>"
+            }
+        },
         "com.amazonaws.connect#TagValue": {
             "type": "string",
             "traits": {
@@ -24799,6 +24999,21 @@
                     "min": 0,
                     "max": 256
                 }
+            }
+        },
+        "com.amazonaws.connect#TagValueString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.connect#TagsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#TagSet"
             }
         },
         "com.amazonaws.connect#TaskActionDefinition": {

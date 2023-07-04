@@ -454,31 +454,31 @@ type DBCluster struct {
 	// automatically adjusts as needed.
 	AllocatedStorage *int32
 
-	// Provides a list of the Amazon Web Services Identity and Access Management (IAM)
-	// roles that are associated with the DB cluster. IAM roles that are associated
-	// with a DB cluster grant permission for the DB cluster to access other Amazon Web
-	// Services on your behalf.
+	// A list of the Amazon Web Services Identity and Access Management (IAM) roles
+	// that are associated with the DB cluster. IAM roles that are associated with a DB
+	// cluster grant permission for the DB cluster to access other Amazon Web Services
+	// on your behalf.
 	AssociatedRoles []DBClusterRole
 
-	// A value that indicates that minor version patches are applied automatically.
-	// This setting is only for non-Aurora Multi-AZ DB clusters.
+	// Indicates whether minor version patches are applied automatically. This setting
+	// is only for non-Aurora Multi-AZ DB clusters.
 	AutoMinorVersionUpgrade bool
 
 	// The time when a stopped DB cluster is restarted automatically.
 	AutomaticRestartTime *time.Time
 
-	// Provides the list of Availability Zones (AZs) where instances in the DB cluster
-	// can be created.
+	// The list of Availability Zones (AZs) where instances in the DB cluster can be
+	// created.
 	AvailabilityZones []string
 
 	// The number of change records stored for Backtrack.
 	BacktrackConsumedChangeRecords *int64
 
-	// The target backtrack window, in seconds. If this value is set to 0,
+	// The target backtrack window, in seconds. If this value is set to 0 ,
 	// backtracking is disabled for the DB cluster. Otherwise, backtracking is enabled.
 	BacktrackWindow *int64
 
-	// Specifies the number of days for which automatic DB snapshots are retained.
+	// The number of days for which automatic DB snapshots are retained.
 	BackupRetentionPeriod *int32
 
 	// The current capacity of an Aurora Serverless v1 DB cluster. The capacity is 0
@@ -491,28 +491,27 @@ type DBCluster struct {
 	// associated with.
 	CharacterSetName *string
 
-	// Identifies the clone group to which the DB cluster is associated.
+	// The ID of the clone group with which the DB cluster is associated.
 	CloneGroupId *string
 
-	// Specifies the time when the DB cluster was created, in Universal Coordinated
-	// Time (UTC).
+	// The time when the DB cluster was created, in Universal Coordinated Time (UTC).
 	ClusterCreateTime *time.Time
 
-	// Specifies whether tags are copied from the DB cluster to snapshots of the DB
+	// Indicates whether tags are copied from the DB cluster to snapshots of the DB
 	// cluster.
 	CopyTagsToSnapshot *bool
 
-	// Specifies whether the DB cluster is a clone of a DB cluster owned by a
+	// Indicates whether the DB cluster is a clone of a DB cluster owned by a
 	// different Amazon Web Services account.
 	CrossAccountClone *bool
 
-	// Identifies all custom endpoints associated with the cluster.
+	// The custom endpoints associated with the DB cluster.
 	CustomEndpoints []string
 
 	// The Amazon Resource Name (ARN) for the DB cluster.
 	DBClusterArn *string
 
-	// Contains a user-supplied DB cluster identifier. This identifier is the unique
+	// The user-supplied identifier for the DB cluster. This identifier is the unique
 	// key that identifies a DB cluster.
 	DBClusterIdentifier *string
 
@@ -520,25 +519,25 @@ type DBCluster struct {
 	// setting is only for non-Aurora Multi-AZ DB clusters.
 	DBClusterInstanceClass *string
 
-	// Provides the list of instances that make up the DB cluster.
+	// The list of DB instances that make up the DB cluster.
 	DBClusterMembers []DBClusterMember
 
-	// Provides the list of option group memberships for this DB cluster.
+	// The list of option group memberships for this DB cluster.
 	DBClusterOptionGroupMemberships []DBClusterOptionGroupStatus
 
-	// Specifies the name of the DB cluster parameter group for the DB cluster.
+	// The name of the DB cluster parameter group for the DB cluster.
 	DBClusterParameterGroup *string
 
-	// Specifies information on the subnet group associated with the DB cluster,
-	// including the name, description, and subnets in the subnet group.
+	// Information about the subnet group associated with the DB cluster, including
+	// the name, description, and subnets in the subnet group.
 	DBSubnetGroup *string
 
 	// Reserved for future use.
 	DBSystemId *string
 
-	// Contains the name of the initial database of this DB cluster that was provided
-	// at create time, if one was specified when the DB cluster was created. This same
-	// name is returned for the life of the DB cluster.
+	// The name of the initial database that was specified for the DB cluster when it
+	// was created, if one was provided. This same name is returned for the life of the
+	// DB cluster.
 	DatabaseName *string
 
 	// The Amazon Web Services Region-unique, immutable identifier for the DB cluster.
@@ -546,8 +545,8 @@ type DBCluster struct {
 	// the KMS key for the DB cluster is accessed.
 	DbClusterResourceId *string
 
-	// Indicates if the DB cluster has deletion protection enabled. The database can't
-	// be deleted when deletion protection is enabled.
+	// Indicates whether the DB cluster has deletion protection enabled. The database
+	// can't be deleted when deletion protection is enabled.
 	DeletionProtection *bool
 
 	// The Active Directory Domain membership records associated with the DB cluster.
@@ -566,10 +565,10 @@ type DBCluster struct {
 	// in the Amazon Aurora User Guide.
 	EnabledCloudwatchLogsExports []string
 
-	// Specifies the connection endpoint for the primary instance of the DB cluster.
+	// The connection endpoint for the primary instance of the DB cluster.
 	Endpoint *string
 
-	// The name of the database engine to be used for this DB cluster.
+	// The database engine used for this DB cluster.
 	Engine *string
 
 	// The DB engine mode of the DB cluster, either provisioned or serverless . For
@@ -577,33 +576,32 @@ type DBCluster struct {
 	// .
 	EngineMode *string
 
-	// Indicates the database engine version.
+	// The version of the database engine.
 	EngineVersion *string
 
-	// Specifies whether you have requested to enable write forwarding for a secondary
-	// cluster in an Aurora global database. Because write forwarding takes time to
-	// enable, check the value of GlobalWriteForwardingStatus to confirm that the
-	// request has completed before using the write forwarding feature for this
-	// cluster.
+	// Specifies whether write forwarding is enabled for a secondary cluster in an
+	// Aurora global database. Because write forwarding takes time to enable, check the
+	// value of GlobalWriteForwardingStatus to confirm that the request has completed
+	// before using the write forwarding feature for this cluster.
 	GlobalWriteForwardingRequested *bool
 
-	// Specifies whether a secondary cluster in an Aurora global database has write
-	// forwarding enabled, not enabled, or is in the process of enabling it.
+	// The status of write forwarding for a secondary cluster in an Aurora global
+	// database.
 	GlobalWriteForwardingStatus WriteForwardingStatus
 
-	// Specifies the ID that Amazon Route 53 assigns when you create a hosted zone.
+	// The ID that Amazon Route 53 assigns when you create a hosted zone.
 	HostedZoneId *string
 
-	// A value that indicates whether the HTTP endpoint for an Aurora Serverless v1 DB
-	// cluster is enabled. When enabled, the HTTP endpoint provides a connectionless
-	// web service API for running SQL queries on the Aurora Serverless v1 DB cluster.
-	// You can also query your database from inside the RDS console with the query
-	// editor. For more information, see Using the Data API for Aurora Serverless v1 (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html)
+	// Indicates whether the HTTP endpoint for an Aurora Serverless v1 DB cluster is
+	// enabled. When enabled, the HTTP endpoint provides a connectionless web service
+	// API for running SQL queries on the Aurora Serverless v1 DB cluster. You can also
+	// query your database from inside the RDS console with the query editor. For more
+	// information, see Using the Data API for Aurora Serverless v1 (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html)
 	// in the Amazon Aurora User Guide.
 	HttpEndpointEnabled *bool
 
-	// A value that indicates whether the mapping of Amazon Web Services Identity and
-	// Access Management (IAM) accounts to database accounts is enabled.
+	// Indicates whether the mapping of Amazon Web Services Identity and Access
+	// Management (IAM) accounts to database accounts is enabled.
 	IAMDatabaseAuthenticationEnabled *bool
 
 	// The next time you can modify the DB cluster to use the aurora-iopt1 storage
@@ -619,19 +617,18 @@ type DBCluster struct {
 	// ARN, key ID, alias ARN, or alias name for the KMS key.
 	KmsKeyId *string
 
-	// Specifies the latest time to which a database can be restored with
-	// point-in-time restore.
+	// The latest time to which a database can be restored with point-in-time restore.
 	LatestRestorableTime *time.Time
 
-	// Contains the secret managed by RDS in Amazon Web Services Secrets Manager for
-	// the master user password. For more information, see Password management with
-	// Amazon Web Services Secrets Manager (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html)
+	// The secret managed by RDS in Amazon Web Services Secrets Manager for the master
+	// user password. For more information, see Password management with Amazon Web
+	// Services Secrets Manager (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html)
 	// in the Amazon RDS User Guide and Password management with Amazon Web Services
 	// Secrets Manager (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-secrets-manager.html)
 	// in the Amazon Aurora User Guide.
 	MasterUserSecret *MasterUserSecret
 
-	// Contains the master username for the DB cluster.
+	// The master username for the DB cluster.
 	MasterUsername *string
 
 	// The interval, in seconds, between points when Enhanced Monitoring metrics are
@@ -644,29 +641,27 @@ type DBCluster struct {
 	// clusters.
 	MonitoringRoleArn *string
 
-	// Specifies whether the DB cluster has instances in multiple Availability Zones.
+	// Indicates whether the DB cluster has instances in multiple Availability Zones.
 	MultiAZ *bool
 
-	// The network type of the DB instance. Valid values:
-	//   - IPV4
-	//   - DUAL
-	// The network type is determined by the DBSubnetGroup specified for the DB
-	// cluster. A DBSubnetGroup can support only the IPv4 protocol or the IPv4 and the
-	// IPv6 protocols ( DUAL ). For more information, see  Working with a DB instance
-	// in a VPC (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html)
+	// The network type of the DB instance. The network type is determined by the
+	// DBSubnetGroup specified for the DB cluster. A DBSubnetGroup can support only
+	// the IPv4 protocol or the IPv4 and the IPv6 protocols ( DUAL ). For more
+	// information, see Working with a DB instance in a VPC (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html)
 	// in the Amazon Aurora User Guide. This setting is only for Aurora DB clusters.
+	// Valid Values: IPV4 | DUAL
 	NetworkType *string
 
-	// A value that specifies that changes to the DB cluster are pending. This element
-	// is only included when changes are pending. Specific changes are identified by
+	// Information about pending changes to the DB cluster. This information is
+	// returned only when there are pending changes. Specific changes are identified by
 	// subelements.
 	PendingModifiedValues *ClusterPendingModifiedValues
 
-	// Specifies the progress of the operation as a percentage.
+	// The progress of the operation as a percentage.
 	PercentProgress *string
 
-	// True if Performance Insights is enabled for the DB cluster, and otherwise
-	// false. This setting is only for non-Aurora Multi-AZ DB clusters.
+	// Indicates whether Performance Insights is enabled for the DB cluster. This
+	// setting is only for non-Aurora Multi-AZ DB clusters.
 	PerformanceInsightsEnabled *bool
 
 	// The Amazon Web Services KMS key identifier for encryption of Performance
@@ -675,39 +670,35 @@ type DBCluster struct {
 	// non-Aurora Multi-AZ DB clusters.
 	PerformanceInsightsKMSKeyId *string
 
-	// The number of days to retain Performance Insights data. The default is 7 days.
-	// The following values are valid:
+	// The number of days to retain Performance Insights data. This setting is only
+	// for non-Aurora Multi-AZ DB clusters. Valid Values:
 	//   - 7
-	//   - month * 31, where month is a number of months from 1-23
+	//   - month * 31, where month is a number of months from 1-23. Examples: 93 (3
+	//   months * 31), 341 (11 months * 31), 589 (19 months * 31)
 	//   - 731
-	// For example, the following values are valid:
-	//   - 93 (3 months * 31)
-	//   - 341 (11 months * 31)
-	//   - 589 (19 months * 31)
-	//   - 731
-	// This setting is only for non-Aurora Multi-AZ DB clusters.
+	// Default: 7 days
 	PerformanceInsightsRetentionPeriod *int32
 
-	// Specifies the port that the database engine is listening on.
+	// The port that the database engine is listening on.
 	Port *int32
 
-	// Specifies the daily time range during which automated backups are created if
-	// automated backups are enabled, as determined by the BackupRetentionPeriod .
+	// The daily time range during which automated backups are created if automated
+	// backups are enabled, as determined by the BackupRetentionPeriod .
 	PreferredBackupWindow *string
 
-	// Specifies the weekly time range during which system maintenance can occur, in
-	// Universal Coordinated Time (UTC).
+	// The weekly time range during which system maintenance can occur, in Universal
+	// Coordinated Time (UTC).
 	PreferredMaintenanceWindow *string
 
-	// Specifies the accessibility options for the DB instance. When the DB instance
-	// is publicly accessible, its Domain Name System (DNS) endpoint resolves to the
-	// private IP address from within the DB instance's virtual private cloud (VPC). It
-	// resolves to the public IP address from outside of the DB instance's VPC. Access
-	// to the DB instance is ultimately controlled by the security group it uses. That
-	// public access is not permitted if the security group assigned to the DB instance
-	// doesn't permit it. When the DB instance isn't publicly accessible, it is an
-	// internal DB instance with a DNS name that resolves to a private IP address. For
-	// more information, see CreateDBInstance . This setting is only for non-Aurora
+	// Indicates whether the DB cluster is publicly accessible. When the DB cluster is
+	// publicly accessible, its Domain Name System (DNS) endpoint resolves to the
+	// private IP address from within the DB cluster's virtual private cloud (VPC). It
+	// resolves to the public IP address from outside of the DB cluster's VPC. Access
+	// to the DB cluster is ultimately controlled by the security group it uses. That
+	// public access isn't permitted if the security group assigned to the DB cluster
+	// doesn't permit it. When the DB cluster isn't publicly accessible, it is an
+	// internal DB cluster with a DNS name that resolves to a private IP address. For
+	// more information, see CreateDBCluster . This setting is only for non-Aurora
 	// Multi-AZ DB clusters.
 	PubliclyAccessible *bool
 
@@ -726,24 +717,23 @@ type DBCluster struct {
 	// cluster, you can then reconnect to the reader endpoint.
 	ReaderEndpoint *string
 
-	// Contains the identifier of the source DB cluster if this DB cluster is a read
-	// replica.
+	// The identifier of the source DB cluster if this DB cluster is a read replica.
 	ReplicationSourceIdentifier *string
 
-	// Shows the scaling configuration for an Aurora DB cluster in serverless DB
-	// engine mode. For more information, see Using Amazon Aurora Serverless v1 (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html)
+	// The scaling configuration for an Aurora DB cluster in serverless DB engine
+	// mode. For more information, see Using Amazon Aurora Serverless v1 (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html)
 	// in the Amazon Aurora User Guide.
 	ScalingConfigurationInfo *ScalingConfigurationInfo
 
-	// Shows the scaling configuration for an Aurora Serverless v2 DB cluster. For
-	// more information, see Using Amazon Aurora Serverless v2 (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html)
+	// The scaling configuration for an Aurora Serverless v2 DB cluster. For more
+	// information, see Using Amazon Aurora Serverless v2 (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html)
 	// in the Amazon Aurora User Guide.
 	ServerlessV2ScalingConfiguration *ServerlessV2ScalingConfigurationInfo
 
-	// Specifies the current state of this DB cluster.
+	// The current state of this DB cluster.
 	Status *string
 
-	// Specifies whether the DB cluster is encrypted.
+	// Indicates whether the DB cluster is encrypted.
 	StorageEncrypted bool
 
 	// The storage type associated with the DB cluster.
@@ -753,7 +743,7 @@ type DBCluster struct {
 	// in the Amazon RDS User Guide.
 	TagList []Tag
 
-	// Provides a list of VPC security groups that the DB cluster belongs to.
+	// The list of VPC security groups that the DB cluster belongs to.
 	VpcSecurityGroups []VpcSecurityGroupMembership
 
 	noSmithyDocumentSerde
@@ -1224,14 +1214,14 @@ type DBInstance struct {
 	// The status of the database activity stream.
 	ActivityStreamStatus ActivityStreamStatus
 
-	// Specifies the allocated storage size specified in gibibytes (GiB).
+	// The amount of storage in gibibytes (GiB) allocated for the DB instance.
 	AllocatedStorage int32
 
 	// The Amazon Web Services Identity and Access Management (IAM) roles associated
 	// with the DB instance.
 	AssociatedRoles []DBInstanceRole
 
-	// A value that indicates that minor version patches are applied automatically.
+	// Indicates whether minor version patches are applied automatically.
 	AutoMinorVersionUpgrade bool
 
 	// The time when a stopped DB instance is restarted automatically.
@@ -1243,18 +1233,18 @@ type DBInstance struct {
 	// --resume-full-automation-mode-minutes .
 	AutomationMode AutomationMode
 
-	// Specifies the name of the Availability Zone the DB instance is located in.
+	// The name of the Availability Zone where the DB instance is located.
 	AvailabilityZone *string
 
 	// The Amazon Resource Name (ARN) of the recovery point in Amazon Web Services
 	// Backup.
 	AwsBackupRecoveryPointArn *string
 
-	// Specifies the number of days for which automatic DB snapshots are retained.
+	// The number of days for which automatic DB snapshots are retained.
 	BackupRetentionPeriod int32
 
-	// Specifies where automated backups and manual snapshots are stored: Amazon Web
-	// Services Outposts or the Amazon Web Services Region.
+	// The location where automated backups and manual snapshots are stored: Amazon
+	// Web Services Outposts or the Amazon Web Services Region.
 	BackupTarget *string
 
 	// The identifier of the CA certificate for this DB instance. For more
@@ -1271,10 +1261,11 @@ type DBInstance struct {
 	// associated with.
 	CharacterSetName *string
 
-	// Specifies whether tags are copied from the DB instance to snapshots of the DB
-	// instance. Amazon Aurora Not applicable. Copying tags to snapshots is managed by
-	// the DB cluster. Setting this value for an Aurora DB instance has no effect on
-	// the DB cluster setting. For more information, see DBCluster .
+	// Indicates whether tags are copied from the DB instance to snapshots of the DB
+	// instance. This setting doesn't apply to Amazon Aurora DB instances. Copying tags
+	// to snapshots is managed by the DB cluster. Setting this value for an Aurora DB
+	// instance has no effect on the DB cluster setting. For more information, see
+	// DBCluster .
 	CopyTagsToSnapshot bool
 
 	// The instance profile associated with the underlying Amazon EC2 instance of an
@@ -1290,7 +1281,7 @@ type DBInstance struct {
 	// in the Amazon RDS User Guide.
 	CustomIamInstanceProfile *string
 
-	// Specifies whether a customer-owned IP address (CoIP) is enabled for an RDS on
+	// Indicates whether a customer-owned IP address (CoIP) is enabled for an RDS on
 	// Outposts DB instance. A CoIP provides local or external connectivity to
 	// resources in your Outpost subnets through your on-premises network. For some use
 	// cases, a CoIP can provide lower latency for connections to the DB instance from
@@ -1302,7 +1293,7 @@ type DBInstance struct {
 	// in the Amazon Web Services Outposts User Guide.
 	CustomerOwnedIpEnabled *bool
 
-	// If the DB instance is a member of a DB cluster, contains the name of the DB
+	// If the DB instance is a member of a DB cluster, indicates the name of the DB
 	// cluster that the DB instance is a member of.
 	DBClusterIdentifier *string
 
@@ -1312,44 +1303,44 @@ type DBInstance struct {
 	// The list of replicated automated backups associated with the DB instance.
 	DBInstanceAutomatedBackupsReplications []DBInstanceAutomatedBackupsReplication
 
-	// Contains the name of the compute and memory capacity class of the DB instance.
+	// The name of the compute and memory capacity class of the DB instance.
 	DBInstanceClass *string
 
-	// Contains a user-supplied database identifier. This identifier is the unique key
-	// that identifies a DB instance.
+	// The user-supplied database identifier. This identifier is the unique key that
+	// identifies a DB instance.
 	DBInstanceIdentifier *string
 
-	// Specifies the current state of this database. For information about DB instance
-	// statuses, see Viewing DB instance status (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/accessing-monitoring.html#Overview.DBInstance.Status)
+	// The current state of this database. For information about DB instance statuses,
+	// see Viewing DB instance status (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/accessing-monitoring.html#Overview.DBInstance.Status)
 	// in the Amazon RDS User Guide.
 	DBInstanceStatus *string
 
-	// The meaning of this parameter differs according to the database engine you use.
-	// MySQL, MariaDB, SQL Server, PostgreSQL Contains the name of the initial database
-	// of this instance that was provided at create time, if one was specified when the
-	// DB instance was created. This same name is returned for the life of the DB
-	// instance. Type: String Oracle Contains the Oracle System ID (SID) of the created
-	// DB instance. Not shown when the returned parameters do not apply to an Oracle DB
-	// instance.
+	// The meaning of this parameter differs depending on the database engine.
+	//   - For RDS for MariaDB, Microsoft SQL Server, MySQL, and PostgreSQL - The name
+	//   of the initial database specified for this DB instance when it was created, if
+	//   one was provided. This same name is returned for the life of the DB instance.
+	//   - For RDS for Oracle - The Oracle System ID (SID) of the created DB instance.
+	//   This value is only returned when the object returned is an Oracle DB instance.
 	DBName *string
 
-	// Provides the list of DB parameter groups applied to this DB instance.
+	// The list of DB parameter groups applied to this DB instance.
 	DBParameterGroups []DBParameterGroupStatus
 
 	// A list of DB security group elements containing DBSecurityGroup.Name and
 	// DBSecurityGroup.Status subelements.
 	DBSecurityGroups []DBSecurityGroupMembership
 
-	// Specifies information on the subnet group associated with the DB instance,
-	// including the name, description, and subnets in the subnet group.
+	// Information about the subnet group associated with the DB instance, including
+	// the name, description, and subnets in the subnet group.
 	DBSubnetGroup *DBSubnetGroup
 
 	// The Oracle system ID (Oracle SID) for a container database (CDB). The Oracle
-	// SID is also the name of the CDB. This setting is valid for RDS Custom only.
+	// SID is also the name of the CDB. This setting is only valid for RDS Custom DB
+	// instances.
 	DBSystemId *string
 
-	// Specifies the port that the DB instance listens on. If the DB instance is part
-	// of a DB cluster, this can be a different port than the DB cluster port.
+	// The port that the DB instance listens on. If the DB instance is part of a DB
+	// cluster, this can be a different port than the DB cluster port.
 	DbInstancePort int32
 
 	// The Amazon Web Services Region-unique, immutable identifier for the DB
@@ -1357,7 +1348,7 @@ type DBInstance struct {
 	// whenever the Amazon Web Services KMS key for the DB instance is accessed.
 	DbiResourceId *string
 
-	// Indicates if the DB instance has deletion protection enabled. The database
+	// Indicates whether the DB instance has deletion protection enabled. The database
 	// can't be deleted when deletion protection is enabled. For more information, see
 	// Deleting a DB Instance (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html)
 	// .
@@ -1368,61 +1359,61 @@ type DBInstance struct {
 
 	// A list of log types that this DB instance is configured to export to CloudWatch
 	// Logs. Log types vary by DB engine. For information about the log types for each
-	// DB engine, see Amazon RDS Database Log Files (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html)
+	// DB engine, see Monitoring Amazon RDS log files (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html)
 	// in the Amazon RDS User Guide.
 	EnabledCloudwatchLogsExports []string
 
-	// Specifies the connection endpoint. The endpoint might not be shown for
-	// instances whose status is creating .
+	// The connection endpoint for the DB instance. The endpoint might not be shown
+	// for instances with the status of creating .
 	Endpoint *Endpoint
 
-	// The name of the database engine to be used for this DB instance.
+	// The database engine used for this DB instance.
 	Engine *string
 
-	// Indicates the database engine version.
+	// The version of the database engine.
 	EngineVersion *string
 
 	// The Amazon Resource Name (ARN) of the Amazon CloudWatch Logs log stream that
 	// receives the Enhanced Monitoring metrics data for the DB instance.
 	EnhancedMonitoringResourceArn *string
 
-	// True if mapping of Amazon Web Services Identity and Access Management (IAM)
-	// accounts to database accounts is enabled, and otherwise false. For a list of
-	// engine versions that support IAM database authentication, see IAM database
+	// Indicates whether mapping of Amazon Web Services Identity and Access Management
+	// (IAM) accounts to database accounts is enabled for the DB instance. For a list
+	// of engine versions that support IAM database authentication, see IAM database
 	// authentication (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RDS_Fea_Regions_DB-eng.Feature.IamDatabaseAuthentication.html)
 	// in the Amazon RDS User Guide and IAM database authentication in Aurora (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.Aurora_Fea_Regions_DB-eng.Feature.IAMdbauth.html)
 	// in the Amazon Aurora User Guide.
 	IAMDatabaseAuthenticationEnabled bool
 
-	// Provides the date and time the DB instance was created.
+	// The date and time when the DB instance was created.
 	InstanceCreateTime *time.Time
 
-	// Specifies the Provisioned IOPS (I/O operations per second) value.
+	// The Provisioned IOPS (I/O operations per second) value for the DB instance.
 	Iops *int32
 
-	// If StorageEncrypted is true, the Amazon Web Services KMS key identifier for the
-	// encrypted DB instance. The Amazon Web Services KMS key identifier is the key
+	// If StorageEncrypted is enabled, the Amazon Web Services KMS key identifier for
+	// the encrypted DB instance. The Amazon Web Services KMS key identifier is the key
 	// ARN, key ID, alias ARN, or alias name for the KMS key.
 	KmsKeyId *string
 
-	// Specifies the latest time to which a database can be restored with
+	// The latest time to which a database in this DB instance can be restored with
 	// point-in-time restore.
 	LatestRestorableTime *time.Time
 
-	// License model information for this DB instance. This setting doesn't apply to
-	// RDS Custom.
+	// The license model information for this DB instance. This setting doesn't apply
+	// to RDS Custom DB instances.
 	LicenseModel *string
 
-	// Specifies the listener connection endpoint for SQL Server Always On.
+	// The listener connection endpoint for SQL Server Always On.
 	ListenerEndpoint *Endpoint
 
-	// Contains the secret managed by RDS in Amazon Web Services Secrets Manager for
-	// the master user password. For more information, see Password management with
-	// Amazon Web Services Secrets Manager (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html)
+	// The secret managed by RDS in Amazon Web Services Secrets Manager for the master
+	// user password. For more information, see Password management with Amazon Web
+	// Services Secrets Manager (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html)
 	// in the Amazon RDS User Guide.
 	MasterUserSecret *MasterUserSecret
 
-	// Contains the master username for the DB instance.
+	// The master username for the DB instance.
 	MasterUsername *string
 
 	// The upper limit in gibibytes (GiB) to which Amazon RDS can automatically scale
@@ -1437,8 +1428,8 @@ type DBInstance struct {
 	// to Amazon CloudWatch Logs.
 	MonitoringRoleArn *string
 
-	// Specifies if the DB instance is a Multi-AZ deployment. This setting doesn't
-	// apply to RDS Custom.
+	// Indicates whether the DB instance is a Multi-AZ deployment. This setting
+	// doesn't apply to RDS Custom DB instances.
 	MultiAZ bool
 
 	// The name of the NCHAR character set for the Oracle DB instance. This character
@@ -1446,27 +1437,23 @@ type DBInstance struct {
 	// NCHAR, NCLOB, or NVARCHAR2.
 	NcharCharacterSetName *string
 
-	// The network type of the DB instance. Valid values:
-	//   - IPV4
-	//   - DUAL
-	// The network type is determined by the DBSubnetGroup specified for the DB
-	// instance. A DBSubnetGroup can support only the IPv4 protocol or the IPv4 and
-	// the IPv6 protocols ( DUAL ). For more information, see  Working with a DB
-	// instance in a VPC (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html)
+	// The network type of the DB instance. The network type is determined by the
+	// DBSubnetGroup specified for the DB instance. A DBSubnetGroup can support only
+	// the IPv4 protocol or the IPv4 and the IPv6 protocols ( DUAL ). For more
+	// information, see Working with a DB instance in a VPC (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html)
 	// in the Amazon RDS User Guide and Working with a DB instance in a VPC (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html)
-	// in the Amazon Aurora User Guide.
+	// in the Amazon Aurora User Guide. Valid Values: IPV4 | DUAL
 	NetworkType *string
 
-	// Provides the list of option group memberships for this DB instance.
+	// The list of option group memberships for this DB instance.
 	OptionGroupMemberships []OptionGroupMembership
 
-	// A value that specifies that changes to the DB instance are pending. This
-	// element is only included when changes are pending. Specific changes are
-	// identified by subelements.
+	// Information about pending changes to the DB instance. This information is
+	// returned only when there are pending changes. Specific changes are identified by
+	// subelements.
 	PendingModifiedValues *PendingModifiedValues
 
-	// True if Performance Insights is enabled for the DB instance, and otherwise
-	// false.
+	// Indicates whether Performance Insights is enabled for the DB instance.
 	PerformanceInsightsEnabled *bool
 
 	// The Amazon Web Services KMS key identifier for encryption of Performance
@@ -1474,38 +1461,34 @@ type DBInstance struct {
 	// ID, alias ARN, or alias name for the KMS key.
 	PerformanceInsightsKMSKeyId *string
 
-	// The number of days to retain Performance Insights data. The default is 7 days.
-	// The following values are valid:
+	// The number of days to retain Performance Insights data. Valid Values:
 	//   - 7
-	//   - month * 31, where month is a number of months from 1-23
+	//   - month * 31, where month is a number of months from 1-23. Examples: 93 (3
+	//   months * 31), 341 (11 months * 31), 589 (19 months * 31)
 	//   - 731
-	// For example, the following values are valid:
-	//   - 93 (3 months * 31)
-	//   - 341 (11 months * 31)
-	//   - 589 (19 months * 31)
-	//   - 731
+	// Default: 7 days
 	PerformanceInsightsRetentionPeriod *int32
 
-	// Specifies the daily time range during which automated backups are created if
-	// automated backups are enabled, as determined by the BackupRetentionPeriod .
+	// The daily time range during which automated backups are created if automated
+	// backups are enabled, as determined by the BackupRetentionPeriod .
 	PreferredBackupWindow *string
 
-	// Specifies the weekly time range during which system maintenance can occur, in
-	// Universal Coordinated Time (UTC).
+	// The weekly time range during which system maintenance can occur, in Universal
+	// Coordinated Time (UTC).
 	PreferredMaintenanceWindow *string
 
 	// The number of CPU cores and the number of threads per core for the DB instance
 	// class of the DB instance.
 	ProcessorFeatures []ProcessorFeature
 
-	// A value that specifies the order in which an Aurora Replica is promoted to the
-	// primary instance after a failure of the existing primary instance. For more
-	// information, see Fault Tolerance for an Aurora DB Cluster (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Backups.html#Aurora.Managing.FaultTolerance)
+	// The order of priority in which an Aurora Replica is promoted to the primary
+	// instance after a failure of the existing primary instance. For more information,
+	// see Fault Tolerance for an Aurora DB Cluster (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.AuroraHighAvailability.html#Aurora.Managing.FaultTolerance)
 	// in the Amazon Aurora User Guide.
 	PromotionTier *int32
 
-	// Specifies the accessibility options for the DB instance. When the DB cluster is
-	// publicly accessible, its Domain Name System (DNS) endpoint resolves to the
+	// Indicates whether the DB instance is publicly accessible. When the DB cluster
+	// is publicly accessible, its Domain Name System (DNS) endpoint resolves to the
 	// private IP address from within the DB cluster's virtual private cloud (VPC). It
 	// resolves to the public IP address from outside of the DB cluster's VPC. Access
 	// to the DB cluster is ultimately controlled by the security group it uses. That
@@ -1515,24 +1498,21 @@ type DBInstance struct {
 	// more information, see CreateDBInstance .
 	PubliclyAccessible bool
 
-	// Contains one or more identifiers of Aurora DB clusters to which the RDS DB
-	// instance is replicated as a read replica. For example, when you create an Aurora
-	// read replica of an RDS for MySQL DB instance, the Aurora MySQL DB cluster for
-	// the Aurora read replica is shown. This output doesn't contain information about
+	// The identifiers of Aurora DB clusters to which the RDS DB instance is
+	// replicated as a read replica. For example, when you create an Aurora read
+	// replica of an RDS for MySQL DB instance, the Aurora MySQL DB cluster for the
+	// Aurora read replica is shown. This output doesn't contain information about
 	// cross-Region Aurora read replicas. Currently, each RDS DB instance can have only
 	// one Aurora read replica.
 	ReadReplicaDBClusterIdentifiers []string
 
-	// Contains one or more identifiers of the read replicas associated with this DB
-	// instance.
+	// The identifiers of the read replicas associated with this DB instance.
 	ReadReplicaDBInstanceIdentifiers []string
 
-	// Contains the identifier of the source DB cluster if this DB instance is a read
-	// replica.
+	// The identifier of the source DB cluster if this DB instance is a read replica.
 	ReadReplicaSourceDBClusterIdentifier *string
 
-	// Contains the identifier of the source DB instance if this DB instance is a read
-	// replica.
+	// The identifier of the source DB instance if this DB instance is a read replica.
 	ReadReplicaSourceDBInstanceIdentifier *string
 
 	// The open mode of an Oracle read replica. The default is open-read-only . For
@@ -1550,18 +1530,18 @@ type DBInstance struct {
 	// instance with multi-AZ support.
 	SecondaryAvailabilityZone *string
 
-	// The status of a read replica. If the instance isn't a read replica, this is
-	// blank.
+	// The status of a read replica. If the DB instance isn't a read replica, the
+	// value is blank.
 	StatusInfos []DBInstanceStatusInfo
 
-	// Specifies whether the DB instance is encrypted.
+	// Indicates whether the DB instance is encrypted.
 	StorageEncrypted bool
 
-	// Specifies the storage throughput for the DB instance. This setting applies only
-	// to the gp3 storage type.
+	// The storage throughput for the DB instance. This setting applies only to the gp3
+	// storage type.
 	StorageThroughput *int32
 
-	// Specifies the storage type associated with the DB instance.
+	// The storage type associated with the DB instance.
 	StorageType *string
 
 	// A list of tags. For more information, see Tagging Amazon RDS Resources (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html)
@@ -1577,7 +1557,7 @@ type DBInstance struct {
 	// created with a time zone specified.
 	Timezone *string
 
-	// Provides a list of VPC security group elements that the DB instance belongs to.
+	// The list of Amazon EC2 VPC security groups that the DB instance belongs to.
 	VpcSecurityGroups []VpcSecurityGroupMembership
 
 	noSmithyDocumentSerde
@@ -2263,15 +2243,26 @@ type DescribeDBLogFilesDetails struct {
 // cluster.
 type DomainMembership struct {
 
+	// The ARN for the Secrets Manager secret that contains the credentials for the
+	// user performing the domain join.
+	AuthSecretArn *string
+
+	// The IPv4 DNS IP addresses of your primary and secondary Active Directory domain
+	// controllers.
+	DnsIps []string
+
 	// The identifier of the Active Directory Domain.
 	Domain *string
 
-	// The fully qualified domain name of the Active Directory Domain.
+	// The fully qualified domain name (FQDN) of the Active Directory Domain.
 	FQDN *string
 
 	// The name of the IAM role to be used when making API calls to the Directory
 	// Service.
 	IAMRoleName *string
+
+	// The Active Directory organizational unit for your DB instance to join.
+	OU *string
 
 	// The status of the Active Directory Domain membership for the DB instance or
 	// cluster. Values include joined, pending-join, failed, and so on.
@@ -3511,8 +3502,8 @@ type ScalingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Shows the scaling configuration for an Aurora DB cluster in serverless DB
-// engine mode. For more information, see Using Amazon Aurora Serverless v1 (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html)
+// The scaling configuration for an Aurora DB cluster in serverless DB engine
+// mode. For more information, see Using Amazon Aurora Serverless v1 (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html)
 // in the Amazon Aurora User Guide.
 type ScalingConfigurationInfo struct {
 
@@ -3567,8 +3558,8 @@ type ServerlessV2ScalingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Shows the scaling configuration for an Aurora Serverless v2 DB cluster. For
-// more information, see Using Amazon Aurora Serverless v2 (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html)
+// The scaling configuration for an Aurora Serverless v2 DB cluster. For more
+// information, see Using Amazon Aurora Serverless v2 (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html)
 // in the Amazon Aurora User Guide.
 type ServerlessV2ScalingConfigurationInfo struct {
 

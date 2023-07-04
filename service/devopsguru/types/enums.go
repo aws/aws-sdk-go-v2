@@ -523,6 +523,24 @@ func (ResourceTypeFilter) Values() []ResourceTypeFilter {
 	}
 }
 
+type ServerSideEncryptionType string
+
+// Enum values for ServerSideEncryptionType
+const (
+	ServerSideEncryptionTypeCustomerManagedKey ServerSideEncryptionType = "CUSTOMER_MANAGED_KEY"
+	ServerSideEncryptionTypeAwsOwnedKmsKey     ServerSideEncryptionType = "AWS_OWNED_KMS_KEY"
+)
+
+// Values returns all known values for ServerSideEncryptionType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ServerSideEncryptionType) Values() []ServerSideEncryptionType {
+	return []ServerSideEncryptionType{
+		"CUSTOMER_MANAGED_KEY",
+		"AWS_OWNED_KMS_KEY",
+	}
+}
+
 type ServiceName string
 
 // Enum values for ServiceName

@@ -1653,7 +1653,7 @@
         "com.amazonaws.fsx#AutomaticBackupRetentionDays": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "<p>The number of days to retain automatic backups. Setting this property to\n                <code>0</code> disables automatic backups. You can retain automatic backups for a\n            maximum of 90 days. The default is <code>0</code>.</p>",
+                "smithy.api#documentation": "<p>The number of days to retain automatic backups. Setting this property to\n                <code>0</code> disables automatic backups. You can retain automatic backups for a\n            maximum of 90 days. The default is <code>30</code>.</p>",
                 "smithy.api#range": {
                     "min": 0,
                     "max": 90
@@ -2129,6 +2129,46 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Copies an existing backup within the same Amazon Web Services account to another Amazon Web Services Region\n         (cross-Region copy) or within the same Amazon Web Services Region (in-Region copy). You can have up to five\n         backup copy requests in progress to a single destination Region per account.</p>\n         <p>You can use cross-Region backup copies for cross-Region disaster recovery. You can\n         periodically take backups and copy them to another Region so that in the event of a\n         disaster in the primary Region, you can restore from backup and recover availability\n         quickly in the other Region. You can make cross-Region copies only within your Amazon Web Services partition. A partition is a grouping of Regions. Amazon Web Services currently\n         has three partitions: <code>aws</code> (Standard Regions), <code>aws-cn</code> (China\n         Regions), and <code>aws-us-gov</code> (Amazon Web Services GovCloud [US] Regions).</p>\n         <p>You can also use backup copies to clone your file dataset to another Region or within\n         the same Region.</p>\n         <p>You can use the <code>SourceRegion</code> parameter to specify the Amazon Web Services Region\n         from which the backup will be copied. For example, if you make the call from the\n         <code>us-west-1</code> Region and want to copy a backup from the <code>us-east-2</code>\n         Region, you specify <code>us-east-2</code> in the <code>SourceRegion</code> parameter\n         to make a cross-Region copy. If you don't specify a Region, the backup copy is\n         created in the same Region where the request is sent from (in-Region copy).</p>\n         <p>For more information about creating backup copies, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/using-backups.html#copy-backups\"> Copying backups</a>\n         in the <i>Amazon FSx for Windows User Guide</i>, <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-backups-fsx.html#copy-backups\">Copying backups</a> in the <i>Amazon FSx for Lustre User\n            Guide</i>, and <a href=\"https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/using-backups.html#copy-backups\">Copying backups</a> in the <i>Amazon FSx for OpenZFS User\n            Guide</i>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To copy a backup",
+                        "documentation": "This operation copies an Amazon FSx backup.",
+                        "input": {
+                            "SourceBackupId": "backup-03e3c82e0183b7b6b",
+                            "SourceRegion": "us-east-2"
+                        },
+                        "output": {
+                            "Backup": {
+                                "BackupId": "backup-0a3364eded1014b28",
+                                "OwnerId": "123456789012",
+                                "Lifecycle": "COPYING",
+                                "Type": "USER_INITIATED",
+                                "CreationTime": 1.617954808068E9,
+                                "KmsKeyId": "arn:aws:fsx:us-east-1:012345678912:key/d1234e22-543a-12b7-a98f-e12c2b54001a",
+                                "ResourceARN": "arn:aws:fsx:us-east-1:012345678912:backup/backup-0a3364eded1014b28",
+                                "Tags": [
+                                    {
+                                        "Key": "Name",
+                                        "Value": "MyBackup"
+                                    }
+                                ],
+                                "FileSystem": {
+                                    "FileSystemId": "fs-0498eed5fe91001ec",
+                                    "FileSystemType": "LUSTRE",
+                                    "StorageCapacity": 2400,
+                                    "StorageType": "SSD",
+                                    "ResourceARN": "arn:aws:fsx:us-east-1:012345678912:file-system/fs-0f5179e395f597e66",
+                                    "LustreConfiguration": {
+                                        "WeeklyMaintenanceStartTime": "1:05:00",
+                                        "DeploymentType": "PERSISTENT_1",
+                                        "PerUnitStorageThroughput": 50,
+                                        "AutomaticBackupRetentionDays": 0
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
                 "smithy.api#idempotent": {}
             }
         },
@@ -2868,7 +2908,10 @@
                     "target": "com.amazonaws.fsx#DailyTime"
                 },
                 "AutomaticBackupRetentionDays": {
-                    "target": "com.amazonaws.fsx#AutomaticBackupRetentionDays"
+                    "target": "com.amazonaws.fsx#AutomaticBackupRetentionDays",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of days to retain automatic backups. Setting this property to\n            <code>0</code> disables automatic backups. You can retain automatic backups for a\n            maximum of 90 days. The default is <code>0</code>.</p>"
+                    }
                 },
                 "CopyTagsToBackups": {
                     "target": "com.amazonaws.fsx#Flag",
@@ -2990,7 +3033,7 @@
                 "DeploymentType": {
                     "target": "com.amazonaws.fsx#OpenZFSDeploymentType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the file system deployment type. Single AZ deployment types are configured\n            for redundancy within a single Availability Zone in an Amazon Web Services Region .\n            Valid values are the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SINGLE_AZ_1</code>- (Default) Creates file systems with throughput capacities of 64 - 4,096 MBps.\n                <code>Single_AZ_1</code> is available in all Amazon Web Services Regions where Amazon FSx \n                for OpenZFS is available, except US West (Oregon).</p>\n            </li>\n            <li>\n               <p>\n                  <code>SINGLE_AZ_2</code>- Creates file systems with throughput capacities of 160 - 10,240 MBps\n                using an NVMe L2ARC cache. <code>Single_AZ_2</code> is available only in the US East (N. Virginia), US East (Ohio), \n                US West (Oregon), and Europe (Ireland) Amazon Web Services Regions.</p>\n            </li>\n         </ul>\n         <p>For more information, see: <a href=\"https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/availability-durability.html#available-aws-regions\">Deployment type availability</a>\n            and <a href=\"https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/performance.html#zfs-fs-performance\">File system performance</a>\n            in the <i>Amazon FSx for OpenZFS User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>Specifies the file system deployment type. Single AZ deployment types are configured\n            for redundancy within a single Availability Zone in an Amazon Web Services Region .\n            Valid values are the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SINGLE_AZ_1</code>- (Default) Creates file systems with throughput capacities of 64 - 4,096 MBps.\n                <code>Single_AZ_1</code> is available in all Amazon Web Services Regions where Amazon FSx \n                for OpenZFS is available.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SINGLE_AZ_2</code>- Creates file systems with throughput capacities of 160 - 10,240 MB/s\n                using an NVMe L2ARC cache. <code>Single_AZ_2</code> is available only in the US East (N. Virginia), US East (Ohio), \n                US West (Oregon), and Europe (Ireland) Amazon Web Services Regions.</p>\n            </li>\n         </ul>\n         <p>For more information, see: <a href=\"https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/availability-durability.html#available-aws-regions\">Deployment type availability</a>\n            and <a href=\"https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/performance.html#zfs-fs-performance\">File system performance</a>\n            in the <i>Amazon FSx for OpenZFS User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3161,7 +3204,7 @@
                 "AutomaticBackupRetentionDays": {
                     "target": "com.amazonaws.fsx#AutomaticBackupRetentionDays",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of days to retain automatic backups. The default is to retain backups for 7\n            days. Setting this value to 0 disables the creation of automatic backups. The maximum\n            retention period for backups is 90 days.</p>"
+                        "smithy.api#documentation": "<p>The number of days to retain automatic backups. Setting this property to\n            <code>0</code> disables automatic backups. You can retain automatic backups for a\n            maximum of 90 days. The default is <code>30</code>.</p>"
                     }
                 },
                 "CopyTagsToBackups": {
@@ -4378,6 +4421,19 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Deletes an Amazon FSx backup. After deletion, the backup no longer exists, and\n            its data is gone.</p>\n         <p>The <code>DeleteBackup</code> call returns instantly. The backup won't show up in\n            later <code>DescribeBackups</code> calls.</p>\n         <important>\n            <p>The data in a deleted backup is also deleted and can't be recovered by any\n                means.</p>\n         </important>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To delete a backup",
+                        "documentation": "This operation deletes an Amazon FSx file system backup.",
+                        "input": {
+                            "BackupId": "backup-03e3c82e0183b7b6b"
+                        },
+                        "output": {
+                            "BackupId": "backup-03e3c82e0183b7b6b",
+                            "Lifecycle": "DELETED"
+                        }
+                    }
+                ],
                 "smithy.api#idempotent": {}
             }
         },
@@ -4609,6 +4665,19 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Deletes a file system. After deletion, the file system no longer exists, and its data\n            is gone. Any existing automatic backups and snapshots are also deleted.</p>\n         <p>To delete an Amazon FSx for NetApp ONTAP file system, first delete all the\n            volumes and storage virtual machines (SVMs) on the file system. Then provide a\n                <code>FileSystemId</code> value to the <code>DeleFileSystem</code> operation.</p>\n         <p>By default, when you delete an Amazon FSx for Windows File Server file system,\n            a final backup is created upon deletion. This final backup isn't subject to the file\n            system's retention policy, and must be manually deleted.</p>\n         <p>The <code>DeleteFileSystem</code> operation returns while the file system has the\n                <code>DELETING</code> status. You can check the file system deletion status by\n            calling the <a href=\"https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeFileSystems.html\">DescribeFileSystems</a> operation, which returns a list of file systems in your\n            account. If you pass the file system ID for a deleted file system, the\n                <code>DescribeFileSystems</code> operation returns a <code>FileSystemNotFound</code>\n            error.</p>\n         <note>\n            <p>If a data repository task is in a <code>PENDING</code> or <code>EXECUTING</code> state,\n                deleting an Amazon FSx for Lustre file system will fail with an HTTP status\n                code 400 (Bad Request).</p>\n         </note>\n         <important>\n            <p>The data in a deleted file system is also deleted and can't be recovered by\n                any means.</p>\n         </important>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To delete a file system",
+                        "documentation": "This operation deletes an Amazon FSx file system.",
+                        "input": {
+                            "FileSystemId": "fs-0498eed5fe91001ec"
+                        },
+                        "output": {
+                            "FileSystemId": "fs-0498eed5fe91001ec",
+                            "Lifecycle": "DELETING"
+                        }
+                    }
+                ],
                 "smithy.api#idempotent": {}
             }
         },
@@ -7225,6 +7294,23 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Lists tags for Amazon FSx resources.</p>\n         <p>When retrieving all tags, you can optionally specify the <code>MaxResults</code>\n            parameter to limit the number of tags in a response. If more tags remain, Amazon FSx\n            returns a <code>NextToken</code> value in the response. In this case, send a later\n            request with the <code>NextToken</code> request parameter set to the value of\n                <code>NextToken</code> from the last response.</p>\n         <p>This action is used in an iterative process to retrieve a list of your tags.\n                <code>ListTagsForResource</code> is called first without a\n            <code>NextToken</code>value. Then the action continues to be called with the\n                <code>NextToken</code> parameter set to the value of the last <code>NextToken</code>\n            value until a response has no <code>NextToken</code>.</p>\n         <p>When using this action, keep the following in mind:</p>\n         <ul>\n            <li>\n               <p>The implementation might return fewer than <code>MaxResults</code> file\n                    system descriptions while still including a <code>NextToken</code>\n                    value.</p>\n            </li>\n            <li>\n               <p>The order of tags returned in the response of one\n                        <code>ListTagsForResource</code> call and the order of tags returned across\n                    the responses of a multi-call iteration is unspecified.</p>\n            </li>\n         </ul>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To list tags for a resource",
+                        "documentation": "This operation lists tags for an Amazon FSx resource.",
+                        "input": {
+                            "ResourceARN": "arn:aws:fsx:us-east-1:012345678912:file-system/fs-0498eed5fe91001ec"
+                        },
+                        "output": {
+                            "Tags": [
+                                {
+                                    "Key": "Name",
+                                    "Value": "MyFileSystem"
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -9713,6 +9799,21 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Tags an Amazon FSx resource.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To tag a resource",
+                        "documentation": "This operation tags an Amazon FSx resource.",
+                        "input": {
+                            "ResourceARN": "arn:aws:fsx:us-east-1:012345678912:file-system/fs-0498eed5fe91001ec",
+                            "Tags": [
+                                {
+                                    "Key": "Name",
+                                    "Value": "MyFileSystem"
+                                }
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#idempotent": {}
             }
         },
@@ -9894,6 +9995,18 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>This action removes a tag from an Amazon FSx resource.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To untag a resource",
+                        "documentation": "This operation untags an Amazon FSx resource.",
+                        "input": {
+                            "ResourceARN": "arn:aws:fsx:us-east-1:012345678912:file-system/fs-0498eed5fe91001ec",
+                            "TagKeys": [
+                                "Name"
+                            ]
+                        }
+                    }
+                ],
                 "smithy.api#idempotent": {}
             }
         },
@@ -10144,7 +10257,10 @@
                     "target": "com.amazonaws.fsx#DailyTime"
                 },
                 "AutomaticBackupRetentionDays": {
-                    "target": "com.amazonaws.fsx#AutomaticBackupRetentionDays"
+                    "target": "com.amazonaws.fsx#AutomaticBackupRetentionDays",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of days to retain automatic backups. Setting this property to\n            <code>0</code> disables automatic backups. You can retain automatic backups for a\n            maximum of 90 days. The default is <code>0</code>.</p>"
+                    }
                 },
                 "AutoImportPolicy": {
                     "target": "com.amazonaws.fsx#AutoImportPolicyType",
@@ -10340,7 +10456,7 @@
                 "AutomaticBackupRetentionDays": {
                     "target": "com.amazonaws.fsx#AutomaticBackupRetentionDays",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of days to retain automatic daily backups. Setting this to zero (0) disables automatic daily\n            backups. You can retain automatic daily backups for a maximum of 90 days. For more information, see\n            <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/using-backups.html#automatic-backups\">Working with Automatic Daily Backups</a>.</p>"
+                        "smithy.api#documentation": "<p>The number of days to retain automatic backups. Setting this property to\n            <code>0</code> disables automatic backups. You can retain automatic backups for a\n            maximum of 90 days. The default is <code>30</code>. For more information, see\n            <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/using-backups.html#automatic-backups\">Working with Automatic Daily Backups</a>.</p>"
                     }
                 },
                 "ThroughputCapacity": {

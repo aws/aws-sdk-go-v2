@@ -1,3 +1,7 @@
+# v1.17.0 (2023-06-28)
+
+* **Feature**: Support for new runtime environment in Kinesis Data Analytics Studio: Zeppelin-0.10, Apache Flink-1.15
+
 # v1.16.15 (2023-06-15)
 
 * No change notes available for this release.

@@ -42,6 +42,11 @@ type GetRecordInput struct {
 	// This member is required.
 	RecordIdentifierValueAsString *string
 
+	// Parameter to request ExpiresAt in response. If Enabled , BatchGetRecord will
+	// return the value of ExpiresAt , if it is not null. If Disabled and null,
+	// BatchGetRecord will return null.
+	ExpirationTimeResponse types.ExpirationTimeResponse
+
 	// List of names of Features to be retrieved. If not specified, the latest value
 	// for all the Features are returned.
 	FeatureNames []string
@@ -50,6 +55,9 @@ type GetRecordInput struct {
 }
 
 type GetRecordOutput struct {
+
+	// The ExpiresAt ISO string of the requested record.
+	ExpiresAt *string
 
 	// The record you requested. A list of FeatureValues .
 	Record []types.FeatureValue

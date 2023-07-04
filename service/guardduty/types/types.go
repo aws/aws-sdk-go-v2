@@ -1251,6 +1251,10 @@ type KubernetesUserDetails struct {
 	// The groups that include the user who called the Kubernetes API.
 	Groups []string
 
+	// Entity that assumes the IAM role when Kubernetes RBAC permissions are assigned
+	// to that role.
+	SessionName []string
+
 	// The user ID of the user who called the Kubernetes API.
 	Uid *string
 

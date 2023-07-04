@@ -211,6 +211,26 @@ func (MediaUriType) Values() []MediaUriType {
 	}
 }
 
+type RecorderStatus string
+
+// Enum values for RecorderStatus
+const (
+	RecorderStatusSuccess     RecorderStatus = "SUCCESS"
+	RecorderStatusUserError   RecorderStatus = "USER_ERROR"
+	RecorderStatusSystemError RecorderStatus = "SYSTEM_ERROR"
+)
+
+// Values returns all known values for RecorderStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RecorderStatus) Values() []RecorderStatus {
+	return []RecorderStatus{
+		"SUCCESS",
+		"USER_ERROR",
+		"SYSTEM_ERROR",
+	}
+}
+
 type Status string
 
 // Enum values for Status
@@ -255,12 +275,13 @@ type SyncStatus string
 
 // Enum values for SyncStatus
 const (
-	SyncStatusSyncing      SyncStatus = "SYNCING"
-	SyncStatusAcknowledged SyncStatus = "ACKNOWLEDGED"
-	SyncStatusInSync       SyncStatus = "IN_SYNC"
-	SyncStatusSyncFailed   SyncStatus = "SYNC_FAILED"
-	SyncStatusDeleting     SyncStatus = "DELETING"
-	SyncStatusDeleteFailed SyncStatus = "DELETE_FAILED"
+	SyncStatusSyncing              SyncStatus = "SYNCING"
+	SyncStatusAcknowledged         SyncStatus = "ACKNOWLEDGED"
+	SyncStatusInSync               SyncStatus = "IN_SYNC"
+	SyncStatusSyncFailed           SyncStatus = "SYNC_FAILED"
+	SyncStatusDeleting             SyncStatus = "DELETING"
+	SyncStatusDeleteFailed         SyncStatus = "DELETE_FAILED"
+	SyncStatusDeletingAcknowledged SyncStatus = "DELETING_ACKNOWLEDGED"
 )
 
 // Values returns all known values for SyncStatus. Note that this can be expanded
@@ -274,6 +295,7 @@ func (SyncStatus) Values() []SyncStatus {
 		"SYNC_FAILED",
 		"DELETING",
 		"DELETE_FAILED",
+		"DELETING_ACKNOWLEDGED",
 	}
 }
 
@@ -293,5 +315,25 @@ func (UpdateDataRetentionOperation) Values() []UpdateDataRetentionOperation {
 	return []UpdateDataRetentionOperation{
 		"INCREASE_DATA_RETENTION",
 		"DECREASE_DATA_RETENTION",
+	}
+}
+
+type UploaderStatus string
+
+// Enum values for UploaderStatus
+const (
+	UploaderStatusSuccess     UploaderStatus = "SUCCESS"
+	UploaderStatusUserError   UploaderStatus = "USER_ERROR"
+	UploaderStatusSystemError UploaderStatus = "SYSTEM_ERROR"
+)
+
+// Values returns all known values for UploaderStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (UploaderStatus) Values() []UploaderStatus {
+	return []UploaderStatus{
+		"SUCCESS",
+		"USER_ERROR",
+		"SYSTEM_ERROR",
 	}
 }

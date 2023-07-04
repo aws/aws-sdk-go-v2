@@ -18,7 +18,15 @@ import (
 // If you ban a user who is already part of a channel, that user is automatically
 // kicked from the channel. The x-amz-chime-bearer request header is mandatory.
 // Use the AppInstanceUserArn of the user that makes the API call as the value in
-// the header.
+// the header. This API is is no longer supported and will not be updated. We
+// recommend using the latest version, CreateChannelBan (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_CreateChannelBan.html)
+// , in the Amazon Chime SDK. Using the latest version requires migrating to a
+// dedicated namespace. For more information, refer to Migrating from the Amazon
+// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
+// in the Amazon Chime SDK Developer Guide.
+//
+// Deprecated: Replaced by CreateChannelBan in the Amazon Chime SDK Messaging
+// Namespace
 func (c *Client) CreateChannelBan(ctx context.Context, params *CreateChannelBanInput, optFns ...func(*Options)) (*CreateChannelBanOutput, error) {
 	if params == nil {
 		params = &CreateChannelBanInput{}

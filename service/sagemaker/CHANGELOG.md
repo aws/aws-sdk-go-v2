@@ -1,3 +1,23 @@
+# v1.91.0 (2023-07-03)
+
+* **Feature**: SageMaker Inference Recommender now accepts new fields SupportedEndpointType and ServerlessConfiguration to support serverless endpoints.
+
+# v1.90.0 (2023-06-30)
+
+* **Feature**: This release adds support for rolling deployment in SageMaker Inference.
+
+# v1.89.0 (2023-06-29)
+
+* **Feature**: Adding support for timeseries forecasting in the CreateAutoMLJobV2 API.
+
+# v1.88.0 (2023-06-28)
+
+* **Feature**: This release adds support for Model Cards Model Registry integration.
+
+# v1.87.0 (2023-06-27)
+
+* **Feature**: Introducing TTL for online store records in feature groups.
+
 # v1.86.0 (2023-06-21)
 
 * **Feature**: This release provides support in SageMaker for output files in training jobs to be uploaded without compression and enable customer to deploy uncompressed model from S3 to real-time inference Endpoints. In addition, ml.trn1n.32xlarge is added to supported instance type list in training job.

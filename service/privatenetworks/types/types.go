@@ -43,7 +43,10 @@ type Address struct {
 	// The company name for this address.
 	Company *string
 
-	// The phone number for this address.
+	// The recipient's email address.
+	EmailAddress *string
+
+	// The recipient's phone number.
 	PhoneNumber *string
 
 	// The second line of the street address.
@@ -51,6 +54,58 @@ type Address struct {
 
 	// The third line of the street address.
 	Street3 *string
+
+	noSmithyDocumentSerde
+}
+
+// Determines the duration and renewal status of the commitment period for a radio
+// unit. For pricing, see Amazon Web Services Private 5G Pricing (http://aws.amazon.com/private5g/pricing)
+// .
+type CommitmentConfiguration struct {
+
+	// Determines whether the commitment period for a radio unit is set to
+	// automatically renew for an additional 1 year after your current commitment
+	// period expires. Set to True , if you want your commitment period to
+	// automatically renew. Set to False if you do not want your commitment to
+	// automatically renew. You can do the following:
+	//   - Set a 1-year commitment to automatically renew for an additional 1 year.
+	//   The hourly rate for the additional year will continue to be the same as your
+	//   existing 1-year rate.
+	//   - Set a 3-year commitment to automatically renew for an additional 1 year.
+	//   The hourly rate for the additional year will continue to be the same as your
+	//   existing 3-year rate.
+	//   - Turn off a previously-enabled automatic renewal on a 1-year or 3-year
+	//   commitment.
+	// You cannot use the automatic-renewal option for a 60-day commitment.
+	//
+	// This member is required.
+	AutomaticRenewal *bool
+
+	// The duration of the commitment period for the radio unit. You can choose a
+	// 60-day, 1-year, or 3-year period.
+	//
+	// This member is required.
+	CommitmentLength CommitmentLength
+
+	noSmithyDocumentSerde
+}
+
+// Shows the duration, the date and time that the contract started and ends, and
+// the renewal status of the commitment period for the radio unit.
+type CommitmentInformation struct {
+
+	// The duration and renewal status of the commitment period for the radio unit.
+	//
+	// This member is required.
+	CommitmentConfiguration *CommitmentConfiguration
+
+	// The date and time that the commitment period ends. If you do not cancel or
+	// renew the commitment before the expiration date, you will be billed at the
+	// 60-day-commitment rate.
+	ExpiresOn *time.Time
+
+	// The date and time that the commitment period started.
+	StartAt *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -140,6 +195,11 @@ type NetworkResource struct {
 
 	// The attributes of the network resource.
 	Attributes []NameValuePair
+
+	// Information about the commitment period for the radio unit. Shows the duration,
+	// the date and time that the contract started and ends, and the renewal status of
+	// the commitment period.
+	CommitmentInformation *CommitmentInformation
 
 	// The creation time of the network resource.
 	CreatedAt *time.Time
@@ -276,11 +336,34 @@ type Order struct {
 	// The Amazon Resource Name (ARN) of the order.
 	OrderArn *string
 
+	// A list of the network resources placed in the order.
+	OrderedResources []OrderedResourceDefinition
+
 	// The shipping address of the order.
 	ShippingAddress *Address
 
 	// The tracking information of the order.
 	TrackingInformation []TrackingInformation
+
+	noSmithyDocumentSerde
+}
+
+// Details of the network resources in the order.
+type OrderedResourceDefinition struct {
+
+	// The number of network resources in the order.
+	//
+	// This member is required.
+	Count *int32
+
+	// The type of network resource in the order.
+	//
+	// This member is required.
+	Type NetworkResourceDefinitionType
+
+	// The duration and renewal status of the commitment period for each radio unit in
+	// the order. Does not show details if the resource type is DEVICE_IDENTIFIER.
+	CommitmentConfiguration *CommitmentConfiguration
 
 	noSmithyDocumentSerde
 }

@@ -13,8 +13,8 @@ import (
 )
 
 // Edit or change an OpsItem. You must have permission in Identity and Access
-// Management (IAM) to update an OpsItem. For more information, see Getting
-// started with OpsCenter (https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html)
+// Management (IAM) to update an OpsItem. For more information, see Set up
+// OpsCenter (https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-setup.html)
 // in the Amazon Web Services Systems Manager User Guide. Operations engineers and
 // IT professionals use Amazon Web Services Systems Manager OpsCenter to view,
 // investigate, and remediate operational issues impacting the performance and
@@ -78,7 +78,7 @@ type UpdateOpsItemInput struct {
 	// OperationalData to specify a related resource in the request. Use the
 	// /aws/automations key in OperationalData to associate an Automation runbook with
 	// the OpsItem. To view Amazon Web Services CLI example commands that use these
-	// keys, see Creating OpsItems manually (https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-creating-OpsItems.html#OpsCenter-manually-create-OpsItems)
+	// keys, see Creating OpsItems manually (https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-manually-create-OpsItems.html)
 	// in the Amazon Web Services Systems Manager User Guide.
 	OperationalData map[string]types.OpsItemDataValue
 
@@ -108,7 +108,7 @@ type UpdateOpsItemInput struct {
 	Severity *string
 
 	// The OpsItem status. Status can be Open , In Progress , or Resolved . For more
-	// information, see Editing OpsItem details (https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-working-with-OpsItems.html#OpsCenter-working-with-OpsItems-editing-details)
+	// information, see Editing OpsItem details (https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-working-with-OpsItems-editing-details.html)
 	// in the Amazon Web Services Systems Manager User Guide.
 	Status types.OpsItemStatus
 

@@ -1,3 +1,7 @@
+# v1.29.3 (2023-06-23)
+
+* **Documentation**: Update to Amazon FSx documentation.
+
 # v1.29.2 (2023-06-15)
 
 * No change notes available for this release.

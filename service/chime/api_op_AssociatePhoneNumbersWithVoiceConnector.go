@@ -11,7 +11,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates phone numbers with the specified Amazon Chime Voice Connector.
+// Associates phone numbers with the specified Amazon Chime Voice Connector. This
+// API is is no longer supported and will not be updated. We recommend using the
+// latest version, AssociatePhoneNumbersWithVoiceConnector (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_AssociatePhoneNumbersWithVoiceConnector.html)
+// , in the Amazon Chime SDK. Using the latest version requires migrating to a
+// dedicated namespace. For more information, refer to Migrating from the Amazon
+// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
+// in the Amazon Chime SDK Developer Guide.
+//
+// Deprecated: Replaced by AssociatePhoneNumbersWithVoiceConnector in the Amazon
+// Chime SDK Voice Namespace
 func (c *Client) AssociatePhoneNumbersWithVoiceConnector(ctx context.Context, params *AssociatePhoneNumbersWithVoiceConnectorInput, optFns ...func(*Options)) (*AssociatePhoneNumbersWithVoiceConnectorOutput, error) {
 	if params == nil {
 		params = &AssociatePhoneNumbersWithVoiceConnectorInput{}

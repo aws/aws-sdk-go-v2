@@ -1,3 +1,11 @@
+# v1.46.0 (2023-06-28)
+
+* **Feature**: Amazon Relational Database Service (RDS) now supports joining a RDS for SQL Server instance to a self-managed Active Directory.
+
+# v1.45.3 (2023-06-23)
+
+* **Documentation**: Documentation improvements for create, describe, and modify DB clusters and DB instances.
+
 # v1.45.2 (2023-06-15)
 
 * No change notes available for this release.

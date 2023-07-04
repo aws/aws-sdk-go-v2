@@ -428,6 +428,15 @@ func awsRestjson1_deserializeOpDocumentGetRecordOutput(v **GetRecordOutput, valu
 
 	for key, value := range shape {
 		switch key {
+		case "ExpiresAt":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExpiresAt to be of type string, got %T instead", value)
+				}
+				sv.ExpiresAt = ptr.String(jtv)
+			}
+
 		case "Record":
 			if err := awsRestjson1_deserializeDocumentRecord(&sv.Record, value); err != nil {
 				return err
@@ -933,6 +942,15 @@ func awsRestjson1_deserializeDocumentBatchGetRecordResultDetail(v **types.BatchG
 
 	for key, value := range shape {
 		switch key {
+		case "ExpiresAt":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExpiresAt to be of type string, got %T instead", value)
+				}
+				sv.ExpiresAt = ptr.String(jtv)
+			}
+
 		case "FeatureGroupName":
 			if value != nil {
 				jtv, ok := value.(string)

@@ -1708,6 +1708,9 @@ type CrawlerTargets struct {
 	// Specifies Amazon DynamoDB targets.
 	DynamoDBTargets []DynamoDBTarget
 
+	// Specifies Apache Iceberg data store targets.
+	IcebergTargets []IcebergTarget
+
 	// Specifies JDBC targets.
 	JdbcTargets []JdbcTarget
 
@@ -3468,6 +3471,30 @@ type GrokClassifier struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies an Apache Iceberg data source where Iceberg tables are stored in
+// Amazon S3.
+type IcebergTarget struct {
+
+	// The name of the connection to use to connect to the Iceberg target.
+	ConnectionName *string
+
+	// A list of glob patterns used to exclude from the crawl. For more information,
+	// see Catalog Tables with a Crawler (https://docs.aws.amazon.com/glue/latest/dg/add-crawler.html)
+	// .
+	Exclusions []string
+
+	// The maximum depth of Amazon S3 paths that the crawler can traverse to discover
+	// the Iceberg metadata folder in your Amazon S3 path. Used to limit the crawler
+	// run time.
+	MaximumTraversalDepth *int32
+
+	// One or more Amazon S3 paths that contains Iceberg metadata folders as
+	// s3://bucket/prefix .
+	Paths []string
+
+	noSmithyDocumentSerde
+}
+
 // Specifies configuration properties for an importing labels task run.
 type ImportLabelsTaskRunProperties struct {
 
@@ -4317,6 +4344,13 @@ type KafkaStreamingSourceOptions struct {
 	// are "earliest" or "latest" . The default value is "latest" .
 	StartingOffsets *string
 
+	// The timestamp of the record in the Kafka topic to start reading data from. The
+	// possible values are a timestamp string in UTC format of the pattern
+	// yyyy-mm-ddTHH:MM:SSZ (where Z represents a UTC timezone offset with a +/-. For
+	// example: "2023-04-04T08:00:00+08:00"). Only one of StartingTimestamp or
+	// StartingOffsets must be set.
+	StartingTimestamp *time.Time
+
 	// A Java regex string that identifies the topic list to subscribe to. You must
 	// specify at least one of "topicName" , "assign" or "subscribePattern" .
 	SubscribePattern *string
@@ -4425,9 +4459,19 @@ type KinesisStreamingSourceOptions struct {
 	RoleSessionName *string
 
 	// The starting position in the Kinesis data stream to read data from. The
-	// possible values are "latest" , "trim_horizon" , or "earliest" . The default
-	// value is "latest" .
+	// possible values are "latest" , "trim_horizon" , "earliest" , or a timestamp
+	// string in UTC format in the pattern yyyy-mm-ddTHH:MM:SSZ (where Z represents a
+	// UTC timezone offset with a +/-. For example: "2023-04-04T08:00:00-04:00"). The
+	// default value is "latest" . Note: Using a value that is a timestamp string in
+	// UTC format for "startingPosition" is supported only for Glue version 4.0 or
+	// later.
 	StartingPosition StartingPosition
+
+	// The timestamp of the record in the Kinesis data stream to start reading data
+	// from. The possible values are a timestamp string in UTC format of the pattern
+	// yyyy-mm-ddTHH:MM:SSZ (where Z represents a UTC timezone offset with a +/-. For
+	// example: "2023-04-04T08:00:00+08:00").
+	StartingTimestamp *time.Time
 
 	// The Amazon Resource Name (ARN) of the Kinesis data stream.
 	StreamArn *string

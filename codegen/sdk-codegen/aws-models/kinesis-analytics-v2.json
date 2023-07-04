@@ -90,6 +90,9 @@
                         "smithy.api#documentation": "<p>A value you use to implement strong concurrency for application updates. You must\n      provide the <code>CurrentApplicationVersionId</code> or the <code>ConditionalToken</code>. You\n      get the application's current <code>ConditionalToken</code> using <a>DescribeApplication</a>. For better concurrency support, use the\n        <code>ConditionalToken</code> parameter instead of\n      <code>CurrentApplicationVersionId</code>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#AddApplicationCloudWatchLoggingOptionResponse": {
@@ -113,6 +116,9 @@
                         "smithy.api#documentation": "<p>The descriptions of the current CloudWatch logging options for the Kinesis Data Analytics application.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#AddApplicationInput": {
@@ -207,6 +213,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#AddApplicationInputProcessingConfigurationResponse": {
@@ -236,6 +245,9 @@
                         "smithy.api#documentation": "<p>The description of the preprocessor that executes on records in this input before the application's code is run.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#AddApplicationInputRequest": {
@@ -262,6 +274,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#AddApplicationInputResponse": {
@@ -285,6 +300,9 @@
                         "smithy.api#documentation": "<p>Describes the application input configuration. \n       \n      \n    </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#AddApplicationOutput": {
@@ -340,6 +358,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#AddApplicationOutputResponse": {
@@ -363,6 +384,9 @@
                         "smithy.api#documentation": "<p>Describes the application output configuration.\n      For more information, \n      see <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html\">Configuring Application Output</a>. \n      \n    </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#AddApplicationReferenceDataSource": {
@@ -418,6 +442,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#AddApplicationReferenceDataSourceResponse": {
@@ -441,6 +468,9 @@
                         "smithy.api#documentation": "<p>Describes reference data sources configured for the application. \n      \n      \n      \n    </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#AddApplicationVpcConfiguration": {
@@ -501,6 +531,9 @@
                         "smithy.api#documentation": "<p>A value you use to implement strong concurrency for application updates. You must\n      provide the <code>ApplicationVersionID</code> or the <code>ConditionalToken</code>. You get\n      the application's current <code>ConditionalToken</code> using <a>DescribeApplication</a>. For better concurrency support, use the\n        <code>ConditionalToken</code> parameter instead of\n      <code>CurrentApplicationVersionId</code>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#AddApplicationVpcConfigurationResponse": {
@@ -524,6 +557,9 @@
                         "smithy.api#documentation": "<p>The parameters of the new VPC configuration.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#ApplicationCodeConfiguration": {
@@ -1761,6 +1797,9 @@
                         "smithy.api#documentation": "<p>The duration in seconds for which the returned URL will be valid.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#CreateApplicationPresignedUrlResponse": {
@@ -1772,6 +1811,9 @@
                         "smithy.api#documentation": "<p>The URL of the extension.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#CreateApplicationRequest": {
@@ -1828,6 +1870,9 @@
                         "smithy.api#documentation": "<p>Use the <code>STREAMING</code> mode to create a Kinesis Data Analytics For Flink application. To create a Kinesis Data Analytics Studio notebook, use the \n    <code>INTERACTIVE</code> mode.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#CreateApplicationResponse": {
@@ -1840,6 +1885,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#CreateApplicationSnapshot": {
@@ -1894,11 +1942,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#CreateApplicationSnapshotResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.kinesisanalyticsv2#CustomArtifactConfiguration": {
             "type": "structure",
@@ -2074,6 +2128,9 @@
                         "smithy.api#documentation": "<p>A value you use to implement strong concurrency for application updates. You must provide\n      the <code>CurrentApplicationVersionId</code> or the <code>ConditionalToken</code>. You get the\n      application's current <code>ConditionalToken</code> using <a>DescribeApplication</a>. For better concurrency support, use the <code>ConditionalToken</code> parameter instead of\n        <code>CurrentApplicationVersionId</code>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#DeleteApplicationCloudWatchLoggingOptionResponse": {
@@ -2097,6 +2154,9 @@
                         "smithy.api#documentation": "<p>The descriptions of the remaining CloudWatch logging options for the application.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#DeleteApplicationInputProcessingConfiguration": {
@@ -2152,6 +2212,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#DeleteApplicationInputProcessingConfigurationResponse": {
@@ -2169,6 +2232,9 @@
                         "smithy.api#documentation": "<p>The current application version ID.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#DeleteApplicationOutput": {
@@ -2224,6 +2290,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#DeleteApplicationOutputResponse": {
@@ -2241,6 +2310,9 @@
                         "smithy.api#documentation": "<p>The current application version ID.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#DeleteApplicationReferenceDataSource": {
@@ -2296,6 +2368,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#DeleteApplicationReferenceDataSourceResponse": {
@@ -2313,6 +2388,9 @@
                         "smithy.api#documentation": "<p>The updated version ID of the application.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#DeleteApplicationRequest": {
@@ -2332,11 +2410,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#DeleteApplicationResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.kinesisanalyticsv2#DeleteApplicationSnapshot": {
             "type": "operation",
@@ -2394,11 +2478,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#DeleteApplicationSnapshotResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.kinesisanalyticsv2#DeleteApplicationVpcConfiguration": {
             "type": "operation",
@@ -2458,6 +2548,9 @@
                         "smithy.api#documentation": "<p>A value you use to implement strong concurrency for application updates. You must provide\n      the <code>CurrentApplicationVersionId</code> or the <code>ConditionalToken</code>. You get the\n      application's current <code>ConditionalToken</code> using <a>DescribeApplication</a>. For better concurrency support, use the <code>ConditionalToken</code> parameter instead of\n        <code>CurrentApplicationVersionId</code>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#DeleteApplicationVpcConfigurationResponse": {
@@ -2475,6 +2568,9 @@
                         "smithy.api#documentation": "<p>The updated version ID of the application.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#DeployAsApplicationConfiguration": {
@@ -2560,6 +2656,9 @@
                         "smithy.api#documentation": "<p>Displays verbose information about a Kinesis Data Analytics application, including the application's job plan.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#DescribeApplicationResponse": {
@@ -2572,6 +2671,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#DescribeApplicationSnapshot": {
@@ -2614,6 +2716,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#DescribeApplicationSnapshotResponse": {
@@ -2626,6 +2731,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#DescribeApplicationVersion": {
@@ -2668,6 +2776,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#DescribeApplicationVersionResponse": {
@@ -2676,6 +2787,9 @@
                 "ApplicationVersionDetail": {
                     "target": "com.amazonaws.kinesisanalyticsv2#ApplicationDetail"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#DestinationSchema": {
@@ -2759,6 +2873,9 @@
                         "smithy.api#documentation": "<p>The <a>InputProcessingConfiguration</a> to use to preprocess the records \n      before discovering the schema of the records.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#DiscoverInputSchemaResponse": {
@@ -2788,6 +2905,9 @@
                         "smithy.api#documentation": "<p>The raw stream data that was sampled to infer the schema.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#EnvironmentProperties": {
@@ -3937,8 +4057,8 @@
                             },
                             "params": {
                                 "Region": "af-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3950,8 +4070,8 @@
                             },
                             "params": {
                                 "Region": "ap-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3963,8 +4083,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3976,8 +4096,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3989,8 +4109,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4002,8 +4122,8 @@
                             },
                             "params": {
                                 "Region": "ap-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4015,8 +4135,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4028,8 +4148,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4041,8 +4161,8 @@
                             },
                             "params": {
                                 "Region": "ca-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4054,8 +4174,8 @@
                             },
                             "params": {
                                 "Region": "eu-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4067,8 +4187,8 @@
                             },
                             "params": {
                                 "Region": "eu-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4080,8 +4200,8 @@
                             },
                             "params": {
                                 "Region": "eu-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4093,8 +4213,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4106,8 +4226,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4119,8 +4239,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4132,8 +4252,8 @@
                             },
                             "params": {
                                 "Region": "me-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4145,8 +4265,8 @@
                             },
                             "params": {
                                 "Region": "sa-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4158,8 +4278,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4171,8 +4291,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4184,8 +4304,8 @@
                             },
                             "params": {
                                 "Region": "us-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4197,8 +4317,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4210,8 +4330,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4223,8 +4343,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4236,8 +4356,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4249,8 +4369,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4262,8 +4382,8 @@
                             },
                             "params": {
                                 "Region": "cn-northwest-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4275,8 +4395,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4288,8 +4408,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4301,8 +4421,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4314,8 +4434,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4327,8 +4447,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4340,8 +4460,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4353,8 +4473,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4366,8 +4486,19 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4379,8 +4510,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4392,8 +4534,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4405,8 +4558,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -4418,8 +4582,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -4431,8 +4595,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -4444,8 +4608,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -4456,8 +4620,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -4468,9 +4632,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -4787,6 +4957,9 @@
                         "smithy.api#documentation": "<p>Use this parameter if you receive a <code>NextToken</code> response in a previous request that indicates that there is more \n      output available. Set it to the value of the previous call's <code>NextToken</code> response to indicate where the output should \n      continue from. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#ListApplicationSnapshotsResponse": {
@@ -4804,6 +4977,9 @@
                         "smithy.api#documentation": "<p>The token for the next set of results, or <code>null</code> if there are no additional results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#ListApplicationVersions": {
@@ -4860,6 +5036,9 @@
                         "smithy.api#documentation": "<p>If a previous invocation of this operation returned a pagination token, pass it into this value to retrieve the next set of results. For more information about pagination, see \n      <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/pagination.html\">Using the Amazon Command Line Interface's Pagination Options</a>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#ListApplicationVersionsResponse": {
@@ -4877,6 +5056,9 @@
                         "smithy.api#documentation": "<p>The pagination token for the next set of results, or <code>null</code> if there are no additional results. \n      To retrieve the next set of items, pass this token into a subsequent invocation of this operation. For more information about pagination, see \n      <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/pagination.html\">Using the Amazon Command Line Interface's Pagination Options</a>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#ListApplications": {
@@ -4920,6 +5102,9 @@
                         "smithy.api#documentation": "<p>If a previous command returned a pagination token, \n      pass it into this value to retrieve the next set of results.\n      For more information about pagination, see \n      <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/pagination.html\">Using the Amazon Command Line Interface's Pagination Options</a>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#ListApplicationsResponse": {
@@ -4938,6 +5123,9 @@
                         "smithy.api#documentation": "<p>The pagination token for the next set of results, or <code>null</code> if there are no additional results.\n      Pass this token into a subsequent command to retrieve the next set of items\n      For more information about pagination, see \n      <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/pagination.html\">Using the Amazon Command Line Interface's Pagination Options</a>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#ListSnapshotsInputLimit": {
@@ -4982,6 +5170,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#ListTagsForResourceResponse": {
@@ -4993,6 +5184,9 @@
                         "smithy.api#documentation": "<p>The key-value tags assigned to the application.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#LogLevel": {
@@ -5976,6 +6170,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#RollbackApplicationResponse": {
@@ -5987,6 +6184,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#RunConfiguration": {
@@ -6101,6 +6301,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "FLINK-1_15"
+                    }
+                },
+                "ZEPPELIN_FLINK_3_0": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ZEPPELIN-FLINK-3_0"
                     }
                 }
             }
@@ -6635,11 +6841,17 @@
                         "smithy.api#documentation": "<p>Identifies the run configuration (start parameters) of a Kinesis Data Analytics application.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#StartApplicationResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.kinesisanalyticsv2#StopApplication": {
             "type": "operation",
@@ -6689,11 +6901,17 @@
                         "smithy.api#documentation": "<p>Set to <code>true</code> to force the application to stop. If you set <code>Force</code>\n          to <code>true</code>, Kinesis Data Analytics stops the application without taking a snapshot. \n      </p>\n          <note>\n            <p>Force-stopping your application may lead to data loss or duplication.\n              To prevent data loss or duplicate processing of data during application restarts, \n              we recommend you to take frequent snapshots of your application.</p>\n         </note>\n         <p>You can only force stop a Flink-based Kinesis Data Analytics application. You can't force stop a SQL-based Kinesis Data Analytics application.</p>\n         <p>The application must be in the\n          <code>STARTING</code>, <code>UPDATING</code>, <code>STOPPING</code>, <code>AUTOSCALING</code>, or\n          <code>RUNNING</code> status. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#StopApplicationResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.kinesisanalyticsv2#SubnetId": {
             "type": "string"
@@ -6798,11 +7016,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#TagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.kinesisanalyticsv2#TagValue": {
             "type": "string",
@@ -6931,11 +7155,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#UntagResourceResponse": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.kinesisanalyticsv2#UpdateApplication": {
             "type": "operation",
@@ -7021,6 +7251,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#UpdateApplicationMaintenanceConfigurationResponse": {
@@ -7038,6 +7271,9 @@
                         "smithy.api#documentation": "<p>The application maintenance configuration description after the update.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#UpdateApplicationRequest": {
@@ -7086,6 +7322,9 @@
                         "smithy.api#documentation": "<p>A value you use to implement strong concurrency for application updates. You must\n      provide the <code>CurrentApplicationVersionId</code> or the <code>ConditionalToken</code>. You\n      get the application's current <code>ConditionalToken</code> using <a>DescribeApplication</a>. For better concurrency support, use the\n        <code>ConditionalToken</code> parameter instead of\n      <code>CurrentApplicationVersionId</code>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#UpdateApplicationResponse": {
@@ -7098,6 +7337,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.kinesisanalyticsv2#UrlType": {

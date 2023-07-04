@@ -2567,13 +2567,13 @@
                 "StartingPosition": {
                     "target": "com.amazonaws.lambda#EventSourcePosition",
                     "traits": {
-                        "smithy.api#documentation": "<p>The position in a stream from which to start reading. Required for Amazon Kinesis, Amazon\n      DynamoDB, and Amazon MSK Streams sources. <code>AT_TIMESTAMP</code> is supported only for\n      Amazon Kinesis streams and Amazon DocumentDB.</p>"
+                        "smithy.api#documentation": "<p>The position in a stream from which to start reading. Required for Amazon Kinesis and\n      Amazon DynamoDB Stream event sources. <code>AT_TIMESTAMP</code> is supported only for\n      Amazon Kinesis streams, Amazon DocumentDB, Amazon MSK, and self-managed Apache Kafka.</p>"
                     }
                 },
                 "StartingPositionTimestamp": {
                     "target": "com.amazonaws.lambda#Date",
                     "traits": {
-                        "smithy.api#documentation": "<p>With <code>StartingPosition</code> set to <code>AT_TIMESTAMP</code>, the time from which to start\n      reading.</p>"
+                        "smithy.api#documentation": "<p>With <code>StartingPosition</code> set to <code>AT_TIMESTAMP</code>, the time from which to start\n      reading. <code>StartingPositionTimestamp</code> cannot be in the future.</p>"
                     }
                 },
                 "DestinationConfig": {
@@ -3134,6 +3134,9 @@
                     "target": "com.amazonaws.lambda#InvalidParameterValueException"
                 },
                 {
+                    "target": "com.amazonaws.lambda#ResourceConflictException"
+                },
+                {
                     "target": "com.amazonaws.lambda#ResourceInUseException"
                 },
                 {
@@ -3197,7 +3200,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a Lambda function. To delete a specific function version, use the <code>Qualifier</code> parameter.\n      Otherwise, all versions and aliases are deleted.</p>\n         <p>To delete Lambda event source mappings that invoke a function, use <a>DeleteEventSourceMapping</a>. For Amazon Web Services and resources that invoke your function\n      directly, delete the trigger in the service where you originally configured it.</p>",
+                "smithy.api#documentation": "<p>Deletes a Lambda function. To delete a specific function version, use the <code>Qualifier</code> parameter.\n      Otherwise, all versions and aliases are deleted. This doesn't require the user to have explicit\n      permissions for <a>DeleteAlias</a>.</p>\n         <p>To delete Lambda event source mappings that invoke a function, use <a>DeleteEventSourceMapping</a>. For Amazon Web Services and resources that invoke your function\n      directly, delete the trigger in the service where you originally configured it.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/2015-03-31/functions/{FunctionName}",
@@ -3912,13 +3915,13 @@
                 "StartingPosition": {
                     "target": "com.amazonaws.lambda#EventSourcePosition",
                     "traits": {
-                        "smithy.api#documentation": "<p>The position in a stream from which to start reading. Required for Amazon Kinesis, Amazon DynamoDB, and Amazon MSK stream sources. <code>AT_TIMESTAMP</code> is supported only for Amazon Kinesis\n      streams and Amazon DocumentDB.</p>"
+                        "smithy.api#documentation": "<p>The position in a stream from which to start reading. Required for Amazon Kinesis and\n      Amazon DynamoDB Stream event sources. <code>AT_TIMESTAMP</code> is supported only for\n      Amazon Kinesis streams, Amazon DocumentDB, Amazon MSK, and self-managed Apache Kafka.</p>"
                     }
                 },
                 "StartingPositionTimestamp": {
                     "target": "com.amazonaws.lambda#Date",
                     "traits": {
-                        "smithy.api#documentation": "<p>With <code>StartingPosition</code> set to <code>AT_TIMESTAMP</code>, the time from which to start\n      reading.</p>"
+                        "smithy.api#documentation": "<p>With <code>StartingPosition</code> set to <code>AT_TIMESTAMP</code>, the time from which to start\n      reading. <code>StartingPositionTimestamp</code> cannot be in the future.</p>"
                     }
                 },
                 "BatchSize": {
@@ -10159,7 +10162,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The function's Lambda SnapStart setting. Set <code>ApplyOn</code> to <code>PublishedVersions</code> to create a\n      snapshot of the initialized execution environment when you publish a function version.</p>\n         <p>SnapStart is supported with the <code>java11</code> runtime. For more information, see\n        <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html\">Improving startup performance with Lambda\n        SnapStart</a>.</p>"
+                "smithy.api#documentation": "<p>The function's <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html\">Lambda SnapStart</a> setting. Set <code>ApplyOn</code> to <code>PublishedVersions</code> to create a\n      snapshot of the initialized execution environment when you publish a function version.</p>"
             }
         },
         "com.amazonaws.lambda#SnapStartApplyOn": {

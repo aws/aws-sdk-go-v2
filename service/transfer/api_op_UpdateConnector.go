@@ -45,7 +45,11 @@ type UpdateConnectorInput struct {
 	// provide read and write access to the parent directory of the file location used
 	// in the StartFileTransfer request. Additionally, you need to provide read and
 	// write access to the parent directory of the files that you intend to send with
-	// StartFileTransfer .
+	// StartFileTransfer . If you are using Basic authentication for your AS2
+	// connector, the access role requires the secretsmanager:GetSecretValue
+	// permission for the secret. If the secret is encrypted using a customer-managed
+	// key instead of the Amazon Web Services managed key in Secrets Manager, then the
+	// role also needs the kms:Decrypt permission for that key.
 	AccessRole *string
 
 	// A structure that contains the parameters for a connector object.

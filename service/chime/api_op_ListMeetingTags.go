@@ -11,7 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the tags applied to an Amazon Chime SDK meeting resource.
+// Lists the tags applied to an Amazon Chime SDK meeting resource. This API is is
+// no longer supported and will not be updated. We recommend using the latest
+// version, ListTagsForResource (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_meeting-chime_ListTagsForResource.html)
+// , in the Amazon Chime SDK. Using the latest version requires migrating to a
+// dedicated namespace. For more information, refer to Migrating from the Amazon
+// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
+// in the Amazon Chime SDK Developer Guide.
+//
+// Deprecated: Use ListTagsForResource in the Amazon Chime SDK Meetings Namespace.
 func (c *Client) ListMeetingTags(ctx context.Context, params *ListMeetingTagsInput, optFns ...func(*Options)) (*ListMeetingTagsOutput, error) {
 	if params == nil {
 		params = &ListMeetingTagsInput{}

@@ -11455,6 +11455,17 @@ func awsRestjson1_serializeDocumentListOf__string(v []string, value smithyjson.V
 	return nil
 }
 
+func awsRestjson1_serializeDocumentListOf__TimezoneEstimationMethodsElement(v []types.TimezoneEstimationMethodsElement, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentListOfClosedDaysRules(v []types.ClosedDaysRule, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -13556,6 +13567,13 @@ func awsRestjson1_serializeDocumentWriteJourneyRequest(v *types.WriteJourneyRequ
 	if len(v.State) > 0 {
 		ok := object.Key("State")
 		ok.String(string(v.State))
+	}
+
+	if v.TimezoneEstimationMethods != nil {
+		ok := object.Key("TimezoneEstimationMethods")
+		if err := awsRestjson1_serializeDocumentListOf__TimezoneEstimationMethodsElement(v.TimezoneEstimationMethods, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.WaitForQuietTime {

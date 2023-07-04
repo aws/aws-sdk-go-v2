@@ -10,7 +10,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the proxy configuration from the specified Amazon Chime Voice Connector.
+// Deletes the proxy configuration from the specified Amazon Chime Voice
+// Connector. This API is is no longer supported and will not be updated. We
+// recommend using the latest version, DeleteVoiceProxy (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_DeleteVoiceConnectorProxy.html)
+// , in the Amazon Chime SDK. Using the latest version requires migrating to a
+// dedicated namespace. For more information, refer to Migrating from the Amazon
+// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
+// in the Amazon Chime SDK Developer Guide.
+//
+// Deprecated: Replaced by DeleteVoiceConnectorProxy in the Amazon Chime SDK Voice
+// Namespace
 func (c *Client) DeleteVoiceConnectorProxy(ctx context.Context, params *DeleteVoiceConnectorProxyInput, optFns ...func(*Options)) (*DeleteVoiceConnectorProxyOutput, error) {
 	if params == nil {
 		params = &DeleteVoiceConnectorProxyInput{}

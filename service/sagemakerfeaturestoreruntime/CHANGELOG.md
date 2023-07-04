@@ -1,3 +1,7 @@
+# v1.15.0 (2023-06-27)
+
+* **Feature**: Introducing TTL for online store records for feature groups.
+
 # v1.14.6 (2023-06-15)
 
 * No change notes available for this release.

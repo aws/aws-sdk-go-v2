@@ -17,7 +17,14 @@ import (
 // Amazon Chime SDK Media Regions (https://docs.aws.amazon.com/chime-sdk/latest/dg/chime-sdk-meetings-regions.html)
 // in the Amazon Chime SDK Developer Guide . For more information about the Amazon
 // Chime SDK, see Using the Amazon Chime SDK (https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html)
-// in the Amazon Chime SDK Developer Guide .
+// in the Amazon Chime SDK Developer Guide. This API is is no longer supported and
+// will not be updated. We recommend using the latest version, CreateMeeting (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_meeting-chime_CreateMeeting.html)
+// , in the Amazon Chime SDK. Using the latest version requires migrating to a
+// dedicated namespace. For more information, refer to Migrating from the Amazon
+// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
+// in the Amazon Chime SDK Developer Guide.
+//
+// Deprecated: Replaced by CreateMeeting in the Amazon Chime SDK Meetings Namespace
 func (c *Client) CreateMeeting(ctx context.Context, params *CreateMeetingInput, optFns ...func(*Options)) (*CreateMeetingOutput, error) {
 	if params == nil {
 		params = &CreateMeetingInput{}

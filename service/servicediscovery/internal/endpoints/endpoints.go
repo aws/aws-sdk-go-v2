@@ -362,33 +362,6 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "servicediscovery.sa-east-1.amazonaws.com",
 			},
 			endpoints.EndpointKey{
-				Region: "servicediscovery",
-			}: endpoints.Endpoint{
-				CredentialScope: endpoints.CredentialScope{
-					Region: "ca-central-1",
-				},
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region:  "servicediscovery",
-				Variant: endpoints.FIPSVariant,
-			}: {
-				Hostname: "servicediscovery-fips.ca-central-1.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "ca-central-1",
-				},
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region: "servicediscovery-fips",
-			}: endpoints.Endpoint{
-				Hostname: "servicediscovery-fips.ca-central-1.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "ca-central-1",
-				},
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
 				Region: "us-east-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{

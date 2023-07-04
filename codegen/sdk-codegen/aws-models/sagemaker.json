@@ -400,6 +400,56 @@
                 "target": "com.amazonaws.sagemaker#AgentVersion"
             }
         },
+        "com.amazonaws.sagemaker#AggregationTransformationValue": {
+            "type": "enum",
+            "members": {
+                "Sum": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "sum"
+                    }
+                },
+                "Avg": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "avg"
+                    }
+                },
+                "First": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "first"
+                    }
+                },
+                "Min": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "min"
+                    }
+                },
+                "Max": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "max"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#AggregationTransformations": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.sagemaker#TransformationAttributeName"
+            },
+            "value": {
+                "target": "com.amazonaws.sagemaker#AggregationTransformationValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
         "com.amazonaws.sagemaker#Alarm": {
             "type": "structure",
             "members": {
@@ -2540,13 +2590,13 @@
                 "ChannelType": {
                     "target": "com.amazonaws.sagemaker#AutoMLChannelType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of channel. Defines whether the data are used for training or validation. The\n         default value is <code>training</code>. Channels for <code>training</code> and\n            <code>validation</code> must share the same <code>ContentType</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The type of channel. Defines whether the data are used for training or validation. The\n         default value is <code>training</code>. Channels for <code>training</code> and\n            <code>validation</code> must share the same <code>ContentType</code>\n         </p>\n         <note>\n            <p>The type of channel defaults to <code>training</code> for the time-series forecasting\n            problem type.</p>\n         </note>"
                     }
                 },
                 "ContentType": {
                     "target": "com.amazonaws.sagemaker#ContentType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The content type of the data from the input source. The following are the allowed\n         content types for different problems:</p>\n         <ul>\n            <li>\n               <p>For Tabular problem types: <code>text/csv;header=present</code> or\n                  <code>x-application/vnd.amazon+parquet</code>. The default value is\n                  <code>text/csv;header=present</code>.</p>\n            </li>\n            <li>\n               <p>For ImageClassification: <code>image/png</code>, <code>image/jpeg</code>, or\n                  <code>image/*</code>. The default value is <code>image/*</code>.</p>\n            </li>\n            <li>\n               <p>For TextClassification: <code>text/csv;header=present</code> or\n                  <code>x-application/vnd.amazon+parquet</code>. The default value is\n                  <code>text/csv;header=present</code>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The content type of the data from the input source. The following are the allowed\n         content types for different problems:</p>\n         <ul>\n            <li>\n               <p>For tabular problem types: <code>text/csv;header=present</code> or\n                  <code>x-application/vnd.amazon+parquet</code>. The default value is\n                  <code>text/csv;header=present</code>.</p>\n            </li>\n            <li>\n               <p>For image classification: <code>image/png</code>, <code>image/jpeg</code>, or\n                  <code>image/*</code>. The default value is <code>image/*</code>.</p>\n            </li>\n            <li>\n               <p>For text classification: <code>text/csv;header=present</code> or\n                  <code>x-application/vnd.amazon+parquet</code>. The default value is\n                  <code>text/csv;header=present</code>.</p>\n            </li>\n            <li>\n               <p>For time-series forecasting: <code>text/csv;header=present</code> or\n                  <code>x-application/vnd.amazon+parquet</code>. The default value is\n                  <code>text/csv;header=present</code>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "CompressionType": {
@@ -2572,7 +2622,7 @@
                 "MaxCandidates": {
                     "target": "com.amazonaws.sagemaker#MaxCandidates",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of times a training job is allowed to run.</p>\n         <p>For job V2s (jobs created by calling <code>CreateAutoMLJobV2</code>), the supported\n         value is 1.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of times a training job is allowed to run.</p>\n         <p>For text and image classification, as well as time-series forecasting problem types, the\n         supported value is 1. For tabular problem types, the maximum value is 750.</p>"
                     }
                 },
                 "MaxRuntimePerTrainingJobInSeconds": {
@@ -2658,7 +2708,7 @@
                 "MetricName": {
                     "target": "com.amazonaws.sagemaker#AutoMLMetricEnum",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the objective metric used to measure the predictive quality of a machine\n         learning system. During training, the model's parameters are updated iteratively to\n         optimize its performance based on the feedback provided by the objective metric when\n         evaluating the model on the validation dataset.</p>\n         <p>For the list of all available metrics supported by Autopilot, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-metrics-validation.html#autopilot-metrics\">Autopilot\n            metrics</a>.</p>\n         <p>If you do not specify a metric explicitly, the default behavior is to automatically\n         use:</p>\n         <ul>\n            <li>\n               <p>For tabular problem types:</p>\n               <ul>\n                  <li>\n                     <p>Regression: <code>MSE</code>.</p>\n                  </li>\n                  <li>\n                     <p>Binary classification: <code>F1</code>.</p>\n                  </li>\n                  <li>\n                     <p>Multiclass classification: <code>Accuracy</code>.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For image or text classification problem types: <code>Accuracy</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The name of the objective metric used to measure the predictive quality of a machine\n         learning system. During training, the model's parameters are updated iteratively to\n         optimize its performance based on the feedback provided by the objective metric when\n         evaluating the model on the validation dataset.</p>\n         <p>For the list of all available metrics supported by Autopilot, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-metrics-validation.html#autopilot-metrics\">Autopilot\n            metrics</a>.</p>\n         <p>If you do not specify a metric explicitly, the default behavior is to automatically\n         use:</p>\n         <ul>\n            <li>\n               <p>For tabular problem types:</p>\n               <ul>\n                  <li>\n                     <p>Regression: <code>MSE</code>.</p>\n                  </li>\n                  <li>\n                     <p>Binary classification: <code>F1</code>.</p>\n                  </li>\n                  <li>\n                     <p>Multiclass classification: <code>Accuracy</code>.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For image or text classification problem types: <code>Accuracy</code>\n               </p>\n            </li>\n            <li>\n               <p>For time-series forecasting problem types:\n                  <code>AverageWeightedQuantileLoss</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2793,6 +2843,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "TrainingModels"
+                    }
+                },
+                "PRE_TRAINING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PreTraining"
                     }
                 }
             }
@@ -3010,6 +3066,30 @@
                     "traits": {
                         "smithy.api#enumValue": "RecallMacro"
                     }
+                },
+                "MAPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MAPE"
+                    }
+                },
+                "MASE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASE"
+                    }
+                },
+                "WAPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WAPE"
+                    }
+                },
+                "AVERAGE_WEIGHTED_QUANTILE_LOSS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AverageWeightedQuantileLoss"
+                    }
                 }
             }
         },
@@ -3104,6 +3184,30 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "InferenceLatency"
+                    }
+                },
+                "MAPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MAPE"
+                    }
+                },
+                "MASE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASE"
+                    }
+                },
+                "WAPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WAPE"
+                    }
+                },
+                "AVERAGE_WEIGHTED_QUANTILE_LOSS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AverageWeightedQuantileLoss"
                     }
                 }
             }
@@ -3208,6 +3312,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Settings used to configure an AutoML job V2 for a tabular problem type (regression,\n         classification).</p>"
                     }
+                },
+                "TimeSeriesForecastingJobConfig": {
+                    "target": "com.amazonaws.sagemaker#TimeSeriesForecastingJobConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Settings used to configure an AutoML job V2 for a time-series forecasting problem\n         type.</p>\n         <note>\n            <p>The <code>TimeSeriesForecastingJobConfig</code> problem type is only available in\n            private beta. Contact Amazon Web Services Support or your account manager to learn more\n            about access privileges.</p>\n         </note>"
+                    }
                 }
             },
             "traits": {
@@ -3233,6 +3343,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "Tabular"
+                    }
+                },
+                "TIMESERIES_FORECASTING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TimeSeriesForecasting"
                     }
                 }
             }
@@ -3488,6 +3604,14 @@
                     "traits": {
                         "smithy.api#enumValue": "AWS/Textract/AnalyzeDocument/Forms/V1"
                     }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#BacktestResultsLocation": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
                 }
             }
         },
@@ -3943,6 +4067,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon S3 prefix to the model insight artifacts generated for the AutoML candidate.</p>"
                     }
+                },
+                "BacktestResults": {
+                    "target": "com.amazonaws.sagemaker#BacktestResultsLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 prefix to the accuracy metrics and the inference results observed over the\n         testing window. Available only for the time-series forecasting problem type.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4145,7 +4275,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the endpoint capacity to activate for production.</p>"
+                "smithy.api#documentation": "<p>Specifies the type and size of the endpoint capacity to activate for a blue/green deployment, a rolling deployment, or a rollback strategy.\n        You can specify your batches as either instance count or the overall percentage or your fleet.</p>\n         <p>For a rollback strategy, if you don't specify the fields in this object, or if you set the <code>Value</code> to 100%, then SageMaker\n        uses a blue/green rollback strategy and rolls all traffic back to the blue fleet.</p>"
             }
         },
         "com.amazonaws.sagemaker#CapacitySizeType": {
@@ -5998,7 +6128,7 @@
                 "ModelDataSource": {
                     "target": "com.amazonaws.sagemaker#ModelDataSource",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the location of ML model data to deploy.</p>\n         <note>\n            <p>Currently you cannot use <code>ModelDataSource</code> in conjuction with\n                SageMaker batch transform, SageMaker serverless endpoints, SageMaker multi-model endpoints, and SageMaker\n                Marketplace.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies the location of ML model data to deploy.</p>\n         <note>\n            <p>Currently you cannot use <code>ModelDataSource</code> in conjunction with\n                SageMaker batch transform, SageMaker serverless endpoints, SageMaker multi-model endpoints, and SageMaker\n                Marketplace.</p>\n         </note>"
                     }
                 }
             },
@@ -6822,7 +6952,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Autopilot job also referred to as Autopilot experiment or AutoML job V2.</p>\n         <note>\n            <p>\n               <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html\">CreateAutoMLJobV2</a> and <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJobV2.html\">DescribeAutoMLJobV2</a> are new versions of <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJob.html\">CreateAutoMLJob</a>\n            and <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJob.html\">DescribeAutoMLJob</a> which offer backward compatibility.</p>\n            <p>\n               <code>CreateAutoMLJobV2</code> can manage tabular problem types identical to those of its previous version\n               <code>CreateAutoMLJob</code>, as well as non-tabular problem types such as\n            image or text classification.</p>\n            <p>Find guidelines about how to migrate a <code>CreateAutoMLJob</code> to\n               <code>CreateAutoMLJobV2</code> in <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development-create-experiment-api.html#autopilot-create-experiment-api-migrate-v1-v2\">Migrate a CreateAutoMLJob to CreateAutoMLJobV2</a>.</p>\n         </note>\n         <p>For the list of available problem types supported by <code>CreateAutoMLJobV2</code>, see\n            <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLProblemTypeConfig.html\">AutoMLProblemTypeConfig</a>.</p>\n         <p>You can find the best-performing model after you run an AutoML job V2 by calling <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJobV2.html\">DescribeAutoMLJobV2</a>.</p>"
+                "smithy.api#documentation": "<p>Creates an Autopilot job also referred to as Autopilot experiment or AutoML job V2.</p>\n         <note>\n            <p>\n               <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html\">CreateAutoMLJobV2</a> and <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJobV2.html\">DescribeAutoMLJobV2</a> are new versions of <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJob.html\">CreateAutoMLJob</a>\n            and <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJob.html\">DescribeAutoMLJob</a> which offer backward compatibility.</p>\n            <p>\n               <code>CreateAutoMLJobV2</code> can manage tabular problem types identical to those of\n            its previous version <code>CreateAutoMLJob</code>, as well as non-tabular problem types\n            such as image or text classification.</p>\n            <p>Find guidelines about how to migrate a <code>CreateAutoMLJob</code> to\n               <code>CreateAutoMLJobV2</code> in <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development-create-experiment-api.html#autopilot-create-experiment-api-migrate-v1-v2\">Migrate a CreateAutoMLJob to CreateAutoMLJobV2</a>.</p>\n         </note>\n         <p>For the list of available problem types supported by <code>CreateAutoMLJobV2</code>, see\n            <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLProblemTypeConfig.html\">AutoMLProblemTypeConfig</a>.</p>\n         <p>You can find the best-performing model after you run an AutoML job V2 by calling <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJobV2.html\">DescribeAutoMLJobV2</a>.</p>"
             }
         },
         "com.amazonaws.sagemaker#CreateAutoMLJobV2Request": {
@@ -6838,7 +6968,7 @@
                 "AutoMLJobInputDataConfig": {
                     "target": "com.amazonaws.sagemaker#AutoMLJobInputDataConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of channel objects describing the input data and their location. Each channel\n         is a named input source. Similar to the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJob.html#sagemaker-CreateAutoMLJob-request-InputDataConfig\">InputDataConfig</a> attribute in the <code>CreateAutoMLJob</code> input parameters.\n         The supported formats depend on the problem type:</p>\n         <ul>\n            <li>\n               <p>For Tabular problem types: <code>S3Prefix</code>,\n               <code>ManifestFile</code>.</p>\n            </li>\n            <li>\n               <p>For ImageClassification: <code>S3Prefix</code>, <code>ManifestFile</code>,\n                  <code>AugmentedManifestFile</code>.</p>\n            </li>\n            <li>\n               <p>For TextClassification: <code>S3Prefix</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>An array of channel objects describing the input data and their location. Each channel\n         is a named input source. Similar to the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJob.html#sagemaker-CreateAutoMLJob-request-InputDataConfig\">InputDataConfig</a> attribute in the <code>CreateAutoMLJob</code> input parameters.\n         The supported formats depend on the problem type:</p>\n         <ul>\n            <li>\n               <p>For tabular problem types: <code>S3Prefix</code>,\n               <code>ManifestFile</code>.</p>\n            </li>\n            <li>\n               <p>For image classification: <code>S3Prefix</code>, <code>ManifestFile</code>,\n                  <code>AugmentedManifestFile</code>.</p>\n            </li>\n            <li>\n               <p>For text classification: <code>S3Prefix</code>.</p>\n            </li>\n            <li>\n               <p>For time-series forecasting: <code>S3Prefix</code>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6890,7 +7020,7 @@
                 "DataSplitConfig": {
                     "target": "com.amazonaws.sagemaker#AutoMLDataSplitConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>This structure specifies how to split the data into train and validation\n         datasets.</p>\n         <p>The validation and training datasets must contain the same headers. For jobs created by\n         calling <code>CreateAutoMLJob</code>, the validation dataset must be less than 2 GB in\n         size.</p>"
+                        "smithy.api#documentation": "<p>This structure specifies how to split the data into train and validation\n         datasets.</p>\n         <p>The validation and training datasets must contain the same headers. For jobs created by\n         calling <code>CreateAutoMLJob</code>, the validation dataset must be less than 2 GB in\n         size.</p>\n         <note>\n            <p>This attribute must not be set for the time-series forecasting problem type, as Autopilot\n            automatically splits the input dataset into training and validation sets.</p>\n         </note>"
                     }
                 }
             },
@@ -9833,7 +9963,7 @@
                 "PipelineDefinition": {
                     "target": "com.amazonaws.sagemaker#PipelineDefinition",
                     "traits": {
-                        "smithy.api#documentation": "<p>The JSON pipeline definition of the pipeline.</p>"
+                        "smithy.api#documentation": "<p>The <a href=\"https://aws-sagemaker-mlops.github.io/sagemaker-model-building-pipeline-definition-JSON-schema/\">JSON \n         pipeline definition</a> of the pipeline.</p>"
                     }
                 },
                 "PipelineDefinitionS3Location": {
@@ -13451,14 +13581,19 @@
                 "BlueGreenUpdatePolicy": {
                     "target": "com.amazonaws.sagemaker#BlueGreenUpdatePolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>Update policy for a blue/green deployment. If this update policy is specified, SageMaker\n            creates a new fleet during the deployment while maintaining the old fleet. SageMaker flips\n            traffic to the new fleet according to the specified traffic routing configuration. Only\n            one update policy should be used in the deployment configuration. If no update policy is\n            specified, SageMaker uses a blue/green deployment strategy with all at once traffic shifting\n            by default.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Update policy for a blue/green deployment. If this update policy is specified, SageMaker\n            creates a new fleet during the deployment while maintaining the old fleet. SageMaker flips\n            traffic to the new fleet according to the specified traffic routing configuration. Only\n            one update policy should be used in the deployment configuration. If no update policy is\n            specified, SageMaker uses a blue/green deployment strategy with all at once traffic shifting\n            by default.</p>"
                     }
                 },
                 "AutoRollbackConfiguration": {
                     "target": "com.amazonaws.sagemaker#AutoRollbackConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>Automatic rollback configuration for handling endpoint deployment failures and\n            recovery.</p>"
+                    }
+                },
+                "RollingUpdatePolicy": {
+                    "target": "com.amazonaws.sagemaker#RollingUpdatePolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a rolling deployment strategy for updating a SageMaker endpoint.</p>"
                     }
                 }
             },
@@ -22749,8 +22884,7 @@
                 "InstanceType": {
                     "target": "com.amazonaws.sagemaker#ProductionVariantInstanceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The instance types to use for the load test.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The instance types to use for the load test.</p>"
                     }
                 },
                 "InferenceSpecificationName": {
@@ -22764,6 +22898,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p> The parameter you want to benchmark against.</p>"
                     }
+                },
+                "ServerlessConfig": {
+                    "target": "com.amazonaws.sagemaker#ProductionVariantServerlessConfig"
                 }
             },
             "traits": {
@@ -22855,17 +22992,17 @@
                 "InstanceType": {
                     "target": "com.amazonaws.sagemaker#ProductionVariantInstanceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The instance type recommended by Amazon SageMaker Inference Recommender.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The instance type recommended by Amazon SageMaker Inference Recommender.</p>"
                     }
                 },
                 "InitialInstanceCount": {
-                    "target": "com.amazonaws.sagemaker#Integer",
+                    "target": "com.amazonaws.sagemaker#InitialInstanceCount",
                     "traits": {
-                        "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The number of instances recommended to launch initially.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The number of instances recommended to launch initially.</p>"
                     }
+                },
+                "ServerlessConfig": {
+                    "target": "com.amazonaws.sagemaker#ProductionVariantServerlessConfig"
                 }
             },
             "traits": {
@@ -22977,6 +23114,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "Failed"
+                    }
+                },
+                "UPDATE_ROLLBACK_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UpdateRollbackFailed"
                     }
                 }
             }
@@ -24154,6 +24297,99 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#FillingTransformationMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.sagemaker#FillingType"
+            },
+            "value": {
+                "target": "com.amazonaws.sagemaker#FillingTransformationValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 6
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#FillingTransformationValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9\\_\\-]+$"
+            }
+        },
+        "com.amazonaws.sagemaker#FillingTransformations": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.sagemaker#TransformationAttributeName"
+            },
+            "value": {
+                "target": "com.amazonaws.sagemaker#FillingTransformationMap"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#FillingType": {
+            "type": "enum",
+            "members": {
+                "Frontfill": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "frontfill"
+                    }
+                },
+                "Middlefill": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "middlefill"
+                    }
+                },
+                "Backfill": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "backfill"
+                    }
+                },
+                "Futurefill": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "futurefill"
+                    }
+                },
+                "FrontfillValue": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "frontfill_value"
+                    }
+                },
+                "MiddlefillValue": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "middlefill_value"
+                    }
+                },
+                "BackfillValue": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "backfill_value"
+                    }
+                },
+                "FuturefillValue": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "futurefill_value"
+                    }
+                }
+            }
+        },
         "com.amazonaws.sagemaker#Filter": {
             "type": "structure",
             "members": {
@@ -24470,6 +24706,46 @@
                     "max": 128
                 },
                 "smithy.api#pattern": "^[\\t\\n\\r -\\uD7FF\\uE000-\\uFFFD]*$"
+            }
+        },
+        "com.amazonaws.sagemaker#ForecastFrequency": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                },
+                "smithy.api#pattern": "^1Y|Y|([1-9]|1[0-1])M|M|[1-4]W|W|[1-6]D|D|([1-9]|1[0-9]|2[0-3])H|H|([1-9]|[1-5][0-9])min$"
+            }
+        },
+        "com.amazonaws.sagemaker#ForecastHorizon": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#ForecastQuantile": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 4
+                },
+                "smithy.api#pattern": "^(^p[1-9]\\d?$)$"
+            }
+        },
+        "com.amazonaws.sagemaker#ForecastQuantiles": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#ForecastQuantile"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
             }
         },
         "com.amazonaws.sagemaker#Framework": {
@@ -24861,6 +25137,27 @@
                     "max": 63
                 },
                 "smithy.api#pattern": "^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}]+$"
+            }
+        },
+        "com.amazonaws.sagemaker#GroupingAttributeName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#GroupingAttributeNames": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#GroupingAttributeName"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
             }
         },
         "com.amazonaws.sagemaker#Groups": {
@@ -27875,6 +28172,14 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"
             }
         },
+        "com.amazonaws.sagemaker#InitialInstanceCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
         "com.amazonaws.sagemaker#InitialNumberOfUsers": {
             "type": "integer",
             "traits": {
@@ -28609,6 +28914,15 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:rolealias/?[a-zA-Z_0-9+=,.@\\-_/]+$"
+            }
+        },
+        "com.amazonaws.sagemaker#ItemIdentifierAttributeName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
             }
         },
         "com.amazonaws.sagemaker#JobDurationInSeconds": {
@@ -36716,7 +37030,7 @@
             "traits": {
                 "smithy.api#range": {
                     "min": 600,
-                    "max": 14400
+                    "max": 28800
                 }
             }
         },
@@ -37281,6 +37595,12 @@
                     "target": "com.amazonaws.sagemaker#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The risk rating of the model. Different organizations might have different criteria for model card risk ratings. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-cards-risk-rating.html\">Risk ratings</a>.</p>"
+                    }
+                },
+                "ModelPackageGroupName": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The model package group that contains the model package. Only relevant for model cards created for model packages in the Amazon SageMaker Model Registry.\n      </p>"
                     }
                 }
             },
@@ -39276,6 +39596,14 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The model registry settings for the SageMaker Canvas application.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#ModelSetupTime": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
             }
         },
         "com.amazonaws.sagemaker#ModelSortKey": {
@@ -41546,10 +41874,30 @@
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Turn <code>OnlineStore</code> off by specifying <code>False</code> \n      for the <code>EnableOnlineStore</code> flag. Turn <code>OnlineStore</code> \n      on by specifying <code>True</code> \n      for the <code>EnableOnlineStore</code> flag. </p>\n         <p>The default value is <code>False</code>.</p>"
                     }
+                },
+                "TtlDuration": {
+                    "target": "com.amazonaws.sagemaker#TtlDuration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Time to live duration, where the record is hard deleted after the expiration time is\n         reached; <code>ExpiresAt</code> = <code>EventTime</code> + <code>TtlDuration</code>. For\n         information on HardDelete, see the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_DeleteRecord.html\">DeleteRecord</a> API in the Amazon SageMaker API Reference guide.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Use this to specify the Amazon Web Services Key Management Service (KMS) Key ID, or\n            <code>KMSKeyId</code>, for at rest data encryption. You can turn\n            <code>OnlineStore</code> on or off by specifying the <code>EnableOnlineStore</code> flag\n         at General Assembly.</p>\n         <p>The default value is <code>False</code>.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#OnlineStoreConfigUpdate": {
+            "type": "structure",
+            "members": {
+                "TtlDuration": {
+                    "target": "com.amazonaws.sagemaker#TtlDuration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Time to live duration, where the record is hard deleted after the expiration time is\n         reached; <code>ExpiresAt</code> = <code>EventTime</code> + <code>TtlDuration</code>. For\n         information on HardDelete, see the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_DeleteRecord.html\">DeleteRecord</a> API in the Amazon SageMaker API Reference guide.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the feature group online store configuration.</p>"
             }
         },
         "com.amazonaws.sagemaker#OnlineStoreSecurityConfig": {
@@ -44968,7 +45316,7 @@
                 "ProvisionedConcurrency": {
                     "target": "com.amazonaws.sagemaker#ServerlessProvisionedConcurrency",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of provisioned concurrency to allocate for the serverless endpoint.\n   Should be less than or equal to <code>MaxConcurrency</code>.</p>"
+                        "smithy.api#documentation": "<p>The amount of provisioned concurrency to allocate for the serverless endpoint.\n   Should be less than or equal to <code>MaxConcurrency</code>.</p>\n         <note>\n            <p>This field is not supported for serverless endpoint recommendations for Inference Recommender jobs.\n   For more information about creating an Inference Recommender job, see\n   <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateInferenceRecommendationsJob.html\">CreateInferenceRecommendationsJobs</a>.</p>\n         </note>"
                     }
                 }
             },
@@ -46339,6 +46687,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the name and shape of the expected data inputs for your trained model with a JSON dictionary form.\n         This field is used for optimizing your model using SageMaker Neo. For more information, see\n         <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_InputConfig.html#sagemaker-Type-InputConfig-DataInputConfig\">DataInputConfig</a>.</p>"
                     }
+                },
+                "SupportedEndpointType": {
+                    "target": "com.amazonaws.sagemaker#RecommendationJobSupportedEndpointType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The endpoint type to receive recommendations for. By default this is null, and the results of \n         the inference recommendation job return a combined list of both real-time and serverless benchmarks.\n         By specifying a value for this field, you can receive a longer list of benchmarks for the desired endpoint type.</p>"
+                    }
                 }
             },
             "traits": {
@@ -46611,6 +46965,23 @@
                 "target": "com.amazonaws.sagemaker#String"
             }
         },
+        "com.amazonaws.sagemaker#RecommendationJobSupportedEndpointType": {
+            "type": "enum",
+            "members": {
+                "REALTIME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RealTime"
+                    }
+                },
+                "SERVERLESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Serverless"
+                    }
+                }
+            }
+        },
         "com.amazonaws.sagemaker#RecommendationJobSupportedInstanceTypes": {
             "type": "list",
             "member": {
@@ -46745,6 +47116,12 @@
                     "target": "com.amazonaws.sagemaker#UtilizationMetric",
                     "traits": {
                         "smithy.api#documentation": "<p>The expected memory utilization at maximum invocations per minute for the instance.</p>\n         <p>\n            <code>NaN</code> indicates that the value is not available.</p>"
+                    }
+                },
+                "ModelSetupTime": {
+                    "target": "com.amazonaws.sagemaker#ModelSetupTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time it takes to launch new compute resources for a serverless endpoint.\n         The time can vary depending on the model size, how long it takes to download the\n         model, and the start-up time of the container.</p>\n         <p>\n            <code>NaN</code> indicates that the value is not available.</p>"
                     }
                 }
             },
@@ -47668,6 +48045,36 @@
                 "smithy.api#pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"
             }
         },
+        "com.amazonaws.sagemaker#RollingUpdatePolicy": {
+            "type": "structure",
+            "members": {
+                "MaximumBatchSize": {
+                    "target": "com.amazonaws.sagemaker#CapacitySize",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "WaitIntervalInSeconds": {
+                    "target": "com.amazonaws.sagemaker#WaitIntervalInSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The length of the baking period, during which SageMaker monitors alarms for each batch on the new fleet.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaximumExecutionTimeoutInSeconds": {
+                    "target": "com.amazonaws.sagemaker#MaximumExecutionTimeoutInSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time limit for the total deployment. Exceeding this limit causes a timeout.</p>"
+                    }
+                },
+                "RollbackMaximumBatchSize": {
+                    "target": "com.amazonaws.sagemaker#CapacitySize"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies a rolling deployment strategy for updating a SageMaker endpoint.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#RootAccess": {
             "type": "enum",
             "members": {
@@ -47844,14 +48251,14 @@
                 "S3DataType": {
                     "target": "com.amazonaws.sagemaker#S3ModelDataType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the type of ML model data to deploy.</p>\n         <p>If you choose <code>S3Prefix</code>, <code>S3Uri</code> identifies a key name prefix.\n            SageMaker uses all objects that match the specified key name prefix as part of the ML model\n            data to deploy. A valid key name prefix identified by <code>S3Uri</code> always ends\n            with a forward slash (/).</p>\n         <p>If you choose S3Object, S3Uri identifies an object that is the ML model data to\n            deploy.</p>",
+                        "smithy.api#documentation": "<p>Specifies the type of ML model data to deploy.</p>\n         <p>If you choose <code>S3Prefix</code>, <code>S3Uri</code> identifies a key name prefix.\n            SageMaker uses all objects that match the specified key name prefix as part of the ML model\n            data to deploy. A valid key name prefix identified by <code>S3Uri</code> always ends\n            with a forward slash (/).</p>\n         <p>If you choose <code>S3Object</code>, <code>S3Uri</code> identifies an object that is\n            the ML model data to deploy.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "CompressionType": {
                     "target": "com.amazonaws.sagemaker#ModelCompressionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies how the ML model data is prepared.</p>\n         <p>If you choose <code>Gzip</code> and choose <code>S3Object</code> as the value of\n            <code>S3DataType</code>, <code>S3Uri</code> identifies an object that is a\n            gzip-compressed TAR archive. SageMaker will attempt to decompress and untar the object\n            during model deployment.</p>\n         <p>If you choose <code>None</code> and chooose <code>S3Object</code> as the value of\n            <code>S3DataType</code>, <code>S3Uri</code> identifies an object that represents an\n            uncompressed ML model to deploy.</p>\n         <p>If you choose None and choose <code>S3Prefix</code> as the value of\n            <code>S3DataType</code>, <code>S3Uri</code> identifies a key name prefix, under which\n            all objects represents the uncompressed ML model to deploy.</p>\n         <p>If you choose None, then SageMaker will follow rules below when creating model data files\n            under /opt/ml/model directory for use by your inference code:</p>\n         <ul>\n            <li>\n               <p>If you choose <code>S3Object</code> as the value of <code>S3DataType</code>,\n                    then SageMaker will split the key of the S3 object referenced by <code>S3Uri</code> by\n                    slash (/), and use the last part as the filename of the file holding the content\n                    of the S3 object.</p>\n            </li>\n            <li>\n               <p>If you choose <code>S3Prefix</code> as the value of <code>S3DataType</code>,\n                    then for each S3 object under the key name pefix referenced by <code>S3Uri</code>,\n                    SageMaker will trim its key by the prefix, and use the remainder as the path\n                    (relative to <code>/opt/ml/model</code>) of the file holding the content of the\n                    S3 object. SageMaker will split the remainder by slash (/), using intermediate parts as\n                    directory names and the last part as filename of the file holding the content of\n                    the S3 object.</p>\n            </li>\n            <li>\n               <p>Do not use any of the following as file names or directory names:</p>\n               <ul>\n                  <li>\n                     <p>An empty or blank string</p>\n                  </li>\n                  <li>\n                     <p>A string which contains null bytes</p>\n                  </li>\n                  <li>\n                     <p>A string longer than 255 bytes</p>\n                  </li>\n                  <li>\n                     <p>A single dot (<code>.</code>)</p>\n                  </li>\n                  <li>\n                     <p>A double dot (<code>..</code>)</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Ambiguous file names will result in model deployment failure. For example,\n                    if your uncompressed ML model consists of two S3 objects\n                    <code>s3://mybucket/model/weights</code> and <code>s3://mybucket/model/weights/part1</code>\n                    and you specify <code>s3://mybucket/model/</code> as the value of <code>S3Uri</code> and\n                    <code>S3Prefix</code> as the value of S3DataType, then it will result in name clash between\n                    <code>/opt/ml/model/weights</code> (a regular file) and <code>/opt/ml/model/weights/</code>\n                    (a directory).</p>\n            </li>\n            <li>\n               <p>Do not organize the model artifacts in\n                    <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html\">S3 console using folders</a>.\n                    When you create a folder in S3 console, S3 creates a 0-byte object with a key set to the\n                    folder name you provide. They key of the 0-byte object ends with a slash (/) which violates\n                    SageMaker restrictions on model artifact file names, leading to model deployment failure.\n                </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies how the ML model data is prepared.</p>\n         <p>If you choose <code>Gzip</code> and choose <code>S3Object</code> as the value of\n            <code>S3DataType</code>, <code>S3Uri</code> identifies an object that is a\n            gzip-compressed TAR archive. SageMaker will attempt to decompress and untar the object\n            during model deployment.</p>\n         <p>If you choose <code>None</code> and chooose <code>S3Object</code> as the value of\n            <code>S3DataType</code>, <code>S3Uri</code> identifies an object that represents an\n            uncompressed ML model to deploy.</p>\n         <p>If you choose None and choose <code>S3Prefix</code> as the value of\n            <code>S3DataType</code>, <code>S3Uri</code> identifies a key name prefix, under which\n            all objects represents the uncompressed ML model to deploy.</p>\n         <p>If you choose None, then SageMaker will follow rules below when creating model data files\n            under /opt/ml/model directory for use by your inference code:</p>\n         <ul>\n            <li>\n               <p>If you choose <code>S3Object</code> as the value of <code>S3DataType</code>,\n                    then SageMaker will split the key of the S3 object referenced by <code>S3Uri</code> by\n                    slash (/), and use the last part as the filename of the file holding the content\n                    of the S3 object.</p>\n            </li>\n            <li>\n               <p>If you choose <code>S3Prefix</code> as the value of <code>S3DataType</code>,\n                    then for each S3 object under the key name pefix referenced by <code>S3Uri</code>,\n                    SageMaker will trim its key by the prefix, and use the remainder as the path\n                    (relative to <code>/opt/ml/model</code>) of the file holding the content of the\n                    S3 object. SageMaker will split the remainder by slash (/), using intermediate parts as\n                    directory names and the last part as filename of the file holding the content of\n                    the S3 object.</p>\n            </li>\n            <li>\n               <p>Do not use any of the following as file names or directory names:</p>\n               <ul>\n                  <li>\n                     <p>An empty or blank string</p>\n                  </li>\n                  <li>\n                     <p>A string which contains null bytes</p>\n                  </li>\n                  <li>\n                     <p>A string longer than 255 bytes</p>\n                  </li>\n                  <li>\n                     <p>A single dot (<code>.</code>)</p>\n                  </li>\n                  <li>\n                     <p>A double dot (<code>..</code>)</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Ambiguous file names will result in model deployment failure. For example,\n                    if your uncompressed ML model consists of two S3 objects\n                    <code>s3://mybucket/model/weights</code> and <code>s3://mybucket/model/weights/part1</code>\n                    and you specify <code>s3://mybucket/model/</code> as the value of <code>S3Uri</code> and\n                    <code>S3Prefix</code> as the value of <code>S3DataType</code>, then it will result in name\n                    clash between <code>/opt/ml/model/weights</code> (a regular file) and\n                    <code>/opt/ml/model/weights/</code> (a directory).</p>\n            </li>\n            <li>\n               <p>Do not organize the model artifacts in\n                    <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html\">S3 console using folders</a>.\n                    When you create a folder in S3 console, S3 creates a 0-byte object with a key set to the\n                    folder name you provide. They key of the 0-byte object ends with a slash (/) which violates\n                    SageMaker restrictions on model artifact file names, leading to model deployment failure.\n                </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -53252,6 +53659,91 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9:_-]+$"
             }
         },
+        "com.amazonaws.sagemaker#TimeSeriesConfig": {
+            "type": "structure",
+            "members": {
+                "TargetAttributeName": {
+                    "target": "com.amazonaws.sagemaker#TargetAttributeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the column representing the target variable that you want to predict for\n         each item in your dataset. The data type of the target variable must be numerical.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TimestampAttributeName": {
+                    "target": "com.amazonaws.sagemaker#TimestampAttributeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the column indicating a point in time at which the target value of a given\n         item is recorded.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ItemIdentifierAttributeName": {
+                    "target": "com.amazonaws.sagemaker#ItemIdentifierAttributeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the column that represents the set of item identifiers for which you want to\n         predict the target value.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "GroupingAttributeNames": {
+                    "target": "com.amazonaws.sagemaker#GroupingAttributeNames",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A set of columns names that can be grouped with the item identifier column to create a\n         composite key for which a target value is predicted.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The collection of components that defines the time-series.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#TimeSeriesForecastingJobConfig": {
+            "type": "structure",
+            "members": {
+                "FeatureSpecificationS3Uri": {
+                    "target": "com.amazonaws.sagemaker#S3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A URL to the Amazon S3 data source containing additional selected features that complement\n         the target, itemID, timestamp, and grouped columns set in <code>TimeSeriesConfig</code>.\n         When not provided, the AutoML job V2 includes all the columns from the original dataset\n         that are not already declared in <code>TimeSeriesConfig</code>. If provided, the AutoML job\n         V2 only considers these additional columns as a complement to the ones declared in\n            <code>TimeSeriesConfig</code>.</p>\n         <p> You can input <code>FeatureAttributeNames</code> (optional) in JSON format as shown\n         below: </p>\n         <p>\n            <code>{ \"FeatureAttributeNames\":[\"col1\", \"col2\", ...] }</code>.</p>\n         <p>You can also specify the data type of the feature (optional) in the format shown\n         below:</p>\n         <p>\n            <code>{ \"FeatureDataTypes\":{\"col1\":\"numeric\", \"col2\":\"categorical\" ... } }</code>\n         </p>\n         <p>Autopilot supports the following data types: <code>numeric</code>, <code>categorical</code>,\n            <code>text</code>, and <code>datetime</code>.</p>\n         <note>\n            <p>These column keys must not include any column set in\n            <code>TimeSeriesConfig</code>.</p>\n         </note>\n         <p>When not provided, the AutoML job V2 includes all the columns from the original dataset\n         that are not already declared in <code>TimeSeriesConfig</code>. If provided, the AutoML job\n         V2 only considers these additional columns as a complement to the ones declared in\n            <code>TimeSeriesConfig</code>.</p>\n         <p>Autopilot supports the following data types: <code>numeric</code>, <code>categorical</code>,\n            <code>text</code>, and <code>datetime</code>.</p>"
+                    }
+                },
+                "CompletionCriteria": {
+                    "target": "com.amazonaws.sagemaker#AutoMLJobCompletionCriteria"
+                },
+                "ForecastFrequency": {
+                    "target": "com.amazonaws.sagemaker#ForecastFrequency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The frequency of predictions in a forecast.</p>\n         <p>Valid intervals are an integer followed by Y (Year), M (Month), W (Week), D (Day), H\n         (Hour), and min (Minute). For example, <code>1D</code> indicates every day and\n            <code>15min</code> indicates every 15 minutes. The value of a frequency must not overlap\n         with the next larger frequency. For example, you must use a frequency of <code>1H</code>\n         instead of <code>60min</code>.</p>\n         <p>The valid values for each frequency are the following:</p>\n         <ul>\n            <li>\n               <p>Minute - 1-59</p>\n            </li>\n            <li>\n               <p>Hour - 1-23</p>\n            </li>\n            <li>\n               <p>Day - 1-6</p>\n            </li>\n            <li>\n               <p>Week - 1-4</p>\n            </li>\n            <li>\n               <p>Month - 1-11</p>\n            </li>\n            <li>\n               <p>Year - 1</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ForecastHorizon": {
+                    "target": "com.amazonaws.sagemaker#ForecastHorizon",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of time-steps that the model predicts. The forecast horizon is also called\n         the prediction length. The maximum forecast horizon is the lesser of 500 time-steps or 1/4\n         of the time-steps in the dataset.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ForecastQuantiles": {
+                    "target": "com.amazonaws.sagemaker#ForecastQuantiles",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The quantiles used to train the model for forecasts at a specified quantile. You can\n         specify quantiles from <code>0.01</code> (p1) to <code>0.99</code> (p99), by increments of\n         0.01 or higher. Up to five forecast quantiles can be specified. When\n            <code>ForecastQuantiles</code> is not provided, the AutoML job uses the quantiles\n            p10, p50, and p90 as default.</p>"
+                    }
+                },
+                "Transformations": {
+                    "target": "com.amazonaws.sagemaker#TimeSeriesTransformations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The transformations modifying specific attributes of the time-series, such as filling\n         strategies for missing values.</p>"
+                    }
+                },
+                "TimeSeriesConfig": {
+                    "target": "com.amazonaws.sagemaker#TimeSeriesConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The collection of components that defines the time-series.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The collection of settings used by an AutoML job V2 for the time-series forecasting\n         problem type.</p>\n         <note>\n            <p>The <code>TimeSeriesForecastingJobConfig</code> problem type is only available in\n            private beta. Contact Amazon Web Services Support or your account manager to learn more\n            about access privileges.</p>\n         </note>"
+            }
+        },
         "com.amazonaws.sagemaker#TimeSeriesForecastingSettings": {
             "type": "structure",
             "members": {
@@ -53272,8 +53764,37 @@
                 "smithy.api#documentation": "<p>Time series forecast settings for the SageMaker Canvas application.</p>"
             }
         },
+        "com.amazonaws.sagemaker#TimeSeriesTransformations": {
+            "type": "structure",
+            "members": {
+                "Filling": {
+                    "target": "com.amazonaws.sagemaker#FillingTransformations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A key value pair defining the filling method for a column, where the key is the column\n         name and the value is an object which defines the filling logic. You can specify multiple\n         filling methods for a single column.</p>\n         <p>The supported filling methods and their corresponding options are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>frontfill</code>: <code>none</code> (Supported only for target\n               column)</p>\n            </li>\n            <li>\n               <p>\n                  <code>middlefill</code>: <code>zero</code>, <code>value</code>,\n                  <code>median</code>, <code>mean</code>, <code>min</code>, <code>max</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>backfill</code>: <code>zero</code>, <code>value</code>, <code>median</code>,\n                  <code>mean</code>, <code>min</code>, <code>max</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>futurefill</code>: <code>zero</code>, <code>value</code>,\n                  <code>median</code>, <code>mean</code>, <code>min</code>, <code>max</code>\n               </p>\n            </li>\n         </ul>\n         <p>To set a filling method to a specific value, set the fill parameter to the chosen\n         filling method value (for example <code>\"backfill\" : \"value\"</code>), and define the\n         filling value in an additional parameter prefixed with \"_value\". For example, to set\n            <code>backfill</code> to a value of <code>2</code>, you must include two parameters:\n            <code>\"backfill\": \"value\"</code> and <code>\"backfill_value\":\"2\"</code>.</p>"
+                    }
+                },
+                "Aggregation": {
+                    "target": "com.amazonaws.sagemaker#AggregationTransformations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A key value pair defining the aggregation method for a column, where the key is the\n         column name and the value is the aggregation method.</p>\n         <p>The supported aggregation methods are <code>sum</code> (default), <code>avg</code>,\n            <code>first</code>, <code>min</code>, <code>max</code>.</p>\n         <note>\n            <p>Aggregation is only supported for the target column.</p>\n         </note>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Transformations allowed on the dataset. Supported transformations are\n            <code>Filling</code> and <code>Aggregation</code>. <code>Filling</code> specifies how to\n         add values to missing values in the dataset. <code>Aggregation</code> defines how to\n         aggregate data that does not align with forecast frequency.</p>"
+            }
+        },
         "com.amazonaws.sagemaker#Timestamp": {
             "type": "timestamp"
+        },
+        "com.amazonaws.sagemaker#TimestampAttributeName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
         },
         "com.amazonaws.sagemaker#TrafficDurationInSeconds": {
             "type": "integer",
@@ -55103,6 +55624,15 @@
                 "smithy.api#documentation": "<p>Describes the S3 data source.</p>"
             }
         },
+        "com.amazonaws.sagemaker#TransformationAttributeName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
         "com.amazonaws.sagemaker#Trial": {
             "type": "structure",
             "members": {
@@ -55813,6 +56343,69 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A summary of the properties of a trial. To get the complete set of properties, call the\n      <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeTrial.html\">DescribeTrial</a> API and provide the <code>TrialName</code>.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#TtlDuration": {
+            "type": "structure",
+            "members": {
+                "Unit": {
+                    "target": "com.amazonaws.sagemaker#TtlDurationUnit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <code>TtlDuration</code> time unit.</p>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.sagemaker#TtlDurationValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <code>TtlDuration</code> time value.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Time to live duration, where the record is hard deleted after the expiration time is\n         reached; <code>ExpiresAt</code> = <code>EventTime</code> + <code>TtlDuration</code>. For\n         information on HardDelete, see the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_DeleteRecord.html\">DeleteRecord</a> API in the Amazon SageMaker API Reference guide.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#TtlDurationUnit": {
+            "type": "enum",
+            "members": {
+                "SECONDS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Seconds"
+                    }
+                },
+                "MINUTES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Minutes"
+                    }
+                },
+                "HOURS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Hours"
+                    }
+                },
+                "DAYS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Days"
+                    }
+                },
+                "WEEKS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Weeks"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#TtlDurationValue": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1
+                }
             }
         },
         "com.amazonaws.sagemaker#TuningJobCompletionCriteria": {
@@ -56639,6 +57232,12 @@
                     "target": "com.amazonaws.sagemaker#FeatureAdditions",
                     "traits": {
                         "smithy.api#documentation": "<p>Updates the feature group. Updating a feature group is an asynchronous operation. When\n         you get an HTTP 200 response, you've made a valid request. It takes some time after you've\n         made a valid request for Feature Store to update the feature group.</p>"
+                    }
+                },
+                "OnlineStoreConfig": {
+                    "target": "com.amazonaws.sagemaker#OnlineStoreConfigUpdate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updates the feature group online store configuration.</p>"
                     }
                 }
             },

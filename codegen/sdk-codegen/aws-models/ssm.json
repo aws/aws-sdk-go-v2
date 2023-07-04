@@ -240,7 +240,7 @@
                 "ResourceId": {
                     "target": "com.amazonaws.ssm#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource ID you want to tag.</p>\n         <p>Use the ID of the resource. Here are some examples:</p>\n         <p>\n            <code>MaintenanceWindow</code>: <code>mw-012345abcde</code>\n         </p>\n         <p>\n            <code>PatchBaseline</code>: <code>pb-012345abcde</code>\n         </p>\n         <p>\n            <code>Automation</code>: <code>example-c160-4567-8519-012345abcde</code>\n         </p>\n         <p>\n            <code>OpsMetadata</code> object: <code>ResourceID</code> for tagging is created from the\n   Amazon Resource Name (ARN) for the object. Specifically, <code>ResourceID</code> is created from\n   the strings that come after the word <code>opsmetadata</code> in the ARN. For example, an\n   OpsMetadata object with an ARN of\n    <code>arn:aws:ssm:us-east-2:1234567890:opsmetadata/aws/ssm/MyGroup/appmanager</code> has a\n    <code>ResourceID</code> of either <code>aws/ssm/MyGroup/appmanager</code> or\n    <code>/aws/ssm/MyGroup/appmanager</code>.</p>\n         <p>For the <code>Document</code> and <code>Parameter</code> values, use the name of the\n   resource.</p>\n         <p>\n            <code>ManagedInstance</code>: <code>mi-012345abcde</code>\n         </p>\n         <note>\n            <p>The <code>ManagedInstance</code> type for this API operation is only for on-premises\n    managed nodes. You must specify the name of the managed node in the following format:\n      <code>mi-<i>ID_number</i>\n               </code>. For example,\n    <code>mi-1a2b3c4d5e6f</code>.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The resource ID you want to tag.</p>\n         <p>Use the ID of the resource. Here are some examples:</p>\n         <p>\n            <code>MaintenanceWindow</code>: <code>mw-012345abcde</code>\n         </p>\n         <p>\n            <code>PatchBaseline</code>: <code>pb-012345abcde</code>\n         </p>\n         <p>\n            <code>Automation</code>: <code>example-c160-4567-8519-012345abcde</code>\n         </p>\n         <p>\n            <code>OpsMetadata</code> object: <code>ResourceID</code> for tagging is created from the\n   Amazon Resource Name (ARN) for the object. Specifically, <code>ResourceID</code> is created from\n   the strings that come after the word <code>opsmetadata</code> in the ARN. For example, an\n   OpsMetadata object with an ARN of\n    <code>arn:aws:ssm:us-east-2:1234567890:opsmetadata/aws/ssm/MyGroup/appmanager</code> has a\n    <code>ResourceID</code> of either <code>aws/ssm/MyGroup/appmanager</code> or\n    <code>/aws/ssm/MyGroup/appmanager</code>.</p>\n         <p>For the <code>Document</code> and <code>Parameter</code> values, use the name of the\n   resource. If you're tagging a shared document, you must use the full ARN of the document.</p>\n         <p>\n            <code>ManagedInstance</code>: <code>mi-012345abcde</code>\n         </p>\n         <note>\n            <p>The <code>ManagedInstance</code> type for this API operation is only for on-premises\n    managed nodes. You must specify the name of the managed node in the following format:\n      <code>mi-<i>ID_number</i>\n               </code>. For example,\n    <code>mi-1a2b3c4d5e6f</code>.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -258,7 +258,10 @@
         },
         "com.amazonaws.ssm#AddTagsToResourceResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.ssm#AgentErrorCode": {
             "type": "string",
@@ -824,7 +827,7 @@
                     "name": "ssm"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>Amazon Web Services Systems Manager is the operations hub for your Amazon Web Services applications and resources and a secure\n   end-to-end management solution for hybrid cloud environments that enables safe and secure\n   operations at scale.</p>\n         <p>This reference is intended to be used with the <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/\">Amazon Web Services Systems Manager User Guide</a>. To get started, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up.html\">Setting up Amazon Web Services Systems Manager</a>.</p>\n         <p class=\"title\">\n            <b>Related resources</b>\n         </p>\n         <ul>\n            <li>\n               <p>For information about each of the capabilities that comprise Systems Manager, see <a href=\"https://docs.aws.amazon.com/systems-manager-automation-runbooks/latest/userguide/what-is-systems-manager.html#systems-manager-capabilities\">Systems Manager capabilities</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n            </li>\n            <li>\n               <p>For details about predefined runbooks for Automation, a capability of Amazon Web Services Systems Manager, see the\n       <i>\n                     <a href=\"https://docs.aws.amazon.com/systems-manager-automation-runbooks/latest/userguide/automation-runbook-reference.html\">Systems Manager Automation runbook reference</a>\n                  </i>.</p>\n            </li>\n            <li>\n               <p>For information about AppConfig, a capability of Systems Manager, see the <i>\n                     <a href=\"https://docs.aws.amazon.com/appconfig/latest/userguide/\">AppConfig User Guide</a>\n                  </i>\n     and the <i>\n                     <a href=\"https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/\">AppConfig\n       API Reference</a>\n                  </i>.</p>\n            </li>\n            <li>\n               <p>For information about Incident Manager, a capability of Systems Manager, see the <i>\n                     <a href=\"https://docs.aws.amazon.com/incident-manager/latest/userguide/\">Systems Manager Incident Manager User\n       Guide</a>\n                  </i> and the <i>\n                     <a href=\"https://docs.aws.amazon.com/incident-manager/latest/APIReference/\">Systems Manager Incident Manager API\n     Reference</a>\n                  </i>.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Amazon Web Services Systems Manager is the operations hub for your Amazon Web Services applications and resources and a secure\n   end-to-end management solution for hybrid cloud environments that enables safe and secure\n   operations at scale.</p>\n         <p>This reference is intended to be used with the <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/\">Amazon Web Services Systems Manager User Guide</a>. To get started, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up.html\">Setting up Amazon Web Services Systems Manager</a>.</p>\n         <p class=\"title\">\n            <b>Related resources</b>\n         </p>\n         <ul>\n            <li>\n               <p>For information about each of the capabilities that comprise Systems Manager, see <a href=\"https://docs.aws.amazon.com/systems-manager-automation-runbooks/latest/userguide/systems-manager-capabilities.html\">Systems Manager capabilities</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n            </li>\n            <li>\n               <p>For details about predefined runbooks for Automation, a capability of Amazon Web Services Systems Manager, see the\n       <i>\n                     <a href=\"https://docs.aws.amazon.com/systems-manager-automation-runbooks/latest/userguide/automation-runbook-reference.html\">Systems Manager Automation runbook reference</a>\n                  </i>.</p>\n            </li>\n            <li>\n               <p>For information about AppConfig, a capability of Systems Manager, see the <i>\n                     <a href=\"https://docs.aws.amazon.com/appconfig/latest/userguide/\">AppConfig User Guide</a>\n                  </i>\n     and the <i>\n                     <a href=\"https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/\">AppConfig\n       API Reference</a>\n                  </i>.</p>\n            </li>\n            <li>\n               <p>For information about Incident Manager, a capability of Systems Manager, see the <i>\n                     <a href=\"https://docs.aws.amazon.com/incident-manager/latest/userguide/\">Systems Manager Incident Manager User\n       Guide</a>\n                  </i> and the <i>\n                     <a href=\"https://docs.aws.amazon.com/incident-manager/latest/APIReference/\">Systems Manager Incident Manager API\n     Reference</a>\n                  </i>.</p>\n            </li>\n         </ul>",
                 "smithy.api#title": "Amazon Simple Systems Manager (SSM)",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://ssm.amazonaws.com/doc/2014-11-06/"
@@ -1214,9 +1217,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "af-south-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "af-south-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1227,9 +1230,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1240,9 +1243,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-northeast-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-northeast-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1253,9 +1256,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-northeast-2",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-northeast-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1266,9 +1269,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-northeast-3",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-northeast-3"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1279,9 +1282,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-south-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-south-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1292,9 +1295,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-southeast-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-southeast-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1305,9 +1308,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-southeast-2",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-southeast-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1318,9 +1321,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-southeast-3",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-southeast-3"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1331,9 +1334,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ca-central-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ca-central-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1344,9 +1347,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ca-central-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "ca-central-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1357,9 +1360,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-central-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-central-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1370,9 +1373,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-north-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-north-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1383,9 +1386,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-south-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-south-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1396,9 +1399,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-west-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1409,9 +1412,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-west-2",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-west-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1422,9 +1425,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-west-3",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-west-3"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1435,9 +1438,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "me-south-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "me-south-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1448,9 +1451,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "sa-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "sa-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1461,9 +1464,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1474,9 +1477,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1487,9 +1490,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-2",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-east-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1500,9 +1503,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-2",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-east-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1513,9 +1516,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-west-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1526,9 +1529,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-west-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1539,9 +1542,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-west-2",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-west-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1552,9 +1555,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-west-2",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-west-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1565,9 +1568,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1578,9 +1581,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1591,9 +1594,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "cn-north-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "cn-north-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1604,9 +1607,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "cn-northwest-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "cn-northwest-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1617,9 +1620,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "cn-north-1",
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "cn-north-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1630,9 +1633,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "cn-north-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "cn-north-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1643,9 +1646,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "cn-north-1",
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "cn-north-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1656,9 +1659,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1669,9 +1672,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1682,9 +1685,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-gov-west-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-gov-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1695,9 +1698,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-gov-west-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-gov-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1708,9 +1711,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1721,9 +1724,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1734,9 +1737,20 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1747,9 +1761,20 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1760,9 +1785,20 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1773,9 +1809,20 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1786,9 +1833,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
                                 "UseDualStack": false,
-                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1811,9 +1858,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false,
-                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1823,10 +1870,16 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
                                 "UseDualStack": true,
-                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -4245,7 +4298,8 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Whether or not the command was successfully canceled. There is no guarantee that a request\n   can be canceled.</p>"
+                "smithy.api#documentation": "<p>Whether or not the command was successfully canceled. There is no guarantee that a request\n   can be canceled.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#CancelMaintenanceWindowExecution": {
@@ -4292,6 +4346,9 @@
                         "smithy.api#documentation": "<p>The ID of the maintenance window execution that has been stopped.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#Category": {
@@ -5649,6 +5706,9 @@
                         "smithy.api#documentation": "<p>The code the system generates when it processes the activation. The activation code\n   functions like a password to validate the activation ID. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#CreateAssociation": {
@@ -5920,6 +5980,9 @@
                         "smithy.api#documentation": "<p>Information about the associations that failed.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#CreateAssociationRequest": {
@@ -6059,6 +6122,9 @@
                         "smithy.api#documentation": "<p>Information about the association.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#CreateDocument": {
@@ -6172,6 +6238,9 @@
                         "smithy.api#documentation": "<p>Information about the SSM document.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#CreateMaintenanceWindow": {
@@ -6296,6 +6365,9 @@
                         "smithy.api#documentation": "<p>The ID of the created maintenance window.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#CreateOpsItem": {
@@ -6324,7 +6396,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new OpsItem. You must have permission in Identity and Access Management (IAM) to create a new OpsItem. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html\">Getting started with\n    OpsCenter</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         <p>Operations engineers and IT professionals use Amazon Web Services Systems Manager OpsCenter to view, investigate, and\n   remediate operational issues impacting the performance and health of their Amazon Web Services resources. For\n   more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html\">Amazon Web Services Systems Manager OpsCenter</a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>. </p>"
+                "smithy.api#documentation": "<p>Creates a new OpsItem. You must have permission in Identity and Access Management (IAM) to create a new OpsItem. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-setup.html\">Set up OpsCenter</a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         <p>Operations engineers and IT professionals use Amazon Web Services Systems Manager OpsCenter to view, investigate, and\n   remediate operational issues impacting the performance and health of their Amazon Web Services resources. For\n   more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html\">Amazon Web Services Systems Manager OpsCenter</a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>. </p>"
             }
         },
         "com.amazonaws.ssm#CreateOpsItemRequest": {
@@ -6346,7 +6418,7 @@
                 "OperationalData": {
                     "target": "com.amazonaws.ssm#OpsItemOperationalData",
                     "traits": {
-                        "smithy.api#documentation": "<p>Operational data is custom data that provides useful reference details about the OpsItem.\n   For example, you can specify log files, error strings, license keys, troubleshooting tips, or\n   other relevant data. You enter operational data as key-value pairs. The key has a maximum length\n   of 128 characters. The value has a maximum size of 20 KB.</p>\n         <important>\n            <p>Operational data keys <i>can't</i> begin with the following:\n     <code>amazon</code>, <code>aws</code>, <code>amzn</code>, <code>ssm</code>,\n     <code>/amazon</code>, <code>/aws</code>, <code>/amzn</code>, <code>/ssm</code>.</p>\n         </important>\n         <p>You can choose to make the data searchable by other users in the account or you can restrict\n   search access. Searchable data means that all users with access to the OpsItem Overview page (as\n   provided by the <a>DescribeOpsItems</a> API operation) can view and search on the\n   specified data. Operational data that isn't searchable is only viewable by users who have access\n   to the OpsItem (as provided by the <a>GetOpsItem</a> API operation).</p>\n         <p>Use the <code>/aws/resources</code> key in OperationalData to specify a related resource in\n   the request. Use the <code>/aws/automations</code> key in OperationalData to associate an\n   Automation runbook with the OpsItem. To view Amazon Web Services CLI example commands that use these keys, see\n    <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-creating-OpsItems.html#OpsCenter-manually-create-OpsItems\">Creating OpsItems manually</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Operational data is custom data that provides useful reference details about the OpsItem.\n   For example, you can specify log files, error strings, license keys, troubleshooting tips, or\n   other relevant data. You enter operational data as key-value pairs. The key has a maximum length\n   of 128 characters. The value has a maximum size of 20 KB.</p>\n         <important>\n            <p>Operational data keys <i>can't</i> begin with the following:\n     <code>amazon</code>, <code>aws</code>, <code>amzn</code>, <code>ssm</code>,\n     <code>/amazon</code>, <code>/aws</code>, <code>/amzn</code>, <code>/ssm</code>.</p>\n         </important>\n         <p>You can choose to make the data searchable by other users in the account or you can restrict\n   search access. Searchable data means that all users with access to the OpsItem Overview page (as\n   provided by the <a>DescribeOpsItems</a> API operation) can view and search on the\n   specified data. Operational data that isn't searchable is only viewable by users who have access\n   to the OpsItem (as provided by the <a>GetOpsItem</a> API operation).</p>\n         <p>Use the <code>/aws/resources</code> key in OperationalData to specify a related resource in\n   the request. Use the <code>/aws/automations</code> key in OperationalData to associate an\n   Automation runbook with the OpsItem. To view Amazon Web Services CLI example commands that use these keys, see\n    <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-manually-create-OpsItems.html\">Creating OpsItems\n    manually</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "Notifications": {
@@ -6384,7 +6456,7 @@
                 "Tags": {
                     "target": "com.amazonaws.ssm#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optional metadata that you assign to a resource. You can restrict access to OpsItems by\n   using an inline IAM policy that specifies tags. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html#OpsCenter-getting-started-user-permissions\">Getting started with OpsCenter</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         <p>Tags use a key-value pair. For example:</p>\n         <p>\n            <code>Key=Department,Value=Finance</code>\n         </p>\n         <important>\n            <p>To add tags to a new OpsItem, a user must have IAM permissions for both the\n     <code>ssm:CreateOpsItems</code> operation and the <code>ssm:AddTagsToResource</code> operation.\n    To add tags to an existing OpsItem, use the <a>AddTagsToResource</a>\n    operation.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>Optional metadata that you assign to a resource.</p>\n         <p>Tags use a key-value pair. For example:</p>\n         <p>\n            <code>Key=Department,Value=Finance</code>\n         </p>\n         <important>\n            <p>To add tags to a new OpsItem, a user must have IAM permissions for both the\n     <code>ssm:CreateOpsItems</code> operation and the <code>ssm:AddTagsToResource</code> operation.\n    To add tags to an existing OpsItem, use the <a>AddTagsToResource</a>\n    operation.</p>\n         </important>"
                     }
                 },
                 "Category": {
@@ -6426,7 +6498,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.ssm#OpsItemAccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The target Amazon Web Services account where you want to create an OpsItem. To make this call, your account\n   must be configured to work with OpsItems across accounts. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-OpsCenter-multiple-accounts.html\">Setting\n    up OpsCenter to work with OpsItems across accounts</a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The target Amazon Web Services account where you want to create an OpsItem. To make this call, your account\n   must be configured to work with OpsItems across accounts. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-setup.html\">Set up\n    OpsCenter</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 }
             },
@@ -6519,6 +6591,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the OpsMetadata Object or blob created by the call.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#CreatePatchBaseline": {
@@ -6642,6 +6717,9 @@
                         "smithy.api#documentation": "<p>The ID of the created patch baseline.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#CreateResourceDataSync": {
@@ -6705,7 +6783,10 @@
         },
         "com.amazonaws.ssm#CreateResourceDataSyncResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.ssm#CreatedDate": {
             "type": "timestamp"
@@ -6788,7 +6869,10 @@
         },
         "com.amazonaws.ssm#DeleteActivationResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.ssm#DeleteAssociation": {
             "type": "operation",
@@ -6847,7 +6931,10 @@
         },
         "com.amazonaws.ssm#DeleteAssociationResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.ssm#DeleteDocument": {
             "type": "operation",
@@ -6911,7 +6998,10 @@
         },
         "com.amazonaws.ssm#DeleteDocumentResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.ssm#DeleteInventory": {
             "type": "operation",
@@ -6998,6 +7088,9 @@
                         "smithy.api#documentation": "<p>A summary of the delete operation. For more information about this summary, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-custom.html#sysman-inventory-delete-summary\">Deleting custom inventory</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#DeleteMaintenanceWindow": {
@@ -7041,6 +7134,9 @@
                         "smithy.api#documentation": "<p>The ID of the deleted maintenance window.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#DeleteOpsMetadata": {
@@ -7083,7 +7179,10 @@
         },
         "com.amazonaws.ssm#DeleteOpsMetadataResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.ssm#DeleteParameter": {
             "type": "operation",
@@ -7122,7 +7221,10 @@
         },
         "com.amazonaws.ssm#DeleteParameterResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.ssm#DeleteParameters": {
             "type": "operation",
@@ -7171,6 +7273,9 @@
                         "smithy.api#documentation": "<p>The names of parameters that weren't deleted because the parameters aren't valid.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#DeletePatchBaseline": {
@@ -7217,6 +7322,9 @@
                         "smithy.api#documentation": "<p>The ID of the deleted patch baseline.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#DeleteResourceDataSync": {
@@ -7265,7 +7373,10 @@
         },
         "com.amazonaws.ssm#DeleteResourceDataSyncResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.ssm#DeleteResourcePolicy": {
             "type": "operation",
@@ -7369,7 +7480,10 @@
         },
         "com.amazonaws.ssm#DeregisterManagedInstanceResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.ssm#DeregisterPatchBaselineForPatchGroup": {
             "type": "operation",
@@ -7428,6 +7542,9 @@
                         "smithy.api#documentation": "<p>The name of the patch group deregistered from the patch baseline.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#DeregisterTargetFromMaintenanceWindow": {
@@ -7497,6 +7614,9 @@
                         "smithy.api#documentation": "<p>The ID of the removed target definition.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#DeregisterTaskFromMaintenanceWindow": {
@@ -7556,6 +7676,9 @@
                         "smithy.api#documentation": "<p>The ID of the task removed from the maintenance window.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#DescribeActivations": {
@@ -7678,6 +7801,9 @@
                         "smithy.api#documentation": "<p>The token for the next set of items to return. Use this token to get the next set of\n   results. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#DescribeAssociation": {
@@ -7797,6 +7923,9 @@
                         "smithy.api#documentation": "<p>The token for the next set of items to return. Use this token to get the next set of\n   results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#DescribeAssociationExecutions": {
@@ -7877,6 +8006,9 @@
                         "smithy.api#documentation": "<p>The token for the next set of items to return. Use this token to get the next set of\n   results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#DescribeAssociationRequest": {
@@ -7920,6 +8052,9 @@
                         "smithy.api#documentation": "<p>Information about the association.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#DescribeAutomationExecutions": {
@@ -7996,6 +8131,9 @@
                         "smithy.api#documentation": "<p>The token to use when requesting the next set of items. If there are no additional items to\n   return, the string is empty.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#DescribeAutomationStepExecutions": {
@@ -8089,6 +8227,9 @@
                         "smithy.api#documentation": "<p>The token to use when requesting the next set of items. If there are no additional items to\n   return, the string is empty.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#DescribeAvailablePatches": {
@@ -8156,6 +8297,9 @@
                         "smithy.api#documentation": "<p>The token to use when requesting the next set of items. If there are no additional items to\n   return, the string is empty.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#DescribeDocument": {
@@ -8307,6 +8451,9 @@
                         "smithy.api#documentation": "<p>Information about the SSM document.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#DescribeEffectiveInstanceAssociations": {
@@ -8381,6 +8528,9 @@
                         "smithy.api#documentation": "<p>The token to use when requesting the next set of items. If there are no additional items to\n   return, the string is empty.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#DescribeEffectivePatchesForPatchBaseline": {
@@ -8458,6 +8608,9 @@
                         "smithy.api#documentation": "<p>The token to use when requesting the next set of items. If there are no additional items to\n   return, the string is empty.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#DescribeInstanceAssociationsStatus": {
@@ -8532,6 +8685,9 @@
                         "smithy.api#documentation": "<p>The token to use when requesting the next set of items. If there are no additional items to\n   return, the string is empty.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#DescribeInstanceInformation": {
@@ -8560,7 +8716,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes one or more of your managed nodes, including information about the operating\n   system platform, the version of SSM Agent installed on the managed node, node status, and so\n   on.</p>\n         <p>If you specify one or more managed node IDs, it returns information for those managed nodes.\n   If you don't specify node IDs, it returns information for all your managed nodes. If you specify\n   a node ID that isn't valid or a node that you don't own, you receive an error.</p>\n         <note>\n            <p>The <code>IamRole</code> field for this API operation is the Identity and Access Management\n     (IAM) role assigned to on-premises managed nodes. This call doesn't return the\n     IAM role for EC2 instances.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Provides information about one or more of your managed nodes, including the operating system\n   platform, SSM Agent version, association status, and IP address. This operation does not return\n   information for nodes that are either Stopped or Terminated.</p>\n         <p>If you specify one or more node IDs, the operation returns information for those managed\n   nodes. If you don't specify node IDs, it returns information for all your managed nodes. If you\n   specify a node ID that isn't valid or a node that you don't own, you receive an error.</p>\n         <note>\n            <p>The <code>IamRole</code> field returned for this API operation is the Identity and Access Management (IAM) role assigned to on-premises managed nodes. This operation does not\n    return the IAM role for EC2 instances.</p>\n         </note>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -8581,14 +8737,14 @@
                 "Filters": {
                     "target": "com.amazonaws.ssm#InstanceInformationStringFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more filters. Use a filter to return a more specific list of managed nodes. You can\n   filter based on tags applied to your managed nodes. Use this <code>Filters</code> data type\n   instead of <code>InstanceInformationFilterList</code>, which is deprecated.</p>"
+                        "smithy.api#documentation": "<p>One or more filters. Use a filter to return a more specific list of managed nodes. You can\n   filter based on tags applied to your managed nodes. Tag filters can't be combined with other\n   filter types. Use this <code>Filters</code> data type instead of\n    <code>InstanceInformationFilterList</code>, which is deprecated.</p>"
                     }
                 },
                 "MaxResults": {
                     "target": "com.amazonaws.ssm#MaxResultsEC2Compatible",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that you\n   can specify in a subsequent call to get the next set of results. </p>"
+                        "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that you\n   can specify in a subsequent call to get the next set of results. The default value is 10 items.\n  </p>"
                     }
                 },
                 "NextToken": {
@@ -8617,6 +8773,9 @@
                         "smithy.api#documentation": "<p>The token to use when requesting the next set of items. If there are no additional items to\n   return, the string is empty. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#DescribeInstancePatchStates": {
@@ -8723,6 +8882,9 @@
                         "smithy.api#documentation": "<p>The token to use when requesting the next set of items. If there are no additional items to\n   return, the string is empty.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#DescribeInstancePatchStatesRequest": {
@@ -8768,6 +8930,9 @@
                         "smithy.api#documentation": "<p>The token to use when requesting the next set of items. If there are no additional items to\n   return, the string is empty.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#DescribeInstancePatches": {
@@ -8851,6 +9016,9 @@
                         "smithy.api#documentation": "<p>The token to use when requesting the next set of items. If there are no additional items to\n   return, the string is empty.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#DescribeInventoryDeletions": {
@@ -8924,6 +9092,9 @@
                         "smithy.api#documentation": "<p>The token for the next set of items to return. Use this token to get the next set of\n   results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#DescribeMaintenanceWindowExecutionTaskInvocations": {
@@ -9008,6 +9179,9 @@
                         "smithy.api#documentation": "<p>The token to use when requesting the next set of items. If there are no additional items to\n   return, the string is empty.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#DescribeMaintenanceWindowExecutionTasks": {
@@ -9085,6 +9259,9 @@
                         "smithy.api#documentation": "<p>The token to use when requesting the next set of items. If there are no additional items to\n   return, the string is empty.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#DescribeMaintenanceWindowExecutions": {
@@ -9159,6 +9336,9 @@
                         "smithy.api#documentation": "<p>The token to use when requesting the next set of items. If there are no additional items to\n   return, the string is empty.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#DescribeMaintenanceWindowSchedule": {
@@ -9247,6 +9427,9 @@
                         "smithy.api#documentation": "<p>The token for the next set of items to return. (You use this token in the next call.)</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#DescribeMaintenanceWindowTargets": {
@@ -9324,6 +9507,9 @@
                         "smithy.api#documentation": "<p>The token to use when requesting the next set of items. If there are no additional items to\n   return, the string is empty.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#DescribeMaintenanceWindowTasks": {
@@ -9401,6 +9587,9 @@
                         "smithy.api#documentation": "<p>The token to use when requesting the next set of items. If there are no additional items to\n   return, the string is empty.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#DescribeMaintenanceWindows": {
@@ -9499,6 +9688,9 @@
                         "smithy.api#documentation": "<p>The token for the next set of items to return. (You use this token in the next call.)</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#DescribeMaintenanceWindowsRequest": {
@@ -9543,6 +9735,9 @@
                         "smithy.api#documentation": "<p>The token to use when requesting the next set of items. If there are no additional items to\n   return, the string is empty.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#DescribeOpsItems": {
@@ -9559,7 +9754,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Query a set of OpsItems. You must have permission in Identity and Access Management (IAM) to query a list of OpsItems. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html\">Getting started with\n    OpsCenter</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         <p>Operations engineers and IT professionals use Amazon Web Services Systems Manager OpsCenter to view, investigate, and\n   remediate operational issues impacting the performance and health of their Amazon Web Services resources. For\n   more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html\">OpsCenter</a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>. </p>",
+                "smithy.api#documentation": "<p>Query a set of OpsItems. You must have permission in Identity and Access Management (IAM) to query a list of OpsItems. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-setup.html\">Set up OpsCenter</a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         <p>Operations engineers and IT professionals use Amazon Web Services Systems Manager OpsCenter to view, investigate, and\n   remediate operational issues impacting the performance and health of their Amazon Web Services resources. For\n   more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html\">OpsCenter</a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>. </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -9574,7 +9769,7 @@
                 "OpsItemFilters": {
                     "target": "com.amazonaws.ssm#OpsItemFilters",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more filters to limit the response.</p>\n         <ul>\n            <li>\n               <p>Key: CreatedTime</p>\n               <p>Operations: GreaterThan, LessThan</p>\n            </li>\n            <li>\n               <p>Key: LastModifiedBy</p>\n               <p>Operations: Contains, Equals</p>\n            </li>\n            <li>\n               <p>Key: LastModifiedTime</p>\n               <p>Operations: GreaterThan, LessThan</p>\n            </li>\n            <li>\n               <p>Key: Priority</p>\n               <p>Operations: Equals</p>\n            </li>\n            <li>\n               <p>Key: Source</p>\n               <p>Operations: Contains, Equals</p>\n            </li>\n            <li>\n               <p>Key: Status</p>\n               <p>Operations: Equals</p>\n            </li>\n            <li>\n               <p>Key: Title*</p>\n               <p>Operations: Equals,Contains</p>\n            </li>\n            <li>\n               <p>Key: OperationalData**</p>\n               <p>Operations: Equals</p>\n            </li>\n            <li>\n               <p>Key: OperationalDataKey</p>\n               <p>Operations: Equals</p>\n            </li>\n            <li>\n               <p>Key: OperationalDataValue</p>\n               <p>Operations: Equals, Contains</p>\n            </li>\n            <li>\n               <p>Key: OpsItemId</p>\n               <p>Operations: Equals</p>\n            </li>\n            <li>\n               <p>Key: ResourceId</p>\n               <p>Operations: Contains</p>\n            </li>\n            <li>\n               <p>Key: AutomationId</p>\n               <p>Operations: Equals</p>\n            </li>\n         </ul>\n         <p>*The Equals operator for Title matches the first 100 characters. If you specify more than\n   100 characters, they system returns an error that the filter value exceeds the length\n   limit.</p>\n         <p>**If you filter the response by using the OperationalData operator, specify a key-value pair\n   by using the following JSON format: {\"key\":\"key_name\",\"value\":\"a_value\"}</p>"
+                        "smithy.api#documentation": "<p>One or more filters to limit the response.</p>\n         <ul>\n            <li>\n               <p>Key: CreatedTime</p>\n               <p>Operations: GreaterThan, LessThan</p>\n            </li>\n            <li>\n               <p>Key: LastModifiedBy</p>\n               <p>Operations: Contains, Equals</p>\n            </li>\n            <li>\n               <p>Key: LastModifiedTime</p>\n               <p>Operations: GreaterThan, LessThan</p>\n            </li>\n            <li>\n               <p>Key: Priority</p>\n               <p>Operations: Equals</p>\n            </li>\n            <li>\n               <p>Key: Source</p>\n               <p>Operations: Contains, Equals</p>\n            </li>\n            <li>\n               <p>Key: Status</p>\n               <p>Operations: Equals</p>\n            </li>\n            <li>\n               <p>Key: Title*</p>\n               <p>Operations: Equals,Contains</p>\n            </li>\n            <li>\n               <p>Key: OperationalData**</p>\n               <p>Operations: Equals</p>\n            </li>\n            <li>\n               <p>Key: OperationalDataKey</p>\n               <p>Operations: Equals</p>\n            </li>\n            <li>\n               <p>Key: OperationalDataValue</p>\n               <p>Operations: Equals, Contains</p>\n            </li>\n            <li>\n               <p>Key: OpsItemId</p>\n               <p>Operations: Equals</p>\n            </li>\n            <li>\n               <p>Key: ResourceId</p>\n               <p>Operations: Contains</p>\n            </li>\n            <li>\n               <p>Key: AutomationId</p>\n               <p>Operations: Equals</p>\n            </li>\n            <li>\n               <p>Key: AccountId</p>\n               <p>Operations: Equals</p>\n            </li>\n         </ul>\n         <p>*The Equals operator for Title matches the first 100 characters. If you specify more than\n   100 characters, they system returns an error that the filter value exceeds the length\n   limit.</p>\n         <p>**If you filter the response by using the OperationalData operator, specify a key-value pair\n   by using the following JSON format: {\"key\":\"key_name\",\"value\":\"a_value\"}</p>"
                     }
                 },
                 "MaxResults": {
@@ -9696,6 +9891,9 @@
                         "smithy.api#documentation": "<p>The token to use when requesting the next set of items.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#DescribePatchBaselines": {
@@ -9763,6 +9961,9 @@
                         "smithy.api#documentation": "<p>The token to use when requesting the next set of items. If there are no additional items to\n   return, the string is empty.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#DescribePatchGroupState": {
@@ -9887,6 +10088,9 @@
                         "smithy.api#documentation": "<p>The number of managed nodes with patches installed that are specified as other than\n    <code>Critical</code> or <code>Security</code> but aren't compliant with the patch baseline. The\n   status of these managed nodes is <code>NON_COMPLIANT</code>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#DescribePatchGroups": {
@@ -9954,6 +10158,9 @@
                         "smithy.api#documentation": "<p>The token to use when requesting the next set of items. If there are no additional items to\n   return, the string is empty.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#DescribePatchProperties": {
@@ -10035,6 +10242,9 @@
                         "smithy.api#documentation": "<p>The token for the next set of items to return. (You use this token in the next call.)</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#DescribeSessions": {
@@ -11623,6 +11833,9 @@
                         "smithy.api#documentation": "<p>Detailed information about the current state of an automation execution.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#GetCalendarState": {
@@ -11954,6 +12167,9 @@
                         "smithy.api#documentation": "<p>Amazon CloudWatch Logs information where Systems Manager sent the command output.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#GetConnectionStatus": {
@@ -12054,6 +12270,9 @@
                         "smithy.api#documentation": "<p>The operating system for the returned patch baseline. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#GetDeployablePatchSnapshotForInstance": {
@@ -12134,6 +12353,9 @@
                         "smithy.api#documentation": "<p>Returns the specific operating system (for example Windows Server 2012 or Amazon Linux\n   2015.09) on the managed node for the specified patch snapshot.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#GetDocument": {
@@ -12273,6 +12495,9 @@
                         "smithy.api#documentation": "<p>The current review status of a new custom Systems Manager document (SSM document) created by a member\n   of your organization, or of the latest version of an existing SSM document.</p>\n         <p>Only one version of an SSM document can be in the APPROVED state at a time. When a new\n   version is approved, the status of the previous version changes to REJECTED.</p>\n         <p>Only one version of an SSM document can be in review, or PENDING, at a time.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#GetInventory": {
@@ -12370,6 +12595,9 @@
                         "smithy.api#documentation": "<p>The token to use when requesting the next set of items. If there are no additional items to\n   return, the string is empty.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#GetInventorySchema": {
@@ -12467,6 +12695,9 @@
                         "smithy.api#documentation": "<p>The token to use when requesting the next set of items. If there are no additional items to\n   return, the string is empty.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#GetMaintenanceWindow": {
@@ -12563,6 +12794,9 @@
                         "smithy.api#documentation": "<p>The time the maintenance window finished running.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#GetMaintenanceWindowExecutionTask": {
@@ -12709,6 +12943,9 @@
                         "smithy.api#documentation": "<p>The maintenance window target ID.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#GetMaintenanceWindowExecutionTaskRequest": {
@@ -12827,6 +13064,9 @@
                         "smithy.api#documentation": "<p>The CloudWatch alarms that were invoked by the maintenance window task.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#GetMaintenanceWindowRequest": {
@@ -12942,6 +13182,9 @@
                         "smithy.api#documentation": "<p>The date the maintenance window was last modified.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#GetMaintenanceWindowTask": {
@@ -13086,6 +13329,9 @@
                         "smithy.api#documentation": "<p>The details for the CloudWatch alarm you applied to your maintenance window\n   task.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#GetOpsItem": {
@@ -13108,7 +13354,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Get information about an OpsItem by using the ID. You must have permission in Identity and Access Management (IAM) to view information about an OpsItem. For more information,\n   see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html\">Getting started with\n    OpsCenter</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         <p>Operations engineers and IT professionals use Amazon Web Services Systems Manager OpsCenter to view, investigate, and\n   remediate operational issues impacting the performance and health of their Amazon Web Services resources. For\n   more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html\">OpsCenter</a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>. </p>"
+                "smithy.api#documentation": "<p>Get information about an OpsItem by using the ID. You must have permission in Identity and Access Management (IAM) to view information about an OpsItem. For more information,\n   see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-setup.html\">Set\n    up OpsCenter</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         <p>Operations engineers and IT professionals use Amazon Web Services Systems Manager OpsCenter to view, investigate, and\n   remediate operational issues impacting the performance and health of their Amazon Web Services resources. For\n   more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html\">OpsCenter</a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>. </p>"
             }
         },
         "com.amazonaws.ssm#GetOpsItemRequest": {
@@ -13228,6 +13474,9 @@
                         "smithy.api#documentation": "<p>The token for the next set of items to return. Use this token to get the next set of\n   results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#GetOpsSummary": {
@@ -13328,6 +13577,9 @@
                         "smithy.api#documentation": "<p>The token for the next set of items to return. Use this token to get the next set of\n   results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#GetParameter": {
@@ -13437,6 +13689,9 @@
                         "smithy.api#documentation": "<p>The token to use when requesting the next set of items. If there are no additional items to\n   return, the string is empty.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#GetParameterRequest": {
@@ -13470,6 +13725,9 @@
                         "smithy.api#documentation": "<p>Information about a parameter.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#GetParameters": {
@@ -13602,6 +13860,9 @@
                         "smithy.api#documentation": "<p>The token for the next set of items to return. Use this token to get the next set of\n   results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#GetParametersRequest": {
@@ -13641,6 +13902,9 @@
                         "smithy.api#documentation": "<p>A list of parameters that aren't formatted correctly or don't run during an\n   execution.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#GetPatchBaseline": {
@@ -13725,6 +13989,9 @@
                         "smithy.api#documentation": "<p>The operating system rule specified for patch groups using the patch baseline.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#GetPatchBaselineRequest": {
@@ -13836,6 +14103,9 @@
                         "smithy.api#documentation": "<p>Information about the patches to use to update the managed nodes, including target operating\n   systems and source repositories. Applies to Linux managed nodes only.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#GetResourcePolicies": {
@@ -13990,7 +14260,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The query result body of the GetServiceSetting API operation.</p>"
+                "smithy.api#documentation": "<p>The query result body of the GetServiceSetting API operation.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#HierarchyLevelLimitExceededException": {
@@ -14379,7 +14650,7 @@
                 "IamRole": {
                     "target": "com.amazonaws.ssm#IamRole",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Identity and Access Management (IAM) role assigned to the on-premises Systems Manager\n   managed node. This call doesn't return the IAM role for Amazon Elastic Compute Cloud\n    (Amazon EC2) instances. To retrieve the IAM role for an EC2 instance, use\n   the Amazon EC2 <code>DescribeInstances</code> operation. For information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html\">DescribeInstances</a> in the <i>Amazon EC2 API Reference</i> or <a href=\"https://docs.aws.amazon.com/cli/latest/ec2/describe-instances.html\">describe-instances</a> in\n   the <i>Amazon Web Services CLI Command Reference</i>.</p>"
+                        "smithy.api#documentation": "<p>The Identity and Access Management (IAM) role assigned to the on-premises Systems Manager\n   managed node. This call doesn't return the IAM role for Amazon Elastic Compute Cloud\n    (Amazon EC2) instances. To retrieve the IAM role for an EC2 instance, use\n   the Amazon EC2 <code>DescribeInstances</code> operation. For information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html\">DescribeInstances</a> in the <i>Amazon EC2 API Reference</i> or <a href=\"https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html\">describe-instances</a> in the <i>Amazon Web Services CLI Command Reference</i>.</p>"
                     }
                 },
                 "RegistrationDate": {
@@ -14397,7 +14668,7 @@
                 "Name": {
                     "target": "com.amazonaws.ssm#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name assigned to an on-premises server, edge device, or virtual machine (VM) when it is\n   activated as a Systems Manager managed node. The name is specified as the <code>DefaultInstanceName</code>\n   property using the <a>CreateActivation</a> command. It is applied to the managed node\n   by specifying the Activation Code and Activation ID when you install SSM Agent on the node, as\n   explained in <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-install-managed-linux.html\">Install SSM Agent for a\n    hybrid environment (Linux)</a> and <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-install-managed-win.html\">Install SSM Agent for a\n    hybrid environment (Windows)</a>. To retrieve the <code>Name</code> tag of an EC2 instance,\n   use the Amazon EC2 <code>DescribeInstances</code> operation. For information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html\">DescribeInstances</a> in the <i>Amazon EC2 API Reference</i> or <a href=\"https://docs.aws.amazon.com/cli/latest/ec2/describe-instances.html\">describe-instances</a> in\n   the <i>Amazon Web Services CLI Command Reference</i>.</p>"
+                        "smithy.api#documentation": "<p>The name assigned to an on-premises server, edge device, or virtual machine (VM) when it is\n   activated as a Systems Manager managed node. The name is specified as the <code>DefaultInstanceName</code>\n   property using the <a>CreateActivation</a> command. It is applied to the managed node\n   by specifying the Activation Code and Activation ID when you install SSM Agent on the node, as\n   explained in <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-install-managed-linux.html\">Install SSM Agent for a\n    hybrid environment (Linux)</a> and <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-install-managed-win.html\">Install SSM Agent for a\n    hybrid environment (Windows)</a>. To retrieve the <code>Name</code> tag of an EC2 instance,\n   use the Amazon EC2 <code>DescribeInstances</code> operation. For information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html\">DescribeInstances</a> in the <i>Amazon EC2 API Reference</i> or <a href=\"https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html\">describe-instances</a> in the <i>Amazon Web Services CLI Command Reference</i>.</p>"
                     }
                 },
                 "IPAddress": {
@@ -16537,6 +16808,9 @@
                         "smithy.api#documentation": "<p>The version of the parameter that has been labeled.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#LastResourceDataSyncMessage": {
@@ -16643,6 +16917,9 @@
                         "smithy.api#documentation": "<p>The token for the next set of items to return. Use this token to get the next set of\n   results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#ListAssociations": {
@@ -16713,6 +16990,9 @@
                         "smithy.api#documentation": "<p>The token to use when requesting the next set of items. If there are no additional items to\n   return, the string is empty.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#ListCommandInvocations": {
@@ -16811,6 +17091,9 @@
                         "smithy.api#documentation": "<p>(Optional) The token for the next set of items to return. (You received this token from a\n   previous call.)</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#ListCommands": {
@@ -16902,6 +17185,9 @@
                         "smithy.api#documentation": "<p>(Optional) The token for the next set of items to return. (You received this token from a\n   previous call.)</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#ListComplianceItems": {
@@ -16993,6 +17279,9 @@
                         "smithy.api#documentation": "<p>The token for the next set of items to return. Use this token to get the next set of\n   results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#ListComplianceSummaries": {
@@ -17066,6 +17355,9 @@
                         "smithy.api#documentation": "<p>The token for the next set of items to return. Use this token to get the next set of\n   results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#ListDocumentMetadataHistory": {
@@ -17245,6 +17537,9 @@
                         "smithy.api#documentation": "<p>The token to use when requesting the next set of items. If there are no additional items to\n   return, the string is empty.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#ListDocuments": {
@@ -17324,6 +17619,9 @@
                         "smithy.api#documentation": "<p>The token to use when requesting the next set of items. If there are no additional items to\n   return, the string is empty.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#ListInventoryEntries": {
@@ -17435,6 +17733,9 @@
                         "smithy.api#documentation": "<p>The token to use when requesting the next set of items. If there are no additional items to\n   return, the string is empty.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#ListOpsItemEvents": {
@@ -17671,6 +17972,9 @@
                         "smithy.api#documentation": "<p>The token for the next set of items to return. Use this token to get the next set of\n   results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#ListResourceComplianceSummaries": {
@@ -17744,6 +18048,9 @@
                         "smithy.api#documentation": "<p>The token for the next set of items to return. Use this token to get the next set of\n   results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#ListResourceDataSync": {
@@ -17817,6 +18124,9 @@
                         "smithy.api#documentation": "<p>The token for the next set of items to return. Use this token to get the next set of\n   results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#ListTagsForResource": {
@@ -17873,6 +18183,9 @@
                         "smithy.api#documentation": "<p>A list of tags.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#LoggingInfo": {
@@ -19914,7 +20227,7 @@
                 "OperationalData": {
                     "target": "com.amazonaws.ssm#OpsItemOperationalData",
                     "traits": {
-                        "smithy.api#documentation": "<p>Operational data is custom data that provides useful reference details about the OpsItem.\n   For example, you can specify log files, error strings, license keys, troubleshooting tips, or\n   other relevant data. You enter operational data as key-value pairs. The key has a maximum length\n   of 128 characters. The value has a maximum size of 20 KB.</p>\n         <important>\n            <p>Operational data keys <i>can't</i> begin with the following:\n     <code>amazon</code>, <code>aws</code>, <code>amzn</code>, <code>ssm</code>,\n     <code>/amazon</code>, <code>/aws</code>, <code>/amzn</code>, <code>/ssm</code>.</p>\n         </important>\n         <p>You can choose to make the data searchable by other users in the account or you can restrict\n   search access. Searchable data means that all users with access to the OpsItem Overview page (as\n   provided by the <a>DescribeOpsItems</a> API operation) can view and search on the\n   specified data. Operational data that isn't searchable is only viewable by users who have access\n   to the OpsItem (as provided by the <a>GetOpsItem</a> API operation).</p>\n         <p>Use the <code>/aws/resources</code> key in OperationalData to specify a related resource in\n   the request. Use the <code>/aws/automations</code> key in OperationalData to associate an\n   Automation runbook with the OpsItem. To view Amazon Web Services CLI example commands that use these keys, see\n    <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-creating-OpsItems.html#OpsCenter-manually-create-OpsItems\">Creating OpsItems manually</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Operational data is custom data that provides useful reference details about the OpsItem.\n   For example, you can specify log files, error strings, license keys, troubleshooting tips, or\n   other relevant data. You enter operational data as key-value pairs. The key has a maximum length\n   of 128 characters. The value has a maximum size of 20 KB.</p>\n         <important>\n            <p>Operational data keys <i>can't</i> begin with the following:\n     <code>amazon</code>, <code>aws</code>, <code>amzn</code>, <code>ssm</code>,\n     <code>/amazon</code>, <code>/aws</code>, <code>/amzn</code>, <code>/ssm</code>.</p>\n         </important>\n         <p>You can choose to make the data searchable by other users in the account or you can restrict\n   search access. Searchable data means that all users with access to the OpsItem Overview page (as\n   provided by the <a>DescribeOpsItems</a> API operation) can view and search on the\n   specified data. Operational data that isn't searchable is only viewable by users who have access\n   to the OpsItem (as provided by the <a>GetOpsItem</a> API operation).</p>\n         <p>Use the <code>/aws/resources</code> key in OperationalData to specify a related resource in\n   the request. Use the <code>/aws/automations</code> key in OperationalData to associate an\n   Automation runbook with the OpsItem. To view Amazon Web Services CLI example commands that use these keys, see\n    <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-manually-create-OpsItems.html\">Creating OpsItems\n    manually</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "Category": {
@@ -20535,7 +20848,7 @@
                     "code": "OpsItemLimitExceededException",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p>The request caused OpsItems to exceed one or more quotas. For information about OpsItem\n   quotas, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-learn-more.html#OpsCenter-learn-more-limits\">What are the resource limits for OpsCenter?</a>.</p>",
+                "smithy.api#documentation": "<p>The request caused OpsItems to exceed one or more quotas.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -23455,7 +23768,10 @@
         },
         "com.amazonaws.ssm#PutComplianceItemsResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.ssm#PutInventory": {
             "type": "operation",
@@ -23541,6 +23857,9 @@
                         "smithy.api#documentation": "<p>Information about the request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#PutParameter": {
@@ -23671,7 +23990,7 @@
                 "DataType": {
                     "target": "com.amazonaws.ssm#ParameterDataType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data type for a <code>String</code> parameter. Supported data types include plain text\n   and Amazon Machine Image (AMI) IDs.</p>\n         <p>\n            <b>The following data type values are supported.</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>text</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>aws:ec2:image</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>aws:ssm:integration</code>\n               </p>\n            </li>\n         </ul>\n         <p>When you create a <code>String</code> parameter and specify <code>aws:ec2:image</code>,\n   Amazon Web Services Systems Manager validates the parameter value is in the required format, such as\n    <code>ami-12345abcdeEXAMPLE</code>, and that the specified AMI is available in your\n   Amazon Web Services account.</p>\n         <note>\n            <p>If the action is successful, the service sends back an HTTP 200 response which indicates a\n    successful <code>PutParameter</code> call for all cases except for data type\n     <code>aws:ec2:image</code>. If you call <code>PutParameter</code> with\n     <code>aws:ec2:image</code> data type, a successful HTTP 200 response does not guarantee that\n    your parameter was successfully created or updated. The <code>aws:ec2:image</code> value is\n    validated asynchronously, and the <code>PutParameter</code> call returns before the validation\n    is complete. If you submit an invalid AMI value, the PutParameter operation will return success,\n    but the asynchronous validation will fail and the parameter will not be created or updated. To\n    monitor whether your <code>aws:ec2:image</code> parameters are created successfully,  see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-cwe.html\">Setting\n     up notifications or trigger actions based on Parameter Store events</a>.  For more\n    information about  AMI format validation , see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-ec2-aliases.html\">Native parameter\n     support for Amazon Machine Image (AMI) IDs</a>. </p>\n         </note>"
+                        "smithy.api#documentation": "<p>The data type for a <code>String</code> parameter. Supported data types include plain text\n   and Amazon Machine Image (AMI) IDs.</p>\n         <p>\n            <b>The following data type values are supported.</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>text</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>aws:ec2:image</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>aws:ssm:integration</code>\n               </p>\n            </li>\n         </ul>\n         <p>When you create a <code>String</code> parameter and specify <code>aws:ec2:image</code>,\n   Amazon Web Services Systems Manager validates the parameter value is in the required format, such as\n    <code>ami-12345abcdeEXAMPLE</code>, and that the specified AMI is available in your\n   Amazon Web Services account.</p>\n         <note>\n            <p>If the action is successful, the service sends back an HTTP 200 response which indicates a\n    successful <code>PutParameter</code> call for all cases except for data type\n     <code>aws:ec2:image</code>. If you call <code>PutParameter</code> with\n     <code>aws:ec2:image</code> data type, a successful HTTP 200 response does not guarantee that\n    your parameter was successfully created or updated. The <code>aws:ec2:image</code> value is\n    validated asynchronously, and the <code>PutParameter</code> call returns before the validation\n    is complete. If you submit an invalid AMI value, the PutParameter operation will return success,\n    but the asynchronous validation will fail and the parameter will not be created or updated. To\n    monitor whether your <code>aws:ec2:image</code> parameters are created successfully, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-cwe.html\">Setting\n     up notifications or trigger actions based on Parameter Store events</a>. For more\n    information about AMI format validation , see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-ec2-aliases.html\">Native parameter\n     support for Amazon Machine Image (AMI) IDs</a>. </p>\n         </note>"
                     }
                 }
             },
@@ -23695,6 +24014,9 @@
                         "smithy.api#documentation": "<p>The tier assigned to the parameter.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#PutResourcePolicy": {
@@ -23856,6 +24178,9 @@
                         "smithy.api#documentation": "<p>The ID of the default patch baseline.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#RegisterPatchBaselineForPatchGroup": {
@@ -23924,6 +24249,9 @@
                         "smithy.api#documentation": "<p>The name of the patch group registered with the patch baseline.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#RegisterTargetWithMaintenanceWindow": {
@@ -24015,6 +24343,9 @@
                         "smithy.api#documentation": "<p>The ID of the target definition in this maintenance window.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#RegisterTaskWithMaintenanceWindow": {
@@ -24164,6 +24495,9 @@
                         "smithy.api#documentation": "<p>The ID of the task in the maintenance window.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#RegistrationLimit": {
@@ -24318,7 +24652,10 @@
         },
         "com.amazonaws.ssm#RemoveTagsFromResourceResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.ssm#RequireType": {
             "type": "string",
@@ -24380,7 +24717,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The result body of the ResetServiceSetting API operation.</p>"
+                "smithy.api#documentation": "<p>The result body of the ResetServiceSetting API operation.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#ResolvedTargets": {
@@ -25605,7 +25943,10 @@
         },
         "com.amazonaws.ssm#SendAutomationSignalResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.ssm#SendCommand": {
             "type": "operation",
@@ -25781,6 +26122,9 @@
                         "smithy.api#documentation": "<p>The request as it was received by Systems Manager. Also provides the command ID which can be used\n   future references to this request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#ServiceRole": {
@@ -26410,7 +26754,10 @@
         },
         "com.amazonaws.ssm#StartAssociationsOnceResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.ssm#StartAutomationExecution": {
             "type": "operation",
@@ -26543,6 +26890,9 @@
                         "smithy.api#documentation": "<p>The unique ID of a newly scheduled automation execution.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#StartChangeRequestExecution": {
@@ -26666,6 +27016,9 @@
                         "smithy.api#documentation": "<p>The unique ID of a runbook workflow operation. (A runbook workflow is a type of Automation\n   operation.) </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#StartSession": {
@@ -27090,7 +27443,10 @@
         },
         "com.amazonaws.ssm#StopAutomationExecutionResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.ssm#StopType": {
             "type": "enum",
@@ -27610,6 +27966,9 @@
                         "smithy.api#documentation": "<p>The labels that aren't attached to the given parameter version.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#UnsupportedCalendarException": {
@@ -27917,6 +28276,9 @@
                         "smithy.api#documentation": "<p>The description of the association that was updated.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#UpdateAssociationStatus": {
@@ -27989,6 +28351,9 @@
                         "smithy.api#documentation": "<p>Information about the association.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#UpdateDocument": {
@@ -28092,6 +28457,9 @@
                         "smithy.api#documentation": "<p>The description of a custom document that you want to set as the default version.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#UpdateDocumentMetadata": {
@@ -28222,6 +28590,9 @@
                         "smithy.api#documentation": "<p>A description of the document that was updated.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#UpdateMaintenanceWindow": {
@@ -28417,6 +28788,9 @@
                         "smithy.api#documentation": "<p>Whether the maintenance window is enabled.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#UpdateMaintenanceWindowTarget": {
@@ -28531,6 +28905,9 @@
                         "smithy.api#documentation": "<p>The updated description.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#UpdateMaintenanceWindowTask": {
@@ -28755,6 +29132,9 @@
                         "smithy.api#documentation": "<p>The details for the CloudWatch alarm you applied to your maintenance window\n   task.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#UpdateManagedInstanceRole": {
@@ -28801,7 +29181,10 @@
         },
         "com.amazonaws.ssm#UpdateManagedInstanceRoleResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.ssm#UpdateOpsItem": {
             "type": "operation",
@@ -28832,7 +29215,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Edit or change an OpsItem. You must have permission in Identity and Access Management (IAM) to update an OpsItem. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html\">Getting started with\n    OpsCenter</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         <p>Operations engineers and IT professionals use Amazon Web Services Systems Manager OpsCenter to view, investigate, and\n   remediate operational issues impacting the performance and health of their Amazon Web Services resources. For\n   more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html\">OpsCenter</a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>. </p>"
+                "smithy.api#documentation": "<p>Edit or change an OpsItem. You must have permission in Identity and Access Management (IAM) to update an OpsItem. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-setup.html\">Set up OpsCenter</a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         <p>Operations engineers and IT professionals use Amazon Web Services Systems Manager OpsCenter to view, investigate, and\n   remediate operational issues impacting the performance and health of their Amazon Web Services resources. For\n   more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html\">OpsCenter</a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>. </p>"
             }
         },
         "com.amazonaws.ssm#UpdateOpsItemRequest": {
@@ -28847,7 +29230,7 @@
                 "OperationalData": {
                     "target": "com.amazonaws.ssm#OpsItemOperationalData",
                     "traits": {
-                        "smithy.api#documentation": "<p>Add new keys or edit existing key-value pairs of the OperationalData map in the OpsItem\n   object.</p>\n         <p>Operational data is custom data that provides useful reference details about the OpsItem.\n   For example, you can specify log files, error strings, license keys, troubleshooting tips, or\n   other relevant data. You enter operational data as key-value pairs. The key has a maximum length\n   of 128 characters. The value has a maximum size of 20 KB.</p>\n         <important>\n            <p>Operational data keys <i>can't</i> begin with the following:\n     <code>amazon</code>, <code>aws</code>, <code>amzn</code>, <code>ssm</code>,\n     <code>/amazon</code>, <code>/aws</code>, <code>/amzn</code>, <code>/ssm</code>.</p>\n         </important>\n         <p>You can choose to make the data searchable by other users in the account or you can restrict\n   search access. Searchable data means that all users with access to the OpsItem Overview page (as\n   provided by the <a>DescribeOpsItems</a> API operation) can view and search on the\n   specified data. Operational data that isn't searchable is only viewable by users who have access\n   to the OpsItem (as provided by the <a>GetOpsItem</a> API operation).</p>\n         <p>Use the <code>/aws/resources</code> key in OperationalData to specify a related resource in\n   the request. Use the <code>/aws/automations</code> key in OperationalData to associate an\n   Automation runbook with the OpsItem. To view Amazon Web Services CLI example commands that use these keys, see\n    <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-creating-OpsItems.html#OpsCenter-manually-create-OpsItems\">Creating OpsItems manually</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Add new keys or edit existing key-value pairs of the OperationalData map in the OpsItem\n   object.</p>\n         <p>Operational data is custom data that provides useful reference details about the OpsItem.\n   For example, you can specify log files, error strings, license keys, troubleshooting tips, or\n   other relevant data. You enter operational data as key-value pairs. The key has a maximum length\n   of 128 characters. The value has a maximum size of 20 KB.</p>\n         <important>\n            <p>Operational data keys <i>can't</i> begin with the following:\n     <code>amazon</code>, <code>aws</code>, <code>amzn</code>, <code>ssm</code>,\n     <code>/amazon</code>, <code>/aws</code>, <code>/amzn</code>, <code>/ssm</code>.</p>\n         </important>\n         <p>You can choose to make the data searchable by other users in the account or you can restrict\n   search access. Searchable data means that all users with access to the OpsItem Overview page (as\n   provided by the <a>DescribeOpsItems</a> API operation) can view and search on the\n   specified data. Operational data that isn't searchable is only viewable by users who have access\n   to the OpsItem (as provided by the <a>GetOpsItem</a> API operation).</p>\n         <p>Use the <code>/aws/resources</code> key in OperationalData to specify a related resource in\n   the request. Use the <code>/aws/automations</code> key in OperationalData to associate an\n   Automation runbook with the OpsItem. To view Amazon Web Services CLI example commands that use these keys, see\n    <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-manually-create-OpsItems.html\">Creating OpsItems\n    manually</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "OperationalDataToDelete": {
@@ -28877,7 +29260,7 @@
                 "Status": {
                     "target": "com.amazonaws.ssm#OpsItemStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The OpsItem status. Status can be <code>Open</code>, <code>In Progress</code>, or\n    <code>Resolved</code>. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-working-with-OpsItems.html#OpsCenter-working-with-OpsItems-editing-details\">Editing OpsItem details</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The OpsItem status. Status can be <code>Open</code>, <code>In Progress</code>, or\n    <code>Resolved</code>. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-working-with-OpsItems-editing-details.html\">Editing OpsItem details</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "OpsItemId": {
@@ -29012,6 +29395,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the OpsMetadata Object that was updated.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#UpdatePatchBaseline": {
@@ -29205,6 +29591,9 @@
                         "smithy.api#documentation": "<p>Information about the patches to use to update the managed nodes, including target operating\n   systems and source repositories. Applies to Linux managed nodes only.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#UpdateResourceDataSync": {
@@ -29264,7 +29653,10 @@
         },
         "com.amazonaws.ssm#UpdateResourceDataSyncResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.ssm#UpdateServiceSetting": {
             "type": "operation",
@@ -29295,7 +29687,7 @@
                 "SettingId": {
                     "target": "com.amazonaws.ssm#ServiceSettingId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the service setting to update. For example,\n    <code>arn:aws:ssm:us-east-1:111122223333:servicesetting/ssm/parameter-store/high-throughput-enabled</code>.\n   The setting ID can be one of the following.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>/ssm/managed-instance/default-ec2-instance-management-role</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/automation/customer-script-log-destination</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/automation/customer-script-log-group-name</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/documents/console/public-sharing-permission</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/managed-instance/activation-tier</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/opsinsights/opscenter</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/parameter-store/default-parameter-tier</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/parameter-store/high-throughput-enabled</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>Permissions to update the <code>/ssm/managed-instance/default-ec2-instance-management-role</code> setting should only be provided to administrators. Implement least privilege access when allowing individuals to configure or modify the Default Host Management Configuration.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the service setting to update. For example,\n    <code>arn:aws:ssm:us-east-1:111122223333:servicesetting/ssm/parameter-store/high-throughput-enabled</code>.\n   The setting ID can be one of the following.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>/ssm/managed-instance/default-ec2-instance-management-role</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/automation/customer-script-log-destination</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/automation/customer-script-log-group-name</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/documents/console/public-sharing-permission</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/managed-instance/activation-tier</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/opsinsights/opscenter</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/parameter-store/default-parameter-tier</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>/ssm/parameter-store/high-throughput-enabled</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>Permissions to update the\n     <code>/ssm/managed-instance/default-ec2-instance-management-role</code> setting should only be\n    provided to administrators. Implement least privilege access when allowing individuals to\n    configure or modify the Default Host Management Configuration.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -29316,7 +29708,8 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>The result body of the UpdateServiceSetting API operation.</p>"
+                "smithy.api#documentation": "<p>The result body of the UpdateServiceSetting API operation.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssm#Url": {

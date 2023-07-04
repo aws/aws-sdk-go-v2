@@ -145,7 +145,7 @@
                 "tags": {
                     "target": "com.amazonaws.privatenetworks#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n           The tags on the device identifier. \n        </p>"
+                        "smithy.api#documentation": "<p> The tags on the device identifier. </p>"
                     }
                 }
             }
@@ -201,6 +201,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html\">How to ensure\n                idempotency</a>.</p>"
                     }
+                },
+                "commitmentConfiguration": {
+                    "target": "com.amazonaws.privatenetworks#CommitmentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines the duration and renewal status of the commitment period for all pending radio\n            units.</p>\n         <p>If you include <code>commitmentConfiguration</code> in the\n                <code>ActivateNetworkSiteRequest</code> action, you must specify the\n            following:</p>\n         <ul>\n            <li>\n               <p>The commitment period for the radio unit. You can choose a 60-day, 1-year, or\n                    3-year period.</p>\n            </li>\n            <li>\n               <p>Whether you want your commitment period to automatically renew for one more\n                    year after your current commitment period expires.</p>\n            </li>\n         </ul>\n         <p>For pricing, see <a href=\"http://aws.amazon.com/private5g/pricing\">Amazon Web Services Private 5G\n                Pricing</a>.</p>\n         <p>If you do not include <code>commitmentConfiguration</code> in the\n                <code>ActivateNetworkSiteRequest</code> action, the commitment period is set to\n            60-days.</p>"
+                    }
                 }
             }
         },
@@ -248,7 +254,7 @@
                 "phoneNumber": {
                     "target": "com.amazonaws.privatenetworks#AddressContent",
                     "traits": {
-                        "smithy.api#documentation": "<p>The phone number for this address.</p>"
+                        "smithy.api#documentation": "<p>The recipient's phone number.</p>"
                     }
                 },
                 "postalCode": {
@@ -283,6 +289,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The third line of the street address.</p>"
                     }
+                },
+                "emailAddress": {
+                    "target": "com.amazonaws.privatenetworks#AddressContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recipient's email address.</p>"
+                    }
                 }
             },
             "traits": {
@@ -314,6 +326,74 @@
                 }
             }
         },
+        "com.amazonaws.privatenetworks#CommitmentConfiguration": {
+            "type": "structure",
+            "members": {
+                "commitmentLength": {
+                    "target": "com.amazonaws.privatenetworks#CommitmentLength",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The duration of the commitment period for the radio unit. You can choose a 60-day, 1-year, or 3-year\n            period.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "automaticRenewal": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines whether the commitment period for a radio unit is set to automatically\n            renew for an additional 1 year after your current commitment period expires.</p>\n         <p>Set to <code>True</code>, if you want your commitment period to automatically renew.\n            Set to <code>False</code> if you do not want your commitment to automatically renew.</p>\n         <p>You can do the following:</p>\n         <ul>\n            <li>\n               <p>Set a 1-year commitment to automatically renew for an additional 1 year. The\n                    hourly rate for the additional year will continue to be the same as your\n                    existing 1-year rate.</p>\n            </li>\n            <li>\n               <p>Set a 3-year commitment to automatically renew for an additional 1 year. The\n                    hourly rate for the additional year will continue to be the same as your\n                    existing 3-year rate.</p>\n            </li>\n            <li>\n               <p>Turn off a previously-enabled automatic renewal on a 1-year or 3-year\n                    commitment.</p>\n            </li>\n         </ul>\n         <p>You cannot use the automatic-renewal option for a 60-day\n            commitment.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Determines the duration and renewal status of the commitment period for a radio\n            unit.</p>\n         <p>For pricing, see <a href=\"http://aws.amazon.com/private5g/pricing\">Amazon Web Services Private 5G\n                Pricing</a>.</p>"
+            }
+        },
+        "com.amazonaws.privatenetworks#CommitmentInformation": {
+            "type": "structure",
+            "members": {
+                "commitmentConfiguration": {
+                    "target": "com.amazonaws.privatenetworks#CommitmentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The duration and renewal status of the commitment period for the radio unit.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "startAt": {
+                    "target": "com.amazonaws.privatenetworks#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the commitment period started.</p>"
+                    }
+                },
+                "expiresOn": {
+                    "target": "com.amazonaws.privatenetworks#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the commitment period ends. If you do not cancel or renew the\n            commitment before the expiration date, you will be billed at the 60-day-commitment\n            rate.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Shows the duration, the date and time that the contract started and ends, and the\n            renewal status of the commitment period for the radio unit.</p>"
+            }
+        },
+        "com.amazonaws.privatenetworks#CommitmentLength": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "SIXTY_DAYS",
+                        "value": "SIXTY_DAYS"
+                    },
+                    {
+                        "name": "ONE_YEAR",
+                        "value": "ONE_YEAR"
+                    },
+                    {
+                        "name": "THREE_YEARS",
+                        "value": "THREE_YEARS"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.privatenetworks#ConfigureAccessPoint": {
             "type": "operation",
             "input": {
@@ -334,7 +414,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Configures the specified network resource. \n        </p>\n         <p>    \n            Use this action to specify the geographic\n            position of the hardware. You must provide Certified Professional Installer (CPI)\n            credentials in the request so that we can obtain spectrum grants. For more information,\n            see <a href=\"https://docs.aws.amazon.com/private-networks/latest/userguide/radio-units.html\">Radio\n                units</a> in the <i>Amazon Web Services Private 5G User Guide</i>. </p>",
+                "smithy.api#documentation": "<p>Configures the specified network resource. </p>\n         <p> Use this action to specify the geographic position of the hardware. You must provide\n            Certified Professional Installer (CPI) credentials in the request so that we can obtain\n            spectrum grants. For more information, see <a href=\"https://docs.aws.amazon.com/private-networks/latest/userguide/radio-units.html\">Radio units</a> in the\n                    <i>Amazon Web Services Private 5G User Guide</i>. </p>",
                 "smithy.api#http": {
                     "uri": "/v1/network-resources/configure",
                     "method": "POST",
@@ -372,7 +452,7 @@
                 "cpiUserId": {
                     "target": "com.amazonaws.privatenetworks#SensitiveString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The CPI user ID of the CPI user who is certifying the coordinates of the network resource. </p>",
+                        "smithy.api#documentation": "<p>The CPI user ID of the CPI user who is certifying the coordinates of the network\n            resource. </p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 4096
@@ -448,7 +528,7 @@
                 "networkName": {
                     "target": "com.amazonaws.privatenetworks#Name",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the network. You can't change the name after you create the network.</p>",
+                        "smithy.api#documentation": "<p>The name of the network. You can't change the name after you create the\n            network.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -467,7 +547,7 @@
                 "tags": {
                     "target": "com.amazonaws.privatenetworks#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n          The tags to apply to the network.\n        </p>"
+                        "smithy.api#documentation": "<p> The tags to apply to the network. </p>"
                     }
                 }
             }
@@ -485,7 +565,7 @@
                 "tags": {
                     "target": "com.amazonaws.privatenetworks#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The network tags. \n        </p>"
+                        "smithy.api#documentation": "<p> The network tags. </p>"
                     }
                 }
             }
@@ -557,19 +637,19 @@
                 "availabilityZone": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Availability Zone that is the parent of this site. You can't change the Availability Zone \n        after you create the site.</p>"
+                        "smithy.api#documentation": "<p>The Availability Zone that is the parent of this site. You can't change the\n            Availability Zone after you create the site.</p>"
                     }
                 },
                 "availabilityZoneId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the Availability Zone that is the parent of this site. You can't change the Availability Zone \n            after you create the site.</p>"
+                        "smithy.api#documentation": "<p>The ID of the Availability Zone that is the parent of this site. You can't change the\n            Availability Zone after you create the site.</p>"
                     }
                 },
                 "tags": {
                     "target": "com.amazonaws.privatenetworks#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The tags to apply to the network site.\n        </p>"
+                        "smithy.api#documentation": "<p> The tags to apply to the network site. </p>"
                     }
                 }
             }
@@ -586,7 +666,7 @@
                 "tags": {
                     "target": "com.amazonaws.privatenetworks#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The network site tags.\n        </p>"
+                        "smithy.api#documentation": "<p> The network site tags. </p>"
                     }
                 }
             }
@@ -673,7 +753,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified network. You must delete network sites before you delete the\n            network. For more information, see \n            <a href=\"https://docs.aws.amazon.com/private-networks/latest/APIReference/API_DeleteNetworkSite.html\">DeleteNetworkSite</a> in the \n            <i>API Reference for Amazon Web Services Private 5G</i>.</p>",
+                "smithy.api#documentation": "<p>Deletes the specified network. You must delete network sites before you delete the\n            network. For more information, see <a href=\"https://docs.aws.amazon.com/private-networks/latest/APIReference/API_DeleteNetworkSite.html\">DeleteNetworkSite</a> in the <i>API Reference for Amazon Web Services Private\n                5G</i>.</p>",
                 "smithy.api#http": {
                     "uri": "/v1/networks/{networkArn}",
                     "method": "DELETE",
@@ -798,13 +878,13 @@
                 "trafficGroupArn": {
                     "target": "com.amazonaws.privatenetworks#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the traffic group to which the device identifier belongs.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the traffic group to which the device identifier\n            belongs.</p>"
                     }
                 },
                 "networkArn": {
                     "target": "com.amazonaws.privatenetworks#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the network on which the device identifier appears.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the network on which the device identifier\n            appears.</p>"
                     }
                 },
                 "imsi": {
@@ -835,7 +915,7 @@
                 "orderArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the order used to purchase the device identifier.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the order used to purchase the device\n            identifier.</p>"
                     }
                 },
                 "createdAt": {
@@ -1375,8 +1455,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1388,8 +1468,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1401,8 +1481,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1414,8 +1494,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1427,8 +1507,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1440,8 +1520,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1453,8 +1533,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1466,8 +1546,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1479,8 +1559,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1492,8 +1572,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1505,8 +1585,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1518,8 +1598,19 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1531,8 +1622,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1544,8 +1646,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1557,8 +1670,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1570,8 +1694,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1583,8 +1707,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1596,8 +1720,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1608,8 +1732,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1620,9 +1744,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -1711,7 +1841,7 @@
                 "tags": {
                     "target": "com.amazonaws.privatenetworks#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The device identifier tags.\n        </p>"
+                        "smithy.api#documentation": "<p> The device identifier tags. </p>"
                     }
                 }
             }
@@ -1813,7 +1943,7 @@
                 "tags": {
                     "target": "com.amazonaws.privatenetworks#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The network resource tags.\n        </p>"
+                        "smithy.api#documentation": "<p> The network resource tags. </p>"
                     }
                 }
             }
@@ -1831,7 +1961,7 @@
                 "tags": {
                     "target": "com.amazonaws.privatenetworks#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The network tags.\n        </p>"
+                        "smithy.api#documentation": "<p> The network tags. </p>"
                     }
                 }
             }
@@ -1890,7 +2020,7 @@
                 "tags": {
                     "target": "com.amazonaws.privatenetworks#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The network site tags.\n        </p>"
+                        "smithy.api#documentation": "<p> The network site tags. </p>"
                     }
                 }
             }
@@ -1950,7 +2080,7 @@
                 "tags": {
                     "target": "com.amazonaws.privatenetworks#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The order tags.\n        </p>"
+                        "smithy.api#documentation": "<p> The order tags. </p>"
                     }
                 }
             }
@@ -2035,7 +2165,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists device identifiers. Add filters to your request to return a more \n            specific list of results. Use filters to match the Amazon Resource Name (ARN) of an order, \n            the status of device identifiers, or the ARN of the traffic group.</p>\n         <p>If you specify multiple filters, filters are joined with an OR, and the request\nreturns results that match all of the specified filters.</p>",
+                "smithy.api#documentation": "<p>Lists device identifiers. Add filters to your request to return a more specific list\n            of results. Use filters to match the Amazon Resource Name (ARN) of an order, the status\n            of device identifiers, or the ARN of the traffic group.</p>\n         <p>If you specify multiple filters, filters are joined with an OR, and the request\nreturns results that match all of the specified filters.</p>",
                 "smithy.api#http": {
                     "uri": "/v1/device-identifiers/list",
                     "method": "POST",
@@ -2056,7 +2186,7 @@
                 "filters": {
                     "target": "com.amazonaws.privatenetworks#DeviceIdentifierFilters",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ORDER</code> - The Amazon Resource Name (ARN) of the order.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STATUS</code> - The status (<code>ACTIVE</code> | <code>INACTIVE</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>TRAFFIC_GROUP</code> - The Amazon Resource Name (ARN) of the traffic group.</p>\n            </li>\n         </ul>\n         <p>Filter values are case sensitive. If you specify multiple \n         values for a filter, the values are joined with an <code>OR</code>, and the request returns \n         all results that match any of the specified values.</p>"
+                        "smithy.api#documentation": "<p>The filters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ORDER</code> - The Amazon Resource Name (ARN) of the order.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STATUS</code> - The status (<code>ACTIVE</code> |\n                    <code>INACTIVE</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>TRAFFIC_GROUP</code> - The Amazon Resource Name (ARN) of the traffic\n                    group.</p>\n            </li>\n         </ul>\n         <p>Filter values are case sensitive. If you specify multiple \n         values for a filter, the values are joined with an <code>OR</code>, and the request returns \n         all results that match any of the specified values.</p>"
                     }
                 },
                 "networkArn": {
@@ -2122,7 +2252,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists network resources.  Add filters to your request to return a more \n            specific list of results. Use filters to match the Amazon Resource Name (ARN) of an order or  \n            the status of network resources.</p>\n         <p>If you specify multiple filters, filters are joined with an OR, and the request\nreturns results that match all of the specified filters.</p>",
+                "smithy.api#documentation": "<p>Lists network resources. Add filters to your request to return a more specific list of\n            results. Use filters to match the Amazon Resource Name (ARN) of an order or the status\n            of network resources.</p>\n         <p>If you specify multiple filters, filters are joined with an OR, and the request\nreturns results that match all of the specified filters.</p>",
                 "smithy.api#http": {
                     "uri": "/v1/network-resources",
                     "method": "POST",
@@ -2143,7 +2273,7 @@
                 "filters": {
                     "target": "com.amazonaws.privatenetworks#NetworkResourceFilters",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ORDER</code> - The Amazon Resource Name (ARN) of the order.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STATUS</code> - The status (<code>AVAILABLE</code> | <code>DELETED</code>\n                    | <code>DELETING</code> | <code>PENDING</code> | <code>PENDING_RETURN</code>\n                    | <code>PROVISIONING</code> | <code>SHIPPED</code>).</p>\n            </li>\n         </ul>\n         <p>Filter values are case sensitive. If you specify multiple \n         values for a filter, the values are joined with an <code>OR</code>, and the request returns \n         all results that match any of the specified values.</p>"
+                        "smithy.api#documentation": "<p>The filters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ORDER</code> - The Amazon Resource Name (ARN) of the order.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STATUS</code> - The status (<code>AVAILABLE</code> |\n                        <code>DELETED</code> | <code>DELETING</code> | <code>PENDING</code> |\n                        <code>PENDING_RETURN</code> | <code>PROVISIONING</code> |\n                        <code>SHIPPED</code>).</p>\n            </li>\n         </ul>\n         <p>Filter values are case sensitive. If you specify multiple \n         values for a filter, the values are joined with an <code>OR</code>, and the request returns \n         all results that match any of the specified values.</p>"
                     }
                 },
                 "networkArn": {
@@ -2209,7 +2339,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists network sites. Add filters to your request to return a more \n            specific list of results. Use filters to match the status of the network site.</p>",
+                "smithy.api#documentation": "<p>Lists network sites. Add filters to your request to return a more specific list of\n            results. Use filters to match the status of the network site.</p>",
                 "smithy.api#http": {
                     "uri": "/v1/network-sites/list",
                     "method": "POST",
@@ -2230,7 +2360,7 @@
                 "filters": {
                     "target": "com.amazonaws.privatenetworks#NetworkSiteFilters",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filters. Add filters to your request to return a more \n            specific list of results. Use filters to match the status of the network sites.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>STATUS</code> - The status (<code>AVAILABLE</code> | <code>CREATED</code>\n                    | <code>DELETED</code> | <code>DEPROVISIONING</code> | <code>PROVISIONING</code>).</p>\n            </li>\n         </ul>\n         <p>Filter values are case sensitive. If you specify multiple \n         values for a filter, the values are joined with an <code>OR</code>, and the request returns \n         all results that match any of the specified values.</p>"
+                        "smithy.api#documentation": "<p>The filters. Add filters to your request to return a more specific list of results.\n            Use filters to match the status of the network sites.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>STATUS</code> - The status (<code>AVAILABLE</code> |\n                        <code>CREATED</code> | <code>DELETED</code> | <code>DEPROVISIONING</code> |\n                        <code>PROVISIONING</code>).</p>\n            </li>\n         </ul>\n         <p>Filter values are case sensitive. If you specify multiple \n         values for a filter, the values are joined with an <code>OR</code>, and the request returns \n         all results that match any of the specified values.</p>"
                     }
                 },
                 "networkArn": {
@@ -2296,7 +2426,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists networks. Add filters to your request to return a more \n            specific list of results. Use filters to match the status of the network.</p>",
+                "smithy.api#documentation": "<p>Lists networks. Add filters to your request to return a more specific list of results.\n            Use filters to match the status of the network.</p>",
                 "smithy.api#http": {
                     "uri": "/v1/networks/list",
                     "method": "POST",
@@ -2317,7 +2447,7 @@
                 "filters": {
                     "target": "com.amazonaws.privatenetworks#NetworkFilters",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>STATUS</code> - The status (<code>AVAILABLE</code> | <code>CREATED</code>\n                    | <code>DELETED</code> | <code>DEPROVISIONING</code> | <code>PROVISIONING</code>).</p>\n            </li>\n         </ul>\n         <p>Filter values are case sensitive. If you specify multiple \n         values for a filter, the values are joined with an <code>OR</code>, and the request returns \n         all results that match any of the specified values.</p>"
+                        "smithy.api#documentation": "<p>The filters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>STATUS</code> - The status (<code>AVAILABLE</code> |\n                        <code>CREATED</code> | <code>DELETED</code> | <code>DEPROVISIONING</code> |\n                        <code>PROVISIONING</code>).</p>\n            </li>\n         </ul>\n         <p>Filter values are case sensitive. If you specify multiple \n         values for a filter, the values are joined with an <code>OR</code>, and the request returns \n         all results that match any of the specified values.</p>"
                     }
                 },
                 "startToken": {
@@ -2376,7 +2506,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists orders.  Add filters to your request to return a more \n            specific list of results. Use filters to match the Amazon Resource Name (ARN) of the network site or  \n            the status of the order.</p>\n         <p>If you specify multiple filters, filters are joined with an OR, and the request\nreturns results that match all of the specified filters.</p>",
+                "smithy.api#documentation": "<p>Lists orders. Add filters to your request to return a more specific list of results.\n            Use filters to match the Amazon Resource Name (ARN) of the network site or the status of\n            the order.</p>\n         <p>If you specify multiple filters, filters are joined with an OR, and the request\nreturns results that match all of the specified filters.</p>",
                 "smithy.api#http": {
                     "uri": "/v1/orders/list",
                     "method": "POST",
@@ -2421,7 +2551,7 @@
                 "filters": {
                     "target": "com.amazonaws.privatenetworks#OrderFilters",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>NETWORK_SITE</code> - The Amazon Resource Name (ARN) of the network site.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STATUS</code> - The status (<code>ACKNOWLEDGING</code> | <code>ACKNOWLEDGED</code>\n                    | <code>UNACKNOWLEDGED</code>).</p>\n            </li>\n         </ul>\n         <p>Filter values are case sensitive. If you specify multiple \n         values for a filter, the values are joined with an <code>OR</code>, and the request returns \n         all results that match any of the specified values.</p>"
+                        "smithy.api#documentation": "<p>The filters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>NETWORK_SITE</code> - The Amazon Resource Name (ARN) of the network\n                    site.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STATUS</code> - The status (<code>ACKNOWLEDGING</code> |\n                        <code>ACKNOWLEDGED</code> | <code>UNACKNOWLEDGED</code>).</p>\n            </li>\n         </ul>\n         <p>Filter values are case sensitive. If you specify multiple \n         values for a filter, the values are joined with an <code>OR</code>, and the request returns \n         all results that match any of the specified values.</p>"
                     }
                 }
             }
@@ -2678,7 +2808,7 @@
                 "networkArn": {
                     "target": "com.amazonaws.privatenetworks#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the network on which this network resource appears.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the network on which this network resource\n            appears.</p>"
                     }
                 },
                 "networkSiteArn": {
@@ -2690,7 +2820,7 @@
                 "orderArn": {
                     "target": "com.amazonaws.privatenetworks#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the order used to purchase this network resource.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the order used to purchase this network\n            resource.</p>"
                     }
                 },
                 "attributes": {
@@ -2715,6 +2845,12 @@
                     "target": "com.amazonaws.privatenetworks#ReturnInformation",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about a request to return the network resource.</p>"
+                    }
+                },
+                "commitmentInformation": {
+                    "target": "com.amazonaws.privatenetworks#CommitmentInformation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the commitment period for the radio unit. Shows the duration, the\n            date and time that the contract started and ends, and the renewal status of the\n            commitment period.</p>"
                     }
                 }
             },
@@ -2903,7 +3039,7 @@
                 "networkArn": {
                     "target": "com.amazonaws.privatenetworks#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the network to which the network site belongs.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the network to which the network site\n            belongs.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2928,13 +3064,13 @@
                 "availabilityZone": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The parent Availability Zone for the network site.\n        </p>"
+                        "smithy.api#documentation": "<p> The parent Availability Zone for the network site. </p>"
                     }
                 },
                 "availabilityZoneId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The parent Availability Zone ID for the network site.\n        </p>"
+                        "smithy.api#documentation": "<p> The parent Availability Zone ID for the network site. </p>"
                     }
                 }
             },
@@ -3078,6 +3214,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The creation time of the order.</p>"
                     }
+                },
+                "orderedResources": {
+                    "target": "com.amazonaws.privatenetworks#OrderedResourceDefinitions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the network resources placed in the order.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3118,6 +3260,43 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.privatenetworks#Order"
+            }
+        },
+        "com.amazonaws.privatenetworks#OrderedResourceDefinition": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.privatenetworks#NetworkResourceDefinitionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of network resource in the order.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "count": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of network resources in the order.</p>",
+                        "smithy.api#range": {
+                            "min": 0
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "commitmentConfiguration": {
+                    "target": "com.amazonaws.privatenetworks#CommitmentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The duration and renewal status of the commitment period for each radio unit in the\n            order. Does not show details if the resource type is DEVICE_IDENTIFIER.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details of the network resources in the order.</p>"
+            }
+        },
+        "com.amazonaws.privatenetworks#OrderedResourceDefinitions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.privatenetworks#OrderedResourceDefinition"
             }
         },
         "com.amazonaws.privatenetworks#PaginationToken": {
@@ -3238,7 +3417,7 @@
                 "returnReason": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The reason for the return. If the return request did not include a \n           reason for the return, this value is null.</p>"
+                        "smithy.api#documentation": "<p>The reason for the return. If the return request did not include a reason for the\n            return, this value is null.</p>"
                     }
                 },
                 "replacementOrderArn": {
@@ -3250,7 +3429,7 @@
                 "shippingLabel": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URL of the shipping label. The shipping label is available for download\n            only if the status of the network resource is <code>PENDING_RETURN</code>.\n            For more information, see <a href=\"https://docs.aws.amazon.com/private-networks/latest/userguide/radio-units.html#return-radio-unit\">Return a radio unit</a>.</p>"
+                        "smithy.api#documentation": "<p>The URL of the shipping label. The shipping label is available for download only if\n            the status of the network resource is <code>PENDING_RETURN</code>. For more information,\n            see <a href=\"https://docs.aws.amazon.com/private-networks/latest/userguide/radio-units.html#return-radio-unit\">Return a\n                radio unit</a>.</p>"
                     }
                 }
             },
@@ -3304,7 +3483,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts an update of the specified network resource.</p>\n         <p>After you submit a request to replace or return a network resource, the status\n           of the network resource is <code>CREATING_SHIPPING_LABEL</code>. The shipping label \n            is available when the status of the network resource is <code>PENDING_RETURN</code>. \n            After the network resource is successfully returned, its status is <code>DELETED</code>. \n            For more information, see <a href=\"https://docs.aws.amazon.com/private-networks/latest/userguide/radio-units.html#return-radio-unit\">Return a radio unit</a>.</p>",
+                "smithy.api#documentation": "<p>Use this action to do the following tasks:</p>\n         <ul>\n            <li>\n               <p>Update the duration and renewal status of the commitment period for a radio\n                    unit. The update goes into effect immediately.</p>\n            </li>\n            <li>\n               <p>Request a replacement for a network resource.</p>\n            </li>\n            <li>\n               <p>Request that you return a network resource.</p>\n            </li>\n         </ul>\n         <p>After you submit a request to replace or return a network resource, the status of the\n            network resource changes to <code>CREATING_SHIPPING_LABEL</code>. The shipping label is\n            available when the status of the network resource is <code>PENDING_RETURN</code>. After\n            the network resource is successfully returned, its status changes to\n                <code>DELETED</code>. For more information, see <a href=\"https://docs.aws.amazon.com/private-networks/latest/userguide/radio-units.html#return-radio-unit\">Return a radio unit</a>.</p>",
                 "smithy.api#http": {
                     "uri": "/v1/network-resources/update",
                     "method": "POST",
@@ -3326,14 +3505,14 @@
                 "updateType": {
                     "target": "com.amazonaws.privatenetworks#UpdateType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The update type.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>REPLACE</code> - Submits a request to replace a defective\n                   radio unit. We provide a shipping label that you can use for the \n                   return process and we ship a replacement radio unit to you.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RETURN</code> - Submits a request to replace a radio unit\n                   that you no longer need. We provide a shipping label that you can \n                    use for the return process.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The update type.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>REPLACE</code> - Submits a request to replace a defective radio unit. We\n                    provide a shipping label that you can use for the return process and we ship a\n                    replacement radio unit to you.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RETURN</code> - Submits a request to return a radio unit that you no\n                    longer need. We provide a shipping label that you can use for the return\n                    process.</p>\n            </li>\n            <li>\n               <p>\n                  <code>COMMITMENT</code> - Submits a request to change or renew the commitment\n                    period. If you choose this value, then you must set <a href=\"https://docs.aws.amazon.com/private-networks/latest/APIReference/API_StartNetworkResourceUpdate.html#privatenetworks-StartNetworkResourceUpdate-request-commitmentConfiguration\">\n                     <code>commitmentConfiguration</code>\n                  </a>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "shippingAddress": {
                     "target": "com.amazonaws.privatenetworks#Address",
                     "traits": {
-                        "smithy.api#documentation": "<p>The shipping address. If you don't provide a shipping address when replacing or\n            returning a network resource, we use the address from the original order for the\n            network resource.</p>"
+                        "smithy.api#documentation": "<p>The shipping address. If you don't provide a shipping address when replacing or\n            returning a network resource, we use the address from the original order for the network\n            resource.</p>"
                     }
                 },
                 "returnReason": {
@@ -3344,6 +3523,12 @@
                             "min": 0,
                             "max": 1000
                         }
+                    }
+                },
+                "commitmentConfiguration": {
+                    "target": "com.amazonaws.privatenetworks#CommitmentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this action to extend and automatically renew the commitment period for the radio\n            unit. You can do the following:</p>\n         <ul>\n            <li>\n               <p>Change a 60-day commitment to a 1-year or 3-year commitment. The change is\n                    immediate and the hourly rate decreases to the rate for the new commitment\n                    period.</p>\n            </li>\n            <li>\n               <p>Change a 1-year commitment to a 3-year commitment. The change is immediate and\n                    the hourly rate decreases to the rate for the 3-year commitment period.</p>\n            </li>\n            <li>\n               <p>Set a 1-year commitment to automatically renew for an additional 1 year. The\n                    hourly rate for the additional year will continue to be the same as your\n                    existing 1-year rate.</p>\n            </li>\n            <li>\n               <p>Set a 3-year commitment to automatically renew for an additional 1 year. The\n                    hourly rate for the additional year will continue to be the same as your\n                    existing 3-year rate.</p>\n            </li>\n            <li>\n               <p>Turn off a previously-enabled automatic renewal on a 1-year or 3-year\n                    commitment. You cannot use the automatic-renewal option for a 60-day\n                    commitment.</p>\n            </li>\n         </ul>\n         <p>For pricing, see <a href=\"http://aws.amazon.com/private5g/pricing\">Amazon Web Services Private 5G\n                Pricing</a>.</p>"
                     }
                 }
             }
@@ -3424,7 +3609,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n            Adds tags to the specified resource.\n        </p>",
+                "smithy.api#documentation": "<p> Adds tags to the specified resource. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/tags/{resourceArn}",
@@ -3438,7 +3623,7 @@
                 "resourceArn": {
                     "target": "com.amazonaws.privatenetworks#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The Amazon Resource Name (ARN) of the resource.\n        </p>",
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the resource. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3474,7 +3659,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            The request was denied due to request throttling.\n        </p>",
+                "smithy.api#documentation": "<p> The request was denied due to request throttling. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429,
                 "smithy.api#retryable": {
@@ -3686,7 +3871,7 @@
                 "tags": {
                     "target": "com.amazonaws.privatenetworks#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The network site tags.\n        </p>"
+                        "smithy.api#documentation": "<p> The network site tags. </p>"
                     }
                 }
             }
@@ -3702,6 +3887,10 @@
                     {
                         "value": "RETURN",
                         "name": "RETURN"
+                    },
+                    {
+                        "value": "COMMITMENT",
+                        "name": "COMMITMENT"
                     }
                 ]
             }

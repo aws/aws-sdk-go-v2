@@ -215,15 +215,6 @@ var defaultPartitions = endpoints.Partitions{
 				Region: "eu-west-3",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
-				Region: "fips",
-			}: endpoints.Endpoint{
-				Hostname: "storagegateway-fips.ca-central-1.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "ca-central-1",
-				},
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
 				Region: "me-central-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{

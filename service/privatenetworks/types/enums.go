@@ -22,6 +22,26 @@ func (AcknowledgmentStatus) Values() []AcknowledgmentStatus {
 	}
 }
 
+type CommitmentLength string
+
+// Enum values for CommitmentLength
+const (
+	CommitmentLengthSixtyDays  CommitmentLength = "SIXTY_DAYS"
+	CommitmentLengthOneYear    CommitmentLength = "ONE_YEAR"
+	CommitmentLengthThreeYears CommitmentLength = "THREE_YEARS"
+)
+
+// Values returns all known values for CommitmentLength. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CommitmentLength) Values() []CommitmentLength {
+	return []CommitmentLength{
+		"SIXTY_DAYS",
+		"ONE_YEAR",
+		"THREE_YEARS",
+	}
+}
+
 type DeviceIdentifierFilterKeys string
 
 // Enum values for DeviceIdentifierFilterKeys
@@ -302,8 +322,9 @@ type UpdateType string
 
 // Enum values for UpdateType
 const (
-	UpdateTypeReplace UpdateType = "REPLACE"
-	UpdateTypeReturn  UpdateType = "RETURN"
+	UpdateTypeReplace    UpdateType = "REPLACE"
+	UpdateTypeReturn     UpdateType = "RETURN"
+	UpdateTypeCommitment UpdateType = "COMMITMENT"
 )
 
 // Values returns all known values for UpdateType. Note that this can be expanded
@@ -313,6 +334,7 @@ func (UpdateType) Values() []UpdateType {
 	return []UpdateType{
 		"REPLACE",
 		"RETURN",
+		"COMMITMENT",
 	}
 }
 

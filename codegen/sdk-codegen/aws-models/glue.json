@@ -6980,6 +6980,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies Delta data store targets.</p>"
                     }
+                },
+                "IcebergTargets": {
+                    "target": "com.amazonaws.glue#IcebergTargetList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies Apache Iceberg data store targets.</p>"
+                    }
                 }
             },
             "traits": {
@@ -19758,6 +19764,44 @@
                 }
             }
         },
+        "com.amazonaws.glue#IcebergTarget": {
+            "type": "structure",
+            "members": {
+                "Paths": {
+                    "target": "com.amazonaws.glue#PathList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more Amazon S3 paths that contains Iceberg metadata folders as <code>s3://bucket/prefix</code>.</p>"
+                    }
+                },
+                "ConnectionName": {
+                    "target": "com.amazonaws.glue#ConnectionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the connection to use to connect to the Iceberg target.</p>"
+                    }
+                },
+                "Exclusions": {
+                    "target": "com.amazonaws.glue#PathList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of glob patterns used to exclude from the crawl.\n      For more information, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/add-crawler.html\">Catalog Tables with a Crawler</a>.</p>"
+                    }
+                },
+                "MaximumTraversalDepth": {
+                    "target": "com.amazonaws.glue#NullableInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum depth of Amazon S3 paths that the crawler can traverse to discover the Iceberg metadata folder in your Amazon S3 path. Used to limit the crawler run time.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies an Apache Iceberg data source where Iceberg tables are stored in Amazon S3.</p>"
+            }
+        },
+        "com.amazonaws.glue#IcebergTargetList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#IcebergTarget"
+            }
+        },
         "com.amazonaws.glue#IdString": {
             "type": "string",
             "traits": {
@@ -19967,6 +20011,12 @@
             "type": "boolean",
             "traits": {
                 "smithy.api#default": false
+            }
+        },
+        "com.amazonaws.glue#Iso8601DateTime": {
+            "type": "timestamp",
+            "traits": {
+                "smithy.api#timestampFormat": "date-time"
             }
         },
         "com.amazonaws.glue#JDBCConnectionType": {
@@ -21411,6 +21461,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>When this option is set to 'true', for each batch, it will emit the metrics for the duration between the oldest record received by the topic and the time it arrives in Glue to CloudWatch. The metric's name is \"glue.driver.streaming.maxConsumerLagInMs\". The default value is 'false'. This option is supported in Glue version 4.0 or later.</p>"
                     }
+                },
+                "StartingTimestamp": {
+                    "target": "com.amazonaws.glue#Iso8601DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of the record in the Kafka topic to start reading data from. The possible values are a timestamp string in UTC format of the pattern <code>yyyy-mm-ddTHH:MM:SSZ</code> (where Z represents a UTC timezone offset with a +/-. For example: \"2023-04-04T08:00:00+08:00\"). </p>\n         <p>Only one of <code>StartingTimestamp</code> or <code>StartingOffsets</code> must be set.</p>"
+                    }
                 }
             },
             "traits": {
@@ -21501,7 +21557,7 @@
                 "StartingPosition": {
                     "target": "com.amazonaws.glue#StartingPosition",
                     "traits": {
-                        "smithy.api#documentation": "<p>The starting position in the Kinesis data stream to read data from. The possible values are <code>\"latest\"</code>, <code>\"trim_horizon\"</code>, or <code>\"earliest\"</code>. The default value is <code>\"latest\"</code>.</p>"
+                        "smithy.api#documentation": "<p>The starting position in the Kinesis data stream to read data from. The possible values are <code>\"latest\"</code>, <code>\"trim_horizon\"</code>, <code>\"earliest\"</code>, or a timestamp string in UTC format in the pattern <code>yyyy-mm-ddTHH:MM:SSZ</code> (where <code>Z</code> represents a UTC timezone offset with a +/-. For example: \"2023-04-04T08:00:00-04:00\"). The default value is <code>\"latest\"</code>.</p>\n         <p>Note: Using a value that is a timestamp string in UTC format for \"startingPosition\" is supported only for Glue version 4.0 or later.</p>"
                     }
                 },
                 "MaxFetchTimeInMs": {
@@ -21592,6 +21648,12 @@
                     "target": "com.amazonaws.glue#EnclosedInStringProperty",
                     "traits": {
                         "smithy.api#documentation": "<p>When this option is set to 'true', for each batch, it will emit the metrics for the duration between the oldest record received by the stream and the time it arrives in Glue  to CloudWatch. The metric's name is \"glue.driver.streaming.maxConsumerLagInMs\". The default value is 'false'. This option is supported in Glue version 4.0 or later.</p>"
+                    }
+                },
+                "StartingTimestamp": {
+                    "target": "com.amazonaws.glue#Iso8601DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of the record in the Kinesis data stream to start reading data from. The possible values are a timestamp string in UTC format of the pattern <code>yyyy-mm-ddTHH:MM:SSZ</code> (where Z represents a UTC timezone offset with a +/-. For example: \"2023-04-04T08:00:00+08:00\"). </p>"
                     }
                 }
             },
@@ -29961,6 +30023,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "earliest"
+                    }
+                },
+                "TIMESTAMP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "timestamp"
                     }
                 }
             }

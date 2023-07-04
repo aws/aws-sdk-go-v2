@@ -65,7 +65,7 @@
                 "boolean": {
                     "target": "com.amazonaws.verifiedpermissions#BooleanAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>An attribute value of <a href=\"docs.cedarpolicy.comcedar-syntax-datatypes.html#datatype-boolean\">Boolean</a>\n            type.</p>\n         <p>Example: <code>{\"boolean\": true}</code>\n         </p>"
+                        "smithy.api#documentation": "<p>An attribute value of <a href=\"https://docs.cedarpolicy.com/syntax-datatypes.html#boolean\">Boolean</a> type.</p>\n         <p>Example: <code>{\"boolean\": true}</code>\n         </p>"
                     }
                 },
                 "entityIdentifier": {
@@ -77,25 +77,25 @@
                 "long": {
                     "target": "com.amazonaws.verifiedpermissions#LongAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>An attribute value of <a href=\"docs.cedarpolicy.comcedar-syntax-datatypes.html#datatype-long\">Long</a>\n            type.</p>\n         <p>Example: <code>{\"long\": 0}</code>\n         </p>"
+                        "smithy.api#documentation": "<p>An attribute value of <a href=\"https://docs.cedarpolicy.com/syntax-datatypes.html#long\">Long</a> type.</p>\n         <p>Example: <code>{\"long\": 0}</code>\n         </p>"
                     }
                 },
                 "string": {
                     "target": "com.amazonaws.verifiedpermissions#StringAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>An attribute value of <a href=\"docs.cedarpolicy.comcedar-syntax-datatypes.html#datatype-string\">String</a>\n            type.</p>\n         <p>Example: <code>{\"string\": \"abc\"}</code>\n         </p>"
+                        "smithy.api#documentation": "<p>An attribute value of <a href=\"https://docs.cedarpolicy.com/syntax-datatypes.html#string\">String</a> type.</p>\n         <p>Example: <code>{\"string\": \"abc\"}</code>\n         </p>"
                     }
                 },
                 "set": {
                     "target": "com.amazonaws.verifiedpermissions#SetAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>An attribute value of <a href=\"docs.cedarpolicy.comcedar-syntax-datatypes.html#datatype-set\">Set</a>\n            type.</p>\n         <p>Example: <code>{\"set\": [ {} ] }</code>\n         </p>"
+                        "smithy.api#documentation": "<p>An attribute value of <a href=\"https://docs.cedarpolicy.com/syntax-datatypes.html#set\">Set</a> type.</p>\n         <p>Example: <code>{\"set\": [ {} ] }</code>\n         </p>"
                     }
                 },
                 "record": {
                     "target": "com.amazonaws.verifiedpermissions#RecordAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>An attribute value of <a href=\"docs.cedarpolicy.comcedar-syntax-datatypes.html#datatype-record\">Record</a>\n            type.</p>\n         <p>Example: <code>{\"record\": { \"keyName\": {} } }</code>\n         </p>"
+                        "smithy.api#documentation": "<p>An attribute value of <a href=\"https://docs.cedarpolicy.com/syntax-datatypes.html#record\">Record</a> type.</p>\n         <p>Example: <code>{\"record\": { \"keyName\": {} } }</code>\n         </p>"
                     }
                 }
             },
@@ -134,7 +134,7 @@
                 "userPoolArn": {
                     "target": "com.amazonaws.verifiedpermissions#UserPoolArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Name (ARN)</a> of the Amazon Cognito user pool that contains the identities to be\n            authorized.</p>\n         <p>Example: <code>\"UserPoolArn\":\n                \"cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5\"</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Name (ARN)</a> of the Amazon Cognito user pool that contains the identities to be\n            authorized.</p>\n         <p>Example: <code>\"UserPoolArn\":\n                \"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5\"</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -146,7 +146,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration for an identity source that represents a connection to an Amazon Cognito user pool used\n            as an identity provider for Verified Permissions.</p>\n         <p>This data type is used as a field that is part of an <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_Configuration.html\">Configuration</a> structure that is\n            used as a parameter to the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_Configuration.html\">Configuration</a>.</p>\n         <p>Example:<code>\"CognitoUserPoolConfiguration\":{\"UserPoolArn\":\"cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5\",\"ClientIds\":\n                [\"a1b2c3d4e5f6g7h8i9j0kalbmc\"]}</code>\n         </p>"
+                "smithy.api#documentation": "<p>The configuration for an identity source that represents a connection to an Amazon Cognito user pool used\n            as an identity provider for Verified Permissions.</p>\n         <p>This data type is used as a field that is part of an <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_Configuration.html\">Configuration</a> structure that is\n            used as a parameter to the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_Configuration.html\">Configuration</a>.</p>\n         <p>Example:<code>\"CognitoUserPoolConfiguration\":{\"UserPoolArn\":\"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5\",\"ClientIds\":\n                [\"a1b2c3d4e5f6g7h8i9j0kalbmc\"]}</code>\n         </p>"
             }
         },
         "com.amazonaws.verifiedpermissions#Configuration": {
@@ -155,7 +155,7 @@
                 "cognitoUserPoolConfiguration": {
                     "target": "com.amazonaws.verifiedpermissions#CognitoUserPoolConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains configuration details of a Amazon Cognito user pool that Verified Permissions can use as a source of\n            authenticated identities as entities. It specifies the <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Name (ARN)</a> of a Amazon Cognito user pool\n            and one or more application client IDs.</p>\n         <p>Example:\n                <code>\"configuration\":{\"cognitoUserPoolConfiguration\":{\"userPoolArn\":\"cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5\",\"clientIds\":\n                [\"a1b2c3d4e5f6g7h8i9j0kalbmc\"]}}</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Contains configuration details of a Amazon Cognito user pool that Verified Permissions can use as a source of\n            authenticated identities as entities. It specifies the <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Name (ARN)</a> of a Amazon Cognito user pool\n            and one or more application client IDs.</p>\n         <p>Example:\n                <code>\"configuration\":{\"cognitoUserPoolConfiguration\":{\"userPoolArn\":\"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5\",\"clientIds\":\n                [\"a1b2c3d4e5f6g7h8i9j0kalbmc\"]}}</code>\n         </p>"
                     }
                 }
             },
@@ -242,7 +242,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.verifiedpermissions#IdempotencyToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a unique, case-sensitive ID that you provide to\n             ensure the idempotency of the request. This lets you safely retry the request without\n             accidentally performing the same operation a second time. Passing the same value to a\n             later call to an operation requires that you also pass the same value for all other \n             parameters. We recommend that you use a <a href=\"https://wikipedia.org/wiki/Universally_unique_Id\">UUID type of \n             value.</a>.</p>\n         <p>If you don't provide this value, then Amazon Web Services generates a random one for\n             you.</p>\n         <p>If you retry the operation with the same <code>ClientToken</code>, but with \n             different parameters, the retry fails with an <code>IdempotentParameterMismatch</code>\n             error.</p>",
+                        "smithy.api#documentation": "<p>Specifies a unique, case-sensitive ID that you provide to\n             ensure the idempotency of the request. This lets you safely retry the request without\n             accidentally performing the same operation a second time. Passing the same value to a\n             later call to an operation requires that you also pass the same value for all other \n             parameters. We recommend that you use a <a href=\"https://wikipedia.org/wiki/Universally_unique_identifier\">UUID type of \n             value.</a>.</p>\n         <p>If you don't provide this value, then Amazon Web Services generates a random one for\n             you.</p>\n         <p>If you retry the operation with the same <code>ClientToken</code>, but with \n             different parameters, the retry fails with an <code>IdempotentParameterMismatch</code>\n             error.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -335,7 +335,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.verifiedpermissions#IdempotencyToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a unique, case-sensitive ID that you provide to\n             ensure the idempotency of the request. This lets you safely retry the request without\n             accidentally performing the same operation a second time. Passing the same value to a\n             later call to an operation requires that you also pass the same value for all other \n             parameters. We recommend that you use a <a href=\"https://wikipedia.org/wiki/Universally_unique_Id\">UUID type of \n             value.</a>.</p>\n         <p>If you don't provide this value, then Amazon Web Services generates a random one for\n             you.</p>\n         <p>If you retry the operation with the same <code>ClientToken</code>, but with \n             different parameters, the retry fails with an <code>IdempotentParameterMismatch</code>\n             error.</p>",
+                        "smithy.api#documentation": "<p>Specifies a unique, case-sensitive ID that you provide to\n             ensure the idempotency of the request. This lets you safely retry the request without\n             accidentally performing the same operation a second time. Passing the same value to a\n             later call to an operation requires that you also pass the same value for all other \n             parameters. We recommend that you use a <a href=\"https://wikipedia.org/wiki/Universally_unique_identifier\">UUID type of \n             value.</a>.</p>\n         <p>If you don't provide this value, then Amazon Web Services generates a random one for\n             you.</p>\n         <p>If you retry the operation with the same <code>ClientToken</code>, but with \n             different parameters, the retry fails with an <code>IdempotentParameterMismatch</code>\n             error.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -428,7 +428,7 @@
             ],
             "traits": {
                 "aws.iam#actionPermissionDescription": "Grants permission to create a Cedar policy and save it in the specified policy store",
-                "smithy.api#documentation": "<p>Creates a policy store. A policy store is a container for policy resources.</p>",
+                "smithy.api#documentation": "<p>Creates a policy store. A policy store is a container for policy resources.</p>\n         <note>\n            <p>Although <a href=\"https://docs.cedarpolicy.com/schema.html#namespace\">Cedar\n                    supports multiple namespaces</a>, Verified Permissions currently supports only one\n                namespace per policy store.</p>\n         </note>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -438,7 +438,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.verifiedpermissions#IdempotencyToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a unique, case-sensitive ID that you provide to\n             ensure the idempotency of the request. This lets you safely retry the request without\n             accidentally performing the same operation a second time. Passing the same value to a\n             later call to an operation requires that you also pass the same value for all other \n             parameters. We recommend that you use a <a href=\"https://wikipedia.org/wiki/Universally_unique_Id\">UUID type of \n             value.</a>.</p>\n         <p>If you don't provide this value, then Amazon Web Services generates a random one for\n             you.</p>\n         <p>If you retry the operation with the same <code>ClientToken</code>, but with \n             different parameters, the retry fails with an <code>IdempotentParameterMismatch</code>\n             error.</p>",
+                        "smithy.api#documentation": "<p>Specifies a unique, case-sensitive ID that you provide to\n             ensure the idempotency of the request. This lets you safely retry the request without\n             accidentally performing the same operation a second time. Passing the same value to a\n             later call to an operation requires that you also pass the same value for all other \n             parameters. We recommend that you use a <a href=\"https://wikipedia.org/wiki/Universally_unique_identifier\">UUID type of \n             value.</a>.</p>\n         <p>If you don't provide this value, then Amazon Web Services generates a random one for\n             you.</p>\n         <p>If you retry the operation with the same <code>ClientToken</code>, but with \n             different parameters, the retry fails with an <code>IdempotentParameterMismatch</code>\n             error.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -518,7 +518,7 @@
                 "clientToken": {
                     "target": "com.amazonaws.verifiedpermissions#IdempotencyToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a unique, case-sensitive ID that you provide to\n             ensure the idempotency of the request. This lets you safely retry the request without\n             accidentally performing the same operation a second time. Passing the same value to a\n             later call to an operation requires that you also pass the same value for all other \n             parameters. We recommend that you use a <a href=\"https://wikipedia.org/wiki/Universally_unique_Id\">UUID type of \n             value.</a>.</p>\n         <p>If you don't provide this value, then Amazon Web Services generates a random one for\n             you.</p>\n         <p>If you retry the operation with the same <code>ClientToken</code>, but with \n             different parameters, the retry fails with an <code>IdempotentParameterMismatch</code>\n             error.</p>",
+                        "smithy.api#documentation": "<p>Specifies a unique, case-sensitive ID that you provide to\n             ensure the idempotency of the request. This lets you safely retry the request without\n             accidentally performing the same operation a second time. Passing the same value to a\n             later call to an operation requires that you also pass the same value for all other \n             parameters. We recommend that you use a <a href=\"https://wikipedia.org/wiki/Universally_unique_identifier\">UUID type of \n             value.</a>.</p>\n         <p>If you don't provide this value, then Amazon Web Services generates a random one for\n             you.</p>\n         <p>If you retry the operation with the same <code>ClientToken</code>, but with \n             different parameters, the retry fails with an <code>IdempotentParameterMismatch</code>\n             error.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -907,7 +907,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about an entity that can be referenced in a Cedar\n            policy.</p>\n         <p>This data type is used as one of the fields in the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_EntitiesDefinition.html\">EntitiesDefinition</a>\n            structure.</p>\n         <p>\n            <code>{\n    \"id\": {\n        \"entityType\": \"Photo\",\n        \"entityId\": \"VacationPhoto94.jpg\"\n    },\n    \"Attributes\": {},\n    \"Parents\": [\n        {\n            \"entityType\": \"Album\",\n            \"entityId\": \"alice_folder\"\n        }\n    ]\n}</code>\n         </p>"
+                "smithy.api#documentation": "<p>Contains information about an entity that can be referenced in a Cedar\n            policy.</p>\n         <p>This data type is used as one of the fields in the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_EntitiesDefinition.html\">EntitiesDefinition</a>\n            structure.</p>\n         <p>\n            <code>{ \"id\": { \"entityType\": \"Photo\", \"entityId\": \"VacationPhoto94.jpg\" },\n                \"Attributes\": {}, \"Parents\": [ { \"entityType\": \"Album\", \"entityId\": \"alice_folder\" }\n                ] }</code>\n         </p>"
             }
         },
         "com.amazonaws.verifiedpermissions#EntityList": {
@@ -963,7 +963,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains a description of an evaluation error.</p>\n         <p>This data type is used as a request parameter in the <a href=\"https://docs.aws.amazon.com/amazon-verified-permissions/latest/APIReference/API_IsAuthorized.html\">IsAuthorized</a> and <a href=\"https://docs.aws.amazon.com/amazon-verified-permissions/latest/APIReference/API_IsAuthorizedWithToken.html\">IsAuthorizedWithToken</a> operations.</p>"
+                "smithy.api#documentation": "<p>Contains a description of an evaluation error.</p>\n         <p>This data type is used as a request parameter in the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html\">IsAuthorized</a> and <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html\">IsAuthorizedWithToken</a> operations.</p>"
             }
         },
         "com.amazonaws.verifiedpermissions#EvaluationErrorList": {
@@ -1684,7 +1684,7 @@
                 "entities": {
                     "target": "com.amazonaws.verifiedpermissions#EntitiesDefinition",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the list of entities and their associated attributes that Verified Permissions can examine\n            when evaluating the policies.</p>"
+                        "smithy.api#documentation": "<p>Specifies the list of resources and principals and their associated attributes that\n            Verified Permissions can examine when evaluating the policies. </p>\n         <note>\n            <p>You can include only principal and resource entities in this parameter; you can't\n                include actions. You must specify actions in the schema.</p>\n         </note>"
                     }
                 }
             },
@@ -1783,7 +1783,7 @@
                 "entities": {
                     "target": "com.amazonaws.verifiedpermissions#EntitiesDefinition",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the list of entities and their associated attributes that Verified Permissions can examine\n            when evaluating the policies.</p>"
+                        "smithy.api#documentation": "<p>Specifies the list of resources and principals and their associated attributes that\n            Verified Permissions can examine when evaluating the policies. </p>\n         <note>\n            <p>You can include only principal and resource entities in this parameter; you can't\n                include actions. You must specify actions in the schema.</p>\n         </note>"
                     }
                 }
             },
@@ -3556,7 +3556,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The request failed because one or more input parameters don't satisfy their constraint\n            requirements. The output is provided as a list of fields and a reason for each field that\n            isn't valid.</p>\n         <p>The possible reasons include the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>UnrecognizedEntityType</b>\n               </p>\n               <p>The policy includes an entity type that isn't found in the schema.</p>\n            </li>\n            <li>\n               <p>\n                  <b>UnrecognizedActionId</b>\n               </p>\n               <p>The policy includes an action id that isn't found in the schema.</p>\n            </li>\n            <li>\n               <p>\n                  <b>InvalidActionApplication</b>\n               </p>\n               <p>The policy includes an action that, according to the schema, doesn't support\n                    the specified principal and resource.</p>\n            </li>\n            <li>\n               <p>\n                  <b>UnexpectedType</b>\n               </p>\n               <p>The policy included an operand that isn't a valid type for the specified\n                    operation.</p>\n            </li>\n            <li>\n               <p>\n                  <b>IncompatibleTypes</b>\n               </p>\n               <p>The types of elements included in a <code>set</code>, or the types of\n                    expressions used in an <code>if...then...else</code> clause aren't compatible in\n                    this context.</p>\n            </li>\n            <li>\n               <p>\n                  <b>MissingAttribute</b>\n               </p>\n               <p>The policy attempts to access a record or entity attribute that isn't\n                    specified in the schema. Test for the existence of the attribute first before\n                    attempting to access its value. For more information, see the <a href=\"docs.cedarpolicy.comsyntax-operators.html#has-presence-of-attribute-test\">has (presence of attribute test) operator</a> in the\n                        <i>Cedar Policy Language Guide</i>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>UnsafeOptionalAttributeAccess</b>\n               </p>\n               <p>The policy attempts to access a record or entity attribute that is optional\n                    and isn't guaranteed to be present. Test for the existence of the attribute\n                    first before attempting to access its value. For more information, see the\n                        <a href=\"docs.cedarpolicy.comsyntax-operators.html#has-presence-of-attribute-test\">has (presence of attribute test) operator</a> in the\n                        <i>Cedar Policy Language Guide</i>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>ImpossiblePolicy</b>\n               </p>\n               <p>Cedar has determined that a policy condition always evaluates to false. If\n                    the policy is always false, it can never apply to any query, and so it can never\n                    affect an authorization decision.</p>\n            </li>\n            <li>\n               <p>\n                  <b>WrongNumberArguments</b>\n               </p>\n               <p>The policy references an extension type with the wrong number of\n                    arguments.</p>\n            </li>\n            <li>\n               <p>\n                  <b>FunctionArgumentValidationError</b>\n               </p>\n               <p>Cedar couldn't parse the argument passed to an extension type. For example,\n                    a string that is to be parsed as an IPv4 address can contain only digits and the\n                    period character.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>The request failed because one or more input parameters don't satisfy their constraint\n            requirements. The output is provided as a list of fields and a reason for each field that\n            isn't valid.</p>\n         <p>The possible reasons include the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>UnrecognizedEntityType</b>\n               </p>\n               <p>The policy includes an entity type that isn't found in the schema.</p>\n            </li>\n            <li>\n               <p>\n                  <b>UnrecognizedActionId</b>\n               </p>\n               <p>The policy includes an action id that isn't found in the schema.</p>\n            </li>\n            <li>\n               <p>\n                  <b>InvalidActionApplication</b>\n               </p>\n               <p>The policy includes an action that, according to the schema, doesn't support\n                    the specified principal and resource.</p>\n            </li>\n            <li>\n               <p>\n                  <b>UnexpectedType</b>\n               </p>\n               <p>The policy included an operand that isn't a valid type for the specified\n                    operation.</p>\n            </li>\n            <li>\n               <p>\n                  <b>IncompatibleTypes</b>\n               </p>\n               <p>The types of elements included in a <code>set</code>, or the types of\n                    expressions used in an <code>if...then...else</code> clause aren't compatible in\n                    this context.</p>\n            </li>\n            <li>\n               <p>\n                  <b>MissingAttribute</b>\n               </p>\n               <p>The policy attempts to access a record or entity attribute that isn't\n                    specified in the schema. Test for the existence of the attribute first before\n                    attempting to access its value. For more information, see the <a href=\"https://docs.cedarpolicy.com/syntax-operators.html#has-presence-of-attribute-test\">has (presence of attribute test) operator</a> in the\n                        <i>Cedar Policy Language Guide</i>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>UnsafeOptionalAttributeAccess</b>\n               </p>\n               <p>The policy attempts to access a record or entity attribute that is optional\n                    and isn't guaranteed to be present. Test for the existence of the attribute\n                    first before attempting to access its value. For more information, see the\n                        <a href=\"https://docs.cedarpolicy.com/syntax-operators.html#has-presence-of-attribute-test\">has (presence of attribute test) operator</a> in the\n                        <i>Cedar Policy Language Guide</i>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>ImpossiblePolicy</b>\n               </p>\n               <p>Cedar has determined that a policy condition always evaluates to false. If\n                    the policy is always false, it can never apply to any query, and so it can never\n                    affect an authorization decision.</p>\n            </li>\n            <li>\n               <p>\n                  <b>WrongNumberArguments</b>\n               </p>\n               <p>The policy references an extension type with the wrong number of\n                    arguments.</p>\n            </li>\n            <li>\n               <p>\n                  <b>FunctionArgumentValidationError</b>\n               </p>\n               <p>Cedar couldn't parse the argument passed to an extension type. For example,\n                    a string that is to be parsed as an IPv4 address can contain only digits and the\n                    period character.</p>\n            </li>\n         </ul>",
                 "smithy.api#error": "client"
             }
         },
@@ -3661,7 +3661,7 @@
                     "FederatedUser"
                 ],
                 "aws.protocols#awsJson1_0": {},
-                "smithy.api#documentation": "<p>Amazon Verified Permissions is a permissions management service from Amazon Web Services. You can use Verified Permissions to manage\n            permissions for your application, and authorize user access based on those permissions.\n            Using Verified Permissions, application developers can grant access based on information about the\n            users, resources, and requested actions. You can also evaluate additional information\n            like group membership, attributes of the resources, and session context, such as time of\n            request and IP addresses. Verified Permissions manages these permissions by letting you create and\n            store authorization policies for your applications, such as consumer-facing web sites\n            and enterprise business systems.</p>\n         <p>Verified Permissions uses Cedar as the policy language to express your permission requirements.\n            Cedar supports both role-based access control (RBAC) and attribute-based access\n            control (ABAC) authorization models.</p>\n         <p>For more information about configuring, administering, and using Amazon Verified Permissions in your\n            applications, see the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/userguide/\">Amazon Verified Permissions User Guide</a>.</p>\n         <p>For more information about the Cedar policy language, see the <a href=\"docs.cedarpolicy.com\">Cedar Policy Language Guide</a>.</p>\n         <important>\n            <p>When you write Cedar policies that reference principals, resources and actions,\n                you can define the unique identifiers used for each of those elements. We strongly\n                recommend that you follow these best practices:</p>\n            <ul>\n               <li>\n                  <p>\n                     <b>Use values like universally unique identifiers\n                            (UUIDs) for all principal and resource identifiers.</b>\n                  </p>\n                  <p>For example, if user <code>jane</code> leaves the company, and you later\n                        let someone else use the name <code>jane</code>, then that new user\n                        automatically gets access to everything granted by policies that still\n                        reference <code>User::\"jane\"</code>. Cedar can’t distinguish between the\n                        new user and the old. This applies to both principal and resource\n                        identifiers. Always use identifiers that are guaranteed unique and never\n                        reused to ensure that you don’t unintentionally grant access because of the\n                        presence of an old identifier in a policy.</p>\n                  <p>Where you use a UUID for an entity, we recommend that you follow it with\n                        the // comment specifier and the ‘friendly’ name of your entity. This helps\n                        to make your policies easier to understand. For example: principal ==\n                        User::\"a1b2c3d4-e5f6-a1b2-c3d4-EXAMPLE11111\", // alice</p>\n               </li>\n               <li>\n                  <p>\n                     <b>Do not include personally identifying, confidential,\n                            or sensitive information as part of the unique identifier for your\n                            principals or resources.</b> These identifiers are included in\n                        log entries shared in CloudTrail trails.</p>\n               </li>\n            </ul>\n         </important>\n         <p>Several operations return structures that appear similar, but have different purposes.\n            As new functionality is added to the product, the structure used in a parameter of one\n            operation might need to change in a way that wouldn't make sense for the same parameter\n            in a different operation. To help you understand the purpose of each, the following\n            naming convention is used for the structures:</p>\n         <ul>\n            <li>\n               <p>Parameters that end in <code>Detail</code> are used in <code>Get</code>\n                    operations.</p>\n            </li>\n            <li>\n               <p>Parameters that end in <code>Item</code> are used in <code>List</code>\n                    operations.</p>\n            </li>\n            <li>\n               <p>Parameters that use neither suffix are used in the mutating (create and\n                    update) operations.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Amazon Verified Permissions is a permissions management service from Amazon Web Services. You can use Verified Permissions to manage\n            permissions for your application, and authorize user access based on those permissions.\n            Using Verified Permissions, application developers can grant access based on information about the\n            users, resources, and requested actions. You can also evaluate additional information\n            like group membership, attributes of the resources, and session context, such as time of\n            request and IP addresses. Verified Permissions manages these permissions by letting you create and\n            store authorization policies for your applications, such as consumer-facing web sites\n            and enterprise business systems.</p>\n         <p>Verified Permissions uses Cedar as the policy language to express your permission requirements.\n            Cedar supports both role-based access control (RBAC) and attribute-based access\n            control (ABAC) authorization models.</p>\n         <p>For more information about configuring, administering, and using Amazon Verified Permissions in your\n            applications, see the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/userguide/\">Amazon Verified Permissions User Guide</a>.</p>\n         <p>For more information about the Cedar policy language, see the <a href=\"https://docs.cedarpolicy.com/\">Cedar Policy Language Guide</a>.</p>\n         <important>\n            <p>When you write Cedar policies that reference principals, resources and actions,\n                you can define the unique identifiers used for each of those elements. We strongly\n                recommend that you follow these best practices:</p>\n            <ul>\n               <li>\n                  <p>\n                     <b>Use values like universally unique identifiers\n                            (UUIDs) for all principal and resource identifiers.</b>\n                  </p>\n                  <p>For example, if user <code>jane</code> leaves the company, and you later\n                        let someone else use the name <code>jane</code>, then that new user\n                        automatically gets access to everything granted by policies that still\n                        reference <code>User::\"jane\"</code>. Cedar can’t distinguish between the\n                        new user and the old. This applies to both principal and resource\n                        identifiers. Always use identifiers that are guaranteed unique and never\n                        reused to ensure that you don’t unintentionally grant access because of the\n                        presence of an old identifier in a policy.</p>\n                  <p>Where you use a UUID for an entity, we recommend that you follow it with\n                        the // comment specifier and the ‘friendly’ name of your entity. This helps\n                        to make your policies easier to understand. For example: principal ==\n                        User::\"a1b2c3d4-e5f6-a1b2-c3d4-EXAMPLE11111\", // alice</p>\n               </li>\n               <li>\n                  <p>\n                     <b>Do not include personally identifying, confidential,\n                            or sensitive information as part of the unique identifier for your\n                            principals or resources.</b> These identifiers are included in\n                        log entries shared in CloudTrail trails.</p>\n               </li>\n            </ul>\n         </important>\n         <p>Several operations return structures that appear similar, but have different purposes.\n            As new functionality is added to the product, the structure used in a parameter of one\n            operation might need to change in a way that wouldn't make sense for the same parameter\n            in a different operation. To help you understand the purpose of each, the following\n            naming convention is used for the structures:</p>\n         <ul>\n            <li>\n               <p>Parameter type structures that end in <code>Detail</code> are used in\n                        <code>Get</code> operations.</p>\n            </li>\n            <li>\n               <p>Parameter type structures that end in <code>Item</code> are used in\n                        <code>List</code> operations.</p>\n            </li>\n            <li>\n               <p>Parameter type structures that use neither suffix are used in the mutating\n                    (create and update) operations.</p>\n            </li>\n         </ul>",
                 "smithy.api#title": "Amazon Verified Permissions",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -4023,8 +4023,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
+                                "UseDualStack": true,
                                 "Region": "us-gov-east-1"
                             }
                         },
@@ -4036,8 +4036,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Region": "us-gov-east-1"
                             }
                         },
@@ -4049,8 +4049,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Region": "us-gov-east-1"
                             }
                         },
@@ -4062,8 +4062,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "us-gov-east-1"
                             }
                         },
@@ -4075,8 +4075,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
+                                "UseDualStack": true,
                                 "Region": "cn-north-1"
                             }
                         },
@@ -4088,8 +4088,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Region": "cn-north-1"
                             }
                         },
@@ -4101,8 +4101,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Region": "cn-north-1"
                             }
                         },
@@ -4114,8 +4114,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "cn-north-1"
                             }
                         },
@@ -4125,8 +4125,8 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
+                                "UseDualStack": true,
                                 "Region": "us-iso-east-1"
                             }
                         },
@@ -4138,8 +4138,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Region": "us-iso-east-1"
                             }
                         },
@@ -4149,8 +4149,8 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Region": "us-iso-east-1"
                             }
                         },
@@ -4162,8 +4162,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "us-iso-east-1"
                             }
                         },
@@ -4175,8 +4175,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
+                                "UseDualStack": true,
                                 "Region": "us-east-1"
                             }
                         },
@@ -4188,8 +4188,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Region": "us-east-1"
                             }
                         },
@@ -4201,8 +4201,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Region": "us-east-1"
                             }
                         },
@@ -4214,8 +4214,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "us-east-1"
                             }
                         },
@@ -4225,8 +4225,8 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
+                                "UseDualStack": true,
                                 "Region": "us-isob-east-1"
                             }
                         },
@@ -4238,8 +4238,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Region": "us-isob-east-1"
                             }
                         },
@@ -4249,8 +4249,8 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Region": "us-isob-east-1"
                             }
                         },
@@ -4262,8 +4262,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "us-isob-east-1"
                             }
                         },
@@ -4275,8 +4275,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
@@ -4287,8 +4287,8 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
@@ -4299,8 +4299,8 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }

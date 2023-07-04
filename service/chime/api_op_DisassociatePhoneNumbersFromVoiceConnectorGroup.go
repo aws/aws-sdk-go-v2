@@ -12,7 +12,16 @@ import (
 )
 
 // Disassociates the specified phone numbers from the specified Amazon Chime Voice
-// Connector group.
+// Connector group. This API is is no longer supported and will not be updated. We
+// recommend using the latest version,
+// DisassociatePhoneNumbersFromVoiceConnectorGroup (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_DisassociatePhoneNumbersFromVoiceConnectorGroup.html)
+// , in the Amazon Chime SDK. Using the latest version requires migrating to a
+// dedicated namespace. For more information, refer to Migrating from the Amazon
+// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
+// in the Amazon Chime SDK Developer Guide.
+//
+// Deprecated: Replaced by DisassociatePhoneNumbersFromVoiceConnectorGroup in the
+// Amazon Chime SDK Voice Namespace
 func (c *Client) DisassociatePhoneNumbersFromVoiceConnectorGroup(ctx context.Context, params *DisassociatePhoneNumbersFromVoiceConnectorGroupInput, optFns ...func(*Options)) (*DisassociatePhoneNumbersFromVoiceConnectorGroupOutput, error) {
 	if params == nil {
 		params = &DisassociatePhoneNumbersFromVoiceConnectorGroupInput{}

@@ -19,9 +19,10 @@
 // Verified Permissions in your applications, see the Amazon Verified Permissions
 // User Guide (https://docs.aws.amazon.com/verifiedpermissions/latest/userguide/) .
 // For more information about the Cedar policy language, see the Cedar Policy
-// Language Guide . When you write Cedar policies that reference principals,
-// resources and actions, you can define the unique identifiers used for each of
-// those elements. We strongly recommend that you follow these best practices:
+// Language Guide (https://docs.cedarpolicy.com/) . When you write Cedar policies
+// that reference principals, resources and actions, you can define the unique
+// identifiers used for each of those elements. We strongly recommend that you
+// follow these best practices:
 //   - Use values like universally unique identifiers (UUIDs) for all principal
 //     and resource identifiers. For example, if user jane leaves the company, and
 //     you later let someone else use the name jane , then that new user
@@ -44,8 +45,8 @@
 // sense for the same parameter in a different operation. To help you understand
 // the purpose of each, the following naming convention is used for the structures:
 //
-//   - Parameters that end in Detail are used in Get operations.
-//   - Parameters that end in Item are used in List operations.
-//   - Parameters that use neither suffix are used in the mutating (create and
-//     update) operations.
+//   - Parameter type structures that end in Detail are used in Get operations.
+//   - Parameter type structures that end in Item are used in List operations.
+//   - Parameter type structures that use neither suffix are used in the mutating
+//     (create and update) operations.
 package verifiedpermissions

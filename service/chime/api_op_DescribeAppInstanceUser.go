@@ -12,7 +12,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the full details of an AppInstanceUser .
+// Returns the full details of an AppInstanceUser . This API is is no longer
+// supported and will not be updated. We recommend using the latest version,
+// DescribeAppInstanceUser (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_identity-chime_DescribeAppInstanceUser.html)
+// , in the Amazon Chime SDK. Using the latest version requires migrating to a
+// dedicated namespace. For more information, refer to Migrating from the Amazon
+// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
+// in the Amazon Chime SDK Developer Guide.
+//
+// Deprecated: Replaced by DescribeAppInstanceUser in the Amazon Chime SDK
+// Identity Namespace
 func (c *Client) DescribeAppInstanceUser(ctx context.Context, params *DescribeAppInstanceUserInput, optFns ...func(*Options)) (*DescribeAppInstanceUserOutput, error) {
 	if params == nil {
 		params = &DescribeAppInstanceUserInput{}

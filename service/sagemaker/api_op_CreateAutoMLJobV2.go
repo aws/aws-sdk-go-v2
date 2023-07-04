@@ -47,9 +47,10 @@ type CreateAutoMLJobV2Input struct {
 	// channel is a named input source. Similar to the InputDataConfig (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJob.html#sagemaker-CreateAutoMLJob-request-InputDataConfig)
 	// attribute in the CreateAutoMLJob input parameters. The supported formats depend
 	// on the problem type:
-	//   - For Tabular problem types: S3Prefix , ManifestFile .
-	//   - For ImageClassification: S3Prefix , ManifestFile , AugmentedManifestFile .
-	//   - For TextClassification: S3Prefix .
+	//   - For tabular problem types: S3Prefix , ManifestFile .
+	//   - For image classification: S3Prefix , ManifestFile , AugmentedManifestFile .
+	//   - For text classification: S3Prefix .
+	//   - For time-series forecasting: S3Prefix .
 	//
 	// This member is required.
 	AutoMLJobInputDataConfig []types.AutoMLJobChannel
@@ -87,7 +88,9 @@ type CreateAutoMLJobV2Input struct {
 	// This structure specifies how to split the data into train and validation
 	// datasets. The validation and training datasets must contain the same headers.
 	// For jobs created by calling CreateAutoMLJob , the validation dataset must be
-	// less than 2 GB in size.
+	// less than 2 GB in size. This attribute must not be set for the time-series
+	// forecasting problem type, as Autopilot automatically splits the input dataset
+	// into training and validation sets.
 	DataSplitConfig *types.AutoMLDataSplitConfig
 
 	// Specifies how to generate the endpoint name for an automatic one-click

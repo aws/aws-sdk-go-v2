@@ -6318,6 +6318,11 @@ func validateAutoMLProblemTypeConfig(v types.AutoMLProblemTypeConfig) error {
 			invalidParams.AddNested("[TabularJobConfig]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.AutoMLProblemTypeConfigMemberTimeSeriesForecastingJobConfig:
+		if err := validateTimeSeriesForecastingJobConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[TimeSeriesForecastingJobConfig]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -7202,11 +7207,14 @@ func validateDeploymentConfig(v *types.DeploymentConfig) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeploymentConfig"}
-	if v.BlueGreenUpdatePolicy == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BlueGreenUpdatePolicy"))
-	} else if v.BlueGreenUpdatePolicy != nil {
+	if v.BlueGreenUpdatePolicy != nil {
 		if err := validateBlueGreenUpdatePolicy(v.BlueGreenUpdatePolicy); err != nil {
 			invalidParams.AddNested("BlueGreenUpdatePolicy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RollingUpdatePolicy != nil {
+		if err := validateRollingUpdatePolicy(v.RollingUpdatePolicy); err != nil {
+			invalidParams.AddNested("RollingUpdatePolicy", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -7601,12 +7609,14 @@ func validateEndpointInputConfiguration(v *types.EndpointInputConfiguration) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "EndpointInputConfiguration"}
-	if len(v.InstanceType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("InstanceType"))
-	}
 	if v.EnvironmentParameterRanges != nil {
 		if err := validateEnvironmentParameterRanges(v.EnvironmentParameterRanges); err != nil {
 			invalidParams.AddNested("EnvironmentParameterRanges", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ServerlessConfig != nil {
+		if err := validateProductionVariantServerlessConfig(v.ServerlessConfig); err != nil {
+			invalidParams.AddNested("ServerlessConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -10315,6 +10325,33 @@ func validateRetryStrategy(v *types.RetryStrategy) error {
 	}
 }
 
+func validateRollingUpdatePolicy(v *types.RollingUpdatePolicy) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RollingUpdatePolicy"}
+	if v.MaximumBatchSize == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaximumBatchSize"))
+	} else if v.MaximumBatchSize != nil {
+		if err := validateCapacitySize(v.MaximumBatchSize); err != nil {
+			invalidParams.AddNested("MaximumBatchSize", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.WaitIntervalInSeconds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WaitIntervalInSeconds"))
+	}
+	if v.RollbackMaximumBatchSize != nil {
+		if err := validateCapacitySize(v.RollbackMaximumBatchSize); err != nil {
+			invalidParams.AddNested("RollbackMaximumBatchSize", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRSessionAppSettings(v *types.RSessionAppSettings) error {
 	if v == nil {
 		return nil
@@ -10795,6 +10832,52 @@ func validateTensorBoardOutputConfig(v *types.TensorBoardOutputConfig) error {
 	invalidParams := smithy.InvalidParamsError{Context: "TensorBoardOutputConfig"}
 	if v.S3OutputPath == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("S3OutputPath"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTimeSeriesConfig(v *types.TimeSeriesConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TimeSeriesConfig"}
+	if v.TargetAttributeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetAttributeName"))
+	}
+	if v.TimestampAttributeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TimestampAttributeName"))
+	}
+	if v.ItemIdentifierAttributeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ItemIdentifierAttributeName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTimeSeriesForecastingJobConfig(v *types.TimeSeriesForecastingJobConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TimeSeriesForecastingJobConfig"}
+	if v.ForecastFrequency == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ForecastFrequency"))
+	}
+	if v.ForecastHorizon == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ForecastHorizon"))
+	}
+	if v.TimeSeriesConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TimeSeriesConfig"))
+	} else if v.TimeSeriesConfig != nil {
+		if err := validateTimeSeriesConfig(v.TimeSeriesConfig); err != nil {
+			invalidParams.AddNested("TimeSeriesConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

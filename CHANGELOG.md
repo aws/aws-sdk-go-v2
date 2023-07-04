@@ -1,3 +1,120 @@
+# Release (2023-07-03)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.24.0](service/batch/CHANGELOG.md#v1240-2023-07-03)
+  * **Feature**: This feature allows customers to use AWS Batch with Linux with ARM64 CPU Architecture and X86_64 CPU Architecture with Windows OS on Fargate Platform.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.91.0](service/sagemaker/CHANGELOG.md#v1910-2023-07-03)
+  * **Feature**: SageMaker Inference Recommender now accepts new fields SupportedEndpointType and ServerlessConfiguration to support serverless endpoints.
+
+# Release (2023-06-30)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.28.0](service/ecs/CHANGELOG.md#v1280-2023-06-30)
+  * **Feature**: Added new field  "credentialspecs" to the ecs task definition to support gMSA of windows/linux in both domainless and domain-joined mode
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.38.1](service/mediaconvert/CHANGELOG.md#v1381-2023-06-30)
+  * **Documentation**: This release includes improved color handling of overlays and general updates to user documentation.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.90.0](service/sagemaker/CHANGELOG.md#v1900-2023-06-30)
+  * **Feature**: This release adds support for rolling deployment in SageMaker Inference.
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.31.0](service/transfer/CHANGELOG.md#v1310-2023-06-30)
+  * **Feature**: Add outbound Basic authentication support to AS2 connectors
+* `github.com/aws/aws-sdk-go-v2/service/verifiedpermissions`: [v1.0.4](service/verifiedpermissions/CHANGELOG.md#v104-2023-06-30)
+  * **Documentation**: This release corrects several broken links in the documentation.
+
+# Release (2023-06-29)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appstream`: [v1.21.0](service/appstream/CHANGELOG.md#v1210-2023-06-29)
+  * **Feature**: This release introduces app block builder, allowing customers to provision a resource to package applications into an app block
+* `github.com/aws/aws-sdk-go-v2/service/chime`: [v1.24.0](service/chime/CHANGELOG.md#v1240-2023-06-29)
+  * **Feature**: The Amazon Chime SDK APIs in the Chime namespace are no longer supported.  Customers should use APIs in the dedicated Amazon Chime SDK namespaces: ChimeSDKIdentity, ChimeSDKMediaPipelines, ChimeSDKMeetings, ChimeSDKMessaging, and ChimeSDKVoice.
+* `github.com/aws/aws-sdk-go-v2/service/cleanrooms`: [v1.2.0](service/cleanrooms/CHANGELOG.md#v120-2023-06-29)
+  * **Feature**: This release adds support for the OR operator in RSQL join match conditions and the ability to control which operators (AND, OR) are allowed in a join match condition.
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.20.0](service/dynamodb/CHANGELOG.md#v1200-2023-06-29)
+  * **Feature**: This release adds ReturnValuesOnConditionCheckFailure parameter to PutItem, UpdateItem, DeleteItem, ExecuteStatement, BatchExecuteStatement and ExecuteTransaction APIs. When set to ALL_OLD,  API returns a copy of the item as it was when a conditional write failed
+* `github.com/aws/aws-sdk-go-v2/service/gamelift`: [v1.20.0](service/gamelift/CHANGELOG.md#v1200-2023-06-29)
+  * **Feature**: Amazon GameLift now supports game builds that use the Amazon Linux 2023 (AL2023) operating system.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.53.0](service/glue/CHANGELOG.md#v1530-2023-06-29)
+  * **Feature**: This release adds support for AWS Glue Crawler with Iceberg Tables, allowing Crawlers to discover Iceberg Tables in S3 and register them in Glue Data Catalog for query engines to query against.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.89.0](service/sagemaker/CHANGELOG.md#v1890-2023-06-29)
+  * **Feature**: Adding support for timeseries forecasting in the CreateAutoMLJobV2 API.
+
+# Release (2023-06-28)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/internetmonitor`: [v1.3.0](service/internetmonitor/CHANGELOG.md#v130-2023-06-28)
+  * **Feature**: This release adds a new feature for Amazon CloudWatch Internet Monitor that enables customers to set custom thresholds, for performance and availability drops, for triggering when to create a health event.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2`: [v1.17.0](service/kinesisanalyticsv2/CHANGELOG.md#v1170-2023-06-28)
+  * **Feature**: Support for new runtime environment in Kinesis Data Analytics Studio: Zeppelin-0.10, Apache Flink-1.15
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.37.0](service/lambda/CHANGELOG.md#v1370-2023-06-28)
+  * **Feature**: Surface ResourceConflictException in DeleteEventSourceMapping
+* `github.com/aws/aws-sdk-go-v2/service/omics`: [v1.5.0](service/omics/CHANGELOG.md#v150-2023-06-28)
+  * **Feature**: Add Common Workflow Language (CWL) as a supported language for Omics workflows
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.46.0](service/rds/CHANGELOG.md#v1460-2023-06-28)
+  * **Feature**: Amazon Relational Database Service (RDS) now supports joining a RDS for SQL Server instance to a self-managed Active Directory.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.36.0](service/s3/CHANGELOG.md#v1360-2023-06-28)
+  * **Feature**: The S3 LISTObjects, ListObjectsV2 and ListObjectVersions API now supports a new optional header x-amz-optional-object-attributes. If header contains RestoreStatus as the value, then S3 will include Glacier restore status i.e. isRestoreInProgress and RestoreExpiryDate in List response.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.88.0](service/sagemaker/CHANGELOG.md#v1880-2023-06-28)
+  * **Feature**: This release adds support for Model Cards Model Registry integration.
+
+# Release (2023-06-27)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appfabric`: [v1.0.0](service/appfabric/CHANGELOG.md#v100-2023-06-27)
+  * **Release**: New AWS service client module
+  * **Feature**: Initial release of AWS AppFabric for connecting SaaS applications for better productivity and security.
+* `github.com/aws/aws-sdk-go-v2/service/appflow`: [v1.32.0](service/appflow/CHANGELOG.md#v1320-2023-06-27)
+  * **Feature**: This release adds support to bypass SSO with the SAPOData connector when connecting to an SAP instance.
+* `github.com/aws/aws-sdk-go-v2/service/emrserverless`: [v1.8.0](service/emrserverless/CHANGELOG.md#v180-2023-06-27)
+  * **Feature**: This release adds support to update the release label of an EMR Serverless application to upgrade it to a different version of Amazon EMR via UpdateApplication API.
+* `github.com/aws/aws-sdk-go-v2/service/ivs`: [v1.23.0](service/ivs/CHANGELOG.md#v1230-2023-06-27)
+  * **Feature**: IVS customers can now revoke the viewer session associated with an auth token, to prevent and stop playback using that token.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideo`: [v1.16.0](service/kinesisvideo/CHANGELOG.md#v1160-2023-06-27)
+  * **Feature**: General Availability (GA) release of Kinesis Video Streams at Edge, enabling customers to provide a configuration for the Kinesis Video Streams EdgeAgent running on an on-premise IoT device. Customers can now locally record from cameras and stream videos to the cloud on a configured schedule.
+* `github.com/aws/aws-sdk-go-v2/service/macie2`: [v1.28.0](service/macie2/CHANGELOG.md#v1280-2023-06-27)
+  * **Feature**: This release adds support for configuring new classification jobs to use the set of managed data identifiers that we recommend for jobs. For the managed data identifier selection type (managedDataIdentifierSelector), specify RECOMMENDED.
+* `github.com/aws/aws-sdk-go-v2/service/privatenetworks`: [v1.3.0](service/privatenetworks/CHANGELOG.md#v130-2023-06-27)
+  * **Feature**: This release allows Private5G customers to choose different commitment plans (60-days, 1-year, 3-years) when placing new orders, enables automatic renewal option for 1-year and 3-years commitments. It also allows customers to update the commitment plan of an existing radio unit.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.87.0](service/sagemaker/CHANGELOG.md#v1870-2023-06-27)
+  * **Feature**: Introducing TTL for online store records in feature groups.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakerfeaturestoreruntime`: [v1.15.0](service/sagemakerfeaturestoreruntime/CHANGELOG.md#v1150-2023-06-27)
+  * **Feature**: Introducing TTL for online store records for feature groups.
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.36.7](service/ssm/CHANGELOG.md#v1367-2023-06-27)
+  * **Documentation**: Systems Manager doc-only update for June 2023.
+* `github.com/aws/aws-sdk-go-v2/service/verifiedpermissions`: [v1.0.3](service/verifiedpermissions/CHANGELOG.md#v103-2023-06-27)
+  * **Documentation**: This update fixes several broken links to the Cedar documentation.
+
+# Release (2023-06-26)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.60.0](service/connect/CHANGELOG.md#v1600-2023-06-26)
+  * **Feature**: This release provides a way to search for existing tags within an instance. Before tagging a resource, ensure consistency by searching for pre-existing key:value pairs.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.52.0](service/glue/CHANGELOG.md#v1520-2023-06-26)
+  * **Feature**: Timestamp Starting Position For Kinesis and Kafka Data Sources in a Glue Streaming Job
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.24.0](service/guardduty/CHANGELOG.md#v1240-2023-06-26)
+  * **Feature**: Add support for user.extra.sessionName in Kubernetes Audit Logs Findings.
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.21.0](service/iam/CHANGELOG.md#v1210-2023-06-26)
+  * **Feature**: Support for a new API "GetMFADevice" to present MFA device metadata such as device certifications
+* `github.com/aws/aws-sdk-go-v2/service/pinpoint`: [v1.20.0](service/pinpoint/CHANGELOG.md#v1200-2023-06-26)
+  * **Feature**: Added time zone estimation support for journeys
+
+# Release (2023-06-23)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/devopsguru`: [v1.24.0](service/devopsguru/CHANGELOG.md#v1240-2023-06-23)
+  * **Feature**: This release adds support for encryption via customer managed keys.
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.29.3](service/fsx/CHANGELOG.md#v1293-2023-06-23)
+  * **Documentation**: Update to Amazon FSx documentation.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.45.3](service/rds/CHANGELOG.md#v1453-2023-06-23)
+  * **Documentation**: Documentation improvements for create, describe, and modify DB clusters and DB instances.
+* `github.com/aws/aws-sdk-go-v2/service/verifiedpermissions`: [v1.0.2](service/verifiedpermissions/CHANGELOG.md#v102-2023-06-23)
+  * **Documentation**: Added improved descriptions and new code samples to SDK documentation.
+
 # Release (2023-06-22)
 
 ## Module Highlights

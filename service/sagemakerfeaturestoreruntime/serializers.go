@@ -74,6 +74,11 @@ func awsRestjson1_serializeOpDocumentBatchGetRecordInput(v *BatchGetRecordInput,
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.ExpirationTimeResponse) > 0 {
+		ok := object.Key("ExpirationTimeResponse")
+		ok.String(string(v.ExpirationTimeResponse))
+	}
+
 	if v.Identifiers != nil {
 		ok := object.Key("Identifiers")
 		if err := awsRestjson1_serializeDocumentBatchGetRecordIdentifiers(v.Identifiers, ok); err != nil {
@@ -206,6 +211,10 @@ func awsRestjson1_serializeOpHttpBindingsGetRecordInput(v *GetRecordInput, encod
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if len(v.ExpirationTimeResponse) > 0 {
+		encoder.SetQuery("ExpirationTimeResponse").String(string(v.ExpirationTimeResponse))
+	}
+
 	if v.FeatureGroupName == nil || len(*v.FeatureGroupName) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member FeatureGroupName must not be empty")}
 	}
@@ -315,6 +324,13 @@ func awsRestjson1_serializeOpDocumentPutRecordInput(v *PutRecordInput, value smi
 		}
 	}
 
+	if v.TtlDuration != nil {
+		ok := object.Key("TtlDuration")
+		if err := awsRestjson1_serializeDocumentTtlDuration(v.TtlDuration, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -417,5 +433,22 @@ func awsRestjson1_serializeDocumentTargetStores(v []types.TargetStore, value smi
 		av := array.Value()
 		av.String(string(v[i]))
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTtlDuration(v *types.TtlDuration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Unit) > 0 {
+		ok := object.Key("Unit")
+		ok.String(string(v.Unit))
+	}
+
+	if v.Value != nil {
+		ok := object.Key("Value")
+		ok.Integer(*v.Value)
+	}
+
 	return nil
 }

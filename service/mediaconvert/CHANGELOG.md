@@ -1,3 +1,7 @@
+# v1.38.1 (2023-06-30)
+
+* **Documentation**: This release includes improved color handling of overlays and general updates to user documentation.
+
 # v1.38.0 (2023-06-21)
 
 * **Feature**: This release introduces the bandwidth reduction filter for the HEVC encoder, increases the limits of outputs per job, and updates support for the Nagra SDK to version 1.14.7.

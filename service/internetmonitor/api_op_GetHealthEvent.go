@@ -95,6 +95,10 @@ type GetHealthEventOutput struct {
 	// the end time is not set.
 	EndedAt *time.Time
 
+	// The threshold percentage for health events when Amazon CloudWatch Internet
+	// Monitor creates a health event.
+	HealthScoreThreshold float64
+
 	// The impact on total traffic that a health event has.
 	PercentOfTotalTrafficImpacted *float64
 

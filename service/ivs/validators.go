@@ -50,6 +50,26 @@ func (m *validateOpBatchGetStreamKey) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpBatchStartViewerSessionRevocation struct {
+}
+
+func (*validateOpBatchStartViewerSessionRevocation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchStartViewerSessionRevocation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchStartViewerSessionRevocationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchStartViewerSessionRevocationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateRecordingConfiguration struct {
 }
 
@@ -390,6 +410,26 @@ func (m *validateOpPutMetadata) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartViewerSessionRevocation struct {
+}
+
+func (*validateOpStartViewerSessionRevocation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartViewerSessionRevocation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartViewerSessionRevocationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartViewerSessionRevocationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStopStream struct {
 }
 
@@ -478,6 +518,10 @@ func addOpBatchGetStreamKeyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchGetStreamKey{}, middleware.After)
 }
 
+func addOpBatchStartViewerSessionRevocationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchStartViewerSessionRevocation{}, middleware.After)
+}
+
 func addOpCreateRecordingConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateRecordingConfiguration{}, middleware.After)
 }
@@ -546,6 +590,10 @@ func addOpPutMetadataValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutMetadata{}, middleware.After)
 }
 
+func addOpStartViewerSessionRevocationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartViewerSessionRevocation{}, middleware.After)
+}
+
 func addOpStopStreamValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStopStream{}, middleware.After)
 }
@@ -560,6 +608,41 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateChannelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateChannel{}, middleware.After)
+}
+
+func validateBatchStartViewerSessionRevocationViewerSession(v *types.BatchStartViewerSessionRevocationViewerSession) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchStartViewerSessionRevocationViewerSession"}
+	if v.ChannelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelArn"))
+	}
+	if v.ViewerId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ViewerId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBatchStartViewerSessionRevocationViewerSessionList(v []types.BatchStartViewerSessionRevocationViewerSession) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchStartViewerSessionRevocationViewerSessionList"}
+	for i := range v {
+		if err := validateBatchStartViewerSessionRevocationViewerSession(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateDestinationConfiguration(v *types.DestinationConfiguration) error {
@@ -616,6 +699,25 @@ func validateOpBatchGetStreamKeyInput(v *BatchGetStreamKeyInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "BatchGetStreamKeyInput"}
 	if v.Arns == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arns"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchStartViewerSessionRevocationInput(v *BatchStartViewerSessionRevocationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchStartViewerSessionRevocationInput"}
+	if v.ViewerSessions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ViewerSessions"))
+	} else if v.ViewerSessions != nil {
+		if err := validateBatchStartViewerSessionRevocationViewerSessionList(v.ViewerSessions); err != nil {
+			invalidParams.AddNested("ViewerSessions", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -878,6 +980,24 @@ func validateOpPutMetadataInput(v *PutMetadataInput) error {
 	}
 	if v.Metadata == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Metadata"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartViewerSessionRevocationInput(v *StartViewerSessionRevocationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartViewerSessionRevocationInput"}
+	if v.ChannelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelArn"))
+	}
+	if v.ViewerId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ViewerId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

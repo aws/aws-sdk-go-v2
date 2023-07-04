@@ -10,7 +10,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Untags the specified tags from the specified Amazon Chime SDK meeting.
+// Untags the specified tags from the specified Amazon Chime SDK meeting. This API
+// is is no longer supported and will not be updated. We recommend using the latest
+// version, UntagResource (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_meeting-chime_UntagResource.html)
+// , in the Amazon Chime SDK. Using the latest version requires migrating to a
+// dedicated namespace. For more information, refer to Migrating from the Amazon
+// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
+// in the Amazon Chime SDK Developer Guide.
+//
+// Deprecated: Use UntagResource in the Amazon Chime SDK Meetings Namespace.
 func (c *Client) UntagMeeting(ctx context.Context, params *UntagMeetingInput, optFns ...func(*Options)) (*UntagMeetingOutput, error) {
 	if params == nil {
 		params = &UntagMeetingInput{}

@@ -4292,6 +4292,11 @@ func awsRestjson1_deserializeDocumentContainerDetail(v **types.ContainerDetail, 
 				return err
 			}
 
+		case "runtimePlatform":
+			if err := awsRestjson1_deserializeDocumentRuntimePlatform(&sv.RuntimePlatform, value); err != nil {
+				return err
+			}
+
 		case "secrets":
 			if err := awsRestjson1_deserializeDocumentSecretList(&sv.Secrets, value); err != nil {
 				return err
@@ -4478,6 +4483,11 @@ func awsRestjson1_deserializeDocumentContainerProperties(v **types.ContainerProp
 
 		case "resourceRequirements":
 			if err := awsRestjson1_deserializeDocumentResourceRequirements(&sv.ResourceRequirements, value); err != nil {
+				return err
+			}
+
+		case "runtimePlatform":
+			if err := awsRestjson1_deserializeDocumentRuntimePlatform(&sv.RuntimePlatform, value); err != nil {
 				return err
 			}
 
@@ -8541,6 +8551,55 @@ func awsRestjson1_deserializeDocumentRetryStrategy(v **types.RetryStrategy, valu
 		case "evaluateOnExit":
 			if err := awsRestjson1_deserializeDocumentEvaluateOnExitList(&sv.EvaluateOnExit, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRuntimePlatform(v **types.RuntimePlatform, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RuntimePlatform
+	if *v == nil {
+		sv = &types.RuntimePlatform{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "cpuArchitecture":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.CpuArchitecture = ptr.String(jtv)
+			}
+
+		case "operatingSystemFamily":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.OperatingSystemFamily = ptr.String(jtv)
 			}
 
 		default:

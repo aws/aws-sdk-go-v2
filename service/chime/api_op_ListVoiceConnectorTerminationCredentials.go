@@ -10,7 +10,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the SIP credentials for the specified Amazon Chime Voice Connector.
+// Lists the SIP credentials for the specified Amazon Chime Voice Connector. This
+// API is is no longer supported and will not be updated. We recommend using the
+// latest version, ListVoiceConnectorTerminationCredentials (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_ListVoiceConnectorTerminationCredentials.html)
+// , in the Amazon Chime SDK. Using the latest version requires migrating to a
+// dedicated namespace. For more information, refer to Migrating from the Amazon
+// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
+// in the Amazon Chime SDK Developer Guide.
+//
+// Deprecated: Replaced by ListVoiceConnectorTerminationCredentials in the Amazon
+// Chime SDK Voice Namespace
 func (c *Client) ListVoiceConnectorTerminationCredentials(ctx context.Context, params *ListVoiceConnectorTerminationCredentialsInput, optFns ...func(*Options)) (*ListVoiceConnectorTerminationCredentialsOutput, error) {
 	if params == nil {
 		params = &ListVoiceConnectorTerminationCredentialsInput{}

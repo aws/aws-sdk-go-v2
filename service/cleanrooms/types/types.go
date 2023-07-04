@@ -85,7 +85,7 @@ type AnalysisRule struct {
 	noSmithyDocumentSerde
 }
 
-// Enables query structure and specified queries that product aggregate statistics.
+// Enables query structure and specified queries that produce aggregate statistics.
 type AnalysisRuleAggregation struct {
 
 	// The columns that query runners are allowed to use in aggregation queries.
@@ -116,8 +116,12 @@ type AnalysisRuleAggregation struct {
 	// This member is required.
 	ScalarFunctions []ScalarFunctions
 
+	// Which logical operators (if any) are to be used in an INNER JOIN match
+	// condition. Default is AND .
+	AllowedJoinOperators []JoinOperator
+
 	// Control that requires member who runs query to do a join with their configured
-	// table and/or other configured table in query
+	// table and/or other configured table in query.
 	JoinRequired JoinRequiredOption
 
 	noSmithyDocumentSerde
@@ -127,7 +131,7 @@ type AnalysisRuleAggregation struct {
 type AnalysisRuleList struct {
 
 	// Columns that can be used to join a configured table with the table of the
-	// member who can query and another members' configured tables.
+	// member who can query and other members' configured tables.
 	//
 	// This member is required.
 	JoinColumns []string
@@ -136,6 +140,10 @@ type AnalysisRuleList struct {
 	//
 	// This member is required.
 	ListColumns []string
+
+	// Which logical operators (if any) are to be used in an INNER JOIN match
+	// condition. Default is AND .
+	AllowedJoinOperators []JoinOperator
 
 	noSmithyDocumentSerde
 }
@@ -222,7 +230,7 @@ type Collaboration struct {
 	CreateTime *time.Time
 
 	// The identifier used to reference members of the collaboration. Currently only
-	// supports AWS account ID.
+	// supports Amazon Web Services account ID.
 	//
 	// This member is required.
 	CreatorAccountId *string
@@ -288,7 +296,7 @@ type CollaborationSummary struct {
 	CreateTime *time.Time
 
 	// The identifier used to reference members of the collaboration. Currently only
-	// supports AWS Account ID.
+	// supports Amazon Web Services account ID.
 	//
 	// This member is required.
 	CreatorAccountId *string
@@ -328,7 +336,7 @@ type CollaborationSummary struct {
 	noSmithyDocumentSerde
 }
 
-// A column within a schema relation, derived from the underlying AWS Glue table.
+// A column within a schema relation, derived from the underlying Glue table.
 type Column struct {
 
 	// The name of the column.
@@ -347,7 +355,7 @@ type Column struct {
 // A table that has been configured for use in a collaboration.
 type ConfiguredTable struct {
 
-	// The columns within the underlying AWS Glue table that can be utilized within
+	// The columns within the underlying Glue table that can be utilized within
 	// collaborations.
 	//
 	// This member is required.
@@ -386,7 +394,7 @@ type ConfiguredTable struct {
 	// This member is required.
 	Name *string
 
-	// The AWS Glue table that this configured table represents.
+	// The Glue table that this configured table represents.
 	//
 	// This member is required.
 	TableReference TableReference
@@ -671,15 +679,15 @@ type DataEncryptionMetadata struct {
 	noSmithyDocumentSerde
 }
 
-// A reference to a table within an AWS Glue data catalog.
+// A reference to a table within an Glue data catalog.
 type GlueTableReference struct {
 
-	// The name of the database the AWS Glue table belongs to.
+	// The name of the database the Glue table belongs to.
 	//
 	// This member is required.
 	DatabaseName *string
 
-	// The name of the AWS Glue table.
+	// The name of the Glue table.
 	//
 	// This member is required.
 	TableName *string
@@ -701,7 +709,7 @@ type Membership struct {
 	CollaborationArn *string
 
 	// The identifier used to reference members of the collaboration. Currently only
-	// supports AWS account ID.
+	// supports Amazon Web Services account ID.
 	//
 	// This member is required.
 	CollaborationCreatorAccountId *string
@@ -769,8 +777,8 @@ type MembershipSummary struct {
 	// This member is required.
 	CollaborationArn *string
 
-	// The identifier of the AWS principal that created the collaboration. Currently
-	// only supports AWS account ID.
+	// The identifier of the Amazon Web Services principal that created the
+	// collaboration. Currently only supports Amazon Web Services account ID.
 	//
 	// This member is required.
 	CollaborationCreatorAccountId *string
@@ -823,7 +831,7 @@ type MembershipSummary struct {
 type MemberSpecification struct {
 
 	// The identifier used to reference members of the collaboration. Currently only
-	// supports AWS Account ID.
+	// supports Amazon Web Services account ID.
 	//
 	// This member is required.
 	AccountId *string
@@ -850,7 +858,7 @@ type MemberSummary struct {
 	Abilities []MemberAbility
 
 	// The identifier used to reference members of the collaboration. Currently only
-	// supports AWS Account ID.
+	// supports Amazon Web Services account ID.
 	//
 	// This member is required.
 	AccountId *string
@@ -885,7 +893,7 @@ type MemberSummary struct {
 	noSmithyDocumentSerde
 }
 
-// The parameters for an AWS Clean Rooms protected query.
+// The parameters for an Clean Rooms protected query.
 type ProtectedQuery struct {
 
 	// The time at which the protected query was created.
@@ -1043,8 +1051,6 @@ type ProtectedQueryS3OutputConfiguration struct {
 type ProtectedQuerySQLParameters struct {
 
 	// The query string to be submitted.
-	//
-	// This member is required.
 	QueryString *string
 
 	noSmithyDocumentSerde
@@ -1120,7 +1126,7 @@ type Schema struct {
 	// This member is required.
 	CreateTime *time.Time
 
-	// The unique account ID for the AWS account that owns the schema.
+	// The unique account ID for the Amazon Web Services account that owns the schema.
 	//
 	// This member is required.
 	CreatorAccountId *string
@@ -1181,7 +1187,7 @@ type SchemaSummary struct {
 	// This member is required.
 	CreateTime *time.Time
 
-	// The unique account ID for the AWS account that owns the schema.
+	// The unique account ID for the Amazon Web Services account that owns the schema.
 	//
 	// This member is required.
 	CreatorAccountId *string
@@ -1209,7 +1215,7 @@ type SchemaSummary struct {
 }
 
 // A pointer to the dataset that underlies this table. Currently, this can only be
-// an AWS Glue table.
+// an Glue table.
 //
 // The following types satisfy this interface:
 //
@@ -1218,8 +1224,7 @@ type TableReference interface {
 	isTableReference()
 }
 
-// If present, a reference to the AWS Glue table referred to by this table
-// reference.
+// If present, a reference to the Glue table referred to by this table reference.
 type TableReferenceMemberGlue struct {
 	Value GlueTableReference
 

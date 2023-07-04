@@ -20,6 +20,9 @@ func ExampleAutoMLProblemTypeConfig_outputUsage() {
 	case *types.AutoMLProblemTypeConfigMemberTextClassificationJobConfig:
 		_ = v.Value // Value is types.TextClassificationJobConfig
 
+	case *types.AutoMLProblemTypeConfigMemberTimeSeriesForecastingJobConfig:
+		_ = v.Value // Value is types.TimeSeriesForecastingJobConfig
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -30,6 +33,7 @@ func ExampleAutoMLProblemTypeConfig_outputUsage() {
 }
 
 var _ *types.TextClassificationJobConfig
+var _ *types.TimeSeriesForecastingJobConfig
 var _ *types.ImageClassificationJobConfig
 var _ *types.TabularJobConfig
 

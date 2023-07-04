@@ -1182,6 +1182,11 @@ func awsRestjson1_serializeOpDocumentUpdateApplicationInput(v *UpdateApplication
 		}
 	}
 
+	if v.ReleaseLabel != nil {
+		ok := object.Key("releaseLabel")
+		ok.String(*v.ReleaseLabel)
+	}
+
 	if v.WorkerTypeSpecifications != nil {
 		ok := object.Key("workerTypeSpecifications")
 		if err := awsRestjson1_serializeDocumentWorkerTypeSpecificationInputMap(v.WorkerTypeSpecifications, ok); err != nil {

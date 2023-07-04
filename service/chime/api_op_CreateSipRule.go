@@ -12,7 +12,14 @@ import (
 )
 
 // Creates a SIP rule which can be used to run a SIP media application as a target
-// for a specific trigger type.
+// for a specific trigger type. This API is is no longer supported and will not be
+// updated. We recommend using the latest version, CreateSipRule (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_CreateSipRule.html)
+// , in the Amazon Chime SDK. Using the latest version requires migrating to a
+// dedicated namespace. For more information, refer to Migrating from the Amazon
+// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
+// in the Amazon Chime SDK Developer Guide.
+//
+// Deprecated: Replaced by CreateSipRule in the Amazon Chime SDK Voice Namespace
 func (c *Client) CreateSipRule(ctx context.Context, params *CreateSipRuleInput, optFns ...func(*Options)) (*CreateSipRuleOutput, error) {
 	if params == nil {
 		params = &CreateSipRuleInput{}

@@ -512,7 +512,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n            <b>This operation is used with the Amazon GameLift FleetIQ solution and game server groups.</b>\n         </p>\n         <p>Locates an available game server and\n            temporarily reserves it to host gameplay and players. This operation is called from a\n            game client or client service (such as a matchmaker) to request hosting resources for a\n            new game session. In response, Amazon GameLift FleetIQ locates an available game server, places it in\n                <code>CLAIMED</code> status for 60 seconds, and returns connection information that\n            players can use to connect to the game server. </p>\n         <p>To claim a game server, identify a game server group. You can also specify a game\n            server ID, although this approach bypasses Amazon GameLift FleetIQ placement optimization. Optionally,\n            include game data to pass to the game server at the start of a game session, such as a\n            game map or player information. Filter options may be included to further restrict how a\n            game server is chosen, such as only allowing game servers on <code>ACTIVE</code> instances\n            to be claimed.</p>\n         <p>When a game server is successfully claimed, connection information is returned. A\n            claimed game server's utilization status remains <code>AVAILABLE</code> while the claim\n            status is set to <code>CLAIMED</code> for up to 60 seconds. This time period gives the\n            game server time to update its status to <code>UTILIZED</code> after players join. If\n            the game server's status is not updated within 60 seconds, the game server reverts to\n            unclaimed status and is available to be claimed by another request. The claim time\n            period is a fixed value and is not configurable.</p>\n         <p>If you try to claim a specific game server, this request will fail in the following\n            cases:</p>\n         <ul>\n            <li>\n               <p>If the game server utilization status is <code>UTILIZED</code>.</p>\n            </li>\n            <li>\n               <p>If the game server claim status is <code>CLAIMED</code>.</p>\n            </li>\n            <li>\n               <p>If the game server is running on an instance in <code>DRAINING</code> status and\n                provided filter option does not allow placing on <code>DRAINING</code> instances.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html\">Amazon GameLift FleetIQ\n                Guide</a>\n         </p>"
+                "smithy.api#documentation": "<p>\n            <b>This operation is used with the Amazon GameLift FleetIQ solution and game server groups.</b>\n         </p>\n         <p>Locates an available game server and\n            temporarily reserves it to host gameplay and players. This operation is called from a\n            game client or client service (such as a matchmaker) to request hosting resources for a\n            new game session. In response, Amazon GameLift FleetIQ locates an available game server, places it in\n                <code>CLAIMED</code> status for 60 seconds, and returns connection information that\n            players can use to connect to the game server. </p>\n         <p>To claim a game server, identify a game server group. You can also specify a game\n            server ID, although this approach bypasses Amazon GameLift FleetIQ placement optimization. Optionally,\n            include game data to pass to the game server at the start of a game session, such as a\n            game map or player information. Add filter options to further restrict how a\n            game server is chosen, such as only allowing game servers on <code>ACTIVE</code> instances\n                to be claimed.</p>\n         <p>When a game server is successfully claimed, connection information is returned. A\n            claimed game server's utilization status remains <code>AVAILABLE</code> while the claim\n            status is set to <code>CLAIMED</code> for up to 60 seconds. This time period gives the\n            game server time to update its status to <code>UTILIZED</code> after players join. If\n            the game server's status is not updated within 60 seconds, the game server reverts to\n            unclaimed status and is available to be claimed by another request. The claim time\n            period is a fixed value and is not configurable.</p>\n         <p>If you try to claim a specific game server, this request will fail in the following\n            cases:</p>\n         <ul>\n            <li>\n               <p>If the game server utilization status is <code>UTILIZED</code>.</p>\n            </li>\n            <li>\n               <p>If the game server claim status is <code>CLAIMED</code>.</p>\n            </li>\n            <li>\n               <p>If the game server is running on an instance in <code>DRAINING</code> status and\n                the provided filter option does not allow placing on <code>DRAINING</code> instances.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Learn more</b>\n         </p>\n         <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html\">Amazon GameLift FleetIQ\n                Guide</a>\n         </p>"
             }
         },
         "com.amazonaws.gamelift#ClaimGameServerInput": {
@@ -1752,7 +1752,7 @@
                 "AdditionalPlayerCount": {
                     "target": "com.amazonaws.gamelift#WholeNumber",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of player slots in a match to keep open for future players. For example, if the configuration's rule set specifies \n            a match for a single 12-person team, and the additional player count is set to 2, only 10 players are selected for the match. This parameter is not used if <code>FlexMatchMode</code> is set to\n                <code>STANDALONE</code>.</p>"
+                        "smithy.api#documentation": "<p>The number of player slots in a match to keep open for future players. For example, if the configuration's rule set specifies \n            a match for a single 10-person team, and the additional player count is set to 2, 10 players will be selected for the match and 2 more player slots will be open for future players. This parameter is not used if <code>FlexMatchMode</code> is set to\n                <code>STANDALONE</code>.</p>"
                     }
                 },
                 "CustomEventData": {
@@ -11354,7 +11354,7 @@
                 "AdditionalPlayerCount": {
                     "target": "com.amazonaws.gamelift#WholeNumber",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of player slots in a match to keep open for future players. For example, if the configuration's rule set specifies \n            a match for a single 12-person team, and the additional player count is set to 2, only 10 players are selected for the match. This parameter is not used when <code>FlexMatchMode</code> is set to\n                <code>STANDALONE</code>.</p>"
+                        "smithy.api#documentation": "<p>The number of player slots in a match to keep open for future players. For example, if the configuration's rule set specifies \n            a match for a single 10-person team, and the additional player count is set to 2, 10 players will be selected for the match and 2 more player slots will be open for future players. This parameter is not used when <code>FlexMatchMode</code> is set to\n                <code>STANDALONE</code>.</p>"
                     }
                 },
                 "CustomEventData": {
@@ -11848,6 +11848,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "WINDOWS_2016"
+                    }
+                },
+                "AMAZON_LINUX_2023": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AMAZON_LINUX_2023"
                     }
                 }
             }
@@ -15051,7 +15057,7 @@
                 "AdditionalPlayerCount": {
                     "target": "com.amazonaws.gamelift#WholeNumber",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of player slots in a match to keep open for future players. For example, if the configuration's rule set specifies \n            a match for a single 12-person team, and the additional player count is set to 2, only 10 players are selected for the match. This parameter is not used if <code>FlexMatchMode</code> is set to\n                <code>STANDALONE</code>.</p>"
+                        "smithy.api#documentation": "<p>The number of player slots in a match to keep open for future players. For example, if the configuration's rule set specifies \n            a match for a single 10-person team, and the additional player count is set to 2, 10 players will be selected for the match and 2 more player slots will be open for future players. This parameter is not used if <code>FlexMatchMode</code> is set to\n                <code>STANDALONE</code>.</p>"
                     }
                 },
                 "CustomEventData": {

@@ -1,3 +1,7 @@
+# v1.37.0 (2023-06-28)
+
+* **Feature**: Surface ResourceConflictException in DeleteEventSourceMapping
+
 # v1.36.0 (2023-06-20)
 
 * **Feature**: This release adds RecursiveInvocationException to the Invoke API and InvokeWithResponseStream API.

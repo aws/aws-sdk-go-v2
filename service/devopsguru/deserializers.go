@@ -7123,6 +7123,64 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentKMSServerSideEncryptionIntegration(v **types.KMSServerSideEncryptionIntegration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.KMSServerSideEncryptionIntegration
+	if *v == nil {
+		sv = &types.KMSServerSideEncryptionIntegration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "KMSKeyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KMSKeyId to be of type string, got %T instead", value)
+				}
+				sv.KMSKeyId = ptr.String(jtv)
+			}
+
+		case "OptInStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OptInStatus to be of type string, got %T instead", value)
+				}
+				sv.OptInStatus = types.OptInStatus(jtv)
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ServerSideEncryptionType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.ServerSideEncryptionType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentLogAnomalyClass(v **types.LogAnomalyClass, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10673,6 +10731,11 @@ func awsRestjson1_deserializeDocumentServiceIntegrationConfig(v **types.ServiceI
 
 	for key, value := range shape {
 		switch key {
+		case "KMSServerSideEncryption":
+			if err := awsRestjson1_deserializeDocumentKMSServerSideEncryptionIntegration(&sv.KMSServerSideEncryption, value); err != nil {
+				return err
+			}
+
 		case "LogsAnomalyDetection":
 			if err := awsRestjson1_deserializeDocumentLogsAnomalyDetectionIntegration(&sv.LogsAnomalyDetection, value); err != nil {
 				return err

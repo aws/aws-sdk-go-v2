@@ -1344,7 +1344,8 @@ type AutoMLJobChannel struct {
 
 	// The type of channel. Defines whether the data are used for training or
 	// validation. The default value is training . Channels for training and validation
-	// must share the same ContentType
+	// must share the same ContentType The type of channel defaults to training for
+	// the time-series forecasting problem type.
 	ChannelType AutoMLChannelType
 
 	// The allowed compression types depend on the input format and problem type. We
@@ -1355,12 +1356,15 @@ type AutoMLJobChannel struct {
 
 	// The content type of the data from the input source. The following are the
 	// allowed content types for different problems:
-	//   - For Tabular problem types: text/csv;header=present or
+	//   - For tabular problem types: text/csv;header=present or
 	//   x-application/vnd.amazon+parquet . The default value is
 	//   text/csv;header=present .
-	//   - For ImageClassification: image/png , image/jpeg , or image/* . The default
+	//   - For image classification: image/png , image/jpeg , or image/* . The default
 	//   value is image/* .
-	//   - For TextClassification: text/csv;header=present or
+	//   - For text classification: text/csv;header=present or
+	//   x-application/vnd.amazon+parquet . The default value is
+	//   text/csv;header=present .
+	//   - For time-series forecasting: text/csv;header=present or
 	//   x-application/vnd.amazon+parquet . The default value is
 	//   text/csv;header=present .
 	ContentType *string
@@ -1383,8 +1387,9 @@ type AutoMLJobCompletionCriteria struct {
 	// not completed.
 	MaxAutoMLJobRuntimeInSeconds *int32
 
-	// The maximum number of times a training job is allowed to run. For job V2s (jobs
-	// created by calling CreateAutoMLJobV2 ), the supported value is 1.
+	// The maximum number of times a training job is allowed to run. For text and
+	// image classification, as well as time-series forecasting problem types, the
+	// supported value is 1. For tabular problem types, the maximum value is 750.
 	MaxCandidates *int32
 
 	// The maximum time, in seconds, that each training job executed inside
@@ -1451,6 +1456,7 @@ type AutoMLJobObjective struct {
 	//   - Binary classification: F1 .
 	//   - Multiclass classification: Accuracy .
 	//   - For image or text classification problem types: Accuracy
+	//   - For time-series forecasting problem types: AverageWeightedQuantileLoss
 	//
 	// This member is required.
 	MetricName AutoMLMetricEnum
@@ -1543,6 +1549,7 @@ type AutoMLPartialFailureReason struct {
 //	AutoMLProblemTypeConfigMemberImageClassificationJobConfig
 //	AutoMLProblemTypeConfigMemberTabularJobConfig
 //	AutoMLProblemTypeConfigMemberTextClassificationJobConfig
+//	AutoMLProblemTypeConfigMemberTimeSeriesForecastingJobConfig
 type AutoMLProblemTypeConfig interface {
 	isAutoMLProblemTypeConfig()
 }
@@ -1576,6 +1583,18 @@ type AutoMLProblemTypeConfigMemberTextClassificationJobConfig struct {
 }
 
 func (*AutoMLProblemTypeConfigMemberTextClassificationJobConfig) isAutoMLProblemTypeConfig() {}
+
+// Settings used to configure an AutoML job V2 for a time-series forecasting
+// problem type. The TimeSeriesForecastingJobConfig problem type is only available
+// in private beta. Contact Amazon Web Services Support or your account manager to
+// learn more about access privileges.
+type AutoMLProblemTypeConfigMemberTimeSeriesForecastingJobConfig struct {
+	Value TimeSeriesForecastingJobConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*AutoMLProblemTypeConfigMemberTimeSeriesForecastingJobConfig) isAutoMLProblemTypeConfig() {}
 
 // The resolved attributes specific to the problem type of an AutoML job V2.
 //
@@ -1950,6 +1969,11 @@ type CandidateArtifactLocations struct {
 	// This member is required.
 	Explainability *string
 
+	// The Amazon S3 prefix to the accuracy metrics and the inference results observed
+	// over the testing window. Available only for the time-series forecasting problem
+	// type.
+	BacktestResults *string
+
 	// The Amazon S3 prefix to the model insight artifacts generated for the AutoML
 	// candidate.
 	ModelInsights *string
@@ -2005,7 +2029,12 @@ type CanvasAppSettings struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the endpoint capacity to activate for production.
+// Specifies the type and size of the endpoint capacity to activate for a
+// blue/green deployment, a rolling deployment, or a rollback strategy. You can
+// specify your batches as either instance count or the overall percentage or your
+// fleet. For a rollback strategy, if you don't specify the fields in this object,
+// or if you set the Value to 100%, then SageMaker uses a blue/green rollback
+// strategy and rolls all traffic back to the blue fleet.
 type CapacitySize struct {
 
 	// Specifies the endpoint capacity type.
@@ -2660,7 +2689,7 @@ type ContainerDefinition struct {
 	Mode ContainerMode
 
 	// Specifies the location of ML model data to deploy. Currently you cannot use
-	// ModelDataSource in conjuction with SageMaker batch transform, SageMaker
+	// ModelDataSource in conjunction with SageMaker batch transform, SageMaker
 	// serverless endpoints, SageMaker multi-model endpoints, and SageMaker
 	// Marketplace.
 	ModelDataSource *ModelDataSource
@@ -3196,19 +3225,20 @@ type DeployedImage struct {
 // deployment strategy and rollback configurations.
 type DeploymentConfig struct {
 
+	// Automatic rollback configuration for handling endpoint deployment failures and
+	// recovery.
+	AutoRollbackConfiguration *AutoRollbackConfig
+
 	// Update policy for a blue/green deployment. If this update policy is specified,
 	// SageMaker creates a new fleet during the deployment while maintaining the old
 	// fleet. SageMaker flips traffic to the new fleet according to the specified
 	// traffic routing configuration. Only one update policy should be used in the
 	// deployment configuration. If no update policy is specified, SageMaker uses a
 	// blue/green deployment strategy with all at once traffic shifting by default.
-	//
-	// This member is required.
 	BlueGreenUpdatePolicy *BlueGreenUpdatePolicy
 
-	// Automatic rollback configuration for handling endpoint deployment failures and
-	// recovery.
-	AutoRollbackConfiguration *AutoRollbackConfig
+	// Specifies a rolling deployment strategy for updating a SageMaker endpoint.
+	RollingUpdatePolicy *RollingUpdatePolicy
 
 	noSmithyDocumentSerde
 }
@@ -4065,16 +4095,17 @@ type EndpointInput struct {
 // The endpoint configuration for the load test.
 type EndpointInputConfiguration struct {
 
-	// The instance types to use for the load test.
-	//
-	// This member is required.
-	InstanceType ProductionVariantInstanceType
-
 	// The parameter you want to benchmark against.
 	EnvironmentParameterRanges *EnvironmentParameterRanges
 
 	// The inference specification name in the model package version.
 	InferenceSpecificationName *string
+
+	// The instance types to use for the load test.
+	InstanceType ProductionVariantInstanceType
+
+	// Specifies the serverless configuration for an endpoint variant.
+	ServerlessConfig *ProductionVariantServerlessConfig
 
 	noSmithyDocumentSerde
 }
@@ -4111,21 +4142,20 @@ type EndpointOutputConfiguration struct {
 	// This member is required.
 	EndpointName *string
 
-	// The number of instances recommended to launch initially.
-	//
-	// This member is required.
-	InitialInstanceCount int32
-
-	// The instance type recommended by Amazon SageMaker Inference Recommender.
-	//
-	// This member is required.
-	InstanceType ProductionVariantInstanceType
-
 	// The name of the production variant (deployed model) made during a
 	// recommendation job.
 	//
 	// This member is required.
 	VariantName *string
+
+	// The number of instances recommended to launch initially.
+	InitialInstanceCount *int32
+
+	// The instance type recommended by Amazon SageMaker Inference Recommender.
+	InstanceType ProductionVariantInstanceType
+
+	// Specifies the serverless configuration for an endpoint variant.
+	ServerlessConfig *ProductionVariantServerlessConfig
 
 	noSmithyDocumentSerde
 }
@@ -7768,6 +7798,10 @@ type ModelCard struct {
 	// The unique name (ID) of the model.
 	ModelId *string
 
+	// The model package group that contains the model package. Only relevant for
+	// model cards created for model packages in the Amazon SageMaker Model Registry.
+	ModelPackageGroupName *string
+
 	// The risk rating of the model. Different organizations might have different
 	// criteria for model card risk ratings. For more information, see Risk ratings (https://docs.aws.amazon.com/sagemaker/latest/dg/model-cards-risk-rating.html)
 	// .
@@ -9780,6 +9814,24 @@ type OnlineStoreConfig struct {
 	// OnlineStore .
 	SecurityConfig *OnlineStoreSecurityConfig
 
+	// Time to live duration, where the record is hard deleted after the expiration
+	// time is reached; ExpiresAt = EventTime + TtlDuration . For information on
+	// HardDelete, see the DeleteRecord (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_DeleteRecord.html)
+	// API in the Amazon SageMaker API Reference guide.
+	TtlDuration *TtlDuration
+
+	noSmithyDocumentSerde
+}
+
+// Updates the feature group online store configuration.
+type OnlineStoreConfigUpdate struct {
+
+	// Time to live duration, where the record is hard deleted after the expiration
+	// time is reached; ExpiresAt = EventTime + TtlDuration . For information on
+	// HardDelete, see the DeleteRecord (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_DeleteRecord.html)
+	// API in the Amazon SageMaker API Reference guide.
+	TtlDuration *TtlDuration
+
 	noSmithyDocumentSerde
 }
 
@@ -10971,7 +11023,11 @@ type ProductionVariantServerlessConfig struct {
 	MemorySizeInMB *int32
 
 	// The amount of provisioned concurrency to allocate for the serverless endpoint.
-	// Should be less than or equal to MaxConcurrency .
+	// Should be less than or equal to MaxConcurrency . This field is not supported for
+	// serverless endpoint recommendations for Inference Recommender jobs. For more
+	// information about creating an Inference Recommender job, see
+	// CreateInferenceRecommendationsJobs (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateInferenceRecommendationsJob.html)
+	// .
 	ProvisionedConcurrency *int32
 
 	noSmithyDocumentSerde
@@ -11575,6 +11631,12 @@ type RecommendationJobContainerConfig struct {
 	// Specifies the SamplePayloadUrl and all other sample payload-related fields.
 	PayloadConfig *RecommendationJobPayloadConfig
 
+	// The endpoint type to receive recommendations for. By default this is null, and
+	// the results of the inference recommendation job return a combined list of both
+	// real-time and serverless benchmarks. By specifying a value for this field, you
+	// can receive a longer list of benchmarks for the desired endpoint type.
+	SupportedEndpointType RecommendationJobSupportedEndpointType
+
 	// A list of the instance types that are used to generate inferences in real-time.
 	SupportedInstanceTypes []string
 
@@ -11785,6 +11847,12 @@ type RecommendationMetrics struct {
 	// The expected memory utilization at maximum invocations per minute for the
 	// instance. NaN indicates that the value is not available.
 	MemoryUtilization *float32
+
+	// The time it takes to launch new compute resources for a serverless endpoint.
+	// The time can vary depending on the model size, how long it takes to download the
+	// model, and the start-up time of the container. NaN indicates that the value is
+	// not available.
+	ModelSetupTime *int32
 
 	noSmithyDocumentSerde
 }
@@ -12065,6 +12133,39 @@ type RetryStrategy struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies a rolling deployment strategy for updating a SageMaker endpoint.
+type RollingUpdatePolicy struct {
+
+	// Specifies the type and size of the endpoint capacity to activate for a
+	// blue/green deployment, a rolling deployment, or a rollback strategy. You can
+	// specify your batches as either instance count or the overall percentage or your
+	// fleet. For a rollback strategy, if you don't specify the fields in this object,
+	// or if you set the Value to 100%, then SageMaker uses a blue/green rollback
+	// strategy and rolls all traffic back to the blue fleet.
+	//
+	// This member is required.
+	MaximumBatchSize *CapacitySize
+
+	// The length of the baking period, during which SageMaker monitors alarms for
+	// each batch on the new fleet.
+	//
+	// This member is required.
+	WaitIntervalInSeconds *int32
+
+	// The time limit for the total deployment. Exceeding this limit causes a timeout.
+	MaximumExecutionTimeoutInSeconds *int32
+
+	// Specifies the type and size of the endpoint capacity to activate for a
+	// blue/green deployment, a rolling deployment, or a rollback strategy. You can
+	// specify your batches as either instance count or the overall percentage or your
+	// fleet. For a rollback strategy, if you don't specify the fields in this object,
+	// or if you set the Value to 100%, then SageMaker uses a blue/green rollback
+	// strategy and rolls all traffic back to the blue fleet.
+	RollbackMaximumBatchSize *CapacitySize
+
+	noSmithyDocumentSerde
+}
+
 // A collection of settings that apply to an RSessionGateway app.
 type RSessionAppSettings struct {
 
@@ -12235,8 +12336,9 @@ type S3ModelDataSource struct {
 	//   if your uncompressed ML model consists of two S3 objects
 	//   s3://mybucket/model/weights and s3://mybucket/model/weights/part1 and you
 	//   specify s3://mybucket/model/ as the value of S3Uri and S3Prefix as the value
-	//   of S3DataType, then it will result in name clash between /opt/ml/model/weights
-	//   (a regular file) and /opt/ml/model/weights/ (a directory).
+	//   of S3DataType , then it will result in name clash between
+	//   /opt/ml/model/weights (a regular file) and /opt/ml/model/weights/ (a
+	//   directory).
 	//   - Do not organize the model artifacts in S3 console using folders (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html)
 	//   . When you create a folder in S3 console, S3 creates a 0-byte object with a key
 	//   set to the folder name you provide. They key of the 0-byte object ends with a
@@ -12250,7 +12352,8 @@ type S3ModelDataSource struct {
 	// identifies a key name prefix. SageMaker uses all objects that match the
 	// specified key name prefix as part of the ML model data to deploy. A valid key
 	// name prefix identified by S3Uri always ends with a forward slash (/). If you
-	// choose S3Object, S3Uri identifies an object that is the ML model data to deploy.
+	// choose S3Object , S3Uri identifies an object that is the ML model data to
+	// deploy.
 	//
 	// This member is required.
 	S3DataType S3ModelDataType
@@ -13041,6 +13144,106 @@ type TextClassificationJobConfig struct {
 	noSmithyDocumentSerde
 }
 
+// The collection of components that defines the time-series.
+type TimeSeriesConfig struct {
+
+	// The name of the column that represents the set of item identifiers for which
+	// you want to predict the target value.
+	//
+	// This member is required.
+	ItemIdentifierAttributeName *string
+
+	// The name of the column representing the target variable that you want to
+	// predict for each item in your dataset. The data type of the target variable must
+	// be numerical.
+	//
+	// This member is required.
+	TargetAttributeName *string
+
+	// The name of the column indicating a point in time at which the target value of
+	// a given item is recorded.
+	//
+	// This member is required.
+	TimestampAttributeName *string
+
+	// A set of columns names that can be grouped with the item identifier column to
+	// create a composite key for which a target value is predicted.
+	GroupingAttributeNames []string
+
+	noSmithyDocumentSerde
+}
+
+// The collection of settings used by an AutoML job V2 for the time-series
+// forecasting problem type. The TimeSeriesForecastingJobConfig problem type is
+// only available in private beta. Contact Amazon Web Services Support or your
+// account manager to learn more about access privileges.
+type TimeSeriesForecastingJobConfig struct {
+
+	// The frequency of predictions in a forecast. Valid intervals are an integer
+	// followed by Y (Year), M (Month), W (Week), D (Day), H (Hour), and min (Minute).
+	// For example, 1D indicates every day and 15min indicates every 15 minutes. The
+	// value of a frequency must not overlap with the next larger frequency. For
+	// example, you must use a frequency of 1H instead of 60min . The valid values for
+	// each frequency are the following:
+	//   - Minute - 1-59
+	//   - Hour - 1-23
+	//   - Day - 1-6
+	//   - Week - 1-4
+	//   - Month - 1-11
+	//   - Year - 1
+	//
+	// This member is required.
+	ForecastFrequency *string
+
+	// The number of time-steps that the model predicts. The forecast horizon is also
+	// called the prediction length. The maximum forecast horizon is the lesser of 500
+	// time-steps or 1/4 of the time-steps in the dataset.
+	//
+	// This member is required.
+	ForecastHorizon *int32
+
+	// The collection of components that defines the time-series.
+	//
+	// This member is required.
+	TimeSeriesConfig *TimeSeriesConfig
+
+	// How long a job is allowed to run, or how many candidates a job is allowed to
+	// generate.
+	CompletionCriteria *AutoMLJobCompletionCriteria
+
+	// A URL to the Amazon S3 data source containing additional selected features that
+	// complement the target, itemID, timestamp, and grouped columns set in
+	// TimeSeriesConfig . When not provided, the AutoML job V2 includes all the columns
+	// from the original dataset that are not already declared in TimeSeriesConfig . If
+	// provided, the AutoML job V2 only considers these additional columns as a
+	// complement to the ones declared in TimeSeriesConfig . You can input
+	// FeatureAttributeNames (optional) in JSON format as shown below: {
+	// "FeatureAttributeNames":["col1", "col2", ...] } . You can also specify the data
+	// type of the feature (optional) in the format shown below: {
+	// "FeatureDataTypes":{"col1":"numeric", "col2":"categorical" ... } } Autopilot
+	// supports the following data types: numeric , categorical , text , and datetime .
+	// These column keys must not include any column set in TimeSeriesConfig . When not
+	// provided, the AutoML job V2 includes all the columns from the original dataset
+	// that are not already declared in TimeSeriesConfig . If provided, the AutoML job
+	// V2 only considers these additional columns as a complement to the ones declared
+	// in TimeSeriesConfig . Autopilot supports the following data types: numeric ,
+	// categorical , text , and datetime .
+	FeatureSpecificationS3Uri *string
+
+	// The quantiles used to train the model for forecasts at a specified quantile.
+	// You can specify quantiles from 0.01 (p1) to 0.99 (p99), by increments of 0.01
+	// or higher. Up to five forecast quantiles can be specified. When
+	// ForecastQuantiles is not provided, the AutoML job uses the quantiles p10, p50,
+	// and p90 as default.
+	ForecastQuantiles []string
+
+	// The transformations modifying specific attributes of the time-series, such as
+	// filling strategies for missing values.
+	Transformations *TimeSeriesTransformations
+
+	noSmithyDocumentSerde
+}
+
 // Time series forecast settings for the SageMaker Canvas application.
 type TimeSeriesForecastingSettings struct {
 
@@ -13057,6 +13260,36 @@ type TimeSeriesForecastingSettings struct {
 	// Describes whether time series forecasting is enabled or disabled in the Canvas
 	// application.
 	Status FeatureStatus
+
+	noSmithyDocumentSerde
+}
+
+// Transformations allowed on the dataset. Supported transformations are Filling
+// and Aggregation . Filling specifies how to add values to missing values in the
+// dataset. Aggregation defines how to aggregate data that does not align with
+// forecast frequency.
+type TimeSeriesTransformations struct {
+
+	// A key value pair defining the aggregation method for a column, where the key is
+	// the column name and the value is the aggregation method. The supported
+	// aggregation methods are sum (default), avg , first , min , max . Aggregation is
+	// only supported for the target column.
+	Aggregation map[string]AggregationTransformationValue
+
+	// A key value pair defining the filling method for a column, where the key is the
+	// column name and the value is an object which defines the filling logic. You can
+	// specify multiple filling methods for a single column. The supported filling
+	// methods and their corresponding options are:
+	//   - frontfill : none (Supported only for target column)
+	//   - middlefill : zero , value , median , mean , min , max
+	//   - backfill : zero , value , median , mean , min , max
+	//   - futurefill : zero , value , median , mean , min , max
+	// To set a filling method to a specific value, set the fill parameter to the
+	// chosen filling method value (for example "backfill" : "value" ), and define the
+	// filling value in an additional parameter prefixed with "_value". For example, to
+	// set backfill to a value of 2 , you must include two parameters: "backfill":
+	// "value" and "backfill_value":"2" .
+	Filling map[string]map[string]string
 
 	noSmithyDocumentSerde
 }
@@ -14256,6 +14489,21 @@ type TrialSummary struct {
 
 	// The source of the trial.
 	TrialSource *TrialSource
+
+	noSmithyDocumentSerde
+}
+
+// Time to live duration, where the record is hard deleted after the expiration
+// time is reached; ExpiresAt = EventTime + TtlDuration . For information on
+// HardDelete, see the DeleteRecord (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_DeleteRecord.html)
+// API in the Amazon SageMaker API Reference guide.
+type TtlDuration struct {
+
+	// TtlDuration time unit.
+	Unit TtlDurationUnit
+
+	// TtlDuration time value.
+	Value *int32
 
 	noSmithyDocumentSerde
 }

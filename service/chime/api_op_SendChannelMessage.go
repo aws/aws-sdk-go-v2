@@ -16,7 +16,15 @@ import (
 // x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of
 // the user that makes the API call as the value in the header. Also, STANDARD
 // messages can contain 4KB of data and the 1KB of metadata. CONTROL messages can
-// contain 30 bytes of data and no metadata.
+// contain 30 bytes of data and no metadata. This API is is no longer supported and
+// will not be updated. We recommend using the latest version, SendChannelMessage (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_SendChannelMessage.html)
+// , in the Amazon Chime SDK. Using the latest version requires migrating to a
+// dedicated namespace. For more information, refer to Migrating from the Amazon
+// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
+// in the Amazon Chime SDK Developer Guide.
+//
+// Deprecated: Replaced by SendChannelMessage in the Amazon Chime SDK Messaging
+// Namespace
 func (c *Client) SendChannelMessage(ctx context.Context, params *SendChannelMessageInput, optFns ...func(*Options)) (*SendChannelMessageOutput, error) {
 	if params == nil {
 		params = &SendChannelMessageInput{}

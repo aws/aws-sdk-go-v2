@@ -370,6 +370,9 @@
                         "smithy.api#documentation": "<p>A set of tags (key-value pairs) that you want to associate with this channel.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisvideo#CreateSignalingChannelOutput": {
@@ -381,6 +384,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the created channel.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.kinesisvideo#CreateStream": {
@@ -448,7 +454,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.kinesisvideo#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the Key Management Service (KMS) key that you want Kinesis Video\n            Streams to use to encrypt stream data.</p>\n         <p>If no key ID is specified, the default, Kinesis Video-managed key\n                (<code>aws/kinesisvideo</code>) is used.</p>\n         <p> For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters\">DescribeKey</a>. </p>"
+                        "smithy.api#documentation": "<p>The ID of the Key Management Service (KMS) key that you want Kinesis Video\n            Streams to use to encrypt stream data.</p>\n         <p>If no key ID is specified, the default, Kinesis Video-managed key\n            (<code>Amazon Web Services/kinesisvideo</code>) is used.</p>\n         <p> For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters\">DescribeKey</a>. </p>"
                     }
                 },
                 "DataRetentionInHours": {
@@ -463,6 +469,9 @@
                         "smithy.api#documentation": "<p>A list of tags to associate with the specified stream. Each tag is a key-value pair\n            (the value is optional).</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisvideo#CreateStreamOutput": {
@@ -474,6 +483,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the stream.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.kinesisvideo#DataEndpoint": {
@@ -497,6 +509,67 @@
         },
         "com.amazonaws.kinesisvideo#DeleteAfterUpload": {
             "type": "boolean"
+        },
+        "com.amazonaws.kinesisvideo#DeleteEdgeConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kinesisvideo#DeleteEdgeConfigurationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.kinesisvideo#DeleteEdgeConfigurationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kinesisvideo#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideo#ClientLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideo#InvalidArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideo#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideo#StreamEdgeConfigurationNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>An asynchronous API that deletes a stream’s existing edge configuration, as well as the corresponding media from the Edge Agent.</p>\n         <p>When you invoke this API, the sync status is set to <code>DELETING</code>. A deletion process starts, in which active edge jobs are stopped and all media is deleted from the edge device. The time to delete varies, depending on the total amount of stored media. If the deletion process fails, the sync status changes to <code>DELETE_FAILED</code>. You will need to re-try the deletion.</p>\n         <p>When the deletion process has completed successfully, the edge configuration is no longer accessible.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/deleteEdgeConfiguration",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.kinesisvideo#DeleteEdgeConfigurationInput": {
+            "type": "structure",
+            "members": {
+                "StreamName": {
+                    "target": "com.amazonaws.kinesisvideo#StreamName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the stream from which to delete the edge configuration. Specify either the <code>StreamName</code> or the <code>StreamARN</code>.</p>"
+                    }
+                },
+                "StreamARN": {
+                    "target": "com.amazonaws.kinesisvideo#ResourceARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the stream. Specify either the <code>StreamName</code> or the <code>StreamARN</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.kinesisvideo#DeleteEdgeConfigurationOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.kinesisvideo#DeleteSignalingChannel": {
             "type": "operation",
@@ -551,11 +624,17 @@
                         "smithy.api#documentation": "<p>The current version of the signaling channel that you want to delete. You can obtain\n            the current version by invoking the <code>DescribeSignalingChannel</code> or\n                <code>ListSignalingChannels</code> API operations.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisvideo#DeleteSignalingChannelOutput": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.kinesisvideo#DeleteStream": {
             "type": "operation",
@@ -610,11 +689,17 @@
                         "smithy.api#documentation": "<p>Optional: The version of the stream that you want to delete. </p>\n         <p>Specify the version as a safeguard to ensure that your are deleting the correct\n            stream. To get the stream version, use the <code>DescribeStream</code> API.</p>\n         <p>If not specified, only the <code>CreationTime</code> is checked before deleting the\n            stream.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisvideo#DeleteStreamOutput": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.kinesisvideo#DeletionConfig": {
             "type": "structure",
@@ -634,7 +719,7 @@
                 "DeleteAfterUpload": {
                     "target": "com.amazonaws.kinesisvideo#DeleteAfterUpload",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>boolean</code> value used to indicate whether or not you want to mark the media for deletion, once it has been uploaded to \n            the Kinesis Video Stream cloud. The media files can be deleted if any of the deletion configuration values are \n            set to <code>true</code>, such as when the limit for the <code>EdgeRetentionInHours</code>, or the\n            <code>MaxLocalMediaSizeInMB</code>, has been reached. \n        </p>\n         <p>Since the default value is set to <code>true</code>, configure the uploader schedule such \n            that the media files are not being deleted before they are initially uploaded to AWS cloud.</p>"
+                        "smithy.api#documentation": "<p>The <code>boolean</code> value used to indicate whether or not you want to mark the media for deletion, once it has been uploaded to \n            the Kinesis Video Stream cloud. The media files can be deleted if any of the deletion configuration values are \n            set to <code>true</code>, such as when the limit for the <code>EdgeRetentionInHours</code>, or the\n            <code>MaxLocalMediaSizeInMB</code>, has been reached. \n        </p>\n         <p>Since the default value is set to <code>true</code>, configure the uploader schedule such \n            that the media files are not being deleted before they are initially uploaded to the  Amazon Web Services cloud.</p>"
                     }
                 }
             },
@@ -668,7 +753,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes a stream’s edge configuration that was set using the <code>StartEdgeConfigurationUpdate</code> API. \n             Use this API to get the status of the configuration if the configuration is in sync with the \n            Edge Agent.</p>",
+                "smithy.api#documentation": "<p>Describes a stream’s edge configuration that was set using the\n                <code>StartEdgeConfigurationUpdate</code> API and the latest status of the edge\n            agent's recorder and uploader jobs. Use this API to get the status of the configuration\n            to determine if the configuration is in sync with the Edge Agent. Use this API to\n            evaluate the health of the Edge Agent.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/describeEdgeConfiguration",
@@ -691,6 +776,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the stream. Specify either the <code>StreamName</code>or the <code>StreamARN</code>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisvideo#DescribeEdgeConfigurationOutput": {
@@ -737,7 +825,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A description of the stream's edge configuration that will be used to sync \n            with the Edge Agent IoT Greengrass component. The Edge Agent component will run\n            on an IoT Hub Device setup at your premise.</p>"
                     }
+                },
+                "EdgeAgentStatus": {
+                    "target": "com.amazonaws.kinesisvideo#EdgeAgentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains the latest status details for an edge agent's recorder and uploader jobs. Use this information to determine the current health of an edge agent.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.kinesisvideo#DescribeImageGenerationConfiguration": {
@@ -786,6 +883,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Kinesis video stream from which to retrieve the image generation configuration. You must specify either the <code>StreamName</code> or the <code>StreamARN</code>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisvideo#DescribeImageGenerationConfigurationOutput": {
@@ -797,6 +897,9 @@
                         "smithy.api#documentation": "<p>The structure that contains the information required for the Kinesis video stream (KVS) images delivery. If this structure is null, the configuration will be deleted from the stream.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.kinesisvideo#DescribeMappedResourceConfiguration": {
@@ -822,7 +925,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the most current information about the stream. Either streamName or streamARN should be provided in the input.</p>\n         <p>Returns the most current information about the stream. The <code>streamName</code>\n            or <code>streamARN</code> should be provided in the input.</p>",
+                "smithy.api#documentation": "<p>Returns the most current information about the stream. The <code>streamName</code>\n            or <code>streamARN</code> should be provided in the input.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/describeMappedResourceConfiguration",
@@ -863,6 +966,9 @@
                         "smithy.api#documentation": "<p>The token to provide in your next request, to get another batch of results.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisvideo#DescribeMappedResourceConfigurationOutput": {
@@ -880,6 +986,9 @@
                         "smithy.api#documentation": "<p>The token that was used in the <code>NextToken</code>request to fetch the next set of results. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.kinesisvideo#DescribeMediaStorageConfiguration": {
@@ -928,6 +1037,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the channel.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisvideo#DescribeMediaStorageConfigurationOutput": {
@@ -939,6 +1051,9 @@
                         "smithy.api#documentation": "<p>A structure that encapsulates, or contains, the media storage configuration properties.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.kinesisvideo#DescribeNotificationConfiguration": {
@@ -987,6 +1102,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Kinesis video stream from where you want to retrieve the notification configuration. You must specify either the <code>StreamName</code> or the StreamARN.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisvideo#DescribeNotificationConfigurationOutput": {
@@ -998,6 +1116,9 @@
                         "smithy.api#documentation": "<p>The structure that contains the information required for notifications. If the structure is null, the configuration will be deleted from the stream.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.kinesisvideo#DescribeSignalingChannel": {
@@ -1046,6 +1167,9 @@
                         "smithy.api#documentation": "<p>The ARN of the signaling channel that you want to describe.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisvideo#DescribeSignalingChannelOutput": {
@@ -1057,6 +1181,9 @@
                         "smithy.api#documentation": "<p>A structure that encapsulates the specified signaling channel's metadata and\n            properties.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.kinesisvideo#DescribeStream": {
@@ -1105,6 +1232,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the stream.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisvideo#DescribeStreamOutput": {
@@ -1116,6 +1246,9 @@
                         "smithy.api#documentation": "<p>An object that describes the stream.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.kinesisvideo#DestinationRegion": {
@@ -1168,6 +1301,26 @@
                     "min": 60,
                     "max": 3600
                 }
+            }
+        },
+        "com.amazonaws.kinesisvideo#EdgeAgentStatus": {
+            "type": "structure",
+            "members": {
+                "LastRecorderStatus": {
+                    "target": "com.amazonaws.kinesisvideo#LastRecorderStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The latest status of a stream’s edge recording job.</p>"
+                    }
+                },
+                "LastUploaderStatus": {
+                    "target": "com.amazonaws.kinesisvideo#LastUploaderStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The latest status of a stream’s edge to cloud uploader job.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains the latest status details for an edge agent's recorder and uploader jobs. Use this information to determine the current health of an edge agent.</p>"
             }
         },
         "com.amazonaws.kinesisvideo#EdgeConfig": {
@@ -1325,6 +1478,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisvideo#GetDataEndpointOutput": {
@@ -1336,6 +1492,9 @@
                         "smithy.api#documentation": "<p>The endpoint value. To read data from the stream or to write data to it, specify\n            this endpoint in your application.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.kinesisvideo#GetSignalingChannelEndpoint": {
@@ -1388,6 +1547,9 @@
                         "smithy.api#documentation": "<p>A structure containing the endpoint configuration for the <code>SINGLE_MASTER</code>\n            channel type.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisvideo#GetSignalingChannelEndpointOutput": {
@@ -1399,6 +1561,9 @@
                         "smithy.api#documentation": "<p>A list of endpoints for the specified signaling channel.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.kinesisvideo#HeightPixels": {
@@ -1494,7 +1659,7 @@
                 "DestinationRegion": {
                     "target": "com.amazonaws.kinesisvideo#DestinationRegion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Region of the S3 bucket where images will be delivered. This <code>DestinationRegion</code> must match the Region where the stream is located.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region of the S3 bucket where images will be delivered. This <code>DestinationRegion</code> must match the Region where the stream is located.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1559,6 +1724,9 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.kinesisvideo#JobStatusDetails": {
+            "type": "string"
+        },
         "com.amazonaws.kinesisvideo#KinesisVideo_20170930": {
             "type": "service",
             "version": "2017-09-30",
@@ -1568,6 +1736,9 @@
                 },
                 {
                     "target": "com.amazonaws.kinesisvideo#CreateStream"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideo#DeleteEdgeConfiguration"
                 },
                 {
                     "target": "com.amazonaws.kinesisvideo#DeleteSignalingChannel"
@@ -1601,6 +1772,9 @@
                 },
                 {
                     "target": "com.amazonaws.kinesisvideo#GetSignalingChannelEndpoint"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideo#ListEdgeAgentConfigurations"
                 },
                 {
                     "target": "com.amazonaws.kinesisvideo#ListSignalingChannels"
@@ -2026,8 +2200,8 @@
                             },
                             "params": {
                                 "Region": "af-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2039,8 +2213,8 @@
                             },
                             "params": {
                                 "Region": "ap-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2052,8 +2226,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2065,8 +2239,8 @@
                             },
                             "params": {
                                 "Region": "ap-northeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2078,8 +2252,8 @@
                             },
                             "params": {
                                 "Region": "ap-south-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2091,8 +2265,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2104,8 +2278,8 @@
                             },
                             "params": {
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2117,8 +2291,8 @@
                             },
                             "params": {
                                 "Region": "ca-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2130,8 +2304,8 @@
                             },
                             "params": {
                                 "Region": "eu-central-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2143,8 +2317,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2156,8 +2330,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2169,8 +2343,8 @@
                             },
                             "params": {
                                 "Region": "eu-west-3",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2182,8 +2356,8 @@
                             },
                             "params": {
                                 "Region": "sa-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2195,8 +2369,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2208,8 +2382,8 @@
                             },
                             "params": {
                                 "Region": "us-east-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2221,8 +2395,8 @@
                             },
                             "params": {
                                 "Region": "us-west-2",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2234,8 +2408,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2247,8 +2421,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2260,8 +2434,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2273,8 +2447,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2286,8 +2460,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2299,8 +2473,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2312,8 +2486,8 @@
                             },
                             "params": {
                                 "Region": "cn-north-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2325,8 +2499,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2338,8 +2512,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2351,8 +2525,8 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": true,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2364,8 +2538,19 @@
                             },
                             "params": {
                                 "Region": "us-gov-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2377,8 +2562,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2390,8 +2586,19 @@
                             },
                             "params": {
                                 "Region": "us-iso-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2403,8 +2610,19 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2416,8 +2634,8 @@
                             },
                             "params": {
                                 "Region": "us-isob-east-1",
-                                "UseDualStack": false,
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2429,8 +2647,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2442,8 +2660,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2454,8 +2672,8 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2466,9 +2684,15 @@
                             },
                             "params": {
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -2484,6 +2708,213 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^.+$"
+            }
+        },
+        "com.amazonaws.kinesisvideo#LastRecorderStatus": {
+            "type": "structure",
+            "members": {
+                "JobStatusDetails": {
+                    "target": "com.amazonaws.kinesisvideo#JobStatusDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of a recorder job’s latest status.</p>"
+                    }
+                },
+                "LastCollectedTime": {
+                    "target": "com.amazonaws.kinesisvideo#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the recorder job was last executed and media stored to local disk.</p>"
+                    }
+                },
+                "LastUpdatedTime": {
+                    "target": "com.amazonaws.kinesisvideo#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the recorder status was last updated.</p>"
+                    }
+                },
+                "RecorderStatus": {
+                    "target": "com.amazonaws.kinesisvideo#RecorderStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the latest recorder job.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The latest status of a stream's edge recording job.</p>"
+            }
+        },
+        "com.amazonaws.kinesisvideo#LastUploaderStatus": {
+            "type": "structure",
+            "members": {
+                "JobStatusDetails": {
+                    "target": "com.amazonaws.kinesisvideo#JobStatusDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of an uploader job’s latest status.</p>"
+                    }
+                },
+                "LastCollectedTime": {
+                    "target": "com.amazonaws.kinesisvideo#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the uploader job was last executed and media collected to the cloud.</p>"
+                    }
+                },
+                "LastUpdatedTime": {
+                    "target": "com.amazonaws.kinesisvideo#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp at which the uploader status was last updated.</p>"
+                    }
+                },
+                "UploaderStatus": {
+                    "target": "com.amazonaws.kinesisvideo#UploaderStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the latest uploader job.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The latest status of a stream’s edge to cloud uploader job.</p>"
+            }
+        },
+        "com.amazonaws.kinesisvideo#ListEdgeAgentConfigurations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kinesisvideo#ListEdgeAgentConfigurationsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.kinesisvideo#ListEdgeAgentConfigurationsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kinesisvideo#ClientLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideo#InvalidArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideo#NotAuthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns an array of edge configurations associated with the specified Edge Agent.</p>\n         <p>In the request, you must specify the Edge Agent <code>HubDeviceArn</code>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/listEdgeAgentConfigurations",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "EdgeConfigs",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.kinesisvideo#ListEdgeAgentConfigurationsEdgeConfig": {
+            "type": "structure",
+            "members": {
+                "StreamName": {
+                    "target": "com.amazonaws.kinesisvideo#StreamName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the stream.</p>"
+                    }
+                },
+                "StreamARN": {
+                    "target": "com.amazonaws.kinesisvideo#ResourceARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the stream.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.kinesisvideo#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the stream first created the edge config.</p>"
+                    }
+                },
+                "LastUpdatedTime": {
+                    "target": "com.amazonaws.kinesisvideo#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the stream last updated the edge config.</p>"
+                    }
+                },
+                "SyncStatus": {
+                    "target": "com.amazonaws.kinesisvideo#SyncStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current sync status of the stream's edge configuration.</p>"
+                    }
+                },
+                "FailedStatusDetails": {
+                    "target": "com.amazonaws.kinesisvideo#FailedStatusDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the generated failure status.</p>"
+                    }
+                },
+                "EdgeConfig": {
+                    "target": "com.amazonaws.kinesisvideo#EdgeConfig"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A description of a single stream's edge configuration.</p>"
+            }
+        },
+        "com.amazonaws.kinesisvideo#ListEdgeAgentConfigurationsEdgeConfigList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kinesisvideo#ListEdgeAgentConfigurationsEdgeConfig"
+            }
+        },
+        "com.amazonaws.kinesisvideo#ListEdgeAgentConfigurationsInput": {
+            "type": "structure",
+            "members": {
+                "HubDeviceArn": {
+                    "target": "com.amazonaws.kinesisvideo#HubDeviceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The \"Internet of Things (IoT) Thing\" Arn of the edge agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.kinesisvideo#ListEdgeAgentConfigurationsInputLimit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of edge configurations to return in the response. The default is 5.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.kinesisvideo#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If you specify this parameter, when the result of a <code>ListEdgeAgentConfigurations</code> operation is truncated, the call returns the <code>NextToken</code> in the response. To get another batch of edge configurations, provide this token in your next request.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.kinesisvideo#ListEdgeAgentConfigurationsInputLimit": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.kinesisvideo#ListEdgeAgentConfigurationsOutput": {
+            "type": "structure",
+            "members": {
+                "EdgeConfigs": {
+                    "target": "com.amazonaws.kinesisvideo#ListEdgeAgentConfigurationsEdgeConfigList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of a single stream's edge configuration.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.kinesisvideo#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response is truncated, the call returns this element with a given token. To get the next batch of edge configurations, use this token in your next request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.kinesisvideo#ListOfProtocols": {
@@ -2553,6 +2984,9 @@
                         "smithy.api#documentation": "<p>Optional: Returns only the channels that satisfy a specific condition.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisvideo#ListSignalingChannelsOutput": {
@@ -2570,6 +3004,9 @@
                         "smithy.api#documentation": "<p>If the response is truncated, the call returns this element with a token. To get the\n            next batch of streams, use this token in your next request.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.kinesisvideo#ListStreams": {
@@ -2624,6 +3061,9 @@
                         "smithy.api#documentation": "<p>Optional: Returns only streams that satisfy a specific condition. Currently, you\n            can specify only the prefix of a stream name as a condition. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisvideo#ListStreamsInputLimit": {
@@ -2650,6 +3090,9 @@
                         "smithy.api#documentation": "<p>If the response is truncated, the call returns this element with a token. To get\n            the next batch of streams, use this token in your next request. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.kinesisvideo#ListTagsForResource": {
@@ -2699,6 +3142,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisvideo#ListTagsForResourceOutput": {
@@ -2716,6 +3162,9 @@
                         "smithy.api#documentation": "<p>A map of tag keys and values associated with the specified signaling channel.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.kinesisvideo#ListTagsForStream": {
@@ -2773,6 +3222,9 @@
                         "smithy.api#documentation": "<p>The name of the stream that you want to list tags for.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisvideo#ListTagsForStreamOutput": {
@@ -2790,6 +3242,9 @@
                         "smithy.api#documentation": "<p>A map of tag keys and values associated with the specified stream.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.kinesisvideo#LocalSizeConfig": {
@@ -2868,7 +3323,7 @@
                 "MediaUriSecretArn": {
                     "target": "com.amazonaws.kinesisvideo#MediaUriSecretArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Secrets Manager ARN for the username and password of the camera, or a local media file location.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services Secrets Manager ARN for the username and password of the camera, or a local media file location.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3063,6 +3518,29 @@
                 "smithy.api#documentation": "<p>The recorder configuration consists of the local <code>MediaSourceConfig</code> details that are used as \n            credentials to accesss the local media files streamed on the camera. </p>"
             }
         },
+        "com.amazonaws.kinesisvideo#RecorderStatus": {
+            "type": "enum",
+            "members": {
+                "SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCESS"
+                    }
+                },
+                "USER_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USER_ERROR"
+                    }
+                },
+                "SYSTEM_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SYSTEM_ERROR"
+                    }
+                }
+            }
+        },
         "com.amazonaws.kinesisvideo#ResourceARN": {
             "type": "string",
             "traits": {
@@ -3099,7 +3577,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that describes the endpoint of the signaling channel returned by the\n                <code>GetSignalingChannelEndpoint</code> API.</p>"
+                "smithy.api#documentation": "<p>An object that describes the endpoint of the signaling channel returned by the\n                <code>GetSignalingChannelEndpoint</code> API.</p>\n         <p>The media server endpoint will correspond to the <code>WEBRTC</code> Protocol.</p>"
             }
         },
         "com.amazonaws.kinesisvideo#ResourceInUseException": {
@@ -3171,7 +3649,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This API enables you to specify the duration that the camera,\n            or local media file, should record onto the Edge Agent. The <code>ScheduleConfig</code> consists of the <code>ScheduleExpression</code> and the \n            <code>DurationInMinutes</code> attributes. </p>\n         <p>If the <code>ScheduleExpression</code> is not provided,\n                then the Edge Agent will always be set to recording mode.</p>"
+                "smithy.api#documentation": "<p>This API enables you to specify the duration that the camera,\n            or local media file, should record onto the Edge Agent. The <code>ScheduleConfig</code> consists of the <code>ScheduleExpression</code> and the \n            <code>DurationInMinutes</code> attributes. </p>\n         <p>If the <code>ScheduleConfig</code> is not provided in the <code>RecorderConfig</code>,\n                then the Edge Agent will always be set to recording mode.</p>\n         <p>If the <code>ScheduleConfig</code> is not provided in the <code>UploaderConfig</code>,\n            then the Edge Agent will upload at regular intervals (every 1 hour).</p>"
             }
         },
         "com.amazonaws.kinesisvideo#ScheduleExpression": {
@@ -3277,6 +3755,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisvideo#StartEdgeConfigurationUpdateOutput": {
@@ -3324,6 +3805,9 @@
                         "smithy.api#documentation": "<p>A description of the stream's edge configuration that will be used to sync \n            with the Edge Agent IoT Greengrass component. The Edge Agent component will run\n            on an IoT Hub Device setup at your premise.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.kinesisvideo#Status": {
@@ -3521,6 +4005,12 @@
                     "traits": {
                         "smithy.api#enumValue": "DELETE_FAILED"
                     }
+                },
+                "DELETING_ACKNOWLEDGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING_ACKNOWLEDGED"
+                    }
                 }
             }
         },
@@ -3643,11 +4133,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisvideo#TagResourceOutput": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.kinesisvideo#TagStream": {
             "type": "operation",
@@ -3708,11 +4204,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisvideo#TagStreamOutput": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.kinesisvideo#TagValue": {
             "type": "string",
@@ -3791,11 +4293,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisvideo#UntagResourceOutput": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.kinesisvideo#UntagStream": {
             "type": "operation",
@@ -3853,11 +4361,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisvideo#UntagStreamOutput": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.kinesisvideo#UpdateDataRetention": {
             "type": "operation",
@@ -3932,6 +4446,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisvideo#UpdateDataRetentionOperation": {
@@ -3953,7 +4470,10 @@
         },
         "com.amazonaws.kinesisvideo#UpdateDataRetentionOutput": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.kinesisvideo#UpdateImageGenerationConfiguration": {
             "type": "operation",
@@ -4013,11 +4533,17 @@
                         "smithy.api#documentation": "<p>The structure that contains the information required for the KVS images delivery. If the structure is null, the configuration will be deleted from the stream.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisvideo#UpdateImageGenerationConfigurationOutput": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.kinesisvideo#UpdateMediaStorageConfiguration": {
             "type": "operation",
@@ -4073,11 +4599,17 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisvideo#UpdateMediaStorageConfigurationOutput": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.kinesisvideo#UpdateNotificationConfiguration": {
             "type": "operation",
@@ -4137,11 +4669,17 @@
                         "smithy.api#documentation": "<p>The structure containing the information required for notifications. If the structure is null, the configuration will be deleted from the stream.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisvideo#UpdateNotificationConfigurationOutput": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.kinesisvideo#UpdateSignalingChannel": {
             "type": "operation",
@@ -4203,11 +4741,17 @@
                         "smithy.api#documentation": "<p>The structure containing the configuration for the <code>SINGLE_MASTER</code> type of\n            the signaling channel that you want to update. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisvideo#UpdateSignalingChannelOutput": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.kinesisvideo#UpdateStream": {
             "type": "operation",
@@ -4280,11 +4824,17 @@
                         "smithy.api#documentation": "<p>The stream's media type. Use <code>MediaType</code> to specify the type of content\n            that the stream contains to the consumers of the stream. For more information about\n            media types, see <a href=\"http://www.iana.org/assignments/media-types/media-types.xhtml\">Media\n                Types</a>. If you choose to specify the <code>MediaType</code>, see <a href=\"https://tools.ietf.org/html/rfc6838#section-4.2\">Naming\n            Requirements</a>.</p>\n         <p>To play video on the console, you must specify the correct video type. For example,\n            if the video in the stream is H.264, specify <code>video/h264</code> as the\n                <code>MediaType</code>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.kinesisvideo#UpdateStreamOutput": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.kinesisvideo#UploaderConfig": {
             "type": "structure",
@@ -4292,13 +4842,36 @@
                 "ScheduleConfig": {
                     "target": "com.amazonaws.kinesisvideo#ScheduleConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration that consists of the <code>ScheduleExpression</code> and the \n            <code>DurationInMinutes</code>details that specify the scheduling to record from a camera, or\n            local media file, onto the Edge Agent. If the <code>ScheduleExpression</code> is not provided,\n            then the Edge Agent will always be in recording mode.</p>",
+                        "smithy.api#documentation": "<p>The configuration that consists of the <code>ScheduleExpression</code> and the \n            <code>DurationInMinutes</code> details that specify the scheduling to record from a camera, or\n            local media file, onto the Edge Agent. If the <code>ScheduleConfig</code> is not provided in this <code>UploaderConfig</code>,\n            then the Edge Agent will upload at regular intervals (every 1 hour).</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration that consists of the <code>ScheduleExpression</code>\n            and the <code>DurationInMinutesdetails</code>, that specify the scheduling to record from a camera,\n            or local media file, onto the Edge Agent. If the <code>ScheduleExpression</code>\n            is not provided, then the Edge Agent will always be in upload mode.\n        </p>"
+                "smithy.api#documentation": "<p>The configuration that consists of the <code>ScheduleExpression</code>\n            and the <code>DurationInMinutes</code> details that specify the scheduling to record from a camera,\n            or local media file, onto the Edge Agent. If the <code>ScheduleConfig</code>\n            is not provided in the <code>UploaderConfig</code>, then the Edge Agent will upload at regular intervals (every 1 hour).\n        </p>"
+            }
+        },
+        "com.amazonaws.kinesisvideo#UploaderStatus": {
+            "type": "enum",
+            "members": {
+                "SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCESS"
+                    }
+                },
+                "USER_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USER_ERROR"
+                    }
+                },
+                "SYSTEM_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SYSTEM_ERROR"
+                    }
+                }
             }
         },
         "com.amazonaws.kinesisvideo#Version": {

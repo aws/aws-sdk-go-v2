@@ -13,8 +13,10 @@ import (
 )
 
 // Describes a stream’s edge configuration that was set using the
-// StartEdgeConfigurationUpdate API. Use this API to get the status of the
-// configuration if the configuration is in sync with the Edge Agent.
+// StartEdgeConfigurationUpdate API and the latest status of the edge agent's
+// recorder and uploader jobs. Use this API to get the status of the configuration
+// to determine if the configuration is in sync with the Edge Agent. Use this API
+// to evaluate the health of the Edge Agent.
 func (c *Client) DescribeEdgeConfiguration(ctx context.Context, params *DescribeEdgeConfigurationInput, optFns ...func(*Options)) (*DescribeEdgeConfigurationOutput, error) {
 	if params == nil {
 		params = &DescribeEdgeConfigurationInput{}
@@ -47,6 +49,11 @@ type DescribeEdgeConfigurationOutput struct {
 
 	// The timestamp at which a stream’s edge configuration was first created.
 	CreationTime *time.Time
+
+	// An object that contains the latest status details for an edge agent's recorder
+	// and uploader jobs. Use this information to determine the current health of an
+	// edge agent.
+	EdgeAgentStatus *types.EdgeAgentStatus
 
 	// A description of the stream's edge configuration that will be used to sync with
 	// the Edge Agent IoT Greengrass component. The Edge Agent component will run on an

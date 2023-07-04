@@ -176,6 +176,24 @@ func validateRecord(v []types.FeatureValue) error {
 	}
 }
 
+func validateTtlDuration(v *types.TtlDuration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TtlDuration"}
+	if len(v.Unit) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Unit"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpBatchGetRecordInput(v *BatchGetRecordInput) error {
 	if v == nil {
 		return nil
@@ -247,6 +265,11 @@ func validateOpPutRecordInput(v *PutRecordInput) error {
 	} else if v.Record != nil {
 		if err := validateRecord(v.Record); err != nil {
 			invalidParams.AddNested("Record", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TtlDuration != nil {
+		if err := validateTtlDuration(v.TtlDuration); err != nil {
+			invalidParams.AddNested("TtlDuration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

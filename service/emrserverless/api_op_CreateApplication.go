@@ -36,7 +36,7 @@ type CreateApplicationInput struct {
 	// This member is required.
 	ClientToken *string
 
-	// The EMR release associated with the application.
+	// The Amazon EMR release associated with the application.
 	//
 	// This member is required.
 	ReleaseLabel *string
