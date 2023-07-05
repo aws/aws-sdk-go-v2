@@ -605,7 +605,7 @@
                 "Type": {
                     "target": "com.amazonaws.securityhub#AutomationRulesActionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Specifies that the rule action should update the <code>Types</code> finding field. The <code>Types</code> \n         finding field provides one or more finding types in the format of \n         namespace/category/classifier that classify a finding. For more information, see\n         <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format-type-taxonomy.html\">Types taxonomy for ASFF</a> in \n         the <i>Security Hub User Guide</i>.\n      </p>"
+                        "smithy.api#documentation": "<p>\n         Specifies that the rule action should update the <code>Types</code> finding field. The <code>Types</code> \n         finding field classifies findings in the format of namespace/category/classifier. For more information, see\n         <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format-type-taxonomy.html\">Types taxonomy for ASFF</a> in \n         the <i>Security Hub User Guide</i>.\n      </p>"
                     }
                 },
                 "FindingFieldsUpdate": {
@@ -654,7 +654,7 @@
                 "RuleStatus": {
                     "target": "com.amazonaws.securityhub#RuleStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Whether the rule is active after it is created. If \n         this parameter is equal to <code>>ENABLED</code>, Security Hub will apply the rule to findings \n         and finding updates after the rule is created.\n      </p>"
+                        "smithy.api#documentation": "<p>\n         Whether the rule is active after it is created. If \n         this parameter is equal to <code>ENABLED</code>, Security Hub starts applying the rule to findings \n         and finding updates after the rule is created.\n      </p>"
                     }
                 },
                 "RuleOrder": {
@@ -680,13 +680,13 @@
                     "target": "com.amazonaws.securityhub#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Specifies whether a rule is the last to be applied with respect to a finding that matches the rule criteria. This is useful \n            when a finding matches the criteria for multiple rules, and each rule has different actions. If the value of this \n            field is set to <code>true</code> for a rule, Security Hub applies the rule action to a finding that matches \n            the rule criteria and won't evaluate other rules for the finding.\u2028 The default value of this field is <code>false</code>.\n        </p>"
+                        "smithy.api#documentation": "<p>Specifies whether a rule is the last to be applied with respect to a finding that matches the rule criteria. This is useful \n            when a finding matches the criteria for multiple rules, and each rule has different actions. If the value of this \n            field is set to <code>true</code> for a rule, Security Hub applies the rule action to a finding that matches \n            the rule criteria and doesn't evaluate other rules for the finding.\u2028 The default value of this field is <code>false</code>.\n        </p>"
                     }
                 },
                 "Criteria": {
                     "target": "com.amazonaws.securityhub#AutomationRulesFindingFilters",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         A set of <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html\">Amazon Web Services Security Finding Format</a> finding field attributes and corresponding expected values that \n         Security Hub uses to filter findings. If a finding matches the conditions specified in\n         this parameter, Security Hub applies the rule action to the finding.\n      </p>"
+                        "smithy.api#documentation": "<p>\n         A set of <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html\">Amazon Web Services \n             Security Finding Format</a> finding field attributes and corresponding expected values that \n         Security Hub uses to filter findings. If a rule is enabled and a finding matches the conditions specified in\n         this parameter, Security Hub applies the rule action to the finding.\n      </p>"
                     }
                 },
                 "Actions": {
@@ -736,33 +736,33 @@
                 "VerificationState": {
                     "target": "com.amazonaws.securityhub#VerificationState",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The rule action will update the <code>VerificationState</code> field of a finding.\n      </p>"
+                        "smithy.api#documentation": "<p>\n         The rule action updates the <code>VerificationState</code> field of a finding.\n      </p>"
                     }
                 },
                 "Confidence": {
                     "target": "com.amazonaws.securityhub#RatioScale",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>\n         The rule action will update the <code>Confidence</code> field of a finding.\n      </p>"
+                        "smithy.api#documentation": "<p>\n         The rule action updates the <code>Confidence</code> field of a finding.\n      </p>"
                     }
                 },
                 "Criticality": {
                     "target": "com.amazonaws.securityhub#RatioScale",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>\n         The rule action will update the <code>Criticality</code> field of a finding.\n      </p>"
+                        "smithy.api#documentation": "<p>\n         The rule action updates the <code>Criticality</code> field of a finding.\n      </p>"
                     }
                 },
                 "Types": {
                     "target": "com.amazonaws.securityhub#TypeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The rule action will update the <code>Types</code> field of a finding.\n      </p>"
+                        "smithy.api#documentation": "<p>\n         The rule action updates the <code>Types</code> field of a finding.\n      </p>"
                     }
                 },
                 "UserDefinedFields": {
                     "target": "com.amazonaws.securityhub#FieldMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The rule action will update the <code>UserDefinedFields</code> field of a finding.\n      </p>"
+                        "smithy.api#documentation": "<p>\n         The rule action updates the <code>UserDefinedFields</code> field of a finding.\n      </p>"
                     }
                 },
                 "Workflow": {
@@ -771,12 +771,12 @@
                 "RelatedFindings": {
                     "target": "com.amazonaws.securityhub#RelatedFindingList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            A list of findings that are related to a finding.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The rule action updates the <code>RelatedFindings</code> field of a finding.\n        </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n         Identifies the finding fields that the automation rule action will update when a \n         finding matches the defined criteria.\n      </p>"
+                "smithy.api#documentation": "<p>\n         Identifies the finding fields that the automation rule action updates when a finding matches the defined criteria.\n      </p>"
             }
         },
         "com.amazonaws.securityhub#AutomationRulesFindingFilters": {
@@ -1009,7 +1009,7 @@
                 "RuleStatus": {
                     "target": "com.amazonaws.securityhub#RuleStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Whether the rule is active after it is created. If \n         this parameter is equal to <code>ENABLED</code>, Security Hub will apply the rule to findings \n         and finding updates after the rule is created. To change the value of this\n         parameter after creating a rule, use <code>BatchUpdateAutomationRules</code>.\n      </p>"
+                        "smithy.api#documentation": "<p>\n         Whether the rule is active after it is created. If \n         this parameter is equal to <code>ENABLED</code>, Security Hub starts applying the rule to findings \n         and finding updates after the rule is created. To change the value of this\n         parameter after creating a rule, use <a href=\"https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateAutomationRules.html\">\n               <code>BatchUpdateAutomationRules</code>\n            </a>.\n      </p>"
                     }
                 },
                 "RuleOrder": {
@@ -1035,7 +1035,7 @@
                     "target": "com.amazonaws.securityhub#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>\n            Specifies whether a rule is the last to be applied with respect to a finding that matches the rule criteria. This is useful \n            when a finding matches the criteria for multiple rules, and each rule has different actions. If the value of this \n            field is set to <code>true</code> for a rule, Security Hub applies the rule action to a finding that matches \n            the rule criteria and won't evaluate other rules for the finding.\u2028 The default value of this field is <code>false</code>.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            Specifies whether a rule is the last to be applied with respect to a finding that matches the rule criteria. This is useful \n            when a finding matches the criteria for multiple rules, and each rule has different actions. If the value of this \n            field is set to <code>true</code> for a rule, Security Hub applies the rule action to a finding that matches \n            the rule criteria and doesn't evaluate other rules for the finding.\u2028 The default value of this field is <code>false</code>.\n        </p>"
                     }
                 },
                 "CreatedAt": {
@@ -20844,7 +20844,7 @@
                 "RuleStatus": {
                     "target": "com.amazonaws.securityhub#RuleStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Whether the rule is active after it is created. If \n         this parameter is equal to <code>Enabled</code>, Security Hub will apply the rule to findings \n         and finding updates after the rule is created. To change the value of this\n         parameter after creating a rule, use <code>BatchUpdateAutomationRules</code>.\n      </p>"
+                        "smithy.api#documentation": "<p>\n         Whether the rule is active after it is created. If \n         this parameter is equal to <code>ENABLED</code>, Security Hub starts applying the rule to findings \n         and finding updates after the rule is created. To change the value of this\n         parameter after creating a rule, use <a href=\"https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateAutomationRules.html\">\n               <code>BatchUpdateAutomationRules</code>\n            </a>.\n      </p>"
                     }
                 },
                 "RuleOrder": {
@@ -20873,13 +20873,13 @@
                     "target": "com.amazonaws.securityhub#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Specifies whether a rule is the last to be applied with respect to a finding that matches the rule criteria. This is useful when a finding \n            matches the criteria for multiple rules, and each rule has different actions. If the value of this field is \n            set to <code>true</code> for a rule, Security Hub applies the rule action to a finding that matches \n            the rule criteria and won't evaluate other rules for the finding. The default value of this field is <code>false</code>.\n        </p>"
+                        "smithy.api#documentation": "<p>Specifies whether a rule is the last to be applied with respect to a finding that matches the rule criteria. This is useful when a finding \n            matches the criteria for multiple rules, and each rule has different actions. If the value of this field is \n            set to <code>true</code> for a rule, Security Hub applies the rule action to a finding that matches \n            the rule criteria and doesn't evaluate other rules for the finding. The default value of this field is <code>false</code>.\n        </p>"
                     }
                 },
                 "Criteria": {
                     "target": "com.amazonaws.securityhub#AutomationRulesFindingFilters",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         A set of ASFF finding field attributes and corresponding expected values that \n         Security Hub uses to filter findings. If a finding matches the conditions specified in\n         this parameter, Security Hub applies the rule action to the finding.\n      </p>",
+                        "smithy.api#documentation": "<p>\n         A set of ASFF finding field attributes and corresponding expected values that \n         Security Hub uses to filter findings. If a rule is enabled and a finding matches the conditions specified in\n         this parameter, Security Hub applies the rule action to the finding.\n      </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -27593,7 +27593,7 @@
                 "SecurityControlStatus": {
                     "target": "com.amazonaws.securityhub#ControlStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The status of a security control based on the compliance status of its findings. For more information about how control \n         status is determined, see <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/controls-overall-status.html\">Determining the overall status of a control from its findings</a> in the \n         <i>Security Hub User Guide</i>.\n      </p>",
+                        "smithy.api#documentation": "<p>\n         The enablement status of a security control in a specific standard.\n      </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -30516,7 +30516,7 @@
                 "RuleStatus": {
                     "target": "com.amazonaws.securityhub#RuleStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Whether the rule is active after it is created. If \n         this parameter is equal to <code>ENABLED</code>, Security Hub will apply the rule to findings \n         and finding updates after the rule is created. To change the value of this\n         parameter after creating a rule, use <code>BatchUpdateAutomationRules</code>.\n      </p>"
+                        "smithy.api#documentation": "<p>\n         Whether the rule is active after it is created. If \n         this parameter is equal to <code>ENABLED</code>, Security Hub starts applying the rule to findings \n         and finding updates after the rule is created. To change the value of this\n         parameter after creating a rule, use <a href=\"https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateAutomationRules.html\">\n               <code>BatchUpdateAutomationRules</code>\n            </a>.\n      </p>"
                     }
                 },
                 "RuleOrder": {
@@ -30542,13 +30542,13 @@
                     "target": "com.amazonaws.securityhub#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Specifies whether a rule is the last to be applied with respect to a finding that matches the rule criteria. This is useful \n            when a finding matches the criteria for multiple rules, and each rule has different actions. If the value of this \n            field is set to <code>true</code> for a rule, Security Hub applies the rule action to a finding that matches \n            the rule criteria and won't evaluate other rules for the finding.\u2028 The default value of this field is <code>false</code>.\n        </p>"
+                        "smithy.api#documentation": "<p>Specifies whether a rule is the last to be applied with respect to a finding that matches the rule criteria. This is useful \n            when a finding matches the criteria for multiple rules, and each rule has different actions. If the value of this \n            field is set to <code>true</code> for a rule, Security Hub applies the rule action to a finding that matches \n            the rule criteria and doesn't evaluate other rules for the finding.\u2028 The default value of this field is <code>false</code>.\n        </p>"
                     }
                 },
                 "Criteria": {
                     "target": "com.amazonaws.securityhub#AutomationRulesFindingFilters",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         A set of ASFF finding field attributes and corresponding expected values that \n         Security Hub uses to filter findings. If a finding matches the conditions specified in\n         this parameter, Security Hub applies the rule action to the finding.\n      </p>"
+                        "smithy.api#documentation": "<p>\n         A set of ASFF finding field attributes and corresponding expected values that \n         Security Hub uses to filter findings. If a rule is enabled and a finding matches the conditions specified in\n         this parameter, Security Hub applies the rule action to the finding.\n      </p>"
                     }
                 },
                 "Actions": {

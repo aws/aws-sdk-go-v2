@@ -4,6 +4,7 @@
         "com.amazonaws.mgn#ARN": {
             "type": "string",
             "traits": {
+                "aws.api#arnReference": {},
                 "smithy.api#length": {
                     "min": 20,
                     "max": 2048
@@ -131,6 +132,29 @@
                     "max": 256
                 },
                 "smithy.api#pattern": "^[^\\s\\x00]( *[^\\s\\x00])*$"
+            }
+        },
+        "com.amazonaws.mgn#ApplianceID": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 27,
+                    "max": 27
+                },
+                "smithy.api#pattern": "^appliance-[0-9a-zA-Z]{17}$"
+            }
+        },
+        "com.amazonaws.mgn#ApplianceResource": {
+            "type": "resource",
+            "identifiers": {
+                "applianceID": {
+                    "target": "com.amazonaws.mgn#ApplianceID"
+                }
+            },
+            "traits": {
+                "aws.api#arn": {
+                    "template": "appliance/{applianceID}"
+                }
             }
         },
         "com.amazonaws.mgn#Application": {
@@ -309,6 +333,9 @@
                     "target": "com.amazonaws.mgn#InitializeService"
                 },
                 {
+                    "target": "com.amazonaws.mgn#ListManagedAccounts"
+                },
+                {
                     "target": "com.amazonaws.mgn#ListTagsForResource"
                 },
                 {
@@ -321,6 +348,9 @@
             "resources": [
                 {
                     "target": "com.amazonaws.mgn#AccountResource"
+                },
+                {
+                    "target": "com.amazonaws.mgn#ApplianceResource"
                 },
                 {
                     "target": "com.amazonaws.mgn#ApplicationResource"
@@ -1146,6 +1176,17 @@
                             }
                         },
                         {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
                             "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -1156,6 +1197,17 @@
                                 "Region": "us-iso-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1172,6 +1224,17 @@
                             }
                         },
                         {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
                             "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -1182,6 +1245,17 @@
                                 "Region": "us-isob-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1246,6 +1320,12 @@
                                 "UseFIPS": false,
                                 "UseDualStack": true,
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -1367,6 +1447,12 @@
                         "smithy.api#documentation": "<p>Application ID.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "accountID": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Account ID.</p>"
+                    }
                 }
             }
         },
@@ -1409,6 +1495,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Wave ID.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "accountID": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Account ID.</p>"
                     }
                 }
             }
@@ -1460,6 +1552,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Application IDs list.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "accountID": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Account ID.</p>"
                     }
                 }
             }
@@ -1516,6 +1614,12 @@
                         "smithy.api#documentation": "<p>Source server IDs list.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "accountID": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Account ID.</p>"
+                    }
                 }
             }
         },
@@ -1534,6 +1638,16 @@
         "com.amazonaws.mgn#AssociateSourceServersResponse": {
             "type": "structure",
             "members": {}
+        },
+        "com.amazonaws.mgn#BandwidthThrottling": {
+            "type": "long",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 10000
+                }
+            }
         },
         "com.amazonaws.mgn#BootMode": {
             "type": "string",
@@ -1626,6 +1740,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The request to change the source server migration lifecycle state.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "accountID": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request to change the source server migration account ID.</p>"
                     }
                 }
             }
@@ -1784,6 +1904,12 @@
                     "target": "com.amazonaws.mgn#TagsMap",
                     "traits": {
                         "smithy.api#documentation": "<p>Application tags.</p>"
+                    }
+                },
+                "accountID": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Account ID.</p>"
                     }
                 }
             }
@@ -1990,7 +2116,7 @@
                     }
                 },
                 "bandwidthThrottling": {
-                    "target": "com.amazonaws.mgn#PositiveInteger",
+                    "target": "com.amazonaws.mgn#BandwidthThrottling",
                     "traits": {
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Request to configure bandwidth throttling during Replication Settings template creation.</p>",
@@ -2016,6 +2142,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Request to configure Staging Area tags during Replication Settings template creation.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "useFipsEndpoint": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Request to use Fips Endpoint during Replication Settings template creation.</p>"
                     }
                 },
                 "tags": {
@@ -2075,6 +2207,12 @@
                     "target": "com.amazonaws.mgn#TagsMap",
                     "traits": {
                         "smithy.api#documentation": "<p>Wave tags.</p>"
+                    }
+                },
+                "accountID": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Account ID.</p>"
                     }
                 }
             }
@@ -2497,6 +2635,12 @@
                         "smithy.api#documentation": "<p>Application ID.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "accountID": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Account ID.</p>"
+                    }
                 }
             }
         },
@@ -2541,6 +2685,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Request to delete Job from service by Job ID.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "accountID": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Request to delete Job from service by Account ID.</p>"
                     }
                 }
             }
@@ -2677,6 +2827,12 @@
                         "smithy.api#documentation": "<p>Request to delete Source Server from service by Server ID.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "accountID": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Request to delete Source Server from service by Account ID.</p>"
+                    }
                 }
             }
         },
@@ -2763,6 +2919,12 @@
                         "smithy.api#documentation": "<p>Wave ID.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "accountID": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Account ID.</p>"
+                    }
                 }
             }
         },
@@ -2823,6 +2985,12 @@
                     "target": "com.amazonaws.mgn#PaginationToken",
                     "traits": {
                         "smithy.api#documentation": "<p>Request to describe Job log next token.</p>"
+                    }
+                },
+                "accountID": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Request to describe Job log Account ID.</p>"
                     }
                 }
             }
@@ -2896,6 +3064,12 @@
                     "target": "com.amazonaws.mgn#PaginationToken",
                     "traits": {
                         "smithy.api#documentation": "<p>Request to describe job log items by next token.</p>"
+                    }
+                },
+                "accountID": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Request to describe job log items by Account ID.</p>"
                     }
                 }
             }
@@ -3160,6 +3334,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Request to filter Source Servers list by next token.</p>"
                     }
+                },
+                "accountID": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Request to filter Source Servers list by Accoun ID.</p>"
+                    }
                 }
             }
         },
@@ -3359,6 +3539,12 @@
                         "smithy.api#documentation": "<p>Application IDs list.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "accountID": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Account ID.</p>"
+                    }
                 }
             }
         },
@@ -3410,6 +3596,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Source server IDs list.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "accountID": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Account ID.</p>"
                     }
                 }
             }
@@ -3466,6 +3658,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Request to disconnect Source Server from service by Server ID.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "accountID": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Request to disconnect Source Server from service by Account ID.</p>"
                     }
                 }
             }
@@ -3804,6 +4002,12 @@
                         "smithy.api#documentation": "<p>Request to finalize Cutover by Source Server ID.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "accountID": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Request to finalize Cutover by Source Account ID.</p>"
+                    }
                 }
             }
         },
@@ -3865,6 +4069,12 @@
                         "smithy.api#documentation": "<p>Request to get Launch Configuration information by Source Server ID.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "accountID": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Request to get Launch Configuration information by Account ID.</p>"
+                    }
                 }
             }
         },
@@ -3902,6 +4112,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Request to get Replication Configuration by Source Server ID.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "accountID": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Request to get Replication Configuration by Account ID.</p>"
                     }
                 }
             }
@@ -4007,6 +4223,12 @@
                     "target": "com.amazonaws.mgn#LargeBoundedString",
                     "traits": {
                         "smithy.api#documentation": "<p>Import error data raw error.</p>"
+                    }
+                },
+                "accountID": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Import error data source account ID.</p>"
                     }
                 }
             },
@@ -4356,6 +4578,16 @@
                 "smithy.api#documentation": "<p>The server encountered an unexpected condition that prevented it from fulfilling the request.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.mgn#Iops": {
+            "type": "long",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 100,
+                    "max": 64000
+                }
             }
         },
         "com.amazonaws.mgn#JmesPathString": {
@@ -4989,14 +5221,14 @@
                     }
                 },
                 "iops": {
-                    "target": "com.amazonaws.mgn#PositiveInteger",
+                    "target": "com.amazonaws.mgn#Iops",
                     "traits": {
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Launch template disk iops configuration.</p>"
                     }
                 },
                 "throughput": {
-                    "target": "com.amazonaws.mgn#PositiveInteger",
+                    "target": "com.amazonaws.mgn#Throughput",
                     "traits": {
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Launch template disk throughput configuration.</p>"
@@ -5353,6 +5585,12 @@
                     "target": "com.amazonaws.mgn#PaginationToken",
                     "traits": {
                         "smithy.api#documentation": "<p>Request next token.</p>"
+                    }
+                },
+                "accountID": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Applications list Account ID.</p>"
                     }
                 }
             }
@@ -5752,6 +5990,82 @@
                 "smithy.api#documentation": "<p>List import response.</p>"
             }
         },
+        "com.amazonaws.mgn#ListManagedAccounts": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mgn#ListManagedAccountsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.mgn#ListManagedAccountsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.mgn#UninitializedAccountException"
+                },
+                {
+                    "target": "com.amazonaws.mgn#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List Managed Accounts.</p>",
+                "smithy.api#http": {
+                    "uri": "/ListManagedAccounts",
+                    "method": "POST",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "items"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.mgn#ListManagedAccountsRequest": {
+            "type": "structure",
+            "members": {
+                "maxResults": {
+                    "target": "com.amazonaws.mgn#MaxResultsType",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>List managed accounts request max results.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.mgn#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List managed accounts request next token.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>List managed accounts request.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.mgn#ListManagedAccountsResponse": {
+            "type": "structure",
+            "members": {
+                "items": {
+                    "target": "com.amazonaws.mgn#ManagedAccounts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List managed accounts response items.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.mgn#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List managed accounts response next token.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>List managed accounts response.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.mgn#ListSourceServerActions": {
             "type": "operation",
             "input": {
@@ -5811,6 +6125,12 @@
                     "target": "com.amazonaws.mgn#PaginationToken",
                     "traits": {
                         "smithy.api#documentation": "<p>Next token to use when listing source server post migration custom actions.</p>"
+                    }
+                },
+                "accountID": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Account ID to return when listing source server post migration custom actions.</p>"
                     }
                 }
             }
@@ -6020,6 +6340,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Request next token.</p>"
                     }
+                },
+                "accountID": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Request account ID.</p>"
+                    }
                 }
             }
         },
@@ -6060,6 +6386,32 @@
                 }
             }
         },
+        "com.amazonaws.mgn#ManagedAccount": {
+            "type": "structure",
+            "members": {
+                "accountId": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Managed account, account ID.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Managed account.</p>"
+            }
+        },
+        "com.amazonaws.mgn#ManagedAccounts": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mgn#ManagedAccount"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1000
+                }
+            }
+        },
         "com.amazonaws.mgn#MarkAsArchived": {
             "type": "operation",
             "input": {
@@ -6096,6 +6448,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Mark as archived by Source Server ID.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "accountID": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Mark as archived by Account ID.</p>"
                     }
                 }
             }
@@ -6224,6 +6582,61 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.mgn#ParticipatingServer"
+            }
+        },
+        "com.amazonaws.mgn#PauseReplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mgn#PauseReplicationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.mgn#SourceServer"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.mgn#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.mgn#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.mgn#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.mgn#UninitializedAccountException"
+                },
+                {
+                    "target": "com.amazonaws.mgn#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Pause Replication.</p>",
+                "smithy.api#http": {
+                    "uri": "/PauseReplication",
+                    "method": "POST",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.mgn#PauseReplicationRequest": {
+            "type": "structure",
+            "members": {
+                "sourceServerID": {
+                    "target": "com.amazonaws.mgn#SourceServerID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Pause Replication Request source server ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "accountID": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Pause Replication Request account ID.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mgn#PositiveInteger": {
@@ -6455,6 +6868,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Source server post migration custom action category.</p>"
                     }
+                },
+                "accountID": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Source server post migration custom account ID.</p>"
+                    }
                 }
             }
         },
@@ -6629,6 +7048,12 @@
                         "smithy.api#documentation": "<p>Source server post migration custom action ID to remove.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "accountID": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Source server post migration account ID.</p>"
+                    }
                 }
             }
         },
@@ -6757,7 +7182,7 @@
                     }
                 },
                 "bandwidthThrottling": {
-                    "target": "com.amazonaws.mgn#PositiveInteger",
+                    "target": "com.amazonaws.mgn#BandwidthThrottling",
                     "traits": {
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Replication Configuration set bandwidth throttling.</p>"
@@ -6779,6 +7204,12 @@
                     "target": "com.amazonaws.mgn#TagsMap",
                     "traits": {
                         "smithy.api#documentation": "<p>Replication Configuration Staging Area tags.</p>"
+                    }
+                },
+                "useFipsEndpoint": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Replication Configuration use Fips Endpoint.</p>"
                     }
                 }
             }
@@ -6988,7 +7419,7 @@
                     }
                 },
                 "bandwidthThrottling": {
-                    "target": "com.amazonaws.mgn#PositiveInteger",
+                    "target": "com.amazonaws.mgn#BandwidthThrottling",
                     "traits": {
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Replication Configuration template bandwidth throttling.</p>"
@@ -7010,6 +7441,12 @@
                     "target": "com.amazonaws.mgn#TagsMap",
                     "traits": {
                         "smithy.api#documentation": "<p>Replication Configuration template Staging Area Tags.</p>"
+                    }
+                },
+                "useFipsEndpoint": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Replication Configuration template use Fips Endpoint.</p>"
                     }
                 },
                 "tags": {
@@ -7140,6 +7577,61 @@
                 "smithy.api#httpError": 404
             }
         },
+        "com.amazonaws.mgn#ResumeReplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mgn#ResumeReplicationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.mgn#SourceServer"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.mgn#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.mgn#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.mgn#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.mgn#UninitializedAccountException"
+                },
+                {
+                    "target": "com.amazonaws.mgn#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Resume Replication.</p>",
+                "smithy.api#http": {
+                    "uri": "/ResumeReplication",
+                    "method": "POST",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.mgn#ResumeReplicationRequest": {
+            "type": "structure",
+            "members": {
+                "sourceServerID": {
+                    "target": "com.amazonaws.mgn#SourceServerID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Resume Replication Request source server ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "accountID": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Resume Replication Request account ID.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
         "com.amazonaws.mgn#RetryDataReplication": {
             "type": "operation",
             "input": {
@@ -7176,6 +7668,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Retry data replication for Source Server ID.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "accountID": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Retry data replication for Account ID.</p>"
                     }
                 }
             }
@@ -7593,16 +8091,25 @@
                     "target": "com.amazonaws.mgn#MarkAsArchived"
                 },
                 {
+                    "target": "com.amazonaws.mgn#PauseReplication"
+                },
+                {
                     "target": "com.amazonaws.mgn#PutSourceServerAction"
                 },
                 {
                     "target": "com.amazonaws.mgn#RemoveSourceServerAction"
                 },
                 {
+                    "target": "com.amazonaws.mgn#ResumeReplication"
+                },
+                {
                     "target": "com.amazonaws.mgn#RetryDataReplication"
                 },
                 {
                     "target": "com.amazonaws.mgn#StartReplication"
+                },
+                {
+                    "target": "com.amazonaws.mgn#StopReplication"
                 },
                 {
                     "target": "com.amazonaws.mgn#UpdateLaunchConfiguration"
@@ -7873,6 +8380,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Start Cutover by Tags.</p>"
                     }
+                },
+                "accountID": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Start Cutover by Account IDs</p>"
+                    }
                 }
             }
         },
@@ -8082,6 +8595,12 @@
                         "smithy.api#documentation": "<p>ID of source server on which to start replication.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "accountID": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Account ID on which to start replication.</p>"
+                    }
                 }
             }
         },
@@ -8128,6 +8647,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Start Test by Tags.</p>"
                     }
+                },
+                "accountID": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Start Test for Account ID.</p>"
+                    }
                 }
             }
         },
@@ -8152,6 +8677,61 @@
                         "smithy.api#documentation": "<p>Start Test Job response.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.mgn#StopReplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.mgn#StopReplicationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.mgn#SourceServer"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.mgn#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.mgn#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.mgn#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.mgn#UninitializedAccountException"
+                },
+                {
+                    "target": "com.amazonaws.mgn#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Stop Replication.</p>",
+                "smithy.api#http": {
+                    "uri": "/StopReplication",
+                    "method": "POST",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.mgn#StopReplicationRequest": {
+            "type": "structure",
+            "members": {
+                "sourceServerID": {
+                    "target": "com.amazonaws.mgn#SourceServerID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Stop Replication Request source server ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "accountID": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Stop Replication Request account ID.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.mgn#StrictlyPositiveInteger": {
@@ -8263,6 +8843,10 @@
                 "target": "com.amazonaws.mgn#TagValue"
             },
             "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                },
                 "smithy.api#sensitive": {}
             }
         },
@@ -8435,6 +9019,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Terminate Target instance by Tags.</p>"
                     }
+                },
+                "accountID": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Terminate Target instance by Account ID</p>"
+                    }
                 }
             }
         },
@@ -8496,6 +9086,16 @@
                 "smithy.api#httpError": 429
             }
         },
+        "com.amazonaws.mgn#Throughput": {
+            "type": "long",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 125,
+                    "max": 1000
+                }
+            }
+        },
         "com.amazonaws.mgn#UnarchiveApplication": {
             "type": "operation",
             "input": {
@@ -8532,6 +9132,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Application ID.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "accountID": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Account ID.</p>"
                     }
                 }
             }
@@ -8572,6 +9178,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Wave ID.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "accountID": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Account ID.</p>"
                     }
                 }
             }
@@ -8697,6 +9309,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Application description.</p>"
                     }
+                },
+                "accountID": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Account ID.</p>"
+                    }
                 }
             }
         },
@@ -8797,6 +9415,12 @@
                     "target": "com.amazonaws.mgn#TagValue",
                     "traits": {
                         "smithy.api#documentation": "<p>Launch configuration map auto tagging MPE ID.</p>"
+                    }
+                },
+                "accountID": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Update Launch configuration Account ID.</p>"
                     }
                 }
             }
@@ -9026,7 +9650,7 @@
                     }
                 },
                 "bandwidthThrottling": {
-                    "target": "com.amazonaws.mgn#PositiveInteger",
+                    "target": "com.amazonaws.mgn#BandwidthThrottling",
                     "traits": {
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Update replication configuration bandwidth throttling request.</p>"
@@ -9048,6 +9672,18 @@
                     "target": "com.amazonaws.mgn#TagsMap",
                     "traits": {
                         "smithy.api#documentation": "<p>Update replication configuration Staging Area Tags request.</p>"
+                    }
+                },
+                "useFipsEndpoint": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Update replication configuration use Fips Endpoint.</p>"
+                    }
+                },
+                "accountID": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Update replication configuration Account ID request.</p>"
                     }
                 }
             }
@@ -9148,7 +9784,7 @@
                     }
                 },
                 "bandwidthThrottling": {
-                    "target": "com.amazonaws.mgn#PositiveInteger",
+                    "target": "com.amazonaws.mgn#BandwidthThrottling",
                     "traits": {
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Update replication configuration template bandwidth throttling request.</p>"
@@ -9170,6 +9806,12 @@
                     "target": "com.amazonaws.mgn#TagsMap",
                     "traits": {
                         "smithy.api#documentation": "<p>Update replication configuration template Staging Area Tags request.</p>"
+                    }
+                },
+                "useFipsEndpoint": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Update replication configuration template use Fips Endpoint request.</p>"
                     }
                 }
             }
@@ -9220,6 +9862,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Replication type to which to update source server.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "accountID": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Account ID on which to update replication type.</p>"
                     }
                 }
             }
@@ -9273,6 +9921,12 @@
                     "target": "com.amazonaws.mgn#WaveDescription",
                     "traits": {
                         "smithy.api#documentation": "<p>Wave description.</p>"
+                    }
+                },
+                "accountID": {
+                    "target": "com.amazonaws.mgn#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Account ID.</p>"
                     }
                 }
             }
