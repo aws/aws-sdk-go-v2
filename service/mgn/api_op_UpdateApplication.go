@@ -34,6 +34,9 @@ type UpdateApplicationInput struct {
 	// This member is required.
 	ApplicationID *string
 
+	// Account ID.
+	AccountID *string
+
 	// Application description.
 	Description *string
 

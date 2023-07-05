@@ -36,6 +36,9 @@ type StartTestInput struct {
 	// This member is required.
 	SourceServerIDs []string
 
+	// Start Test for Account ID.
+	AccountID *string
+
 	// Start Test by Tags.
 	Tags map[string]string
 

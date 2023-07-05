@@ -95,6 +95,11 @@ type GenerateDataKeyPairWithoutPlaintextInput struct {
 	// This member is required.
 	KeyPairSpec types.DataKeyPairSpec
 
+	// Checks if your request will succeed. DryRun is an optional parameter. To learn
+	// more about how to use this parameter, see Testing your KMS API calls (https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html)
+	// in the Key Management Service Developer Guide.
+	DryRun *bool
+
 	// Specifies the encryption context that will be used when encrypting the private
 	// key in the data key pair. Do not include confidential or sensitive information
 	// in this field. This field may be displayed in plaintext in CloudTrail logs and

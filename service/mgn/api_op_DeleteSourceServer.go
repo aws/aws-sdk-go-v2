@@ -33,6 +33,9 @@ type DeleteSourceServerInput struct {
 	// This member is required.
 	SourceServerID *string
 
+	// Request to delete Source Server from service by Account ID.
+	AccountID *string
+
 	noSmithyDocumentSerde
 }
 

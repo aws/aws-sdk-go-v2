@@ -1,0 +1,8 @@
+{
+    "id": "68d79835-ba5f-417a-83a7-d0a3a3a2e06b",
+    "type": "documentation",
+    "description": "GetMetricDataV2 API: Channels filters do not count towards overall limitation of 100 filter values.",
+    "modules": [
+        "service/connect"
+    ]
+}

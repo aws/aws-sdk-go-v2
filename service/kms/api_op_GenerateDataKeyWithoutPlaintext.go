@@ -90,6 +90,11 @@ type GenerateDataKeyWithoutPlaintextInput struct {
 	// This member is required.
 	KeyId *string
 
+	// Checks if your request will succeed. DryRun is an optional parameter. To learn
+	// more about how to use this parameter, see Testing your KMS API calls (https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html)
+	// in the Key Management Service Developer Guide.
+	DryRun *bool
+
 	// Specifies the encryption context that will be used when encrypting the data
 	// key. Do not include confidential or sensitive information in this field. This
 	// field may be displayed in plaintext in CloudTrail logs and other output. An

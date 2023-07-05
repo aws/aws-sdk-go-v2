@@ -12,7 +12,6 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API is in preview release for Amazon Connect and is subject to change.
 // Searches queues in an Amazon Connect instance, with optional filtering.
 func (c *Client) SearchQueues(ctx context.Context, params *SearchQueuesInput, optFns ...func(*Options)) (*SearchQueuesOutput, error) {
 	if params == nil {

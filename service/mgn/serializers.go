@@ -74,6 +74,11 @@ func awsRestjson1_serializeOpDocumentArchiveApplicationInput(v *ArchiveApplicati
 	object := value.Object()
 	defer object.Close()
 
+	if v.AccountID != nil {
+		ok := object.Key("accountID")
+		ok.String(*v.AccountID)
+	}
+
 	if v.ApplicationID != nil {
 		ok := object.Key("applicationID")
 		ok.String(*v.ApplicationID)
@@ -142,6 +147,11 @@ func awsRestjson1_serializeOpDocumentArchiveWaveInput(v *ArchiveWaveInput, value
 	object := value.Object()
 	defer object.Close()
 
+	if v.AccountID != nil {
+		ok := object.Key("accountID")
+		ok.String(*v.AccountID)
+	}
+
 	if v.WaveID != nil {
 		ok := object.Key("waveID")
 		ok.String(*v.WaveID)
@@ -209,6 +219,11 @@ func awsRestjson1_serializeOpHttpBindingsAssociateApplicationsInput(v *Associate
 func awsRestjson1_serializeOpDocumentAssociateApplicationsInput(v *AssociateApplicationsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AccountID != nil {
+		ok := object.Key("accountID")
+		ok.String(*v.AccountID)
+	}
 
 	if v.ApplicationIDs != nil {
 		ok := object.Key("applicationIDs")
@@ -285,6 +300,11 @@ func awsRestjson1_serializeOpDocumentAssociateSourceServersInput(v *AssociateSou
 	object := value.Object()
 	defer object.Close()
 
+	if v.AccountID != nil {
+		ok := object.Key("accountID")
+		ok.String(*v.AccountID)
+	}
+
 	if v.ApplicationID != nil {
 		ok := object.Key("applicationID")
 		ok.String(*v.ApplicationID)
@@ -360,6 +380,11 @@ func awsRestjson1_serializeOpDocumentChangeServerLifeCycleStateInput(v *ChangeSe
 	object := value.Object()
 	defer object.Close()
 
+	if v.AccountID != nil {
+		ok := object.Key("accountID")
+		ok.String(*v.AccountID)
+	}
+
 	if v.LifeCycle != nil {
 		ok := object.Key("lifeCycle")
 		if err := awsRestjson1_serializeDocumentChangeServerLifeCycleStateSourceServerLifecycle(v.LifeCycle, ok); err != nil {
@@ -434,6 +459,11 @@ func awsRestjson1_serializeOpHttpBindingsCreateApplicationInput(v *CreateApplica
 func awsRestjson1_serializeOpDocumentCreateApplicationInput(v *CreateApplicationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AccountID != nil {
+		ok := object.Key("accountID")
+		ok.String(*v.AccountID)
+	}
 
 	if v.Description != nil {
 		ok := object.Key("description")
@@ -729,6 +759,11 @@ func awsRestjson1_serializeOpDocumentCreateReplicationConfigurationTemplateInput
 		ok.Boolean(*v.UseDedicatedReplicationServer)
 	}
 
+	if v.UseFipsEndpoint != nil {
+		ok := object.Key("useFipsEndpoint")
+		ok.Boolean(*v.UseFipsEndpoint)
+	}
+
 	return nil
 }
 
@@ -791,6 +826,11 @@ func awsRestjson1_serializeOpHttpBindingsCreateWaveInput(v *CreateWaveInput, enc
 func awsRestjson1_serializeOpDocumentCreateWaveInput(v *CreateWaveInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AccountID != nil {
+		ok := object.Key("accountID")
+		ok.String(*v.AccountID)
+	}
 
 	if v.Description != nil {
 		ok := object.Key("description")
@@ -872,6 +912,11 @@ func awsRestjson1_serializeOpDocumentDeleteApplicationInput(v *DeleteApplication
 	object := value.Object()
 	defer object.Close()
 
+	if v.AccountID != nil {
+		ok := object.Key("accountID")
+		ok.String(*v.AccountID)
+	}
+
 	if v.ApplicationID != nil {
 		ok := object.Key("applicationID")
 		ok.String(*v.ApplicationID)
@@ -939,6 +984,11 @@ func awsRestjson1_serializeOpHttpBindingsDeleteJobInput(v *DeleteJobInput, encod
 func awsRestjson1_serializeOpDocumentDeleteJobInput(v *DeleteJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AccountID != nil {
+		ok := object.Key("accountID")
+		ok.String(*v.AccountID)
+	}
 
 	if v.JobID != nil {
 		ok := object.Key("jobID")
@@ -1144,6 +1194,11 @@ func awsRestjson1_serializeOpDocumentDeleteSourceServerInput(v *DeleteSourceServ
 	object := value.Object()
 	defer object.Close()
 
+	if v.AccountID != nil {
+		ok := object.Key("accountID")
+		ok.String(*v.AccountID)
+	}
+
 	if v.SourceServerID != nil {
 		ok := object.Key("sourceServerID")
 		ok.String(*v.SourceServerID)
@@ -1280,6 +1335,11 @@ func awsRestjson1_serializeOpDocumentDeleteWaveInput(v *DeleteWaveInput, value s
 	object := value.Object()
 	defer object.Close()
 
+	if v.AccountID != nil {
+		ok := object.Key("accountID")
+		ok.String(*v.AccountID)
+	}
+
 	if v.WaveID != nil {
 		ok := object.Key("waveID")
 		ok.String(*v.WaveID)
@@ -1347,6 +1407,11 @@ func awsRestjson1_serializeOpHttpBindingsDescribeJobLogItemsInput(v *DescribeJob
 func awsRestjson1_serializeOpDocumentDescribeJobLogItemsInput(v *DescribeJobLogItemsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AccountID != nil {
+		ok := object.Key("accountID")
+		ok.String(*v.AccountID)
+	}
 
 	if v.JobID != nil {
 		ok := object.Key("jobID")
@@ -1425,6 +1490,11 @@ func awsRestjson1_serializeOpHttpBindingsDescribeJobsInput(v *DescribeJobsInput,
 func awsRestjson1_serializeOpDocumentDescribeJobsInput(v *DescribeJobsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AccountID != nil {
+		ok := object.Key("accountID")
+		ok.String(*v.AccountID)
+	}
 
 	if v.Filters != nil {
 		ok := object.Key("filters")
@@ -1666,6 +1736,11 @@ func awsRestjson1_serializeOpDocumentDescribeSourceServersInput(v *DescribeSourc
 	object := value.Object()
 	defer object.Close()
 
+	if v.AccountID != nil {
+		ok := object.Key("accountID")
+		ok.String(*v.AccountID)
+	}
+
 	if v.Filters != nil {
 		ok := object.Key("filters")
 		if err := awsRestjson1_serializeDocumentDescribeSourceServersRequestFilters(v.Filters, ok); err != nil {
@@ -1803,6 +1878,11 @@ func awsRestjson1_serializeOpDocumentDisassociateApplicationsInput(v *Disassocia
 	object := value.Object()
 	defer object.Close()
 
+	if v.AccountID != nil {
+		ok := object.Key("accountID")
+		ok.String(*v.AccountID)
+	}
+
 	if v.ApplicationIDs != nil {
 		ok := object.Key("applicationIDs")
 		if err := awsRestjson1_serializeDocumentApplicationIDs(v.ApplicationIDs, ok); err != nil {
@@ -1877,6 +1957,11 @@ func awsRestjson1_serializeOpHttpBindingsDisassociateSourceServersInput(v *Disas
 func awsRestjson1_serializeOpDocumentDisassociateSourceServersInput(v *DisassociateSourceServersInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AccountID != nil {
+		ok := object.Key("accountID")
+		ok.String(*v.AccountID)
+	}
 
 	if v.ApplicationID != nil {
 		ok := object.Key("applicationID")
@@ -1953,6 +2038,11 @@ func awsRestjson1_serializeOpDocumentDisconnectFromServiceInput(v *DisconnectFro
 	object := value.Object()
 	defer object.Close()
 
+	if v.AccountID != nil {
+		ok := object.Key("accountID")
+		ok.String(*v.AccountID)
+	}
+
 	if v.SourceServerID != nil {
 		ok := object.Key("sourceServerID")
 		ok.String(*v.SourceServerID)
@@ -2020,6 +2110,11 @@ func awsRestjson1_serializeOpHttpBindingsFinalizeCutoverInput(v *FinalizeCutover
 func awsRestjson1_serializeOpDocumentFinalizeCutoverInput(v *FinalizeCutoverInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AccountID != nil {
+		ok := object.Key("accountID")
+		ok.String(*v.AccountID)
+	}
 
 	if v.SourceServerID != nil {
 		ok := object.Key("sourceServerID")
@@ -2089,6 +2184,11 @@ func awsRestjson1_serializeOpDocumentGetLaunchConfigurationInput(v *GetLaunchCon
 	object := value.Object()
 	defer object.Close()
 
+	if v.AccountID != nil {
+		ok := object.Key("accountID")
+		ok.String(*v.AccountID)
+	}
+
 	if v.SourceServerID != nil {
 		ok := object.Key("sourceServerID")
 		ok.String(*v.SourceServerID)
@@ -2156,6 +2256,11 @@ func awsRestjson1_serializeOpHttpBindingsGetReplicationConfigurationInput(v *Get
 func awsRestjson1_serializeOpDocumentGetReplicationConfigurationInput(v *GetReplicationConfigurationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AccountID != nil {
+		ok := object.Key("accountID")
+		ok.String(*v.AccountID)
+	}
 
 	if v.SourceServerID != nil {
 		ok := object.Key("sourceServerID")
@@ -2269,6 +2374,11 @@ func awsRestjson1_serializeOpHttpBindingsListApplicationsInput(v *ListApplicatio
 func awsRestjson1_serializeOpDocumentListApplicationsInput(v *ListApplicationsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AccountID != nil {
+		ok := object.Key("accountID")
+		ok.String(*v.AccountID)
+	}
 
 	if v.Filters != nil {
 		ok := object.Key("filters")
@@ -2606,6 +2716,79 @@ func awsRestjson1_serializeOpDocumentListImportsInput(v *ListImportsInput, value
 	return nil
 }
 
+type awsRestjson1_serializeOpListManagedAccounts struct {
+}
+
+func (*awsRestjson1_serializeOpListManagedAccounts) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListManagedAccounts) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListManagedAccountsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/ListManagedAccounts")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentListManagedAccountsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListManagedAccountsInput(v *ListManagedAccountsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentListManagedAccountsInput(v *ListManagedAccountsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxResults != 0 {
+		ok := object.Key("maxResults")
+		ok.Integer(v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpListSourceServerActions struct {
 }
 
@@ -2665,6 +2848,11 @@ func awsRestjson1_serializeOpHttpBindingsListSourceServerActionsInput(v *ListSou
 func awsRestjson1_serializeOpDocumentListSourceServerActionsInput(v *ListSourceServerActionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AccountID != nil {
+		ok := object.Key("accountID")
+		ok.String(*v.AccountID)
+	}
 
 	if v.Filters != nil {
 		ok := object.Key("filters")
@@ -2894,6 +3082,11 @@ func awsRestjson1_serializeOpDocumentListWavesInput(v *ListWavesInput, value smi
 	object := value.Object()
 	defer object.Close()
 
+	if v.AccountID != nil {
+		ok := object.Key("accountID")
+		ok.String(*v.AccountID)
+	}
+
 	if v.Filters != nil {
 		ok := object.Key("filters")
 		if err := awsRestjson1_serializeDocumentListWavesRequestFilters(v.Filters, ok); err != nil {
@@ -2974,6 +3167,84 @@ func awsRestjson1_serializeOpDocumentMarkAsArchivedInput(v *MarkAsArchivedInput,
 	object := value.Object()
 	defer object.Close()
 
+	if v.AccountID != nil {
+		ok := object.Key("accountID")
+		ok.String(*v.AccountID)
+	}
+
+	if v.SourceServerID != nil {
+		ok := object.Key("sourceServerID")
+		ok.String(*v.SourceServerID)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpPauseReplication struct {
+}
+
+func (*awsRestjson1_serializeOpPauseReplication) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpPauseReplication) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*PauseReplicationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/PauseReplication")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentPauseReplicationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsPauseReplicationInput(v *PauseReplicationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentPauseReplicationInput(v *PauseReplicationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AccountID != nil {
+		ok := object.Key("accountID")
+		ok.String(*v.AccountID)
+	}
+
 	if v.SourceServerID != nil {
 		ok := object.Key("sourceServerID")
 		ok.String(*v.SourceServerID)
@@ -3041,6 +3312,11 @@ func awsRestjson1_serializeOpHttpBindingsPutSourceServerActionInput(v *PutSource
 func awsRestjson1_serializeOpDocumentPutSourceServerActionInput(v *PutSourceServerActionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AccountID != nil {
+		ok := object.Key("accountID")
+		ok.String(*v.AccountID)
+	}
 
 	if v.ActionID != nil {
 		ok := object.Key("actionID")
@@ -3311,6 +3587,11 @@ func awsRestjson1_serializeOpDocumentRemoveSourceServerActionInput(v *RemoveSour
 	object := value.Object()
 	defer object.Close()
 
+	if v.AccountID != nil {
+		ok := object.Key("accountID")
+		ok.String(*v.AccountID)
+	}
+
 	if v.ActionID != nil {
 		ok := object.Key("actionID")
 		ok.String(*v.ActionID)
@@ -3397,6 +3678,79 @@ func awsRestjson1_serializeOpDocumentRemoveTemplateActionInput(v *RemoveTemplate
 	return nil
 }
 
+type awsRestjson1_serializeOpResumeReplication struct {
+}
+
+func (*awsRestjson1_serializeOpResumeReplication) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpResumeReplication) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ResumeReplicationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/ResumeReplication")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentResumeReplicationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsResumeReplicationInput(v *ResumeReplicationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentResumeReplicationInput(v *ResumeReplicationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AccountID != nil {
+		ok := object.Key("accountID")
+		ok.String(*v.AccountID)
+	}
+
+	if v.SourceServerID != nil {
+		ok := object.Key("sourceServerID")
+		ok.String(*v.SourceServerID)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpRetryDataReplication struct {
 }
 
@@ -3456,6 +3810,11 @@ func awsRestjson1_serializeOpHttpBindingsRetryDataReplicationInput(v *RetryDataR
 func awsRestjson1_serializeOpDocumentRetryDataReplicationInput(v *RetryDataReplicationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AccountID != nil {
+		ok := object.Key("accountID")
+		ok.String(*v.AccountID)
+	}
 
 	if v.SourceServerID != nil {
 		ok := object.Key("sourceServerID")
@@ -3524,6 +3883,11 @@ func awsRestjson1_serializeOpHttpBindingsStartCutoverInput(v *StartCutoverInput,
 func awsRestjson1_serializeOpDocumentStartCutoverInput(v *StartCutoverInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AccountID != nil {
+		ok := object.Key("accountID")
+		ok.String(*v.AccountID)
+	}
 
 	if v.SourceServerIDs != nil {
 		ok := object.Key("sourceServerIDs")
@@ -3755,6 +4119,11 @@ func awsRestjson1_serializeOpDocumentStartReplicationInput(v *StartReplicationIn
 	object := value.Object()
 	defer object.Close()
 
+	if v.AccountID != nil {
+		ok := object.Key("accountID")
+		ok.String(*v.AccountID)
+	}
+
 	if v.SourceServerID != nil {
 		ok := object.Key("sourceServerID")
 		ok.String(*v.SourceServerID)
@@ -3823,6 +4192,11 @@ func awsRestjson1_serializeOpDocumentStartTestInput(v *StartTestInput, value smi
 	object := value.Object()
 	defer object.Close()
 
+	if v.AccountID != nil {
+		ok := object.Key("accountID")
+		ok.String(*v.AccountID)
+	}
+
 	if v.SourceServerIDs != nil {
 		ok := object.Key("sourceServerIDs")
 		if err := awsRestjson1_serializeDocumentStartTestRequestSourceServerIDs(v.SourceServerIDs, ok); err != nil {
@@ -3835,6 +4209,79 @@ func awsRestjson1_serializeOpDocumentStartTestInput(v *StartTestInput, value smi
 		if err := awsRestjson1_serializeDocumentTagsMap(v.Tags, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpStopReplication struct {
+}
+
+func (*awsRestjson1_serializeOpStopReplication) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpStopReplication) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StopReplicationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/StopReplication")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentStopReplicationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsStopReplicationInput(v *StopReplicationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentStopReplicationInput(v *StopReplicationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AccountID != nil {
+		ok := object.Key("accountID")
+		ok.String(*v.AccountID)
+	}
+
+	if v.SourceServerID != nil {
+		ok := object.Key("sourceServerID")
+		ok.String(*v.SourceServerID)
 	}
 
 	return nil
@@ -3983,6 +4430,11 @@ func awsRestjson1_serializeOpDocumentTerminateTargetInstancesInput(v *TerminateT
 	object := value.Object()
 	defer object.Close()
 
+	if v.AccountID != nil {
+		ok := object.Key("accountID")
+		ok.String(*v.AccountID)
+	}
+
 	if v.SourceServerIDs != nil {
 		ok := object.Key("sourceServerIDs")
 		if err := awsRestjson1_serializeDocumentTerminateTargetInstancesRequestSourceServerIDs(v.SourceServerIDs, ok); err != nil {
@@ -4060,6 +4512,11 @@ func awsRestjson1_serializeOpDocumentUnarchiveApplicationInput(v *UnarchiveAppli
 	object := value.Object()
 	defer object.Close()
 
+	if v.AccountID != nil {
+		ok := object.Key("accountID")
+		ok.String(*v.AccountID)
+	}
+
 	if v.ApplicationID != nil {
 		ok := object.Key("applicationID")
 		ok.String(*v.ApplicationID)
@@ -4127,6 +4584,11 @@ func awsRestjson1_serializeOpHttpBindingsUnarchiveWaveInput(v *UnarchiveWaveInpu
 func awsRestjson1_serializeOpDocumentUnarchiveWaveInput(v *UnarchiveWaveInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AccountID != nil {
+		ok := object.Key("accountID")
+		ok.String(*v.AccountID)
+	}
 
 	if v.WaveID != nil {
 		ok := object.Key("waveID")
@@ -4260,6 +4722,11 @@ func awsRestjson1_serializeOpDocumentUpdateApplicationInput(v *UpdateApplication
 	object := value.Object()
 	defer object.Close()
 
+	if v.AccountID != nil {
+		ok := object.Key("accountID")
+		ok.String(*v.AccountID)
+	}
+
 	if v.ApplicationID != nil {
 		ok := object.Key("applicationID")
 		ok.String(*v.ApplicationID)
@@ -4337,6 +4804,11 @@ func awsRestjson1_serializeOpHttpBindingsUpdateLaunchConfigurationInput(v *Updat
 func awsRestjson1_serializeOpDocumentUpdateLaunchConfigurationInput(v *UpdateLaunchConfigurationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AccountID != nil {
+		ok := object.Key("accountID")
+		ok.String(*v.AccountID)
+	}
 
 	if len(v.BootMode) > 0 {
 		ok := object.Key("bootMode")
@@ -4601,6 +5073,11 @@ func awsRestjson1_serializeOpDocumentUpdateReplicationConfigurationInput(v *Upda
 	object := value.Object()
 	defer object.Close()
 
+	if v.AccountID != nil {
+		ok := object.Key("accountID")
+		ok.String(*v.AccountID)
+	}
+
 	if v.AssociateDefaultSecurityGroup != nil {
 		ok := object.Key("associateDefaultSecurityGroup")
 		ok.Boolean(*v.AssociateDefaultSecurityGroup)
@@ -4680,6 +5157,11 @@ func awsRestjson1_serializeOpDocumentUpdateReplicationConfigurationInput(v *Upda
 	if v.UseDedicatedReplicationServer != nil {
 		ok := object.Key("useDedicatedReplicationServer")
 		ok.Boolean(*v.UseDedicatedReplicationServer)
+	}
+
+	if v.UseFipsEndpoint != nil {
+		ok := object.Key("useFipsEndpoint")
+		ok.Boolean(*v.UseFipsEndpoint)
 	}
 
 	return nil
@@ -4819,6 +5301,11 @@ func awsRestjson1_serializeOpDocumentUpdateReplicationConfigurationTemplateInput
 		ok.Boolean(*v.UseDedicatedReplicationServer)
 	}
 
+	if v.UseFipsEndpoint != nil {
+		ok := object.Key("useFipsEndpoint")
+		ok.Boolean(*v.UseFipsEndpoint)
+	}
+
 	return nil
 }
 
@@ -4881,6 +5368,11 @@ func awsRestjson1_serializeOpHttpBindingsUpdateSourceServerReplicationTypeInput(
 func awsRestjson1_serializeOpDocumentUpdateSourceServerReplicationTypeInput(v *UpdateSourceServerReplicationTypeInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AccountID != nil {
+		ok := object.Key("accountID")
+		ok.String(*v.AccountID)
+	}
 
 	if len(v.ReplicationType) > 0 {
 		ok := object.Key("replicationType")
@@ -4954,6 +5446,11 @@ func awsRestjson1_serializeOpHttpBindingsUpdateWaveInput(v *UpdateWaveInput, enc
 func awsRestjson1_serializeOpDocumentUpdateWaveInput(v *UpdateWaveInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AccountID != nil {
+		ok := object.Key("accountID")
+		ok.String(*v.AccountID)
+	}
 
 	if v.Description != nil {
 		ok := object.Key("description")

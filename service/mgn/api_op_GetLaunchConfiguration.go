@@ -34,6 +34,9 @@ type GetLaunchConfigurationInput struct {
 	// This member is required.
 	SourceServerID *string
 
+	// Request to get Launch Configuration information by Account ID.
+	AccountID *string
+
 	noSmithyDocumentSerde
 }
 

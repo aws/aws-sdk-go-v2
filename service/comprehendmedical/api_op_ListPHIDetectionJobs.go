@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a list of protected health information (PHI) detection jobs that you have
+// Gets a list of protected health information (PHI) detection jobs you have
 // submitted.
 func (c *Client) ListPHIDetectionJobs(ctx context.Context, params *ListPHIDetectionJobsInput, optFns ...func(*Options)) (*ListPHIDetectionJobsOutput, error) {
 	if params == nil {

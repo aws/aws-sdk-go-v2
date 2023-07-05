@@ -98,6 +98,11 @@ type EncryptInput struct {
 	// This member is required.
 	Plaintext []byte
 
+	// Checks if your request will succeed. DryRun is an optional parameter. To learn
+	// more about how to use this parameter, see Testing your KMS API calls (https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html)
+	// in the Key Management Service Developer Guide.
+	DryRun *bool
+
 	// Specifies the encryption algorithm that KMS will use to encrypt the plaintext
 	// message. The algorithm must be compatible with the KMS key that you specify.
 	// This parameter is required only for asymmetric KMS keys. The default value,

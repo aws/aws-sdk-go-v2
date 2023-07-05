@@ -12,45 +12,43 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves all waves or multiple waves by ID.
-func (c *Client) ListWaves(ctx context.Context, params *ListWavesInput, optFns ...func(*Options)) (*ListWavesOutput, error) {
+// List Managed Accounts.
+func (c *Client) ListManagedAccounts(ctx context.Context, params *ListManagedAccountsInput, optFns ...func(*Options)) (*ListManagedAccountsOutput, error) {
 	if params == nil {
-		params = &ListWavesInput{}
+		params = &ListManagedAccountsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "ListWaves", params, optFns, c.addOperationListWavesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "ListManagedAccounts", params, optFns, c.addOperationListManagedAccountsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*ListWavesOutput)
+	out := result.(*ListManagedAccountsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type ListWavesInput struct {
+// List managed accounts request.
+type ListManagedAccountsInput struct {
 
-	// Request account ID.
-	AccountID *string
-
-	// Waves list filters.
-	Filters *types.ListWavesRequestFilters
-
-	// Maximum results to return when listing waves.
+	// List managed accounts request max results.
 	MaxResults int32
 
-	// Request next token.
+	// List managed accounts request next token.
 	NextToken *string
 
 	noSmithyDocumentSerde
 }
 
-type ListWavesOutput struct {
+// List managed accounts response.
+type ListManagedAccountsOutput struct {
 
-	// Waves list.
-	Items []types.Wave
+	// List managed accounts response items.
+	//
+	// This member is required.
+	Items []types.ManagedAccount
 
-	// Response next token.
+	// List managed accounts response next token.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -59,12 +57,12 @@ type ListWavesOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationListWavesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListWaves{}, middleware.After)
+func (c *Client) addOperationListManagedAccountsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpListManagedAccounts{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListWaves{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListManagedAccounts{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -104,7 +102,7 @@ func (c *Client) addOperationListWavesMiddlewares(stack *middleware.Stack, optio
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListWaves(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListManagedAccounts(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -122,16 +120,18 @@ func (c *Client) addOperationListWavesMiddlewares(stack *middleware.Stack, optio
 	return nil
 }
 
-// ListWavesAPIClient is a client that implements the ListWaves operation.
-type ListWavesAPIClient interface {
-	ListWaves(context.Context, *ListWavesInput, ...func(*Options)) (*ListWavesOutput, error)
+// ListManagedAccountsAPIClient is a client that implements the
+// ListManagedAccounts operation.
+type ListManagedAccountsAPIClient interface {
+	ListManagedAccounts(context.Context, *ListManagedAccountsInput, ...func(*Options)) (*ListManagedAccountsOutput, error)
 }
 
-var _ ListWavesAPIClient = (*Client)(nil)
+var _ ListManagedAccountsAPIClient = (*Client)(nil)
 
-// ListWavesPaginatorOptions is the paginator options for ListWaves
-type ListWavesPaginatorOptions struct {
-	// Maximum results to return when listing waves.
+// ListManagedAccountsPaginatorOptions is the paginator options for
+// ListManagedAccounts
+type ListManagedAccountsPaginatorOptions struct {
+	// List managed accounts request max results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token
@@ -139,22 +139,22 @@ type ListWavesPaginatorOptions struct {
 	StopOnDuplicateToken bool
 }
 
-// ListWavesPaginator is a paginator for ListWaves
-type ListWavesPaginator struct {
-	options   ListWavesPaginatorOptions
-	client    ListWavesAPIClient
-	params    *ListWavesInput
+// ListManagedAccountsPaginator is a paginator for ListManagedAccounts
+type ListManagedAccountsPaginator struct {
+	options   ListManagedAccountsPaginatorOptions
+	client    ListManagedAccountsAPIClient
+	params    *ListManagedAccountsInput
 	nextToken *string
 	firstPage bool
 }
 
-// NewListWavesPaginator returns a new ListWavesPaginator
-func NewListWavesPaginator(client ListWavesAPIClient, params *ListWavesInput, optFns ...func(*ListWavesPaginatorOptions)) *ListWavesPaginator {
+// NewListManagedAccountsPaginator returns a new ListManagedAccountsPaginator
+func NewListManagedAccountsPaginator(client ListManagedAccountsAPIClient, params *ListManagedAccountsInput, optFns ...func(*ListManagedAccountsPaginatorOptions)) *ListManagedAccountsPaginator {
 	if params == nil {
-		params = &ListWavesInput{}
+		params = &ListManagedAccountsInput{}
 	}
 
-	options := ListWavesPaginatorOptions{}
+	options := ListManagedAccountsPaginatorOptions{}
 	if params.MaxResults != 0 {
 		options.Limit = params.MaxResults
 	}
@@ -163,7 +163,7 @@ func NewListWavesPaginator(client ListWavesAPIClient, params *ListWavesInput, op
 		fn(&options)
 	}
 
-	return &ListWavesPaginator{
+	return &ListManagedAccountsPaginator{
 		options:   options,
 		client:    client,
 		params:    params,
@@ -173,12 +173,12 @@ func NewListWavesPaginator(client ListWavesAPIClient, params *ListWavesInput, op
 }
 
 // HasMorePages returns a boolean indicating whether more pages are available
-func (p *ListWavesPaginator) HasMorePages() bool {
+func (p *ListManagedAccountsPaginator) HasMorePages() bool {
 	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
 }
 
-// NextPage retrieves the next ListWaves page.
-func (p *ListWavesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListWavesOutput, error) {
+// NextPage retrieves the next ListManagedAccounts page.
+func (p *ListManagedAccountsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListManagedAccountsOutput, error) {
 	if !p.HasMorePages() {
 		return nil, fmt.Errorf("no more pages available")
 	}
@@ -188,7 +188,7 @@ func (p *ListWavesPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 
 	params.MaxResults = p.options.Limit
 
-	result, err := p.client.ListWaves(ctx, &params, optFns...)
+	result, err := p.client.ListManagedAccounts(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
 	}
@@ -207,11 +207,11 @@ func (p *ListWavesPaginator) NextPage(ctx context.Context, optFns ...func(*Optio
 	return result, nil
 }
 
-func newServiceMetadataMiddleware_opListWaves(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opListManagedAccounts(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "mgn",
-		OperationName: "ListWaves",
+		OperationName: "ListManagedAccounts",
 	}
 }

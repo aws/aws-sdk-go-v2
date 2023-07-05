@@ -34,6 +34,9 @@ type CreateWaveInput struct {
 	// This member is required.
 	Name *string
 
+	// Account ID.
+	AccountID *string
+
 	// Wave description.
 	Description *string
 

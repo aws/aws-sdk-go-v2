@@ -34,6 +34,9 @@ type UpdateLaunchConfigurationInput struct {
 	// This member is required.
 	SourceServerID *string
 
+	// Update Launch configuration Account ID.
+	AccountID *string
+
 	// Update Launch configuration boot mode request.
 	BootMode types.BootMode
 

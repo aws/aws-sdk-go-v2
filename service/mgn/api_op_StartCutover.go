@@ -36,6 +36,9 @@ type StartCutoverInput struct {
 	// This member is required.
 	SourceServerIDs []string
 
+	// Start Cutover by Account IDs
+	AccountID *string
+
 	// Start Cutover by Tags.
 	Tags map[string]string
 

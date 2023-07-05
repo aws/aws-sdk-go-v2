@@ -328,6 +328,9 @@ type IdentificationHints struct {
 // Import error data.
 type ImportErrorData struct {
 
+	// Import error data source account ID.
+	AccountID *string
+
 	// Import error data application ID.
 	ApplicationID *string
 
@@ -791,6 +794,15 @@ type ListWavesRequestFilters struct {
 	noSmithyDocumentSerde
 }
 
+// Managed account.
+type ManagedAccount struct {
+
+	// Managed account, account ID.
+	AccountId *string
+
+	noSmithyDocumentSerde
+}
+
 // Network interface.
 type NetworkInterface struct {
 
@@ -939,6 +951,9 @@ type ReplicationConfigurationTemplate struct {
 
 	// Replication Configuration template use Dedicated Replication Server.
 	UseDedicatedReplicationServer *bool
+
+	// Replication Configuration template use Fips Endpoint.
+	UseFipsEndpoint *bool
 
 	noSmithyDocumentSerde
 }

@@ -64,9 +64,10 @@ type GetMetricDataV2Input struct {
 	//   AGENT_HIERARCHY_LEVEL_THREE | AGENT_HIERARCHY_LEVEL_FOUR |
 	//   AGENT_HIERARCHY_LEVEL_FIVE
 	//   - Filter values: A maximum of 100 filter values are supported in a single
-	//   request. For example, a GetMetricDataV2 request can filter by 50 queues, 35
-	//   agents, and 15 routing profiles for a total of 100 filter values. VOICE , CHAT
-	//   , and TASK are valid filterValue for the CHANNEL filter key.
+	//   request. VOICE, CHAT, and TASK are valid filterValue for the CHANNEL filter
+	//   key. They do not count towards limitation of 100 filter values. For example, a
+	//   GetMetricDataV2 request can filter by 50 queues, 35 agents, and 15 routing
+	//   profiles for a total of 100 filter values, along with 3 channel filters.
 	//
 	// This member is required.
 	Filters []types.FilterV2

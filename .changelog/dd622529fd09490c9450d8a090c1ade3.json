@@ -1,0 +1,8 @@
+{
+    "id": "dd622529-fd09-490c-9450-d8a090c1ade3",
+    "type": "feature",
+    "description": "This release introduces the Global view feature and new Replication state APIs.",
+    "modules": [
+        "service/mgn"
+    ]
+}

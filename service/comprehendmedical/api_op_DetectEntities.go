@@ -14,7 +14,7 @@ import (
 // The DetectEntities operation is deprecated. You should use the DetectEntitiesV2
 // operation instead. Inspects the clinical text for a variety of medical entities
 // and returns specific information about them such as entity category, location,
-// and confidence score on that information .
+// and confidence score on that information.
 //
 // Deprecated: This operation is deprecated, use DetectEntitiesV2 instead.
 func (c *Client) DetectEntities(ctx context.Context, params *DetectEntitiesInput, optFns ...func(*Options)) (*DetectEntitiesOutput, error) {
@@ -34,8 +34,7 @@ func (c *Client) DetectEntities(ctx context.Context, params *DetectEntitiesInput
 
 type DetectEntitiesInput struct {
 
-	// A UTF-8 text string containing the clinical content being examined for
-	// entities. Each string must contain fewer than 20,000 bytes of characters.
+	// A UTF-8 text string containing the clinical content being examined for entities.
 	//
 	// This member is required.
 	Text *string
@@ -48,7 +47,7 @@ type DetectEntitiesOutput struct {
 	// The collection of medical entities extracted from the input text and their
 	// associated information. For each entity, the response provides the entity text,
 	// the entity category, where the entity text begins and ends, and the level of
-	// confidence that Comprehend Medical; has in the detection and analysis.
+	// confidence that Amazon Comprehend Medical has in the detection and analysis.
 	// Attributes and traits of the entity are also returned.
 	//
 	// This member is required.

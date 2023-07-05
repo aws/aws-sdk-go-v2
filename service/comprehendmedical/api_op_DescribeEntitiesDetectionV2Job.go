@@ -30,7 +30,7 @@ func (c *Client) DescribeEntitiesDetectionV2Job(ctx context.Context, params *Des
 
 type DescribeEntitiesDetectionV2JobInput struct {
 
-	// The identifier that Comprehend Medical; generated for the job. The
+	// The identifier that Amazon Comprehend Medical generated for the job. The
 	// StartEntitiesDetectionV2Job operation returns this identifier in its response.
 	//
 	// This member is required.

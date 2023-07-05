@@ -35,6 +35,9 @@ func (c *Client) DescribeJobs(ctx context.Context, params *DescribeJobsInput, op
 
 type DescribeJobsInput struct {
 
+	// Request to describe job log items by Account ID.
+	AccountID *string
+
 	// Request to describe Job log filters.
 	Filters *types.DescribeJobsRequestFilters
 

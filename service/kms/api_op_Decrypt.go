@@ -91,6 +91,11 @@ type DecryptInput struct {
 	// This member is required.
 	CiphertextBlob []byte
 
+	// Checks if your request will succeed. DryRun is an optional parameter. To learn
+	// more about how to use this parameter, see Testing your KMS API calls (https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html)
+	// in the Key Management Service Developer Guide.
+	DryRun *bool
+
 	// Specifies the encryption algorithm that will be used to decrypt the ciphertext.
 	// Specify the same algorithm that was used to encrypt the data. If you specify a
 	// different algorithm, the Decrypt operation fails. This parameter is required

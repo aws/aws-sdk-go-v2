@@ -36,9 +36,9 @@ type CreateAutomationRuleInput struct {
 	Actions []types.AutomationRulesAction
 
 	// A set of ASFF finding field attributes and corresponding expected values that
-	// Security Hub uses to filter findings. If a finding matches the conditions
-	// specified in this parameter, Security Hub applies the rule action to the
-	// finding.
+	// Security Hub uses to filter findings. If a rule is enabled and a finding matches
+	// the conditions specified in this parameter, Security Hub applies the rule action
+	// to the finding.
 	//
 	// This member is required.
 	Criteria *types.AutomationRulesFindingFilters
@@ -64,14 +64,15 @@ type CreateAutomationRuleInput struct {
 	// that matches the rule criteria. This is useful when a finding matches the
 	// criteria for multiple rules, and each rule has different actions. If the value
 	// of this field is set to true for a rule, Security Hub applies the rule action
-	// to a finding that matches the rule criteria and won't evaluate other rules for
+	// to a finding that matches the rule criteria and doesn't evaluate other rules for
 	// the finding. The default value of this field is false .
 	IsTerminal bool
 
 	// Whether the rule is active after it is created. If this parameter is equal to
-	// Enabled , Security Hub will apply the rule to findings and finding updates after
-	// the rule is created. To change the value of this parameter after creating a
-	// rule, use BatchUpdateAutomationRules .
+	// ENABLED , Security Hub starts applying the rule to findings and finding updates
+	// after the rule is created. To change the value of this parameter after creating
+	// a rule, use BatchUpdateAutomationRules (https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateAutomationRules.html)
+	// .
 	RuleStatus types.RuleStatus
 
 	// User-defined tags that help you label the purpose of a rule.

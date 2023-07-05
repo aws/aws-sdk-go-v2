@@ -28,8 +28,8 @@ type Attribute struct {
 	// id unique within this response rather than a global unique identifier.
 	Id *int32
 
-	// The level of confidence that Comprehend Medical; has that this attribute is
-	// correctly related to this entity.
+	// The level of confidence that Amazon Comprehend Medical has that this attribute
+	// is correctly related to this entity.
 	RelationshipScore *float32
 
 	// The type of relationship between the entity and attribute. Type for the
@@ -37,8 +37,8 @@ type Attribute struct {
 	// as the Date_Expression .
 	RelationshipType RelationshipType
 
-	// The level of confidence that Comprehend Medical; has that the segment of text
-	// is correctly recognized as an attribute.
+	// The level of confidence that Amazon Comprehend Medical has that the segment of
+	// text is correctly recognized as an attribute.
 	Score *float32
 
 	// The segment of input text extracted as this attribute.
@@ -57,7 +57,7 @@ type Attribute struct {
 type Characters struct {
 
 	// The number of characters present in the input text document as processed by
-	// Comprehend Medical.
+	// Amazon Comprehend Medical.
 	OriginalTextCharacters *int32
 
 	noSmithyDocumentSerde
@@ -89,8 +89,8 @@ type ComprehendMedicalAsyncJobFilter struct {
 // Provides information about a detection job.
 type ComprehendMedicalAsyncJobProperties struct {
 
-	// The Amazon Resource Name (ARN) that gives Comprehend Medical; read access to
-	// your input data.
+	// The Amazon Resource Name (ARN) that gives Amazon Comprehend Medical read access
+	// to your input data.
 	DataAccessRoleArn *string
 
 	// The time that the detection job completed.
@@ -164,8 +164,8 @@ type Entity struct {
 	// unique within this response rather than a global unique identifier.
 	Id *int32
 
-	// The level of confidence that Comprehend Medical; has in the accuracy of the
-	// detection.
+	// The level of confidence that Amazon Comprehend Medical has in the accuracy of
+	// the detection.
 	Score *float32
 
 	// The segment of input text extracted as this entity.
@@ -301,8 +301,8 @@ type ICD10CMTrait struct {
 	// Provides a name or contextual description about the trait.
 	Name ICD10CMTraitName
 
-	// The level of confidence that Comprehend Medical; has that the segment of text
-	// is correctly recognized as a trait.
+	// The level of confidence that Amazon Comprehend Medical has that the segment of
+	// text is correctly recognized as a trait.
 	Score *float32
 
 	noSmithyDocumentSerde
@@ -313,9 +313,7 @@ type ICD10CMTrait struct {
 type InputDataConfig struct {
 
 	// The URI of the S3 bucket that contains the input data. The bucket must be in
-	// the same region as the API endpoint that you are calling. Each file in the
-	// document collection must be less than 40 KB. You can store a maximum of 30 GB in
-	// the bucket.
+	// the same region as the API endpoint that you are calling.
 	//
 	// This member is required.
 	S3Bucket *string
@@ -337,9 +335,9 @@ type OutputDataConfig struct {
 	// This member is required.
 	S3Bucket *string
 
-	// The path to the output data files in the S3 bucket. Comprehend Medical; creates
-	// an output directory using the job ID so that the output from one job does not
-	// overwrite the output of another.
+	// The path to the output data files in the S3 bucket. Amazon Comprehend Medical
+	// creates an output directory using the job ID so that the output from one job
+	// does not overwrite the output of another.
 	S3Key *string
 
 	noSmithyDocumentSerde
@@ -365,8 +363,8 @@ type RxNormAttribute struct {
 	// is accurately linked to an entity.
 	RelationshipScore *float32
 
-	// The level of confidence that Comprehend Medical has that the segment of text is
-	// correctly recognized as an attribute.
+	// The level of confidence that Amazon Comprehend Medical has that the segment of
+	// text is correctly recognized as an attribute.
 	Score *float32
 
 	// The segment of input text which corresponds to the detected attribute.
@@ -484,8 +482,8 @@ type SNOMEDCTAttribute struct {
 	// id unique within this response rather than a global unique identifier.
 	Id *int32
 
-	// The level of confidence that Comprehend Medical has that this attribute is
-	// correctly related to this entity.
+	// The level of confidence that Amazon Comprehend Medical has that this attribute
+	// is correctly related to this entity.
 	RelationshipScore *float32
 
 	// The type of relationship that exists between the entity and the related
@@ -496,8 +494,8 @@ type SNOMEDCTAttribute struct {
 	// the likelihood of the match.
 	SNOMEDCTConcepts []SNOMEDCTConcept
 
-	// The level of confidence that Comprehend Medical has that the segment of text is
-	// correctly recognized as an attribute.
+	// The level of confidence that Amazon Comprehend Medical has that the segment of
+	// text is correctly recognized as an attribute.
 	Score *float32
 
 	// The segment of input text extracted as this attribute.
@@ -525,8 +523,8 @@ type SNOMEDCTConcept struct {
 	// The description of the SNOMED-CT concept.
 	Description *string
 
-	// The level of confidence Comprehend Medical has that the entity should be linked
-	// to the identified SNOMED-CT concept.
+	// The level of confidence Amazon Comprehend Medical has that the entity should be
+	// linked to the identified SNOMED-CT concept.
 	Score *float32
 
 	noSmithyDocumentSerde
@@ -554,8 +552,8 @@ type SNOMEDCTDetails struct {
 // The collection of medical entities extracted from the input text and their
 // associated information. For each entity, the response provides the entity text,
 // the entity category, where the entity text begins and ends, and the level of
-// confidence that Comprehend Medical has in the detection and analysis. Attributes
-// and traits of the entity are also returned.
+// confidence that Amazon Comprehend Medical has in the detection and analysis.
+// Attributes and traits of the entity are also returned.
 type SNOMEDCTEntity struct {
 
 	// An extracted segment of the text that is an attribute of an entity, or
@@ -582,8 +580,8 @@ type SNOMEDCTEntity struct {
 	// indicating the likelihood of the match.
 	SNOMEDCTConcepts []SNOMEDCTConcept
 
-	// The level of confidence that Comprehend Medical has in the accuracy of the
-	// detected entity.
+	// The level of confidence that Amazon Comprehend Medical has in the accuracy of
+	// the detected entity.
 	Score *float32
 
 	// The segment of input text extracted as this entity.
@@ -606,7 +604,7 @@ type SNOMEDCTTrait struct {
 	// The name or contextual description of a detected trait.
 	Name SNOMEDCTTraitName
 
-	// The level of confidence that Comprehend Medical has in the accuracy of a
+	// The level of confidence that Amazon Comprehend Medical has in the accuracy of a
 	// detected trait.
 	Score *float32
 
@@ -619,15 +617,15 @@ type Trait struct {
 	// Provides a name or contextual description about the trait.
 	Name AttributeName
 
-	// The level of confidence that Comprehend Medical; has in the accuracy of this
-	// trait.
+	// The level of confidence that Amazon Comprehend Medical has in the accuracy of
+	// this trait.
 	Score *float32
 
 	noSmithyDocumentSerde
 }
 
-// An attribute that was extracted, but Comprehend Medical; was unable to relate
-// to an entity.
+// An attribute that was extracted, but Amazon Comprehend Medical was unable to
+// relate to an entity.
 type UnmappedAttribute struct {
 
 	// The specific attribute that has been extracted but not mapped to an entity.

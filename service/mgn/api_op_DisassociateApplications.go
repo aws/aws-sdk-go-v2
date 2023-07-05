@@ -38,6 +38,9 @@ type DisassociateApplicationsInput struct {
 	// This member is required.
 	WaveID *string
 
+	// Account ID.
+	AccountID *string
+
 	noSmithyDocumentSerde
 }
 

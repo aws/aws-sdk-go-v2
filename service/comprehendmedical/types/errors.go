@@ -114,8 +114,8 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The Comprehend Medical; service is temporarily unavailable. Please wait and
-// then retry your request.
+// The Amazon Comprehend Medical service is temporarily unavailable. Please wait
+// and then retry your request.
 type ServiceUnavailableException struct {
 	Message *string
 

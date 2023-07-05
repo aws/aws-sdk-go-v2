@@ -31,8 +31,7 @@ func (c *Client) InferSNOMEDCT(ctx context.Context, params *InferSNOMEDCTInput, 
 
 type InferSNOMEDCTInput struct {
 
-	// The input text to be analyzed using InferSNOMEDCT. The text should be a string
-	// with 1 to 10000 characters.
+	// The input text to be analyzed using InferSNOMEDCT.
 	//
 	// This member is required.
 	Text *string
@@ -45,7 +44,7 @@ type InferSNOMEDCTOutput struct {
 	// The collection of medical concept entities extracted from the input text and
 	// their associated information. For each entity, the response provides the entity
 	// text, the entity category, where the entity text begins and ends, and the level
-	// of confidence that Comprehend Medical has in the detection and analysis.
+	// of confidence that Amazon Comprehend Medical has in the detection and analysis.
 	// Attributes and traits of the entity are also returned.
 	//
 	// This member is required.

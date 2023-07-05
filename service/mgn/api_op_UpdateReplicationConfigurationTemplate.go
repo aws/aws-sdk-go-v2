@@ -78,6 +78,9 @@ type UpdateReplicationConfigurationTemplateInput struct {
 	// request.
 	UseDedicatedReplicationServer *bool
 
+	// Update replication configuration template use Fips Endpoint request.
+	UseFipsEndpoint *bool
+
 	noSmithyDocumentSerde
 }
 
@@ -130,6 +133,9 @@ type UpdateReplicationConfigurationTemplateOutput struct {
 
 	// Replication Configuration template use Dedicated Replication Server.
 	UseDedicatedReplicationServer *bool
+
+	// Replication Configuration template use Fips Endpoint.
+	UseFipsEndpoint *bool
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -35,6 +35,9 @@ type ListSourceServerActionsInput struct {
 	// This member is required.
 	SourceServerID *string
 
+	// Account ID to return when listing source server post migration custom actions.
+	AccountID *string
+
 	// Filters to apply when listing source server post migration custom actions.
 	Filters *types.SourceServerActionsRequestFilters
 

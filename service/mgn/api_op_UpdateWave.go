@@ -34,6 +34,9 @@ type UpdateWaveInput struct {
 	// This member is required.
 	WaveID *string
 
+	// Account ID.
+	AccountID *string
+
 	// Wave description.
 	Description *string
 

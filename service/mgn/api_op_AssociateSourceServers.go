@@ -38,6 +38,9 @@ type AssociateSourceServersInput struct {
 	// This member is required.
 	SourceServerIDs []string
 
+	// Account ID.
+	AccountID *string
+
 	noSmithyDocumentSerde
 }
 

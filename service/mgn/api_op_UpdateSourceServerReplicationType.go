@@ -40,6 +40,9 @@ type UpdateSourceServerReplicationTypeInput struct {
 	// This member is required.
 	SourceServerID *string
 
+	// Account ID on which to update replication type.
+	AccountID *string
+
 	noSmithyDocumentSerde
 }
 

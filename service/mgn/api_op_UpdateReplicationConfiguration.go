@@ -34,6 +34,9 @@ type UpdateReplicationConfigurationInput struct {
 	// This member is required.
 	SourceServerID *string
 
+	// Update replication configuration Account ID request.
+	AccountID *string
+
 	// Update replication configuration associate default Application Migration
 	// Service Security group request.
 	AssociateDefaultSecurityGroup *bool
@@ -76,6 +79,9 @@ type UpdateReplicationConfigurationInput struct {
 
 	// Update replication configuration use dedicated Replication Server request.
 	UseDedicatedReplicationServer *bool
+
+	// Update replication configuration use Fips Endpoint.
+	UseFipsEndpoint *bool
 
 	noSmithyDocumentSerde
 }
@@ -127,6 +133,9 @@ type UpdateReplicationConfigurationOutput struct {
 
 	// Replication Configuration use Dedicated Replication Server.
 	UseDedicatedReplicationServer *bool
+
+	// Replication Configuration use Fips Endpoint.
+	UseFipsEndpoint *bool
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

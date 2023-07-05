@@ -30,6 +30,9 @@ func (c *Client) ListApplications(ctx context.Context, params *ListApplicationsI
 
 type ListApplicationsInput struct {
 
+	// Applications list Account ID.
+	AccountID *string
+
 	// Applications list filters.
 	Filters *types.ListApplicationsRequestFilters
 

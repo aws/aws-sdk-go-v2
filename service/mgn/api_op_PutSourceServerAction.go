@@ -54,6 +54,9 @@ type PutSourceServerActionInput struct {
 	// This member is required.
 	SourceServerID *string
 
+	// Source server post migration custom account ID.
+	AccountID *string
+
 	// Source server post migration custom action active status.
 	Active *bool
 

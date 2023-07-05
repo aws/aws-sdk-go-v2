@@ -101,6 +101,9 @@ type CreateReplicationConfigurationTemplateInput struct {
 	// Request to configure tags during Replication Settings template creation.
 	Tags map[string]string
 
+	// Request to use Fips Endpoint during Replication Settings template creation.
+	UseFipsEndpoint *bool
+
 	noSmithyDocumentSerde
 }
 
@@ -153,6 +156,9 @@ type CreateReplicationConfigurationTemplateOutput struct {
 
 	// Replication Configuration template use Dedicated Replication Server.
 	UseDedicatedReplicationServer *bool
+
+	// Replication Configuration template use Fips Endpoint.
+	UseFipsEndpoint *bool
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

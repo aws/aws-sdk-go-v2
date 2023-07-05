@@ -43,6 +43,9 @@ type ChangeServerLifeCycleStateInput struct {
 	// This member is required.
 	SourceServerID *string
 
+	// The request to change the source server migration account ID.
+	AccountID *string
+
 	noSmithyDocumentSerde
 }
 

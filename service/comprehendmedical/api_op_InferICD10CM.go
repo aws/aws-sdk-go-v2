@@ -32,8 +32,7 @@ func (c *Client) InferICD10CM(ctx context.Context, params *InferICD10CMInput, op
 
 type InferICD10CMInput struct {
 
-	// The input text used for analysis. The input for InferICD10CM is a string from 1
-	// to 10000 characters.
+	// The input text used for analysis.
 	//
 	// This member is required.
 	Text *string

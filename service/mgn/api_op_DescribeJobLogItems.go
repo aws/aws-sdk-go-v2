@@ -35,6 +35,9 @@ type DescribeJobLogItemsInput struct {
 	// This member is required.
 	JobID *string
 
+	// Request to describe Job log Account ID.
+	AccountID *string
+
 	// Request to describe Job log item maximum results.
 	MaxResults int32
 

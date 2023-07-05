@@ -38,6 +38,9 @@ type RemoveSourceServerActionInput struct {
 	// This member is required.
 	SourceServerID *string
 
+	// Source server post migration account ID.
+	AccountID *string
+
 	noSmithyDocumentSerde
 }
 

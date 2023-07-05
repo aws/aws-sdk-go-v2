@@ -34,6 +34,9 @@ type CreateApplicationInput struct {
 	// This member is required.
 	Name *string
 
+	// Account ID.
+	AccountID *string
+
 	// Application description.
 	Description *string
 

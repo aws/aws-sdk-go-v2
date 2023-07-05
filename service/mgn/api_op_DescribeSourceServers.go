@@ -30,6 +30,9 @@ func (c *Client) DescribeSourceServers(ctx context.Context, params *DescribeSour
 
 type DescribeSourceServersInput struct {
 
+	// Request to filter Source Servers list by Accoun ID.
+	AccountID *string
+
 	// Request to filter Source Servers list.
 	Filters *types.DescribeSourceServersRequestFilters
 

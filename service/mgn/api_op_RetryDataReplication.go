@@ -37,6 +37,9 @@ type RetryDataReplicationInput struct {
 	// This member is required.
 	SourceServerID *string
 
+	// Retry data replication for Account ID.
+	AccountID *string
+
 	noSmithyDocumentSerde
 }
 

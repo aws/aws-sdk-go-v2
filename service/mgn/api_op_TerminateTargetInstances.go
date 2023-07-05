@@ -36,6 +36,9 @@ type TerminateTargetInstancesInput struct {
 	// This member is required.
 	SourceServerIDs []string
 
+	// Terminate Target instance by Account ID
+	AccountID *string
+
 	// Terminate Target instance by Tags.
 	Tags map[string]string
 

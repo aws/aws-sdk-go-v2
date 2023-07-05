@@ -36,6 +36,9 @@ type MarkAsArchivedInput struct {
 	// This member is required.
 	SourceServerID *string
 
+	// Mark as archived by Account ID.
+	AccountID *string
+
 	noSmithyDocumentSerde
 }
 

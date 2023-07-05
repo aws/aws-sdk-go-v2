@@ -38,7 +38,6 @@ func (c *Client) DetectEntitiesV2(ctx context.Context, params *DetectEntitiesV2I
 type DetectEntitiesV2Input struct {
 
 	// A UTF-8 string containing the clinical content being examined for entities.
-	// Each string must contain fewer than 20,000 bytes of characters.
 	//
 	// This member is required.
 	Text *string

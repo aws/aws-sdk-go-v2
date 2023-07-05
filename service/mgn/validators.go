@@ -590,6 +590,26 @@ func (m *validateOpMarkAsArchived) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPauseReplication struct {
+}
+
+func (*validateOpPauseReplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPauseReplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PauseReplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPauseReplicationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutSourceServerAction struct {
 }
 
@@ -665,6 +685,26 @@ func (m *validateOpRemoveTemplateAction) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpRemoveTemplateActionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpResumeReplication struct {
+}
+
+func (*validateOpResumeReplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpResumeReplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ResumeReplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpResumeReplicationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -785,6 +825,26 @@ func (m *validateOpStartTest) HandleInitialize(ctx context.Context, in middlewar
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStartTestInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStopReplication struct {
+}
+
+func (*validateOpStopReplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopReplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopReplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopReplicationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1146,6 +1206,10 @@ func addOpMarkAsArchivedValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpMarkAsArchived{}, middleware.After)
 }
 
+func addOpPauseReplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPauseReplication{}, middleware.After)
+}
+
 func addOpPutSourceServerActionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutSourceServerAction{}, middleware.After)
 }
@@ -1160,6 +1224,10 @@ func addOpRemoveSourceServerActionValidationMiddleware(stack *middleware.Stack) 
 
 func addOpRemoveTemplateActionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRemoveTemplateAction{}, middleware.After)
+}
+
+func addOpResumeReplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpResumeReplication{}, middleware.After)
 }
 
 func addOpRetryDataReplicationValidationMiddleware(stack *middleware.Stack) error {
@@ -1184,6 +1252,10 @@ func addOpStartReplicationValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpStartTestValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartTest{}, middleware.After)
+}
+
+func addOpStopReplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopReplication{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1859,6 +1931,21 @@ func validateOpMarkAsArchivedInput(v *MarkAsArchivedInput) error {
 	}
 }
 
+func validateOpPauseReplicationInput(v *PauseReplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PauseReplicationInput"}
+	if v.SourceServerID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceServerID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpPutSourceServerActionInput(v *PutSourceServerActionInput) error {
 	if v == nil {
 		return nil
@@ -1945,6 +2032,21 @@ func validateOpRemoveTemplateActionInput(v *RemoveTemplateActionInput) error {
 	}
 	if v.ActionID == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ActionID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpResumeReplicationInput(v *ResumeReplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResumeReplicationInput"}
+	if v.SourceServerID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceServerID"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2042,6 +2144,21 @@ func validateOpStartTestInput(v *StartTestInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "StartTestInput"}
 	if v.SourceServerIDs == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceServerIDs"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopReplicationInput(v *StopReplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopReplicationInput"}
+	if v.SourceServerID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceServerID"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -44,6 +44,9 @@ type FinalizeCutoverInput struct {
 	// This member is required.
 	SourceServerID *string
 
+	// Request to finalize Cutover by Source Account ID.
+	AccountID *string
+
 	noSmithyDocumentSerde
 }
 

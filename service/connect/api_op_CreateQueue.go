@@ -22,7 +22,11 @@ import (
 // distribution group and you are calling this API using an instance in the
 // alternate Amazon Web Services Region associated with the traffic distribution
 // group, you must provide a full phone number ARN. If a UUID is provided in this
-// scenario, you will receive a ResourceNotFoundException .
+// scenario, you will receive a ResourceNotFoundException . Only use the phone
+// number ARN format that doesn't contain instance in the path, for example,
+// arn:aws:connect:us-east-1:1234567890:phone-number/uuid . This is the same ARN
+// format that is returned when you call the ListPhoneNumbersV2 (https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbersV2.html)
+// API.
 func (c *Client) CreateQueue(ctx context.Context, params *CreateQueueInput, optFns ...func(*Options)) (*CreateQueueOutput, error) {
 	if params == nil {
 		params = &CreateQueueInput{}

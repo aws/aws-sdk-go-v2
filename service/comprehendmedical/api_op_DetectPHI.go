@@ -32,7 +32,7 @@ func (c *Client) DetectPHI(ctx context.Context, params *DetectPHIInput, optFns .
 type DetectPHIInput struct {
 
 	// A UTF-8 text string containing the clinical content being examined for PHI
-	// entities. Each string must contain fewer than 20,000 bytes of characters.
+	// entities.
 	//
 	// This member is required.
 	Text *string
@@ -45,7 +45,7 @@ type DetectPHIOutput struct {
 	// The collection of PHI entities extracted from the input text and their
 	// associated information. For each entity, the response provides the entity text,
 	// the entity category, where the entity text begins and ends, and the level of
-	// confidence that Comprehend Medical; has in its detection.
+	// confidence that Amazon Comprehend Medical has in its detection.
 	//
 	// This member is required.
 	Entities []types.Entity

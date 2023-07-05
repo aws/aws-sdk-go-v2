@@ -34,6 +34,9 @@ type GetReplicationConfigurationInput struct {
 	// This member is required.
 	SourceServerID *string
 
+	// Request to get Replication Configuration by Account ID.
+	AccountID *string
+
 	noSmithyDocumentSerde
 }
 
@@ -84,6 +87,9 @@ type GetReplicationConfigurationOutput struct {
 
 	// Replication Configuration use Dedicated Replication Server.
 	UseDedicatedReplicationServer *bool
+
+	// Replication Configuration use Fips Endpoint.
+	UseFipsEndpoint *bool
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

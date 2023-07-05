@@ -45,6 +45,9 @@ type DisconnectFromServiceInput struct {
 	// This member is required.
 	SourceServerID *string
 
+	// Request to disconnect Source Server from service by Account ID.
+	AccountID *string
+
 	noSmithyDocumentSerde
 }
 

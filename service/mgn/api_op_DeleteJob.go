@@ -33,6 +33,9 @@ type DeleteJobInput struct {
 	// This member is required.
 	JobID *string
 
+	// Request to delete Job from service by Account ID.
+	AccountID *string
+
 	noSmithyDocumentSerde
 }
 

@@ -11,36 +11,36 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts replication for SNAPSHOT_SHIPPING agents.
-func (c *Client) StartReplication(ctx context.Context, params *StartReplicationInput, optFns ...func(*Options)) (*StartReplicationOutput, error) {
+// Pause Replication.
+func (c *Client) PauseReplication(ctx context.Context, params *PauseReplicationInput, optFns ...func(*Options)) (*PauseReplicationOutput, error) {
 	if params == nil {
-		params = &StartReplicationInput{}
+		params = &PauseReplicationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "StartReplication", params, optFns, c.addOperationStartReplicationMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "PauseReplication", params, optFns, c.addOperationPauseReplicationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*StartReplicationOutput)
+	out := result.(*PauseReplicationOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type StartReplicationInput struct {
+type PauseReplicationInput struct {
 
-	// ID of source server on which to start replication.
+	// Pause Replication Request source server ID.
 	//
 	// This member is required.
 	SourceServerID *string
 
-	// Account ID on which to start replication.
+	// Pause Replication Request account ID.
 	AccountID *string
 
 	noSmithyDocumentSerde
 }
 
-type StartReplicationOutput struct {
+type PauseReplicationOutput struct {
 
 	// Source server application ID.
 	ApplicationID *string
@@ -87,12 +87,12 @@ type StartReplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationStartReplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartReplication{}, middleware.After)
+func (c *Client) addOperationPauseReplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpPauseReplication{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartReplication{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPauseReplication{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -132,10 +132,10 @@ func (c *Client) addOperationStartReplicationMiddlewares(stack *middleware.Stack
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpStartReplicationValidationMiddleware(stack); err != nil {
+	if err = addOpPauseReplicationValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartReplication(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPauseReplication(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -153,11 +153,11 @@ func (c *Client) addOperationStartReplicationMiddlewares(stack *middleware.Stack
 	return nil
 }
 
-func newServiceMetadataMiddleware_opStartReplication(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opPauseReplication(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "mgn",
-		OperationName: "StartReplication",
+		OperationName: "PauseReplication",
 	}
 }

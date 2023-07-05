@@ -32,8 +32,9 @@ func (c *Client) StartPHIDetectionJob(ctx context.Context, params *StartPHIDetec
 type StartPHIDetectionJobInput struct {
 
 	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
-	// role that grants Comprehend Medical; read access to your input data. For more
-	// information, see Role-Based Permissions Required for Asynchronous Operations (https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions-med.html#auth-role-permissions-med)
+	// role that grants Amazon Comprehend Medical read access to your input data. For
+	// more information, see Role-Based Permissions Required for Asynchronous
+	// Operations (https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions-med.html#auth-role-permissions-med)
 	// .
 	//
 	// This member is required.
@@ -55,7 +56,7 @@ type StartPHIDetectionJobInput struct {
 	OutputDataConfig *types.OutputDataConfig
 
 	// A unique identifier for the request. If you don't set the client request token,
-	// Comprehend Medical; generates one.
+	// Amazon Comprehend Medical generates one.
 	ClientRequestToken *string
 
 	// The identifier of the job.

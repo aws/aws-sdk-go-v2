@@ -63,6 +63,11 @@ type RevokeGrantInput struct {
 	// This member is required.
 	KeyId *string
 
+	// Checks if your request will succeed. DryRun is an optional parameter. To learn
+	// more about how to use this parameter, see Testing your KMS API calls (https://docs.aws.amazon.com/kms/latest/developerguide/programming-dryrun.html)
+	// in the Key Management Service Developer Guide.
+	DryRun *bool
+
 	noSmithyDocumentSerde
 }
 

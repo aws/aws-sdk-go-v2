@@ -32,8 +32,7 @@ func (c *Client) InferRxNorm(ctx context.Context, params *InferRxNormInput, optF
 
 type InferRxNormInput struct {
 
-	// The input text used for analysis. The input for InferRxNorm is a string from 1
-	// to 10000 characters.
+	// The input text used for analysis.
 	//
 	// This member is required.
 	Text *string
