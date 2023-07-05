@@ -1,8 +1,0 @@
-{
-    "id": "14181393-1148-43e4-bb95-26f4f5c3feb0",
-    "type": "documentation",
-    "description": "Update to Amazon Comprehend Medical documentation.",
-    "modules": [
-        "service/comprehendmedical"
-    ]
-}

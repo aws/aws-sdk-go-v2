@@ -1,3 +1,7 @@
+# v1.16.3 (2023-07-05)
+
+* **Documentation**: Update to Amazon Comprehend Medical documentation.
+
 # v1.16.2 (2023-06-15)
 
 * No change notes available for this release.

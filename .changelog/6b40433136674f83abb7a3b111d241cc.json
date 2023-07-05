@@ -1,8 +1,0 @@
-{
-    "id": "6b404331-3667-4f83-abb7-a3b111d241cc",
-    "type": "feature",
-    "description": "Added Dry Run Feature to cryptographic and cross-account mutating KMS APIs (14 in all). This feature allows users to test their permissions and parameters before making the actual API call.",
-    "modules": [
-        "service/kms"
-    ]
-}

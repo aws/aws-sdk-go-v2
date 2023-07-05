@@ -1,3 +1,7 @@
+# v1.19.0 (2023-07-05)
+
+* **Feature**: This release introduces the Global view feature and new Replication state APIs.
+
 # v1.18.9 (2023-06-15)
 
 * No change notes available for this release.

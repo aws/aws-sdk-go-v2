@@ -1,3 +1,17 @@
+# Release (2023-07-05)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/comprehendmedical`: [v1.16.3](service/comprehendmedical/CHANGELOG.md#v1163-2023-07-05)
+  * **Documentation**: Update to Amazon Comprehend Medical documentation.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.60.1](service/connect/CHANGELOG.md#v1601-2023-07-05)
+  * **Documentation**: GetMetricDataV2 API: Channels filters do not count towards overall limitation of 100 filter values.
+* `github.com/aws/aws-sdk-go-v2/service/kms`: [v1.23.0](service/kms/CHANGELOG.md#v1230-2023-07-05)
+  * **Feature**: Added Dry Run Feature to cryptographic and cross-account mutating KMS APIs (14 in all). This feature allows users to test their permissions and parameters before making the actual API call.
+* `github.com/aws/aws-sdk-go-v2/service/mgn`: [v1.19.0](service/mgn/CHANGELOG.md#v1190-2023-07-05)
+  * **Feature**: This release introduces the Global view feature and new Replication state APIs.
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.33.2](service/securityhub/CHANGELOG.md#v1332-2023-07-05)
+  * **Documentation**: Documentation updates for AWS Security Hub
+
 # Release (2023-07-03)
 
 ## Module Highlights

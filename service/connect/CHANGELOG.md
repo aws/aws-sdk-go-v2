@@ -1,3 +1,7 @@
+# v1.60.1 (2023-07-05)
+
+* **Documentation**: GetMetricDataV2 API: Channels filters do not count towards overall limitation of 100 filter values.
+
 # v1.60.0 (2023-06-26)
 
 * **Feature**: This release provides a way to search for existing tags within an instance. Before tagging a resource, ensure consistency by searching for pre-existing key:value pairs.
