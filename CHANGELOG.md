@@ -1,3 +1,17 @@
+# Release (2023-07-06)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.103.0](service/ec2/CHANGELOG.md#v11030-2023-07-06)
+  * **Feature**: Add Nitro Enclaves support on DescribeInstanceTypes
+* `github.com/aws/aws-sdk-go-v2/service/location`: [v1.25.0](service/location/CHANGELOG.md#v1250-2023-07-06)
+  * **Feature**: This release adds support for authenticating with Amazon Location Service's Places & Routes APIs with an API Key. Also, with this release developers can publish tracked device position updates to Amazon EventBridge.
+* `github.com/aws/aws-sdk-go-v2/service/outposts`: [v1.28.0](service/outposts/CHANGELOG.md#v1280-2023-07-06)
+  * **Feature**: Added paginator support to several APIs. Added the ISOLATED enum value to AssetState.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.38.0](service/quicksight/CHANGELOG.md#v1380-2023-07-06)
+  * **Feature**: This release includes below three changes: small multiples axes improvement, field based coloring, removed required trait from Aggregation function for TopBottomFilter.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.46.1](service/rds/CHANGELOG.md#v1461-2023-07-06)
+  * **Documentation**: Updates Amazon RDS documentation for creating DB instances and creating Aurora global clusters.
+
 # Release (2023-07-05)
 
 ## Module Highlights

@@ -1,8 +1,0 @@
-{
-    "id": "8a53cab4-d74a-49e3-acea-f96a5f8c7c22",
-    "type": "feature",
-    "description": "This release includes below three changes: small multiples axes improvement, field based coloring, removed required trait from Aggregation function for TopBottomFilter.",
-    "modules": [
-        "service/quicksight"
-    ]
-}

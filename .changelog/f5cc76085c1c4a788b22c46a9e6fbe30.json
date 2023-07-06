@@ -1,8 +1,0 @@
-{
-    "id": "f5cc7608-5c1c-4a78-8b22-c46a9e6fbe30",
-    "type": "documentation",
-    "description": "Updates Amazon RDS documentation for creating DB instances and creating Aurora global clusters.",
-    "modules": [
-        "service/rds"
-    ]
-}

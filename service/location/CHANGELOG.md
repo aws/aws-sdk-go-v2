@@ -1,3 +1,7 @@
+# v1.25.0 (2023-07-06)
+
+* **Feature**: This release adds support for authenticating with Amazon Location Service's Places & Routes APIs with an API Key. Also, with this release developers can publish tracked device position updates to Amazon EventBridge.
+
 # v1.24.0 (2023-06-15)
 
 * **Feature**: Amazon Location Service adds categories to places, including filtering on those categories in searches. Also, you can now add metadata properties to your geofences.

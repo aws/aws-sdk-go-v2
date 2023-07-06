@@ -1,3 +1,7 @@
+# v1.38.0 (2023-07-06)
+
+* **Feature**: This release includes below three changes: small multiples axes improvement, field based coloring, removed required trait from Aggregation function for TopBottomFilter.
+
 # v1.37.2 (2023-06-15)
 
 * No change notes available for this release.

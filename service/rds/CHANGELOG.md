@@ -1,3 +1,7 @@
+# v1.46.1 (2023-07-06)
+
+* **Documentation**: Updates Amazon RDS documentation for creating DB instances and creating Aurora global clusters.
+
 # v1.46.0 (2023-06-28)
 
 * **Feature**: Amazon Relational Database Service (RDS) now supports joining a RDS for SQL Server instance to a self-managed Active Directory.
