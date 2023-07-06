@@ -271,8 +271,7 @@
                 "AggregationFunction": {
                     "target": "com.amazonaws.quicksight#AggregationFunction",
                     "traits": {
-                        "smithy.api#documentation": "<p>The function that aggregates the values in <code>Column</code>.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The function that aggregates the values in <code>Column</code>.</p>"
                     }
                 }
             },
@@ -2249,7 +2248,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The source of the asset bundle zip file that contains the data that you want to import.</p>"
+                "smithy.api#documentation": "<p>The source of the asset bundle zip file that contains the data that you want to import. The file must be in <code>QUICKSIGHT_JSON</code> format.</p>"
             }
         },
         "com.amazonaws.quicksight#AssetBundleImportSourceDescription": {
@@ -4263,6 +4262,20 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#ColorsConfiguration": {
+            "type": "structure",
+            "members": {
+                "CustomColors": {
+                    "target": "com.amazonaws.quicksight#CustomColorsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of up to 50 custom colors.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The color configurations for a column.</p>"
+            }
+        },
         "com.amazonaws.quicksight#ColumnConfiguration": {
             "type": "structure",
             "members": {
@@ -4283,6 +4296,12 @@
                     "target": "com.amazonaws.quicksight#ColumnRole",
                     "traits": {
                         "smithy.api#documentation": "<p>The role of the column.</p>"
+                    }
+                },
+                "ColorsConfiguration": {
+                    "target": "com.amazonaws.quicksight#ColorsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The color configurations of the column.</p>"
                     }
                 }
             },
@@ -8613,6 +8632,45 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The URL operation that opens a link to another webpage.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#CustomColor": {
+            "type": "structure",
+            "members": {
+                "FieldValue": {
+                    "target": "com.amazonaws.quicksight#FieldValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data value that the color is applied to.</p>"
+                    }
+                },
+                "Color": {
+                    "target": "com.amazonaws.quicksight#HexColor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The color that is applied to the data value.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SpecialValue": {
+                    "target": "com.amazonaws.quicksight#SpecialValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of a special data value.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Determines the color that's applied to a particular data value in a column.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#CustomColorsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#CustomColor"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
             }
         },
         "com.amazonaws.quicksight#CustomContentConfiguration": {
@@ -15190,7 +15248,7 @@
                 "ExportFormat": {
                     "target": "com.amazonaws.quicksight#AssetBundleExportFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>The format of the export.</p>"
+                        "smithy.api#documentation": "<p>The format of the exported asset bundle. A <code>QUICKSIGHT_JSON</code> formatted file can be used to make a <code>StartAssetBundleImportJob</code> API call. A <code>CLOUDFORMATION_JSON</code> formatted file can be used in the CloudFormation console and with the CloudFormation APIs.</p>"
                     }
                 },
                 "CloudFormationOverridePropertyConfiguration": {
@@ -38987,6 +39045,60 @@
                 "smithy.api#documentation": "<p>The display options of a control.</p>"
             }
         },
+        "com.amazonaws.quicksight#SmallMultiplesAxisPlacement": {
+            "type": "enum",
+            "members": {
+                "OUTSIDE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OUTSIDE"
+                    }
+                },
+                "INSIDE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INSIDE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#SmallMultiplesAxisProperties": {
+            "type": "structure",
+            "members": {
+                "Scale": {
+                    "target": "com.amazonaws.quicksight#SmallMultiplesAxisScale",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines whether scale of the axes are shared or independent. The default value is <code>SHARED</code>.</p>"
+                    }
+                },
+                "Placement": {
+                    "target": "com.amazonaws.quicksight#SmallMultiplesAxisPlacement",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the placement of the axis. By default, axes are rendered <code>OUTSIDE</code> of the panels. Axes with <code>INDEPENDENT</code> scale are rendered <code>INSIDE</code> the panels.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configures the properties of a chart's axes that are used by small multiples panels.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#SmallMultiplesAxisScale": {
+            "type": "enum",
+            "members": {
+                "SHARED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SHARED"
+                    }
+                },
+                "INDEPENDENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INDEPENDENT"
+                    }
+                }
+            }
+        },
         "com.amazonaws.quicksight#SmallMultiplesDimensionFieldList": {
             "type": "list",
             "member": {
@@ -39018,6 +39130,18 @@
                     "target": "com.amazonaws.quicksight#PanelConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Configures the display options for each small multiples panel.</p>"
+                    }
+                },
+                "XAxis": {
+                    "target": "com.amazonaws.quicksight#SmallMultiplesAxisProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The properties of a small multiples X axis.</p>"
+                    }
+                },
+                "YAxis": {
+                    "target": "com.amazonaws.quicksight#SmallMultiplesAxisProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The properties of a small multiples Y axis.</p>"
                     }
                 }
             },
@@ -39126,6 +39250,29 @@
                 "smithy.api#documentation": "<p>The parameters for Spark.</p>"
             }
         },
+        "com.amazonaws.quicksight#SpecialValue": {
+            "type": "enum",
+            "members": {
+                "EMPTY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EMPTY"
+                    }
+                },
+                "NULL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NULL"
+                    }
+                },
+                "OTHER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OTHER"
+                    }
+                }
+            }
+        },
         "com.amazonaws.quicksight#SqlEndpointPath": {
             "type": "string",
             "traits": {
@@ -39221,7 +39368,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts an Asset Bundle export job.</p>\n         <p>An Asset Bundle export job exports specified Amazon QuickSight assets. You can also choose to export any asset dependencies in the same job. Export jobs run asynchronously and can be polled with a <code>DescribeAssetBundleExportJob</code> API call. When a job is successfully completed, a download URL that contains the exported assets is returned. The URL is valid for 5 minutes and can be refreshed with a <code>DescribeAssetBundleExportJob</code> API call. Each Amazon QuickSight account can run up to 10 export jobs concurrently.</p>\n         <p>The API caller must have the necessary permissions in their IAM role to access each resource before the resources can be exported.</p>",
+                "smithy.api#documentation": "<p>Starts an Asset Bundle export job.</p>\n         <p>An Asset Bundle export job exports specified Amazon QuickSight assets. You can also choose to export any asset dependencies in the same job. Export jobs run asynchronously and can be polled with a <code>DescribeAssetBundleExportJob</code> API call. When a job is successfully completed, a download URL that contains the exported assets is returned. The URL is valid for 5 minutes and can be refreshed with a <code>DescribeAssetBundleExportJob</code> API call. Each Amazon QuickSight account can run up to 5 export jobs concurrently.</p>\n         <p>The API caller must have the necessary permissions in their IAM role to access each resource before the resources can be exported.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/accounts/{AwsAccountId}/asset-bundle-export-jobs/export",
@@ -39345,7 +39492,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts an Asset Bundle import job.</p>\n         <p>An Asset Bundle import job imports specified Amazon QuickSight assets into an Amazon QuickSight account. You can also choose to import a naming prefix and specified configuration overrides. The assets that are contained in the bundle file that you provide are used to create or update a new or existing asset in your Amazon QuickSight account. Each Amazon QuickSight account can run up to 10 import jobs concurrently.</p>\n         <p>The API caller must have the necessary <code>\"create\"</code>, <code>\"describe\"</code>, and <code>\"update\"</code> permissions in their IAM role to access each resource type that is contained in the bundle file before the resources can be imported.</p>",
+                "smithy.api#documentation": "<p>Starts an Asset Bundle import job.</p>\n         <p>An Asset Bundle import job imports specified Amazon QuickSight assets into an Amazon QuickSight account. You can also choose to import a naming prefix and specified configuration overrides. The assets that are contained in the bundle file that you provide are used to create or update a new or existing asset in your Amazon QuickSight account. Each Amazon QuickSight account can run up to 5 import jobs concurrently.</p>\n         <p>The API caller must have the necessary <code>\"create\"</code>, <code>\"describe\"</code>, and <code>\"update\"</code> permissions in their IAM role to access each resource type that is contained in the bundle file before the resources can be imported.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/accounts/{AwsAccountId}/asset-bundle-import-jobs/import",
@@ -39374,7 +39521,7 @@
                 "AssetBundleImportSource": {
                     "target": "com.amazonaws.quicksight#AssetBundleImportSource",
                     "traits": {
-                        "smithy.api#documentation": "<p>The source of the asset bundle zip file that contains the data that you want to import.</p>",
+                        "smithy.api#documentation": "<p>The source of the asset bundle zip file that contains the data that you want to import. The file must be in <code>QUICKSIGHT_JSON</code> format.\n      </p>",
                         "smithy.api#required": {}
                     }
                 },
