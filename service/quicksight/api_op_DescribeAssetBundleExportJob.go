@@ -80,7 +80,10 @@ type DescribeAssetBundleExportJobOutput struct {
 	// set of error records is available after the job has completed and failed.
 	Errors []types.AssetBundleExportJobError
 
-	// The format of the export.
+	// The format of the exported asset bundle. A QUICKSIGHT_JSON formatted file can
+	// be used to make a StartAssetBundleImportJob API call. A CLOUDFORMATION_JSON
+	// formatted file can be used in the CloudFormation console and with the
+	// CloudFormation APIs.
 	ExportFormat types.AssetBundleExportFormat
 
 	// The include dependencies flag.

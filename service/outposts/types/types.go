@@ -196,7 +196,7 @@ type LineItem struct {
 	// The ID of the previous line item.
 	PreviousLineItemId *string
 
-	// The ID of the previous order.
+	// The ID of the previous order item.
 	PreviousOrderId *string
 
 	// The quantity of the line item.
@@ -250,7 +250,7 @@ type Order struct {
 	// The submission date for the order.
 	OrderSubmissionDate *time.Time
 
-	// The type of order.
+	// Type of order.
 	OrderType OrderType
 
 	// The ID of the Outpost in the order.

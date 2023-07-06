@@ -3341,6 +3341,42 @@ func (SimpleNumericalAggregationFunction) Values() []SimpleNumericalAggregationF
 	}
 }
 
+type SmallMultiplesAxisPlacement string
+
+// Enum values for SmallMultiplesAxisPlacement
+const (
+	SmallMultiplesAxisPlacementOutside SmallMultiplesAxisPlacement = "OUTSIDE"
+	SmallMultiplesAxisPlacementInside  SmallMultiplesAxisPlacement = "INSIDE"
+)
+
+// Values returns all known values for SmallMultiplesAxisPlacement. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SmallMultiplesAxisPlacement) Values() []SmallMultiplesAxisPlacement {
+	return []SmallMultiplesAxisPlacement{
+		"OUTSIDE",
+		"INSIDE",
+	}
+}
+
+type SmallMultiplesAxisScale string
+
+// Enum values for SmallMultiplesAxisScale
+const (
+	SmallMultiplesAxisScaleShared      SmallMultiplesAxisScale = "SHARED"
+	SmallMultiplesAxisScaleIndependent SmallMultiplesAxisScale = "INDEPENDENT"
+)
+
+// Values returns all known values for SmallMultiplesAxisScale. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SmallMultiplesAxisScale) Values() []SmallMultiplesAxisScale {
+	return []SmallMultiplesAxisScale{
+		"SHARED",
+		"INDEPENDENT",
+	}
+}
+
 type SortDirection string
 
 // Enum values for SortDirection
@@ -3356,6 +3392,26 @@ func (SortDirection) Values() []SortDirection {
 	return []SortDirection{
 		"ASC",
 		"DESC",
+	}
+}
+
+type SpecialValue string
+
+// Enum values for SpecialValue
+const (
+	SpecialValueEmpty SpecialValue = "EMPTY"
+	SpecialValueNull  SpecialValue = "NULL"
+	SpecialValueOther SpecialValue = "OTHER"
+)
+
+// Values returns all known values for SpecialValue. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SpecialValue) Values() []SpecialValue {
+	return []SpecialValue{
+		"EMPTY",
+		"NULL",
+		"OTHER",
 	}
 }
 

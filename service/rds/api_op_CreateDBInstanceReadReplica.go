@@ -128,8 +128,8 @@ type CreateDBInstanceReadReplicaInput struct {
 	// in the Amazon RDS User Guide. This setting doesn't apply to RDS Custom.
 	Domain *string
 
-	// The ARN for the Secrets Manager secret that contains the credentials for the
-	// user performing the domain join. Example:
+	// The ARN for the Secrets Manager secret with the credentials for the user
+	// joining the domain. Example:
 	// arn:aws:secretsmanager:region:account-number:secret:myselfmanagedADtestsecret-123456
 	DomainAuthSecretArn *string
 
@@ -141,9 +141,9 @@ type CreateDBInstanceReadReplicaInput struct {
 	// Example: 123.124.125.126,234.235.236.237
 	DomainDnsIps []string
 
-	// Specifies the fully qualified domain name of an Active Directory domain.
+	// The fully qualified domain name (FQDN) of an Active Directory domain.
 	// Constraints:
-	//   - Cannot be greater than 64 characters.
+	//   - Can't be longer than 64 characters.
 	// Example: mymanagedADtest.mymanagedAD.mydomain
 	DomainFqdn *string
 
@@ -154,7 +154,7 @@ type CreateDBInstanceReadReplicaInput struct {
 	// The Active Directory organizational unit for your DB instance to join.
 	// Constraints:
 	//   - Must be in the distinguished name format.
-	//   - Cannot be greater than 64 characters.
+	//   - Can't be longer than 64 characters.
 	// Example: OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain
 	DomainOu *string
 

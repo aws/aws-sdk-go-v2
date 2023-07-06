@@ -84,34 +84,38 @@ type CreateDBInstanceInput struct {
 	// setting doesn't apply to Amazon Aurora DB instances. Aurora cluster volumes
 	// automatically grow as the amount of data in your database increases, though you
 	// are only charged for the space that you use in an Aurora cluster volume. Amazon
-	// RDS Custom RDS for MariaDB RDS for MySQL RDS for Oracle RDS for PostgreSQL RDS
-	// for SQL Server Constraints to the amount of storage for each storage type are
-	// the following:
+	// RDS Custom Constraints to the amount of storage for each storage type are the
+	// following:
 	//   - General Purpose (SSD) storage (gp2, gp3): Must be an integer from 40 to
 	//   65536 for RDS Custom for Oracle, 16384 for RDS Custom for SQL Server.
 	//   - Provisioned IOPS storage (io1): Must be an integer from 40 to 65536 for RDS
 	//   Custom for Oracle, 16384 for RDS Custom for SQL Server.
-	// Constraints to the amount of storage for each storage type are the following:
+	// RDS for MariaDB Constraints to the amount of storage for each storage type are
+	// the following:
 	//   - General Purpose (SSD) storage (gp2, gp3): Must be an integer from 20 to
 	//   65536.
 	//   - Provisioned IOPS storage (io1): Must be an integer from 100 to 65536.
 	//   - Magnetic storage (standard): Must be an integer from 5 to 3072.
-	// Constraints to the amount of storage for each storage type are the following:
+	// RDS for MySQL Constraints to the amount of storage for each storage type are
+	// the following:
 	//   - General Purpose (SSD) storage (gp2, gp3): Must be an integer from 20 to
 	//   65536.
 	//   - Provisioned IOPS storage (io1): Must be an integer from 100 to 65536.
 	//   - Magnetic storage (standard): Must be an integer from 5 to 3072.
-	// Constraints to the amount of storage for each storage type are the following:
+	// RDS for Oracle Constraints to the amount of storage for each storage type are
+	// the following:
 	//   - General Purpose (SSD) storage (gp2, gp3): Must be an integer from 20 to
 	//   65536.
 	//   - Provisioned IOPS storage (io1): Must be an integer from 100 to 65536.
 	//   - Magnetic storage (standard): Must be an integer from 10 to 3072.
-	// Constraints to the amount of storage for each storage type are the following:
+	// RDS for PostgreSQL Constraints to the amount of storage for each storage type
+	// are the following:
 	//   - General Purpose (SSD) storage (gp2, gp3): Must be an integer from 20 to
 	//   65536.
 	//   - Provisioned IOPS storage (io1): Must be an integer from 100 to 65536.
 	//   - Magnetic storage (standard): Must be an integer from 5 to 3072.
-	// Constraints to the amount of storage for each storage type are the following:
+	// RDS for SQL Server Constraints to the amount of storage for each storage type
+	// are the following:
 	//   - General Purpose (SSD) storage (gp2, gp3):
 	//   - Enterprise and Standard editions: Must be an integer from 20 to 16384.
 	//   - Web and Express editions: Must be an integer from 20 to 16384.
@@ -178,7 +182,7 @@ type CreateDBInstanceInput struct {
 	//   change it on the database itself.
 	CharacterSetName *string
 
-	// Spcifies whether to copy tags from the DB instance to snapshots of the DB
+	// Specifies whether to copy tags from the DB instance to snapshots of the DB
 	// instance. By default, tags are not copied. This setting doesn't apply to Amazon
 	// Aurora DB instances. Copying tags to snapshots is managed by the DB cluster.
 	// Setting this value for an Aurora DB instance has no effect on the DB cluster
@@ -202,50 +206,49 @@ type CreateDBInstanceInput struct {
 	DBClusterIdentifier *string
 
 	// The meaning of this parameter differs depending on the database engine. Amazon
-	// Aurora MySQL Amazon Aurora PostgreSQL Amazon RDS Custom for Oracle Amazon RDS
-	// Custom for SQL Server RDS for MariaDB RDS for MySQL RDS for Oracle RDS for
-	// PostgreSQL RDS for SQL Server The name of the database to create when the
-	// primary DB instance of the Aurora MySQL DB cluster is created. If you don't
-	// specify a value, Amazon RDS doesn't create a database in the DB cluster.
-	// Constraints:
+	// Aurora MySQL The name of the database to create when the primary DB instance of
+	// the Aurora MySQL DB cluster is created. If you don't specify a value, Amazon RDS
+	// doesn't create a database in the DB cluster. Constraints:
 	//   - Must contain 1 to 64 alphanumeric characters.
 	//   - Can't be a word reserved by the database engine.
-	// The name of the database to create when the primary DB instance of the Aurora
-	// PostgreSQL DB cluster is created. Default: postgres Constraints:
+	// Amazon Aurora PostgreSQL The name of the database to create when the primary DB
+	// instance of the Aurora PostgreSQL DB cluster is created. Default: postgres
+	// Constraints:
 	//   - Must contain 1 to 63 alphanumeric characters.
 	//   - Must begin with a letter. Subsequent characters can be letters,
 	//   underscores, or digits (0 to 9).
 	//   - Can't be a word reserved by the database engine.
-	// The Oracle System ID (SID) of the created RDS Custom DB instance. Default: ORCL
-	// Constraints:
+	// Amazon RDS Custom for Oracle The Oracle System ID (SID) of the created RDS
+	// Custom DB instance. Default: ORCL Constraints:
 	//   - Must contain 1 to 8 alphanumeric characters.
 	//   - Must contain a letter.
 	//   - Can't be a word reserved by the database engine.
-	// Not applicable. Must be null. The name of the database to create when the DB
-	// instance is created. If you don't specify a value, Amazon RDS doesn't create a
-	// database in the DB instance. Constraints:
-	//   - Must contain 1 to 64 letters or numbers.
-	//   - Must begin with a letter. Subsequent characters can be letters,
-	//   underscores, or digits (0-9).
-	//   - Can't be a word reserved by the database engine.
-	// The name of the database to create when the DB instance is created. If you
-	// don't specify a value, Amazon RDS doesn't create a database in the DB instance.
+	// Amazon RDS Custom for SQL Server Not applicable. Must be null. RDS for MariaDB
+	// The name of the database to create when the DB instance is created. If you don't
+	// specify a value, Amazon RDS doesn't create a database in the DB instance.
 	// Constraints:
 	//   - Must contain 1 to 64 letters or numbers.
 	//   - Must begin with a letter. Subsequent characters can be letters,
 	//   underscores, or digits (0-9).
 	//   - Can't be a word reserved by the database engine.
-	// The Oracle System ID (SID) of the created DB instance. Default: ORCL
-	// Constraints:
+	// RDS for MySQL The name of the database to create when the DB instance is
+	// created. If you don't specify a value, Amazon RDS doesn't create a database in
+	// the DB instance. Constraints:
+	//   - Must contain 1 to 64 letters or numbers.
+	//   - Must begin with a letter. Subsequent characters can be letters,
+	//   underscores, or digits (0-9).
+	//   - Can't be a word reserved by the database engine.
+	// RDS for Oracle The Oracle System ID (SID) of the created DB instance. Default:
+	// ORCL Constraints:
 	//   - Can't be longer than 8 characters.
 	//   - Can't be a word reserved by the database engine, such as the string NULL .
-	// The name of the database to create when the DB instance is created. Default:
-	// postgres Constraints:
+	// RDS for PostgreSQL The name of the database to create when the DB instance is
+	// created. Default: postgres Constraints:
 	//   - Must contain 1 to 63 letters, numbers, or underscores.
 	//   - Must begin with a letter. Subsequent characters can be letters,
 	//   underscores, or digits (0-9).
 	//   - Can't be a word reserved by the database engine.
-	// Not applicable. Must be null.
+	// RDS for SQL Server Not applicable. Must be null.
 	DBName *string
 
 	// The name of the DB parameter group to associate with this DB instance. If you
@@ -286,8 +289,8 @@ type CreateDBInstanceInput struct {
 	//   - RDS Custom
 	Domain *string
 
-	// The ARN for the Secrets Manager secret that contains the credentials for the
-	// user performing the domain join. Example:
+	// The ARN for the Secrets Manager secret with the credentials for the user
+	// joining the domain. Example:
 	// arn:aws:secretsmanager:region:account-number:secret:myselfmanagedADtestsecret-123456
 	DomainAuthSecretArn *string
 
@@ -299,9 +302,9 @@ type CreateDBInstanceInput struct {
 	// Example: 123.124.125.126,234.235.236.237
 	DomainDnsIps []string
 
-	// Specifies the fully qualified domain name of an Active Directory domain.
+	// The fully qualified domain name (FQDN) of an Active Directory domain.
 	// Constraints:
-	//   - Cannot be greater than 64 characters.
+	//   - Can't be longer than 64 characters.
 	// Example: mymanagedADtest.mymanagedAD.mydomain
 	DomainFqdn *string
 
@@ -314,7 +317,7 @@ type CreateDBInstanceInput struct {
 	// The Active Directory organizational unit for your DB instance to join.
 	// Constraints:
 	//   - Must be in the distinguished name format.
-	//   - Cannot be greater than 64 characters.
+	//   - Can't be longer than 64 characters.
 	// Example: OU=mymanagedADtestOU,DC=mymanagedADtest,DC=mymanagedAD,DC=mydomain
 	DomainOu *string
 
@@ -367,22 +370,23 @@ type CreateDBInstanceInput struct {
 	// use the DescribeDBEngineVersions operation. The following are the database
 	// engines and links to information about the major and minor versions that are
 	// available with Amazon RDS. Not every database engine is available for every
-	// Amazon Web Services Region. Amazon RDS Custom for Oracle Amazon RDS Custom for
-	// SQL Server RDS for MariaDB RDS for Microsoft SQL Server RDS for MySQL RDS for
-	// Oracle RDS for PostgreSQL A custom engine version (CEV) that you have previously
-	// created. This setting is required for RDS Custom for Oracle. The CEV name has
-	// the following format: 19.customized_string. A valid CEV name is 19.my_cev1 . For
-	// more information, see Creating an RDS Custom for Oracle DB instance (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-creating.html#custom-creating.create)
-	// in the Amazon RDS User Guide. See RDS Custom for SQL Server general requirements (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-reqs-limits-MS.html)
-	// in the Amazon RDS User Guide. For information, see MariaDB on Amazon RDS
-	// versions (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html#MariaDB.Concepts.VersionMgmt)
-	// in the Amazon RDS User Guide. For information, see Microsoft SQL Server
-	// versions on Amazon RDS (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.VersionSupport)
-	// in the Amazon RDS User Guide. For information, see MySQL on Amazon RDS versions (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt)
-	// in the Amazon RDS User Guide. For information, see Oracle Database Engine
-	// release notes (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.PatchComposition.html)
-	// in the Amazon RDS User Guide. For information, see Amazon RDS for PostgreSQL
-	// versions and extensions (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts)
+	// Amazon Web Services Region. Amazon RDS Custom for Oracle A custom engine version
+	// (CEV) that you have previously created. This setting is required for RDS Custom
+	// for Oracle. The CEV name has the following format: 19.customized_string. A valid
+	// CEV name is 19.my_cev1 . For more information, see  Creating an RDS Custom for
+	// Oracle DB instance (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-creating.html#custom-creating.create)
+	// in the Amazon RDS User Guide. Amazon RDS Custom for SQL Server See RDS Custom
+	// for SQL Server general requirements (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-reqs-limits-MS.html)
+	// in the Amazon RDS User Guide. RDS for MariaDB For information, see MariaDB on
+	// Amazon RDS versions (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html#MariaDB.Concepts.VersionMgmt)
+	// in the Amazon RDS User Guide. RDS for Microsoft SQL Server For information, see
+	// Microsoft SQL Server versions on Amazon RDS (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.VersionSupport)
+	// in the Amazon RDS User Guide. RDS for MySQL For information, see MySQL on
+	// Amazon RDS versions (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_MySQL.html#MySQL.Concepts.VersionMgmt)
+	// in the Amazon RDS User Guide. RDS for Oracle For information, see Oracle
+	// Database Engine release notes (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.PatchComposition.html)
+	// in the Amazon RDS User Guide. RDS for PostgreSQL For information, see Amazon
+	// RDS for PostgreSQL versions and extensions (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts)
 	// in the Amazon RDS User Guide.
 	EngineVersion *string
 

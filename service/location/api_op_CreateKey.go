@@ -14,10 +14,8 @@ import (
 )
 
 // Creates an API key resource in your Amazon Web Services account, which lets you
-// grant geo:GetMap* actions for Amazon Location Map resources to the API key
-// bearer. The API keys feature is in preview. We may add, change, or remove
-// features before announcing general availability. For more information, see
-// Using API keys (https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html)
+// grant actions for Amazon Location resources to the API key bearer. For more
+// information, see Using API keys (https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html)
 // .
 func (c *Client) CreateKey(ctx context.Context, params *CreateKeyInput, optFns ...func(*Options)) (*CreateKeyOutput, error) {
 	if params == nil {

@@ -1,0 +1,8 @@
+{
+    "id": "3846fd17-f240-4126-9c45-08692c328492",
+    "type": "feature",
+    "description": "This release adds support for authenticating with Amazon Location Service's Places \u0026 Routes APIs with an API Key. Also, with this release developers can publish tracked device position updates to Amazon EventBridge.",
+    "modules": [
+        "service/location"
+    ]
+}

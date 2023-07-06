@@ -100,6 +100,10 @@ type CalculateRouteInput struct {
 	// of positions. Default Value: false Valid Values: false | true
 	IncludeLegGeometry *bool
 
+	// The optional API key (https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html)
+	// to authorize the request.
+	Key *string
+
 	// Specifies the mode of transport when calculating a route. Used in estimating
 	// the speed of travel and road compatibility. You can choose Car , Truck , Walking
 	// , Bicycle or Motorcycle as options for the TravelMode . Bicycle and Motorcycle

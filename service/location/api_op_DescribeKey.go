@@ -13,10 +13,7 @@ import (
 	"time"
 )
 
-// Retrieves the API key resource details. The API keys feature is in preview. We
-// may add, change, or remove features before announcing general availability. For
-// more information, see Using API keys (https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html)
-// .
+// Retrieves the API key resource details.
 func (c *Client) DescribeKey(ctx context.Context, params *DescribeKeyInput, optFns ...func(*Options)) (*DescribeKeyOutput, error) {
 	if params == nil {
 		params = &DescribeKeyInput{}

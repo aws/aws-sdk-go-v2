@@ -4475,6 +4475,15 @@ func awsRestjson1_deserializeOpDocumentDescribeTrackerOutput(v **DescribeTracker
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "EventBridgeEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.EventBridgeEnabled = ptr.Bool(jtv)
+			}
+
 		case "KmsKeyId":
 			if value != nil {
 				jtv, ok := value.(string)

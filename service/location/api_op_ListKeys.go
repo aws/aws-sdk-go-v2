@@ -12,10 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists API key resources in your Amazon Web Services account. The API keys
-// feature is in preview. We may add, change, or remove features before announcing
-// general availability. For more information, see Using API keys (https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html)
-// .
+// Lists API key resources in your Amazon Web Services account.
 func (c *Client) ListKeys(ctx context.Context, params *ListKeysInput, optFns ...func(*Options)) (*ListKeysOutput, error) {
 	if params == nil {
 		params = &ListKeysInput{}

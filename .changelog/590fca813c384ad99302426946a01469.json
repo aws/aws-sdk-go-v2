@@ -1,0 +1,8 @@
+{
+    "id": "590fca81-3c38-4ad9-9302-426946a01469",
+    "type": "feature",
+    "description": "Added paginator support to several APIs. Added the ISOLATED enum value to AssetState.",
+    "modules": [
+        "service/outposts"
+    ]
+}

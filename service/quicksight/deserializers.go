@@ -38988,6 +38988,42 @@ func awsRestjson1_deserializeDocumentColorScaleColorList(v *[]types.DataColor, v
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentColorsConfiguration(v **types.ColorsConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ColorsConfiguration
+	if *v == nil {
+		sv = &types.ColorsConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CustomColors":
+			if err := awsRestjson1_deserializeDocumentCustomColorsList(&sv.CustomColors, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentColumnConfiguration(v **types.ColumnConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -39010,6 +39046,11 @@ func awsRestjson1_deserializeDocumentColumnConfiguration(v **types.ColumnConfigu
 
 	for key, value := range shape {
 		switch key {
+		case "ColorsConfiguration":
+			if err := awsRestjson1_deserializeDocumentColorsConfiguration(&sv.ColorsConfiguration, value); err != nil {
+				return err
+			}
+
 		case "Column":
 			if err := awsRestjson1_deserializeDocumentColumnIdentifier(&sv.Column, value); err != nil {
 				return err
@@ -41400,6 +41441,98 @@ func awsRestjson1_deserializeDocumentCustomActionURLOperation(v **types.CustomAc
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCustomColor(v **types.CustomColor, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CustomColor
+	if *v == nil {
+		sv = &types.CustomColor{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Color":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HexColor to be of type string, got %T instead", value)
+				}
+				sv.Color = ptr.String(jtv)
+			}
+
+		case "FieldValue":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FieldValue to be of type string, got %T instead", value)
+				}
+				sv.FieldValue = ptr.String(jtv)
+			}
+
+		case "SpecialValue":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SpecialValue to be of type string, got %T instead", value)
+				}
+				sv.SpecialValue = types.SpecialValue(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCustomColorsList(v *[]types.CustomColor, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.CustomColor
+	if *v == nil {
+		cv = []types.CustomColor{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.CustomColor
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentCustomColor(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -68425,6 +68558,55 @@ func awsRestjson1_deserializeDocumentSliderControlDisplayOptions(v **types.Slide
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentSmallMultiplesAxisProperties(v **types.SmallMultiplesAxisProperties, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SmallMultiplesAxisProperties
+	if *v == nil {
+		sv = &types.SmallMultiplesAxisProperties{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Placement":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SmallMultiplesAxisPlacement to be of type string, got %T instead", value)
+				}
+				sv.Placement = types.SmallMultiplesAxisPlacement(jtv)
+			}
+
+		case "Scale":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SmallMultiplesAxisScale to be of type string, got %T instead", value)
+				}
+				sv.Scale = types.SmallMultiplesAxisScale(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentSmallMultiplesDimensionFieldList(v *[]types.DimensionField, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -68509,6 +68691,16 @@ func awsRestjson1_deserializeDocumentSmallMultiplesOptions(v **types.SmallMultip
 
 		case "PanelConfiguration":
 			if err := awsRestjson1_deserializeDocumentPanelConfiguration(&sv.PanelConfiguration, value); err != nil {
+				return err
+			}
+
+		case "XAxis":
+			if err := awsRestjson1_deserializeDocumentSmallMultiplesAxisProperties(&sv.XAxis, value); err != nil {
+				return err
+			}
+
+		case "YAxis":
+			if err := awsRestjson1_deserializeDocumentSmallMultiplesAxisProperties(&sv.YAxis, value); err != nil {
 				return err
 			}
 

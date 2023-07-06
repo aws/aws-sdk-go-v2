@@ -111,6 +111,10 @@ type CalculateRouteMatrixInput struct {
 	// Set the unit system to specify the distance. Default Value: Kilometers
 	DistanceUnit types.DistanceUnit
 
+	// The optional API key (https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html)
+	// to authorize the request.
+	Key *string
+
 	// Specifies the mode of transport when calculating a route. Used in estimating
 	// the speed of travel and road compatibility. The TravelMode you specify also
 	// determines how you specify route preferences:

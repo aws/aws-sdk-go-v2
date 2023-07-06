@@ -18,8 +18,8 @@ import (
 // subsystem. You can create a global database that is initially empty, and then
 // add a primary cluster and a secondary cluster to it. Or you can specify an
 // existing Aurora cluster during the create operation, and this cluster becomes
-// the primary cluster of the global database. This action applies only to Aurora
-// DB clusters.
+// the primary cluster of the global database. This operation applies only to
+// Aurora DB clusters.
 func (c *Client) CreateGlobalCluster(ctx context.Context, params *CreateGlobalClusterInput, optFns ...func(*Options)) (*CreateGlobalClusterOutput, error) {
 	if params == nil {
 		params = &CreateGlobalClusterInput{}
@@ -37,30 +37,47 @@ func (c *Client) CreateGlobalCluster(ctx context.Context, params *CreateGlobalCl
 
 type CreateGlobalClusterInput struct {
 
-	// The name for your database of up to 64 alphanumeric characters. If you do not
-	// provide a name, Amazon Aurora will not create a database in the global database
-	// cluster you are creating.
+	// The name for your database of up to 64 alphanumeric characters. If you don't
+	// specify a name, Amazon Aurora doesn't create a database in the global database
+	// cluster. Constraints:
+	//   - Can't be specified if SourceDBClusterIdentifier is specified. In this case,
+	//   Amazon Aurora uses the database name from the source DB cluster.
 	DatabaseName *string
 
-	// The deletion protection setting for the new global database. The global
-	// database can't be deleted when deletion protection is enabled.
+	// Specifies whether to enable deletion protection for the new global database
+	// cluster. The global database can't be deleted when deletion protection is
+	// enabled.
 	DeletionProtection *bool
 
-	// The name of the database engine to be used for this DB cluster.
+	// The database engine to use for this global database cluster. Valid Values:
+	// aurora-mysql | aurora-postgresql Constraints:
+	//   - Can't be specified if SourceDBClusterIdentifier is specified. In this case,
+	//   Amazon Aurora uses the engine of the source DB cluster.
 	Engine *string
 
-	// The engine version of the Aurora global database.
+	// The engine version to use for this global database cluster. Constraints:
+	//   - Can't be specified if SourceDBClusterIdentifier is specified. In this case,
+	//   Amazon Aurora uses the engine version of the source DB cluster.
 	EngineVersion *string
 
-	// The cluster identifier of the new global database cluster. This parameter is
+	// The cluster identifier for this global database cluster. This parameter is
 	// stored as a lowercase string.
 	GlobalClusterIdentifier *string
 
 	// The Amazon Resource Name (ARN) to use as the primary cluster of the global
-	// database. This parameter is optional.
+	// database. If you provide a value for this parameter, don't specify values for
+	// the following settings because Amazon Aurora uses the values from the specified
+	// source DB cluster:
+	//   - DatabaseName
+	//   - Engine
+	//   - EngineVersion
+	//   - StorageEncrypted
 	SourceDBClusterIdentifier *string
 
-	// The storage encryption setting for the new global database cluster.
+	// Specifies whether to enable storage encryption for the new global database
+	// cluster. Constraints:
+	//   - Can't be specified if SourceDBClusterIdentifier is specified. In this case,
+	//   Amazon Aurora uses the setting from the source DB cluster.
 	StorageEncrypted *bool
 
 	noSmithyDocumentSerde

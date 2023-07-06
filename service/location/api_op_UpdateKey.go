@@ -13,10 +13,7 @@ import (
 	"time"
 )
 
-// Updates the specified properties of a given API key resource. The API keys
-// feature is in preview. We may add, change, or remove features before announcing
-// general availability. For more information, see Using API keys (https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html)
-// .
+// Updates the specified properties of a given API key resource.
 func (c *Client) UpdateKey(ctx context.Context, params *UpdateKeyInput, optFns ...func(*Options)) (*UpdateKeyOutput, error) {
 	if params == nil {
 		params = &UpdateKeyInput{}

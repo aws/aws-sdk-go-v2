@@ -44,6 +44,11 @@ type CreateTrackerInput struct {
 	// An optional description for the tracker resource.
 	Description *string
 
+	// Whether to enable position UPDATE events from this tracker to be sent to
+	// EventBridge. You do not need enable this feature to get ENTER and EXIT events
+	// for geofences with this tracker. Those events are always sent to EventBridge.
+	EventBridgeEnabled *bool
+
 	// A key identifier for an Amazon Web Services KMS customer managed key (https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html)
 	// . Enter a key ID, key ARN, alias name, or alias ARN.
 	KmsKeyId *string

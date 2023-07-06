@@ -83,6 +83,10 @@ type SearchPlaceIndexForTextInput struct {
 	//   AUS .
 	FilterCountries []string
 
+	// The optional API key (https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html)
+	// to authorize the request.
+	Key *string
+
 	// The preferred language used to return results. The value must be a valid BCP 47 (https://tools.ietf.org/search/bcp47)
 	// language tag, for example, en for English. This setting affects the languages
 	// used in the results, but not the results themselves. If no language is

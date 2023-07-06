@@ -1,0 +1,8 @@
+{
+    "id": "cf3223dd-29c1-4e2a-b3a9-6c752828c34d",
+    "type": "feature",
+    "description": "Add Nitro Enclaves support on DescribeInstanceTypes",
+    "modules": [
+        "service/ec2"
+    ]
+}

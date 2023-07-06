@@ -17,8 +17,8 @@ import (
 // DescribeAssetBundleExportJob API call. When a job is successfully completed, a
 // download URL that contains the exported assets is returned. The URL is valid for
 // 5 minutes and can be refreshed with a DescribeAssetBundleExportJob API call.
-// Each Amazon QuickSight account can run up to 10 export jobs concurrently. The
-// API caller must have the necessary permissions in their IAM role to access each
+// Each Amazon QuickSight account can run up to 5 export jobs concurrently. The API
+// caller must have the necessary permissions in their IAM role to access each
 // resource before the resources can be exported.
 func (c *Client) StartAssetBundleExportJob(ctx context.Context, params *StartAssetBundleExportJobInput, optFns ...func(*Options)) (*StartAssetBundleExportJobOutput, error) {
 	if params == nil {

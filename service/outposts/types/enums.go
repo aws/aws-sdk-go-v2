@@ -26,6 +26,7 @@ type AssetState string
 const (
 	AssetStateActive   AssetState = "ACTIVE"
 	AssetStateRetiring AssetState = "RETIRING"
+	AssetStateIsolated AssetState = "ISOLATED"
 )
 
 // Values returns all known values for AssetState. Note that this can be expanded
@@ -35,6 +36,7 @@ func (AssetState) Values() []AssetState {
 	return []AssetState{
 		"ACTIVE",
 		"RETIRING",
+		"ISOLATED",
 	}
 }
 

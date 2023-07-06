@@ -132,11 +132,6 @@ type AggregationFunction struct {
 // The configuration options to sort aggregated values.
 type AggregationSortConfiguration struct {
 
-	// The function that aggregates the values in Column .
-	//
-	// This member is required.
-	AggregationFunction *AggregationFunction
-
 	// The column that determines the sort order of aggregated values.
 	//
 	// This member is required.
@@ -148,6 +143,9 @@ type AggregationSortConfiguration struct {
 	//
 	// This member is required.
 	SortDirection SortDirection
+
+	// The function that aggregates the values in Column .
+	AggregationFunction *AggregationFunction
 
 	noSmithyDocumentSerde
 }
@@ -960,7 +958,7 @@ type AssetBundleImportJobVPCConnectionOverrideParameters struct {
 }
 
 // The source of the asset bundle zip file that contains the data that you want to
-// import.
+// import. The file must be in QUICKSIGHT_JSON format.
 type AssetBundleImportSource struct {
 
 	// The bytes of the base64 encoded asset bundle import zip file. This file can't
@@ -1862,6 +1860,15 @@ type ColorScale struct {
 	noSmithyDocumentSerde
 }
 
+// The color configurations for a column.
+type ColorsConfiguration struct {
+
+	// A list of up to 50 custom colors.
+	CustomColors []CustomColor
+
+	noSmithyDocumentSerde
+}
+
 // The general configuration of a column.
 type ColumnConfiguration struct {
 
@@ -1869,6 +1876,9 @@ type ColumnConfiguration struct {
 	//
 	// This member is required.
 	Column *ColumnIdentifier
+
+	// The color configurations of the column.
+	ColorsConfiguration *ColorsConfiguration
 
 	// The format configuration of a column.
 	FormatConfiguration *FormatConfiguration
@@ -2517,6 +2527,23 @@ type CustomActionURLOperation struct {
 	//
 	// This member is required.
 	URLTemplate *string
+
+	noSmithyDocumentSerde
+}
+
+// Determines the color that's applied to a particular data value in a column.
+type CustomColor struct {
+
+	// The color that is applied to the data value.
+	//
+	// This member is required.
+	Color *string
+
+	// The data value that the color is applied to.
+	FieldValue *string
+
+	// The value of a special data value.
+	SpecialValue SpecialValue
 
 	noSmithyDocumentSerde
 }
@@ -10735,6 +10762,21 @@ type SliderControlDisplayOptions struct {
 	noSmithyDocumentSerde
 }
 
+// Configures the properties of a chart's axes that are used by small multiples
+// panels.
+type SmallMultiplesAxisProperties struct {
+
+	// Defines the placement of the axis. By default, axes are rendered OUTSIDE of the
+	// panels. Axes with INDEPENDENT scale are rendered INSIDE the panels.
+	Placement SmallMultiplesAxisPlacement
+
+	// Determines whether scale of the axes are shared or independent. The default
+	// value is SHARED .
+	Scale SmallMultiplesAxisScale
+
+	noSmithyDocumentSerde
+}
+
 // Options that determine the layout and display options of a chart's small
 // multiples.
 type SmallMultiplesOptions struct {
@@ -10751,6 +10793,12 @@ type SmallMultiplesOptions struct {
 
 	// Configures the display options for each small multiples panel.
 	PanelConfiguration *PanelConfiguration
+
+	// The properties of a small multiples X axis.
+	XAxis *SmallMultiplesAxisProperties
+
+	// The properties of a small multiples Y axis.
+	YAxis *SmallMultiplesAxisProperties
 
 	noSmithyDocumentSerde
 }

@@ -661,6 +661,10 @@ func awsRestjson1_serializeOpHttpBindingsCalculateRouteInput(v *CalculateRouteIn
 		}
 	}
 
+	if v.Key != nil {
+		encoder.SetQuery("key").String(*v.Key)
+	}
+
 	return nil
 }
 
@@ -795,6 +799,10 @@ func awsRestjson1_serializeOpHttpBindingsCalculateRouteMatrixInput(v *CalculateR
 		if err := encoder.SetURI("CalculatorName").String(*v.CalculatorName); err != nil {
 			return err
 		}
+	}
+
+	if v.Key != nil {
+		encoder.SetQuery("key").String(*v.Key)
 	}
 
 	return nil
@@ -1389,6 +1397,11 @@ func awsRestjson1_serializeOpDocumentCreateTrackerInput(v *CreateTrackerInput, v
 	if v.Description != nil {
 		ok := object.Key("Description")
 		ok.String(*v.Description)
+	}
+
+	if v.EventBridgeEnabled != nil {
+		ok := object.Key("EventBridgeEnabled")
+		ok.Boolean(*v.EventBridgeEnabled)
 	}
 
 	if v.KmsKeyId != nil {
@@ -2785,6 +2798,10 @@ func awsRestjson1_serializeOpHttpBindingsGetPlaceInput(v *GetPlaceInput, encoder
 		}
 	}
 
+	if v.Key != nil {
+		encoder.SetQuery("key").String(*v.Key)
+	}
+
 	if v.Language != nil {
 		encoder.SetQuery("language").String(*v.Language)
 	}
@@ -3727,6 +3744,10 @@ func awsRestjson1_serializeOpHttpBindingsSearchPlaceIndexForPositionInput(v *Sea
 		}
 	}
 
+	if v.Key != nil {
+		encoder.SetQuery("key").String(*v.Key)
+	}
+
 	return nil
 }
 
@@ -3818,6 +3839,10 @@ func awsRestjson1_serializeOpHttpBindingsSearchPlaceIndexForSuggestionsInput(v *
 		if err := encoder.SetURI("IndexName").String(*v.IndexName); err != nil {
 			return err
 		}
+	}
+
+	if v.Key != nil {
+		encoder.SetQuery("key").String(*v.Key)
 	}
 
 	return nil
@@ -3937,6 +3962,10 @@ func awsRestjson1_serializeOpHttpBindingsSearchPlaceIndexForTextInput(v *SearchP
 		if err := encoder.SetURI("IndexName").String(*v.IndexName); err != nil {
 			return err
 		}
+	}
+
+	if v.Key != nil {
+		encoder.SetQuery("key").String(*v.Key)
 	}
 
 	return nil
@@ -4681,6 +4710,11 @@ func awsRestjson1_serializeOpDocumentUpdateTrackerInput(v *UpdateTrackerInput, v
 	if v.Description != nil {
 		ok := object.Key("Description")
 		ok.String(*v.Description)
+	}
+
+	if v.EventBridgeEnabled != nil {
+		ok := object.Key("EventBridgeEnabled")
+		ok.Boolean(*v.EventBridgeEnabled)
 	}
 
 	if len(v.PositionFiltering) > 0 {

@@ -16,7 +16,7 @@ import (
 // to import a naming prefix and specified configuration overrides. The assets that
 // are contained in the bundle file that you provide are used to create or update a
 // new or existing asset in your Amazon QuickSight account. Each Amazon QuickSight
-// account can run up to 10 import jobs concurrently. The API caller must have the
+// account can run up to 5 import jobs concurrently. The API caller must have the
 // necessary "create" , "describe" , and "update" permissions in their IAM role to
 // access each resource type that is contained in the bundle file before the
 // resources can be imported.
@@ -44,7 +44,7 @@ type StartAssetBundleImportJobInput struct {
 	AssetBundleImportJobId *string
 
 	// The source of the asset bundle zip file that contains the data that you want to
-	// import.
+	// import. The file must be in QUICKSIGHT_JSON format.
 	//
 	// This member is required.
 	AssetBundleImportSource *types.AssetBundleImportSource

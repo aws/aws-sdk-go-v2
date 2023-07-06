@@ -3817,9 +3817,6 @@ func validateAggregationSortConfiguration(v *types.AggregationSortConfiguration)
 	if len(v.SortDirection) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("SortDirection"))
 	}
-	if v.AggregationFunction == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AggregationFunction"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -5492,6 +5489,23 @@ func validateColorScale(v *types.ColorScale) error {
 	}
 }
 
+func validateColorsConfiguration(v *types.ColorsConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ColorsConfiguration"}
+	if v.CustomColors != nil {
+		if err := validateCustomColorsList(v.CustomColors); err != nil {
+			invalidParams.AddNested("CustomColors", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateColumnConfiguration(v *types.ColumnConfiguration) error {
 	if v == nil {
 		return nil
@@ -5507,6 +5521,11 @@ func validateColumnConfiguration(v *types.ColumnConfiguration) error {
 	if v.FormatConfiguration != nil {
 		if err := validateFormatConfiguration(v.FormatConfiguration); err != nil {
 			invalidParams.AddNested("FormatConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ColorsConfiguration != nil {
+		if err := validateColorsConfiguration(v.ColorsConfiguration); err != nil {
+			invalidParams.AddNested("ColorsConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -6270,6 +6289,38 @@ func validateCustomActionURLOperation(v *types.CustomActionURLOperation) error {
 	}
 	if len(v.URLTarget) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("URLTarget"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomColor(v *types.CustomColor) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomColor"}
+	if v.Color == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Color"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomColorsList(v []types.CustomColor) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomColorsList"}
+	for i := range v {
+		if err := validateCustomColor(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

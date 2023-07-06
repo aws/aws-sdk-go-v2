@@ -39,6 +39,11 @@ type UpdateTrackerInput struct {
 	// Updates the description for the tracker resource.
 	Description *string
 
+	// Whether to enable position UPDATE events from this tracker to be sent to
+	// EventBridge. You do not need enable this feature to get ENTER and EXIT events
+	// for geofences with this tracker. Those events are always sent to EventBridge.
+	EventBridgeEnabled *bool
+
 	// Updates the position filtering for the tracker resource. Valid values:
 	//   - TimeBased - Location updates are evaluated against linked geofence
 	//   collections, but not every location update is stored. If your update frequency

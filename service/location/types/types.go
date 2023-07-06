@@ -21,29 +21,42 @@ type ApiKeyFilter struct {
 type ApiKeyRestrictions struct {
 
 	// A list of allowed actions that an API key resource grants permissions to
-	// perform Currently, the only valid action is geo:GetMap* as an input to the
-	// list. For example, ["geo:GetMap*"] is valid but ["geo:GetMapTile"] is not.
+	// perform. You must have at least one action for each type of resource. For
+	// example, if you have a place resource, you must include at least one place
+	// action. The following are valid values for the actions.
+	//   - Map actions
+	//   - geo:GetMap* - Allows all actions needed for map rendering.
+	//   - Place actions
+	//   - geo:SearchPlaceIndexForText - Allows geocoding.
+	//   - geo:SearchPlaceIndexForPosition - Allows reverse geocoding.
+	//   - geo:SearchPlaceIndexForSuggestions - Allows generating suggestions from
+	//   text.
+	//   - GetPlace - Allows finding a place by place ID.
+	//   - Route actions
+	//   - geo:CalculateRoute - Allows point to point routing.
+	//   - geo:CalculateRouteMatrix - Allows calculating a matrix of routes.
+	// You must use these strings exactly. For example, to provide access to map
+	// rendering, the only valid action is geo:GetMap* as an input to the list.
+	// ["geo:GetMap*"] is valid but ["geo:GetMapTile"] is not. Similarly, you cannot
+	// use ["geo:SearchPlaceIndexFor*"] - you must list each of the Place actions
+	// separately.
 	//
 	// This member is required.
 	AllowActions []string
 
-	// A list of allowed resource ARNs that a API key bearer can perform actions on
-	// For more information about ARN format, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// . In this preview, you can allow only map resources. Requirements:
-	//   - Must be prefixed with arn .
-	//   - partition and service must not be empty and should begin with only
-	//   alphanumeric characters (A–Z, a–z, 0–9) and contain only alphanumeric numbers,
-	//   hyphens (-) and periods (.).
-	//   - region and account-id can be empty or should begin with only alphanumeric
-	//   characters (A–Z, a–z, 0–9) and contain only alphanumeric numbers, hyphens (-)
-	//   and periods (.).
-	//   - resource-id can begin with any character except for forward slash (/) and
-	//   contain any characters after, including forward slashes to form a path.
-	//   resource-id can also include wildcard characters, denoted by an asterisk (*).
-	//   - arn , partition , service , region , account-id and resource-id must be
-	//   delimited by a colon (:).
-	//   - No spaces allowed. For example,
+	// A list of allowed resource ARNs that a API key bearer can perform actions on.
+	//   - The ARN must be the correct ARN for a map, place, or route ARN. You may
+	//   include wildcards in the resource-id to match multiple resources of the same
+	//   type.
+	//   - The resources must be in the same partition , region , and account-id as the
+	//   key that is being created.
+	//   - Other than wildcards, you must include the full ARN, including the arn ,
+	//   partition , service , region , account-id and resource-id , delimited by
+	//   colons (:).
+	//   - No spaces allowed, even with wildcards. For example,
 	//   arn:aws:geo:region:account-id:map/ExampleMap* .
+	// For more information about ARN format, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
+	// .
 	//
 	// This member is required.
 	AllowResources []string
@@ -182,8 +195,9 @@ type BatchPutGeofenceRequestEntry struct {
 	// This member is required.
 	Geometry *GeofenceGeometry
 
-	// Specifies additional user-defined properties to store with the Geofence. An
-	// array of key-value pairs.
+	// Associates one of more properties with the geofence. A property is a key-value
+	// pair stored with the geofence and added to any geofence event triggered with
+	// that geofence. Format: "key" : "value"
 	GeofenceProperties map[string]string
 
 	noSmithyDocumentSerde
@@ -671,8 +685,9 @@ type ListGeofenceResponseEntry struct {
 	// This member is required.
 	UpdateTime *time.Time
 
-	// Contains additional user-defined properties stored with the geofence. An array
-	// of key-value pairs.
+	// User defined properties of the geofence. A property is a key-value pair stored
+	// with the geofence and added to any geofence event triggered with that geofence.
+	// Format: "key" : "value"
 	GeofenceProperties map[string]string
 
 	noSmithyDocumentSerde

@@ -50,8 +50,9 @@ type PutGeofenceInput struct {
 	// This member is required.
 	Geometry *types.GeofenceGeometry
 
-	// Specifies additional user-defined properties to store with the Geofence. An
-	// array of key-value pairs.
+	// Associates one of more properties with the geofence. A property is a key-value
+	// pair stored with the geofence and added to any geofence event triggered with
+	// that geofence. Format: "key" : "value"
 	GeofenceProperties map[string]string
 
 	noSmithyDocumentSerde

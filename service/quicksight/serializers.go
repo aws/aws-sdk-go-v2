@@ -16131,9 +16131,30 @@ func awsRestjson1_serializeDocumentColorScaleColorList(v []types.DataColor, valu
 	return nil
 }
 
+func awsRestjson1_serializeDocumentColorsConfiguration(v *types.ColorsConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CustomColors != nil {
+		ok := object.Key("CustomColors")
+		if err := awsRestjson1_serializeDocumentCustomColorsList(v.CustomColors, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentColumnConfiguration(v *types.ColumnConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ColorsConfiguration != nil {
+		ok := object.Key("ColorsConfiguration")
+		if err := awsRestjson1_serializeDocumentColorsConfiguration(v.ColorsConfiguration, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.Column != nil {
 		ok := object.Key("Column")
@@ -17286,6 +17307,41 @@ func awsRestjson1_serializeDocumentCustomActionURLOperation(v *types.CustomActio
 		ok.String(*v.URLTemplate)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCustomColor(v *types.CustomColor, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Color != nil {
+		ok := object.Key("Color")
+		ok.String(*v.Color)
+	}
+
+	if v.FieldValue != nil {
+		ok := object.Key("FieldValue")
+		ok.String(*v.FieldValue)
+	}
+
+	if len(v.SpecialValue) > 0 {
+		ok := object.Key("SpecialValue")
+		ok.String(string(v.SpecialValue))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCustomColorsList(v []types.CustomColor, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentCustomColor(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -29221,6 +29277,23 @@ func awsRestjson1_serializeDocumentSliderControlDisplayOptions(v *types.SliderCo
 	return nil
 }
 
+func awsRestjson1_serializeDocumentSmallMultiplesAxisProperties(v *types.SmallMultiplesAxisProperties, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Placement) > 0 {
+		ok := object.Key("Placement")
+		ok.String(string(v.Placement))
+	}
+
+	if len(v.Scale) > 0 {
+		ok := object.Key("Scale")
+		ok.String(string(v.Scale))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentSmallMultiplesDimensionFieldList(v []types.DimensionField, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -29251,6 +29324,20 @@ func awsRestjson1_serializeDocumentSmallMultiplesOptions(v *types.SmallMultiples
 	if v.PanelConfiguration != nil {
 		ok := object.Key("PanelConfiguration")
 		if err := awsRestjson1_serializeDocumentPanelConfiguration(v.PanelConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.XAxis != nil {
+		ok := object.Key("XAxis")
+		if err := awsRestjson1_serializeDocumentSmallMultiplesAxisProperties(v.XAxis, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.YAxis != nil {
+		ok := object.Key("YAxis")
+		if err := awsRestjson1_serializeDocumentSmallMultiplesAxisProperties(v.YAxis, ok); err != nil {
 			return err
 		}
 	}
