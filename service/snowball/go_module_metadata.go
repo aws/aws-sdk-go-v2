@@ -3,4 +3,4 @@
 package snowball
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.19.2"
+const goModuleVersion = "1.19.4"
