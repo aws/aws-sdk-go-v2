@@ -377,9 +377,13 @@ func (m *opDeleteObjectResolveEndpointMiddleware) HandleSerialize(ctx context.Co
 			var signingName, signingRegion string
 			if v4Scheme.SigningName == nil {
 				signingName = "s3"
+			} else {
+				signingName = *v4Scheme.SigningName
 			}
 			if v4Scheme.SigningRegion == nil {
 				signingRegion = m.BuiltInResolver.(*BuiltInResolver).Region
+			} else {
+				signingRegion = *v4Scheme.SigningRegion
 			}
 			if v4Scheme.DisableDoubleEncoding != nil {
 				// The signer sets an equivalent value at client initialization time.
