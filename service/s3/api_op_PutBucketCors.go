@@ -172,9 +172,6 @@ func (c *Client) addOperationPutBucketCorsMiddlewares(stack *middleware.Stack, o
 	if err = addPutBucketCorsInputChecksumMiddlewares(stack, options); err != nil {
 		return err
 	}
-	if err = addPutBucketCorsUpdateEndpoint(stack, options); err != nil {
-		return err
-	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
 		return err
 	}

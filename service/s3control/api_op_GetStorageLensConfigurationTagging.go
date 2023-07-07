@@ -126,9 +126,6 @@ func (c *Client) addOperationGetStorageLensConfigurationTaggingMiddlewares(stack
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
 		return err
 	}
-	if err = addGetStorageLensConfigurationTaggingUpdateEndpoint(stack, options); err != nil {
-		return err
-	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
 		return err
 	}

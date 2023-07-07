@@ -173,9 +173,6 @@ func (c *Client) addOperationPutBucketLoggingMiddlewares(stack *middleware.Stack
 	if err = addPutBucketLoggingInputChecksumMiddlewares(stack, options); err != nil {
 		return err
 	}
-	if err = addPutBucketLoggingUpdateEndpoint(stack, options); err != nil {
-		return err
-	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
 		return err
 	}

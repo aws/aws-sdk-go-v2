@@ -25,7 +25,7 @@ type s3BucketTest struct {
 	err    string
 }
 
-func TestUpdateEndpointBuild(t *testing.T) {
+func Test_UpdateEndpointBuild(t *testing.T) {
 	cases := map[string]map[string]struct {
 		tests          []s3BucketTest
 		useAccelerate  bool
@@ -218,8 +218,7 @@ func TestUpdateEndpointBuild(t *testing.T) {
 							// isaiah: build a Go request from smithy request
 							// then ensure that the URL is correct
 							req := fm.request.Build(context.Background())
-							if e, a := test.url, req.URL.String(); e != a {
-								t.Fatalf("expect url %s, got %s", e, a)
+							if e, a := test.url, req.URL.String(); e !								t.Fatalf("expect url %s, got %s", e, a)
 							}
 						})
 					}

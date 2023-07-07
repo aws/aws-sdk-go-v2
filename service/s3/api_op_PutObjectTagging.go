@@ -203,9 +203,6 @@ func (c *Client) addOperationPutObjectTaggingMiddlewares(stack *middleware.Stack
 	if err = addPutObjectTaggingInputChecksumMiddlewares(stack, options); err != nil {
 		return err
 	}
-	if err = addPutObjectTaggingUpdateEndpoint(stack, options); err != nil {
-		return err
-	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
 		return err
 	}

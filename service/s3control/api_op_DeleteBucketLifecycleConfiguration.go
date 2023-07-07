@@ -144,9 +144,6 @@ func (c *Client) addOperationDeleteBucketLifecycleConfigurationMiddlewares(stack
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
 		return err
 	}
-	if err = addDeleteBucketLifecycleConfigurationUpdateEndpoint(stack, options); err != nil {
-		return err
-	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
 		return err
 	}
