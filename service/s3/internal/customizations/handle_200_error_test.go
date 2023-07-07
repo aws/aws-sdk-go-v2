@@ -2,8 +2,9 @@ package customizations_test
 
 import (
 	"context"
+	"io"
+	"io/ioutil"
 	"net/http"
-	"net/http/httptest"
 	"strings"
 	"testing"
 
@@ -19,41 +20,71 @@ func (fn EndpointResolverFunc) ResolveEndpoint(region string, options s3.Endpoin
 	return fn(region, options)
 }
 
+type mockHTTPClient struct {
+	r *http.Response
+}
+
+func (m *mockHTTPClient) Do(*http.Request) (*http.Response, error) {
+	return m.r, nil
+}
+
+var _ s3.HTTPClient = &mockHTTPClient{}
+
+func asReadCloser(s string) io.ReadCloser {
+	return ioutil.NopCloser(strings.NewReader(s))
+}
+
 func TestErrorResponseWith200StatusCode(t *testing.T) {
 	cases := map[string]struct {
-		response       []byte
-		statusCode     int
+		response       *http.Response
 		expectedError  string
 		expectedBucket string
 	}{
 		"200ErrorBody": {
-			response: []byte(`<Error><Type>Sender</Type>
-    <Code>InvalidGreeting</Code>
-    <Message>Hi</Message>
-    <AnotherSetting>setting</AnotherSetting>
-    <RequestId>foo-id</RequestId></Error>`),
-			statusCode:    200,
+			response: &http.Response{
+				StatusCode: 200,
+				Body: asReadCloser(
+					`<Error>
+						<Type>Sender</Type>
+						<Code>InvalidGreeting</Code>
+						<Message>Hi</Message>
+						<AnotherSetting>setting</AnotherSetting>
+						<RequestId>foo-id</RequestId>
+					</Error>`,
+				),
+			},
 			expectedError: "InvalidGreeting",
 		},
 		"200NoResponse": {
-			response:      []byte{},
-			statusCode:    200,
+			response: &http.Response{
+				StatusCode: 200,
+				Body:       asReadCloser(""),
+			},
 			expectedError: "received empty response payload",
 		},
 		"200InvalidResponse": {
-			response: []byte(`<Error><Type>Sender</Type>
-    <Code>InvalidGreeting</Code>
-    <Message>Hi</Message>
-    <AnotherSetting>setting</AnotherSetting>
-    <RequestId>foo-id`),
-			statusCode:    200,
+			response: &http.Response{
+				StatusCode: 200,
+				Body: asReadCloser(
+					`<Error>
+						<Type>Sender</Type>
+						<Code>InvalidGreeting</Code>
+						<Message>Hi</Message>
+						<AnotherSetting>setting</AnotherSetting>
+						<RequestId>foo-id`,
+				),
+			},
 			expectedError: "unexpected EOF",
 		},
 		"200SuccessResponse": {
-			response: []byte(`<CompleteMultipartUploadResult>
-   			<Bucket>bucket</Bucket>
-			</CompleteMultipartUploadResult>`),
-			statusCode:     200,
+			response: &http.Response{
+				StatusCode: 200,
+				Body: asReadCloser(
+					`<CompleteMultipartUploadResult>
+						<Bucket>bucket</Bucket>
+					</CompleteMultipartUploadResult>`,
+				),
+			},
 			expectedError:  "",
 			expectedBucket: "bucket",
 		},
@@ -61,23 +92,12 @@ func TestErrorResponseWith200StatusCode(t *testing.T) {
 
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			server := httptest.NewServer(http.HandlerFunc(
-				func(w http.ResponseWriter, r *http.Request) {
-					w.WriteHeader(c.statusCode)
-					w.Write(c.response)
-				}))
-			defer server.Close()
-
 			options := s3.Options{
-				Credentials: unit.StubCredentialsProvider{},
-				Retryer:     aws.NopRetryer{},
-				Region:      "mock-region",
-				EndpointResolver: EndpointResolverFunc(func(region string, options s3.EndpointResolverOptions) (e aws.Endpoint, err error) {
-					e.URL = server.URL
-					e.SigningRegion = "us-west-2"
-					return e, err
-				}),
+				Credentials:  unit.StubCredentialsProvider{},
+				Retryer:      aws.NopRetryer{},
+				Region:       "mock-region",
 				UsePathStyle: true,
+				HTTPClient:   &mockHTTPClient{c.response},
 			}
 
 			svc := s3.New(options)
