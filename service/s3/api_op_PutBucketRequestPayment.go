@@ -149,9 +149,6 @@ func (c *Client) addOperationPutBucketRequestPaymentMiddlewares(stack *middlewar
 	if err = addPutBucketRequestPaymentInputChecksumMiddlewares(stack, options); err != nil {
 		return err
 	}
-	if err = addPutBucketRequestPaymentUpdateEndpoint(stack, options); err != nil {
-		return err
-	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
 		return err
 	}

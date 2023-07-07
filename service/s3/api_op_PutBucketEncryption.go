@@ -173,9 +173,6 @@ func (c *Client) addOperationPutBucketEncryptionMiddlewares(stack *middleware.St
 	if err = addPutBucketEncryptionInputChecksumMiddlewares(stack, options); err != nil {
 		return err
 	}
-	if err = addPutBucketEncryptionUpdateEndpoint(stack, options); err != nil {
-		return err
-	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
 		return err
 	}

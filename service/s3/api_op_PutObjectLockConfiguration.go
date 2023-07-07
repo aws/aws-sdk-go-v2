@@ -162,9 +162,6 @@ func (c *Client) addOperationPutObjectLockConfigurationMiddlewares(stack *middle
 	if err = addPutObjectLockConfigurationInputChecksumMiddlewares(stack, options); err != nil {
 		return err
 	}
-	if err = addPutObjectLockConfigurationUpdateEndpoint(stack, options); err != nil {
-		return err
-	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
 		return err
 	}

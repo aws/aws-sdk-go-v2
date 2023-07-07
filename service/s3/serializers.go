@@ -52,6 +52,24 @@ func (m *awsRestxml_serializeOpAbortMultipartUpload) HandleSerialize(ctx context
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "AbortMultipartUploadRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentAbortMultipartUploadInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -62,15 +80,6 @@ func (m *awsRestxml_serializeOpAbortMultipartUpload) HandleSerialize(ctx context
 func awsRestxml_serializeOpHttpBindingsAbortMultipartUploadInput(v *AbortMultipartUploadInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
 	}
 
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
@@ -96,6 +105,22 @@ func awsRestxml_serializeOpHttpBindingsAbortMultipartUploadInput(v *AbortMultipa
 		encoder.SetQuery("uploadId").String(*v.UploadId)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeOpDocumentAbortMultipartUploadInput(v *AbortMultipartUploadInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
 	return nil
 }
 
@@ -167,15 +192,6 @@ func (m *awsRestxml_serializeOpCompleteMultipartUpload) HandleSerialize(ctx cont
 func awsRestxml_serializeOpHttpBindingsCompleteMultipartUploadInput(v *CompleteMultipartUploadInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
 	}
 
 	if v.ChecksumCRC32 != nil && len(*v.ChecksumCRC32) > 0 {
@@ -273,6 +289,24 @@ func (m *awsRestxml_serializeOpCopyObject) HandleSerialize(ctx context.Context, 
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "CopyObjectRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentCopyObjectInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -288,15 +322,6 @@ func awsRestxml_serializeOpHttpBindingsCopyObjectInput(v *CopyObjectInput, encod
 	if len(v.ACL) > 0 {
 		locationName := "X-Amz-Acl"
 		encoder.SetHeader(locationName).String(string(v.ACL))
-	}
-
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
 	}
 
 	if v.BucketKeyEnabled {
@@ -505,6 +530,22 @@ func awsRestxml_serializeOpHttpBindingsCopyObjectInput(v *CopyObjectInput, encod
 	return nil
 }
 
+func awsRestxml_serializeOpDocumentCopyObjectInput(v *CopyObjectInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
+	return nil
+}
+
 type awsRestxml_serializeOpCreateBucket struct {
 }
 
@@ -580,15 +621,6 @@ func awsRestxml_serializeOpHttpBindingsCreateBucketInput(v *CreateBucketInput, e
 		encoder.SetHeader(locationName).String(string(v.ACL))
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if v.GrantFullControl != nil && len(*v.GrantFullControl) > 0 {
 		locationName := "X-Amz-Grant-Full-Control"
 		encoder.SetHeader(locationName).String(*v.GrantFullControl)
@@ -661,6 +693,24 @@ func (m *awsRestxml_serializeOpCreateMultipartUpload) HandleSerialize(ctx contex
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "CreateMultipartUploadRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentCreateMultipartUploadInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -676,15 +726,6 @@ func awsRestxml_serializeOpHttpBindingsCreateMultipartUploadInput(v *CreateMulti
 	if len(v.ACL) > 0 {
 		locationName := "X-Amz-Acl"
 		encoder.SetHeader(locationName).String(string(v.ACL))
-	}
-
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
 	}
 
 	if v.BucketKeyEnabled {
@@ -838,6 +879,22 @@ func awsRestxml_serializeOpHttpBindingsCreateMultipartUploadInput(v *CreateMulti
 	return nil
 }
 
+func awsRestxml_serializeOpDocumentCreateMultipartUploadInput(v *CreateMultipartUploadInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
+	return nil
+}
+
 type awsRestxml_serializeOpDeleteBucket struct {
 }
 
@@ -872,6 +929,24 @@ func (m *awsRestxml_serializeOpDeleteBucket) HandleSerialize(ctx context.Context
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "DeleteBucketRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentDeleteBucketInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -884,20 +959,27 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketInput(v *DeleteBucketInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
 		locationName := "X-Amz-Expected-Bucket-Owner"
 		encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeOpDocumentDeleteBucketInput(v *DeleteBucketInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
 	return nil
 }
 
@@ -935,6 +1017,24 @@ func (m *awsRestxml_serializeOpDeleteBucketAnalyticsConfiguration) HandleSeriali
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "DeleteBucketAnalyticsConfigurationRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentDeleteBucketAnalyticsConfigurationInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -947,15 +1047,6 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketAnalyticsConfigurationInput(v
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
 		locationName := "X-Amz-Expected-Bucket-Owner"
 		encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
@@ -965,6 +1056,22 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketAnalyticsConfigurationInput(v
 		encoder.SetQuery("id").String(*v.Id)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeOpDocumentDeleteBucketAnalyticsConfigurationInput(v *DeleteBucketAnalyticsConfigurationInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
 	return nil
 }
 
@@ -1002,6 +1109,24 @@ func (m *awsRestxml_serializeOpDeleteBucketCors) HandleSerialize(ctx context.Con
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "DeleteBucketCorsRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentDeleteBucketCorsInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -1014,20 +1139,27 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketCorsInput(v *DeleteBucketCors
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
 		locationName := "X-Amz-Expected-Bucket-Owner"
 		encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeOpDocumentDeleteBucketCorsInput(v *DeleteBucketCorsInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
 	return nil
 }
 
@@ -1065,6 +1197,24 @@ func (m *awsRestxml_serializeOpDeleteBucketEncryption) HandleSerialize(ctx conte
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "DeleteBucketEncryptionRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentDeleteBucketEncryptionInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -1077,20 +1227,27 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketEncryptionInput(v *DeleteBuck
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
 		locationName := "X-Amz-Expected-Bucket-Owner"
 		encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeOpDocumentDeleteBucketEncryptionInput(v *DeleteBucketEncryptionInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
 	return nil
 }
 
@@ -1128,6 +1285,24 @@ func (m *awsRestxml_serializeOpDeleteBucketIntelligentTieringConfiguration) Hand
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "DeleteBucketIntelligentTieringConfigurationRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentDeleteBucketIntelligentTieringConfigurationInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -1140,19 +1315,26 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketIntelligentTieringConfigurati
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if v.Id != nil {
 		encoder.SetQuery("id").String(*v.Id)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeOpDocumentDeleteBucketIntelligentTieringConfigurationInput(v *DeleteBucketIntelligentTieringConfigurationInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
 	return nil
 }
 
@@ -1190,6 +1372,24 @@ func (m *awsRestxml_serializeOpDeleteBucketInventoryConfiguration) HandleSeriali
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "DeleteBucketInventoryConfigurationRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentDeleteBucketInventoryConfigurationInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -1202,15 +1402,6 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketInventoryConfigurationInput(v
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
 		locationName := "X-Amz-Expected-Bucket-Owner"
 		encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
@@ -1220,6 +1411,22 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketInventoryConfigurationInput(v
 		encoder.SetQuery("id").String(*v.Id)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeOpDocumentDeleteBucketInventoryConfigurationInput(v *DeleteBucketInventoryConfigurationInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
 	return nil
 }
 
@@ -1257,6 +1464,24 @@ func (m *awsRestxml_serializeOpDeleteBucketLifecycle) HandleSerialize(ctx contex
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "DeleteBucketLifecycleRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentDeleteBucketLifecycleInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -1269,20 +1494,27 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketLifecycleInput(v *DeleteBucke
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
 		locationName := "X-Amz-Expected-Bucket-Owner"
 		encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeOpDocumentDeleteBucketLifecycleInput(v *DeleteBucketLifecycleInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
 	return nil
 }
 
@@ -1320,6 +1552,24 @@ func (m *awsRestxml_serializeOpDeleteBucketMetricsConfiguration) HandleSerialize
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "DeleteBucketMetricsConfigurationRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentDeleteBucketMetricsConfigurationInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -1332,15 +1582,6 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketMetricsConfigurationInput(v *
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
 		locationName := "X-Amz-Expected-Bucket-Owner"
 		encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
@@ -1350,6 +1591,22 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketMetricsConfigurationInput(v *
 		encoder.SetQuery("id").String(*v.Id)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeOpDocumentDeleteBucketMetricsConfigurationInput(v *DeleteBucketMetricsConfigurationInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
 	return nil
 }
 
@@ -1387,6 +1644,24 @@ func (m *awsRestxml_serializeOpDeleteBucketOwnershipControls) HandleSerialize(ct
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "DeleteBucketOwnershipControlsRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentDeleteBucketOwnershipControlsInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -1399,20 +1674,27 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketOwnershipControlsInput(v *Del
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
 		locationName := "X-Amz-Expected-Bucket-Owner"
 		encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeOpDocumentDeleteBucketOwnershipControlsInput(v *DeleteBucketOwnershipControlsInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
 	return nil
 }
 
@@ -1450,6 +1732,24 @@ func (m *awsRestxml_serializeOpDeleteBucketPolicy) HandleSerialize(ctx context.C
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "DeleteBucketPolicyRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentDeleteBucketPolicyInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -1462,20 +1762,27 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketPolicyInput(v *DeleteBucketPo
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
 		locationName := "X-Amz-Expected-Bucket-Owner"
 		encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeOpDocumentDeleteBucketPolicyInput(v *DeleteBucketPolicyInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
 	return nil
 }
 
@@ -1513,6 +1820,24 @@ func (m *awsRestxml_serializeOpDeleteBucketReplication) HandleSerialize(ctx cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "DeleteBucketReplicationRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentDeleteBucketReplicationInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -1525,20 +1850,27 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketReplicationInput(v *DeleteBuc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
 		locationName := "X-Amz-Expected-Bucket-Owner"
 		encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeOpDocumentDeleteBucketReplicationInput(v *DeleteBucketReplicationInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
 	return nil
 }
 
@@ -1576,6 +1908,24 @@ func (m *awsRestxml_serializeOpDeleteBucketTagging) HandleSerialize(ctx context.
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "DeleteBucketTaggingRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentDeleteBucketTaggingInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -1588,20 +1938,27 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketTaggingInput(v *DeleteBucketT
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
 		locationName := "X-Amz-Expected-Bucket-Owner"
 		encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeOpDocumentDeleteBucketTaggingInput(v *DeleteBucketTaggingInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
 	return nil
 }
 
@@ -1639,6 +1996,24 @@ func (m *awsRestxml_serializeOpDeleteBucketWebsite) HandleSerialize(ctx context.
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "DeleteBucketWebsiteRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentDeleteBucketWebsiteInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -1651,20 +2026,27 @@ func awsRestxml_serializeOpHttpBindingsDeleteBucketWebsiteInput(v *DeleteBucketW
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
 		locationName := "X-Amz-Expected-Bucket-Owner"
 		encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeOpDocumentDeleteBucketWebsiteInput(v *DeleteBucketWebsiteInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
 	return nil
 }
 
@@ -1702,6 +2084,24 @@ func (m *awsRestxml_serializeOpDeleteObject) HandleSerialize(ctx context.Context
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "DeleteObjectRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentDeleteObjectInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -1712,15 +2112,6 @@ func (m *awsRestxml_serializeOpDeleteObject) HandleSerialize(ctx context.Context
 func awsRestxml_serializeOpHttpBindingsDeleteObjectInput(v *DeleteObjectInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
 	}
 
 	if v.BypassGovernanceRetention {
@@ -1756,6 +2147,22 @@ func awsRestxml_serializeOpHttpBindingsDeleteObjectInput(v *DeleteObjectInput, e
 		encoder.SetQuery("versionId").String(*v.VersionId)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeOpDocumentDeleteObjectInput(v *DeleteObjectInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
 	return nil
 }
 
@@ -1829,15 +2236,6 @@ func awsRestxml_serializeOpHttpBindingsDeleteObjectsInput(v *DeleteObjectsInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if v.BypassGovernanceRetention {
 		locationName := "X-Amz-Bypass-Governance-Retention"
 		encoder.SetHeader(locationName).Boolean(v.BypassGovernanceRetention)
@@ -1900,6 +2298,24 @@ func (m *awsRestxml_serializeOpDeleteObjectTagging) HandleSerialize(ctx context.
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "DeleteObjectTaggingRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentDeleteObjectTaggingInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -1910,15 +2326,6 @@ func (m *awsRestxml_serializeOpDeleteObjectTagging) HandleSerialize(ctx context.
 func awsRestxml_serializeOpHttpBindingsDeleteObjectTaggingInput(v *DeleteObjectTaggingInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
 	}
 
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
@@ -1939,6 +2346,22 @@ func awsRestxml_serializeOpHttpBindingsDeleteObjectTaggingInput(v *DeleteObjectT
 		encoder.SetQuery("versionId").String(*v.VersionId)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeOpDocumentDeleteObjectTaggingInput(v *DeleteObjectTaggingInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
 	return nil
 }
 
@@ -1976,6 +2399,24 @@ func (m *awsRestxml_serializeOpDeletePublicAccessBlock) HandleSerialize(ctx cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "DeletePublicAccessBlockRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentDeletePublicAccessBlockInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -1988,20 +2429,27 @@ func awsRestxml_serializeOpHttpBindingsDeletePublicAccessBlockInput(v *DeletePub
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
 		locationName := "X-Amz-Expected-Bucket-Owner"
 		encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeOpDocumentDeletePublicAccessBlockInput(v *DeletePublicAccessBlockInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
 	return nil
 }
 
@@ -2039,6 +2487,24 @@ func (m *awsRestxml_serializeOpGetBucketAccelerateConfiguration) HandleSerialize
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "GetBucketAccelerateConfigurationRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentGetBucketAccelerateConfigurationInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -2051,15 +2517,6 @@ func awsRestxml_serializeOpHttpBindingsGetBucketAccelerateConfigurationInput(v *
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
 		locationName := "X-Amz-Expected-Bucket-Owner"
 		encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
@@ -2070,6 +2527,22 @@ func awsRestxml_serializeOpHttpBindingsGetBucketAccelerateConfigurationInput(v *
 		encoder.SetHeader(locationName).String(string(v.RequestPayer))
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeOpDocumentGetBucketAccelerateConfigurationInput(v *GetBucketAccelerateConfigurationInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
 	return nil
 }
 
@@ -2107,6 +2580,24 @@ func (m *awsRestxml_serializeOpGetBucketAcl) HandleSerialize(ctx context.Context
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "GetBucketAclRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentGetBucketAclInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -2119,20 +2610,27 @@ func awsRestxml_serializeOpHttpBindingsGetBucketAclInput(v *GetBucketAclInput, e
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
 		locationName := "X-Amz-Expected-Bucket-Owner"
 		encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeOpDocumentGetBucketAclInput(v *GetBucketAclInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
 	return nil
 }
 
@@ -2170,6 +2668,24 @@ func (m *awsRestxml_serializeOpGetBucketAnalyticsConfiguration) HandleSerialize(
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "GetBucketAnalyticsConfigurationRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentGetBucketAnalyticsConfigurationInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -2182,15 +2698,6 @@ func awsRestxml_serializeOpHttpBindingsGetBucketAnalyticsConfigurationInput(v *G
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
 		locationName := "X-Amz-Expected-Bucket-Owner"
 		encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
@@ -2200,6 +2707,22 @@ func awsRestxml_serializeOpHttpBindingsGetBucketAnalyticsConfigurationInput(v *G
 		encoder.SetQuery("id").String(*v.Id)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeOpDocumentGetBucketAnalyticsConfigurationInput(v *GetBucketAnalyticsConfigurationInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
 	return nil
 }
 
@@ -2237,6 +2760,24 @@ func (m *awsRestxml_serializeOpGetBucketCors) HandleSerialize(ctx context.Contex
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "GetBucketCorsRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentGetBucketCorsInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -2249,20 +2790,27 @@ func awsRestxml_serializeOpHttpBindingsGetBucketCorsInput(v *GetBucketCorsInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
 		locationName := "X-Amz-Expected-Bucket-Owner"
 		encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeOpDocumentGetBucketCorsInput(v *GetBucketCorsInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
 	return nil
 }
 
@@ -2300,6 +2848,24 @@ func (m *awsRestxml_serializeOpGetBucketEncryption) HandleSerialize(ctx context.
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "GetBucketEncryptionRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentGetBucketEncryptionInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -2312,20 +2878,27 @@ func awsRestxml_serializeOpHttpBindingsGetBucketEncryptionInput(v *GetBucketEncr
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
 		locationName := "X-Amz-Expected-Bucket-Owner"
 		encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeOpDocumentGetBucketEncryptionInput(v *GetBucketEncryptionInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
 	return nil
 }
 
@@ -2363,6 +2936,24 @@ func (m *awsRestxml_serializeOpGetBucketIntelligentTieringConfiguration) HandleS
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "GetBucketIntelligentTieringConfigurationRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentGetBucketIntelligentTieringConfigurationInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -2375,19 +2966,26 @@ func awsRestxml_serializeOpHttpBindingsGetBucketIntelligentTieringConfigurationI
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if v.Id != nil {
 		encoder.SetQuery("id").String(*v.Id)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeOpDocumentGetBucketIntelligentTieringConfigurationInput(v *GetBucketIntelligentTieringConfigurationInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
 	return nil
 }
 
@@ -2425,6 +3023,24 @@ func (m *awsRestxml_serializeOpGetBucketInventoryConfiguration) HandleSerialize(
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "GetBucketInventoryConfigurationRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentGetBucketInventoryConfigurationInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -2437,15 +3053,6 @@ func awsRestxml_serializeOpHttpBindingsGetBucketInventoryConfigurationInput(v *G
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
 		locationName := "X-Amz-Expected-Bucket-Owner"
 		encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
@@ -2455,6 +3062,22 @@ func awsRestxml_serializeOpHttpBindingsGetBucketInventoryConfigurationInput(v *G
 		encoder.SetQuery("id").String(*v.Id)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeOpDocumentGetBucketInventoryConfigurationInput(v *GetBucketInventoryConfigurationInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
 	return nil
 }
 
@@ -2492,6 +3115,24 @@ func (m *awsRestxml_serializeOpGetBucketLifecycleConfiguration) HandleSerialize(
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "GetBucketLifecycleConfigurationRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentGetBucketLifecycleConfigurationInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -2504,20 +3145,27 @@ func awsRestxml_serializeOpHttpBindingsGetBucketLifecycleConfigurationInput(v *G
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
 		locationName := "X-Amz-Expected-Bucket-Owner"
 		encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeOpDocumentGetBucketLifecycleConfigurationInput(v *GetBucketLifecycleConfigurationInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
 	return nil
 }
 
@@ -2555,6 +3203,24 @@ func (m *awsRestxml_serializeOpGetBucketLocation) HandleSerialize(ctx context.Co
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "GetBucketLocationRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentGetBucketLocationInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -2567,20 +3233,27 @@ func awsRestxml_serializeOpHttpBindingsGetBucketLocationInput(v *GetBucketLocati
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
 		locationName := "X-Amz-Expected-Bucket-Owner"
 		encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeOpDocumentGetBucketLocationInput(v *GetBucketLocationInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
 	return nil
 }
 
@@ -2618,6 +3291,24 @@ func (m *awsRestxml_serializeOpGetBucketLogging) HandleSerialize(ctx context.Con
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "GetBucketLoggingRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentGetBucketLoggingInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -2630,20 +3321,27 @@ func awsRestxml_serializeOpHttpBindingsGetBucketLoggingInput(v *GetBucketLogging
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
 		locationName := "X-Amz-Expected-Bucket-Owner"
 		encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeOpDocumentGetBucketLoggingInput(v *GetBucketLoggingInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
 	return nil
 }
 
@@ -2681,6 +3379,24 @@ func (m *awsRestxml_serializeOpGetBucketMetricsConfiguration) HandleSerialize(ct
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "GetBucketMetricsConfigurationRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentGetBucketMetricsConfigurationInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -2693,15 +3409,6 @@ func awsRestxml_serializeOpHttpBindingsGetBucketMetricsConfigurationInput(v *Get
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
 		locationName := "X-Amz-Expected-Bucket-Owner"
 		encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
@@ -2711,6 +3418,22 @@ func awsRestxml_serializeOpHttpBindingsGetBucketMetricsConfigurationInput(v *Get
 		encoder.SetQuery("id").String(*v.Id)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeOpDocumentGetBucketMetricsConfigurationInput(v *GetBucketMetricsConfigurationInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
 	return nil
 }
 
@@ -2748,6 +3471,24 @@ func (m *awsRestxml_serializeOpGetBucketNotificationConfiguration) HandleSeriali
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "GetBucketNotificationConfigurationRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentGetBucketNotificationConfigurationInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -2760,20 +3501,27 @@ func awsRestxml_serializeOpHttpBindingsGetBucketNotificationConfigurationInput(v
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
 		locationName := "X-Amz-Expected-Bucket-Owner"
 		encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeOpDocumentGetBucketNotificationConfigurationInput(v *GetBucketNotificationConfigurationInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
 	return nil
 }
 
@@ -2811,6 +3559,24 @@ func (m *awsRestxml_serializeOpGetBucketOwnershipControls) HandleSerialize(ctx c
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "GetBucketOwnershipControlsRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentGetBucketOwnershipControlsInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -2823,20 +3589,27 @@ func awsRestxml_serializeOpHttpBindingsGetBucketOwnershipControlsInput(v *GetBuc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
 		locationName := "X-Amz-Expected-Bucket-Owner"
 		encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeOpDocumentGetBucketOwnershipControlsInput(v *GetBucketOwnershipControlsInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
 	return nil
 }
 
@@ -2874,6 +3647,24 @@ func (m *awsRestxml_serializeOpGetBucketPolicy) HandleSerialize(ctx context.Cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "GetBucketPolicyRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentGetBucketPolicyInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -2886,20 +3677,27 @@ func awsRestxml_serializeOpHttpBindingsGetBucketPolicyInput(v *GetBucketPolicyIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
 		locationName := "X-Amz-Expected-Bucket-Owner"
 		encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeOpDocumentGetBucketPolicyInput(v *GetBucketPolicyInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
 	return nil
 }
 
@@ -2937,6 +3735,24 @@ func (m *awsRestxml_serializeOpGetBucketPolicyStatus) HandleSerialize(ctx contex
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "GetBucketPolicyStatusRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentGetBucketPolicyStatusInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -2949,20 +3765,27 @@ func awsRestxml_serializeOpHttpBindingsGetBucketPolicyStatusInput(v *GetBucketPo
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
 		locationName := "X-Amz-Expected-Bucket-Owner"
 		encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeOpDocumentGetBucketPolicyStatusInput(v *GetBucketPolicyStatusInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
 	return nil
 }
 
@@ -3000,6 +3823,24 @@ func (m *awsRestxml_serializeOpGetBucketReplication) HandleSerialize(ctx context
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "GetBucketReplicationRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentGetBucketReplicationInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -3012,20 +3853,27 @@ func awsRestxml_serializeOpHttpBindingsGetBucketReplicationInput(v *GetBucketRep
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
 		locationName := "X-Amz-Expected-Bucket-Owner"
 		encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeOpDocumentGetBucketReplicationInput(v *GetBucketReplicationInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
 	return nil
 }
 
@@ -3063,6 +3911,24 @@ func (m *awsRestxml_serializeOpGetBucketRequestPayment) HandleSerialize(ctx cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "GetBucketRequestPaymentRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentGetBucketRequestPaymentInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -3075,20 +3941,27 @@ func awsRestxml_serializeOpHttpBindingsGetBucketRequestPaymentInput(v *GetBucket
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
 		locationName := "X-Amz-Expected-Bucket-Owner"
 		encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeOpDocumentGetBucketRequestPaymentInput(v *GetBucketRequestPaymentInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
 	return nil
 }
 
@@ -3126,6 +3999,24 @@ func (m *awsRestxml_serializeOpGetBucketTagging) HandleSerialize(ctx context.Con
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "GetBucketTaggingRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentGetBucketTaggingInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -3138,20 +4029,27 @@ func awsRestxml_serializeOpHttpBindingsGetBucketTaggingInput(v *GetBucketTagging
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
 		locationName := "X-Amz-Expected-Bucket-Owner"
 		encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeOpDocumentGetBucketTaggingInput(v *GetBucketTaggingInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
 	return nil
 }
 
@@ -3189,6 +4087,24 @@ func (m *awsRestxml_serializeOpGetBucketVersioning) HandleSerialize(ctx context.
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "GetBucketVersioningRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentGetBucketVersioningInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -3201,20 +4117,27 @@ func awsRestxml_serializeOpHttpBindingsGetBucketVersioningInput(v *GetBucketVers
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
 		locationName := "X-Amz-Expected-Bucket-Owner"
 		encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeOpDocumentGetBucketVersioningInput(v *GetBucketVersioningInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
 	return nil
 }
 
@@ -3252,6 +4175,24 @@ func (m *awsRestxml_serializeOpGetBucketWebsite) HandleSerialize(ctx context.Con
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "GetBucketWebsiteRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentGetBucketWebsiteInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -3264,20 +4205,27 @@ func awsRestxml_serializeOpHttpBindingsGetBucketWebsiteInput(v *GetBucketWebsite
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
 		locationName := "X-Amz-Expected-Bucket-Owner"
 		encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeOpDocumentGetBucketWebsiteInput(v *GetBucketWebsiteInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
 	return nil
 }
 
@@ -3315,6 +4263,24 @@ func (m *awsRestxml_serializeOpGetObject) HandleSerialize(ctx context.Context, i
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "GetObjectRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentGetObjectInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -3325,15 +4291,6 @@ func (m *awsRestxml_serializeOpGetObject) HandleSerialize(ctx context.Context, i
 func awsRestxml_serializeOpHttpBindingsGetObjectInput(v *GetObjectInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
 	}
 
 	if len(v.ChecksumMode) > 0 {
@@ -3435,6 +4392,22 @@ func awsRestxml_serializeOpHttpBindingsGetObjectInput(v *GetObjectInput, encoder
 	return nil
 }
 
+func awsRestxml_serializeOpDocumentGetObjectInput(v *GetObjectInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
+	return nil
+}
+
 type awsRestxml_serializeOpGetObjectAcl struct {
 }
 
@@ -3469,6 +4442,24 @@ func (m *awsRestxml_serializeOpGetObjectAcl) HandleSerialize(ctx context.Context
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "GetObjectAclRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentGetObjectAclInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -3479,15 +4470,6 @@ func (m *awsRestxml_serializeOpGetObjectAcl) HandleSerialize(ctx context.Context
 func awsRestxml_serializeOpHttpBindingsGetObjectAclInput(v *GetObjectAclInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
 	}
 
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
@@ -3513,6 +4495,22 @@ func awsRestxml_serializeOpHttpBindingsGetObjectAclInput(v *GetObjectAclInput, e
 		encoder.SetQuery("versionId").String(*v.VersionId)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeOpDocumentGetObjectAclInput(v *GetObjectAclInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
 	return nil
 }
 
@@ -3550,6 +4548,24 @@ func (m *awsRestxml_serializeOpGetObjectAttributes) HandleSerialize(ctx context.
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "GetObjectAttributesRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentGetObjectAttributesInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -3560,15 +4576,6 @@ func (m *awsRestxml_serializeOpGetObjectAttributes) HandleSerialize(ctx context.
 func awsRestxml_serializeOpHttpBindingsGetObjectAttributesInput(v *GetObjectAttributesInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
 	}
 
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
@@ -3636,6 +4643,22 @@ func awsRestxml_serializeOpHttpBindingsGetObjectAttributesInput(v *GetObjectAttr
 	return nil
 }
 
+func awsRestxml_serializeOpDocumentGetObjectAttributesInput(v *GetObjectAttributesInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
+	return nil
+}
+
 type awsRestxml_serializeOpGetObjectLegalHold struct {
 }
 
@@ -3670,6 +4693,24 @@ func (m *awsRestxml_serializeOpGetObjectLegalHold) HandleSerialize(ctx context.C
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "GetObjectLegalHoldRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentGetObjectLegalHoldInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -3680,15 +4721,6 @@ func (m *awsRestxml_serializeOpGetObjectLegalHold) HandleSerialize(ctx context.C
 func awsRestxml_serializeOpHttpBindingsGetObjectLegalHoldInput(v *GetObjectLegalHoldInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
 	}
 
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
@@ -3714,6 +4746,22 @@ func awsRestxml_serializeOpHttpBindingsGetObjectLegalHoldInput(v *GetObjectLegal
 		encoder.SetQuery("versionId").String(*v.VersionId)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeOpDocumentGetObjectLegalHoldInput(v *GetObjectLegalHoldInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
 	return nil
 }
 
@@ -3751,6 +4799,24 @@ func (m *awsRestxml_serializeOpGetObjectLockConfiguration) HandleSerialize(ctx c
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "GetObjectLockConfigurationRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentGetObjectLockConfigurationInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -3763,20 +4829,27 @@ func awsRestxml_serializeOpHttpBindingsGetObjectLockConfigurationInput(v *GetObj
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
 		locationName := "X-Amz-Expected-Bucket-Owner"
 		encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeOpDocumentGetObjectLockConfigurationInput(v *GetObjectLockConfigurationInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
 	return nil
 }
 
@@ -3814,6 +4887,24 @@ func (m *awsRestxml_serializeOpGetObjectRetention) HandleSerialize(ctx context.C
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "GetObjectRetentionRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentGetObjectRetentionInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -3824,15 +4915,6 @@ func (m *awsRestxml_serializeOpGetObjectRetention) HandleSerialize(ctx context.C
 func awsRestxml_serializeOpHttpBindingsGetObjectRetentionInput(v *GetObjectRetentionInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
 	}
 
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
@@ -3858,6 +4940,22 @@ func awsRestxml_serializeOpHttpBindingsGetObjectRetentionInput(v *GetObjectReten
 		encoder.SetQuery("versionId").String(*v.VersionId)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeOpDocumentGetObjectRetentionInput(v *GetObjectRetentionInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
 	return nil
 }
 
@@ -3895,6 +4993,24 @@ func (m *awsRestxml_serializeOpGetObjectTagging) HandleSerialize(ctx context.Con
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "GetObjectTaggingRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentGetObjectTaggingInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -3905,15 +5021,6 @@ func (m *awsRestxml_serializeOpGetObjectTagging) HandleSerialize(ctx context.Con
 func awsRestxml_serializeOpHttpBindingsGetObjectTaggingInput(v *GetObjectTaggingInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
 	}
 
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
@@ -3939,6 +5046,22 @@ func awsRestxml_serializeOpHttpBindingsGetObjectTaggingInput(v *GetObjectTagging
 		encoder.SetQuery("versionId").String(*v.VersionId)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeOpDocumentGetObjectTaggingInput(v *GetObjectTaggingInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
 	return nil
 }
 
@@ -3976,6 +5099,24 @@ func (m *awsRestxml_serializeOpGetObjectTorrent) HandleSerialize(ctx context.Con
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "GetObjectTorrentRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentGetObjectTorrentInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -3986,15 +5127,6 @@ func (m *awsRestxml_serializeOpGetObjectTorrent) HandleSerialize(ctx context.Con
 func awsRestxml_serializeOpHttpBindingsGetObjectTorrentInput(v *GetObjectTorrentInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
 	}
 
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
@@ -4016,6 +5148,22 @@ func awsRestxml_serializeOpHttpBindingsGetObjectTorrentInput(v *GetObjectTorrent
 		encoder.SetHeader(locationName).String(string(v.RequestPayer))
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeOpDocumentGetObjectTorrentInput(v *GetObjectTorrentInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
 	return nil
 }
 
@@ -4053,6 +5201,24 @@ func (m *awsRestxml_serializeOpGetPublicAccessBlock) HandleSerialize(ctx context
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "GetPublicAccessBlockRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentGetPublicAccessBlockInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -4065,20 +5231,27 @@ func awsRestxml_serializeOpHttpBindingsGetPublicAccessBlockInput(v *GetPublicAcc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
 		locationName := "X-Amz-Expected-Bucket-Owner"
 		encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeOpDocumentGetPublicAccessBlockInput(v *GetPublicAccessBlockInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
 	return nil
 }
 
@@ -4116,6 +5289,24 @@ func (m *awsRestxml_serializeOpHeadBucket) HandleSerialize(ctx context.Context, 
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "HeadBucketRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentHeadBucketInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -4128,20 +5319,27 @@ func awsRestxml_serializeOpHttpBindingsHeadBucketInput(v *HeadBucketInput, encod
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
 		locationName := "X-Amz-Expected-Bucket-Owner"
 		encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeOpDocumentHeadBucketInput(v *HeadBucketInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
 	return nil
 }
 
@@ -4179,6 +5377,24 @@ func (m *awsRestxml_serializeOpHeadObject) HandleSerialize(ctx context.Context, 
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "HeadObjectRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentHeadObjectInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -4189,15 +5405,6 @@ func (m *awsRestxml_serializeOpHeadObject) HandleSerialize(ctx context.Context, 
 func awsRestxml_serializeOpHttpBindingsHeadObjectInput(v *HeadObjectInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
 	}
 
 	if len(v.ChecksumMode) > 0 {
@@ -4275,6 +5482,22 @@ func awsRestxml_serializeOpHttpBindingsHeadObjectInput(v *HeadObjectInput, encod
 	return nil
 }
 
+func awsRestxml_serializeOpDocumentHeadObjectInput(v *HeadObjectInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
+	return nil
+}
+
 type awsRestxml_serializeOpListBucketAnalyticsConfigurations struct {
 }
 
@@ -4309,6 +5532,24 @@ func (m *awsRestxml_serializeOpListBucketAnalyticsConfigurations) HandleSerializ
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "ListBucketAnalyticsConfigurationsRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentListBucketAnalyticsConfigurationsInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -4321,15 +5562,6 @@ func awsRestxml_serializeOpHttpBindingsListBucketAnalyticsConfigurationsInput(v 
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if v.ContinuationToken != nil {
 		encoder.SetQuery("continuation-token").String(*v.ContinuationToken)
 	}
@@ -4339,6 +5571,22 @@ func awsRestxml_serializeOpHttpBindingsListBucketAnalyticsConfigurationsInput(v 
 		encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeOpDocumentListBucketAnalyticsConfigurationsInput(v *ListBucketAnalyticsConfigurationsInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
 	return nil
 }
 
@@ -4376,6 +5624,24 @@ func (m *awsRestxml_serializeOpListBucketIntelligentTieringConfigurations) Handl
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "ListBucketIntelligentTieringConfigurationsRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentListBucketIntelligentTieringConfigurationsInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -4388,19 +5654,26 @@ func awsRestxml_serializeOpHttpBindingsListBucketIntelligentTieringConfiguration
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if v.ContinuationToken != nil {
 		encoder.SetQuery("continuation-token").String(*v.ContinuationToken)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeOpDocumentListBucketIntelligentTieringConfigurationsInput(v *ListBucketIntelligentTieringConfigurationsInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
 	return nil
 }
 
@@ -4438,6 +5711,24 @@ func (m *awsRestxml_serializeOpListBucketInventoryConfigurations) HandleSerializ
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "ListBucketInventoryConfigurationsRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentListBucketInventoryConfigurationsInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -4450,15 +5741,6 @@ func awsRestxml_serializeOpHttpBindingsListBucketInventoryConfigurationsInput(v 
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if v.ContinuationToken != nil {
 		encoder.SetQuery("continuation-token").String(*v.ContinuationToken)
 	}
@@ -4468,6 +5750,22 @@ func awsRestxml_serializeOpHttpBindingsListBucketInventoryConfigurationsInput(v 
 		encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeOpDocumentListBucketInventoryConfigurationsInput(v *ListBucketInventoryConfigurationsInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
 	return nil
 }
 
@@ -4505,6 +5803,24 @@ func (m *awsRestxml_serializeOpListBucketMetricsConfigurations) HandleSerialize(
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "ListBucketMetricsConfigurationsRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentListBucketMetricsConfigurationsInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -4517,15 +5833,6 @@ func awsRestxml_serializeOpHttpBindingsListBucketMetricsConfigurationsInput(v *L
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if v.ContinuationToken != nil {
 		encoder.SetQuery("continuation-token").String(*v.ContinuationToken)
 	}
@@ -4535,6 +5842,22 @@ func awsRestxml_serializeOpHttpBindingsListBucketMetricsConfigurationsInput(v *L
 		encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeOpDocumentListBucketMetricsConfigurationsInput(v *ListBucketMetricsConfigurationsInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
 	return nil
 }
 
@@ -4617,6 +5940,24 @@ func (m *awsRestxml_serializeOpListMultipartUploads) HandleSerialize(ctx context
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "ListMultipartUploadsRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentListMultipartUploadsInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -4627,15 +5968,6 @@ func (m *awsRestxml_serializeOpListMultipartUploads) HandleSerialize(ctx context
 func awsRestxml_serializeOpHttpBindingsListMultipartUploadsInput(v *ListMultipartUploadsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
 	}
 
 	if v.Delimiter != nil {
@@ -4675,6 +6007,22 @@ func awsRestxml_serializeOpHttpBindingsListMultipartUploadsInput(v *ListMultipar
 	return nil
 }
 
+func awsRestxml_serializeOpDocumentListMultipartUploadsInput(v *ListMultipartUploadsInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
+	return nil
+}
+
 type awsRestxml_serializeOpListObjects struct {
 }
 
@@ -4709,6 +6057,24 @@ func (m *awsRestxml_serializeOpListObjects) HandleSerialize(ctx context.Context,
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "ListObjectsRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentListObjectsInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -4719,15 +6085,6 @@ func (m *awsRestxml_serializeOpListObjects) HandleSerialize(ctx context.Context,
 func awsRestxml_serializeOpHttpBindingsListObjectsInput(v *ListObjectsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
 	}
 
 	if v.Delimiter != nil {
@@ -4777,6 +6134,22 @@ func awsRestxml_serializeOpHttpBindingsListObjectsInput(v *ListObjectsInput, enc
 	return nil
 }
 
+func awsRestxml_serializeOpDocumentListObjectsInput(v *ListObjectsInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
+	return nil
+}
+
 type awsRestxml_serializeOpListObjectsV2 struct {
 }
 
@@ -4811,6 +6184,24 @@ func (m *awsRestxml_serializeOpListObjectsV2) HandleSerialize(ctx context.Contex
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "ListObjectsV2Request",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentListObjectsV2Input(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -4821,15 +6212,6 @@ func (m *awsRestxml_serializeOpListObjectsV2) HandleSerialize(ctx context.Contex
 func awsRestxml_serializeOpHttpBindingsListObjectsV2Input(v *ListObjectsV2Input, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
 	}
 
 	if v.ContinuationToken != nil {
@@ -4887,6 +6269,22 @@ func awsRestxml_serializeOpHttpBindingsListObjectsV2Input(v *ListObjectsV2Input,
 	return nil
 }
 
+func awsRestxml_serializeOpDocumentListObjectsV2Input(v *ListObjectsV2Input, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
+	return nil
+}
+
 type awsRestxml_serializeOpListObjectVersions struct {
 }
 
@@ -4921,6 +6319,24 @@ func (m *awsRestxml_serializeOpListObjectVersions) HandleSerialize(ctx context.C
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "ListObjectVersionsRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentListObjectVersionsInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -4931,15 +6347,6 @@ func (m *awsRestxml_serializeOpListObjectVersions) HandleSerialize(ctx context.C
 func awsRestxml_serializeOpHttpBindingsListObjectVersionsInput(v *ListObjectVersionsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
 	}
 
 	if v.Delimiter != nil {
@@ -4993,6 +6400,22 @@ func awsRestxml_serializeOpHttpBindingsListObjectVersionsInput(v *ListObjectVers
 	return nil
 }
 
+func awsRestxml_serializeOpDocumentListObjectVersionsInput(v *ListObjectVersionsInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
+	return nil
+}
+
 type awsRestxml_serializeOpListParts struct {
 }
 
@@ -5027,6 +6450,24 @@ func (m *awsRestxml_serializeOpListParts) HandleSerialize(ctx context.Context, i
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "ListPartsRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentListPartsInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -5037,15 +6478,6 @@ func (m *awsRestxml_serializeOpListParts) HandleSerialize(ctx context.Context, i
 func awsRestxml_serializeOpHttpBindingsListPartsInput(v *ListPartsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
 	}
 
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
@@ -5094,6 +6526,22 @@ func awsRestxml_serializeOpHttpBindingsListPartsInput(v *ListPartsInput, encoder
 		encoder.SetQuery("uploadId").String(*v.UploadId)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeOpDocumentListPartsInput(v *ListPartsInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
 	return nil
 }
 
@@ -5165,15 +6613,6 @@ func (m *awsRestxml_serializeOpPutBucketAccelerateConfiguration) HandleSerialize
 func awsRestxml_serializeOpHttpBindingsPutBucketAccelerateConfigurationInput(v *PutBucketAccelerateConfigurationInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
 	}
 
 	if len(v.ChecksumAlgorithm) > 0 {
@@ -5262,15 +6701,6 @@ func awsRestxml_serializeOpHttpBindingsPutBucketAclInput(v *PutBucketAclInput, e
 	if len(v.ACL) > 0 {
 		locationName := "X-Amz-Acl"
 		encoder.SetHeader(locationName).String(string(v.ACL))
-	}
-
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
 	}
 
 	if len(v.ChecksumAlgorithm) > 0 {
@@ -5386,15 +6816,6 @@ func awsRestxml_serializeOpHttpBindingsPutBucketAnalyticsConfigurationInput(v *P
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
 		locationName := "X-Amz-Expected-Bucket-Owner"
 		encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
@@ -5475,15 +6896,6 @@ func (m *awsRestxml_serializeOpPutBucketCors) HandleSerialize(ctx context.Contex
 func awsRestxml_serializeOpHttpBindingsPutBucketCorsInput(v *PutBucketCorsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
 	}
 
 	if len(v.ChecksumAlgorithm) > 0 {
@@ -5574,15 +6986,6 @@ func awsRestxml_serializeOpHttpBindingsPutBucketEncryptionInput(v *PutBucketEncr
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if len(v.ChecksumAlgorithm) > 0 {
 		locationName := "X-Amz-Sdk-Checksum-Algorithm"
 		encoder.SetHeader(locationName).String(string(v.ChecksumAlgorithm))
@@ -5671,15 +7074,6 @@ func awsRestxml_serializeOpHttpBindingsPutBucketIntelligentTieringConfigurationI
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if v.Id != nil {
 		encoder.SetQuery("id").String(*v.Id)
 	}
@@ -5755,15 +7149,6 @@ func (m *awsRestxml_serializeOpPutBucketInventoryConfiguration) HandleSerialize(
 func awsRestxml_serializeOpHttpBindingsPutBucketInventoryConfigurationInput(v *PutBucketInventoryConfigurationInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
 	}
 
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
@@ -5848,15 +7233,6 @@ func awsRestxml_serializeOpHttpBindingsPutBucketLifecycleConfigurationInput(v *P
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if len(v.ChecksumAlgorithm) > 0 {
 		locationName := "X-Amz-Sdk-Checksum-Algorithm"
 		encoder.SetHeader(locationName).String(string(v.ChecksumAlgorithm))
@@ -5938,15 +7314,6 @@ func (m *awsRestxml_serializeOpPutBucketLogging) HandleSerialize(ctx context.Con
 func awsRestxml_serializeOpHttpBindingsPutBucketLoggingInput(v *PutBucketLoggingInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
 	}
 
 	if len(v.ChecksumAlgorithm) > 0 {
@@ -6037,15 +7404,6 @@ func awsRestxml_serializeOpHttpBindingsPutBucketMetricsConfigurationInput(v *Put
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
 		locationName := "X-Amz-Expected-Bucket-Owner"
 		encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
@@ -6126,15 +7484,6 @@ func (m *awsRestxml_serializeOpPutBucketNotificationConfiguration) HandleSeriali
 func awsRestxml_serializeOpHttpBindingsPutBucketNotificationConfigurationInput(v *PutBucketNotificationConfigurationInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
 	}
 
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
@@ -6220,15 +7569,6 @@ func awsRestxml_serializeOpHttpBindingsPutBucketOwnershipControlsInput(v *PutBuc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if v.ContentMD5 != nil && len(*v.ContentMD5) > 0 {
 		locationName := "Content-Md5"
 		encoder.SetHeader(locationName).String(*v.ContentMD5)
@@ -6298,15 +7638,6 @@ func (m *awsRestxml_serializeOpPutBucketPolicy) HandleSerialize(ctx context.Cont
 func awsRestxml_serializeOpHttpBindingsPutBucketPolicyInput(v *PutBucketPolicyInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
 	}
 
 	if len(v.ChecksumAlgorithm) > 0 {
@@ -6402,15 +7733,6 @@ func awsRestxml_serializeOpHttpBindingsPutBucketReplicationInput(v *PutBucketRep
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if len(v.ChecksumAlgorithm) > 0 {
 		locationName := "X-Amz-Sdk-Checksum-Algorithm"
 		encoder.SetHeader(locationName).String(string(v.ChecksumAlgorithm))
@@ -6504,15 +7826,6 @@ func awsRestxml_serializeOpHttpBindingsPutBucketRequestPaymentInput(v *PutBucket
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if len(v.ChecksumAlgorithm) > 0 {
 		locationName := "X-Amz-Sdk-Checksum-Algorithm"
 		encoder.SetHeader(locationName).String(string(v.ChecksumAlgorithm))
@@ -6601,15 +7914,6 @@ func awsRestxml_serializeOpHttpBindingsPutBucketTaggingInput(v *PutBucketTagging
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if len(v.ChecksumAlgorithm) > 0 {
 		locationName := "X-Amz-Sdk-Checksum-Algorithm"
 		encoder.SetHeader(locationName).String(string(v.ChecksumAlgorithm))
@@ -6696,15 +8000,6 @@ func (m *awsRestxml_serializeOpPutBucketVersioning) HandleSerialize(ctx context.
 func awsRestxml_serializeOpHttpBindingsPutBucketVersioningInput(v *PutBucketVersioningInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
 	}
 
 	if len(v.ChecksumAlgorithm) > 0 {
@@ -6800,15 +8095,6 @@ func awsRestxml_serializeOpHttpBindingsPutBucketWebsiteInput(v *PutBucketWebsite
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if len(v.ChecksumAlgorithm) > 0 {
 		locationName := "X-Amz-Sdk-Checksum-Algorithm"
 		encoder.SetHeader(locationName).String(string(v.ChecksumAlgorithm))
@@ -6888,15 +8174,6 @@ func awsRestxml_serializeOpHttpBindingsPutObjectInput(v *PutObjectInput, encoder
 	if len(v.ACL) > 0 {
 		locationName := "X-Amz-Acl"
 		encoder.SetHeader(locationName).String(string(v.ACL))
-	}
-
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
 	}
 
 	if v.BucketKeyEnabled {
@@ -7155,15 +8432,6 @@ func awsRestxml_serializeOpHttpBindingsPutObjectAclInput(v *PutObjectAclInput, e
 		encoder.SetHeader(locationName).String(string(v.ACL))
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if len(v.ChecksumAlgorithm) > 0 {
 		locationName := "X-Amz-Sdk-Checksum-Algorithm"
 		encoder.SetHeader(locationName).String(string(v.ChecksumAlgorithm))
@@ -7295,15 +8563,6 @@ func awsRestxml_serializeOpHttpBindingsPutObjectLegalHoldInput(v *PutObjectLegal
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if len(v.ChecksumAlgorithm) > 0 {
 		locationName := "X-Amz-Sdk-Checksum-Algorithm"
 		encoder.SetHeader(locationName).String(string(v.ChecksumAlgorithm))
@@ -7410,15 +8669,6 @@ func awsRestxml_serializeOpHttpBindingsPutObjectLockConfigurationInput(v *PutObj
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if len(v.ChecksumAlgorithm) > 0 {
 		locationName := "X-Amz-Sdk-Checksum-Algorithm"
 		encoder.SetHeader(locationName).String(string(v.ChecksumAlgorithm))
@@ -7515,15 +8765,6 @@ func (m *awsRestxml_serializeOpPutObjectRetention) HandleSerialize(ctx context.C
 func awsRestxml_serializeOpHttpBindingsPutObjectRetentionInput(v *PutObjectRetentionInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
 	}
 
 	if v.BypassGovernanceRetention {
@@ -7637,15 +8878,6 @@ func awsRestxml_serializeOpHttpBindingsPutObjectTaggingInput(v *PutObjectTagging
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if len(v.ChecksumAlgorithm) > 0 {
 		locationName := "X-Amz-Sdk-Checksum-Algorithm"
 		encoder.SetHeader(locationName).String(string(v.ChecksumAlgorithm))
@@ -7752,15 +8984,6 @@ func awsRestxml_serializeOpHttpBindingsPutPublicAccessBlockInput(v *PutPublicAcc
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if len(v.ChecksumAlgorithm) > 0 {
 		locationName := "X-Amz-Sdk-Checksum-Algorithm"
 		encoder.SetHeader(locationName).String(string(v.ChecksumAlgorithm))
@@ -7847,15 +9070,6 @@ func (m *awsRestxml_serializeOpRestoreObject) HandleSerialize(ctx context.Contex
 func awsRestxml_serializeOpHttpBindingsRestoreObjectInput(v *RestoreObjectInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
 	}
 
 	if len(v.ChecksumAlgorithm) > 0 {
@@ -7953,15 +9167,6 @@ func awsRestxml_serializeOpHttpBindingsSelectObjectContentInput(v *SelectObjectC
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if v.ExpectedBucketOwner != nil && len(*v.ExpectedBucketOwner) > 0 {
 		locationName := "X-Amz-Expected-Bucket-Owner"
 		encoder.SetHeader(locationName).String(*v.ExpectedBucketOwner)
@@ -7996,6 +9201,17 @@ func awsRestxml_serializeOpHttpBindingsSelectObjectContentInput(v *SelectObjectC
 
 func awsRestxml_serializeOpDocumentSelectObjectContentInput(v *SelectObjectContentInput, value smithyxml.Value) error {
 	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
 	if v.Expression != nil {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
@@ -8131,15 +9347,6 @@ func awsRestxml_serializeOpHttpBindingsUploadPartInput(v *UploadPartInput, encod
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
-	}
-
 	if len(v.ChecksumAlgorithm) > 0 {
 		locationName := "X-Amz-Sdk-Checksum-Algorithm"
 		encoder.SetHeader(locationName).String(string(v.ChecksumAlgorithm))
@@ -8254,6 +9461,24 @@ func (m *awsRestxml_serializeOpUploadPartCopy) HandleSerialize(ctx context.Conte
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/xml")
+
+	xmlEncoder := smithyxml.NewEncoder(bytes.NewBuffer(nil))
+	rootAttr := []smithyxml.Attr{}
+	root := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "UploadPartCopyRequest",
+		},
+		Attr: rootAttr,
+	}
+	root.Attr = append(root.Attr, smithyxml.NewNamespaceAttribute("", "http://s3.amazonaws.com/doc/2006-03-01/"))
+	if err := awsRestxml_serializeOpDocumentUploadPartCopyInput(input, xmlEncoder.RootElement(root)); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	if request, err = request.SetStream(bytes.NewReader(xmlEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -8264,15 +9489,6 @@ func (m *awsRestxml_serializeOpUploadPartCopy) HandleSerialize(ctx context.Conte
 func awsRestxml_serializeOpHttpBindingsUploadPartCopyInput(v *UploadPartCopyInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	if v.Bucket == nil || len(*v.Bucket) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member Bucket must not be empty")}
-	}
-	if v.Bucket != nil {
-		if err := encoder.SetURI("Bucket").String(*v.Bucket); err != nil {
-			return err
-		}
 	}
 
 	if v.CopySource != nil && len(*v.CopySource) > 0 {
@@ -8367,6 +9583,22 @@ func awsRestxml_serializeOpHttpBindingsUploadPartCopyInput(v *UploadPartCopyInpu
 		encoder.SetQuery("uploadId").String(*v.UploadId)
 	}
 
+	return nil
+}
+
+func awsRestxml_serializeOpDocumentUploadPartCopyInput(v *UploadPartCopyInput, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Bucket != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Bucket",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Bucket)
+	}
 	return nil
 }
 

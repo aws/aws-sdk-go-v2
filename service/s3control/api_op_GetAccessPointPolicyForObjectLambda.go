@@ -123,9 +123,6 @@ func (c *Client) addOperationGetAccessPointPolicyForObjectLambdaMiddlewares(stac
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
 		return err
 	}
-	if err = addGetAccessPointPolicyForObjectLambdaUpdateEndpoint(stack, options); err != nil {
-		return err
-	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
 		return err
 	}
