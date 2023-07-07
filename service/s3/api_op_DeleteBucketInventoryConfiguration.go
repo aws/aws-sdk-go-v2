@@ -144,6 +144,9 @@ func (c *Client) addOperationDeleteBucketInventoryConfigurationMiddlewares(stack
 	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
+	if err = addDeleteBucketInventoryConfigurationEndpointDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
 	return nil
 }
 
@@ -180,6 +183,35 @@ func addDeleteBucketInventoryConfigurationUpdateEndpoint(stack *middleware.Stack
 		UseARNRegion:                   options.UseARNRegion,
 		DisableMultiRegionAccessPoints: options.DisableMultiRegionAccessPoints,
 	})
+}
+
+type opDeleteBucketInventoryConfigurationEndpointDisableHTTPSMiddleware struct {
+	EndpointDisableHTTPS bool
+}
+
+func (*opDeleteBucketInventoryConfigurationEndpointDisableHTTPSMiddleware) ID() string {
+	return "opDeleteBucketInventoryConfigurationEndpointDisableHTTPSMiddleware"
+}
+
+func (m *opDeleteBucketInventoryConfigurationEndpointDisableHTTPSMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	if m.EndpointDisableHTTPS {
+		req.URL.Scheme = "http"
+	}
+
+	return next.HandleSerialize(ctx, in)
+
+}
+func addDeleteBucketInventoryConfigurationEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
+	return stack.Serialize.Insert(&opDeleteBucketInventoryConfigurationEndpointDisableHTTPSMiddleware{
+		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
+	}, "opDeleteBucketInventoryConfigurationResolveEndpointMiddleware", middleware.After)
 }
 
 type opDeleteBucketInventoryConfigurationResolveEndpointMiddleware struct {

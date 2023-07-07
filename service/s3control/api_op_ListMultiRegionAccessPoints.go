@@ -152,6 +152,9 @@ func (c *Client) addOperationListMultiRegionAccessPointsMiddlewares(stack *middl
 	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
+	if err = addListMultiRegionAccessPointsEndpointDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
 	return nil
 }
 
@@ -284,6 +287,35 @@ func addListMultiRegionAccessPointsUpdateEndpoint(stack *middleware.Stack, optio
 		EndpointResolverOptions: options.EndpointOptions,
 		UseARNRegion:            options.UseARNRegion,
 	})
+}
+
+type opListMultiRegionAccessPointsEndpointDisableHTTPSMiddleware struct {
+	EndpointDisableHTTPS bool
+}
+
+func (*opListMultiRegionAccessPointsEndpointDisableHTTPSMiddleware) ID() string {
+	return "opListMultiRegionAccessPointsEndpointDisableHTTPSMiddleware"
+}
+
+func (m *opListMultiRegionAccessPointsEndpointDisableHTTPSMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	if m.EndpointDisableHTTPS {
+		req.URL.Scheme = "http"
+	}
+
+	return next.HandleSerialize(ctx, in)
+
+}
+func addListMultiRegionAccessPointsEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
+	return stack.Serialize.Insert(&opListMultiRegionAccessPointsEndpointDisableHTTPSMiddleware{
+		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
+	}, "opListMultiRegionAccessPointsResolveEndpointMiddleware", middleware.After)
 }
 
 type opListMultiRegionAccessPointsResolveEndpointMiddleware struct {

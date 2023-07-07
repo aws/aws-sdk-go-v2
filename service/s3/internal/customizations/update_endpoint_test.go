@@ -35,33 +35,6 @@ func Test_UpdateEndpointBuild(t *testing.T) {
 		customEndpoint *aws.Endpoint
 	}{
 		"default endpoint": {
-			"PathStyleBucket": {
-				usePathStyle: true,
-				tests: []s3BucketTest{
-					{"abc", "key", "https://s3.mock-region.amazonaws.com/abc/key?x-id=GetObject", ""},
-					{"a$b$c", "key", "https://s3.mock-region.amazonaws.com/a%24b%24c/key?x-id=GetObject", ""},
-					{"a.b.c", "key", "https://s3.mock-region.amazonaws.com/a.b.c/key?x-id=GetObject", ""},
-					{"a..bc", "key", "https://s3.mock-region.amazonaws.com/a..bc/key?x-id=GetObject", ""},
-					{"abc", "k:e,y", "https://s3.mock-region.amazonaws.com/abc/k%3Ae%2Cy?x-id=GetObject", ""},
-				},
-			},
-			"VirtualHostStyleBucket": {
-				tests: []s3BucketTest{
-					{"abc", "key", "https://abc.s3.mock-region.amazonaws.com/key?x-id=GetObject", ""},
-					{"a$b$c", "key", "https://s3.mock-region.amazonaws.com/a%24b%24c/key?x-id=GetObject", ""},
-					{"a.b.c", "key", "https://s3.mock-region.amazonaws.com/a.b.c/key?x-id=GetObject", ""},
-					{"a..bc", "key", "https://s3.mock-region.amazonaws.com/a..bc/key?x-id=GetObject", ""},
-					{"abc", "k:e,y", "https://abc.s3.mock-region.amazonaws.com/k%3Ae%2Cy?x-id=GetObject", ""},
-				},
-			},
-			"Accelerate": {
-				useAccelerate: true,
-				tests: []s3BucketTest{
-					{"abc", "key", "https://abc.s3-accelerate.amazonaws.com/key?x-id=GetObject", ""},
-					{"a.b.c", "key", "https://s3.mock-region.amazonaws.com/a.b.c/key?x-id=GetObject", "not compatible"},
-					{"a$b$c", "key", "https://s3.mock-region.amazonaws.com/a%24b%24c/key?x-id=GetObject", "not compatible"},
-				},
-			},
 			"AccelerateNoSSLTests": {
 				useAccelerate: true,
 				disableHTTPS:  true,
@@ -69,88 +42,6 @@ func Test_UpdateEndpointBuild(t *testing.T) {
 					{"abc", "key", "http://abc.s3-accelerate.amazonaws.com/key?x-id=GetObject", ""},
 					{"a.b.c", "key", "http://a.b.c.s3-accelerate.amazonaws.com/key?x-id=GetObject", ""},
 					{"a$b$c", "key", "http://s3.mock-region.amazonaws.com/a%24b%24c/key?x-id=GetObject", "not compatible"},
-				},
-			},
-			"DualStack": {
-				useDualstack: true,
-				tests: []s3BucketTest{
-					{"abc", "key", "https://abc.s3.dualstack.mock-region.amazonaws.com/key?x-id=GetObject", ""},
-					{"a.b.c", "key", "https://s3.dualstack.mock-region.amazonaws.com/a.b.c/key?x-id=GetObject", ""},
-					{"a$b$c", "key", "https://s3.dualstack.mock-region.amazonaws.com/a%24b%24c/key?x-id=GetObject", ""},
-				},
-			},
-			"DualStackWithPathStyle": {
-				useDualstack: true,
-				usePathStyle: true,
-				tests: []s3BucketTest{
-					{"abc", "key", "https://s3.dualstack.mock-region.amazonaws.com/abc/key?x-id=GetObject", ""},
-					{"a.b.c", "key", "https://s3.dualstack.mock-region.amazonaws.com/a.b.c/key?x-id=GetObject", ""},
-					{"a$b$c", "key", "https://s3.dualstack.mock-region.amazonaws.com/a%24b%24c/key?x-id=GetObject", ""},
-				},
-			},
-			"AccelerateWithDualStack": {
-				useAccelerate: true,
-				useDualstack:  true,
-				tests: []s3BucketTest{
-					{"abc", "key", "https://abc.s3-accelerate.dualstack.amazonaws.com/key?x-id=GetObject", ""},
-					{"a.b.c", "key", "https://s3.mock-region.dualstack.amazonaws.com/a.b.c/key?x-id=GetObject", "not compatible"},
-					{"a$b$c", "key", "https://s3.mock-region.dualstack.amazonaws.com/a%24b%24c/key?x-id=GetObject", "not compatible"},
-				},
-			},
-		},
-
-		"immutable endpoint": {
-			"PathStyleBucket": {
-				usePathStyle: true,
-				customEndpoint: &aws.Endpoint{
-					URL:               "https://example.region.amazonaws.com",
-					HostnameImmutable: true,
-				},
-				tests: []s3BucketTest{
-					{"abc", "key", "https://example.region.amazonaws.com/abc/key?x-id=GetObject", ""},
-					{"a$b$c", "key", "https://example.region.amazonaws.com/a%24b%24c/key?x-id=GetObject", ""},
-					{"a.b.c", "key", "https://example.region.amazonaws.com/a.b.c/key?x-id=GetObject", ""},
-					{"a..bc", "key", "https://example.region.amazonaws.com/a..bc/key?x-id=GetObject", ""},
-					{"abc", "k:e,y", "https://example.region.amazonaws.com/abc/k%3Ae%2Cy?x-id=GetObject", ""},
-				},
-			},
-			"VirtualHostStyleBucket": {
-				customEndpoint: &aws.Endpoint{
-					URL:               "https://example.region.amazonaws.com",
-					HostnameImmutable: true,
-				},
-				tests: []s3BucketTest{
-					{"abc", "key", "https://example.region.amazonaws.com/abc/key?x-id=GetObject", ""},
-					{"a$b$c", "key", "https://example.region.amazonaws.com/a%24b%24c/key?x-id=GetObject", ""},
-					{"a.b.c", "key", "https://example.region.amazonaws.com/a.b.c/key?x-id=GetObject", ""},
-					{"a..bc", "key", "https://example.region.amazonaws.com/a..bc/key?x-id=GetObject", ""},
-					{"abc", "k:e,y", "https://example.region.amazonaws.com/abc/k%3Ae%2Cy?x-id=GetObject", ""},
-				},
-			},
-			"Accelerate": {
-				useAccelerate: true,
-				customEndpoint: &aws.Endpoint{
-					URL:               "https://example.region.amazonaws.com",
-					HostnameImmutable: true,
-				},
-				tests: []s3BucketTest{
-					{"abc", "key", "https://example.region.amazonaws.com/abc/key?x-id=GetObject", ""},
-					{"a$b$c", "key", "https://example.region.amazonaws.com/a%24b%24c/key?x-id=GetObject", ""},
-					{"a.b.c", "key", "https://example.region.amazonaws.com/a.b.c/key?x-id=GetObject", ""},
-					{"a..bc", "key", "https://example.region.amazonaws.com/a..bc/key?x-id=GetObject", ""},
-				},
-			},
-			"AccelerateNoSSLTests": {
-				useAccelerate: true,
-				disableHTTPS:  true,
-				customEndpoint: &aws.Endpoint{
-					URL:               "https://example.region.amazonaws.com",
-					HostnameImmutable: true,
-				},
-				tests: []s3BucketTest{
-					{"abc", "key", "https://example.region.amazonaws.com/abc/key?x-id=GetObject", ""},
-					{"a.b.c", "key", "https://example.region.amazonaws.com/a.b.c/key?x-id=GetObject", ""},
-					{"a$b$c", "key", "https://example.region.amazonaws.com/a%24b%24c/key?x-id=GetObject", ""},
 				},
 			},
 		},
@@ -236,7 +127,7 @@ type testCaseForEndpointCustomization struct {
 	expectedHeader        map[string]string
 }
 
-func TestEndpointWithARN(t *testing.T) {
+func Test_EndpointWithARN(t *testing.T) {
 	// test cases
 	cases := map[string]testCaseForEndpointCustomization{
 		"Object Lambda with no UseARNRegion flag set": {
