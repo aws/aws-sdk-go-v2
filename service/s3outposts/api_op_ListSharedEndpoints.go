@@ -134,6 +134,9 @@ func (c *Client) addOperationListSharedEndpointsMiddlewares(stack *middleware.St
 	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
+	if err = addListSharedEndpointsEndpointDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
 	return nil
 }
 
@@ -231,6 +234,35 @@ func newServiceMetadataMiddleware_opListSharedEndpoints(region string) *awsmiddl
 		SigningName:   "s3-outposts",
 		OperationName: "ListSharedEndpoints",
 	}
+}
+
+type opListSharedEndpointsEndpointDisableHTTPSMiddleware struct {
+	EndpointDisableHTTPS bool
+}
+
+func (*opListSharedEndpointsEndpointDisableHTTPSMiddleware) ID() string {
+	return "opListSharedEndpointsEndpointDisableHTTPSMiddleware"
+}
+
+func (m *opListSharedEndpointsEndpointDisableHTTPSMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	if m.EndpointDisableHTTPS {
+		req.URL.Scheme = "http"
+	}
+
+	return next.HandleSerialize(ctx, in)
+
+}
+func addListSharedEndpointsEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
+	return stack.Serialize.Insert(&opListSharedEndpointsEndpointDisableHTTPSMiddleware{
+		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
+	}, "opListSharedEndpointsResolveEndpointMiddleware", middleware.After)
 }
 
 type opListSharedEndpointsResolveEndpointMiddleware struct {

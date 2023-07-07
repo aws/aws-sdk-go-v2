@@ -127,6 +127,9 @@ func (c *Client) addOperationListOutpostsWithS3Middlewares(stack *middleware.Sta
 	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
+	if err = addListOutpostsWithS3EndpointDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
 	return nil
 }
 
@@ -224,6 +227,35 @@ func newServiceMetadataMiddleware_opListOutpostsWithS3(region string) *awsmiddle
 		SigningName:   "s3-outposts",
 		OperationName: "ListOutpostsWithS3",
 	}
+}
+
+type opListOutpostsWithS3EndpointDisableHTTPSMiddleware struct {
+	EndpointDisableHTTPS bool
+}
+
+func (*opListOutpostsWithS3EndpointDisableHTTPSMiddleware) ID() string {
+	return "opListOutpostsWithS3EndpointDisableHTTPSMiddleware"
+}
+
+func (m *opListOutpostsWithS3EndpointDisableHTTPSMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	if m.EndpointDisableHTTPS {
+		req.URL.Scheme = "http"
+	}
+
+	return next.HandleSerialize(ctx, in)
+
+}
+func addListOutpostsWithS3EndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
+	return stack.Serialize.Insert(&opListOutpostsWithS3EndpointDisableHTTPSMiddleware{
+		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
+	}, "opListOutpostsWithS3ResolveEndpointMiddleware", middleware.After)
 }
 
 type opListOutpostsWithS3ResolveEndpointMiddleware struct {
