@@ -209,8 +209,7 @@ public class AwsEndpointAuthSchemeGenerator implements GoIntegration {
                 """
                     v4aScheme, _ := authScheme.($P)
                     if v4aScheme.SigningName == nil {
-                        signingNameDefault := \"$L\"
-                        v4aScheme.SigningName = &signingNameDefault
+                        v4aScheme.SigningName = $T(\"$L\")
                     }
                     if v4aScheme.DisableDoubleEncoding != nil {
                         // The signer sets an equivalent value at client initialization time.
@@ -223,6 +222,7 @@ public class AwsEndpointAuthSchemeGenerator implements GoIntegration {
                     $W
                 """,
                 SymbolUtils.createPointableSymbolBuilder("AuthenticationSchemeV4A", AwsGoDependency.INTERNAL_AUTH).build(),
+                SymbolUtils.createValueSymbolBuilder("String", AwsGoDependency.AWS_CORE).build(),
                 SymbolUtils.createValueSymbolBuilder(signingNameDefault).build(),
                 SymbolUtils.createValueSymbolBuilder("SetDisableDoubleEncoding", AwsGoDependency.INTERNAL_AUTH).build(),
                 SymbolUtils.createValueSymbolBuilder("SetSigningName", AwsGoDependency.AWS_MIDDLEWARE).build(),
