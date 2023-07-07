@@ -221,9 +221,6 @@ func (c *Client) addOperationListObjectVersionsMiddlewares(stack *middleware.Sta
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
 		return err
 	}
-	if err = addListObjectVersionsUpdateEndpoint(stack, options); err != nil {
-		return err
-	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
 		return err
 	}

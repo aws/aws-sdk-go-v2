@@ -492,9 +492,6 @@ func (c *Client) addOperationCreateMultipartUploadMiddlewares(stack *middleware.
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
 		return err
 	}
-	if err = addCreateMultipartUploadUpdateEndpoint(stack, options); err != nil {
-		return err
-	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
 		return err
 	}

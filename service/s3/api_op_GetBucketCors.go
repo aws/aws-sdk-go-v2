@@ -142,9 +142,6 @@ func (c *Client) addOperationGetBucketCorsMiddlewares(stack *middleware.Stack, o
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
 		return err
 	}
-	if err = addGetBucketCorsUpdateEndpoint(stack, options); err != nil {
-		return err
-	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
 		return err
 	}

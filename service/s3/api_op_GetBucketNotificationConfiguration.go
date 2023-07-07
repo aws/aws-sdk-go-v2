@@ -158,9 +158,6 @@ func (c *Client) addOperationGetBucketNotificationConfigurationMiddlewares(stack
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
 		return err
 	}
-	if err = addGetBucketNotificationConfigurationUpdateEndpoint(stack, options); err != nil {
-		return err
-	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
 		return err
 	}

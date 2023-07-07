@@ -161,9 +161,6 @@ func (c *Client) addOperationPutPublicAccessBlockMiddlewares(stack *middleware.S
 	if err = addPutPublicAccessBlockInputChecksumMiddlewares(stack, options); err != nil {
 		return err
 	}
-	if err = addPutPublicAccessBlockUpdateEndpoint(stack, options); err != nil {
-		return err
-	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
 		return err
 	}

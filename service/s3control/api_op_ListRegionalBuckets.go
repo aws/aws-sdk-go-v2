@@ -136,9 +136,6 @@ func (c *Client) addOperationListRegionalBucketsMiddlewares(stack *middleware.St
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
 		return err
 	}
-	if err = addListRegionalBucketsUpdateEndpoint(stack, options); err != nil {
-		return err
-	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
 		return err
 	}
