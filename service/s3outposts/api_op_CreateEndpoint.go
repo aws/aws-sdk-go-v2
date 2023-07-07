@@ -143,6 +143,9 @@ func (c *Client) addOperationCreateEndpointMiddlewares(stack *middleware.Stack, 
 	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
+	if err = addCreateEndpointEndpointDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
 	return nil
 }
 
@@ -153,6 +156,35 @@ func newServiceMetadataMiddleware_opCreateEndpoint(region string) *awsmiddleware
 		SigningName:   "s3-outposts",
 		OperationName: "CreateEndpoint",
 	}
+}
+
+type opCreateEndpointEndpointDisableHTTPSMiddleware struct {
+	EndpointDisableHTTPS bool
+}
+
+func (*opCreateEndpointEndpointDisableHTTPSMiddleware) ID() string {
+	return "opCreateEndpointEndpointDisableHTTPSMiddleware"
+}
+
+func (m *opCreateEndpointEndpointDisableHTTPSMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	if m.EndpointDisableHTTPS {
+		req.URL.Scheme = "http"
+	}
+
+	return next.HandleSerialize(ctx, in)
+
+}
+func addCreateEndpointEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
+	return stack.Serialize.Insert(&opCreateEndpointEndpointDisableHTTPSMiddleware{
+		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
+	}, "opCreateEndpointResolveEndpointMiddleware", middleware.After)
 }
 
 type opCreateEndpointResolveEndpointMiddleware struct {
