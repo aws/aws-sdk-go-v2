@@ -215,6 +215,9 @@ func (c *Client) addOperationPutObjectTaggingMiddlewares(stack *middleware.Stack
 	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
+	if err = addPutObjectTaggingEndpointDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
 	return nil
 }
 
@@ -271,6 +274,35 @@ func addPutObjectTaggingUpdateEndpoint(stack *middleware.Stack, options Options)
 		UseARNRegion:                   options.UseARNRegion,
 		DisableMultiRegionAccessPoints: options.DisableMultiRegionAccessPoints,
 	})
+}
+
+type opPutObjectTaggingEndpointDisableHTTPSMiddleware struct {
+	EndpointDisableHTTPS bool
+}
+
+func (*opPutObjectTaggingEndpointDisableHTTPSMiddleware) ID() string {
+	return "opPutObjectTaggingEndpointDisableHTTPSMiddleware"
+}
+
+func (m *opPutObjectTaggingEndpointDisableHTTPSMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	if m.EndpointDisableHTTPS {
+		req.URL.Scheme = "http"
+	}
+
+	return next.HandleSerialize(ctx, in)
+
+}
+func addPutObjectTaggingEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
+	return stack.Serialize.Insert(&opPutObjectTaggingEndpointDisableHTTPSMiddleware{
+		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
+	}, "opPutObjectTaggingResolveEndpointMiddleware", middleware.After)
 }
 
 type opPutObjectTaggingResolveEndpointMiddleware struct {

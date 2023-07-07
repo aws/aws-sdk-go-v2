@@ -137,6 +137,9 @@ func (c *Client) addOperationGetBucketRequestPaymentMiddlewares(stack *middlewar
 	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
+	if err = addGetBucketRequestPaymentEndpointDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
 	return nil
 }
 
@@ -173,6 +176,35 @@ func addGetBucketRequestPaymentUpdateEndpoint(stack *middleware.Stack, options O
 		UseARNRegion:                   options.UseARNRegion,
 		DisableMultiRegionAccessPoints: options.DisableMultiRegionAccessPoints,
 	})
+}
+
+type opGetBucketRequestPaymentEndpointDisableHTTPSMiddleware struct {
+	EndpointDisableHTTPS bool
+}
+
+func (*opGetBucketRequestPaymentEndpointDisableHTTPSMiddleware) ID() string {
+	return "opGetBucketRequestPaymentEndpointDisableHTTPSMiddleware"
+}
+
+func (m *opGetBucketRequestPaymentEndpointDisableHTTPSMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	if m.EndpointDisableHTTPS {
+		req.URL.Scheme = "http"
+	}
+
+	return next.HandleSerialize(ctx, in)
+
+}
+func addGetBucketRequestPaymentEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
+	return stack.Serialize.Insert(&opGetBucketRequestPaymentEndpointDisableHTTPSMiddleware{
+		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
+	}, "opGetBucketRequestPaymentResolveEndpointMiddleware", middleware.After)
 }
 
 type opGetBucketRequestPaymentResolveEndpointMiddleware struct {

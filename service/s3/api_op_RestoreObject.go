@@ -331,6 +331,9 @@ func (c *Client) addOperationRestoreObjectMiddlewares(stack *middleware.Stack, o
 	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
+	if err = addRestoreObjectEndpointDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
 	return nil
 }
 
@@ -387,6 +390,35 @@ func addRestoreObjectUpdateEndpoint(stack *middleware.Stack, options Options) er
 		UseARNRegion:                   options.UseARNRegion,
 		DisableMultiRegionAccessPoints: options.DisableMultiRegionAccessPoints,
 	})
+}
+
+type opRestoreObjectEndpointDisableHTTPSMiddleware struct {
+	EndpointDisableHTTPS bool
+}
+
+func (*opRestoreObjectEndpointDisableHTTPSMiddleware) ID() string {
+	return "opRestoreObjectEndpointDisableHTTPSMiddleware"
+}
+
+func (m *opRestoreObjectEndpointDisableHTTPSMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	if m.EndpointDisableHTTPS {
+		req.URL.Scheme = "http"
+	}
+
+	return next.HandleSerialize(ctx, in)
+
+}
+func addRestoreObjectEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
+	return stack.Serialize.Insert(&opRestoreObjectEndpointDisableHTTPSMiddleware{
+		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
+	}, "opRestoreObjectResolveEndpointMiddleware", middleware.After)
 }
 
 type opRestoreObjectResolveEndpointMiddleware struct {

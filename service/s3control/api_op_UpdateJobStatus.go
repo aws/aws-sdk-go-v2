@@ -151,6 +151,9 @@ func (c *Client) addOperationUpdateJobStatusMiddlewares(stack *middleware.Stack,
 	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
+	if err = addUpdateJobStatusEndpointDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
 	return nil
 }
 
@@ -194,6 +197,35 @@ func addUpdateJobStatusUpdateEndpoint(stack *middleware.Stack, options Options) 
 		EndpointResolverOptions: options.EndpointOptions,
 		UseARNRegion:            options.UseARNRegion,
 	})
+}
+
+type opUpdateJobStatusEndpointDisableHTTPSMiddleware struct {
+	EndpointDisableHTTPS bool
+}
+
+func (*opUpdateJobStatusEndpointDisableHTTPSMiddleware) ID() string {
+	return "opUpdateJobStatusEndpointDisableHTTPSMiddleware"
+}
+
+func (m *opUpdateJobStatusEndpointDisableHTTPSMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	if m.EndpointDisableHTTPS {
+		req.URL.Scheme = "http"
+	}
+
+	return next.HandleSerialize(ctx, in)
+
+}
+func addUpdateJobStatusEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
+	return stack.Serialize.Insert(&opUpdateJobStatusEndpointDisableHTTPSMiddleware{
+		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
+	}, "opUpdateJobStatusResolveEndpointMiddleware", middleware.After)
 }
 
 type opUpdateJobStatusResolveEndpointMiddleware struct {

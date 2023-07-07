@@ -161,6 +161,9 @@ func (c *Client) addOperationGetBucketPolicyMiddlewares(stack *middleware.Stack,
 	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
+	if err = addGetBucketPolicyEndpointDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
 	return nil
 }
 
@@ -216,6 +219,35 @@ func addGetBucketPolicyUpdateEndpoint(stack *middleware.Stack, options Options) 
 		EndpointResolverOptions: options.EndpointOptions,
 		UseARNRegion:            options.UseARNRegion,
 	})
+}
+
+type opGetBucketPolicyEndpointDisableHTTPSMiddleware struct {
+	EndpointDisableHTTPS bool
+}
+
+func (*opGetBucketPolicyEndpointDisableHTTPSMiddleware) ID() string {
+	return "opGetBucketPolicyEndpointDisableHTTPSMiddleware"
+}
+
+func (m *opGetBucketPolicyEndpointDisableHTTPSMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	if m.EndpointDisableHTTPS {
+		req.URL.Scheme = "http"
+	}
+
+	return next.HandleSerialize(ctx, in)
+
+}
+func addGetBucketPolicyEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
+	return stack.Serialize.Insert(&opGetBucketPolicyEndpointDisableHTTPSMiddleware{
+		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
+	}, "opGetBucketPolicyResolveEndpointMiddleware", middleware.After)
 }
 
 type opGetBucketPolicyResolveEndpointMiddleware struct {
