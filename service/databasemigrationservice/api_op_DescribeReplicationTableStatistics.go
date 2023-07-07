@@ -12,29 +12,32 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about the possible endpoint settings available when you
-// create an endpoint for a specific database engine.
-func (c *Client) DescribeEndpointSettings(ctx context.Context, params *DescribeEndpointSettingsInput, optFns ...func(*Options)) (*DescribeEndpointSettingsOutput, error) {
+// Returns table and schema statistics for one or more provisioned replications
+// that use a given DMS Serverless replication configuration.
+func (c *Client) DescribeReplicationTableStatistics(ctx context.Context, params *DescribeReplicationTableStatisticsInput, optFns ...func(*Options)) (*DescribeReplicationTableStatisticsOutput, error) {
 	if params == nil {
-		params = &DescribeEndpointSettingsInput{}
+		params = &DescribeReplicationTableStatisticsInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeEndpointSettings", params, optFns, c.addOperationDescribeEndpointSettingsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeReplicationTableStatistics", params, optFns, c.addOperationDescribeReplicationTableStatisticsMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DescribeEndpointSettingsOutput)
+	out := result.(*DescribeReplicationTableStatisticsOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type DescribeEndpointSettingsInput struct {
+type DescribeReplicationTableStatisticsInput struct {
 
-	// The database engine used for your source or target endpoint.
+	// The replication config to describe.
 	//
 	// This member is required.
-	EngineName *string
+	ReplicationConfigArn *string
+
+	// Filters applied to the replication table statistics.
+	Filters []types.Filter
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
@@ -49,16 +52,19 @@ type DescribeEndpointSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
-type DescribeEndpointSettingsOutput struct {
-
-	// Descriptions of the endpoint settings available for your source or target
-	// database engine.
-	EndpointSettings []types.EndpointSetting
+type DescribeReplicationTableStatisticsOutput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
 	// value specified by MaxRecords .
 	Marker *string
+
+	// The Amazon Resource Name of the replication config.
+	ReplicationConfigArn *string
+
+	// Returns table statistics on the replication, including table name, rows
+	// inserted, rows updated, and rows deleted.
+	ReplicationTableStatistics []types.TableStatistics
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -66,12 +72,12 @@ type DescribeEndpointSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDescribeEndpointSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEndpointSettings{}, middleware.After)
+func (c *Client) addOperationDescribeReplicationTableStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeReplicationTableStatistics{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeEndpointSettings{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeReplicationTableStatistics{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -111,10 +117,10 @@ func (c *Client) addOperationDescribeEndpointSettingsMiddlewares(stack *middlewa
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpDescribeEndpointSettingsValidationMiddleware(stack); err != nil {
+	if err = addOpDescribeReplicationTableStatisticsValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeEndpointSettings(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeReplicationTableStatistics(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
@@ -132,17 +138,17 @@ func (c *Client) addOperationDescribeEndpointSettingsMiddlewares(stack *middlewa
 	return nil
 }
 
-// DescribeEndpointSettingsAPIClient is a client that implements the
-// DescribeEndpointSettings operation.
-type DescribeEndpointSettingsAPIClient interface {
-	DescribeEndpointSettings(context.Context, *DescribeEndpointSettingsInput, ...func(*Options)) (*DescribeEndpointSettingsOutput, error)
+// DescribeReplicationTableStatisticsAPIClient is a client that implements the
+// DescribeReplicationTableStatistics operation.
+type DescribeReplicationTableStatisticsAPIClient interface {
+	DescribeReplicationTableStatistics(context.Context, *DescribeReplicationTableStatisticsInput, ...func(*Options)) (*DescribeReplicationTableStatisticsOutput, error)
 }
 
-var _ DescribeEndpointSettingsAPIClient = (*Client)(nil)
+var _ DescribeReplicationTableStatisticsAPIClient = (*Client)(nil)
 
-// DescribeEndpointSettingsPaginatorOptions is the paginator options for
-// DescribeEndpointSettings
-type DescribeEndpointSettingsPaginatorOptions struct {
+// DescribeReplicationTableStatisticsPaginatorOptions is the paginator options for
+// DescribeReplicationTableStatistics
+type DescribeReplicationTableStatisticsPaginatorOptions struct {
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
 	// included in the response so that the remaining results can be retrieved.
@@ -153,23 +159,24 @@ type DescribeEndpointSettingsPaginatorOptions struct {
 	StopOnDuplicateToken bool
 }
 
-// DescribeEndpointSettingsPaginator is a paginator for DescribeEndpointSettings
-type DescribeEndpointSettingsPaginator struct {
-	options   DescribeEndpointSettingsPaginatorOptions
-	client    DescribeEndpointSettingsAPIClient
-	params    *DescribeEndpointSettingsInput
+// DescribeReplicationTableStatisticsPaginator is a paginator for
+// DescribeReplicationTableStatistics
+type DescribeReplicationTableStatisticsPaginator struct {
+	options   DescribeReplicationTableStatisticsPaginatorOptions
+	client    DescribeReplicationTableStatisticsAPIClient
+	params    *DescribeReplicationTableStatisticsInput
 	nextToken *string
 	firstPage bool
 }
 
-// NewDescribeEndpointSettingsPaginator returns a new
-// DescribeEndpointSettingsPaginator
-func NewDescribeEndpointSettingsPaginator(client DescribeEndpointSettingsAPIClient, params *DescribeEndpointSettingsInput, optFns ...func(*DescribeEndpointSettingsPaginatorOptions)) *DescribeEndpointSettingsPaginator {
+// NewDescribeReplicationTableStatisticsPaginator returns a new
+// DescribeReplicationTableStatisticsPaginator
+func NewDescribeReplicationTableStatisticsPaginator(client DescribeReplicationTableStatisticsAPIClient, params *DescribeReplicationTableStatisticsInput, optFns ...func(*DescribeReplicationTableStatisticsPaginatorOptions)) *DescribeReplicationTableStatisticsPaginator {
 	if params == nil {
-		params = &DescribeEndpointSettingsInput{}
+		params = &DescribeReplicationTableStatisticsInput{}
 	}
 
-	options := DescribeEndpointSettingsPaginatorOptions{}
+	options := DescribeReplicationTableStatisticsPaginatorOptions{}
 	if params.MaxRecords != nil {
 		options.Limit = *params.MaxRecords
 	}
@@ -178,7 +185,7 @@ func NewDescribeEndpointSettingsPaginator(client DescribeEndpointSettingsAPIClie
 		fn(&options)
 	}
 
-	return &DescribeEndpointSettingsPaginator{
+	return &DescribeReplicationTableStatisticsPaginator{
 		options:   options,
 		client:    client,
 		params:    params,
@@ -188,12 +195,12 @@ func NewDescribeEndpointSettingsPaginator(client DescribeEndpointSettingsAPIClie
 }
 
 // HasMorePages returns a boolean indicating whether more pages are available
-func (p *DescribeEndpointSettingsPaginator) HasMorePages() bool {
+func (p *DescribeReplicationTableStatisticsPaginator) HasMorePages() bool {
 	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
 }
 
-// NextPage retrieves the next DescribeEndpointSettings page.
-func (p *DescribeEndpointSettingsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeEndpointSettingsOutput, error) {
+// NextPage retrieves the next DescribeReplicationTableStatistics page.
+func (p *DescribeReplicationTableStatisticsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeReplicationTableStatisticsOutput, error) {
 	if !p.HasMorePages() {
 		return nil, fmt.Errorf("no more pages available")
 	}
@@ -207,7 +214,7 @@ func (p *DescribeEndpointSettingsPaginator) NextPage(ctx context.Context, optFns
 	}
 	params.MaxRecords = limit
 
-	result, err := p.client.DescribeEndpointSettings(ctx, &params, optFns...)
+	result, err := p.client.DescribeReplicationTableStatistics(ctx, &params, optFns...)
 	if err != nil {
 		return nil, err
 	}
@@ -226,11 +233,11 @@ func (p *DescribeEndpointSettingsPaginator) NextPage(ctx context.Context, optFns
 	return result, nil
 }
 
-func newServiceMetadataMiddleware_opDescribeEndpointSettings(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opDescribeReplicationTableStatistics(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "dms",
-		OperationName: "DescribeEndpointSettings",
+		OperationName: "DescribeReplicationTableStatistics",
 	}
 }

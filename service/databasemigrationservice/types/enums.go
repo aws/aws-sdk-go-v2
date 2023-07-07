@@ -312,6 +312,45 @@ func (KafkaSecurityProtocol) Values() []KafkaSecurityProtocol {
 	}
 }
 
+type KafkaSslEndpointIdentificationAlgorithm string
+
+// Enum values for KafkaSslEndpointIdentificationAlgorithm
+const (
+	KafkaSslEndpointIdentificationAlgorithmNone  KafkaSslEndpointIdentificationAlgorithm = "none"
+	KafkaSslEndpointIdentificationAlgorithmHttps KafkaSslEndpointIdentificationAlgorithm = "https"
+)
+
+// Values returns all known values for KafkaSslEndpointIdentificationAlgorithm.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (KafkaSslEndpointIdentificationAlgorithm) Values() []KafkaSslEndpointIdentificationAlgorithm {
+	return []KafkaSslEndpointIdentificationAlgorithm{
+		"none",
+		"https",
+	}
+}
+
+type LongVarcharMappingType string
+
+// Enum values for LongVarcharMappingType
+const (
+	LongVarcharMappingTypeWstring LongVarcharMappingType = "wstring"
+	LongVarcharMappingTypeClob    LongVarcharMappingType = "clob"
+	LongVarcharMappingTypeNclob   LongVarcharMappingType = "nclob"
+)
+
+// Values returns all known values for LongVarcharMappingType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LongVarcharMappingType) Values() []LongVarcharMappingType {
+	return []LongVarcharMappingType{
+		"wstring",
+		"clob",
+		"nclob",
+	}
+}
+
 type MessageFormatValue string
 
 // Enum values for MessageFormatValue

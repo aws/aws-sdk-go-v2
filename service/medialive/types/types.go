@@ -4,6 +4,7 @@ package types
 
 import (
 	smithydocument "github.com/aws/smithy-go/document"
+	"time"
 )
 
 // Aac Settings
@@ -79,6 +80,17 @@ type Ac3Settings struct {
 	// or DolbyE decoder that supplied this audio data. If audio was not supplied from
 	// one of these streams, then the static metadata settings will be used.
 	MetadataControl Ac3MetadataControl
+
+	noSmithyDocumentSerde
+}
+
+// Placeholder documentation for AccountConfiguration
+type AccountConfiguration struct {
+
+	// Specifies the KMS key to use for all features that use key encryption. Specify
+	// the ARN of a KMS key that you have created. Or leave blank to use the key that
+	// MediaLive creates and manages for you.
+	KmsKeyId *string
 
 	noSmithyDocumentSerde
 }
@@ -1514,6 +1526,9 @@ type EncoderSettings struct {
 
 	// Nielsen configuration settings.
 	NielsenConfiguration *NielsenConfiguration
+
+	// Thumbnail configuration settings.
+	ThumbnailConfiguration *ThumbnailConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -5366,6 +5381,47 @@ type TemporalFilterSettings struct {
 	// Choose a filter strength. We recommend a strength of 1 or 2. A higher strength
 	// might take out good information, resulting in an image that is overly soft.
 	Strength TemporalFilterStrength
+
+	noSmithyDocumentSerde
+}
+
+// Details of a single thumbnail
+type Thumbnail struct {
+
+	// The binary data for the latest thumbnail.
+	Body *string
+
+	// The content type for the latest thumbnail.
+	ContentType *string
+
+	// Thumbnail Type
+	ThumbnailType ThumbnailType
+
+	// Time stamp for the latest thumbnail.
+	TimeStamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Thumbnail Configuration
+type ThumbnailConfiguration struct {
+
+	// Whether Thumbnail is enabled.
+	//
+	// This member is required.
+	State ThumbnailState
+
+	noSmithyDocumentSerde
+}
+
+// Thumbnail details for one pipeline of a running channel.
+type ThumbnailDetail struct {
+
+	// Pipeline ID
+	PipelineId *string
+
+	// thumbnails of a single pipeline
+	Thumbnails []Thumbnail
 
 	noSmithyDocumentSerde
 }

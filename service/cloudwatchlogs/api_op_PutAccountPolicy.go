@@ -95,9 +95,9 @@ type PutAccountPolicyInput struct {
 	// This member is required.
 	PolicyType types.PolicyType
 
-	// Currently the only valid value for this parameter is GLOBAL , which specifies
-	// that the data protection policy applies to all log groups in the account. If you
-	// omit this parameter, the default of GLOBAL is used.
+	// Currently the only valid value for this parameter is ALL , which specifies that
+	// the data protection policy applies to all log groups in the account. If you omit
+	// this parameter, the default of ALL is used.
 	Scope types.Scope
 
 	noSmithyDocumentSerde

@@ -150,6 +150,26 @@ func (m *validateOpCreateFleetAdvisorCollector) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateReplicationConfig struct {
+}
+
+func (*validateOpCreateReplicationConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateReplicationConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateReplicationConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateReplicationConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateReplicationInstance struct {
 }
 
@@ -325,6 +345,26 @@ func (m *validateOpDeleteFleetAdvisorDatabases) HandleInitialize(ctx context.Con
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteFleetAdvisorDatabasesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteReplicationConfig struct {
+}
+
+func (*validateOpDeleteReplicationConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteReplicationConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteReplicationConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteReplicationConfigInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -730,6 +770,26 @@ func (m *validateOpDescribeRefreshSchemasStatus) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeReplicationConfigs struct {
+}
+
+func (*validateOpDescribeReplicationConfigs) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeReplicationConfigs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeReplicationConfigsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeReplicationConfigsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeReplicationInstances struct {
 }
 
@@ -770,6 +830,26 @@ func (m *validateOpDescribeReplicationInstanceTaskLogs) HandleInitialize(ctx con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeReplications struct {
+}
+
+func (*validateOpDescribeReplications) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeReplications) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeReplicationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeReplicationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeReplicationSubnetGroups struct {
 }
 
@@ -785,6 +865,26 @@ func (m *validateOpDescribeReplicationSubnetGroups) HandleInitialize(ctx context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeReplicationSubnetGroupsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeReplicationTableStatistics struct {
+}
+
+func (*validateOpDescribeReplicationTableStatistics) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeReplicationTableStatistics) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeReplicationTableStatisticsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeReplicationTableStatisticsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -950,6 +1050,26 @@ func (m *validateOpModifyEventSubscription) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpModifyReplicationConfig struct {
+}
+
+func (*validateOpModifyReplicationConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpModifyReplicationConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ModifyReplicationConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpModifyReplicationConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpModifyReplicationInstance struct {
 }
 
@@ -1070,6 +1190,26 @@ func (m *validateOpRefreshSchemas) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpReloadReplicationTables struct {
+}
+
+func (*validateOpReloadReplicationTables) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpReloadReplicationTables) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ReloadReplicationTablesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpReloadReplicationTablesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpReloadTables struct {
 }
 
@@ -1130,6 +1270,26 @@ func (m *validateOpStartRecommendations) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartReplication struct {
+}
+
+func (*validateOpStartReplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartReplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartReplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartReplicationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartReplicationTaskAssessment struct {
 }
 
@@ -1185,6 +1345,26 @@ func (m *validateOpStartReplicationTask) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStartReplicationTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStopReplication struct {
+}
+
+func (*validateOpStopReplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopReplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopReplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopReplicationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1258,6 +1438,10 @@ func addOpCreateFleetAdvisorCollectorValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpCreateFleetAdvisorCollector{}, middleware.After)
 }
 
+func addOpCreateReplicationConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateReplicationConfig{}, middleware.After)
+}
+
 func addOpCreateReplicationInstanceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateReplicationInstance{}, middleware.After)
 }
@@ -1292,6 +1476,10 @@ func addOpDeleteFleetAdvisorCollectorValidationMiddleware(stack *middleware.Stac
 
 func addOpDeleteFleetAdvisorDatabasesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteFleetAdvisorDatabases{}, middleware.After)
+}
+
+func addOpDeleteReplicationConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteReplicationConfig{}, middleware.After)
 }
 
 func addOpDeleteReplicationInstanceValidationMiddleware(stack *middleware.Stack) error {
@@ -1374,6 +1562,10 @@ func addOpDescribeRefreshSchemasStatusValidationMiddleware(stack *middleware.Sta
 	return stack.Initialize.Add(&validateOpDescribeRefreshSchemasStatus{}, middleware.After)
 }
 
+func addOpDescribeReplicationConfigsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeReplicationConfigs{}, middleware.After)
+}
+
 func addOpDescribeReplicationInstancesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeReplicationInstances{}, middleware.After)
 }
@@ -1382,8 +1574,16 @@ func addOpDescribeReplicationInstanceTaskLogsValidationMiddleware(stack *middlew
 	return stack.Initialize.Add(&validateOpDescribeReplicationInstanceTaskLogs{}, middleware.After)
 }
 
+func addOpDescribeReplicationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeReplications{}, middleware.After)
+}
+
 func addOpDescribeReplicationSubnetGroupsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeReplicationSubnetGroups{}, middleware.After)
+}
+
+func addOpDescribeReplicationTableStatisticsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeReplicationTableStatistics{}, middleware.After)
 }
 
 func addOpDescribeReplicationTaskAssessmentRunsValidationMiddleware(stack *middleware.Stack) error {
@@ -1418,6 +1618,10 @@ func addOpModifyEventSubscriptionValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpModifyEventSubscription{}, middleware.After)
 }
 
+func addOpModifyReplicationConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpModifyReplicationConfig{}, middleware.After)
+}
+
 func addOpModifyReplicationInstanceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpModifyReplicationInstance{}, middleware.After)
 }
@@ -1442,6 +1646,10 @@ func addOpRefreshSchemasValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRefreshSchemas{}, middleware.After)
 }
 
+func addOpReloadReplicationTablesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpReloadReplicationTables{}, middleware.After)
+}
+
 func addOpReloadTablesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpReloadTables{}, middleware.After)
 }
@@ -1454,6 +1662,10 @@ func addOpStartRecommendationsValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpStartRecommendations{}, middleware.After)
 }
 
+func addOpStartReplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartReplication{}, middleware.After)
+}
+
 func addOpStartReplicationTaskAssessmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartReplicationTaskAssessment{}, middleware.After)
 }
@@ -1464,6 +1676,10 @@ func addOpStartReplicationTaskAssessmentRunValidationMiddleware(stack *middlewar
 
 func addOpStartReplicationTaskValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartReplicationTask{}, middleware.After)
+}
+
+func addOpStopReplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopReplication{}, middleware.After)
 }
 
 func addOpStopReplicationTaskValidationMiddleware(stack *middleware.Stack) error {
@@ -1667,6 +1883,27 @@ func validateTableToReload(v *types.TableToReload) error {
 	}
 }
 
+func validateTimestreamSettings(v *types.TimestreamSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TimestreamSettings"}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if v.MemoryDuration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MemoryDuration"))
+	}
+	if v.MagneticDuration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MagneticDuration"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAddTagsToResourceInput(v *AddTagsToResourceInput) error {
 	if v == nil {
 		return nil
@@ -1772,6 +2009,11 @@ func validateOpCreateEndpointInput(v *CreateEndpointInput) error {
 			invalidParams.AddNested("RedisSettings", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.TimestreamSettings != nil {
+		if err := validateTimestreamSettings(v.TimestreamSettings); err != nil {
+			invalidParams.AddNested("TimestreamSettings", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1810,6 +2052,36 @@ func validateOpCreateFleetAdvisorCollectorInput(v *CreateFleetAdvisorCollectorIn
 	}
 	if v.S3BucketName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("S3BucketName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateReplicationConfigInput(v *CreateReplicationConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateReplicationConfigInput"}
+	if v.ReplicationConfigIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReplicationConfigIdentifier"))
+	}
+	if v.SourceEndpointArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceEndpointArn"))
+	}
+	if v.TargetEndpointArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetEndpointArn"))
+	}
+	if v.ComputeConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ComputeConfig"))
+	}
+	if len(v.ReplicationType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ReplicationType"))
+	}
+	if v.TableMappings == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableMappings"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1972,6 +2244,21 @@ func validateOpDeleteFleetAdvisorDatabasesInput(v *DeleteFleetAdvisorDatabasesIn
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteFleetAdvisorDatabasesInput"}
 	if v.DatabaseIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatabaseIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteReplicationConfigInput(v *DeleteReplicationConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteReplicationConfigInput"}
+	if v.ReplicationConfigArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReplicationConfigArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2308,6 +2595,23 @@ func validateOpDescribeRefreshSchemasStatusInput(v *DescribeRefreshSchemasStatus
 	}
 }
 
+func validateOpDescribeReplicationConfigsInput(v *DescribeReplicationConfigsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeReplicationConfigsInput"}
+	if v.Filters != nil {
+		if err := validateFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeReplicationInstancesInput(v *DescribeReplicationInstancesInput) error {
 	if v == nil {
 		return nil
@@ -2340,11 +2644,48 @@ func validateOpDescribeReplicationInstanceTaskLogsInput(v *DescribeReplicationIn
 	}
 }
 
+func validateOpDescribeReplicationsInput(v *DescribeReplicationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeReplicationsInput"}
+	if v.Filters != nil {
+		if err := validateFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeReplicationSubnetGroupsInput(v *DescribeReplicationSubnetGroupsInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeReplicationSubnetGroupsInput"}
+	if v.Filters != nil {
+		if err := validateFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeReplicationTableStatisticsInput(v *DescribeReplicationTableStatisticsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeReplicationTableStatisticsInput"}
+	if v.ReplicationConfigArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReplicationConfigArn"))
+	}
 	if v.Filters != nil {
 		if err := validateFilterList(v.Filters); err != nil {
 			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
@@ -2486,6 +2827,11 @@ func validateOpModifyEndpointInput(v *ModifyEndpointInput) error {
 			invalidParams.AddNested("RedisSettings", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.TimestreamSettings != nil {
+		if err := validateTimestreamSettings(v.TimestreamSettings); err != nil {
+			invalidParams.AddNested("TimestreamSettings", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2500,6 +2846,21 @@ func validateOpModifyEventSubscriptionInput(v *ModifyEventSubscriptionInput) err
 	invalidParams := smithy.InvalidParamsError{Context: "ModifyEventSubscriptionInput"}
 	if v.SubscriptionName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SubscriptionName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpModifyReplicationConfigInput(v *ModifyReplicationConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModifyReplicationConfigInput"}
+	if v.ReplicationConfigArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReplicationConfigArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2607,6 +2968,28 @@ func validateOpRefreshSchemasInput(v *RefreshSchemasInput) error {
 	}
 }
 
+func validateOpReloadReplicationTablesInput(v *ReloadReplicationTablesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ReloadReplicationTablesInput"}
+	if v.ReplicationConfigArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReplicationConfigArn"))
+	}
+	if v.TablesToReload == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TablesToReload"))
+	} else if v.TablesToReload != nil {
+		if err := validateTableListToReload(v.TablesToReload); err != nil {
+			invalidParams.AddNested("TablesToReload", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpReloadTablesInput(v *ReloadTablesInput) error {
 	if v == nil {
 		return nil
@@ -2669,6 +3052,24 @@ func validateOpStartRecommendationsInput(v *StartRecommendationsInput) error {
 	}
 }
 
+func validateOpStartReplicationInput(v *StartReplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartReplicationInput"}
+	if v.ReplicationConfigArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReplicationConfigArn"))
+	}
+	if v.StartReplicationType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartReplicationType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStartReplicationTaskAssessmentInput(v *StartReplicationTaskAssessmentInput) error {
 	if v == nil {
 		return nil
@@ -2718,6 +3119,21 @@ func validateOpStartReplicationTaskInput(v *StartReplicationTaskInput) error {
 	}
 	if len(v.StartReplicationTaskType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("StartReplicationTaskType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopReplicationInput(v *StopReplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopReplicationInput"}
+	if v.ReplicationConfigArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReplicationConfigArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

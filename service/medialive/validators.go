@@ -550,6 +550,26 @@ func (m *validateOpDescribeSchedule) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeThumbnails struct {
+}
+
+func (*validateOpDescribeThumbnails) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeThumbnails) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeThumbnailsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeThumbnailsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListInputDeviceTransfers struct {
 }
 
@@ -1056,6 +1076,10 @@ func addOpDescribeReservationValidationMiddleware(stack *middleware.Stack) error
 
 func addOpDescribeScheduleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeSchedule{}, middleware.After)
+}
+
+func addOpDescribeThumbnailsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeThumbnails{}, middleware.After)
 }
 
 func addOpListInputDeviceTransfersValidationMiddleware(stack *middleware.Stack) error {
@@ -2054,6 +2078,11 @@ func validateEncoderSettings(v *types.EncoderSettings) error {
 	} else if v.VideoDescriptions != nil {
 		if err := validate__listOfVideoDescription(v.VideoDescriptions); err != nil {
 			invalidParams.AddNested("VideoDescriptions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ThumbnailConfiguration != nil {
+		if err := validateThumbnailConfiguration(v.ThumbnailConfiguration); err != nil {
+			invalidParams.AddNested("ThumbnailConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3187,6 +3216,21 @@ func validateTeletextSourceSettings(v *types.TeletextSourceSettings) error {
 	}
 }
 
+func validateThumbnailConfiguration(v *types.ThumbnailConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ThumbnailConfiguration"}
+	if len(v.State) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("State"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTimecodeBurninSettings(v *types.TimecodeBurninSettings) error {
 	if v == nil {
 		return nil
@@ -3785,6 +3829,27 @@ func validateOpDescribeScheduleInput(v *DescribeScheduleInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeScheduleInput"}
 	if v.ChannelId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ChannelId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeThumbnailsInput(v *DescribeThumbnailsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeThumbnailsInput"}
+	if v.ChannelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelId"))
+	}
+	if v.PipelineId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PipelineId"))
+	}
+	if v.ThumbnailType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ThumbnailType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

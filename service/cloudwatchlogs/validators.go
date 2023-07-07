@@ -330,26 +330,6 @@ func (m *validateOpDescribeSubscriptionFilters) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpDisassociateKmsKey struct {
-}
-
-func (*validateOpDisassociateKmsKey) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpDisassociateKmsKey) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*DisassociateKmsKeyInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpDisassociateKmsKeyInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpGetDataProtectionPolicy struct {
 }
 
@@ -854,10 +834,6 @@ func addOpDescribeSubscriptionFiltersValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpDescribeSubscriptionFilters{}, middleware.After)
 }
 
-func addOpDisassociateKmsKeyValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpDisassociateKmsKey{}, middleware.After)
-}
-
 func addOpGetDataProtectionPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDataProtectionPolicy{}, middleware.After)
 }
@@ -1024,9 +1000,6 @@ func validateOpAssociateKmsKeyInput(v *AssociateKmsKeyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AssociateKmsKeyInput"}
-	if v.LogGroupName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LogGroupName"))
-	}
 	if v.KmsKeyId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("KmsKeyId"))
 	}
@@ -1276,21 +1249,6 @@ func validateOpDescribeSubscriptionFiltersInput(v *DescribeSubscriptionFiltersIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeSubscriptionFiltersInput"}
-	if v.LogGroupName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LogGroupName"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpDisassociateKmsKeyInput(v *DisassociateKmsKeyInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "DisassociateKmsKeyInput"}
 	if v.LogGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LogGroupName"))
 	}

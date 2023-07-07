@@ -994,6 +994,23 @@ func addOpUpdateVodSourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateVodSource{}, middleware.After)
 }
 
+func validate__listOfAdBreak(v []types.AdBreak) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOfAdBreak"}
+	for i := range v {
+		if err := validateAdBreak(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validate__listOfAvailMatchingCriteria(v []types.AvailMatchingCriteria) error {
 	if v == nil {
 		return nil
@@ -1001,6 +1018,40 @@ func validate__listOfAvailMatchingCriteria(v []types.AvailMatchingCriteria) erro
 	invalidParams := smithy.InvalidParamsError{Context: "ListOfAvailMatchingCriteria"}
 	for i := range v {
 		if err := validateAvailMatchingCriteria(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAdBreak(v *types.AdBreak) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AdBreak"}
+	if v.AdBreakMetadata != nil {
+		if err := validateAdBreakMetadataList(v.AdBreakMetadata); err != nil {
+			invalidParams.AddNested("AdBreakMetadata", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAdBreakMetadataList(v []types.KeyValuePair) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AdBreakMetadataList"}
+	for i := range v {
+		if err := validateKeyValuePair(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1086,6 +1137,24 @@ func validateHttpPackageConfigurations(v []types.HttpPackageConfiguration) error
 		if err := validateHttpPackageConfiguration(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateKeyValuePair(v *types.KeyValuePair) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "KeyValuePair"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1343,6 +1412,11 @@ func validateOpCreateProgramInput(v *CreateProgramInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateProgramInput"}
+	if v.AdBreaks != nil {
+		if err := validate__listOfAdBreak(v.AdBreaks); err != nil {
+			invalidParams.AddNested("AdBreaks", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.ChannelName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ChannelName"))
 	}
@@ -1918,6 +1992,11 @@ func validateOpUpdateProgramInput(v *UpdateProgramInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateProgramInput"}
+	if v.AdBreaks != nil {
+		if err := validate__listOfAdBreak(v.AdBreaks); err != nil {
+			invalidParams.AddNested("AdBreaks", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.ChannelName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ChannelName"))
 	}

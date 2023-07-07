@@ -212,6 +212,9 @@ type ModifyEndpointInput struct {
 	// in the Database Migration Service User Guide.
 	SybaseSettings *types.SybaseSettings
 
+	// Settings in JSON format for the target Amazon Timestream endpoint.
+	TimestreamSettings *types.TimestreamSettings
+
 	// The user name to be used to login to the endpoint database.
 	Username *string
 

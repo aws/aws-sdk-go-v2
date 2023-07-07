@@ -20,6 +20,24 @@ func (AccessType) Values() []AccessType {
 	}
 }
 
+type AdMarkupType string
+
+// Enum values for AdMarkupType
+const (
+	AdMarkupTypeDaterange      AdMarkupType = "DATERANGE"
+	AdMarkupTypeScte35Enhanced AdMarkupType = "SCTE35_ENHANCED"
+)
+
+// Values returns all known values for AdMarkupType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AdMarkupType) Values() []AdMarkupType {
+	return []AdMarkupType{
+		"DATERANGE",
+		"SCTE35_ENHANCED",
+	}
+}
+
 type ChannelState string
 
 // Enum values for ChannelState

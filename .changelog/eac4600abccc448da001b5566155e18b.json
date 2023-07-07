@@ -1,0 +1,8 @@
+{
+    "id": "eac4600a-bccc-448d-a001-b5566155e18b",
+    "type": "feature",
+    "description": "This release enables the use of Thumbnails in AWS Elemental MediaLive.",
+    "modules": [
+        "service/medialive"
+    ]
+}

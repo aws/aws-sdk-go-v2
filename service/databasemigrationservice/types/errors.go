@@ -165,7 +165,7 @@ func (e *InvalidResourceStateFault) ErrorCode() string {
 }
 func (e *InvalidResourceStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The subnet provided is invalid.
+// The subnet provided isn't valid.
 type InvalidSubnet struct {
 	Message *string
 

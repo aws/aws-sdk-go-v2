@@ -3471,6 +3471,21 @@ type GrokClassifier struct {
 	noSmithyDocumentSerde
 }
 
+// A structure that defines an Apache Iceberg metadata table to create in the
+// catalog.
+type IcebergInput struct {
+
+	// A required metadata operation. Can only be set to CREATE .
+	//
+	// This member is required.
+	MetadataOperation MetadataOperation
+
+	// The table version for the Iceberg table. Defaults to 2.
+	Version *string
+
+	noSmithyDocumentSerde
+}
+
 // Specifies an Apache Iceberg data source where Iceberg tables are stored in
 // Amazon S3.
 type IcebergTarget struct {
@@ -5029,6 +5044,16 @@ type NullValueField struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// A structure representing an open format table.
+type OpenTableFormatInput struct {
+
+	// Specifies an IcebergInput structure that defines an Apache Iceberg metadata
+	// table.
+	IcebergInput *IcebergInput
 
 	noSmithyDocumentSerde
 }

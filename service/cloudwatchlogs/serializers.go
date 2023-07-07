@@ -3028,6 +3028,11 @@ func awsAwsjson11_serializeOpDocumentAssociateKmsKeyInput(v *AssociateKmsKeyInpu
 		ok.String(*v.LogGroupName)
 	}
 
+	if v.ResourceIdentifier != nil {
+		ok := object.Key("resourceIdentifier")
+		ok.String(*v.ResourceIdentifier)
+	}
+
 	return nil
 }
 
@@ -3557,6 +3562,11 @@ func awsAwsjson11_serializeOpDocumentDisassociateKmsKeyInput(v *DisassociateKmsK
 	if v.LogGroupName != nil {
 		ok := object.Key("logGroupName")
 		ok.String(*v.LogGroupName)
+	}
+
+	if v.ResourceIdentifier != nil {
+		ok := object.Key("resourceIdentifier")
+		ok.String(*v.ResourceIdentifier)
 	}
 
 	return nil

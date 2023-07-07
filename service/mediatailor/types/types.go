@@ -37,6 +37,10 @@ type AccessConfiguration struct {
 // Ad break configuration parameters.
 type AdBreak struct {
 
+	// Defines a list of key/value pairs that MediaTailor generates within the
+	// EXT-X-ASSET tag for SCTE35_ENHANCED output.
+	AdBreakMetadata []KeyValuePair
+
 	// The SCTE-35 ad insertion type. Accepted value: SPLICE_INSERT , TIME_SIGNAL .
 	MessageType MessageType
 
@@ -384,6 +388,11 @@ type HlsConfiguration struct {
 // HLS playlist configuration parameters.
 type HlsPlaylistSettings struct {
 
+	// Determines the type of SCTE 35 tags to use in ad markup. Specify DATERANGE to
+	// use DATERANGE tags (for live or VOD content). Specify SCTE35_ENHANCED to use
+	// EXT-X-CUE-OUT and EXT-X-CUE-IN tags (for VOD content only).
+	AdMarkupType []AdMarkupType
+
 	// The total duration (in seconds) of each manifest. Minimum value: 30 seconds.
 	// Maximum value: 3600 seconds.
 	ManifestWindowSeconds int32
@@ -423,6 +432,27 @@ type HttpPackageConfiguration struct {
 	//
 	// This member is required.
 	Type Type
+
+	noSmithyDocumentSerde
+}
+
+// For SCTE35_ENHANCED output, defines a key and corresponding value. MediaTailor
+// generates these pairs within the EXT-X-ASSET tag.
+type KeyValuePair struct {
+
+	// For SCTE35_ENHANCED output, defines a key. MediaTailor takes this key, and its
+	// associated value, and generates the key/value pair within the EXT-X-ASSET tag.
+	// If you specify a key, you must also specify a corresponding value.
+	//
+	// This member is required.
+	Key *string
+
+	// For SCTE35_ENHANCED output, defines a vaue. MediaTailor; takes this value, and
+	// its associated key, and generates the key/value pair within the EXT-X-ASSET tag.
+	// If you specify a value, you must also specify a corresponding key.
+	//
+	// This member is required.
+	Value *string
 
 	noSmithyDocumentSerde
 }

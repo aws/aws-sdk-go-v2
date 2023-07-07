@@ -7744,6 +7744,11 @@ func awsRestjson1_deserializeDocumentAdBreak(v **types.AdBreak, value interface{
 
 	for key, value := range shape {
 		switch key {
+		case "AdBreakMetadata":
+			if err := awsRestjson1_deserializeDocumentAdBreakMetadataList(&sv.AdBreakMetadata, value); err != nil {
+				return err
+			}
+
 		case "MessageType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7790,6 +7795,40 @@ func awsRestjson1_deserializeDocumentAdBreak(v **types.AdBreak, value interface{
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAdBreakMetadataList(v *[]types.KeyValuePair, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.KeyValuePair
+	if *v == nil {
+		cv = []types.KeyValuePair{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.KeyValuePair
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentKeyValuePair(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAdMarkerPassthrough(v **types.AdMarkerPassthrough, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7827,6 +7866,42 @@ func awsRestjson1_deserializeDocumentAdMarkerPassthrough(v **types.AdMarkerPasst
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAdMarkupTypes(v *[]types.AdMarkupType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AdMarkupType
+	if *v == nil {
+		cv = []types.AdMarkupType{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AdMarkupType
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected AdMarkupType to be of type string, got %T instead", value)
+			}
+			col = types.AdMarkupType(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -8603,6 +8678,11 @@ func awsRestjson1_deserializeDocumentHlsPlaylistSettings(v **types.HlsPlaylistSe
 
 	for key, value := range shape {
 		switch key {
+		case "AdMarkupType":
+			if err := awsRestjson1_deserializeDocumentAdMarkupTypes(&sv.AdMarkupType, value); err != nil {
+				return err
+			}
+
 		case "ManifestWindowSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -8754,6 +8834,55 @@ func awsRestjson1_deserializeDocumentHttpPackageConfigurations(v *[]types.HttpPa
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentKeyValuePair(v **types.KeyValuePair, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.KeyValuePair
+	if *v == nil {
+		sv = &types.KeyValuePair{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Key":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Key = ptr.String(jtv)
+			}
+
+		case "Value":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Value = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

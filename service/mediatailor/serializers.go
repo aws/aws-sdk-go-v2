@@ -3423,6 +3423,13 @@ func awsRestjson1_serializeDocumentAdBreak(v *types.AdBreak, value smithyjson.Va
 	object := value.Object()
 	defer object.Close()
 
+	if v.AdBreakMetadata != nil {
+		ok := object.Key("AdBreakMetadata")
+		if err := awsRestjson1_serializeDocumentAdBreakMetadataList(v.AdBreakMetadata, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.MessageType) > 0 {
 		ok := object.Key("MessageType")
 		ok.String(string(v.MessageType))
@@ -3457,6 +3464,19 @@ func awsRestjson1_serializeDocumentAdBreak(v *types.AdBreak, value smithyjson.Va
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAdBreakMetadataList(v []types.KeyValuePair, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentKeyValuePair(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAdMarkerPassthrough(v *types.AdMarkerPassthrough, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3466,6 +3486,17 @@ func awsRestjson1_serializeDocumentAdMarkerPassthrough(v *types.AdMarkerPassthro
 		ok.Boolean(v.Enabled)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAdMarkupTypes(v []types.AdMarkupType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
 	return nil
 }
 
@@ -3630,6 +3661,13 @@ func awsRestjson1_serializeDocumentHlsPlaylistSettings(v *types.HlsPlaylistSetti
 	object := value.Object()
 	defer object.Close()
 
+	if v.AdMarkupType != nil {
+		ok := object.Key("AdMarkupType")
+		if err := awsRestjson1_serializeDocumentAdMarkupTypes(v.AdMarkupType, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ManifestWindowSeconds != 0 {
 		ok := object.Key("ManifestWindowSeconds")
 		ok.Integer(v.ManifestWindowSeconds)
@@ -3682,6 +3720,23 @@ func awsRestjson1_serializeDocumentHttpPackageConfigurations(v []types.HttpPacka
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentKeyValuePair(v *types.KeyValuePair, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Key != nil {
+		ok := object.Key("Key")
+		ok.String(*v.Key)
+	}
+
+	if v.Value != nil {
+		ok := object.Key("Value")
+		ok.String(*v.Value)
+	}
+
 	return nil
 }
 

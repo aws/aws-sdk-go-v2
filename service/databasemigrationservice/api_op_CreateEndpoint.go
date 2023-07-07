@@ -218,6 +218,9 @@ type CreateEndpointInput struct {
 	// One or more tags to be assigned to the endpoint.
 	Tags []types.Tag
 
+	// Settings in JSON format for the target Amazon Timestream endpoint.
+	TimestreamSettings *types.TimestreamSettings
+
 	// The user name to be used to log in to the endpoint database.
 	Username *string
 

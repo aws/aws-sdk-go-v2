@@ -174,6 +174,77 @@ type CollectorShortInfoResponse struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration parameters for provisioning an DMS Serverless replication.
+type ComputeConfig struct {
+
+	// The Availability Zone where the DMS Serverless replication using this
+	// configuration will run. The default value is a random, system-chosen
+	// Availability Zone in the configuration's Amazon Web Services Region, for
+	// example, "us-west-2" . You can't set this parameter if the MultiAZ parameter is
+	// set to true .
+	AvailabilityZone *string
+
+	// A list of custom DNS name servers supported for the DMS Serverless replication
+	// to access your source or target database. This list overrides the default name
+	// servers supported by the DMS Serverless replication. You can specify a
+	// comma-separated list of internet addresses for up to four DNS name servers. For
+	// example: "1.1.1.1,2.2.2.2,3.3.3.3,4.4.4.4"
+	DnsNameServers *string
+
+	// An Key Management Service (KMS) key Amazon Resource Name (ARN) that is used to
+	// encrypt the data during DMS Serverless replication. If you don't specify a value
+	// for the KmsKeyId parameter, DMS uses your default encryption key. KMS creates
+	// the default encryption key for your Amazon Web Services account. Your Amazon Web
+	// Services account has a different default encryption key for each Amazon Web
+	// Services Region.
+	KmsKeyId *string
+
+	// Specifies the maximum value of the DMS capacity units (DCUs) for which a given
+	// DMS Serverless replication can be provisioned. A single DCU is 2GB of RAM, with
+	// 2 DCUs as the minimum value allowed. The list of valid DCU values includes 2, 4,
+	// 8, 16, 32, 64, 128, 192, 256, and 384. So, the maximum value that you can
+	// specify for DMS Serverless is 384. The MaxCapacityUnits parameter is the only
+	// DCU parameter you are required to specify.
+	MaxCapacityUnits *int32
+
+	// Specifies the minimum value of the DMS capacity units (DCUs) for which a given
+	// DMS Serverless replication can be provisioned. A single DCU is 2GB of RAM, with
+	// 2 DCUs as the minimum value allowed. The list of valid DCU values includes 2, 4,
+	// 8, 16, 32, 64, 128, 192, 256, and 384. So, the minimum DCU value that you can
+	// specify for DMS Serverless is 2. You don't have to specify a value for the
+	// MinCapacityUnits parameter. If you don't set this value, DMS scans the current
+	// activity of available source tables to identify an optimum setting for this
+	// parameter. If there is no current source activity or DMS can't otherwise
+	// identify a more appropriate value, it sets this parameter to the minimum DCU
+	// value allowed, 2.
+	MinCapacityUnits *int32
+
+	// Specifies whether the DMS Serverless replication is a Multi-AZ deployment. You
+	// can't set the AvailabilityZone parameter if the MultiAZ parameter is set to true
+	// .
+	MultiAZ *bool
+
+	// The weekly time range during which system maintenance can occur for the DMS
+	// Serverless replication, in Universal Coordinated Time (UTC). The format is
+	// ddd:hh24:mi-ddd:hh24:mi . The default is a 30-minute window selected at random
+	// from an 8-hour block of time per Amazon Web Services Region. This maintenance
+	// occurs on a random day of the week. Valid values for days of the week include
+	// Mon , Tue , Wed , Thu , Fri , Sat , and Sun . Constraints include a minimum
+	// 30-minute window.
+	PreferredMaintenanceWindow *string
+
+	// Specifies a subnet group identifier to associate with the DMS Serverless
+	// replication.
+	ReplicationSubnetGroupId *string
+
+	// Specifies the virtual private cloud (VPC) security group to use with the DMS
+	// Serverless replication. The VPC security group must work with the VPC containing
+	// the replication.
+	VpcSecurityGroupIds []string
+
+	noSmithyDocumentSerde
+}
+
 // Status of the connection between an endpoint and a replication instance,
 // including Amazon Resource Names (ARNs) and the last error message issued.
 type Connection struct {
@@ -330,6 +401,13 @@ type DocDbSettings struct {
 	// The port value for the DocumentDB source endpoint.
 	Port *int32
 
+	// If true , DMS replicates data to shard collections. DMS only uses this setting
+	// if the target endpoint is a DocumentDB elastic cluster. When this setting is
+	// true , note the following:
+	//   - You must set TargetTablePrepMode to nothing .
+	//   - DMS automatically sets useUpdateLookup to false .
+	ReplicateShardCollections *bool
+
 	// The full Amazon Resource Name (ARN) of the IAM role that specifies DMS as the
 	// trusted entity and grants the required permissions to access the value in
 	// SecretsManagerSecret . The role must allow the iam:PassRole action.
@@ -350,6 +428,12 @@ type DocDbSettings struct {
 
 	// The name of the server on the DocumentDB source endpoint.
 	ServerName *string
+
+	// If true , DMS retrieves the entire document from the DocumentDB source during
+	// migration. This may cause a migration failure if the server response exceeds
+	// bandwidth limits. To fetch only updates and deletes during migration, set this
+	// parameter to false .
+	UseUpdateLookUp *bool
 
 	// The user name you use to access the DocumentDB source endpoint.
 	Username *string
@@ -542,6 +626,10 @@ type Endpoint struct {
 	// The settings for the SAP ASE source and target endpoint. For more information,
 	// see the SybaseSettings structure.
 	SybaseSettings *SybaseSettings
+
+	// The settings for the Amazon Timestream target endpoint. For more information,
+	// see the TimestreamSettings structure.
+	TimestreamSettings *TimestreamSettings
 
 	// The user name used to connect to the endpoint.
 	Username *string
@@ -961,6 +1049,10 @@ type KafkaSettings struct {
 	// target endpoint.
 	SslClientKeyPassword *string
 
+	// Sets hostname verification for the certificate. This setting is supported in
+	// DMS version 3.5.1 and later.
+	SslEndpointIdentificationAlgorithm KafkaSslEndpointIdentificationAlgorithm
+
 	// The topic to which you migrate the data. If you don't specify a topic, DMS
 	// specifies "kafka-default-topic" as the migration topic.
 	Topic *string
@@ -1207,6 +1299,13 @@ type MongoDbSettings struct {
 	// The port value for the MongoDB source endpoint.
 	Port *int32
 
+	// If true , DMS replicates data to shard collections. DMS only uses this setting
+	// if the target endpoint is a DocumentDB elastic cluster. When this setting is
+	// true , note the following:
+	//   - You must set TargetTablePrepMode to nothing .
+	//   - DMS automatically sets useUpdateLookup to false .
+	ReplicateShardCollections *bool
+
 	// The full Amazon Resource Name (ARN) of the IAM role that specifies DMS as the
 	// trusted entity and grants the required permissions to access the value in
 	// SecretsManagerSecret . The role must allow the iam:PassRole action.
@@ -1227,6 +1326,12 @@ type MongoDbSettings struct {
 
 	// The name of the server on the MongoDB source endpoint.
 	ServerName *string
+
+	// If true , DMS retrieves the entire document from the MongoDB source during
+	// migration. This may cause a migration failure if the server response exceeds
+	// bandwidth limits. To fetch only updates and deletes during migration, set this
+	// parameter to false .
+	UseUpdateLookUp *bool
 
 	// The user name you use to access the MongoDB source endpoint.
 	Username *string
@@ -1489,6 +1594,12 @@ type OracleSettings struct {
 	// FLOAT. By default, the NUMBER data type is converted to precision 38, scale 10.
 	// Example: numberDataTypeScale=12
 	NumberDatatypeScale *int32
+
+	// The timeframe in minutes to check for open transactions for a CDC-only task.
+	// You can specify an integer value between 0 (the default) and 240 (the maximum).
+	// This parameter is only valid in DMS version 3.5.0 and later. DMS supports a
+	// window of up to 9.5 hours including the value for OpenTransactionWindow .
+	OpenTransactionWindow *int32
 
 	// Set this string attribute to the required value in order to use the Binary
 	// Reader to capture change data for an Amazon RDS for Oracle as the source. This
@@ -1776,6 +1887,12 @@ type PostgreSQLSettings struct {
 	// PostgreSQL migrates booleans as varchar(5) .
 	MapBooleanAsBoolean *bool
 
+	// When true, DMS migrates JSONB values as CLOB.
+	MapJsonbAsClob *bool
+
+	// When true, DMS migrates LONG values as VARCHAR.
+	MapLongVarcharAs LongVarcharMappingType
+
 	// Specifies the maximum size (in KB) of any .csv file used to transfer data to
 	// PostgreSQL. Example: maxFileSize=512
 	MaxFileSize *int32
@@ -1824,8 +1941,9 @@ type PostgreSQLSettings struct {
 	// the specified slot doesn't exist or the task doesn't have a valid
 	// CdcStartPosition setting, DMS raises an error. For more information about
 	// setting the CdcStartPosition request parameter, see Determining a CDC native
-	// start point in the Database Migration Service User Guide. For more information
-	// about using CdcStartPosition , see CreateReplicationTask (https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateReplicationTask.html)
+	// start point (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Task.CDC.html#CHAP_Task.CDC.StartPoint.Native)
+	// in the Database Migration Service User Guide. For more information about using
+	// CdcStartPosition , see CreateReplicationTask (https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateReplicationTask.html)
 	// , StartReplicationTask (https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTask.html)
 	// , and ModifyReplicationTask (https://docs.aws.amazon.com/dms/latest/APIReference/API_ModifyReplicationTask.html)
 	// .
@@ -1841,6 +1959,31 @@ type PostgreSQLSettings struct {
 	noSmithyDocumentSerde
 }
 
+// Information about provisioning resources for an DMS serverless replication.
+type ProvisionData struct {
+
+	// The timestamp when provisioning became available.
+	DateNewProvisioningDataAvailable *time.Time
+
+	// The timestamp when DMS provisioned replication resources.
+	DateProvisioned *time.Time
+
+	// Whether the new provisioning is available to the replication.
+	IsNewProvisioningAvailable bool
+
+	// The current provisioning state
+	ProvisionState *string
+
+	// The number of capacity units the replication is using.
+	ProvisionedCapacityUnits int32
+
+	// A message describing the reason that DMS provisioned new resources for the
+	// serverless replication.
+	ReasonForNewProvisioningData *string
+
+	noSmithyDocumentSerde
+}
+
 // Provides information that describes the configuration of the recommended target
 // engine on Amazon RDS.
 type RdsConfiguration struct {
@@ -1852,6 +1995,9 @@ type RdsConfiguration struct {
 
 	// Describes the recommended target Amazon RDS engine edition.
 	EngineEdition *string
+
+	// Describes the recommended target Amazon RDS engine version.
+	EngineVersion *string
 
 	// Describes the memory on the recommended Amazon RDS DB instance that meets your
 	// requirements.
@@ -1907,6 +2053,9 @@ type RdsRequirements struct {
 
 	// The required target Amazon RDS engine edition.
 	EngineEdition *string
+
+	// The required target Amazon RDS engine version.
+	EngineVersion *string
 
 	// The required memory on the Amazon RDS DB instance.
 	InstanceMemory *float64
@@ -2240,6 +2389,138 @@ type RefreshSchemasStatus struct {
 	noSmithyDocumentSerde
 }
 
+// Provides information that describes a serverless replication created by the
+// CreateReplication operation.
+type Replication struct {
+
+	// Indicates the start time for a change data capture (CDC) operation. Use either
+	// CdcStartTime or CdcStartPosition to specify when you want a CDC operation to
+	// start. Specifying both values results in an error.
+	CdcStartPosition *string
+
+	// Indicates the start time for a change data capture (CDC) operation. Use either
+	// CdcStartTime or CdcStartPosition to specify when you want a CDC operation to
+	// start. Specifying both values results in an error.
+	CdcStartTime *time.Time
+
+	// Indicates when you want a change data capture (CDC) operation to stop. The
+	// value can be either server time or commit time.
+	CdcStopPosition *string
+
+	// Error and other information about why a serverless replication failed.
+	FailureMessages []string
+
+	// Information about provisioning resources for an DMS serverless replication.
+	ProvisionData *ProvisionData
+
+	// Indicates the last checkpoint that occurred during a change data capture (CDC)
+	// operation. You can provide this value to the CdcStartPosition parameter to
+	// start a CDC operation that begins at that checkpoint.
+	RecoveryCheckpoint *string
+
+	// The Amazon Resource Name for the ReplicationConfig associated with the
+	// replication.
+	ReplicationConfigArn *string
+
+	// The identifier for the ReplicationConfig associated with the replication.
+	ReplicationConfigIdentifier *string
+
+	// The time the serverless replication was created.
+	ReplicationCreateTime *time.Time
+
+	// The timestamp when replication was last stopped.
+	ReplicationLastStopTime *time.Time
+
+	// This object provides a collection of statistics about a serverless replication.
+	ReplicationStats *ReplicationStats
+
+	// The type of the serverless replication.
+	ReplicationType MigrationTypeValue
+
+	// The time the serverless replication was updated.
+	ReplicationUpdateTime *time.Time
+
+	// The Amazon Resource Name for an existing Endpoint the serverless replication
+	// uses for its data source.
+	SourceEndpointArn *string
+
+	// The replication type.
+	StartReplicationType *string
+
+	// The current status of the serverless replication.
+	Status *string
+
+	// The reason the replication task was stopped. This response parameter can return
+	// one of the following values:
+	//   - "Stop Reason NORMAL"
+	//   - "Stop Reason RECOVERABLE_ERROR"
+	//   - "Stop Reason FATAL_ERROR"
+	//   - "Stop Reason FULL_LOAD_ONLY_FINISHED"
+	//   - "Stop Reason STOPPED_AFTER_FULL_LOAD" – Full load completed, with cached
+	//   changes not applied
+	//   - "Stop Reason STOPPED_AFTER_CACHED_EVENTS" – Full load completed, with cached
+	//   changes applied
+	//   - "Stop Reason EXPRESS_LICENSE_LIMITS_REACHED"
+	//   - "Stop Reason STOPPED_AFTER_DDL_APPLY" – User-defined stop task after DDL
+	//   applied
+	//   - "Stop Reason STOPPED_DUE_TO_LOW_MEMORY"
+	//   - "Stop Reason STOPPED_DUE_TO_LOW_DISK"
+	//   - "Stop Reason STOPPED_AT_SERVER_TIME" – User-defined server time for stopping
+	//   task
+	//   - "Stop Reason STOPPED_AT_COMMIT_TIME" – User-defined commit time for stopping
+	//   task
+	//   - "Stop Reason RECONFIGURATION_RESTART"
+	//   - "Stop Reason RECYCLE_TASK"
+	StopReason *string
+
+	// The Amazon Resource Name for an existing Endpoint the serverless replication
+	// uses for its data target.
+	TargetEndpointArn *string
+
+	noSmithyDocumentSerde
+}
+
+// This object provides configuration information about a serverless replication.
+type ReplicationConfig struct {
+
+	// Configuration parameters for provisioning an DMS serverless replication.
+	ComputeConfig *ComputeConfig
+
+	// The Amazon Resource Name (ARN) of this DMS Serverless replication configuration.
+	ReplicationConfigArn *string
+
+	// The time the serverless replication config was created.
+	ReplicationConfigCreateTime *time.Time
+
+	// The identifier for the ReplicationConfig associated with the replication.
+	ReplicationConfigIdentifier *string
+
+	// The time the serverless replication config was updated.
+	ReplicationConfigUpdateTime *time.Time
+
+	// Configuration parameters for an DMS serverless replication.
+	ReplicationSettings *string
+
+	// The type of the replication.
+	ReplicationType MigrationTypeValue
+
+	// The Amazon Resource Name (ARN) of the source endpoint for this DMS serverless
+	// replication configuration.
+	SourceEndpointArn *string
+
+	// Additional parameters for an DMS serverless replication.
+	SupplementalSettings *string
+
+	// Table mappings specified in the replication.
+	TableMappings *string
+
+	// The Amazon Resource Name (ARN) of the target endpoint for this DMS serverless
+	// replication configuration.
+	TargetEndpointArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Provides information that defines a replication instance.
 type ReplicationInstance struct {
 
@@ -2408,6 +2689,46 @@ type ReplicationPendingModifiedValues struct {
 	// right DMS replication instance for your migration (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.html#CHAP_ReplicationInstance.InDepth)
 	// .
 	ReplicationInstanceClass *string
+
+	noSmithyDocumentSerde
+}
+
+// This object provides a collection of statistics about a serverless replication.
+type ReplicationStats struct {
+
+	// The elapsed time of the replication, in milliseconds.
+	ElapsedTimeMillis int64
+
+	// The date the replication was started either with a fresh start or a target
+	// reload.
+	FreshStartDate *time.Time
+
+	// The date the replication full load was finished.
+	FullLoadFinishDate *time.Time
+
+	// The percent complete for the full load serverless replication.
+	FullLoadProgressPercent int32
+
+	// The date the replication full load was started.
+	FullLoadStartDate *time.Time
+
+	// The date the replication is scheduled to start.
+	StartDate *time.Time
+
+	// The date the replication was stopped.
+	StopDate *time.Time
+
+	// The number of errors that have occured for this replication.
+	TablesErrored int32
+
+	// The number of tables loaded for this replication.
+	TablesLoaded int32
+
+	// The number of tables currently loading for this replication.
+	TablesLoading int32
+
+	// The number of tables queued for this replication.
+	TablesQueued int32
 
 	noSmithyDocumentSerde
 }
@@ -2826,14 +3147,14 @@ type S3Settings struct {
 	// UPDATE operations to .csv or .parquet (columnar storage) output files. The
 	// default setting is false , but when CdcInsertsAndUpdates is set to true or y ,
 	// only INSERTs and UPDATEs from the source database are migrated to the .csv or
-	// .parquet file. For .csv file format only, how these INSERTs and UPDATEs are
-	// recorded depends on the value of the IncludeOpForFullLoad parameter. If
-	// IncludeOpForFullLoad is set to true , the first field of every CDC record is set
-	// to either I or U to indicate INSERT and UPDATE operations at the source. But if
-	// IncludeOpForFullLoad is set to false , CDC records are written without an
-	// indication of INSERT or UPDATE operations at the source. For more information
-	// about how these settings work together, see Indicating Source DB Operations in
-	// Migrated S3 Data (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring.InsertOps)
+	// .parquet file. DMS supports the use of the .parquet files in versions 3.4.7 and
+	// later. How these INSERTs and UPDATEs are recorded depends on the value of the
+	// IncludeOpForFullLoad parameter. If IncludeOpForFullLoad is set to true , the
+	// first field of every CDC record is set to either I or U to indicate INSERT and
+	// UPDATE operations at the source. But if IncludeOpForFullLoad is set to false ,
+	// CDC records are written without an indication of INSERT or UPDATE operations at
+	// the source. For more information about how these settings work together, see
+	// Indicating Source DB Operations in Migrated S3 Data (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring.InsertOps)
 	// in the Database Migration Service User Guide.. DMS supports the use of the
 	// CdcInsertsAndUpdates parameter in versions 3.3.1 and later. CdcInsertsOnly and
 	// CdcInsertsAndUpdates can't both be set to true for the same endpoint. Set
@@ -3023,18 +3344,19 @@ type S3Settings struct {
 	IgnoreHeaderRows *int32
 
 	// A value that enables a full load to write INSERT operations to the
-	// comma-separated value (.csv) output files only to indicate how the rows were
-	// added to the source database. DMS supports the IncludeOpForFullLoad parameter
-	// in versions 3.1.4 and later. For full load, records can only be inserted. By
-	// default (the false setting), no information is recorded in these output files
-	// for a full load to indicate that the rows were inserted at the source database.
-	// If IncludeOpForFullLoad is set to true or y , the INSERT is recorded as an I
-	// annotation in the first field of the .csv file. This allows the format of your
-	// target records from a full load to be consistent with the target records from a
-	// CDC load. This setting works together with the CdcInsertsOnly and the
-	// CdcInsertsAndUpdates parameters for output to .csv files only. For more
-	// information about how these settings work together, see Indicating Source DB
-	// Operations in Migrated S3 Data (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring.InsertOps)
+	// comma-separated value (.csv) or .parquet output files only to indicate how the
+	// rows were added to the source database. DMS supports the IncludeOpForFullLoad
+	// parameter in versions 3.1.4 and later. DMS supports the use of the .parquet
+	// files with the IncludeOpForFullLoad parameter in versions 3.4.7 and later. For
+	// full load, records can only be inserted. By default (the false setting), no
+	// information is recorded in these output files for a full load to indicate that
+	// the rows were inserted at the source database. If IncludeOpForFullLoad is set
+	// to true or y , the INSERT is recorded as an I annotation in the first field of
+	// the .csv file. This allows the format of your target records from a full load to
+	// be consistent with the target records from a CDC load. This setting works
+	// together with the CdcInsertsOnly and the CdcInsertsAndUpdates parameters for
+	// output to .csv files only. For more information about how these settings work
+	// together, see Indicating Source DB Operations in Migrated S3 Data (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring.InsertOps)
 	// in the Database Migration Service User Guide..
 	IncludeOpForFullLoad *bool
 
@@ -3455,6 +3777,48 @@ type Tag struct {
 	// '/', '=', '+', '-' (Java regular expressions:
 	// "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides information that defines an Amazon Timestream endpoint.
+type TimestreamSettings struct {
+
+	// Database name for the endpoint.
+	//
+	// This member is required.
+	DatabaseName *string
+
+	// Set this attribute to specify the default magnetic duration applied to the
+	// Amazon Timestream tables in days. This is the number of days that records remain
+	// in magnetic store before being discarded. For more information, see Storage (https://docs.aws.amazon.com/timestream/latest/developerguide/storage.html)
+	// in the Amazon Timestream Developer Guide (https://docs.aws.amazon.com/timestream/latest/developerguide/)
+	// .
+	//
+	// This member is required.
+	MagneticDuration *int32
+
+	// Set this attribute to specify the length of time to store all of the tables in
+	// memory that are migrated into Amazon Timestream from the source database. Time
+	// is measured in units of hours. When Timestream data comes in, it first resides
+	// in memory for the specified duration, which allows quick access to it.
+	//
+	// This member is required.
+	MemoryDuration *int32
+
+	// Set this attribute to true to specify that DMS only applies inserts and
+	// updates, and not deletes. Amazon Timestream does not allow deleting records, so
+	// if this value is false , DMS nulls out the corresponding record in the
+	// Timestream database rather than deleting it.
+	CdcInsertsAndUpdates *bool
+
+	// Set this attribute to true to enable memory store writes. When this value is
+	// false , DMS does not write records that are older in days than the value
+	// specified in MagneticDuration , because Amazon Timestream does not allow memory
+	// writes by default. For more information, see Storage (https://docs.aws.amazon.com/timestream/latest/developerguide/storage.html)
+	// in the Amazon Timestream Developer Guide (https://docs.aws.amazon.com/timestream/latest/developerguide/)
+	// .
+	EnableMagneticStoreWrites *bool
 
 	noSmithyDocumentSerde
 }

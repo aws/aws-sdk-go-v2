@@ -6017,6 +6017,21 @@ func validateGovernedCatalogTarget(v *types.GovernedCatalogTarget) error {
 	}
 }
 
+func validateIcebergInput(v *types.IcebergInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IcebergInput"}
+	if len(v.MetadataOperation) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MetadataOperation"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateJDBCConnectorSource(v *types.JDBCConnectorSource) error {
 	if v == nil {
 		return nil
@@ -6359,6 +6374,23 @@ func validateNullValueFields(v []types.NullValueField) error {
 	for i := range v {
 		if err := validateNullValueField(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpenTableFormatInput(v *types.OpenTableFormatInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OpenTableFormatInput"}
+	if v.IcebergInput != nil {
+		if err := validateIcebergInput(v.IcebergInput); err != nil {
+			invalidParams.AddNested("IcebergInput", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -8328,6 +8360,11 @@ func validateOpCreateTableInput(v *CreateTableInput) error {
 	if v.PartitionIndexes != nil {
 		if err := validatePartitionIndexList(v.PartitionIndexes); err != nil {
 			invalidParams.AddNested("PartitionIndexes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OpenTableFormatInput != nil {
+		if err := validateOpenTableFormatInput(v.OpenTableFormatInput); err != nil {
+			invalidParams.AddNested("OpenTableFormatInput", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

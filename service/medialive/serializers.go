@@ -1729,6 +1729,51 @@ func awsRestjson1_serializeOpHttpBindingsDeleteTagsInput(v *DeleteTagsInput, enc
 	return nil
 }
 
+type awsRestjson1_serializeOpDescribeAccountConfiguration struct {
+}
+
+func (*awsRestjson1_serializeOpDescribeAccountConfiguration) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDescribeAccountConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeAccountConfigurationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/prod/accountConfiguration")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDescribeAccountConfigurationInput(v *DescribeAccountConfigurationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpDescribeChannel struct {
 }
 
@@ -2326,6 +2371,72 @@ func awsRestjson1_serializeOpHttpBindingsDescribeScheduleInput(v *DescribeSchedu
 
 	if v.NextToken != nil {
 		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDescribeThumbnails struct {
+}
+
+func (*awsRestjson1_serializeOpDescribeThumbnails) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDescribeThumbnails) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeThumbnailsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/prod/channels/{ChannelId}/thumbnails")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDescribeThumbnailsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDescribeThumbnailsInput(v *DescribeThumbnailsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ChannelId == nil || len(*v.ChannelId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ChannelId must not be empty")}
+	}
+	if v.ChannelId != nil {
+		if err := encoder.SetURI("ChannelId").String(*v.ChannelId); err != nil {
+			return err
+		}
+	}
+
+	if v.PipelineId != nil {
+		encoder.SetQuery("pipelineId").String(*v.PipelineId)
+	}
+
+	if v.ThumbnailType != nil {
+		encoder.SetQuery("thumbnailType").String(*v.ThumbnailType)
 	}
 
 	return nil
@@ -3617,6 +3728,76 @@ func awsRestjson1_serializeOpDocumentTransferInputDeviceInput(v *TransferInputDe
 	return nil
 }
 
+type awsRestjson1_serializeOpUpdateAccountConfiguration struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateAccountConfiguration) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateAccountConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateAccountConfigurationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/prod/accountConfiguration")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateAccountConfigurationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateAccountConfigurationInput(v *UpdateAccountConfigurationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateAccountConfigurationInput(v *UpdateAccountConfigurationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AccountConfiguration != nil {
+		ok := object.Key("accountConfiguration")
+		if err := awsRestjson1_serializeDocumentAccountConfiguration(v.AccountConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpUpdateChannel struct {
 }
 
@@ -4898,6 +5079,18 @@ func awsRestjson1_serializeDocumentAc3Settings(v *types.Ac3Settings, value smith
 	if len(v.MetadataControl) > 0 {
 		ok := object.Key("metadataControl")
 		ok.String(string(v.MetadataControl))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAccountConfiguration(v *types.AccountConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.KmsKeyId != nil {
+		ok := object.Key("kmsKeyId")
+		ok.String(*v.KmsKeyId)
 	}
 
 	return nil
@@ -6566,6 +6759,13 @@ func awsRestjson1_serializeDocumentEncoderSettings(v *types.EncoderSettings, val
 	if v.OutputGroups != nil {
 		ok := object.Key("outputGroups")
 		if err := awsRestjson1_serializeDocument__listOfOutputGroup(v.OutputGroups, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ThumbnailConfiguration != nil {
+		ok := object.Key("thumbnailConfiguration")
+		if err := awsRestjson1_serializeDocumentThumbnailConfiguration(v.ThumbnailConfiguration, ok); err != nil {
 			return err
 		}
 	}
@@ -10550,6 +10750,18 @@ func awsRestjson1_serializeDocumentTemporalFilterSettings(v *types.TemporalFilte
 	if len(v.Strength) > 0 {
 		ok := object.Key("strength")
 		ok.String(string(v.Strength))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentThumbnailConfiguration(v *types.ThumbnailConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.State) > 0 {
+		ok := object.Key("state")
+		ok.String(string(v.State))
 	}
 
 	return nil

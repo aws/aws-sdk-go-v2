@@ -50,6 +50,12 @@ type GetQueryResultsInput struct {
 
 type GetQueryResultsOutput struct {
 
+	// If you associated an KMS key with the CloudWatch Logs Insights query results in
+	// this account, this field displays the ARN of the key that's used to encrypt the
+	// query results when StartQuery (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_StartQuery.html)
+	// stores them.
+	EncryptionKey *string
+
 	// The log events that matched the query criteria during the most recent time it
 	// ran. The results value is an array of arrays. Each log event is one object in
 	// the top-level array. Each of these log event objects is an array of field / value
@@ -57,9 +63,8 @@ type GetQueryResultsOutput struct {
 	Results [][]types.ResultField
 
 	// Includes the number of log events scanned by the query, the number of log
-	// events that matched the query criteria, and the total number of bytes in the log
-	// events that were scanned. These values reflect the full raw results of the
-	// query.
+	// events that matched the query criteria, and the total number of bytes in the
+	// scanned log events. These values reflect the full raw results of the query.
 	Statistics *types.QueryStatistics
 
 	// The status of the most recent running of the query. Possible values are

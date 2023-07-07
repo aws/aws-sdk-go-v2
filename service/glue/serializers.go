@@ -14884,6 +14884,23 @@ func awsAwsjson11_serializeDocumentGovernedCatalogTarget(v *types.GovernedCatalo
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentIcebergInput(v *types.IcebergInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.MetadataOperation) > 0 {
+		ok := object.Key("MetadataOperation")
+		ok.String(string(v.MetadataOperation))
+	}
+
+	if v.Version != nil {
+		ok := object.Key("Version")
+		ok.String(*v.Version)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentIcebergTarget(v *types.IcebergTarget, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -16198,6 +16215,20 @@ func awsAwsjson11_serializeDocumentOneInput(v []string, value smithyjson.Value) 
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentOpenTableFormatInput(v *types.OpenTableFormatInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IcebergInput != nil {
+		ok := object.Key("IcebergInput")
+		if err := awsAwsjson11_serializeDocumentIcebergInput(v.IcebergInput, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -20551,6 +20582,13 @@ func awsAwsjson11_serializeOpDocumentCreateTableInput(v *CreateTableInput, value
 	if v.DatabaseName != nil {
 		ok := object.Key("DatabaseName")
 		ok.String(*v.DatabaseName)
+	}
+
+	if v.OpenTableFormatInput != nil {
+		ok := object.Key("OpenTableFormatInput")
+		if err := awsAwsjson11_serializeDocumentOpenTableFormatInput(v.OpenTableFormatInput, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.PartitionIndexes != nil {

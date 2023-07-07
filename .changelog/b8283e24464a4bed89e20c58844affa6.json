@@ -1,0 +1,8 @@
+{
+    "id": "b8283e24-464a-4bed-89e2-0c58844affa6",
+    "type": "feature",
+    "description": "Add CMK encryption support for CloudWatch Logs Insights query result data",
+    "modules": [
+        "service/cloudwatchlogs"
+    ]
+}

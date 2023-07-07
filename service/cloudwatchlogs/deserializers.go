@@ -9925,6 +9925,15 @@ func awsAwsjson11_deserializeOpDocumentGetQueryResultsOutput(v **GetQueryResults
 
 	for key, value := range shape {
 		switch key {
+		case "encryptionKey":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EncryptionKey to be of type string, got %T instead", value)
+				}
+				sv.EncryptionKey = ptr.String(jtv)
+			}
+
 		case "results":
 			if err := awsAwsjson11_deserializeDocumentQueryResults(&sv.Results, value); err != nil {
 				return err

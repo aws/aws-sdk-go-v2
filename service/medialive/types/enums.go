@@ -5079,6 +5079,42 @@ func (TemporalFilterStrength) Values() []TemporalFilterStrength {
 	}
 }
 
+type ThumbnailState string
+
+// Enum values for ThumbnailState
+const (
+	ThumbnailStateAuto     ThumbnailState = "AUTO"
+	ThumbnailStateDisabled ThumbnailState = "DISABLED"
+)
+
+// Values returns all known values for ThumbnailState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ThumbnailState) Values() []ThumbnailState {
+	return []ThumbnailState{
+		"AUTO",
+		"DISABLED",
+	}
+}
+
+type ThumbnailType string
+
+// Enum values for ThumbnailType
+const (
+	ThumbnailTypeUnspecified   ThumbnailType = "UNSPECIFIED"
+	ThumbnailTypeCurrentActive ThumbnailType = "CURRENT_ACTIVE"
+)
+
+// Values returns all known values for ThumbnailType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ThumbnailType) Values() []ThumbnailType {
+	return []ThumbnailType{
+		"UNSPECIFIED",
+		"CURRENT_ACTIVE",
+	}
+}
+
 type TimecodeBurninFontSize string
 
 // Enum values for TimecodeBurninFontSize

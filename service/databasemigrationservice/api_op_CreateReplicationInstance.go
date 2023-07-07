@@ -39,7 +39,8 @@ type CreateReplicationInstanceInput struct {
 	// specified replication instance class. For example to specify the instance class
 	// dms.c4.large, set this parameter to "dms.c4.large" . For more information on the
 	// settings and capacities for the available replication instance classes, see
-	// Selecting the right DMS replication instance for your migration (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.html#CHAP_ReplicationInstance.InDepth)
+	// Choosing the right DMS replication instance (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.Types.html)
+	// ; and, Selecting the best size for a replication instance (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_BestPractices.SizingReplicationInstance.html)
 	// .
 	//
 	// This member is required.
@@ -71,7 +72,7 @@ type CreateReplicationInstanceInput struct {
 
 	// The Availability Zone where the replication instance will be created. The
 	// default value is a random, system-chosen Availability Zone in the endpoint's
-	// Amazon Web Services Region, for example: us-east-1d
+	// Amazon Web Services Region, for example: us-east-1d .
 	AvailabilityZone *string
 
 	// A list of custom DNS name servers supported for the replication instance to

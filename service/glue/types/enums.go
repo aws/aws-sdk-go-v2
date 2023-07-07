@@ -1120,6 +1120,22 @@ func (LogicalOperator) Values() []LogicalOperator {
 	}
 }
 
+type MetadataOperation string
+
+// Enum values for MetadataOperation
+const (
+	MetadataOperationCreate MetadataOperation = "CREATE"
+)
+
+// Values returns all known values for MetadataOperation. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MetadataOperation) Values() []MetadataOperation {
+	return []MetadataOperation{
+		"CREATE",
+	}
+}
+
 type MLUserDataEncryptionModeString string
 
 // Enum values for MLUserDataEncryptionModeString
