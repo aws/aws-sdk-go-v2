@@ -195,6 +195,9 @@ func (c *Client) addOperationPutBucketLifecycleConfigurationMiddlewares(stack *m
 	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
+	if err = addPutBucketLifecycleConfigurationEndpointDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
 	return nil
 }
 
@@ -251,6 +254,35 @@ func addPutBucketLifecycleConfigurationUpdateEndpoint(stack *middleware.Stack, o
 		UseARNRegion:                   options.UseARNRegion,
 		DisableMultiRegionAccessPoints: options.DisableMultiRegionAccessPoints,
 	})
+}
+
+type opPutBucketLifecycleConfigurationEndpointDisableHTTPSMiddleware struct {
+	EndpointDisableHTTPS bool
+}
+
+func (*opPutBucketLifecycleConfigurationEndpointDisableHTTPSMiddleware) ID() string {
+	return "opPutBucketLifecycleConfigurationEndpointDisableHTTPSMiddleware"
+}
+
+func (m *opPutBucketLifecycleConfigurationEndpointDisableHTTPSMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	if m.EndpointDisableHTTPS {
+		req.URL.Scheme = "http"
+	}
+
+	return next.HandleSerialize(ctx, in)
+
+}
+func addPutBucketLifecycleConfigurationEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
+	return stack.Serialize.Insert(&opPutBucketLifecycleConfigurationEndpointDisableHTTPSMiddleware{
+		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
+	}, "opPutBucketLifecycleConfigurationResolveEndpointMiddleware", middleware.After)
 }
 
 type opPutBucketLifecycleConfigurationResolveEndpointMiddleware struct {

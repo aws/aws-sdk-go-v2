@@ -502,6 +502,9 @@ func (c *Client) addOperationPutObjectMiddlewares(stack *middleware.Stack, optio
 	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
+	if err = addPutObjectEndpointDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
 	return nil
 }
 
@@ -591,6 +594,35 @@ func addPutObjectPayloadAsUnsigned(stack *middleware.Stack, options Options) err
 	v4.RemoveContentSHA256HeaderMiddleware(stack)
 	v4.RemoveComputePayloadSHA256Middleware(stack)
 	return v4.AddUnsignedPayloadMiddleware(stack)
+}
+
+type opPutObjectEndpointDisableHTTPSMiddleware struct {
+	EndpointDisableHTTPS bool
+}
+
+func (*opPutObjectEndpointDisableHTTPSMiddleware) ID() string {
+	return "opPutObjectEndpointDisableHTTPSMiddleware"
+}
+
+func (m *opPutObjectEndpointDisableHTTPSMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	if m.EndpointDisableHTTPS {
+		req.URL.Scheme = "http"
+	}
+
+	return next.HandleSerialize(ctx, in)
+
+}
+func addPutObjectEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
+	return stack.Serialize.Insert(&opPutObjectEndpointDisableHTTPSMiddleware{
+		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
+	}, "opPutObjectResolveEndpointMiddleware", middleware.After)
 }
 
 type opPutObjectResolveEndpointMiddleware struct {

@@ -153,6 +153,9 @@ func (c *Client) addOperationGetObjectTorrentMiddlewares(stack *middleware.Stack
 	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
+	if err = addGetObjectTorrentEndpointDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
 	return nil
 }
 
@@ -189,6 +192,35 @@ func addGetObjectTorrentUpdateEndpoint(stack *middleware.Stack, options Options)
 		UseARNRegion:                   options.UseARNRegion,
 		DisableMultiRegionAccessPoints: options.DisableMultiRegionAccessPoints,
 	})
+}
+
+type opGetObjectTorrentEndpointDisableHTTPSMiddleware struct {
+	EndpointDisableHTTPS bool
+}
+
+func (*opGetObjectTorrentEndpointDisableHTTPSMiddleware) ID() string {
+	return "opGetObjectTorrentEndpointDisableHTTPSMiddleware"
+}
+
+func (m *opGetObjectTorrentEndpointDisableHTTPSMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	if m.EndpointDisableHTTPS {
+		req.URL.Scheme = "http"
+	}
+
+	return next.HandleSerialize(ctx, in)
+
+}
+func addGetObjectTorrentEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
+	return stack.Serialize.Insert(&opGetObjectTorrentEndpointDisableHTTPSMiddleware{
+		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
+	}, "opGetObjectTorrentResolveEndpointMiddleware", middleware.After)
 }
 
 type opGetObjectTorrentResolveEndpointMiddleware struct {

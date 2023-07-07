@@ -137,6 +137,9 @@ func (c *Client) addOperationPutStorageLensConfigurationTaggingMiddlewares(stack
 	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
+	if err = addPutStorageLensConfigurationTaggingEndpointDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
 	return nil
 }
 
@@ -180,6 +183,35 @@ func addPutStorageLensConfigurationTaggingUpdateEndpoint(stack *middleware.Stack
 		EndpointResolverOptions: options.EndpointOptions,
 		UseARNRegion:            options.UseARNRegion,
 	})
+}
+
+type opPutStorageLensConfigurationTaggingEndpointDisableHTTPSMiddleware struct {
+	EndpointDisableHTTPS bool
+}
+
+func (*opPutStorageLensConfigurationTaggingEndpointDisableHTTPSMiddleware) ID() string {
+	return "opPutStorageLensConfigurationTaggingEndpointDisableHTTPSMiddleware"
+}
+
+func (m *opPutStorageLensConfigurationTaggingEndpointDisableHTTPSMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	if m.EndpointDisableHTTPS {
+		req.URL.Scheme = "http"
+	}
+
+	return next.HandleSerialize(ctx, in)
+
+}
+func addPutStorageLensConfigurationTaggingEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
+	return stack.Serialize.Insert(&opPutStorageLensConfigurationTaggingEndpointDisableHTTPSMiddleware{
+		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
+	}, "opPutStorageLensConfigurationTaggingResolveEndpointMiddleware", middleware.After)
 }
 
 type opPutStorageLensConfigurationTaggingResolveEndpointMiddleware struct {

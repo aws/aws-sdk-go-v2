@@ -137,6 +137,9 @@ func (c *Client) addOperationDeletePublicAccessBlockMiddlewares(stack *middlewar
 	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
+	if err = addDeletePublicAccessBlockEndpointDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
 	return nil
 }
 
@@ -173,6 +176,35 @@ func addDeletePublicAccessBlockUpdateEndpoint(stack *middleware.Stack, options O
 		UseARNRegion:                   options.UseARNRegion,
 		DisableMultiRegionAccessPoints: options.DisableMultiRegionAccessPoints,
 	})
+}
+
+type opDeletePublicAccessBlockEndpointDisableHTTPSMiddleware struct {
+	EndpointDisableHTTPS bool
+}
+
+func (*opDeletePublicAccessBlockEndpointDisableHTTPSMiddleware) ID() string {
+	return "opDeletePublicAccessBlockEndpointDisableHTTPSMiddleware"
+}
+
+func (m *opDeletePublicAccessBlockEndpointDisableHTTPSMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	if m.EndpointDisableHTTPS {
+		req.URL.Scheme = "http"
+	}
+
+	return next.HandleSerialize(ctx, in)
+
+}
+func addDeletePublicAccessBlockEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
+	return stack.Serialize.Insert(&opDeletePublicAccessBlockEndpointDisableHTTPSMiddleware{
+		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
+	}, "opDeletePublicAccessBlockResolveEndpointMiddleware", middleware.After)
 }
 
 type opDeletePublicAccessBlockResolveEndpointMiddleware struct {

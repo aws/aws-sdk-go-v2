@@ -134,6 +134,9 @@ func (c *Client) addOperationDeleteBucketCorsMiddlewares(stack *middleware.Stack
 	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
+	if err = addDeleteBucketCorsEndpointDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
 	return nil
 }
 
@@ -170,6 +173,35 @@ func addDeleteBucketCorsUpdateEndpoint(stack *middleware.Stack, options Options)
 		UseARNRegion:                   options.UseARNRegion,
 		DisableMultiRegionAccessPoints: options.DisableMultiRegionAccessPoints,
 	})
+}
+
+type opDeleteBucketCorsEndpointDisableHTTPSMiddleware struct {
+	EndpointDisableHTTPS bool
+}
+
+func (*opDeleteBucketCorsEndpointDisableHTTPSMiddleware) ID() string {
+	return "opDeleteBucketCorsEndpointDisableHTTPSMiddleware"
+}
+
+func (m *opDeleteBucketCorsEndpointDisableHTTPSMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	if m.EndpointDisableHTTPS {
+		req.URL.Scheme = "http"
+	}
+
+	return next.HandleSerialize(ctx, in)
+
+}
+func addDeleteBucketCorsEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
+	return stack.Serialize.Insert(&opDeleteBucketCorsEndpointDisableHTTPSMiddleware{
+		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
+	}, "opDeleteBucketCorsResolveEndpointMiddleware", middleware.After)
 }
 
 type opDeleteBucketCorsResolveEndpointMiddleware struct {

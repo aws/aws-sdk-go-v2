@@ -133,6 +133,9 @@ func (c *Client) addOperationGetAccessPointConfigurationForObjectLambdaMiddlewar
 	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
+	if err = addGetAccessPointConfigurationForObjectLambdaEndpointDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
 	return nil
 }
 
@@ -176,6 +179,35 @@ func addGetAccessPointConfigurationForObjectLambdaUpdateEndpoint(stack *middlewa
 		EndpointResolverOptions: options.EndpointOptions,
 		UseARNRegion:            options.UseARNRegion,
 	})
+}
+
+type opGetAccessPointConfigurationForObjectLambdaEndpointDisableHTTPSMiddleware struct {
+	EndpointDisableHTTPS bool
+}
+
+func (*opGetAccessPointConfigurationForObjectLambdaEndpointDisableHTTPSMiddleware) ID() string {
+	return "opGetAccessPointConfigurationForObjectLambdaEndpointDisableHTTPSMiddleware"
+}
+
+func (m *opGetAccessPointConfigurationForObjectLambdaEndpointDisableHTTPSMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	if m.EndpointDisableHTTPS {
+		req.URL.Scheme = "http"
+	}
+
+	return next.HandleSerialize(ctx, in)
+
+}
+func addGetAccessPointConfigurationForObjectLambdaEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
+	return stack.Serialize.Insert(&opGetAccessPointConfigurationForObjectLambdaEndpointDisableHTTPSMiddleware{
+		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
+	}, "opGetAccessPointConfigurationForObjectLambdaResolveEndpointMiddleware", middleware.After)
 }
 
 type opGetAccessPointConfigurationForObjectLambdaResolveEndpointMiddleware struct {

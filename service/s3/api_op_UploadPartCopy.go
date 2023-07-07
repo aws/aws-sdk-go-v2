@@ -358,6 +358,9 @@ func (c *Client) addOperationUploadPartCopyMiddlewares(stack *middleware.Stack, 
 	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
+	if err = addUploadPartCopyEndpointDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
 	return nil
 }
 
@@ -394,6 +397,35 @@ func addUploadPartCopyUpdateEndpoint(stack *middleware.Stack, options Options) e
 		UseARNRegion:                   options.UseARNRegion,
 		DisableMultiRegionAccessPoints: options.DisableMultiRegionAccessPoints,
 	})
+}
+
+type opUploadPartCopyEndpointDisableHTTPSMiddleware struct {
+	EndpointDisableHTTPS bool
+}
+
+func (*opUploadPartCopyEndpointDisableHTTPSMiddleware) ID() string {
+	return "opUploadPartCopyEndpointDisableHTTPSMiddleware"
+}
+
+func (m *opUploadPartCopyEndpointDisableHTTPSMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	if m.EndpointDisableHTTPS {
+		req.URL.Scheme = "http"
+	}
+
+	return next.HandleSerialize(ctx, in)
+
+}
+func addUploadPartCopyEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
+	return stack.Serialize.Insert(&opUploadPartCopyEndpointDisableHTTPSMiddleware{
+		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
+	}, "opUploadPartCopyResolveEndpointMiddleware", middleware.After)
 }
 
 type opUploadPartCopyResolveEndpointMiddleware struct {
