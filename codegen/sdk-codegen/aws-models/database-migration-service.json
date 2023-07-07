@@ -154,6 +154,9 @@
                     "target": "com.amazonaws.databasemigrationservice#CreateFleetAdvisorCollector"
                 },
                 {
+                    "target": "com.amazonaws.databasemigrationservice#CreateReplicationConfig"
+                },
+                {
                     "target": "com.amazonaws.databasemigrationservice#CreateReplicationInstance"
                 },
                 {
@@ -179,6 +182,9 @@
                 },
                 {
                     "target": "com.amazonaws.databasemigrationservice#DeleteFleetAdvisorDatabases"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#DeleteReplicationConfig"
                 },
                 {
                     "target": "com.amazonaws.databasemigrationservice#DeleteReplicationInstance"
@@ -253,13 +259,22 @@
                     "target": "com.amazonaws.databasemigrationservice#DescribeRefreshSchemasStatus"
                 },
                 {
+                    "target": "com.amazonaws.databasemigrationservice#DescribeReplicationConfigs"
+                },
+                {
                     "target": "com.amazonaws.databasemigrationservice#DescribeReplicationInstances"
                 },
                 {
                     "target": "com.amazonaws.databasemigrationservice#DescribeReplicationInstanceTaskLogs"
                 },
                 {
+                    "target": "com.amazonaws.databasemigrationservice#DescribeReplications"
+                },
+                {
                     "target": "com.amazonaws.databasemigrationservice#DescribeReplicationSubnetGroups"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#DescribeReplicationTableStatistics"
                 },
                 {
                     "target": "com.amazonaws.databasemigrationservice#DescribeReplicationTaskAssessmentResults"
@@ -292,6 +307,9 @@
                     "target": "com.amazonaws.databasemigrationservice#ModifyEventSubscription"
                 },
                 {
+                    "target": "com.amazonaws.databasemigrationservice#ModifyReplicationConfig"
+                },
+                {
                     "target": "com.amazonaws.databasemigrationservice#ModifyReplicationInstance"
                 },
                 {
@@ -310,6 +328,9 @@
                     "target": "com.amazonaws.databasemigrationservice#RefreshSchemas"
                 },
                 {
+                    "target": "com.amazonaws.databasemigrationservice#ReloadReplicationTables"
+                },
+                {
                     "target": "com.amazonaws.databasemigrationservice#ReloadTables"
                 },
                 {
@@ -322,6 +343,9 @@
                     "target": "com.amazonaws.databasemigrationservice#StartRecommendations"
                 },
                 {
+                    "target": "com.amazonaws.databasemigrationservice#StartReplication"
+                },
+                {
                     "target": "com.amazonaws.databasemigrationservice#StartReplicationTask"
                 },
                 {
@@ -329,6 +353,9 @@
                 },
                 {
                     "target": "com.amazonaws.databasemigrationservice#StartReplicationTaskAssessmentRun"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#StopReplication"
                 },
                 {
                     "target": "com.amazonaws.databasemigrationservice#StopReplicationTask"
@@ -792,9 +819,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "af-south-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "af-south-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -805,9 +832,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -818,9 +845,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-northeast-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-northeast-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -831,9 +858,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-northeast-2",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-northeast-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -844,9 +871,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-northeast-3",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-northeast-3"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -857,9 +884,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-south-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-south-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -870,9 +897,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-southeast-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-southeast-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -883,9 +910,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-southeast-2",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-southeast-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -896,9 +923,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-southeast-3",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-southeast-3"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -909,9 +936,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ca-central-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ca-central-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -922,9 +949,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-central-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-central-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -935,9 +962,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-north-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-north-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -948,9 +975,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-south-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-south-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -961,9 +988,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-west-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -974,9 +1001,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-west-2",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-west-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -987,9 +1014,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-west-3",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-west-3"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1000,9 +1027,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "me-south-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "me-south-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1013,9 +1040,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "sa-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "sa-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1026,9 +1053,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1039,9 +1066,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1052,9 +1079,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-2",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-east-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1065,9 +1092,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-2",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-east-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1078,9 +1105,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-west-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1091,9 +1118,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-west-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1104,9 +1131,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-west-2",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-west-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1117,9 +1144,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-west-2",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-west-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1130,9 +1157,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1143,9 +1170,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1156,9 +1183,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "cn-north-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "cn-north-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1169,9 +1196,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "cn-northwest-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "cn-northwest-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1182,9 +1209,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "cn-north-1",
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "cn-north-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1195,9 +1222,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "cn-north-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "cn-north-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1208,9 +1235,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "cn-north-1",
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "cn-north-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1221,9 +1248,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1234,9 +1261,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1247,9 +1274,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-gov-west-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-gov-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1260,9 +1287,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-gov-west-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-gov-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1273,9 +1300,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1286,9 +1313,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1299,9 +1326,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1312,9 +1339,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1325,9 +1352,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-iso-west-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-iso-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1338,9 +1365,31 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-iso-west-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-iso-west-1"
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1351,9 +1400,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1364,9 +1413,31 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1377,9 +1448,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
                                 "UseDualStack": false,
-                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1402,9 +1473,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false,
-                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1414,10 +1485,16 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
                                 "UseDualStack": true,
-                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
                             }
                         }
                     ],
@@ -2044,6 +2121,68 @@
                 }
             }
         },
+        "com.amazonaws.databasemigrationservice#ComputeConfig": {
+            "type": "structure",
+            "members": {
+                "AvailabilityZone": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Availability Zone where the DMS Serverless replication using this configuration will run. \n         The default value is a random, system-chosen Availability Zone in the configuration's Amazon Web Services Region,\n         for example, <code>\"us-west-2\"</code>. You can't set this parameter if the <code>MultiAZ</code>\n         parameter is set to <code>true</code>.</p>"
+                    }
+                },
+                "DnsNameServers": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of custom DNS name servers supported for the DMS Serverless replication\n         to access your source or target database. This list overrides the default name servers\n         supported by the DMS Serverless replication. You can specify a comma-separated list of\n         internet addresses for up to four DNS name servers.\n         For example: <code>\"1.1.1.1,2.2.2.2,3.3.3.3,4.4.4.4\"</code>\n         </p>"
+                    }
+                },
+                "KmsKeyId": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An Key Management Service (KMS) key Amazon Resource Name (ARN) that is used to encrypt the data during\n         DMS Serverless replication.</p>\n         <p>If you don't specify a value for the <code>KmsKeyId</code> parameter, DMS uses your default\n         encryption key.</p>\n         <p>KMS creates the default encryption key for your Amazon Web Services account. Your Amazon Web Services account has a\n         different default encryption key for each Amazon Web Services Region.</p>"
+                    }
+                },
+                "MaxCapacityUnits": {
+                    "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the maximum value of the DMS capacity units (DCUs) for which a given DMS Serverless\n         replication can be provisioned. A single DCU is 2GB of RAM, with 2 DCUs as the minimum value allowed.\n         The list of valid DCU values includes 2, 4, 8, 16, 32, 64, 128, 192, 256, and 384. So, the maximum value\n         that you can specify for DMS Serverless is 384. The <code>MaxCapacityUnits</code> parameter is the only\n         DCU parameter you are required to specify.</p>"
+                    }
+                },
+                "MinCapacityUnits": {
+                    "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the minimum value of the DMS capacity units (DCUs) for which a given DMS\n         Serverless replication can be provisioned. A single DCU is 2GB of RAM, with 2 DCUs as the minimum value\n         allowed. The list of valid DCU values includes 2, 4, 8, 16, 32, 64, 128, 192, 256, and 384. So, the minimum DCU\n         value that you can specify for DMS Serverless is 2. You don't have to specify a value for the\n         <code>MinCapacityUnits</code> parameter. If you don't set this value, DMS scans the current activity\n         of available source tables to identify an optimum setting for this parameter. If there is no current\n         source activity or DMS can't otherwise identify a more appropriate value, it sets this parameter to\n         the minimum DCU value allowed, 2.</p>"
+                    }
+                },
+                "MultiAZ": {
+                    "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the DMS Serverless replication is a Multi-AZ deployment. You can't set the\n         <code>AvailabilityZone</code> parameter if the <code>MultiAZ</code> parameter is set to\n         <code>true</code>.</p>"
+                    }
+                },
+                "PreferredMaintenanceWindow": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The weekly time range during which system maintenance can occur for the DMS Serverless\n         replication, in Universal Coordinated Time (UTC). The format is <code>ddd:hh24:mi-ddd:hh24:mi</code>.</p>\n         <p>The default is a 30-minute window selected at random from an 8-hour block of time per Amazon Web Services Region.\n         This maintenance occurs on a random day of the week. Valid values for days of the week include\n         <code>Mon</code>, <code>Tue</code>, <code>Wed</code>, <code>Thu</code>, <code>Fri</code>, <code>Sat</code>,\n         and <code>Sun</code>.</p>\n         <p>Constraints include a minimum 30-minute window.</p>"
+                    }
+                },
+                "ReplicationSubnetGroupId": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a subnet group identifier to associate with the DMS Serverless replication.</p>"
+                    }
+                },
+                "VpcSecurityGroupIds": {
+                    "target": "com.amazonaws.databasemigrationservice#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the virtual private cloud (VPC) security group to use with the DMS Serverless\n         replication. The VPC security group must work with the VPC containing the replication.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration parameters for provisioning an DMS Serverless replication.</p>"
+            }
+        },
         "com.amazonaws.databasemigrationservice#Connection": {
             "type": "structure",
             "members": {
@@ -2335,6 +2474,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Settings in JSON format for the source GCP MySQL endpoint.</p>"
                     }
+                },
+                "TimestreamSettings": {
+                    "target": "com.amazonaws.databasemigrationservice#TimestreamSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Settings in JSON format for the target Amazon Timestream endpoint.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2569,6 +2714,133 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.databasemigrationservice#CreateReplicationConfig": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.databasemigrationservice#CreateReplicationConfigMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.databasemigrationservice#CreateReplicationConfigResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.databasemigrationservice#AccessDeniedFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#InvalidResourceStateFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#InvalidSubnet"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#KMSKeyNotAccessibleFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#ReplicationSubnetGroupDoesNotCoverEnoughAZs"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#ResourceAlreadyExistsFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#ResourceNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#ResourceQuotaExceededFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a configuration that you can later provide to configure and start an DMS Serverless\n         replication. You can also provide options to validate the configuration inputs before you start the\n         replication.</p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#CreateReplicationConfigMessage": {
+            "type": "structure",
+            "members": {
+                "ReplicationConfigIdentifier": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier that you want to use to create a <code>ReplicationConfigArn</code> that is\n         returned as part of the output from this action. You can then pass this output <code>ReplicationConfigArn</code>\n         as the value of the <code>ReplicationConfigArn</code> option for other actions to identify both\n         DMS Serverless replications and replication configurations that you want those actions to operate on.\n         For some actions, you can also use either this unique identifier or a corresponding ARN in action filters to\n         identify the specific replication and replication configuration to operate on.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SourceEndpointArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the source endpoint for\n         this DMS Serverless replication configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TargetEndpointArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the target endpoint for\n         this DMS serverless replication configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ComputeConfig": {
+                    "target": "com.amazonaws.databasemigrationservice#ComputeConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration parameters for provisioning an DMS Serverless replication.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ReplicationType": {
+                    "target": "com.amazonaws.databasemigrationservice#MigrationTypeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of DMS Serverless replication to provision\n         using this replication configuration.</p>\n         <p>Possible values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>\"full-load\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"cdc\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"full-load-and-cdc\"</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TableMappings": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>JSON table mappings for DMS Serverless replications that are provisioned\n         using this replication configuration. For more information, see \n         <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TableMapping.SelectionTransformation.html\">\n            Specifying table selection and transformations rules using JSON</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ReplicationSettings": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional JSON settings for DMS Serverless replications that are\n         provisioned using this replication configuration. For example, see\n         <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TaskSettings.ChangeProcessingTuning.html\">\n            Change processing tuning settings</a>.</p>"
+                    }
+                },
+                "SupplementalSettings": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional JSON settings for specifying supplemental data. For more information, see\n         <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.TaskData.html\">\n            Specifying supplemental data for task settings</a>.</p>"
+                    }
+                },
+                "ResourceIdentifier": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional unique value or name that you set for a given resource\n         that can be used to construct an Amazon Resource Name (ARN) for that resource. For more information, see\n         <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#CHAP_Security.FineGrainedAccess\">\n            Fine-grained access control using resource names and tags</a>.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.databasemigrationservice#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more optional tags associated with resources used by the DMS Serverless replication.\n         For more information, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tagging.html\">\n            Tagging resources in Database Migration Service</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#CreateReplicationConfigResponse": {
+            "type": "structure",
+            "members": {
+                "ReplicationConfig": {
+                    "target": "com.amazonaws.databasemigrationservice#ReplicationConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration parameters returned from the DMS Serverless replication after it is created.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.databasemigrationservice#CreateReplicationInstance": {
             "type": "operation",
             "input": {
@@ -2632,7 +2904,7 @@
                 "ReplicationInstanceClass": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The compute and memory capacity of the replication instance as defined for the specified\n         replication instance class. For example to specify the instance class dms.c4.large, set this parameter to <code>\"dms.c4.large\"</code>.</p>\n         <p>For more information on the settings and capacities for the available replication instance classes, see \n         <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.html#CHAP_ReplicationInstance.InDepth\">\n            Selecting the right DMS replication instance for your migration</a>.\n      </p>",
+                        "smithy.api#documentation": "<p>The compute and memory capacity of the replication instance as defined for the specified\n         replication instance class. For example to specify the instance class dms.c4.large, set this parameter to <code>\"dms.c4.large\"</code>.</p>\n         <p>For more information on the settings and capacities for the available replication instance classes, see \n         <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.Types.html \">\n            Choosing the right DMS replication instance</a>; and, \n         <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_BestPractices.SizingReplicationInstance.html\">Selecting the best size for a replication instance</a>.\n      </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2645,7 +2917,7 @@
                 "AvailabilityZone": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Availability Zone where the replication instance will be created. The default\n         value is a random, system-chosen Availability Zone in the endpoint's Amazon Web Services Region, for\n         example: <code>us-east-1d</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The Availability Zone where the replication instance will be created. The default\n         value is a random, system-chosen Availability Zone in the endpoint's Amazon Web Services Region, for\n         example: <code>us-east-1d</code>.</p>"
                     }
                 },
                 "ReplicationSubnetGroupIdentifier": {
@@ -2763,7 +3035,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a replication subnet group given a list of the subnet IDs in a VPC.</p>\n         <p>The VPC needs to have at least one subnet in at least two availability zones in the Amazon Web Services Region, otherwise the\n          service will throw a <code>ReplicationSubnetGroupDoesNotCoverEnoughAZs</code> exception.</p>"
+                "smithy.api#documentation": "<p>Creates a replication subnet group given a list of the subnet IDs in a VPC.</p>\n         <p>The VPC needs to have at least one subnet in at least two availability zones in the Amazon Web Services Region, otherwise the\n          service will throw a <code>ReplicationSubnetGroupDoesNotCoverEnoughAZs</code> exception.</p>\n         <p>If a replication subnet group exists in your Amazon Web Services account, the CreateReplicationSubnetGroup action \n         returns the following error message: The Replication Subnet Group already exists. In this case, delete \n         the existing replication subnet group. To do so, use the <a href=\"https://docs.aws.amazon.com/en_us/dms/latest/APIReference/API_DeleteReplicationSubnetGroup.html\">DeleteReplicationSubnetGroup</a> action. Optionally, choose Subnet groups in the DMS console, \n         then choose your subnet group. Next, choose Delete from Actions.</p>"
             }
         },
         "com.amazonaws.databasemigrationservice#CreateReplicationSubnetGroupMessage": {
@@ -3464,6 +3736,59 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.databasemigrationservice#DeleteReplicationConfig": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.databasemigrationservice#DeleteReplicationConfigMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.databasemigrationservice#DeleteReplicationConfigResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.databasemigrationservice#AccessDeniedFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#InvalidResourceStateFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#ResourceNotFoundFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an DMS Serverless replication configuration. This effectively deprovisions any and all\n         replications that use this configuration. You can't delete the configuration for an DMS Serverless replication\n         that is ongoing. You can delete the configuration when the replication is in a non-RUNNING and non-STARTING state.</p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#DeleteReplicationConfigMessage": {
+            "type": "structure",
+            "members": {
+                "ReplicationConfigArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The replication config to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#DeleteReplicationConfigResponse": {
+            "type": "structure",
+            "members": {
+                "ReplicationConfig": {
+                    "target": "com.amazonaws.databasemigrationservice#ReplicationConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration parameters returned for the DMS Serverless replication after it is deleted.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.databasemigrationservice#DeleteReplicationInstance": {
             "type": "operation",
             "input": {
@@ -3984,7 +4309,7 @@
                 "EngineName": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The databse engine used for your source or target endpoint.</p>",
+                        "smithy.api#documentation": "<p>The database engine used for your source or target endpoint.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5070,6 +5395,75 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.databasemigrationservice#DescribeReplicationConfigs": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.databasemigrationservice#DescribeReplicationConfigsMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.databasemigrationservice#DescribeReplicationConfigsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.databasemigrationservice#ResourceNotFoundFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns one or more existing DMS Serverless replication configurations as a list of structures.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "outputToken": "Marker",
+                    "pageSize": "MaxRecords"
+                }
+            }
+        },
+        "com.amazonaws.databasemigrationservice#DescribeReplicationConfigsMessage": {
+            "type": "structure",
+            "members": {
+                "Filters": {
+                    "target": "com.amazonaws.databasemigrationservice#FilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters applied to the replication configs.</p>"
+                    }
+                },
+                "MaxRecords": {
+                    "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of records to include in the response. If more records exist than the specified \n         <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that \n         the remaining results can be retrieved. </p>"
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional pagination token provided by a previous request. If this parameter is specified, \n         the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#DescribeReplicationConfigsResponse": {
+            "type": "structure",
+            "members": {
+                "Marker": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional pagination token provided by a previous request. If this parameter is specified, the response \n         includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. </p>"
+                    }
+                },
+                "ReplicationConfigs": {
+                    "target": "com.amazonaws.databasemigrationservice#ReplicationConfigList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returned configuration parameters that describe each provisioned DMS Serverless replication.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.databasemigrationservice#DescribeReplicationInstanceTaskLogs": {
             "type": "operation",
             "input": {
@@ -5355,6 +5749,91 @@
                     "target": "com.amazonaws.databasemigrationservice#ReplicationSubnetGroups",
                     "traits": {
                         "smithy.api#documentation": "<p>A description of the replication subnet groups.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.databasemigrationservice#DescribeReplicationTableStatistics": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.databasemigrationservice#DescribeReplicationTableStatisticsMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.databasemigrationservice#DescribeReplicationTableStatisticsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.databasemigrationservice#InvalidResourceStateFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#ResourceNotFoundFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns table and schema statistics for one or more provisioned replications that use a\n         given DMS Serverless replication configuration.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "outputToken": "Marker",
+                    "pageSize": "MaxRecords"
+                }
+            }
+        },
+        "com.amazonaws.databasemigrationservice#DescribeReplicationTableStatisticsMessage": {
+            "type": "structure",
+            "members": {
+                "ReplicationConfigArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The replication config to describe.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxRecords": {
+                    "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of records to include in the response. If more records exist than the specified \n         <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that \n         the remaining results can be retrieved. </p>"
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional pagination token provided by a previous request. If this parameter is specified, \n         the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. </p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.databasemigrationservice#FilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters applied to the replication table statistics.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#DescribeReplicationTableStatisticsResponse": {
+            "type": "structure",
+            "members": {
+                "ReplicationConfigArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name of the replication config.</p>"
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional pagination token provided by a previous request. If this parameter is specified, \n         the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. </p>"
+                    }
+                },
+                "ReplicationTableStatistics": {
+                    "target": "com.amazonaws.databasemigrationservice#ReplicationTableStatisticsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns table statistics on the replication, including table name, rows inserted, rows updated, and rows deleted.</p>"
                     }
                 }
             },
@@ -5993,6 +6472,75 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.databasemigrationservice#DescribeReplications": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.databasemigrationservice#DescribeReplicationsMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.databasemigrationservice#DescribeReplicationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.databasemigrationservice#ResourceNotFoundFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Provides details on replication progress by returning status information for one or more\n         provisioned DMS Serverless replications.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "outputToken": "Marker",
+                    "pageSize": "MaxRecords"
+                }
+            }
+        },
+        "com.amazonaws.databasemigrationservice#DescribeReplicationsMessage": {
+            "type": "structure",
+            "members": {
+                "Filters": {
+                    "target": "com.amazonaws.databasemigrationservice#FilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters applied to the replications.</p>"
+                    }
+                },
+                "MaxRecords": {
+                    "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of records to include in the response. If more records exist than the specified \n         <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that \n         the remaining results can be retrieved. </p>"
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional pagination token provided by a previous request. If this parameter is specified, \n         the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#DescribeReplicationsResponse": {
+            "type": "structure",
+            "members": {
+                "Marker": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional pagination token provided by a previous request. If this parameter is specified, \n         the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. </p>"
+                    }
+                },
+                "Replications": {
+                    "target": "com.amazonaws.databasemigrationservice#ReplicationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The replication descriptions.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.databasemigrationservice#DescribeSchemas": {
             "type": "operation",
             "input": {
@@ -6267,6 +6815,18 @@
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The full ARN, partial ARN, or friendly name of the <code>SecretsManagerSecret</code>\n         that contains the DocumentDB endpoint connection details.</p>"
+                    }
+                },
+                "UseUpdateLookUp": {
+                    "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>true</code>, DMS retrieves the entire document from the DocumentDB source during migration.\n         This may cause a migration failure if the server response exceeds bandwidth limits. To fetch only updates\n         and deletes during migration, set this parameter to <code>false</code>.</p>"
+                    }
+                },
+                "ReplicateShardCollections": {
+                    "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>true</code>, DMS replicates data to shard collections. DMS only uses this setting if\n      the target endpoint is a DocumentDB elastic cluster.</p>\n         <p>When this setting is <code>true</code>, note the following:</p>\n         <ul>\n            <li>\n               <p>You must set <code>TargetTablePrepMode</code> to <code>nothing</code>.</p>\n            </li>\n            <li>\n               <p>DMS automatically sets <code>useUpdateLookup</code> to <code>false</code>.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -6580,6 +7140,12 @@
                     "target": "com.amazonaws.databasemigrationservice#GcpMySQLSettings",
                     "traits": {
                         "smithy.api#documentation": "<p>Settings in JSON format for the source GCP MySQL endpoint.</p>"
+                    }
+                },
+                "TimestreamSettings": {
+                    "target": "com.amazonaws.databasemigrationservice#TimestreamSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The settings for the Amazon Timestream target endpoint. For more information, see the\n         <code>TimestreamSettings</code> structure.</p>"
                     }
                 }
             },
@@ -7300,7 +7866,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The subnet provided is invalid.</p>",
+                "smithy.api#documentation": "<p>The subnet provided isn't valid.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -7573,10 +8139,33 @@
                     "traits": {
                         "smithy.api#documentation": "<p>For SASL/SSL authentication, DMS supports the <code>SCRAM-SHA-512</code> mechanism by default. DMS versions \n         3.5.0 and later also support the <code>PLAIN</code> mechanism. To use the <code>PLAIN</code> mechanism, set this\n         parameter to <code>PLAIN.</code>\n         </p>"
                     }
+                },
+                "SslEndpointIdentificationAlgorithm": {
+                    "target": "com.amazonaws.databasemigrationservice#KafkaSslEndpointIdentificationAlgorithm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets hostname verification\n         for the certificate. This setting is supported in DMS version 3.5.1 and later. </p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Provides information that describes an Apache Kafka endpoint. This\n         information includes the output format of records applied to the endpoint and details of\n         transaction and control table data information.</p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#KafkaSslEndpointIdentificationAlgorithm": {
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "none"
+                    }
+                },
+                "HTTPS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "https"
+                    }
+                }
             }
         },
         "com.amazonaws.databasemigrationservice#KeyList": {
@@ -7763,6 +8352,29 @@
         },
         "com.amazonaws.databasemigrationservice#LongOptional": {
             "type": "long"
+        },
+        "com.amazonaws.databasemigrationservice#LongVarcharMappingType": {
+            "type": "enum",
+            "members": {
+                "WSTRING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "wstring"
+                    }
+                },
+                "CLOB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "clob"
+                    }
+                },
+                "NCLOB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "nclob"
+                    }
+                }
+            }
         },
         "com.amazonaws.databasemigrationservice#MessageFormatValue": {
             "type": "enum",
@@ -8141,6 +8753,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Settings in JSON format for the source GCP MySQL endpoint.</p>"
                     }
+                },
+                "TimestreamSettings": {
+                    "target": "com.amazonaws.databasemigrationservice#TimestreamSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Settings in JSON format for the target Amazon Timestream endpoint.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8254,6 +8872,115 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p></p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.databasemigrationservice#ModifyReplicationConfig": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.databasemigrationservice#ModifyReplicationConfigMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.databasemigrationservice#ModifyReplicationConfigResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.databasemigrationservice#AccessDeniedFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#InvalidResourceStateFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#InvalidSubnet"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#KMSKeyNotAccessibleFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#ReplicationSubnetGroupDoesNotCoverEnoughAZs"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#ResourceNotFoundFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Modifies an existing DMS Serverless replication configuration that you can use\n         to start a replication. This command includes input validation and logic to check\n         the state of any replication that uses this configuration. You can only modify a replication\n         configuration before any replication that uses it has started. As soon as you have initially\n         started a replication with a given configuiration, you can't modify that configuration,\n         even if you stop it.</p>\n         <p>Other run statuses that allow you to run this command include FAILED and CREATED.\n         A provisioning state that allows you to run this command is FAILED_PROVISION.</p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#ModifyReplicationConfigMessage": {
+            "type": "structure",
+            "members": {
+                "ReplicationConfigArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name of the replication to modify.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ReplicationConfigIdentifier": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new replication config to apply to the replication.</p>"
+                    }
+                },
+                "ReplicationType": {
+                    "target": "com.amazonaws.databasemigrationservice#MigrationTypeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of replication.</p>"
+                    }
+                },
+                "TableMappings": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Table mappings specified in the replication.</p>"
+                    }
+                },
+                "ReplicationSettings": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The settings for the replication.</p>"
+                    }
+                },
+                "SupplementalSettings": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional settings for the replication.</p>"
+                    }
+                },
+                "ComputeConfig": {
+                    "target": "com.amazonaws.databasemigrationservice#ComputeConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration parameters for provisioning an DMS Serverless replication.</p>"
+                    }
+                },
+                "SourceEndpointArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the source endpoint for\n         this DMS serverless replication configuration.</p>"
+                    }
+                },
+                "TargetEndpointArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the target endpoint for\n         this DMS serverless replication configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#ModifyReplicationConfigResponse": {
+            "type": "structure",
+            "members": {
+                "ReplicationConfig": {
+                    "target": "com.amazonaws.databasemigrationservice#ReplicationConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the serverless replication config that was modified.</p>"
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#output": {}
             }
         },
@@ -8654,6 +9381,18 @@
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The full ARN, partial ARN, or friendly name of the <code>SecretsManagerSecret</code> that contains the MongoDB endpoint connection details.</p>"
+                    }
+                },
+                "UseUpdateLookUp": {
+                    "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>true</code>, DMS retrieves the entire document from the MongoDB source during migration.\n         This may cause a migration failure if the server response exceeds bandwidth limits. To fetch only updates\n         and deletes during migration, set this parameter to <code>false</code>.</p>"
+                    }
+                },
+                "ReplicateShardCollections": {
+                    "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>true</code>, DMS replicates data to shard collections. DMS only uses this setting if\n         the target endpoint is a DocumentDB elastic cluster.</p>\n         <p>When this setting is <code>true</code>, note the following:</p>\n         <ul>\n            <li>\n               <p>You must set <code>TargetTablePrepMode</code> to <code>nothing</code>.</p>\n            </li>\n            <li>\n               <p>DMS automatically sets <code>useUpdateLookup</code> to <code>false</code>.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -9142,6 +9881,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>When true, converts timestamps with the <code>timezone</code> datatype to their UTC value.</p>"
                     }
+                },
+                "OpenTransactionWindow": {
+                    "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timeframe in minutes to check for open transactions for a CDC-only task.</p>\n         <p>You can\n         specify an integer value between 0 (the default) and 240 (the maximum). </p>\n         <note>\n            <p>This parameter is only valid in DMS version 3.5.0 and later. DMS supports\n      a window of up to 9.5 hours including the value for <code>OpenTransactionWindow</code>.</p>\n         </note>"
+                    }
                 }
             },
             "traits": {
@@ -9415,7 +10160,7 @@
                 "SlotName": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Sets the name of a previously created logical replication slot\n         for a change data capture (CDC) load of the PostgreSQL source instance. </p>\n         <p>When used with the <code>CdcStartPosition</code>\n         request parameter for the DMS API , this attribute also makes it possible to use native CDC\n         start points. DMS verifies that the specified logical\n         replication slot exists before starting the CDC load task. It\n         also verifies that the task was created with a valid setting of\n         <code>CdcStartPosition</code>. If the specified slot\n         doesn't exist or the task doesn't have a valid\n         <code>CdcStartPosition</code> setting, DMS raises an\n         error.</p>\n         <p>For more information about setting the <code>CdcStartPosition</code> request parameter,\n         see <a href=\"dms/latest/userguide/CHAP_Task.CDC.html#CHAP_Task.CDC.StartPoint.Native\">Determining a CDC native start point</a> in the <i>Database Migration Service User\n            Guide</i>. For more information about using <code>CdcStartPosition</code>, see\n            <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateReplicationTask.html\">CreateReplicationTask</a>, <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTask.html\">StartReplicationTask</a>, and <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_ModifyReplicationTask.html\">ModifyReplicationTask</a>.</p>"
+                        "smithy.api#documentation": "<p>Sets the name of a previously created logical replication slot\n         for a change data capture (CDC) load of the PostgreSQL source instance. </p>\n         <p>When used with the <code>CdcStartPosition</code>\n         request parameter for the DMS API , this attribute also makes it possible to use native CDC\n         start points. DMS verifies that the specified logical\n         replication slot exists before starting the CDC load task. It\n         also verifies that the task was created with a valid setting of\n         <code>CdcStartPosition</code>. If the specified slot\n         doesn't exist or the task doesn't have a valid\n         <code>CdcStartPosition</code> setting, DMS raises an\n         error.</p>\n         <p>For more information about setting the <code>CdcStartPosition</code> request parameter,\n         see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Task.CDC.html#CHAP_Task.CDC.StartPoint.Native\">Determining a CDC native start point</a> in the <i>Database Migration Service User\n            Guide</i>. For more information about using <code>CdcStartPosition</code>, see\n            <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateReplicationTask.html\">CreateReplicationTask</a>, <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTask.html\">StartReplicationTask</a>, and <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_ModifyReplicationTask.html\">ModifyReplicationTask</a>.</p>"
                     }
                 },
                 "PluginName": {
@@ -9447,10 +10192,68 @@
                     "traits": {
                         "smithy.api#documentation": "<p>When true, lets PostgreSQL migrate the boolean type as boolean. By default, PostgreSQL migrates booleans as \n         <code>varchar(5)</code>.</p>"
                     }
+                },
+                "MapJsonbAsClob": {
+                    "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When true, DMS migrates JSONB values as CLOB.</p>"
+                    }
+                },
+                "MapLongVarcharAs": {
+                    "target": "com.amazonaws.databasemigrationservice#LongVarcharMappingType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When true, DMS migrates LONG values as VARCHAR.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Provides information that defines a PostgreSQL endpoint.</p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#ProvisionData": {
+            "type": "structure",
+            "members": {
+                "ProvisionState": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current provisioning state </p>"
+                    }
+                },
+                "ProvisionedCapacityUnits": {
+                    "target": "com.amazonaws.databasemigrationservice#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of capacity units the replication is using.</p>"
+                    }
+                },
+                "DateProvisioned": {
+                    "target": "com.amazonaws.databasemigrationservice#TStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when DMS provisioned replication resources.</p>"
+                    }
+                },
+                "IsNewProvisioningAvailable": {
+                    "target": "com.amazonaws.databasemigrationservice#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Whether the new provisioning is available to the replication.</p>"
+                    }
+                },
+                "DateNewProvisioningDataAvailable": {
+                    "target": "com.amazonaws.databasemigrationservice#TStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when provisioning became available.</p>"
+                    }
+                },
+                "ReasonForNewProvisioningData": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message describing the reason that DMS provisioned new resources for the serverless replication.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about provisioning resources for an DMS serverless replication.</p>"
             }
         },
         "com.amazonaws.databasemigrationservice#RdsConfiguration": {
@@ -9502,6 +10305,12 @@
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
                         "smithy.api#documentation": "<p>Describes the deployment option for the recommended Amazon RDS DB instance. The deployment\n            options include Multi-AZ and Single-AZ deployments. Valid values include\n                <code>\"MULTI_AZ\"</code> and <code>\"SINGLE_AZ\"</code>.</p>"
+                    }
+                },
+                "EngineVersion": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the recommended target Amazon RDS engine version.</p>"
                     }
                 }
             },
@@ -9566,6 +10375,12 @@
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The required deployment option for the Amazon RDS DB instance. Valid values include\n                <code>\"MULTI_AZ\"</code> for Multi-AZ deployments and <code>\"SINGLE_AZ\"</code> for\n            Single-AZ deployments.</p>"
+                    }
+                },
+                "EngineVersion": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The required target Amazon RDS engine version.</p>"
                     }
                 }
             },
@@ -10151,6 +10966,69 @@
                 }
             }
         },
+        "com.amazonaws.databasemigrationservice#ReloadReplicationTables": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.databasemigrationservice#ReloadReplicationTablesMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.databasemigrationservice#ReloadReplicationTablesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.databasemigrationservice#InvalidResourceStateFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#ResourceNotFoundFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Reloads the target database table with the source data for a given DMS Serverless\n         replication configuration.</p>\n         <p>You can only use this operation with a task in the RUNNING state, otherwise the service\n         will throw an <code>InvalidResourceStateFault</code> exception.</p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#ReloadReplicationTablesMessage": {
+            "type": "structure",
+            "members": {
+                "ReplicationConfigArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name of the replication config for which to reload tables.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TablesToReload": {
+                    "target": "com.amazonaws.databasemigrationservice#TableListToReload",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of tables to reload.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ReloadOption": {
+                    "target": "com.amazonaws.databasemigrationservice#ReloadOptionValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Options for reload. Specify <code>data-reload</code> to reload the data and re-validate\n         it if validation is enabled. Specify <code>validate-only</code> to re-validate the table.\n         This option applies only when validation is enabled for the replication. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#ReloadReplicationTablesResponse": {
+            "type": "structure",
+            "members": {
+                "ReplicationConfigArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name of the replication config for which to reload tables.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.databasemigrationservice#ReloadTables": {
             "type": "operation",
             "input": {
@@ -10255,6 +11133,205 @@
             "traits": {
                 "smithy.api#documentation": "<p></p>",
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.databasemigrationservice#Replication": {
+            "type": "structure",
+            "members": {
+                "ReplicationConfigIdentifier": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the <code>ReplicationConfig</code> associated with the replication.</p>"
+                    }
+                },
+                "ReplicationConfigArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name for the <code>ReplicationConfig</code> associated with the replication.</p>"
+                    }
+                },
+                "SourceEndpointArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name for an existing <code>Endpoint</code> the serverless replication uses for its data source.</p>"
+                    }
+                },
+                "TargetEndpointArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name for an existing <code>Endpoint</code> the serverless replication uses for its data target.</p>"
+                    }
+                },
+                "ReplicationType": {
+                    "target": "com.amazonaws.databasemigrationservice#MigrationTypeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the serverless replication.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the serverless replication.</p>"
+                    }
+                },
+                "ProvisionData": {
+                    "target": "com.amazonaws.databasemigrationservice#ProvisionData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about provisioning resources for an DMS serverless replication.</p>"
+                    }
+                },
+                "StopReason": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason the replication task was stopped. This response parameter can return one of\n         the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>\"Stop Reason NORMAL\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"Stop Reason RECOVERABLE_ERROR\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"Stop Reason FATAL_ERROR\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"Stop Reason FULL_LOAD_ONLY_FINISHED\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"Stop Reason STOPPED_AFTER_FULL_LOAD\"</code> – Full load completed, with cached changes not applied</p>\n            </li>\n            <li>\n               <p>\n                  <code>\"Stop Reason STOPPED_AFTER_CACHED_EVENTS\"</code>  – Full load completed, with cached changes applied</p>\n            </li>\n            <li>\n               <p>\n                  <code>\"Stop Reason EXPRESS_LICENSE_LIMITS_REACHED\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"Stop Reason STOPPED_AFTER_DDL_APPLY\"</code> – User-defined stop task after DDL applied</p>\n            </li>\n            <li>\n               <p>\n                  <code>\"Stop Reason STOPPED_DUE_TO_LOW_MEMORY\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"Stop Reason STOPPED_DUE_TO_LOW_DISK\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"Stop Reason STOPPED_AT_SERVER_TIME\"</code> – User-defined server time for stopping task</p>\n            </li>\n            <li>\n               <p>\n                  <code>\"Stop Reason STOPPED_AT_COMMIT_TIME\"</code> –  User-defined commit time for stopping task</p>\n            </li>\n            <li>\n               <p>\n                  <code>\"Stop Reason RECONFIGURATION_RESTART\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"Stop Reason RECYCLE_TASK\"</code>\n               </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "FailureMessages": {
+                    "target": "com.amazonaws.databasemigrationservice#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Error and other information about why a serverless replication failed.</p>"
+                    }
+                },
+                "ReplicationStats": {
+                    "target": "com.amazonaws.databasemigrationservice#ReplicationStats",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This object provides a collection of statistics about a serverless replication.</p>"
+                    }
+                },
+                "StartReplicationType": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The replication type.</p>"
+                    }
+                },
+                "CdcStartTime": {
+                    "target": "com.amazonaws.databasemigrationservice#TStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the start time for a change data capture (CDC) operation. Use either\n         <code>CdcStartTime</code> or <code>CdcStartPosition</code> to specify when you want a CDC operation to start.\n         Specifying both values results in an error.</p>"
+                    }
+                },
+                "CdcStartPosition": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the start time for a change data capture (CDC) operation. Use either\n         <code>CdcStartTime</code> or <code>CdcStartPosition</code> to specify when you want a CDC operation to start.\n         Specifying both values results in an error.</p>"
+                    }
+                },
+                "CdcStopPosition": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates when you want a change data capture (CDC) operation to stop. The value can be\n         either server time or commit time.</p>"
+                    }
+                },
+                "RecoveryCheckpoint": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the last checkpoint that occurred during a change data capture (CDC)\n         operation. You can provide this value to the <code>CdcStartPosition</code> parameter to\n         start a CDC operation that begins at that checkpoint.</p>"
+                    }
+                },
+                "ReplicationCreateTime": {
+                    "target": "com.amazonaws.databasemigrationservice#TStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the serverless replication was created.</p>"
+                    }
+                },
+                "ReplicationUpdateTime": {
+                    "target": "com.amazonaws.databasemigrationservice#TStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the serverless replication was updated.</p>"
+                    }
+                },
+                "ReplicationLastStopTime": {
+                    "target": "com.amazonaws.databasemigrationservice#TStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when replication was last stopped.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information that describes a serverless replication created by the <code>CreateReplication</code> operation.</p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#ReplicationConfig": {
+            "type": "structure",
+            "members": {
+                "ReplicationConfigIdentifier": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the <code>ReplicationConfig</code> associated with the replication.</p>"
+                    }
+                },
+                "ReplicationConfigArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of \n         this DMS Serverless replication configuration.</p>"
+                    }
+                },
+                "SourceEndpointArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the source endpoint for\n         this DMS serverless replication configuration.</p>"
+                    }
+                },
+                "TargetEndpointArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the target endpoint for\n         this DMS serverless replication configuration.</p>"
+                    }
+                },
+                "ReplicationType": {
+                    "target": "com.amazonaws.databasemigrationservice#MigrationTypeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the replication.</p>"
+                    }
+                },
+                "ComputeConfig": {
+                    "target": "com.amazonaws.databasemigrationservice#ComputeConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration parameters for provisioning an DMS serverless replication.</p>"
+                    }
+                },
+                "ReplicationSettings": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration parameters for an DMS serverless replication.</p>"
+                    }
+                },
+                "SupplementalSettings": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional parameters for an DMS serverless replication.</p>"
+                    }
+                },
+                "TableMappings": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Table mappings specified in the replication.</p>"
+                    }
+                },
+                "ReplicationConfigCreateTime": {
+                    "target": "com.amazonaws.databasemigrationservice#TStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the serverless replication config was created.</p>"
+                    }
+                },
+                "ReplicationConfigUpdateTime": {
+                    "target": "com.amazonaws.databasemigrationservice#TStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the serverless replication config was updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This object provides configuration information about a serverless replication.</p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#ReplicationConfigList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.databasemigrationservice#ReplicationConfig",
+                "traits": {
+                    "smithy.api#xmlName": "ReplicationConfig"
+                }
             }
         },
         "com.amazonaws.databasemigrationservice#ReplicationEndpointTypeValue": {
@@ -10498,6 +11575,15 @@
                 "target": "com.amazonaws.databasemigrationservice#ReplicationInstanceTaskLog"
             }
         },
+        "com.amazonaws.databasemigrationservice#ReplicationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.databasemigrationservice#Replication",
+                "traits": {
+                    "smithy.api#xmlName": "Replication"
+                }
+            }
+        },
         "com.amazonaws.databasemigrationservice#ReplicationPendingModifiedValues": {
             "type": "structure",
             "members": {
@@ -10534,6 +11620,86 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Provides information about the values of pending modifications to a replication\n         instance. This data type is an object of the\n         <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_ReplicationInstance.html\">\n               <code>ReplicationInstance</code>\n            </a> user-defined\n         data type. </p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#ReplicationStats": {
+            "type": "structure",
+            "members": {
+                "FullLoadProgressPercent": {
+                    "target": "com.amazonaws.databasemigrationservice#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The percent complete for the full load serverless replication.</p>"
+                    }
+                },
+                "ElapsedTimeMillis": {
+                    "target": "com.amazonaws.databasemigrationservice#Long",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The elapsed time of the replication, in milliseconds.</p>"
+                    }
+                },
+                "TablesLoaded": {
+                    "target": "com.amazonaws.databasemigrationservice#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of tables loaded for this replication.</p>"
+                    }
+                },
+                "TablesLoading": {
+                    "target": "com.amazonaws.databasemigrationservice#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of tables currently loading for this replication.</p>"
+                    }
+                },
+                "TablesQueued": {
+                    "target": "com.amazonaws.databasemigrationservice#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of tables queued for this replication.</p>"
+                    }
+                },
+                "TablesErrored": {
+                    "target": "com.amazonaws.databasemigrationservice#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of errors that have occured for this replication.</p>"
+                    }
+                },
+                "FreshStartDate": {
+                    "target": "com.amazonaws.databasemigrationservice#TStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date the replication was started either with a fresh start or a target reload.</p>"
+                    }
+                },
+                "StartDate": {
+                    "target": "com.amazonaws.databasemigrationservice#TStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date the replication is scheduled to start.</p>"
+                    }
+                },
+                "StopDate": {
+                    "target": "com.amazonaws.databasemigrationservice#TStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date the replication was stopped.</p>"
+                    }
+                },
+                "FullLoadStartDate": {
+                    "target": "com.amazonaws.databasemigrationservice#TStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date the replication full load was started.</p>"
+                    }
+                },
+                "FullLoadFinishDate": {
+                    "target": "com.amazonaws.databasemigrationservice#TStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date the replication full load was finished.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This object provides a collection of statistics about a serverless replication.</p>"
             }
         },
         "com.amazonaws.databasemigrationservice#ReplicationSubnetGroup": {
@@ -10602,6 +11768,12 @@
                 "traits": {
                     "smithy.api#xmlName": "ReplicationSubnetGroup"
                 }
+            }
+        },
+        "com.amazonaws.databasemigrationservice#ReplicationTableStatisticsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.databasemigrationservice#TableStatistics"
             }
         },
         "com.amazonaws.databasemigrationservice#ReplicationTask": {
@@ -11036,7 +12208,10 @@
                     }
                 },
                 "resourceArn": {
-                    "target": "com.amazonaws.databasemigrationservice#ResourceArn"
+                    "target": "com.amazonaws.databasemigrationservice#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
                 }
             },
             "traits": {
@@ -11263,7 +12438,7 @@
                 "IncludeOpForFullLoad": {
                     "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that enables a full load to write INSERT operations to the comma-separated value\n         (.csv) output files only to indicate how the rows were added to the source database.</p>\n         <note>\n            <p>DMS supports the <code>IncludeOpForFullLoad</code> parameter in versions 3.1.4 and\n            later.</p>\n         </note>\n         <p>For full load, records can only be inserted. By default (the <code>false</code>\n         setting), no information is recorded in these output files for a full load to indicate that\n         the rows were inserted at the source database. If <code>IncludeOpForFullLoad</code> is set\n         to <code>true</code> or <code>y</code>, the INSERT is recorded as an I annotation in the\n         first field of the .csv file. This allows the format of your target records from a full\n         load to be consistent with the target records from a CDC load.</p>\n         <note>\n            <p>This setting works together with the <code>CdcInsertsOnly</code> and the\n               <code>CdcInsertsAndUpdates</code> parameters for output to .csv files only. For more\n            information about how these settings work together, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring.InsertOps\">Indicating Source DB Operations in Migrated S3 Data</a> in the <i>Database Migration Service\n                   User Guide.</i>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>A value that enables a full load to write INSERT operations to the comma-separated value\n         (.csv) or .parquet output files only to indicate how the rows were added to the source database.</p>\n         <note>\n            <p>DMS supports the <code>IncludeOpForFullLoad</code> parameter in versions 3.1.4 and\n            later.</p>\n            <p>DMS supports the use of the .parquet files with the <code>IncludeOpForFullLoad</code> \n            parameter in versions 3.4.7 and later.</p>\n         </note>\n         <p>For full load, records can only be inserted. By default (the <code>false</code>\n         setting), no information is recorded in these output files for a full load to indicate that\n         the rows were inserted at the source database. If <code>IncludeOpForFullLoad</code> is set\n         to <code>true</code> or <code>y</code>, the INSERT is recorded as an I annotation in the\n         first field of the .csv file. This allows the format of your target records from a full\n         load to be consistent with the target records from a CDC load.</p>\n         <note>\n            <p>This setting works together with the <code>CdcInsertsOnly</code> and the\n               <code>CdcInsertsAndUpdates</code> parameters for output to .csv files only. For more\n            information about how these settings work together, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring.InsertOps\">Indicating Source DB Operations in Migrated S3 Data</a> in the <i>Database Migration Service\n                   User Guide.</i>.</p>\n         </note>"
                     }
                 },
                 "CdcInsertsOnly": {
@@ -11287,7 +12462,7 @@
                 "CdcInsertsAndUpdates": {
                     "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that enables a change data capture (CDC) load to write INSERT and UPDATE\n         operations to .csv or .parquet (columnar storage) output files. The default setting is\n            <code>false</code>, but when <code>CdcInsertsAndUpdates</code> is set to\n            <code>true</code> or <code>y</code>, only INSERTs and UPDATEs from the source database\n         are migrated to the .csv or .parquet file. </p>\n         <p>For .csv file format only, how these INSERTs and UPDATEs are recorded depends on the\n         value of the <code>IncludeOpForFullLoad</code> parameter. If\n            <code>IncludeOpForFullLoad</code> is set to <code>true</code>, the first field of every\n         CDC record is set to either <code>I</code> or <code>U</code> to indicate INSERT and UPDATE\n         operations at the source. But if <code>IncludeOpForFullLoad</code> is set to\n            <code>false</code>, CDC records are written without an indication of INSERT or UPDATE\n         operations at the source. For more information about how these settings work together, see\n            <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring.InsertOps\">Indicating Source DB Operations in Migrated S3 Data</a> in the <i>Database Migration Service User Guide.</i>.</p>\n         <note>\n            <p>DMS supports the use of the <code>CdcInsertsAndUpdates</code> parameter in\n            versions 3.3.1 and later.</p>\n            <p>\n               <code>CdcInsertsOnly</code> and <code>CdcInsertsAndUpdates</code> can't\n            both be set to <code>true</code> for the same endpoint. Set either\n            <code>CdcInsertsOnly</code> or <code>CdcInsertsAndUpdates</code> to <code>true</code>\n            for the same endpoint, but not both.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>A value that enables a change data capture (CDC) load to write INSERT and UPDATE\n         operations to .csv or .parquet (columnar storage) output files. The default setting is\n            <code>false</code>, but when <code>CdcInsertsAndUpdates</code> is set to\n            <code>true</code> or <code>y</code>, only INSERTs and UPDATEs from the source database\n         are migrated to the .csv or .parquet file.</p>\n         <important>\n            <p>DMS supports the use of the .parquet files in versions 3.4.7 and later.</p>\n         </important>\n         <p>How these INSERTs and UPDATEs are recorded depends on the\n         value of the <code>IncludeOpForFullLoad</code> parameter. If\n            <code>IncludeOpForFullLoad</code> is set to <code>true</code>, the first field of every\n         CDC record is set to either <code>I</code> or <code>U</code> to indicate INSERT and UPDATE\n         operations at the source. But if <code>IncludeOpForFullLoad</code> is set to\n            <code>false</code>, CDC records are written without an indication of INSERT or UPDATE\n         operations at the source. For more information about how these settings work together, see\n            <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring.InsertOps\">Indicating Source DB Operations in Migrated S3 Data</a> in the <i>Database Migration Service User Guide.</i>.</p>\n         <note>\n            <p>DMS supports the use of the <code>CdcInsertsAndUpdates</code> parameter in\n            versions 3.3.1 and later.</p>\n            <p>\n               <code>CdcInsertsOnly</code> and <code>CdcInsertsAndUpdates</code> can't\n            both be set to <code>true</code> for the same endpoint. Set either\n            <code>CdcInsertsOnly</code> or <code>CdcInsertsAndUpdates</code> to <code>true</code>\n            for the same endpoint, but not both.</p>\n         </note>"
                     }
                 },
                 "DatePartitionEnabled": {
@@ -11713,6 +12888,84 @@
                 "target": "com.amazonaws.databasemigrationservice#StartRecommendationsRequestEntry"
             }
         },
+        "com.amazonaws.databasemigrationservice#StartReplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.databasemigrationservice#StartReplicationMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.databasemigrationservice#StartReplicationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.databasemigrationservice#AccessDeniedFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#InvalidResourceStateFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#ResourceNotFoundFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>For a given DMS Serverless replication configuration, DMS connects to the source endpoint and\n         collects the metadata to analyze the replication workload. Using this metadata, DMS then\n         computes and provisions the required capacity and starts replicating to the target endpoint\n         using the server resources that DMS has provisioned for the DMS Serverless replication.</p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#StartReplicationMessage": {
+            "type": "structure",
+            "members": {
+                "ReplicationConfigArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name of the replication for which to start replication.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StartReplicationType": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The replication type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CdcStartTime": {
+                    "target": "com.amazonaws.databasemigrationservice#TStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the start time for a change data capture (CDC) operation. Use either <code>CdcStartTime</code>\n         or <code>CdcStartPosition</code> to specify when you want a CDC operation to start. Specifying both values results in an error.</p>"
+                    }
+                },
+                "CdcStartPosition": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates when you want a change data capture (CDC) operation to start. Use either \n         <code>CdcStartPosition</code> or <code>CdcStartTime</code> to specify when you want a \n         CDC operation to start. Specifying both values results in an error.</p>\n         <p>The value can be in date, checkpoint, or LSN/SCN format.</p>"
+                    }
+                },
+                "CdcStopPosition": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates when you want a change data capture (CDC) operation to stop. The value can be \n         either server time or commit time.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#StartReplicationResponse": {
+            "type": "structure",
+            "members": {
+                "Replication": {
+                    "target": "com.amazonaws.databasemigrationservice#Replication",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The replication that DMS started.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.databasemigrationservice#StartReplicationTask": {
             "type": "operation",
             "input": {
@@ -11993,6 +13246,58 @@
                         "smithy.api#enumValue": "reload-target"
                     }
                 }
+            }
+        },
+        "com.amazonaws.databasemigrationservice#StopReplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.databasemigrationservice#StopReplicationMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.databasemigrationservice#StopReplicationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.databasemigrationservice#AccessDeniedFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#InvalidResourceStateFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#ResourceNotFoundFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>For a given DMS Serverless replication configuration, DMS stops any and all ongoing DMS Serverless replications.\n         This command doesn't deprovision the stopped replications.</p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#StopReplicationMessage": {
+            "type": "structure",
+            "members": {
+                "ReplicationConfigArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name of the replication to stop.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#StopReplicationResponse": {
+            "type": "structure",
+            "members": {
+                "Replication": {
+                    "target": "com.amazonaws.databasemigrationservice#Replication",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The replication that DMS stopped.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.databasemigrationservice#StopReplicationTask": {
@@ -12535,6 +13840,47 @@
             "traits": {
                 "smithy.api#documentation": "<p></p>",
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.databasemigrationservice#TimestreamSettings": {
+            "type": "structure",
+            "members": {
+                "DatabaseName": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Database name for the endpoint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MemoryDuration": {
+                    "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Set this attribute to specify the length of time to store all of the tables in memory \n         that are migrated into Amazon Timestream from the source database. Time is measured in units \n         of hours. When Timestream data comes in, it first resides in memory for the specified duration, \n         which allows quick access to it.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MagneticDuration": {
+                    "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Set this attribute to specify the default magnetic duration applied to the Amazon Timestream\n         tables in days. This is the number of days that records remain in magnetic store \n         before being discarded. For more information, see <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/storage.html\">Storage</a> in the\n         <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/\">Amazon Timestream Developer Guide</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CdcInsertsAndUpdates": {
+                    "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Set this attribute to <code>true</code> to specify that DMS only\n         applies inserts and updates, and not deletes. Amazon Timestream does not allow\n         deleting records, so if this value is <code>false</code>, DMS nulls out\n         the corresponding record in the Timestream database rather than deleting it.</p>"
+                    }
+                },
+                "EnableMagneticStoreWrites": {
+                    "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Set this attribute to <code>true</code> to enable memory store writes.\n         When this value is <code>false</code>, DMS does not write records that are older  \n         in days than the value specified in <code>MagneticDuration</code>, because Amazon Timestream does not\n         allow memory writes by default. For more information, see <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/storage.html\">Storage</a> in the\n         <a href=\"https://docs.aws.amazon.com/timestream/latest/developerguide/\">Amazon Timestream Developer Guide</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information that defines an Amazon Timestream endpoint.</p>"
             }
         },
         "com.amazonaws.databasemigrationservice#TlogAccessMode": {

@@ -148,7 +148,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Associates the specified KMS key with the specified log\n      group.</p>\n         <p>Associating a KMS key with a log group overrides any existing\n      associations between the log group and a KMS key. After a KMS key is associated with a log group, all newly ingested data for the log group is encrypted\n      using the KMS key. This association is stored as long as the data encrypted\n      with the KMS keyis still within CloudWatch Logs. This enables CloudWatch Logs to decrypt this data whenever it is requested.</p>\n         <important>\n            <p>CloudWatch Logs supports only symmetric KMS keys. Do not use an associate\n        an asymmetric KMS key with your log group. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html\">Using\n          Symmetric and Asymmetric Keys</a>.</p>\n         </important>\n         <p>It can take up to 5 minutes for this operation to take effect.</p>\n         <p>If you attempt to associate a KMS key with a log group but the KMS key does not exist or the KMS key is disabled, you receive an\n        <code>InvalidParameterException</code> error. </p>"
+                "smithy.api#documentation": "<p>Associates the specified KMS key with either one log group in the account, or with all stored\n      CloudWatch Logs query insights results in the account.</p>\n         <p>When you use <code>AssociateKmsKey</code>, you specify either the <code>logGroupName</code> parameter\n    or the <code>resourceIdentifier</code> parameter. You can't specify both of those parameters in the same operation.</p>\n         <ul>\n            <li>\n               <p>Specify the <code>logGroupName</code> parameter to cause all log events stored in the log group to\n    be encrypted with that key. Only the log events ingested after the key is associated are encrypted with that key.</p>\n               <p>Associating a KMS key with a log group overrides any existing\n      associations between the log group and a KMS key. After a KMS key is associated with a log group, all newly ingested data for the log group is encrypted\n      using the KMS key. This association is stored as long as the data encrypted\n      with the KMS key is still within CloudWatch Logs. This enables CloudWatch Logs to decrypt this data whenever it is requested.</p>\n               <p>Associating\n    a key with a log group does not cause the results of queries of that log group to be encrypted with that key. To have query\n    results encrypted with a KMS key, you must use an <code>AssociateKmsKey</code> operation with the <code>resourceIdentifier</code>\n    parameter that specifies a <code>query-result</code> resource. </p>\n            </li>\n            <li>\n               <p>Specify the <code>resourceIdentifier</code> parameter with a <code>query-result</code> resource, \n     to use that key to encrypt the stored results of all future \n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_StartQuery.html\">StartQuery</a>\n      operations in the account. The response from a \n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetQueryResults.html\">GetQueryResults</a>\n      operation will still return\n    the query results in plain text.</p>\n               <p>Even if you have not associated a key with your query results, the query results are encrypted when stored,\n      using the default CloudWatch Logs method.</p>\n               <p>If you run a query from a monitoring account that queries logs in a source account, the\n          query results key from the monitoring account, if any, is used.</p>\n            </li>\n         </ul>\n         <important>\n            <p>If you delete the key that is used to encrypt log events or log group query results,\n    then all the associated stored log events or query results that were encrypted with that key \n    will be unencryptable and unusable.</p>\n         </important>\n         <note>\n            <p>CloudWatch Logs supports only symmetric KMS keys. Do not use an associate\n        an asymmetric KMS key with your log group or query results. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html\">Using\n          Symmetric and Asymmetric Keys</a>.</p>\n         </note>\n         <p>It can take up to 5 minutes for this operation to take effect.</p>\n         <p>If you attempt to associate a KMS key with a log group but the KMS key does not exist or the KMS key is disabled, you receive an\n        <code>InvalidParameterException</code> error. </p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#AssociateKmsKeyRequest": {
@@ -157,8 +157,7 @@
                 "logGroupName": {
                     "target": "com.amazonaws.cloudwatchlogs#LogGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the log group.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The name of the log group.</p>\n         <p>In your <code>AssociateKmsKey</code> operation,\n      you must specify either the <code>resourceIdentifier</code> parameter or the <code>logGroup</code> parameter, \n      but you can't specify both.</p>"
                     }
                 },
                 "kmsKeyId": {
@@ -166,6 +165,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key to use when encrypting log\n      data. This must be a symmetric KMS key. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms\">Amazon Resource Names</a> and <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html\">Using Symmetric and Asymmetric\n        Keys</a>.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "resourceIdentifier": {
+                    "target": "com.amazonaws.cloudwatchlogs#ResourceIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the target for this operation. You must specify one of the following:</p>\n         <ul>\n            <li>\n               <p>Specify the following ARN to have future <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetQueryResults.html\">GetQueryResults</a>\n        operations in this account encrypt the results\n        with the specified KMS key. Replace\n        <i>REGION</i> and <i>ACCOUNT_ID</i> with your Region and account ID.</p>\n               <p>\n                  <code>arn:aws:logs:<i>REGION</i>:<i>ACCOUNT_ID</i>:query-result:*</code>\n               </p>\n            </li>\n            <li>\n               <p>Specify the ARN of a log group to have CloudWatch Logs use the KMS key\n        to encrypt log events that are ingested and stored by that log group. The log group ARN must be in \n        the following format. Replace\n        <i>REGION</i> and <i>ACCOUNT_ID</i> with your Region and account ID.</p>\n               <p>\n                  <code>arn:aws:logs:<i>REGION</i>:<i>ACCOUNT_ID</i>:log-group:<i>LOG_GROUP_NAME</i>\n                  </code>\n               </p>\n            </li>\n         </ul>\n         <p>In your <code>AssociateKmsKey</code> operation,\n        you must specify either the <code>resourceIdentifier</code> parameter or the <code>logGroup</code> parameter, \n        but you can't specify both.</p>"
                     }
                 }
             },
@@ -1799,7 +1804,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disassociates the associated KMS key from the specified log\n      group.</p>\n         <p>After the KMS key is disassociated from the log group, CloudWatch Logs stops encrypting newly ingested data for the log group. All previously ingested data\n      remains encrypted, and CloudWatch Logs requires permissions for the KMS key\n      whenever the encrypted data is requested.</p>\n         <p>Note that it can take up to 5 minutes for this operation to take effect.</p>"
+                "smithy.api#documentation": "<p>Disassociates the specified KMS key from the specified log\n      group or from all CloudWatch Logs Insights query results in the account.</p>\n         <p>When you use <code>DisassociateKmsKey</code>, you specify either the <code>logGroupName</code> parameter\n      or the <code>resourceIdentifier</code> parameter. You can't specify both of those parameters in the same operation.</p>\n         <ul>\n            <li>\n               <p>Specify the <code>logGroupName</code> parameter to stop using the KMS key\n          to encrypt future log events ingested and stored in the log group. Instead, they will be\n          encrypted with the default CloudWatch Logs method. The log events that were ingested\n          while the key was associated with the log group are still encrypted with that key.\n          Therefore, CloudWatch Logs will need permissions for the key whenever that data is\n          accessed.</p>\n            </li>\n            <li>\n               <p>Specify the <code>resourceIdentifier</code> parameter with the <code>query-result</code>\n          resource to stop using the KMS key to encrypt the results of all\n          future <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_StartQuery.html\">StartQuery</a>\n          operations in the account. They will instead be encrypted with the default CloudWatch Logs method. The results from queries that ran while the key was associated with\n          the account are still encrypted with that key. Therefore, CloudWatch Logs will need\n          permissions for the key whenever that data is accessed.</p>\n            </li>\n         </ul>\n         <p>It can take up to 5 minutes for this operation to take effect.</p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#DisassociateKmsKeyRequest": {
@@ -1808,8 +1813,13 @@
                 "logGroupName": {
                     "target": "com.amazonaws.cloudwatchlogs#LogGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the log group.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The name of the log group.</p>\n         <p>In your <code>DisassociateKmsKey</code> operation,\n      you must specify either the <code>resourceIdentifier</code> parameter or the <code>logGroup</code> parameter, \n      but you can't specify both.</p>"
+                    }
+                },
+                "resourceIdentifier": {
+                    "target": "com.amazonaws.cloudwatchlogs#ResourceIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the target for this operation. You must specify one of the following:</p>\n         <ul>\n            <li>\n               <p>Specify the ARN of a log group to stop having CloudWatch Logs use the KMS key\n        to encrypt log events that are ingested and stored by that log group. After you run this operation, CloudWatch Logs\n        encrypts ingested log events with the default CloudWatch Logs method. The log group ARN must be in \n        the following format. Replace\n        <i>REGION</i> and <i>ACCOUNT_ID</i> with your Region and account ID.</p>\n               <p>\n                  <code>arn:aws:logs:<i>REGION</i>:<i>ACCOUNT_ID</i>:log-group:<i>LOG_GROUP_NAME</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>Specify the following ARN to stop using this key to encrypt the results of future <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_StartQuery.html\">StartQuery</a>\n        operations in this account. Replace\n        <i>REGION</i> and <i>ACCOUNT_ID</i> with your Region and account ID.</p>\n               <p>\n                  <code>arn:aws:logs:<i>REGION</i>:<i>ACCOUNT_ID</i>:query-result:*</code>\n               </p>\n            </li>\n         </ul>\n         <p>In your <code>DisssociateKmsKey</code> operation,\n      you must specify either the <code>resourceIdentifier</code> parameter or the <code>logGroup</code> parameter, \n      but you can't specify both.</p>"
                     }
                 }
             },
@@ -1835,6 +1845,15 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The method used to distribute log data to the destination, which can be either\n      random or grouped by log stream.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#EncryptionKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
             }
         },
         "com.amazonaws.cloudwatchlogs#EventId": {
@@ -2483,7 +2502,7 @@
                 "time": {
                     "target": "com.amazonaws.cloudwatchlogs#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time to set as the center of the query. If you specify <code>time</code>, the 15\n      minutes before this time are queries. If you omit <code>time</code>, the 8 minutes before and\n      8 minutes after this time are searched.</p>\n         <p>The <code>time</code> value is specified as epoch time, which is the number of seconds\n      since <code>January 1, 1970, 00:00:00 UTC</code>.</p>"
+                        "smithy.api#documentation": "<p>The time to set as the center of the query. If you specify <code>time</code>, the 8 minutes before and\n      8 minutes after this time are searched. If you omit <code>time</code>, the most recent 15 minutes\n      up to the current time are searched.</p>\n         <p>The <code>time</code> value is specified as epoch time, which is the number of seconds\n      since <code>January 1, 1970, 00:00:00 UTC</code>.</p>"
                     }
                 },
                 "logGroupIdentifier": {
@@ -2623,13 +2642,19 @@
                 "statistics": {
                     "target": "com.amazonaws.cloudwatchlogs#QueryStatistics",
                     "traits": {
-                        "smithy.api#documentation": "<p>Includes the number of log events scanned by the query, the number of log events that matched the \n    query criteria, and the total number of bytes in the log events that were scanned. These values\n    reflect the full raw results of the query.</p>"
+                        "smithy.api#documentation": "<p>Includes the number of log events scanned by the query, the number of log events that\n      matched the query criteria, and the total number of bytes in the scanned log events. These\n      values reflect the full raw results of the query.</p>"
                     }
                 },
                 "status": {
                     "target": "com.amazonaws.cloudwatchlogs#QueryStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>The status of the most recent running of the query. Possible values are <code>Cancelled</code>, \n      <code>Complete</code>, <code>Failed</code>, <code>Running</code>, <code>Scheduled</code>, \n      <code>Timeout</code>, and <code>Unknown</code>.</p>\n         <p>Queries time out after 60 minutes of runtime. To avoid having your queries time out,\n      reduce the time range being searched or partition your query into a number of queries.</p>"
+                    }
+                },
+                "encryptionKey": {
+                    "target": "com.amazonaws.cloudwatchlogs#EncryptionKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If you associated an KMS key with the CloudWatch Logs Insights\n      query results in this account, this field displays the ARN of the key that's used to encrypt\n      the query results when <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_StartQuery.html\">StartQuery</a> stores\n      them.</p>"
                     }
                 }
             },
@@ -4684,7 +4709,7 @@
                 "scope": {
                     "target": "com.amazonaws.cloudwatchlogs#Scope",
                     "traits": {
-                        "smithy.api#documentation": "<p>Currently the only valid value for this parameter is <code>GLOBAL</code>, which specifies that the data \n      protection policy applies to all log groups in the account. If you omit this parameter, the default\n    of <code>GLOBAL</code> is used.</p>"
+                        "smithy.api#documentation": "<p>Currently the only valid value for this parameter is <code>ALL</code>, which specifies that the data \n      protection policy applies to all log groups in the account. If you omit this parameter, the default\n    of <code>ALL</code> is used.</p>"
                     }
                 }
             },
@@ -5262,7 +5287,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates or updates a subscription filter and associates it with the specified log\n      group. With subscription filters, you can subscribe to a real-time stream of log events\n      ingested through <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutLogEvents.html\">PutLogEvents</a>\n      and have them delivered to a specific destination. When log events are sent to the receiving\n      service, they are Base64 encoded and compressed with the GZIP format.</p>\n         <p>The following destinations are supported for subscription filters:</p>\n         <ul>\n            <li>\n               <p>An Amazon Kinesis data stream belonging to the same account as the subscription\n          filter, for same-account delivery.</p>\n            </li>\n            <li>\n               <p>A logical destination that belongs to a different account, for cross-account delivery.</p>\n            </li>\n            <li>\n               <p>An Amazon Kinesis Data Firehose delivery stream that belongs to the same account as\n          the subscription filter, for same-account delivery.</p>\n            </li>\n            <li>\n               <p>An Lambda function that belongs to the same account as the\n          subscription filter, for same-account delivery.</p>\n            </li>\n         </ul>\n         <p>Each log group can have up to two subscription filters associated with it. If you are\n      updating an existing filter, you must specify the correct name in <code>filterName</code>.\n      </p>\n         <p>To perform a <code>PutSubscriptionFilter</code> operation for any destination except a Lambda function, \n    you must also have the \n      <code>iam:PassRole</code> permission.</p>"
+                "smithy.api#documentation": "<p>Creates or updates a subscription filter and associates it with the specified log\n      group. With subscription filters, you can subscribe to a real-time stream of log events\n      ingested through <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutLogEvents.html\">PutLogEvents</a>\n      and have them delivered to a specific destination. When log events are sent to the receiving\n      service, they are Base64 encoded and compressed with the GZIP format.</p>\n         <p>The following destinations are supported for subscription filters:</p>\n         <ul>\n            <li>\n               <p>An Amazon Kinesis data stream belonging to the same account as the subscription\n          filter, for same-account delivery.</p>\n            </li>\n            <li>\n               <p>A logical destination created with <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDestination.html\">PutDestination</a> that belongs to a different account, for cross-account delivery.\n          We currently support Kinesis Data Streams and Kinesis Data Firehose as logical destinations.</p>\n            </li>\n            <li>\n               <p>An Amazon Kinesis Data Firehose delivery stream that belongs to the same account as\n          the subscription filter, for same-account delivery.</p>\n            </li>\n            <li>\n               <p>An Lambda function that belongs to the same account as the\n          subscription filter, for same-account delivery.</p>\n            </li>\n         </ul>\n         <p>Each log group can have up to two subscription filters associated with it. If you are\n      updating an existing filter, you must specify the correct name in <code>filterName</code>.\n      </p>\n         <p>To perform a <code>PutSubscriptionFilter</code> operation for any destination except a Lambda function, \n    you must also have the \n      <code>iam:PassRole</code> permission.</p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#PutSubscriptionFilterRequest": {
@@ -5609,6 +5634,16 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.cloudwatchlogs#ResourceIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^[\\w+=/:,.@\\-\\*]*$"
+            }
+        },
         "com.amazonaws.cloudwatchlogs#ResourceNotFoundException": {
             "type": "structure",
             "members": {
@@ -5940,7 +5975,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Schedules a query of a log group using CloudWatch Logs Insights. You specify the log group\n      and time range to query and the query string to use.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html\">CloudWatch Logs Insights Query Syntax</a>.</p>\n         <p>Queries time out after 60 minutes of runtime. If your queries are timing out, reduce the\n      time range being searched or partition your query into a number of queries.</p>\n         <p>If you are using CloudWatch cross-account observability, you can use this operation in a\n      monitoring account to start a query in a linked source account. For more information, see\n        <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html\">CloudWatch\n        cross-account observability</a>. For a cross-account <code>StartQuery</code> operation,\n      the query definition must be defined in the monitoring account.</p>\n         <p>You can have up to 30 concurrent CloudWatch Logs insights queries, including queries\n      that have been added to dashboards. </p>"
+                "smithy.api#documentation": "<p>Schedules a query of a log group using CloudWatch Logs Insights. You specify the log group\n      and time range to query and the query string to use.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html\">CloudWatch Logs Insights Query Syntax</a>.</p>\n         <p>After you run a query using <code>StartQuery</code>, the query results are stored by CloudWatch Logs. \n      You can use <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetQueryResults.html\">GetQueryResults</a> to retrieve\n      the results of a query, using the <code>queryId</code> that <code>StartQuery</code> returns.\n    </p>\n         <p>If you have associated a KMS key with the query results in this account, \n    then \n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_StartQuery.html\">StartQuery</a> uses that key to \n      encrypt the results when it stores them. If no key is associated with query results, the query results are \n    encrypted with the default CloudWatch Logs encryption method.</p>\n         <p>Queries time out after 60 minutes of runtime. If your queries are timing out, reduce the\n      time range being searched or partition your query into a number of queries.</p>\n         <p>If you are using CloudWatch cross-account observability, you can use this operation in a\n      monitoring account to start a query in a linked source account. For more information, see\n        <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html\">CloudWatch\n        cross-account observability</a>. For a cross-account <code>StartQuery</code> operation,\n      the query definition must be defined in the monitoring account.</p>\n         <p>You can have up to 30 concurrent CloudWatch Logs insights queries, including queries\n      that have been added to dashboards. </p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#StartQueryRequest": {
@@ -5949,19 +5984,19 @@
                 "logGroupName": {
                     "target": "com.amazonaws.cloudwatchlogs#LogGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The log group on which to perform the query.</p>\n         <note>\n            <p>A <code>StartQuery</code> operation must include exactly one \n          of the following parameters: \n          <code>logGroupName</code>, <code>logGroupNames</code> or <code>logGroupIdentifiers</code>.\n        </p>\n         </note>"
+                        "smithy.api#documentation": "<p>The log group on which to perform the query.</p>\n         <note>\n            <p>A <code>StartQuery</code> operation must include exactly one of the following\n        parameters: <code>logGroupName</code>, <code>logGroupNames</code>, or\n          <code>logGroupIdentifiers</code>. </p>\n         </note>"
                     }
                 },
                 "logGroupNames": {
                     "target": "com.amazonaws.cloudwatchlogs#LogGroupNames",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of log groups to be queried. You can include up to 50 log groups.</p>\n         <note>\n            <p>A <code>StartQuery</code> operation must include exactly one \n        of the following parameters: \n        <code>logGroupName</code>, <code>logGroupNames</code> or <code>logGroupIdentifiers</code>.\n      </p>\n         </note>"
+                        "smithy.api#documentation": "<p>The list of log groups to be queried. You can include up to 50 log groups.</p>\n         <note>\n            <p>A <code>StartQuery</code> operation must include exactly one of the following\n        parameters: <code>logGroupName</code>, <code>logGroupNames</code>, or\n          <code>logGroupIdentifiers</code>. </p>\n         </note>"
                     }
                 },
                 "logGroupIdentifiers": {
                     "target": "com.amazonaws.cloudwatchlogs#LogGroupIdentifiers",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of log groups to query. You can include up to 50 log groups.</p>\n         <p>You can specify them by the log group name or ARN. If a log group that you're querying is\n      in a source account and you're using a monitoring account, you must specify the ARN of the log\n      group here. The query definition must also be defined in the monitoring account.</p>\n         <p>If you specify an ARN, the ARN can't end with an asterisk (*).</p>\n         <p>A <code>StartQuery</code> operation must include exactly one \n      of the following parameters: \n      <code>logGroupName</code>, <code>logGroupNames</code> or <code>logGroupIdentifiers</code>.\n    </p>"
+                        "smithy.api#documentation": "<p>The list of log groups to query. You can include up to 50 log groups.</p>\n         <p>You can specify them by the log group name or ARN. If a log group that you're querying is\n      in a source account and you're using a monitoring account, you must specify the ARN of the log\n      group here. The query definition must also be defined in the monitoring account.</p>\n         <p>If you specify an ARN, the ARN can't end with an asterisk (*).</p>\n         <p>A <code>StartQuery</code> operation must include exactly one of the following parameters:\n        <code>logGroupName</code>, <code>logGroupNames</code>, or <code>logGroupIdentifiers</code>. </p>"
                     }
                 },
                 "startTime": {

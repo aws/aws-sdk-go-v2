@@ -71,10 +71,22 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Defines the SCTE-35 <code>time_signal</code> message inserted around the ad.</p>\n         <p>Programs on a channel's schedule can be configured with one or more ad breaks. You can attach a <code>splice_insert</code> SCTE-35 message to the ad break. This message provides basic metadata about the ad break.</p>\n         <p>See section 9.7.4 of the 2022 SCTE-35 specification for more information.</p>"
                     }
+                },
+                "AdBreakMetadata": {
+                    "target": "com.amazonaws.mediatailor#AdBreakMetadataList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines a list of key/value pairs that MediaTailor generates within the <code>EXT-X-ASSET</code>tag for <code>SCTE35_ENHANCED</code> output.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Ad break configuration parameters.</p>"
+            }
+        },
+        "com.amazonaws.mediatailor#AdBreakMetadataList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mediatailor#KeyValuePair"
             }
         },
         "com.amazonaws.mediatailor#AdMarkerPassthrough": {
@@ -90,6 +102,23 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>For HLS, when set to <code>true</code>, MediaTailor passes through <code>EXT-X-CUE-IN</code>, <code>EXT-X-CUE-OUT</code>, and <code>EXT-X-SPLICEPOINT-SCTE35</code> ad markers from the origin manifest to the MediaTailor personalized manifest.</p>\n         <p>No logic is applied to these ad markers. For example, if <code>EXT-X-CUE-OUT</code> has a value of <code>60</code>, but no ads are filled for that ad break, MediaTailor will not set the value to <code>0</code>.</p>"
+            }
+        },
+        "com.amazonaws.mediatailor#AdMarkupType": {
+            "type": "enum",
+            "members": {
+                "DATERANGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATERANGE"
+                    }
+                },
+                "SCTE35_ENHANCED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SCTE35_ENHANCED"
+                    }
+                }
             }
         },
         "com.amazonaws.mediatailor#Alert": {
@@ -342,7 +371,11 @@
             "traits": {
                 "aws.api#arn": {
                     "template": "channel/{ChannelName}"
-                }
+                },
+                "aws.cloudformation#cfnResource": {
+                    "name": "ChannelPolicy"
+                },
+                "smithy.api#unstable": {}
             }
         },
         "com.amazonaws.mediatailor#ChannelResource": {
@@ -396,7 +429,11 @@
                 "aws.api#arn": {
                     "template": "channel/{ChannelName}"
                 },
-                "smithy.api#noReplace": {}
+                "aws.cloudformation#cfnResource": {
+                    "name": "Channel"
+                },
+                "smithy.api#noReplace": {},
+                "smithy.api#unstable": {}
             }
         },
         "com.amazonaws.mediatailor#ChannelState": {
@@ -687,13 +724,17 @@
                 "Outputs": {
                     "target": "com.amazonaws.mediatailor#ResponseOutputs",
                     "traits": {
-                        "smithy.api#documentation": "<p>The output properties to assign to the channel.</p>"
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The output properties to assign to the channel.</p>",
+                        "smithy.api#unstable": {}
                     }
                 },
                 "PlaybackMode": {
                     "target": "com.amazonaws.mediatailor#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The playback mode to assign to the channel.</p>"
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The playback mode to assign to the channel.</p>",
+                        "smithy.api#unstable": {}
                     }
                 },
                 "Tags": {
@@ -706,7 +747,9 @@
                 "Tier": {
                     "target": "com.amazonaws.mediatailor#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tier of the channel.</p>"
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The tier of the channel.</p>",
+                        "smithy.api#unstable": {}
                     }
                 }
             }
@@ -1760,13 +1803,17 @@
                 "Outputs": {
                     "target": "com.amazonaws.mediatailor#ResponseOutputs",
                     "traits": {
-                        "smithy.api#documentation": "<p>The channel's output properties.</p>"
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The channel's output properties.</p>",
+                        "smithy.api#unstable": {}
                     }
                 },
                 "PlaybackMode": {
                     "target": "com.amazonaws.mediatailor#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The channel's playback mode.</p>"
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The channel's playback mode.</p>",
+                        "smithy.api#unstable": {}
                     }
                 },
                 "Tags": {
@@ -1779,7 +1826,9 @@
                 "Tier": {
                     "target": "com.amazonaws.mediatailor#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The channel's tier.</p>"
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The channel's tier.</p>",
+                        "smithy.api#unstable": {}
                     }
                 },
                 "LogConfiguration": {
@@ -2556,6 +2605,12 @@
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total duration (in seconds) of each manifest. Minimum value: <code>30</code> seconds. Maximum value: <code>3600</code> seconds.</p>"
                     }
+                },
+                "AdMarkupType": {
+                    "target": "com.amazonaws.mediatailor#adMarkupTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines the type of SCTE 35 tags to use in ad markup. Specify <code>DATERANGE</code> to use <code>DATERANGE</code> tags (for live or VOD content). Specify <code>SCTE35_ENHANCED</code> to use <code>EXT-X-CUE-OUT</code> and <code>EXT-X-CUE-IN</code> tags (for VOD content only).</p>"
+                    }
                 }
             },
             "traits": {
@@ -2613,6 +2668,28 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The VOD source's HTTP package configuration settings.</p>"
+            }
+        },
+        "com.amazonaws.mediatailor#KeyValuePair": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For <code>SCTE35_ENHANCED</code> output, defines a key. MediaTailor takes this key, and its associated value, and generates the key/value pair within the <code>EXT-X-ASSET</code>tag. If you specify a key, you must also specify a corresponding value.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For <code>SCTE35_ENHANCED</code> output, defines a vaue. MediaTailor; takes this value, and its associated key, and generates the key/value pair within the <code>EXT-X-ASSET</code>tag. If you specify a value, you must also specify a corresponding key.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>For <code>SCTE35_ENHANCED</code> output, defines a key and corresponding value. MediaTailor generates these pairs within the <code>EXT-X-ASSET</code>tag.</p>"
             }
         },
         "com.amazonaws.mediatailor#ListAlerts": {
@@ -3238,7 +3315,11 @@
             "traits": {
                 "aws.api#arn": {
                     "template": "liveSource/{SourceLocationName}/{LiveSourceName}"
-                }
+                },
+                "aws.cloudformation#cfnResource": {
+                    "name": "LiveSource"
+                },
+                "smithy.api#unstable": {}
             }
         },
         "com.amazonaws.mediatailor#LogConfiguration": {
@@ -5288,7 +5369,11 @@
                 "aws.api#arn": {
                     "template": "sourceLocation/{SourceLocationName}"
                 },
-                "smithy.api#noReplace": {}
+                "aws.cloudformation#cfnResource": {
+                    "name": "SourceLocation"
+                },
+                "smithy.api#noReplace": {},
+                "smithy.api#unstable": {}
             }
         },
         "com.amazonaws.mediatailor#SpliceInsertMessage": {
@@ -5660,13 +5745,17 @@
                 "Outputs": {
                     "target": "com.amazonaws.mediatailor#ResponseOutputs",
                     "traits": {
-                        "smithy.api#documentation": "<p>The channel's output properties.</p>"
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The channel's output properties.</p>",
+                        "smithy.api#unstable": {}
                     }
                 },
                 "PlaybackMode": {
                     "target": "com.amazonaws.mediatailor#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of playback mode for this channel.</p>\n         <p>\n            <code>LINEAR</code> - Programs play back-to-back only once.</p>\n         <p>\n            <code>LOOP</code> - Programs play back-to-back in an endless loop. When the last program in the schedule plays, playback loops back to the first program in the schedule.</p>"
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The type of playback mode for this channel.</p>\n         <p>\n            <code>LINEAR</code> - Programs play back-to-back only once.</p>\n         <p>\n            <code>LOOP</code> - Programs play back-to-back in an endless loop. When the last program in the schedule plays, playback loops back to the first program in the schedule.</p>",
+                        "smithy.api#unstable": {}
                     }
                 },
                 "Tags": {
@@ -5679,7 +5768,9 @@
                 "Tier": {
                     "target": "com.amazonaws.mediatailor#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tier associated with this Channel.</p>"
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The tier associated with this Channel.</p>",
+                        "smithy.api#unstable": {}
                     }
                 }
             }
@@ -6243,7 +6334,11 @@
                 "aws.api#arn": {
                     "template": "vodSource/{SourceLocationName}/{VodSourceName}"
                 },
-                "smithy.api#noReplace": {}
+                "aws.cloudformation#cfnResource": {
+                    "name": "VodSource"
+                },
+                "smithy.api#noReplace": {},
+                "smithy.api#unstable": {}
             }
         },
         "com.amazonaws.mediatailor#__boolean": {
@@ -6377,6 +6472,12 @@
             "type": "timestamp",
             "traits": {
                 "smithy.api#timestampFormat": "epoch-seconds"
+            }
+        },
+        "com.amazonaws.mediatailor#adMarkupTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mediatailor#AdMarkupType"
             }
         }
     }

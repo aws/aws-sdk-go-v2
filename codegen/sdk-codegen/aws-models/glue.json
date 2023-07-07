@@ -9120,6 +9120,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the transaction.</p>"
                     }
+                },
+                "OpenTableFormatInput": {
+                    "target": "com.amazonaws.glue#OpenTableFormatInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies an <code>OpenTableFormatInput</code> structure when creating an open format table.</p>"
+                    }
                 }
             },
             "traits": {
@@ -19764,6 +19770,27 @@
                 }
             }
         },
+        "com.amazonaws.glue#IcebergInput": {
+            "type": "structure",
+            "members": {
+                "MetadataOperation": {
+                    "target": "com.amazonaws.glue#MetadataOperation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A required metadata operation. Can only be set to <code>CREATE</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Version": {
+                    "target": "com.amazonaws.glue#VersionString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The table version for the Iceberg table. Defaults to 2.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that defines an Apache Iceberg metadata table to create in the catalog.</p>"
+            }
+        },
         "com.amazonaws.glue#IcebergTarget": {
             "type": "structure",
             "members": {
@@ -23862,6 +23889,17 @@
                 "target": "com.amazonaws.glue#MetadataKeyValuePair"
             }
         },
+        "com.amazonaws.glue#MetadataOperation": {
+            "type": "enum",
+            "members": {
+                "CREATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE"
+                    }
+                }
+            }
+        },
         "com.amazonaws.glue#MetadataValueString": {
             "type": "string",
             "traits": {
@@ -24299,6 +24337,20 @@
                     "min": 1,
                     "max": 1
                 }
+            }
+        },
+        "com.amazonaws.glue#OpenTableFormatInput": {
+            "type": "structure",
+            "members": {
+                "IcebergInput": {
+                    "target": "com.amazonaws.glue#IcebergInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies an <code>IcebergInput</code> structure that defines an Apache Iceberg metadata table.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure representing an open format table.</p>"
             }
         },
         "com.amazonaws.glue#OperationTimeoutException": {
