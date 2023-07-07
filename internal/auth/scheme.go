@@ -3,6 +3,7 @@ package auth
 import (
 	"context"
 	"fmt"
+
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
@@ -105,7 +106,7 @@ func GetAuthenticationSchemes(p *smithy.Properties) ([]AuthenticationScheme, err
 			v4aScheme := AuthenticationSchemeV4A{
 				Name:                  SigV4A,
 				SigningName:           getSigningName(authScheme),
-				SigningRegionSet:      authScheme["signingRegionSet"].([]string),
+				SigningRegionSet:      getSigningRegionSet(authScheme),
 				DisableDoubleEncoding: getDisableDoubleEncoding(authScheme),
 			}
 			result = append(result, AuthenticationScheme(&v4aScheme))
@@ -154,6 +155,18 @@ func getSigningName(authScheme map[string]interface{}) *string {
 		return nil
 	}
 	return &signingName
+}
+
+func getSigningRegionSet(authScheme map[string]interface{}) []string {
+	untypedSigningRegionSet, ok := authScheme["signingRegionSet"].([]interface{})
+	if !ok {
+		return nil
+	}
+	signingRegionSet := []string{}
+	for _, item := range untypedSigningRegionSet {
+		signingRegionSet = append(signingRegionSet, item.(string))
+	}
+	return signingRegionSet
 }
 
 func getSigningRegion(authScheme map[string]interface{}) *string {

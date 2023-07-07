@@ -8,6 +8,7 @@ import (
 	"encoding/xml"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	internalauth "github.com/aws/aws-sdk-go-v2/internal/auth"
@@ -383,9 +384,8 @@ func (m *opGetBucketLocationResolveEndpointMiddleware) HandleSerialize(ctx conte
 			break
 		case *internalauth.AuthenticationSchemeV4A:
 			v4aScheme, _ := authScheme.(*internalauth.AuthenticationSchemeV4A)
-			var signingName string
 			if v4aScheme.SigningName == nil {
-				signingName = "s3"
+				v4aScheme.SigningName = aws.String("s3")
 			}
 			if v4aScheme.DisableDoubleEncoding != nil {
 				// The signer sets an equivalent value at client initialization time.
@@ -393,7 +393,7 @@ func (m *opGetBucketLocationResolveEndpointMiddleware) HandleSerialize(ctx conte
 				// and override the value set at client initialization time.
 				ctx = internalauth.SetDisableDoubleEncoding(ctx, *v4aScheme.DisableDoubleEncoding)
 			}
-			ctx = awsmiddleware.SetSigningName(ctx, signingName)
+			ctx = awsmiddleware.SetSigningName(ctx, *v4aScheme.SigningName)
 			ctx = awsmiddleware.SetSigningRegion(ctx, v4aScheme.SigningRegionSet[0])
 			ctx = s3cust.SetSignerVersion(ctx, v4aScheme.Name)
 			break
