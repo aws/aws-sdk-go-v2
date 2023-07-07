@@ -320,9 +320,9 @@ func (m *opGetObjectLegalHoldResolveEndpointMiddleware) HandleSerialize(ctx cont
 			break
 		case *internalauth.AuthenticationSchemeV4A:
 			v4aScheme, _ := authScheme.(*internalauth.AuthenticationSchemeV4A)
-			var signingName string
 			if v4aScheme.SigningName == nil {
-				signingName = "s3"
+				signingNameDefault := "s3"
+				v4aScheme.SigningName = &signingNameDefault
 			}
 			if v4aScheme.DisableDoubleEncoding != nil {
 				// The signer sets an equivalent value at client initialization time.
@@ -330,7 +330,7 @@ func (m *opGetObjectLegalHoldResolveEndpointMiddleware) HandleSerialize(ctx cont
 				// and override the value set at client initialization time.
 				ctx = internalauth.SetDisableDoubleEncoding(ctx, *v4aScheme.DisableDoubleEncoding)
 			}
-			ctx = awsmiddleware.SetSigningName(ctx, signingName)
+			ctx = awsmiddleware.SetSigningName(ctx, *v4aScheme.SigningName)
 			ctx = awsmiddleware.SetSigningRegion(ctx, v4aScheme.SigningRegionSet[0])
 			ctx = s3cust.SetSignerVersion(ctx, v4aScheme.Name)
 			break
