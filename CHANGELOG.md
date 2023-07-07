@@ -1,3 +1,17 @@
+# Release (2023-07-07)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.22.0](service/cloudwatchlogs/CHANGELOG.md#v1220-2023-07-07)
+  * **Feature**: Add CMK encryption support for CloudWatch Logs Insights query result data
+* `github.com/aws/aws-sdk-go-v2/service/databasemigrationservice`: [v1.26.0](service/databasemigrationservice/CHANGELOG.md#v1260-2023-07-07)
+  * **Feature**: Releasing DMS Serverless. Adding support for PostgreSQL 15.x as source and target endpoint. Adding support for DocDB Elastic Clusters with sharded collections, PostgreSQL datatype mapping customization and disabling hostname validation of the certificate authority in Kafka endpoint settings
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.54.0](service/glue/CHANGELOG.md#v1540-2023-07-07)
+  * **Feature**: This release enables customers to create new Apache Iceberg tables and associated metadata in Amazon S3 by using native AWS Glue CreateTable operation.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.32.0](service/medialive/CHANGELOG.md#v1320-2023-07-07)
+  * **Feature**: This release enables the use of Thumbnails in AWS Elemental MediaLive.
+* `github.com/aws/aws-sdk-go-v2/service/mediatailor`: [v1.24.0](service/mediatailor/CHANGELOG.md#v1240-2023-07-07)
+  * **Feature**: The AWS Elemental MediaTailor SDK for Channel Assembly has added support for EXT-X-CUE-OUT and EXT-X-CUE-IN tags to specify ad breaks in HLS outputs, including support for EXT-OATCLS, EXT-X-ASSET, and EXT-X-CUE-OUT-CONT accessory tags.
+
 # Release (2023-07-06)
 
 ## Module Highlights

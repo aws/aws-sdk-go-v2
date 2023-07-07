@@ -1,8 +1,0 @@
-{
-    "id": "d97905af-d375-4eaf-b37f-ee6bf9a494de",
-    "type": "feature",
-    "description": "Releasing DMS Serverless. Adding support for PostgreSQL 15.x as source and target endpoint. Adding support for DocDB Elastic Clusters with sharded collections, PostgreSQL datatype mapping customization and disabling hostname validation of the certificate authority in Kafka endpoint settings",
-    "modules": [
-        "service/databasemigrationservice"
-    ]
-}

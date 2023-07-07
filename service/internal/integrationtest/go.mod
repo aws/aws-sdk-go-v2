@@ -25,7 +25,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.22.12
 	github.com/aws/aws-sdk-go-v2/service/configservice v1.34.0
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.16.2
-	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.25.7
+	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.26.0
 	github.com/aws/aws-sdk-go-v2/service/devicefarm v1.15.12
 	github.com/aws/aws-sdk-go-v2/service/directconnect v1.18.17
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.17.3
@@ -46,7 +46,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.16.14
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.20.0
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.14.13
-	github.com/aws/aws-sdk-go-v2/service/glue v1.53.0
+	github.com/aws/aws-sdk-go-v2/service/glue v1.54.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.17.2
 	github.com/aws/aws-sdk-go-v2/service/iam v1.21.0
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.13.12

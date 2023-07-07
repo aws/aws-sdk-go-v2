@@ -1,3 +1,7 @@
+# v1.54.0 (2023-07-07)
+
+* **Feature**: This release enables customers to create new Apache Iceberg tables and associated metadata in Amazon S3 by using native AWS Glue CreateTable operation.
+
 # v1.53.0 (2023-06-29)
 
 * **Feature**: This release adds support for AWS Glue Crawler with Iceberg Tables, allowing Crawlers to discover Iceberg Tables in S3 and register them in Glue Data Catalog for query engines to query against.

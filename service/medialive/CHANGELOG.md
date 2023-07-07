@@ -1,3 +1,7 @@
+# v1.32.0 (2023-07-07)
+
+* **Feature**: This release enables the use of Thumbnails in AWS Elemental MediaLive.
+
 # v1.31.6 (2023-06-15)
 
 * No change notes available for this release.

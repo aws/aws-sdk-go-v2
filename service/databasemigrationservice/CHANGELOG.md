@@ -1,3 +1,7 @@
+# v1.26.0 (2023-07-07)
+
+* **Feature**: Releasing DMS Serverless. Adding support for PostgreSQL 15.x as source and target endpoint. Adding support for DocDB Elastic Clusters with sharded collections, PostgreSQL datatype mapping customization and disabling hostname validation of the certificate authority in Kafka endpoint settings
+
 # v1.25.7 (2023-06-15)
 
 * No change notes available for this release.

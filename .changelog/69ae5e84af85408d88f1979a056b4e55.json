@@ -1,8 +1,0 @@
-{
-    "id": "69ae5e84-af85-408d-88f1-979a056b4e55",
-    "type": "feature",
-    "description": "This release enables customers to create new Apache Iceberg tables and associated metadata in Amazon S3 by using native AWS Glue CreateTable operation.",
-    "modules": [
-        "service/glue"
-    ]
-}

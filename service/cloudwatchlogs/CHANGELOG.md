@@ -1,3 +1,7 @@
+# v1.22.0 (2023-07-07)
+
+* **Feature**: Add CMK encryption support for CloudWatch Logs Insights query result data
+
 # v1.21.2 (2023-06-15)
 
 * No change notes available for this release.
