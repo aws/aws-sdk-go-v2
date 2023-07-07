@@ -25,7 +25,7 @@ type s3BucketTest struct {
 	err    string
 }
 
-func TestUpdateEndpointBuild(t *testing.T) {
+func Test_UpdateEndpointBuild(t *testing.T) {
 	cases := map[string]map[string]struct {
 		tests          []s3BucketTest
 		useAccelerate  bool
@@ -116,7 +116,7 @@ func TestUpdateEndpointBuild(t *testing.T) {
 			},
 			"VirtualHostStyleBucket": {
 				customEndpoint: &aws.Endpoint{
-					URL:               "https://example.1region.amazonaws.com",
+					URL:               "https://example.region.amazonaws.com",
 					HostnameImmutable: true,
 				},
 				tests: []s3BucketTest{
@@ -199,7 +199,6 @@ func TestUpdateEndpointBuild(t *testing.T) {
 								},
 							)
 
-							// isaiah: ensure the correct error is produced
 							if test.err != "" {
 								if err == nil {
 									t.Fatalf("test %d: expected error, got none", i)
@@ -209,14 +208,10 @@ func TestUpdateEndpointBuild(t *testing.T) {
 								}
 								return
 							}
-
-							// isaiah: ensure that no error is produced
 							if err != nil {
 								t.Fatalf("expect no error, got %v", err)
 							}
 
-							// isaiah: build a Go request from smithy request
-							// then ensure that the URL is correct
 							req := fm.request.Build(context.Background())
 							if e, a := test.url, req.URL.String(); e != a {
 								t.Fatalf("expect url %s, got %s", e, a)

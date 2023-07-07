@@ -153,9 +153,6 @@ func (c *Client) addOperationPutJobTaggingMiddlewares(stack *middleware.Stack, o
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
 		return err
 	}
-	if err = addPutJobTaggingUpdateEndpoint(stack, options); err != nil {
-		return err
-	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
 		return err
 	}

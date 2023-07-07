@@ -457,9 +457,6 @@ func (c *Client) addOperationGetObjectMiddlewares(stack *middleware.Stack, optio
 	if err = addGetObjectOutputChecksumMiddlewares(stack, options); err != nil {
 		return err
 	}
-	if err = addGetObjectUpdateEndpoint(stack, options); err != nil {
-		return err
-	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
 		return err
 	}

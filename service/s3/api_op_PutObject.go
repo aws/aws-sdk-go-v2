@@ -487,9 +487,6 @@ func (c *Client) addOperationPutObjectMiddlewares(stack *middleware.Stack, optio
 	if err = addPutObjectInputChecksumMiddlewares(stack, options); err != nil {
 		return err
 	}
-	if err = addPutObjectUpdateEndpoint(stack, options); err != nil {
-		return err
-	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
 		return err
 	}

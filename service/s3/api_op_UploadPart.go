@@ -360,9 +360,6 @@ func (c *Client) addOperationUploadPartMiddlewares(stack *middleware.Stack, opti
 	if err = addUploadPartInputChecksumMiddlewares(stack, options); err != nil {
 		return err
 	}
-	if err = addUploadPartUpdateEndpoint(stack, options); err != nil {
-		return err
-	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
 		return err
 	}

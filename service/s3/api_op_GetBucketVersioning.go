@@ -133,9 +133,6 @@ func (c *Client) addOperationGetBucketVersioningMiddlewares(stack *middleware.St
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
 		return err
 	}
-	if err = addGetBucketVersioningUpdateEndpoint(stack, options); err != nil {
-		return err
-	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
 		return err
 	}

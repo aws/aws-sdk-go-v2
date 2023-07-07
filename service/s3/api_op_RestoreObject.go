@@ -319,9 +319,6 @@ func (c *Client) addOperationRestoreObjectMiddlewares(stack *middleware.Stack, o
 	if err = addRestoreObjectInputChecksumMiddlewares(stack, options); err != nil {
 		return err
 	}
-	if err = addRestoreObjectUpdateEndpoint(stack, options); err != nil {
-		return err
-	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
 		return err
 	}

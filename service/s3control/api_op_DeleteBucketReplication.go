@@ -151,9 +151,6 @@ func (c *Client) addOperationDeleteBucketReplicationMiddlewares(stack *middlewar
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
 		return err
 	}
-	if err = addDeleteBucketReplicationUpdateEndpoint(stack, options); err != nil {
-		return err
-	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
 		return err
 	}

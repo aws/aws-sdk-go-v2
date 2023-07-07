@@ -185,9 +185,6 @@ func (c *Client) addOperationPutBucketWebsiteMiddlewares(stack *middleware.Stack
 	if err = addPutBucketWebsiteInputChecksumMiddlewares(stack, options); err != nil {
 		return err
 	}
-	if err = addPutBucketWebsiteUpdateEndpoint(stack, options); err != nil {
-		return err
-	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
 		return err
 	}
