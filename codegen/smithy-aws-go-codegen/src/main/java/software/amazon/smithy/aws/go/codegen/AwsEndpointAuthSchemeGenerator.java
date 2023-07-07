@@ -208,9 +208,9 @@ public class AwsEndpointAuthSchemeGenerator implements GoIntegration {
             writer.write(
                 """
                     v4aScheme, _ := authScheme.($P)
-                    var signingName string
                     if v4aScheme.SigningName == nil {
-                        signingName = \"$L\"
+                        signingNameDefault := \"$L\"
+                        v4aScheme.SigningName = &signingNameDefault
                     }
                     if v4aScheme.DisableDoubleEncoding != nil {
                         // The signer sets an equivalent value at client initialization time.
@@ -218,7 +218,7 @@ public class AwsEndpointAuthSchemeGenerator implements GoIntegration {
                         // and override the value set at client initialization time.
                         ctx = $T(ctx, *v4aScheme.DisableDoubleEncoding)
                     }
-                    ctx = $T(ctx, signingName)
+                    ctx = $T(ctx, *v4aScheme.SigningName)
                     ctx = $T(ctx, v4aScheme.SigningRegionSet[0]) 
                     $W
                 """,
