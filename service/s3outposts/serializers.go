@@ -43,7 +43,7 @@ func (m *awsRestjson1_serializeOpCreateEndpoint) HandleSerialize(ctx context.Con
 		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	} else {
 		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
-		restEncoder, err = httpbinding.NewHTTPBindingEncoder(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
 	}
 
 	if err != nil {
@@ -138,7 +138,7 @@ func (m *awsRestjson1_serializeOpDeleteEndpoint) HandleSerialize(ctx context.Con
 		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	} else {
 		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
-		restEncoder, err = httpbinding.NewHTTPBindingEncoder(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
 	}
 
 	if err != nil {
@@ -202,7 +202,7 @@ func (m *awsRestjson1_serializeOpListEndpoints) HandleSerialize(ctx context.Cont
 		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	} else {
 		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
-		restEncoder, err = httpbinding.NewHTTPBindingEncoder(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
 	}
 
 	if err != nil {
@@ -266,7 +266,7 @@ func (m *awsRestjson1_serializeOpListOutpostsWithS3) HandleSerialize(ctx context
 		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	} else {
 		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
-		restEncoder, err = httpbinding.NewHTTPBindingEncoder(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
 	}
 
 	if err != nil {
@@ -330,7 +330,7 @@ func (m *awsRestjson1_serializeOpListSharedEndpoints) HandleSerialize(ctx contex
 		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	} else {
 		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
-		restEncoder, err = httpbinding.NewHTTPBindingEncoder(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
 	}
 
 	if err != nil {
