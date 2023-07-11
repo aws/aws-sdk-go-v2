@@ -141,7 +141,17 @@ func (c *Client) addOperationGetBucketRequestPaymentMiddlewares(stack *middlewar
 	if err = addGetBucketRequestPaymentEndpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
+	if err = addSerializeImmutableHostnameBucketMiddleware(stack); err != nil {
+		return err
+	}
 	return nil
+}
+
+func (v *GetBucketRequestPaymentInput) bucket() (string, bool) {
+	if v.Bucket == nil {
+		return "", false
+	}
+	return *v.Bucket, true
 }
 
 func newServiceMetadataMiddleware_opGetBucketRequestPayment(region string) *awsmiddleware.RegisterServiceMetadata {
@@ -205,7 +215,7 @@ func (m *opGetBucketRequestPaymentEndpointDisableHTTPSMiddleware) HandleSerializ
 func addGetBucketRequestPaymentEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
 	return stack.Serialize.Insert(&opGetBucketRequestPaymentEndpointDisableHTTPSMiddleware{
 		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
-	}, "opGetBucketRequestPaymentResolveEndpointMiddleware", middleware.After)
+	}, "ResolveEndpointV2", middleware.After)
 }
 
 type opGetBucketRequestPaymentResolveEndpointMiddleware struct {
@@ -214,7 +224,7 @@ type opGetBucketRequestPaymentResolveEndpointMiddleware struct {
 }
 
 func (*opGetBucketRequestPaymentResolveEndpointMiddleware) ID() string {
-	return "opGetBucketRequestPaymentResolveEndpointMiddleware"
+	return "ResolveEndpointV2"
 }
 
 func (m *opGetBucketRequestPaymentResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

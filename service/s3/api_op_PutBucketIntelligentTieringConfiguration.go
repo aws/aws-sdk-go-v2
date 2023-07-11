@@ -168,7 +168,17 @@ func (c *Client) addOperationPutBucketIntelligentTieringConfigurationMiddlewares
 	if err = addPutBucketIntelligentTieringConfigurationEndpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
+	if err = addSerializeImmutableHostnameBucketMiddleware(stack); err != nil {
+		return err
+	}
 	return nil
+}
+
+func (v *PutBucketIntelligentTieringConfigurationInput) bucket() (string, bool) {
+	if v.Bucket == nil {
+		return "", false
+	}
+	return *v.Bucket, true
 }
 
 func newServiceMetadataMiddleware_opPutBucketIntelligentTieringConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
@@ -232,7 +242,7 @@ func (m *opPutBucketIntelligentTieringConfigurationEndpointDisableHTTPSMiddlewar
 func addPutBucketIntelligentTieringConfigurationEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
 	return stack.Serialize.Insert(&opPutBucketIntelligentTieringConfigurationEndpointDisableHTTPSMiddleware{
 		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
-	}, "opPutBucketIntelligentTieringConfigurationResolveEndpointMiddleware", middleware.After)
+	}, "ResolveEndpointV2", middleware.After)
 }
 
 type opPutBucketIntelligentTieringConfigurationResolveEndpointMiddleware struct {
@@ -241,7 +251,7 @@ type opPutBucketIntelligentTieringConfigurationResolveEndpointMiddleware struct 
 }
 
 func (*opPutBucketIntelligentTieringConfigurationResolveEndpointMiddleware) ID() string {
-	return "opPutBucketIntelligentTieringConfigurationResolveEndpointMiddleware"
+	return "ResolveEndpointV2"
 }
 
 func (m *opPutBucketIntelligentTieringConfigurationResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

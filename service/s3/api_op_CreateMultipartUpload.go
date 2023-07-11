@@ -506,7 +506,17 @@ func (c *Client) addOperationCreateMultipartUploadMiddlewares(stack *middleware.
 	if err = addCreateMultipartUploadEndpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
+	if err = addSerializeImmutableHostnameBucketMiddleware(stack); err != nil {
+		return err
+	}
 	return nil
+}
+
+func (v *CreateMultipartUploadInput) bucket() (string, bool) {
+	if v.Bucket == nil {
+		return "", false
+	}
+	return *v.Bucket, true
 }
 
 func newServiceMetadataMiddleware_opCreateMultipartUpload(region string) *awsmiddleware.RegisterServiceMetadata {
@@ -570,7 +580,7 @@ func (m *opCreateMultipartUploadEndpointDisableHTTPSMiddleware) HandleSerialize(
 func addCreateMultipartUploadEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
 	return stack.Serialize.Insert(&opCreateMultipartUploadEndpointDisableHTTPSMiddleware{
 		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
-	}, "opCreateMultipartUploadResolveEndpointMiddleware", middleware.After)
+	}, "ResolveEndpointV2", middleware.After)
 }
 
 type opCreateMultipartUploadResolveEndpointMiddleware struct {
@@ -579,7 +589,7 @@ type opCreateMultipartUploadResolveEndpointMiddleware struct {
 }
 
 func (*opCreateMultipartUploadResolveEndpointMiddleware) ID() string {
-	return "opCreateMultipartUploadResolveEndpointMiddleware"
+	return "ResolveEndpointV2"
 }
 
 func (m *opCreateMultipartUploadResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

@@ -176,7 +176,17 @@ func (c *Client) addOperationHeadBucketMiddlewares(stack *middleware.Stack, opti
 	if err = addHeadBucketEndpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
+	if err = addSerializeImmutableHostnameBucketMiddleware(stack); err != nil {
+		return err
+	}
 	return nil
+}
+
+func (v *HeadBucketInput) bucket() (string, bool) {
+	if v.Bucket == nil {
+		return "", false
+	}
+	return *v.Bucket, true
 }
 
 // HeadBucketAPIClient is a client that implements the HeadBucket operation.
@@ -581,7 +591,7 @@ func (m *opHeadBucketEndpointDisableHTTPSMiddleware) HandleSerialize(ctx context
 func addHeadBucketEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
 	return stack.Serialize.Insert(&opHeadBucketEndpointDisableHTTPSMiddleware{
 		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
-	}, "opHeadBucketResolveEndpointMiddleware", middleware.After)
+	}, "ResolveEndpointV2", middleware.After)
 }
 
 type opHeadBucketResolveEndpointMiddleware struct {
@@ -590,7 +600,7 @@ type opHeadBucketResolveEndpointMiddleware struct {
 }
 
 func (*opHeadBucketResolveEndpointMiddleware) ID() string {
-	return "opHeadBucketResolveEndpointMiddleware"
+	return "ResolveEndpointV2"
 }
 
 func (m *opHeadBucketResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

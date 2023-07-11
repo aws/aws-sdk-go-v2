@@ -148,7 +148,17 @@ func (c *Client) addOperationGetObjectLockConfigurationMiddlewares(stack *middle
 	if err = addGetObjectLockConfigurationEndpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
+	if err = addSerializeImmutableHostnameBucketMiddleware(stack); err != nil {
+		return err
+	}
 	return nil
+}
+
+func (v *GetObjectLockConfigurationInput) bucket() (string, bool) {
+	if v.Bucket == nil {
+		return "", false
+	}
+	return *v.Bucket, true
 }
 
 func newServiceMetadataMiddleware_opGetObjectLockConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
@@ -212,7 +222,7 @@ func (m *opGetObjectLockConfigurationEndpointDisableHTTPSMiddleware) HandleSeria
 func addGetObjectLockConfigurationEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
 	return stack.Serialize.Insert(&opGetObjectLockConfigurationEndpointDisableHTTPSMiddleware{
 		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
-	}, "opGetObjectLockConfigurationResolveEndpointMiddleware", middleware.After)
+	}, "ResolveEndpointV2", middleware.After)
 }
 
 type opGetObjectLockConfigurationResolveEndpointMiddleware struct {
@@ -221,7 +231,7 @@ type opGetObjectLockConfigurationResolveEndpointMiddleware struct {
 }
 
 func (*opGetObjectLockConfigurationResolveEndpointMiddleware) ID() string {
-	return "opGetObjectLockConfigurationResolveEndpointMiddleware"
+	return "ResolveEndpointV2"
 }
 
 func (m *opGetObjectLockConfigurationResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

@@ -281,7 +281,17 @@ func (c *Client) addOperationListPartsMiddlewares(stack *middleware.Stack, optio
 	if err = addListPartsEndpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
+	if err = addSerializeImmutableHostnameBucketMiddleware(stack); err != nil {
+		return err
+	}
 	return nil
+}
+
+func (v *ListPartsInput) bucket() (string, bool) {
+	if v.Bucket == nil {
+		return "", false
+	}
+	return *v.Bucket, true
 }
 
 // ListPartsAPIClient is a client that implements the ListParts operation.
@@ -432,7 +442,7 @@ func (m *opListPartsEndpointDisableHTTPSMiddleware) HandleSerialize(ctx context.
 func addListPartsEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
 	return stack.Serialize.Insert(&opListPartsEndpointDisableHTTPSMiddleware{
 		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
-	}, "opListPartsResolveEndpointMiddleware", middleware.After)
+	}, "ResolveEndpointV2", middleware.After)
 }
 
 type opListPartsResolveEndpointMiddleware struct {
@@ -441,7 +451,7 @@ type opListPartsResolveEndpointMiddleware struct {
 }
 
 func (*opListPartsResolveEndpointMiddleware) ID() string {
-	return "opListPartsResolveEndpointMiddleware"
+	return "ResolveEndpointV2"
 }
 
 func (m *opListPartsResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
