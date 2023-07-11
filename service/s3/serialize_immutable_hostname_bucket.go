@@ -3,10 +3,10 @@ package s3
 import (
 	"context"
 	"fmt"
-	"net/url"
 	"path"
 
 	smithy "github.com/aws/smithy-go"
+	"github.com/aws/smithy-go/encoding/httpbinding"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -36,7 +36,7 @@ func (m *serializeImmutableHostnameBucketMiddleware) HandleSerialize(
 
 	if bucket, ok := bucketFromInput(in.Parameters); ok {
 		request.URL.Path = path.Join(request.URL.Path, bucket)
-		request.URL.RawPath = path.Join(request.URL.RawPath, url.PathEscape(bucket))
+		request.URL.RawPath = path.Join(request.URL.RawPath, httpbinding.EscapePath(bucket, true))
 	}
 
 	return next.HandleSerialize(ctx, in)
