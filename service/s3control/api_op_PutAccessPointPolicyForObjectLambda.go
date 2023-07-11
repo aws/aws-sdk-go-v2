@@ -6,6 +6,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	internalauth "github.com/aws/aws-sdk-go-v2/internal/auth"
@@ -135,7 +136,7 @@ func (c *Client) addOperationPutAccessPointPolicyForObjectLambdaMiddlewares(stac
 	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
-	if err = addPutAccessPointPolicyForObjectLambdaEndpointDisableHTTPSMiddleware(stack, options); err != nil {
+	if err = addEndpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
 	return nil
@@ -183,42 +184,13 @@ func addPutAccessPointPolicyForObjectLambdaUpdateEndpoint(stack *middleware.Stac
 	})
 }
 
-type opPutAccessPointPolicyForObjectLambdaEndpointDisableHTTPSMiddleware struct {
-	EndpointDisableHTTPS bool
-}
-
-func (*opPutAccessPointPolicyForObjectLambdaEndpointDisableHTTPSMiddleware) ID() string {
-	return "opPutAccessPointPolicyForObjectLambdaEndpointDisableHTTPSMiddleware"
-}
-
-func (m *opPutAccessPointPolicyForObjectLambdaEndpointDisableHTTPSMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	if m.EndpointDisableHTTPS {
-		req.URL.Scheme = "http"
-	}
-
-	return next.HandleSerialize(ctx, in)
-
-}
-func addPutAccessPointPolicyForObjectLambdaEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
-	return stack.Serialize.Insert(&opPutAccessPointPolicyForObjectLambdaEndpointDisableHTTPSMiddleware{
-		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
-	}, "opPutAccessPointPolicyForObjectLambdaResolveEndpointMiddleware", middleware.After)
-}
-
 type opPutAccessPointPolicyForObjectLambdaResolveEndpointMiddleware struct {
 	EndpointResolver EndpointResolverV2
 	BuiltInResolver  BuiltInParameterResolver
 }
 
 func (*opPutAccessPointPolicyForObjectLambdaResolveEndpointMiddleware) ID() string {
-	return "opPutAccessPointPolicyForObjectLambdaResolveEndpointMiddleware"
+	return "ResolveEndpointV2"
 }
 
 func (m *opPutAccessPointPolicyForObjectLambdaResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -289,9 +261,13 @@ func (m *opPutAccessPointPolicyForObjectLambdaResolveEndpointMiddleware) HandleS
 			var signingName, signingRegion string
 			if v4Scheme.SigningName == nil {
 				signingName = "s3"
+			} else {
+				signingName = *v4Scheme.SigningName
 			}
 			if v4Scheme.SigningRegion == nil {
 				signingRegion = m.BuiltInResolver.(*BuiltInResolver).Region
+			} else {
+				signingRegion = *v4Scheme.SigningRegion
 			}
 			if v4Scheme.DisableDoubleEncoding != nil {
 				// The signer sets an equivalent value at client initialization time.
@@ -304,9 +280,8 @@ func (m *opPutAccessPointPolicyForObjectLambdaResolveEndpointMiddleware) HandleS
 			break
 		case *internalauth.AuthenticationSchemeV4A:
 			v4aScheme, _ := authScheme.(*internalauth.AuthenticationSchemeV4A)
-			var signingName string
 			if v4aScheme.SigningName == nil {
-				signingName = "s3"
+				v4aScheme.SigningName = aws.String("s3")
 			}
 			if v4aScheme.DisableDoubleEncoding != nil {
 				// The signer sets an equivalent value at client initialization time.
@@ -314,7 +289,7 @@ func (m *opPutAccessPointPolicyForObjectLambdaResolveEndpointMiddleware) HandleS
 				// and override the value set at client initialization time.
 				ctx = internalauth.SetDisableDoubleEncoding(ctx, *v4aScheme.DisableDoubleEncoding)
 			}
-			ctx = awsmiddleware.SetSigningName(ctx, signingName)
+			ctx = awsmiddleware.SetSigningName(ctx, *v4aScheme.SigningName)
 			ctx = awsmiddleware.SetSigningRegion(ctx, v4aScheme.SigningRegionSet[0])
 			break
 		case *internalauth.AuthenticationSchemeNone:
