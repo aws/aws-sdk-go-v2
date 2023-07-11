@@ -58,3 +58,5 @@ software.amazon.smithy.aws.go.codegen.customization.S3HostPrefixRequestRouteFilt
 software.amazon.smithy.aws.go.codegen.customization.S3HttpLabelBucketFilterIntegration
 software.amazon.smithy.aws.go.codegen.AwsEndpointAuthSchemeGenerator
 software.amazon.smithy.aws.go.codegen.EndpointDisableHttps
+software.amazon.smithy.aws.go.codegen.customization.S3Bucketer
+software.amazon.smithy.aws.go.codegen.customization.S3SerializeImmutableHostnameBucket

@@ -166,7 +166,17 @@ func (c *Client) addOperationDeleteObjectTaggingMiddlewares(stack *middleware.St
 	if err = addDeleteObjectTaggingEndpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
+	if err = addSerializeImmutableHostnameBucketMiddleware(stack); err != nil {
+		return err
+	}
 	return nil
+}
+
+func (v *DeleteObjectTaggingInput) bucket() (string, bool) {
+	if v.Bucket == nil {
+		return "", false
+	}
+	return *v.Bucket, true
 }
 
 func newServiceMetadataMiddleware_opDeleteObjectTagging(region string) *awsmiddleware.RegisterServiceMetadata {
@@ -230,7 +240,7 @@ func (m *opDeleteObjectTaggingEndpointDisableHTTPSMiddleware) HandleSerialize(ct
 func addDeleteObjectTaggingEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
 	return stack.Serialize.Insert(&opDeleteObjectTaggingEndpointDisableHTTPSMiddleware{
 		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
-	}, "opDeleteObjectTaggingResolveEndpointMiddleware", middleware.After)
+	}, "ResolveEndpointV2", middleware.After)
 }
 
 type opDeleteObjectTaggingResolveEndpointMiddleware struct {
@@ -239,7 +249,7 @@ type opDeleteObjectTaggingResolveEndpointMiddleware struct {
 }
 
 func (*opDeleteObjectTaggingResolveEndpointMiddleware) ID() string {
-	return "opDeleteObjectTaggingResolveEndpointMiddleware"
+	return "ResolveEndpointV2"
 }
 
 func (m *opDeleteObjectTaggingResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

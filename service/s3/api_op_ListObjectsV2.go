@@ -282,7 +282,17 @@ func (c *Client) addOperationListObjectsV2Middlewares(stack *middleware.Stack, o
 	if err = addListObjectsV2EndpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
+	if err = addSerializeImmutableHostnameBucketMiddleware(stack); err != nil {
+		return err
+	}
 	return nil
+}
+
+func (v *ListObjectsV2Input) bucket() (string, bool) {
+	if v.Bucket == nil {
+		return "", false
+	}
+	return *v.Bucket, true
 }
 
 // ListObjectsV2APIClient is a client that implements the ListObjectsV2 operation.
@@ -436,7 +446,7 @@ func (m *opListObjectsV2EndpointDisableHTTPSMiddleware) HandleSerialize(ctx cont
 func addListObjectsV2EndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
 	return stack.Serialize.Insert(&opListObjectsV2EndpointDisableHTTPSMiddleware{
 		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
-	}, "opListObjectsV2ResolveEndpointMiddleware", middleware.After)
+	}, "ResolveEndpointV2", middleware.After)
 }
 
 type opListObjectsV2ResolveEndpointMiddleware struct {
@@ -445,7 +455,7 @@ type opListObjectsV2ResolveEndpointMiddleware struct {
 }
 
 func (*opListObjectsV2ResolveEndpointMiddleware) ID() string {
-	return "opListObjectsV2ResolveEndpointMiddleware"
+	return "ResolveEndpointV2"
 }
 
 func (m *opListObjectsV2ResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

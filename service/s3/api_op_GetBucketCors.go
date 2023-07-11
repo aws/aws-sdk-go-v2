@@ -158,7 +158,17 @@ func (c *Client) addOperationGetBucketCorsMiddlewares(stack *middleware.Stack, o
 	if err = addGetBucketCorsEndpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
+	if err = addSerializeImmutableHostnameBucketMiddleware(stack); err != nil {
+		return err
+	}
 	return nil
+}
+
+func (v *GetBucketCorsInput) bucket() (string, bool) {
+	if v.Bucket == nil {
+		return "", false
+	}
+	return *v.Bucket, true
 }
 
 func newServiceMetadataMiddleware_opGetBucketCors(region string) *awsmiddleware.RegisterServiceMetadata {
@@ -222,7 +232,7 @@ func (m *opGetBucketCorsEndpointDisableHTTPSMiddleware) HandleSerialize(ctx cont
 func addGetBucketCorsEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
 	return stack.Serialize.Insert(&opGetBucketCorsEndpointDisableHTTPSMiddleware{
 		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
-	}, "opGetBucketCorsResolveEndpointMiddleware", middleware.After)
+	}, "ResolveEndpointV2", middleware.After)
 }
 
 type opGetBucketCorsResolveEndpointMiddleware struct {
@@ -231,7 +241,7 @@ type opGetBucketCorsResolveEndpointMiddleware struct {
 }
 
 func (*opGetBucketCorsResolveEndpointMiddleware) ID() string {
-	return "opGetBucketCorsResolveEndpointMiddleware"
+	return "ResolveEndpointV2"
 }
 
 func (m *opGetBucketCorsResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

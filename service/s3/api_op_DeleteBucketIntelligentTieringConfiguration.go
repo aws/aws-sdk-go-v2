@@ -150,7 +150,17 @@ func (c *Client) addOperationDeleteBucketIntelligentTieringConfigurationMiddlewa
 	if err = addDeleteBucketIntelligentTieringConfigurationEndpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
+	if err = addSerializeImmutableHostnameBucketMiddleware(stack); err != nil {
+		return err
+	}
 	return nil
+}
+
+func (v *DeleteBucketIntelligentTieringConfigurationInput) bucket() (string, bool) {
+	if v.Bucket == nil {
+		return "", false
+	}
+	return *v.Bucket, true
 }
 
 func newServiceMetadataMiddleware_opDeleteBucketIntelligentTieringConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
@@ -214,7 +224,7 @@ func (m *opDeleteBucketIntelligentTieringConfigurationEndpointDisableHTTPSMiddle
 func addDeleteBucketIntelligentTieringConfigurationEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
 	return stack.Serialize.Insert(&opDeleteBucketIntelligentTieringConfigurationEndpointDisableHTTPSMiddleware{
 		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
-	}, "opDeleteBucketIntelligentTieringConfigurationResolveEndpointMiddleware", middleware.After)
+	}, "ResolveEndpointV2", middleware.After)
 }
 
 type opDeleteBucketIntelligentTieringConfigurationResolveEndpointMiddleware struct {
@@ -223,7 +233,7 @@ type opDeleteBucketIntelligentTieringConfigurationResolveEndpointMiddleware stru
 }
 
 func (*opDeleteBucketIntelligentTieringConfigurationResolveEndpointMiddleware) ID() string {
-	return "opDeleteBucketIntelligentTieringConfigurationResolveEndpointMiddleware"
+	return "ResolveEndpointV2"
 }
 
 func (m *opDeleteBucketIntelligentTieringConfigurationResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
