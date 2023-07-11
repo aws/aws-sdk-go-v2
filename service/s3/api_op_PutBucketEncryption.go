@@ -186,7 +186,7 @@ func (c *Client) addOperationPutBucketEncryptionMiddlewares(stack *middleware.St
 	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
-	if err = addPutBucketEncryptionEndpointDisableHTTPSMiddleware(stack, options); err != nil {
+	if err = addEndpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addSerializeImmutableHostnameBucketMiddleware(stack); err != nil {
@@ -255,35 +255,6 @@ func addPutBucketEncryptionUpdateEndpoint(stack *middleware.Stack, options Optio
 		UseARNRegion:                   options.UseARNRegion,
 		DisableMultiRegionAccessPoints: options.DisableMultiRegionAccessPoints,
 	})
-}
-
-type opPutBucketEncryptionEndpointDisableHTTPSMiddleware struct {
-	EndpointDisableHTTPS bool
-}
-
-func (*opPutBucketEncryptionEndpointDisableHTTPSMiddleware) ID() string {
-	return "opPutBucketEncryptionEndpointDisableHTTPSMiddleware"
-}
-
-func (m *opPutBucketEncryptionEndpointDisableHTTPSMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	if m.EndpointDisableHTTPS {
-		req.URL.Scheme = "http"
-	}
-
-	return next.HandleSerialize(ctx, in)
-
-}
-func addPutBucketEncryptionEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
-	return stack.Serialize.Insert(&opPutBucketEncryptionEndpointDisableHTTPSMiddleware{
-		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
-	}, "ResolveEndpointV2", middleware.After)
 }
 
 type opPutBucketEncryptionResolveEndpointMiddleware struct {

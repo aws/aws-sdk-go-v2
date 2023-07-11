@@ -163,7 +163,7 @@ func (c *Client) addOperationDeleteObjectTaggingMiddlewares(stack *middleware.St
 	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
-	if err = addDeleteObjectTaggingEndpointDisableHTTPSMiddleware(stack, options); err != nil {
+	if err = addEndpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addSerializeImmutableHostnameBucketMiddleware(stack); err != nil {
@@ -212,35 +212,6 @@ func addDeleteObjectTaggingUpdateEndpoint(stack *middleware.Stack, options Optio
 		UseARNRegion:                   options.UseARNRegion,
 		DisableMultiRegionAccessPoints: options.DisableMultiRegionAccessPoints,
 	})
-}
-
-type opDeleteObjectTaggingEndpointDisableHTTPSMiddleware struct {
-	EndpointDisableHTTPS bool
-}
-
-func (*opDeleteObjectTaggingEndpointDisableHTTPSMiddleware) ID() string {
-	return "opDeleteObjectTaggingEndpointDisableHTTPSMiddleware"
-}
-
-func (m *opDeleteObjectTaggingEndpointDisableHTTPSMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	if m.EndpointDisableHTTPS {
-		req.URL.Scheme = "http"
-	}
-
-	return next.HandleSerialize(ctx, in)
-
-}
-func addDeleteObjectTaggingEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
-	return stack.Serialize.Insert(&opDeleteObjectTaggingEndpointDisableHTTPSMiddleware{
-		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
-	}, "ResolveEndpointV2", middleware.After)
 }
 
 type opDeleteObjectTaggingResolveEndpointMiddleware struct {

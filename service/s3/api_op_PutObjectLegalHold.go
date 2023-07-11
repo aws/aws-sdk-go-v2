@@ -182,7 +182,7 @@ func (c *Client) addOperationPutObjectLegalHoldMiddlewares(stack *middleware.Sta
 	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
-	if err = addPutObjectLegalHoldEndpointDisableHTTPSMiddleware(stack, options); err != nil {
+	if err = addEndpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addSerializeImmutableHostnameBucketMiddleware(stack); err != nil {
@@ -251,35 +251,6 @@ func addPutObjectLegalHoldUpdateEndpoint(stack *middleware.Stack, options Option
 		UseARNRegion:                   options.UseARNRegion,
 		DisableMultiRegionAccessPoints: options.DisableMultiRegionAccessPoints,
 	})
-}
-
-type opPutObjectLegalHoldEndpointDisableHTTPSMiddleware struct {
-	EndpointDisableHTTPS bool
-}
-
-func (*opPutObjectLegalHoldEndpointDisableHTTPSMiddleware) ID() string {
-	return "opPutObjectLegalHoldEndpointDisableHTTPSMiddleware"
-}
-
-func (m *opPutObjectLegalHoldEndpointDisableHTTPSMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	if m.EndpointDisableHTTPS {
-		req.URL.Scheme = "http"
-	}
-
-	return next.HandleSerialize(ctx, in)
-
-}
-func addPutObjectLegalHoldEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
-	return stack.Serialize.Insert(&opPutObjectLegalHoldEndpointDisableHTTPSMiddleware{
-		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
-	}, "ResolveEndpointV2", middleware.After)
 }
 
 type opPutObjectLegalHoldResolveEndpointMiddleware struct {

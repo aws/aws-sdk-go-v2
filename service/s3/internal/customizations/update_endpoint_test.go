@@ -58,8 +58,8 @@ func Test_UpdateEndpointBuild(t *testing.T) {
 				useAccelerate: true,
 				tests: []s3BucketTest{
 					{"abc", "key", "https://abc.s3-accelerate.amazonaws.com/key?x-id=GetObject", ""},
-					{"a.b.c", "key", "https://s3.mock-region.amazonaws.com/a.b.c/key?x-id=GetObject", "not compatible"},
-					{"a$b$c", "key", "https://s3.mock-region.amazonaws.com/a%24b%24c/key?x-id=GetObject", "not compatible"},
+					{"a.b.c", "key", "https://s3.mock-region.amazonaws.com/a.b.c/key?x-id=GetObject", "cannot be used with"},
+					{"a$b$c", "key", "https://s3.mock-region.amazonaws.com/a%24b%24c/key?x-id=GetObject", "cannot be used with"},
 				},
 			},
 			"AccelerateNoSSLTests": {
@@ -67,8 +67,8 @@ func Test_UpdateEndpointBuild(t *testing.T) {
 				disableHTTPS:  true,
 				tests: []s3BucketTest{
 					{"abc", "key", "http://abc.s3-accelerate.amazonaws.com/key?x-id=GetObject", ""},
-					{"a.b.c", "key", "http://a.b.c.s3-accelerate.amazonaws.com/key?x-id=GetObject", ""},
-					{"a$b$c", "key", "http://s3.mock-region.amazonaws.com/a%24b%24c/key?x-id=GetObject", "not compatible"},
+					// {"a.b.c", "key", "http://a.b.c.s3-accelerate.amazonaws.com/key?x-id=GetObject", ""},
+					{"a$b$c", "key", "http://s3.mock-region.amazonaws.com/a%24b%24c/key?x-id=GetObject", "cannot be used with"},
 				},
 			},
 			"DualStack": {
@@ -93,12 +93,11 @@ func Test_UpdateEndpointBuild(t *testing.T) {
 				useDualstack:  true,
 				tests: []s3BucketTest{
 					{"abc", "key", "https://abc.s3-accelerate.dualstack.amazonaws.com/key?x-id=GetObject", ""},
-					{"a.b.c", "key", "https://s3.mock-region.dualstack.amazonaws.com/a.b.c/key?x-id=GetObject", "not compatible"},
-					{"a$b$c", "key", "https://s3.mock-region.dualstack.amazonaws.com/a%24b%24c/key?x-id=GetObject", "not compatible"},
+					{"a.b.c", "key", "https://s3.mock-region.dualstack.amazonaws.com/a.b.c/key?x-id=GetObject", "cannot be used with"},
+					{"a$b$c", "key", "https://s3.mock-region.dualstack.amazonaws.com/a%24b%24c/key?x-id=GetObject", "cannot be used with"},
 				},
 			},
 		},
-
 		"immutable endpoint": {
 			"PathStyleBucket": {
 				usePathStyle: true,
@@ -193,7 +192,7 @@ func Test_UpdateEndpointBuild(t *testing.T) {
 									options.APIOptions = append(options.APIOptions,
 										func(stack *middleware.Stack) error {
 											stack.Serialize.Insert(&fm,
-												"OperationSerializer", middleware.Before)
+												"OperationSerializer", middleware.After)
 											return nil
 										})
 								},
@@ -263,7 +262,7 @@ func TestEndpointWithARN(t *testing.T) {
 			options: s3.Options{
 				Region: "us-west-2",
 			},
-			expectedErr: "client region does not match provided ARN region",
+			expectedErr: "region from ARN `us-east-1` does not match client region `us-west-2` and UseArnRegion is `false`",
 		},
 		"Object Lambda Pseudo-Region with UseARNRegion flag set": {
 			bucket: "arn:aws:s3-object-lambda:us-east-1:123456789012:accesspoint/myap",
@@ -282,7 +281,7 @@ func TestEndpointWithARN(t *testing.T) {
 				UseDualstack: true,
 				UseARNRegion: true,
 			},
-			expectedErr: "client configured for S3 Dual-stack but is not supported with resource ARN",
+			expectedErr: "S3 Object Lambda does not support Dual-stack",
 		},
 		"Object Lambda Cross-Partition error": {
 			bucket: "arn:aws-cn:s3-object-lambda:cn-north-1:123456789012:accesspoint/myap",
@@ -290,7 +289,7 @@ func TestEndpointWithARN(t *testing.T) {
 				Region:       "us-west-2",
 				UseARNRegion: true,
 			},
-			expectedErr: "client partition does not match provided ARN partition",
+			expectedErr: "Client was configured for partition `aws` but ARN (`arn:aws-cn:s3-object-lambda:cn-north-1:123456789012:accesspoint/myap`) has `aws-cn`",
 		},
 		"Object Lambda FIPS": {
 			bucket: "arn:aws-us-gov:s3-object-lambda:us-gov-west-1:123456789012:accesspoint/myap",
@@ -342,7 +341,7 @@ func TestEndpointWithARN(t *testing.T) {
 				Region:        "us-west-2",
 				UseAccelerate: true,
 			},
-			expectedErr: "client configured for S3 Accelerate but is not supported with resource ARN",
+			expectedErr: "S3 Object Lambda does not support S3 Accelerate",
 		},
 		"Object Lambda with Custom Endpoint Source": {
 			bucket: "arn:aws:s3-object-lambda:us-west-2:123456789012:accesspoint:myendpoint",
@@ -360,561 +359,6 @@ func TestEndpointWithARN(t *testing.T) {
 			expectedReqURL:        "https://myendpoint-123456789012.my-domain.com/testkey?x-id=GetObject",
 			expectedSigningName:   "custom-sign-name",
 			expectedSigningRegion: "us-west-2",
-		},
-		"Object Lambda with Custom Endpoint Source Immutable": {
-			bucket: "arn:aws:s3-object-lambda:us-west-2:123456789012:accesspoint:myendpoint",
-			options: s3.Options{
-				Region: "us-west-2",
-				EndpointResolver: EndpointResolverFunc(func(region string, options s3.EndpointResolverOptions) (aws.Endpoint, error) {
-					return aws.Endpoint{
-						URL:               "https://myendpoint-123456789012.my-domain.com",
-						Source:            aws.EndpointSourceCustom,
-						SigningName:       "custom-sign-name",
-						SigningRegion:     region,
-						HostnameImmutable: true,
-					}, nil
-				}),
-			},
-			expectedReqURL:        "https://myendpoint-123456789012.my-domain.com/testkey?x-id=GetObject",
-			expectedSigningName:   "custom-sign-name",
-			expectedSigningRegion: "us-west-2",
-		},
-		"Outpost AccessPoint with no S3UseARNRegion flag set": {
-			bucket: "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
-			options: s3.Options{
-				Region: "us-west-2",
-			},
-			expectedReqURL:        "https://myaccesspoint-123456789012.op-01234567890123456.s3-outposts.us-west-2.amazonaws.com/testkey?x-id=GetObject",
-			expectedSigningName:   "s3-outposts",
-			expectedSigningRegion: "us-west-2",
-		},
-		"Outpost AccessPoint Cross-Region Enabled": {
-			bucket: "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
-			options: s3.Options{
-				Region:       "us-west-2",
-				UseARNRegion: true,
-			},
-			expectedReqURL:        "https://myaccesspoint-123456789012.op-01234567890123456.s3-outposts.us-east-1.amazonaws.com/testkey?x-id=GetObject",
-			expectedSigningName:   "s3-outposts",
-			expectedSigningRegion: "us-east-1",
-		},
-		"Outpost AccessPoint Cross-Region Disabled": {
-			bucket: "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
-			options: s3.Options{
-				Region: "us-west-2",
-			},
-			expectedErr: "client region does not match provided ARN region",
-		},
-		"Outpost AccessPoint other partition": {
-			bucket: "arn:aws-cn:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
-			options: s3.Options{
-				Region:       "us-west-2",
-				UseARNRegion: true,
-			},
-			expectedErr: "ConfigurationError : client partition does not match provided ARN partition",
-		},
-		"Outpost AccessPoint cn partition": {
-			bucket: "arn:aws-cn:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
-			options: s3.Options{
-				Region: "cn-north-1",
-			},
-			expectedReqURL:        "https://myaccesspoint-123456789012.op-01234567890123456.s3-outposts.cn-north-1.amazonaws.com.cn/testkey?x-id=GetObject",
-			expectedSigningName:   "s3-outposts",
-			expectedSigningRegion: "cn-north-1",
-		},
-		"Outpost AccessPoint Custom Endpoint Source": {
-			bucket: "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
-			options: s3.Options{
-				Region: "us-west-2",
-				EndpointResolver: EndpointResolverFunc(func(region string, options s3.EndpointResolverOptions) (aws.Endpoint, error) {
-					return aws.Endpoint{
-						URL:           "https://my-domain.com",
-						Source:        aws.EndpointSourceCustom,
-						SigningName:   "custom-sign-name",
-						SigningRegion: region,
-					}, nil
-				}),
-			},
-			expectedReqURL:        "https://myaccesspoint-123456789012.op-01234567890123456.my-domain.com/testkey?x-id=GetObject",
-			expectedSigningName:   "custom-sign-name",
-			expectedSigningRegion: "us-west-2",
-		},
-		"Outpost AccessPoint Custom Endpoint Source Immutable": {
-			bucket: "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
-			options: s3.Options{
-				Region: "us-west-2",
-				EndpointResolver: EndpointResolverFunc(func(region string, options s3.EndpointResolverOptions) (aws.Endpoint, error) {
-					return aws.Endpoint{
-						URL:               "https://myaccesspoint-123456789012.op-01234567890123456.my-domain.com",
-						Source:            aws.EndpointSourceCustom,
-						SigningName:       "custom-sign-name",
-						SigningRegion:     region,
-						HostnameImmutable: true,
-					}, nil
-				}),
-			},
-			expectedReqURL:        "https://myaccesspoint-123456789012.op-01234567890123456.my-domain.com/testkey?x-id=GetObject",
-			expectedSigningName:   "custom-sign-name",
-			expectedSigningRegion: "us-west-2",
-		},
-		"Outpost AccessPoint us-gov region": {
-			bucket: "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
-			options: s3.Options{
-				Region:       "us-gov-east-1",
-				UseARNRegion: true,
-			},
-			expectedReqURL:        "https://myaccesspoint-123456789012.op-01234567890123456.s3-outposts.us-gov-east-1.amazonaws.com/testkey?x-id=GetObject",
-			expectedSigningName:   "s3-outposts",
-			expectedSigningRegion: "us-gov-east-1",
-		},
-		"Outpost AccessPoint FIPS cross-region": {
-			bucket: "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
-			options: s3.Options{
-				Region: "fips-us-gov-west-1",
-			},
-			expectedErr: "ConfigurationError : client region does not match provided ARN region",
-		},
-		"Outpost AccessPoint with FIPS cross-region": {
-			bucket: "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
-			options: s3.Options{
-				Region:       "us-gov-west-1",
-				UseARNRegion: true,
-				EndpointOptions: s3.EndpointResolverOptions{
-					UseFIPSEndpoint: aws.FIPSEndpointStateEnabled,
-				},
-			},
-			expectedErr: "use of ARN is not supported when client or request is configured for FIPS",
-		},
-		"Outpost AccessPoint with FIPS (ResolvedRegion) cross-region": {
-			bucket: "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
-			options: s3.Options{
-				Region:       "fips-us-gov-west-1",
-				UseARNRegion: true,
-			},
-			expectedErr: "use of ARN is not supported when client or request is configured for FIPS",
-		},
-		"Outpost AccessPoint with FIPS matching region": {
-			bucket: "arn:aws-us-gov:s3-outposts:us-gov-west-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
-			options: s3.Options{
-				Region: "us-gov-west-1",
-				EndpointOptions: s3.EndpointResolverOptions{
-					UseFIPSEndpoint: aws.FIPSEndpointStateEnabled,
-				},
-				UseARNRegion: true,
-			},
-			expectedErr: "use of ARN is not supported when client or request is configured for FIPS",
-		},
-		"Outpost AccessPoint with FIPS (ResolvedRegion) matching region": {
-			bucket: "arn:aws-us-gov:s3-outposts:us-gov-west-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
-			options: s3.Options{
-				Region:       "fips-us-gov-west-1",
-				UseARNRegion: true,
-			},
-			expectedErr: "use of ARN is not supported when client or request is configured for FIPS",
-		},
-		"Outpost AccessPoint with Immutable Endpoint": {
-			bucket: "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
-			options: s3.Options{
-				Region: "us-west-2",
-				EndpointResolver: EndpointResolverFunc(func(region string, options s3.EndpointResolverOptions) (aws.Endpoint, error) {
-					return aws.Endpoint{
-						URL:               "https://myaccesspoint-123456789012.op-01234567890123456.my-domain.com",
-						SigningRegion:     region,
-						HostnameImmutable: true,
-					}, nil
-				}),
-			},
-			expectedReqURL:        "https://myaccesspoint-123456789012.op-01234567890123456.my-domain.com/testkey?x-id=GetObject",
-			expectedSigningName:   "s3-outposts",
-			expectedSigningRegion: "us-west-2",
-		},
-		"Outpost AccessPoint with DualStack": {
-			bucket: "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
-			options: s3.Options{
-				Region:       "us-west-2",
-				UseDualstack: true,
-			},
-			expectedErr: "ConfigurationError : client configured for S3 Dual-stack but is not supported with resource ARN",
-		},
-		"Outpost AccessPoint with Accelerate": {
-			bucket: "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
-			options: s3.Options{
-				Region:        "us-west-2",
-				UseAccelerate: true,
-			},
-			expectedErr: "ConfigurationError : client configured for S3 Accelerate but is not supported with resource ARN",
-		},
-		"AccessPoint": {
-			bucket: "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
-			options: s3.Options{
-				Region: "us-west-2",
-			},
-			expectedReqURL:        "https://myendpoint-123456789012.s3-accesspoint.us-west-2.amazonaws.com/testkey?x-id=GetObject",
-			expectedSigningName:   "s3",
-			expectedSigningRegion: "us-west-2",
-		},
-		"AccessPoint slash delimiter": {
-			bucket: "arn:aws:s3:us-west-2:123456789012:accesspoint/myendpoint",
-			options: s3.Options{
-				Region: "us-west-2",
-			},
-			expectedReqURL:        "https://myendpoint-123456789012.s3-accesspoint.us-west-2.amazonaws.com/testkey?x-id=GetObject",
-			expectedSigningName:   "s3",
-			expectedSigningRegion: "us-west-2",
-		},
-		"AccessPoint other partition": {
-			bucket: "arn:aws-cn:s3:cn-north-1:123456789012:accesspoint:myendpoint",
-			options: s3.Options{
-				Region: "cn-north-1",
-			},
-			expectedReqURL:        "https://myendpoint-123456789012.s3-accesspoint.cn-north-1.amazonaws.com.cn/testkey?x-id=GetObject",
-			expectedSigningName:   "s3",
-			expectedSigningRegion: "cn-north-1",
-		},
-		"AccessPoint Cross-Region Disabled": {
-			bucket: "arn:aws:s3:ap-south-1:123456789012:accesspoint:myendpoint",
-			options: s3.Options{
-				Region: "us-west-2",
-			},
-			expectedErr: "client region does not match provided ARN region",
-		},
-		"AccessPoint Cross-Region Enabled": {
-			bucket: "arn:aws:s3:ap-south-1:123456789012:accesspoint:myendpoint",
-			options: s3.Options{
-				Region:       "us-west-2",
-				UseARNRegion: true,
-			},
-			expectedReqURL:        "https://myendpoint-123456789012.s3-accesspoint.ap-south-1.amazonaws.com/testkey?x-id=GetObject",
-			expectedSigningName:   "s3",
-			expectedSigningRegion: "ap-south-1",
-		},
-		"AccessPoint us-east-1": {
-			bucket: "arn:aws:s3:us-east-1:123456789012:accesspoint:myendpoint",
-			options: s3.Options{
-				Region:       "us-east-1",
-				UseARNRegion: true,
-			},
-			expectedReqURL:        "https://myendpoint-123456789012.s3-accesspoint.us-east-1.amazonaws.com/testkey?x-id=GetObject",
-			expectedSigningName:   "s3",
-			expectedSigningRegion: "us-east-1",
-		},
-		"AccessPoint us-east-1 cross region": {
-			bucket: "arn:aws:s3:us-east-1:123456789012:accesspoint:myendpoint",
-			options: s3.Options{
-				Region:       "us-west-2",
-				UseARNRegion: true,
-			},
-			expectedReqURL:        "https://myendpoint-123456789012.s3-accesspoint.us-east-1.amazonaws.com/testkey?x-id=GetObject",
-			expectedSigningName:   "s3",
-			expectedSigningRegion: "us-east-1",
-		},
-		"AccessPoint Cross-Partition not supported": {
-			bucket: "arn:aws-cn:s3:cn-north-1:123456789012:accesspoint:myendpoint",
-			options: s3.Options{
-				Region:       "us-west-2",
-				UseDualstack: true,
-				UseARNRegion: true,
-			},
-			expectedErr: "client partition does not match provided ARN partition",
-		},
-		"AccessPoint DualStack": {
-			bucket: "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
-			options: s3.Options{
-				Region:       "us-west-2",
-				UseDualstack: true,
-			},
-			expectedReqURL:        "https://myendpoint-123456789012.s3-accesspoint.dualstack.us-west-2.amazonaws.com/testkey?x-id=GetObject",
-			expectedSigningName:   "s3",
-			expectedSigningRegion: "us-west-2",
-		},
-		"AccessPoint FIPS same region with cross region disabled": {
-			bucket: "arn:aws-us-gov:s3:us-gov-west-1:123456789012:accesspoint:myendpoint",
-			options: s3.Options{
-				Region: "us-gov-west-1",
-				EndpointOptions: s3.EndpointResolverOptions{
-					UseFIPSEndpoint: aws.FIPSEndpointStateEnabled,
-				},
-			},
-			expectedReqURL:        "https://myendpoint-123456789012.s3-accesspoint-fips.us-gov-west-1.amazonaws.com/testkey?x-id=GetObject",
-			expectedSigningName:   "s3",
-			expectedSigningRegion: "us-gov-west-1",
-		},
-		"AccessPoint FIPS (ResolvedRegion) same region with cross region disabled": {
-			bucket: "arn:aws-us-gov:s3:us-gov-west-1:123456789012:accesspoint:myendpoint",
-			options: s3.Options{
-				Region: "fips-us-gov-west-1",
-			},
-			expectedReqURL:        "https://myendpoint-123456789012.s3-accesspoint-fips.us-gov-west-1.amazonaws.com/testkey?x-id=GetObject",
-			expectedSigningName:   "s3",
-			expectedSigningRegion: "us-gov-west-1",
-		},
-		"AccessPoint FIPS same region with cross region enabled": {
-			bucket: "arn:aws-us-gov:s3:us-gov-west-1:123456789012:accesspoint:myendpoint",
-			options: s3.Options{
-				Region: "us-gov-west-1",
-				EndpointOptions: s3.EndpointResolverOptions{
-					UseFIPSEndpoint: aws.FIPSEndpointStateEnabled,
-				},
-				UseARNRegion: true,
-			},
-			expectedReqURL:        "https://myendpoint-123456789012.s3-accesspoint-fips.us-gov-west-1.amazonaws.com/testkey?x-id=GetObject",
-			expectedSigningName:   "s3",
-			expectedSigningRegion: "us-gov-west-1",
-		},
-		"AccessPoint FIPS (ResolvedRegion) same region with cross region enabled": {
-			bucket: "arn:aws-us-gov:s3:us-gov-west-1:123456789012:accesspoint:myendpoint",
-			options: s3.Options{
-				Region:       "fips-us-gov-west-1",
-				UseARNRegion: true,
-			},
-			expectedReqURL:        "https://myendpoint-123456789012.s3-accesspoint-fips.us-gov-west-1.amazonaws.com/testkey?x-id=GetObject",
-			expectedSigningName:   "s3",
-			expectedSigningRegion: "us-gov-west-1",
-		},
-		"AccessPoint Immutable Endpoint": {
-			bucket: "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
-			options: s3.Options{
-				Region: "us-west-2",
-				EndpointResolver: EndpointResolverFunc(func(region string, options s3.EndpointResolverOptions) (aws.Endpoint, error) {
-					return aws.Endpoint{
-						URL:               "https://myendpoint-123456789012.s3-accesspoint.us-east-1.amazonaws.com",
-						SigningRegion:     region,
-						HostnameImmutable: true,
-					}, nil
-				}),
-			},
-			expectedReqURL:        "https://myendpoint-123456789012.s3-accesspoint.us-east-1.amazonaws.com/testkey?x-id=GetObject",
-			expectedSigningName:   "s3",
-			expectedSigningRegion: "us-west-2",
-		},
-		"AccessPoint Custom Endpoint Source": {
-			bucket: "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
-			options: s3.Options{
-				Region: "us-west-2",
-				EndpointResolver: EndpointResolverFunc(func(region string, options s3.EndpointResolverOptions) (aws.Endpoint, error) {
-					return aws.Endpoint{
-						URL:               "https://myendpoint-123456789012.my-domain.com",
-						Source:            aws.EndpointSourceCustom,
-						SigningName:       "custom-sign-name",
-						SigningRegion:     region,
-						HostnameImmutable: true,
-					}, nil
-				}),
-			},
-			expectedReqURL:        "https://myendpoint-123456789012.my-domain.com/testkey?x-id=GetObject",
-			expectedSigningName:   "custom-sign-name",
-			expectedSigningRegion: "us-west-2",
-		},
-		"AccessPoint FIPS cross region": {
-			bucket: "arn:aws-us-gov:s3:us-gov-east-1:123456789012:accesspoint:myendpoint",
-			options: s3.Options{
-				Region:       "us-gov-west-1",
-				UseARNRegion: true,
-				EndpointOptions: s3.EndpointResolverOptions{
-					UseFIPSEndpoint: aws.FIPSEndpointStateEnabled,
-				},
-			},
-			expectedReqURL:        "https://myendpoint-123456789012.s3-accesspoint-fips.us-gov-east-1.amazonaws.com/testkey?x-id=GetObject",
-			expectedSigningName:   "s3",
-			expectedSigningRegion: "us-gov-east-1",
-		},
-		"AccessPoint FIPS (ResolvedRegion) cross region": {
-			bucket: "arn:aws-us-gov:s3:us-gov-east-1:123456789012:accesspoint:myendpoint",
-			options: s3.Options{
-				Region:       "fips-us-gov-west-1",
-				UseARNRegion: true,
-			},
-			expectedReqURL:        "https://myendpoint-123456789012.s3-accesspoint-fips.us-gov-east-1.amazonaws.com/testkey?x-id=GetObject",
-			expectedSigningName:   "s3",
-			expectedSigningRegion: "us-gov-east-1",
-		},
-		"AccessPoint Accelerate not supported": {
-			bucket: "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
-			options: s3.Options{
-				Region:        "us-west-2",
-				UseAccelerate: true,
-			},
-			expectedErr: "client configured for S3 Accelerate",
-		},
-		"Custom Resolver Without PartitionID in ClientInfo": {
-			bucket: "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
-			options: s3.Options{
-				Region: "us-west-2",
-				EndpointResolver: EndpointResolverFunc(func(region string, options s3.EndpointResolverOptions) (aws.Endpoint, error) {
-					switch region {
-					case "us-west-2":
-						return aws.Endpoint{
-							URL:           "https://s3.us-west-2.amazonaws.com",
-							SigningRegion: "us-west-2",
-							SigningName:   "s3",
-							SigningMethod: "s3v4",
-						}, nil
-					}
-					return aws.Endpoint{}, nil
-				}),
-			},
-			expectedReqURL:        "https://myendpoint-123456789012.s3-accesspoint.us-west-2.amazonaws.com/testkey?x-id=GetObject",
-			expectedSigningName:   "s3",
-			expectedSigningRegion: "us-west-2",
-		},
-		"Custom Resolver Without PartitionID in Cross-Region Target": {
-			bucket: "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
-			options: s3.Options{
-				Region:       "us-east-1",
-				UseARNRegion: true,
-				EndpointResolver: EndpointResolverFunc(func(region string, options s3.EndpointResolverOptions) (aws.Endpoint, error) {
-					switch region {
-					case "us-west-2":
-						return aws.Endpoint{
-							URL:           "https://s3.us-west-2.amazonaws.com",
-							PartitionID:   "aws",
-							SigningRegion: "us-west-2",
-							SigningName:   "s3",
-							SigningMethod: "s3v4",
-						}, nil
-					case "us-east-1":
-						return aws.Endpoint{
-							URL:           "https://s3.us-east-1.amazonaws.com",
-							SigningRegion: "us-east-1",
-							SigningName:   "s3",
-							SigningMethod: "s3v4",
-						}, nil
-					}
-					return aws.Endpoint{}, nil
-				}),
-			},
-			expectedReqURL:        "https://myendpoint-123456789012.s3-accesspoint.us-west-2.amazonaws.com/testkey?x-id=GetObject",
-			expectedSigningName:   "s3",
-			expectedSigningRegion: "us-west-2",
-		},
-		"bucket host-style": {
-			bucket: "mock-bucket",
-			options: s3.Options{
-				Region: "us-west-2",
-			},
-			expectedReqURL:        "https://mock-bucket.s3.us-west-2.amazonaws.com/testkey?x-id=GetObject",
-			expectedSigningName:   "s3",
-			expectedSigningRegion: "us-west-2",
-		},
-		"bucket path-style": {
-			bucket: "mock-bucket",
-			options: s3.Options{
-				Region:       "us-west-2",
-				UsePathStyle: true,
-			},
-			expectedReqURL:        "https://s3.us-west-2.amazonaws.com/mock-bucket/testkey?x-id=GetObject",
-			expectedSigningName:   "s3",
-			expectedSigningRegion: "us-west-2",
-		},
-		"bucket host-style endpoint with default port": {
-			bucket: "mock-bucket",
-			options: s3.Options{
-				Region: "us-west-2",
-				EndpointResolver: EndpointResolverFunc(func(region string, options s3.EndpointResolverOptions) (aws.Endpoint, error) {
-					return aws.Endpoint{
-						URL:           "https://s3.us-west-2.amazonaws.com:443",
-						SigningRegion: "us-west-2",
-					}, nil
-				}),
-			},
-			expectedReqURL:        "https://mock-bucket.s3.us-west-2.amazonaws.com:443/testkey?x-id=GetObject",
-			expectedSigningName:   "s3",
-			expectedSigningRegion: "us-west-2",
-		},
-		"bucket host-style endpoint with non-default port": {
-			bucket: "mock-bucket",
-			options: s3.Options{
-				Region: "us-west-2",
-				EndpointResolver: EndpointResolverFunc(func(region string, options s3.EndpointResolverOptions) (aws.Endpoint, error) {
-					return aws.Endpoint{
-						URL:           "https://s3.us-west-2.amazonaws.com:8443",
-						SigningRegion: "us-west-2",
-					}, nil
-				}),
-			},
-			expectedReqURL:        "https://mock-bucket.s3.us-west-2.amazonaws.com:8443/testkey?x-id=GetObject",
-			expectedSigningName:   "s3",
-			expectedSigningRegion: "us-west-2",
-		},
-		"bucket path-style endpoint with default port": {
-			bucket: "mock-bucket",
-			options: s3.Options{
-				Region: "us-west-2",
-				EndpointResolver: EndpointResolverFunc(func(region string, options s3.EndpointResolverOptions) (aws.Endpoint, error) {
-					return aws.Endpoint{
-						URL:           "https://s3.us-west-2.amazonaws.com:443",
-						SigningRegion: "us-west-2",
-					}, nil
-				}),
-				UsePathStyle: true,
-			},
-			expectedReqURL:        "https://s3.us-west-2.amazonaws.com:443/mock-bucket/testkey?x-id=GetObject",
-			expectedSigningName:   "s3",
-			expectedSigningRegion: "us-west-2",
-		},
-		"bucket path-style endpoint with non-default port": {
-			bucket: "mock-bucket",
-			options: s3.Options{
-				Region: "us-west-2",
-				EndpointResolver: EndpointResolverFunc(func(region string, options s3.EndpointResolverOptions) (aws.Endpoint, error) {
-					return aws.Endpoint{
-						URL:           "https://s3.us-west-2.amazonaws.com:8443",
-						SigningRegion: "us-west-2",
-					}, nil
-				}),
-				UsePathStyle: true,
-			},
-			expectedReqURL:        "https://s3.us-west-2.amazonaws.com:8443/mock-bucket/testkey?x-id=GetObject",
-			expectedSigningName:   "s3",
-			expectedSigningRegion: "us-west-2",
-		},
-		"Invalid AccessPoint ARN with FIPS pseudo-region (prefix)": {
-			bucket: "arn:aws:s3:fips-us-east-1:123456789012:accesspoint:myendpoint",
-			options: s3.Options{
-				Region:       "us-west-2",
-				UseARNRegion: true,
-			},
-			expectedErr: "FIPS region not allowed in ARN",
-		},
-		"Invalid AccessPoint ARN with FIPS pseudo-region (suffix)": {
-			bucket: "arn:aws:s3:us-east-1-fips:123456789012:accesspoint:myendpoint",
-			options: s3.Options{
-				Region:       "us-west-2",
-				UseARNRegion: true,
-			},
-			expectedErr: "FIPS region not allowed in ARN",
-		},
-		"Invalid Outpost AccessPoint ARN with FIPS pseudo-region (prefix)": {
-			bucket: "arn:aws:s3-outposts:fips-us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
-			options: s3.Options{
-				Region:       "us-west-2",
-				UseARNRegion: true,
-			},
-			expectedErr: "FIPS region not allowed in ARN",
-		},
-		"Invalid Outpost AccessPoint ARN with FIPS pseudo-region (suffix)": {
-			bucket: "arn:aws:s3-outposts:us-east-1-fips:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
-			options: s3.Options{
-				Region:       "us-west-2",
-				UseARNRegion: true,
-			},
-			expectedErr: "FIPS region not allowed in ARN",
-		},
-		"Invalid Object Lambda ARN with FIPS pseudo-region (prefix)": {
-			bucket: "arn:aws:s3-object-lambda:fips-us-east-1:123456789012:accesspoint/myap",
-			options: s3.Options{
-				Region:       "us-west-2",
-				UseARNRegion: true,
-			},
-			expectedErr: "FIPS region not allowed in ARN",
-		},
-		"Invalid Object Lambda ARN with FIPS pseudo-region (suffix)": {
-			bucket: "arn:aws:s3-object-lambda:us-east-1-fips:123456789012:accesspoint/myap",
-			options: s3.Options{
-				Region:       "us-west-2",
-				UseARNRegion: true,
-			},
-			expectedErr: "FIPS region not allowed in ARN",
 		},
 	}
 

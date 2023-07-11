@@ -127,7 +127,7 @@ func (c *Client) addOperationListBucketsMiddlewares(stack *middleware.Stack, opt
 	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
-	if err = addListBucketsEndpointDisableHTTPSMiddleware(stack, options); err != nil {
+	if err = addEndpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addSerializeImmutableHostnameBucketMiddleware(stack); err != nil {
@@ -159,35 +159,6 @@ func addListBucketsUpdateEndpoint(stack *middleware.Stack, options Options) erro
 		UseARNRegion:                   options.UseARNRegion,
 		DisableMultiRegionAccessPoints: options.DisableMultiRegionAccessPoints,
 	})
-}
-
-type opListBucketsEndpointDisableHTTPSMiddleware struct {
-	EndpointDisableHTTPS bool
-}
-
-func (*opListBucketsEndpointDisableHTTPSMiddleware) ID() string {
-	return "opListBucketsEndpointDisableHTTPSMiddleware"
-}
-
-func (m *opListBucketsEndpointDisableHTTPSMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	if m.EndpointDisableHTTPS {
-		req.URL.Scheme = "http"
-	}
-
-	return next.HandleSerialize(ctx, in)
-
-}
-func addListBucketsEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
-	return stack.Serialize.Insert(&opListBucketsEndpointDisableHTTPSMiddleware{
-		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
-	}, "ResolveEndpointV2", middleware.After)
 }
 
 type opListBucketsResolveEndpointMiddleware struct {

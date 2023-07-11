@@ -6,6 +6,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	internalauth "github.com/aws/aws-sdk-go-v2/internal/auth"
@@ -196,7 +197,7 @@ func (c *Client) addOperationPutBucketReplicationMiddlewares(stack *middleware.S
 	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
-	if err = addPutBucketReplicationEndpointDisableHTTPSMiddleware(stack, options); err != nil {
+	if err = addEndpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
 	return nil
@@ -256,42 +257,13 @@ func addPutBucketReplicationUpdateEndpoint(stack *middleware.Stack, options Opti
 	})
 }
 
-type opPutBucketReplicationEndpointDisableHTTPSMiddleware struct {
-	EndpointDisableHTTPS bool
-}
-
-func (*opPutBucketReplicationEndpointDisableHTTPSMiddleware) ID() string {
-	return "opPutBucketReplicationEndpointDisableHTTPSMiddleware"
-}
-
-func (m *opPutBucketReplicationEndpointDisableHTTPSMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	if m.EndpointDisableHTTPS {
-		req.URL.Scheme = "http"
-	}
-
-	return next.HandleSerialize(ctx, in)
-
-}
-func addPutBucketReplicationEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
-	return stack.Serialize.Insert(&opPutBucketReplicationEndpointDisableHTTPSMiddleware{
-		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
-	}, "opPutBucketReplicationResolveEndpointMiddleware", middleware.After)
-}
-
 type opPutBucketReplicationResolveEndpointMiddleware struct {
 	EndpointResolver EndpointResolverV2
 	BuiltInResolver  BuiltInParameterResolver
 }
 
 func (*opPutBucketReplicationResolveEndpointMiddleware) ID() string {
-	return "opPutBucketReplicationResolveEndpointMiddleware"
+	return "ResolveEndpointV2"
 }
 
 func (m *opPutBucketReplicationResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -364,9 +336,13 @@ func (m *opPutBucketReplicationResolveEndpointMiddleware) HandleSerialize(ctx co
 			var signingName, signingRegion string
 			if v4Scheme.SigningName == nil {
 				signingName = "s3"
+			} else {
+				signingName = *v4Scheme.SigningName
 			}
 			if v4Scheme.SigningRegion == nil {
 				signingRegion = m.BuiltInResolver.(*BuiltInResolver).Region
+			} else {
+				signingRegion = *v4Scheme.SigningRegion
 			}
 			if v4Scheme.DisableDoubleEncoding != nil {
 				// The signer sets an equivalent value at client initialization time.
@@ -379,9 +355,8 @@ func (m *opPutBucketReplicationResolveEndpointMiddleware) HandleSerialize(ctx co
 			break
 		case *internalauth.AuthenticationSchemeV4A:
 			v4aScheme, _ := authScheme.(*internalauth.AuthenticationSchemeV4A)
-			var signingName string
 			if v4aScheme.SigningName == nil {
-				signingName = "s3"
+				v4aScheme.SigningName = aws.String("s3")
 			}
 			if v4aScheme.DisableDoubleEncoding != nil {
 				// The signer sets an equivalent value at client initialization time.
@@ -389,7 +364,7 @@ func (m *opPutBucketReplicationResolveEndpointMiddleware) HandleSerialize(ctx co
 				// and override the value set at client initialization time.
 				ctx = internalauth.SetDisableDoubleEncoding(ctx, *v4aScheme.DisableDoubleEncoding)
 			}
-			ctx = awsmiddleware.SetSigningName(ctx, signingName)
+			ctx = awsmiddleware.SetSigningName(ctx, *v4aScheme.SigningName)
 			ctx = awsmiddleware.SetSigningRegion(ctx, v4aScheme.SigningRegionSet[0])
 			break
 		case *internalauth.AuthenticationSchemeNone:

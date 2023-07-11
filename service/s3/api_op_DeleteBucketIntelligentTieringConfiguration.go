@@ -147,7 +147,7 @@ func (c *Client) addOperationDeleteBucketIntelligentTieringConfigurationMiddlewa
 	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
-	if err = addDeleteBucketIntelligentTieringConfigurationEndpointDisableHTTPSMiddleware(stack, options); err != nil {
+	if err = addEndpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addSerializeImmutableHostnameBucketMiddleware(stack); err != nil {
@@ -196,35 +196,6 @@ func addDeleteBucketIntelligentTieringConfigurationUpdateEndpoint(stack *middlew
 		UseARNRegion:                   options.UseARNRegion,
 		DisableMultiRegionAccessPoints: options.DisableMultiRegionAccessPoints,
 	})
-}
-
-type opDeleteBucketIntelligentTieringConfigurationEndpointDisableHTTPSMiddleware struct {
-	EndpointDisableHTTPS bool
-}
-
-func (*opDeleteBucketIntelligentTieringConfigurationEndpointDisableHTTPSMiddleware) ID() string {
-	return "opDeleteBucketIntelligentTieringConfigurationEndpointDisableHTTPSMiddleware"
-}
-
-func (m *opDeleteBucketIntelligentTieringConfigurationEndpointDisableHTTPSMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	if m.EndpointDisableHTTPS {
-		req.URL.Scheme = "http"
-	}
-
-	return next.HandleSerialize(ctx, in)
-
-}
-func addDeleteBucketIntelligentTieringConfigurationEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
-	return stack.Serialize.Insert(&opDeleteBucketIntelligentTieringConfigurationEndpointDisableHTTPSMiddleware{
-		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
-	}, "ResolveEndpointV2", middleware.After)
 }
 
 type opDeleteBucketIntelligentTieringConfigurationResolveEndpointMiddleware struct {

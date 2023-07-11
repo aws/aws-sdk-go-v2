@@ -198,7 +198,7 @@ func (c *Client) addOperationPutBucketWebsiteMiddlewares(stack *middleware.Stack
 	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
-	if err = addPutBucketWebsiteEndpointDisableHTTPSMiddleware(stack, options); err != nil {
+	if err = addEndpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addSerializeImmutableHostnameBucketMiddleware(stack); err != nil {
@@ -267,35 +267,6 @@ func addPutBucketWebsiteUpdateEndpoint(stack *middleware.Stack, options Options)
 		UseARNRegion:                   options.UseARNRegion,
 		DisableMultiRegionAccessPoints: options.DisableMultiRegionAccessPoints,
 	})
-}
-
-type opPutBucketWebsiteEndpointDisableHTTPSMiddleware struct {
-	EndpointDisableHTTPS bool
-}
-
-func (*opPutBucketWebsiteEndpointDisableHTTPSMiddleware) ID() string {
-	return "opPutBucketWebsiteEndpointDisableHTTPSMiddleware"
-}
-
-func (m *opPutBucketWebsiteEndpointDisableHTTPSMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	if m.EndpointDisableHTTPS {
-		req.URL.Scheme = "http"
-	}
-
-	return next.HandleSerialize(ctx, in)
-
-}
-func addPutBucketWebsiteEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
-	return stack.Serialize.Insert(&opPutBucketWebsiteEndpointDisableHTTPSMiddleware{
-		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
-	}, "ResolveEndpointV2", middleware.After)
 }
 
 type opPutBucketWebsiteResolveEndpointMiddleware struct {

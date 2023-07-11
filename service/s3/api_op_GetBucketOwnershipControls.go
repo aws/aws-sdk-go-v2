@@ -141,7 +141,7 @@ func (c *Client) addOperationGetBucketOwnershipControlsMiddlewares(stack *middle
 	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
-	if err = addGetBucketOwnershipControlsEndpointDisableHTTPSMiddleware(stack, options); err != nil {
+	if err = addEndpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addSerializeImmutableHostnameBucketMiddleware(stack); err != nil {
@@ -190,35 +190,6 @@ func addGetBucketOwnershipControlsUpdateEndpoint(stack *middleware.Stack, option
 		UseARNRegion:                   options.UseARNRegion,
 		DisableMultiRegionAccessPoints: options.DisableMultiRegionAccessPoints,
 	})
-}
-
-type opGetBucketOwnershipControlsEndpointDisableHTTPSMiddleware struct {
-	EndpointDisableHTTPS bool
-}
-
-func (*opGetBucketOwnershipControlsEndpointDisableHTTPSMiddleware) ID() string {
-	return "opGetBucketOwnershipControlsEndpointDisableHTTPSMiddleware"
-}
-
-func (m *opGetBucketOwnershipControlsEndpointDisableHTTPSMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	if m.EndpointDisableHTTPS {
-		req.URL.Scheme = "http"
-	}
-
-	return next.HandleSerialize(ctx, in)
-
-}
-func addGetBucketOwnershipControlsEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
-	return stack.Serialize.Insert(&opGetBucketOwnershipControlsEndpointDisableHTTPSMiddleware{
-		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
-	}, "ResolveEndpointV2", middleware.After)
 }
 
 type opGetBucketOwnershipControlsResolveEndpointMiddleware struct {

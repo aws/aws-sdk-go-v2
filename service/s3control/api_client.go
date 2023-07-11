@@ -5,6 +5,7 @@ package s3control
 import (
 	"context"
 	cryptorand "crypto/rand"
+	"fmt"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/defaults"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
@@ -555,4 +556,33 @@ func addRequestResponseLogging(stack *middleware.Stack, o Options) error {
 		LogResponse:         o.ClientLogMode.IsResponse(),
 		LogResponseWithBody: o.ClientLogMode.IsResponseWithBody(),
 	}, middleware.After)
+}
+
+type EndpointDisableHTTPSMiddleware struct {
+	EndpointDisableHTTPS bool
+}
+
+func (*EndpointDisableHTTPSMiddleware) ID() string {
+	return "EndpointDisableHTTPSMiddleware"
+}
+
+func (m *EndpointDisableHTTPSMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	if m.EndpointDisableHTTPS && !smithyhttp.GetHostnameImmutable(ctx) {
+		req.URL.Scheme = "http"
+	}
+
+	return next.HandleSerialize(ctx, in)
+
+}
+func addEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
+	return stack.Serialize.Insert(&EndpointDisableHTTPSMiddleware{
+		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
+	}, "ResolveEndpointV2", middleware.After)
 }

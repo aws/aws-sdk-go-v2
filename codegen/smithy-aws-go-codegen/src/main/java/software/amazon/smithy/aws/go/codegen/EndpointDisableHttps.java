@@ -47,13 +47,8 @@ public class EndpointDisableHttps implements GoIntegration {
 
         private final List<RuntimeClientPlugin> runtimeClientPlugins = new ArrayList<>();
 
-        public static String getAddMiddlewareFuncName(String operationName) {
-                return String.format("add%sEndpointDisableHTTPSMiddleware", operationName);
-        }
-
-        public static String getMiddlewareObjectName(String operationName) {
-                return String.format("op%sEndpointDisableHTTPSMiddleware", operationName);
-        }
+        public static final String MIDDLEWARE_ID = "EndpointDisableHTTPSMiddleware";
+        public static final String MIDDLEWARE_ADDER = String.format("add%s", MIDDLEWARE_ID);
 
         /**
          * Gets the sort order of the customization from -128 to 127, with lowest
@@ -75,25 +70,18 @@ public class EndpointDisableHttps implements GoIntegration {
         @Override
         public void processFinalizedModel(GoSettings settings, Model model) {
 
-                TopDownIndex topDownIndex = TopDownIndex.of(model);
                 var serviceShape = settings.getService(model);
 
-                for (ToShapeId operation : topDownIndex.getContainedOperations(serviceShape)) {
-                        OperationShape operationShape = model.expectShape(operation.toShapeId(), OperationShape.class);
-                        String operationName = operationShape.getId().getName();
+                runtimeClientPlugins.add(RuntimeClientPlugin.builder()
+                                .servicePredicate((m, s) -> s.equals(serviceShape))
+                                .registerMiddleware(MiddlewareRegistrar.builder()
+                                                .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
+                                                                MIDDLEWARE_ADDER)
+                                                                .build())
+                                                .useClientOptions()
+                                                .build())
+                                .build());
 
-                        runtimeClientPlugins.add(RuntimeClientPlugin.builder()
-                                        .servicePredicate((m, s) -> s.equals(serviceShape))
-                                        .operationPredicate((m, s, o) -> o.equals(operationShape))
-                                        .registerMiddleware(MiddlewareRegistrar.builder()
-                                                        .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
-                                                                        getAddMiddlewareFuncName(operationName))
-                                                                        .build())
-                                                        .useClientOptions()
-                                                        .build())
-                                        .build());
-
-                }
         }
 
         @Override
@@ -103,41 +91,32 @@ public class EndpointDisableHttps implements GoIntegration {
                         SymbolProvider symbolProvider,
                         GoDelegator goDelegator) {
 
-                TopDownIndex topDownIndex = TopDownIndex.of(model);
                 var serviceShape = settings.getService(model);
+                goDelegator.useShapeWriter(serviceShape, writer -> {
 
-                for (ToShapeId operation : topDownIndex.getContainedOperations(serviceShape)) {
-                        OperationShape operationShape = model.expectShape(operation.toShapeId(), OperationShape.class);
 
-                        goDelegator.useShapeWriter(operationShape, writer -> {
-                                Symbol operationSymbol = symbolProvider.toSymbol(operationShape);
-                                String operationName = operationSymbol.getName();
+                        GoStackStepMiddlewareGenerator middleware = GoStackStepMiddlewareGenerator
+                                        .createSerializeStepMiddleware(
+                                                        MIDDLEWARE_ID,
+                                                        MiddlewareIdentifier.string(MIDDLEWARE_ID));
+                        middleware.writeMiddleware(writer, this::generateMiddlewareResolverBody,
+                                        this::generateMiddlewareStructureMembers);
 
-                                GoStackStepMiddlewareGenerator middleware = GoStackStepMiddlewareGenerator
-                                                .createSerializeStepMiddleware(
-                                                                getMiddlewareObjectName(operationName),
-                                                                MiddlewareIdentifier.string(getMiddlewareObjectName(
-                                                                                operationName)));
-                                middleware.writeMiddleware(writer, this::generateMiddlewareResolverBody,
-                                                this::generateMiddlewareStructureMembers);
-
-                                writer.write(
-                                                """
-                                                                        func $L(stack $P, o Options) error {
-                                                                                return stack.Serialize.Insert(&$L{
-                                                                                        EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
-                                                                                }, \"$L\", middleware.After)
-                                                                        }
-                                                                """,
-                                                getAddMiddlewareFuncName(operationName),
-                                                SymbolUtils.createPointableSymbolBuilder("Stack",
-                                                                SmithyGoDependency.SMITHY_MIDDLEWARE).build(),
-                                                getMiddlewareObjectName(operationName),
-                                                EndpointMiddlewareGenerator.MIDDLEWARE_ID);
-                                writer.write("");
-
-                        });
-                }
+                        writer.write(
+                                        """
+                                                                func $L(stack $P, o Options) error {
+                                                                        return stack.Serialize.Insert(&$L{
+                                                                                EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
+                                                                        }, \"$L\", middleware.After)
+                                                                }
+                                                        """,
+                                        MIDDLEWARE_ADDER,
+                                        SymbolUtils.createPointableSymbolBuilder("Stack",
+                                                        SmithyGoDependency.SMITHY_MIDDLEWARE).build(),
+                                        MIDDLEWARE_ID,
+                                        EndpointMiddlewareGenerator.MIDDLEWARE_ID);
+                        writer.write("");
+                });
         }
 
         private void generateMiddlewareResolverBody(GoStackStepMiddlewareGenerator g, GoWriter writer) {
@@ -148,7 +127,7 @@ public class EndpointDisableHttps implements GoIntegration {
                                                                 return out, metadata, $T(\"unknown transport type %T\", in.Request)
                                                         }
 
-                                                        if m.EndpointDisableHTTPS {
+                                                        if m.EndpointDisableHTTPS && !$T(ctx) {
                                                                 req.URL.Scheme = \"http\"
                                                         }
 
@@ -156,7 +135,9 @@ public class EndpointDisableHttps implements GoIntegration {
                                                 """,
                                 SymbolUtils.createPointableSymbolBuilder("Request",
                                                 SmithyGoDependency.SMITHY_HTTP_TRANSPORT).build(),
-                                SymbolUtils.createValueSymbolBuilder("Errorf", SmithyGoDependency.FMT).build());
+                                SymbolUtils.createValueSymbolBuilder("Errorf", SmithyGoDependency.FMT).build(),
+                                SymbolUtils.createValueSymbolBuilder("GetHostnameImmutable", SmithyGoDependency.SMITHY_HTTP_TRANSPORT).build()
+                                );
         }
 
         private void generateMiddlewareStructureMembers(GoStackStepMiddlewareGenerator g, GoWriter writer) {

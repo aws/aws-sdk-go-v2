@@ -376,7 +376,7 @@ func (c *Client) addOperationUploadPartMiddlewares(stack *middleware.Stack, opti
 	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
-	if err = addUploadPartEndpointDisableHTTPSMiddleware(stack, options); err != nil {
+	if err = addEndpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addSerializeImmutableHostnameBucketMiddleware(stack); err != nil {
@@ -479,35 +479,6 @@ func addUploadPartPayloadAsUnsigned(stack *middleware.Stack, options Options) er
 	v4.RemoveContentSHA256HeaderMiddleware(stack)
 	v4.RemoveComputePayloadSHA256Middleware(stack)
 	return v4.AddUnsignedPayloadMiddleware(stack)
-}
-
-type opUploadPartEndpointDisableHTTPSMiddleware struct {
-	EndpointDisableHTTPS bool
-}
-
-func (*opUploadPartEndpointDisableHTTPSMiddleware) ID() string {
-	return "opUploadPartEndpointDisableHTTPSMiddleware"
-}
-
-func (m *opUploadPartEndpointDisableHTTPSMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	if m.EndpointDisableHTTPS {
-		req.URL.Scheme = "http"
-	}
-
-	return next.HandleSerialize(ctx, in)
-
-}
-func addUploadPartEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
-	return stack.Serialize.Insert(&opUploadPartEndpointDisableHTTPSMiddleware{
-		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
-	}, "ResolveEndpointV2", middleware.After)
 }
 
 type opUploadPartResolveEndpointMiddleware struct {
