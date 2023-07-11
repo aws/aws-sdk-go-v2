@@ -133,7 +133,7 @@ public class EndpointDisableHttps implements GoIntegration {
                                                 SymbolUtils.createPointableSymbolBuilder("Stack",
                                                                 SmithyGoDependency.SMITHY_MIDDLEWARE).build(),
                                                 getMiddlewareObjectName(operationName),
-                                                EndpointMiddlewareGenerator.getMiddlewareObjectName(operationName));
+                                                EndpointMiddlewareGenerator.MIDDLEWARE_ID);
                                 writer.write("");
 
                         });

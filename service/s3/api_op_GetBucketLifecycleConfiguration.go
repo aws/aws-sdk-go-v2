@@ -161,7 +161,17 @@ func (c *Client) addOperationGetBucketLifecycleConfigurationMiddlewares(stack *m
 	if err = addGetBucketLifecycleConfigurationEndpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
+	if err = addSerializeImmutableHostnameBucketMiddleware(stack); err != nil {
+		return err
+	}
 	return nil
+}
+
+func (v *GetBucketLifecycleConfigurationInput) bucket() (string, bool) {
+	if v.Bucket == nil {
+		return "", false
+	}
+	return *v.Bucket, true
 }
 
 func newServiceMetadataMiddleware_opGetBucketLifecycleConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
@@ -225,7 +235,7 @@ func (m *opGetBucketLifecycleConfigurationEndpointDisableHTTPSMiddleware) Handle
 func addGetBucketLifecycleConfigurationEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
 	return stack.Serialize.Insert(&opGetBucketLifecycleConfigurationEndpointDisableHTTPSMiddleware{
 		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
-	}, "opGetBucketLifecycleConfigurationResolveEndpointMiddleware", middleware.After)
+	}, "ResolveEndpointV2", middleware.After)
 }
 
 type opGetBucketLifecycleConfigurationResolveEndpointMiddleware struct {
@@ -234,7 +244,7 @@ type opGetBucketLifecycleConfigurationResolveEndpointMiddleware struct {
 }
 
 func (*opGetBucketLifecycleConfigurationResolveEndpointMiddleware) ID() string {
-	return "opGetBucketLifecycleConfigurationResolveEndpointMiddleware"
+	return "ResolveEndpointV2"
 }
 
 func (m *opGetBucketLifecycleConfigurationResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

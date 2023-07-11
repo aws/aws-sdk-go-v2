@@ -174,7 +174,17 @@ func (c *Client) addOperationGetBucketNotificationConfigurationMiddlewares(stack
 	if err = addGetBucketNotificationConfigurationEndpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
+	if err = addSerializeImmutableHostnameBucketMiddleware(stack); err != nil {
+		return err
+	}
 	return nil
+}
+
+func (v *GetBucketNotificationConfigurationInput) bucket() (string, bool) {
+	if v.Bucket == nil {
+		return "", false
+	}
+	return *v.Bucket, true
 }
 
 func newServiceMetadataMiddleware_opGetBucketNotificationConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
@@ -238,7 +248,7 @@ func (m *opGetBucketNotificationConfigurationEndpointDisableHTTPSMiddleware) Han
 func addGetBucketNotificationConfigurationEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
 	return stack.Serialize.Insert(&opGetBucketNotificationConfigurationEndpointDisableHTTPSMiddleware{
 		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
-	}, "opGetBucketNotificationConfigurationResolveEndpointMiddleware", middleware.After)
+	}, "ResolveEndpointV2", middleware.After)
 }
 
 type opGetBucketNotificationConfigurationResolveEndpointMiddleware struct {
@@ -247,7 +257,7 @@ type opGetBucketNotificationConfigurationResolveEndpointMiddleware struct {
 }
 
 func (*opGetBucketNotificationConfigurationResolveEndpointMiddleware) ID() string {
-	return "opGetBucketNotificationConfigurationResolveEndpointMiddleware"
+	return "ResolveEndpointV2"
 }
 
 func (m *opGetBucketNotificationConfigurationResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

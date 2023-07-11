@@ -527,7 +527,17 @@ func (c *Client) addOperationCopyObjectMiddlewares(stack *middleware.Stack, opti
 	if err = addCopyObjectEndpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
+	if err = addSerializeImmutableHostnameBucketMiddleware(stack); err != nil {
+		return err
+	}
 	return nil
+}
+
+func (v *CopyObjectInput) bucket() (string, bool) {
+	if v.Bucket == nil {
+		return "", false
+	}
+	return *v.Bucket, true
 }
 
 func newServiceMetadataMiddleware_opCopyObject(region string) *awsmiddleware.RegisterServiceMetadata {
@@ -591,7 +601,7 @@ func (m *opCopyObjectEndpointDisableHTTPSMiddleware) HandleSerialize(ctx context
 func addCopyObjectEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
 	return stack.Serialize.Insert(&opCopyObjectEndpointDisableHTTPSMiddleware{
 		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
-	}, "opCopyObjectResolveEndpointMiddleware", middleware.After)
+	}, "ResolveEndpointV2", middleware.After)
 }
 
 type opCopyObjectResolveEndpointMiddleware struct {
@@ -600,7 +610,7 @@ type opCopyObjectResolveEndpointMiddleware struct {
 }
 
 func (*opCopyObjectResolveEndpointMiddleware) ID() string {
-	return "opCopyObjectResolveEndpointMiddleware"
+	return "ResolveEndpointV2"
 }
 
 func (m *opCopyObjectResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

@@ -177,7 +177,17 @@ func (c *Client) addOperationPutPublicAccessBlockMiddlewares(stack *middleware.S
 	if err = addPutPublicAccessBlockEndpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
+	if err = addSerializeImmutableHostnameBucketMiddleware(stack); err != nil {
+		return err
+	}
 	return nil
+}
+
+func (v *PutPublicAccessBlockInput) bucket() (string, bool) {
+	if v.Bucket == nil {
+		return "", false
+	}
+	return *v.Bucket, true
 }
 
 func newServiceMetadataMiddleware_opPutPublicAccessBlock(region string) *awsmiddleware.RegisterServiceMetadata {
@@ -261,7 +271,7 @@ func (m *opPutPublicAccessBlockEndpointDisableHTTPSMiddleware) HandleSerialize(c
 func addPutPublicAccessBlockEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
 	return stack.Serialize.Insert(&opPutPublicAccessBlockEndpointDisableHTTPSMiddleware{
 		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
-	}, "opPutPublicAccessBlockResolveEndpointMiddleware", middleware.After)
+	}, "ResolveEndpointV2", middleware.After)
 }
 
 type opPutPublicAccessBlockResolveEndpointMiddleware struct {
@@ -270,7 +280,7 @@ type opPutPublicAccessBlockResolveEndpointMiddleware struct {
 }
 
 func (*opPutPublicAccessBlockResolveEndpointMiddleware) ID() string {
-	return "opPutPublicAccessBlockResolveEndpointMiddleware"
+	return "ResolveEndpointV2"
 }
 
 func (m *opPutPublicAccessBlockResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

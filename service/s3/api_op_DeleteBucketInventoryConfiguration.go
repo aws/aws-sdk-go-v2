@@ -148,7 +148,17 @@ func (c *Client) addOperationDeleteBucketInventoryConfigurationMiddlewares(stack
 	if err = addDeleteBucketInventoryConfigurationEndpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
+	if err = addSerializeImmutableHostnameBucketMiddleware(stack); err != nil {
+		return err
+	}
 	return nil
+}
+
+func (v *DeleteBucketInventoryConfigurationInput) bucket() (string, bool) {
+	if v.Bucket == nil {
+		return "", false
+	}
+	return *v.Bucket, true
 }
 
 func newServiceMetadataMiddleware_opDeleteBucketInventoryConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
@@ -212,7 +222,7 @@ func (m *opDeleteBucketInventoryConfigurationEndpointDisableHTTPSMiddleware) Han
 func addDeleteBucketInventoryConfigurationEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
 	return stack.Serialize.Insert(&opDeleteBucketInventoryConfigurationEndpointDisableHTTPSMiddleware{
 		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
-	}, "opDeleteBucketInventoryConfigurationResolveEndpointMiddleware", middleware.After)
+	}, "ResolveEndpointV2", middleware.After)
 }
 
 type opDeleteBucketInventoryConfigurationResolveEndpointMiddleware struct {
@@ -221,7 +231,7 @@ type opDeleteBucketInventoryConfigurationResolveEndpointMiddleware struct {
 }
 
 func (*opDeleteBucketInventoryConfigurationResolveEndpointMiddleware) ID() string {
-	return "opDeleteBucketInventoryConfigurationResolveEndpointMiddleware"
+	return "ResolveEndpointV2"
 }
 
 func (m *opDeleteBucketInventoryConfigurationResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

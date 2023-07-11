@@ -138,7 +138,17 @@ func (c *Client) addOperationDeleteBucketOwnershipControlsMiddlewares(stack *mid
 	if err = addDeleteBucketOwnershipControlsEndpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
+	if err = addSerializeImmutableHostnameBucketMiddleware(stack); err != nil {
+		return err
+	}
 	return nil
+}
+
+func (v *DeleteBucketOwnershipControlsInput) bucket() (string, bool) {
+	if v.Bucket == nil {
+		return "", false
+	}
+	return *v.Bucket, true
 }
 
 func newServiceMetadataMiddleware_opDeleteBucketOwnershipControls(region string) *awsmiddleware.RegisterServiceMetadata {
@@ -202,7 +212,7 @@ func (m *opDeleteBucketOwnershipControlsEndpointDisableHTTPSMiddleware) HandleSe
 func addDeleteBucketOwnershipControlsEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
 	return stack.Serialize.Insert(&opDeleteBucketOwnershipControlsEndpointDisableHTTPSMiddleware{
 		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
-	}, "opDeleteBucketOwnershipControlsResolveEndpointMiddleware", middleware.After)
+	}, "ResolveEndpointV2", middleware.After)
 }
 
 type opDeleteBucketOwnershipControlsResolveEndpointMiddleware struct {
@@ -211,7 +221,7 @@ type opDeleteBucketOwnershipControlsResolveEndpointMiddleware struct {
 }
 
 func (*opDeleteBucketOwnershipControlsResolveEndpointMiddleware) ID() string {
-	return "opDeleteBucketOwnershipControlsResolveEndpointMiddleware"
+	return "ResolveEndpointV2"
 }
 
 func (m *opDeleteBucketOwnershipControlsResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

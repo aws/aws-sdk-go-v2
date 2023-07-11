@@ -163,7 +163,17 @@ func (c *Client) addOperationGetObjectLegalHoldMiddlewares(stack *middleware.Sta
 	if err = addGetObjectLegalHoldEndpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
+	if err = addSerializeImmutableHostnameBucketMiddleware(stack); err != nil {
+		return err
+	}
 	return nil
+}
+
+func (v *GetObjectLegalHoldInput) bucket() (string, bool) {
+	if v.Bucket == nil {
+		return "", false
+	}
+	return *v.Bucket, true
 }
 
 func newServiceMetadataMiddleware_opGetObjectLegalHold(region string) *awsmiddleware.RegisterServiceMetadata {
@@ -227,7 +237,7 @@ func (m *opGetObjectLegalHoldEndpointDisableHTTPSMiddleware) HandleSerialize(ctx
 func addGetObjectLegalHoldEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
 	return stack.Serialize.Insert(&opGetObjectLegalHoldEndpointDisableHTTPSMiddleware{
 		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
-	}, "opGetObjectLegalHoldResolveEndpointMiddleware", middleware.After)
+	}, "ResolveEndpointV2", middleware.After)
 }
 
 type opGetObjectLegalHoldResolveEndpointMiddleware struct {
@@ -236,7 +246,7 @@ type opGetObjectLegalHoldResolveEndpointMiddleware struct {
 }
 
 func (*opGetObjectLegalHoldResolveEndpointMiddleware) ID() string {
-	return "opGetObjectLegalHoldResolveEndpointMiddleware"
+	return "ResolveEndpointV2"
 }
 
 func (m *opGetObjectLegalHoldResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
