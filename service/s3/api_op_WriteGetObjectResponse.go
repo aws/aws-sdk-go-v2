@@ -12,11 +12,13 @@ import (
 	internalauth "github.com/aws/aws-sdk-go-v2/internal/auth"
 	s3cust "github.com/aws/aws-sdk-go-v2/service/s3/internal/customizations"
 	"github.com/aws/aws-sdk-go-v2/service/s3/types"
+	smithy "github.com/aws/smithy-go"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
+	"strings"
 	"time"
 )
 
@@ -339,6 +341,9 @@ func (c *Client) addOperationWriteGetObjectResponseMiddlewares(stack *middleware
 	if err = swapWithCustomHTTPSignerMiddleware(stack, options); err != nil {
 		return err
 	}
+	if err = addEndpointPrefix_opWriteGetObjectResponseMiddleware(stack); err != nil {
+		return err
+	}
 	if err = addWriteGetObjectResponseResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -373,6 +378,47 @@ func (c *Client) addOperationWriteGetObjectResponseMiddlewares(stack *middleware
 		return err
 	}
 	return nil
+}
+
+type endpointPrefix_opWriteGetObjectResponseMiddleware struct {
+}
+
+func (*endpointPrefix_opWriteGetObjectResponseMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opWriteGetObjectResponseMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleSerialize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	input, ok := in.Parameters.(*WriteGetObjectResponseInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input type %T", in.Parameters)
+	}
+
+	var prefix strings.Builder
+	if input.RequestRoute == nil {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("RequestRoute forms part of the endpoint host and so may not be nil")}
+	} else if !smithyhttp.ValidHostLabel(*input.RequestRoute) {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("RequestRoute forms part of the endpoint host and so must match \"[a-zA-Z0-9-]{1,63}\", but was \"%s\"", *input.RequestRoute)}
+	} else {
+		prefix.WriteString(*input.RequestRoute)
+	}
+	prefix.WriteString(".")
+	req.URL.Host = prefix.String() + req.URL.Host
+
+	return next.HandleSerialize(ctx, in)
+}
+func addEndpointPrefix_opWriteGetObjectResponseMiddleware(stack *middleware.Stack) error {
+	return stack.Serialize.Insert(&endpointPrefix_opWriteGetObjectResponseMiddleware{}, `OperationSerializer`, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opWriteGetObjectResponse(region string) *awsmiddleware.RegisterServiceMetadata {
