@@ -178,7 +178,17 @@ func (c *Client) addOperationPutObjectLockConfigurationMiddlewares(stack *middle
 	if err = addPutObjectLockConfigurationEndpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
+	if err = addSerializeImmutableHostnameBucketMiddleware(stack); err != nil {
+		return err
+	}
 	return nil
+}
+
+func (v *PutObjectLockConfigurationInput) bucket() (string, bool) {
+	if v.Bucket == nil {
+		return "", false
+	}
+	return *v.Bucket, true
 }
 
 func newServiceMetadataMiddleware_opPutObjectLockConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
@@ -262,7 +272,7 @@ func (m *opPutObjectLockConfigurationEndpointDisableHTTPSMiddleware) HandleSeria
 func addPutObjectLockConfigurationEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
 	return stack.Serialize.Insert(&opPutObjectLockConfigurationEndpointDisableHTTPSMiddleware{
 		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
-	}, "opPutObjectLockConfigurationResolveEndpointMiddleware", middleware.After)
+	}, "ResolveEndpointV2", middleware.After)
 }
 
 type opPutObjectLockConfigurationResolveEndpointMiddleware struct {
@@ -271,7 +281,7 @@ type opPutObjectLockConfigurationResolveEndpointMiddleware struct {
 }
 
 func (*opPutObjectLockConfigurationResolveEndpointMiddleware) ID() string {
-	return "opPutObjectLockConfigurationResolveEndpointMiddleware"
+	return "ResolveEndpointV2"
 }
 
 func (m *opPutObjectLockConfigurationResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

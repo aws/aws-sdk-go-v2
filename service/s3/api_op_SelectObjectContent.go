@@ -259,7 +259,17 @@ func (c *Client) addOperationSelectObjectContentMiddlewares(stack *middleware.St
 	if err = addSelectObjectContentEndpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
+	if err = addSerializeImmutableHostnameBucketMiddleware(stack); err != nil {
+		return err
+	}
 	return nil
+}
+
+func (v *SelectObjectContentInput) bucket() (string, bool) {
+	if v.Bucket == nil {
+		return "", false
+	}
+	return *v.Bucket, true
 }
 
 func newServiceMetadataMiddleware_opSelectObjectContent(region string) *awsmiddleware.RegisterServiceMetadata {
@@ -323,7 +333,7 @@ func (m *opSelectObjectContentEndpointDisableHTTPSMiddleware) HandleSerialize(ct
 func addSelectObjectContentEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
 	return stack.Serialize.Insert(&opSelectObjectContentEndpointDisableHTTPSMiddleware{
 		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
-	}, "opSelectObjectContentResolveEndpointMiddleware", middleware.After)
+	}, "ResolveEndpointV2", middleware.After)
 }
 
 // SelectObjectContentEventStream provides the event stream handling for the SelectObjectContent operation.
@@ -432,7 +442,7 @@ type opSelectObjectContentResolveEndpointMiddleware struct {
 }
 
 func (*opSelectObjectContentResolveEndpointMiddleware) ID() string {
-	return "opSelectObjectContentResolveEndpointMiddleware"
+	return "ResolveEndpointV2"
 }
 
 func (m *opSelectObjectContentResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

@@ -147,7 +147,17 @@ func (c *Client) addOperationGetBucketPolicyStatusMiddlewares(stack *middleware.
 	if err = addGetBucketPolicyStatusEndpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
+	if err = addSerializeImmutableHostnameBucketMiddleware(stack); err != nil {
+		return err
+	}
 	return nil
+}
+
+func (v *GetBucketPolicyStatusInput) bucket() (string, bool) {
+	if v.Bucket == nil {
+		return "", false
+	}
+	return *v.Bucket, true
 }
 
 func newServiceMetadataMiddleware_opGetBucketPolicyStatus(region string) *awsmiddleware.RegisterServiceMetadata {
@@ -211,7 +221,7 @@ func (m *opGetBucketPolicyStatusEndpointDisableHTTPSMiddleware) HandleSerialize(
 func addGetBucketPolicyStatusEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
 	return stack.Serialize.Insert(&opGetBucketPolicyStatusEndpointDisableHTTPSMiddleware{
 		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
-	}, "opGetBucketPolicyStatusResolveEndpointMiddleware", middleware.After)
+	}, "ResolveEndpointV2", middleware.After)
 }
 
 type opGetBucketPolicyStatusResolveEndpointMiddleware struct {
@@ -220,7 +230,7 @@ type opGetBucketPolicyStatusResolveEndpointMiddleware struct {
 }
 
 func (*opGetBucketPolicyStatusResolveEndpointMiddleware) ID() string {
-	return "opGetBucketPolicyStatusResolveEndpointMiddleware"
+	return "ResolveEndpointV2"
 }
 
 func (m *opGetBucketPolicyStatusResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

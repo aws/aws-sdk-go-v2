@@ -130,6 +130,9 @@ func (c *Client) addOperationListBucketsMiddlewares(stack *middleware.Stack, opt
 	if err = addListBucketsEndpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
+	if err = addSerializeImmutableHostnameBucketMiddleware(stack); err != nil {
+		return err
+	}
 	return nil
 }
 
@@ -184,7 +187,7 @@ func (m *opListBucketsEndpointDisableHTTPSMiddleware) HandleSerialize(ctx contex
 func addListBucketsEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
 	return stack.Serialize.Insert(&opListBucketsEndpointDisableHTTPSMiddleware{
 		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
-	}, "opListBucketsResolveEndpointMiddleware", middleware.After)
+	}, "ResolveEndpointV2", middleware.After)
 }
 
 type opListBucketsResolveEndpointMiddleware struct {
@@ -193,7 +196,7 @@ type opListBucketsResolveEndpointMiddleware struct {
 }
 
 func (*opListBucketsResolveEndpointMiddleware) ID() string {
-	return "opListBucketsResolveEndpointMiddleware"
+	return "ResolveEndpointV2"
 }
 
 func (m *opListBucketsResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

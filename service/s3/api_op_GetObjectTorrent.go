@@ -157,7 +157,17 @@ func (c *Client) addOperationGetObjectTorrentMiddlewares(stack *middleware.Stack
 	if err = addGetObjectTorrentEndpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
+	if err = addSerializeImmutableHostnameBucketMiddleware(stack); err != nil {
+		return err
+	}
 	return nil
+}
+
+func (v *GetObjectTorrentInput) bucket() (string, bool) {
+	if v.Bucket == nil {
+		return "", false
+	}
+	return *v.Bucket, true
 }
 
 func newServiceMetadataMiddleware_opGetObjectTorrent(region string) *awsmiddleware.RegisterServiceMetadata {
@@ -221,7 +231,7 @@ func (m *opGetObjectTorrentEndpointDisableHTTPSMiddleware) HandleSerialize(ctx c
 func addGetObjectTorrentEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
 	return stack.Serialize.Insert(&opGetObjectTorrentEndpointDisableHTTPSMiddleware{
 		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
-	}, "opGetObjectTorrentResolveEndpointMiddleware", middleware.After)
+	}, "ResolveEndpointV2", middleware.After)
 }
 
 type opGetObjectTorrentResolveEndpointMiddleware struct {
@@ -230,7 +240,7 @@ type opGetObjectTorrentResolveEndpointMiddleware struct {
 }
 
 func (*opGetObjectTorrentResolveEndpointMiddleware) ID() string {
-	return "opGetObjectTorrentResolveEndpointMiddleware"
+	return "ResolveEndpointV2"
 }
 
 func (m *opGetObjectTorrentResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

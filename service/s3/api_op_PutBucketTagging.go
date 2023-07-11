@@ -193,7 +193,17 @@ func (c *Client) addOperationPutBucketTaggingMiddlewares(stack *middleware.Stack
 	if err = addPutBucketTaggingEndpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
+	if err = addSerializeImmutableHostnameBucketMiddleware(stack); err != nil {
+		return err
+	}
 	return nil
+}
+
+func (v *PutBucketTaggingInput) bucket() (string, bool) {
+	if v.Bucket == nil {
+		return "", false
+	}
+	return *v.Bucket, true
 }
 
 func newServiceMetadataMiddleware_opPutBucketTagging(region string) *awsmiddleware.RegisterServiceMetadata {
@@ -277,7 +287,7 @@ func (m *opPutBucketTaggingEndpointDisableHTTPSMiddleware) HandleSerialize(ctx c
 func addPutBucketTaggingEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
 	return stack.Serialize.Insert(&opPutBucketTaggingEndpointDisableHTTPSMiddleware{
 		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
-	}, "opPutBucketTaggingResolveEndpointMiddleware", middleware.After)
+	}, "ResolveEndpointV2", middleware.After)
 }
 
 type opPutBucketTaggingResolveEndpointMiddleware struct {
@@ -286,7 +296,7 @@ type opPutBucketTaggingResolveEndpointMiddleware struct {
 }
 
 func (*opPutBucketTaggingResolveEndpointMiddleware) ID() string {
-	return "opPutBucketTaggingResolveEndpointMiddleware"
+	return "ResolveEndpointV2"
 }
 
 func (m *opPutBucketTaggingResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

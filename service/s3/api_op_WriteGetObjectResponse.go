@@ -369,6 +369,9 @@ func (c *Client) addOperationWriteGetObjectResponseMiddlewares(stack *middleware
 	if err = addWriteGetObjectResponseEndpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
+	if err = addSerializeImmutableHostnameBucketMiddleware(stack); err != nil {
+		return err
+	}
 	return nil
 }
 
@@ -423,7 +426,7 @@ func (m *opWriteGetObjectResponseEndpointDisableHTTPSMiddleware) HandleSerialize
 func addWriteGetObjectResponseEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
 	return stack.Serialize.Insert(&opWriteGetObjectResponseEndpointDisableHTTPSMiddleware{
 		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
-	}, "opWriteGetObjectResponseResolveEndpointMiddleware", middleware.After)
+	}, "ResolveEndpointV2", middleware.After)
 }
 
 type opWriteGetObjectResponseResolveEndpointMiddleware struct {
@@ -432,7 +435,7 @@ type opWriteGetObjectResponseResolveEndpointMiddleware struct {
 }
 
 func (*opWriteGetObjectResponseResolveEndpointMiddleware) ID() string {
-	return "opWriteGetObjectResponseResolveEndpointMiddleware"
+	return "ResolveEndpointV2"
 }
 
 func (m *opWriteGetObjectResponseResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (

@@ -143,7 +143,17 @@ func (c *Client) addOperationDeleteBucketReplicationMiddlewares(stack *middlewar
 	if err = addDeleteBucketReplicationEndpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
+	if err = addSerializeImmutableHostnameBucketMiddleware(stack); err != nil {
+		return err
+	}
 	return nil
+}
+
+func (v *DeleteBucketReplicationInput) bucket() (string, bool) {
+	if v.Bucket == nil {
+		return "", false
+	}
+	return *v.Bucket, true
 }
 
 func newServiceMetadataMiddleware_opDeleteBucketReplication(region string) *awsmiddleware.RegisterServiceMetadata {
@@ -207,7 +217,7 @@ func (m *opDeleteBucketReplicationEndpointDisableHTTPSMiddleware) HandleSerializ
 func addDeleteBucketReplicationEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
 	return stack.Serialize.Insert(&opDeleteBucketReplicationEndpointDisableHTTPSMiddleware{
 		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
-	}, "opDeleteBucketReplicationResolveEndpointMiddleware", middleware.After)
+	}, "ResolveEndpointV2", middleware.After)
 }
 
 type opDeleteBucketReplicationResolveEndpointMiddleware struct {
@@ -216,7 +226,7 @@ type opDeleteBucketReplicationResolveEndpointMiddleware struct {
 }
 
 func (*opDeleteBucketReplicationResolveEndpointMiddleware) ID() string {
-	return "opDeleteBucketReplicationResolveEndpointMiddleware"
+	return "ResolveEndpointV2"
 }
 
 func (m *opDeleteBucketReplicationResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
