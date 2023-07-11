@@ -247,9 +247,9 @@ func (c *Client) addOperationListObjectsMiddlewares(stack *middleware.Stack, opt
 	if err = addListObjectsEndpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-    if err = addSerializeImmutableHostnameBucketMiddleware(stack); err != nil {
-    	return err
-    }
+	if err = addSerializeImmutableHostnameBucketMiddleware(stack); err != nil {
+		return err
+	}
 	return nil
 }
 
