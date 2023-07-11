@@ -6,6 +6,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	internalauth "github.com/aws/aws-sdk-go-v2/internal/auth"
@@ -127,7 +128,7 @@ func (c *Client) addOperationListOutpostsWithS3Middlewares(stack *middleware.Sta
 	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
-	if err = addListOutpostsWithS3EndpointDisableHTTPSMiddleware(stack, options); err != nil {
+	if err = addEndpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
 	return nil
@@ -229,42 +230,13 @@ func newServiceMetadataMiddleware_opListOutpostsWithS3(region string) *awsmiddle
 	}
 }
 
-type opListOutpostsWithS3EndpointDisableHTTPSMiddleware struct {
-	EndpointDisableHTTPS bool
-}
-
-func (*opListOutpostsWithS3EndpointDisableHTTPSMiddleware) ID() string {
-	return "opListOutpostsWithS3EndpointDisableHTTPSMiddleware"
-}
-
-func (m *opListOutpostsWithS3EndpointDisableHTTPSMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	if m.EndpointDisableHTTPS {
-		req.URL.Scheme = "http"
-	}
-
-	return next.HandleSerialize(ctx, in)
-
-}
-func addListOutpostsWithS3EndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
-	return stack.Serialize.Insert(&opListOutpostsWithS3EndpointDisableHTTPSMiddleware{
-		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
-	}, "opListOutpostsWithS3ResolveEndpointMiddleware", middleware.After)
-}
-
 type opListOutpostsWithS3ResolveEndpointMiddleware struct {
 	EndpointResolver EndpointResolverV2
 	BuiltInResolver  BuiltInParameterResolver
 }
 
 func (*opListOutpostsWithS3ResolveEndpointMiddleware) ID() string {
-	return "opListOutpostsWithS3ResolveEndpointMiddleware"
+	return "ResolveEndpointV2"
 }
 
 func (m *opListOutpostsWithS3ResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -326,9 +298,13 @@ func (m *opListOutpostsWithS3ResolveEndpointMiddleware) HandleSerialize(ctx cont
 			var signingName, signingRegion string
 			if v4Scheme.SigningName == nil {
 				signingName = "s3-outposts"
+			} else {
+				signingName = *v4Scheme.SigningName
 			}
 			if v4Scheme.SigningRegion == nil {
 				signingRegion = m.BuiltInResolver.(*BuiltInResolver).Region
+			} else {
+				signingRegion = *v4Scheme.SigningRegion
 			}
 			if v4Scheme.DisableDoubleEncoding != nil {
 				// The signer sets an equivalent value at client initialization time.
@@ -341,9 +317,8 @@ func (m *opListOutpostsWithS3ResolveEndpointMiddleware) HandleSerialize(ctx cont
 			break
 		case *internalauth.AuthenticationSchemeV4A:
 			v4aScheme, _ := authScheme.(*internalauth.AuthenticationSchemeV4A)
-			var signingName string
 			if v4aScheme.SigningName == nil {
-				signingName = "s3-outposts"
+				v4aScheme.SigningName = aws.String("s3-outposts")
 			}
 			if v4aScheme.DisableDoubleEncoding != nil {
 				// The signer sets an equivalent value at client initialization time.
@@ -351,7 +326,7 @@ func (m *opListOutpostsWithS3ResolveEndpointMiddleware) HandleSerialize(ctx cont
 				// and override the value set at client initialization time.
 				ctx = internalauth.SetDisableDoubleEncoding(ctx, *v4aScheme.DisableDoubleEncoding)
 			}
-			ctx = awsmiddleware.SetSigningName(ctx, signingName)
+			ctx = awsmiddleware.SetSigningName(ctx, *v4aScheme.SigningName)
 			ctx = awsmiddleware.SetSigningRegion(ctx, v4aScheme.SigningRegionSet[0])
 			break
 		case *internalauth.AuthenticationSchemeNone:

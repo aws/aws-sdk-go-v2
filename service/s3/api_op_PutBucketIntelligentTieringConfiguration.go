@@ -165,7 +165,7 @@ func (c *Client) addOperationPutBucketIntelligentTieringConfigurationMiddlewares
 	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
-	if err = addPutBucketIntelligentTieringConfigurationEndpointDisableHTTPSMiddleware(stack, options); err != nil {
+	if err = addEndpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addSerializeImmutableHostnameBucketMiddleware(stack); err != nil {
@@ -214,35 +214,6 @@ func addPutBucketIntelligentTieringConfigurationUpdateEndpoint(stack *middleware
 		UseARNRegion:                   options.UseARNRegion,
 		DisableMultiRegionAccessPoints: options.DisableMultiRegionAccessPoints,
 	})
-}
-
-type opPutBucketIntelligentTieringConfigurationEndpointDisableHTTPSMiddleware struct {
-	EndpointDisableHTTPS bool
-}
-
-func (*opPutBucketIntelligentTieringConfigurationEndpointDisableHTTPSMiddleware) ID() string {
-	return "opPutBucketIntelligentTieringConfigurationEndpointDisableHTTPSMiddleware"
-}
-
-func (m *opPutBucketIntelligentTieringConfigurationEndpointDisableHTTPSMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	if m.EndpointDisableHTTPS {
-		req.URL.Scheme = "http"
-	}
-
-	return next.HandleSerialize(ctx, in)
-
-}
-func addPutBucketIntelligentTieringConfigurationEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
-	return stack.Serialize.Insert(&opPutBucketIntelligentTieringConfigurationEndpointDisableHTTPSMiddleware{
-		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
-	}, "ResolveEndpointV2", middleware.After)
 }
 
 type opPutBucketIntelligentTieringConfigurationResolveEndpointMiddleware struct {
