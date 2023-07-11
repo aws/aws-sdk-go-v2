@@ -1106,19 +1106,19 @@ func TestWriteGetObjectResponse_UpdateEndpoint(t *testing.T) {
 			expectedSigningRegion: "us-gov-west-1",
 			expectedSigningName:   "s3-object-lambda",
 		},
-		"duakstack endpoint": {
+		"dualstack endpoint": {
 			options: s3.Options{
 				Region:       "us-west-2",
 				UseDualstack: true,
 			},
-			expectedErr: "client configured for dualstack but not supported for operation",
+			expectedErr: "S3 Object Lambda does not support Dual-stack",
 		},
 		"accelerate endpoint": {
 			options: s3.Options{
 				Region:        "us-west-2",
 				UseAccelerate: true,
 			},
-			expectedErr: "client configured for accelerate but not supported for operation",
+			expectedErr: "S3 Object Lambda does not support S3 Accelerate",
 		},
 		"custom endpoint": {
 			options: s3.Options{
