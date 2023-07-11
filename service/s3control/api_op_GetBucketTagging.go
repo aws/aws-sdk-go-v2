@@ -6,6 +6,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	internalauth "github.com/aws/aws-sdk-go-v2/internal/auth"
@@ -158,7 +159,7 @@ func (c *Client) addOperationGetBucketTaggingMiddlewares(stack *middleware.Stack
 	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
-	if err = addGetBucketTaggingEndpointDisableHTTPSMiddleware(stack, options); err != nil {
+	if err = addEndpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
 	return nil
@@ -218,42 +219,13 @@ func addGetBucketTaggingUpdateEndpoint(stack *middleware.Stack, options Options)
 	})
 }
 
-type opGetBucketTaggingEndpointDisableHTTPSMiddleware struct {
-	EndpointDisableHTTPS bool
-}
-
-func (*opGetBucketTaggingEndpointDisableHTTPSMiddleware) ID() string {
-	return "opGetBucketTaggingEndpointDisableHTTPSMiddleware"
-}
-
-func (m *opGetBucketTaggingEndpointDisableHTTPSMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	if m.EndpointDisableHTTPS {
-		req.URL.Scheme = "http"
-	}
-
-	return next.HandleSerialize(ctx, in)
-
-}
-func addGetBucketTaggingEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
-	return stack.Serialize.Insert(&opGetBucketTaggingEndpointDisableHTTPSMiddleware{
-		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
-	}, "opGetBucketTaggingResolveEndpointMiddleware", middleware.After)
-}
-
 type opGetBucketTaggingResolveEndpointMiddleware struct {
 	EndpointResolver EndpointResolverV2
 	BuiltInResolver  BuiltInParameterResolver
 }
 
 func (*opGetBucketTaggingResolveEndpointMiddleware) ID() string {
-	return "opGetBucketTaggingResolveEndpointMiddleware"
+	return "ResolveEndpointV2"
 }
 
 func (m *opGetBucketTaggingResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
@@ -326,9 +298,13 @@ func (m *opGetBucketTaggingResolveEndpointMiddleware) HandleSerialize(ctx contex
 			var signingName, signingRegion string
 			if v4Scheme.SigningName == nil {
 				signingName = "s3"
+			} else {
+				signingName = *v4Scheme.SigningName
 			}
 			if v4Scheme.SigningRegion == nil {
 				signingRegion = m.BuiltInResolver.(*BuiltInResolver).Region
+			} else {
+				signingRegion = *v4Scheme.SigningRegion
 			}
 			if v4Scheme.DisableDoubleEncoding != nil {
 				// The signer sets an equivalent value at client initialization time.
@@ -341,9 +317,8 @@ func (m *opGetBucketTaggingResolveEndpointMiddleware) HandleSerialize(ctx contex
 			break
 		case *internalauth.AuthenticationSchemeV4A:
 			v4aScheme, _ := authScheme.(*internalauth.AuthenticationSchemeV4A)
-			var signingName string
 			if v4aScheme.SigningName == nil {
-				signingName = "s3"
+				v4aScheme.SigningName = aws.String("s3")
 			}
 			if v4aScheme.DisableDoubleEncoding != nil {
 				// The signer sets an equivalent value at client initialization time.
@@ -351,7 +326,7 @@ func (m *opGetBucketTaggingResolveEndpointMiddleware) HandleSerialize(ctx contex
 				// and override the value set at client initialization time.
 				ctx = internalauth.SetDisableDoubleEncoding(ctx, *v4aScheme.DisableDoubleEncoding)
 			}
-			ctx = awsmiddleware.SetSigningName(ctx, signingName)
+			ctx = awsmiddleware.SetSigningName(ctx, *v4aScheme.SigningName)
 			ctx = awsmiddleware.SetSigningRegion(ctx, v4aScheme.SigningRegionSet[0])
 			break
 		case *internalauth.AuthenticationSchemeNone:
