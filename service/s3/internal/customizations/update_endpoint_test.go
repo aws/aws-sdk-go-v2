@@ -1313,7 +1313,7 @@ func TestMultiRegionAccessPoints_UpdateEndpoint(t *testing.T) {
 				DisableMultiRegionAccessPoints: true,
 			},
 			bucket:      "arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
-			expectedErr: "Multi-Region access point ARNs are disabled",
+			expectedErr: "Multi-Region Access Point ARNs are disabled",
 		},
 		"region as aws-global with mrap disabled": {
 			options: s3.Options{
@@ -1321,7 +1321,7 @@ func TestMultiRegionAccessPoints_UpdateEndpoint(t *testing.T) {
 				DisableMultiRegionAccessPoints: true,
 			},
 			bucket:      "arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
-			expectedErr: "Multi-Region access point ARNs are disabled",
+			expectedErr: "Multi-Region Access Point ARNs are disabled",
 		},
 		"with dualstack": {
 			options: s3.Options{
@@ -1329,7 +1329,7 @@ func TestMultiRegionAccessPoints_UpdateEndpoint(t *testing.T) {
 				UseDualstack: true,
 			},
 			bucket:      "arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
-			expectedErr: "client configured for S3 Dual-stack but is not supported with resource",
+			expectedErr: "S3 MRAP does not support dual-stack",
 		},
 		"with accelerate": {
 			options: s3.Options{
@@ -1337,7 +1337,7 @@ func TestMultiRegionAccessPoints_UpdateEndpoint(t *testing.T) {
 				UseAccelerate: true,
 			},
 			bucket:      "arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
-			expectedErr: "client configured for S3 Accelerate but is not supported with resource",
+			expectedErr: "S3 MRAP does not support S3 Accelerate",
 		},
 		"access point with no region and mrap disabled": {
 			options: s3.Options{
@@ -1345,7 +1345,7 @@ func TestMultiRegionAccessPoints_UpdateEndpoint(t *testing.T) {
 				DisableMultiRegionAccessPoints: true,
 			},
 			bucket:      "arn:aws:s3::123456789012:accesspoint:myendpoint",
-			expectedErr: "Multi-Region access point ARNs are disabled",
+			expectedErr: "Multi-Region Access Point ARNs are disabled",
 		},
 		"endpoint with no region and disabled mrap": {
 			options: s3.Options{
@@ -1353,7 +1353,7 @@ func TestMultiRegionAccessPoints_UpdateEndpoint(t *testing.T) {
 				DisableMultiRegionAccessPoints: true,
 			},
 			bucket:      "arn:aws:s3::123456789012:accesspoint:myendpoint",
-			expectedErr: "Multi-Region access point ARNs are disabled",
+			expectedErr: "Multi-Region Access Point ARNs are disabled",
 		},
 		"endpoint with no region": {
 			options: s3.Options{
@@ -1418,14 +1418,14 @@ func TestMultiRegionAccessPoints_UpdateEndpoint(t *testing.T) {
 				},
 			},
 			bucket:      "arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
-			expectedErr: "client configured for fips but cross-region resource ARN provided",
+			expectedErr: "S3 MRAP does not support FIPS",
 		},
 		"with fips (ResolvedRegion) client": {
 			options: s3.Options{
 				Region: "fips-us-west-2",
 			},
 			bucket:      "arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
-			expectedErr: "client configured for fips but cross-region resource ARN provided",
+			expectedErr: "S3 MRAP does not support FIPS",
 		},
 		"Accesspoint ARN with region and MRAP disabled": {
 			options: s3.Options{
