@@ -193,6 +193,9 @@ func (c *Client) addOperationSelectObjectContentMiddlewares(stack *middleware.St
 	if err != nil {
 		return err
 	}
+	if err = addLegacyEndpointContextSetter(stack, options); err != nil {
+		return err
+	}
 	if err = addEventStreamSelectObjectContentMiddleware(stack, options); err != nil {
 		return err
 	}

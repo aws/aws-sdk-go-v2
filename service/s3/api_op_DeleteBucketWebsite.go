@@ -76,6 +76,9 @@ func (c *Client) addOperationDeleteBucketWebsiteMiddlewares(stack *middleware.St
 	if err != nil {
 		return err
 	}
+	if err = addLegacyEndpointContextSetter(stack, options); err != nil {
+		return err
+	}
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}

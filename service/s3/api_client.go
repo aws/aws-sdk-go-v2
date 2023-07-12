@@ -269,6 +269,30 @@ func (c *Client) invokeOperation(ctx context.Context, opID string, params interf
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
 
+type LegacyEndpointContextSetter struct {
+	LegacyResolver EndpointResolver
+}
+
+func (*LegacyEndpointContextSetter) ID() string {
+	return "LegacyEndpointContextSetter"
+}
+
+func (m *LegacyEndpointContextSetter) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.LegacyResolver != nil {
+		ctx = awsmiddleware.SetRequiresLegacyEndpoints(ctx, true)
+	}
+
+	return next.HandleInitialize(ctx, in)
+
+}
+func addLegacyEndpointContextSetter(stack *middleware.Stack, o Options) error {
+	return stack.Initialize.Add(&LegacyEndpointContextSetter{
+		LegacyResolver: o.EndpointResolver,
+	}, middleware.Before)
+}
+
 func resolveDefaultLogger(o *Options) {
 	if o.Logger != nil {
 		return
