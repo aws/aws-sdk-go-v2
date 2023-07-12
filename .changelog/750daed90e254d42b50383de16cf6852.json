@@ -1,0 +1,9 @@
+{
+    "id": "750daed9-0e25-4d42-b503-83de16cf6852",
+    "type": "feature",
+    "collapse": true,
+    "description": "Modify user agent syntax and introduce support for optional app identifier in UA header",
+    "modules": [
+        "."
+    ]
+}

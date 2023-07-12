@@ -63,6 +63,9 @@ type Options struct {
 	// modify this list for per operation behavior.
 	APIOptions []func(*middleware.Stack) error
 
+	// The optional application specific identifier appended to the User-Agent header.
+	AppID string
+
 	// Signer for authenticating requests with bearer auth
 	BearerAuthSigner bearer.Signer
 
@@ -232,6 +235,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		APIOptions:              cfg.APIOptions,
 		Logger:                  cfg.Logger,
 		ClientLogMode:           cfg.ClientLogMode,
+		AppID:                   cfg.AppID,
 	}
 	resolveAWSRetryerProvider(cfg, &opts)
 	resolveAWSRetryMaxAttempts(cfg, &opts)
@@ -345,8 +349,16 @@ func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
 	o.EndpointResolver = withEndpointResolver(cfg.EndpointResolver, cfg.EndpointResolverWithOptions, NewDefaultEndpointResolver())
 }
 
-func addClientUserAgent(stack *middleware.Stack) error {
-	return awsmiddleware.AddSDKAgentKeyValue(awsmiddleware.APIMetadata, "codecatalyst", goModuleVersion)(stack)
+func addClientUserAgent(stack *middleware.Stack, options Options) error {
+	if err := awsmiddleware.AddSDKAgentKeyValue(awsmiddleware.APIMetadata, "codecatalyst", goModuleVersion)(stack); err != nil {
+		return err
+	}
+
+	if len(options.AppID) > 0 {
+		return awsmiddleware.AddSDKAgentKey(awsmiddleware.ApplicationIdentifier, options.AppID)(stack)
+	}
+
+	return nil
 }
 
 func addRetryMiddlewares(stack *middleware.Stack, o Options) error {

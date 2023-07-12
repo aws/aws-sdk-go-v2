@@ -15,9 +15,7 @@ import (
 	"github.com/google/go-cmp/cmp/cmpopts"
 )
 
-var expectedAgent = aws.SDKName + "/" + aws.SDKVersion + " os/" + getNormalizedOSName() + " lang/go/" + languageVersion + " md/GOOS/" + runtime.GOOS + " md/GOARCH/" + runtime.GOARCH
-
-//var expectedSDKAgent = aws.SDKName + "/" + aws.SDKVersion + " os/" + getNormalizedOSName() + " lang/go/" + languageVersion + " md/GOOS/" + runtime.GOOS + " md/GOARCH/" + runtime.GOARCH
+var expectedAgent = aws.SDKName + "/" + aws.SDKVersion + " os/" + getNormalizedOSName() + " lang/go#" + languageVersion + " md/GOOS#" + runtime.GOOS + " md/GOARCH#" + runtime.GOARCH
 
 func TestRequestUserAgent_HandleBuild(t *testing.T) {
 	cases := map[string]struct {
@@ -134,31 +132,49 @@ func TestAddUserAgentKey(t *testing.T) {
 	restoreEnv := clearEnv()
 	defer restoreEnv()
 
-	b := newRequestUserAgent()
-	stack := middleware.NewStack("testStack", smithyhttp.NewStackRequest)
-	err := stack.Build.Add(b, middleware.After)
-	if err != nil {
-		t.Fatalf("expect no error, got %v", err)
+	cases := map[string]struct {
+		Key    string
+		Expect string
+	}{
+		"Simple key": {
+			Key:    "baz",
+			Expect: expectedAgent + " baz",
+		},
+		"Key containing slash": {
+			Key:    "baz/ba",
+			Expect: expectedAgent + " baz-ba",
+		},
 	}
 
-	err = AddUserAgentKey("foo")(stack)
-	if err != nil {
-		t.Fatalf("expect no error, got %v", err)
-	}
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			b := newRequestUserAgent()
+			stack := middleware.NewStack("testStack", smithyhttp.NewStackRequest)
+			err := stack.Build.Add(b, middleware.After)
+			if err != nil {
+				t.Fatalf("expect no error, got %v", err)
+			}
 
-	bi := middleware.BuildInput{Request: &smithyhttp.Request{Request: &http.Request{Header: map[string][]string{}}}}
-	_, _, err = b.HandleBuild(context.Background(), bi, middleware.BuildHandlerFunc(func(ctx context.Context, input middleware.BuildInput) (o middleware.BuildOutput, m middleware.Metadata, err error) {
-		return o, m, err
-	}))
-	if err != nil {
-		t.Fatalf("expect no error, got %v", err)
-	}
-	ua, ok := bi.Request.(*smithyhttp.Request).Header["User-Agent"]
-	if !ok {
-		t.Fatalf("expect User-Agent to be present")
-	}
-	if ua[0] != expectedAgent+" foo" {
-		t.Error("User-Agent did not match expected")
+			err = AddUserAgentKey(c.Key)(stack)
+			if err != nil {
+				t.Fatalf("expect no error, got %v", err)
+			}
+
+			bi := middleware.BuildInput{Request: &smithyhttp.Request{Request: &http.Request{Header: map[string][]string{}}}}
+			_, _, err = b.HandleBuild(context.Background(), bi, middleware.BuildHandlerFunc(func(ctx context.Context, input middleware.BuildInput) (o middleware.BuildOutput, m middleware.Metadata, err error) {
+				return o, m, err
+			}))
+			if err != nil {
+				t.Fatalf("expect no error, got %v", err)
+			}
+			ua, ok := bi.Request.(*smithyhttp.Request).Header["User-Agent"]
+			if !ok {
+				t.Fatalf("expect User-Agent to be present")
+			}
+			if ua[0] != c.Expect {
+				t.Error("User-Agent did not match expected")
+			}
+		})
 	}
 }
 
@@ -166,31 +182,161 @@ func TestAddUserAgentKeyValue(t *testing.T) {
 	restoreEnv := clearEnv()
 	defer restoreEnv()
 
-	b := newRequestUserAgent()
-	stack := middleware.NewStack("testStack", smithyhttp.NewStackRequest)
-	err := stack.Build.Add(b, middleware.After)
-	if err != nil {
-		t.Fatalf("expect no error, got %v", err)
+	cases := map[string]struct {
+		Key    string
+		Value  string
+		Expect string
+	}{
+		"Simple key value pair": {
+			Key:    "foo",
+			Value:  "a+b-C$4'5.6",
+			Expect: expectedAgent + " foo/a+b-C$4'5.6",
+		},
+		"Value containing invalid rune": {
+			Key:    "foo",
+			Value:  "1(2)3",
+			Expect: expectedAgent + " foo/1-2-3",
+		},
 	}
 
-	err = AddUserAgentKeyValue("foo", "bar")(stack)
-	if err != nil {
-		t.Fatalf("expect no error, got %v", err)
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			b := newRequestUserAgent()
+			stack := middleware.NewStack("testStack", smithyhttp.NewStackRequest)
+			err := stack.Build.Add(b, middleware.After)
+			if err != nil {
+				t.Fatalf("expect no error, got %v", err)
+			}
+
+			err = AddUserAgentKeyValue(c.Key, c.Value)(stack)
+			if err != nil {
+				t.Fatalf("expect no error, got %v", err)
+			}
+
+			bi := middleware.BuildInput{Request: &smithyhttp.Request{Request: &http.Request{Header: map[string][]string{}}}}
+			_, _, err = b.HandleBuild(context.Background(), bi, middleware.BuildHandlerFunc(func(ctx context.Context, input middleware.BuildInput) (o middleware.BuildOutput, m middleware.Metadata, err error) {
+				return o, m, err
+			}))
+			if err != nil {
+				t.Fatalf("expect no error, got %v", err)
+			}
+			ua, ok := bi.Request.(*smithyhttp.Request).Header["User-Agent"]
+			if !ok {
+				t.Fatalf("expect User-Agent to be present")
+			}
+			if ua[0] != c.Expect {
+				t.Error("User-Agent did not match expected")
+			}
+		})
+	}
+}
+
+func TestAddSDKAgentKey(t *testing.T) {
+	restoreEnv := clearEnv()
+	defer restoreEnv()
+
+	cases := map[string]struct {
+		KeyType SDKAgentKeyType
+		Key     string
+		Expect  string
+	}{
+		"Additional metadata key type": {
+			KeyType: AdditionalMetadata,
+			Key:     "baz",
+			Expect:  expectedAgent + " md/baz",
+		},
+		"Config metadata key type": {
+			KeyType: ConfigMetadata,
+			Key:     "foo",
+			Expect:  expectedAgent + " cfg/foo",
+		},
 	}
 
-	bi := middleware.BuildInput{Request: &smithyhttp.Request{Request: &http.Request{Header: map[string][]string{}}}}
-	_, _, err = b.HandleBuild(context.Background(), bi, middleware.BuildHandlerFunc(func(ctx context.Context, input middleware.BuildInput) (o middleware.BuildOutput, m middleware.Metadata, err error) {
-		return o, m, err
-	}))
-	if err != nil {
-		t.Fatalf("expect no error, got %v", err)
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			b := newRequestUserAgent()
+			stack := middleware.NewStack("testStack", smithyhttp.NewStackRequest)
+			err := stack.Build.Add(b, middleware.After)
+			if err != nil {
+				t.Fatalf("expect no error, got %v", err)
+			}
+
+			err = AddSDKAgentKey(c.KeyType, c.Key)(stack)
+			if err != nil {
+				t.Fatalf("expect no error, got %v", err)
+			}
+
+			bi := middleware.BuildInput{Request: &smithyhttp.Request{Request: &http.Request{Header: map[string][]string{}}}}
+			_, _, err = b.HandleBuild(context.Background(), bi, middleware.BuildHandlerFunc(func(ctx context.Context, input middleware.BuildInput) (o middleware.BuildOutput, m middleware.Metadata, err error) {
+				return o, m, err
+			}))
+			if err != nil {
+				t.Fatalf("expect no error, got %v", err)
+			}
+			ua, ok := bi.Request.(*smithyhttp.Request).Header["User-Agent"]
+			if !ok {
+				t.Fatalf("expect User-Agent to be present")
+			}
+			if ua[0] != c.Expect {
+				t.Error("User-Agent did not match expected")
+			}
+		})
 	}
-	ua, ok := bi.Request.(*smithyhttp.Request).Header["User-Agent"]
-	if !ok {
-		t.Fatalf("expect User-Agent to be present")
+}
+
+func TestAddSDKAgentKeyValue(t *testing.T) {
+	restoreEnv := clearEnv()
+	defer restoreEnv()
+
+	cases := map[string]struct {
+		KeyType SDKAgentKeyType
+		Key     string
+		Value   string
+		Expect  string
+	}{
+		"Value containing valid chars": {
+			KeyType: AdditionalMetadata,
+			Key:     "baz",
+			Value:   "a+b-C$4'5.6",
+			Expect:  expectedAgent + " md/baz#a+b-C$4'5.6",
+		},
+		"Value containing invalid chars": {
+			KeyType: ConfigMetadata,
+			Key:     "foo",
+			Value:   "1(2)3",
+			Expect:  expectedAgent + " cfg/foo#1-2-3",
+		},
 	}
-	if ua[0] != expectedAgent+" foo/bar" {
-		t.Error("User-Agent did not match expected")
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			b := newRequestUserAgent()
+			stack := middleware.NewStack("testStack", smithyhttp.NewStackRequest)
+			err := stack.Build.Add(b, middleware.After)
+			if err != nil {
+				t.Fatalf("expect no error, got %v", err)
+			}
+
+			err = AddSDKAgentKeyValue(c.KeyType, c.Key, c.Value)(stack)
+			if err != nil {
+				t.Fatalf("expect no error, got %v", err)
+			}
+
+			bi := middleware.BuildInput{Request: &smithyhttp.Request{Request: &http.Request{Header: map[string][]string{}}}}
+			_, _, err = b.HandleBuild(context.Background(), bi, middleware.BuildHandlerFunc(func(ctx context.Context, input middleware.BuildInput) (o middleware.BuildOutput, m middleware.Metadata, err error) {
+				return o, m, err
+			}))
+			if err != nil {
+				t.Fatalf("expect no error, got %v", err)
+			}
+			ua, ok := bi.Request.(*smithyhttp.Request).Header["User-Agent"]
+			if !ok {
+				t.Fatalf("expect User-Agent to be present")
+			}
+			if ua[0] != c.Expect {
+				t.Error("User-Agent did not match expected")
+			}
+		})
 	}
 }
 
@@ -198,28 +344,46 @@ func TestAddUserAgentKey_AddToStack(t *testing.T) {
 	restoreEnv := clearEnv()
 	defer restoreEnv()
 
-	stack := middleware.NewStack("testStack", smithyhttp.NewStackRequest)
-	bi := middleware.BuildInput{Request: &smithyhttp.Request{Request: &http.Request{Header: map[string][]string{}}}}
-	stack.Build.Add(middleware.BuildMiddlewareFunc("testInit", func(ctx context.Context, input middleware.BuildInput, handler middleware.BuildHandler) (o middleware.BuildOutput, m middleware.Metadata, err error) {
-		return handler.HandleBuild(ctx, bi)
-	}), middleware.After)
-	err := AddUserAgentKey("foo")(stack)
-	if err != nil {
-		t.Fatalf("expect no error, got %v", err)
+	cases := map[string]struct {
+		Key    string
+		Expect string
+	}{
+		"Simple key": {
+			Key:    "baz",
+			Expect: expectedAgent + " baz",
+		},
+		"Key containing slash": {
+			Key:    "baz/ba",
+			Expect: expectedAgent + " baz-ba",
+		},
 	}
 
-	_, _, err = middleware.DecorateHandler(middleware.HandlerFunc(func(ctx context.Context, input interface{}) (output interface{}, metadata middleware.Metadata, err error) {
-		return output, metadata, err
-	}), stack).Handle(context.Background(), nil)
-	if err != nil {
-		t.Fatalf("expect no error, got %v", err)
-	}
-	ua, ok := bi.Request.(*smithyhttp.Request).Header["User-Agent"]
-	if !ok {
-		t.Fatalf("expect User-Agent to be present")
-	}
-	if ua[0] != expectedAgent+" foo" {
-		t.Error("User-Agent did not match expected")
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			stack := middleware.NewStack("testStack", smithyhttp.NewStackRequest)
+			bi := middleware.BuildInput{Request: &smithyhttp.Request{Request: &http.Request{Header: map[string][]string{}}}}
+			stack.Build.Add(middleware.BuildMiddlewareFunc("testInit", func(ctx context.Context, input middleware.BuildInput, handler middleware.BuildHandler) (o middleware.BuildOutput, m middleware.Metadata, err error) {
+				return handler.HandleBuild(ctx, bi)
+			}), middleware.After)
+			err := AddUserAgentKey(c.Key)(stack)
+			if err != nil {
+				t.Fatalf("expect no error, got %v", err)
+			}
+
+			_, _, err = middleware.DecorateHandler(middleware.HandlerFunc(func(ctx context.Context, input interface{}) (output interface{}, metadata middleware.Metadata, err error) {
+				return output, metadata, err
+			}), stack).Handle(context.Background(), nil)
+			if err != nil {
+				t.Fatalf("expect no error, got %v", err)
+			}
+			ua, ok := bi.Request.(*smithyhttp.Request).Header["User-Agent"]
+			if !ok {
+				t.Fatalf("expect User-Agent to be present")
+			}
+			if ua[0] != c.Expect {
+				t.Error("User-Agent did not match expected")
+			}
+		})
 	}
 }
 
@@ -227,27 +391,48 @@ func TestAddUserAgentKeyValue_AddToStack(t *testing.T) {
 	restoreEnv := clearEnv()
 	defer restoreEnv()
 
-	stack := middleware.NewStack("testStack", smithyhttp.NewStackRequest)
-	bi := middleware.BuildInput{Request: &smithyhttp.Request{Request: &http.Request{Header: map[string][]string{}}}}
-	stack.Build.Add(middleware.BuildMiddlewareFunc("testInit", func(ctx context.Context, input middleware.BuildInput, handler middleware.BuildHandler) (o middleware.BuildOutput, m middleware.Metadata, err error) {
-		return handler.HandleBuild(ctx, bi)
-	}), middleware.After)
-	err := AddUserAgentKeyValue("foo", "bar")(stack)
-	if err != nil {
-		t.Fatalf("expect no error, got %v", err)
+	cases := map[string]struct {
+		Key    string
+		Value  string
+		Expect string
+	}{
+		"Simple key value pair": {
+			Key:    "foo",
+			Value:  "a+b-C$4'5.6",
+			Expect: expectedAgent + " foo/a+b-C$4'5.6",
+		},
+		"Value containing invalid rune": {
+			Key:    "foo",
+			Value:  "1(2)3",
+			Expect: expectedAgent + " foo/1-2-3",
+		},
 	}
 
-	_, _, err = middleware.DecorateHandler(middleware.HandlerFunc(func(ctx context.Context, input interface{}) (output interface{}, metadata middleware.Metadata, err error) {
-		return output, metadata, err
-	}), stack).Handle(context.Background(), nil)
-	if err != nil {
-		t.Fatalf("expect no error, got %v", err)
-	}
-	ua, ok := bi.Request.(*smithyhttp.Request).Header["User-Agent"]
-	if !ok {
-		t.Fatalf("expect User-Agent to be present")
-	}
-	if ua[0] != expectedAgent+" foo/bar" {
-		t.Error("User-Agent did not match expected")
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			stack := middleware.NewStack("testStack", smithyhttp.NewStackRequest)
+			bi := middleware.BuildInput{Request: &smithyhttp.Request{Request: &http.Request{Header: map[string][]string{}}}}
+			stack.Build.Add(middleware.BuildMiddlewareFunc("testInit", func(ctx context.Context, input middleware.BuildInput, handler middleware.BuildHandler) (o middleware.BuildOutput, m middleware.Metadata, err error) {
+				return handler.HandleBuild(ctx, bi)
+			}), middleware.After)
+			err := AddUserAgentKeyValue(c.Key, c.Value)(stack)
+			if err != nil {
+				t.Fatalf("expect no error, got %v", err)
+			}
+
+			_, _, err = middleware.DecorateHandler(middleware.HandlerFunc(func(ctx context.Context, input interface{}) (output interface{}, metadata middleware.Metadata, err error) {
+				return output, metadata, err
+			}), stack).Handle(context.Background(), nil)
+			if err != nil {
+				t.Fatalf("expect no error, got %v", err)
+			}
+			ua, ok := bi.Request.(*smithyhttp.Request).Header["User-Agent"]
+			if !ok {
+				t.Fatalf("expect User-Agent to be present")
+			}
+			if ua[0] != c.Expect {
+				t.Error("User-Agent did not match expected")
+			}
+		})
 	}
 }

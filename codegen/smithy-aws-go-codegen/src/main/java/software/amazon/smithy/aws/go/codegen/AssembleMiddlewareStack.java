@@ -169,6 +169,7 @@ public class AssembleMiddlewareStack implements GoIntegration {
                         .registerMiddleware(MiddlewareRegistrar.builder()
                                 .resolvedFunction(SymbolUtils.createPointableSymbolBuilder(
                                         AwsClientUserAgent.MIDDLEWARE_RESOLVER).build())
+                                .useClientOptions()
                                 .build())
                         .build(),
 
