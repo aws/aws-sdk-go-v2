@@ -625,14 +625,6 @@ public final class EndpointGenerator implements Runnable {
             writer.write("return fn(region, options)");
         });
 
-        // Generate Client Options Configuration Resolver
-        writer.openBlock("func $L(o $P) {", "}", CLIENT_CONFIG_RESOLVER,
-                SymbolUtils.createPointableSymbolBuilder("Options").build(), () -> {
-                    writer.openBlock("if o.EndpointResolver != nil {", "}", () -> writer.write("return"));
-                    writer.openBlock("o.EndpointResolver = &$L{", "}", AwsEndpointResolverAdapterGenerator.COMPATIBLE_ADAPTER_TYPE, () -> writer.write(
-                        "$L: $L(),", EndpointResolutionGenerator.RESOLVER_INTERFACE_NAME, EndpointResolutionGenerator.NEW_RESOLVER_FUNC_NAME
-                    ));
-                });
 
         // Generate EndpointResolverFromURL helper
         writer.writeDocs(String.format("%s returns an EndpointResolver configured using the provided endpoint url. "
