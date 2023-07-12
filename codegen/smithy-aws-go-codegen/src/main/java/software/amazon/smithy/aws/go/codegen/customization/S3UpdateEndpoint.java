@@ -150,7 +150,6 @@ public class S3UpdateEndpoint implements GoIntegration {
                             .build())
                     .build());
         }
-        }
     }
 
     @Override
