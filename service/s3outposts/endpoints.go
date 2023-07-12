@@ -43,15 +43,6 @@ func (fn EndpointResolverFunc) ResolveEndpoint(region string, options EndpointRe
 	return fn(region, options)
 }
 
-func resolveDefaultEndpointConfiguration(o *Options) {
-	if o.EndpointResolver != nil {
-		return
-	}
-	o.EndpointResolver = &compatibleEndpointResolver{
-		EndpointResolverV2: NewDefaultEndpointResolverV2(),
-	}
-}
-
 // EndpointResolverFromURL returns an EndpointResolver configured using the
 // provided endpoint url. By default, the resolved endpoint resolver uses the
 // client region as signing region, and the endpoint source is set to

@@ -47,8 +47,6 @@ func New(options Options, optFns ...func(*Options)) *Client {
 
 	resolveHTTPSignerV4(&options)
 
-	resolveDefaultEndpointConfiguration(&options)
-
 	for _, fn := range optFns {
 		fn(&options)
 	}
@@ -285,7 +283,6 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 	resolveAWSRetryerProvider(cfg, &opts)
 	resolveAWSRetryMaxAttempts(cfg, &opts)
 	resolveAWSRetryMode(cfg, &opts)
-	resolveAWSEndpointResolver(cfg, &opts)
 	resolveUseDualStackEndpoint(cfg, &opts)
 	resolveUseFIPSEndpoint(cfg, &opts)
 	return New(opts, optFns...)
@@ -385,13 +382,6 @@ func finalizeRetryMaxAttemptOptions(o *Options, client Client) {
 	}
 
 	o.Retryer = retry.AddWithMaxAttempts(o.Retryer, o.RetryMaxAttempts)
-}
-
-func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
-	if cfg.EndpointResolver == nil && cfg.EndpointResolverWithOptions == nil {
-		return
-	}
-	o.EndpointResolver = withEndpointResolver(cfg.EndpointResolver, cfg.EndpointResolverWithOptions, NewDefaultEndpointResolver())
 }
 
 func addClientUserAgent(stack *middleware.Stack) error {
