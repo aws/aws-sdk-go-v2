@@ -402,7 +402,7 @@ func TestEndpointWithARN(t *testing.T) {
 			options: s3.Options{
 				Region: "us-west-2",
 			},
-			expectedErr: "client region does not match provided ARN region",
+			expectedErr: "region from ARN `us-east-1` does not match client region `us-west-2` and UseArnRegion is `false`",
 		},
 		"Outpost AccessPoint other partition": {
 			bucket: "arn:aws-cn:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
@@ -410,7 +410,7 @@ func TestEndpointWithARN(t *testing.T) {
 				Region:       "us-west-2",
 				UseARNRegion: true,
 			},
-			expectedErr: "ConfigurationError : client partition does not match provided ARN partition",
+			expectedErr: "Client was configured for partition `aws` but ARN (`arn:aws-cn:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint`) has `aws-cn`",
 		},
 		"Outpost AccessPoint cn partition": {
 			bucket: "arn:aws-cn:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
@@ -471,7 +471,7 @@ func TestEndpointWithARN(t *testing.T) {
 			options: s3.Options{
 				Region: "fips-us-gov-west-1",
 			},
-			expectedErr: "ConfigurationError : client region does not match provided ARN region",
+			expectedErr: "S3 Outposts does not support FIPS",
 		},
 		"Outpost AccessPoint with FIPS cross-region": {
 			bucket: "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
@@ -482,7 +482,7 @@ func TestEndpointWithARN(t *testing.T) {
 					UseFIPSEndpoint: aws.FIPSEndpointStateEnabled,
 				},
 			},
-			expectedErr: "use of ARN is not supported when client or request is configured for FIPS",
+			expectedErr: "S3 Outposts does not support FIPS",
 		},
 		"Outpost AccessPoint with FIPS (ResolvedRegion) cross-region": {
 			bucket: "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
@@ -490,7 +490,7 @@ func TestEndpointWithARN(t *testing.T) {
 				Region:       "fips-us-gov-west-1",
 				UseARNRegion: true,
 			},
-			expectedErr: "use of ARN is not supported when client or request is configured for FIPS",
+			expectedErr: "S3 Outposts does not support FIPS",
 		},
 		"Outpost AccessPoint with FIPS matching region": {
 			bucket: "arn:aws-us-gov:s3-outposts:us-gov-west-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
@@ -501,7 +501,7 @@ func TestEndpointWithARN(t *testing.T) {
 				},
 				UseARNRegion: true,
 			},
-			expectedErr: "use of ARN is not supported when client or request is configured for FIPS",
+			expectedErr: "S3 Outposts does not support FIPS",
 		},
 		"Outpost AccessPoint with FIPS (ResolvedRegion) matching region": {
 			bucket: "arn:aws-us-gov:s3-outposts:us-gov-west-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
@@ -509,7 +509,7 @@ func TestEndpointWithARN(t *testing.T) {
 				Region:       "fips-us-gov-west-1",
 				UseARNRegion: true,
 			},
-			expectedErr: "use of ARN is not supported when client or request is configured for FIPS",
+			expectedErr: "S3 Outposts does not support FIPS",
 		},
 		"Outpost AccessPoint with Immutable Endpoint": {
 			bucket: "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
@@ -533,7 +533,7 @@ func TestEndpointWithARN(t *testing.T) {
 				Region:       "us-west-2",
 				UseDualstack: true,
 			},
-			expectedErr: "ConfigurationError : client configured for S3 Dual-stack but is not supported with resource ARN",
+			expectedErr: "S3 Outposts does not support Dual-stack",
 		},
 		"Outpost AccessPoint with Accelerate": {
 			bucket: "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
@@ -541,7 +541,7 @@ func TestEndpointWithARN(t *testing.T) {
 				Region:        "us-west-2",
 				UseAccelerate: true,
 			},
-			expectedErr: "ConfigurationError : client configured for S3 Accelerate but is not supported with resource ARN",
+			expectedErr: "S3 Outposts does not support S3 Accelerate",
 		},
 		"AccessPoint": {
 			bucket: "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
@@ -575,7 +575,7 @@ func TestEndpointWithARN(t *testing.T) {
 			options: s3.Options{
 				Region: "us-west-2",
 			},
-			expectedErr: "client region does not match provided ARN region",
+			expectedErr: "region from ARN `ap-south-1` does not match client region `us-west-2` and UseArnRegion is `false`",
 		},
 		"AccessPoint Cross-Region Enabled": {
 			bucket: "arn:aws:s3:ap-south-1:123456789012:accesspoint:myendpoint",
@@ -614,7 +614,7 @@ func TestEndpointWithARN(t *testing.T) {
 				UseDualstack: true,
 				UseARNRegion: true,
 			},
-			expectedErr: "client partition does not match provided ARN partition",
+			expectedErr: "Client was configured for partition `aws` but ARN (`arn:aws-cn:s3:cn-north-1:123456789012:accesspoint:myendpoint`) has `aws-cn`",
 		},
 		"AccessPoint DualStack": {
 			bucket: "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
@@ -733,7 +733,7 @@ func TestEndpointWithARN(t *testing.T) {
 				Region:        "us-west-2",
 				UseAccelerate: true,
 			},
-			expectedErr: "client configured for S3 Accelerate",
+			expectedErr: "Access Points do not support S3 Accelerate",
 		},
 		"Custom Resolver Without PartitionID in ClientInfo": {
 			bucket: "arn:aws:s3:us-west-2:123456789012:accesspoint:myendpoint",
