@@ -503,6 +503,15 @@ public final class EndpointGenerator implements Runnable {
         w.addUseImports(SmithyGoDependency.SMITHY_MIDDLEWARE);
         w.addUseImports(SmithyGoDependency.SMITHY_HTTP_TRANSPORT);
 
+        w.write(
+            """
+                if !$T(ctx) {
+                    return next.HandleSerialize(ctx, in)
+                }
+            """,
+            SymbolUtils.createValueSymbolBuilder("GetRequiresLegacyEndpoints", AwsGoDependency.AWS_MIDDLEWARE).build()
+        );
+
         w.write("req, ok := in.Request.(*smithyhttp.Request)");
         w.openBlock("if !ok {", "}", () -> {
             w.write("return out, metadata, fmt.Errorf(\"unknown transport type %T\", in.Request)");

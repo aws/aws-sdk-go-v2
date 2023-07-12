@@ -11,7 +11,6 @@ import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.MiddlewareIdentifier;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SymbolUtils;
-import software.amazon.smithy.go.codegen.endpoints.EndpointMiddlewareGenerator;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.MiddlewareRegistrar;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
@@ -56,6 +55,18 @@ public class LegacyEndpointContextSetter implements GoIntegration {
                                             .build())
                             .build());
 
+    }
+
+    @Override
+    public void renderPreEndpointResolutionHook(GoSettings settings, GoWriter writer, Model model) {
+        writer.write(
+                """
+                        if $T(ctx) {
+                            return next.HandleSerialize(ctx, in)
+                        }
+                """,
+                SymbolUtils.createValueSymbolBuilder("GetRequiresLegacyEndpoints", AwsGoDependency.AWS_MIDDLEWARE).build()
+        );
     }
 
     @Override
