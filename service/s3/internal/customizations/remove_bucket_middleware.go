@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/aws/smithy-go/middleware"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/transport/http"
 )
 
@@ -25,7 +25,6 @@ func (m *removeBucketFromPathMiddleware) HandleSerialize(
 	if !awsmiddleware.GetRequiresLegacyEndpoints(ctx) {
 		return next.HandleSerialize(ctx, in)
 	}
-
 
 	// check if a bucket removal from HTTP path is required
 	bucket, ok := getRemoveBucketFromPath(ctx)

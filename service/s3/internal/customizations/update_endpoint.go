@@ -144,7 +144,7 @@ func (u *updateEndpoint) HandleSerialize(
 	if !awsmiddleware.GetRequiresLegacyEndpoints(ctx) {
 		return next.HandleSerialize(ctx, in)
 	}
-	
+
 	// if arn was processed, skip this middleware
 	if _, ok := s3shared.GetARNResourceFromContext(ctx); ok {
 		return next.HandleSerialize(ctx, in)
