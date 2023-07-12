@@ -178,6 +178,9 @@ func (c *Client) addOperationCreateJobMiddlewares(stack *middleware.Stack, optio
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
 		return err
 	}
+	if err = addCreateJobUpdateEndpoint(stack, options); err != nil {
+		return err
+	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
 		return err
 	}

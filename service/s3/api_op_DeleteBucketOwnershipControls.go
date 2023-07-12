@@ -123,6 +123,9 @@ func (c *Client) addOperationDeleteBucketOwnershipControlsMiddlewares(stack *mid
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
 		return err
 	}
+	if err = addDeleteBucketOwnershipControlsUpdateEndpoint(stack, options); err != nil {
+		return err
+	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
 		return err
 	}

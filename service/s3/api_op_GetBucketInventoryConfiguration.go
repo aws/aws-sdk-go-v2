@@ -137,6 +137,9 @@ func (c *Client) addOperationGetBucketInventoryConfigurationMiddlewares(stack *m
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
 		return err
 	}
+	if err = addGetBucketInventoryConfigurationUpdateEndpoint(stack, options); err != nil {
+		return err
+	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
 		return err
 	}

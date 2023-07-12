@@ -120,6 +120,9 @@ func (c *Client) addOperationDeleteAccessPointPolicyForObjectLambdaMiddlewares(s
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
 		return err
 	}
+	if err = addDeleteAccessPointPolicyForObjectLambdaUpdateEndpoint(stack, options); err != nil {
+		return err
+	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
 		return err
 	}

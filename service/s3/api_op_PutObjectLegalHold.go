@@ -170,6 +170,9 @@ func (c *Client) addOperationPutObjectLegalHoldMiddlewares(stack *middleware.Sta
 	if err = addPutObjectLegalHoldInputChecksumMiddlewares(stack, options); err != nil {
 		return err
 	}
+	if err = addPutObjectLegalHoldUpdateEndpoint(stack, options); err != nil {
+		return err
+	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
 		return err
 	}

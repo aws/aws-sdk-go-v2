@@ -177,6 +177,9 @@ func (c *Client) addOperationPutObjectRetentionMiddlewares(stack *middleware.Sta
 	if err = addPutObjectRetentionInputChecksumMiddlewares(stack, options); err != nil {
 		return err
 	}
+	if err = addPutObjectRetentionUpdateEndpoint(stack, options); err != nil {
+		return err
+	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
 		return err
 	}

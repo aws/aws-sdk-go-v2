@@ -139,6 +139,9 @@ func (c *Client) addOperationPutBucketOwnershipControlsMiddlewares(stack *middle
 	if err = addPutBucketOwnershipControlsInputChecksumMiddlewares(stack, options); err != nil {
 		return err
 	}
+	if err = addPutBucketOwnershipControlsUpdateEndpoint(stack, options); err != nil {
+		return err
+	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
 		return err
 	}

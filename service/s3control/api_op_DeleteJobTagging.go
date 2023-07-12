@@ -123,6 +123,9 @@ func (c *Client) addOperationDeleteJobTaggingMiddlewares(stack *middleware.Stack
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
 		return err
 	}
+	if err = addDeleteJobTaggingUpdateEndpoint(stack, options); err != nil {
+		return err
+	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
 		return err
 	}

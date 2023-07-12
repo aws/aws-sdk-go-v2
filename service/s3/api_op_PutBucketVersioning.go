@@ -168,6 +168,9 @@ func (c *Client) addOperationPutBucketVersioningMiddlewares(stack *middleware.St
 	if err = addPutBucketVersioningInputChecksumMiddlewares(stack, options); err != nil {
 		return err
 	}
+	if err = addPutBucketVersioningUpdateEndpoint(stack, options); err != nil {
+		return err
+	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
 		return err
 	}

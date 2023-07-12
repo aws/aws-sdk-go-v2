@@ -244,6 +244,9 @@ func (c *Client) addOperationPutBucketAclMiddlewares(stack *middleware.Stack, op
 	if err = addPutBucketAclInputChecksumMiddlewares(stack, options); err != nil {
 		return err
 	}
+	if err = addPutBucketAclUpdateEndpoint(stack, options); err != nil {
+		return err
+	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
 		return err
 	}

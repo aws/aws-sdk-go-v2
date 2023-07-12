@@ -159,6 +159,9 @@ func (c *Client) addOperationPutBucketAccelerateConfigurationMiddlewares(stack *
 	if err = addPutBucketAccelerateConfigurationInputChecksumMiddlewares(stack, options); err != nil {
 		return err
 	}
+	if err = addPutBucketAccelerateConfigurationUpdateEndpoint(stack, options); err != nil {
+		return err
+	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
 		return err
 	}

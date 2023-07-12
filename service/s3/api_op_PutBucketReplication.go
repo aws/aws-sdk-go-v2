@@ -186,6 +186,9 @@ func (c *Client) addOperationPutBucketReplicationMiddlewares(stack *middleware.S
 	if err = addPutBucketReplicationInputChecksumMiddlewares(stack, options); err != nil {
 		return err
 	}
+	if err = addPutBucketReplicationUpdateEndpoint(stack, options); err != nil {
+		return err
+	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
 		return err
 	}

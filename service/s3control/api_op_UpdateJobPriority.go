@@ -138,6 +138,9 @@ func (c *Client) addOperationUpdateJobPriorityMiddlewares(stack *middleware.Stac
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
 		return err
 	}
+	if err = addUpdateJobPriorityUpdateEndpoint(stack, options); err != nil {
+		return err
+	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
 		return err
 	}

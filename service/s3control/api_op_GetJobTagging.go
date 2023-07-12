@@ -127,6 +127,9 @@ func (c *Client) addOperationGetJobTaggingMiddlewares(stack *middleware.Stack, o
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
 		return err
 	}
+	if err = addGetJobTaggingUpdateEndpoint(stack, options); err != nil {
+		return err
+	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
 		return err
 	}

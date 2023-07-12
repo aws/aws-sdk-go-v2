@@ -155,6 +155,9 @@ func (c *Client) addOperationGetBucketMiddlewares(stack *middleware.Stack, optio
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
 		return err
 	}
+	if err = addGetBucketUpdateEndpoint(stack, options); err != nil {
+		return err
+	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
 		return err
 	}

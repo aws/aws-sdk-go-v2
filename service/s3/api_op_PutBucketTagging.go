@@ -178,6 +178,9 @@ func (c *Client) addOperationPutBucketTaggingMiddlewares(stack *middleware.Stack
 	if err = addPutBucketTaggingInputChecksumMiddlewares(stack, options); err != nil {
 		return err
 	}
+	if err = addPutBucketTaggingUpdateEndpoint(stack, options); err != nil {
+		return err
+	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
 		return err
 	}

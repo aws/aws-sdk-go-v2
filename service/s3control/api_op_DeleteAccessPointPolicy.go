@@ -134,6 +134,9 @@ func (c *Client) addOperationDeleteAccessPointPolicyMiddlewares(stack *middlewar
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
 		return err
 	}
+	if err = addDeleteAccessPointPolicyUpdateEndpoint(stack, options); err != nil {
+		return err
+	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
 		return err
 	}
