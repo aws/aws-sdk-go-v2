@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"path"
 
+	"github.com/aws/aws-sdk-go-v2/internal/endpoints/awsrulesfn"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/encoding/httpbinding"
 	"github.com/aws/smithy-go/middleware"
@@ -15,6 +16,10 @@ import (
 // "immutable" hostnames resolved via v1 EndpointResolvers. This CANNOT be done in
 // serialization, since v2 endpoint resolution requires removing the {Bucket} path
 // segment from all S3 requests.
+//
+// This will only be done for non-ARN buckets, as the features that use those require
+// virtualhost manipulation to function and we previously (pre-ep2) expected the caller
+// to handle that in their resolver.
 type serializeImmutableHostnameBucketMiddleware struct{}
 
 func (*serializeImmutableHostnameBucketMiddleware) ID() string {
@@ -34,7 +39,7 @@ func (m *serializeImmutableHostnameBucketMiddleware) HandleSerialize(
 		return next.HandleSerialize(ctx, in)
 	}
 
-	if bucket, ok := bucketFromInput(in.Parameters); ok {
+	if bucket, ok := bucketFromInput(in.Parameters); ok && awsrulesfn.ParseARN(bucket) == nil {
 		request.URL.Path = path.Join(request.URL.Path, bucket)
 		request.URL.RawPath = path.Join(request.URL.RawPath, httpbinding.EscapePath(bucket, true))
 	}
