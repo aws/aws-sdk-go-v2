@@ -227,6 +227,8 @@ func (c *Client) invokeOperation(ctx context.Context, opID string, params interf
 	ctx = middleware.ClearStackValues(ctx)
 	stack := middleware.NewStack(opID, smithyhttp.NewStackRequest)
 	options := c.options.Copy()
+	resolveEndpointResolverV2(&options)
+
 	for _, fn := range optFns {
 		fn(&options)
 	}
@@ -238,8 +240,6 @@ func (c *Client) invokeOperation(ctx context.Context, opID string, params interf
 	finalizeClientEndpointResolverOptions(&options)
 
 	resolveCredentialProvider(&options)
-
-	finalizeEndpointResolverV2(&options)
 
 	for _, fn := range stackFns {
 		if err := fn(stack, options); err != nil {
