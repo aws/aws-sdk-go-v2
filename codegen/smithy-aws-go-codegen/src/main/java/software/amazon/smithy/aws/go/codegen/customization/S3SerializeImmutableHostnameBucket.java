@@ -18,6 +18,7 @@ public class S3SerializeImmutableHostnameBucket implements GoIntegration {
     private final MiddlewareRegistrar serializeImmutableHostnameBucketMiddleware =
             MiddlewareRegistrar.builder()
                     .resolvedFunction(SymbolUtils.createValueSymbolBuilder("addSerializeImmutableHostnameBucketMiddleware").build())
+                    .useClientOptions()
                     .build();
 
     @Override
