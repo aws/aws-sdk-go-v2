@@ -281,7 +281,7 @@ func (c *Client) addOperationListMultipartUploadsMiddlewares(stack *middleware.S
 	if err = addEndpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addSerializeImmutableHostnameBucketMiddleware(stack); err != nil {
+	if err = addSerializeImmutableHostnameBucketMiddleware(stack, options); err != nil {
 		return err
 	}
 	return nil

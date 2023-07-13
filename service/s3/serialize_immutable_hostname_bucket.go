@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"path"
+	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 
 	"github.com/aws/aws-sdk-go-v2/internal/endpoints/awsrulesfn"
 	smithy "github.com/aws/smithy-go"
@@ -20,7 +21,9 @@ import (
 // This will only be done for non-ARN buckets, as the features that use those require
 // virtualhost manipulation to function and we previously (pre-ep2) expected the caller
 // to handle that in their resolver.
-type serializeImmutableHostnameBucketMiddleware struct{}
+type serializeImmutableHostnameBucketMiddleware struct {
+	UsePathStyle bool
+}
 
 func (*serializeImmutableHostnameBucketMiddleware) ID() string {
 	return "serializeImmutableHostnameBucket"
@@ -35,7 +38,8 @@ func (m *serializeImmutableHostnameBucketMiddleware) HandleSerialize(
 	if !ok {
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
 	}
-	if !smithyhttp.GetHostnameImmutable(ctx) {
+	if !smithyhttp.GetHostnameImmutable(ctx) &&
+	   !(awsmiddleware.GetRequiresLegacyEndpoints(ctx) && m.UsePathStyle) {
 		return next.HandleSerialize(ctx, in)
 	}
 
@@ -47,9 +51,11 @@ func (m *serializeImmutableHostnameBucketMiddleware) HandleSerialize(
 	return next.HandleSerialize(ctx, in)
 }
 
-func addSerializeImmutableHostnameBucketMiddleware(stack *middleware.Stack) error {
+func addSerializeImmutableHostnameBucketMiddleware(stack *middleware.Stack, options Options) error {
 	return stack.Serialize.Insert(
-		&serializeImmutableHostnameBucketMiddleware{},
+		&serializeImmutableHostnameBucketMiddleware{
+			UsePathStyle: options.UsePathStyle,
+		},
 		"ResolveEndpointV2",
 		middleware.After,
 	)
