@@ -129,6 +129,9 @@ func (c *Client) addOperationPutBucketWebsiteMiddlewares(stack *middleware.Stack
 	if err != nil {
 		return err
 	}
+	if err = addLegacyEndpointContextSetter(stack, options); err != nil {
+		return err
+	}
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -184,6 +187,9 @@ func (c *Client) addOperationPutBucketWebsiteMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addPutBucketWebsiteInputChecksumMiddlewares(stack, options); err != nil {
+		return err
+	}
+	if err = addPutBucketWebsiteUpdateEndpoint(stack, options); err != nil {
 		return err
 	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
@@ -281,6 +287,10 @@ func (*opPutBucketWebsiteResolveEndpointMiddleware) ID() string {
 func (m *opPutBucketWebsiteResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	if awsmiddleware.GetRequiresLegacyEndpoints(ctx) {
+		return next.HandleSerialize(ctx, in)
+	}
+
 	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)

@@ -1044,7 +1044,7 @@ func TestVPC_CustomEndpoint(t *testing.T) {
 				Region:       "us-west-2",
 				UseDualstack: true,
 			},
-			expectedErr: "S3 Outposts does not support Dual-stack",
+			expectedErr: "client configured for S3 Dual-stack but is not supported with resource",
 		},
 		"Standard custom endpoint url with Immutable Host": {
 			bucket: "bucketname",

@@ -50,7 +50,7 @@ software.amazon.smithy.aws.go.codegen.customization.S3100Continue
 software.amazon.smithy.aws.go.codegen.customization.ApiGatewayExportsNullabilityExceptionIntegration
 software.amazon.smithy.aws.go.codegen.customization.LambdaRecursionDetection
 software.amazon.smithy.aws.go.codegen.customization.SQSCustomizations
-software.amazon.smithy.aws.go.codegen.AwsEndpointResolverAdapterGenerator
+software.amazon.smithy.aws.go.codegen.AwsEndpointResolverInitializerGenerator
 software.amazon.smithy.aws.go.codegen.AwsEndpointResolverBuiltInGenerator
 software.amazon.smithy.aws.go.codegen.customization.S3ControlHostPrefixAccountIdFilterIntegration
 software.amazon.smithy.aws.go.codegen.customization.S3HttpPathBucketFilterIntegration
@@ -59,3 +59,5 @@ software.amazon.smithy.aws.go.codegen.AwsEndpointAuthSchemeGenerator
 software.amazon.smithy.aws.go.codegen.EndpointDisableHttps
 software.amazon.smithy.aws.go.codegen.customization.S3Bucketer
 software.amazon.smithy.aws.go.codegen.customization.S3SerializeImmutableHostnameBucket
+software.amazon.smithy.aws.go.codegen.LegacyEndpointContextSetter
+

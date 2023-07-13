@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 
+	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/smithy-go/middleware"
 
 	"github.com/aws/aws-sdk-go-v2/aws/arn"
@@ -28,6 +29,10 @@ func (m *ARNLookup) ID() string {
 func (m *ARNLookup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
 	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
 ) {
+	if !awsmiddleware.GetRequiresLegacyEndpoints(ctx) {
+		return next.HandleInitialize(ctx, in)
+	}
+
 	// check if GetARNValue is supported
 	if m.GetARNValue == nil {
 		return next.HandleInitialize(ctx, in)

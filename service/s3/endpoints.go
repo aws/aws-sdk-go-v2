@@ -45,15 +45,6 @@ func (fn EndpointResolverFunc) ResolveEndpoint(region string, options EndpointRe
 	return fn(region, options)
 }
 
-func resolveDefaultEndpointConfiguration(o *Options) {
-	if o.EndpointResolver != nil {
-		return
-	}
-	o.EndpointResolver = &compatibleEndpointResolver{
-		EndpointResolverV2: NewDefaultEndpointResolverV2(),
-	}
-}
-
 // EndpointResolverFromURL returns an EndpointResolver configured using the
 // provided endpoint url. By default, the resolved endpoint resolver uses the
 // client region as signing region, and the endpoint source is set to
@@ -87,6 +78,10 @@ func (*ResolveEndpoint) ID() string {
 func (m *ResolveEndpoint) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	if !awsmiddleware.GetRequiresLegacyEndpoints(ctx) {
+		return next.HandleSerialize(ctx, in)
+	}
+
 	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
@@ -215,90 +210,10 @@ func finalizeClientEndpointResolverOptions(options *Options) {
 
 }
 
-type legacyEndpointResolverAdapter struct {
-	legacyResolver EndpointResolver
-	resolver       EndpointResolverV2
-}
-
-func (l *legacyEndpointResolverAdapter) ResolveEndpoint(ctx context.Context, params EndpointParameters) (endpoint smithyendpoints.Endpoint, err error) {
-	var fips aws.FIPSEndpointState
-	var dualStack aws.DualStackEndpointState
-
-	if aws.ToBool(params.UseFIPS) {
-		fips = aws.FIPSEndpointStateEnabled
+func resolveEndpointResolverV2(options *Options) {
+	if options.EndpointResolverV2 == nil {
+		options.EndpointResolverV2 = NewDefaultEndpointResolverV2()
 	}
-	if aws.ToBool(params.UseDualStack) {
-		dualStack = aws.DualStackEndpointStateEnabled
-	}
-
-	resolveEndpoint, err := l.legacyResolver.ResolveEndpoint(aws.ToString(params.Region), EndpointResolverOptions{
-		ResolvedRegion:       aws.ToString(params.Region),
-		UseFIPSEndpoint:      fips,
-		UseDualStackEndpoint: dualStack,
-	})
-	if err != nil {
-		return endpoint, err
-	}
-
-	if resolveEndpoint.HostnameImmutable {
-		uriString := resolveEndpoint.URL
-		uri, err := url.Parse(uriString)
-		if err != nil {
-			return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
-		}
-
-		return smithyendpoints.Endpoint{
-			URI: *uri,
-		}, nil
-	}
-
-	if resolveEndpoint.Source == aws.EndpointSourceServiceMetadata {
-		return l.resolver.ResolveEndpoint(ctx, params)
-	}
-
-	params = params.WithDefaults()
-	params.Endpoint = &resolveEndpoint.URL
-
-	return l.resolver.ResolveEndpoint(ctx, params)
-}
-
-type isDefaultProvidedImplementation interface {
-	isDefaultProvidedImplementation()
-}
-
-type compatibleEndpointResolver struct {
-	EndpointResolverV2 EndpointResolverV2
-}
-
-func (n *compatibleEndpointResolver) isDefaultProvidedImplementation() {}
-
-func (n *compatibleEndpointResolver) ResolveEndpoint(region string, options EndpointResolverOptions) (endpoint aws.Endpoint, err error) {
-	reg := region
-	fips := options.UseFIPSEndpoint
-	if len(options.ResolvedRegion) > 0 {
-		reg = options.ResolvedRegion
-	} else {
-		// EndpointResolverV2 needs to support pseudo-regions to maintain backwards-compatibility
-		// with the legacy EndpointResolver
-		reg, fips = mapPseudoRegion(region)
-	}
-	ctx := context.Background()
-	resolved, err := n.EndpointResolverV2.ResolveEndpoint(ctx, EndpointParameters{
-		Region:       &reg,
-		UseFIPS:      aws.Bool(fips == aws.FIPSEndpointStateEnabled),
-		UseDualStack: aws.Bool(options.UseDualStackEndpoint == aws.DualStackEndpointStateEnabled),
-	})
-	if err != nil {
-		return endpoint, err
-	}
-
-	endpoint = aws.Endpoint{
-		URL:               resolved.URI.String(),
-		HostnameImmutable: false,
-		Source:            aws.EndpointSourceServiceMetadata,
-	}
-
-	return endpoint, nil
 }
 
 // Utility function to aid with translating pseudo-regions to classical regions
@@ -319,24 +234,6 @@ func mapPseudoRegion(pr string) (region string, fips aws.FIPSEndpointState) {
 	}
 
 	return region, fips
-}
-
-func finalizeEndpointResolverV2(options *Options) {
-	// Check if the EndpointResolver was not user provided
-	// but is the SDK's default provided version.
-	_, ok := options.EndpointResolver.(isDefaultProvidedImplementation)
-	if options.EndpointResolverV2 == nil {
-		options.EndpointResolverV2 = NewDefaultEndpointResolverV2()
-	}
-	if ok {
-		// Nothing further to do
-		return
-	}
-
-	options.EndpointResolverV2 = &legacyEndpointResolverAdapter{
-		legacyResolver: options.EndpointResolver,
-		resolver:       NewDefaultEndpointResolverV2(),
-	}
 }
 
 // BuiltInParameterResolver is the interface responsible for resolving BuiltIn

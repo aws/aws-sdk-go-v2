@@ -186,13 +186,6 @@ public class AddAwsConfigFields implements GoIntegration {
                     .generatedOnClient(false)
                     .build(),
             AwsConfigField.builder()
-                    .name(ENDPOINT_RESOLVER_CONFIG_NAME)
-                    .type(getAwsCoreSymbol("EndpointResolver"))
-                    .generatedOnClient(false)
-                    .awsResolveFunction(SymbolUtils.createValueSymbolBuilder(RESOLVE_AWS_CONFIG_ENDPOINT_RESOLVER)
-                            .build())
-                    .build(),
-            AwsConfigField.builder()
                     .name(LOGGER_CONFIG_NAME)
                     .type(getAwsCoreSymbol("Logger"))
                     .generatedOnClient(false)
@@ -270,7 +263,6 @@ public class AddAwsConfigFields implements GoIntegration {
         writeHttpClientResolver(writer);
         writeRetryerResolvers(writer);
         writeRetryMaxAttemptsFinalizeResolver(writer);
-        writeAwsConfigEndpointResolver(writer);
     }
 
     private void writerAwsDefaultResolversTests(GoWriter writer) {
@@ -586,25 +578,6 @@ public class AddAwsConfigFields implements GoIntegration {
                 }
                 """);
 
-        writer.popState();
-    }
-
-    private void writeAwsConfigEndpointResolver(GoWriter writer) {
-        writer.pushState();
-        writer.putContext("resolverName", RESOLVE_AWS_CONFIG_ENDPOINT_RESOLVER);
-        writer.putContext("clientOption", ENDPOINT_RESOLVER_CONFIG_NAME);
-        writer.putContext("wrapperHelper", EndpointGenerator.AWS_ENDPOINT_RESOLVER_HELPER);
-        writer.putContext("awsResolver", ENDPOINT_RESOLVER_CONFIG_NAME);
-        writer.putContext("awsResolverWithOptions", AWS_ENDPOINT_RESOLVER_WITH_OPTIONS);
-        writer.putContext("newResolver", EndpointGenerator.RESOLVER_CONSTRUCTOR_NAME);
-        writer.write("""
-                func $resolverName:L(cfg aws.Config, o *Options) {
-                    if cfg.$awsResolver:L == nil && cfg.$awsResolverWithOptions:L == nil {
-                        return
-                    }
-                    o.$clientOption:L = $wrapperHelper:L(cfg.$awsResolver:L, cfg.$awsResolverWithOptions:L, $newResolver:L())
-                }
-                """);
         writer.popState();
     }
 
