@@ -54,8 +54,6 @@ func New(options Options, optFns ...func(*Options)) *Client {
 
 	resolveHTTPSignerV4(&options)
 
-	resolveDefaultEndpointConfiguration(&options)
-
 	resolveHTTPSignerV4a(&options)
 
 	for _, fn := range optFns {
@@ -229,6 +227,8 @@ func (c *Client) invokeOperation(ctx context.Context, opID string, params interf
 	ctx = middleware.ClearStackValues(ctx)
 	stack := middleware.NewStack(opID, smithyhttp.NewStackRequest)
 	options := c.options.Copy()
+	resolveEndpointResolverV2(&options)
+
 	for _, fn := range optFns {
 		fn(&options)
 	}
@@ -240,8 +240,6 @@ func (c *Client) invokeOperation(ctx context.Context, opID string, params interf
 	finalizeClientEndpointResolverOptions(&options)
 
 	resolveCredentialProvider(&options)
-
-	finalizeEndpointResolverV2(&options)
 
 	for _, fn := range stackFns {
 		if err := fn(stack, options); err != nil {
@@ -268,6 +266,30 @@ func (c *Client) invokeOperation(ctx context.Context, opID string, params interf
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+type LegacyEndpointContextSetter struct {
+	LegacyResolver EndpointResolver
+}
+
+func (*LegacyEndpointContextSetter) ID() string {
+	return "LegacyEndpointContextSetter"
+}
+
+func (m *LegacyEndpointContextSetter) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.LegacyResolver != nil {
+		ctx = awsmiddleware.SetRequiresLegacyEndpoints(ctx, true)
+	}
+
+	return next.HandleInitialize(ctx, in)
+
+}
+func addLegacyEndpointContextSetter(stack *middleware.Stack, o Options) error {
+	return stack.Initialize.Add(&LegacyEndpointContextSetter{
+		LegacyResolver: o.EndpointResolver,
+	}, middleware.Before)
+}
 
 func resolveDefaultLogger(o *Options) {
 	if o.Logger != nil {
@@ -310,7 +332,6 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 	resolveAWSRetryerProvider(cfg, &opts)
 	resolveAWSRetryMaxAttempts(cfg, &opts)
 	resolveAWSRetryMode(cfg, &opts)
-	resolveAWSEndpointResolver(cfg, &opts)
 	resolveUseARNRegion(cfg, &opts)
 	resolveUseDualStackEndpoint(cfg, &opts)
 	resolveUseFIPSEndpoint(cfg, &opts)
@@ -411,13 +432,6 @@ func finalizeRetryMaxAttemptOptions(o *Options, client Client) {
 	}
 
 	o.Retryer = retry.AddWithMaxAttempts(o.Retryer, o.RetryMaxAttempts)
-}
-
-func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
-	if cfg.EndpointResolver == nil && cfg.EndpointResolverWithOptions == nil {
-		return
-	}
-	o.EndpointResolver = withEndpointResolver(cfg.EndpointResolver, cfg.EndpointResolverWithOptions, NewDefaultEndpointResolver())
 }
 
 func addClientUserAgent(stack *middleware.Stack) error {

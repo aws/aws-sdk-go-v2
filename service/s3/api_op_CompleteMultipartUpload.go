@@ -286,6 +286,9 @@ func (c *Client) addOperationCompleteMultipartUploadMiddlewares(stack *middlewar
 	if err != nil {
 		return err
 	}
+	if err = addLegacyEndpointContextSetter(stack, options); err != nil {
+		return err
+	}
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -338,6 +341,9 @@ func (c *Client) addOperationCompleteMultipartUploadMiddlewares(stack *middlewar
 		return err
 	}
 	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+		return err
+	}
+	if err = addCompleteMultipartUploadUpdateEndpoint(stack, options); err != nil {
 		return err
 	}
 	if err = addResponseErrorMiddleware(stack); err != nil {
@@ -418,6 +424,10 @@ func (*opCompleteMultipartUploadResolveEndpointMiddleware) ID() string {
 func (m *opCompleteMultipartUploadResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	if awsmiddleware.GetRequiresLegacyEndpoints(ctx) {
+		return next.HandleSerialize(ctx, in)
+	}
+
 	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)

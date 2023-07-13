@@ -60,6 +60,7 @@ public class AwsEndpointResolverBuiltInGenerator implements GoIntegration {
         Parameters parameters = ruleset.get().getParameters();
 
         var content = new GoWriter.ChainWritable()
+                .add(generatePseudoRegionUtility())
                 .add(generateBuiltInInterfaceType())
                 .add(generateBuiltInImplementationType(parameters))
                 .add(generateBuiltInResolverMethod(parameters))
@@ -74,6 +75,35 @@ public class AwsEndpointResolverBuiltInGenerator implements GoIntegration {
             }
         }
 
+    }
+
+    private GoWriter.Writable generatePseudoRegionUtility() {
+        return goTemplate(
+            """
+            // Utility function to aid with translating pseudo-regions to classical regions
+            // with the appropriate setting indicated by the pseudo-region
+            func mapPseudoRegion(pr string) (region string, fips $awsFipsEndpointStateType:T) {
+                const fipsInfix = \"-fips-\"
+                const fipsPrefix = \"fips-\"
+                const fipsSuffix = \"-fips\"
+
+                if strings.Contains(pr, fipsInfix) ||
+                    strings.Contains(pr, fipsPrefix) ||
+                    strings.Contains(pr, fipsSuffix) {
+                    region = strings.ReplaceAll(strings.ReplaceAll(strings.ReplaceAll(
+                        pr, fipsInfix, "-"), fipsPrefix, ""), fipsSuffix, "")
+                    fips = $awsFipsEndpointStateEnabledType:T
+                } else {
+                    region = pr
+                }
+
+                return region, fips
+            }
+            """,
+            MapUtils.of(
+                    "awsFipsEndpointStateEnabledType", SymbolUtils.createValueSymbolBuilder("FIPSEndpointStateEnabled", AwsGoDependency.AWS_CORE).build(),
+                    "awsFipsEndpointStateType", SymbolUtils.createValueSymbolBuilder("FIPSEndpointState", AwsGoDependency.AWS_CORE).build()
+            ));
     }
 
     private GoWriter.Writable generateBuiltInInterfaceType() {
