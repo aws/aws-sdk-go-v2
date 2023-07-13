@@ -90,12 +90,6 @@ public final class AwsEndpointGenerator implements GoIntegration {
                                         .build()
                         ))
                         .addConfigFieldResolver(ConfigFieldResolver.builder()
-                                .location(ConfigFieldResolver.Location.CLIENT)
-                                .target(ConfigFieldResolver.Target.INITIALIZATION)
-                                .resolver(SymbolUtils.createValueSymbolBuilder(EndpointGenerator.CLIENT_CONFIG_RESOLVER)
-                                        .build())
-                                .build())
-                        .addConfigFieldResolver(ConfigFieldResolver.builder()
                                 .location(ConfigFieldResolver.Location.OPERATION)
                                 .target(ConfigFieldResolver.Target.FINALIZATION)
                                 .resolver(SymbolUtils.createValueSymbolBuilder(

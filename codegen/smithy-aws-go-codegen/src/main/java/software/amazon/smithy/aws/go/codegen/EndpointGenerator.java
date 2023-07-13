@@ -503,6 +503,15 @@ public final class EndpointGenerator implements Runnable {
         w.addUseImports(SmithyGoDependency.SMITHY_MIDDLEWARE);
         w.addUseImports(SmithyGoDependency.SMITHY_HTTP_TRANSPORT);
 
+        w.write(
+            """
+                if !$T(ctx) {
+                    return next.HandleSerialize(ctx, in)
+                }
+            """,
+            SymbolUtils.createValueSymbolBuilder("GetRequiresLegacyEndpoints", AwsGoDependency.AWS_MIDDLEWARE).build()
+        );
+
         w.write("req, ok := in.Request.(*smithyhttp.Request)");
         w.openBlock("if !ok {", "}", () -> {
             w.write("return out, metadata, fmt.Errorf(\"unknown transport type %T\", in.Request)");
@@ -616,14 +625,6 @@ public final class EndpointGenerator implements Runnable {
             writer.write("return fn(region, options)");
         });
 
-        // Generate Client Options Configuration Resolver
-        writer.openBlock("func $L(o $P) {", "}", CLIENT_CONFIG_RESOLVER,
-                SymbolUtils.createPointableSymbolBuilder("Options").build(), () -> {
-                    writer.openBlock("if o.EndpointResolver != nil {", "}", () -> writer.write("return"));
-                    writer.openBlock("o.EndpointResolver = &$L{", "}", AwsEndpointResolverAdapterGenerator.COMPATIBLE_ADAPTER_TYPE, () -> writer.write(
-                        "$L: $L(),", EndpointResolutionGenerator.RESOLVER_INTERFACE_NAME, EndpointResolutionGenerator.NEW_RESOLVER_FUNC_NAME
-                    ));
-                });
 
         // Generate EndpointResolverFromURL helper
         writer.writeDocs(String.format("%s returns an EndpointResolver configured using the provided endpoint url. "

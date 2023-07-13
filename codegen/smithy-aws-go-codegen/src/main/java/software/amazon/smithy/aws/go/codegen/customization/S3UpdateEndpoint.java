@@ -135,6 +135,20 @@ public class S3UpdateEndpoint implements GoIntegration {
                     symbolProvider.toSymbol(operation).getName(),
                     UPDATE_ENDPOINT_INTERNAL_ADDER
             );
+
+            runtimeClientPlugins.add(RuntimeClientPlugin.builder()
+                    .operationPredicate((m, s, o) -> {
+                        if (!isS3SharedService(m, s)) {
+                            return false;
+                        }
+                        return o.equals(operation);
+                    })
+                    .registerMiddleware(MiddlewareRegistrar.builder()
+                            .resolvedFunction(SymbolUtils.createValueSymbolBuilder(helperFuncName)
+                                    .build())
+                            .useClientOptions()
+                            .build())
+                    .build());
         }
     }
 
