@@ -69,16 +69,18 @@ public final class AwsEndpointGenerator implements GoIntegration {
                                         .name(ENDPOINT_RESOLVER_CONFIG_NAME)
                                         .type(SymbolUtils.createValueSymbolBuilder(EndpointGenerator.RESOLVER_INTERFACE_NAME)
                                                 .build())
-                                        .documentation(String.format("The service endpoint resolver."))
-                                        .deprecated(String.format(
+                                        .documentation("The service endpoint resolver.")
+                                        .deprecated(
                                             """
-                                            %s and With%s are deprecated. See %s and With%s
-                                            """,
-                                            EndpointGenerator.RESOLVER_INTERFACE_NAME,
-                                            EndpointGenerator.RESOLVER_INTERFACE_NAME,
-                                            EndpointResolutionGenerator.RESOLVER_INTERFACE_NAME,
-                                            EndpointResolutionGenerator.RESOLVER_INTERFACE_NAME
-                                        ))
+                                            EndpointResolver and WithEndpointResolver are deprecated.
+                                            Providing a value for this field will likely prevent you from using any
+                                            endpoint-related service features released after the introduction of
+                                            EndpointResolverV2 and BaseEndpoint.
+
+                                            To migrate an EndpointResolver implementation that uses a custom endpoint,
+                                            set the client option BaseEndpoint instead.
+                                            """
+                                        )
                                         .withHelper(true)
                                         .build(),
                                 ConfigField.builder()
