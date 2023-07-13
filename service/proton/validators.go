@@ -370,6 +370,26 @@ func (m *validateOpDeleteComponent) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteDeployment struct {
+}
+
+func (*validateOpDeleteDeployment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteDeployment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteDeploymentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteDeploymentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteEnvironmentAccountConnection struct {
 }
 
@@ -585,6 +605,26 @@ func (m *validateOpGetComponent) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetComponentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetDeployment struct {
+}
+
+func (*validateOpGetDeployment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDeployment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDeploymentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDeploymentInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1602,6 +1642,10 @@ func addOpDeleteComponentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteComponent{}, middleware.After)
 }
 
+func addOpDeleteDeploymentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteDeployment{}, middleware.After)
+}
+
 func addOpDeleteEnvironmentAccountConnectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteEnvironmentAccountConnection{}, middleware.After)
 }
@@ -1644,6 +1688,10 @@ func addOpDeleteTemplateSyncConfigValidationMiddleware(stack *middleware.Stack) 
 
 func addOpGetComponentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetComponent{}, middleware.After)
+}
+
+func addOpGetDeploymentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDeployment{}, middleware.After)
 }
 
 func addOpGetEnvironmentAccountConnectionValidationMiddleware(stack *middleware.Stack) error {
@@ -2409,6 +2457,21 @@ func validateOpDeleteComponentInput(v *DeleteComponentInput) error {
 	}
 }
 
+func validateOpDeleteDeploymentInput(v *DeleteDeploymentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteDeploymentInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteEnvironmentAccountConnectionInput(v *DeleteEnvironmentAccountConnectionInput) error {
 	if v == nil {
 		return nil
@@ -2584,6 +2647,21 @@ func validateOpGetComponentInput(v *GetComponentInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetComponentInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetDeploymentInput(v *GetDeploymentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDeploymentInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

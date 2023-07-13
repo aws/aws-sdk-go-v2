@@ -15,8 +15,8 @@ import (
 // with the instance profile you are about to delete. Deleting a role or instance
 // profile that is associated with a running instance will break any applications
 // running on the instance. For more information about instance profiles, see
-// About instance profiles (https://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html)
-// .
+// Using instance profiles (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html)
+// in the IAM User Guide.
 func (c *Client) DeleteInstanceProfile(ctx context.Context, params *DeleteInstanceProfileInput, optFns ...func(*Options)) (*DeleteInstanceProfileOutput, error) {
 	if params == nil {
 		params = &DeleteInstanceProfileInput{}

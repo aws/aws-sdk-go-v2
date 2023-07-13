@@ -12,9 +12,9 @@ import (
 )
 
 // Creates a new role for your Amazon Web Services account. For more information
-// about roles, see IAM roles (https://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html)
-// . For information about quotas for role names and the number of roles you can
-// create, see IAM and STS quotas (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html)
+// about roles, see IAM roles (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)
+// in the IAM User Guide. For information about quotas for role names and the
+// number of roles you can create, see IAM and STS quotas (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html)
 // in the IAM User Guide.
 func (c *Client) CreateRole(ctx context.Context, params *CreateRoleInput, optFns ...func(*Options)) (*CreateRoleOutput, error) {
 	if params == nil {

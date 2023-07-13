@@ -19,9 +19,10 @@ import (
 // and then associate the instance profile (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AssociateIamInstanceProfile.html)
 // , or you can stop your instance and then restart it. The caller of this
 // operation must be granted the PassRole permission on the IAM role by a
-// permissions policy. For more information about roles, see Working with roles (https://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html)
-// . For more information about instance profiles, see About instance profiles (https://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html)
-// .
+// permissions policy. For more information about roles, see IAM roles (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)
+// in the IAM User Guide. For more information about instance profiles, see Using
+// instance profiles (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html)
+// in the IAM User Guide.
 func (c *Client) AddRoleToInstanceProfile(ctx context.Context, params *AddRoleToInstanceProfileInput, optFns ...func(*Options)) (*AddRoleToInstanceProfileOutput, error) {
 	if params == nil {
 		params = &AddRoleToInstanceProfileInput{}

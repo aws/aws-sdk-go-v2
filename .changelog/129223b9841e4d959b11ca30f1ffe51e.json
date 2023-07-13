@@ -1,0 +1,8 @@
+{
+    "id": "129223b9-841e-4d95-9b11-ca30f1ffe51e",
+    "type": "feature",
+    "description": "API model updated in Amazon Cognito",
+    "modules": [
+        "service/cognitoidentityprovider"
+    ]
+}

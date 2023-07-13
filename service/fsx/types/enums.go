@@ -78,6 +78,32 @@ func (AliasLifecycle) Values() []AliasLifecycle {
 	}
 }
 
+type AutocommitPeriodType string
+
+// Enum values for AutocommitPeriodType
+const (
+	AutocommitPeriodTypeMinutes AutocommitPeriodType = "MINUTES"
+	AutocommitPeriodTypeHours   AutocommitPeriodType = "HOURS"
+	AutocommitPeriodTypeDays    AutocommitPeriodType = "DAYS"
+	AutocommitPeriodTypeMonths  AutocommitPeriodType = "MONTHS"
+	AutocommitPeriodTypeYears   AutocommitPeriodType = "YEARS"
+	AutocommitPeriodTypeNone    AutocommitPeriodType = "NONE"
+)
+
+// Values returns all known values for AutocommitPeriodType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AutocommitPeriodType) Values() []AutocommitPeriodType {
+	return []AutocommitPeriodType{
+		"MINUTES",
+		"HOURS",
+		"DAYS",
+		"MONTHS",
+		"YEARS",
+		"NONE",
+	}
+}
+
 type AutoImportPolicyType string
 
 // Enum values for AutoImportPolicyType
@@ -716,6 +742,26 @@ func (OpenZFSQuotaType) Values() []OpenZFSQuotaType {
 	}
 }
 
+type PrivilegedDelete string
+
+// Enum values for PrivilegedDelete
+const (
+	PrivilegedDeleteDisabled            PrivilegedDelete = "DISABLED"
+	PrivilegedDeleteEnabled             PrivilegedDelete = "ENABLED"
+	PrivilegedDeletePermanentlyDisabled PrivilegedDelete = "PERMANENTLY_DISABLED"
+)
+
+// Values returns all known values for PrivilegedDelete. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PrivilegedDelete) Values() []PrivilegedDelete {
+	return []PrivilegedDelete{
+		"DISABLED",
+		"ENABLED",
+		"PERMANENTLY_DISABLED",
+	}
+}
+
 type ReportFormat string
 
 // Enum values for ReportFormat
@@ -784,6 +830,36 @@ func (RestoreOpenZFSVolumeOption) Values() []RestoreOpenZFSVolumeOption {
 	}
 }
 
+type RetentionPeriodType string
+
+// Enum values for RetentionPeriodType
+const (
+	RetentionPeriodTypeSeconds     RetentionPeriodType = "SECONDS"
+	RetentionPeriodTypeMinutes     RetentionPeriodType = "MINUTES"
+	RetentionPeriodTypeHours       RetentionPeriodType = "HOURS"
+	RetentionPeriodTypeDays        RetentionPeriodType = "DAYS"
+	RetentionPeriodTypeMonths      RetentionPeriodType = "MONTHS"
+	RetentionPeriodTypeYears       RetentionPeriodType = "YEARS"
+	RetentionPeriodTypeInfinite    RetentionPeriodType = "INFINITE"
+	RetentionPeriodTypeUnspecified RetentionPeriodType = "UNSPECIFIED"
+)
+
+// Values returns all known values for RetentionPeriodType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RetentionPeriodType) Values() []RetentionPeriodType {
+	return []RetentionPeriodType{
+		"SECONDS",
+		"MINUTES",
+		"HOURS",
+		"DAYS",
+		"MONTHS",
+		"YEARS",
+		"INFINITE",
+		"UNSPECIFIED",
+	}
+}
+
 type SecurityStyle string
 
 // Enum values for SecurityStyle
@@ -835,6 +911,24 @@ func (ServiceLimit) Values() []ServiceLimit {
 		"VOLUMES_PER_FILE_SYSTEM",
 		"TOTAL_SSD_IOPS",
 		"FILE_CACHE_COUNT",
+	}
+}
+
+type SnaplockType string
+
+// Enum values for SnaplockType
+const (
+	SnaplockTypeCompliance SnaplockType = "COMPLIANCE"
+	SnaplockTypeEnterprise SnaplockType = "ENTERPRISE"
+)
+
+// Values returns all known values for SnaplockType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SnaplockType) Values() []SnaplockType {
+	return []SnaplockType{
+		"COMPLIANCE",
+		"ENTERPRISE",
 	}
 }
 

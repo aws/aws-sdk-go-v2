@@ -802,6 +802,21 @@ func addOpUpdateVolumeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateVolume{}, middleware.After)
 }
 
+func validateAutocommitPeriod(v *types.AutocommitPeriod) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutocommitPeriod"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCompletionReport(v *types.CompletionReport) error {
 	if v == nil {
 		return nil
@@ -953,6 +968,11 @@ func validateCreateOntapVolumeConfiguration(v *types.CreateOntapVolumeConfigurat
 	if v.StorageVirtualMachineId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StorageVirtualMachineId"))
 	}
+	if v.SnaplockConfiguration != nil {
+		if err := validateCreateSnaplockConfiguration(v.SnaplockConfiguration); err != nil {
+			invalidParams.AddNested("SnaplockConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1000,6 +1020,31 @@ func validateCreateOpenZFSVolumeConfiguration(v *types.CreateOpenZFSVolumeConfig
 		if err := validateOpenZFSUserAndGroupQuotas(v.UserAndGroupQuotas); err != nil {
 			invalidParams.AddNested("UserAndGroupQuotas", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCreateSnaplockConfiguration(v *types.CreateSnaplockConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateSnaplockConfiguration"}
+	if v.AutocommitPeriod != nil {
+		if err := validateAutocommitPeriod(v.AutocommitPeriod); err != nil {
+			invalidParams.AddNested("AutocommitPeriod", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RetentionPeriod != nil {
+		if err := validateSnaplockRetentionPeriod(v.RetentionPeriod); err != nil {
+			invalidParams.AddNested("RetentionPeriod", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.SnaplockType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SnaplockType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1295,6 +1340,21 @@ func validateOpenZFSUserOrGroupQuota(v *types.OpenZFSUserOrGroupQuota) error {
 	}
 }
 
+func validateRetentionPeriod(v *types.RetentionPeriod) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RetentionPeriod"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSelfManagedActiveDirectoryConfiguration(v *types.SelfManagedActiveDirectoryConfiguration) error {
 	if v == nil {
 		return nil
@@ -1311,6 +1371,39 @@ func validateSelfManagedActiveDirectoryConfiguration(v *types.SelfManagedActiveD
 	}
 	if v.DnsIps == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DnsIps"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSnaplockRetentionPeriod(v *types.SnaplockRetentionPeriod) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SnaplockRetentionPeriod"}
+	if v.DefaultRetention == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DefaultRetention"))
+	} else if v.DefaultRetention != nil {
+		if err := validateRetentionPeriod(v.DefaultRetention); err != nil {
+			invalidParams.AddNested("DefaultRetention", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MinimumRetention == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MinimumRetention"))
+	} else if v.MinimumRetention != nil {
+		if err := validateRetentionPeriod(v.MinimumRetention); err != nil {
+			invalidParams.AddNested("MinimumRetention", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MaximumRetention == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaximumRetention"))
+	} else if v.MaximumRetention != nil {
+		if err := validateRetentionPeriod(v.MaximumRetention); err != nil {
+			invalidParams.AddNested("MaximumRetention", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1388,6 +1481,23 @@ func validateUpdateFileSystemWindowsConfiguration(v *types.UpdateFileSystemWindo
 	}
 }
 
+func validateUpdateOntapVolumeConfiguration(v *types.UpdateOntapVolumeConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateOntapVolumeConfiguration"}
+	if v.SnaplockConfiguration != nil {
+		if err := validateUpdateSnaplockConfiguration(v.SnaplockConfiguration); err != nil {
+			invalidParams.AddNested("SnaplockConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateUpdateOpenZFSVolumeConfiguration(v *types.UpdateOpenZFSVolumeConfiguration) error {
 	if v == nil {
 		return nil
@@ -1401,6 +1511,28 @@ func validateUpdateOpenZFSVolumeConfiguration(v *types.UpdateOpenZFSVolumeConfig
 	if v.UserAndGroupQuotas != nil {
 		if err := validateOpenZFSUserAndGroupQuotas(v.UserAndGroupQuotas); err != nil {
 			invalidParams.AddNested("UserAndGroupQuotas", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdateSnaplockConfiguration(v *types.UpdateSnaplockConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateSnaplockConfiguration"}
+	if v.AutocommitPeriod != nil {
+		if err := validateAutocommitPeriod(v.AutocommitPeriod); err != nil {
+			invalidParams.AddNested("AutocommitPeriod", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RetentionPeriod != nil {
+		if err := validateSnaplockRetentionPeriod(v.RetentionPeriod); err != nil {
+			invalidParams.AddNested("RetentionPeriod", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2127,6 +2259,11 @@ func validateOpUpdateVolumeInput(v *UpdateVolumeInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateVolumeInput"}
 	if v.VolumeId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VolumeId"))
+	}
+	if v.OntapConfiguration != nil {
+		if err := validateUpdateOntapVolumeConfiguration(v.OntapConfiguration); err != nil {
+			invalidParams.AddNested("OntapConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.OpenZFSConfiguration != nil {
 		if err := validateUpdateOpenZFSVolumeConfiguration(v.OpenZFSConfiguration); err != nil {

@@ -2302,6 +2302,129 @@ func awsAwsjson10_deserializeOpErrorDeleteComponent(response *smithyhttp.Respons
 	}
 }
 
+type awsAwsjson10_deserializeOpDeleteDeployment struct {
+}
+
+func (*awsAwsjson10_deserializeOpDeleteDeployment) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson10_deserializeOpDeleteDeployment) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson10_deserializeOpErrorDeleteDeployment(response, &metadata)
+	}
+	output := &DeleteDeploymentOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson10_deserializeOpDocumentDeleteDeploymentOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson10_deserializeOpErrorDeleteDeployment(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson10_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsAwsjson10_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsAwsjson10_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsAwsjson10_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsjson10_deserializeOpDeleteEnvironment struct {
 }
 
@@ -3743,6 +3866,129 @@ func (m *awsAwsjson10_deserializeOpGetComponent) HandleDeserialize(ctx context.C
 }
 
 func awsAwsjson10_deserializeOpErrorGetComponent(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson10_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsAwsjson10_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsAwsjson10_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsAwsjson10_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsAwsjson10_deserializeOpGetDeployment struct {
+}
+
+func (*awsAwsjson10_deserializeOpGetDeployment) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson10_deserializeOpGetDeployment) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson10_deserializeOpErrorGetDeployment(response, &metadata)
+	}
+	output := &GetDeploymentOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson10_deserializeOpDocumentGetDeploymentOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson10_deserializeOpErrorGetDeployment(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -6122,6 +6368,129 @@ func awsAwsjson10_deserializeOpErrorListComponents(response *smithyhttp.Response
 
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsAwsjson10_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsAwsjson10_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsAwsjson10_deserializeOpListDeployments struct {
+}
+
+func (*awsAwsjson10_deserializeOpListDeployments) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson10_deserializeOpListDeployments) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson10_deserializeOpErrorListDeployments(response, &metadata)
+	}
+	output := &ListDeploymentsOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson10_deserializeOpDocumentListDeploymentsOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson10_deserializeOpErrorListDeployments(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson10_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsAwsjson10_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
 
 	case strings.EqualFold("ThrottlingException", errorCode):
 		return awsAwsjson10_deserializeErrorThrottlingException(response, errorBody)
@@ -10994,6 +11363,15 @@ func awsAwsjson10_deserializeDocumentComponent(v **types.Component, value interf
 				sv.EnvironmentName = ptr.String(jtv)
 			}
 
+		case "lastAttemptedDeploymentId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeploymentId to be of type string, got %T instead", value)
+				}
+				sv.LastAttemptedDeploymentId = ptr.String(jtv)
+			}
+
 		case "lastClientRequestToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11051,6 +11429,15 @@ func awsAwsjson10_deserializeDocumentComponent(v **types.Component, value interf
 				}
 			}
 
+		case "lastSucceededDeploymentId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeploymentId to be of type string, got %T instead", value)
+				}
+				sv.LastSucceededDeploymentId = ptr.String(jtv)
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11085,6 +11472,109 @@ func awsAwsjson10_deserializeDocumentComponent(v **types.Component, value interf
 					return fmt.Errorf("expected SpecContents to be of type string, got %T instead", value)
 				}
 				sv.ServiceSpec = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentComponentDeploymentIdList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected DeploymentId to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentComponentState(v **types.ComponentState, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ComponentState
+	if *v == nil {
+		sv = &types.ComponentState{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "serviceInstanceName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceNameOrEmpty to be of type string, got %T instead", value)
+				}
+				sv.ServiceInstanceName = ptr.String(jtv)
+			}
+
+		case "serviceName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceNameOrEmpty to be of type string, got %T instead", value)
+				}
+				sv.ServiceName = ptr.String(jtv)
+			}
+
+		case "serviceSpec":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SpecContents to be of type string, got %T instead", value)
+				}
+				sv.ServiceSpec = ptr.String(jtv)
+			}
+
+		case "templateFile":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TemplateFileContents to be of type string, got %T instead", value)
+				}
+				sv.TemplateFile = ptr.String(jtv)
 			}
 
 		default:
@@ -11170,6 +11660,15 @@ func awsAwsjson10_deserializeDocumentComponentSummary(v **types.ComponentSummary
 				sv.EnvironmentName = ptr.String(jtv)
 			}
 
+		case "lastAttemptedDeploymentId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeploymentId to be of type string, got %T instead", value)
+				}
+				sv.LastAttemptedDeploymentId = ptr.String(jtv)
+			}
+
 		case "lastDeploymentAttemptedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -11216,6 +11715,15 @@ func awsAwsjson10_deserializeDocumentComponentSummary(v **types.ComponentSummary
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "lastSucceededDeploymentId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeploymentId to be of type string, got %T instead", value)
+				}
+				sv.LastSucceededDeploymentId = ptr.String(jtv)
 			}
 
 		case "name":
@@ -11394,6 +11902,517 @@ func awsAwsjson10_deserializeDocumentCountsSummary(v **types.CountsSummary, valu
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentDeployment(v **types.Deployment, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Deployment
+	if *v == nil {
+		sv = &types.Deployment{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "arn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeploymentArn to be of type string, got %T instead", value)
+				}
+				sv.Arn = ptr.String(jtv)
+			}
+
+		case "completedAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CompletedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "componentName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceName to be of type string, got %T instead", value)
+				}
+				sv.ComponentName = ptr.String(jtv)
+			}
+
+		case "createdAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreatedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "deploymentStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeploymentStatus to be of type string, got %T instead", value)
+				}
+				sv.DeploymentStatus = types.DeploymentStatus(jtv)
+			}
+
+		case "deploymentStatusMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StatusMessage to be of type string, got %T instead", value)
+				}
+				sv.DeploymentStatusMessage = ptr.String(jtv)
+			}
+
+		case "environmentName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceName to be of type string, got %T instead", value)
+				}
+				sv.EnvironmentName = ptr.String(jtv)
+			}
+
+		case "id":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeploymentId to be of type string, got %T instead", value)
+				}
+				sv.Id = ptr.String(jtv)
+			}
+
+		case "initialState":
+			if err := awsAwsjson10_deserializeDocumentDeploymentState(&sv.InitialState, value); err != nil {
+				return err
+			}
+
+		case "lastAttemptedDeploymentId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeploymentId to be of type string, got %T instead", value)
+				}
+				sv.LastAttemptedDeploymentId = ptr.String(jtv)
+			}
+
+		case "lastModifiedAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastModifiedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "lastSucceededDeploymentId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeploymentId to be of type string, got %T instead", value)
+				}
+				sv.LastSucceededDeploymentId = ptr.String(jtv)
+			}
+
+		case "serviceInstanceName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceName to be of type string, got %T instead", value)
+				}
+				sv.ServiceInstanceName = ptr.String(jtv)
+			}
+
+		case "serviceName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceName to be of type string, got %T instead", value)
+				}
+				sv.ServiceName = ptr.String(jtv)
+			}
+
+		case "targetArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+				}
+				sv.TargetArn = ptr.String(jtv)
+			}
+
+		case "targetResourceCreatedAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.TargetResourceCreatedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "targetResourceType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeploymentTargetResourceType to be of type string, got %T instead", value)
+				}
+				sv.TargetResourceType = types.DeploymentTargetResourceType(jtv)
+			}
+
+		case "targetState":
+			if err := awsAwsjson10_deserializeDocumentDeploymentState(&sv.TargetState, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentDeploymentState(v *types.DeploymentState, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.DeploymentState
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "component":
+			var mv types.ComponentState
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentComponentState(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.DeploymentStateMemberComponent{Value: mv}
+			break loop
+
+		case "environment":
+			var mv types.EnvironmentState
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentEnvironmentState(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.DeploymentStateMemberEnvironment{Value: mv}
+			break loop
+
+		case "serviceInstance":
+			var mv types.ServiceInstanceState
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentServiceInstanceState(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.DeploymentStateMemberServiceInstance{Value: mv}
+			break loop
+
+		case "servicePipeline":
+			var mv types.ServicePipelineState
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentServicePipelineState(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.DeploymentStateMemberServicePipeline{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentDeploymentSummary(v **types.DeploymentSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DeploymentSummary
+	if *v == nil {
+		sv = &types.DeploymentSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "arn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeploymentArn to be of type string, got %T instead", value)
+				}
+				sv.Arn = ptr.String(jtv)
+			}
+
+		case "completedAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CompletedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "componentName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceName to be of type string, got %T instead", value)
+				}
+				sv.ComponentName = ptr.String(jtv)
+			}
+
+		case "createdAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreatedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "deploymentStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeploymentStatus to be of type string, got %T instead", value)
+				}
+				sv.DeploymentStatus = types.DeploymentStatus(jtv)
+			}
+
+		case "environmentName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceName to be of type string, got %T instead", value)
+				}
+				sv.EnvironmentName = ptr.String(jtv)
+			}
+
+		case "id":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeploymentId to be of type string, got %T instead", value)
+				}
+				sv.Id = ptr.String(jtv)
+			}
+
+		case "lastAttemptedDeploymentId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeploymentId to be of type string, got %T instead", value)
+				}
+				sv.LastAttemptedDeploymentId = ptr.String(jtv)
+			}
+
+		case "lastModifiedAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastModifiedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "lastSucceededDeploymentId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeploymentId to be of type string, got %T instead", value)
+				}
+				sv.LastSucceededDeploymentId = ptr.String(jtv)
+			}
+
+		case "serviceInstanceName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceName to be of type string, got %T instead", value)
+				}
+				sv.ServiceInstanceName = ptr.String(jtv)
+			}
+
+		case "serviceName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceName to be of type string, got %T instead", value)
+				}
+				sv.ServiceName = ptr.String(jtv)
+			}
+
+		case "targetArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+				}
+				sv.TargetArn = ptr.String(jtv)
+			}
+
+		case "targetResourceCreatedAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.TargetResourceCreatedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "targetResourceType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeploymentTargetResourceType to be of type string, got %T instead", value)
+				}
+				sv.TargetResourceType = types.DeploymentTargetResourceType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentDeploymentSummaryList(v *[]types.DeploymentSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.DeploymentSummary
+	if *v == nil {
+		cv = []types.DeploymentSummary{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.DeploymentSummary
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentDeploymentSummary(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentEnvironment(v **types.Environment, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -11504,6 +12523,15 @@ func awsAwsjson10_deserializeDocumentEnvironment(v **types.Environment, value in
 				sv.EnvironmentAccountId = ptr.String(jtv)
 			}
 
+		case "lastAttemptedDeploymentId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeploymentId to be of type string, got %T instead", value)
+				}
+				sv.LastAttemptedDeploymentId = ptr.String(jtv)
+			}
+
 		case "lastDeploymentAttemptedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -11534,6 +12562,15 @@ func awsAwsjson10_deserializeDocumentEnvironment(v **types.Environment, value in
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "lastSucceededDeploymentId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeploymentId to be of type string, got %T instead", value)
+				}
+				sv.LastSucceededDeploymentId = ptr.String(jtv)
 			}
 
 		case "name":
@@ -11926,6 +12963,73 @@ func awsAwsjson10_deserializeDocumentEnvironmentAccountConnectionSummaryList(v *
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentEnvironmentState(v **types.EnvironmentState, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EnvironmentState
+	if *v == nil {
+		sv = &types.EnvironmentState{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "spec":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SpecContents to be of type string, got %T instead", value)
+				}
+				sv.Spec = ptr.String(jtv)
+			}
+
+		case "templateMajorVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TemplateVersionPart to be of type string, got %T instead", value)
+				}
+				sv.TemplateMajorVersion = ptr.String(jtv)
+			}
+
+		case "templateMinorVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TemplateVersionPart to be of type string, got %T instead", value)
+				}
+				sv.TemplateMinorVersion = ptr.String(jtv)
+			}
+
+		case "templateName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceName to be of type string, got %T instead", value)
+				}
+				sv.TemplateName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentEnvironmentSummary(v **types.EnvironmentSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -12027,6 +13131,15 @@ func awsAwsjson10_deserializeDocumentEnvironmentSummary(v **types.EnvironmentSum
 				sv.EnvironmentAccountId = ptr.String(jtv)
 			}
 
+		case "lastAttemptedDeploymentId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeploymentId to be of type string, got %T instead", value)
+				}
+				sv.LastAttemptedDeploymentId = ptr.String(jtv)
+			}
+
 		case "lastDeploymentAttemptedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -12057,6 +13170,15 @@ func awsAwsjson10_deserializeDocumentEnvironmentSummary(v **types.EnvironmentSum
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "lastSucceededDeploymentId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeploymentId to be of type string, got %T instead", value)
+				}
+				sv.LastSucceededDeploymentId = ptr.String(jtv)
 			}
 
 		case "name":
@@ -14141,6 +15263,15 @@ func awsAwsjson10_deserializeDocumentServiceInstance(v **types.ServiceInstance, 
 				sv.EnvironmentName = ptr.String(jtv)
 			}
 
+		case "lastAttemptedDeploymentId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeploymentId to be of type string, got %T instead", value)
+				}
+				sv.LastAttemptedDeploymentId = ptr.String(jtv)
+			}
+
 		case "lastClientRequestToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14182,6 +15313,15 @@ func awsAwsjson10_deserializeDocumentServiceInstance(v **types.ServiceInstance, 
 				}
 			}
 
+		case "lastSucceededDeploymentId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeploymentId to be of type string, got %T instead", value)
+				}
+				sv.LastSucceededDeploymentId = ptr.String(jtv)
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14198,6 +15338,96 @@ func awsAwsjson10_deserializeDocumentServiceInstance(v **types.ServiceInstance, 
 					return fmt.Errorf("expected ResourceName to be of type string, got %T instead", value)
 				}
 				sv.ServiceName = ptr.String(jtv)
+			}
+
+		case "spec":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SpecContents to be of type string, got %T instead", value)
+				}
+				sv.Spec = ptr.String(jtv)
+			}
+
+		case "templateMajorVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TemplateVersionPart to be of type string, got %T instead", value)
+				}
+				sv.TemplateMajorVersion = ptr.String(jtv)
+			}
+
+		case "templateMinorVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TemplateVersionPart to be of type string, got %T instead", value)
+				}
+				sv.TemplateMinorVersion = ptr.String(jtv)
+			}
+
+		case "templateName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceName to be of type string, got %T instead", value)
+				}
+				sv.TemplateName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentServiceInstanceState(v **types.ServiceInstanceState, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ServiceInstanceState
+	if *v == nil {
+		sv = &types.ServiceInstanceState{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "lastSuccessfulComponentDeploymentIds":
+			if err := awsAwsjson10_deserializeDocumentComponentDeploymentIdList(&sv.LastSuccessfulComponentDeploymentIds, value); err != nil {
+				return err
+			}
+
+		case "lastSuccessfulEnvironmentDeploymentId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeploymentId to be of type string, got %T instead", value)
+				}
+				sv.LastSuccessfulEnvironmentDeploymentId = ptr.String(jtv)
+			}
+
+		case "lastSuccessfulServicePipelineDeploymentId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeploymentId to be of type string, got %T instead", value)
+				}
+				sv.LastSuccessfulServicePipelineDeploymentId = ptr.String(jtv)
 			}
 
 		case "spec":
@@ -14319,6 +15549,15 @@ func awsAwsjson10_deserializeDocumentServiceInstanceSummary(v **types.ServiceIns
 				sv.EnvironmentName = ptr.String(jtv)
 			}
 
+		case "lastAttemptedDeploymentId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeploymentId to be of type string, got %T instead", value)
+				}
+				sv.LastAttemptedDeploymentId = ptr.String(jtv)
+			}
+
 		case "lastDeploymentAttemptedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -14349,6 +15588,15 @@ func awsAwsjson10_deserializeDocumentServiceInstanceSummary(v **types.ServiceIns
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "lastSucceededDeploymentId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeploymentId to be of type string, got %T instead", value)
+				}
+				sv.LastSucceededDeploymentId = ptr.String(jtv)
 			}
 
 		case "name":
@@ -14504,6 +15752,15 @@ func awsAwsjson10_deserializeDocumentServicePipeline(v **types.ServicePipeline, 
 				sv.DeploymentStatusMessage = ptr.String(jtv)
 			}
 
+		case "lastAttemptedDeploymentId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeploymentId to be of type string, got %T instead", value)
+				}
+				sv.LastAttemptedDeploymentId = ptr.String(jtv)
+			}
+
 		case "lastDeploymentAttemptedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -14536,6 +15793,82 @@ func awsAwsjson10_deserializeDocumentServicePipeline(v **types.ServicePipeline, 
 				}
 			}
 
+		case "lastSucceededDeploymentId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeploymentId to be of type string, got %T instead", value)
+				}
+				sv.LastSucceededDeploymentId = ptr.String(jtv)
+			}
+
+		case "spec":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SpecContents to be of type string, got %T instead", value)
+				}
+				sv.Spec = ptr.String(jtv)
+			}
+
+		case "templateMajorVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TemplateVersionPart to be of type string, got %T instead", value)
+				}
+				sv.TemplateMajorVersion = ptr.String(jtv)
+			}
+
+		case "templateMinorVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TemplateVersionPart to be of type string, got %T instead", value)
+				}
+				sv.TemplateMinorVersion = ptr.String(jtv)
+			}
+
+		case "templateName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceName to be of type string, got %T instead", value)
+				}
+				sv.TemplateName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentServicePipelineState(v **types.ServicePipelineState, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ServicePipelineState
+	if *v == nil {
+		sv = &types.ServicePipelineState{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
 		case "spec":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16630,6 +17963,42 @@ func awsAwsjson10_deserializeOpDocumentDeleteComponentOutput(v **DeleteComponent
 	return nil
 }
 
+func awsAwsjson10_deserializeOpDocumentDeleteDeploymentOutput(v **DeleteDeploymentOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *DeleteDeploymentOutput
+	if *v == nil {
+		sv = &DeleteDeploymentOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "deployment":
+			if err := awsAwsjson10_deserializeDocumentDeployment(&sv.Deployment, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeOpDocumentDeleteEnvironmentAccountConnectionOutput(v **DeleteEnvironmentAccountConnectionOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -17050,6 +18419,42 @@ func awsAwsjson10_deserializeOpDocumentGetComponentOutput(v **GetComponentOutput
 		switch key {
 		case "component":
 			if err := awsAwsjson10_deserializeDocumentComponent(&sv.Component, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeOpDocumentGetDeploymentOutput(v **GetDeploymentOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *GetDeploymentOutput
+	if *v == nil {
+		sv = &GetDeploymentOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "deployment":
+			if err := awsAwsjson10_deserializeDocumentDeployment(&sv.Deployment, value); err != nil {
 				return err
 			}
 
@@ -17772,6 +19177,51 @@ func awsAwsjson10_deserializeOpDocumentListComponentsOutput(v **ListComponentsOu
 		switch key {
 		case "components":
 			if err := awsAwsjson10_deserializeDocumentComponentSummaryList(&sv.Components, value); err != nil {
+				return err
+			}
+
+		case "nextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeOpDocumentListDeploymentsOutput(v **ListDeploymentsOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *ListDeploymentsOutput
+	if *v == nil {
+		sv = &ListDeploymentsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "deployments":
+			if err := awsAwsjson10_deserializeDocumentDeploymentSummaryList(&sv.Deployments, value); err != nil {
 				return err
 			}
 

@@ -14,8 +14,9 @@ import (
 
 // Lists the instance profiles that have the specified associated IAM role. If
 // there are none, the operation returns an empty list. For more information about
-// instance profiles, go to About instance profiles (https://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html)
-// . You can paginate the results using the MaxItems and Marker parameters.
+// instance profiles, go to Using instance profiles (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html)
+// in the IAM User Guide. You can paginate the results using the MaxItems and
+// Marker parameters.
 func (c *Client) ListInstanceProfilesForRole(ctx context.Context, params *ListInstanceProfilesForRoleInput, optFns ...func(*Options)) (*ListInstanceProfilesForRoleOutput, error) {
 	if params == nil {
 		params = &ListInstanceProfilesForRoleInput{}

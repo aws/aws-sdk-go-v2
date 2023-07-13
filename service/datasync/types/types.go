@@ -368,6 +368,9 @@ type NetAppONTAPCluster struct {
 	// The name of the cluster.
 	ClusterName *string
 
+	// The number of LUNs (logical unit numbers) in the cluster.
+	LunCount *int64
+
 	// The performance data that DataSync Discovery collects about the cluster.
 	MaxP95Performance *MaxP95Performance
 
@@ -404,6 +407,9 @@ type NetAppONTAPSVM struct {
 
 	// The data transfer protocols (such as NFS) configured for the SVM.
 	EnabledProtocols []string
+
+	// The number of LUNs (logical unit numbers) in the SVM.
+	LunCount *int64
 
 	// The performance data that DataSync Discovery collects about the SVM.
 	MaxP95Performance *MaxP95Performance
@@ -461,6 +467,9 @@ type NetAppONTAPVolume struct {
 	// The storage space that's being used in the volume without accounting for
 	// compression or deduplication.
 	LogicalCapacityUsed *int64
+
+	// The number of LUNs (logical unit numbers) in the volume.
+	LunCount *int64
 
 	// The performance data that DataSync Discovery collects about the volume.
 	MaxP95Performance *MaxP95Performance
@@ -649,11 +658,9 @@ type Options struct {
 	// configuration.
 	SecurityDescriptorCopyFlags SmbSecurityDescriptorCopyFlags
 
-	// Specifies whether tasks should be queued before executing the tasks. The
-	// default is ENABLED , which means the tasks will be queued. If you use the same
-	// agent to run multiple tasks, you can enable the tasks to run in series. For more
-	// information, see Queueing task executions (https://docs.aws.amazon.com/datasync/latest/userguide/run-task.html#queue-task-execution)
-	// .
+	// Specifies whether your transfer tasks should be put into a queue during certain
+	// scenarios when running multiple tasks (https://docs.aws.amazon.com/datasync/latest/userguide/run-task.html#running-multiple-tasks)
+	// . This is ENABLED by default.
 	TaskQueueing TaskQueueing
 
 	// Determines whether DataSync transfers only the data and metadata that differ

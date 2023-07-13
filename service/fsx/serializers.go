@@ -2280,6 +2280,23 @@ func awsAwsjson11_serializeDocumentAlternateDNSNames(v []string, value smithyjso
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentAutocommitPeriod(v *types.AutocommitPeriod, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	if v.Value != nil {
+		ok := object.Key("Value")
+		ok.Integer(*v.Value)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentAutoExportPolicy(v *types.AutoExportPolicy, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2683,6 +2700,13 @@ func awsAwsjson11_serializeDocumentCreateOntapVolumeConfiguration(v *types.Creat
 		ok.Integer(*v.SizeInMegabytes)
 	}
 
+	if v.SnaplockConfiguration != nil {
+		ok := object.Key("SnaplockConfiguration")
+		if err := awsAwsjson11_serializeDocumentCreateSnaplockConfiguration(v.SnaplockConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SnapshotPolicy != nil {
 		ok := object.Key("SnapshotPolicy")
 		ok.String(*v.SnapshotPolicy)
@@ -2783,6 +2807,47 @@ func awsAwsjson11_serializeDocumentCreateOpenZFSVolumeConfiguration(v *types.Cre
 		if err := awsAwsjson11_serializeDocumentOpenZFSUserAndGroupQuotas(v.UserAndGroupQuotas, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCreateSnaplockConfiguration(v *types.CreateSnaplockConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AuditLogVolume != nil {
+		ok := object.Key("AuditLogVolume")
+		ok.Boolean(*v.AuditLogVolume)
+	}
+
+	if v.AutocommitPeriod != nil {
+		ok := object.Key("AutocommitPeriod")
+		if err := awsAwsjson11_serializeDocumentAutocommitPeriod(v.AutocommitPeriod, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.PrivilegedDelete) > 0 {
+		ok := object.Key("PrivilegedDelete")
+		ok.String(string(v.PrivilegedDelete))
+	}
+
+	if v.RetentionPeriod != nil {
+		ok := object.Key("RetentionPeriod")
+		if err := awsAwsjson11_serializeDocumentSnaplockRetentionPeriod(v.RetentionPeriod, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.SnaplockType) > 0 {
+		ok := object.Key("SnaplockType")
+		ok.String(string(v.SnaplockType))
+	}
+
+	if v.VolumeAppendModeEnabled != nil {
+		ok := object.Key("VolumeAppendModeEnabled")
+		ok.Boolean(*v.VolumeAppendModeEnabled)
 	}
 
 	return nil
@@ -2961,6 +3026,11 @@ func awsAwsjson11_serializeDocumentDeleteOpenZFSVolumeOptions(v []types.DeleteOp
 func awsAwsjson11_serializeDocumentDeleteVolumeOntapConfiguration(v *types.DeleteVolumeOntapConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.BypassSnaplockEnterpriseRetention != nil {
+		ok := object.Key("BypassSnaplockEnterpriseRetention")
+		ok.Boolean(*v.BypassSnaplockEnterpriseRetention)
+	}
 
 	if v.FinalBackupTags != nil {
 		ok := object.Key("FinalBackupTags")
@@ -3372,6 +3442,23 @@ func awsAwsjson11_serializeDocumentRestoreOpenZFSVolumeOptions(v []types.Restore
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentRetentionPeriod(v *types.RetentionPeriod, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	if v.Value != nil {
+		ok := object.Key("Value")
+		ok.Integer(*v.Value)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentRouteTableIds(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -3488,6 +3575,34 @@ func awsAwsjson11_serializeDocumentSelfManagedActiveDirectoryConfigurationUpdate
 	if v.UserName != nil {
 		ok := object.Key("UserName")
 		ok.String(*v.UserName)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSnaplockRetentionPeriod(v *types.SnaplockRetentionPeriod, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DefaultRetention != nil {
+		ok := object.Key("DefaultRetention")
+		if err := awsAwsjson11_serializeDocumentRetentionPeriod(v.DefaultRetention, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaximumRetention != nil {
+		ok := object.Key("MaximumRetention")
+		if err := awsAwsjson11_serializeDocumentRetentionPeriod(v.MaximumRetention, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MinimumRetention != nil {
+		ok := object.Key("MinimumRetention")
+		if err := awsAwsjson11_serializeDocumentRetentionPeriod(v.MinimumRetention, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -3912,6 +4027,13 @@ func awsAwsjson11_serializeDocumentUpdateOntapVolumeConfiguration(v *types.Updat
 		ok.Integer(*v.SizeInMegabytes)
 	}
 
+	if v.SnaplockConfiguration != nil {
+		ok := object.Key("SnaplockConfiguration")
+		if err := awsAwsjson11_serializeDocumentUpdateSnaplockConfiguration(v.SnaplockConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SnapshotPolicy != nil {
 		ok := object.Key("SnapshotPolicy")
 		ok.String(*v.SnapshotPolicy)
@@ -3973,6 +4095,42 @@ func awsAwsjson11_serializeDocumentUpdateOpenZFSVolumeConfiguration(v *types.Upd
 		if err := awsAwsjson11_serializeDocumentOpenZFSUserAndGroupQuotas(v.UserAndGroupQuotas, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentUpdateSnaplockConfiguration(v *types.UpdateSnaplockConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AuditLogVolume != nil {
+		ok := object.Key("AuditLogVolume")
+		ok.Boolean(*v.AuditLogVolume)
+	}
+
+	if v.AutocommitPeriod != nil {
+		ok := object.Key("AutocommitPeriod")
+		if err := awsAwsjson11_serializeDocumentAutocommitPeriod(v.AutocommitPeriod, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.PrivilegedDelete) > 0 {
+		ok := object.Key("PrivilegedDelete")
+		ok.String(string(v.PrivilegedDelete))
+	}
+
+	if v.RetentionPeriod != nil {
+		ok := object.Key("RetentionPeriod")
+		if err := awsAwsjson11_serializeDocumentSnaplockRetentionPeriod(v.RetentionPeriod, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VolumeAppendModeEnabled != nil {
+		ok := object.Key("VolumeAppendModeEnabled")
+		ok.Boolean(*v.VolumeAppendModeEnabled)
 	}
 
 	return nil

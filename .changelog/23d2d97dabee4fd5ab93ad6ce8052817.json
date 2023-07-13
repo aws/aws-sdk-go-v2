@@ -1,0 +1,8 @@
+{
+    "id": "23d2d97d-abee-4fd5-ab93-ad6ce8052817",
+    "type": "feature",
+    "description": "Adds categories to MediaTailor channel assembly alerts",
+    "modules": [
+        "service/mediatailor"
+    ]
+}

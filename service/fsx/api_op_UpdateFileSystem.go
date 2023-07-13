@@ -28,6 +28,7 @@ import (
 //   - AutomaticBackupRetentionDays
 //   - DailyAutomaticBackupStartTime
 //   - DataCompressionType
+//   - LogConfiguration
 //   - LustreRootSquashConfiguration
 //   - StorageCapacity
 //   - WeeklyMaintenanceStartTime

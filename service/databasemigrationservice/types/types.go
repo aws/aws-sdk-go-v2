@@ -1849,10 +1849,19 @@ type PostgreSQLSettings struct {
 	// Example: afterConnectScript=SET session_replication_role='replica'
 	AfterConnectScript *string
 
+	// The Babelfish for Aurora PostgreSQL database name for the endpoint.
+	BabelfishDatabaseName *string
+
 	// To capture DDL events, DMS creates various artifacts in the PostgreSQL database
 	// when the task starts. You can later remove these artifacts. If this value is set
 	// to N , you don't have to create tables or triggers on the source database.
 	CaptureDdls *bool
+
+	// Specifies whether to use default or custom replication behavior for
+	// PostgreSQL-compatible endpoints. You can use this setting to specify replication
+	// behavior for endpoints that require additional configuration, such as Babelfish
+	// endpoints.
+	DatabaseMode DatabaseMode
 
 	// Database name for the endpoint.
 	DatabaseName *string

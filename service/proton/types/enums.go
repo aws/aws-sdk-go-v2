@@ -85,6 +85,29 @@ func (DeploymentStatus) Values() []DeploymentStatus {
 	}
 }
 
+type DeploymentTargetResourceType string
+
+// Enum values for DeploymentTargetResourceType
+const (
+	DeploymentTargetResourceTypeEnvironment     DeploymentTargetResourceType = "ENVIRONMENT"
+	DeploymentTargetResourceTypeServicePipeline DeploymentTargetResourceType = "SERVICE_PIPELINE"
+	DeploymentTargetResourceTypeServiceInstance DeploymentTargetResourceType = "SERVICE_INSTANCE"
+	DeploymentTargetResourceTypeComponent       DeploymentTargetResourceType = "COMPONENT"
+)
+
+// Values returns all known values for DeploymentTargetResourceType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (DeploymentTargetResourceType) Values() []DeploymentTargetResourceType {
+	return []DeploymentTargetResourceType{
+		"ENVIRONMENT",
+		"SERVICE_PIPELINE",
+		"SERVICE_INSTANCE",
+		"COMPONENT",
+	}
+}
+
 type DeploymentUpdateType string
 
 // Enum values for DeploymentUpdateType

@@ -1,0 +1,8 @@
+{
+    "id": "f3689707-14a2-48ef-92dc-ad58f6385480",
+    "type": "feature",
+    "description": "S3 Inventory now supports Object Access Control List and Object Owner as available object metadata fields in inventory reports.",
+    "modules": [
+        "service/s3"
+    ]
+}

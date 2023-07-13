@@ -1,0 +1,8 @@
+{
+    "id": "49ec6568-02ff-4ddb-9eb0-37528912594a",
+    "type": "feature",
+    "description": "Enhanced PostgreSQL target endpoint settings for providing Babelfish support.",
+    "modules": [
+        "service/databasemigrationservice"
+    ]
+}

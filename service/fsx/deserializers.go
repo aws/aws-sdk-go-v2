@@ -6697,6 +6697,59 @@ func awsAwsjson11_deserializeDocumentAliases(v *[]types.Alias, value interface{}
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentAutocommitPeriod(v **types.AutocommitPeriod, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AutocommitPeriod
+	if *v == nil {
+		sv = &types.AutocommitPeriod{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AutocommitPeriodType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.AutocommitPeriodType(jtv)
+			}
+
+		case "Value":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected AutocommitPeriodValue to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Value = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentAutoExportPolicy(v **types.AutoExportPolicy, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10794,6 +10847,11 @@ func awsAwsjson11_deserializeDocumentOntapVolumeConfiguration(v **types.OntapVol
 				sv.SizeInMegabytes = ptr.Int32(int32(i64))
 			}
 
+		case "SnaplockConfiguration":
+			if err := awsAwsjson11_deserializeDocumentSnaplockConfiguration(&sv.SnaplockConfiguration, value); err != nil {
+				return err
+			}
+
 		case "SnapshotPolicy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11594,6 +11652,59 @@ func awsAwsjson11_deserializeDocumentResourceNotFound(v **types.ResourceNotFound
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentRetentionPeriod(v **types.RetentionPeriod, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RetentionPeriod
+	if *v == nil {
+		sv = &types.RetentionPeriod{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RetentionPeriodType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.RetentionPeriodType(jtv)
+			}
+
+		case "Value":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected RetentionPeriodValue to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Value = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentRouteTableIds(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -11781,6 +11892,129 @@ func awsAwsjson11_deserializeDocumentServiceLimitExceeded(v **types.ServiceLimit
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentSnaplockConfiguration(v **types.SnaplockConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SnaplockConfiguration
+	if *v == nil {
+		sv = &types.SnaplockConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AuditLogVolume":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Flag to be of type *bool, got %T instead", value)
+				}
+				sv.AuditLogVolume = ptr.Bool(jtv)
+			}
+
+		case "AutocommitPeriod":
+			if err := awsAwsjson11_deserializeDocumentAutocommitPeriod(&sv.AutocommitPeriod, value); err != nil {
+				return err
+			}
+
+		case "PrivilegedDelete":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PrivilegedDelete to be of type string, got %T instead", value)
+				}
+				sv.PrivilegedDelete = types.PrivilegedDelete(jtv)
+			}
+
+		case "RetentionPeriod":
+			if err := awsAwsjson11_deserializeDocumentSnaplockRetentionPeriod(&sv.RetentionPeriod, value); err != nil {
+				return err
+			}
+
+		case "SnaplockType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SnaplockType to be of type string, got %T instead", value)
+				}
+				sv.SnaplockType = types.SnaplockType(jtv)
+			}
+
+		case "VolumeAppendModeEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Flag to be of type *bool, got %T instead", value)
+				}
+				sv.VolumeAppendModeEnabled = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentSnaplockRetentionPeriod(v **types.SnaplockRetentionPeriod, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SnaplockRetentionPeriod
+	if *v == nil {
+		sv = &types.SnaplockRetentionPeriod{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DefaultRetention":
+			if err := awsAwsjson11_deserializeDocumentRetentionPeriod(&sv.DefaultRetention, value); err != nil {
+				return err
+			}
+
+		case "MaximumRetention":
+			if err := awsAwsjson11_deserializeDocumentRetentionPeriod(&sv.MaximumRetention, value); err != nil {
+				return err
+			}
+
+		case "MinimumRetention":
+			if err := awsAwsjson11_deserializeDocumentRetentionPeriod(&sv.MinimumRetention, value); err != nil {
+				return err
 			}
 
 		default:

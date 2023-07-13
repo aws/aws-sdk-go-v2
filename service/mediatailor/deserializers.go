@@ -7945,6 +7945,15 @@ func awsRestjson1_deserializeDocumentAlert(v **types.Alert, value interface{}) e
 				sv.AlertMessage = ptr.String(jtv)
 			}
 
+		case "Category":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AlertCategory to be of type string, got %T instead", value)
+				}
+				sv.Category = types.AlertCategory(jtv)
+			}
+
 		case "LastModifiedTime":
 			if value != nil {
 				switch jtv := value.(type) {

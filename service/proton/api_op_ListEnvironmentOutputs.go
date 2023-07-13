@@ -35,6 +35,9 @@ type ListEnvironmentOutputsInput struct {
 	// This member is required.
 	EnvironmentName *string
 
+	// The ID of the deployment whose outputs you want.
+	DeploymentId *string
+
 	// A token that indicates the location of the next environment output in the array
 	// of environment outputs, after the list of environment outputs that was
 	// previously requested.

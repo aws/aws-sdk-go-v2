@@ -17724,6 +17724,13 @@ func awsAwsjson11_serializeDocumentCanvasAppSettings(v *types.CanvasAppSettings,
 		}
 	}
 
+	if v.WorkspaceSettings != nil {
+		ok := object.Key("WorkspaceSettings")
+		if err := awsAwsjson11_serializeDocumentWorkspaceSettings(v.WorkspaceSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -25946,6 +25953,23 @@ func awsAwsjson11_serializeDocumentWorkforceVpcConfigRequest(v *types.WorkforceV
 	if v.VpcId != nil {
 		ok := object.Key("VpcId")
 		ok.String(*v.VpcId)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentWorkspaceSettings(v *types.WorkspaceSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.S3ArtifactPath != nil {
+		ok := object.Key("S3ArtifactPath")
+		ok.String(*v.S3ArtifactPath)
+	}
+
+	if v.S3KmsKeyId != nil {
+		ok := object.Key("S3KmsKeyId")
+		ok.String(*v.S3KmsKeyId)
 	}
 
 	return nil

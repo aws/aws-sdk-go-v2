@@ -1,0 +1,8 @@
+{
+    "id": "c1d9acbc-6a73-4485-8d85-237ecbdf2cca",
+    "type": "feature",
+    "description": "This release adds support for deployment history for Proton provisioned resources",
+    "modules": [
+        "service/proton"
+    ]
+}

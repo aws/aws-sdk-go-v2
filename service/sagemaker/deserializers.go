@@ -37250,6 +37250,11 @@ func awsAwsjson11_deserializeDocumentCanvasAppSettings(v **types.CanvasAppSettin
 				return err
 			}
 
+		case "WorkspaceSettings":
+			if err := awsAwsjson11_deserializeDocumentWorkspaceSettings(&sv.WorkspaceSettings, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -72925,6 +72930,55 @@ func awsAwsjson11_deserializeDocumentWorkforceVpcConfigResponse(v **types.Workfo
 					return fmt.Errorf("expected WorkforceVpcId to be of type string, got %T instead", value)
 				}
 				sv.VpcId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentWorkspaceSettings(v **types.WorkspaceSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.WorkspaceSettings
+	if *v == nil {
+		sv = &types.WorkspaceSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "S3ArtifactPath":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3Uri to be of type string, got %T instead", value)
+				}
+				sv.S3ArtifactPath = ptr.String(jtv)
+			}
+
+		case "S3KmsKeyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KmsKeyId to be of type string, got %T instead", value)
+				}
+				sv.S3KmsKeyId = ptr.String(jtv)
 			}
 
 		default:

@@ -182,8 +182,19 @@ var defaultPartitions = endpoints.Partitions{
 				SignatureVersions: []string{"v4"},
 			},
 		},
-		RegionRegex:    partitionRegexp.AwsCn,
-		IsRegionalized: true,
+		RegionRegex:       partitionRegexp.AwsCn,
+		IsRegionalized:    false,
+		PartitionEndpoint: "aws-cn",
+		Endpoints: endpoints.Endpoints{
+			endpoints.EndpointKey{
+				Region: "aws-cn",
+			}: endpoints.Endpoint{
+				Hostname: "savingsplans.cn-northwest-1.amazonaws.com.cn",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "cn-northwest-1",
+				},
+			},
+		},
 	},
 	{
 		ID: "aws-iso",
@@ -301,7 +312,18 @@ var defaultPartitions = endpoints.Partitions{
 				SignatureVersions: []string{"v4"},
 			},
 		},
-		RegionRegex:    partitionRegexp.AwsUsGov,
-		IsRegionalized: true,
+		RegionRegex:       partitionRegexp.AwsUsGov,
+		IsRegionalized:    false,
+		PartitionEndpoint: "aws-us-gov-global",
+		Endpoints: endpoints.Endpoints{
+			endpoints.EndpointKey{
+				Region: "aws-us-gov-global",
+			}: endpoints.Endpoint{
+				Hostname: "savingsplans.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-west-1",
+				},
+			},
+		},
 	},
 }

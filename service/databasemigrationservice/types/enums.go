@@ -126,6 +126,24 @@ func (CompressionTypeValue) Values() []CompressionTypeValue {
 	}
 }
 
+type DatabaseMode string
+
+// Enum values for DatabaseMode
+const (
+	DatabaseModeDefault   DatabaseMode = "default"
+	DatabaseModeBabelfish DatabaseMode = "babelfish"
+)
+
+// Values returns all known values for DatabaseMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DatabaseMode) Values() []DatabaseMode {
+	return []DatabaseMode{
+		"default",
+		"babelfish",
+	}
+}
+
 type DataFormatValue string
 
 // Enum values for DataFormatValue

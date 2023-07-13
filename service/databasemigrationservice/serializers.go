@@ -5426,9 +5426,19 @@ func awsAwsjson11_serializeDocumentPostgreSQLSettings(v *types.PostgreSQLSetting
 		ok.String(*v.AfterConnectScript)
 	}
 
+	if v.BabelfishDatabaseName != nil {
+		ok := object.Key("BabelfishDatabaseName")
+		ok.String(*v.BabelfishDatabaseName)
+	}
+
 	if v.CaptureDdls != nil {
 		ok := object.Key("CaptureDdls")
 		ok.Boolean(*v.CaptureDdls)
+	}
+
+	if len(v.DatabaseMode) > 0 {
+		ok := object.Key("DatabaseMode")
+		ok.String(string(v.DatabaseMode))
 	}
 
 	if v.DatabaseName != nil {

@@ -13,11 +13,10 @@ import (
 )
 
 // Lists the IAM roles that have the specified path prefix. If there are none, the
-// operation returns an empty list. For more information about roles, see Working
-// with roles (https://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html)
-// . IAM resource-listing operations return a subset of the available attributes
-// for the resource. This operation does not return the following attributes, even
-// though they are an attribute of the returned object:
+// operation returns an empty list. For more information about roles, see IAM roles (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)
+// in the IAM User Guide. IAM resource-listing operations return a subset of the
+// available attributes for the resource. This operation does not return the
+// following attributes, even though they are an attribute of the returned object:
 //   - PermissionsBoundary
 //   - RoleLastUsed
 //   - Tags

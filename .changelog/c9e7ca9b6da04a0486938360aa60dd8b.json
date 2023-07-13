@@ -1,0 +1,8 @@
+{
+    "id": "c9e7ca9b-6da0-4a04-8693-8360aa60dd8b",
+    "type": "feature",
+    "description": "Add support for deleting Queues and Routing Profiles.",
+    "modules": [
+        "service/connect"
+    ]
+}

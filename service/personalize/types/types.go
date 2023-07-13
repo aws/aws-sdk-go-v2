@@ -486,6 +486,9 @@ type Dataset struct {
 	// A time stamp that shows when the dataset was updated.
 	LastUpdatedDateTime *time.Time
 
+	// Describes the latest update to the dataset.
+	LatestDatasetUpdate *DatasetUpdateSummary
+
 	// The name of the dataset.
 	Name *string
 
@@ -819,6 +822,28 @@ type DatasetSummary struct {
 	// The status of the dataset. A dataset can be in one of the following states:
 	//   - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
 	//   - DELETE PENDING > DELETE IN_PROGRESS
+	Status *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes an update to a dataset.
+type DatasetUpdateSummary struct {
+
+	// The creation date and time (in Unix time) of the dataset update.
+	CreationDateTime *time.Time
+
+	// If updating a dataset fails, provides the reason why.
+	FailureReason *string
+
+	// The last update date and time (in Unix time) of the dataset.
+	LastUpdatedDateTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the schema that replaced the previous schema
+	// of the dataset.
+	SchemaArn *string
+
+	// The status of the dataset update.
 	Status *string
 
 	noSmithyDocumentSerde
@@ -1517,7 +1542,8 @@ type Solution struct {
 	// default is false .
 	PerformHPO bool
 
-	// The ARN of the recipe used to create the solution.
+	// The ARN of the recipe used to create the solution. This is required when
+	// performAutoML is false.
 	RecipeArn *string
 
 	// The ARN of the solution.

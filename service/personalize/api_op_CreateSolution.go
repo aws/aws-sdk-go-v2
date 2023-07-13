@@ -96,7 +96,7 @@ type CreateSolutionInput struct {
 	// is always true and you should not set it to false .
 	PerformHPO *bool
 
-	// The ARN of the recipe to use for model training. Only specified when
+	// The ARN of the recipe to use for model training. This is required when
 	// performAutoML is false.
 	RecipeArn *string
 

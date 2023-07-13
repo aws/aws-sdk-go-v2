@@ -15565,6 +15565,15 @@ func awsAwsjson11_deserializeDocumentPostgreSQLSettings(v **types.PostgreSQLSett
 				sv.AfterConnectScript = ptr.String(jtv)
 			}
 
+		case "BabelfishDatabaseName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.BabelfishDatabaseName = ptr.String(jtv)
+			}
+
 		case "CaptureDdls":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -15572,6 +15581,15 @@ func awsAwsjson11_deserializeDocumentPostgreSQLSettings(v **types.PostgreSQLSett
 					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", value)
 				}
 				sv.CaptureDdls = ptr.Bool(jtv)
+			}
+
+		case "DatabaseMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DatabaseMode to be of type string, got %T instead", value)
+				}
+				sv.DatabaseMode = types.DatabaseMode(jtv)
 			}
 
 		case "DatabaseName":

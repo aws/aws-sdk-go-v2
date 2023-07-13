@@ -51,9 +51,10 @@ type CreateLocationFsxWindowsInput struct {
 	// This member is required.
 	SecurityGroupArns []string
 
-	// Specifies the user who has the permissions to access files and folders in the
-	// file system. For information about choosing a user name that ensures sufficient
-	// permissions to files, folders, and metadata, see user .
+	// Specifies the user who has the permissions to access files, folders, and
+	// metadata in your file system. For information about choosing a user with
+	// sufficient permissions, see Required permissions (https://docs.aws.amazon.com/datasync/latest/userguide/create-fsx-location.html#create-fsx-windows-location-permissions)
+	// .
 	//
 	// This member is required.
 	User *string

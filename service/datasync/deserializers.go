@@ -8434,6 +8434,19 @@ func awsAwsjson11_deserializeDocumentNetAppONTAPCluster(v **types.NetAppONTAPClu
 				sv.ClusterName = ptr.String(jtv)
 			}
 
+		case "LunCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected NonNegativeLong to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.LunCount = ptr.Int64(i64)
+			}
+
 		case "MaxP95Performance":
 			if err := awsAwsjson11_deserializeDocumentMaxP95Performance(&sv.MaxP95Performance, value); err != nil {
 				return err
@@ -8565,6 +8578,19 @@ func awsAwsjson11_deserializeDocumentNetAppONTAPSVM(v **types.NetAppONTAPSVM, va
 		case "EnabledProtocols":
 			if err := awsAwsjson11_deserializeDocumentEnabledProtocols(&sv.EnabledProtocols, value); err != nil {
 				return err
+			}
+
+		case "LunCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected NonNegativeLong to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.LunCount = ptr.Int64(i64)
 			}
 
 		case "MaxP95Performance":
@@ -8784,6 +8810,19 @@ func awsAwsjson11_deserializeDocumentNetAppONTAPVolume(v **types.NetAppONTAPVolu
 					return err
 				}
 				sv.LogicalCapacityUsed = ptr.Int64(i64)
+			}
+
+		case "LunCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected NonNegativeLong to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.LunCount = ptr.Int64(i64)
 			}
 
 		case "MaxP95Performance":

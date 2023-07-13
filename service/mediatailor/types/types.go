@@ -109,6 +109,9 @@ type Alert struct {
 	// This member is required.
 	ResourceArn *string
 
+	// The category that MediaTailor assigns to the alert.
+	Category AlertCategory
+
 	noSmithyDocumentSerde
 }
 
@@ -447,7 +450,7 @@ type KeyValuePair struct {
 	// This member is required.
 	Key *string
 
-	// For SCTE35_ENHANCED output, defines a vaue. MediaTailor; takes this value, and
+	// For SCTE35_ENHANCED output, defines a value. MediaTailor; takes this value, and
 	// its associated key, and generates the key/value pair within the EXT-X-ASSET tag.
 	// If you specify a value, you must also specify a corresponding key.
 	//

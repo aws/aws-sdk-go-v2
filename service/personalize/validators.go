@@ -970,6 +970,26 @@ func (m *validateOpUpdateCampaign) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateDataset struct {
+}
+
+func (*validateOpUpdateDataset) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateDataset) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateDatasetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateDatasetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateMetricAttribution struct {
 }
 
@@ -1200,6 +1220,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateCampaignValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateCampaign{}, middleware.After)
+}
+
+func addOpUpdateDatasetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateDataset{}, middleware.After)
 }
 
 func addOpUpdateMetricAttributionValidationMiddleware(stack *middleware.Stack) error {
@@ -2307,6 +2331,24 @@ func validateOpUpdateCampaignInput(v *UpdateCampaignInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateCampaignInput"}
 	if v.CampaignArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CampaignArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateDatasetInput(v *UpdateDatasetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateDatasetInput"}
+	if v.DatasetArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasetArn"))
+	}
+	if v.SchemaArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SchemaArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

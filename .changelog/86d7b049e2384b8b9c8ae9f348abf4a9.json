@@ -1,0 +1,8 @@
+{
+    "id": "86d7b049-e238-4b8b-9c8a-e9f348abf4a9",
+    "type": "feature",
+    "description": "Amazon SageMaker Canvas adds WorkspeceSettings support for CanvasAppSettings",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

@@ -37,6 +37,9 @@ type ListComponentOutputsInput struct {
 	// This member is required.
 	ComponentName *string
 
+	// The ID of the deployment whose outputs you want.
+	DeploymentId *string
+
 	// A token that indicates the location of the next output in the array of outputs,
 	// after the list of outputs that was previously requested.
 	NextToken *string

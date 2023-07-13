@@ -38,6 +38,26 @@ func (AdMarkupType) Values() []AdMarkupType {
 	}
 }
 
+type AlertCategory string
+
+// Enum values for AlertCategory
+const (
+	AlertCategorySchedulingError AlertCategory = "SCHEDULING_ERROR"
+	AlertCategoryPlaybackWarning AlertCategory = "PLAYBACK_WARNING"
+	AlertCategoryInfo            AlertCategory = "INFO"
+)
+
+// Values returns all known values for AlertCategory. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AlertCategory) Values() []AlertCategory {
+	return []AlertCategory{
+		"SCHEDULING_ERROR",
+		"PLAYBACK_WARNING",
+		"INFO",
+	}
+}
+
 type ChannelState string
 
 // Enum values for ChannelState

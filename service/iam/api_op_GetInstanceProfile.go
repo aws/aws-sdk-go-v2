@@ -18,7 +18,7 @@ import (
 
 // Retrieves information about the specified instance profile, including the
 // instance profile's path, GUID, ARN, and role. For more information about
-// instance profiles, see About instance profiles (https://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html)
+// instance profiles, see Using instance profiles (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html)
 // in the IAM User Guide.
 func (c *Client) GetInstanceProfile(ctx context.Context, params *GetInstanceProfileInput, optFns ...func(*Options)) (*GetInstanceProfileOutput, error) {
 	if params == nil {

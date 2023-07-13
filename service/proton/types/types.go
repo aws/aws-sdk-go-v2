@@ -103,6 +103,9 @@ type Component struct {
 	// A description of the component.
 	Description *string
 
+	// The ID of the last attempted deployment of this component.
+	LastAttemptedDeploymentId *string
+
 	// The last token the client requested.
 	LastClientRequestToken *string
 
@@ -111,6 +114,9 @@ type Component struct {
 
 	// The time when the component was last deployed successfully.
 	LastDeploymentSucceededAt *time.Time
+
+	// The ID of the last successful deployment of this component.
+	LastSucceededDeploymentId *string
 
 	// The name of the service instance that this component is attached to. Provided
 	// when a component is attached to a service instance.
@@ -125,6 +131,31 @@ type Component struct {
 	//
 	// This value conforms to the media type: application/yaml
 	ServiceSpec *string
+
+	noSmithyDocumentSerde
+}
+
+// The detailed data about the current state of the component.
+type ComponentState struct {
+
+	// The name of the service instance that this component is attached to. Provided
+	// when a component is attached to a service instance.
+	ServiceInstanceName *string
+
+	// The name of the service that serviceInstanceName is associated with. Provided
+	// when a component is attached to a service instance.
+	ServiceName *string
+
+	// The service spec that the component uses to access service inputs. Provided
+	// when a component is attached to a service instance.
+	//
+	// This value conforms to the media type: application/yaml
+	ServiceSpec *string
+
+	// The template file used.
+	//
+	// This value conforms to the media type: application/yaml
+	TemplateFile *string
 
 	noSmithyDocumentSerde
 }
@@ -167,11 +198,17 @@ type ComponentSummary struct {
 	// The message associated with the component deployment status.
 	DeploymentStatusMessage *string
 
+	// The ID of the last attempted deployment of this component.
+	LastAttemptedDeploymentId *string
+
 	// The time when a deployment of the component was last attempted.
 	LastDeploymentAttemptedAt *time.Time
 
 	// The time when the component was last deployed successfully.
 	LastDeploymentSucceededAt *time.Time
+
+	// The ID of the last successful deployment of this component.
+	LastSucceededDeploymentId *string
 
 	// The name of the service instance that this component is attached to. Provided
 	// when a component is attached to a service instance.
@@ -216,6 +253,203 @@ type CountsSummary struct {
 
 	// The staleness counts for Proton services in the Amazon Web Services account.
 	Services *ResourceCountsSummary
+
+	noSmithyDocumentSerde
+}
+
+// The detailed information about a deployment.
+type Deployment struct {
+
+	// The Amazon Resource Name (ARN) of the deployment.
+	//
+	// This member is required.
+	Arn *string
+
+	// The date and time the deployment was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The status of the deployment.
+	//
+	// This member is required.
+	DeploymentStatus DeploymentStatus
+
+	// The name of the environment associated with this deployment.
+	//
+	// This member is required.
+	EnvironmentName *string
+
+	// The ID of the deployment.
+	//
+	// This member is required.
+	Id *string
+
+	// The date and time the deployment was last modified.
+	//
+	// This member is required.
+	LastModifiedAt *time.Time
+
+	// The Amazon Resource Name (ARN) of the target of the deployment.
+	//
+	// This member is required.
+	TargetArn *string
+
+	// The date and time the depoyment target was created.
+	//
+	// This member is required.
+	TargetResourceCreatedAt *time.Time
+
+	// The resource type of the deployment target. It can be an environment, service,
+	// service instance, or component.
+	//
+	// This member is required.
+	TargetResourceType DeploymentTargetResourceType
+
+	// The date and time the deployment was completed.
+	CompletedAt *time.Time
+
+	// The name of the component associated with this deployment.
+	ComponentName *string
+
+	// The deployment status message.
+	DeploymentStatusMessage *string
+
+	// The initial state of the target resource at the time of the deployment.
+	InitialState DeploymentState
+
+	// The ID of the last attempted deployment.
+	LastAttemptedDeploymentId *string
+
+	// The ID of the last successful deployment.
+	LastSucceededDeploymentId *string
+
+	// The name of the deployment's service instance.
+	ServiceInstanceName *string
+
+	// The name of the service in this deployment.
+	ServiceName *string
+
+	// The target state of the target resource at the time of the deployment.
+	TargetState DeploymentState
+
+	noSmithyDocumentSerde
+}
+
+// The detailed data about the current state of the deployment.
+//
+// The following types satisfy this interface:
+//
+//	DeploymentStateMemberComponent
+//	DeploymentStateMemberEnvironment
+//	DeploymentStateMemberServiceInstance
+//	DeploymentStateMemberServicePipeline
+type DeploymentState interface {
+	isDeploymentState()
+}
+
+// The state of the component associated with the deployment.
+type DeploymentStateMemberComponent struct {
+	Value ComponentState
+
+	noSmithyDocumentSerde
+}
+
+func (*DeploymentStateMemberComponent) isDeploymentState() {}
+
+// The state of the environment associated with the deployment.
+type DeploymentStateMemberEnvironment struct {
+	Value EnvironmentState
+
+	noSmithyDocumentSerde
+}
+
+func (*DeploymentStateMemberEnvironment) isDeploymentState() {}
+
+// The state of the service instance associated with the deployment.
+type DeploymentStateMemberServiceInstance struct {
+	Value ServiceInstanceState
+
+	noSmithyDocumentSerde
+}
+
+func (*DeploymentStateMemberServiceInstance) isDeploymentState() {}
+
+// The state of the service pipeline associated with the deployment.
+type DeploymentStateMemberServicePipeline struct {
+	Value ServicePipelineState
+
+	noSmithyDocumentSerde
+}
+
+func (*DeploymentStateMemberServicePipeline) isDeploymentState() {}
+
+// Summary data of the deployment.
+type DeploymentSummary struct {
+
+	// The Amazon Resource Name (ARN) of the deployment.
+	//
+	// This member is required.
+	Arn *string
+
+	// The date and time the deployment was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The current status of the deployment.
+	//
+	// This member is required.
+	DeploymentStatus DeploymentStatus
+
+	// The name of the environment associated with the deployment.
+	//
+	// This member is required.
+	EnvironmentName *string
+
+	// The ID of the deployment.
+	//
+	// This member is required.
+	Id *string
+
+	// The date and time the deployment was last modified.
+	//
+	// This member is required.
+	LastModifiedAt *time.Time
+
+	// The Amazon Resource Name (ARN) of the target of the deployment.
+	//
+	// This member is required.
+	TargetArn *string
+
+	// The date and time the target resource was created.
+	//
+	// This member is required.
+	TargetResourceCreatedAt *time.Time
+
+	// The resource type of the deployment target. It can be an environment, service,
+	// service instance, or component.
+	//
+	// This member is required.
+	TargetResourceType DeploymentTargetResourceType
+
+	// The date and time the deployment was completed.
+	CompletedAt *time.Time
+
+	// The name of the component associated with the deployment.
+	ComponentName *string
+
+	// The ID of the last attempted deployment.
+	LastAttemptedDeploymentId *string
+
+	// The ID of the last successful deployment.
+	LastSucceededDeploymentId *string
+
+	// The name of the service instance associated with the deployment.
+	ServiceInstanceName *string
+
+	// The name of the service associated with the deployment.
+	ServiceName *string
 
 	noSmithyDocumentSerde
 }
@@ -295,6 +529,12 @@ type Environment struct {
 	// The ID of the environment account that the environment infrastructure resources
 	// are provisioned in.
 	EnvironmentAccountId *string
+
+	// The ID of the last attempted deployment of this environment.
+	LastAttemptedDeploymentId *string
+
+	// The ID of the last successful deployment of this environment.
+	LastSucceededDeploymentId *string
 
 	// The Amazon Resource Name (ARN) of the Proton service role that allows Proton to
 	// make calls to other services on your behalf.
@@ -448,6 +688,34 @@ type EnvironmentAccountConnectionSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The detailed data about the current state of the environment.
+type EnvironmentState struct {
+
+	// The major version of the environment template that was used to create the
+	// environment.
+	//
+	// This member is required.
+	TemplateMajorVersion *string
+
+	// The minor version of the environment template that was used to create the
+	// environment.
+	//
+	// This member is required.
+	TemplateMinorVersion *string
+
+	// The name of the environment template that was used to create the environment.
+	//
+	// This member is required.
+	TemplateName *string
+
+	// The environment spec that was used to create the environment.
+	//
+	// This value conforms to the media type: application/yaml
+	Spec *string
+
+	noSmithyDocumentSerde
+}
+
 // Summary data of an Proton environment resource. An Proton environment is a set
 // of resources shared across Proton services.
 type EnvironmentSummary struct {
@@ -519,6 +787,12 @@ type EnvironmentSummary struct {
 	// The ID of the environment account that the environment infrastructure resources
 	// are provisioned in.
 	EnvironmentAccountId *string
+
+	// The ID of the last attempted deployment of this environment.
+	LastAttemptedDeploymentId *string
+
+	// The ID of the last successful deployment of this environment.
+	LastSucceededDeploymentId *string
 
 	// The Amazon Resource Name (ARN) of the Proton service role that allows Proton to
 	// make calls to other services on your behalf.
@@ -1220,13 +1494,59 @@ type ServiceInstance struct {
 	// The message associated with the service instance deployment status.
 	DeploymentStatusMessage *string
 
+	// The ID of the last attempted deployment of this service instance.
+	LastAttemptedDeploymentId *string
+
 	// The last client request token received.
 	LastClientRequestToken *string
+
+	// The ID of the last successful deployment of this service instance.
+	LastSucceededDeploymentId *string
 
 	// The service spec that was used to create the service instance.
 	//
 	// This value conforms to the media type: application/yaml
 	Spec *string
+
+	noSmithyDocumentSerde
+}
+
+// The detailed data about the current state of this service instance.
+type ServiceInstanceState struct {
+
+	// The service spec that was used to create the service instance.
+	//
+	// This value conforms to the media type: application/yaml
+	//
+	// This member is required.
+	Spec *string
+
+	// The major version of the service template that was used to create the service
+	// pipeline.
+	//
+	// This member is required.
+	TemplateMajorVersion *string
+
+	// The minor version of the service template that was used to create the service
+	// pipeline.
+	//
+	// This member is required.
+	TemplateMinorVersion *string
+
+	// The name of the service template that was used to create the service instance.
+	//
+	// This member is required.
+	TemplateName *string
+
+	// The IDs for the last successful components deployed for this service instance.
+	LastSuccessfulComponentDeploymentIds []string
+
+	// The ID for the last successful environment deployed for this service instance.
+	LastSuccessfulEnvironmentDeploymentId *string
+
+	// The ID for the last successful service pipeline deployed for this service
+	// instance.
+	LastSuccessfulServicePipelineDeploymentId *string
 
 	noSmithyDocumentSerde
 }
@@ -1292,6 +1612,12 @@ type ServiceInstanceSummary struct {
 	// A service instance deployment status message.
 	DeploymentStatusMessage *string
 
+	// The ID of the last attempted deployment of this service instance.
+	LastAttemptedDeploymentId *string
+
+	// The ID of the last successful deployment of this service instance.
+	LastSucceededDeploymentId *string
+
 	noSmithyDocumentSerde
 }
 
@@ -1342,6 +1668,40 @@ type ServicePipeline struct {
 
 	// A service pipeline deployment status message.
 	DeploymentStatusMessage *string
+
+	// The ID of the last attempted deployment of this service pipeline.
+	LastAttemptedDeploymentId *string
+
+	// The ID of the last successful deployment of this service pipeline.
+	LastSucceededDeploymentId *string
+
+	// The service spec that was used to create the service pipeline.
+	//
+	// This value conforms to the media type: application/yaml
+	Spec *string
+
+	noSmithyDocumentSerde
+}
+
+// The detailed data about the current state of the service pipeline.
+type ServicePipelineState struct {
+
+	// The major version of the service template that was used to create the service
+	// pipeline.
+	//
+	// This member is required.
+	TemplateMajorVersion *string
+
+	// The minor version of the service template that was used to create the service
+	// pipeline.
+	//
+	// This member is required.
+	TemplateMinorVersion *string
+
+	// The name of the service template that was used to create the service pipeline.
+	//
+	// This member is required.
+	TemplateName *string
 
 	// The service spec that was used to create the service pipeline.
 	//
@@ -1791,4 +2151,5 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnknownUnionMember) isDeploymentState()            {}
 func (*UnknownUnionMember) isTemplateVersionSourceInput() {}

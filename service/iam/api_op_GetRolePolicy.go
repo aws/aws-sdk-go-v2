@@ -21,9 +21,8 @@ import (
 // determine the policy's default version, then use GetPolicyVersion to retrieve
 // the policy document. For more information about policies, see Managed policies
 // and inline policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
-// in the IAM User Guide. For more information about roles, see Using roles to
-// delegate permissions and federate identities (https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html)
-// .
+// in the IAM User Guide. For more information about roles, see IAM roles (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)
+// in the IAM User Guide.
 func (c *Client) GetRolePolicy(ctx context.Context, params *GetRolePolicyInput, optFns ...func(*Options)) (*GetRolePolicyOutput, error) {
 	if params == nil {
 		params = &GetRolePolicyInput{}

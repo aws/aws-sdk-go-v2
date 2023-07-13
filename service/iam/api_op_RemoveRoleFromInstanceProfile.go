@@ -14,10 +14,10 @@ import (
 // sure that you do not have any Amazon EC2 instances running with the role you are
 // about to remove from the instance profile. Removing a role from an instance
 // profile that is associated with a running instance might break any applications
-// running on the instance. For more information about IAM roles, see Working with
-// roles (https://docs.aws.amazon.com/IAM/latest/UserGuide/WorkingWithRoles.html) .
-// For more information about instance profiles, see About instance profiles (https://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html)
-// .
+// running on the instance. For more information about roles, see IAM roles (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)
+// in the IAM User Guide. For more information about instance profiles, see Using
+// instance profiles (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html)
+// in the IAM User Guide.
 func (c *Client) RemoveRoleFromInstanceProfile(ctx context.Context, params *RemoveRoleFromInstanceProfileInput, optFns ...func(*Options)) (*RemoveRoleFromInstanceProfileOutput, error) {
 	if params == nil {
 		params = &RemoveRoleFromInstanceProfileInput{}

@@ -72,6 +72,7 @@
         "api_op_TagResource.go",
         "api_op_UntagResource.go",
         "api_op_UpdateCampaign.go",
+        "api_op_UpdateDataset.go",
         "api_op_UpdateMetricAttribution.go",
         "api_op_UpdateRecommender.go",
         "deserializers.go",

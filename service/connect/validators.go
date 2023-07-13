@@ -830,6 +830,26 @@ func (m *validateOpDeletePrompt) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteQueue struct {
+}
+
+func (*validateOpDeleteQueue) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteQueue) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteQueueInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteQueueInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteQuickConnect struct {
 }
 
@@ -845,6 +865,26 @@ func (m *validateOpDeleteQuickConnect) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteQuickConnectInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteRoutingProfile struct {
+}
+
+func (*validateOpDeleteRoutingProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteRoutingProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteRoutingProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteRoutingProfileInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -3974,8 +4014,16 @@ func addOpDeletePromptValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeletePrompt{}, middleware.After)
 }
 
+func addOpDeleteQueueValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteQueue{}, middleware.After)
+}
+
 func addOpDeleteQuickConnectValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteQuickConnect{}, middleware.After)
+}
+
+func addOpDeleteRoutingProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteRoutingProfile{}, middleware.After)
 }
 
 func addOpDeleteRuleValidationMiddleware(stack *middleware.Stack) error {
@@ -6668,6 +6716,24 @@ func validateOpDeletePromptInput(v *DeletePromptInput) error {
 	}
 }
 
+func validateOpDeleteQueueInput(v *DeleteQueueInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteQueueInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.QueueId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueueId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteQuickConnectInput(v *DeleteQuickConnectInput) error {
 	if v == nil {
 		return nil
@@ -6678,6 +6744,24 @@ func validateOpDeleteQuickConnectInput(v *DeleteQuickConnectInput) error {
 	}
 	if v.QuickConnectId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("QuickConnectId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteRoutingProfileInput(v *DeleteRoutingProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteRoutingProfileInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.RoutingProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoutingProfileId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -7,6 +7,36 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
 )
 
+func ExampleDeploymentState_outputUsage() {
+	var union types.DeploymentState
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.DeploymentStateMemberComponent:
+		_ = v.Value // Value is types.ComponentState
+
+	case *types.DeploymentStateMemberEnvironment:
+		_ = v.Value // Value is types.EnvironmentState
+
+	case *types.DeploymentStateMemberServiceInstance:
+		_ = v.Value // Value is types.ServiceInstanceState
+
+	case *types.DeploymentStateMemberServicePipeline:
+		_ = v.Value // Value is types.ServicePipelineState
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ServiceInstanceState
+var _ *types.EnvironmentState
+var _ *types.ServicePipelineState
+var _ *types.ComponentState
+
 func ExampleTemplateVersionSourceInput_outputUsage() {
 	var union types.TemplateVersionSourceInput
 	// type switches can be used to check the union value
