@@ -1,3 +1,7 @@
+# v1.32.1 (2023-07-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.32.0 (2023-07-07)
 
 * **Feature**: This release enables the use of Thumbnails in AWS Elemental MediaLive.

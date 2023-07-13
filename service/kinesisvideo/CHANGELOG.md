@@ -1,3 +1,7 @@
+# v1.16.1 (2023-07-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.16.0 (2023-06-27)
 
 * **Feature**: General Availability (GA) release of Kinesis Video Streams at Edge, enabling customers to provide a configuration for the Kinesis Video Streams EdgeAgent running on an on-premise IoT device. Customers can now locally record from cameras and stream videos to the cloud on a configured schedule.

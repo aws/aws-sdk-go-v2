@@ -1,3 +1,7 @@
+# v1.36.8 (2023-07-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.36.7 (2023-06-27)
 
 * **Documentation**: Systems Manager doc-only update for June 2023.

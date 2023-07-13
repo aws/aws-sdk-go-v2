@@ -1,3 +1,7 @@
+# v1.16.1 (2023-07-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.16.0 (2023-06-16)
 
 * **Feature**: Add Amazon EC2 instance recommendations export

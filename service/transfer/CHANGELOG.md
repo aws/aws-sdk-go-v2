@@ -1,3 +1,7 @@
+# v1.31.1 (2023-07-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.31.0 (2023-06-30)
 
 * **Feature**: Add outbound Basic authentication support to AS2 connectors

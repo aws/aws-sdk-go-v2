@@ -1,3 +1,7 @@
+# v1.38.2 (2023-07-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.38.1 (2023-06-30)
 
 * **Documentation**: This release includes improved color handling of overlays and general updates to user documentation.

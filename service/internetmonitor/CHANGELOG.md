@@ -1,3 +1,7 @@
+# v1.3.1 (2023-07-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.3.0 (2023-06-28)
 
 * **Feature**: This release adds a new feature for Amazon CloudWatch Internet Monitor that enables customers to set custom thresholds, for performance and availability drops, for triggering when to create a health event.

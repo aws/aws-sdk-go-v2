@@ -1,3 +1,7 @@
+# v1.28.1 (2023-07-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.28.0 (2023-07-06)
 
 * **Feature**: Added paginator support to several APIs. Added the ISOLATED enum value to AssetState.

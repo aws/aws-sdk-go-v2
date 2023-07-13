@@ -1,3 +1,8 @@
+# v1.25.0 (2023-07-13)
+
+* **Feature**: This release provides ability to customers to change schema associated with their datasets in Amazon Personalize
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.24.2 (2023-06-15)
 
 * No change notes available for this release.

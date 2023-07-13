@@ -1,3 +1,8 @@
+# v1.61.0 (2023-07-13)
+
+* **Feature**: Add support for deleting Queues and Routing Profiles.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.60.1 (2023-07-05)
 
 * **Documentation**: GetMetricDataV2 API: Channels filters do not count towards overall limitation of 100 filter values.

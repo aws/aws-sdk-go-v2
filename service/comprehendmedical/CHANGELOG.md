@@ -1,3 +1,7 @@
+# v1.16.4 (2023-07-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.16.3 (2023-07-05)
 
 * **Documentation**: Update to Amazon Comprehend Medical documentation.

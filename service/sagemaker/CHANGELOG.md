@@ -1,3 +1,8 @@
+# v1.92.0 (2023-07-13)
+
+* **Feature**: Amazon SageMaker Canvas adds WorkspeceSettings support for CanvasAppSettings
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.91.0 (2023-07-03)
 
 * **Feature**: SageMaker Inference Recommender now accepts new fields SupportedEndpointType and ServerlessConfiguration to support serverless endpoints.

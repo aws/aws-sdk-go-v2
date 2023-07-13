@@ -1,3 +1,7 @@
+# v1.32.1 (2023-07-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.32.0 (2023-06-27)
 
 * **Feature**: This release adds support to bypass SSO with the SAPOData connector when connecting to an SAP instance.

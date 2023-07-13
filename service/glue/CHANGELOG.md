@@ -1,3 +1,7 @@
+# v1.54.1 (2023-07-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.54.0 (2023-07-07)
 
 * **Feature**: This release enables customers to create new Apache Iceberg tables and associated metadata in Amazon S3 by using native AWS Glue CreateTable operation.

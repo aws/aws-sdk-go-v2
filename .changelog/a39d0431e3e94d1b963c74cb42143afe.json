@@ -1,8 +1,0 @@
-{
-    "id": "a39d0431-e3e9-4d1b-963c-74cb42143afe",
-    "type": "feature",
-    "description": "Amazon FSx for NetApp ONTAP now supports SnapLock, an ONTAP feature that enables you to protect your files in a volume by transitioning them to a write once, read many (WORM) state.",
-    "modules": [
-        "service/fsx"
-    ]
-}

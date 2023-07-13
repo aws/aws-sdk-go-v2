@@ -1,3 +1,8 @@
+# v1.22.0 (2023-07-13)
+
+* **Feature**: This release adds support for deployment history for Proton provisioned resources
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.6 (2023-06-15)
 
 * No change notes available for this release.

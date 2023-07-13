@@ -1,3 +1,7 @@
+# v1.27.1 (2023-07-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.27.0 (2023-06-21)
 
 * **Feature**: This release introduces a new Amazon EMR EPI called ListSupportedInstanceTypes that returns a list of all instance types supported by a given EMR release.

@@ -1,3 +1,7 @@
+# v1.24.1 (2023-07-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.24.0 (2023-06-23)
 
 * **Feature**: This release adds support for encryption via customer managed keys.

@@ -1,3 +1,7 @@
+# v1.24.1 (2023-07-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.24.0 (2023-06-26)
 
 * **Feature**: Add support for user.extra.sessionName in Kubernetes Audit Logs Findings.

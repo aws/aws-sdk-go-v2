@@ -1,3 +1,8 @@
+# v1.25.0 (2023-07-13)
+
+* **Feature**: Added LunCount to the response object of DescribeStorageSystemResourcesResponse, LunCount represents the number of LUNs on a storage system resource.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.24.4 (2023-06-15)
 
 * No change notes available for this release.

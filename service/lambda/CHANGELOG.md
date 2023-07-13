@@ -1,3 +1,7 @@
+# v1.37.1 (2023-07-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.37.0 (2023-06-28)
 
 * **Feature**: Surface ResourceConflictException in DeleteEventSourceMapping

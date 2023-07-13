@@ -1,8 +1,0 @@
-{
-    "id": "27c56a94-b737-4617-a692-7743d91e41cc",
-    "type": "feature",
-    "description": "Added LunCount to the response object of DescribeStorageSystemResourcesResponse, LunCount represents the number of LUNs on a storage system resource.",
-    "modules": [
-        "service/datasync"
-    ]
-}

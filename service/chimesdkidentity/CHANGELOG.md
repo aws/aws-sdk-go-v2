@@ -1,3 +1,7 @@
+# v1.12.1 (2023-07-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.12.0 (2023-06-22)
 
 * **Feature**: AppInstanceBots can be configured to be invoked or not using the Target or the CHIME.mentions attribute for ChannelMessages

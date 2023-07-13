@@ -1,3 +1,7 @@
+# v1.19.1 (2023-07-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.19.0 (2023-07-05)
 
 * **Feature**: This release introduces the Global view feature and new Replication state APIs.

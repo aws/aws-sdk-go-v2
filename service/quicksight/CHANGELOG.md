@@ -1,3 +1,7 @@
+# v1.38.1 (2023-07-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.38.0 (2023-07-06)
 
 * **Feature**: This release includes below three changes: small multiples axes improvement, field based coloring, removed required trait from Aggregation function for TopBottomFilter.

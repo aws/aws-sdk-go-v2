@@ -1,3 +1,37 @@
+# Release (2023-07-13)
+
+## General Highlights
+* **Feature**: Modify user agent syntax and introduce support for optional app identifier in UA header
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.23.0](service/cognitoidentityprovider/CHANGELOG.md#v1230-2023-07-13)
+  * **Feature**: API model updated in Amazon Cognito
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.61.0](service/connect/CHANGELOG.md#v1610-2023-07-13)
+  * **Feature**: Add support for deleting Queues and Routing Profiles.
+* `github.com/aws/aws-sdk-go-v2/service/databasemigrationservice`: [v1.27.0](service/databasemigrationservice/CHANGELOG.md#v1270-2023-07-13)
+  * **Feature**: Enhanced PostgreSQL target endpoint settings for providing Babelfish support.
+* `github.com/aws/aws-sdk-go-v2/service/datasync`: [v1.25.0](service/datasync/CHANGELOG.md#v1250-2023-07-13)
+  * **Feature**: Added LunCount to the response object of DescribeStorageSystemResourcesResponse, LunCount represents the number of LUNs on a storage system resource.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.104.0](service/ec2/CHANGELOG.md#v11040-2023-07-13)
+  * **Feature**: This release adds support for the C7gn and Hpc7g instances. C7gn instances are powered by AWS Graviton3 processors and the fifth-generation AWS Nitro Cards. Hpc7g instances are powered by AWS Graviton 3E processors and provide up to 200 Gbps network bandwidth.
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.30.0](service/fsx/CHANGELOG.md#v1300-2023-07-13)
+  * **Feature**: Amazon FSx for NetApp ONTAP now supports SnapLock, an ONTAP feature that enables you to protect your files in a volume by transitioning them to a write once, read many (WORM) state.
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.21.1](service/iam/CHANGELOG.md#v1211-2023-07-13)
+  * **Documentation**: Documentation updates for AWS Identity and Access Management (IAM).
+* `github.com/aws/aws-sdk-go-v2/service/mediatailor`: [v1.25.0](service/mediatailor/CHANGELOG.md#v1250-2023-07-13)
+  * **Feature**: Adds categories to MediaTailor channel assembly alerts
+* `github.com/aws/aws-sdk-go-v2/service/personalize`: [v1.25.0](service/personalize/CHANGELOG.md#v1250-2023-07-13)
+  * **Feature**: This release provides ability to customers to change schema associated with their datasets in Amazon Personalize
+* `github.com/aws/aws-sdk-go-v2/service/proton`: [v1.22.0](service/proton/CHANGELOG.md#v1220-2023-07-13)
+  * **Feature**: This release adds support for deployment history for Proton provisioned resources
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.37.0](service/s3/CHANGELOG.md#v1370-2023-07-13)
+  * **Feature**: S3 Inventory now supports Object Access Control List and Object Owner as available object metadata fields in inventory reports.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.92.0](service/sagemaker/CHANGELOG.md#v1920-2023-07-13)
+  * **Feature**: Amazon SageMaker Canvas adds WorkspeceSettings support for CanvasAppSettings
+* `github.com/aws/aws-sdk-go-v2/service/secretsmanager`: [v1.19.11](service/secretsmanager/CHANGELOG.md#v11911-2023-07-13)
+  * **Documentation**: Documentation updates for Secrets Manager
+
 # Release (2023-07-07)
 
 ## Module Highlights

@@ -1,8 +1,0 @@
-{
-    "id": "0e5c33e7-d2e9-49f8-8f49-25d6d59f3f98",
-    "type": "feature",
-    "description": "This release provides ability to customers to change schema associated with their datasets in Amazon Personalize",
-    "modules": [
-        "service/personalize"
-    ]
-}

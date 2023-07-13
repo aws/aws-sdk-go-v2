@@ -1,3 +1,7 @@
+# v1.20.1 (2023-07-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.20.0 (2023-06-19)
 
 * **Feature**: This release updates the PriceListArn regex pattern.

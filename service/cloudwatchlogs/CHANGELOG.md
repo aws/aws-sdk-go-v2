@@ -1,3 +1,7 @@
+# v1.22.1 (2023-07-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.22.0 (2023-07-07)
 
 * **Feature**: Add CMK encryption support for CloudWatch Logs Insights query result data

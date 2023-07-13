@@ -1,3 +1,7 @@
+# v1.46.2 (2023-07-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.46.1 (2023-07-06)
 
 * **Documentation**: Updates Amazon RDS documentation for creating DB instances and creating Aurora global clusters.

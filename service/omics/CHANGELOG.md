@@ -1,3 +1,7 @@
+# v1.5.1 (2023-07-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.5.0 (2023-06-28)
 
 * **Feature**: Add Common Workflow Language (CWL) as a supported language for Omics workflows

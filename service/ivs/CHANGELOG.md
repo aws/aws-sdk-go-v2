@@ -1,3 +1,7 @@
+# v1.23.1 (2023-07-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.23.0 (2023-06-27)
 
 * **Feature**: IVS customers can now revoke the viewer session associated with an auth token, to prevent and stop playback using that token.
