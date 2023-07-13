@@ -190,6 +190,9 @@
                     "target": "com.amazonaws.proton#ComponentResource"
                 },
                 {
+                    "target": "com.amazonaws.proton#DeploymentResource"
+                },
+                {
                     "target": "com.amazonaws.proton#EnvironmentAccountConnectionResource"
                 },
                 {
@@ -618,9 +621,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-northeast-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-northeast-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -631,9 +634,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-west-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -644,9 +647,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -657,9 +660,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-2",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-east-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -670,9 +673,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-west-2",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-west-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -683,9 +686,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -696,9 +699,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -709,9 +712,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -722,9 +725,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "cn-north-1",
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "cn-north-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -735,9 +738,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "cn-north-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "cn-north-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -748,9 +751,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "cn-north-1",
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "cn-north-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -761,9 +764,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "cn-north-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "cn-north-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -774,9 +777,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -787,9 +790,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -800,9 +803,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -813,9 +816,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -824,9 +827,9 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -837,9 +840,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -848,9 +851,9 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -861,9 +864,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -872,9 +875,9 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -885,9 +888,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -896,9 +899,9 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -909,9 +912,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -922,9 +925,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
                                 "UseDualStack": false,
-                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -947,9 +950,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false,
-                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -959,9 +962,9 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
                                 "UseDualStack": true,
-                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1437,6 +1440,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The last token the client requested.</p>"
                     }
+                },
+                "lastAttemptedDeploymentId": {
+                    "target": "com.amazonaws.proton#DeploymentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the last attempted deployment of this component.</p>"
+                    }
+                },
+                "lastSucceededDeploymentId": {
+                    "target": "com.amazonaws.proton#DeploymentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the last successful deployment of this component.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1448,6 +1463,18 @@
             "traits": {
                 "aws.api#arnReference": {
                     "resource": "com.amazonaws.proton#ComponentResource"
+                }
+            }
+        },
+        "com.amazonaws.proton#ComponentDeploymentIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.proton#DeploymentId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
                 }
             }
         },
@@ -1523,6 +1550,38 @@
                 "smithy.api#noReplace": {}
             }
         },
+        "com.amazonaws.proton#ComponentState": {
+            "type": "structure",
+            "members": {
+                "serviceName": {
+                    "target": "com.amazonaws.proton#ResourceNameOrEmpty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the service that <code>serviceInstanceName</code> is associated with. Provided when a component is attached to a service instance.</p>"
+                    }
+                },
+                "serviceInstanceName": {
+                    "target": "com.amazonaws.proton#ResourceNameOrEmpty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the service instance that this component is attached to. Provided when a component is attached to a service instance.</p>"
+                    }
+                },
+                "serviceSpec": {
+                    "target": "com.amazonaws.proton#SpecContents",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service spec that the component uses to access service inputs. Provided when a component is attached to a service instance.</p>"
+                    }
+                },
+                "templateFile": {
+                    "target": "com.amazonaws.proton#TemplateFileContents",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The template file used.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The detailed data about the current state of the component.</p>"
+            }
+        },
         "com.amazonaws.proton#ComponentSummary": {
             "type": "structure",
             "members": {
@@ -1596,6 +1655,18 @@
                     "target": "com.amazonaws.proton#StatusMessage",
                     "traits": {
                         "smithy.api#documentation": "<p>The message associated with the component deployment status.</p>"
+                    }
+                },
+                "lastAttemptedDeploymentId": {
+                    "target": "com.amazonaws.proton#DeploymentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the last attempted deployment of this component.</p>"
+                    }
+                },
+                "lastSucceededDeploymentId": {
+                    "target": "com.amazonaws.proton#DeploymentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the last successful deployment of this component.</p>"
                     }
                 }
             },
@@ -2796,7 +2867,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Set up a template to create new template versions automatically by tracking a linked\n   repository. A linked repository is a repository that has been registered with Proton. For more\n   information, see <a>CreateRepository</a>.</p>\n         <p>When a commit is pushed to your linked repository, Proton checks for changes to your\n   repository template bundles. If it detects a template bundle change, a new major or minor version\n   of its template is created, if the version doesn’t already exist. For more information, see\n    <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/ag-template-sync-configs.html\">Template\n    sync configurations</a> in the <i>Proton User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Set up a template to create new template versions automatically by tracking a linked repository. A linked repository is a repository that has\n   been registered with Proton. For more information, see <a>CreateRepository</a>.</p>\n         <p>When a commit is pushed to your linked repository, Proton checks for changes to your repository template bundles. If it detects a template\n   bundle change, a new major or minor version of its template is created, if the version doesn’t already exist. For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/ag-template-sync-configs.html\">Template sync configurations</a> in the <i>Proton\n    User Guide</i>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -2841,7 +2912,7 @@
                 "subdirectory": {
                     "target": "com.amazonaws.proton#Subdirectory",
                     "traits": {
-                        "smithy.api#documentation": "<p>A repository subdirectory path to your template bundle directory. When included, Proton\n   limits the template bundle search to this repository directory.</p>"
+                        "smithy.api#documentation": "<p>A repository subdirectory path to your template bundle directory. When included, Proton limits the template bundle search to this\n   repository directory.</p>"
                     }
                 }
             }
@@ -2918,6 +2989,70 @@
                         "smithy.api#documentation": "<p>The detailed data of the component being deleted.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.proton#DeleteDeployment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.proton#DeleteDeploymentInput"
+            },
+            "output": {
+                "target": "com.amazonaws.proton#DeleteDeploymentOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.proton#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.proton#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.proton#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.proton#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.proton#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Delete the deployment.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.proton#DeleteDeploymentInput": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.proton#DeploymentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the deployment to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.proton#DeploymentResource"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.proton#DeleteDeploymentOutput": {
+            "type": "structure",
+            "members": {
+                "deployment": {
+                    "target": "com.amazonaws.proton#Deployment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The detailed data of the deployment being deleted.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.proton#DeleteEnvironment": {
@@ -3578,10 +3713,197 @@
                 }
             }
         },
+        "com.amazonaws.proton#Deployment": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.proton#DeploymentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the deployment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.proton#DeploymentArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the deployment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "targetArn": {
+                    "target": "com.amazonaws.proton#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the target of the deployment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "targetResourceCreatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the depoyment target was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "targetResourceType": {
+                    "target": "com.amazonaws.proton#DeploymentTargetResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource type of the deployment target. It can be an environment, service, service instance, or component.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "environmentName": {
+                    "target": "com.amazonaws.proton#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the environment associated with this deployment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "serviceName": {
+                    "target": "com.amazonaws.proton#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the service in this deployment.</p>"
+                    }
+                },
+                "serviceInstanceName": {
+                    "target": "com.amazonaws.proton#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the deployment's service instance.</p>"
+                    }
+                },
+                "componentName": {
+                    "target": "com.amazonaws.proton#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the component associated with this deployment.</p>"
+                    }
+                },
+                "deploymentStatus": {
+                    "target": "com.amazonaws.proton#DeploymentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the deployment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "deploymentStatusMessage": {
+                    "target": "com.amazonaws.proton#StatusMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deployment status message.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the deployment was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastModifiedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the deployment was last modified.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "completedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the deployment was completed.</p>"
+                    }
+                },
+                "lastAttemptedDeploymentId": {
+                    "target": "com.amazonaws.proton#DeploymentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the last attempted deployment.</p>"
+                    }
+                },
+                "lastSucceededDeploymentId": {
+                    "target": "com.amazonaws.proton#DeploymentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the last successful deployment.</p>"
+                    }
+                },
+                "initialState": {
+                    "target": "com.amazonaws.proton#DeploymentState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The initial state of the target resource at the time of the deployment.</p>"
+                    }
+                },
+                "targetState": {
+                    "target": "com.amazonaws.proton#DeploymentState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target state of the target resource at the time of the deployment.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The detailed information about a deployment.</p>"
+            }
+        },
+        "com.amazonaws.proton#DeploymentArn": {
+            "type": "string",
+            "traits": {
+                "aws.api#arnReference": {
+                    "resource": "com.amazonaws.proton#DeploymentResource"
+                }
+            }
+        },
         "com.amazonaws.proton#DeploymentId": {
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+            }
+        },
+        "com.amazonaws.proton#DeploymentResource": {
+            "type": "resource",
+            "identifiers": {
+                "id": {
+                    "target": "com.amazonaws.proton#DeploymentId"
+                }
+            },
+            "read": {
+                "target": "com.amazonaws.proton#GetDeployment"
+            },
+            "delete": {
+                "target": "com.amazonaws.proton#DeleteDeployment"
+            },
+            "list": {
+                "target": "com.amazonaws.proton#ListDeployments"
+            },
+            "traits": {
+                "aws.api#arn": {
+                    "template": "deployment/{id}"
+                }
+            }
+        },
+        "com.amazonaws.proton#DeploymentState": {
+            "type": "union",
+            "members": {
+                "serviceInstance": {
+                    "target": "com.amazonaws.proton#ServiceInstanceState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the service instance associated with the deployment.</p>"
+                    }
+                },
+                "environment": {
+                    "target": "com.amazonaws.proton#EnvironmentState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the environment associated with the deployment.</p>"
+                    }
+                },
+                "servicePipeline": {
+                    "target": "com.amazonaws.proton#ServicePipelineState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the service pipeline associated with the deployment.</p>"
+                    }
+                },
+                "component": {
+                    "target": "com.amazonaws.proton#ComponentState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the component associated with the deployment.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The detailed data about the current state of the deployment.</p>"
             }
         },
         "com.amazonaws.proton#DeploymentStatus": {
@@ -3619,6 +3941,142 @@
                     {
                         "name": "CANCELLED",
                         "value": "CANCELLED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.proton#DeploymentSummary": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.proton#DeploymentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the deployment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.proton#DeploymentArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the deployment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "targetArn": {
+                    "target": "com.amazonaws.proton#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the target of the deployment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "targetResourceCreatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the target resource was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "targetResourceType": {
+                    "target": "com.amazonaws.proton#DeploymentTargetResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource type of the deployment target. It can be an environment, service, service instance, or component.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the deployment was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastModifiedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the deployment was last modified.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "completedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the deployment was completed.</p>"
+                    }
+                },
+                "environmentName": {
+                    "target": "com.amazonaws.proton#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the environment associated with the deployment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "serviceName": {
+                    "target": "com.amazonaws.proton#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the service associated with the deployment.</p>"
+                    }
+                },
+                "serviceInstanceName": {
+                    "target": "com.amazonaws.proton#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the service instance associated with the deployment.</p>"
+                    }
+                },
+                "componentName": {
+                    "target": "com.amazonaws.proton#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the component associated with the deployment.</p>"
+                    }
+                },
+                "lastAttemptedDeploymentId": {
+                    "target": "com.amazonaws.proton#DeploymentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the last attempted deployment.</p>"
+                    }
+                },
+                "lastSucceededDeploymentId": {
+                    "target": "com.amazonaws.proton#DeploymentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the last successful deployment.</p>"
+                    }
+                },
+                "deploymentStatus": {
+                    "target": "com.amazonaws.proton#DeploymentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the deployment.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary data of the deployment.</p>"
+            }
+        },
+        "com.amazonaws.proton#DeploymentSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.proton#DeploymentSummary"
+            }
+        },
+        "com.amazonaws.proton#DeploymentTargetResourceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "ENVIRONMENT",
+                        "value": "ENVIRONMENT"
+                    },
+                    {
+                        "name": "SERVICE_PIPELINE",
+                        "value": "SERVICE_PIPELINE"
+                    },
+                    {
+                        "name": "SERVICE_INSTANCE",
+                        "value": "SERVICE_INSTANCE"
+                    },
+                    {
+                        "name": "COMPONENT",
+                        "value": "COMPONENT"
                     }
                 ]
             }
@@ -3799,6 +4257,18 @@
                     "target": "com.amazonaws.proton#RoleArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM service role that allows Proton to provision infrastructure using CodeBuild-based provisioning on your\n      behalf.</p>"
+                    }
+                },
+                "lastAttemptedDeploymentId": {
+                    "target": "com.amazonaws.proton#DeploymentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the last attempted deployment of this environment.</p>"
+                    }
+                },
+                "lastSucceededDeploymentId": {
+                    "target": "com.amazonaws.proton#DeploymentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the last successful deployment of this environment.</p>"
                     }
                 }
             },
@@ -4127,6 +4597,41 @@
                 "smithy.api#noReplace": {}
             }
         },
+        "com.amazonaws.proton#EnvironmentState": {
+            "type": "structure",
+            "members": {
+                "spec": {
+                    "target": "com.amazonaws.proton#SpecContents",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The environment spec that was used to create the environment.</p>"
+                    }
+                },
+                "templateName": {
+                    "target": "com.amazonaws.proton#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the environment template that was used to create the environment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "templateMajorVersion": {
+                    "target": "com.amazonaws.proton#TemplateVersionPart",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The major version of the environment template that was used to create the environment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "templateMinorVersion": {
+                    "target": "com.amazonaws.proton#TemplateVersionPart",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minor version of the environment template that was used to create the environment.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The detailed data about the current state of the environment.</p>"
+            }
+        },
         "com.amazonaws.proton#EnvironmentSummary": {
             "type": "structure",
             "members": {
@@ -4233,6 +4738,18 @@
                     "target": "com.amazonaws.proton#Arn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM service role that Proton uses when provisioning directly defined components in this environment. It\n      determines the scope of infrastructure that a component can provision.</p>\n         <p>The environment must have a <code>componentRoleArn</code> to allow directly defined components to be associated with the environment.</p>\n         <p>For more information about components, see\n  <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html\">Proton components</a> in the\n  <i>Proton User Guide</i>.</p>"
+                    }
+                },
+                "lastAttemptedDeploymentId": {
+                    "target": "com.amazonaws.proton#DeploymentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the last attempted deployment of this environment.</p>"
+                    }
+                },
+                "lastSucceededDeploymentId": {
+                    "target": "com.amazonaws.proton#DeploymentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the last successful deployment of this environment.</p>"
                     }
                 }
             },
@@ -4820,6 +5337,94 @@
                 }
             }
         },
+        "com.amazonaws.proton#GetDeployment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.proton#GetDeploymentInput"
+            },
+            "output": {
+                "target": "com.amazonaws.proton#GetDeploymentOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.proton#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.proton#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.proton#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.proton#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.proton#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get detailed data for a deployment.</p>",
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.proton#GetDeploymentInput": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.proton#DeploymentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the deployment that you want to get the detailed data for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "environmentName": {
+                    "target": "com.amazonaws.proton#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a environment that you want to get the detailed data for.</p>"
+                    }
+                },
+                "serviceName": {
+                    "target": "com.amazonaws.proton#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the service associated with the given deployment ID.</p>"
+                    }
+                },
+                "serviceInstanceName": {
+                    "target": "com.amazonaws.proton#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the service instance associated with the given deployment ID. <code>serviceName</code> must be specified to identify the service\n   instance.</p>"
+                    }
+                },
+                "componentName": {
+                    "target": "com.amazonaws.proton#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a component that you want to get the detailed data for.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.proton#DeploymentResource"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.proton#GetDeploymentOutput": {
+            "type": "structure",
+            "members": {
+                "deployment": {
+                    "target": "com.amazonaws.proton#Deployment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The detailed data of the requested deployment.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.proton#GetEnvironment": {
             "type": "operation",
             "input": {
@@ -5303,7 +5908,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Get counts of Proton resources.</p>\n         <p>For infrastructure-provisioning resources (environments, services, service instances,\n   pipelines), the action returns staleness counts. A resource is stale when it's behind the\n   recommended version of the Proton template that it uses and it needs an update to become\n   current.</p>\n         <p>The action returns staleness counts (counts of resources that are up-to-date, behind a\n   template major version, or behind a template minor version), the total number of resources, and\n   the number of resources that are in a failed state, grouped by resource type. Components,\n   environments, and service templates return less information - see the <code>components</code>,\n    <code>environments</code>, and <code>serviceTemplates</code> field descriptions.</p>\n         <p>For context, the action also returns the total number of each type of Proton template in the\n   Amazon Web Services account.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/monitoring-dashboard.html\">Proton dashboard</a> in the\n    <i>Proton User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Get counts of Proton resources.</p>\n         <p>For infrastructure-provisioning resources (environments, services, service instances, pipelines), the action returns staleness counts. A\n   resource is stale when it's behind the recommended version of the Proton template that it uses and it needs an update to become current.</p>\n         <p>The action returns staleness counts (counts of resources that are up-to-date, behind a template major version, or behind a template minor\n   version), the total number of resources, and the number of resources that are in a failed state, grouped by resource type. Components,\n   environments, and service templates return less information - see the <code>components</code>, <code>environments</code>, and\n    <code>serviceTemplates</code> field descriptions.</p>\n         <p>For context, the action also returns the total number of each type of Proton template in the Amazon Web Services account.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/monitoring-dashboard.html\">Proton dashboard</a> in the\n    <i>Proton User Guide</i>.</p>",
                 "smithy.api#readonly": {}
             }
         },
@@ -6214,6 +6819,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A token that indicates the location of the next output in the array of outputs, after the list of outputs that was previously requested.</p>"
                     }
+                },
+                "deploymentId": {
+                    "target": "com.amazonaws.proton#DeploymentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the deployment whose outputs you want.</p>"
+                    }
                 }
             }
         },
@@ -6392,6 +7003,107 @@
                 }
             }
         },
+        "com.amazonaws.proton#ListDeployments": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.proton#ListDeploymentsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.proton#ListDeploymentsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.proton#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.proton#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.proton#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.proton#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.proton#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List deployments. You can filter the result list by environment, service, or a single service instance.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "deployments"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.proton#ListDeploymentsInput": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.proton#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that indicates the location of the next deployment in the array of deployment, after the list of deployment that was previously\n   requested.</p>"
+                    }
+                },
+                "environmentName": {
+                    "target": "com.amazonaws.proton#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of an environment for result list filtering. Proton returns deployments associated with the environment.</p>"
+                    }
+                },
+                "serviceName": {
+                    "target": "com.amazonaws.proton#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a service for result list filtering. Proton returns deployments associated with service instances of the service.</p>"
+                    }
+                },
+                "serviceInstanceName": {
+                    "target": "com.amazonaws.proton#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a service instance for result list filtering. Proton returns the deployments associated with the service instance.</p>"
+                    }
+                },
+                "componentName": {
+                    "target": "com.amazonaws.proton#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a component for result list filtering. Proton returns deployments associated with that component.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.proton#MaxPageResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of deployments to list.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.proton#ListDeploymentsOutput": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.proton#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that indicates the location of the next deployment in the array of deployment, after the current requested list of deployment.</p>"
+                    }
+                },
+                "deployments": {
+                    "target": "com.amazonaws.proton#DeploymentSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of deployment with summary data.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.proton#ListEnvironmentAccountConnections": {
             "type": "operation",
             "input": {
@@ -6528,6 +7240,12 @@
                     "target": "com.amazonaws.proton#EmptyNextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>A token that indicates the location of the next environment output in the array of environment outputs, after the list of environment outputs that was\n      previously requested.</p>"
+                    }
+                },
+                "deploymentId": {
+                    "target": "com.amazonaws.proton#DeploymentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the deployment whose outputs you want.</p>"
                     }
                 }
             }
@@ -7060,6 +7778,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A token that indicates the location of the next output in the array of outputs, after the\n      list of outputs that was previously requested.</p>"
                     }
+                },
+                "deploymentId": {
+                    "target": "com.amazonaws.proton#DeploymentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the deployment whose outputs you want.</p>"
+                    }
                 }
             }
         },
@@ -7415,6 +8139,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A token that indicates the location of the next output in the array of outputs, after the\n      list of outputs that was previously requested.</p>"
                     }
+                },
+                "deploymentId": {
+                    "target": "com.amazonaws.proton#DeploymentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the deployment you want the outputs for.</p>"
+                    }
                 }
             }
         },
@@ -7753,7 +8483,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List tags for a resource. For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/resources.html\">Proton resources and tagging</a> in the\n    <i>Proton User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>List tags for a resource. For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/resources.html\">Proton\n    resources and tagging</a> in the <i>Proton User Guide</i>.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -7777,7 +8507,7 @@
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token that indicates the location of the next resource tag in the array of resource tags,\n   after the list of resource tags that was previously requested.</p>",
+                        "smithy.api#documentation": "<p>A token that indicates the location of the next resource tag in the array of resource tags, after the list of resource tags that was\n   previously requested.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -7803,7 +8533,7 @@
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token that indicates the location of the next resource tag in the array of resource tags,\n   after the current requested list of resource tags.</p>"
+                        "smithy.api#documentation": "<p>A token that indicates the location of the next resource tag in the array of resource tags, after the current requested list of resource\n   tags.</p>"
                     }
                 }
             }
@@ -7855,7 +8585,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Notify Proton of status changes to a provisioned resource when you use self-managed\n   provisioning.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/ag-works-prov-methods.html#ag-works-prov-methods-self\">Self-managed\n    provisioning</a> in the <i>Proton User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Notify Proton of status changes to a provisioned resource when you use self-managed provisioning.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/ag-works-prov-methods.html#ag-works-prov-methods-self\">Self-managed provisioning</a> in the <i>Proton User Guide</i>.</p>"
             }
         },
         "com.amazonaws.proton#NotifyResourceDeploymentStatusChangeInput": {
@@ -8993,6 +9723,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The last client request token received.</p>"
                     }
+                },
+                "lastAttemptedDeploymentId": {
+                    "target": "com.amazonaws.proton#DeploymentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the last attempted deployment of this service instance.</p>"
+                    }
+                },
+                "lastSucceededDeploymentId": {
+                    "target": "com.amazonaws.proton#DeploymentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the last successful deployment of this service instance.</p>"
+                    }
                 }
             },
             "traits": {
@@ -9072,6 +9814,60 @@
                 "aws.api#arn": {
                     "template": "service/{serviceName}/service-instance/{name}"
                 }
+            }
+        },
+        "com.amazonaws.proton#ServiceInstanceState": {
+            "type": "structure",
+            "members": {
+                "spec": {
+                    "target": "com.amazonaws.proton#SpecContents",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service spec that was used to create the service instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "templateName": {
+                    "target": "com.amazonaws.proton#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the service template that was used to create the service instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "templateMajorVersion": {
+                    "target": "com.amazonaws.proton#TemplateVersionPart",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The major version of the service template that was used to create the service\n      pipeline.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "templateMinorVersion": {
+                    "target": "com.amazonaws.proton#TemplateVersionPart",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minor version of the service template that was used to create the service\n      pipeline.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastSuccessfulComponentDeploymentIds": {
+                    "target": "com.amazonaws.proton#ComponentDeploymentIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IDs for the last successful components deployed for this service instance.</p>"
+                    }
+                },
+                "lastSuccessfulEnvironmentDeploymentId": {
+                    "target": "com.amazonaws.proton#DeploymentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID for the last successful environment deployed for this service instance.</p>"
+                    }
+                },
+                "lastSuccessfulServicePipelineDeploymentId": {
+                    "target": "com.amazonaws.proton#DeploymentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID for the last successful service pipeline deployed for this service instance.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The detailed data about the current state of this service instance.</p>"
             }
         },
         "com.amazonaws.proton#ServiceInstanceSummary": {
@@ -9158,6 +9954,18 @@
                     "target": "com.amazonaws.proton#StatusMessage",
                     "traits": {
                         "smithy.api#documentation": "<p>A service instance deployment status message.</p>"
+                    }
+                },
+                "lastAttemptedDeploymentId": {
+                    "target": "com.amazonaws.proton#DeploymentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the last attempted deployment of this service instance.</p>"
+                    }
+                },
+                "lastSucceededDeploymentId": {
+                    "target": "com.amazonaws.proton#DeploymentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the last successful deployment of this service instance.</p>"
                     }
                 }
             },
@@ -9246,6 +10054,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The service spec that was used to create the service pipeline.</p>"
                     }
+                },
+                "lastAttemptedDeploymentId": {
+                    "target": "com.amazonaws.proton#DeploymentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the last attempted deployment of this service pipeline.</p>"
+                    }
+                },
+                "lastSucceededDeploymentId": {
+                    "target": "com.amazonaws.proton#DeploymentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the last successful deployment of this service pipeline.</p>"
+                    }
                 }
             },
             "traits": {
@@ -9289,6 +10109,41 @@
             },
             "update": {
                 "target": "com.amazonaws.proton#UpdateServicePipeline"
+            }
+        },
+        "com.amazonaws.proton#ServicePipelineState": {
+            "type": "structure",
+            "members": {
+                "spec": {
+                    "target": "com.amazonaws.proton#SpecContents",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service spec that was used to create the service pipeline.</p>"
+                    }
+                },
+                "templateName": {
+                    "target": "com.amazonaws.proton#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the service template that was used to create the service pipeline.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "templateMajorVersion": {
+                    "target": "com.amazonaws.proton#TemplateVersionPart",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The major version of the service template that was used to create the service\n      pipeline.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "templateMinorVersion": {
+                    "target": "com.amazonaws.proton#TemplateVersionPart",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minor version of the service template that was used to create the service\n      pipeline.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The detailed data about the current state of the service pipeline.</p>"
             }
         },
         "com.amazonaws.proton#ServiceQuotaExceededException": {
@@ -10195,7 +11050,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Tag a resource. A tag is a key-value pair of metadata that you associate with an Proton\n   resource.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/resources.html\">Proton resources and tagging</a> in the\n    <i>Proton User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Tag a resource. A tag is a key-value pair of metadata that you associate with an Proton resource.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/resources.html\">Proton resources and tagging</a> in\n   the <i>Proton User Guide</i>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -10439,7 +11294,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Remove a customer tag from a resource. A tag is a key-value pair of metadata associated with\n   an Proton resource.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/resources.html\">Proton resources and tagging</a> in the\n    <i>Proton User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Remove a customer tag from a resource. A tag is a key-value pair of metadata associated with an Proton resource.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/userguide/resources.html\">Proton resources and tagging</a> in\n   the <i>Proton User Guide</i>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -10457,7 +11312,7 @@
                 "tagKeys": {
                     "target": "com.amazonaws.proton#TagKeyList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of customer tag keys that indicate the customer tags to be removed from the\n   resource.</p>",
+                        "smithy.api#documentation": "<p>A list of customer tag keys that indicate the customer tags to be removed from the resource.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -10502,25 +11357,25 @@
                 "pipelineServiceRoleArn": {
                     "target": "com.amazonaws.proton#RoleArnOrEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the service role you want to use for provisioning\n   pipelines. Assumed by Proton for Amazon Web Services-managed provisioning, and by customer-owned automation for\n   self-managed provisioning.</p>\n         <p>To remove a previously configured ARN, specify an empty string.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the service role you want to use for provisioning pipelines. Assumed by Proton for Amazon Web Services-managed\n   provisioning, and by customer-owned automation for self-managed provisioning.</p>\n         <p>To remove a previously configured ARN, specify an empty string.</p>"
                     }
                 },
                 "pipelineProvisioningRepository": {
                     "target": "com.amazonaws.proton#RepositoryBranchInput",
                     "traits": {
-                        "smithy.api#documentation": "<p>A linked repository for pipeline provisioning. Specify it if you have environments\n   configured for self-managed provisioning with services that include pipelines. A linked\n   repository is a repository that has been registered with Proton. For more information, see\n    <a>CreateRepository</a>.</p>\n         <p>To remove a previously configured repository, set\n    <code>deletePipelineProvisioningRepository</code> to <code>true</code>, and don't set\n    <code>pipelineProvisioningRepository</code>.</p>"
+                        "smithy.api#documentation": "<p>A linked repository for pipeline provisioning. Specify it if you have environments configured for self-managed provisioning with services that\n   include pipelines. A linked repository is a repository that has been registered with Proton. For more information, see <a>CreateRepository</a>.</p>\n         <p>To remove a previously configured repository, set <code>deletePipelineProvisioningRepository</code> to <code>true</code>, and don't set\n    <code>pipelineProvisioningRepository</code>.</p>"
                     }
                 },
                 "deletePipelineProvisioningRepository": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Set to <code>true</code> to remove a configured pipeline repository from the account\n   settings. Don't set this field if you are updating the configured pipeline repository.</p>"
+                        "smithy.api#documentation": "<p>Set to <code>true</code> to remove a configured pipeline repository from the account settings. Don't set this field if you are updating the\n   configured pipeline repository.</p>"
                     }
                 },
                 "pipelineCodebuildRoleArn": {
                     "target": "com.amazonaws.proton#RoleArnOrEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the service role you want to use for provisioning\n   pipelines. Proton assumes this role for CodeBuild-based provisioning.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the service role you want to use for provisioning pipelines. Proton assumes this role for CodeBuild-based\n   provisioning.</p>"
                     }
                 }
             }
@@ -11653,7 +12508,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Update template sync configuration parameters, except for the <code>templateName</code> and\n    <code>templateType</code>. Repository details (branch, name, and provider) should be of a linked\n   repository. A linked repository is a repository that has been registered with Proton. For more\n   information, see <a>CreateRepository</a>.</p>"
+                "smithy.api#documentation": "<p>Update template sync configuration parameters, except for the <code>templateName</code> and <code>templateType</code>. Repository details\n   (branch, name, and provider) should be of a linked repository. A linked repository is a repository that has been registered with Proton. For\n   more information, see <a>CreateRepository</a>.</p>"
             }
         },
         "com.amazonaws.proton#UpdateTemplateSyncConfigInput": {
@@ -11697,7 +12552,7 @@
                 "subdirectory": {
                     "target": "com.amazonaws.proton#Subdirectory",
                     "traits": {
-                        "smithy.api#documentation": "<p>A subdirectory path to your template bundle version. When included, limits the template\n   bundle search to this repository directory.</p>"
+                        "smithy.api#documentation": "<p>A subdirectory path to your template bundle version. When included, limits the template bundle search to this repository directory.</p>"
                     }
                 }
             }

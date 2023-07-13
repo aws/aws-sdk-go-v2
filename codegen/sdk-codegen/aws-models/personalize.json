@@ -324,6 +324,9 @@
                     "target": "com.amazonaws.personalize#UpdateCampaign"
                 },
                 {
+                    "target": "com.amazonaws.personalize#UpdateDataset"
+                },
+                {
                     "target": "com.amazonaws.personalize#UpdateMetricAttribution"
                 },
                 {
@@ -3010,7 +3013,7 @@
                 "recipeArn": {
                     "target": "com.amazonaws.personalize#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the recipe to use for model training. Only specified when\n      <code>performAutoML</code> is false.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the recipe to use for model training. This is required when\n      <code>performAutoML</code> is false.</p>"
                     }
                 },
                 "datasetGroupArn": {
@@ -3199,6 +3202,12 @@
                     "target": "com.amazonaws.personalize#Date",
                     "traits": {
                         "smithy.api#documentation": "<p>A time stamp that shows when the dataset was updated.</p>"
+                    }
+                },
+                "latestDatasetUpdate": {
+                    "target": "com.amazonaws.personalize#DatasetUpdateSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the latest update to the dataset.</p>"
                     }
                 }
             },
@@ -3737,6 +3746,44 @@
                     "min": 0,
                     "max": 256
                 }
+            }
+        },
+        "com.amazonaws.personalize#DatasetUpdateSummary": {
+            "type": "structure",
+            "members": {
+                "schemaArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the schema that replaced the previous schema of the dataset.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.personalize#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the dataset update. </p>"
+                    }
+                },
+                "failureReason": {
+                    "target": "com.amazonaws.personalize#FailureReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If updating a dataset fails, provides the reason why.</p>"
+                    }
+                },
+                "creationDateTime": {
+                    "target": "com.amazonaws.personalize#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The creation date and time (in Unix time) of the dataset update.</p>"
+                    }
+                },
+                "lastUpdatedDateTime": {
+                    "target": "com.amazonaws.personalize#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last update date and time (in Unix time) of the dataset.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an update to a dataset.</p>"
             }
         },
         "com.amazonaws.personalize#Datasets": {
@@ -7868,7 +7915,7 @@
                 "recipeArn": {
                     "target": "com.amazonaws.personalize#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the recipe used to create the solution.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the recipe used to create the solution. This is required when\n      <code>performAutoML</code> is false.</p>"
                     }
                 },
                 "datasetGroupArn": {
@@ -8694,6 +8741,66 @@
                     "target": "com.amazonaws.personalize#Arn",
                     "traits": {
                         "smithy.api#documentation": "<p>The same campaign ARN as given in the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.personalize#UpdateDataset": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.personalize#UpdateDatasetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.personalize#UpdateDatasetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.personalize#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.personalize#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.personalize#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Update a dataset to replace its schema with a new or existing one. For more information, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/updating-dataset-schema.html\">Replacing a dataset's schema</a>. </p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.personalize#UpdateDatasetRequest": {
+            "type": "structure",
+            "members": {
+                "datasetArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset that you want to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "schemaArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the new schema you want use.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.personalize#UpdateDatasetResponse": {
+            "type": "structure",
+            "members": {
+                "datasetArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset you updated.</p>"
                     }
                 }
             },

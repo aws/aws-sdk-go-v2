@@ -155,7 +155,7 @@
                 "EvaluationFormVersion": {
                     "target": "com.amazonaws.connect#VersionNumber",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the evaluation form to activate. If the version property is not provided, the\n   latest version of the evaluation form is activated.</p>",
+                        "smithy.api#documentation": "<p>The version of the evaluation form to activate. If the version property is not provided, the latest version of the\n   evaluation form is activated.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -689,7 +689,13 @@
                     "target": "com.amazonaws.connect#DeletePrompt"
                 },
                 {
+                    "target": "com.amazonaws.connect#DeleteQueue"
+                },
+                {
                     "target": "com.amazonaws.connect#DeleteQuickConnect"
+                },
+                {
+                    "target": "com.amazonaws.connect#DeleteRoutingProfile"
                 },
                 {
                     "target": "com.amazonaws.connect#DeleteRule"
@@ -4306,7 +4312,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an evaluation form in the specified Amazon Connect instance. The form can be\n   used to define questions related to agent performance, and create sections to organize such\n   questions. Question and section identifiers cannot be duplicated within the same evaluation\n   form.</p>",
+                "smithy.api#documentation": "<p>Creates an evaluation form in the specified Amazon Connect instance. The form can be used to define\n   questions related to agent performance, and create sections to organize such questions.  Question and section identifiers\n   cannot be duplicated within the same evaluation form.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/evaluation-forms/{InstanceId}",
@@ -4730,7 +4736,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds a new participant into an on-going chat contact. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/chat-customize-flow.html\">Customize chat\n    flow experiences by integrating custom participants</a>.</p>",
+                "smithy.api#documentation": "<p>Adds a new participant into an on-going chat contact. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/chat-customize-flow.html\">Customize chat\n   flow experiences by integrating custom participants</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/contact/create-participant",
@@ -4780,7 +4786,7 @@
                 "ParticipantCredentials": {
                     "target": "com.amazonaws.connect#ParticipantTokenCredentials",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token used by the chat participant to call <code>CreateParticipantConnection</code>. The\n   participant token is valid for the lifetime of a chat participant.</p>"
+                        "smithy.api#documentation": "<p>The token used by the chat participant to call <code>CreateParticipantConnection</code>. The participant\n   token is valid for the lifetime of a chat participant.</p>"
                     }
                 },
                 "ParticipantId": {
@@ -4823,7 +4829,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a prompt. For more information about prompts, such as supported file types and\n   maximum length, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/prompts.html\">Create prompts</a> in the <i>Amazon Connect Administrator's\n   Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Creates a prompt. For more information about prompts, such as supported file types and maximum length, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/prompts.html\">Create prompts</a> in the <i>Amazon Connect Administrator's Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/prompts/{InstanceId}",
@@ -7026,6 +7032,67 @@
                 "smithy.api#input": {}
             }
         },
+        "com.amazonaws.connect#DeleteQueue": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#DeleteQueueRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a queue.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/queues/{InstanceId}/{QueueId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#DeleteQueueRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "QueueId": {
+                    "target": "com.amazonaws.connect#QueueId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the queue.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
         "com.amazonaws.connect#DeleteQuickConnect": {
             "type": "operation",
             "input": {
@@ -7075,6 +7142,67 @@
                     "target": "com.amazonaws.connect#QuickConnectId",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier for the quick connect.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connect#DeleteRoutingProfile": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#DeleteRoutingProfileRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a routing profile.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/routing-profiles/{InstanceId}/{RoutingProfileId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#DeleteRoutingProfileRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html\">find the instance ID</a> in the Amazon Resource Name (ARN) of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "RoutingProfileId": {
+                    "target": "com.amazonaws.connect#RoutingProfileId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the routing profile.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -13395,7 +13523,7 @@
                 "InstanceAccessUrl": {
                     "target": "com.amazonaws.connect#Url",
                     "traits": {
-                        "smithy.api#documentation": "<p>This URL allows contact center users to access Amazon Connect admin website.</p>"
+                        "smithy.api#documentation": "<p>This URL allows contact center users to access the Amazon Connect admin website.</p>"
                     }
                 }
             },
@@ -13715,7 +13843,7 @@
                 "InstanceAccessUrl": {
                     "target": "com.amazonaws.connect#Url",
                     "traits": {
-                        "smithy.api#documentation": "<p>This URL allows contact center users to access Amazon Connect admin website.</p>"
+                        "smithy.api#documentation": "<p>This URL allows contact center users to access the Amazon Connect admin website.</p>"
                     }
                 }
             },
@@ -22259,7 +22387,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Searches the hours of operation in an Amazon Connect instance, with optional\n   filtering.</p>",
+                "smithy.api#documentation": "<p>Searches the hours of operation in an Amazon Connect instance, with optional filtering.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/search-hours-of-operations",
@@ -26746,7 +26874,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates details about a specific evaluation form version in the specified Amazon Connect\n   instance. Question and section identifiers cannot be duplicated within the same evaluation\n   form.</p>\n         <p>This operation does not support partial updates. Instead it does a full update of evaluation\n   form content.</p>",
+                "smithy.api#documentation": "<p>Updates details about a specific evaluation form version in the specified Amazon Connect\n   instance. Question and section\n   identifiers cannot be duplicated within the same evaluation form.</p>\n         <p>This operation does not support partial updates. Instead it does a full update of evaluation form content.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/evaluation-forms/{InstanceId}/{EvaluationFormId}",

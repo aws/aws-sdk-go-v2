@@ -3300,6 +3300,23 @@
                 "target": "com.amazonaws.databasemigrationservice#DatabaseResponse"
             }
         },
+        "com.amazonaws.databasemigrationservice#DatabaseMode": {
+            "type": "enum",
+            "members": {
+                "DEFAULT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "default"
+                    }
+                },
+                "BABELFISH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "babelfish"
+                    }
+                }
+            }
+        },
         "com.amazonaws.databasemigrationservice#DatabaseResponse": {
             "type": "structure",
             "members": {
@@ -10203,6 +10220,18 @@
                     "target": "com.amazonaws.databasemigrationservice#LongVarcharMappingType",
                     "traits": {
                         "smithy.api#documentation": "<p>When true, DMS migrates LONG values as VARCHAR.</p>"
+                    }
+                },
+                "DatabaseMode": {
+                    "target": "com.amazonaws.databasemigrationservice#DatabaseMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to use default or custom replication behavior for \n         PostgreSQL-compatible endpoints. You can use this setting to specify replication \n         behavior for endpoints that require additional configuration, such as Babelfish endpoints.</p>"
+                    }
+                },
+                "BabelfishDatabaseName": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Babelfish for Aurora PostgreSQL database name for the endpoint.</p>"
                     }
                 }
             },

@@ -12200,7 +12200,8 @@
                     "min": 6,
                     "max": 6
                 },
-                "smithy.api#pattern": "^[0-9]+$"
+                "smithy.api#pattern": "^[0-9]+$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.cognitoidentityprovider#SoftwareTokenMfaConfigType": {
@@ -13815,7 +13816,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contextual data, such as the user's device fingerprint, IP address, or location, used\n            for evaluating the risk of an unexpected event by Amazon Cognito advanced\n        security.</p>"
+                "smithy.api#documentation": "<p>Contextual data, such as the user's device fingerprint, IP address, or location, used\n            for evaluating the risk of an unexpected event by Amazon Cognito advanced\n        security.</p>",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.cognitoidentityprovider#UserFilterType": {

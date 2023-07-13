@@ -330,7 +330,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Activates an DataSync agent that you have deployed in your storage\n      environment. The activation process associates your agent with your account. In the activation\n      process, you specify information such as the Amazon Web Services Region that you want to\n      activate the agent in. You activate the agent in the Amazon Web Services Region where your\n      target locations (in Amazon S3 or Amazon EFS) reside. Your tasks are created in this Amazon Web Services Region.</p>\n         <p>You can activate the agent in a VPC (virtual private cloud) or provide the agent access to\n      a VPC endpoint so you can run tasks without going over the public internet.</p>\n         <p>You can use an agent for more than one location. If a task uses multiple agents, all of\n      them need to have status AVAILABLE for the task to run. If you use multiple agents for a\n      source location, the status of all the agents must be AVAILABLE for the task to run. </p>\n         <p>Agents are automatically updated by Amazon Web Services on a regular basis, using a\n      mechanism that ensures minimal interruption to your tasks.</p>"
+                "smithy.api#documentation": "<p>Activates an DataSync agent that you've deployed in your storage\n      environment. The activation process associates the agent with your Amazon Web Services account.</p>\n         <p>If you haven't deployed an agent yet, see the following topics to learn more:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/agent-requirements.html\">Agent requirements</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/configure-agent.html\">Create an agent</a>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>If you're transferring between Amazon Web Services storage services, you don't need a\n          DataSync agent. </p>\n         </note>"
             }
         },
         "com.amazonaws.datasync#CreateAgentRequest": {
@@ -339,38 +339,38 @@
                 "ActivationKey": {
                     "target": "com.amazonaws.datasync#ActivationKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>Your agent activation key. You can get the activation key either by sending an HTTP GET\n      request with redirects that enable you to get the agent IP address (port 80). Alternatively,\n      you can get it from the DataSync console.</p>\n         <p>The redirect URL returned in the response provides you the activation key for your\n      agent in the query string parameter <code>activationKey</code>. It might also include other\n      activation-related parameters; however, these are merely defaults. The arguments you pass to\n      this API call determine the actual configuration of your agent.</p>\n         <p>For more information, see Activating an Agent in the <i>DataSync User Guide.</i>\n         </p>",
+                        "smithy.api#documentation": "<p>Specifies your DataSync agent's activation key. If you don't have an\n      activation key, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/activate-agent.html\">Activate your agent</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "AgentName": {
                     "target": "com.amazonaws.datasync#TagValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name you configured for your agent. This value is a text reference that is used to\n      identify the agent in the console.</p>"
+                        "smithy.api#documentation": "<p>Specifies a name for your agent. You can see this name in the DataSync\n      console.</p>"
                     }
                 },
                 "Tags": {
                     "target": "com.amazonaws.datasync#InputTagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key-value pair that represents the tag that you want to associate with the agent.\n      The value can be an empty string. This value helps you manage, filter, and search for your\n      agents.</p>\n         <note>\n            <p>Valid characters for key and value are letters, spaces, and numbers representable in\n        UTF-8 format, and the following special characters: + - = . _ : / @. </p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies labels that help you categorize, filter, and search for your Amazon Web Services resources.\n      We recommend creating at least one tag for your agent.</p>"
                     }
                 },
                 "VpcEndpointId": {
                     "target": "com.amazonaws.datasync#VpcEndpointId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the VPC (virtual private cloud) endpoint that the agent has access to. This is\n      the client-side VPC endpoint, also called a PrivateLink. If you don't have a PrivateLink VPC\n      endpoint, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html#create-endpoint-service\">Creating a VPC\n        Endpoint Service Configuration</a> in the Amazon VPC User Guide.</p>\n         <p>VPC endpoint ID looks like this: <code>vpce-01234d5aff67890e1</code>.</p>"
+                        "smithy.api#documentation": "<p>Specifies the ID of the VPC endpoint that you want your agent to connect to. For example,\n      a VPC endpoint ID looks like <code>vpce-01234d5aff67890e1</code>.</p>\n         <important>\n            <p>The VPC endpoint you use must include the DataSync service name (for example,\n          <code>com.amazonaws.us-east-2.datasync</code>).</p>\n         </important>"
                     }
                 },
                 "SubnetArns": {
                     "target": "com.amazonaws.datasync#PLSubnetArnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the subnets in which DataSync will create\n      elastic network interfaces for each data transfer task. The agent that runs a task must be\n      private. When you start a task that is associated with an agent created in a VPC, or one that\n      has access to an IP address in a VPC, then the task is also private. In this case, DataSync creates four network interfaces for each task in your subnet. For a data transfer\n      to work, the agent must be able to route to all these four network interfaces.</p>"
+                        "smithy.api#documentation": "<p>Specifies the ARN of the subnet where you want to run your DataSync task when\n      using a VPC endpoint. This is the subnet where DataSync creates and manages the\n        <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/datasync-network.html#required-network-interfaces\">network\n        interfaces</a> for your transfer.</p>"
                     }
                 },
                 "SecurityGroupArns": {
                     "target": "com.amazonaws.datasync#PLSecurityGroupArnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARNs of the security groups used to protect your data transfer task subnets. See\n        <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_Ec2Config.html#DataSync-Type-Ec2Config-SecurityGroupArns\">SecurityGroupArns</a>.</p>"
+                        "smithy.api#documentation": "<p>Specifies the Amazon Resource Name (ARN) of the security group that protects your task's\n        <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/datasync-network.html#required-network-interfaces\">network\n          interfaces</a> when <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/choose-service-endpoint.html#choose-service-endpoint-vpc\">using a virtual private cloud (VPC)\n      endpoint</a>.</p>"
                     }
                 }
             },
@@ -385,7 +385,7 @@
                 "AgentArn": {
                     "target": "com.amazonaws.datasync#AgentArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the agent. Use the <code>ListAgents</code> operation\n      to return a list of agents for your account and Amazon Web Services Region.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the agent that you just activated. Use the <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_ListAgents.html\">ListAgents</a> operation to return a\n      list of agents in your Amazon Web Services account and Amazon Web Services Region.</p>"
                     }
                 }
             },
@@ -751,7 +751,7 @@
                 "User": {
                     "target": "com.amazonaws.datasync#SmbUser",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the user who has the permissions to access files and folders in the file\n      system.</p>\n         <p>For information about choosing a user name that ensures sufficient permissions to files,\n      folders, and metadata, see <a href=\"create-fsx-location.html#FSxWuser\">user</a>.</p>",
+                        "smithy.api#documentation": "<p>Specifies the user who has the permissions to access files, folders, and metadata in your\n      file system.</p>\n         <p>For information about choosing a user with sufficient permissions, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-fsx-location.html#create-fsx-windows-location-permissions\">Required permissions</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1070,7 +1070,7 @@
                 "ServerCertificate": {
                     "target": "com.amazonaws.datasync#ObjectStorageCertificate",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a certificate to authenticate with an object storage system that uses a private\n      or self-signed certificate authority (CA). You must specify a Base64-encoded <code>.pem</code>\n      file (for example, <code>file:///home/user/.ssh/storage_sys_certificate.pem</code>). The\n      certificate can be up to 32768 bytes (before Base64 encoding).</p>\n         <p>To use this parameter, configure <code>ServerProtocol</code> to <code>HTTPS</code>.</p>"
+                        "smithy.api#documentation": "<p>Specifies a file with the certificates that are used to sign the object storage server's\n      certificate (for example, <code>file:///home/user/.ssh/storage_sys_certificate.pem</code>).\n      The file you specify must include the following:</p>\n         <ul>\n            <li>\n               <p>The certificate of the signing certificate authority (CA)</p>\n            </li>\n            <li>\n               <p>Any intermediate certificates</p>\n            </li>\n            <li>\n               <p>base64 encoding</p>\n            </li>\n            <li>\n               <p>A <code>.pem</code> extension</p>\n            </li>\n         </ul>\n         <p>The file can be up to 32768 bytes (before base64 encoding).</p>\n         <p>To use this parameter, configure <code>ServerProtocol</code> to <code>HTTPS</code>.</p>"
                     }
                 }
             },
@@ -3727,7 +3727,7 @@
                     "name": "datasync"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<fullname>DataSync</fullname>\n         <p>DataSync is a managed data transfer service that makes it simpler for you\n      to automate moving data between on-premises storage and Amazon Web Services storage services.\n      You also can use DataSync to transfer data between other cloud providers and Amazon Web Services storage services.</p>\n         <p>This API interface reference includes documentation for using DataSync\n      programmatically. For complete information, see the <i>\n               <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/what-is-datasync.html\">DataSync User\n          Guide</a>\n            </i>.</p>",
+                "smithy.api#documentation": "<fullname>DataSync</fullname>\n         <p>DataSync is an online data movement and discovery service that simplifies data migration\n      and helps you quickly, easily, and securely transfer your file or object data to, from, and\n      between Amazon Web Services storage services.</p>\n         <p>This API interface reference includes documentation for using DataSync\n      programmatically. For complete information, see the <i>\n               <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/what-is-datasync.html\">DataSync User\n          Guide</a>\n            </i>.</p>",
                 "smithy.api#title": "AWS DataSync",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -6086,6 +6086,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether DataSync Discovery recommendations for the cluster are ready to view, incomplete,\n      or can't be determined.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/discovery-job-statuses.html#recommendation-statuses-table\">Recommendation statuses</a>.</p>"
                     }
+                },
+                "LunCount": {
+                    "target": "com.amazonaws.datasync#NonNegativeLong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of LUNs (logical unit numbers) in the cluster.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6177,6 +6183,12 @@
                     "target": "com.amazonaws.datasync#NonNegativeLong",
                     "traits": {
                         "smithy.api#documentation": "<p>The amount of storage in the SVM that's being used for snapshots.</p>"
+                    }
+                },
+                "LunCount": {
+                    "target": "com.amazonaws.datasync#NonNegativeLong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of LUNs (logical unit numbers) in the SVM.</p>"
                     }
                 }
             },
@@ -6276,6 +6288,12 @@
                     "target": "com.amazonaws.datasync#RecommendationStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether DataSync Discovery recommendations for the volume are ready to view, incomplete,\n      or can't be determined.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/discovery-job-statuses.html#recommendation-statuses-table\">Recommendation statuses</a>.</p>"
+                    }
+                },
+                "LunCount": {
+                    "target": "com.amazonaws.datasync#NonNegativeLong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of LUNs (logical unit numbers) in the volume.</p>"
                     }
                 }
             },
@@ -6607,7 +6625,7 @@
                 "TaskQueueing": {
                     "target": "com.amazonaws.datasync#TaskQueueing",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether tasks should be queued before executing the tasks. The default is\n        <code>ENABLED</code>, which means the tasks will be queued.</p>\n         <p>If you use the same agent to run multiple tasks, you can enable the tasks to run in\n      series. For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/run-task.html#queue-task-execution\">Queueing task\n        executions</a>.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether your transfer tasks should be put into a queue during certain scenarios\n      when <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/run-task.html#running-multiple-tasks\">running multiple\n        tasks</a>. This is <code>ENABLED</code> by default.</p>"
                     }
                 },
                 "LogLevel": {

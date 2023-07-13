@@ -1650,6 +1650,77 @@
                 }
             }
         },
+        "com.amazonaws.fsx#AutocommitPeriod": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.fsx#AutocommitPeriodType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the type of time for the autocommit period of a file in an FSx for ONTAP SnapLock volume. \n        Setting this value to <code>NONE</code> disables autocommit. The default value is <code>NONE</code>. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.fsx#AutocommitPeriodValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the amount of time for the autocommit period of a file in an FSx for ONTAP SnapLock volume. \n        The following ranges are valid: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>Minutes</code>: 5 - 65,535</p>\n            </li>\n            <li>\n               <p>\n                  <code>Hours</code>: 1 - 65,535</p>\n            </li>\n            <li>\n               <p>\n                  <code>Days</code>: 1 - 3,650</p>\n            </li>\n            <li>\n               <p>\n                  <code>Months</code>: 1 - 120</p>\n            </li>\n            <li>\n               <p>\n                  <code>Years</code>: 1 - 10</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Sets the autocommit period of files in an FSx for ONTAP SnapLock volume, which determines \n            how long the files must  \n        remain unmodified before they're automatically transitioned to the write once, read many (WORM) state. \n        </p>\n         <p>For more information, see \n            <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/worm-state.html#worm-state-autocommit\">Autocommit</a>. </p>"
+            }
+        },
+        "com.amazonaws.fsx#AutocommitPeriodType": {
+            "type": "enum",
+            "members": {
+                "MINUTES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MINUTES"
+                    }
+                },
+                "HOURS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HOURS"
+                    }
+                },
+                "DAYS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DAYS"
+                    }
+                },
+                "MONTHS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MONTHS"
+                    }
+                },
+                "YEARS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "YEARS"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.fsx#AutocommitPeriodValue": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 65535
+                }
+            }
+        },
         "com.amazonaws.fsx#AutomaticBackupRetentionDays": {
             "type": "integer",
             "traits": {
@@ -2129,46 +2200,6 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Copies an existing backup within the same Amazon Web Services account to another Amazon Web Services Region\n         (cross-Region copy) or within the same Amazon Web Services Region (in-Region copy). You can have up to five\n         backup copy requests in progress to a single destination Region per account.</p>\n         <p>You can use cross-Region backup copies for cross-Region disaster recovery. You can\n         periodically take backups and copy them to another Region so that in the event of a\n         disaster in the primary Region, you can restore from backup and recover availability\n         quickly in the other Region. You can make cross-Region copies only within your Amazon Web Services partition. A partition is a grouping of Regions. Amazon Web Services currently\n         has three partitions: <code>aws</code> (Standard Regions), <code>aws-cn</code> (China\n         Regions), and <code>aws-us-gov</code> (Amazon Web Services GovCloud [US] Regions).</p>\n         <p>You can also use backup copies to clone your file dataset to another Region or within\n         the same Region.</p>\n         <p>You can use the <code>SourceRegion</code> parameter to specify the Amazon Web Services Region\n         from which the backup will be copied. For example, if you make the call from the\n         <code>us-west-1</code> Region and want to copy a backup from the <code>us-east-2</code>\n         Region, you specify <code>us-east-2</code> in the <code>SourceRegion</code> parameter\n         to make a cross-Region copy. If you don't specify a Region, the backup copy is\n         created in the same Region where the request is sent from (in-Region copy).</p>\n         <p>For more information about creating backup copies, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/using-backups.html#copy-backups\"> Copying backups</a>\n         in the <i>Amazon FSx for Windows User Guide</i>, <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-backups-fsx.html#copy-backups\">Copying backups</a> in the <i>Amazon FSx for Lustre User\n            Guide</i>, and <a href=\"https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/using-backups.html#copy-backups\">Copying backups</a> in the <i>Amazon FSx for OpenZFS User\n            Guide</i>.</p>",
-                "smithy.api#examples": [
-                    {
-                        "title": "To copy a backup",
-                        "documentation": "This operation copies an Amazon FSx backup.",
-                        "input": {
-                            "SourceBackupId": "backup-03e3c82e0183b7b6b",
-                            "SourceRegion": "us-east-2"
-                        },
-                        "output": {
-                            "Backup": {
-                                "BackupId": "backup-0a3364eded1014b28",
-                                "OwnerId": "123456789012",
-                                "Lifecycle": "COPYING",
-                                "Type": "USER_INITIATED",
-                                "CreationTime": 1.617954808068E9,
-                                "KmsKeyId": "arn:aws:fsx:us-east-1:012345678912:key/d1234e22-543a-12b7-a98f-e12c2b54001a",
-                                "ResourceARN": "arn:aws:fsx:us-east-1:012345678912:backup/backup-0a3364eded1014b28",
-                                "Tags": [
-                                    {
-                                        "Key": "Name",
-                                        "Value": "MyBackup"
-                                    }
-                                ],
-                                "FileSystem": {
-                                    "FileSystemId": "fs-0498eed5fe91001ec",
-                                    "FileSystemType": "LUSTRE",
-                                    "StorageCapacity": 2400,
-                                    "StorageType": "SSD",
-                                    "ResourceARN": "arn:aws:fsx:us-east-1:012345678912:file-system/fs-0f5179e395f597e66",
-                                    "LustreConfiguration": {
-                                        "WeeklyMaintenanceStartTime": "1:05:00",
-                                        "DeploymentType": "PERSISTENT_1",
-                                        "PerUnitStorageThroughput": 50,
-                                        "AutomaticBackupRetentionDays": 0
-                                    }
-                                }
-                            }
-                        }
-                    }
-                ],
                 "smithy.api#idempotent": {}
             }
         },
@@ -3248,7 +3279,7 @@
                 "SizeInMegabytes": {
                     "target": "com.amazonaws.fsx#VolumeCapacity",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the size of the volume, in megabytes (MB), that you are creating.\n            Provide any whole number in the range of 20–104857600 to specify the size of\n            the volume.</p>",
+                        "smithy.api#documentation": "<p>Specifies the size of the volume, in megabytes (MB), that you are creating.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3284,6 +3315,12 @@
                     "target": "com.amazonaws.fsx#Flag",
                     "traits": {
                         "smithy.api#documentation": "<p>A boolean flag indicating whether tags for the volume should be copied to backups. This value defaults to\n            false. If it's set to true, all tags for the volume are copied to all automatic and user-initiated backups\n            where the user doesn't specify tags. If this value is true, and you specify one or more tags, only the\n            specified tags are copied to backups. If you specify one or more tags when creating a user-initiated\n            backup, no tags are copied from the volume, regardless of this value.</p>"
+                    }
+                },
+                "SnaplockConfiguration": {
+                    "target": "com.amazonaws.fsx#CreateSnaplockConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the SnapLock configuration for an FSx for ONTAP volume. </p>"
                     }
                 }
             },
@@ -3379,6 +3416,51 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Specifies the configuration of the Amazon FSx for OpenZFS volume that you are creating.</p>"
+            }
+        },
+        "com.amazonaws.fsx#CreateSnaplockConfiguration": {
+            "type": "structure",
+            "members": {
+                "AuditLogVolume": {
+                    "target": "com.amazonaws.fsx#Flag",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enables or disables the audit log volume for an FSx for ONTAP SnapLock volume. The default \n            value is <code>false</code>. If you set <code>AuditLogVolume</code> to <code>true</code>, the SnapLock volume is \n            created as an audit log volume. The minimum retention period for an audit log volume is six months. </p>\n         <p>For more information, see \n            <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/how-snaplock-works.html#snaplock-audit-log-volume\">\n            SnapLock audit log volumes</a>. </p>"
+                    }
+                },
+                "AutocommitPeriod": {
+                    "target": "com.amazonaws.fsx#AutocommitPeriod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration object for setting the autocommit period of files in an FSx for ONTAP SnapLock volume. </p>"
+                    }
+                },
+                "PrivilegedDelete": {
+                    "target": "com.amazonaws.fsx#PrivilegedDelete",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enables, disables, or permanently disables privileged delete on an FSx for ONTAP SnapLock \n            Enterprise volume. Enabling privileged delete allows SnapLock administrators to delete WORM files even \n            if they have active retention periods. <code>PERMANENTLY_DISABLED</code> is a terminal state. \n            If privileged delete is permanently disabled on a SnapLock volume, you can't re-enable it. The default \n            value is <code>DISABLED</code>. </p>\n         <p>For more information, see \n            <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/how-snaplock-works.html#privileged-delete\">Privileged delete</a>. </p>"
+                    }
+                },
+                "RetentionPeriod": {
+                    "target": "com.amazonaws.fsx#SnaplockRetentionPeriod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the retention period of an FSx for ONTAP \n            SnapLock volume. </p>"
+                    }
+                },
+                "SnaplockType": {
+                    "target": "com.amazonaws.fsx#SnaplockType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the retention mode of an FSx for ONTAP SnapLock volume.  After it is set, it can't be changed. \n        You can choose one of the following retention modes: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>COMPLIANCE</code>: Files transitioned to write once, read many (WORM) on a Compliance volume can't be deleted \n                until their retention periods expire. This retention mode is used to address government or industry-specific mandates or to protect \n                against ransomware attacks. For more information, \n                see <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snaplock-compliance.html\">SnapLock Compliance</a>. </p>\n            </li>\n            <li>\n               <p>\n                  <code>ENTERPRISE</code>: Files transitioned to WORM on an Enterprise volume can be deleted by authorized users \n            before their retention periods expire using privileged delete. This retention mode is used to advance an organization's data integrity \n            and internal compliance or to test retention settings before using SnapLock Compliance. For more information, see \n                <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/how-snaplock-works.htmlFile\">SnapLock Enterprise</a>. </p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "VolumeAppendModeEnabled": {
+                    "target": "com.amazonaws.fsx#Flag",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enables or disables volume-append mode \n            on an FSx for ONTAP SnapLock volume. Volume-append mode allows you to \n            create WORM-appendable files and write data to them incrementally. The default value is <code>false</code>. </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/worm-state.html#worm-state-append\">Volume-append mode</a>. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the SnapLock configuration when creating an FSx for ONTAP SnapLock volume. </p>"
             }
         },
         "com.amazonaws.fsx#CreateSnapshot": {
@@ -4421,19 +4503,6 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Deletes an Amazon FSx backup. After deletion, the backup no longer exists, and\n            its data is gone.</p>\n         <p>The <code>DeleteBackup</code> call returns instantly. The backup won't show up in\n            later <code>DescribeBackups</code> calls.</p>\n         <important>\n            <p>The data in a deleted backup is also deleted and can't be recovered by any\n                means.</p>\n         </important>",
-                "smithy.api#examples": [
-                    {
-                        "title": "To delete a backup",
-                        "documentation": "This operation deletes an Amazon FSx file system backup.",
-                        "input": {
-                            "BackupId": "backup-03e3c82e0183b7b6b"
-                        },
-                        "output": {
-                            "BackupId": "backup-03e3c82e0183b7b6b",
-                            "Lifecycle": "DELETED"
-                        }
-                    }
-                ],
                 "smithy.api#idempotent": {}
             }
         },
@@ -4665,19 +4734,6 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Deletes a file system. After deletion, the file system no longer exists, and its data\n            is gone. Any existing automatic backups and snapshots are also deleted.</p>\n         <p>To delete an Amazon FSx for NetApp ONTAP file system, first delete all the\n            volumes and storage virtual machines (SVMs) on the file system. Then provide a\n                <code>FileSystemId</code> value to the <code>DeleFileSystem</code> operation.</p>\n         <p>By default, when you delete an Amazon FSx for Windows File Server file system,\n            a final backup is created upon deletion. This final backup isn't subject to the file\n            system's retention policy, and must be manually deleted.</p>\n         <p>The <code>DeleteFileSystem</code> operation returns while the file system has the\n                <code>DELETING</code> status. You can check the file system deletion status by\n            calling the <a href=\"https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeFileSystems.html\">DescribeFileSystems</a> operation, which returns a list of file systems in your\n            account. If you pass the file system ID for a deleted file system, the\n                <code>DescribeFileSystems</code> operation returns a <code>FileSystemNotFound</code>\n            error.</p>\n         <note>\n            <p>If a data repository task is in a <code>PENDING</code> or <code>EXECUTING</code> state,\n                deleting an Amazon FSx for Lustre file system will fail with an HTTP status\n                code 400 (Bad Request).</p>\n         </note>\n         <important>\n            <p>The data in a deleted file system is also deleted and can't be recovered by\n                any means.</p>\n         </important>",
-                "smithy.api#examples": [
-                    {
-                        "title": "To delete a file system",
-                        "documentation": "This operation deletes an Amazon FSx file system.",
-                        "input": {
-                            "FileSystemId": "fs-0498eed5fe91001ec"
-                        },
-                        "output": {
-                            "FileSystemId": "fs-0498eed5fe91001ec",
-                            "Lifecycle": "DELETING"
-                        }
-                    }
-                ],
                 "smithy.api#idempotent": {}
             }
         },
@@ -5087,10 +5143,16 @@
                 },
                 "FinalBackupTags": {
                     "target": "com.amazonaws.fsx#Tags"
+                },
+                "BypassSnaplockEnterpriseRetention": {
+                    "target": "com.amazonaws.fsx#Flag",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Setting this to <code>true</code> allows a SnapLock administrator to delete an FSx for ONTAP SnapLock Enterprise volume \n            with unexpired write once, read many (WORM) files. The IAM permission <code>fsx:BypassSnaplockEnterpriseRetention</code> is also \n        required to delete SnapLock Enterprise volumes with unexpired WORM files. The default value is <code>false</code>. </p>\n         <p>For more information, see \n            <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/how-snaplock-works.html#snaplock-delete-volume\">\n                Deleting a SnapLock volume\n            </a>. </p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Use to specify skipping a final backup, or to add tags to a final backup.</p>"
+                "smithy.api#documentation": "<p>Use to specify skipping a final backup, adding tags to a final backup, or bypassing the \n            retention period of an FSx for ONTAP SnapLock Enterprise volume when deleting an \n            FSx for ONTAP volume. </p>"
             }
         },
         "com.amazonaws.fsx#DeleteVolumeOntapResponse": {
@@ -7294,23 +7356,6 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Lists tags for Amazon FSx resources.</p>\n         <p>When retrieving all tags, you can optionally specify the <code>MaxResults</code>\n            parameter to limit the number of tags in a response. If more tags remain, Amazon FSx\n            returns a <code>NextToken</code> value in the response. In this case, send a later\n            request with the <code>NextToken</code> request parameter set to the value of\n                <code>NextToken</code> from the last response.</p>\n         <p>This action is used in an iterative process to retrieve a list of your tags.\n                <code>ListTagsForResource</code> is called first without a\n            <code>NextToken</code>value. Then the action continues to be called with the\n                <code>NextToken</code> parameter set to the value of the last <code>NextToken</code>\n            value until a response has no <code>NextToken</code>.</p>\n         <p>When using this action, keep the following in mind:</p>\n         <ul>\n            <li>\n               <p>The implementation might return fewer than <code>MaxResults</code> file\n                    system descriptions while still including a <code>NextToken</code>\n                    value.</p>\n            </li>\n            <li>\n               <p>The order of tags returned in the response of one\n                        <code>ListTagsForResource</code> call and the order of tags returned across\n                    the responses of a multi-call iteration is unspecified.</p>\n            </li>\n         </ul>",
-                "smithy.api#examples": [
-                    {
-                        "title": "To list tags for a resource",
-                        "documentation": "This operation lists tags for an Amazon FSx resource.",
-                        "input": {
-                            "ResourceARN": "arn:aws:fsx:us-east-1:012345678912:file-system/fs-0498eed5fe91001ec"
-                        },
-                        "output": {
-                            "Tags": [
-                                {
-                                    "Key": "Name",
-                                    "Value": "MyFileSystem"
-                                }
-                            ]
-                        }
-                    }
-                ],
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -7948,6 +7993,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A boolean flag indicating whether tags for the volume should be copied to backups. This value defaults to\n            false. If it's set to true, all tags for the volume are copied to all automatic and user-initiated backups\n            where the user doesn't specify tags. If this value is true, and you specify one or more tags, only the\n            specified tags are copied to backups. If you specify one or more tags when creating a user-initiated\n            backup, no tags are copied from the volume, regardless of this value.</p>"
                     }
+                },
+                "SnaplockConfiguration": {
+                    "target": "com.amazonaws.fsx#SnaplockConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SnapLock configuration object for an FSx for ONTAP SnapLock volume. </p>"
+                    }
                 }
             },
             "traits": {
@@ -8416,6 +8467,29 @@
                 }
             }
         },
+        "com.amazonaws.fsx#PrivilegedDelete": {
+            "type": "enum",
+            "members": {
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                },
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "PERMANENTLY_DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PERMANENTLY_DISABLED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.fsx#ProgressPercent": {
             "type": "integer",
             "traits": {
@@ -8717,6 +8791,89 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.fsx#RetentionPeriod": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.fsx#RetentionPeriodType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the type of time for the retention period of an FSx for ONTAP SnapLock volume. \n            Set it to \n            one of the valid types. If you set it to <code>INFINITE</code>, the files are retained forever. If you set it to \n            <code>UNSPECIFIED</code>, the files are retained until you set an explicit retention period. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.fsx#RetentionPeriodValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the amount of time for the retention period of an FSx for ONTAP SnapLock volume. \n        You can't set a value for <code>INFINITE</code> or <code>UNSPECIFIED</code>. For all other options, the \n        following ranges are valid: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>Seconds</code>: 0 - 65,535</p>\n            </li>\n            <li>\n               <p>\n                  <code>Minutes</code>: 0 - 65,535</p>\n            </li>\n            <li>\n               <p>\n                  <code>Hours</code>: 0 - 24</p>\n            </li>\n            <li>\n               <p>\n                  <code>Days</code>: 0 - 365</p>\n            </li>\n            <li>\n               <p>\n                  <code>Months</code>: 0 - 12</p>\n            </li>\n            <li>\n               <p>\n                  <code>Years</code>: 0 - 100</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the retention period of an FSx for ONTAP SnapLock volume.  After it is set, it can't be changed. \n            Files can't be \n        deleted or modified during the retention period. </p>\n         <p>For more information, see \n            <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snaplock-retention.html\">Working with the retention \n                period in SnapLock</a>. </p>"
+            }
+        },
+        "com.amazonaws.fsx#RetentionPeriodType": {
+            "type": "enum",
+            "members": {
+                "SECONDS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SECONDS"
+                    }
+                },
+                "MINUTES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MINUTES"
+                    }
+                },
+                "HOURS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HOURS"
+                    }
+                },
+                "DAYS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DAYS"
+                    }
+                },
+                "MONTHS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MONTHS"
+                    }
+                },
+                "YEARS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "YEARS"
+                    }
+                },
+                "INFINITE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INFINITE"
+                    }
+                },
+                "UNSPECIFIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNSPECIFIED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.fsx#RetentionPeriodValue": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 65535
+                }
             }
         },
         "com.amazonaws.fsx#RouteTableId": {
@@ -9023,6 +9180,96 @@
             "traits": {
                 "smithy.api#documentation": "<p>An error indicating that a particular service limit was exceeded. You can increase\n            some service limits by contacting Amazon Web Services Support.</p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.fsx#SnaplockConfiguration": {
+            "type": "structure",
+            "members": {
+                "AuditLogVolume": {
+                    "target": "com.amazonaws.fsx#Flag",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enables or disables the audit log volume for an FSx for ONTAP SnapLock volume. The default \n            value is <code>false</code>. If you set <code>AuditLogVolume</code> to <code>true</code>, the SnapLock volume is \n            created as an audit log volume. The minimum retention period for an audit log volume is six months. </p>\n         <p>For more information, see \n            <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/how-snaplock-works.html#snaplock-audit-log-volume\">\n                SnapLock audit log volumes</a>. </p>"
+                    }
+                },
+                "AutocommitPeriod": {
+                    "target": "com.amazonaws.fsx#AutocommitPeriod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration object for setting the autocommit period of files in an FSx for ONTAP SnapLock volume. </p>"
+                    }
+                },
+                "PrivilegedDelete": {
+                    "target": "com.amazonaws.fsx#PrivilegedDelete",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enables, disables, or permanently disables privileged delete on an FSx for ONTAP SnapLock \n            Enterprise volume. Enabling privileged delete allows SnapLock administrators to delete write once, read \n            many (WORM) files even \n            if they have active retention periods. <code>PERMANENTLY_DISABLED</code> is a terminal state. \n            If privileged delete is permanently disabled on a SnapLock volume, you can't re-enable it. The default \n            value is <code>DISABLED</code>. </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/how-snaplock-works.html#privileged-delete\">Privileged delete</a>. </p>"
+                    }
+                },
+                "RetentionPeriod": {
+                    "target": "com.amazonaws.fsx#SnaplockRetentionPeriod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the retention period of an FSx for ONTAP SnapLock volume. </p>"
+                    }
+                },
+                "SnaplockType": {
+                    "target": "com.amazonaws.fsx#SnaplockType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the retention mode of an FSx for ONTAP SnapLock volume.  After it is set, it can't be changed. \n            You can choose one of the following retention modes: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>COMPLIANCE</code>: Files transitioned to write once, read many (WORM) on a Compliance volume can't be deleted \n                    until their retention periods expire. This retention mode is used to address government or industry-specific mandates or to protect \n                    against ransomware attacks. For more information, \n                    see <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snaplock-compliance.html\">SnapLock Compliance</a>. </p>\n            </li>\n            <li>\n               <p>\n                  <code>ENTERPRISE</code>: Files transitioned to WORM on an Enterprise volume can be deleted by authorized users \n                before their retention periods expire using privileged delete. This retention mode is used to advance an organization's data integrity \n                and internal compliance or to test retention settings before using SnapLock Compliance. For more information, see \n                <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/how-snaplock-works.htmlFile\">SnapLock Enterprise</a>. </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "VolumeAppendModeEnabled": {
+                    "target": "com.amazonaws.fsx#Flag",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enables or disables volume-append mode \n            on an FSx for ONTAP SnapLock volume. Volume-append mode allows you to \n            create WORM-appendable files and write data to them incrementally. \n            The default value is <code>false</code>. </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/worm-state.html#worm-state-append\">Volume-append mode</a>. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the SnapLock configuration for an FSx for ONTAP SnapLock volume. </p>"
+            }
+        },
+        "com.amazonaws.fsx#SnaplockRetentionPeriod": {
+            "type": "structure",
+            "members": {
+                "DefaultRetention": {
+                    "target": "com.amazonaws.fsx#RetentionPeriod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The retention period assigned to a write once, read many (WORM) file by default if an explicit retention period is not set for an \n            FSx for ONTAP SnapLock volume. The default retention period must be greater than or equal to \n        the minimum retention period and less than or equal to the maximum retention period. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MinimumRetention": {
+                    "target": "com.amazonaws.fsx#RetentionPeriod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The shortest retention period that can be assigned to a WORM file on an FSx for ONTAP SnapLock volume. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaximumRetention": {
+                    "target": "com.amazonaws.fsx#RetentionPeriod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The longest retention period that can be assigned to a WORM file on \n            an FSx for ONTAP SnapLock volume. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration to set the retention period of an FSx for ONTAP SnapLock volume. The retention \n        period includes default, maximum, and minimum settings. For more information, see \n            <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snaplock-retention.html\">Working with the retention period \n            in SnapLock</a>. </p>"
+            }
+        },
+        "com.amazonaws.fsx#SnaplockType": {
+            "type": "enum",
+            "members": {
+                "COMPLIANCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLIANCE"
+                    }
+                },
+                "ENTERPRISE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENTERPRISE"
+                    }
+                }
             }
         },
         "com.amazonaws.fsx#Snapshot": {
@@ -9799,21 +10046,6 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Tags an Amazon FSx resource.</p>",
-                "smithy.api#examples": [
-                    {
-                        "title": "To tag a resource",
-                        "documentation": "This operation tags an Amazon FSx resource.",
-                        "input": {
-                            "ResourceARN": "arn:aws:fsx:us-east-1:012345678912:file-system/fs-0498eed5fe91001ec",
-                            "Tags": [
-                                {
-                                    "Key": "Name",
-                                    "Value": "MyFileSystem"
-                                }
-                            ]
-                        }
-                    }
-                ],
                 "smithy.api#idempotent": {}
             }
         },
@@ -9995,18 +10227,6 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>This action removes a tag from an Amazon FSx resource.</p>",
-                "smithy.api#examples": [
-                    {
-                        "title": "To untag a resource",
-                        "documentation": "This operation untags an Amazon FSx resource.",
-                        "input": {
-                            "ResourceARN": "arn:aws:fsx:us-east-1:012345678912:file-system/fs-0498eed5fe91001ec",
-                            "TagKeys": [
-                                "Name"
-                            ]
-                        }
-                    }
-                ],
                 "smithy.api#idempotent": {}
             }
         },
@@ -10241,7 +10461,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Use this operation to update the configuration of an existing Amazon FSx file\n      system. You can update multiple properties in a single request.</p>\n         <p>For FSx for Windows File Server file systems, you can update the following\n      properties:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AuditLogConfiguration</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AutomaticBackupRetentionDays</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DailyAutomaticBackupStartTime</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SelfManagedActiveDirectoryConfiguration</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>StorageCapacity</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ThroughputCapacity</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>WeeklyMaintenanceStartTime</code>\n               </p>\n            </li>\n         </ul>\n         <p>For FSx for Lustre file systems, you can update the following\n      properties:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AutoImportPolicy</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AutomaticBackupRetentionDays</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DailyAutomaticBackupStartTime</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DataCompressionType</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>LustreRootSquashConfiguration</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>StorageCapacity</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>WeeklyMaintenanceStartTime</code>\n               </p>\n            </li>\n         </ul>\n         <p>For FSx for ONTAP file systems, you can update the following\n      properties:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AddRouteTableIds</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AutomaticBackupRetentionDays</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DailyAutomaticBackupStartTime</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DiskIopsConfiguration</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>FsxAdminPassword</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>RemoveRouteTableIds</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>StorageCapacity</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ThroughputCapacity</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>WeeklyMaintenanceStartTime</code>\n               </p>\n            </li>\n         </ul>\n         <p>For FSx for OpenZFS file systems, you can update the following\n      properties:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AutomaticBackupRetentionDays</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CopyTagsToBackups</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CopyTagsToVolumes</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DailyAutomaticBackupStartTime</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DiskIopsConfiguration</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>StorageCapacity</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ThroughputCapacity</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>WeeklyMaintenanceStartTime</code>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Use this operation to update the configuration of an existing Amazon FSx file\n      system. You can update multiple properties in a single request.</p>\n         <p>For FSx for Windows File Server file systems, you can update the following\n      properties:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AuditLogConfiguration</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AutomaticBackupRetentionDays</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DailyAutomaticBackupStartTime</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SelfManagedActiveDirectoryConfiguration</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>StorageCapacity</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ThroughputCapacity</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>WeeklyMaintenanceStartTime</code>\n               </p>\n            </li>\n         </ul>\n         <p>For FSx for Lustre file systems, you can update the following\n      properties:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AutoImportPolicy</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AutomaticBackupRetentionDays</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DailyAutomaticBackupStartTime</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DataCompressionType</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>LogConfiguration</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>LustreRootSquashConfiguration</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>StorageCapacity</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>WeeklyMaintenanceStartTime</code>\n               </p>\n            </li>\n         </ul>\n         <p>For FSx for ONTAP file systems, you can update the following\n      properties:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AddRouteTableIds</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AutomaticBackupRetentionDays</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DailyAutomaticBackupStartTime</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DiskIopsConfiguration</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>FsxAdminPassword</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>RemoveRouteTableIds</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>StorageCapacity</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ThroughputCapacity</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>WeeklyMaintenanceStartTime</code>\n               </p>\n            </li>\n         </ul>\n         <p>For FSx for OpenZFS file systems, you can update the following\n      properties:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AutomaticBackupRetentionDays</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CopyTagsToBackups</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CopyTagsToVolumes</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DailyAutomaticBackupStartTime</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DiskIopsConfiguration</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>StorageCapacity</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ThroughputCapacity</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>WeeklyMaintenanceStartTime</code>\n               </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.fsx#UpdateFileSystemLustreConfiguration": {
@@ -10494,7 +10714,7 @@
                 "SecurityStyle": {
                     "target": "com.amazonaws.fsx#SecurityStyle",
                     "traits": {
-                        "smithy.api#documentation": "<p>The security style for the volume, which can be <code>UNIX</code>.\n            <code>NTFS</code>, or <code>MIXED</code>.</p>"
+                        "smithy.api#documentation": "<p>The security style for the volume, which can be <code>UNIX</code>,\n            <code>NTFS</code>, or <code>MIXED</code>.</p>"
                     }
                 },
                 "SizeInMegabytes": {
@@ -10525,6 +10745,12 @@
                     "target": "com.amazonaws.fsx#Flag",
                     "traits": {
                         "smithy.api#documentation": "<p>A boolean flag indicating whether tags for the volume should be copied to backups. This value defaults to\n            false. If it's set to true, all tags for the volume are copied to all automatic and user-initiated backups\n            where the user doesn't specify tags. If this value is true, and you specify one or more tags, only the\n            specified tags are copied to backups. If you specify one or more tags when creating a user-initiated\n            backup, no tags are copied from the volume, regardless of this value.</p>"
+                    }
+                },
+                "SnaplockConfiguration": {
+                    "target": "com.amazonaws.fsx#UpdateSnaplockConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration object for updating the SnapLock configuration of an FSx for ONTAP SnapLock volume. </p>"
                     }
                 }
             },
@@ -10580,6 +10806,44 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Used to specify changes to the OpenZFS configuration for the volume\n            that you are updating.</p>"
+            }
+        },
+        "com.amazonaws.fsx#UpdateSnaplockConfiguration": {
+            "type": "structure",
+            "members": {
+                "AuditLogVolume": {
+                    "target": "com.amazonaws.fsx#Flag",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enables or disables the audit log volume for an FSx for ONTAP SnapLock volume. The default \n        value is <code>false</code>. If you set <code>AuditLogVolume</code> to <code>true</code>, the SnapLock volume is \n        created as an audit log volume. The minimum retention period for an audit log volume is six months. </p>\n         <p>For more information, see \n            <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/how-snaplock-works.html#snaplock-audit-log-volume\">\n                SnapLock audit log volumes</a>. </p>"
+                    }
+                },
+                "AutocommitPeriod": {
+                    "target": "com.amazonaws.fsx#AutocommitPeriod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration object for setting the autocommit period of files in an FSx for ONTAP SnapLock volume. </p>"
+                    }
+                },
+                "PrivilegedDelete": {
+                    "target": "com.amazonaws.fsx#PrivilegedDelete",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enables, disables, or permanently disables privileged delete on an FSx for ONTAP SnapLock \n            Enterprise volume. Enabling privileged delete allows SnapLock administrators to delete write once, read \n            many (WORM) files even \n            if they have active retention periods. <code>PERMANENTLY_DISABLED</code> is a terminal state. \n        If privileged delete is permanently disabled on a SnapLock volume, you can't re-enable it. The default \n        value is <code>DISABLED</code>. </p>\n         <p>For more information, see \n            <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/how-snaplock-works.html#privileged-delete\">Privileged delete</a>. </p>"
+                    }
+                },
+                "RetentionPeriod": {
+                    "target": "com.amazonaws.fsx#SnaplockRetentionPeriod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the retention period of an FSx for ONTAP SnapLock volume. </p>"
+                    }
+                },
+                "VolumeAppendModeEnabled": {
+                    "target": "com.amazonaws.fsx#Flag",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enables or disables volume-append mode \n            on an FSx for ONTAP SnapLock volume. Volume-append mode allows you to \n            create WORM-appendable files and write data to them incrementally. The default value is <code>false</code>. </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/worm-state.html#worm-state-append\">Volume-append mode</a>. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the SnapLock configuration for an existing FSx for ONTAP volume. </p>"
             }
         },
         "com.amazonaws.fsx#UpdateSnapshot": {
@@ -10890,7 +11154,7 @@
             "traits": {
                 "smithy.api#range": {
                     "min": 0,
-                    "max": 2147483647
+                    "max": 314572800
                 }
             }
         },
