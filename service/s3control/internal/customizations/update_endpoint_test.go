@@ -142,16 +142,6 @@ func TestEndpointWithARN(t *testing.T) {
 		expectedHeaderForOutpostID string
 		expectedHeaderForAccountID bool
 	}{
-		"access point": {
-			accessPoint: "myaccesspoint",
-			options: s3control.Options{
-				Region: "us-west-2",
-			},
-			expectedReqURL:             "https://123456789012.s3-control.us-west-2.amazonaws.com/v20180820/accesspoint/myaccesspoint",
-			expectedHeaderForAccountID: true,
-			expectedSigningRegion:      "us-west-2",
-			expectedSigningName:        "s3",
-		},
 		"Outpost AccessPoint with no S3UseARNRegion flag set": {
 			accessPoint: "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
 			options: s3control.Options{
@@ -331,11 +321,6 @@ func TestEndpointWithARN(t *testing.T) {
 			},
 			expectedErr: "invalid Amazon s3-outposts ARN",
 		},
-
-
-
-
-
 		"Invalid outpost resource format": {
 			bucket: "arn:aws:s3-outposts:us-west-2:123456789012:outpost",
 			options: s3control.Options{
@@ -349,6 +334,16 @@ func TestEndpointWithARN(t *testing.T) {
 				Region: "us-west-2",
 			},
 			expectedErr: "incomplete outpost resource type",
+		},
+		"access point": {
+			accessPoint: "myaccesspoint",
+			options: s3control.Options{
+				Region: "us-west-2",
+			},
+			expectedReqURL:             "https://123456789012.s3-control.us-west-2.amazonaws.com/v20180820/accesspoint/myaccesspoint",
+			expectedHeaderForAccountID: true,
+			expectedSigningRegion:      "us-west-2",
+			expectedSigningName:        "s3",
 		},
 		"Outpost Bucket with no S3UseARNRegion flag set": {
 			bucket: "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket",
