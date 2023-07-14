@@ -344,7 +344,7 @@ func TestEndpointWithARN(t *testing.T) {
 				Region: "us-west-2",
 			},
 			expectedErr: "invalid Amazon s3-outposts ARN",
-		},g
+		},
 		"Outpost Bucket with no S3UseARNRegion flag set": {
 			bucket: "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket",
 			options: s3control.Options{
