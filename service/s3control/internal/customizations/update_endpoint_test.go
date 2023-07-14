@@ -134,6 +134,7 @@ func TestEndpointWithARN(t *testing.T) {
 	cases := map[string]struct {
 		options                    s3control.Options
 		bucket                     string
+		accessPoint                string
 		expectedErr                string
 		expectedReqURL             string
 		expectedSigningName        string
@@ -141,38 +142,48 @@ func TestEndpointWithARN(t *testing.T) {
 		expectedHeaderForOutpostID string
 		expectedHeaderForAccountID bool
 	}{
-		"Outpost AccessPoint with no S3UseARNRegion flag set": {
-			bucket: "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+		"access point": {
+			accessPoint: "myaccesspoint",
 			options: s3control.Options{
 				Region: "us-west-2",
 			},
-			expectedReqURL:             "https://s3-outposts.us-west-2.amazonaws.com/v20180820/bucket/myaccesspoint",
+			expectedReqURL:             "https://123456789012.s3-control.us-west-2.amazonaws.com/v20180820/accesspoint/myaccesspoint",
+			expectedHeaderForAccountID: true,
+			expectedSigningRegion:      "us-west-2",
+			expectedSigningName:        "s3",
+		},
+		"Outpost AccessPoint with no S3UseARNRegion flag set": {
+			accessPoint: "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+			options: s3control.Options{
+				Region: "us-west-2",
+			},
+			expectedReqURL:             "https://s3-outposts.us-west-2.amazonaws.com/v20180820/accesspoint/myaccesspoint",
 			expectedSigningName:        "s3-outposts",
 			expectedSigningRegion:      "us-west-2",
 			expectedHeaderForAccountID: true,
 			expectedHeaderForOutpostID: "op-01234567890123456",
 		},
 		"Outpost AccessPoint Cross-Region Enabled": {
-			bucket: "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+			accessPoint: "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
 			options: s3control.Options{
 				Region:       "us-west-2",
 				UseARNRegion: true,
 			},
-			expectedReqURL:             "https://s3-outposts.us-east-1.amazonaws.com/v20180820/bucket/myaccesspoint",
+			expectedReqURL:             "https://s3-outposts.us-east-1.amazonaws.com/v20180820/accesspoint/myaccesspoint",
 			expectedSigningName:        "s3-outposts",
 			expectedSigningRegion:      "us-east-1",
 			expectedHeaderForAccountID: true,
 			expectedHeaderForOutpostID: "op-01234567890123456",
 		},
 		"Outpost AccessPoint Cross-Region Disabled": {
-			bucket: "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+			accessPoint: "arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
 			options: s3control.Options{
 				Region: "us-west-2",
 			},
 			expectedErr: "client region does not match provided ARN region",
 		},
 		"Outpost AccessPoint other partition": {
-			bucket: "arn:aws-cn:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+			accessPoint: "arn:aws-cn:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
 			options: s3control.Options{
 				Region:       "us-west-2",
 				UseARNRegion: true,
@@ -180,44 +191,44 @@ func TestEndpointWithARN(t *testing.T) {
 			expectedErr: "ConfigurationError : client partition does not match provided ARN partition",
 		},
 		"Outpost AccessPoint us-gov region": {
-			bucket: "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+			accessPoint: "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
 			options: s3control.Options{
 				Region:       "us-gov-east-1",
 				UseARNRegion: true,
 			},
-			expectedReqURL:             "https://s3-outposts.us-gov-east-1.amazonaws.com/v20180820/bucket/myaccesspoint",
+			expectedReqURL:             "https://s3-outposts.us-gov-east-1.amazonaws.com/v20180820/accesspoint/myaccesspoint",
 			expectedSigningName:        "s3-outposts",
 			expectedSigningRegion:      "us-gov-east-1",
 			expectedHeaderForAccountID: true,
 			expectedHeaderForOutpostID: "op-01234567890123456",
 		},
 		"Outpost AccessPoint with client region as FIPS": {
-			bucket: "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+			accessPoint: "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
 			options: s3control.Options{
 				Region: "us-gov-east-1",
 				EndpointOptions: s3control.EndpointResolverOptions{
 					UseFIPSEndpoint: aws.FIPSEndpointStateEnabled,
 				},
 			},
-			expectedReqURL:             "https://s3-outposts-fips.us-gov-east-1.amazonaws.com/v20180820/bucket/myaccesspoint",
+			expectedReqURL:             "https://s3-outposts-fips.us-gov-east-1.amazonaws.com/v20180820/accesspoint/myaccesspoint",
 			expectedSigningName:        "s3-outposts",
 			expectedSigningRegion:      "us-gov-east-1",
 			expectedHeaderForOutpostID: "op-01234567890123456",
 			expectedHeaderForAccountID: true,
 		},
 		"Outpost AccessPoint with client region as FIPS (ResolvedRegion)": {
-			bucket: "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+			accessPoint: "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
 			options: s3control.Options{
 				Region: "us-gov-east-1-fips",
 			},
-			expectedReqURL:             "https://s3-outposts-fips.us-gov-east-1.amazonaws.com/v20180820/bucket/myaccesspoint",
+			expectedReqURL:             "https://s3-outposts-fips.us-gov-east-1.amazonaws.com/v20180820/accesspoint/myaccesspoint",
 			expectedSigningName:        "s3-outposts",
 			expectedSigningRegion:      "us-gov-east-1",
 			expectedHeaderForOutpostID: "op-01234567890123456",
 			expectedHeaderForAccountID: true,
 		},
 		"Outpost AccessPoint with client FIPS and use arn region enabled": {
-			bucket: "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+			accessPoint: "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
 			options: s3control.Options{
 				Region: "us-gov-east-1",
 				EndpointOptions: s3control.EndpointResolverOptions{
@@ -225,26 +236,26 @@ func TestEndpointWithARN(t *testing.T) {
 				},
 				UseARNRegion: true,
 			},
-			expectedReqURL:             "https://s3-outposts-fips.us-gov-east-1.amazonaws.com/v20180820/bucket/myaccesspoint",
+			expectedReqURL:             "https://s3-outposts-fips.us-gov-east-1.amazonaws.com/v20180820/accesspoint/myaccesspoint",
 			expectedSigningName:        "s3-outposts",
 			expectedSigningRegion:      "us-gov-east-1",
 			expectedHeaderForOutpostID: "op-01234567890123456",
 			expectedHeaderForAccountID: true,
 		},
 		"Outpost AccessPoint with client FIPS (ResolvedRegion) and use arn region enabled": {
-			bucket: "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+			accessPoint: "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
 			options: s3control.Options{
 				Region:       "us-gov-east-1-fips",
 				UseARNRegion: true,
 			},
-			expectedReqURL:             "https://s3-outposts-fips.us-gov-east-1.amazonaws.com/v20180820/bucket/myaccesspoint",
+			expectedReqURL:             "https://s3-outposts-fips.us-gov-east-1.amazonaws.com/v20180820/accesspoint/myaccesspoint",
 			expectedSigningName:        "s3-outposts",
 			expectedSigningRegion:      "us-gov-east-1",
 			expectedHeaderForOutpostID: "op-01234567890123456",
 			expectedHeaderForAccountID: true,
 		},
 		"Outpost AccessPoint client FIPS and cross region ARN": {
-			bucket: "arn:aws-us-gov:s3-outposts:us-gov-west-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+			accessPoint: "arn:aws-us-gov:s3-outposts:us-gov-west-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
 			options: s3control.Options{
 				Region:       "us-gov-east-1",
 				UseARNRegion: true,
@@ -252,26 +263,26 @@ func TestEndpointWithARN(t *testing.T) {
 					UseFIPSEndpoint: aws.FIPSEndpointStateEnabled,
 				},
 			},
-			expectedReqURL:             "https://s3-outposts-fips.us-gov-west-1.amazonaws.com/v20180820/bucket/myaccesspoint",
+			expectedReqURL:             "https://s3-outposts-fips.us-gov-west-1.amazonaws.com/v20180820/accesspoint/myaccesspoint",
 			expectedSigningName:        "s3-outposts",
 			expectedSigningRegion:      "us-gov-west-1",
 			expectedHeaderForOutpostID: "op-01234567890123456",
 			expectedHeaderForAccountID: true,
 		},
 		"Outpost AccessPoint client FIPS (ResolvedRegion) and cross region ARN": {
-			bucket: "arn:aws-us-gov:s3-outposts:us-gov-west-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+			accessPoint: "arn:aws-us-gov:s3-outposts:us-gov-west-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
 			options: s3control.Options{
 				Region:       "us-gov-east-1-fips",
 				UseARNRegion: true,
 			},
-			expectedReqURL:             "https://s3-outposts-fips.us-gov-west-1.amazonaws.com/v20180820/bucket/myaccesspoint",
+			expectedReqURL:             "https://s3-outposts-fips.us-gov-west-1.amazonaws.com/v20180820/accesspoint/myaccesspoint",
 			expectedSigningName:        "s3-outposts",
 			expectedSigningRegion:      "us-gov-west-1",
 			expectedHeaderForOutpostID: "op-01234567890123456",
 			expectedHeaderForAccountID: true,
 		},
 		"Outpost AccessPoint client FIPS with valid ARN region": {
-			bucket: "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+			accessPoint: "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
 			options: s3control.Options{
 				Region: "us-gov-east-1",
 				EndpointOptions: s3control.EndpointResolverOptions{
@@ -279,26 +290,26 @@ func TestEndpointWithARN(t *testing.T) {
 				},
 				UseARNRegion: true,
 			},
-			expectedReqURL:             "https://s3-outposts-fips.us-gov-east-1.amazonaws.com/v20180820/bucket/myaccesspoint",
+			expectedReqURL:             "https://s3-outposts-fips.us-gov-east-1.amazonaws.com/v20180820/accesspoint/myaccesspoint",
 			expectedSigningName:        "s3-outposts",
 			expectedSigningRegion:      "us-gov-east-1",
 			expectedHeaderForOutpostID: "op-01234567890123456",
 			expectedHeaderForAccountID: true,
 		},
 		"Outpost AccessPoint client FIPS (ResolvedRegion) with valid ARN region": {
-			bucket: "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+			accessPoint: "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
 			options: s3control.Options{
 				Region:       "us-gov-east-1-fips",
 				UseARNRegion: true,
 			},
-			expectedReqURL:             "https://s3-outposts-fips.us-gov-east-1.amazonaws.com/v20180820/bucket/myaccesspoint",
+			expectedReqURL:             "https://s3-outposts-fips.us-gov-east-1.amazonaws.com/v20180820/accesspoint/myaccesspoint",
 			expectedSigningName:        "s3-outposts",
 			expectedSigningRegion:      "us-gov-east-1",
 			expectedHeaderForOutpostID: "op-01234567890123456",
 			expectedHeaderForAccountID: true,
 		},
 		"Outpost AccessPoint with DualStack": {
-			bucket: "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+			accessPoint: "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
 			options: s3control.Options{
 				Region:       "us-west-2",
 				UseARNRegion: true,
@@ -306,6 +317,25 @@ func TestEndpointWithARN(t *testing.T) {
 			},
 			expectedErr: "ConfigurationError : client configured for S3 Dual-stack but is not supported with resource ARN",
 		},
+		"outpost access point with unsupported sub-resource": {
+			accessPoint: "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:mybucket:object:foo",
+			options: s3control.Options{
+				Region: "us-west-2",
+			},
+			expectedErr: "sub resource not supported",
+		},
+		"Missing outpost identifiers in outpost access point arn": {
+			accessPoint: "arn:aws:s3-outposts:us-west-2:123456789012:accesspoint:myendpoint",
+			options: s3control.Options{
+				Region: "us-west-2",
+			},
+			expectedErr: "invalid Amazon s3-outposts ARN",
+		},
+
+
+
+
+
 		"Invalid outpost resource format": {
 			bucket: "arn:aws:s3-outposts:us-west-2:123456789012:outpost",
 			options: s3control.Options{
@@ -319,30 +349,6 @@ func TestEndpointWithARN(t *testing.T) {
 				Region: "us-west-2",
 			},
 			expectedErr: "incomplete outpost resource type",
-		},
-		"access point": {
-			bucket: "myaccesspoint",
-			options: s3control.Options{
-				Region: "us-west-2",
-			},
-			expectedReqURL:             "https://123456789012.s3-control.us-west-2.amazonaws.com/v20180820/bucket/myaccesspoint",
-			expectedHeaderForAccountID: true,
-			expectedSigningRegion:      "us-west-2",
-			expectedSigningName:        "s3",
-		},
-		"outpost access point with unsupported sub-resource": {
-			bucket: "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:mybucket:object:foo",
-			options: s3control.Options{
-				Region: "us-west-2",
-			},
-			expectedErr: "sub resource not supported",
-		},
-		"Missing outpost identifiers in outpost access point arn": {
-			bucket: "arn:aws:s3-outposts:us-west-2:123456789012:accesspoint:myendpoint",
-			options: s3control.Options{
-				Region: "us-west-2",
-			},
-			expectedErr: "invalid Amazon s3-outposts ARN",
 		},
 		"Outpost Bucket with no S3UseARNRegion flag set": {
 			bucket: "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket",
@@ -510,19 +516,34 @@ func TestEndpointWithARN(t *testing.T) {
 
 			ctx := context.Background()
 
-			// call an operation
-			_, err := svc.GetBucket(ctx, &s3control.GetBucketInput{
-				Bucket:    ptr.String(c.bucket),
-				AccountId: ptr.String("123456789012"),
-			}, func(options *s3control.Options) {
-				// append request retriever middleware for request inspection
-				options.APIOptions = append(options.APIOptions,
-					func(stack *middleware.Stack) error {
-						// adds AFTER operation serializer middleware
-						stack.Serialize.Insert(&fm, "OperationSerializer", middleware.After)
-						return nil
-					})
-			})
+			var err error
+			if len(c.accessPoint) > 0 {
+				_, err = svc.GetAccessPoint(ctx, &s3control.GetAccessPointInput{
+					Name:    ptr.String(c.accessPoint),
+					AccountId: ptr.String("123456789012"),
+				}, func(options *s3control.Options) {
+					// append request retriever middleware for request inspection
+					options.APIOptions = append(options.APIOptions,
+						func(stack *middleware.Stack) error {
+							// adds AFTER operation serializer middleware
+							stack.Serialize.Insert(&fm, "OperationSerializer", middleware.After)
+							return nil
+						})
+				})
+			} else {
+				_, err = svc.GetBucket(ctx, &s3control.GetBucketInput{
+					Bucket:    ptr.String(c.bucket),
+					AccountId: ptr.String("123456789012"),
+				}, func(options *s3control.Options) {
+					// append request retriever middleware for request inspection
+					options.APIOptions = append(options.APIOptions,
+						func(stack *middleware.Stack) error {
+							// adds AFTER operation serializer middleware
+							stack.Serialize.Insert(&fm, "OperationSerializer", middleware.After)
+							return nil
+						})
+				})
+			}
 
 			// inspect any errors
 			if len(c.expectedErr) != 0 {
