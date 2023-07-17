@@ -152,7 +152,9 @@ type DataCellsFilter struct {
 	// This member is required.
 	TableName *string
 
-	// A list of column names.
+	// A list of column names and/or nested column attributes. When specifying nested
+	// attributes, use a qualified dot (.) delimited format such as "address"."zip".
+	// Nested attributes within this list may not exceed a depth of 5.
 	ColumnNames []string
 
 	// A wildcard with exclusions. You must specify either a ColumnNames list or the
@@ -204,10 +206,14 @@ type DataLakeSettings struct {
 	// If true, you allow Amazon EMR clusters to access data in Amazon S3 locations
 	// that are registered with Lake Formation. If false or null, no Amazon EMR
 	// clusters will be able to access data in Amazon S3 locations that are registered
-	// with Lake Formation. For more information, see (Optional) Allow Data Filtering
-	// on Amazon EMR (https://docs-aws.amazon.com/lake-formation/latest/dg/getting-started-setup.html#emr-switch)
+	// with Lake Formation. For more information, see (Optional) Allow external data
+	// filtering (https://docs.aws.amazon.com/lake-formation/latest/dg/initial-LF-setup.html#external-data-filter)
 	// .
 	AllowExternalDataFiltering *bool
+
+	// Whether to allow a third-party query engine to get data access credentials
+	// without session tags when a caller has full data access permissions.
+	AllowFullTableExternalDataAccess *bool
 
 	// Lake Formation relies on a privileged process secured by Amazon EMR or the
 	// third party integrator to tag the user's role while assuming it. Lake Formation
@@ -253,6 +259,11 @@ type DataLakeSettings struct {
 	// CrossAccountVersion is the key you can configure in the Parameters field.
 	// Accepted values for the CrossAccountVersion key are 1, 2, and 3.
 	Parameters map[string]string
+
+	// A list of Lake Formation principals with only view access to the resources,
+	// without the ability to make changes. Supported principals are IAM users or IAM
+	// roles.
+	ReadOnlyAdmins []DataLakePrincipal
 
 	// A list of the resource-owning account IDs that the caller's account can use to
 	// share their user access details (user ARNs). The user ARNs can be logged in the

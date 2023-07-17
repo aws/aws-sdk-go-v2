@@ -5369,6 +5369,24 @@ func (NitroEnclavesSupport) Values() []NitroEnclavesSupport {
 	}
 }
 
+type NitroTpmSupport string
+
+// Enum values for NitroTpmSupport
+const (
+	NitroTpmSupportUnsupported NitroTpmSupport = "unsupported"
+	NitroTpmSupportSupported   NitroTpmSupport = "supported"
+)
+
+// Values returns all known values for NitroTpmSupport. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (NitroTpmSupport) Values() []NitroTpmSupport {
+	return []NitroTpmSupport{
+		"unsupported",
+		"supported",
+	}
+}
+
 type OfferingClassType string
 
 // Enum values for OfferingClassType

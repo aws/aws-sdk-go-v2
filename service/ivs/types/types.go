@@ -354,6 +354,9 @@ type RecordingConfiguration struct {
 	// Default: 0.
 	RecordingReconnectWindowSeconds int32
 
+	// Object that describes which renditions should be recorded for a stream.
+	RenditionConfiguration *RenditionConfiguration
+
 	// Tags attached to the resource. Array of 1-50 maps, each of the form
 	// string:string (key:value) . See Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
 	// for more information, including restrictions that apply to tags and "Tag naming
@@ -398,6 +401,25 @@ type RecordingConfigurationSummary struct {
 	// limits and requirements"; Amazon IVS has no service-specific constraints beyond
 	// what is documented there.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Object that describes which renditions should be recorded for a stream.
+type RenditionConfiguration struct {
+
+	// Indicates which set of renditions are recorded for a stream. For BASIC
+	// channels, the CUSTOM value has no effect. If CUSTOM is specified, a set of
+	// renditions must be specified in the renditions field. Default: ALL .
+	RenditionSelection RenditionConfigurationRenditionSelection
+
+	// Indicates which renditions are recorded for a stream, if renditionSelection is
+	// CUSTOM ; otherwise, this field is irrelevant. The selected renditions are
+	// recorded if they are available during the stream. If a selected rendition is
+	// unavailable, the best available rendition is recorded. For details on the
+	// resolution dimensions of each rendition, see Auto-Record to Amazon S3 (https://docs.aws.amazon.com/ivs/latest/userguide/record-to-s3.html)
+	// .
+	Renditions []RenditionConfigurationRendition
 
 	noSmithyDocumentSerde
 }
@@ -605,13 +627,28 @@ type ThumbnailConfiguration struct {
 	// Thumbnail recording mode. Default: INTERVAL .
 	RecordingMode RecordingMode
 
+	// Indicates the desired resolution of recorded thumbnails. Thumbnails are
+	// recorded at the selected resolution if the corresponding rendition is available
+	// during the stream; otherwise, they are recorded at source resolution. For more
+	// information about resolution values and their corresponding height and width
+	// dimensions, see Auto-Record to Amazon S3 (https://docs.aws.amazon.com/ivs/latest/userguide/record-to-s3.html)
+	// . Default: Null (source resolution is returned).
+	Resolution ThumbnailConfigurationResolution
+
+	// Indicates the format in which thumbnails are recorded. SEQUENTIAL records all
+	// generated thumbnails in a serial manner, to the media/thumbnails directory.
+	// LATEST saves the latest thumbnail in media/latest_thumbnail/thumb.jpg and
+	// overwrites it at the interval specified by targetIntervalSeconds . You can
+	// enable both SEQUENTIAL and LATEST . Default: SEQUENTIAL .
+	Storage []ThumbnailConfigurationStorage
+
 	// The targeted thumbnail-generation interval in seconds. This is configurable
-	// (and required) only if recordingMode is INTERVAL . Default: 60. Important:
-	// Setting a value for targetIntervalSeconds does not guarantee that thumbnails
-	// are generated at the specified interval. For thumbnails to be generated at the
-	// targetIntervalSeconds interval, the IDR/Keyframe value for the input video must
-	// be less than the targetIntervalSeconds value. See  Amazon IVS Streaming
-	// Configuration (https://docs.aws.amazon.com/ivs/latest/userguide/streaming-config.html)
+	// (and required) only if recordingMode is INTERVAL . Default: 60. Important: For
+	// the BASIC channel type, setting a value for targetIntervalSeconds does not
+	// guarantee that thumbnails are generated at the specified interval. For
+	// thumbnails to be generated at the targetIntervalSeconds interval, the
+	// IDR/Keyframe value for the input video must be less than the
+	// targetIntervalSeconds value. See  Amazon IVS Streaming Configuration (https://docs.aws.amazon.com/ivs/latest/userguide/streaming-config.html)
 	// for information on setting IDR/Keyframe to the recommended value in
 	// video-encoder settings.
 	TargetIntervalSeconds int64

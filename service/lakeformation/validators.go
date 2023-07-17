@@ -1756,9 +1756,6 @@ func validateOpGetTemporaryGluePartitionCredentialsInput(v *GetTemporaryGluePart
 			invalidParams.AddNested("Partition", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.SupportedPermissionTypes == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SupportedPermissionTypes"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1773,9 +1770,6 @@ func validateOpGetTemporaryGlueTableCredentialsInput(v *GetTemporaryGlueTableCre
 	invalidParams := smithy.InvalidParamsError{Context: "GetTemporaryGlueTableCredentialsInput"}
 	if v.TableArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TableArn"))
-	}
-	if v.SupportedPermissionTypes == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SupportedPermissionTypes"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

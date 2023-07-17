@@ -66,7 +66,7 @@ type PublishPackageVersionInput struct {
 	Domain *string
 
 	// A format that specifies the type of the package version with the requested
-	// asset file.
+	// asset file. The only supported value is generic .
 	//
 	// This member is required.
 	Format types.PackageFormat

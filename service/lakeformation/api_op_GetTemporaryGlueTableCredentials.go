@@ -33,12 +33,6 @@ func (c *Client) GetTemporaryGlueTableCredentials(ctx context.Context, params *G
 
 type GetTemporaryGlueTableCredentialsInput struct {
 
-	// A list of supported permission types for the table. Valid values are
-	// COLUMN_PERMISSION and CELL_FILTER_PERMISSION .
-	//
-	// This member is required.
-	SupportedPermissionTypes []types.PermissionType
-
 	// The ARN identifying a table in the Data Catalog for the temporary credentials
 	// request.
 	//
@@ -56,6 +50,10 @@ type GetTemporaryGlueTableCredentialsInput struct {
 	// Filters the request based on the user having been granted a list of specified
 	// permissions on the requested resource(s).
 	Permissions []types.Permission
+
+	// A list of supported permission types for the table. Valid values are
+	// COLUMN_PERMISSION and CELL_FILTER_PERMISSION .
+	SupportedPermissionTypes []types.PermissionType
 
 	noSmithyDocumentSerde
 }

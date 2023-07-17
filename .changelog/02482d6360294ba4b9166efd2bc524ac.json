@@ -1,0 +1,8 @@
+{
+    "id": "02482d63-6029-4ba4-b916-6efd2bc524ac",
+    "type": "feature",
+    "description": "Adding new supported permission type flags to get-unfiltered endpoints that callers may pass to indicate support for enforcing Lake Formation fine-grained access control on nested column attributes.",
+    "modules": [
+        "service/glue"
+    ]
+}

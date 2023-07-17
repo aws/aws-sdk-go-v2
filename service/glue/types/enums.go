@@ -1287,6 +1287,8 @@ type PermissionType string
 const (
 	PermissionTypeColumnPermission     PermissionType = "COLUMN_PERMISSION"
 	PermissionTypeCellFilterPermission PermissionType = "CELL_FILTER_PERMISSION"
+	PermissionTypeNestedPermission     PermissionType = "NESTED_PERMISSION"
+	PermissionTypeNestedCellPermission PermissionType = "NESTED_CELL_PERMISSION"
 )
 
 // Values returns all known values for PermissionType. Note that this can be
@@ -1296,6 +1298,8 @@ func (PermissionType) Values() []PermissionType {
 	return []PermissionType{
 		"COLUMN_PERMISSION",
 		"CELL_FILTER_PERMISSION",
+		"NESTED_PERMISSION",
+		"NESTED_CELL_PERMISSION",
 	}
 }
 

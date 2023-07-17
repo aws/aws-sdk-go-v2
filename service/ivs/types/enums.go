@@ -80,6 +80,50 @@ func (RecordingMode) Values() []RecordingMode {
 	}
 }
 
+type RenditionConfigurationRendition string
+
+// Enum values for RenditionConfigurationRendition
+const (
+	RenditionConfigurationRenditionFullHd           RenditionConfigurationRendition = "FULL_HD"
+	RenditionConfigurationRenditionHd               RenditionConfigurationRendition = "HD"
+	RenditionConfigurationRenditionSd               RenditionConfigurationRendition = "SD"
+	RenditionConfigurationRenditionLowestResolution RenditionConfigurationRendition = "LOWEST_RESOLUTION"
+)
+
+// Values returns all known values for RenditionConfigurationRendition. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (RenditionConfigurationRendition) Values() []RenditionConfigurationRendition {
+	return []RenditionConfigurationRendition{
+		"FULL_HD",
+		"HD",
+		"SD",
+		"LOWEST_RESOLUTION",
+	}
+}
+
+type RenditionConfigurationRenditionSelection string
+
+// Enum values for RenditionConfigurationRenditionSelection
+const (
+	RenditionConfigurationRenditionSelectionAll    RenditionConfigurationRenditionSelection = "ALL"
+	RenditionConfigurationRenditionSelectionNone   RenditionConfigurationRenditionSelection = "NONE"
+	RenditionConfigurationRenditionSelectionCustom RenditionConfigurationRenditionSelection = "CUSTOM"
+)
+
+// Values returns all known values for RenditionConfigurationRenditionSelection.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (RenditionConfigurationRenditionSelection) Values() []RenditionConfigurationRenditionSelection {
+	return []RenditionConfigurationRenditionSelection{
+		"ALL",
+		"NONE",
+		"CUSTOM",
+	}
+}
+
 type StreamHealth string
 
 // Enum values for StreamHealth
@@ -115,6 +159,48 @@ func (StreamState) Values() []StreamState {
 	return []StreamState{
 		"LIVE",
 		"OFFLINE",
+	}
+}
+
+type ThumbnailConfigurationResolution string
+
+// Enum values for ThumbnailConfigurationResolution
+const (
+	ThumbnailConfigurationResolutionFullHd           ThumbnailConfigurationResolution = "FULL_HD"
+	ThumbnailConfigurationResolutionHd               ThumbnailConfigurationResolution = "HD"
+	ThumbnailConfigurationResolutionSd               ThumbnailConfigurationResolution = "SD"
+	ThumbnailConfigurationResolutionLowestResolution ThumbnailConfigurationResolution = "LOWEST_RESOLUTION"
+)
+
+// Values returns all known values for ThumbnailConfigurationResolution. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ThumbnailConfigurationResolution) Values() []ThumbnailConfigurationResolution {
+	return []ThumbnailConfigurationResolution{
+		"FULL_HD",
+		"HD",
+		"SD",
+		"LOWEST_RESOLUTION",
+	}
+}
+
+type ThumbnailConfigurationStorage string
+
+// Enum values for ThumbnailConfigurationStorage
+const (
+	ThumbnailConfigurationStorageSequential ThumbnailConfigurationStorage = "SEQUENTIAL"
+	ThumbnailConfigurationStorageLatest     ThumbnailConfigurationStorage = "LATEST"
+)
+
+// Values returns all known values for ThumbnailConfigurationStorage. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ThumbnailConfigurationStorage) Values() []ThumbnailConfigurationStorage {
+	return []ThumbnailConfigurationStorage{
+		"SEQUENTIAL",
+		"LATEST",
 	}
 }
 

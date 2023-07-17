@@ -1,0 +1,8 @@
+{
+    "id": "4de5b2a4-f73c-4490-913c-3f9a96154189",
+    "type": "feature",
+    "description": "Add Nitro TPM support on DescribeInstanceTypes",
+    "modules": [
+        "service/ec2"
+    ]
+}

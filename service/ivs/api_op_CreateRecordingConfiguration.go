@@ -52,6 +52,9 @@ type CreateRecordingConfigurationInput struct {
 	// Default: 0.
 	RecordingReconnectWindowSeconds int32
 
+	// Object that describes which renditions should be recorded for a stream.
+	RenditionConfiguration *types.RenditionConfiguration
+
 	// Array of 1-50 maps, each of the form string:string (key:value) . See Tagging
 	// Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
 	// for more information, including restrictions that apply to tags and "Tag naming

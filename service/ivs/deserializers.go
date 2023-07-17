@@ -416,6 +416,15 @@ func awsRestjson1_deserializeOpErrorBatchStartViewerSessionRevocation(response *
 	}
 
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("PendingVerification", errorCode):
+		return awsRestjson1_deserializeErrorPendingVerification(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
 	case strings.EqualFold("ValidationException", errorCode):
 		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
 
@@ -3721,6 +3730,12 @@ func awsRestjson1_deserializeOpErrorStartViewerSessionRevocation(response *smith
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
 
+	case strings.EqualFold("PendingVerification", errorCode):
+		return awsRestjson1_deserializeErrorPendingVerification(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
 	case strings.EqualFold("ThrottlingException", errorCode):
 		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
 
@@ -5589,6 +5604,11 @@ func awsRestjson1_deserializeDocumentRecordingConfiguration(v **types.RecordingC
 				sv.RecordingReconnectWindowSeconds = int32(i64)
 			}
 
+		case "renditionConfiguration":
+			if err := awsRestjson1_deserializeDocumentRenditionConfiguration(&sv.RenditionConfiguration, value); err != nil {
+				return err
+			}
+
 		case "state":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5716,6 +5736,87 @@ func awsRestjson1_deserializeDocumentRecordingConfigurationSummary(v **types.Rec
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRenditionConfiguration(v **types.RenditionConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RenditionConfiguration
+	if *v == nil {
+		sv = &types.RenditionConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "renditions":
+			if err := awsRestjson1_deserializeDocumentRenditionConfigurationRenditionList(&sv.Renditions, value); err != nil {
+				return err
+			}
+
+		case "renditionSelection":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RenditionConfigurationRenditionSelection to be of type string, got %T instead", value)
+				}
+				sv.RenditionSelection = types.RenditionConfigurationRenditionSelection(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRenditionConfigurationRenditionList(v *[]types.RenditionConfigurationRendition, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RenditionConfigurationRendition
+	if *v == nil {
+		cv = []types.RenditionConfigurationRendition{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RenditionConfigurationRendition
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected RenditionConfigurationRendition to be of type string, got %T instead", value)
+			}
+			col = types.RenditionConfigurationRendition(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -6691,6 +6792,20 @@ func awsRestjson1_deserializeDocumentThumbnailConfiguration(v **types.ThumbnailC
 				sv.RecordingMode = types.RecordingMode(jtv)
 			}
 
+		case "resolution":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ThumbnailConfigurationResolution to be of type string, got %T instead", value)
+				}
+				sv.Resolution = types.ThumbnailConfigurationResolution(jtv)
+			}
+
+		case "storage":
+			if err := awsRestjson1_deserializeDocumentThumbnailConfigurationStorageList(&sv.Storage, value); err != nil {
+				return err
+			}
+
 		case "targetIntervalSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -6710,6 +6825,42 @@ func awsRestjson1_deserializeDocumentThumbnailConfiguration(v **types.ThumbnailC
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentThumbnailConfigurationStorageList(v *[]types.ThumbnailConfigurationStorage, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ThumbnailConfigurationStorage
+	if *v == nil {
+		cv = []types.ThumbnailConfigurationStorage{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ThumbnailConfigurationStorage
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ThumbnailConfigurationStorage to be of type string, got %T instead", value)
+			}
+			col = types.ThumbnailConfigurationStorage(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

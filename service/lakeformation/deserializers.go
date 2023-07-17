@@ -8232,6 +8232,15 @@ func awsRestjson1_deserializeDocumentDataLakeSettings(v **types.DataLakeSettings
 				sv.AllowExternalDataFiltering = ptr.Bool(jtv)
 			}
 
+		case "AllowFullTableExternalDataAccess":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected NullableBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.AllowFullTableExternalDataAccess = ptr.Bool(jtv)
+			}
+
 		case "AuthorizedSessionTagValueList":
 			if err := awsRestjson1_deserializeDocumentAuthorizedSessionTagValueList(&sv.AuthorizedSessionTagValueList, value); err != nil {
 				return err
@@ -8259,6 +8268,11 @@ func awsRestjson1_deserializeDocumentDataLakeSettings(v **types.DataLakeSettings
 
 		case "Parameters":
 			if err := awsRestjson1_deserializeDocumentParametersMap(&sv.Parameters, value); err != nil {
+				return err
+			}
+
+		case "ReadOnlyAdmins":
+			if err := awsRestjson1_deserializeDocumentDataLakePrincipalList(&sv.ReadOnlyAdmins, value); err != nil {
 				return err
 			}
 

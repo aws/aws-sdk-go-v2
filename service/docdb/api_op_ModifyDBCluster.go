@@ -39,6 +39,12 @@ type ModifyDBClusterInput struct {
 	// This member is required.
 	DBClusterIdentifier *string
 
+	// A value that indicates whether major version upgrades are allowed. Constraints:
+	// You must allow major version upgrades when specifying a value for the
+	// EngineVersion parameter that is a different major version than the DB cluster's
+	// current version.
+	AllowMajorVersionUpgrade bool
+
 	// A value that specifies whether the changes in this request and any pending
 	// changes are asynchronously applied as soon as possible, regardless of the
 	// PreferredMaintenanceWindow setting for the cluster. If this parameter is set to
@@ -71,7 +77,11 @@ type ModifyDBClusterInput struct {
 	DeletionProtection *bool
 
 	// The version number of the database engine to which you want to upgrade.
-	// Modifying engine version is not supported on Amazon DocumentDB.
+	// Changing this parameter results in an outage. The change is applied during the
+	// next maintenance window unless ApplyImmediately is enabled. To list all of the
+	// available engine versions for Amazon DocumentDB use the following command: aws
+	// docdb describe-db-engine-versions --engine docdb --query
+	// "DBEngineVersions[].EngineVersion"
 	EngineVersion *string
 
 	// The password for the master database user. This password can contain any

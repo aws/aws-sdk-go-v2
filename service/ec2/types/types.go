@@ -6886,6 +6886,12 @@ type InstanceTypeInfo struct {
 	// Indicates whether Nitro Enclaves is supported.
 	NitroEnclavesSupport NitroEnclavesSupport
 
+	// Describes the supported NitroTPM versions for the instance type.
+	NitroTpmInfo *NitroTpmInfo
+
+	// Indicates whether NitroTPM is supported.
+	NitroTpmSupport NitroTpmSupport
+
 	// Describes the placement group settings for the instance type.
 	PlacementGroupInfo *PlacementGroupInfo
 
@@ -10360,6 +10366,15 @@ type NewDhcpConfiguration struct {
 
 	// One or more values for the DHCP option.
 	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the supported NitroTPM versions for the instance type.
+type NitroTpmInfo struct {
+
+	// Indicates the supported NitroTPM versions.
+	SupportedVersions []string
 
 	noSmithyDocumentSerde
 }

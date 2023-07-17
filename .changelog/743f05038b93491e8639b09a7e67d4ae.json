@@ -1,0 +1,8 @@
+{
+    "id": "743f0503-8b93-491e-8639-b09a7e67d4ae",
+    "type": "documentation",
+    "description": "Doc only update for AWS CodeArtifact",
+    "modules": [
+        "service/codeartifact"
+    ]
+}

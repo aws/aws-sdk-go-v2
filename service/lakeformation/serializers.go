@@ -4062,6 +4062,11 @@ func awsRestjson1_serializeDocumentDataLakeSettings(v *types.DataLakeSettings, v
 		ok.Boolean(*v.AllowExternalDataFiltering)
 	}
 
+	if v.AllowFullTableExternalDataAccess != nil {
+		ok := object.Key("AllowFullTableExternalDataAccess")
+		ok.Boolean(*v.AllowFullTableExternalDataAccess)
+	}
+
 	if v.AuthorizedSessionTagValueList != nil {
 		ok := object.Key("AuthorizedSessionTagValueList")
 		if err := awsRestjson1_serializeDocumentAuthorizedSessionTagValueList(v.AuthorizedSessionTagValueList, ok); err != nil {
@@ -4100,6 +4105,13 @@ func awsRestjson1_serializeDocumentDataLakeSettings(v *types.DataLakeSettings, v
 	if v.Parameters != nil {
 		ok := object.Key("Parameters")
 		if err := awsRestjson1_serializeDocumentParametersMap(v.Parameters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ReadOnlyAdmins != nil {
+		ok := object.Key("ReadOnlyAdmins")
+		if err := awsRestjson1_serializeDocumentDataLakePrincipalList(v.ReadOnlyAdmins, ok); err != nil {
 			return err
 		}
 	}

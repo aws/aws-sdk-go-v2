@@ -112,18 +112,19 @@ type Permission string
 
 // Enum values for Permission
 const (
-	PermissionAll                Permission = "ALL"
-	PermissionSelect             Permission = "SELECT"
-	PermissionAlter              Permission = "ALTER"
-	PermissionDrop               Permission = "DROP"
-	PermissionDelete             Permission = "DELETE"
-	PermissionInsert             Permission = "INSERT"
-	PermissionDescribe           Permission = "DESCRIBE"
-	PermissionCreateDatabase     Permission = "CREATE_DATABASE"
-	PermissionCreateTable        Permission = "CREATE_TABLE"
-	PermissionDataLocationAccess Permission = "DATA_LOCATION_ACCESS"
-	PermissionCreateTag          Permission = "CREATE_TAG"
-	PermissionAssociate          Permission = "ASSOCIATE"
+	PermissionAll                      Permission = "ALL"
+	PermissionSelect                   Permission = "SELECT"
+	PermissionAlter                    Permission = "ALTER"
+	PermissionDrop                     Permission = "DROP"
+	PermissionDelete                   Permission = "DELETE"
+	PermissionInsert                   Permission = "INSERT"
+	PermissionDescribe                 Permission = "DESCRIBE"
+	PermissionCreateDatabase           Permission = "CREATE_DATABASE"
+	PermissionCreateTable              Permission = "CREATE_TABLE"
+	PermissionDataLocationAccess       Permission = "DATA_LOCATION_ACCESS"
+	PermissionCreateLfTag              Permission = "CREATE_LF_TAG"
+	PermissionAssociate                Permission = "ASSOCIATE"
+	PermissionGrantWithLfTagExpression Permission = "GRANT_WITH_LF_TAG_EXPRESSION"
 )
 
 // Values returns all known values for Permission. Note that this can be expanded
@@ -141,8 +142,9 @@ func (Permission) Values() []Permission {
 		"CREATE_DATABASE",
 		"CREATE_TABLE",
 		"DATA_LOCATION_ACCESS",
-		"CREATE_TAG",
+		"CREATE_LF_TAG",
 		"ASSOCIATE",
+		"GRANT_WITH_LF_TAG_EXPRESSION",
 	}
 }
 
@@ -152,6 +154,8 @@ type PermissionType string
 const (
 	PermissionTypeColumnPermission     PermissionType = "COLUMN_PERMISSION"
 	PermissionTypeCellFilterPermission PermissionType = "CELL_FILTER_PERMISSION"
+	PermissionTypeNestedPermission     PermissionType = "NESTED_PERMISSION"
+	PermissionTypeNestedCellPermission PermissionType = "NESTED_CELL_PERMISSION"
 )
 
 // Values returns all known values for PermissionType. Note that this can be
@@ -161,6 +165,8 @@ func (PermissionType) Values() []PermissionType {
 	return []PermissionType{
 		"COLUMN_PERMISSION",
 		"CELL_FILTER_PERMISSION",
+		"NESTED_PERMISSION",
+		"NESTED_CELL_PERMISSION",
 	}
 }
 

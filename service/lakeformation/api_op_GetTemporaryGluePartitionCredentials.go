@@ -38,12 +38,6 @@ type GetTemporaryGluePartitionCredentialsInput struct {
 	// This member is required.
 	Partition *types.PartitionValueList
 
-	// A list of supported permission types for the partition. Valid values are
-	// COLUMN_PERMISSION and CELL_FILTER_PERMISSION .
-	//
-	// This member is required.
-	SupportedPermissionTypes []types.PermissionType
-
 	// The ARN of the partitions' table.
 	//
 	// This member is required.
@@ -60,6 +54,10 @@ type GetTemporaryGluePartitionCredentialsInput struct {
 	// Filters the request based on the user having been granted a list of specified
 	// permissions on the requested resource(s).
 	Permissions []types.Permission
+
+	// A list of supported permission types for the partition. Valid values are
+	// COLUMN_PERMISSION and CELL_FILTER_PERMISSION .
+	SupportedPermissionTypes []types.PermissionType
 
 	noSmithyDocumentSerde
 }

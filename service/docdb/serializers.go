@@ -4809,6 +4809,11 @@ func awsAwsquery_serializeOpDocumentModifyDBClusterInput(v *ModifyDBClusterInput
 	object := value.Object()
 	_ = object
 
+	if v.AllowMajorVersionUpgrade {
+		objectKey := object.Key("AllowMajorVersionUpgrade")
+		objectKey.Boolean(v.AllowMajorVersionUpgrade)
+	}
+
 	if v.ApplyImmediately {
 		objectKey := object.Key("ApplyImmediately")
 		objectKey.Boolean(v.ApplyImmediately)
