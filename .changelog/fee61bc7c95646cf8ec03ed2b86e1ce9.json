@@ -1,8 +1,0 @@
-{
-    "id": "fee61bc7-c956-46cf-8ec0-3ed2b86e1ce9",
-    "type": "feature",
-    "description": "Added major version upgrade option in ModifyDBCluster API",
-    "modules": [
-        "service/docdb"
-    ]
-}

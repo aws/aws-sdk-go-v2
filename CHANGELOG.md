@@ -1,3 +1,19 @@
+# Release (2023-07-17)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/codeartifact`: [v1.18.8](service/codeartifact/CHANGELOG.md#v1188-2023-07-17)
+  * **Documentation**: Doc only update for AWS CodeArtifact
+* `github.com/aws/aws-sdk-go-v2/service/docdb`: [v1.22.0](service/docdb/CHANGELOG.md#v1220-2023-07-17)
+  * **Feature**: Added major version upgrade option in ModifyDBCluster API
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.105.0](service/ec2/CHANGELOG.md#v11050-2023-07-17)
+  * **Feature**: Add Nitro TPM support on DescribeInstanceTypes
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.55.0](service/glue/CHANGELOG.md#v1550-2023-07-17)
+  * **Feature**: Adding new supported permission type flags to get-unfiltered endpoints that callers may pass to indicate support for enforcing Lake Formation fine-grained access control on nested column attributes.
+* `github.com/aws/aws-sdk-go-v2/service/ivs`: [v1.24.0](service/ivs/CHANGELOG.md#v1240-2023-07-17)
+  * **Feature**: This release provides the flexibility to configure what renditions or thumbnail qualities to record when creating recording configuration.
+* `github.com/aws/aws-sdk-go-v2/service/lakeformation`: [v1.22.0](service/lakeformation/CHANGELOG.md#v1220-2023-07-17)
+  * **Feature**: Adds supports for ReadOnlyAdmins and AllowFullTableExternalDataAccess. Adds NESTED_PERMISSION and NESTED_CELL_PERMISSION to SUPPORTED_PERMISSION_TYPES enum. Adds CREATE_LF_TAG on catalog resource and ALTER, DROP, and GRANT_WITH_LF_TAG_EXPRESSION on LF Tag resource.
+
 # Release (2023-07-13)
 
 ## General Highlights

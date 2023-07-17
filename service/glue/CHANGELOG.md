@@ -1,3 +1,7 @@
+# v1.55.0 (2023-07-17)
+
+* **Feature**: Adding new supported permission type flags to get-unfiltered endpoints that callers may pass to indicate support for enforcing Lake Formation fine-grained access control on nested column attributes.
+
 # v1.54.1 (2023-07-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

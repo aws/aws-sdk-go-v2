@@ -1,8 +1,0 @@
-{
-    "id": "6014afa5-997a-46a8-854d-e7aee72437e7",
-    "type": "feature",
-    "description": "This release provides the flexibility to configure what renditions or thumbnail qualities to record when creating recording configuration.",
-    "modules": [
-        "service/ivs"
-    ]
-}

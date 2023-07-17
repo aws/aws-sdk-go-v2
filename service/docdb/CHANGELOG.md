@@ -1,3 +1,7 @@
+# v1.22.0 (2023-07-17)
+
+* **Feature**: Added major version upgrade option in ModifyDBCluster API
+
 # v1.21.6 (2023-07-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions
