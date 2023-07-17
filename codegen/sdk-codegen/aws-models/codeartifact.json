@@ -245,6 +245,9 @@
                         "smithy.api#documentation": "<p>\n        Information about the connected repository after processing the request.\n       </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codeartifact#AuthorizationTokenDurationSeconds": {
@@ -752,9 +755,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-northeast-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-northeast-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -765,9 +768,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-south-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-south-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -778,9 +781,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-southeast-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-southeast-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -791,9 +794,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-southeast-2",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-southeast-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -804,9 +807,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-central-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-central-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -817,9 +820,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-north-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-north-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -830,9 +833,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-south-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-south-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -843,9 +846,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-west-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -856,9 +859,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-west-2",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-west-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -869,9 +872,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-west-3",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-west-3"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -882,9 +885,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -895,9 +898,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-2",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-east-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -908,9 +911,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-west-2",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-west-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -921,9 +924,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -934,9 +937,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -947,9 +950,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -960,9 +963,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "cn-north-1",
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "cn-north-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -973,9 +976,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "cn-north-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "cn-north-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -986,9 +989,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "cn-north-1",
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "cn-north-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -999,9 +1002,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "cn-north-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "cn-north-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1012,9 +1015,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1025,9 +1028,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1038,9 +1041,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1051,9 +1054,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1062,9 +1065,9 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1075,9 +1078,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1086,9 +1089,9 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1099,9 +1102,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1110,9 +1113,9 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1123,9 +1126,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1134,9 +1137,9 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1147,9 +1150,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1160,9 +1163,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
                                 "UseDualStack": false,
-                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1185,9 +1188,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": false,
-                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1197,9 +1200,9 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
                                 "UseDualStack": true,
-                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1383,6 +1386,9 @@
                         "smithy.api#documentation": "<p>\n      A map of package versions that failed to copy and their error codes. The possible error codes are in \n      the <code>PackageVersionError</code> data type. They are:\n    </p>\n         <ul>\n            <li>\n               <p>\n                  <code>ALREADY_EXISTS</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>MISMATCHED_REVISION</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>MISMATCHED_STATUS</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>NOT_ALLOWED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>NOT_FOUND</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SKIPPED</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codeartifact#CreateDomain": {
@@ -1462,6 +1468,9 @@
                         "smithy.api#documentation": "<p>\n        Contains information about the created domain after processing the request.\n      </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codeartifact#CreateRepository": {
@@ -1562,6 +1571,9 @@
                         "smithy.api#documentation": "<p>\n        Information about the created repository after processing the request.\n      </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codeartifact#DeleteDomain": {
@@ -1674,6 +1686,9 @@
                         "smithy.api#documentation": "<p>\n        Information about the deleted resource policy after processing the request.\n      </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codeartifact#DeleteDomainRequest": {
@@ -1708,6 +1723,9 @@
                         "smithy.api#documentation": "<p>\n        Contains information about the deleted domain after processing the request.\n       </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codeartifact#DeletePackage": {
@@ -1807,6 +1825,9 @@
                 "deletedPackage": {
                     "target": "com.amazonaws.codeartifact#PackageSummary"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codeartifact#DeletePackageVersions": {
@@ -1928,6 +1949,9 @@
                         "smithy.api#documentation": "<p>\n       A <code>PackageVersionError</code> object that contains a map of errors codes for the \n       deleted package that failed. The possible error codes are:\n     </p>\n         <ul>\n            <li>\n               <p>\n                  <code>ALREADY_EXISTS</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>MISMATCHED_REVISION</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>MISMATCHED_STATUS</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>NOT_ALLOWED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>NOT_FOUND</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SKIPPED</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codeartifact#DeleteRepository": {
@@ -2051,6 +2075,9 @@
                         "smithy.api#documentation": "<p>\n      Information about the deleted policy after processing the request.\n    </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codeartifact#DeleteRepositoryRequest": {
@@ -2093,6 +2120,9 @@
                         "smithy.api#documentation": "<p>\n        Information about the deleted repository after processing the request.\n       </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codeartifact#DescribeDomain": {
@@ -2158,6 +2188,9 @@
                 "domain": {
                     "target": "com.amazonaws.codeartifact#DomainDescription"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codeartifact#DescribePackage": {
@@ -2258,6 +2291,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codeartifact#DescribePackageVersion": {
@@ -2369,6 +2405,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codeartifact#DescribeRepository": {
@@ -2445,6 +2484,9 @@
                         "smithy.api#documentation": "<p>\n         A <code>RepositoryDescription</code> object that contains the requested repository information.\n       </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codeartifact#Description": {
@@ -2545,6 +2587,9 @@
                         "smithy.api#documentation": "<p>\n      The repository associated with the removed external connection.\n    </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codeartifact#DisposePackageVersions": {
@@ -2672,6 +2717,9 @@
                         "smithy.api#documentation": "<p>\n      A <code>PackageVersionError</code> object that contains a map of errors codes for the \n      disposed package versions that failed. The possible error codes are:\n    </p>\n         <ul>\n            <li>\n               <p>\n                  <code>ALREADY_EXISTS</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>MISMATCHED_REVISION</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>MISMATCHED_STATUS</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>NOT_ALLOWED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>NOT_FOUND</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SKIPPED</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codeartifact#DomainDescription": {
@@ -2938,6 +2986,9 @@
                         "smithy.api#documentation": "<p>\n      A timestamp that specifies the date and time the authorization token expires.\n    </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codeartifact#GetDomainPermissionsPolicy": {
@@ -3006,6 +3057,9 @@
                         "smithy.api#documentation": "<p>\n        The returned resource policy.\n      </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codeartifact#GetPackageVersionAsset": {
@@ -3154,6 +3208,9 @@
                         "smithy.api#httpHeader": "X-PackageVersionRevision"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codeartifact#GetPackageVersionReadme": {
@@ -3291,6 +3348,9 @@
                         "smithy.api#documentation": "<p>\n      The text of the returned readme file.\n    </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codeartifact#GetRepositoryEndpoint": {
@@ -3375,6 +3435,9 @@
                         "smithy.api#documentation": "<p>\n         A string that specifies the URL of the returned endpoint.\n     </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codeartifact#GetRepositoryPermissionsPolicy": {
@@ -3451,6 +3514,9 @@
                         "smithy.api#documentation": "<p>\n        The returned resource policy.\n      </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codeartifact#HashAlgorithm": {
@@ -3621,6 +3687,9 @@
                         "smithy.api#documentation": "<p>\n        The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.\n       </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codeartifact#ListPackageVersionAssets": {
@@ -3793,6 +3862,9 @@
                         "smithy.api#documentation": "<p>\n      The returned list of <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_AssetSummary.html\">AssetSummary</a> objects.\n    </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codeartifact#ListPackageVersionDependencies": {
@@ -3943,6 +4015,9 @@
                         "smithy.api#documentation": "<p>\n      The returned list of <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageDependency.html\">PackageDependency</a> objects.\n    </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codeartifact#ListPackageVersions": {
@@ -4122,6 +4197,9 @@
                         "smithy.api#documentation": "<p>\n        If there are additional results, this is the token for the next set of results.\n       </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codeartifact#ListPackages": {
@@ -4268,6 +4346,9 @@
                         "smithy.api#documentation": "<p>\n        If there are additional results, this is the token for the next set of results.\n       </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codeartifact#ListRepositories": {
@@ -4422,6 +4503,9 @@
                         "smithy.api#documentation": "<p>\n        If there are additional results, this is the token for the next set of results.\n       </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codeartifact#ListRepositoriesMaxResults": {
@@ -4477,6 +4561,9 @@
                         "smithy.api#documentation": "<p>\n        If there are additional results, this is the token for the next set of results.\n       </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codeartifact#ListTagsForResource": {
@@ -4535,6 +4622,9 @@
                         "smithy.api#documentation": "<p>A list of tag key and value pairs associated with the specified resource.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codeartifact#Long": {
@@ -5176,7 +5266,7 @@
                 "format": {
                     "target": "com.amazonaws.codeartifact#PackageFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>A format that specifies the type of the package version with the requested asset file.</p>",
+                        "smithy.api#documentation": "<p>A format that specifies the type of the package version with the requested asset file.</p>\n         <p>The only supported value is <code>generic</code>.</p>",
                         "smithy.api#httpQuery": "format",
                         "smithy.api#required": {}
                     }
@@ -5285,6 +5375,9 @@
                         "smithy.api#documentation": "<p>An <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_AssetSummary.html\">AssetSummary</a> for the published asset.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codeartifact#PutDomainPermissionsPolicy": {
@@ -5370,6 +5463,9 @@
                         "smithy.api#documentation": "<p> The resource policy that was set after processing the request. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codeartifact#PutPackageOriginConfiguration": {
@@ -5476,6 +5572,9 @@
                         "smithy.api#documentation": "<p>A <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageOriginConfiguration.html\">PackageOriginConfiguration</a> \n      object that describes the origin configuration set for the package. It contains a \n      <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageOriginRestrictions.html\">PackageOriginRestrictions</a> \n      object that describes how new versions of the package can be introduced to the repository.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codeartifact#PutRepositoryPermissionsPolicy": {
@@ -5571,6 +5670,9 @@
                         "smithy.api#documentation": "<p> The resource policy that was set after processing the request. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codeartifact#RepositoryDescription": {
@@ -6019,7 +6121,10 @@
         },
         "com.amazonaws.codeartifact#TagResourceResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.codeartifact#TagValue": {
             "type": "string",
@@ -6113,7 +6218,10 @@
         },
         "com.amazonaws.codeartifact#UntagResourceResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.codeartifact#UpdatePackageVersionsStatus": {
             "type": "operation",
@@ -6247,6 +6355,9 @@
                         "smithy.api#documentation": "<p> A list of <code>SuccessfulPackageVersionInfo</code> objects, one for each package version\n      with a status that successfully updated. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codeartifact#UpdateRepository": {
@@ -6341,6 +6452,9 @@
                         "smithy.api#documentation": "<p>\n         The updated repository.\n       </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.codeartifact#UpstreamRepository": {

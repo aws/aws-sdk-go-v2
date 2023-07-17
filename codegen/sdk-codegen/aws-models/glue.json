@@ -25132,6 +25132,18 @@
                     "traits": {
                         "smithy.api#enumValue": "CELL_FILTER_PERMISSION"
                     }
+                },
+                "NESTED_PERMISSION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NESTED_PERMISSION"
+                    }
+                },
+                "NESTED_CELL_PERMISSION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NESTED_CELL_PERMISSION"
+                    }
                 }
             }
         },

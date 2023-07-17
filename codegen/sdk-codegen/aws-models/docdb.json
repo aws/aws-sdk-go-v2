@@ -77,6 +77,9 @@
                 "EventSubscription": {
                     "target": "com.amazonaws.docdb#EventSubscription"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.docdb#AddTagsToResource": {
@@ -300,7 +303,7 @@
                     "name": "rds"
                 },
                 "aws.protocols#awsQuery": {},
-                "smithy.api#documentation": "<p>Amazon DocumentDB API documentation</p>",
+                "smithy.api#documentation": "<p>Amazon DocumentDB is a fast, reliable, and fully managed database service. \n         Amazon DocumentDB makes it easy to set up, operate, and scale MongoDB-compatible databases in the cloud. \n         With Amazon DocumentDB, you can run the same application code and use the same drivers and tools that you use with MongoDB.</p>",
                 "smithy.api#title": "Amazon DocumentDB with MongoDB compatibility",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://rds.amazonaws.com/doc/2014-10-31/"
@@ -1448,6 +1451,9 @@
                 "ResourcePendingMaintenanceActions": {
                     "target": "com.amazonaws.docdb#ResourcePendingMaintenanceActions"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.docdb#AttributeValueList": {
@@ -1688,6 +1694,9 @@
                 "DBClusterParameterGroup": {
                     "target": "com.amazonaws.docdb#DBClusterParameterGroup"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.docdb#CopyDBClusterSnapshot": {
@@ -1774,6 +1783,9 @@
                 "DBClusterSnapshot": {
                     "target": "com.amazonaws.docdb#DBClusterSnapshot"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.docdb#CreateDBCluster": {
@@ -2032,6 +2044,9 @@
                 "DBClusterParameterGroup": {
                     "target": "com.amazonaws.docdb#DBClusterParameterGroup"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.docdb#CreateDBClusterResult": {
@@ -2040,6 +2055,9 @@
                 "DBCluster": {
                     "target": "com.amazonaws.docdb#DBCluster"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.docdb#CreateDBClusterSnapshot": {
@@ -2105,6 +2123,9 @@
                 "DBClusterSnapshot": {
                     "target": "com.amazonaws.docdb#DBClusterSnapshot"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.docdb#CreateDBInstance": {
@@ -2256,6 +2277,9 @@
                 "DBInstance": {
                     "target": "com.amazonaws.docdb#DBInstance"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.docdb#CreateDBSubnetGroup": {
@@ -2328,6 +2352,9 @@
                 "DBSubnetGroup": {
                     "target": "com.amazonaws.docdb#DBSubnetGroup"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.docdb#CreateEventSubscription": {
@@ -2423,6 +2450,9 @@
                 "EventSubscription": {
                     "target": "com.amazonaws.docdb#EventSubscription"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.docdb#CreateGlobalCluster": {
@@ -2508,6 +2538,9 @@
                 "GlobalCluster": {
                     "target": "com.amazonaws.docdb#GlobalCluster"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.docdb#DBCluster": {
@@ -3941,6 +3974,9 @@
                 "DBCluster": {
                     "target": "com.amazonaws.docdb#DBCluster"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.docdb#DeleteDBClusterSnapshot": {
@@ -3984,6 +4020,9 @@
                 "DBClusterSnapshot": {
                     "target": "com.amazonaws.docdb#DBClusterSnapshot"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.docdb#DeleteDBInstance": {
@@ -4036,6 +4075,9 @@
                 "DBInstance": {
                     "target": "com.amazonaws.docdb#DBInstance"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.docdb#DeleteDBSubnetGroup": {
@@ -4117,6 +4159,9 @@
                 "EventSubscription": {
                     "target": "com.amazonaws.docdb#EventSubscription"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.docdb#DeleteGlobalCluster": {
@@ -4160,6 +4205,9 @@
                 "GlobalCluster": {
                     "target": "com.amazonaws.docdb#GlobalCluster"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.docdb#DescribeCertificates": {
@@ -4369,6 +4417,9 @@
                 "DBClusterSnapshotAttributesResult": {
                     "target": "com.amazonaws.docdb#DBClusterSnapshotAttributesResult"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.docdb#DescribeDBClusterSnapshots": {
@@ -4880,6 +4931,9 @@
                 "EngineDefaults": {
                     "target": "com.amazonaws.docdb#EngineDefaults"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.docdb#DescribeEventCategories": {
@@ -5576,6 +5630,9 @@
                 "DBCluster": {
                     "target": "com.amazonaws.docdb#DBCluster"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.docdb#Filter": {
@@ -6301,7 +6358,14 @@
                 "EngineVersion": {
                     "target": "com.amazonaws.docdb#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version number of the database engine to which you want to upgrade. Modifying engine version is not supported on Amazon DocumentDB.</p>"
+                        "smithy.api#documentation": "<p>The version number of the database engine to which you want to upgrade.\n             Changing this parameter results in an outage. The change is applied during\n             the next maintenance window unless <code>ApplyImmediately</code> is enabled.</p>\n         <p>To list all of the available engine versions for Amazon DocumentDB use the following command:</p>\n         <p>\n            <code>aws docdb describe-db-engine-versions --engine docdb --query \"DBEngineVersions[].EngineVersion\"</code>\n         </p>"
+                    }
+                },
+                "AllowMajorVersionUpgrade": {
+                    "target": "com.amazonaws.docdb#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>A value that indicates whether major version upgrades are allowed.</p>\n         <p>Constraints: You must allow major version upgrades when specifying a value for the\n             <code>EngineVersion</code> parameter that is a different major version than the DB\n             cluster's current version.</p>"
                     }
                 },
                 "DeletionProtection": {
@@ -6363,6 +6427,9 @@
                 "DBCluster": {
                     "target": "com.amazonaws.docdb#DBCluster"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.docdb#ModifyDBClusterSnapshotAttribute": {
@@ -6428,6 +6495,9 @@
                 "DBClusterSnapshotAttributesResult": {
                     "target": "com.amazonaws.docdb#DBClusterSnapshotAttributesResult"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.docdb#ModifyDBInstance": {
@@ -6565,6 +6635,9 @@
                 "DBInstance": {
                     "target": "com.amazonaws.docdb#DBInstance"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.docdb#ModifyDBSubnetGroup": {
@@ -6630,6 +6703,9 @@
                 "DBSubnetGroup": {
                     "target": "com.amazonaws.docdb#DBSubnetGroup"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.docdb#ModifyEventSubscription": {
@@ -6709,6 +6785,9 @@
                 "EventSubscription": {
                     "target": "com.amazonaws.docdb#EventSubscription"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.docdb#ModifyGlobalCluster": {
@@ -6764,6 +6843,9 @@
                 "GlobalCluster": {
                     "target": "com.amazonaws.docdb#GlobalCluster"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.docdb#OrderableDBInstanceOption": {
@@ -7174,6 +7256,9 @@
                 "DBInstance": {
                     "target": "com.amazonaws.docdb#DBInstance"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.docdb#RemoveFromGlobalCluster": {
@@ -7227,6 +7312,9 @@
                 "GlobalCluster": {
                     "target": "com.amazonaws.docdb#GlobalCluster"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.docdb#RemoveSourceIdentifierFromSubscription": {
@@ -7277,6 +7365,9 @@
                 "EventSubscription": {
                     "target": "com.amazonaws.docdb#EventSubscription"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.docdb#RemoveTagsFromResource": {
@@ -7560,6 +7651,9 @@
                 "DBCluster": {
                     "target": "com.amazonaws.docdb#DBCluster"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.docdb#RestoreDBClusterToPointInTime": {
@@ -7710,6 +7804,9 @@
                 "DBCluster": {
                     "target": "com.amazonaws.docdb#DBCluster"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.docdb#SNSInvalidTopicFault": {
@@ -7905,6 +8002,9 @@
                 "DBCluster": {
                     "target": "com.amazonaws.docdb#DBCluster"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.docdb#StopDBCluster": {
@@ -7948,6 +8048,9 @@
                 "DBCluster": {
                     "target": "com.amazonaws.docdb#DBCluster"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.docdb#StorageQuotaExceededFault": {
