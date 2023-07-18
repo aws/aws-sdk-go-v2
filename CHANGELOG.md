@@ -1,3 +1,19 @@
+# Release (2023-07-18)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/codegurusecurity`: [v1.0.3](service/codegurusecurity/CHANGELOG.md#v103-2023-07-18)
+  * **Documentation**: Documentation updates for CodeGuru Security.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.61.1](service/connect/CHANGELOG.md#v1611-2023-07-18)
+  * **Documentation**: GetMetricDataV2 API: Update to include Contact Lens Conversational Analytics Metrics
+* `github.com/aws/aws-sdk-go-v2/service/lexmodelsv2`: [v1.30.0](service/lexmodelsv2/CHANGELOG.md#v1300-2023-07-18)
+  * **Feature**: This release adds support for Lex Developers to view analytics for their bots.
+* `github.com/aws/aws-sdk-go-v2/service/m2`: [v1.6.0](service/m2/CHANGELOG.md#v160-2023-07-18)
+  * **Feature**: Allows UpdateEnvironment to update the environment to 0 host capacity. New GetSignedBluinsightsUrl API
+* `github.com/aws/aws-sdk-go-v2/service/snowball`: [v1.20.0](service/snowball/CHANGELOG.md#v1200-2023-07-18)
+  * **Feature**: Adds support for RACK_5U_C. This is the first AWS Snow Family device designed to meet U.S. Military Ruggedization Standards (MIL-STD-810H) with 208 vCPU device in a portable, compact 5U, half-rack width form-factor.
+* `github.com/aws/aws-sdk-go-v2/service/translate`: [v1.18.4](service/translate/CHANGELOG.md#v1184-2023-07-18)
+  * **Documentation**: Added DOCX word document support to TranslateDocument API
+
 # Release (2023-07-17)
 
 ## Module Highlights

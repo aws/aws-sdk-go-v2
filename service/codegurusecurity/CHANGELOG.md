@@ -1,3 +1,7 @@
+# v1.0.3 (2023-07-18)
+
+* **Documentation**: Documentation updates for CodeGuru Security.
+
 # v1.0.2 (2023-07-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

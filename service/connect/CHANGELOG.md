@@ -1,3 +1,7 @@
+# v1.61.1 (2023-07-18)
+
+* **Documentation**: GetMetricDataV2 API: Update to include Contact Lens Conversational Analytics Metrics
+
 # v1.61.0 (2023-07-13)
 
 * **Feature**: Add support for deleting Queues and Routing Profiles.

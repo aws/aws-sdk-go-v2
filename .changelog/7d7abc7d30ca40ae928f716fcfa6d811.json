@@ -1,8 +1,0 @@
-{
-    "id": "7d7abc7d-30ca-40ae-928f-716fcfa6d811",
-    "type": "documentation",
-    "description": "GetMetricDataV2 API: Update to include Contact Lens Conversational Analytics Metrics",
-    "modules": [
-        "service/connect"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "782a3bed-21dc-4ef8-9ac2-ca5d1a811f8e",
-    "type": "documentation",
-    "description": "Documentation updates for CodeGuru Security.",
-    "modules": [
-        "service/codegurusecurity"
-    ]
-}

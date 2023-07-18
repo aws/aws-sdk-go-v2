@@ -20,7 +20,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/codebuild v1.20.16
 	github.com/aws/aws-sdk-go-v2/service/codecommit v1.14.15
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.16.14
-	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.15.3
+	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.15.4
 	github.com/aws/aws-sdk-go-v2/service/codestar v1.13.13
 	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.23.0
 	github.com/aws/aws-sdk-go-v2/service/configservice v1.34.1
@@ -67,13 +67,13 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.15.1
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.17.14
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.37.0
-	github.com/aws/aws-sdk-go-v2/service/s3control v1.31.8
+	github.com/aws/aws-sdk-go-v2/service/s3control v1.31.9
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.19.11
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.19.3
 	github.com/aws/aws-sdk-go-v2/service/ses v1.15.12
 	github.com/aws/aws-sdk-go-v2/service/sfn v1.18.1
 	github.com/aws/aws-sdk-go-v2/service/shield v1.18.13
-	github.com/aws/aws-sdk-go-v2/service/snowball v1.19.5
+	github.com/aws/aws-sdk-go-v2/service/snowball v1.20.0
 	github.com/aws/aws-sdk-go-v2/service/sns v1.20.14
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.23.3
 	github.com/aws/aws-sdk-go-v2/service/ssm v1.36.8

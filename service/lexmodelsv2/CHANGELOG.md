@@ -1,3 +1,7 @@
+# v1.30.0 (2023-07-18)
+
+* **Feature**: This release adds support for Lex Developers to view analytics for their bots.
+
 # v1.29.3 (2023-07-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

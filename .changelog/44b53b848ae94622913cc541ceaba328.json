@@ -1,8 +1,0 @@
-{
-    "id": "44b53b84-8ae9-4622-913c-c541ceaba328",
-    "type": "feature",
-    "description": "This release adds support for Lex Developers to view analytics for their bots.",
-    "modules": [
-        "service/lexmodelsv2"
-    ]
-}

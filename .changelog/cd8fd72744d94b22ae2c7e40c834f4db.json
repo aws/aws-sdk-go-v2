@@ -1,8 +1,0 @@
-{
-    "id": "cd8fd727-44d9-4b22-ae2c-7e40c834f4db",
-    "type": "documentation",
-    "description": "Added DOCX word document support to TranslateDocument API",
-    "modules": [
-        "service/translate"
-    ]
-}

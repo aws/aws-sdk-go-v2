@@ -1,3 +1,7 @@
+# v1.6.0 (2023-07-18)
+
+* **Feature**: Allows UpdateEnvironment to update the environment to 0 host capacity. New GetSignedBluinsightsUrl API
+
 # v1.5.3 (2023-07-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions
