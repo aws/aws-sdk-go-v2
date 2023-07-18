@@ -461,6 +461,38 @@ func TestEndpointWithARN(t *testing.T) {
 			},
 			expectedErr: "Invalid ARN: Expected a 4-component resource",
 		},
+		"Invalid Outpost Bucket ARN with FIPS pseudo-region (prefix)": {
+			bucket: "arn:aws:s3-outposts:fips-us-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket",
+			options: s3control.Options{
+				Region:       "us-west-2",
+				UseARNRegion: true,
+			},
+			expectedErr: "FIPS region not allowed in ARN",
+		},
+		"Invalid Outpost Bucket ARN with FIPS pseudo-region (suffix)": {
+			bucket: "arn:aws:s3-outposts:us-east-1-fips:123456789012:outpost:op-01234567890123456:bucket:mybucket",
+			options: s3control.Options{
+				Region:       "us-west-2",
+				UseARNRegion: true,
+			},
+			expectedErr: "FIPS region not allowed in ARN",
+		},
+		"Invalid Outpost AccessPoint ARN with FIPS pseudo-region (prefix)": {
+			accessPoint: "arn:aws-us-gov:s3-outposts:fips-us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+			options: s3control.Options{
+				Region:       "us-west-2",
+				UseARNRegion: true,
+			},
+			expectedErr: "FIPS region not allowed in ARN",
+		},
+		"Invalid Outpost AccessPoint ARN with FIPS pseudo-region (suffix)": {
+			accessPoint: "arn:aws-us-gov:s3-outposts:us-east-1-fips:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+			options: s3control.Options{
+				Region:       "us-west-2",
+				UseARNRegion: true,
+			},
+			expectedErr: "FIPS region not allowed in ARN",
+		},
 	}
 
 	for name, c := range cases {
