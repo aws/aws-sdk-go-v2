@@ -56,6 +56,9 @@ type UpdateJobInput struct {
 	// Services Storage Gateway service Tape Gateway type.
 	OnDeviceServiceConfiguration *types.OnDeviceServiceConfiguration
 
+	// Information identifying the person picking up the device.
+	PickupDetails *types.PickupDetails
+
 	// The updated JobResource object, or the updated JobResource object.
 	Resources *types.JobResource
 

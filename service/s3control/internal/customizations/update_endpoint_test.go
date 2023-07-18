@@ -514,7 +514,7 @@ func TestEndpointWithARN(t *testing.T) {
 			var err error
 			if len(c.accessPoint) > 0 {
 				_, err = svc.GetAccessPoint(ctx, &s3control.GetAccessPointInput{
-					Name:    ptr.String(c.accessPoint),
+					Name:      ptr.String(c.accessPoint),
 					AccountId: ptr.String("123456789012"),
 				}, func(options *s3control.Options) {
 					// append request retriever middleware for request inspection

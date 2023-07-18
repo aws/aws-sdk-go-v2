@@ -638,6 +638,9 @@ func validateOpCreateLongTermPricingInput(v *CreateLongTermPricingInput) error {
 	if len(v.LongTermPricingType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("LongTermPricingType"))
 	}
+	if len(v.SnowballType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SnowballType"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

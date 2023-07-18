@@ -23,6 +23,7 @@
         "api_op_GetDataSetImportTask.go",
         "api_op_GetDeployment.go",
         "api_op_GetEnvironment.go",
+        "api_op_GetSignedBluinsightsUrl.go",
         "api_op_ListApplicationVersions.go",
         "api_op_ListApplications.go",
         "api_op_ListBatchJobDefinitions.go",

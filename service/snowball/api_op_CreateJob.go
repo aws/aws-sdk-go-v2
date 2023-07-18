@@ -38,7 +38,8 @@ import (
 //   - Description: Snowball Edge Compute Optimized without GPU
 //   - Device type: EDGE
 //   - Capacity: T100
-//   - Description: Snowball Edge Storage Optimized with EC2 Compute
+//   - Description: Snowball Edge Storage Optimized with EC2 Compute This device
+//     is replaced with T98.
 //   - Device type: STANDARD
 //   - Capacity: T50
 //   - Description: Original Snowball device This device is only available in the
@@ -47,9 +48,9 @@ import (
 //   - Capacity: T80
 //   - Description: Original Snowball device This device is only available in the
 //     Ningxia, Beijing, and Singapore Amazon Web Services Region.
-//   - Device type: V3_5C
-//   - Capacity: T32
-//   - Description: Snowball Edge Compute Optimized without GPU
+//   - Snow Family device type: RACK_5U_C
+//   - Capacity: T13
+//   - Description: Snowblade.
 //   - Device type: V3_5S
 //   - Capacity: T240
 //   - Description: Snowball Edge Storage Optimized 210TB
@@ -93,6 +94,10 @@ type CreateJobInput struct {
 	// Regions.
 	ForwardingAddressId *string
 
+	// The highest impact level of data that will be stored or processed on the
+	// device, provided at job creation.
+	ImpactLevel types.ImpactLevel
+
 	// Defines the type of job that you're creating.
 	JobType types.JobType
 
@@ -114,10 +119,15 @@ type CreateJobInput struct {
 	// Services Storage Gateway service Tape Gateway type.
 	OnDeviceServiceConfiguration *types.OnDeviceServiceConfiguration
 
+	// Information identifying the person picking up the device.
+	PickupDetails *types.PickupDetails
+
 	// Allows you to securely operate and manage Snowcone devices remotely from
 	// outside of your internal network. When set to INSTALLED_AUTOSTART , remote
 	// management will automatically be available when the device arrives at your
-	// location. Otherwise, you need to use the Snowball Client to manage the device.
+	// location. Otherwise, you need to use the Snowball Edge client to manage the
+	// device. When set to NOT_INSTALLED , remote management will not be available on
+	// the device.
 	RemoteManagement types.RemoteManagement
 
 	// Defines the Amazon S3 buckets associated with this job. With IMPORT jobs, you

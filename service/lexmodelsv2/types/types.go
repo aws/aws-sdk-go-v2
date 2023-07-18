@@ -154,6 +154,824 @@ type AllowedInputTypes struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the time metric, interval, and method by which to bin the analytics
+// data.
+type AnalyticsBinBySpecification struct {
+
+	// Specifies the interval of time by which to bin the analytics data.
+	//
+	// This member is required.
+	Interval AnalyticsInterval
+
+	// Specifies the time metric by which to bin the analytics data.
+	//
+	// This member is required.
+	Name AnalyticsBinByName
+
+	// Specifies whether to bin the analytics data in ascending or descending order.
+	// If this field is left blank, the default order is by the key of the bin in
+	// descending order.
+	Order AnalyticsSortOrder
+
+	noSmithyDocumentSerde
+}
+
+// An object containing the criterion by which to bin the results and the value
+// that defines that bin.
+type AnalyticsBinKey struct {
+
+	// The criterion by which to bin the results.
+	Name AnalyticsBinByName
+
+	// The value of the criterion that defines the bin.
+	Value *int64
+
+	noSmithyDocumentSerde
+}
+
+// Contains fields describing a condition by which to filter the intents. The
+// expression may be understood as name
+//
+//	operator
+//
+// values . For example:
+//   - IntentName CO Book – The intent name contains the string "Book."
+//   - BotVersion EQ 2 – The bot version is equal to two.
+//
+// The operators that each filter supports are listed below:
+//   - BotAlias – EQ .
+//   - BotVersion – EQ .
+//   - LocaleId – EQ .
+//   - Modality – EQ .
+//   - Channel – EQ .
+//   - SessionId – EQ .
+//   - OriginatingRequestId – EQ .
+//   - IntentName – EQ , CO .
+//   - IntentEndState – EQ , CO .
+type AnalyticsIntentFilter struct {
+
+	// The category by which to filter the intents. The descriptions for each option
+	// are as follows:
+	//   - BotAlias – The name of the bot alias.
+	//   - BotVersion – The version of the bot.
+	//   - LocaleId – The locale of the bot.
+	//   - Modality – The modality of the session with the bot (audio, DTMF, or text).
+	//   - Channel – The channel that the bot is integrated with.
+	//   - SessionId – The identifier of the session with the bot.
+	//   - OriginatingRequestId – The identifier of the first request in a session.
+	//   - IntentName – The name of the intent.
+	//   - IntentEndState – The final state of the intent.
+	//
+	// This member is required.
+	Name AnalyticsIntentFilterName
+
+	// The operation by which to filter the category. The following operations are
+	// possible:
+	//   - CO – Contains
+	//   - EQ – Equals
+	//   - GT – Greater than
+	//   - LT – Less than
+	// The operators that each filter supports are listed below:
+	//   - BotAlias – EQ .
+	//   - BotVersion – EQ .
+	//   - LocaleId – EQ .
+	//   - Modality – EQ .
+	//   - Channel – EQ .
+	//   - SessionId – EQ .
+	//   - OriginatingRequestId – EQ .
+	//   - IntentName – EQ , CO .
+	//   - IntentEndState – EQ , CO .
+	//
+	// This member is required.
+	Operator AnalyticsFilterOperator
+
+	// An array containing the values of the category by which to apply the operator
+	// to filter the results. You can provide multiple values if the operator is EQ or
+	// CO . If you provide multiple values, you filter for results that equal/contain
+	// any of the values. For example, if the name , operator , and values fields are
+	// Modality , EQ , and [Speech, Text] , the operation filters for results where the
+	// modality was either Speech or Text .
+	//
+	// This member is required.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the category by which the intent analytics were grouped and a member
+// of that category.
+type AnalyticsIntentGroupByKey struct {
+
+	// A category by which the intent analytics were grouped.
+	Name AnalyticsIntentField
+
+	// A member of the category by which the intent analytics were grouped.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the category by which to group the intents.
+type AnalyticsIntentGroupBySpecification struct {
+
+	// Specifies whether to group the intent stages by their name or their end state.
+	//
+	// This member is required.
+	Name AnalyticsIntentField
+
+	noSmithyDocumentSerde
+}
+
+// Contains the metric and the summary statistic you want to calculate, and the
+// order in which to sort the results, for the intents in the bot.
+type AnalyticsIntentMetric struct {
+
+	// The metric for which you want to get intent summary statistics.
+	//   - Count – The number of times the intent was invoked.
+	//   - Success – The number of times the intent succeeded.
+	//   - Failure – The number of times the intent failed.
+	//   - Switched – The number of times there was a switch to a different intent.
+	//   - Dropped – The number of times the user dropped the intent.
+	//
+	// This member is required.
+	Name AnalyticsIntentMetricName
+
+	// The summary statistic to calculate.
+	//   - Sum – The total count for the category you provide in name .
+	//   - Average – The total count divided by the number of intents in the category
+	//   you provide in name .
+	//   - Max – The highest count in the category you provide in name .
+	//
+	// This member is required.
+	Statistic AnalyticsMetricStatistic
+
+	// Specifies whether to sort the results in ascending or descending order.
+	Order AnalyticsSortOrder
+
+	noSmithyDocumentSerde
+}
+
+// An object containing the results for the intent metric you requested.
+type AnalyticsIntentMetricResult struct {
+
+	// The metric that you requested. See Key definitions (https://docs.aws.amazon.com/lexv2/latest/dg/analytics-key-definitions.html)
+	// for more details about these metrics.
+	//   - Count – The number of times the intent was invoked.
+	//   - Success – The number of times the intent succeeded.
+	//   - Failure – The number of times the intent failed.
+	//   - Switched – The number of times there was a switch to a different intent.
+	//   - Dropped – The number of times the user dropped the intent.
+	Name AnalyticsIntentMetricName
+
+	// The statistic that you requested to calculate.
+	//   - Sum – The total count for the category you provide in name .
+	//   - Average – The total count divided by the number of intents in the category
+	//   you provide in name .
+	//   - Max – The highest count in the category you provide in name .
+	Statistic AnalyticsMetricStatistic
+
+	// The value of the summary statistic for the metric that you requested.
+	Value *float64
+
+	noSmithyDocumentSerde
+}
+
+// An object containing information about the requested path.
+type AnalyticsIntentNodeSummary struct {
+
+	// The total number of sessions that follow the given path to the given intent.
+	IntentCount *int32
+
+	// The number of intents up to and including the requested path.
+	IntentLevel *int32
+
+	// The name of the intent at the end of the requested path.
+	IntentName *string
+
+	// The path.
+	IntentPath *string
+
+	// Specifies whether the node is the end of a path ( Exit ) or not ( Inner ).
+	NodeType AnalyticsNodeType
+
+	noSmithyDocumentSerde
+}
+
+// An object containing the results for the intent metrics you requested and the
+// bin and/or group(s) they refer to, if applicable.
+type AnalyticsIntentResult struct {
+
+	// A list of objects containing the criteria you requested for binning results and
+	// the values of the bins.
+	BinKeys []AnalyticsBinKey
+
+	// A list of objects containing the criteria you requested for grouping results
+	// and the values of the groups.
+	GroupByKeys []AnalyticsIntentGroupByKey
+
+	// A list of objects, each of which contains a metric you want to list, the
+	// statistic for the metric you want to return, and the method by which to organize
+	// the results.
+	MetricsResults []AnalyticsIntentMetricResult
+
+	noSmithyDocumentSerde
+}
+
+// Contains fields describing a condition by which to filter the intent stages.
+// The expression may be understood as name
+//
+//	operator
+//
+// values . For example:
+//   - IntentName CO Book – The intent name contains the string "Book."
+//   - BotVersion EQ 2 – The bot version is equal to two.
+//
+// The operators that each filter supports are listed below:
+//   - BotAlias – EQ .
+//   - BotVersion – EQ .
+//   - LocaleId – EQ .
+//   - Modality – EQ .
+//   - Channel – EQ .
+//   - SessionId – EQ .
+//   - OriginatingRequestId – EQ .
+//   - IntentName – EQ , CO .
+//   - IntentStageName – EQ , CO .
+type AnalyticsIntentStageFilter struct {
+
+	// The category by which to filter the intent stages. The descriptions for each
+	// option are as follows:
+	//   - BotAlias – The name of the bot alias.
+	//   - BotVersion – The version of the bot.
+	//   - LocaleId – The locale of the bot.
+	//   - Modality – The modality of the session with the bot (audio, DTMF, or text).
+	//   - Channel – The channel that the bot is integrated with.
+	//   - SessionId – The identifier of the session with the bot.
+	//   - OriginatingRequestId – The identifier of the first request in a session.
+	//   - IntentName – The name of the intent.
+	//   - IntentStageName – The stage in the intent.
+	//
+	// This member is required.
+	Name AnalyticsIntentStageFilterName
+
+	// The operation by which to filter the category. The following operations are
+	// possible:
+	//   - CO – Contains
+	//   - EQ – Equals
+	//   - GT – Greater than
+	//   - LT – Less than
+	// The operators that each filter supports are listed below:
+	//   - BotAlias – EQ .
+	//   - BotVersion – EQ .
+	//   - LocaleId – EQ .
+	//   - Modality – EQ .
+	//   - Channel – EQ .
+	//   - SessionId – EQ .
+	//   - OriginatingRequestId – EQ .
+	//   - IntentName – EQ , CO .
+	//   - IntentStageName – EQ , CO .
+	//
+	// This member is required.
+	Operator AnalyticsFilterOperator
+
+	// An array containing the values of the category by which to apply the operator
+	// to filter the results. You can provide multiple values if the operator is EQ or
+	// CO . If you provide multiple values, you filter for results that equal/contain
+	// any of the values. For example, if the name , operator , and values fields are
+	// Modality , EQ , and [Speech, Text] , the operation filters for results where the
+	// modality was either Speech or Text .
+	//
+	// This member is required.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the category by which the intent stage analytics and the values for
+// that category were grouped.
+type AnalyticsIntentStageGroupByKey struct {
+
+	// A category by which the intent stage analytics were grouped.
+	Name AnalyticsIntentStageField
+
+	// A member of the category by which the intent stage analytics were grouped.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the category by which to group the intent stages.
+type AnalyticsIntentStageGroupBySpecification struct {
+
+	// Specifies whether to group the intent stages by their name or the intent to
+	// which the session was switched.
+	//
+	// This member is required.
+	Name AnalyticsIntentStageField
+
+	noSmithyDocumentSerde
+}
+
+// Contains the metric and the summary statistic you want to calculate, and the
+// order in which to sort the results, for the intent stages across the user
+// sessions with the bot.
+type AnalyticsIntentStageMetric struct {
+
+	// The metric for which you want to get intent stage summary statistics. See Key
+	// definitions (https://docs.aws.amazon.com/lexv2/latest/dg/analytics-key-definitions.html)
+	// for more details about these metrics.
+	//   - Count – The number of times the intent stage occurred.
+	//   - Success – The number of times the intent stage succeeded.
+	//   - Failure – The number of times the intent stage failed.
+	//   - Dropped – The number of times the user dropped the intent stage.
+	//   - Retry – The number of times the bot tried to elicit a response from the user
+	//   at this stage.
+	//
+	// This member is required.
+	Name AnalyticsIntentStageMetricName
+
+	// The summary statistic to calculate.
+	//   - Sum – The total count for the category you provide in name .
+	//   - Average – The total count divided by the number of intent stages in the
+	//   category you provide in name .
+	//   - Max – The highest count in the category you provide in name .
+	//
+	// This member is required.
+	Statistic AnalyticsMetricStatistic
+
+	// Specifies whether to sort the results in ascending or descending order of the
+	// summary statistic ( value in the response).
+	Order AnalyticsSortOrder
+
+	noSmithyDocumentSerde
+}
+
+// An object containing the results for an intent stage metric you requested.
+type AnalyticsIntentStageMetricResult struct {
+
+	// The metric that you requested.
+	//   - Count – The number of times the intent stage occurred.
+	//   - Success – The number of times the intent stage succeeded.
+	//   - Failure – The number of times the intent stage failed.
+	//   - Dropped – The number of times the user dropped the intent stage.
+	//   - Retry – The number of times the bot tried to elicit a response from the user
+	//   at this stage.
+	Name AnalyticsIntentStageMetricName
+
+	// The summary statistic that you requested to calculate.
+	//   - Sum – The total count for the category you provide in name .
+	//   - Average – The total count divided by the number of intent stages in the
+	//   category you provide in name .
+	//   - Max – The highest count in the category you provide in name .
+	Statistic AnalyticsMetricStatistic
+
+	// The value of the summary statistic for the metric that you requested.
+	Value *float64
+
+	noSmithyDocumentSerde
+}
+
+// An object containing the results for the intent stage metrics you requested and
+// the bin and/or group they refer to, if applicable.
+type AnalyticsIntentStageResult struct {
+
+	// A list of objects containing the criteria you requested for binning results and
+	// the values of the bins.
+	BinKeys []AnalyticsBinKey
+
+	// A list of objects containing the criteria you requested for grouping results
+	// and the values of the bins.
+	GroupByKeys []AnalyticsIntentStageGroupByKey
+
+	// A list of objects, each of which contains a metric you want to list, the
+	// statistic for the metric you want to return, and the method by which to organize
+	// the results.
+	MetricsResults []AnalyticsIntentStageMetricResult
+
+	noSmithyDocumentSerde
+}
+
+// Contains fields describing a condition by which to filter the paths. The
+// expression may be understood as name
+//
+//	operator
+//
+// values . For example:
+//   - LocaleId EQ en – The locale is "en".
+//   - BotVersion EQ 2 – The bot version is equal to two.
+//
+// The operators that each filter supports are listed below:
+//   - BotAlias – EQ .
+//   - BotVersion – EQ .
+//   - LocaleId – EQ .
+//   - Modality – EQ .
+//   - Channel – EQ .
+type AnalyticsPathFilter struct {
+
+	// The category by which to filter the intent paths. The descriptions for each
+	// option are as follows:
+	//   - BotAlias – The name of the bot alias.
+	//   - BotVersion – The version of the bot.
+	//   - LocaleId – The locale of the bot.
+	//   - Modality – The modality of the session with the bot (audio, DTMF, or text).
+	//   - Channel – The channel that the bot is integrated with.
+	//
+	// This member is required.
+	Name AnalyticsCommonFilterName
+
+	// The operation by which to filter the category. The following operations are
+	// possible:
+	//   - CO – Contains
+	//   - EQ – Equals
+	//   - GT – Greater than
+	//   - LT – Less than
+	// The operators that each filter supports are listed below:
+	//   - BotAlias – EQ .
+	//   - BotVersion – EQ .
+	//   - LocaleId – EQ .
+	//   - Modality – EQ .
+	//   - Channel – EQ .
+	//
+	// This member is required.
+	Operator AnalyticsFilterOperator
+
+	// An array containing the values of the category by which to apply the operator
+	// to filter the results. You can provide multiple values if the operator is EQ or
+	// CO . If you provide multiple values, you filter for results that equal/contain
+	// any of the values. For example, if the name , operator , and values fields are
+	// Modality , EQ , and [Speech, Text] , the operation filters for results where the
+	// modality was either Speech or Text .
+	//
+	// This member is required.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// Contains fields describing a condition by which to filter the sessions. The
+// expression may be understood as name
+//
+//	operator
+//
+// values . For example:
+//   - LocaleId EQ en – The locale is "en".
+//   - Duration GT 200 – The duration is greater than 200 seconds.
+//
+// The operators that each filter supports are listed below:
+//   - BotAlias – EQ .
+//   - BotVersion – EQ .
+//   - LocaleId – EQ .
+//   - Modality – EQ .
+//   - Channel – EQ .
+//   - Duration – EQ , GT , LT .
+//   - conversationEndState – EQ , CO .
+//   - SessionId – EQ .
+//   - OriginatingRequestId – EQ .
+//   - IntentPath – EQ .
+type AnalyticsSessionFilter struct {
+
+	// The category by which to filter the sessions. The descriptions for each option
+	// are as follows:
+	//   - BotAlias – The name of the bot alias.
+	//   - BotVersion – The version of the bot.
+	//   - LocaleId – The locale of the bot.
+	//   - Modality – The modality of the session with the bot (audio, DTMF, or text).
+	//   - Channel – The channel that the bot is integrated with.
+	//   - Duration – The duration of the session.
+	//   - conversationEndState – The final state of the session.
+	//   - SessionId – The identifier of the session with the bot.
+	//   - OriginatingRequestId – The identifier of the first request in a session.
+	//   - IntentPath – The order of intents taken in a session.
+	//
+	// This member is required.
+	Name AnalyticsSessionFilterName
+
+	// The operation by which to filter the category. The following operations are
+	// possible:
+	//   - CO – Contains
+	//   - EQ – Equals
+	//   - GT – Greater than
+	//   - LT – Less than
+	// The operators that each filter supports are listed below:
+	//   - BotAlias – EQ .
+	//   - BotVersion – EQ .
+	//   - LocaleId – EQ .
+	//   - Modality – EQ .
+	//   - Channel – EQ .
+	//   - Duration – EQ , GT , LT .
+	//   - conversationEndState – EQ , CO .
+	//   - SessionId – EQ .
+	//   - OriginatingRequestId – EQ .
+	//   - IntentPath – EQ .
+	//
+	// This member is required.
+	Operator AnalyticsFilterOperator
+
+	// An array containing the values of the category by which to apply the operator
+	// to filter the results. You can provide multiple values if the operator is EQ or
+	// CO . If you provide multiple values, you filter for results that equal/contain
+	// any of the values. For example, if the name , operator , and values fields are
+	// Modality , EQ , and [Speech, Text] , the operation filters for results where the
+	// modality was either Speech or Text .
+	//
+	// This member is required.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the category by which the session analytics were grouped and a member
+// of that category.
+type AnalyticsSessionGroupByKey struct {
+
+	// The category by which the session analytics were grouped.
+	Name AnalyticsSessionField
+
+	// A member of the category by which the session analytics were grouped.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the category by which to group the sessions.
+type AnalyticsSessionGroupBySpecification struct {
+
+	// Specifies whether to group the session by their end state or their locale.
+	//
+	// This member is required.
+	Name AnalyticsSessionField
+
+	noSmithyDocumentSerde
+}
+
+// Contains the metric and the summary statistic you want to calculate, and the
+// order in which to sort the results, for the user sessions with the bot.
+type AnalyticsSessionMetric struct {
+
+	// The metric for which you want to get session summary statistics.
+	//   - Count – The number of sessions.
+	//   - Success – The number of sessions that succeeded.
+	//   - Failure – The number of sessions that failed.
+	//   - Dropped – The number of sessions that the user dropped.
+	//   - Duration – The duration of sessions.
+	//   - TurnsPerSession – The number of turns in the sessions.
+	//   - Concurrency – The number of sessions occurring in the same period of time.
+	//
+	// This member is required.
+	Name AnalyticsSessionMetricName
+
+	// The summary statistic to calculate.
+	//   - Sum – The total count for the category you provide in name .
+	//   - Average – The total count divided by the number of sessions in the category
+	//   you provide in name .
+	//   - Max – The highest count in the category you provide in name .
+	//
+	// This member is required.
+	Statistic AnalyticsMetricStatistic
+
+	// Specifies whether to sort the results in ascending or descending order.
+	Order AnalyticsSortOrder
+
+	noSmithyDocumentSerde
+}
+
+// An object containing the results for a session metric you requested.
+type AnalyticsSessionMetricResult struct {
+
+	// The metric that you requested.
+	//   - Count – The number of sessions.
+	//   - Success – The number of sessions that succeeded.
+	//   - Failure – The number of sessions that failed.
+	//   - Dropped – The number of sessions that the user dropped.
+	//   - Duration – The duration of sessions.
+	//   - TurnPersession – The number of turns in the sessions.
+	//   - Concurrency – The number of sessions occurring in the same period of time.
+	Name AnalyticsSessionMetricName
+
+	// The summary statistic that you requested to calculate.
+	//   - Sum – The total count for the category you provide in name .
+	//   - Average – The total count divided by the number of sessions in the category
+	//   you provide in name .
+	//   - Max – The highest count in the category you provide in name .
+	Statistic AnalyticsMetricStatistic
+
+	// The value of the summary statistic for the metric that you requested.
+	Value *float64
+
+	noSmithyDocumentSerde
+}
+
+// An object containing the results for the session metrics you requested and the
+// bin and/or group(s) they refer to, if applicable.
+type AnalyticsSessionResult struct {
+
+	// A list of objects containing the criteria you requested for binning results and
+	// the values of the bins.
+	BinKeys []AnalyticsBinKey
+
+	// A list of objects containing the criteria you requested for grouping results
+	// and the values of the bins.
+	GroupByKeys []AnalyticsSessionGroupByKey
+
+	// A list of objects, each of which contains a metric you want to list, the
+	// statistic for the metric you want to return, and the method by which to organize
+	// the results.
+	MetricsResults []AnalyticsSessionMetricResult
+
+	noSmithyDocumentSerde
+}
+
+// An object that specifies the last used intent at the time of the utterance as
+// an attribute to return.
+type AnalyticsUtteranceAttribute struct {
+
+	// An attribute to return. The only available attribute is the intent that the bot
+	// mapped the utterance to.
+	//
+	// This member is required.
+	Name AnalyticsUtteranceAttributeName
+
+	noSmithyDocumentSerde
+}
+
+// An object containing the intent that the bot mapped the utterance to.
+type AnalyticsUtteranceAttributeResult struct {
+
+	// The intent that the bot mapped the utterance to.
+	LastUsedIntent *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains fields describing a condition by which to filter the utterances. The
+// expression may be understood as name
+//
+//	operator
+//
+// values . For example:
+//   - LocaleId EQ Book – The locale is the string "en".
+//   - UtteranceText CO help – The text of the utterance contains the string
+//     "help".
+//
+// The operators that each filter supports are listed below:
+//   - BotAlias – EQ .
+//   - BotVersion – EQ .
+//   - LocaleId – EQ .
+//   - Modality – EQ .
+//   - Channel – EQ .
+//   - SessionId – EQ .
+//   - OriginatingRequestId – EQ .
+//   - UtteranceState – EQ .
+//   - UtteranceText – EQ , CO .
+type AnalyticsUtteranceFilter struct {
+
+	// The category by which to filter the utterances. The descriptions for each
+	// option are as follows:
+	//   - BotAlias – The name of the bot alias.
+	//   - BotVersion – The version of the bot.
+	//   - LocaleId – The locale of the bot.
+	//   - Modality – The modality of the session with the bot (audio, DTMF, or text).
+	//   - Channel – The channel that the bot is integrated with.
+	//   - SessionId – The identifier of the session with the bot.
+	//   - OriginatingRequestId – The identifier of the first request in a session.
+	//   - UtteranceState – The state of the utterance.
+	//   - UtteranceText – The text in the utterance.
+	//
+	// This member is required.
+	Name AnalyticsUtteranceFilterName
+
+	// The operation by which to filter the category. The following operations are
+	// possible:
+	//   - CO – Contains
+	//   - EQ – Equals
+	//   - GT – Greater than
+	//   - LT – Less than
+	// The operators that each filter supports are listed below:
+	//   - BotAlias – EQ .
+	//   - BotVersion – EQ .
+	//   - LocaleId – EQ .
+	//   - Modality – EQ .
+	//   - Channel – EQ .
+	//   - SessionId – EQ .
+	//   - OriginatingRequestId – EQ .
+	//   - UtteranceState – EQ .
+	//   - UtteranceText – EQ , CO .
+	//
+	// This member is required.
+	Operator AnalyticsFilterOperator
+
+	// An array containing the values of the category by which to apply the operator
+	// to filter the results. You can provide multiple values if the operator is EQ or
+	// CO . If you provide multiple values, you filter for results that equal/contain
+	// any of the values. For example, if the name , operator , and values fields are
+	// Modality , EQ , and [Speech, Text] , the operation filters for results where the
+	// modality was either Speech or Text .
+	//
+	// This member is required.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the category by which the utterance analytics were grouped and the
+// values for that category.
+type AnalyticsUtteranceGroupByKey struct {
+
+	// The category by which the utterance analytics were grouped.
+	Name AnalyticsUtteranceField
+
+	// A member of the category by which the utterance analytics were grouped.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the category by which to group the utterances.
+type AnalyticsUtteranceGroupBySpecification struct {
+
+	// Specifies whether to group the utterances by their text or their state.
+	//
+	// This member is required.
+	Name AnalyticsUtteranceField
+
+	noSmithyDocumentSerde
+}
+
+// Contains the metric and the summary statistic you want to calculate, and the
+// order in which to sort the results, for the utterances across the user sessions
+// with the bot.
+type AnalyticsUtteranceMetric struct {
+
+	// The metric for which you want to get utterance summary statistics.
+	//   - Count – The number of utterances.
+	//   - Missed – The number of utterances that Amazon Lex failed to recognize.
+	//   - Detected – The number of utterances that Amazon Lex managed to detect.
+	//   - UtteranceTimestamp – The date and time of the utterance.
+	//
+	// This member is required.
+	Name AnalyticsUtteranceMetricName
+
+	// The summary statistic to calculate.
+	//   - Sum – The total count for the category you provide in name .
+	//   - Average – The total count divided by the number of utterances in the
+	//   category you provide in name .
+	//   - Max – The highest count in the category you provide in name .
+	//
+	// This member is required.
+	Statistic AnalyticsMetricStatistic
+
+	// Specifies whether to sort the results in ascending or descending order.
+	Order AnalyticsSortOrder
+
+	noSmithyDocumentSerde
+}
+
+// An object containing the results for the utterance metric you requested.
+type AnalyticsUtteranceMetricResult struct {
+
+	// The metric that you requested.
+	//   - Count – The number of utterances.
+	//   - Missed – The number of utterances that Amazon Lex failed to recognize.
+	//   - Detected – The number of utterances that Amazon Lex managed to detect.
+	//   - UtteranceTimeStamp – The date and time of the utterance.
+	Name AnalyticsUtteranceMetricName
+
+	// The summary statistic that you requested to calculate.
+	//   - Sum – The total count for the category you provide in name .
+	//   - Average – The total count divided by the number of utterances in the
+	//   category you provide in name .
+	//   - Max – The highest count in the category you provide in name .
+	Statistic AnalyticsMetricStatistic
+
+	// The value of the summary statistic for the metric that you requested.
+	Value *float64
+
+	noSmithyDocumentSerde
+}
+
+// An object containing the results for the utterance metrics you requested and
+// the bin and/or group(s) they refer to, if applicable.
+type AnalyticsUtteranceResult struct {
+
+	// A list of objects containing information about the last used intent at the time
+	// of an utterance.
+	AttributeResults []AnalyticsUtteranceAttributeResult
+
+	// A list of objects containing the criteria you requested for binning results and
+	// the values of the bins.
+	BinKeys []AnalyticsBinKey
+
+	// A list of objects containing the criteria you requested for grouping results
+	// and the values of the bins.
+	GroupByKeys []AnalyticsUtteranceGroupByKey
+
+	// A list of objects, each of which contains a metric you want to list, the
+	// statistic for the metric you want to return, and the method by which to organize
+	// the results.
+	MetricsResults []AnalyticsUtteranceMetricResult
+
+	noSmithyDocumentSerde
+}
+
 // The object containing information that associates the recommended intent/slot
 // type with a conversation.
 type AssociatedTranscript struct {
@@ -2095,6 +2913,15 @@ type IntentSummary struct {
 	noSmithyDocumentSerde
 }
 
+// An object containing the name of an intent that was invoked.
+type InvokedIntentSample struct {
+
+	// The name of an intent that was invoked.
+	IntentName *string
+
+	noSmithyDocumentSerde
+}
+
 // Provides configuration information for the AMAZON.KendraSearchIntent intent.
 // When you use this intent, Amazon Lex searches the specified Amazon Kendra index
 // and returns documents from the index that match the user's utterance.
@@ -2680,6 +3507,81 @@ type SentimentAnalysisSettings struct {
 	//
 	// This member is required.
 	DetectSentiment bool
+
+	noSmithyDocumentSerde
+}
+
+// An object specifying the measure and method by which to sort the session
+// analytics data.
+type SessionDataSortBy struct {
+
+	// The measure by which to sort the session analytics data.
+	//   - conversationStartTime – The date and time when the conversation began. A
+	//   conversation is defined as a unique combination of a sessionId and an
+	//   originatingRequestId .
+	//   - numberOfTurns – The number of turns that the session took.
+	//   - conversationDurationSeconds – The duration of the conversation in seconds.
+	//
+	// This member is required.
+	Name AnalyticsSessionSortByName
+
+	// Specifies whether to sort the results in ascending or descending order.
+	//
+	// This member is required.
+	Order AnalyticsSortOrder
+
+	noSmithyDocumentSerde
+}
+
+// An object containing information about a specific session.
+type SessionSpecification struct {
+
+	// The identifier of the alias of the bot that the session was held with.
+	BotAliasId *string
+
+	// The version of the bot that the session was held with.
+	BotVersion *string
+
+	// The channel that is integrated with the bot that the session was held with.
+	Channel BotChannelType
+
+	// The duration of the conversation in seconds. A conversation is defined as a
+	// unique combination of a sessionId and an originatingRequestId .
+	ConversationDurationSeconds *int64
+
+	// The final state of the conversation. A conversation is defined as a unique
+	// combination of a sessionId and an originatingRequestId .
+	ConversationEndState ConversationEndState
+
+	// The date and time when the conversation ended. A conversation is defined as a
+	// unique combination of a sessionId and an originatingRequestId .
+	ConversationEndTime *time.Time
+
+	// The date and time when the conversation began. A conversation is defined as a
+	// unique combination of a sessionId and an originatingRequestId .
+	ConversationStartTime *time.Time
+
+	// A list of objects containing the name of an intent that was invoked.
+	InvokedIntentSamples []InvokedIntentSample
+
+	// The locale of the bot that the session was held with.
+	LocaleId *string
+
+	// The mode of the session. The possible values are as follows:
+	//   - Speech – The session was spoken.
+	//   - Text – The session was written.
+	//   - DTMF – The session used a touch-tone keypad (Dual Tone Multi-Frequency).
+	//   - MultiMode – The session used multiple modes.
+	Mode AnalyticsModality
+
+	// The number of turns that the session took.
+	NumberOfTurns *int64
+
+	// The identifier of the first request in a session.
+	OriginatingRequestId *string
+
+	// The identifier of the session.
+	SessionId *string
 
 	noSmithyDocumentSerde
 }
@@ -3795,6 +4697,50 @@ type UtteranceAudioInputSpecification struct {
 	noSmithyDocumentSerde
 }
 
+// An object that contains a response to the utterance from the bot.
+type UtteranceBotResponse struct {
+
+	// The text of the response to the utterance from the bot.
+	Content *string
+
+	// The type of the response. The following values are possible:
+	//   - PlainText – A plain text string.
+	//   - CustomPayload – A response string that you can customize to include data or
+	//   metadata for your application.
+	//   - SSML – A string that includes Speech Synthesis Markup Language to customize
+	//   the audio response.
+	//   - ImageResponseCard – An image with buttons that the customer can select. See
+	//   ImageResponseCard (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_runtime_ImageResponseCard.html)
+	//   for more information.
+	ContentType UtteranceContentType
+
+	// A card that is shown to the user by a messaging platform. You define the
+	// contents of the card, the card is displayed by the platform. When you use a
+	// response card, the response from the user is constrained to the text associated
+	// with a button on the card.
+	ImageResponseCard *ImageResponseCard
+
+	noSmithyDocumentSerde
+}
+
+// An object specifying the measure and method by which to sort the utterance data.
+type UtteranceDataSortBy struct {
+
+	// The measure by which to sort the utterance analytics data.
+	//   - Count – The number of utterances.
+	//   - UtteranceTimeStamp – The date and time of the utterance.
+	//
+	// This member is required.
+	Name AnalyticsUtteranceSortByName
+
+	// Specifies whether to sort the results in ascending or descending order.
+	//
+	// This member is required.
+	Order AnalyticsSortOrder
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about input of an utterance.
 type UtteranceInputSpecification struct {
 
@@ -3837,6 +4783,105 @@ type UtteranceLevelTestResults struct {
 	//
 	// This member is required.
 	Items []UtteranceLevelTestResultItem
+
+	noSmithyDocumentSerde
+}
+
+// An object containing information about a specific utterance.
+type UtteranceSpecification struct {
+
+	// The name of the intent that the utterance is associated to.
+	AssociatedIntentName *string
+
+	// The name of the slot that the utterance is associated to.
+	AssociatedSlotName *string
+
+	// The duration in milliseconds of the audio associated with the utterance.
+	AudioVoiceDurationMillis *int64
+
+	// The identifier of the alias of the bot that the utterance was made to.
+	BotAliasId *string
+
+	// The identifier for the audio of the bot response.
+	BotResponseAudioVoiceId *string
+
+	// A list of objects containing information about the bot response to the
+	// utterance.
+	BotResponses []UtteranceBotResponse
+
+	// The version of the bot that the utterance was made to.
+	BotVersion *string
+
+	// The channel that is integrated with the bot that the utterance was made to.
+	Channel BotChannelType
+
+	// The date and time when the conversation in which the utterance took place
+	// ended. A conversation is defined as a unique combination of a sessionId and an
+	// originatingRequestId .
+	ConversationEndTime *time.Time
+
+	// The date and time when the conversation in which the utterance took place
+	// began. A conversation is defined as a unique combination of a sessionId and an
+	// originatingRequestId .
+	ConversationStartTime *time.Time
+
+	// The type of dialog action that the utterance is associated to. See the type
+	// field in DialogAction (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_runtime_DialogAction.html)
+	// for more information.
+	DialogActionType *string
+
+	// The input type of the utterance. The possible values are as follows:
+	//   - PCM format: audio data must be in little-endian byte order.
+	//   - audio/l16; rate=16000; channels=1
+	//   - audio/x-l16; sample-rate=16000; channel-count=1
+	//   - audio/lpcm; sample-rate=8000; sample-size-bits=16; channel-count=1;
+	//   is-big-endian=false
+	//   - Opus format
+	//   -
+	//   audio/x-cbr-opus-with-preamble;preamble-size=0;bit-rate=256000;frame-size-milliseconds=4
+	//   - Text format
+	//   - text/plain; charset=utf-8
+	InputType *string
+
+	// The state of the intent that the utterance is associated to.
+	IntentState IntentState
+
+	// The locale of the bot that the utterance was made to.
+	LocaleId *string
+
+	// The mode of the session. The possible values are as follows:
+	//   - Speech – The session consisted of spoken dialogue.
+	//   - Text – The session consisted of written dialogue.
+	//   - DTMF – The session consisted of touch-tone keypad (Dual Tone
+	//   Multi-Frequency) key presses.
+	//   - MultiMode – The session consisted of multiple modes.
+	Mode AnalyticsModality
+
+	// The output type of the utterance. The possible values are as follows:
+	//   - audio/mpeg
+	//   - audio/ogg
+	//   - audio/pcm (16 KHz)
+	//   - audio/ (defaults to mpeg )
+	//   - text/plain; charset=utf-8
+	OutputType *string
+
+	// The identifier of the session that the utterance was made in.
+	SessionId *string
+
+	// The slots that have been filled in the session by the time of the utterance.
+	SlotsFilledInSession *string
+
+	// The text of the utterance.
+	Utterance *string
+
+	// The identifier of the request associated with the utterance.
+	UtteranceRequestId *string
+
+	// The date and time when the utterance took place.
+	UtteranceTimestamp *time.Time
+
+	// Specifies whether the bot understood the utterance or not.
+	UtteranceUnderstood bool
 
 	noSmithyDocumentSerde
 }

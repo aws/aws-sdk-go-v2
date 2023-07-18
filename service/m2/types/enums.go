@@ -193,9 +193,9 @@ type EnvironmentLifecycle string
 const (
 	EnvironmentLifecycleCreating  EnvironmentLifecycle = "Creating"
 	EnvironmentLifecycleAvailable EnvironmentLifecycle = "Available"
+	EnvironmentLifecycleUpdating  EnvironmentLifecycle = "Updating"
 	EnvironmentLifecycleDeleting  EnvironmentLifecycle = "Deleting"
 	EnvironmentLifecycleFailed    EnvironmentLifecycle = "Failed"
-	EnvironmentLifecycleUpdating  EnvironmentLifecycle = "Updating"
 )
 
 // Values returns all known values for EnvironmentLifecycle. Note that this can be
@@ -205,9 +205,9 @@ func (EnvironmentLifecycle) Values() []EnvironmentLifecycle {
 	return []EnvironmentLifecycle{
 		"Creating",
 		"Available",
+		"Updating",
 		"Deleting",
 		"Failed",
-		"Updating",
 	}
 }
 

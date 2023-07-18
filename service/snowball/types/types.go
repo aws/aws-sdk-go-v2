@@ -58,6 +58,10 @@ type Address struct {
 	// The third line in a street address that a Snow device is to be delivered to.
 	Street3 *string
 
+	// Differentiates between delivery address and pickup address in the customer
+	// account. Provided at job creation.
+	Type AddressType
+
 	noSmithyDocumentSerde
 }
 
@@ -215,9 +219,9 @@ type DeviceConfiguration struct {
 }
 
 // A JSON-formatted object that contains the IDs for an Amazon Machine Image
-// (AMI), including the Amazon EC2 AMI ID and the Snow device AMI ID. Each AMI has
-// these two IDs to simplify identifying the AMI in both the Amazon Web Services
-// Cloud and on the device.
+// (AMI), including the Amazon EC2-compatible AMI ID and the Snow device AMI ID.
+// Each AMI has these two IDs to simplify identifying the AMI in both the Amazon
+// Web Services Cloud and on the device.
 type Ec2AmiResource struct {
 
 	// The ID of the AMI in Amazon EC2.
@@ -358,6 +362,10 @@ type JobMetadata struct {
 	// to its primary address. This field is not supported in most regions.
 	ForwardingAddressId *string
 
+	// The highest impact level of data that will be stored or processed on the
+	// device, provided at job creation.
+	ImpactLevel ImpactLevel
+
 	// The automatically generated ID for a job, for example
 	// JID123e4567-e89b-12d3-a456-426655440000 .
 	JobId *string
@@ -391,6 +399,9 @@ type JobMetadata struct {
 	// Services Snow Family device.
 	OnDeviceServiceConfiguration *OnDeviceServiceConfiguration
 
+	// Information identifying the person picking up the device.
+	PickupDetails *PickupDetails
+
 	// Allows you to securely operate and manage Snowcone devices remotely from
 	// outside of your internal network. When set to INSTALLED_AUTOSTART , remote
 	// management will automatically be available when the device arrives at your
@@ -417,6 +428,9 @@ type JobMetadata struct {
 	// "https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html"
 	// (Snow Family Devices and Capacity) in the Snowcone User Guide.
 	SnowballCapacityPreference SnowballCapacity
+
+	// Unique ID associated with a device.
+	SnowballId *string
 
 	// The type of device used with this job.
 	SnowballType SnowballType
@@ -537,6 +551,10 @@ type NFSOnDeviceServiceConfiguration struct {
 // notifications sent out for all job states with NotifyAll set to true.
 type Notification struct {
 
+	// Used to send SNS notifications for the person picking up the device (identified
+	// during job creation).
+	DevicePickupSnsTopicARN *string
+
 	// The list of job states that will trigger a notification for this job.
 	JobStatesToNotify []JobState
 
@@ -569,6 +587,34 @@ type OnDeviceServiceConfiguration struct {
 	// Represents the Storage Gateway service Tape Gateway type on a Snow Family
 	// device.
 	TGWOnDeviceService *TGWOnDeviceServiceConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Information identifying the person picking up the device.
+type PickupDetails struct {
+
+	// The unique ID for a device that will be picked up.
+	DevicePickupId *string
+
+	// The email address of the person picking up the device.
+	Email *string
+
+	// Expiration date of the credential identifying the person picking up the device.
+	IdentificationExpirationDate *time.Time
+
+	// Organization that issued the credential identifying the person picking up the
+	// device.
+	IdentificationIssuingOrg *string
+
+	// The number on the credential identifying the person picking up the device.
+	IdentificationNumber *string
+
+	// The name of the person picking up the device.
+	Name *string
+
+	// The phone number of the person picking up the device.
+	PhoneNumber *string
 
 	noSmithyDocumentSerde
 }

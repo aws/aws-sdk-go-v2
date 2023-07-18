@@ -12,7 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of all the scans in an account.
+// Returns a list of all the standard scans in an account. Does not return express
+// scans.
 func (c *Client) ListScans(ctx context.Context, params *ListScansInput, optFns ...func(*Options)) (*ListScansOutput, error) {
 	if params == nil {
 		params = &ListScansInput{}

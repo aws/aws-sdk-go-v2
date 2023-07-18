@@ -61,7 +61,9 @@ type CreateApplicationInput struct {
 	// The identifier of a customer managed key.
 	KmsKeyId *string
 
-	// The Amazon Resource Name (ARN) of the role associated with the application.
+	// The Amazon Resource Name (ARN) that identifies a role that the application uses
+	// to access Amazon Web Services resources that are not part of the application or
+	// are in a different Amazon Web Services account.
 	RoleArn *string
 
 	// A list of tags to apply to the application.

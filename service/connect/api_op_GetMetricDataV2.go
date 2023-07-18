@@ -54,6 +54,7 @@ type GetMetricDataV2Input struct {
 	//   - Agents
 	//   - Channels
 	//   - User hierarchy groups
+	//   - Feature
 	// At least one filter must be passed from queues, routing profiles, agents, or
 	// user hierarchy groups. To filter by phone number, see Create a historical
 	// metrics report (https://docs.aws.amazon.com/connect/latest/adminguide/create-historical-metrics-report.html)
@@ -62,12 +63,15 @@ type GetMetricDataV2Input struct {
 	//   Valid filter keys: QUEUE | ROUTING_PROFILE | AGENT | CHANNEL |
 	//   AGENT_HIERARCHY_LEVEL_ONE | AGENT_HIERARCHY_LEVEL_TWO |
 	//   AGENT_HIERARCHY_LEVEL_THREE | AGENT_HIERARCHY_LEVEL_FOUR |
-	//   AGENT_HIERARCHY_LEVEL_FIVE
+	//   AGENT_HIERARCHY_LEVEL_FIVE | FEATURE
 	//   - Filter values: A maximum of 100 filter values are supported in a single
 	//   request. VOICE, CHAT, and TASK are valid filterValue for the CHANNEL filter
 	//   key. They do not count towards limitation of 100 filter values. For example, a
 	//   GetMetricDataV2 request can filter by 50 queues, 35 agents, and 15 routing
 	//   profiles for a total of 100 filter values, along with 3 channel filters.
+	//   contact_lens_conversational_analytics is a valid filterValue for the FEATURE
+	//   filter key. It is available only to contacts analyzed by Contact Lens
+	//   conversational analytics.
 	//
 	// This member is required.
 	Filters []types.FilterV2
@@ -92,28 +96,64 @@ type GetMetricDataV2Input struct {
 	// Profile, Agent, Agent Hierarchy AVG_ABANDON_TIME Unit: Seconds Valid groupings
 	// and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy
 	// AVG_AFTER_CONTACT_WORK_TIME Unit: Seconds Valid groupings and filters: Queue,
-	// Channel, Routing Profile, Agent, Agent Hierarchy AVG_AGENT_CONNECTING_TIME Unit:
-	// Seconds Valid metric filter key: INITIATION_METHOD . For now, this metric only
-	// supports the following as INITIATION_METHOD : INBOUND | OUTBOUND | CALLBACK |
-	// API Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy AVG_HANDLE_TIME Unit: Seconds Valid groupings and filters: Queue,
-	// Channel, Routing Profile, Agent, Agent Hierarchy AVG_HOLD_TIME Unit: Seconds
-	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy AVG_INTERACTION_AND_HOLD_TIME Unit: Seconds Valid groupings and
+	// Channel, Routing Profile, Agent, Agent Hierarchy, Feature Feature is a valid
+	// filter but not a valid grouping. AVG_AGENT_CONNECTING_TIME Unit: Seconds Valid
+	// metric filter key: INITIATION_METHOD . For now, this metric only supports the
+	// following as INITIATION_METHOD : INBOUND | OUTBOUND | CALLBACK | API Valid
+	// groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy
+	// AVG_AGENT_CONNECTING_TIME Unit: Seconds Valid metric filter key:
+	// INITIATION_METHOD . For now, this metric only supports the following as
+	// INITIATION_METHOD : INBOUND | OUTBOUND | CALLBACK | API Valid groupings and
 	// filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy
-	// AVG_INTERACTION_TIME Unit: Seconds Valid groupings and filters: Queue, Channel,
-	// Routing Profile AVG_QUEUE_ANSWER_TIME Unit: Seconds Valid groupings and filters:
-	// Queue, Channel, Routing Profile CONTACTS_ABANDONED Unit: Count Valid groupings
+	// AVG_CONTACT_DURATION Unit: Seconds Valid groupings and filters: Queue, Channel,
+	// Routing Profile, Agent, Agent Hierarchy, Feature Feature is a valid filter but
+	// not a valid grouping. AVG_CONVERSATION_DURATION Unit: Seconds Valid groupings
 	// and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy
-	// CONTACTS_CREATED Unit: Count Valid metric filter key: INITIATION_METHOD Valid
-	// groupings and filters: Queue, Channel, Routing Profile CONTACTS_HANDLED Unit:
-	// Count Valid metric filter key: INITIATION_METHOD , DISCONNECT_REASON Valid
+	// AVG_GREETING_TIME_AGENT This metric is available only for contacts analyzed by
+	// Contact Lens conversational analytics. Unit: Seconds Valid groupings and
+	// filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy AVG_HANDLE_TIME
+	// Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile,
+	// Agent, Agent Hierarchy, Feature Feature is a valid filter but not a valid
+	// grouping. AVG_HOLD_TIME Unit: Seconds Valid groupings and filters: Queue,
+	// Channel, Routing Profile, Agent, Agent Hierarchy, Feature Feature is a valid
+	// filter but not a valid grouping. AVG_HOLDS Unit: Count Valid groupings and
+	// filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature
+	// Feature is a valid filter but not a valid grouping.
+	// AVG_INTERACTION_AND_HOLD_TIME Unit: Seconds Valid groupings and filters: Queue,
+	// Channel, Routing Profile, Agent, Agent Hierarchy AVG_INTERACTION_TIME Unit:
+	// Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Feature
+	// Feature is a valid filter but not a valid grouping. AVG_INTERRUPTIONS_AGENT This
+	// metric is available only for contacts analyzed by Contact Lens conversational
+	// analytics. Unit: Count Valid groupings and filters: Queue, Channel, Routing
+	// Profile, Agent, Agent Hierarchy AVG_INTERRUPTION_TIME_AGENT This metric is
+	// available only for contacts analyzed by Contact Lens conversational analytics.
+	// Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile,
+	// Agent, Agent Hierarchy AVG_NON_TALK_TIME This metric is available only for
+	// contacts analyzed by Contact Lens conversational analytics. Unit: Seconds Valid
 	// groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy
-	// CONTACTS_HOLD_ABANDONS Unit: Count Valid groupings and filters: Queue, Channel,
-	// Routing Profile, Agent, Agent Hierarchy CONTACTS_QUEUED Unit: Count Valid
+	// AVG_QUEUE_ANSWER_TIME Unit: Seconds Valid groupings and filters: Queue, Channel,
+	// Routing Profile, Feature Feature is a valid filter but not a valid grouping.
+	// AVG_TALK_TIME This metric is available only for contacts analyzed by Contact
+	// Lens conversational analytics. Unit: Seconds Valid groupings and filters: Queue,
+	// Channel, Routing Profile, Agent, Agent Hierarchy AVG_TALK_TIME_AGENT This metric
+	// is available only for contacts analyzed by Contact Lens conversational
+	// analytics. Unit: Seconds Valid groupings and filters: Queue, Channel, Routing
+	// Profile, Agent, Agent Hierarchy AVG_TALK_TIME_CUSTOMER This metric is available
+	// only for contacts analyzed by Contact Lens conversational analytics. Unit:
+	// Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
+	// Agent Hierarchy CONTACTS_ABANDONED Unit: Count Valid groupings and filters:
+	// Queue, Channel, Routing Profile, Agent, Agent Hierarchy CONTACTS_CREATED Unit:
+	// Count Valid metric filter key: INITIATION_METHOD Valid groupings and filters:
+	// Queue, Channel, Routing Profile, Feature Feature is a valid filter but not a
+	// valid grouping. CONTACTS_HANDLED Unit: Count Valid metric filter key:
+	// INITIATION_METHOD , DISCONNECT_REASON Valid groupings and filters: Queue,
+	// Channel, Routing Profile, Agent, Agent Hierarchy, Feature Feature is a valid
+	// filter but not a valid grouping. CONTACTS_HOLD_ABANDONS Unit: Count Valid
 	// groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy
-	// CONTACTS_TRANSFERRED_OUT Unit: Count Valid groupings and filters: Queue,
-	// Channel, Routing Profile, Agent, Agent Hierarchy
+	// CONTACTS_QUEUED Unit: Count Valid groupings and filters: Queue, Channel, Routing
+	// Profile, Agent, Agent Hierarchy CONTACTS_TRANSFERRED_OUT Unit: Count Valid
+	// groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,
+	// Feature Feature is a valid filter but not a valid grouping.
 	// CONTACTS_TRANSFERRED_OUT_BY_AGENT Unit: Count Valid groupings and filters:
 	// Queue, Channel, Routing Profile, Agent, Agent Hierarchy
 	// CONTACTS_TRANSFERRED_OUT_FROM_QUEUE Unit: Count Valid groupings and filters:

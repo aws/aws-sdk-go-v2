@@ -11,6 +11,7 @@ import (
 	"github.com/aws/smithy-go/encoding/httpbinding"
 	smithyjson "github.com/aws/smithy-go/encoding/json"
 	"github.com/aws/smithy-go/middleware"
+	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"math"
 	"path"
@@ -1171,6 +1172,61 @@ func (m *awsAwsjson11_serializeOpListLongTermPricing) HandleSerialize(ctx contex
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpListPickupLocations struct {
+}
+
+func (*awsAwsjson11_serializeOpListPickupLocations) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpListPickupLocations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListPickupLocationsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSIESnowballJobManagementService.ListPickupLocations")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentListPickupLocationsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpListServiceVersions struct {
 }
 
@@ -1519,6 +1575,11 @@ func awsAwsjson11_serializeDocumentAddress(v *types.Address, value smithyjson.Va
 		ok.String(*v.Street3)
 	}
 
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
 	return nil
 }
 
@@ -1772,6 +1833,11 @@ func awsAwsjson11_serializeDocumentNotification(v *types.Notification, value smi
 	object := value.Object()
 	defer object.Close()
 
+	if v.DevicePickupSnsTopicARN != nil {
+		ok := object.Key("DevicePickupSnsTopicARN")
+		ok.String(*v.DevicePickupSnsTopicARN)
+	}
+
 	if v.JobStatesToNotify != nil {
 		ok := object.Key("JobStatesToNotify")
 		if err := awsAwsjson11_serializeDocumentJobStateList(v.JobStatesToNotify, ok); err != nil {
@@ -1822,6 +1888,48 @@ func awsAwsjson11_serializeDocumentOnDeviceServiceConfiguration(v *types.OnDevic
 		if err := awsAwsjson11_serializeDocumentTGWOnDeviceServiceConfiguration(v.TGWOnDeviceService, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPickupDetails(v *types.PickupDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DevicePickupId != nil {
+		ok := object.Key("DevicePickupId")
+		ok.String(*v.DevicePickupId)
+	}
+
+	if v.Email != nil {
+		ok := object.Key("Email")
+		ok.String(*v.Email)
+	}
+
+	if v.IdentificationExpirationDate != nil {
+		ok := object.Key("IdentificationExpirationDate")
+		ok.Double(smithytime.FormatEpochSeconds(*v.IdentificationExpirationDate))
+	}
+
+	if v.IdentificationIssuingOrg != nil {
+		ok := object.Key("IdentificationIssuingOrg")
+		ok.String(*v.IdentificationIssuingOrg)
+	}
+
+	if v.IdentificationNumber != nil {
+		ok := object.Key("IdentificationNumber")
+		ok.String(*v.IdentificationNumber)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.PhoneNumber != nil {
+		ok := object.Key("PhoneNumber")
+		ok.String(*v.PhoneNumber)
 	}
 
 	return nil
@@ -2176,6 +2284,11 @@ func awsAwsjson11_serializeOpDocumentCreateJobInput(v *CreateJobInput, value smi
 		ok.String(*v.ForwardingAddressId)
 	}
 
+	if len(v.ImpactLevel) > 0 {
+		ok := object.Key("ImpactLevel")
+		ok.String(string(v.ImpactLevel))
+	}
+
 	if len(v.JobType) > 0 {
 		ok := object.Key("JobType")
 		ok.String(string(v.JobType))
@@ -2201,6 +2314,13 @@ func awsAwsjson11_serializeOpDocumentCreateJobInput(v *CreateJobInput, value smi
 	if v.OnDeviceServiceConfiguration != nil {
 		ok := object.Key("OnDeviceServiceConfiguration")
 		if err := awsAwsjson11_serializeDocumentOnDeviceServiceConfiguration(v.OnDeviceServiceConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PickupDetails != nil {
+		ok := object.Key("PickupDetails")
+		if err := awsAwsjson11_serializeDocumentPickupDetails(v.PickupDetails, ok); err != nil {
 			return err
 		}
 	}
@@ -2484,6 +2604,23 @@ func awsAwsjson11_serializeOpDocumentListLongTermPricingInput(v *ListLongTermPri
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentListPickupLocationsInput(v *ListPickupLocationsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentListServiceVersionsInput(v *ListServiceVersionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2605,6 +2742,13 @@ func awsAwsjson11_serializeOpDocumentUpdateJobInput(v *UpdateJobInput, value smi
 	if v.OnDeviceServiceConfiguration != nil {
 		ok := object.Key("OnDeviceServiceConfiguration")
 		if err := awsAwsjson11_serializeDocumentOnDeviceServiceConfiguration(v.OnDeviceServiceConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PickupDetails != nil {
+		ok := object.Key("PickupDetails")
+		if err := awsAwsjson11_serializeDocumentPickupDetails(v.PickupDetails, ok); err != nil {
 			return err
 		}
 	}

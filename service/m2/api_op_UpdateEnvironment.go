@@ -41,7 +41,8 @@ type UpdateEnvironmentInput struct {
 	// applyDuringMaintenanceWindow is set to true.
 	ApplyDuringMaintenanceWindow bool
 
-	// The desired capacity for the runtime environment to update.
+	// The desired capacity for the runtime environment to update. The minimum
+	// possible value is 0 and the maximum is 100.
 	DesiredCapacity *int32
 
 	// The version of the runtime engine for the runtime environment.

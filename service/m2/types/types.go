@@ -739,7 +739,8 @@ type GdgDetailAttributes struct {
 // Defines the details of a high availability configuration.
 type HighAvailabilityConfig struct {
 
-	// The number of instances in a high availability configuration.
+	// The number of instances in a high availability configuration. The minimum
+	// possible value is 1 and the maximum is 100.
 	//
 	// This member is required.
 	DesiredCapacity *int32

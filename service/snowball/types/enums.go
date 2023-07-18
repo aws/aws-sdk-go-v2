@@ -2,6 +2,24 @@
 
 package types
 
+type AddressType string
+
+// Enum values for AddressType
+const (
+	AddressTypeCustPickup AddressType = "CUST_PICKUP"
+	AddressTypeAwsShip    AddressType = "AWS_SHIP"
+)
+
+// Values returns all known values for AddressType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (AddressType) Values() []AddressType {
+	return []AddressType{
+		"CUST_PICKUP",
+		"AWS_SHIP",
+	}
+}
+
 type ClusterState string
 
 // Enum values for ClusterState
@@ -41,6 +59,30 @@ func (DeviceServiceName) Values() []DeviceServiceName {
 	return []DeviceServiceName{
 		"NFS_ON_DEVICE_SERVICE",
 		"S3_ON_DEVICE_SERVICE",
+	}
+}
+
+type ImpactLevel string
+
+// Enum values for ImpactLevel
+const (
+	ImpactLevelIl2  ImpactLevel = "IL2"
+	ImpactLevelIl4  ImpactLevel = "IL4"
+	ImpactLevelIl5  ImpactLevel = "IL5"
+	ImpactLevelIl6  ImpactLevel = "IL6"
+	ImpactLevelIl99 ImpactLevel = "IL99"
+)
+
+// Values returns all known values for ImpactLevel. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ImpactLevel) Values() []ImpactLevel {
+	return []ImpactLevel{
+		"IL2",
+		"IL4",
+		"IL5",
+		"IL6",
+		"IL99",
 	}
 }
 
@@ -130,6 +172,7 @@ type RemoteManagement string
 const (
 	RemoteManagementInstalledOnly      RemoteManagement = "INSTALLED_ONLY"
 	RemoteManagementInstalledAutostart RemoteManagement = "INSTALLED_AUTOSTART"
+	RemoteManagementNotInstalled       RemoteManagement = "NOT_INSTALLED"
 )
 
 // Values returns all known values for RemoteManagement. Note that this can be
@@ -139,6 +182,7 @@ func (RemoteManagement) Values() []RemoteManagement {
 	return []RemoteManagement{
 		"INSTALLED_ONLY",
 		"INSTALLED_AUTOSTART",
+		"NOT_INSTALLED",
 	}
 }
 
@@ -236,6 +280,7 @@ const (
 	SnowballCapacityT32          SnowballCapacity = "T32"
 	SnowballCapacityNoPreference SnowballCapacity = "NoPreference"
 	SnowballCapacityT240         SnowballCapacity = "T240"
+	SnowballCapacityT13          SnowballCapacity = "T13"
 )
 
 // Values returns all known values for SnowballCapacity. Note that this can be
@@ -253,6 +298,7 @@ func (SnowballCapacity) Values() []SnowballCapacity {
 		"T32",
 		"NoPreference",
 		"T240",
+		"T13",
 	}
 }
 
@@ -269,6 +315,7 @@ const (
 	SnowballTypeSnc1Ssd  SnowballType = "SNC1_SSD"
 	SnowballTypeV35c     SnowballType = "V3_5C"
 	SnowballTypeV35s     SnowballType = "V3_5S"
+	SnowballTypeRack5uC  SnowballType = "RACK_5U_C"
 )
 
 // Values returns all known values for SnowballType. Note that this can be
@@ -285,6 +332,7 @@ func (SnowballType) Values() []SnowballType {
 		"SNC1_SSD",
 		"V3_5C",
 		"V3_5S",
+		"RACK_5U_C",
 	}
 }
 

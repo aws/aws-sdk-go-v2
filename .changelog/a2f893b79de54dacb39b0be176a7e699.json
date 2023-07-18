@@ -1,0 +1,8 @@
+{
+    "id": "a2f893b7-9de5-4dac-b39b-0be176a7e699",
+    "type": "feature",
+    "description": "Regex Validation on the ElasticSearch Engine Version attribute",
+    "modules": [
+        "service/elasticsearchservice"
+    ]
+}

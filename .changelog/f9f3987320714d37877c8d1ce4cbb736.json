@@ -1,0 +1,8 @@
+{
+    "id": "f9f39873-2071-4d37-877c-8d1ce4cbb736",
+    "type": "feature",
+    "description": "Allows UpdateEnvironment to update the environment to 0 host capacity. New GetSignedBluinsightsUrl API",
+    "modules": [
+        "service/m2"
+    ]
+}

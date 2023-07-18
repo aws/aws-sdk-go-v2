@@ -57,6 +57,524 @@ func (AggregatedUtterancesSortAttribute) Values() []AggregatedUtterancesSortAttr
 	}
 }
 
+type AnalyticsBinByName string
+
+// Enum values for AnalyticsBinByName
+const (
+	AnalyticsBinByNameConversationStartTime AnalyticsBinByName = "ConversationStartTime"
+	AnalyticsBinByNameUtteranceTimestamp    AnalyticsBinByName = "UtteranceTimestamp"
+)
+
+// Values returns all known values for AnalyticsBinByName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AnalyticsBinByName) Values() []AnalyticsBinByName {
+	return []AnalyticsBinByName{
+		"ConversationStartTime",
+		"UtteranceTimestamp",
+	}
+}
+
+type AnalyticsCommonFilterName string
+
+// Enum values for AnalyticsCommonFilterName
+const (
+	AnalyticsCommonFilterNameBotAliasId AnalyticsCommonFilterName = "BotAliasId"
+	AnalyticsCommonFilterNameBotVersion AnalyticsCommonFilterName = "BotVersion"
+	AnalyticsCommonFilterNameLocaleId   AnalyticsCommonFilterName = "LocaleId"
+	AnalyticsCommonFilterNameModality   AnalyticsCommonFilterName = "Modality"
+	AnalyticsCommonFilterNameChannel    AnalyticsCommonFilterName = "Channel"
+)
+
+// Values returns all known values for AnalyticsCommonFilterName. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AnalyticsCommonFilterName) Values() []AnalyticsCommonFilterName {
+	return []AnalyticsCommonFilterName{
+		"BotAliasId",
+		"BotVersion",
+		"LocaleId",
+		"Modality",
+		"Channel",
+	}
+}
+
+type AnalyticsFilterOperator string
+
+// Enum values for AnalyticsFilterOperator
+const (
+	AnalyticsFilterOperatorEquals      AnalyticsFilterOperator = "EQ"
+	AnalyticsFilterOperatorGreaterThan AnalyticsFilterOperator = "GT"
+	AnalyticsFilterOperatorLessThan    AnalyticsFilterOperator = "LT"
+)
+
+// Values returns all known values for AnalyticsFilterOperator. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AnalyticsFilterOperator) Values() []AnalyticsFilterOperator {
+	return []AnalyticsFilterOperator{
+		"EQ",
+		"GT",
+		"LT",
+	}
+}
+
+type AnalyticsIntentField string
+
+// Enum values for AnalyticsIntentField
+const (
+	AnalyticsIntentFieldIntentName     AnalyticsIntentField = "IntentName"
+	AnalyticsIntentFieldIntentEndState AnalyticsIntentField = "IntentEndState"
+	AnalyticsIntentFieldIntentLevel    AnalyticsIntentField = "IntentLevel"
+)
+
+// Values returns all known values for AnalyticsIntentField. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AnalyticsIntentField) Values() []AnalyticsIntentField {
+	return []AnalyticsIntentField{
+		"IntentName",
+		"IntentEndState",
+		"IntentLevel",
+	}
+}
+
+type AnalyticsIntentFilterName string
+
+// Enum values for AnalyticsIntentFilterName
+const (
+	AnalyticsIntentFilterNameBotAliasId           AnalyticsIntentFilterName = "BotAliasId"
+	AnalyticsIntentFilterNameBotVersion           AnalyticsIntentFilterName = "BotVersion"
+	AnalyticsIntentFilterNameLocaleId             AnalyticsIntentFilterName = "LocaleId"
+	AnalyticsIntentFilterNameModality             AnalyticsIntentFilterName = "Modality"
+	AnalyticsIntentFilterNameChannel              AnalyticsIntentFilterName = "Channel"
+	AnalyticsIntentFilterNameSessionId            AnalyticsIntentFilterName = "SessionId"
+	AnalyticsIntentFilterNameOriginatingRequestId AnalyticsIntentFilterName = "OriginatingRequestId"
+	AnalyticsIntentFilterNameIntentName           AnalyticsIntentFilterName = "IntentName"
+	AnalyticsIntentFilterNameIntentEndState       AnalyticsIntentFilterName = "IntentEndState"
+)
+
+// Values returns all known values for AnalyticsIntentFilterName. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AnalyticsIntentFilterName) Values() []AnalyticsIntentFilterName {
+	return []AnalyticsIntentFilterName{
+		"BotAliasId",
+		"BotVersion",
+		"LocaleId",
+		"Modality",
+		"Channel",
+		"SessionId",
+		"OriginatingRequestId",
+		"IntentName",
+		"IntentEndState",
+	}
+}
+
+type AnalyticsIntentMetricName string
+
+// Enum values for AnalyticsIntentMetricName
+const (
+	AnalyticsIntentMetricNameCount    AnalyticsIntentMetricName = "Count"
+	AnalyticsIntentMetricNameSuccess  AnalyticsIntentMetricName = "Success"
+	AnalyticsIntentMetricNameFailure  AnalyticsIntentMetricName = "Failure"
+	AnalyticsIntentMetricNameSwitched AnalyticsIntentMetricName = "Switched"
+	AnalyticsIntentMetricNameDropped  AnalyticsIntentMetricName = "Dropped"
+)
+
+// Values returns all known values for AnalyticsIntentMetricName. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AnalyticsIntentMetricName) Values() []AnalyticsIntentMetricName {
+	return []AnalyticsIntentMetricName{
+		"Count",
+		"Success",
+		"Failure",
+		"Switched",
+		"Dropped",
+	}
+}
+
+type AnalyticsIntentStageField string
+
+// Enum values for AnalyticsIntentStageField
+const (
+	AnalyticsIntentStageFieldIntentStageName  AnalyticsIntentStageField = "IntentStageName"
+	AnalyticsIntentStageFieldSwitchedToIntent AnalyticsIntentStageField = "SwitchedToIntent"
+)
+
+// Values returns all known values for AnalyticsIntentStageField. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AnalyticsIntentStageField) Values() []AnalyticsIntentStageField {
+	return []AnalyticsIntentStageField{
+		"IntentStageName",
+		"SwitchedToIntent",
+	}
+}
+
+type AnalyticsIntentStageFilterName string
+
+// Enum values for AnalyticsIntentStageFilterName
+const (
+	AnalyticsIntentStageFilterNameBotAliasId           AnalyticsIntentStageFilterName = "BotAliasId"
+	AnalyticsIntentStageFilterNameBotVersion           AnalyticsIntentStageFilterName = "BotVersion"
+	AnalyticsIntentStageFilterNameLocaleId             AnalyticsIntentStageFilterName = "LocaleId"
+	AnalyticsIntentStageFilterNameModality             AnalyticsIntentStageFilterName = "Modality"
+	AnalyticsIntentStageFilterNameChannel              AnalyticsIntentStageFilterName = "Channel"
+	AnalyticsIntentStageFilterNameSessionId            AnalyticsIntentStageFilterName = "SessionId"
+	AnalyticsIntentStageFilterNameOriginatingRequestId AnalyticsIntentStageFilterName = "OriginatingRequestId"
+	AnalyticsIntentStageFilterNameIntentName           AnalyticsIntentStageFilterName = "IntentName"
+	AnalyticsIntentStageFilterNameIntentStageName      AnalyticsIntentStageFilterName = "IntentStageName"
+)
+
+// Values returns all known values for AnalyticsIntentStageFilterName. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (AnalyticsIntentStageFilterName) Values() []AnalyticsIntentStageFilterName {
+	return []AnalyticsIntentStageFilterName{
+		"BotAliasId",
+		"BotVersion",
+		"LocaleId",
+		"Modality",
+		"Channel",
+		"SessionId",
+		"OriginatingRequestId",
+		"IntentName",
+		"IntentStageName",
+	}
+}
+
+type AnalyticsIntentStageMetricName string
+
+// Enum values for AnalyticsIntentStageMetricName
+const (
+	AnalyticsIntentStageMetricNameCount   AnalyticsIntentStageMetricName = "Count"
+	AnalyticsIntentStageMetricNameSuccess AnalyticsIntentStageMetricName = "Success"
+	AnalyticsIntentStageMetricNameFailed  AnalyticsIntentStageMetricName = "Failed"
+	AnalyticsIntentStageMetricNameDropped AnalyticsIntentStageMetricName = "Dropped"
+	AnalyticsIntentStageMetricNameRetry   AnalyticsIntentStageMetricName = "Retry"
+)
+
+// Values returns all known values for AnalyticsIntentStageMetricName. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (AnalyticsIntentStageMetricName) Values() []AnalyticsIntentStageMetricName {
+	return []AnalyticsIntentStageMetricName{
+		"Count",
+		"Success",
+		"Failed",
+		"Dropped",
+		"Retry",
+	}
+}
+
+type AnalyticsInterval string
+
+// Enum values for AnalyticsInterval
+const (
+	AnalyticsIntervalOneHour AnalyticsInterval = "OneHour"
+	AnalyticsIntervalOneDay  AnalyticsInterval = "OneDay"
+)
+
+// Values returns all known values for AnalyticsInterval. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AnalyticsInterval) Values() []AnalyticsInterval {
+	return []AnalyticsInterval{
+		"OneHour",
+		"OneDay",
+	}
+}
+
+type AnalyticsMetricStatistic string
+
+// Enum values for AnalyticsMetricStatistic
+const (
+	AnalyticsMetricStatisticSum AnalyticsMetricStatistic = "Sum"
+	AnalyticsMetricStatisticAvg AnalyticsMetricStatistic = "Avg"
+	AnalyticsMetricStatisticMax AnalyticsMetricStatistic = "Max"
+)
+
+// Values returns all known values for AnalyticsMetricStatistic. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AnalyticsMetricStatistic) Values() []AnalyticsMetricStatistic {
+	return []AnalyticsMetricStatistic{
+		"Sum",
+		"Avg",
+		"Max",
+	}
+}
+
+type AnalyticsModality string
+
+// Enum values for AnalyticsModality
+const (
+	AnalyticsModalitySpeech    AnalyticsModality = "Speech"
+	AnalyticsModalityText      AnalyticsModality = "Text"
+	AnalyticsModalityDtmf      AnalyticsModality = "DTMF"
+	AnalyticsModalityMultiMode AnalyticsModality = "MultiMode"
+)
+
+// Values returns all known values for AnalyticsModality. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AnalyticsModality) Values() []AnalyticsModality {
+	return []AnalyticsModality{
+		"Speech",
+		"Text",
+		"DTMF",
+		"MultiMode",
+	}
+}
+
+type AnalyticsNodeType string
+
+// Enum values for AnalyticsNodeType
+const (
+	AnalyticsNodeTypeInner AnalyticsNodeType = "Inner"
+	AnalyticsNodeTypeExit  AnalyticsNodeType = "Exit"
+)
+
+// Values returns all known values for AnalyticsNodeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AnalyticsNodeType) Values() []AnalyticsNodeType {
+	return []AnalyticsNodeType{
+		"Inner",
+		"Exit",
+	}
+}
+
+type AnalyticsSessionField string
+
+// Enum values for AnalyticsSessionField
+const (
+	AnalyticsSessionFieldConversationEndState AnalyticsSessionField = "ConversationEndState"
+	AnalyticsSessionFieldLocaleId             AnalyticsSessionField = "LocaleId"
+)
+
+// Values returns all known values for AnalyticsSessionField. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AnalyticsSessionField) Values() []AnalyticsSessionField {
+	return []AnalyticsSessionField{
+		"ConversationEndState",
+		"LocaleId",
+	}
+}
+
+type AnalyticsSessionFilterName string
+
+// Enum values for AnalyticsSessionFilterName
+const (
+	AnalyticsSessionFilterNameBotAliasId           AnalyticsSessionFilterName = "BotAliasId"
+	AnalyticsSessionFilterNameBotVersion           AnalyticsSessionFilterName = "BotVersion"
+	AnalyticsSessionFilterNameLocaleId             AnalyticsSessionFilterName = "LocaleId"
+	AnalyticsSessionFilterNameModality             AnalyticsSessionFilterName = "Modality"
+	AnalyticsSessionFilterNameChannel              AnalyticsSessionFilterName = "Channel"
+	AnalyticsSessionFilterNameDuration             AnalyticsSessionFilterName = "Duration"
+	AnalyticsSessionFilterNameConversationEndState AnalyticsSessionFilterName = "ConversationEndState"
+	AnalyticsSessionFilterNameSessionId            AnalyticsSessionFilterName = "SessionId"
+	AnalyticsSessionFilterNameOriginatingRequestId AnalyticsSessionFilterName = "OriginatingRequestId"
+	AnalyticsSessionFilterNameIntentPath           AnalyticsSessionFilterName = "IntentPath"
+)
+
+// Values returns all known values for AnalyticsSessionFilterName. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AnalyticsSessionFilterName) Values() []AnalyticsSessionFilterName {
+	return []AnalyticsSessionFilterName{
+		"BotAliasId",
+		"BotVersion",
+		"LocaleId",
+		"Modality",
+		"Channel",
+		"Duration",
+		"ConversationEndState",
+		"SessionId",
+		"OriginatingRequestId",
+		"IntentPath",
+	}
+}
+
+type AnalyticsSessionMetricName string
+
+// Enum values for AnalyticsSessionMetricName
+const (
+	AnalyticsSessionMetricNameCount                AnalyticsSessionMetricName = "Count"
+	AnalyticsSessionMetricNameSuccess              AnalyticsSessionMetricName = "Success"
+	AnalyticsSessionMetricNameFailure              AnalyticsSessionMetricName = "Failure"
+	AnalyticsSessionMetricNameDropped              AnalyticsSessionMetricName = "Dropped"
+	AnalyticsSessionMetricNameDuration             AnalyticsSessionMetricName = "Duration"
+	AnalyticsSessionMetricNameTurnsPerConversation AnalyticsSessionMetricName = "TurnsPerConversation"
+	AnalyticsSessionMetricNameConcurrency          AnalyticsSessionMetricName = "Concurrency"
+)
+
+// Values returns all known values for AnalyticsSessionMetricName. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AnalyticsSessionMetricName) Values() []AnalyticsSessionMetricName {
+	return []AnalyticsSessionMetricName{
+		"Count",
+		"Success",
+		"Failure",
+		"Dropped",
+		"Duration",
+		"TurnsPerConversation",
+		"Concurrency",
+	}
+}
+
+type AnalyticsSessionSortByName string
+
+// Enum values for AnalyticsSessionSortByName
+const (
+	AnalyticsSessionSortByNameConversationStartTime AnalyticsSessionSortByName = "ConversationStartTime"
+	AnalyticsSessionSortByNameNumberOfTurns         AnalyticsSessionSortByName = "NumberOfTurns"
+	AnalyticsSessionSortByNameDuration              AnalyticsSessionSortByName = "Duration"
+)
+
+// Values returns all known values for AnalyticsSessionSortByName. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AnalyticsSessionSortByName) Values() []AnalyticsSessionSortByName {
+	return []AnalyticsSessionSortByName{
+		"ConversationStartTime",
+		"NumberOfTurns",
+		"Duration",
+	}
+}
+
+type AnalyticsSortOrder string
+
+// Enum values for AnalyticsSortOrder
+const (
+	AnalyticsSortOrderAscending  AnalyticsSortOrder = "Ascending"
+	AnalyticsSortOrderDescending AnalyticsSortOrder = "Descending"
+)
+
+// Values returns all known values for AnalyticsSortOrder. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AnalyticsSortOrder) Values() []AnalyticsSortOrder {
+	return []AnalyticsSortOrder{
+		"Ascending",
+		"Descending",
+	}
+}
+
+type AnalyticsUtteranceAttributeName string
+
+// Enum values for AnalyticsUtteranceAttributeName
+const (
+	AnalyticsUtteranceAttributeNameLastUsedIntent AnalyticsUtteranceAttributeName = "LastUsedIntent"
+)
+
+// Values returns all known values for AnalyticsUtteranceAttributeName. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (AnalyticsUtteranceAttributeName) Values() []AnalyticsUtteranceAttributeName {
+	return []AnalyticsUtteranceAttributeName{
+		"LastUsedIntent",
+	}
+}
+
+type AnalyticsUtteranceField string
+
+// Enum values for AnalyticsUtteranceField
+const (
+	AnalyticsUtteranceFieldUtteranceText  AnalyticsUtteranceField = "UtteranceText"
+	AnalyticsUtteranceFieldUtteranceState AnalyticsUtteranceField = "UtteranceState"
+)
+
+// Values returns all known values for AnalyticsUtteranceField. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AnalyticsUtteranceField) Values() []AnalyticsUtteranceField {
+	return []AnalyticsUtteranceField{
+		"UtteranceText",
+		"UtteranceState",
+	}
+}
+
+type AnalyticsUtteranceFilterName string
+
+// Enum values for AnalyticsUtteranceFilterName
+const (
+	AnalyticsUtteranceFilterNameBotAliasId           AnalyticsUtteranceFilterName = "BotAliasId"
+	AnalyticsUtteranceFilterNameBotVersion           AnalyticsUtteranceFilterName = "BotVersion"
+	AnalyticsUtteranceFilterNameLocaleId             AnalyticsUtteranceFilterName = "LocaleId"
+	AnalyticsUtteranceFilterNameModality             AnalyticsUtteranceFilterName = "Modality"
+	AnalyticsUtteranceFilterNameChannel              AnalyticsUtteranceFilterName = "Channel"
+	AnalyticsUtteranceFilterNameSessionId            AnalyticsUtteranceFilterName = "SessionId"
+	AnalyticsUtteranceFilterNameOriginatingRequestId AnalyticsUtteranceFilterName = "OriginatingRequestId"
+	AnalyticsUtteranceFilterNameUtteranceState       AnalyticsUtteranceFilterName = "UtteranceState"
+	AnalyticsUtteranceFilterNameUtteranceText        AnalyticsUtteranceFilterName = "UtteranceText"
+)
+
+// Values returns all known values for AnalyticsUtteranceFilterName. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (AnalyticsUtteranceFilterName) Values() []AnalyticsUtteranceFilterName {
+	return []AnalyticsUtteranceFilterName{
+		"BotAliasId",
+		"BotVersion",
+		"LocaleId",
+		"Modality",
+		"Channel",
+		"SessionId",
+		"OriginatingRequestId",
+		"UtteranceState",
+		"UtteranceText",
+	}
+}
+
+type AnalyticsUtteranceMetricName string
+
+// Enum values for AnalyticsUtteranceMetricName
+const (
+	AnalyticsUtteranceMetricNameCount              AnalyticsUtteranceMetricName = "Count"
+	AnalyticsUtteranceMetricNameMissed             AnalyticsUtteranceMetricName = "Missed"
+	AnalyticsUtteranceMetricNameDetected           AnalyticsUtteranceMetricName = "Detected"
+	AnalyticsUtteranceMetricNameUtteranceTimestamp AnalyticsUtteranceMetricName = "UtteranceTimestamp"
+)
+
+// Values returns all known values for AnalyticsUtteranceMetricName. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (AnalyticsUtteranceMetricName) Values() []AnalyticsUtteranceMetricName {
+	return []AnalyticsUtteranceMetricName{
+		"Count",
+		"Missed",
+		"Detected",
+		"UtteranceTimestamp",
+	}
+}
+
+type AnalyticsUtteranceSortByName string
+
+// Enum values for AnalyticsUtteranceSortByName
+const (
+	AnalyticsUtteranceSortByNameUtteranceTimestamp AnalyticsUtteranceSortByName = "UtteranceTimestamp"
+)
+
+// Values returns all known values for AnalyticsUtteranceSortByName. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (AnalyticsUtteranceSortByName) Values() []AnalyticsUtteranceSortByName {
+	return []AnalyticsUtteranceSortByName{
+		"UtteranceTimestamp",
+	}
+}
+
 type AssociatedTranscriptFilterName string
 
 // Enum values for AssociatedTranscriptFilterName
@@ -111,6 +629,26 @@ func (BotAliasStatus) Values() []BotAliasStatus {
 		"Available",
 		"Deleting",
 		"Failed",
+	}
+}
+
+type BotChannelType string
+
+// Enum values for BotChannelType
+const (
+	BotChannelTypeFacebook  BotChannelType = "Facebook"
+	BotChannelTypeSlack     BotChannelType = "Slack"
+	BotChannelTypeTwilioSms BotChannelType = "TwilioSms"
+)
+
+// Values returns all known values for BotChannelType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (BotChannelType) Values() []BotChannelType {
+	return []BotChannelType{
+		"Facebook",
+		"Slack",
+		"TwilioSms",
 	}
 }
 
@@ -376,6 +914,26 @@ const (
 func (BuiltInSlotTypeSortAttribute) Values() []BuiltInSlotTypeSortAttribute {
 	return []BuiltInSlotTypeSortAttribute{
 		"SlotTypeSignature",
+	}
+}
+
+type ConversationEndState string
+
+// Enum values for ConversationEndState
+const (
+	ConversationEndStateSuccess ConversationEndState = "Success"
+	ConversationEndStateFailure ConversationEndState = "Failure"
+	ConversationEndStateDropped ConversationEndState = "Dropped"
+)
+
+// Values returns all known values for ConversationEndState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConversationEndState) Values() []ConversationEndState {
+	return []ConversationEndState{
+		"Success",
+		"Failure",
+		"Dropped",
 	}
 }
 
@@ -729,6 +1287,32 @@ func (IntentSortAttribute) Values() []IntentSortAttribute {
 	return []IntentSortAttribute{
 		"IntentName",
 		"LastUpdatedDateTime",
+	}
+}
+
+type IntentState string
+
+// Enum values for IntentState
+const (
+	IntentStateFailed                IntentState = "Failed"
+	IntentStateFulfilled             IntentState = "Fulfilled"
+	IntentStateInProgress            IntentState = "InProgress"
+	IntentStateReadyForFulfillment   IntentState = "ReadyForFulfillment"
+	IntentStateWaiting               IntentState = "Waiting"
+	IntentStateFulfillmentInProgress IntentState = "FulfillmentInProgress"
+)
+
+// Values returns all known values for IntentState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (IntentState) Values() []IntentState {
+	return []IntentState{
+		"Failed",
+		"Fulfilled",
+		"InProgress",
+		"ReadyForFulfillment",
+		"Waiting",
+		"FulfillmentInProgress",
 	}
 }
 
@@ -1296,6 +1880,28 @@ const (
 func (TranscriptFormat) Values() []TranscriptFormat {
 	return []TranscriptFormat{
 		"Lex",
+	}
+}
+
+type UtteranceContentType string
+
+// Enum values for UtteranceContentType
+const (
+	UtteranceContentTypePlainText         UtteranceContentType = "PlainText"
+	UtteranceContentTypeCustomPayload     UtteranceContentType = "CustomPayload"
+	UtteranceContentTypeSsml              UtteranceContentType = "SSML"
+	UtteranceContentTypeImageResponseCard UtteranceContentType = "ImageResponseCard"
+)
+
+// Values returns all known values for UtteranceContentType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (UtteranceContentType) Values() []UtteranceContentType {
+	return []UtteranceContentType{
+		"PlainText",
+		"CustomPayload",
+		"SSML",
+		"ImageResponseCard",
 	}
 }
 

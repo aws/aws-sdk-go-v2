@@ -155,7 +155,7 @@ type CreateClusterOutput struct {
 	ClusterId *string
 
 	// List of jobs created for this cluster. For syntax, see
-	// ListJobsResult$JobListEntries (https://docs.aws.amazon.com/snowball/latest/api-reference/API_ListJobs.html#API_ListJobs_ResponseSyntax)
+	// ListJobsResult$JobListEntries (http://amazonaws.com/snowball/latest/api-reference/API_ListJobs.html#API_ListJobs_ResponseSyntax)
 	// in this guide.
 	JobListEntries []types.JobListEntry
 

@@ -2423,6 +2423,117 @@ func awsAwsjson11_deserializeOpErrorListLongTermPricing(response *smithyhttp.Res
 	}
 }
 
+type awsAwsjson11_deserializeOpListPickupLocations struct {
+}
+
+func (*awsAwsjson11_deserializeOpListPickupLocations) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpListPickupLocations) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorListPickupLocations(response, &metadata)
+	}
+	output := &ListPickupLocationsOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentListPickupLocationsOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorListPickupLocations(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("InvalidResourceException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidResourceException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsjson11_deserializeOpListServiceVersions struct {
 }
 
@@ -3542,6 +3653,15 @@ func awsAwsjson11_deserializeDocumentAddress(v **types.Address, value interface{
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Street3 = ptr.String(jtv)
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AddressType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.AddressType(jtv)
 			}
 
 		default:
@@ -4994,6 +5114,15 @@ func awsAwsjson11_deserializeDocumentJobMetadata(v **types.JobMetadata, value in
 				sv.ForwardingAddressId = ptr.String(jtv)
 			}
 
+		case "ImpactLevel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ImpactLevel to be of type string, got %T instead", value)
+				}
+				sv.ImpactLevel = types.ImpactLevel(jtv)
+			}
+
 		case "JobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5054,6 +5183,11 @@ func awsAwsjson11_deserializeDocumentJobMetadata(v **types.JobMetadata, value in
 				return err
 			}
 
+		case "PickupDetails":
+			if err := awsAwsjson11_deserializeDocumentPickupDetails(&sv.PickupDetails, value); err != nil {
+				return err
+			}
+
 		case "RemoteManagement":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5089,6 +5223,15 @@ func awsAwsjson11_deserializeDocumentJobMetadata(v **types.JobMetadata, value in
 					return fmt.Errorf("expected SnowballCapacity to be of type string, got %T instead", value)
 				}
 				sv.SnowballCapacityPreference = types.SnowballCapacity(jtv)
+			}
+
+		case "SnowballId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.SnowballId = ptr.String(jtv)
 			}
 
 		case "SnowballType":
@@ -5674,6 +5817,15 @@ func awsAwsjson11_deserializeDocumentNotification(v **types.Notification, value 
 
 	for key, value := range shape {
 		switch key {
+		case "DevicePickupSnsTopicARN":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SnsTopicARN to be of type string, got %T instead", value)
+				}
+				sv.DevicePickupSnsTopicARN = ptr.String(jtv)
+			}
+
 		case "JobStatesToNotify":
 			if err := awsAwsjson11_deserializeDocumentJobStateList(&sv.JobStatesToNotify, value); err != nil {
 				return err
@@ -5746,6 +5898,107 @@ func awsAwsjson11_deserializeDocumentOnDeviceServiceConfiguration(v **types.OnDe
 		case "TGWOnDeviceService":
 			if err := awsAwsjson11_deserializeDocumentTGWOnDeviceServiceConfiguration(&sv.TGWOnDeviceService, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentPickupDetails(v **types.PickupDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PickupDetails
+	if *v == nil {
+		sv = &types.PickupDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DevicePickupId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DevicePickupId to be of type string, got %T instead", value)
+				}
+				sv.DevicePickupId = ptr.String(jtv)
+			}
+
+		case "Email":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Email to be of type string, got %T instead", value)
+				}
+				sv.Email = ptr.String(jtv)
+			}
+
+		case "IdentificationExpirationDate":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.IdentificationExpirationDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "IdentificationIssuingOrg":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.IdentificationIssuingOrg = ptr.String(jtv)
+			}
+
+		case "IdentificationNumber":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.IdentificationNumber = ptr.String(jtv)
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "PhoneNumber":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PhoneNumber to be of type string, got %T instead", value)
+				}
+				sv.PhoneNumber = ptr.String(jtv)
 			}
 
 		default:
@@ -7313,6 +7566,51 @@ func awsAwsjson11_deserializeOpDocumentListLongTermPricingOutput(v **ListLongTer
 		switch key {
 		case "LongTermPricingEntries":
 			if err := awsAwsjson11_deserializeDocumentLongTermPricingEntryList(&sv.LongTermPricingEntries, value); err != nil {
+				return err
+			}
+
+		case "NextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeOpDocumentListPickupLocationsOutput(v **ListPickupLocationsOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *ListPickupLocationsOutput
+	if *v == nil {
+		sv = &ListPickupLocationsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Addresses":
+			if err := awsAwsjson11_deserializeDocumentAddressList(&sv.Addresses, value); err != nil {
 				return err
 			}
 

@@ -1,0 +1,8 @@
+{
+    "id": "65f49ea9-9a23-4bf7-90f8-3aa4450331d7",
+    "type": "feature",
+    "description": "Adds support for RACK_5U_C. This is the first AWS Snow Family device designed to meet U.S. Military Ruggedization Standards (MIL-STD-810H) with 208 vCPU device in a portable, compact 5U, half-rack width form-factor.",
+    "modules": [
+        "service/snowball"
+    ]
+}

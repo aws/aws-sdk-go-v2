@@ -1150,6 +1150,46 @@ func (m *validateOpListImports) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListIntentMetrics struct {
+}
+
+func (*validateOpListIntentMetrics) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListIntentMetrics) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListIntentMetricsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListIntentMetricsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListIntentPaths struct {
+}
+
+func (*validateOpListIntentPaths) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListIntentPaths) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListIntentPathsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListIntentPathsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListIntents struct {
 }
 
@@ -1170,6 +1210,26 @@ func (m *validateOpListIntents) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListIntentStageMetrics struct {
+}
+
+func (*validateOpListIntentStageMetrics) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListIntentStageMetrics) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListIntentStageMetricsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListIntentStageMetricsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListRecommendedIntents struct {
 }
 
@@ -1185,6 +1245,46 @@ func (m *validateOpListRecommendedIntents) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListRecommendedIntentsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListSessionAnalyticsData struct {
+}
+
+func (*validateOpListSessionAnalyticsData) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListSessionAnalyticsData) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListSessionAnalyticsDataInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListSessionAnalyticsDataInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListSessionMetrics struct {
+}
+
+func (*validateOpListSessionMetrics) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListSessionMetrics) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListSessionMetricsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListSessionMetricsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1325,6 +1425,46 @@ func (m *validateOpListTestSets) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTestSetsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListUtteranceAnalyticsData struct {
+}
+
+func (*validateOpListUtteranceAnalyticsData) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListUtteranceAnalyticsData) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListUtteranceAnalyticsDataInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListUtteranceAnalyticsDataInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListUtteranceMetrics struct {
+}
+
+func (*validateOpListUtteranceMetrics) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListUtteranceMetrics) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListUtteranceMetricsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListUtteranceMetricsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1918,12 +2058,32 @@ func addOpListImportsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListImports{}, middleware.After)
 }
 
+func addOpListIntentMetricsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListIntentMetrics{}, middleware.After)
+}
+
+func addOpListIntentPathsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListIntentPaths{}, middleware.After)
+}
+
 func addOpListIntentsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListIntents{}, middleware.After)
 }
 
+func addOpListIntentStageMetricsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListIntentStageMetrics{}, middleware.After)
+}
+
 func addOpListRecommendedIntentsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListRecommendedIntents{}, middleware.After)
+}
+
+func addOpListSessionAnalyticsDataValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListSessionAnalyticsData{}, middleware.After)
+}
+
+func addOpListSessionMetricsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListSessionMetrics{}, middleware.After)
 }
 
 func addOpListSlotsValidationMiddleware(stack *middleware.Stack) error {
@@ -1952,6 +2112,14 @@ func addOpListTestSetRecordsValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpListTestSetsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTestSets{}, middleware.After)
+}
+
+func addOpListUtteranceAnalyticsDataValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListUtteranceAnalyticsData{}, middleware.After)
+}
+
+func addOpListUtteranceMetricsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListUtteranceMetrics{}, middleware.After)
 }
 
 func addOpSearchAssociatedTranscriptsValidationMiddleware(stack *middleware.Stack) error {
@@ -2092,6 +2260,531 @@ func validateAllowedInputTypes(v *types.AllowedInputTypes) error {
 	}
 	if v.AllowDTMFInput == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AllowDTMFInput"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAnalyticsBinByList(v []types.AnalyticsBinBySpecification) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AnalyticsBinByList"}
+	for i := range v {
+		if err := validateAnalyticsBinBySpecification(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAnalyticsBinBySpecification(v *types.AnalyticsBinBySpecification) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AnalyticsBinBySpecification"}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Interval) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Interval"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAnalyticsIntentFilter(v *types.AnalyticsIntentFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AnalyticsIntentFilter"}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Operator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Operator"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAnalyticsIntentFilters(v []types.AnalyticsIntentFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AnalyticsIntentFilters"}
+	for i := range v {
+		if err := validateAnalyticsIntentFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAnalyticsIntentGroupByList(v []types.AnalyticsIntentGroupBySpecification) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AnalyticsIntentGroupByList"}
+	for i := range v {
+		if err := validateAnalyticsIntentGroupBySpecification(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAnalyticsIntentGroupBySpecification(v *types.AnalyticsIntentGroupBySpecification) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AnalyticsIntentGroupBySpecification"}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAnalyticsIntentMetric(v *types.AnalyticsIntentMetric) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AnalyticsIntentMetric"}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Statistic) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Statistic"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAnalyticsIntentMetrics(v []types.AnalyticsIntentMetric) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AnalyticsIntentMetrics"}
+	for i := range v {
+		if err := validateAnalyticsIntentMetric(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAnalyticsIntentStageFilter(v *types.AnalyticsIntentStageFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AnalyticsIntentStageFilter"}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Operator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Operator"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAnalyticsIntentStageFilters(v []types.AnalyticsIntentStageFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AnalyticsIntentStageFilters"}
+	for i := range v {
+		if err := validateAnalyticsIntentStageFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAnalyticsIntentStageGroupByList(v []types.AnalyticsIntentStageGroupBySpecification) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AnalyticsIntentStageGroupByList"}
+	for i := range v {
+		if err := validateAnalyticsIntentStageGroupBySpecification(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAnalyticsIntentStageGroupBySpecification(v *types.AnalyticsIntentStageGroupBySpecification) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AnalyticsIntentStageGroupBySpecification"}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAnalyticsIntentStageMetric(v *types.AnalyticsIntentStageMetric) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AnalyticsIntentStageMetric"}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Statistic) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Statistic"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAnalyticsIntentStageMetrics(v []types.AnalyticsIntentStageMetric) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AnalyticsIntentStageMetrics"}
+	for i := range v {
+		if err := validateAnalyticsIntentStageMetric(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAnalyticsPathFilter(v *types.AnalyticsPathFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AnalyticsPathFilter"}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Operator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Operator"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAnalyticsPathFilters(v []types.AnalyticsPathFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AnalyticsPathFilters"}
+	for i := range v {
+		if err := validateAnalyticsPathFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAnalyticsSessionFilter(v *types.AnalyticsSessionFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AnalyticsSessionFilter"}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Operator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Operator"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAnalyticsSessionFilters(v []types.AnalyticsSessionFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AnalyticsSessionFilters"}
+	for i := range v {
+		if err := validateAnalyticsSessionFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAnalyticsSessionGroupByList(v []types.AnalyticsSessionGroupBySpecification) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AnalyticsSessionGroupByList"}
+	for i := range v {
+		if err := validateAnalyticsSessionGroupBySpecification(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAnalyticsSessionGroupBySpecification(v *types.AnalyticsSessionGroupBySpecification) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AnalyticsSessionGroupBySpecification"}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAnalyticsSessionMetric(v *types.AnalyticsSessionMetric) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AnalyticsSessionMetric"}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Statistic) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Statistic"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAnalyticsSessionMetrics(v []types.AnalyticsSessionMetric) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AnalyticsSessionMetrics"}
+	for i := range v {
+		if err := validateAnalyticsSessionMetric(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAnalyticsUtteranceAttribute(v *types.AnalyticsUtteranceAttribute) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AnalyticsUtteranceAttribute"}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAnalyticsUtteranceAttributes(v []types.AnalyticsUtteranceAttribute) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AnalyticsUtteranceAttributes"}
+	for i := range v {
+		if err := validateAnalyticsUtteranceAttribute(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAnalyticsUtteranceFilter(v *types.AnalyticsUtteranceFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AnalyticsUtteranceFilter"}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Operator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Operator"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAnalyticsUtteranceFilters(v []types.AnalyticsUtteranceFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AnalyticsUtteranceFilters"}
+	for i := range v {
+		if err := validateAnalyticsUtteranceFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAnalyticsUtteranceGroupByList(v []types.AnalyticsUtteranceGroupBySpecification) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AnalyticsUtteranceGroupByList"}
+	for i := range v {
+		if err := validateAnalyticsUtteranceGroupBySpecification(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAnalyticsUtteranceGroupBySpecification(v *types.AnalyticsUtteranceGroupBySpecification) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AnalyticsUtteranceGroupBySpecification"}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAnalyticsUtteranceMetric(v *types.AnalyticsUtteranceMetric) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AnalyticsUtteranceMetric"}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Statistic) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Statistic"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAnalyticsUtteranceMetrics(v []types.AnalyticsUtteranceMetric) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AnalyticsUtteranceMetrics"}
+	for i := range v {
+		if err := validateAnalyticsUtteranceMetric(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4266,6 +4959,24 @@ func validateSentimentAnalysisSettings(v *types.SentimentAnalysisSettings) error
 	}
 }
 
+func validateSessionDataSortBy(v *types.SessionDataSortBy) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SessionDataSortBy"}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Order) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Order"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSlotCaptureSetting(v *types.SlotCaptureSetting) error {
 	if v == nil {
 		return nil
@@ -5154,6 +5865,24 @@ func validateUtteranceAggregationDuration(v *types.UtteranceAggregationDuration)
 		if err := validateRelativeAggregationDuration(v.RelativeAggregationDuration); err != nil {
 			invalidParams.AddNested("RelativeAggregationDuration", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUtteranceDataSortBy(v *types.UtteranceDataSortBy) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UtteranceDataSortBy"}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Order) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Order"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6495,6 +7224,78 @@ func validateOpListImportsInput(v *ListImportsInput) error {
 	}
 }
 
+func validateOpListIntentMetricsInput(v *ListIntentMetricsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListIntentMetricsInput"}
+	if v.BotId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotId"))
+	}
+	if v.StartDateTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartDateTime"))
+	}
+	if v.EndDateTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndDateTime"))
+	}
+	if v.Metrics == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Metrics"))
+	} else if v.Metrics != nil {
+		if err := validateAnalyticsIntentMetrics(v.Metrics); err != nil {
+			invalidParams.AddNested("Metrics", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.BinBy != nil {
+		if err := validateAnalyticsBinByList(v.BinBy); err != nil {
+			invalidParams.AddNested("BinBy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.GroupBy != nil {
+		if err := validateAnalyticsIntentGroupByList(v.GroupBy); err != nil {
+			invalidParams.AddNested("GroupBy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Filters != nil {
+		if err := validateAnalyticsIntentFilters(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListIntentPathsInput(v *ListIntentPathsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListIntentPathsInput"}
+	if v.BotId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotId"))
+	}
+	if v.StartDateTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartDateTime"))
+	}
+	if v.EndDateTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndDateTime"))
+	}
+	if v.IntentPath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IntentPath"))
+	}
+	if v.Filters != nil {
+		if err := validateAnalyticsPathFilters(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListIntentsInput(v *ListIntentsInput) error {
 	if v == nil {
 		return nil
@@ -6526,6 +7327,49 @@ func validateOpListIntentsInput(v *ListIntentsInput) error {
 	}
 }
 
+func validateOpListIntentStageMetricsInput(v *ListIntentStageMetricsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListIntentStageMetricsInput"}
+	if v.BotId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotId"))
+	}
+	if v.StartDateTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartDateTime"))
+	}
+	if v.EndDateTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndDateTime"))
+	}
+	if v.Metrics == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Metrics"))
+	} else if v.Metrics != nil {
+		if err := validateAnalyticsIntentStageMetrics(v.Metrics); err != nil {
+			invalidParams.AddNested("Metrics", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.BinBy != nil {
+		if err := validateAnalyticsBinByList(v.BinBy); err != nil {
+			invalidParams.AddNested("BinBy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.GroupBy != nil {
+		if err := validateAnalyticsIntentStageGroupByList(v.GroupBy); err != nil {
+			invalidParams.AddNested("GroupBy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Filters != nil {
+		if err := validateAnalyticsIntentStageFilters(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListRecommendedIntentsInput(v *ListRecommendedIntentsInput) error {
 	if v == nil {
 		return nil
@@ -6542,6 +7386,80 @@ func validateOpListRecommendedIntentsInput(v *ListRecommendedIntentsInput) error
 	}
 	if v.BotRecommendationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BotRecommendationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListSessionAnalyticsDataInput(v *ListSessionAnalyticsDataInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListSessionAnalyticsDataInput"}
+	if v.BotId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotId"))
+	}
+	if v.StartDateTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartDateTime"))
+	}
+	if v.EndDateTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndDateTime"))
+	}
+	if v.SortBy != nil {
+		if err := validateSessionDataSortBy(v.SortBy); err != nil {
+			invalidParams.AddNested("SortBy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Filters != nil {
+		if err := validateAnalyticsSessionFilters(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListSessionMetricsInput(v *ListSessionMetricsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListSessionMetricsInput"}
+	if v.BotId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotId"))
+	}
+	if v.StartDateTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartDateTime"))
+	}
+	if v.EndDateTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndDateTime"))
+	}
+	if v.Metrics == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Metrics"))
+	} else if v.Metrics != nil {
+		if err := validateAnalyticsSessionMetrics(v.Metrics); err != nil {
+			invalidParams.AddNested("Metrics", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.BinBy != nil {
+		if err := validateAnalyticsBinByList(v.BinBy); err != nil {
+			invalidParams.AddNested("BinBy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.GroupBy != nil {
+		if err := validateAnalyticsSessionGroupByList(v.GroupBy); err != nil {
+			invalidParams.AddNested("GroupBy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Filters != nil {
+		if err := validateAnalyticsSessionFilters(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6692,6 +7610,85 @@ func validateOpListTestSetsInput(v *ListTestSetsInput) error {
 	if v.SortBy != nil {
 		if err := validateTestSetSortBy(v.SortBy); err != nil {
 			invalidParams.AddNested("SortBy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListUtteranceAnalyticsDataInput(v *ListUtteranceAnalyticsDataInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListUtteranceAnalyticsDataInput"}
+	if v.BotId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotId"))
+	}
+	if v.StartDateTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartDateTime"))
+	}
+	if v.EndDateTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndDateTime"))
+	}
+	if v.SortBy != nil {
+		if err := validateUtteranceDataSortBy(v.SortBy); err != nil {
+			invalidParams.AddNested("SortBy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Filters != nil {
+		if err := validateAnalyticsUtteranceFilters(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListUtteranceMetricsInput(v *ListUtteranceMetricsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListUtteranceMetricsInput"}
+	if v.BotId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BotId"))
+	}
+	if v.StartDateTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartDateTime"))
+	}
+	if v.EndDateTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndDateTime"))
+	}
+	if v.Metrics == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Metrics"))
+	} else if v.Metrics != nil {
+		if err := validateAnalyticsUtteranceMetrics(v.Metrics); err != nil {
+			invalidParams.AddNested("Metrics", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.BinBy != nil {
+		if err := validateAnalyticsBinByList(v.BinBy); err != nil {
+			invalidParams.AddNested("BinBy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.GroupBy != nil {
+		if err := validateAnalyticsUtteranceGroupByList(v.GroupBy); err != nil {
+			invalidParams.AddNested("GroupBy", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Attributes != nil {
+		if err := validateAnalyticsUtteranceAttributes(v.Attributes); err != nil {
+			invalidParams.AddNested("Attributes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Filters != nil {
+		if err := validateAnalyticsUtteranceFilters(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
