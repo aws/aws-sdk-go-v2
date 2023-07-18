@@ -900,112 +900,112 @@ func TestVPC_CustomEndpoint(t *testing.T) {
 			expectedSigningName:   "s3",
 			expectedSigningRegion: "us-west-2",
 		},
-		// "Outpost Accesspoint ARN with GetAccesspoint and custom endpoint url": {
-		// 	options: s3control.Options{
-		// 		EndpointResolver: s3control.EndpointResolverFromURL(
-		// 			"https://beta.example.com",
-		// 		),
-		// 		Region: "us-west-2",
-		// 	},
-		// 	operation: func(ctx context.Context, svc *s3control.Client, fm *requestRetrieverMiddleware) (interface{}, error) {
-		// 		return svc.GetAccessPoint(ctx, &s3control.GetAccessPointInput{
-		// 			AccountId: aws.String(account),
-		// 			Name:      aws.String("arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"),
-		// 		}, addRequestRetriever(fm))
-		// 	},
-		// 	expectedReqURL:             "https://beta.example.com/v20180820/accesspoint/myaccesspoint",
-		// 	expectedSigningName:        "s3-outposts",
-		// 	expectedSigningRegion:      "us-west-2",
-		// 	expectedHeaderForOutpostID: "op-01234567890123456",
-		// },
-		// "standard CreateBucket with custom endpoint url": {
-		// 	options: s3control.Options{
-		// 		EndpointResolver: s3control.EndpointResolverFromURL("https://beta.example.com"),
-		// 		Region:           "us-west-2",
-		// 	},
-		// 	operation: func(ctx context.Context, svc *s3control.Client, fm *requestRetrieverMiddleware) (interface{}, error) {
-		// 		return svc.CreateBucket(ctx, &s3control.CreateBucketInput{
-		// 			Bucket:    aws.String("bucketname"),
-		// 			OutpostId: aws.String("op-01234567890123456"),
-		// 		}, addRequestRetriever(fm))
-		// 	},
-		// 	expectedReqURL:             "https://beta.example.com/v20180820/bucket/bucketname",
-		// 	expectedSigningName:        "s3-outposts",
-		// 	expectedSigningRegion:      "us-west-2",
-		// 	expectedHeaderForOutpostID: "op-01234567890123456",
-		// },
-		// "Outpost Accesspoint for GetBucket with custom endpoint url": {
-		// 	options: s3control.Options{
-		// 		EndpointResolver: s3control.EndpointResolverFromURL("https://beta.example.com"),
-		// 		Region:           "us-west-2",
-		// 	},
-		// 	operation: func(ctx context.Context, svc *s3control.Client, fm *requestRetrieverMiddleware) (interface{}, error) {
-		// 		return svc.GetBucket(ctx, &s3control.GetBucketInput{
-		// 			Bucket: aws.String("arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket"),
-		// 		}, addRequestRetriever(fm))
-		// 	},
-		// 	expectedReqURL:             "https://beta.example.com/v20180820/bucket/mybucket",
-		// 	expectedSigningName:        "s3-outposts",
-		// 	expectedSigningRegion:      "us-west-2",
-		// 	expectedHeaderForOutpostID: "op-01234567890123456",
-		// },
-		// "GetAccesspoint with dualstack and custom endpoint url": {
-		// 	options: s3control.Options{
-		// 		EndpointResolver: s3control.EndpointResolverFromURL("https://beta.example.com"),
-		// 		Region:           "us-west-2",
-		// 		UseDualstack:     true,
-		// 	},
-		// 	operation: func(ctx context.Context, svc *s3control.Client, fm *requestRetrieverMiddleware) (interface{}, error) {
-		// 		return svc.GetAccessPoint(ctx, &s3control.GetAccessPointInput{
-		// 			AccountId: aws.String(account),
-		// 			Name:      aws.String("apname"),
-		// 		}, addRequestRetriever(fm))
-		// 	},
-		// 	expectedReqURL:        "https://123456789012.beta.example.com/v20180820/accesspoint/apname",
-		// 	expectedSigningName:   "s3",
-		// 	expectedSigningRegion: "us-west-2",
-		// },
-		// "GetAccesspoint with Outposts accesspoint ARN and dualstack": {
-		// 	options: s3control.Options{
-		// 		EndpointResolver: s3control.EndpointResolverFromURL("https://beta.example.com"),
-		// 		Region:           "us-west-2",
-		// 		UseDualstack:     true,
-		// 	},
-		// 	operation: func(ctx context.Context, svc *s3control.Client, fm *requestRetrieverMiddleware) (interface{}, error) {
-		// 		return svc.GetAccessPoint(ctx, &s3control.GetAccessPointInput{
-		// 			AccountId: aws.String(account),
-		// 			Name:      aws.String("arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"),
-		// 		}, addRequestRetriever(fm))
-		// 	},
-		// 	expectedErr: "client configured for S3 Dual-stack but is not supported with resource ARN",
-		// },
-		// "standard CreateBucket with dualstack": {
-		// 	options: s3control.Options{
-		// 		EndpointResolver: s3control.EndpointResolverFromURL("https://beta.example.com"),
-		// 		Region:           "us-west-2",
-		// 		UseDualstack:     true,
-		// 	},
-		// 	operation: func(ctx context.Context, svc *s3control.Client, fm *requestRetrieverMiddleware) (interface{}, error) {
-		// 		return svc.CreateBucket(ctx, &s3control.CreateBucketInput{
-		// 			Bucket:    aws.String("bucketname"),
-		// 			OutpostId: aws.String("op-1234567890123456"),
-		// 		}, addRequestRetriever(fm))
-		// 	},
-		// 	expectedErr: " dualstack is not supported for outposts request",
-		// },
-		// "GetBucket with Outpost bucket ARN": {
-		// 	options: s3control.Options{
-		// 		EndpointResolver: s3control.EndpointResolverFromURL("https://beta.example.com"),
-		// 		Region:           "us-west-2",
-		// 		UseDualstack:     true,
-		// 	},
-		// 	operation: func(ctx context.Context, svc *s3control.Client, fm *requestRetrieverMiddleware) (interface{}, error) {
-		// 		return svc.GetBucket(ctx, &s3control.GetBucketInput{
-		// 			Bucket: aws.String("arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket"),
-		// 		}, addRequestRetriever(fm))
-		// 	},
-		// 	expectedErr: "client configured for S3 Dual-stack but is not supported with resource ARN",
-		// },
+		"Outpost Accesspoint ARN with GetAccesspoint and custom endpoint url": {
+			options: s3control.Options{
+				EndpointResolver: s3control.EndpointResolverFromURL(
+					"https://beta.example.com",
+				),
+				Region: "us-west-2",
+			},
+			operation: func(ctx context.Context, svc *s3control.Client, fm *requestRetrieverMiddleware) (interface{}, error) {
+				return svc.GetAccessPoint(ctx, &s3control.GetAccessPointInput{
+					AccountId: aws.String(account),
+					Name:      aws.String("arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"),
+				}, addRequestRetriever(fm))
+			},
+			expectedReqURL:             "https://beta.example.com/v20180820/accesspoint/myaccesspoint",
+			expectedSigningName:        "s3-outposts",
+			expectedSigningRegion:      "us-west-2",
+			expectedHeaderForOutpostID: "op-01234567890123456",
+		},
+		"standard CreateBucket with custom endpoint url": {
+			options: s3control.Options{
+				EndpointResolver: s3control.EndpointResolverFromURL("https://beta.example.com"),
+				Region:           "us-west-2",
+			},
+			operation: func(ctx context.Context, svc *s3control.Client, fm *requestRetrieverMiddleware) (interface{}, error) {
+				return svc.CreateBucket(ctx, &s3control.CreateBucketInput{
+					Bucket:    aws.String("bucketname"),
+					OutpostId: aws.String("op-01234567890123456"),
+				}, addRequestRetriever(fm))
+			},
+			expectedReqURL:             "https://beta.example.com/v20180820/bucket/bucketname",
+			expectedSigningName:        "s3-outposts",
+			expectedSigningRegion:      "us-west-2",
+			expectedHeaderForOutpostID: "op-01234567890123456",
+		},
+		"Outpost Accesspoint for GetBucket with custom endpoint url": {
+			options: s3control.Options{
+				EndpointResolver: s3control.EndpointResolverFromURL("https://beta.example.com"),
+				Region:           "us-west-2",
+			},
+			operation: func(ctx context.Context, svc *s3control.Client, fm *requestRetrieverMiddleware) (interface{}, error) {
+				return svc.GetBucket(ctx, &s3control.GetBucketInput{
+					Bucket: aws.String("arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket"),
+				}, addRequestRetriever(fm))
+			},
+			expectedReqURL:             "https://beta.example.com/v20180820/bucket/mybucket",
+			expectedSigningName:        "s3-outposts",
+			expectedSigningRegion:      "us-west-2",
+			expectedHeaderForOutpostID: "op-01234567890123456",
+		},
+		"GetAccesspoint with dualstack and custom endpoint url": {
+			options: s3control.Options{
+				EndpointResolver: s3control.EndpointResolverFromURL("https://beta.example.com"),
+				Region:           "us-west-2",
+				UseDualstack:     true,
+			},
+			operation: func(ctx context.Context, svc *s3control.Client, fm *requestRetrieverMiddleware) (interface{}, error) {
+				return svc.GetAccessPoint(ctx, &s3control.GetAccessPointInput{
+					AccountId: aws.String(account),
+					Name:      aws.String("apname"),
+				}, addRequestRetriever(fm))
+			},
+			expectedReqURL:        "https://123456789012.beta.example.com/v20180820/accesspoint/apname",
+			expectedSigningName:   "s3",
+			expectedSigningRegion: "us-west-2",
+		},
+		"GetAccesspoint with Outposts accesspoint ARN and dualstack": {
+			options: s3control.Options{
+				EndpointResolver: s3control.EndpointResolverFromURL("https://beta.example.com"),
+				Region:           "us-west-2",
+				UseDualstack:     true,
+			},
+			operation: func(ctx context.Context, svc *s3control.Client, fm *requestRetrieverMiddleware) (interface{}, error) {
+				return svc.GetAccessPoint(ctx, &s3control.GetAccessPointInput{
+					AccountId: aws.String(account),
+					Name:      aws.String("arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint"),
+				}, addRequestRetriever(fm))
+			},
+			expectedErr: "client configured for S3 Dual-stack but is not supported with resource ARN",
+		},
+		"standard CreateBucket with dualstack": {
+			options: s3control.Options{
+				EndpointResolver: s3control.EndpointResolverFromURL("https://beta.example.com"),
+				Region:           "us-west-2",
+				UseDualstack:     true,
+			},
+			operation: func(ctx context.Context, svc *s3control.Client, fm *requestRetrieverMiddleware) (interface{}, error) {
+				return svc.CreateBucket(ctx, &s3control.CreateBucketInput{
+					Bucket:    aws.String("bucketname"),
+					OutpostId: aws.String("op-1234567890123456"),
+				}, addRequestRetriever(fm))
+			},
+			expectedErr: " dualstack is not supported for outposts request",
+		},
+		"GetBucket with Outpost bucket ARN": {
+			options: s3control.Options{
+				EndpointResolver: s3control.EndpointResolverFromURL("https://beta.example.com"),
+				Region:           "us-west-2",
+				UseDualstack:     true,
+			},
+			operation: func(ctx context.Context, svc *s3control.Client, fm *requestRetrieverMiddleware) (interface{}, error) {
+				return svc.GetBucket(ctx, &s3control.GetBucketInput{
+					Bucket: aws.String("arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket"),
+				}, addRequestRetriever(fm))
+			},
+			expectedErr: "client configured for S3 Dual-stack but is not supported with resource ARN",
+		},
 	}
 
 	for name, c := range cases {
