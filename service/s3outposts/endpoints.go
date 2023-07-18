@@ -486,7 +486,7 @@ func (r *resolver) ResolveEndpoint(
 				Headers: http.Header{},
 			}, nil
 		}
-		return endpoint, fmt.Errorf("no rules matched these parameters. This is a bug, %#v", params)
+		return endpoint, fmt.Errorf("Endpoint resolution failed. Invalid operation or environment input.")
 	}
 	return endpoint, fmt.Errorf("endpoint rule error, %s", "Invalid Configuration: Missing Region")
 }

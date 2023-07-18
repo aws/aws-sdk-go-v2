@@ -3,8 +3,8 @@ package s3
 import (
 	"context"
 	"fmt"
-	"path"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"path"
 
 	"github.com/aws/aws-sdk-go-v2/internal/endpoints/awsrulesfn"
 	smithy "github.com/aws/smithy-go"
@@ -39,7 +39,7 @@ func (m *serializeImmutableHostnameBucketMiddleware) HandleSerialize(
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
 	}
 	if !smithyhttp.GetHostnameImmutable(ctx) &&
-	   !(awsmiddleware.GetRequiresLegacyEndpoints(ctx) && m.UsePathStyle) {
+		!(awsmiddleware.GetRequiresLegacyEndpoints(ctx) && m.UsePathStyle) {
 		return next.HandleSerialize(ctx, in)
 	}
 
