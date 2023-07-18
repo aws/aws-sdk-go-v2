@@ -5457,7 +5457,7 @@
         "com.amazonaws.elasticsearchservice#ElasticsearchVersionString": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^[0-9]{1}\\.[0-9]{1,2}$|^OpenSearch_[0-9]{1,2}\\.[0-9]{1,2}$"
+                "smithy.api#pattern": "^[0-9]{1}\\.[0-9]{1,2}$|^OpenSearch_[0-9]{1,2}\\.[0-9]{1,2}$|^OS_[0-9]{1,2}\\.[0-9]{1,2}$"
             }
         },
         "com.amazonaws.elasticsearchservice#EncryptionAtRestOptions": {

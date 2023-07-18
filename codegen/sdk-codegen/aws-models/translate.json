@@ -1481,7 +1481,7 @@
                 "ContentType": {
                     "target": "com.amazonaws.translate#ContentType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes the format of the document. You can specify one of the following:</p>\n         <ul>\n            <li>\n               <p>text/html - The input data consists of HTML content. \n        Amazon Translate translates only the text in the HTML element.</p>\n            </li>\n            <li>\n               <p>text/plain - The input data consists of unformatted text. \n        Amazon Translate translates every character in the content. </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Describes the format of the document. You can specify one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>text/html</code> - The input data consists of HTML content. \n        Amazon Translate translates only the text in the HTML element.</p>\n            </li>\n            <li>\n               <p>\n                  <code>text/plain</code> - The input data consists of unformatted text. \n        Amazon Translate translates every character in the content. </p>\n            </li>\n            <li>\n               <p>\n                  <code>application/vnd.openxmlformats-officedocument.wordprocessingml.document</code> - The \n          input data consists of a Word document (.docx).</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }

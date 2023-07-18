@@ -395,6 +395,9 @@
             "version": "2021-04-28",
             "operations": [
                 {
+                    "target": "com.amazonaws.m2#GetSignedBluinsightsUrl"
+                },
+                {
                     "target": "com.amazonaws.m2#ListEngineVersions"
                 },
                 {
@@ -1487,13 +1490,7 @@
             "members": {}
         },
         "com.amazonaws.m2#CapacityValue": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#range": {
-                    "min": 1,
-                    "max": 100
-                }
-            }
+            "type": "integer"
         },
         "com.amazonaws.m2#ConflictException": {
             "type": "structure",
@@ -1622,7 +1619,7 @@
                 "roleArn": {
                     "target": "com.amazonaws.m2#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the role associated with the application.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies a role that the application uses to access Amazon Web Services resources\n         that are not part of the application or are in a different Amazon Web Services account.</p>"
                     }
                 }
             }
@@ -2752,16 +2749,16 @@
                         "name": "AVAILABLE"
                     },
                     {
+                        "value": "Updating",
+                        "name": "UPDATING"
+                    },
+                    {
                         "value": "Deleting",
                         "name": "DELETING"
                     },
                     {
                         "value": "Failed",
                         "name": "FAILED"
-                    },
-                    {
-                        "value": "Updating",
-                        "name": "UPDATING"
                     }
                 ]
             }
@@ -3895,13 +3892,59 @@
                 }
             }
         },
+        "com.amazonaws.m2#GetSignedBluinsightsUrl": {
+            "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
+            "output": {
+                "target": "com.amazonaws.m2#GetSignedBluinsightsUrlResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.m2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.m2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.m2#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "aws.api#controlPlane": {},
+                "aws.iam#actionPermissionDescription": "Grants permission to create a signed Bluinsights url",
+                "smithy.api#documentation": "<p>Gets a single sign-on URL that can be used to connect to AWS Blu Insights.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/signed-bi-url",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.m2#GetSignedBluinsightsUrlResponse": {
+            "type": "structure",
+            "members": {
+                "signedBiUrl": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Single sign-on AWS Blu Insights URL.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.m2#HighAvailabilityConfig": {
             "type": "structure",
             "members": {
                 "desiredCapacity": {
                     "target": "com.amazonaws.m2#CapacityValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of instances in a high availability configuration.</p>",
+                        "smithy.api#documentation": "<p>The number of instances in a high availability configuration. The minimum possible value is 1 and the maximum is 100.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4971,7 +5014,7 @@
             "traits": {
                 "smithy.api#range": {
                     "min": 1,
-                    "max": 100
+                    "max": 2000
                 }
             }
         },
@@ -5020,7 +5063,7 @@
                 "memberFileExtensions": {
                     "target": "com.amazonaws.m2#String20List",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array containing one or more filename extensions, allowing you to specify which files to be included as PDS member.</p>",
+                        "smithy.api#documentation": "<p>An array containing one or more filename extensions, allowing you to specify which files\n         to be included as PDS member.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5886,7 +5929,7 @@
                     "target": "com.amazonaws.m2#CapacityValue",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>The desired capacity for the runtime environment to update.</p>"
+                        "smithy.api#documentation": "<p>The desired capacity for the runtime environment to update. The minimum possible value is 0 and the maximum is 100.</p>"
                     }
                 },
                 "instanceType": {

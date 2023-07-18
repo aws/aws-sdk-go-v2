@@ -320,6 +320,1756 @@
                 }
             }
         },
+        "com.amazonaws.lexmodelsv2#AnalyticsBinByList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#AnalyticsBinBySpecification"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsBinByName": {
+            "type": "enum",
+            "members": {
+                "ConversationStartTime": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ConversationStartTime"
+                    }
+                },
+                "UtteranceTimestamp": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtteranceTimestamp"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsBinBySpecification": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsBinByName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the time metric by which to bin the analytics data.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "interval": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsInterval",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the interval of time by which to bin the analytics data.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "order": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsSortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to bin the analytics data in ascending or descending order. If this field is left blank, the default order is by the key of the bin in descending order.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the time metric, interval, and method by which to bin the analytics data.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsBinKey": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsBinByName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The criterion by which to bin the results.</p>"
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsBinValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the criterion that defines the bin.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object containing the criterion by which to bin the results and the value that defines that bin.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsBinKeys": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#AnalyticsBinKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsBinValue": {
+            "type": "long"
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsCommonFilterName": {
+            "type": "enum",
+            "members": {
+                "BotAliasId": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BotAliasId"
+                    }
+                },
+                "BotVersion": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BotVersion"
+                    }
+                },
+                "LocaleId": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LocaleId"
+                    }
+                },
+                "Modality": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Modality"
+                    }
+                },
+                "Channel": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Channel"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsFilterOperator": {
+            "type": "enum",
+            "members": {
+                "Equals": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQ"
+                    }
+                },
+                "GreaterThan": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GT"
+                    }
+                },
+                "LessThan": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsFilterValue": {
+            "type": "string"
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsFilterValues": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#AnalyticsFilterValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsGroupByValue": {
+            "type": "string"
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsIntentField": {
+            "type": "enum",
+            "members": {
+                "IntentName": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IntentName"
+                    }
+                },
+                "IntentEndState": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IntentEndState"
+                    }
+                },
+                "IntentLevel": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IntentLevel"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsIntentFilter": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsIntentFilterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The category by which to filter the intents. The descriptions for each option are as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BotAlias</code> – The name of the bot alias.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BotVersion</code> – The version of the bot.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LocaleId</code> – The locale of the bot.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Modality</code> – The modality of the session with the bot (audio, DTMF, or text).</p>\n            </li>\n            <li>\n               <p>\n                  <code>Channel</code> – The channel that the bot is integrated with.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SessionId</code> – The identifier of the session with the bot.</p>\n            </li>\n            <li>\n               <p>\n                  <code>OriginatingRequestId</code> – The identifier of the first request in a session.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IntentName</code> – The name of the intent.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IntentEndState</code> – The final state of the intent.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "operator": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsFilterOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operation by which to filter the category. The following operations are possible:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CO</code> – Contains</p>\n            </li>\n            <li>\n               <p>\n                  <code>EQ</code> – Equals</p>\n            </li>\n            <li>\n               <p>\n                  <code>GT</code> – Greater than</p>\n            </li>\n            <li>\n               <p>\n                  <code>LT</code> – Less than</p>\n            </li>\n         </ul>\n         <p>The operators that each filter supports are listed below:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BotAlias</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BotVersion</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LocaleId</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Modality</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Channel</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SessionId</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>OriginatingRequestId</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IntentName</code> – <code>EQ</code>, <code>CO</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IntentEndState</code> – <code>EQ</code>, <code>CO</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "values": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsFilterValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array containing the values of the category by which to apply the operator to filter the results. You can provide multiple values if the operator is <code>EQ</code> or <code>CO</code>. If you provide multiple values, you filter for results that equal/contain any of the values. For example, if the <code>name</code>, <code>operator</code>, and <code>values</code> fields are <code>Modality</code>, <code>EQ</code>, and <code>[Speech, Text]</code>, the operation filters for results where the modality was either <code>Speech</code> or <code>Text</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains fields describing a condition by which to filter the intents. The expression may be understood as <code>name</code>\n            <code>operator</code>\n            <code>values</code>. For example:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>IntentName CO Book</code> – The intent name contains the string \"Book.\"</p>\n            </li>\n            <li>\n               <p>\n                  <code>BotVersion EQ 2</code> – The bot version is equal to two.</p>\n            </li>\n         </ul>\n         <p>The operators that each filter supports are listed below:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BotAlias</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BotVersion</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LocaleId</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Modality</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Channel</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SessionId</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>OriginatingRequestId</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IntentName</code> – <code>EQ</code>, <code>CO</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IntentEndState</code> – <code>EQ</code>, <code>CO</code>.</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsIntentFilterName": {
+            "type": "enum",
+            "members": {
+                "BotAliasId": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BotAliasId"
+                    }
+                },
+                "BotVersion": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BotVersion"
+                    }
+                },
+                "LocaleId": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LocaleId"
+                    }
+                },
+                "Modality": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Modality"
+                    }
+                },
+                "Channel": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Channel"
+                    }
+                },
+                "SessionId": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SessionId"
+                    }
+                },
+                "OriginatingRequestId": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OriginatingRequestId"
+                    }
+                },
+                "IntentName": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IntentName"
+                    }
+                },
+                "IntentEndState": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IntentEndState"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsIntentFilters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#AnalyticsIntentFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 9
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsIntentGroupByKey": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsIntentField",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A category by which the intent analytics were grouped.</p>"
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsGroupByValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A member of the category by which the intent analytics were grouped.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the category by which the intent analytics were grouped and a member of that category.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsIntentGroupByKeys": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#AnalyticsIntentGroupByKey"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsIntentGroupByList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#AnalyticsIntentGroupBySpecification"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 3
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsIntentGroupBySpecification": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsIntentField",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to group the intent stages by their name or their end state.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the category by which to group the intents.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsIntentMetric": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsIntentMetricName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metric for which you want to get intent summary statistics.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Count</code> – The number of times the intent was invoked.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Success</code> – The number of times the intent succeeded.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Failure</code> – The number of times the intent failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Switched</code> – The number of times there was a switch to a different intent.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Dropped</code> – The number of times the user dropped the intent.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "statistic": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsMetricStatistic",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The summary statistic to calculate.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Sum</code> – The total count for the category you provide in <code>name</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Average</code> – The total count divided by the number of intents in the category you provide in <code>name</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Max</code> – The highest count in the category you provide in <code>name</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "order": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsSortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to sort the results in ascending or descending order.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the metric and the summary statistic you want to calculate, and the order in which to sort the results, for the intents in the bot.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsIntentMetricName": {
+            "type": "enum",
+            "members": {
+                "Count": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Count"
+                    }
+                },
+                "Success": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Success"
+                    }
+                },
+                "Failure": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Failure"
+                    }
+                },
+                "Switched": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Switched"
+                    }
+                },
+                "Dropped": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Dropped"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsIntentMetricResult": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsIntentMetricName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metric that you requested. See <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/analytics-key-definitions.html\">Key definitions</a> for more details about these metrics.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Count</code> – The number of times the intent was invoked.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Success</code> – The number of times the intent succeeded.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Failure</code> – The number of times the intent failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Switched</code> – The number of times there was a switch to a different intent.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Dropped</code> – The number of times the user dropped the intent.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "statistic": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsMetricStatistic",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The statistic that you requested to calculate.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Sum</code> – The total count for the category you provide in <code>name</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Average</code> – The total count divided by the number of intents in the category you provide in <code>name</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Max</code> – The highest count in the category you provide in <code>name</code>.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsMetricValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the summary statistic for the metric that you requested.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object containing the results for the intent metric you requested.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsIntentMetricResults": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#AnalyticsIntentMetricResult"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsIntentMetrics": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#AnalyticsIntentMetric"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsIntentNodeSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#AnalyticsIntentNodeSummary"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsIntentNodeSummary": {
+            "type": "structure",
+            "members": {
+                "intentName": {
+                    "target": "com.amazonaws.lexmodelsv2#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the intent at the end of the requested path.</p>"
+                    }
+                },
+                "intentPath": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsPath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path.</p>"
+                    }
+                },
+                "intentCount": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsNodeCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of sessions that follow the given path to the given intent.</p>"
+                    }
+                },
+                "intentLevel": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsNodeLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of intents up to and including the requested path.</p>"
+                    }
+                },
+                "nodeType": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsNodeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the node is the end of a path (<code>Exit</code>) or not (<code>Inner</code>).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object containing information about the requested path.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsIntentResult": {
+            "type": "structure",
+            "members": {
+                "binKeys": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsBinKeys",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of objects containing the criteria you requested for binning results and the values of the bins.</p>"
+                    }
+                },
+                "groupByKeys": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsIntentGroupByKeys",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of objects containing the criteria you requested for grouping results and the values of the groups.</p>"
+                    }
+                },
+                "metricsResults": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsIntentMetricResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of objects, each of which contains a metric you want to list, the statistic for the metric you want to return, and the method by which to organize the results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object containing the results for the intent metrics you requested and the bin and/or group(s) they refer to, if applicable.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsIntentResults": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#AnalyticsIntentResult"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsIntentStageField": {
+            "type": "enum",
+            "members": {
+                "IntentStageName": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IntentStageName"
+                    }
+                },
+                "SwitchedToIntent": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SwitchedToIntent"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsIntentStageFilter": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsIntentStageFilterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The category by which to filter the intent stages. The descriptions for each option are as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BotAlias</code> – The name of the bot alias.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BotVersion</code> – The version of the bot.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LocaleId</code> – The locale of the bot.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Modality</code> – The modality of the session with the bot (audio, DTMF, or text).</p>\n            </li>\n            <li>\n               <p>\n                  <code>Channel</code> – The channel that the bot is integrated with.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SessionId</code> – The identifier of the session with the bot.</p>\n            </li>\n            <li>\n               <p>\n                  <code>OriginatingRequestId</code> – The identifier of the first request in a session.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IntentName</code> – The name of the intent.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IntentStageName</code> – The stage in the intent.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "operator": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsFilterOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operation by which to filter the category. The following operations are possible:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CO</code> – Contains</p>\n            </li>\n            <li>\n               <p>\n                  <code>EQ</code> – Equals</p>\n            </li>\n            <li>\n               <p>\n                  <code>GT</code> – Greater than</p>\n            </li>\n            <li>\n               <p>\n                  <code>LT</code> – Less than</p>\n            </li>\n         </ul>\n         <p>The operators that each filter supports are listed below:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BotAlias</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BotVersion</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LocaleId</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Modality</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Channel</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SessionId</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>OriginatingRequestId</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IntentName</code> – <code>EQ</code>, <code>CO</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IntentStageName</code> – <code>EQ</code>, <code>CO</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "values": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsFilterValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array containing the values of the category by which to apply the operator to filter the results. You can provide multiple values if the operator is <code>EQ</code> or <code>CO</code>. If you provide multiple values, you filter for results that equal/contain any of the values. For example, if the <code>name</code>, <code>operator</code>, and <code>values</code> fields are <code>Modality</code>, <code>EQ</code>, and <code>[Speech, Text]</code>, the operation filters for results where the modality was either <code>Speech</code> or <code>Text</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains fields describing a condition by which to filter the intent stages. The expression may be understood as <code>name</code>\n            <code>operator</code>\n            <code>values</code>. For example:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>IntentName CO Book</code> – The intent name contains the string \"Book.\"</p>\n            </li>\n            <li>\n               <p>\n                  <code>BotVersion EQ 2</code> – The bot version is equal to two.</p>\n            </li>\n         </ul>\n         <p>The operators that each filter supports are listed below:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BotAlias</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BotVersion</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LocaleId</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Modality</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Channel</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SessionId</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>OriginatingRequestId</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IntentName</code> – <code>EQ</code>, <code>CO</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IntentStageName</code> – <code>EQ</code>, <code>CO</code>.</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsIntentStageFilterName": {
+            "type": "enum",
+            "members": {
+                "BotAliasId": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BotAliasId"
+                    }
+                },
+                "BotVersion": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BotVersion"
+                    }
+                },
+                "LocaleId": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LocaleId"
+                    }
+                },
+                "Modality": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Modality"
+                    }
+                },
+                "Channel": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Channel"
+                    }
+                },
+                "SessionId": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SessionId"
+                    }
+                },
+                "OriginatingRequestId": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OriginatingRequestId"
+                    }
+                },
+                "IntentName": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IntentName"
+                    }
+                },
+                "IntentStageName": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IntentStageName"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsIntentStageFilters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#AnalyticsIntentStageFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 9
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsIntentStageGroupByKey": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsIntentStageField",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A category by which the intent stage analytics were grouped.</p>"
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsGroupByValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A member of the category by which the intent stage analytics were grouped.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the category by which the intent stage analytics and the values for that category were grouped.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsIntentStageGroupByKeys": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#AnalyticsIntentStageGroupByKey"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsIntentStageGroupByList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#AnalyticsIntentStageGroupBySpecification"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsIntentStageGroupBySpecification": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsIntentStageField",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to group the intent stages by their name or the intent to which the session was switched.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the category by which to group the intent stages.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsIntentStageMetric": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsIntentStageMetricName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metric for which you want to get intent stage summary statistics. See <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/analytics-key-definitions.html\">Key definitions</a> for more details about these metrics.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Count</code> – The number of times the intent stage occurred.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Success</code> – The number of times the intent stage succeeded.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Failure</code> – The number of times the intent stage failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Dropped</code> – The number of times the user dropped the intent stage.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Retry</code> – The number of times the bot tried to elicit a response from the user at this stage.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "statistic": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsMetricStatistic",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The summary statistic to calculate.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Sum</code> – The total count for the category you provide in <code>name</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Average</code> – The total count divided by the number of intent stages in the category you provide in <code>name</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Max</code> – The highest count in the category you provide in <code>name</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "order": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsSortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to sort the results in ascending or descending order of the summary statistic (<code>value</code> in the response).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the metric and the summary statistic you want to calculate, and the order in which to sort the results, for the intent stages across the user sessions with the bot.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsIntentStageMetricName": {
+            "type": "enum",
+            "members": {
+                "Count": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Count"
+                    }
+                },
+                "Success": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Success"
+                    }
+                },
+                "Failed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Failed"
+                    }
+                },
+                "Dropped": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Dropped"
+                    }
+                },
+                "Retry": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Retry"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsIntentStageMetricResult": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsIntentStageMetricName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metric that you requested.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Count</code> – The number of times the intent stage occurred.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Success</code> – The number of times the intent stage succeeded.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Failure</code> – The number of times the intent stage failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Dropped</code> – The number of times the user dropped the intent stage.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Retry</code> – The number of times the bot tried to elicit a response from the user at this stage.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "statistic": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsMetricStatistic",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The summary statistic that you requested to calculate.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Sum</code> – The total count for the category you provide in <code>name</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Average</code> – The total count divided by the number of intent stages in the category you provide in <code>name</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Max</code> – The highest count in the category you provide in <code>name</code>.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsMetricValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the summary statistic for the metric that you requested.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object containing the results for an intent stage metric you requested.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsIntentStageMetricResults": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#AnalyticsIntentStageMetricResult"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsIntentStageMetrics": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#AnalyticsIntentStageMetric"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsIntentStageResult": {
+            "type": "structure",
+            "members": {
+                "binKeys": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsBinKeys",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of objects containing the criteria you requested for binning results and the values of the bins.</p>"
+                    }
+                },
+                "groupByKeys": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsIntentStageGroupByKeys",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of objects containing the criteria you requested for grouping results and the values of the bins.</p>"
+                    }
+                },
+                "metricsResults": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsIntentStageMetricResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of objects, each of which contains a metric you want to list, the statistic for the metric you want to return, and the method by which to organize the results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object containing the results for the intent stage metrics you requested and the bin and/or group they refer to, if applicable.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsIntentStageResults": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#AnalyticsIntentStageResult"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsInterval": {
+            "type": "enum",
+            "members": {
+                "OneHour": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OneHour"
+                    }
+                },
+                "OneDay": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OneDay"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsLongValue": {
+            "type": "long"
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsMetricStatistic": {
+            "type": "enum",
+            "members": {
+                "Sum": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Sum"
+                    }
+                },
+                "Avg": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Avg"
+                    }
+                },
+                "Max": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Max"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsMetricValue": {
+            "type": "double"
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsModality": {
+            "type": "enum",
+            "members": {
+                "Speech": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Speech"
+                    }
+                },
+                "Text": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Text"
+                    }
+                },
+                "DTMF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DTMF"
+                    }
+                },
+                "MultiMode": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MultiMode"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsNodeCount": {
+            "type": "integer"
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsNodeLevel": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsNodeType": {
+            "type": "enum",
+            "members": {
+                "Inner": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Inner"
+                    }
+                },
+                "Exit": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Exit"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsOriginatingRequestId": {
+            "type": "string"
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsPath": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsPathFilter": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsCommonFilterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The category by which to filter the intent paths. The descriptions for each option are as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BotAlias</code> – The name of the bot alias.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BotVersion</code> – The version of the bot.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LocaleId</code> – The locale of the bot.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Modality</code> – The modality of the session with the bot (audio, DTMF, or text).</p>\n            </li>\n            <li>\n               <p>\n                  <code>Channel</code> – The channel that the bot is integrated with.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "operator": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsFilterOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operation by which to filter the category. The following operations are possible:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CO</code> – Contains</p>\n            </li>\n            <li>\n               <p>\n                  <code>EQ</code> – Equals</p>\n            </li>\n            <li>\n               <p>\n                  <code>GT</code> – Greater than</p>\n            </li>\n            <li>\n               <p>\n                  <code>LT</code> – Less than</p>\n            </li>\n         </ul>\n         <p>The operators that each filter supports are listed below:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BotAlias</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BotVersion</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LocaleId</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Modality</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Channel</code> – <code>EQ</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "values": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsFilterValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array containing the values of the category by which to apply the operator to filter the results. You can provide multiple values if the operator is <code>EQ</code> or <code>CO</code>. If you provide multiple values, you filter for results that equal/contain any of the values. For example, if the <code>name</code>, <code>operator</code>, and <code>values</code> fields are <code>Modality</code>, <code>EQ</code>, and <code>[Speech, Text]</code>, the operation filters for results where the modality was either <code>Speech</code> or <code>Text</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains fields describing a condition by which to filter the paths. The expression may be understood as <code>name</code>\n            <code>operator</code>\n            <code>values</code>. For example:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>LocaleId EQ en</code> – The locale is \"en\".</p>\n            </li>\n            <li>\n               <p>\n                  <code>BotVersion EQ 2</code> – The bot version is equal to two.</p>\n            </li>\n         </ul>\n         <p>The operators that each filter supports are listed below:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BotAlias</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BotVersion</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LocaleId</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Modality</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Channel</code> – <code>EQ</code>.</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsPathFilters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#AnalyticsPathFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsSessionField": {
+            "type": "enum",
+            "members": {
+                "ConversationEndState": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ConversationEndState"
+                    }
+                },
+                "LocaleId": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LocaleId"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsSessionFilter": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsSessionFilterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The category by which to filter the sessions. The descriptions for each option are as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BotAlias</code> – The name of the bot alias.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BotVersion</code> – The version of the bot.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LocaleId</code> – The locale of the bot.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Modality</code> – The modality of the session with the bot (audio, DTMF, or text).</p>\n            </li>\n            <li>\n               <p>\n                  <code>Channel</code> – The channel that the bot is integrated with.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Duration</code> – The duration of the session.</p>\n            </li>\n            <li>\n               <p>\n                  <code>conversationEndState</code> – The final state of the session.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SessionId</code> – The identifier of the session with the bot.</p>\n            </li>\n            <li>\n               <p>\n                  <code>OriginatingRequestId</code> – The identifier of the first request in a session.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IntentPath</code> – The order of intents taken in a session.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "operator": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsFilterOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operation by which to filter the category. The following operations are possible:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CO</code> – Contains</p>\n            </li>\n            <li>\n               <p>\n                  <code>EQ</code> – Equals</p>\n            </li>\n            <li>\n               <p>\n                  <code>GT</code> – Greater than</p>\n            </li>\n            <li>\n               <p>\n                  <code>LT</code> – Less than</p>\n            </li>\n         </ul>\n         <p>The operators that each filter supports are listed below:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BotAlias</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BotVersion</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LocaleId</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Modality</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Channel</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Duration</code> – <code>EQ</code>, <code>GT</code>, <code>LT</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>conversationEndState</code> – <code>EQ</code>, <code>CO</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SessionId</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>OriginatingRequestId</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IntentPath</code> – <code>EQ</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "values": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsFilterValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array containing the values of the category by which to apply the operator to filter the results. You can provide multiple values if the operator is <code>EQ</code> or <code>CO</code>. If you provide multiple values, you filter for results that equal/contain any of the values. For example, if the <code>name</code>, <code>operator</code>, and <code>values</code> fields are <code>Modality</code>, <code>EQ</code>, and <code>[Speech, Text]</code>, the operation filters for results where the modality was either <code>Speech</code> or <code>Text</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains fields describing a condition by which to filter the sessions. The expression may be understood as <code>name</code>\n            <code>operator</code>\n            <code>values</code>. For example:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>LocaleId EQ en</code> – The locale is \"en\".</p>\n            </li>\n            <li>\n               <p>\n                  <code>Duration GT 200</code> – The duration is greater than 200 seconds.</p>\n            </li>\n         </ul>\n         <p>The operators that each filter supports are listed below:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BotAlias</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BotVersion</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LocaleId</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Modality</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Channel</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Duration</code> – <code>EQ</code>, <code>GT</code>, <code>LT</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>conversationEndState</code> – <code>EQ</code>, <code>CO</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SessionId</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>OriginatingRequestId</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IntentPath</code> – <code>EQ</code>.</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsSessionFilterName": {
+            "type": "enum",
+            "members": {
+                "BotAliasId": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BotAliasId"
+                    }
+                },
+                "BotVersion": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BotVersion"
+                    }
+                },
+                "LocaleId": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LocaleId"
+                    }
+                },
+                "Modality": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Modality"
+                    }
+                },
+                "Channel": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Channel"
+                    }
+                },
+                "Duration": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Duration"
+                    }
+                },
+                "ConversationEndState": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ConversationEndState"
+                    }
+                },
+                "SessionId": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SessionId"
+                    }
+                },
+                "OriginatingRequestId": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OriginatingRequestId"
+                    }
+                },
+                "IntentPath": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IntentPath"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsSessionFilters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#AnalyticsSessionFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsSessionGroupByKey": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsSessionField",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The category by which the session analytics were grouped.</p>"
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsGroupByValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A member of the category by which the session analytics were grouped.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the category by which the session analytics were grouped and a member of that category.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsSessionGroupByKeys": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#AnalyticsSessionGroupByKey"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsSessionGroupByList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#AnalyticsSessionGroupBySpecification"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsSessionGroupBySpecification": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsSessionField",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to group the session by their end state or their locale.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the category by which to group the sessions.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsSessionId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[0-9a-zA-Z._:-]$"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsSessionMetric": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsSessionMetricName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metric for which you want to get session summary statistics.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Count</code> – The number of sessions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Success</code> – The number of sessions that succeeded.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Failure</code> – The number of sessions that failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Dropped</code> – The number of sessions that the user dropped.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Duration</code> – The duration of sessions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TurnsPerSession</code> – The number of turns in the sessions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Concurrency</code> – The number of sessions occurring in the same period of time.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "statistic": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsMetricStatistic",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The summary statistic to calculate.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Sum</code> – The total count for the category you provide in <code>name</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Average</code> – The total count divided by the number of sessions in the category you provide in <code>name</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Max</code> – The highest count in the category you provide in <code>name</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "order": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsSortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to sort the results in ascending or descending order.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the metric and the summary statistic you want to calculate, and the order in which to sort the results, for the user sessions with the bot.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsSessionMetricName": {
+            "type": "enum",
+            "members": {
+                "Count": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Count"
+                    }
+                },
+                "Success": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Success"
+                    }
+                },
+                "Failure": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Failure"
+                    }
+                },
+                "Dropped": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Dropped"
+                    }
+                },
+                "Duration": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Duration"
+                    }
+                },
+                "TurnsPerConversation": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TurnsPerConversation"
+                    }
+                },
+                "Concurrency": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Concurrency"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsSessionMetricResult": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsSessionMetricName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metric that you requested.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Count</code> – The number of sessions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Success</code> – The number of sessions that succeeded.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Failure</code> – The number of sessions that failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Dropped</code> – The number of sessions that the user dropped.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Duration</code> – The duration of sessions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TurnPersession</code> – The number of turns in the sessions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Concurrency</code> – The number of sessions occurring in the same period of time.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "statistic": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsMetricStatistic",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The summary statistic that you requested to calculate.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Sum</code> – The total count for the category you provide in <code>name</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Average</code> – The total count divided by the number of sessions in the category you provide in <code>name</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Max</code> – The highest count in the category you provide in <code>name</code>.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsMetricValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the summary statistic for the metric that you requested.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object containing the results for a session metric you requested.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsSessionMetricResults": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#AnalyticsSessionMetricResult"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsSessionMetrics": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#AnalyticsSessionMetric"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 7
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsSessionResult": {
+            "type": "structure",
+            "members": {
+                "binKeys": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsBinKeys",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of objects containing the criteria you requested for binning results and the values of the bins.</p>"
+                    }
+                },
+                "groupByKeys": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsSessionGroupByKeys",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of objects containing the criteria you requested for grouping results and the values of the bins.</p>"
+                    }
+                },
+                "metricsResults": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsSessionMetricResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of objects, each of which contains a metric you want to list, the statistic for the metric you want to return, and the method by which to organize the results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object containing the results for the session metrics you requested and the bin and/or group(s) they refer to, if applicable.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsSessionResults": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#AnalyticsSessionResult"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsSessionSortByName": {
+            "type": "enum",
+            "members": {
+                "ConversationStartTime": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ConversationStartTime"
+                    }
+                },
+                "NumberOfTurns": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NumberOfTurns"
+                    }
+                },
+                "Duration": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Duration"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsSortOrder": {
+            "type": "enum",
+            "members": {
+                "Ascending": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Ascending"
+                    }
+                },
+                "Descending": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Descending"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsUtteranceAttribute": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsUtteranceAttributeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An attribute to return. The only available attribute is the intent that the bot mapped the utterance to.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that specifies the last used intent at the time of the utterance as an attribute to return.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsUtteranceAttributeName": {
+            "type": "enum",
+            "members": {
+                "LastUsedIntent": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LastUsedIntent"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsUtteranceAttributeResult": {
+            "type": "structure",
+            "members": {
+                "lastUsedIntent": {
+                    "target": "com.amazonaws.lexmodelsv2#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The intent that the bot mapped the utterance to.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object containing the intent that the bot mapped the utterance to.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsUtteranceAttributeResults": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#AnalyticsUtteranceAttributeResult"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsUtteranceAttributes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#AnalyticsUtteranceAttribute"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsUtteranceField": {
+            "type": "enum",
+            "members": {
+                "UtteranceText": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtteranceText"
+                    }
+                },
+                "UtteranceState": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtteranceState"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsUtteranceFilter": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsUtteranceFilterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The category by which to filter the utterances. The descriptions for each option are as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BotAlias</code> – The name of the bot alias.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BotVersion</code> – The version of the bot.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LocaleId</code> – The locale of the bot.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Modality</code> – The modality of the session with the bot (audio, DTMF, or text).</p>\n            </li>\n            <li>\n               <p>\n                  <code>Channel</code> – The channel that the bot is integrated with.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SessionId</code> – The identifier of the session with the bot.</p>\n            </li>\n            <li>\n               <p>\n                  <code>OriginatingRequestId</code> – The identifier of the first request in a session.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UtteranceState</code> – The state of the utterance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UtteranceText</code> – The text in the utterance.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "operator": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsFilterOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operation by which to filter the category. The following operations are possible:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CO</code> – Contains</p>\n            </li>\n            <li>\n               <p>\n                  <code>EQ</code> – Equals</p>\n            </li>\n            <li>\n               <p>\n                  <code>GT</code> – Greater than</p>\n            </li>\n            <li>\n               <p>\n                  <code>LT</code> – Less than</p>\n            </li>\n         </ul>\n         <p>The operators that each filter supports are listed below:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BotAlias</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BotVersion</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LocaleId</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Modality</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Channel</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SessionId</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>OriginatingRequestId</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UtteranceState</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UtteranceText</code> – <code>EQ</code>, <code>CO</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "values": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsFilterValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array containing the values of the category by which to apply the operator to filter the results. You can provide multiple values if the operator is <code>EQ</code> or <code>CO</code>. If you provide multiple values, you filter for results that equal/contain any of the values. For example, if the <code>name</code>, <code>operator</code>, and <code>values</code> fields are <code>Modality</code>, <code>EQ</code>, and <code>[Speech, Text]</code>, the operation filters for results where the modality was either <code>Speech</code> or <code>Text</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains fields describing a condition by which to filter the utterances. The expression may be understood as <code>name</code>\n            <code>operator</code>\n            <code>values</code>. For example:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>LocaleId EQ Book</code> – The locale is the string \"en\".</p>\n            </li>\n            <li>\n               <p>\n                  <code>UtteranceText CO help</code> – The text of the utterance contains the string \"help\".</p>\n            </li>\n         </ul>\n         <p>The operators that each filter supports are listed below:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BotAlias</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BotVersion</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LocaleId</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Modality</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Channel</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SessionId</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>OriginatingRequestId</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UtteranceState</code> – <code>EQ</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UtteranceText</code> – <code>EQ</code>, <code>CO</code>.</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsUtteranceFilterName": {
+            "type": "enum",
+            "members": {
+                "BotAliasId": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BotAliasId"
+                    }
+                },
+                "BotVersion": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BotVersion"
+                    }
+                },
+                "LocaleId": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LocaleId"
+                    }
+                },
+                "Modality": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Modality"
+                    }
+                },
+                "Channel": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Channel"
+                    }
+                },
+                "SessionId": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SessionId"
+                    }
+                },
+                "OriginatingRequestId": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OriginatingRequestId"
+                    }
+                },
+                "UtteranceState": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtteranceState"
+                    }
+                },
+                "UtteranceText": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtteranceText"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsUtteranceFilters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#AnalyticsUtteranceFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 9
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsUtteranceGroupByKey": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsUtteranceField",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The category by which the utterance analytics were grouped.</p>"
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsGroupByValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A member of the category by which the utterance analytics were grouped.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the category by which the utterance analytics were grouped and the values for that category.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsUtteranceGroupByKeys": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#AnalyticsUtteranceGroupByKey"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsUtteranceGroupByList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#AnalyticsUtteranceGroupBySpecification"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsUtteranceGroupBySpecification": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsUtteranceField",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to group the utterances by their text or their state.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the category by which to group the utterances.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsUtteranceMetric": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsUtteranceMetricName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metric for which you want to get utterance summary statistics.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Count</code> – The number of utterances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Missed</code> – The number of utterances that Amazon Lex failed to recognize.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Detected</code> – The number of utterances that Amazon Lex managed to detect.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UtteranceTimestamp</code> – The date and time of the utterance.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "statistic": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsMetricStatistic",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The summary statistic to calculate.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Sum</code> – The total count for the category you provide in <code>name</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Average</code> – The total count divided by the number of utterances in the category you provide in <code>name</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Max</code> – The highest count in the category you provide in <code>name</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "order": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsSortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to sort the results in ascending or descending order.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the metric and the summary statistic you want to calculate, and the order in which to sort the results, for the utterances across the user sessions with the bot.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsUtteranceMetricName": {
+            "type": "enum",
+            "members": {
+                "Count": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Count"
+                    }
+                },
+                "Missed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Missed"
+                    }
+                },
+                "Detected": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Detected"
+                    }
+                },
+                "UtteranceTimestamp": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtteranceTimestamp"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsUtteranceMetricResult": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsUtteranceMetricName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metric that you requested.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Count</code> – The number of utterances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Missed</code> – The number of utterances that Amazon Lex failed to recognize.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Detected</code> – The number of utterances that Amazon Lex managed to detect.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UtteranceTimeStamp</code> – The date and time of the utterance.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "statistic": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsMetricStatistic",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The summary statistic that you requested to calculate.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Sum</code> – The total count for the category you provide in <code>name</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Average</code> – The total count divided by the number of utterances in the category you provide in <code>name</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Max</code> – The highest count in the category you provide in <code>name</code>.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsMetricValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the summary statistic for the metric that you requested.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object containing the results for the utterance metric you requested.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsUtteranceMetricResults": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#AnalyticsUtteranceMetricResult"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsUtteranceMetrics": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#AnalyticsUtteranceMetric"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsUtteranceResult": {
+            "type": "structure",
+            "members": {
+                "binKeys": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsBinKeys",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of objects containing the criteria you requested for binning results and the values of the bins.</p>"
+                    }
+                },
+                "groupByKeys": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsUtteranceGroupByKeys",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of objects containing the criteria you requested for grouping results and the values of the bins.</p>"
+                    }
+                },
+                "metricsResults": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsUtteranceMetricResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of objects, each of which contains a metric you want to list, the statistic for the metric you want to return, and the method by which to organize the results.</p>"
+                    }
+                },
+                "attributeResults": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsUtteranceAttributeResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of objects containing information about the last used intent at the time of an utterance.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object containing the results for the utterance metrics you requested and the bin and/or group(s) they refer to, if applicable.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsUtteranceResults": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#AnalyticsUtteranceResult"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AnalyticsUtteranceSortByName": {
+            "type": "enum",
+            "members": {
+                "UtteranceTimestamp": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UtteranceTimestamp"
+                    }
+                }
+            }
+        },
         "com.amazonaws.lexmodelsv2#AssociatedTranscript": {
             "type": "structure",
             "members": {
@@ -1067,6 +2817,29 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The target Amazon S3 location for the test set execution using a bot alias.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#BotChannelType": {
+            "type": "enum",
+            "members": {
+                "Facebook": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Facebook"
+                    }
+                },
+                "Slack": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Slack"
+                    }
+                },
+                "TwilioSms": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TwilioSms"
+                    }
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#BotExportSpecification": {
@@ -2566,6 +4339,29 @@
                 "smithy.api#range": {
                     "min": 1,
                     "max": 20
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ConversationEndState": {
+            "type": "enum",
+            "members": {
+                "Success": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Success"
+                    }
+                },
+                "Failure": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Failure"
+                    }
+                },
+                "Dropped": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Dropped"
+                    }
                 }
             }
         },
@@ -10106,6 +11902,47 @@
                 "smithy.api#documentation": "<p>Specifies attributes for sorting a list of intents.</p>"
             }
         },
+        "com.amazonaws.lexmodelsv2#IntentState": {
+            "type": "enum",
+            "members": {
+                "Failed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Failed"
+                    }
+                },
+                "Fulfilled": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Fulfilled"
+                    }
+                },
+                "InProgress": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InProgress"
+                    }
+                },
+                "ReadyForFulfillment": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ReadyForFulfillment"
+                    }
+                },
+                "Waiting": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Waiting"
+                    }
+                },
+                "FulfillmentInProgress": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FulfillmentInProgress"
+                    }
+                }
+            }
+        },
         "com.amazonaws.lexmodelsv2#IntentStatistics": {
             "type": "structure",
             "members": {
@@ -10187,6 +12024,26 @@
                 "smithy.api#documentation": "<p>The service encountered an unexpected condition. Try your request\n         again.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.lexmodelsv2#InvokedIntentSample": {
+            "type": "structure",
+            "members": {
+                "intentName": {
+                    "target": "com.amazonaws.lexmodelsv2#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of an intent that was invoked.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object containing the name of an intent that was invoked.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#InvokedIntentSamples": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#InvokedIntentSample"
             }
         },
         "com.amazonaws.lexmodelsv2#ItemId": {
@@ -10457,10 +12314,25 @@
                     "target": "com.amazonaws.lexmodelsv2#ListImports"
                 },
                 {
+                    "target": "com.amazonaws.lexmodelsv2#ListIntentMetrics"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ListIntentPaths"
+                },
+                {
                     "target": "com.amazonaws.lexmodelsv2#ListIntents"
                 },
                 {
+                    "target": "com.amazonaws.lexmodelsv2#ListIntentStageMetrics"
+                },
+                {
                     "target": "com.amazonaws.lexmodelsv2#ListRecommendedIntents"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ListSessionAnalyticsData"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ListSessionMetrics"
                 },
                 {
                     "target": "com.amazonaws.lexmodelsv2#ListSlots"
@@ -10482,6 +12354,12 @@
                 },
                 {
                     "target": "com.amazonaws.lexmodelsv2#ListTestSets"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ListUtteranceAnalyticsData"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ListUtteranceMetrics"
                 },
                 {
                     "target": "com.amazonaws.lexmodelsv2#SearchAssociatedTranscripts"
@@ -12595,6 +14473,361 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.lexmodelsv2#ListIntentMetrics": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#ListIntentMetricsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#ListIntentMetricsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#PreconditionFailedException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves summary metrics for the intents in your bot. The following fields are required:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>metrics</code> – A list of <a href=\"https://docs.aws.amazon.com/lexv2/latest/APIReference/API_AnalyticsIntentMetric.html\">AnalyticsIntentMetric</a> objects. In each object, use the <code>name</code> field to specify the metric to calculate, the <code>statistic</code> field to specify whether to calculate the <code>Sum</code>, <code>Average</code>, or <code>Max</code> number, and the <code>order</code> field to specify whether to sort the results in <code>Ascending</code> or <code>Descending</code> order.</p>\n            </li>\n            <li>\n               <p>\n                  <code>startDateTime</code> and <code>endDateTime</code> – Define a time range for which you want to retrieve results.</p>\n            </li>\n         </ul>\n         <p>Of the optional fields, you can organize the results in the following ways:</p>\n         <ul>\n            <li>\n               <p>Use the <code>filters</code> field to filter the results, the <code>groupBy</code> field to specify categories by which to group the results, and the <code>binBy</code> field to specify time intervals by which to group the results.</p>\n            </li>\n            <li>\n               <p>Use the <code>maxResults</code> field to limit the number of results to return in a single response and the <code>nextToken</code> field to return the next batch of results if the response does not return the full set of results.</p>\n            </li>\n         </ul>\n         <p>Note that an <code>order</code> field exists in both <code>binBy</code> and <code>metrics</code>. You can specify only one <code>order</code> in a given request.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/bots/{botId}/analytics/intentmetrics",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ListIntentMetricsRequest": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the bot for which you want to retrieve intent metrics.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "startDateTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp that marks the beginning of the range of time for which you want to see intent metrics.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "endDateTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that marks the end of the range of time for which you want to see intent metrics.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "metrics": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsIntentMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of objects, each of which contains a metric you want to list, the statistic for the metric you want to return, and the order by which to organize the results.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "binBy": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsBinByList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of objects, each of which contains specifications for organizing the results by time.</p>"
+                    }
+                },
+                "groupBy": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsIntentGroupByList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of objects, each of which specifies how to group the results. You can group by the following criteria:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>IntentName</code> – The name of the intent.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IntentEndState</code> – The final state of the intent. The possible end states are detailed in <a href=\"https://docs.aws.amazon.com/analytics-key-definitions-intents\">Key definitions</a> in the user guide.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "filters": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsIntentFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of objects, each of which describes a condition by which you want to filter the results.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.lexmodelsv2#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in each page of results. If there are fewer results than the maximum page size, only the actual number of results are returned.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.lexmodelsv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response from the ListIntentMetrics operation contains more results than specified in the maxResults parameter, a token is returned in the response.</p>\n         <p>Use the returned token in the nextToken parameter of a ListIntentMetrics request to return the next page of results. For a complete set of results, call the ListIntentMetrics operation until the nextToken returned in the response is null.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ListIntentMetricsResponse": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the bot for which you retrieved intent metrics.</p>"
+                    }
+                },
+                "results": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsIntentResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The results for the intent metrics.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.lexmodelsv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response from the ListIntentMetrics operation contains more results than specified in the maxResults parameter, a token is returned in the response.</p>\n         <p>Use the returned token in the nextToken parameter of a ListIntentMetrics request to return the next page of results. For a complete set of results, call the ListIntentMetrics operation until the nextToken returned in the response is null.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ListIntentPaths": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#ListIntentPathsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#ListIntentPathsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#PreconditionFailedException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves summary statistics for a path of intents that users take over sessions with your bot. The following fields are required:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>startDateTime</code> and <code>endDateTime</code> – Define a time range for which you want to retrieve results.</p>\n            </li>\n            <li>\n               <p>\n                  <code>intentPath</code> – Define an order of intents for which you want to retrieve metrics. Separate intents in the path with a forward slash. For example, populate the <code>intentPath</code> field with <code>/BookCar/BookHotel</code> to see details about how many times users invoked the <code>BookCar</code> and <code>BookHotel</code> intents in that order.</p>\n            </li>\n         </ul>\n         <p>Use the optional <code>filters</code> field to filter the results.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/bots/{botId}/analytics/intentpaths",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ListIntentPathsRequest": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the bot for which you want to retrieve intent path metrics.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "startDateTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that marks the beginning of the range of time for which you want to see intent path metrics.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "endDateTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that marks the end of the range of time for which you want to see intent path metrics.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "intentPath": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsPath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The intent path for which you want to retrieve metrics. Use a forward slash to separate intents in the path. For example:</p>\n         <ul>\n            <li>\n               <p>/BookCar</p>\n            </li>\n            <li>\n               <p>/BookCar/BookHotel</p>\n            </li>\n            <li>\n               <p>/BookHotel/BookCar</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "filters": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsPathFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of objects, each describes a condition by which you want to filter the results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ListIntentPathsResponse": {
+            "type": "structure",
+            "members": {
+                "nodeSummaries": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsIntentNodeSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of objects, each of which contains information about a node in the intent path for which you requested metrics.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ListIntentStageMetrics": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#ListIntentStageMetricsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#ListIntentStageMetricsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#PreconditionFailedException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves summary metrics for the intent stages in your bot. The following fields are required:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>metrics</code> – A list of <a href=\"https://docs.aws.amazon.com/lexv2/latest/APIReference/API_AnalyticsIntentStageMetric.html\">AnalyticsIntentStageMetric</a> objects. In each object, use the <code>name</code> field to specify the metric to calculate, the <code>statistic</code> field to specify whether to calculate the <code>Sum</code>, <code>Average</code>, or <code>Max</code> number, and the <code>order</code> field to specify whether to sort the results in <code>Ascending</code> or <code>Descending</code> order.</p>\n            </li>\n            <li>\n               <p>\n                  <code>startDateTime</code> and <code>endDateTime</code> – Define a time range for which you want to retrieve results.</p>\n            </li>\n         </ul>\n         <p>Of the optional fields, you can organize the results in the following ways:</p>\n         <ul>\n            <li>\n               <p>Use the <code>filters</code> field to filter the results, the <code>groupBy</code> field to specify categories by which to group the results, and the <code>binBy</code> field to specify time intervals by which to group the results.</p>\n            </li>\n            <li>\n               <p>Use the <code>maxResults</code> field to limit the number of results to return in a single response and the <code>nextToken</code> field to return the next batch of results if the response does not return the full set of results.</p>\n            </li>\n         </ul>\n         <p>Note that an <code>order</code> field exists in both <code>binBy</code> and <code>metrics</code>. You can only specify one <code>order</code> in a given request.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/bots/{botId}/analytics/intentstagemetrics",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ListIntentStageMetricsRequest": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the bot for which you want to retrieve intent stage metrics.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "startDateTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that marks the beginning of the range of time for which you want to see intent stage metrics.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "endDateTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that marks the end of the range of time for which you want to see intent stage metrics.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "metrics": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsIntentStageMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of objects, each of which contains a metric you want to list, the statistic for the metric you want to return, and the method by which to organize the results.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "binBy": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsBinByList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of objects, each of which contains specifications for organizing the results by time.</p>"
+                    }
+                },
+                "groupBy": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsIntentStageGroupByList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of objects, each of which specifies how to group the results. You can group by the following criteria:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>IntentStageName</code> – The name of the intent stage.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SwitchedToIntent</code> – The intent to which the conversation was switched (if any).</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "filters": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsIntentStageFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of objects, each of which describes a condition by which you want to filter the results.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.lexmodelsv2#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in each page of results. If there are fewer results than the maximum page size, only the actual number of results are returned.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.lexmodelsv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response from the ListIntentStageMetrics operation contains more results than specified in the maxResults parameter, a token is returned in the response.</p>\n         <p>Use the returned token in the nextToken parameter of a ListIntentStageMetrics request to return the next page of results. For a complete set of results, call the ListIntentStageMetrics operation until the nextToken returned in the response is null.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ListIntentStageMetricsResponse": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the bot for which you retrieved intent stage metrics.</p>"
+                    }
+                },
+                "results": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsIntentStageResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The results for the intent stage metrics.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.lexmodelsv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response from the ListIntentStageMetrics operation contains more results than specified in the maxResults parameter, a token is returned in the response.</p>\n         <p>Use the returned token in the nextToken parameter of a ListIntentStageMetrics request to return the next page of results. For a complete set of results, call the ListIntentStageMetrics operation until the nextToken returned in the response is null.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.lexmodelsv2#ListIntents": {
             "type": "operation",
             "input": {
@@ -12853,6 +15086,257 @@
                     "target": "com.amazonaws.lexmodelsv2#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>A token that indicates whether there are more results to return in a\n         response to the ListRecommendedIntents operation. If the nextToken\n         field is present, you send the contents as the nextToken parameter of a\n         ListRecommendedIntents operation request to get the next page of\n         results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ListSessionAnalyticsData": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#ListSessionAnalyticsDataRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#ListSessionAnalyticsDataResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#PreconditionFailedException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a list of metadata for individual user sessions with your bot. The <code>startDateTime</code> and <code>endDateTime</code> fields are required. These fields define a time range for which you want to retrieve results. Of the optional fields, you can organize the results in the following ways:</p>\n         <ul>\n            <li>\n               <p>Use the <code>filters</code> field to filter the results and the <code>sortBy</code> field to specify the values by which to sort the results.</p>\n            </li>\n            <li>\n               <p>Use the <code>maxResults</code> field to limit the number of results to return in a single response and the <code>nextToken</code> field to return the next batch of results if the response does not return the full set of results.</p>\n            </li>\n         </ul>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/bots/{botId}/analytics/sessions",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ListSessionAnalyticsDataRequest": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the bot for which you want to retrieve session analytics.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "startDateTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that marks the beginning of the range of time for which you want to see session analytics.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "endDateTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that marks the end of the range of time for which you want to see session analytics.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sortBy": {
+                    "target": "com.amazonaws.lexmodelsv2#SessionDataSortBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object specifying the measure and method by which to sort the session analytics data.</p>"
+                    }
+                },
+                "filters": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsSessionFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of objects, each of which describes a condition by which you want to filter the results.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.lexmodelsv2#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in each page of results. If there are fewer results than the maximum page size, only the actual number of results are returned.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.lexmodelsv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response from the ListSessionAnalyticsData operation contains more results than specified in the maxResults parameter, a token is returned in the response.</p>\n         <p>Use the returned token in the nextToken parameter of a ListSessionAnalyticsData request to return the next page of results. For a complete set of results, call the ListSessionAnalyticsData operation until the nextToken returned in the response is null.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ListSessionAnalyticsDataResponse": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot that the sessions belong to.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.lexmodelsv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response from the ListSessionAnalyticsData operation contains more results than specified in the maxResults parameter, a token is returned in the response.</p>\n         <p>Use the returned token in the nextToken parameter of a ListSessionAnalyticsData request to return the next page of results. For a complete set of results, call the ListSessionAnalyticsData operation until the nextToken returned in the response is null.</p>"
+                    }
+                },
+                "sessions": {
+                    "target": "com.amazonaws.lexmodelsv2#SessionSpecifications",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of objects, each of which contains information about a session with the bot.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ListSessionMetrics": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#ListSessionMetricsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#ListSessionMetricsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#PreconditionFailedException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves summary metrics for the user sessions with your bot. The following fields are required:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>metrics</code> – A list of <a href=\"https://docs.aws.amazon.com/lexv2/latest/APIReference/API_AnalyticsSessionMetric.html\">AnalyticsSessionMetric</a> objects. In each object, use the <code>name</code> field to specify the metric to calculate, the <code>statistic</code> field to specify whether to calculate the <code>Sum</code>, <code>Average</code>, or <code>Max</code> number, and the <code>order</code> field to specify whether to sort the results in <code>Ascending</code> or <code>Descending</code> order.</p>\n            </li>\n            <li>\n               <p>\n                  <code>startDateTime</code> and <code>endDateTime</code> – Define a time range for which you want to retrieve results.</p>\n            </li>\n         </ul>\n         <p>Of the optional fields, you can organize the results in the following ways:</p>\n         <ul>\n            <li>\n               <p>Use the <code>filters</code> field to filter the results, the <code>groupBy</code> field to specify categories by which to group the results, and the <code>binBy</code> field to specify time intervals by which to group the results.</p>\n            </li>\n            <li>\n               <p>Use the <code>maxResults</code> field to limit the number of results to return in a single response and the <code>nextToken</code> field to return the next batch of results if the response does not return the full set of results.</p>\n            </li>\n         </ul>\n         <p>Note that an <code>order</code> field exists in both <code>binBy</code> and <code>metrics</code>. Currently, you can specify it in either field, but not in both.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/bots/{botId}/analytics/sessionmetrics",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ListSessionMetricsRequest": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the bot for which you want to retrieve session metrics.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "startDateTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that marks the beginning of the range of time for which you want to see session metrics.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "endDateTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that marks the end of the range of time for which you want to see session metrics.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "metrics": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsSessionMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of objects, each of which contains a metric you want to list, the statistic for the metric you want to return, and the method by which to organize the results.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "binBy": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsBinByList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of objects, each of which contains specifications for organizing the results by time.</p>"
+                    }
+                },
+                "groupBy": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsSessionGroupByList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of objects, each of which specifies how to group the results. You can group by the following criteria:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ConversationEndState</code> – The final state of the conversation. The possible end states are detailed in <a href=\"https://docs.aws.amazon.com/analytics-key-definitions-conversations\">Key definitions</a> in the user guide.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LocaleId</code> – The unique identifier of the bot locale.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "filters": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsSessionFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of objects, each of which describes a condition by which you want to filter the results.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.lexmodelsv2#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in each page of results. If there are fewer results than the maximum page size, only the actual number of results are returned.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.lexmodelsv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response from the ListSessionMetrics operation contains more results than specified in the maxResults parameter, a token is returned in the response.</p>\n         <p>Use the returned token in the nextToken parameter of a ListSessionMetrics request to return the next page of results. For a complete set of results, call the ListSessionMetrics operation until the nextToken returned in the response is null.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ListSessionMetricsResponse": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the bot for which you retrieved session metrics.</p>"
+                    }
+                },
+                "results": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsSessionResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The results for the session metrics.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.lexmodelsv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response from the ListSessionMetrics operation contains more results than specified in the maxResults parameter, a token is returned in the response.</p>\n         <p>Use the returned token in the nextToken parameter of a ListSessionMetrics request to return the next page of results. For a complete set of results, call the ListSessionMetrics operation until the nextToken returned in the response is null.</p>"
                     }
                 }
             },
@@ -13533,6 +16017,263 @@
                     "target": "com.amazonaws.lexmodelsv2#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>A token that indicates whether there are more results to return in a response \n      to the ListTestSets operation. If the nextToken field is present, you send the \n      contents as the nextToken parameter of a ListTestSets operation request to get \n      the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ListUtteranceAnalyticsData": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#ListUtteranceAnalyticsDataRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#ListUtteranceAnalyticsDataResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#PreconditionFailedException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a list of metadata for individual user utterances to your bot. The <code>startDateTime</code> and <code>endDateTime</code> fields are required. These fields define a time range for which you want to retrieve results. Of the optional fields, you can organize the results in the following ways:</p>\n         <ul>\n            <li>\n               <p>Use the <code>filters</code> field to filter the results and the <code>sortBy</code> field to specify the values by which to sort the results.</p>\n            </li>\n            <li>\n               <p>Use the <code>maxResults</code> field to limit the number of results to return in a single response and the <code>nextToken</code> field to return the next batch of results if the response does not return the full set of results.</p>\n            </li>\n         </ul>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/bots/{botId}/analytics/utterances",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ListUtteranceAnalyticsDataRequest": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the bot for which you want to retrieve utterance analytics.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "startDateTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that marks the beginning of the range of time for which you want to see utterance analytics.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "endDateTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that marks the end of the range of time for which you want to see utterance analytics.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sortBy": {
+                    "target": "com.amazonaws.lexmodelsv2#UtteranceDataSortBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object specifying the measure and method by which to sort the utterance analytics data.</p>"
+                    }
+                },
+                "filters": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsUtteranceFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of objects, each of which describes a condition by which you want to filter the results.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.lexmodelsv2#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in each page of results. If there are fewer results than the maximum page size, only the actual number of results are returned.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.lexmodelsv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response from the ListUtteranceAnalyticsData operation contains more results than specified in the maxResults parameter, a token is returned in the response.</p>\n         <p>Use the returned token in the nextToken parameter of a ListUtteranceAnalyticsData request to return the next page of results. For a complete set of results, call the ListUtteranceAnalyticsData operation until the nextToken returned in the response is null.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ListUtteranceAnalyticsDataResponse": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the bot that the utterances belong to.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.lexmodelsv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response from the ListUtteranceAnalyticsData operation contains more results than specified in the maxResults parameter, a token is returned in the response.</p>\n         <p>Use the returned token in the nextToken parameter of a ListUtteranceAnalyticsData request to return the next page of results. For a complete set of results, call the ListUtteranceAnalyticsData operation until the nextToken returned in the response is null.</p>"
+                    }
+                },
+                "utterances": {
+                    "target": "com.amazonaws.lexmodelsv2#UtteranceSpecifications",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of objects, each of which contains information about an utterance in a user session with your bot.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ListUtteranceMetrics": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#ListUtteranceMetricsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#ListUtteranceMetricsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#PreconditionFailedException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves summary metrics for the utterances in your bot. The following fields are required:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>metrics</code> – A list of <a href=\"https://docs.aws.amazon.com/lexv2/latest/APIReference/API_AnalyticsUtteranceMetric.html\">AnalyticsUtteranceMetric</a> objects. In each object, use the <code>name</code> field to specify the metric to calculate, the <code>statistic</code> field to specify whether to calculate the <code>Sum</code>, <code>Average</code>, or <code>Max</code> number, and the <code>order</code> field to specify whether to sort the results in <code>Ascending</code> or <code>Descending</code> order.</p>\n            </li>\n            <li>\n               <p>\n                  <code>startDateTime</code> and <code>endDateTime</code> – Define a time range for which you want to retrieve results.</p>\n            </li>\n         </ul>\n         <p>Of the optional fields, you can organize the results in the following ways:</p>\n         <ul>\n            <li>\n               <p>Use the <code>filters</code> field to filter the results, the <code>groupBy</code> field to specify categories by which to group the results, and the <code>binBy</code> field to specify time intervals by which to group the results.</p>\n            </li>\n            <li>\n               <p>Use the <code>maxResults</code> field to limit the number of results to return in a single response and the <code>nextToken</code> field to return the next batch of results if the response does not return the full set of results.</p>\n            </li>\n         </ul>\n         <p>Note that an <code>order</code> field exists in both <code>binBy</code> and <code>metrics</code>. Currently, you can specify it in either field, but not in both.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/bots/{botId}/analytics/utterancemetrics",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ListUtteranceMetricsRequest": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the bot for which you want to retrieve utterance metrics.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "startDateTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that marks the beginning of the range of time for which you want to see utterance metrics.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "endDateTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that marks the end of the range of time for which you want to see utterance metrics.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "metrics": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsUtteranceMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of objects, each of which contains a metric you want to list, the statistic for the metric you want to return, and the method by which to organize the results.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "binBy": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsBinByList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of objects, each of which contains specifications for organizing the results by time.</p>"
+                    }
+                },
+                "groupBy": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsUtteranceGroupByList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of objects, each of which specifies how to group the results. You can group by the following criteria:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>UtteranceText</code> – The transcription of the utterance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UtteranceState</code> – The state of the utterance. The possible states are detailed in <a href=\"https://docs.aws.amazon.com/analytics-key-definitions-utterances\">Key definitions</a> in the user guide.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "attributes": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsUtteranceAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list containing attributes related to the utterance that you want the response to return. The following attributes are possible:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>LastUsedIntent</code> – The last used intent at the time of the utterance.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "filters": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsUtteranceFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of objects, each of which describes a condition by which you want to filter the results.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.lexmodelsv2#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in each page of results. If there are fewer results than the maximum page size, only the actual number of results are returned.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.lexmodelsv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response from the ListUtteranceMetrics operation contains more results than specified in the maxResults parameter, a token is returned in the response.</p>\n         <p>Use the returned token in the nextToken parameter of a ListUtteranceMetrics request to return the next page of results. For a complete set of results, call the ListUtteranceMetrics operation until the nextToken returned in the response is null.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ListUtteranceMetricsResponse": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the bot for which you retrieved utterance metrics.</p>"
+                    }
+                },
+                "results": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsUtteranceResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The results for the utterance metrics.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.lexmodelsv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response from the ListUtteranceMetrics operation contains more results than specified in the maxResults parameter, a token is returned in the response.</p>\n         <p>Use the returned token in the nextToken parameter of a ListUtteranceMetrics request to return the next page of results. For a complete set of results, call the ListUtteranceMetrics operation until the nextToken returned in the response is null.</p>"
                     }
                 }
             },
@@ -14929,6 +17670,28 @@
                 "smithy.api#httpError": 402
             }
         },
+        "com.amazonaws.lexmodelsv2#SessionDataSortBy": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsSessionSortByName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The measure by which to sort the session analytics data.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>conversationStartTime</code> – The date and time when the conversation began. A conversation is defined as a unique combination of a <code>sessionId</code> and an <code>originatingRequestId</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>numberOfTurns</code> – The number of turns that the session took.</p>\n            </li>\n            <li>\n               <p>\n                  <code>conversationDurationSeconds</code> – The duration of the conversation in seconds.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "order": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsSortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to sort the results in ascending or descending order.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object specifying the measure and method by which to sort the session analytics data.</p>"
+            }
+        },
         "com.amazonaws.lexmodelsv2#SessionId": {
             "type": "string",
             "traits": {
@@ -14937,6 +17700,98 @@
                     "max": 100
                 },
                 "smithy.api#pattern": "^[0-9a-zA-Z._:-]+$"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#SessionSpecification": {
+            "type": "structure",
+            "members": {
+                "botAliasId": {
+                    "target": "com.amazonaws.lexmodelsv2#BotAliasId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the alias of the bot that the session was held with.</p>"
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#NumericalBotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the bot that the session was held with.</p>"
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locale of the bot that the session was held with.</p>"
+                    }
+                },
+                "channel": {
+                    "target": "com.amazonaws.lexmodelsv2#BotChannelType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The channel that is integrated with the bot that the session was held with.</p>"
+                    }
+                },
+                "sessionId": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsSessionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the session.</p>"
+                    }
+                },
+                "conversationStartTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the conversation began. A conversation is defined as a unique combination of a <code>sessionId</code> and an <code>originatingRequestId</code>.</p>"
+                    }
+                },
+                "conversationEndTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the conversation ended. A conversation is defined as a unique combination of a <code>sessionId</code> and an <code>originatingRequestId</code>.</p>"
+                    }
+                },
+                "conversationDurationSeconds": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsLongValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The duration of the conversation in seconds. A conversation is defined as a unique combination of a <code>sessionId</code> and an <code>originatingRequestId</code>.</p>"
+                    }
+                },
+                "conversationEndState": {
+                    "target": "com.amazonaws.lexmodelsv2#ConversationEndState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The final state of the conversation. A conversation is defined as a unique combination of a <code>sessionId</code> and an <code>originatingRequestId</code>.</p>"
+                    }
+                },
+                "mode": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsModality",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mode of the session. The possible values are as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Speech</code> – The session was spoken.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Text</code> – The session was written.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DTMF</code> – The session used a touch-tone keypad (Dual Tone Multi-Frequency).</p>\n            </li>\n            <li>\n               <p>\n                  <code>MultiMode</code> – The session used multiple modes.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "numberOfTurns": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsLongValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of turns that the session took.</p>"
+                    }
+                },
+                "invokedIntentSamples": {
+                    "target": "com.amazonaws.lexmodelsv2#InvokedIntentSamples",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of objects containing the name of an intent that was invoked.</p>"
+                    }
+                },
+                "originatingRequestId": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsOriginatingRequestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the first request in a session.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object containing information about a specific session.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#SessionSpecifications": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#SessionSpecification"
             }
         },
         "com.amazonaws.lexmodelsv2#SessionTTL": {
@@ -19818,6 +22673,86 @@
                 "smithy.api#documentation": "<p>Contains information about the audio for an utterance.</p>"
             }
         },
+        "com.amazonaws.lexmodelsv2#UtteranceBotResponse": {
+            "type": "structure",
+            "members": {
+                "content": {
+                    "target": "com.amazonaws.lexmodelsv2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text of the response to the utterance from the bot.</p>"
+                    }
+                },
+                "contentType": {
+                    "target": "com.amazonaws.lexmodelsv2#UtteranceContentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the response. The following values are possible:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PlainText</code> – A plain text string.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CustomPayload</code> – A response string that you can customize to include data or metadata for your application.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SSML</code> – A string that includes Speech Synthesis Markup Language to customize the audio response.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ImageResponseCard</code> – An image with buttons that the customer can select. See <a href=\"https://docs.aws.amazon.com/lexv2/latest/APIReference/API_runtime_ImageResponseCard.html\">ImageResponseCard</a> for more information.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "imageResponseCard": {
+                    "target": "com.amazonaws.lexmodelsv2#ImageResponseCard"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains a response to the utterance from the bot.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#UtteranceBotResponses": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#UtteranceBotResponse"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#UtteranceContentType": {
+            "type": "enum",
+            "members": {
+                "PlainText": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PlainText"
+                    }
+                },
+                "CustomPayload": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CustomPayload"
+                    }
+                },
+                "SSML": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SSML"
+                    }
+                },
+                "ImageResponseCard": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ImageResponseCard"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#UtteranceDataSortBy": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsUtteranceSortByName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The measure by which to sort the utterance analytics data.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Count</code> – The number of utterances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UtteranceTimeStamp</code> – The date and time of the utterance.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "order": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsSortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to sort the results in ascending or descending order.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object specifying the measure and method by which to sort the utterance data.</p>"
+            }
+        },
         "com.amazonaws.lexmodelsv2#UtteranceInputSpecification": {
             "type": "structure",
             "members": {
@@ -19885,6 +22820,159 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains information about the utterances in the results of the test set execution.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#UtteranceSpecification": {
+            "type": "structure",
+            "members": {
+                "botAliasId": {
+                    "target": "com.amazonaws.lexmodelsv2#BotAliasId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the alias of the bot that the utterance was made to.</p>"
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#NumericalBotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the bot that the utterance was made to.</p>"
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locale of the bot that the utterance was made to.</p>"
+                    }
+                },
+                "sessionId": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsSessionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the session that the utterance was made in.</p>"
+                    }
+                },
+                "channel": {
+                    "target": "com.amazonaws.lexmodelsv2#BotChannelType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The channel that is integrated with the bot that the utterance was made to.</p>"
+                    }
+                },
+                "mode": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsModality",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mode of the session. The possible values are as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Speech</code> – The session consisted of spoken dialogue.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Text</code> – The session consisted of written dialogue.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DTMF</code> – The session consisted of touch-tone keypad (Dual Tone Multi-Frequency) key presses.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MultiMode</code> – The session consisted of multiple modes.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "conversationStartTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the conversation in which the utterance took place began. A conversation is defined as a unique combination of a <code>sessionId</code> and an <code>originatingRequestId</code>.</p>"
+                    }
+                },
+                "conversationEndTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the conversation in which the utterance took place ended. A conversation is defined as a unique combination of a <code>sessionId</code> and an <code>originatingRequestId</code>.</p>"
+                    }
+                },
+                "utterance": {
+                    "target": "com.amazonaws.lexmodelsv2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text of the utterance.</p>"
+                    }
+                },
+                "utteranceTimestamp": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the utterance took place.</p>"
+                    }
+                },
+                "audioVoiceDurationMillis": {
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsLongValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The duration in milliseconds of the audio associated with the utterance.</p>"
+                    }
+                },
+                "utteranceUnderstood": {
+                    "target": "com.amazonaws.lexmodelsv2#UtteranceUnderstood",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies whether the bot understood the utterance or not.</p>"
+                    }
+                },
+                "inputType": {
+                    "target": "com.amazonaws.lexmodelsv2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The input type of the utterance. The possible values are as follows:</p>\n         <ul>\n            <li>\n               <p>PCM format: audio data must be in little-endian byte order.</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>audio/l16; rate=16000; channels=1</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>audio/x-l16; sample-rate=16000; channel-count=1</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>audio/lpcm; sample-rate=8000; sample-size-bits=16; channel-count=1; is-big-endian=false</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Opus format</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>audio/x-cbr-opus-with-preamble;preamble-size=0;bit-rate=256000;frame-size-milliseconds=4</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Text format</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>text/plain; charset=utf-8</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
+                    }
+                },
+                "outputType": {
+                    "target": "com.amazonaws.lexmodelsv2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The output type of the utterance. The possible values are as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>audio/mpeg</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>audio/ogg</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>audio/pcm (16 KHz)</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>audio/</code> (defaults to <code>mpeg</code>)</p>\n            </li>\n            <li>\n               <p>\n                  <code>text/plain; charset=utf-8</code>\n               </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "associatedIntentName": {
+                    "target": "com.amazonaws.lexmodelsv2#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the intent that the utterance is associated to.</p>"
+                    }
+                },
+                "associatedSlotName": {
+                    "target": "com.amazonaws.lexmodelsv2#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the slot that the utterance is associated to.</p>"
+                    }
+                },
+                "intentState": {
+                    "target": "com.amazonaws.lexmodelsv2#IntentState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the intent that the utterance is associated to.</p>"
+                    }
+                },
+                "dialogActionType": {
+                    "target": "com.amazonaws.lexmodelsv2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of dialog action that the utterance is associated to. See the <code>type</code> field in <a href=\"https://docs.aws.amazon.com/lexv2/latest/APIReference/API_runtime_DialogAction.html\">DialogAction</a> for more information.</p>"
+                    }
+                },
+                "botResponseAudioVoiceId": {
+                    "target": "com.amazonaws.lexmodelsv2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the audio of the bot response.</p>"
+                    }
+                },
+                "slotsFilledInSession": {
+                    "target": "com.amazonaws.lexmodelsv2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The slots that have been filled in the session by the time of the utterance.</p>"
+                    }
+                },
+                "utteranceRequestId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the request associated with the utterance.</p>"
+                    }
+                },
+                "botResponses": {
+                    "target": "com.amazonaws.lexmodelsv2#UtteranceBotResponses",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of objects containing information about the bot response to the utterance.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object containing information about a specific utterance.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#UtteranceSpecifications": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#UtteranceSpecification"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#UtteranceUnderstood": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
             }
         },
         "com.amazonaws.lexmodelsv2#ValidationException": {
