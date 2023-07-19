@@ -6,6 +6,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	internalauth "github.com/aws/aws-sdk-go-v2/internal/auth"
@@ -60,6 +61,9 @@ func (c *Client) addOperationDeactivateEventSourceMiddlewares(stack *middleware.
 	}
 	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeactivateEventSource{}, middleware.After)
 	if err != nil {
+		return err
+	}
+	if err = addLegacyEndpointContextSetter(stack, options); err != nil {
 		return err
 	}
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
@@ -119,6 +123,9 @@ func (c *Client) addOperationDeactivateEventSourceMiddlewares(stack *middleware.
 	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
+	if err = addEndpointDisableHTTPSMiddleware(stack, options); err != nil {
+		return err
+	}
 	return nil
 }
 
@@ -137,12 +144,16 @@ type opDeactivateEventSourceResolveEndpointMiddleware struct {
 }
 
 func (*opDeactivateEventSourceResolveEndpointMiddleware) ID() string {
-	return "opDeactivateEventSourceResolveEndpointMiddleware"
+	return "ResolveEndpointV2"
 }
 
 func (m *opDeactivateEventSourceResolveEndpointMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	if awsmiddleware.GetRequiresLegacyEndpoints(ctx) {
+		return next.HandleSerialize(ctx, in)
+	}
+
 	req, ok := in.Request.(*smithyhttp.Request)
 	if !ok {
 		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
@@ -170,6 +181,8 @@ func (m *opDeactivateEventSourceResolveEndpointMiddleware) HandleSerialize(ctx c
 			resolvedEndpoint.Headers.Get(k),
 		)
 	}
+
+	ctx = smithyhttp.DisableEndpointHostPrefix(ctx, true)
 
 	authSchemes, err := internalauth.GetAuthenticationSchemes(&resolvedEndpoint.Properties)
 	if err != nil {
@@ -199,9 +212,13 @@ func (m *opDeactivateEventSourceResolveEndpointMiddleware) HandleSerialize(ctx c
 			var signingName, signingRegion string
 			if v4Scheme.SigningName == nil {
 				signingName = "events"
+			} else {
+				signingName = *v4Scheme.SigningName
 			}
 			if v4Scheme.SigningRegion == nil {
 				signingRegion = m.BuiltInResolver.(*BuiltInResolver).Region
+			} else {
+				signingRegion = *v4Scheme.SigningRegion
 			}
 			if v4Scheme.DisableDoubleEncoding != nil {
 				// The signer sets an equivalent value at client initialization time.
@@ -215,9 +232,8 @@ func (m *opDeactivateEventSourceResolveEndpointMiddleware) HandleSerialize(ctx c
 			break
 		case *internalauth.AuthenticationSchemeV4A:
 			v4aScheme, _ := authScheme.(*internalauth.AuthenticationSchemeV4A)
-			var signingName string
 			if v4aScheme.SigningName == nil {
-				signingName = "events"
+				v4aScheme.SigningName = aws.String("events")
 			}
 			if v4aScheme.DisableDoubleEncoding != nil {
 				// The signer sets an equivalent value at client initialization time.
@@ -225,7 +241,7 @@ func (m *opDeactivateEventSourceResolveEndpointMiddleware) HandleSerialize(ctx c
 				// and override the value set at client initialization time.
 				ctx = internalauth.SetDisableDoubleEncoding(ctx, *v4aScheme.DisableDoubleEncoding)
 			}
-			ctx = awsmiddleware.SetSigningName(ctx, signingName)
+			ctx = awsmiddleware.SetSigningName(ctx, *v4aScheme.SigningName)
 			ctx = awsmiddleware.SetSigningRegion(ctx, v4aScheme.SigningRegionSet[0])
 			ctx = ebcust.SetSignerVersion(ctx, v4aScheme.Name)
 			break
