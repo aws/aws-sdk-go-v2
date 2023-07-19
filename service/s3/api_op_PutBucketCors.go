@@ -313,6 +313,8 @@ func (m *opPutBucketCorsResolveEndpointMiddleware) HandleSerialize(ctx context.C
 		)
 	}
 
+	ctx = smithyhttp.DisableEndpointHostPrefix(ctx, true)
+
 	authSchemes, err := internalauth.GetAuthenticationSchemes(&resolvedEndpoint.Properties)
 	if err != nil {
 		var nfe *internalauth.NoAuthenticationSchemesFoundError

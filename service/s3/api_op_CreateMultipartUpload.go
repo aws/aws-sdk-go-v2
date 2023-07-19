@@ -613,6 +613,8 @@ func (m *opCreateMultipartUploadResolveEndpointMiddleware) HandleSerialize(ctx c
 		)
 	}
 
+	ctx = smithyhttp.DisableEndpointHostPrefix(ctx, true)
+
 	authSchemes, err := internalauth.GetAuthenticationSchemes(&resolvedEndpoint.Properties)
 	if err != nil {
 		var nfe *internalauth.NoAuthenticationSchemesFoundError

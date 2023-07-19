@@ -37,6 +37,10 @@ func (m *processOutpostIDMiddleware) HandleSerialize(
 ) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	if !awsmiddleware.GetRequiresLegacyEndpoints(ctx) {
+		return next.HandleSerialize(ctx, in)
+	}
+
 	// if host name is immutable, skip this customization
 	if smithyhttp.GetHostnameImmutable(ctx) {
 		return next.HandleSerialize(ctx, in)

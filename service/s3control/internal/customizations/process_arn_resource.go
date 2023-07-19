@@ -53,6 +53,10 @@ func (m *processARNResource) HandleSerialize(
 ) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
+	if !awsmiddleware.GetRequiresLegacyEndpoints(ctx) {
+		return next.HandleSerialize(ctx, in)
+	}
+
 	// if arn region resolves to custom endpoint that is mutable
 	if smithyhttp.GetHostnameImmutable(ctx) {
 		return next.HandleSerialize(ctx, in)
