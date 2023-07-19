@@ -1,0 +1,3912 @@
+{
+    "smithy": "2.0",
+    "shapes": {
+        "com.amazonaws.medicalimaging#AHIGatewayService": {
+            "type": "service",
+            "version": "2023-07-19",
+            "operations": [
+                {
+                    "target": "com.amazonaws.medicalimaging#CopyImageSet"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#DeleteImageSet"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#GetDICOMImportJob"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#GetImageFrame"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#GetImageSet"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#GetImageSetMetadata"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ListDICOMImportJobs"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ListImageSetVersions"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#SearchImageSets"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#StartDICOMImportJob"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#UpdateImageSetMetadata"
+                }
+            ],
+            "resources": [
+                {
+                    "target": "com.amazonaws.medicalimaging#DatastoreResource"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ImageSetResource"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Medical Imaging",
+                    "arnNamespace": "medical-imaging",
+                    "endpointPrefix": "medical-imaging"
+                },
+                "aws.auth#sigv4": {
+                    "name": "medical-imaging"
+                },
+                "aws.iam#defineConditionKeys": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "type": "String",
+                        "documentation": "Filters access by a tag key and value pair of a resource"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "type": "String",
+                        "documentation": "Filters access by a tag key and value pair that is allowed in the request"
+                    },
+                    "aws:TagKeys": {
+                        "type": "String",
+                        "documentation": "Filters access by a list of tag keys that are allowed in the request"
+                    }
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>This is the <i>AWS HealthImaging API Reference</i>. AWS HealthImaging is an AWS service for storing, accessing,\n            and analyzing medical images. For an introduction to the service, see the <a href=\"https://docs.aws.amazon.com/medical-imaging/latest/devguide\">\n               <i>AWS HealthImaging Developer Guide</i>\n            </a>.</p>\n         <note>\n            <p>We recommend using one of the AWS Software Development Kits (SDKs) for your programming language, as\n                    they take care of request authentication, serialization, and connection management. For more information,\n                    see <a href=\"http://aws.amazon.com/developer/tools\">Tools to build on AWS</a>.</p>\n            <p>For information about using AWS HealthImaging API actions in one of the language-specific AWS SDKs, refer to the\n                    <i>See Also</i> link at the end of each section that describes an API action or data type.</p>\n         </note>\n         <p>The following sections list AWS HealthImaging API actions categorized according to functionality. Links are \n             provided to actions within this Reference, along with links back to corresponding sections in the \n             <i>AWS HealthImaging Developer Guide</i> so you can view console procedures and CLI/SDK code examples.</p>\n         <p class=\"title\">\n            <b>Data store actions</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/medical-imaging/latest/APIReference/API_CreateDatastore.html\">CreateDatastore</a>\n                       – See \n                       <a href=\"https://docs.aws.amazon.com/medical-imaging/latest/devguide/create-data-store.html\">Creating a data store</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/medical-imaging/latest/APIReference/API_GetDatastore.html\">GetDatastore</a>\n                       – See \n                       <a href=\"https://docs.aws.amazon.com/medical-imaging/latest/devguide/get-data-store.html\">Getting data store properties</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/medical-imaging/latest/APIReference/API_ListDatastores.html\">ListDatastores</a>\n                       – See \n                       <a href=\"https://docs.aws.amazon.com/medical-imaging/latest/devguide/list-data-stores.html\">Listing data stores</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/medical-imaging/latest/APIReference/API_DeleteDatastore.html\">DeleteDatastore</a>\n                       – See \n                       <a href=\"https://docs.aws.amazon.com/medical-imaging/latest/devguide/delete-data-store.html\">Deleting a data store</a>.</p>\n            </li>\n         </ul>\n         <p class=\"title\">\n            <b>Import job actions</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/medical-imaging/latest/APIReference/API_StartDICOMImportJob.html\">StartDICOMImportJob</a>\n                       – See \n                       <a href=\"https://docs.aws.amazon.com/medical-imaging/latest/devguide/start-dicom-import-job.html\">Starting an import job</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/medical-imaging/latest/APIReference/API_GetDICOMImportJob.html\">GetDICOMImportJob</a>\n                       – See \n                       <a href=\"https://docs.aws.amazon.com/medical-imaging/latest/devguide/get-dicom-import-job.html\">Getting import job properties</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/medical-imaging/latest/APIReference/API_ListDICOMImportJobs.html\">ListDICOMImportJobs</a>\n                       – See \n                       <a href=\"https://docs.aws.amazon.com/medical-imaging/latest/devguide/list-dicom-import-jobs.html\">Listing import jobs</a>.</p>\n            </li>\n         </ul>\n         <p class=\"title\">\n            <b>Image set access actions</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/medical-imaging/latest/APIReference/API_SearchImageSets.html\">SearchImageSets</a>\n                        – See \n                        <a href=\"https://docs.aws.amazon.com/medical-imaging/latest/devguide/search-image-sets.html\">Searching image sets</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/medical-imaging/latest/APIReference/API_GetImageSet.html\">GetImageSet</a>\n                       – See \n                       <a href=\"https://docs.aws.amazon.com/medical-imaging/latest/devguide/get-image-set-properties.html\">Getting image set properties</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/medical-imaging/latest/APIReference/API_GetImageSetMetadata.html\">GetImageSetMetadata</a>\n                        – See \n                        <a href=\"https://docs.aws.amazon.com/medical-imaging/latest/devguide/get-image-set-metadata.html\">Getting image set metadata</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/medical-imaging/latest/APIReference/API_GetImageFrame.html\">GetImageFrame</a>\n                        – See \n                        <a href=\"https://docs.aws.amazon.com/medical-imaging/latest/devguide/get-image-frame.html\">Getting image set pixel data</a>.</p>\n            </li>\n         </ul>\n         <p class=\"title\">\n            <b>Image set modification actions</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/medical-imaging/latest/APIReference/API_ListImageSetVersions.html\">ListImageSetVersions</a>\n                        – See \n                        <a href=\"https://docs.aws.amazon.com/medical-imaging/latest/devguide/list-image-set-versions.html\">Listing image set versions</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/medical-imaging/latest/APIReference/API_UpdateImageSetMetadata.html\">UpdateImageSetMetadata</a>\n                        – See \n                        <a href=\"https://docs.aws.amazon.com/medical-imaging/latest/devguide/update-image-set-metadata.html\">Updating image set metadata</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/medical-imaging/latest/APIReference/API_CopyImageSet.html\">CopyImageSet</a>\n                        – See \n                        <a href=\"https://docs.aws.amazon.com/medical-imaging/latest/devguide/copy-image-set.html\">Copying an image set</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/medical-imaging/latest/APIReference/API_DeleteImageSet.html\">DeleteImageSet</a>\n                        – See \n                        <a href=\"https://docs.aws.amazon.com/medical-imaging/latest/devguide/delete-image-set.html\">Deleting an image set</a>.</p>\n            </li>\n         </ul>\n         <p class=\"title\">\n            <b>Tagging actions</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/medical-imaging/latest/APIReference/API_TagResource.html\">TagResource</a>\n                        – See \n                        <a href=\"https://docs.aws.amazon.com/medical-imaging/latest/devguide/tag-list-untag-data-store.html\">Tagging a data store</a> and\n                        <a href=\"https://docs.aws.amazon.com/medical-imaging/latest/devguide/tag-list-untag-image-set.html\">Tagging an image set</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/medical-imaging/latest/APIReference/API_ListTagsForResource.html\">ListTagsForResource</a>\n                        – See \n                        <a href=\"https://docs.aws.amazon.com/medical-imaging/latest/devguide/tag-list-untag-data-store.html\">Tagging a data store</a> and\n                        <a href=\"https://docs.aws.amazon.com/medical-imaging/latest/devguide/tag-list-untag-image-set.html\">Tagging an image set</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/medical-imaging/latest/APIReference/API_UntagResource.html\">UntagResource</a>\n                        – See \n                        <a href=\"https://docs.aws.amazon.com/medical-imaging/latest/devguide/tag-list-untag-data-store.html\">Tagging a data store</a> and\n                        <a href=\"https://docs.aws.amazon.com/medical-imaging/latest/devguide/tag-list-untag-image-set.html\">Tagging an image set</a>.</p>\n            </li>\n         </ul>",
+                "smithy.api#title": "AWS Health Imaging",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "conditions": [],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://medical-imaging-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://medical-imaging-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "type": "tree",
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "type": "tree",
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://medical-imaging.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://medical-imaging.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://medical-imaging-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://medical-imaging-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://medical-imaging.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://medical-imaging.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://medical-imaging-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://medical-imaging-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://medical-imaging.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://medical-imaging.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://medical-imaging-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://medical-imaging.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://medical-imaging-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://medical-imaging-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://medical-imaging.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://medical-imaging.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://medical-imaging-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://medical-imaging.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.medicalimaging#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The user does not have sufficient access to perform this action.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.medicalimaging#Arn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:medical-imaging:[a-z0-9-]+:[0-9]{12}:datastore/[0-9a-z]{32}(/imageset/[0-9a-z]{32})?$"
+            }
+        },
+        "com.amazonaws.medicalimaging#ClientToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9._-]+$"
+            }
+        },
+        "com.amazonaws.medicalimaging#ConflictException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Updating or deleting a resource can cause an inconsistent state.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.medicalimaging#CopyDestinationImageSet": {
+            "type": "structure",
+            "members": {
+                "imageSetId": {
+                    "target": "com.amazonaws.medicalimaging#ImageSetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image set identifier for the destination image set.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "latestVersionId": {
+                    "target": "com.amazonaws.medicalimaging#ImageSetExternalVersionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The latest version identifier for the destination image set.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Copy the destination image set.</p>"
+            }
+        },
+        "com.amazonaws.medicalimaging#CopyDestinationImageSetProperties": {
+            "type": "structure",
+            "members": {
+                "imageSetId": {
+                    "target": "com.amazonaws.medicalimaging#ImageSetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image set identifier of the copied image set properties.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "latestVersionId": {
+                    "target": "com.amazonaws.medicalimaging#ImageSetExternalVersionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The latest version identifier for the destination image set properties.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "imageSetState": {
+                    "target": "com.amazonaws.medicalimaging#ImageSetState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image set state of the destination image set properties.</p>"
+                    }
+                },
+                "imageSetWorkflowStatus": {
+                    "target": "com.amazonaws.medicalimaging#ImageSetWorkflowStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image set workflow status of the destination image set properties.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.medicalimaging#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the destination image set properties were created.</p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.medicalimaging#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the destination image set properties were last updated.</p>"
+                    }
+                },
+                "imageSetArn": {
+                    "target": "com.amazonaws.medicalimaging#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) assigned to the destination image set.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Copy the image set properties of the destination image set.</p>"
+            }
+        },
+        "com.amazonaws.medicalimaging#CopyImageSet": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.medicalimaging#CopyImageSetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.medicalimaging#CopyImageSetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.medicalimaging#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Copy an image set.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "runtime-"
+                },
+                "smithy.api#http": {
+                    "uri": "/datastore/{datastoreId}/imageSet/{sourceImageSetId}/copyImageSet",
+                    "method": "POST"
+                }
+            }
+        },
+        "com.amazonaws.medicalimaging#CopyImageSetInformation": {
+            "type": "structure",
+            "members": {
+                "sourceImageSet": {
+                    "target": "com.amazonaws.medicalimaging#CopySourceImageSetInformation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source image set.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "destinationImageSet": {
+                    "target": "com.amazonaws.medicalimaging#CopyDestinationImageSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination image set.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Copy image set information.</p>"
+            }
+        },
+        "com.amazonaws.medicalimaging#CopyImageSetRequest": {
+            "type": "structure",
+            "members": {
+                "datastoreId": {
+                    "target": "com.amazonaws.medicalimaging#DatastoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data store identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "sourceImageSetId": {
+                    "target": "com.amazonaws.medicalimaging#ImageSetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source image set identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "copyImageSetInformation": {
+                    "target": "com.amazonaws.medicalimaging#CopyImageSetInformation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Copy image set information.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#CopyImageSetResponse": {
+            "type": "structure",
+            "members": {
+                "datastoreId": {
+                    "target": "com.amazonaws.medicalimaging#DatastoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data store identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sourceImageSetProperties": {
+                    "target": "com.amazonaws.medicalimaging#CopySourceImageSetProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The properties of the source image set.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "destinationImageSetProperties": {
+                    "target": "com.amazonaws.medicalimaging#CopyDestinationImageSetProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The properties of the destination image set.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#CopySourceImageSetInformation": {
+            "type": "structure",
+            "members": {
+                "latestVersionId": {
+                    "target": "com.amazonaws.medicalimaging#ImageSetExternalVersionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The latest version identifier for the source image set.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Copy source image set information.</p>"
+            }
+        },
+        "com.amazonaws.medicalimaging#CopySourceImageSetProperties": {
+            "type": "structure",
+            "members": {
+                "imageSetId": {
+                    "target": "com.amazonaws.medicalimaging#ImageSetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image set identifier for the copied source image set.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "latestVersionId": {
+                    "target": "com.amazonaws.medicalimaging#ImageSetExternalVersionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The latest version identifier for the copied source image set.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "imageSetState": {
+                    "target": "com.amazonaws.medicalimaging#ImageSetState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image set state of the copied source image set.</p>"
+                    }
+                },
+                "imageSetWorkflowStatus": {
+                    "target": "com.amazonaws.medicalimaging#ImageSetWorkflowStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The workflow status of the copied source image set.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.medicalimaging#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the source image set properties were created.</p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.medicalimaging#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the source image set properties were updated.</p>"
+                    }
+                },
+                "imageSetArn": {
+                    "target": "com.amazonaws.medicalimaging#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) assigned to the source image set.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Copy source image set properties.</p>"
+            }
+        },
+        "com.amazonaws.medicalimaging#CreateDatastore": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.medicalimaging#CreateDatastoreRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.medicalimaging#CreateDatastoreResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.medicalimaging#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys"
+                ],
+                "smithy.api#documentation": "<p>Create a data store.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/datastore"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#CreateDatastoreRequest": {
+            "type": "structure",
+            "members": {
+                "datastoreName": {
+                    "target": "com.amazonaws.medicalimaging#DatastoreName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data store name.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.medicalimaging#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for API idempotency.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.medicalimaging#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags provided when creating a data store.</p>"
+                    }
+                },
+                "kmsKeyArn": {
+                    "target": "com.amazonaws.medicalimaging#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) assigned to the AWS Key Management Service (AWS KMS) key for accessing encrypted data.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#CreateDatastoreResponse": {
+            "type": "structure",
+            "members": {
+                "datastoreId": {
+                    "target": "com.amazonaws.medicalimaging#DatastoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data store identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "datastoreStatus": {
+                    "target": "com.amazonaws.medicalimaging#DatastoreStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data store status.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#DICOMAccessionNumber": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 16
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#DICOMAttribute": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10000
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#DICOMImportJobProperties": {
+            "type": "structure",
+            "members": {
+                "jobId": {
+                    "target": "com.amazonaws.medicalimaging#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The import job identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "jobName": {
+                    "target": "com.amazonaws.medicalimaging#JobName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The import job name.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "jobStatus": {
+                    "target": "com.amazonaws.medicalimaging#JobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filters for listing import jobs based on status.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "datastoreId": {
+                    "target": "com.amazonaws.medicalimaging#DatastoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data store identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "dataAccessRoleArn": {
+                    "target": "com.amazonaws.medicalimaging#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that grants permissions to access medical imaging resources.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "endedAt": {
+                    "target": "com.amazonaws.medicalimaging#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp for when the import job was ended.</p>"
+                    }
+                },
+                "submittedAt": {
+                    "target": "com.amazonaws.medicalimaging#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp for when the import job was submitted.</p>"
+                    }
+                },
+                "inputS3Uri": {
+                    "target": "com.amazonaws.medicalimaging#S3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The input prefix path for the S3 bucket that contains the DICOM P10 files to be imported.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "outputS3Uri": {
+                    "target": "com.amazonaws.medicalimaging#S3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The output prefix of the S3 bucket to upload the results of the DICOM import job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.medicalimaging#Message",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message thrown if an import job fails.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Properties of the import job.</p>"
+            }
+        },
+        "com.amazonaws.medicalimaging#DICOMImportJobSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.medicalimaging#DICOMImportJobSummary"
+            }
+        },
+        "com.amazonaws.medicalimaging#DICOMImportJobSummary": {
+            "type": "structure",
+            "members": {
+                "jobId": {
+                    "target": "com.amazonaws.medicalimaging#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The import job identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "jobName": {
+                    "target": "com.amazonaws.medicalimaging#JobName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The import job name.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "jobStatus": {
+                    "target": "com.amazonaws.medicalimaging#JobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filters for listing import jobs based on status.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "datastoreId": {
+                    "target": "com.amazonaws.medicalimaging#DatastoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data store identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "dataAccessRoleArn": {
+                    "target": "com.amazonaws.medicalimaging#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that grants permissions to access medical imaging resources.</p>"
+                    }
+                },
+                "endedAt": {
+                    "target": "com.amazonaws.medicalimaging#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when an import job ended.</p>"
+                    }
+                },
+                "submittedAt": {
+                    "target": "com.amazonaws.medicalimaging#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when an import job was submitted.</p>"
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.medicalimaging#Message",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message thrown if an import job fails.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary of import job.</p>"
+            }
+        },
+        "com.amazonaws.medicalimaging#DICOMNumberOfStudyRelatedInstances": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 10000
+                }
+            }
+        },
+        "com.amazonaws.medicalimaging#DICOMNumberOfStudyRelatedSeries": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 10000
+                }
+            }
+        },
+        "com.amazonaws.medicalimaging#DICOMPatientBirthDate": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 18
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#DICOMPatientId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 64
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#DICOMPatientName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#DICOMPatientSex": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 16
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#DICOMStudyDate": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 18
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#DICOMStudyDateAndTime": {
+            "type": "structure",
+            "members": {
+                "DICOMStudyDate": {
+                    "target": "com.amazonaws.medicalimaging#DICOMStudyDate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DICOM study date provided in <code>yyMMdd</code> format.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DICOMStudyTime": {
+                    "target": "com.amazonaws.medicalimaging#DICOMStudyTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DICOM study time provided in <code>HHmmss.FFFFFF</code> format.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The aggregated structure to store DICOM study date and study time for search capabilities.</p>"
+            }
+        },
+        "com.amazonaws.medicalimaging#DICOMStudyDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 64
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#DICOMStudyId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 16
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#DICOMStudyInstanceUID": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^(?:[1-9][0-9]*|0)(\\.(?:[1-9][0-9]*|0))*$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#DICOMStudyTime": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 28
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#DICOMTags": {
+            "type": "structure",
+            "members": {
+                "DICOMPatientId": {
+                    "target": "com.amazonaws.medicalimaging#DICOMPatientId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for a patient in a DICOM Study.</p>"
+                    }
+                },
+                "DICOMPatientName": {
+                    "target": "com.amazonaws.medicalimaging#DICOMPatientName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The patient name.</p>"
+                    }
+                },
+                "DICOMPatientBirthDate": {
+                    "target": "com.amazonaws.medicalimaging#DICOMPatientBirthDate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The patient birth date.</p>"
+                    }
+                },
+                "DICOMPatientSex": {
+                    "target": "com.amazonaws.medicalimaging#DICOMPatientSex",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The patient sex.</p>"
+                    }
+                },
+                "DICOMStudyInstanceUID": {
+                    "target": "com.amazonaws.medicalimaging#DICOMStudyInstanceUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DICOM provided identifier for studyInstanceUid.&gt;</p>"
+                    }
+                },
+                "DICOMStudyId": {
+                    "target": "com.amazonaws.medicalimaging#DICOMStudyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DICOM provided studyId.</p>"
+                    }
+                },
+                "DICOMStudyDescription": {
+                    "target": "com.amazonaws.medicalimaging#DICOMStudyDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the study.</p>"
+                    }
+                },
+                "DICOMNumberOfStudyRelatedSeries": {
+                    "target": "com.amazonaws.medicalimaging#DICOMNumberOfStudyRelatedSeries",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The total number of series in the DICOM study.</p>"
+                    }
+                },
+                "DICOMNumberOfStudyRelatedInstances": {
+                    "target": "com.amazonaws.medicalimaging#DICOMNumberOfStudyRelatedInstances",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The total number of instances in the DICOM study.</p>"
+                    }
+                },
+                "DICOMAccessionNumber": {
+                    "target": "com.amazonaws.medicalimaging#DICOMAccessionNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The accession number for the DICOM study.</p>"
+                    }
+                },
+                "DICOMStudyDate": {
+                    "target": "com.amazonaws.medicalimaging#DICOMStudyDate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The study date.</p>"
+                    }
+                },
+                "DICOMStudyTime": {
+                    "target": "com.amazonaws.medicalimaging#DICOMStudyTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The study time.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The DICOM attributes returned as a part of a response. Each image set has these properties\n           as part of a search result.</p>"
+            }
+        },
+        "com.amazonaws.medicalimaging#DICOMUpdates": {
+            "type": "structure",
+            "members": {
+                "removableAttributes": {
+                    "target": "com.amazonaws.medicalimaging#DICOMAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DICOM tags to be removed from <code>ImageSetMetadata</code>.</p>"
+                    }
+                },
+                "updatableAttributes": {
+                    "target": "com.amazonaws.medicalimaging#DICOMAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DICOM tags that need to be updated in <code>ImageSetMetadata</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The object containing <code>removableAttributes</code> and <code>updatableAttributes</code>.</p>"
+            }
+        },
+        "com.amazonaws.medicalimaging#DatastoreId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[0-9a-z]{32}$"
+            }
+        },
+        "com.amazonaws.medicalimaging#DatastoreName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9._/#-]+$"
+            }
+        },
+        "com.amazonaws.medicalimaging#DatastoreProperties": {
+            "type": "structure",
+            "members": {
+                "datastoreId": {
+                    "target": "com.amazonaws.medicalimaging#DatastoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data store identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "datastoreName": {
+                    "target": "com.amazonaws.medicalimaging#DatastoreName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data store name.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "datastoreStatus": {
+                    "target": "com.amazonaws.medicalimaging#DatastoreStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data store status.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "kmsKeyArn": {
+                    "target": "com.amazonaws.medicalimaging#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) assigned to the AWS Key Management Service (AWS KMS) key for accessing encrypted data.</p>"
+                    }
+                },
+                "datastoreArn": {
+                    "target": "com.amazonaws.medicalimaging#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the data store.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.medicalimaging#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the data store was created.</p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.medicalimaging#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the data store was last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The properties associated with the data store.</p>"
+            }
+        },
+        "com.amazonaws.medicalimaging#DatastoreResource": {
+            "type": "resource",
+            "identifiers": {
+                "datastoreId": {
+                    "target": "com.amazonaws.medicalimaging#DatastoreId"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.medicalimaging#CreateDatastore"
+            },
+            "read": {
+                "target": "com.amazonaws.medicalimaging#GetDatastore"
+            },
+            "delete": {
+                "target": "com.amazonaws.medicalimaging#DeleteDatastore"
+            },
+            "list": {
+                "target": "com.amazonaws.medicalimaging#ListDatastores"
+            },
+            "traits": {
+                "aws.api#arn": {
+                    "template": "datastore/{datastoreId}"
+                },
+                "aws.iam#conditionKeys": [
+                    "aws:ResourceTag/${TagKey}"
+                ],
+                "aws.iam#disableConditionKeyInference": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#DatastoreStatus": {
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                },
+                "CREATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_FAILED"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.medicalimaging#DatastoreSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.medicalimaging#DatastoreSummary"
+            }
+        },
+        "com.amazonaws.medicalimaging#DatastoreSummary": {
+            "type": "structure",
+            "members": {
+                "datastoreId": {
+                    "target": "com.amazonaws.medicalimaging#DatastoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data store identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "datastoreName": {
+                    "target": "com.amazonaws.medicalimaging#DatastoreName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data store name.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "datastoreStatus": {
+                    "target": "com.amazonaws.medicalimaging#DatastoreStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data store status.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "datastoreArn": {
+                    "target": "com.amazonaws.medicalimaging#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the data store.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.medicalimaging#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the data store was created.</p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.medicalimaging#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the data store was last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>List of summaries of data stores.</p>"
+            }
+        },
+        "com.amazonaws.medicalimaging#Date": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.medicalimaging#DeleteDatastore": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.medicalimaging#DeleteDatastoreRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.medicalimaging#DeleteDatastoreResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.medicalimaging#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Delete a data store.</p>\n         <note>\n            <p>Before a data store can be deleted, you must first delete all image sets within it.</p>\n         </note>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/datastore/{datastoreId}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#DeleteDatastoreRequest": {
+            "type": "structure",
+            "members": {
+                "datastoreId": {
+                    "target": "com.amazonaws.medicalimaging#DatastoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data store identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#DeleteDatastoreResponse": {
+            "type": "structure",
+            "members": {
+                "datastoreId": {
+                    "target": "com.amazonaws.medicalimaging#DatastoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data store identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "datastoreStatus": {
+                    "target": "com.amazonaws.medicalimaging#DatastoreStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data store status.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#DeleteImageSet": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.medicalimaging#DeleteImageSetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.medicalimaging#DeleteImageSetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.medicalimaging#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Delete an image set.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "runtime-"
+                },
+                "smithy.api#http": {
+                    "uri": "/datastore/{datastoreId}/imageSet/{imageSetId}/deleteImageSet",
+                    "method": "POST"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#DeleteImageSetRequest": {
+            "type": "structure",
+            "members": {
+                "datastoreId": {
+                    "target": "com.amazonaws.medicalimaging#DatastoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data store identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "imageSetId": {
+                    "target": "com.amazonaws.medicalimaging#ImageSetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image set identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#DeleteImageSetResponse": {
+            "type": "structure",
+            "members": {
+                "datastoreId": {
+                    "target": "com.amazonaws.medicalimaging#DatastoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data store identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "imageSetId": {
+                    "target": "com.amazonaws.medicalimaging#ImageSetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image set identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "imageSetState": {
+                    "target": "com.amazonaws.medicalimaging#ImageSetState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image set state.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "imageSetWorkflowStatus": {
+                    "target": "com.amazonaws.medicalimaging#ImageSetWorkflowStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image set workflow status.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#GetDICOMImportJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.medicalimaging#GetDICOMImportJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.medicalimaging#GetDICOMImportJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.medicalimaging#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get the import job properties to learn more about the job or job progress.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/getDICOMImportJob/datastore/{datastoreId}/job/{jobId}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#GetDICOMImportJobRequest": {
+            "type": "structure",
+            "members": {
+                "datastoreId": {
+                    "target": "com.amazonaws.medicalimaging#DatastoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data store identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "jobId": {
+                    "target": "com.amazonaws.medicalimaging#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The import job identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#GetDICOMImportJobResponse": {
+            "type": "structure",
+            "members": {
+                "jobProperties": {
+                    "target": "com.amazonaws.medicalimaging#DICOMImportJobProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The properties of the import job.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#GetDatastore": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.medicalimaging#GetDatastoreRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.medicalimaging#GetDatastoreResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.medicalimaging#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get data store properties.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/datastore/{datastoreId}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#GetDatastoreRequest": {
+            "type": "structure",
+            "members": {
+                "datastoreId": {
+                    "target": "com.amazonaws.medicalimaging#DatastoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data store identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#GetDatastoreResponse": {
+            "type": "structure",
+            "members": {
+                "datastoreProperties": {
+                    "target": "com.amazonaws.medicalimaging#DatastoreProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data store properties.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#GetImageFrame": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.medicalimaging#GetImageFrameRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.medicalimaging#GetImageFrameResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.medicalimaging#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get an image frame (pixel data) for an image set.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "runtime-"
+                },
+                "smithy.api#http": {
+                    "uri": "/datastore/{datastoreId}/imageSet/{imageSetId}/getImageFrame",
+                    "method": "POST"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#GetImageFrameRequest": {
+            "type": "structure",
+            "members": {
+                "datastoreId": {
+                    "target": "com.amazonaws.medicalimaging#DatastoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data store identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "imageSetId": {
+                    "target": "com.amazonaws.medicalimaging#ImageSetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image set identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "imageFrameInformation": {
+                    "target": "com.amazonaws.medicalimaging#ImageFrameInformation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the image frame (pixel data) identifier.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#GetImageFrameResponse": {
+            "type": "structure",
+            "members": {
+                "imageFrameBlob": {
+                    "target": "com.amazonaws.medicalimaging#PayloadBlob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The blob containing the aggregated image frame information.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "contentType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format in which the image frame information is returned to the customer. Default is \n           <code>application/octet-stream</code>.</p>",
+                        "smithy.api#httpHeader": "Content-Type"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#GetImageSet": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.medicalimaging#GetImageSetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.medicalimaging#GetImageSetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.medicalimaging#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get image set properties.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "runtime-"
+                },
+                "smithy.api#http": {
+                    "uri": "/datastore/{datastoreId}/imageSet/{imageSetId}/getImageSet",
+                    "method": "POST"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#GetImageSetMetadata": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.medicalimaging#GetImageSetMetadataRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.medicalimaging#GetImageSetMetadataResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.medicalimaging#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get metadata attributes for an image set.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "runtime-"
+                },
+                "smithy.api#http": {
+                    "uri": "/datastore/{datastoreId}/imageSet/{imageSetId}/getImageSetMetadata",
+                    "method": "POST"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#GetImageSetMetadataRequest": {
+            "type": "structure",
+            "members": {
+                "datastoreId": {
+                    "target": "com.amazonaws.medicalimaging#DatastoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data store identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "imageSetId": {
+                    "target": "com.amazonaws.medicalimaging#ImageSetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image set identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "versionId": {
+                    "target": "com.amazonaws.medicalimaging#ImageSetExternalVersionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image set version identifier.</p>",
+                        "smithy.api#httpQuery": "version"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#GetImageSetMetadataResponse": {
+            "type": "structure",
+            "members": {
+                "imageSetMetadataBlob": {
+                    "target": "com.amazonaws.medicalimaging#ImageSetMetadataBlob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The blob containing the aggregated metadata information for the image set.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "contentType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format in which the study metadata is returned to the customer. Default is <code>text/plain</code>.</p>",
+                        "smithy.api#httpHeader": "Content-Type"
+                    }
+                },
+                "contentEncoding": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The compression format in which image set metadata attributes are returned.</p>",
+                        "smithy.api#httpHeader": "Content-Encoding"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#GetImageSetRequest": {
+            "type": "structure",
+            "members": {
+                "datastoreId": {
+                    "target": "com.amazonaws.medicalimaging#DatastoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data store identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "imageSetId": {
+                    "target": "com.amazonaws.medicalimaging#ImageSetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image set identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "versionId": {
+                    "target": "com.amazonaws.medicalimaging#ImageSetExternalVersionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image set version identifier.</p>",
+                        "smithy.api#httpQuery": "version"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#GetImageSetResponse": {
+            "type": "structure",
+            "members": {
+                "datastoreId": {
+                    "target": "com.amazonaws.medicalimaging#DatastoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data store identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "imageSetId": {
+                    "target": "com.amazonaws.medicalimaging#ImageSetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image set identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "versionId": {
+                    "target": "com.amazonaws.medicalimaging#ImageSetExternalVersionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image set version identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "imageSetState": {
+                    "target": "com.amazonaws.medicalimaging#ImageSetState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image set state.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "imageSetWorkflowStatus": {
+                    "target": "com.amazonaws.medicalimaging#ImageSetWorkflowStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image set workflow status.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.medicalimaging#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when image set properties were created.</p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.medicalimaging#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when image set properties were updated.</p>"
+                    }
+                },
+                "deletedAt": {
+                    "target": "com.amazonaws.medicalimaging#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the image set properties were deleted.</p>"
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.medicalimaging#Message",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message thrown if an image set action fails.</p>"
+                    }
+                },
+                "imageSetArn": {
+                    "target": "com.amazonaws.medicalimaging#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) assigned to the image set.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#ImageFrameId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[0-9a-z]{32}$"
+            }
+        },
+        "com.amazonaws.medicalimaging#ImageFrameInformation": {
+            "type": "structure",
+            "members": {
+                "imageFrameId": {
+                    "target": "com.amazonaws.medicalimaging#ImageFrameId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image frame (pixel data) identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the image frame (pixel data) identifier.</p>"
+            }
+        },
+        "com.amazonaws.medicalimaging#ImageSetExternalVersionId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^\\d+$"
+            }
+        },
+        "com.amazonaws.medicalimaging#ImageSetId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[0-9a-z]{32}$"
+            }
+        },
+        "com.amazonaws.medicalimaging#ImageSetMetadataBlob": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#streaming": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#ImageSetProperties": {
+            "type": "structure",
+            "members": {
+                "imageSetId": {
+                    "target": "com.amazonaws.medicalimaging#ImageSetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image set identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "versionId": {
+                    "target": "com.amazonaws.medicalimaging#ImageSetExternalVersionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image set version identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "imageSetState": {
+                    "target": "com.amazonaws.medicalimaging#ImageSetState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image set state.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ImageSetWorkflowStatus": {
+                    "target": "com.amazonaws.medicalimaging#ImageSetWorkflowStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image set workflow status.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.medicalimaging#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the image set properties were created.</p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.medicalimaging#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the image set properties were updated.</p>"
+                    }
+                },
+                "deletedAt": {
+                    "target": "com.amazonaws.medicalimaging#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the image set properties were deleted.</p>"
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.medicalimaging#Message",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message thrown if an image set action fails.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The image set properties.</p>"
+            }
+        },
+        "com.amazonaws.medicalimaging#ImageSetPropertiesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.medicalimaging#ImageSetProperties"
+            }
+        },
+        "com.amazonaws.medicalimaging#ImageSetResource": {
+            "type": "resource",
+            "identifiers": {
+                "datastoreId": {
+                    "target": "com.amazonaws.medicalimaging#DatastoreId"
+                },
+                "imageSetId": {
+                    "target": "com.amazonaws.medicalimaging#ImageSetId"
+                }
+            },
+            "traits": {
+                "aws.api#arn": {
+                    "template": "datastore/{datastoreId}/imageset/{imageSetId}"
+                },
+                "aws.iam#conditionKeys": [
+                    "aws:ResourceTag/${TagKey}"
+                ],
+                "aws.iam#disableConditionKeyInference": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#ImageSetState": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "LOCKED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LOCKED"
+                    }
+                },
+                "DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.medicalimaging#ImageSetWorkflowStatus": {
+            "type": "enum",
+            "members": {
+                "CREATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATED"
+                    }
+                },
+                "COPIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COPIED"
+                    }
+                },
+                "COPYING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COPYING"
+                    }
+                },
+                "COPYING_WITH_READ_ONLY_ACCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COPYING_WITH_READ_ONLY_ACCESS"
+                    }
+                },
+                "COPY_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COPY_FAILED"
+                    }
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                },
+                "UPDATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATED"
+                    }
+                },
+                "UPDATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATE_FAILED"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.medicalimaging#ImageSetsMetadataSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.medicalimaging#ImageSetsMetadataSummary"
+            }
+        },
+        "com.amazonaws.medicalimaging#ImageSetsMetadataSummary": {
+            "type": "structure",
+            "members": {
+                "imageSetId": {
+                    "target": "com.amazonaws.medicalimaging#ImageSetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image set identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "version": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image set version.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.medicalimaging#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time an image set is created in AWS HealthImaging. Sample creation \n            date is provided in <code>1985-04-12T23:20:50.52Z</code> format.</p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.medicalimaging#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when an image was last updated in AWS HealthImaging.</p>"
+                    }
+                },
+                "DICOMTags": {
+                    "target": "com.amazonaws.medicalimaging#DICOMTags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DICOM tags associated with the image set.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary of the image set metadata.</p>"
+            }
+        },
+        "com.amazonaws.medicalimaging#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An unexpected error occurred during processing of the request.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.medicalimaging#JobId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 32
+                },
+                "smithy.api#pattern": "^[0-9a-z]+$"
+            }
+        },
+        "com.amazonaws.medicalimaging#JobName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9._/#-]+$"
+            }
+        },
+        "com.amazonaws.medicalimaging#JobStatus": {
+            "type": "enum",
+            "members": {
+                "SUBMITTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUBMITTED"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.medicalimaging#KmsKeyArn": {
+            "type": "string",
+            "traits": {
+                "aws.api#arnReference": {},
+                "smithy.api#documentation": "ARN referencing a KMS key or KMS key alias.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^arn:aws[a-zA-Z-]{0,16}:kms:[a-z]{2}(-[a-z]{1,16}){1,3}-\\d{1}:\\d{12}:((key/[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12})|(alias/[a-zA-Z0-9:/_-]{1,256}))$"
+            }
+        },
+        "com.amazonaws.medicalimaging#ListDICOMImportJobs": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.medicalimaging#ListDICOMImportJobsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.medicalimaging#ListDICOMImportJobsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.medicalimaging#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List import jobs created by this AWS account for a specific data store.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/listDICOMImportJobs/datastore/{datastoreId}"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "jobSummaries"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#ListDICOMImportJobsRequest": {
+            "type": "structure",
+            "members": {
+                "datastoreId": {
+                    "target": "com.amazonaws.medicalimaging#DatastoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data store identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "jobStatus": {
+                    "target": "com.amazonaws.medicalimaging#JobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filters for listing import jobs based on status.</p>",
+                        "smithy.api#httpQuery": "jobStatus"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.medicalimaging#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token used to request the list of import jobs on the next page.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The max results count. The upper bound is determined by load testing.</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 50
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#ListDICOMImportJobsResponse": {
+            "type": "structure",
+            "members": {
+                "jobSummaries": {
+                    "target": "com.amazonaws.medicalimaging#DICOMImportJobSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of job summaries.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.medicalimaging#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token used to retrieve the list of import jobs on the next page.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#ListDatastores": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.medicalimaging#ListDatastoresRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.medicalimaging#ListDatastoresResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.medicalimaging#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List data stores created by this AWS account.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/datastore"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "datastoreSummaries"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#ListDatastoresRequest": {
+            "type": "structure",
+            "members": {
+                "datastoreStatus": {
+                    "target": "com.amazonaws.medicalimaging#DatastoreStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data store status.</p>",
+                        "smithy.api#httpQuery": "datastoreStatus"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.medicalimaging#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token used to request the list of data stores on the next page.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Valid Range: Minimum value of 1. Maximum value of 50.</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 50
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#ListDatastoresResponse": {
+            "type": "structure",
+            "members": {
+                "datastoreSummaries": {
+                    "target": "com.amazonaws.medicalimaging#DatastoreSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of summaries of data stores.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.medicalimaging#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token used to retrieve the list of data stores on the next page.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#ListImageSetVersions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.medicalimaging#ListImageSetVersionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.medicalimaging#ListImageSetVersionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.medicalimaging#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List image set versions.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "runtime-"
+                },
+                "smithy.api#http": {
+                    "uri": "/datastore/{datastoreId}/imageSet/{imageSetId}/listImageSetVersions",
+                    "method": "POST"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "imageSetPropertiesList"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#ListImageSetVersionsRequest": {
+            "type": "structure",
+            "members": {
+                "datastoreId": {
+                    "target": "com.amazonaws.medicalimaging#DatastoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data store identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "imageSetId": {
+                    "target": "com.amazonaws.medicalimaging#ImageSetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image set identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.medicalimaging#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token used to request the list of image set versions on the next page.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The max results count.</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 50
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#ListImageSetVersionsResponse": {
+            "type": "structure",
+            "members": {
+                "imageSetPropertiesList": {
+                    "target": "com.amazonaws.medicalimaging#ImageSetPropertiesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Lists all properties associated with an image set.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.medicalimaging#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token used to retrieve the list of image set versions on the next page.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.medicalimaging#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.medicalimaging#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.medicalimaging#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all tags associated with a medical imaging resource.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/tags/{resourceArn}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.medicalimaging#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the medical imaging resource to list tags for.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "tags": {
+                    "target": "com.amazonaws.medicalimaging#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of all tags associated with a medical imaging resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#Message": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^[\\w -:]+$"
+            }
+        },
+        "com.amazonaws.medicalimaging#MetadataUpdates": {
+            "type": "union",
+            "members": {
+                "DICOMUpdates": {
+                    "target": "com.amazonaws.medicalimaging#DICOMUpdates",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The object containing <code>removableAttributes</code> and <code>updatableAttributes</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains DICOMUpdates.</p>"
+            }
+        },
+        "com.amazonaws.medicalimaging#NextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 8192
+                },
+                "smithy.api#pattern": "^\\p{ASCII}{0,8192}$"
+            }
+        },
+        "com.amazonaws.medicalimaging#Operator": {
+            "type": "enum",
+            "members": {
+                "EQUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EQUAL"
+                    }
+                },
+                "BETWEEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BETWEEN"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.medicalimaging#PayloadBlob": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#streaming": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request references a resource which does not exist.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.medicalimaging#RoleArn": {
+            "type": "string",
+            "traits": {
+                "aws.api#arnReference": {
+                    "type": "AWS::IAM::Role"
+                },
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+$"
+            }
+        },
+        "com.amazonaws.medicalimaging#S3Uri": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^s3://[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9](/.*)?$"
+            }
+        },
+        "com.amazonaws.medicalimaging#SearchByAttributeValue": {
+            "type": "union",
+            "members": {
+                "DICOMPatientId": {
+                    "target": "com.amazonaws.medicalimaging#DICOMPatientId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The patient ID input for search.</p>"
+                    }
+                },
+                "DICOMAccessionNumber": {
+                    "target": "com.amazonaws.medicalimaging#DICOMAccessionNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DICOM accession number for search.</p>"
+                    }
+                },
+                "DICOMStudyId": {
+                    "target": "com.amazonaws.medicalimaging#DICOMStudyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DICOM study ID for search.</p>"
+                    }
+                },
+                "DICOMStudyInstanceUID": {
+                    "target": "com.amazonaws.medicalimaging#DICOMStudyInstanceUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DICOM study instance UID for search.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.medicalimaging#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The created at time of the image set provided for search.</p>"
+                    }
+                },
+                "DICOMStudyDateAndTime": {
+                    "target": "com.amazonaws.medicalimaging#DICOMStudyDateAndTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The aggregated structure containing DICOM study date and study time for search.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The search input attribute value.</p>"
+            }
+        },
+        "com.amazonaws.medicalimaging#SearchByAttributeValues": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.medicalimaging#SearchByAttributeValue"
+            }
+        },
+        "com.amazonaws.medicalimaging#SearchCriteria": {
+            "type": "structure",
+            "members": {
+                "filters": {
+                    "target": "com.amazonaws.medicalimaging#SearchFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filters for the search criteria.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 2
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The search criteria.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#SearchFilter": {
+            "type": "structure",
+            "members": {
+                "values": {
+                    "target": "com.amazonaws.medicalimaging#SearchByAttributeValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The search filter values.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 2
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "operator": {
+                    "target": "com.amazonaws.medicalimaging#Operator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The search filter operator for <code>imageSetDateTime</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The search filter.</p>"
+            }
+        },
+        "com.amazonaws.medicalimaging#SearchFilters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.medicalimaging#SearchFilter"
+            }
+        },
+        "com.amazonaws.medicalimaging#SearchImageSets": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.medicalimaging#SearchImageSetsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.medicalimaging#SearchImageSetsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.medicalimaging#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Search image sets based on defined input attributes.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "runtime-"
+                },
+                "smithy.api#http": {
+                    "uri": "/datastore/{datastoreId}/searchImageSets",
+                    "method": "POST"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "imageSetsMetadataSummaries"
+                }
+            }
+        },
+        "com.amazonaws.medicalimaging#SearchImageSetsRequest": {
+            "type": "structure",
+            "members": {
+                "datastoreId": {
+                    "target": "com.amazonaws.medicalimaging#DatastoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the data store where the image sets reside.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "searchCriteria": {
+                    "target": "com.amazonaws.medicalimaging#SearchCriteria",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The search criteria that filters by applying a maximum of 1 item to <code>SearchByAttribute</code>.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results that can be returned in a search.</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 50
+                        }
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.medicalimaging#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token used for pagination of results returned in the response. Use the token returned from the previous\n           request to continue results where the previous request ended.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#SearchImageSetsResponse": {
+            "type": "structure",
+            "members": {
+                "imageSetsMetadataSummaries": {
+                    "target": "com.amazonaws.medicalimaging#ImageSetsMetadataSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The model containing the image set results.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.medicalimaging#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for pagination results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request caused a service quota to be exceeded.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.medicalimaging#StartDICOMImportJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.medicalimaging#StartDICOMImportJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.medicalimaging#StartDICOMImportJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.medicalimaging#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Start importing bulk data into an <code>ACTIVE</code> data store. The import job imports DICOM P10 files\n           found in the S3 prefix specified by the <code>inputS3Uri</code> parameter. The import job stores\n           processing results in the file specified by the <code>outputS3Uri</code> parameter.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/startDICOMImportJob/datastore/{datastoreId}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#StartDICOMImportJobRequest": {
+            "type": "structure",
+            "members": {
+                "jobName": {
+                    "target": "com.amazonaws.medicalimaging#JobName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The import job name.</p>"
+                    }
+                },
+                "dataAccessRoleArn": {
+                    "target": "com.amazonaws.medicalimaging#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that grants permission to access medical imaging resources.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.medicalimaging#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for API idempotency.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "datastoreId": {
+                    "target": "com.amazonaws.medicalimaging#DatastoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data store identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "inputS3Uri": {
+                    "target": "com.amazonaws.medicalimaging#S3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The input prefix path for the S3 bucket that contains the DICOM files to be imported.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "outputS3Uri": {
+                    "target": "com.amazonaws.medicalimaging#S3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The output prefix of the S3 bucket to upload the results of the DICOM import job.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#StartDICOMImportJobResponse": {
+            "type": "structure",
+            "members": {
+                "datastoreId": {
+                    "target": "com.amazonaws.medicalimaging#DatastoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data store identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "jobId": {
+                    "target": "com.amazonaws.medicalimaging#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The import job identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "jobStatus": {
+                    "target": "com.amazonaws.medicalimaging#JobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The import job status.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "submittedAt": {
+                    "target": "com.amazonaws.medicalimaging#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the import job was submitted.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^(?!aws:)[a-zA-Z+-=._:/]+$"
+            }
+        },
+        "com.amazonaws.medicalimaging#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.medicalimaging#TagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.medicalimaging#TagMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.medicalimaging#TagKey"
+            },
+            "value": {
+                "target": "com.amazonaws.medicalimaging#TagValue"
+            }
+        },
+        "com.amazonaws.medicalimaging#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.medicalimaging#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.medicalimaging#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.medicalimaging#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys"
+                ],
+                "smithy.api#documentation": "<p>Adds a user-specifed key and value tag to a medical imaging resource.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/tags/{resourceArn}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.medicalimaging#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the medical imaging resource that tags are being added to.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.medicalimaging#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user-specified key and value tag pairs added to a medical imaging resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.medicalimaging#DatastoreResource",
+                        "ids": {
+                            "datastoreId": "resourceArn"
+                        }
+                    },
+                    {
+                        "resource": "com.amazonaws.medicalimaging#ImageSetResource",
+                        "ids": {
+                            "datastoreId": "resourceArn",
+                            "imageSetId": "resourceArn"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.medicalimaging#TagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.medicalimaging#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request was denied due to throttling.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.medicalimaging#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.medicalimaging#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.medicalimaging#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.medicalimaging#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:TagKeys"
+                ],
+                "smithy.api#documentation": "<p>Removes tags from a medical imaging resource.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/tags/{resourceArn}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.medicalimaging#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the medical imaging resource that tags are being removed from.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tagKeys": {
+                    "target": "com.amazonaws.medicalimaging#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The keys for the tags to be removed from the medical imaging resource.</p>",
+                        "smithy.api#httpQuery": "tagKeys",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.medicalimaging#DatastoreResource",
+                        "ids": {
+                            "datastoreId": "resourceArn"
+                        }
+                    },
+                    {
+                        "resource": "com.amazonaws.medicalimaging#ImageSetResource",
+                        "ids": {
+                            "datastoreId": "resourceArn",
+                            "imageSetId": "resourceArn"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.medicalimaging#UntagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#UpdateImageSetMetadata": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.medicalimaging#UpdateImageSetMetadataRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.medicalimaging#UpdateImageSetMetadataResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.medicalimaging#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.medicalimaging#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Update image set metadata attributes.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "runtime-"
+                },
+                "smithy.api#http": {
+                    "uri": "/datastore/{datastoreId}/imageSet/{imageSetId}/updateImageSetMetadata",
+                    "method": "POST"
+                }
+            }
+        },
+        "com.amazonaws.medicalimaging#UpdateImageSetMetadataRequest": {
+            "type": "structure",
+            "members": {
+                "datastoreId": {
+                    "target": "com.amazonaws.medicalimaging#DatastoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data store identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "imageSetId": {
+                    "target": "com.amazonaws.medicalimaging#ImageSetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image set identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "latestVersionId": {
+                    "target": "com.amazonaws.medicalimaging#ImageSetExternalVersionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The latest image set version identifier.</p>",
+                        "smithy.api#httpQuery": "latestVersion",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updateImageSetMetadataUpdates": {
+                    "target": "com.amazonaws.medicalimaging#MetadataUpdates",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Update image set metadata updates.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#UpdateImageSetMetadataResponse": {
+            "type": "structure",
+            "members": {
+                "datastoreId": {
+                    "target": "com.amazonaws.medicalimaging#DatastoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data store identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "imageSetId": {
+                    "target": "com.amazonaws.medicalimaging#ImageSetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image set identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "latestVersionId": {
+                    "target": "com.amazonaws.medicalimaging#ImageSetExternalVersionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The latest image set version identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "imageSetState": {
+                    "target": "com.amazonaws.medicalimaging#ImageSetState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image set state.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "imageSetWorkflowStatus": {
+                    "target": "com.amazonaws.medicalimaging#ImageSetWorkflowStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The image set workflow status.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.medicalimaging#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when image set metadata was created.</p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.medicalimaging#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when image set metadata was updated.</p>"
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.medicalimaging#Message",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message thrown if an update image set metadata action fails.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.medicalimaging#ValidationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by an AWS service.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        }
+    }
+}

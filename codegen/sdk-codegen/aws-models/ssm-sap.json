@@ -40,6 +40,12 @@
                         "smithy.api#documentation": "<p>The status of the application.</p>"
                     }
                 },
+                "DiscoveryStatus": {
+                    "target": "com.amazonaws.ssmsap#ApplicationDiscoveryStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The latest discovery result for the application.</p>"
+                    }
+                },
                 "Components": {
                     "target": "com.amazonaws.ssmsap#ComponentIdList",
                     "traits": {
@@ -104,6 +110,41 @@
                 }
             }
         },
+        "com.amazonaws.ssmsap#ApplicationDiscoveryStatus": {
+            "type": "enum",
+            "members": {
+                "SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCESS"
+                    }
+                },
+                "REGISTRATION_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REGISTRATION_FAILED"
+                    }
+                },
+                "REFRESH_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REFRESH_FAILED"
+                    }
+                },
+                "REGISTERING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REGISTERING"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                }
+            }
+        },
         "com.amazonaws.ssmsap#ApplicationId": {
             "type": "string",
             "traits": {
@@ -111,42 +152,56 @@
             }
         },
         "com.amazonaws.ssmsap#ApplicationStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ACTIVATED",
-                        "name": "ACTIVATED"
-                    },
-                    {
-                        "value": "STARTING",
-                        "name": "STARTING"
-                    },
-                    {
-                        "value": "STOPPED",
-                        "name": "STOPPED"
-                    },
-                    {
-                        "value": "STOPPING",
-                        "name": "STOPPING"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "REGISTERING",
-                        "name": "REGISTERING"
-                    },
-                    {
-                        "value": "DELETING",
-                        "name": "DELETING"
-                    },
-                    {
-                        "value": "UNKNOWN",
-                        "name": "UNKNOWN"
+            "type": "enum",
+            "members": {
+                "ACTIVATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVATED"
                     }
-                ]
+                },
+                "STARTING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STARTING"
+                    }
+                },
+                "STOPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPED"
+                    }
+                },
+                "STOPPING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPING"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "REGISTERING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REGISTERING"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "UNKNOWN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNKNOWN"
+                    }
+                }
             }
         },
         "com.amazonaws.ssmsap#ApplicationSummary": {
@@ -188,20 +243,114 @@
             }
         },
         "com.amazonaws.ssmsap#ApplicationType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "HANA",
-                        "name": "HANA"
+            "type": "enum",
+            "members": {
+                "HANA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HANA"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.ssmsap#Arn": {
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^arn:(.+:){2,4}.+$|^arn:(.+:){1,3}.+\\/.+$"
+            }
+        },
+        "com.amazonaws.ssmsap#AssociatedHost": {
+            "type": "structure",
+            "members": {
+                "Hostname": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the host.</p>"
+                    }
+                },
+                "Ec2InstanceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon EC2 instance.</p>"
+                    }
+                },
+                "OsVersion": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the operating system.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the properties of the associated host.</p>"
+            }
+        },
+        "com.amazonaws.ssmsap#BackintConfig": {
+            "type": "structure",
+            "members": {
+                "BackintMode": {
+                    "target": "com.amazonaws.ssmsap#BackintMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>AWS service for your database backup.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EnsureNoBackupInProcess": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration parameters for AWS Backint Agent for SAP HANA. You can backup your SAP\n         HANA database with AWS Backup or Amazon S3.</p>"
+            }
+        },
+        "com.amazonaws.ssmsap#BackintMode": {
+            "type": "enum",
+            "members": {
+                "AWSBackup": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWSBackup"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmsap#ClusterStatus": {
+            "type": "enum",
+            "members": {
+                "ONLINE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ONLINE"
+                    }
+                },
+                "STANDBY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STANDBY"
+                    }
+                },
+                "MAINTENANCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MAINTENANCE"
+                    }
+                },
+                "OFFLINE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OFFLINE"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                }
             }
         },
         "com.amazonaws.ssmsap#Component": {
@@ -211,6 +360,18 @@
                     "target": "com.amazonaws.ssmsap#ComponentId",
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the component.</p>"
+                    }
+                },
+                "ParentComponent": {
+                    "target": "com.amazonaws.ssmsap#ComponentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parent component of a highly available environment. For example, in a highly\n         available SAP on AWS workload, the parent component consists of the entire setup,\n         including the child components.</p>"
+                    }
+                },
+                "ChildComponents": {
+                    "target": "com.amazonaws.ssmsap#ComponentIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The child components of a highly available environment. For example, in a highly\n         available SAP on AWS workload, the child component consists of the primary and secondar\n         instances.</p>"
                     }
                 },
                 "ApplicationId": {
@@ -231,6 +392,36 @@
                         "smithy.api#documentation": "<p>The status of the component.</p>"
                     }
                 },
+                "SapHostname": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The hostname of the component.</p>"
+                    }
+                },
+                "SapKernelVersion": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The kernel version of the component.</p>"
+                    }
+                },
+                "HdbVersion": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SAP HANA version of the component.</p>"
+                    }
+                },
+                "Resilience": {
+                    "target": "com.amazonaws.ssmsap#Resilience",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details of the SAP HANA system replication for the component.</p>"
+                    }
+                },
+                "AssociatedHost": {
+                    "target": "com.amazonaws.ssmsap#AssociatedHost",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The associated host of the component.</p>"
+                    }
+                },
                 "Databases": {
                     "target": "com.amazonaws.ssmsap#DatabaseIdList",
                     "traits": {
@@ -240,12 +431,18 @@
                 "Hosts": {
                     "target": "com.amazonaws.ssmsap#HostList",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "This shape is no longer used. Please use AssociatedHost."
+                        },
                         "smithy.api#documentation": "<p>The hosts of the component.</p>"
                     }
                 },
                 "PrimaryHost": {
                     "target": "smithy.api#String",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "This shape is no longer used. Please use AssociatedHost."
+                        },
                         "smithy.api#documentation": "<p>The primary host of the component.</p>"
                     }
                 },
@@ -253,6 +450,12 @@
                     "target": "smithy.api#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The time at which the component was last updated.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.ssmsap#SsmSapArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the component.</p>"
                     }
                 }
             },
@@ -273,14 +476,50 @@
             }
         },
         "com.amazonaws.ssmsap#ComponentStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ACTIVATED",
-                        "name": "ACTIVATED"
+            "type": "enum",
+            "members": {
+                "ACTIVATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVATED"
                     }
-                ]
+                },
+                "STARTING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STARTING"
+                    }
+                },
+                "STOPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPED"
+                    }
+                },
+                "STOPPING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPING"
+                    }
+                },
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING"
+                    }
+                },
+                "RUNNING_WITH_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING_WITH_ERROR"
+                    }
+                },
+                "UNDEFINED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNDEFINED"
+                    }
+                }
             }
         },
         "com.amazonaws.ssmsap#ComponentSummary": {
@@ -309,6 +548,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The tags of the component.</p>"
                     }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.ssmsap#SsmSapArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the component summary.</p>"
+                    }
                 }
             },
             "traits": {
@@ -322,14 +567,20 @@
             }
         },
         "com.amazonaws.ssmsap#ComponentType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "HANA",
-                        "name": "HANA"
+            "type": "enum",
+            "members": {
+                "HANA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HANA"
                     }
-                ]
+                },
+                "HANA_NODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HANA_NODE"
+                    }
+                }
             }
         },
         "com.amazonaws.ssmsap#ConflictException": {
@@ -346,14 +597,14 @@
             }
         },
         "com.amazonaws.ssmsap#CredentialType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ADMIN",
-                        "name": "ADMIN"
+            "type": "enum",
+            "members": {
+                "ADMIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADMIN"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.ssmsap#Database": {
@@ -452,30 +703,44 @@
             }
         },
         "com.amazonaws.ssmsap#DatabaseStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "RUNNING",
-                        "name": "RUNNING"
-                    },
-                    {
-                        "value": "STARTING",
-                        "name": "STARTING"
-                    },
-                    {
-                        "value": "STOPPED",
-                        "name": "STOPPED"
-                    },
-                    {
-                        "value": "WARNING",
-                        "name": "WARNING"
-                    },
-                    {
-                        "value": "UNKNOWN",
-                        "name": "UNKNOWN"
+            "type": "enum",
+            "members": {
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING"
                     }
-                ]
+                },
+                "STARTING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STARTING"
+                    }
+                },
+                "STOPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPED"
+                    }
+                },
+                "WARNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WARNING"
+                    }
+                },
+                "UNKNOWN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNKNOWN"
+                    }
+                },
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
+                    }
+                }
             }
         },
         "com.amazonaws.ssmsap#DatabaseSummary": {
@@ -529,18 +794,20 @@
             }
         },
         "com.amazonaws.ssmsap#DatabaseType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SYSTEM",
-                        "name": "SYSTEM"
-                    },
-                    {
-                        "value": "TENANT",
-                        "name": "TENANT"
+            "type": "enum",
+            "members": {
+                "SYSTEM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SYSTEM"
                     }
-                ]
+                },
+                "TENANT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TENANT"
+                    }
+                }
             }
         },
         "com.amazonaws.ssmsap#DeleteResourcePermission": {
@@ -698,22 +965,26 @@
             }
         },
         "com.amazonaws.ssmsap#FilterOperator": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Equals",
-                        "name": "EQUALS"
-                    },
-                    {
-                        "value": "GreaterThanOrEquals",
-                        "name": "GREATER_THAN_OR_EQUALS"
-                    },
-                    {
-                        "value": "LessThanOrEquals",
-                        "name": "LESS_THAN_OR_EQUALS"
+            "type": "enum",
+            "members": {
+                "EQUALS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Equals"
                     }
-                ]
+                },
+                "GREATER_THAN_OR_EQUALS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GreaterThanOrEquals"
+                    }
+                },
+                "LESS_THAN_OR_EQUALS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LessThanOrEquals"
+                    }
+                }
             }
         },
         "com.amazonaws.ssmsap#FilterValue": {
@@ -843,6 +1114,12 @@
                     "target": "com.amazonaws.ssmsap#Component",
                     "traits": {
                         "smithy.api#documentation": "<p>The component of an application registered with AWS Systems Manager for SAP.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.ssmsap#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags of a component.</p>"
                     }
                 }
             }
@@ -1034,22 +1311,34 @@
                         "smithy.api#documentation": "<p>The name of the Dedicated Host.</p>"
                     }
                 },
-                "HostRole": {
-                    "target": "com.amazonaws.ssmsap#HostRole",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The role of the Dedicated Host.</p>"
-                    }
-                },
                 "HostIp": {
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The IP address of the Dedicated Host. </p>"
                     }
                 },
+                "EC2InstanceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of Amazon EC2 instance.</p>"
+                    }
+                },
                 "InstanceId": {
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The instance ID of the instance on the Dedicated Host.</p>"
+                    }
+                },
+                "HostRole": {
+                    "target": "com.amazonaws.ssmsap#HostRole",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The role of the Dedicated Host.</p>"
+                    }
+                },
+                "OsVersion": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the operating system.</p>"
                     }
                 }
             },
@@ -1064,26 +1353,32 @@
             }
         },
         "com.amazonaws.ssmsap#HostRole": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "LEADER",
-                        "name": "LEADER"
-                    },
-                    {
-                        "value": "WORKER",
-                        "name": "WORKER"
-                    },
-                    {
-                        "value": "STANDBY",
-                        "name": "STANDBY"
-                    },
-                    {
-                        "value": "UNKNOWN",
-                        "name": "UNKNOWN"
+            "type": "enum",
+            "members": {
+                "LEADER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LEADER"
                     }
-                ]
+                },
+                "WORKER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WORKER"
+                    }
+                },
+                "STANDBY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STANDBY"
+                    }
+                },
+                "UNKNOWN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNKNOWN"
+                    }
+                }
             }
         },
         "com.amazonaws.ssmsap#InstanceId": {
@@ -1340,7 +1635,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.ssmsap#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are no more\n         results to return.</p>"
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are\n         no more results to return.</p>"
                     }
                 }
             }
@@ -1391,13 +1686,13 @@
                     "target": "com.amazonaws.ssmsap#MaxResults",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, make\n         another call with the returned nextToken value.\n         If you do not specify a value for MaxResults, the request returns 50 items per page by default.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining\n         results, make another call with the returned nextToken value. If you do not specify a value\n         for MaxResults, the request returns 50 items per page by default.</p>"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.ssmsap#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token for the next page of results.\n      </p>"
+                        "smithy.api#documentation": "<p>The token for the next page of results. </p>"
                     }
                 },
                 "Filters": {
@@ -1420,7 +1715,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.ssmsap#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are no more\n         results to return.</p>"
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are\n         no more results to return.</p>"
                     }
                 }
             }
@@ -1585,6 +1880,41 @@
                 "target": "com.amazonaws.ssmsap#Operation"
             }
         },
+        "com.amazonaws.ssmsap#OperationMode": {
+            "type": "enum",
+            "members": {
+                "PRIMARY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRIMARY"
+                    }
+                },
+                "LOGREPLAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LOGREPLAY"
+                    }
+                },
+                "DELTA_DATASHIPPING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELTA_DATASHIPPING"
+                    }
+                },
+                "LOGREPLAY_READACCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LOGREPLAY_READACCESS"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                }
+            }
+        },
         "com.amazonaws.ssmsap#OperationProperties": {
             "type": "map",
             "key": {
@@ -1598,36 +1928,40 @@
             }
         },
         "com.amazonaws.ssmsap#OperationStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "INPROGRESS",
-                        "name": "INPROGRESS"
-                    },
-                    {
-                        "value": "SUCCESS",
-                        "name": "SUCCESS"
-                    },
-                    {
-                        "value": "ERROR",
-                        "name": "ERROR"
+            "type": "enum",
+            "members": {
+                "INPROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INPROGRESS"
                     }
-                ]
+                },
+                "SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCESS"
+                    }
+                },
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
+                    }
+                }
             }
         },
         "com.amazonaws.ssmsap#OperationType": {
             "type": "string"
         },
         "com.amazonaws.ssmsap#PermissionActionType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "RESTORE",
-                        "name": "RESTORE"
+            "type": "enum",
+            "members": {
+                "RESTORE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESTORE"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.ssmsap#PutResourcePermission": {
@@ -1791,6 +2125,73 @@
                 }
             }
         },
+        "com.amazonaws.ssmsap#ReplicationMode": {
+            "type": "enum",
+            "members": {
+                "PRIMARY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRIMARY"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                },
+                "SYNC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SYNC"
+                    }
+                },
+                "SYNCMEM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SYNCMEM"
+                    }
+                },
+                "ASYNC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASYNC"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmsap#Resilience": {
+            "type": "structure",
+            "members": {
+                "HsrTier": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tier of the component.</p>"
+                    }
+                },
+                "HsrReplicationMode": {
+                    "target": "com.amazonaws.ssmsap#ReplicationMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The replication mode of the component.</p>"
+                    }
+                },
+                "HsrOperationMode": {
+                    "target": "com.amazonaws.ssmsap#OperationMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operation mode of the component.</p>"
+                    }
+                },
+                "ClusterStatus": {
+                    "target": "com.amazonaws.ssmsap#ClusterStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cluster status of the component.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details of the SAP HANA system replication for the instance.</p>"
+            }
+        },
         "com.amazonaws.ssmsap#ResourceId": {
             "type": "string",
             "traits": {
@@ -1889,6 +2290,9 @@
                 },
                 {
                     "target": "com.amazonaws.ssmsap#RegisterApplication"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#StartApplicationRefresh"
                 },
                 {
                     "target": "com.amazonaws.ssmsap#TagResource"
@@ -2285,9 +2689,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2298,9 +2702,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2311,9 +2715,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2324,9 +2728,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2337,9 +2741,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "cn-north-1",
                                 "UseFIPS": true,
-                                "Region": "cn-north-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2350,9 +2754,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "cn-north-1",
                                 "UseFIPS": true,
-                                "Region": "cn-north-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2363,9 +2767,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "cn-north-1",
                                 "UseFIPS": false,
-                                "Region": "cn-north-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2376,9 +2780,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "cn-north-1",
                                 "UseFIPS": false,
-                                "Region": "cn-north-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2387,9 +2791,9 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2400,9 +2804,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2411,9 +2815,9 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2424,9 +2828,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2437,9 +2841,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2450,9 +2854,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2463,9 +2867,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2476,9 +2880,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2487,9 +2891,9 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2500,9 +2904,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2511,9 +2915,9 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2524,9 +2928,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-isob-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2537,9 +2941,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2549,9 +2953,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
                                 "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2561,9 +2965,9 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
                             }
                         }
@@ -2576,6 +2980,66 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^arn:(.+:){2,4}.+$|^arn:(.+:){1,3}.+\\/.+$"
+            }
+        },
+        "com.amazonaws.ssmsap#StartApplicationRefresh": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmsap#StartApplicationRefreshInput"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmsap#StartApplicationRefreshOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmsap#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Refreshes a registered application.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/start-application-refresh"
+                }
+            }
+        },
+        "com.amazonaws.ssmsap#StartApplicationRefreshInput": {
+            "type": "structure",
+            "members": {
+                "ApplicationId": {
+                    "target": "com.amazonaws.ssmsap#ApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the application.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ssmsap#StartApplicationRefreshOutput": {
+            "type": "structure",
+            "members": {
+                "OperationId": {
+                    "target": "com.amazonaws.ssmsap#OperationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.ssmsap#TagKey": {
@@ -2722,6 +3186,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.ssmsap#ConflictException"
+                },
+                {
                     "target": "com.amazonaws.ssmsap#InternalServerException"
                 },
                 {
@@ -2760,6 +3227,12 @@
                     "target": "com.amazonaws.ssmsap#ApplicationCredentialList",
                     "traits": {
                         "smithy.api#documentation": "<p>The credentials to be removed.</p>"
+                    }
+                },
+                "Backint": {
+                    "target": "com.amazonaws.ssmsap#BackintConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Installation of AWS Backint Agent for SAP HANA.</p>"
                     }
                 }
             }

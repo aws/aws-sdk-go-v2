@@ -1474,6 +1474,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies a unique, case-sensitive identifier that you provide to\n             ensure the idempotency of the request. This lets you safely retry the request without\n             accidentally performing the same operation a second time. Passing the same value to a\n             later call to an operation requires that you also pass the same value for all other \n             parameters. We recommend that you use a <a href=\"https://wikipedia.org/wiki/Universally_unique_identifier\">UUID type of \n             value.</a>.</p>\n         <p>If you don't provide this value, then Amazon Web Services generates a random one for\n             you.</p>\n         <p>If you retry the operation with the same <code>ClientToken</code>, but with \n             different parameters, the retry fails with an <code>IdempotentParameterMismatch</code>\n             error.</p>"
                     }
+                },
+                "sources": {
+                    "target": "com.amazonaws.ram#SourceArnOrAccountList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies from which source accounts the service principal\n            has access to the resources in this resource share.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1809,6 +1815,9 @@
                     "target": "com.amazonaws.ram#ServiceUnavailableException"
                 },
                 {
+                    "target": "com.amazonaws.ram#TagLimitExceededException"
+                },
+                {
                     "target": "com.amazonaws.ram#TagPolicyViolationException"
                 },
                 {
@@ -1868,6 +1877,12 @@
                     "target": "com.amazonaws.ram#PermissionArnList",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> of the RAM permission to associate with the resource share. If you do\n            not specify an ARN for the permission, RAM automatically attaches the default version\n            of the permission for each resource type. You can associate only one permission with\n            each resource type included in the resource share.</p>"
+                    }
+                },
+                "sources": {
+                    "target": "com.amazonaws.ram#SourceArnOrAccountList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies from which source accounts the service principal\n            has access to the resources in this resource share.</p>"
                     }
                 }
             },
@@ -2346,6 +2361,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies a unique, case-sensitive identifier that you provide to\n             ensure the idempotency of the request. This lets you safely retry the request without\n             accidentally performing the same operation a second time. Passing the same value to a\n             later call to an operation requires that you also pass the same value for all other \n             parameters. We recommend that you use a <a href=\"https://wikipedia.org/wiki/Universally_unique_identifier\">UUID type of \n             value.</a>.</p>\n         <p>If you don't provide this value, then Amazon Web Services generates a random one for\n             you.</p>\n         <p>If you retry the operation with the same <code>ClientToken</code>, but with \n             different parameters, the retry fails with an <code>IdempotentParameterMismatch</code>\n             error.</p>"
                     }
+                },
+                "sources": {
+                    "target": "com.amazonaws.ram#SourceArnOrAccountList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies from which source accounts the\n            service principal no longer has access to the resources in this resource share.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2659,7 +2680,7 @@
                 "principal": {
                     "target": "com.amazonaws.ram#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the ID of the principal whose resource shares you want to retrieve. This can be an\n            Amazon Web Services account ID, an organization ID, an organizational unit ID, or the <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Name (ARN)</a> of an\n            individual IAM user or role.</p>\n         <p>You cannot specify this parameter if the association type is\n            <code>RESOURCE</code>.</p>"
+                        "smithy.api#documentation": "<p>Specifies the ID of the principal whose resource shares you want to retrieve. This can be an\n            Amazon Web Services account ID, an organization ID, an organizational unit ID, or the <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Name (ARN)</a> of an\n            individual IAM role or user.</p>\n         <p>You cannot specify this parameter if the association type is\n            <code>RESOURCE</code>.</p>"
                     }
                 },
                 "associationStatus": {
@@ -5783,6 +5804,15 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ram#SourceArnOrAccountList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ram#String",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
             }
         },
         "com.amazonaws.ram#String": {

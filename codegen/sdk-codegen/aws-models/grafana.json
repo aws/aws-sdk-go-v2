@@ -9,6 +9,9 @@
                     "target": "com.amazonaws.grafana#ListTagsForResource"
                 },
                 {
+                    "target": "com.amazonaws.grafana#ListVersions"
+                },
+                {
                     "target": "com.amazonaws.grafana#TagResource"
                 },
                 {
@@ -1448,7 +1451,7 @@
                 "vpcConfiguration": {
                     "target": "com.amazonaws.grafana#VpcConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration settings for an Amazon VPC that contains data sources for\n            your Grafana workspace to connect to.</p>"
+                        "smithy.api#documentation": "<p>The configuration settings for an Amazon VPC that contains data sources for\n            your Grafana workspace to connect to.</p>\n         <note>\n            <p>Connecting to a private VPC is not yet available in the Asia Pacific (Seoul) \n                Region (ap-northeast-2).</p>\n         </note>"
                     }
                 },
                 "configuration": {
@@ -1466,7 +1469,7 @@
                 "grafanaVersion": {
                     "target": "com.amazonaws.grafana#GrafanaVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the version of Grafana to support in the new workspace.</p>\n         <p>Supported values are <code>8.4</code> and <code>9.4</code>.</p>"
+                        "smithy.api#documentation": "<p>Specifies the version of Grafana to support in the new workspace.</p>\n         <p>To get a list of supported version, use the <code>ListVersions</code>\n            operation.</p>"
                     }
                 }
             }
@@ -1829,6 +1832,12 @@
                         "smithy.api#documentation": "<p>The configuration string for the workspace that you requested. For more information\n            about the format and configuration options available, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html\">Working in your Grafana\n                workspace</a>.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "grafanaVersion": {
+                    "target": "com.amazonaws.grafana#GrafanaVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The supported Grafana version for the workspace.</p>"
+                    }
                 }
             }
         },
@@ -1950,6 +1959,12 @@
                     "min": 1,
                     "max": 255
                 }
+            }
+        },
+        "com.amazonaws.grafana#GrafanaVersionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.grafana#GrafanaVersion"
             }
         },
         "com.amazonaws.grafana#IamRoleArn": {
@@ -2231,6 +2246,102 @@
                 }
             }
         },
+        "com.amazonaws.grafana#ListVersions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.grafana#ListVersionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.grafana#ListVersionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.grafana#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.grafana#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists available versions of Grafana. These are available when calling \n            <code>CreateWorkspace</code>. Optionally, include a workspace to list the versions \n            to which it can be upgraded.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/versions"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "grafanaVersions"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.grafana#ListVersionsRequest": {
+            "type": "structure",
+            "members": {
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to include in the response.</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.grafana#PaginationToken",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The token to use when requesting the next set of results. You receive this token from\n            a previous <code>ListVersions</code> operation.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "workspaceId": {
+                    "target": "com.amazonaws.grafana#WorkspaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the workspace to list the available upgrade versions. If not included, \n            lists all versions of Grafana that are supported for \n            <code>CreateWorkspace</code>.</p>",
+                        "smithy.api#httpQuery": "workspace-id"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.grafana#ListVersionsResponse": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.grafana#PaginationToken",
+                    "traits": {
+                        "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#documentation": "<p>The token to use in a subsequent <code>ListVersions</code> operation to return the\n            next set of results.</p>"
+                    }
+                },
+                "grafanaVersions": {
+                    "target": "com.amazonaws.grafana#GrafanaVersionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Grafana versions available to create. If a workspace ID is included in the \n            request, the Grafana versions to which this workspace can be upgraded.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.grafana#ListWorkspaces": {
             "type": "operation",
             "input": {
@@ -2319,20 +2430,20 @@
                 "prefixListIds": {
                     "target": "com.amazonaws.grafana#PrefixListIds",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of prefix list IDs. A prefix list is a list of CIDR ranges of IP addresses.\n            The IP addresses specified are allowed to access your workspace. If the list is not\n            included in the configuration then no IP addresses will be allowed to access the\n            workspace. You create a prefix list using the Amazon VPC console.</p>\n         <p>Prefix list IDs have the format <code>pl-<i>1a2b3c4d</i>\n            </code>.</p>\n         <p>For more information about prefix lists, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/managed-prefix-lists.html\">Group CIDR blocks using managed\n                prefix lists</a>in the <i>Amazon Virtual Private Cloud User\n            Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>An array of prefix list IDs. A prefix list is a list of CIDR ranges of IP addresses.\n            The IP addresses specified are allowed to access your workspace. If the list is not\n            included in the configuration (passed an empty array) then no IP addresses are \n            allowed to access the workspace. You create a prefix list using the Amazon VPC \n            console.</p>\n         <p>Prefix list IDs have the format <code>pl-<i>1a2b3c4d</i>\n            </code>.</p>\n         <p>For more information about prefix lists, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/managed-prefix-lists.html\">Group CIDR blocks using managed\n                prefix lists</a>in the <i>Amazon Virtual Private Cloud User\n            Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "vpceIds": {
                     "target": "com.amazonaws.grafana#VpceIds",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of Amazon VPC endpoint IDs for the workspace. You can create VPC\n            endpoints to your Amazon Managed Grafana workspace for access from within a VPC. If a\n                <code>NetworkAccessConfiguration</code> is specified then only VPC endpoints\n            specified here will be allowed to access the workspace.</p>\n         <p>VPC endpoint IDs have the format\n            <code>vpce-<i>1a2b3c4d</i>\n            </code>.</p>\n         <p>For more information about creating an interface VPC endpoint, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/VPC-endpoints\">Interface VPC\n                endpoints</a> in the <i>Amazon Managed Grafana User\n            Guide</i>.</p>\n         <note>\n            <p>The only VPC endpoints that can be specified here are interface VPC endpoints for\n                Grafana workspaces (using the <code>com.amazonaws.[region].grafana-workspace</code>\n                service endpoint). Other VPC endpoints will be ignored.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>An array of Amazon VPC endpoint IDs for the workspace. You can create VPC\n            endpoints to your Amazon Managed Grafana workspace for access from within a VPC. If a\n                <code>NetworkAccessConfiguration</code> is specified then only VPC endpoints\n            specified here are allowed to access the workspace. If you pass in an empty array\n            of strings, then no VPCs are allowed to access the workspace.</p>\n         <p>VPC endpoint IDs have the format\n            <code>vpce-<i>1a2b3c4d</i>\n            </code>.</p>\n         <p>For more information about creating an interface VPC endpoint, see <a href=\"https://docs.aws.amazon.com/grafana/latest/userguide/VPC-endpoints\">Interface VPC\n                endpoints</a> in the <i>Amazon Managed Grafana User\n            Guide</i>.</p>\n         <note>\n            <p>The only VPC endpoints that can be specified here are interface VPC endpoints for\n                Grafana workspaces (using the <code>com.amazonaws.[region].grafana-workspace</code>\n                service endpoint). Other VPC endpoints are ignored.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration settings for in-bound network access to your workspace.</p>\n         <p>When this is configured, only listed IP addresses and VPC endpoints will be able to\n            access your workspace. Standard Grafana authentication and authorization will still be\n            required.</p>\n         <p>If this is not configured, or is removed, then all IP addresses and VPC endpoints will\n            be allowed. Standard Grafana authentication and authorization will still be\n            required.</p>"
+                "smithy.api#documentation": "<p>The configuration settings for in-bound network access to your workspace.</p>\n         <p>When this is configured, only listed IP addresses and VPC endpoints will be able to\n            access your workspace. Standard Grafana authentication and authorization are still\n            required.</p>\n         <p>Access is granted to a caller that is in either the IP address list or the VPC \n            endpoint list - they do not need to be in both.</p>\n         <p>If this is not configured, or is removed, then all IP addresses and VPC endpoints are\n            allowed. Standard Grafana authentication and authorization are still\n            required.</p>\n         <note>\n            <p>While both <code>prefixListIds</code> and <code>vpceIds</code> are required, you \n                can pass in an empty array of strings for either parameter if you do not want to allow any\n                of that type.</p>\n            <p>If both are passed as empty arrays, no traffic is allowed to the workspace, \n                because only <i>explicitly</i> allowed connections are accepted.</p>\n         </note>"
             }
         },
         "com.amazonaws.grafana#NotificationDestinationType": {
@@ -3262,6 +3373,12 @@
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
+                },
+                "grafanaVersion": {
+                    "target": "com.amazonaws.grafana#GrafanaVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the version of Grafana to support in the new workspace.</p>\n         <p>Can only be used to upgrade (for example, from 8.4 to 9.4), not\n            downgrade (for example, from 9.4 to 8.4).</p>\n         <p>To know what versions are available to upgrade to for a specific workspace, see \n            the <code>ListVersions</code> operation.</p>"
+                    }
                 }
             }
         },
@@ -3523,7 +3640,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration settings for an Amazon VPC that contains data sources for\n            your Grafana workspace to connect to.</p>\n         <note>\n            <p>Provided <code>securityGroupIds</code> and <code>subnetIds</code> must be part of\n                the same VPC.</p>\n         </note>"
+                "smithy.api#documentation": "<p>The configuration settings for an Amazon VPC that contains data sources for\n            your Grafana workspace to connect to.</p>\n         <note>\n            <p>Provided <code>securityGroupIds</code> and <code>subnetIds</code> must be part of\n                the same VPC.</p>\n            <p>Connecting to a private VPC is not yet available in the Asia Pacific (Seoul) \n                Region (ap-northeast-2).</p>\n         </note>"
             }
         },
         "com.amazonaws.grafana#VpceId": {
@@ -3807,6 +3924,16 @@
                         "name": "LICENSE_REMOVAL_FAILED",
                         "value": "LICENSE_REMOVAL_FAILED",
                         "documentation": "Failed to remove enterprise license from workspace."
+                    },
+                    {
+                        "name": "VERSION_UPDATING",
+                        "value": "VERSION_UPDATING",
+                        "documentation": "Workspace version is being updated."
+                    },
+                    {
+                        "name": "VERSION_UPDATE_FAILED",
+                        "value": "VERSION_UPDATE_FAILED",
+                        "documentation": "Workspace version update failed."
                     }
                 ]
             }

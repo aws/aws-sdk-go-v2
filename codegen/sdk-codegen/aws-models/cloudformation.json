@@ -2547,7 +2547,7 @@
                 "OnStackFailure": {
                     "target": "com.amazonaws.cloudformation#OnStackFailure",
                     "traits": {
-                        "smithy.api#documentation": "<p>Determines what action will be taken if stack creation fails. If this parameter is specified, the\n   <code>DisableRollback</code> parameter to the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ExecuteChangeSet.html\">ExecuteChangeSet</a> API operation must not\n   be specified. This must be one of these values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DELETE</code> - Deletes the change set if the stack creation fails. This is only valid when the\n     <code>ChangeSetType</code> parameter is set to <code>CREATE</code>. If the deletion of the stack fails, the status\n     of the stack is <code>DELETE_FAILED</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DO_NOTHING</code> - if the stack creation fails, do nothing. This is equivalent to specifying\n     <code>true</code> for the <code>DisableRollback</code> parameter to the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ExecuteChangeSet.html\">ExecuteChangeSet</a> API\n     operation.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ROLLBACK</code> - if the stack creation fails, roll back the stack. This is equivalent to specifying\n     <code>false</code> for the <code>DisableRollback</code> parameter to the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ExecuteChangeSet.html\">ExecuteChangeSet</a> API\n     operation.</p>\n            </li>\n         </ul>\n         <p>For nested stacks, when the <code>OnStackFailure</code> parameter is set to <code>DELETE</code> for the change\n   set for the parent stack, any failure in a child stack will cause the parent stack creation to fail and all stacks to\n   be deleted.</p>"
+                        "smithy.api#documentation": "<p>Determines what action will be taken if stack creation fails. If this parameter is specified, the\n    <code>DisableRollback</code> parameter to the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ExecuteChangeSet.html\">ExecuteChangeSet</a> API operation must not\n      be specified. This must be one of these values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DELETE</code> - Deletes the change set if the stack creation fails. This is only valid when the\n        <code>ChangeSetType</code> parameter is set to <code>CREATE</code>. If the deletion of the stack fails, the status\n        of the stack is <code>DELETE_FAILED</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DO_NOTHING</code> - if the stack creation fails, do nothing. This is equivalent to specifying\n        <code>true</code> for the <code>DisableRollback</code> parameter to the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ExecuteChangeSet.html\">ExecuteChangeSet</a> API\n        operation.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ROLLBACK</code> - if the stack creation fails, roll back the stack. This is equivalent to specifying\n        <code>false</code> for the <code>DisableRollback</code> parameter to the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ExecuteChangeSet.html\">ExecuteChangeSet</a> API\n        operation.</p>\n            </li>\n         </ul>\n         <p>For nested stacks, when the <code>OnStackFailure</code> parameter is set to <code>DELETE</code> for the change\n     set for the parent stack, any failure in a child stack will cause the parent stack creation to fail and all stacks to\n     be deleted.</p>"
                     }
                 }
             },
@@ -3797,7 +3797,7 @@
                 "OnStackFailure": {
                     "target": "com.amazonaws.cloudformation#OnStackFailure",
                     "traits": {
-                        "smithy.api#documentation": "<p>Determines what action will be taken if stack creation fails. When this parameter is specified, the\n   <code>DisableRollback</code> parameter to the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ExecuteChangeSet.html\">ExecuteChangeSet</a> API operation must not\n   be specified. This must be one of these values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DELETE</code> - Deletes the change set if the stack creation fails. This is only valid when the\n     <code>ChangeSetType</code> parameter is set to <code>CREATE</code>. If the deletion of the stack fails, the status\n     of the stack is <code>DELETE_FAILED</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DO_NOTHING</code> - if the stack creation fails, do nothing. This is equivalent to specifying\n     <code>true</code> for the <code>DisableRollback</code> parameter to the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ExecuteChangeSet.html\">ExecuteChangeSet</a> API\n     operation.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ROLLBACK</code> - if the stack creation fails, roll back the stack. This is equivalent to specifying\n     <code>false</code> for the <code>DisableRollback</code> parameter to the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ExecuteChangeSet.html\">ExecuteChangeSet</a> API\n     operation.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Determines what action will be taken if stack creation fails. When this parameter is specified, the\n    <code>DisableRollback</code> parameter to the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ExecuteChangeSet.html\">ExecuteChangeSet</a> API operation must not\n    be specified. This must be one of these values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DELETE</code> - Deletes the change set if the stack creation fails. This is only valid when the\n        <code>ChangeSetType</code> parameter is set to <code>CREATE</code>. If the deletion of the stack fails, the status\n        of the stack is <code>DELETE_FAILED</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DO_NOTHING</code> - if the stack creation fails, do nothing. This is equivalent to specifying\n        <code>true</code> for the <code>DisableRollback</code> parameter to the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ExecuteChangeSet.html\">ExecuteChangeSet</a> API\n        operation.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ROLLBACK</code> - if the stack creation fails, roll back the stack. This is equivalent to specifying\n        <code>false</code> for the <code>DisableRollback</code> parameter to the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ExecuteChangeSet.html\">ExecuteChangeSet</a> API\n        operation.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -5523,7 +5523,7 @@
                 "DisableRollback": {
                     "target": "com.amazonaws.cloudformation#DisableRollback",
                     "traits": {
-                        "smithy.api#documentation": "<p>Preserves the state of previously provisioned resources when an operation\n   fails. This parameter can't be specified when\n   the <code>OnStackFailure</code> parameter to the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CreateChangeSet.html\">CreateChangeSet</a> API operation was\n   specified.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>True</code> - if the stack creation fails, do nothing. This is equivalent to specifying\n     <code>DO_NOTHING</code> for the <code>OnStackFailure</code> parameter to the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CreateChangeSet.html\">CreateChangeSet</a> API operation.</p>\n            </li>\n            <li>\n               <p>\n                  <code>False</code> - if the stack creation fails, roll back the stack. This is equivalent to specifying\n     <code>ROLLBACK</code> for the <code>OnStackFailure</code> parameter to the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CreateChangeSet.html\">CreateChangeSet</a> API operation.</p>\n            </li>\n         </ul>\n         <p>Default: <code>True</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Preserves the state of previously provisioned resources when an operation\n    fails. This parameter can't be specified when\n    the <code>OnStackFailure</code> parameter to the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CreateChangeSet.html\">CreateChangeSet</a> API operation was\n    specified.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>True</code> - if the stack creation fails, do nothing. This is equivalent to specifying\n        <code>DO_NOTHING</code> for the <code>OnStackFailure</code> parameter to the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CreateChangeSet.html\">CreateChangeSet</a> API operation.</p>\n            </li>\n            <li>\n               <p>\n                  <code>False</code> - if the stack creation fails, roll back the stack. This is equivalent to specifying\n        <code>ROLLBACK</code> for the <code>OnStackFailure</code> parameter to the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_CreateChangeSet.html\">CreateChangeSet</a> API operation.</p>\n            </li>\n         </ul>\n         <p>Default: <code>True</code>\n         </p>"
                     }
                 }
             },
@@ -5812,6 +5812,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization's\n    management account or as a delegated administrator in a member account.</p>\n         <p>By default, <code>SELF</code> is specified. Use <code>SELF</code> for stack sets with self-managed\n   permissions.</p>\n         <ul>\n            <li>\n               <p>If you are signed in to the management account, specify <code>SELF</code>.</p>\n            </li>\n            <li>\n               <p>If you are signed in to a delegated administrator account, specify <code>DELEGATED_ADMIN</code>.</p>\n               <p>Your Amazon Web Services account must be registered as a delegated administrator in the management account. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html\">Register a delegated\n      administrator</a> in the <i>CloudFormation User Guide</i>.</p>\n            </li>\n         </ul>"
                     }
+                },
+                "TemplateSummaryConfig": {
+                    "target": "com.amazonaws.cloudformation#TemplateSummaryConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies options for the <code>GetTemplateSummary</code> API action.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5874,6 +5880,12 @@
                     "target": "com.amazonaws.cloudformation#ResourceIdentifierSummaries",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of resource identifier summaries that describe the target resources of an import operation and the\n   properties you can provide during the import to identify the target resources. For example, <code>BucketName</code>\n   is a possible identifier property for an <code>AWS::S3::Bucket</code> resource.</p>"
+                    }
+                },
+                "Warnings": {
+                    "target": "com.amazonaws.cloudformation#Warnings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object containing any warnings returned.</p>"
                     }
                 }
             },
@@ -11768,6 +11780,20 @@
                 }
             }
         },
+        "com.amazonaws.cloudformation#TemplateSummaryConfig": {
+            "type": "structure",
+            "members": {
+                "TreatUnrecognizedResourceTypesAsWarnings": {
+                    "target": "com.amazonaws.cloudformation#TreatUnrecognizedResourceTypesAsWarnings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If set to <code>True</code>, any unrecognized resource types generate warnings and not an error. Any\n   unrecognized resource types are returned in the <code>Warnings</code> output parameter.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Options for the <code>GetTemplateSummary</code> API action.</p>"
+            }
+        },
         "com.amazonaws.cloudformation#TemplateURL": {
             "type": "string",
             "traits": {
@@ -11928,6 +11954,9 @@
             "member": {
                 "target": "com.amazonaws.cloudformation#TransformName"
             }
+        },
+        "com.amazonaws.cloudformation#TreatUnrecognizedResourceTypesAsWarnings": {
+            "type": "boolean"
         },
         "com.amazonaws.cloudformation#Type": {
             "type": "string"
@@ -12967,6 +12996,20 @@
                         "smithy.api#enumValue": "PRIVATE"
                     }
                 }
+            }
+        },
+        "com.amazonaws.cloudformation#Warnings": {
+            "type": "structure",
+            "members": {
+                "UnrecognizedResourceTypes": {
+                    "target": "com.amazonaws.cloudformation#ResourceTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of all of the unrecognized resource types. This is only returned if the\n   <code>TemplateSummaryConfig</code> parameter has the <code>TreatUnrecognizedResourceTypesAsWarning</code>\n   configuration set to <code>True</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains any warnings returned by the <code>GetTemplateSummary</code> API action.</p>"
             }
         }
     }
