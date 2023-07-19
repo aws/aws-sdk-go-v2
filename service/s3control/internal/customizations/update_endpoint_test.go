@@ -170,7 +170,7 @@ func TestEndpointWithARN(t *testing.T) {
 			options: s3control.Options{
 				Region: "us-west-2",
 			},
-			expectedErr: "client region does not match provided ARN region",
+			expectedErr: "Invalid configuration: region from ARN `us-east-1` does not match client region `us-west-2` and UseArnRegion is `false`",
 		},
 		"Outpost AccessPoint other partition": {
 			accessPoint: "arn:aws-cn:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
@@ -178,7 +178,7 @@ func TestEndpointWithARN(t *testing.T) {
 				Region:       "us-west-2",
 				UseARNRegion: true,
 			},
-			expectedErr: "ConfigurationError : client partition does not match provided ARN partition",
+			expectedErr: "Client was configured for partition `aws` but ARN has `aws-cn`",
 		},
 		"Outpost AccessPoint us-gov region": {
 			accessPoint: "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
@@ -305,21 +305,21 @@ func TestEndpointWithARN(t *testing.T) {
 				UseARNRegion: true,
 				UseDualstack: true,
 			},
-			expectedErr: "ConfigurationError : client configured for S3 Dual-stack but is not supported with resource ARN",
+			expectedErr: "Invalid configuration: Outpost Access Points do not support dual-stack",
 		},
 		"Invalid outpost resource format": {
 			bucket: "arn:aws:s3-outposts:us-west-2:123456789012:outpost",
 			options: s3control.Options{
 				Region: "us-west-2",
 			},
-			expectedErr: "outpost resource-id not set",
+			expectedErr: "Invalid ARN: The Outpost Id was not set",
 		},
 		"Missing access point for outpost resource": {
 			bucket: "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456",
 			options: s3control.Options{
 				Region: "us-west-2",
 			},
-			expectedErr: "incomplete outpost resource type",
+			expectedErr: "Invalid ARN: Expected a 4-component resource",
 		},
 		"access point": {
 			accessPoint: "myaccesspoint",
@@ -343,7 +343,7 @@ func TestEndpointWithARN(t *testing.T) {
 			options: s3control.Options{
 				Region: "us-west-2",
 			},
-			expectedErr: "invalid Amazon s3-outposts ARN",
+			expectedErr: "Invalid ARN: Expected a 4-component resource",
 		},
 		"Outpost Bucket with no S3UseARNRegion flag set": {
 			bucket: "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket",
@@ -373,7 +373,7 @@ func TestEndpointWithARN(t *testing.T) {
 			options: s3control.Options{
 				Region: "us-west-2",
 			},
-			expectedErr: "client region does not match provided ARN region",
+			expectedErr: "Invalid configuration: region from ARN `us-east-1` does not match client region `us-west-2` and UseArnRegion is `false`",
 		},
 		"Outpost Bucket other partition": {
 			bucket: "arn:aws-cn:s3-outposts:cn-north-1:123456789012:outpost:op-01234567890123456:bucket:mybucket",
@@ -381,7 +381,7 @@ func TestEndpointWithARN(t *testing.T) {
 				Region:       "us-west-2",
 				UseARNRegion: true,
 			},
-			expectedErr: "ConfigurationError : client partition does not match provided ARN partition",
+			expectedErr: "Client was configured for partition `aws` but ARN has `aws-cn`",
 		},
 		"Outpost Bucket us-gov region": {
 			bucket: "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket",
@@ -403,14 +403,14 @@ func TestEndpointWithARN(t *testing.T) {
 					UseFIPSEndpoint: aws.FIPSEndpointStateEnabled,
 				},
 			},
-			expectedErr: "ConfigurationError : client region does not match provided ARN region",
+			expectedErr: "Invalid configuration: region from ARN `us-gov-east-1` does not match client region `us-gov-west-1` and UseArnRegion is `false`",
 		},
 		"Outpost Bucket client FIPS (ResolvedRegion), cross-region ARN": {
 			bucket: "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket",
 			options: s3control.Options{
 				Region: "us-gov-west-1-fips",
 			},
-			expectedErr: "ConfigurationError : client region does not match provided ARN region",
+			expectedErr: "Invalid configuration: region from ARN `us-gov-east-1` does not match client region `us-gov-west-1` and UseArnRegion is `false`",
 		},
 		"Outpost Bucket client FIPS with non cross-region ARN region": {
 			bucket: "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket",
@@ -445,21 +445,21 @@ func TestEndpointWithARN(t *testing.T) {
 				Region:       "us-west-2",
 				UseDualstack: true,
 			},
-			expectedErr: "ConfigurationError : client configured for S3 Dual-stack but is not supported with resource ARN",
+			expectedErr: "Invalid configuration: Outpost buckets do not support dual-stack",
 		},
 		"Missing bucket id": {
 			bucket: "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket",
 			options: s3control.Options{
 				Region: "us-west-2",
 			},
-			expectedErr: "invalid Amazon s3-outposts ARN",
+			expectedErr: "Invalid ARN: expected a bucket name",
 		},
 		"Invalid ARN": {
 			bucket: "arn:aws:s3-outposts:us-west-2:123456789012:bucket:mybucket",
 			options: s3control.Options{
 				Region: "us-west-2",
 			},
-			expectedErr: "invalid Amazon s3-outposts ARN, unknown resource type",
+			expectedErr: "Invalid ARN: Expected a 4-component resource",
 		},
 		"Invalid Outpost Bucket ARN with FIPS pseudo-region (prefix)": {
 			bucket: "arn:aws:s3-outposts:fips-us-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket",
@@ -478,7 +478,7 @@ func TestEndpointWithARN(t *testing.T) {
 			expectedErr: "FIPS region not allowed in ARN",
 		},
 		"Invalid Outpost AccessPoint ARN with FIPS pseudo-region (prefix)": {
-			bucket: "arn:aws-us-gov:s3-outposts:fips-us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+			accessPoint: "arn:aws-us-gov:s3-outposts:fips-us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
 			options: s3control.Options{
 				Region:       "us-west-2",
 				UseARNRegion: true,
@@ -486,7 +486,7 @@ func TestEndpointWithARN(t *testing.T) {
 			expectedErr: "FIPS region not allowed in ARN",
 		},
 		"Invalid Outpost AccessPoint ARN with FIPS pseudo-region (suffix)": {
-			bucket: "arn:aws-us-gov:s3-outposts:us-east-1-fips:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+			accessPoint: "arn:aws-us-gov:s3-outposts:us-east-1-fips:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
 			options: s3control.Options{
 				Region:       "us-west-2",
 				UseARNRegion: true,
@@ -760,7 +760,7 @@ func TestCustomEndpoint_SpecialOperations(t *testing.T) {
 						})
 				})
 			},
-			expectedErr: "invalid Amazon s3 ARN, unknown resource type",
+			expectedErr: "Endpoint resolution failed. Invalid operation or environment input",
 		},
 		"CreateAccessPoint outpost bucket arn": {
 			options: s3control.Options{

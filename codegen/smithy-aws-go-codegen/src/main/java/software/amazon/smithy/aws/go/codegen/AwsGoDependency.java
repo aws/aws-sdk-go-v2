@@ -55,6 +55,9 @@ public class AwsGoDependency {
             null, Versions.SERVICE_INTERNAL_CHECKSUM, "internalChecksum");
     public static final GoDependency INTERNAL_SIGV4A = awsModuleDep("internal/v4a",
             null, Versions.INTERNAL_SIGV4A, "v4a");
+    public static final GoDependency S3_INTERNAL_ARN = aws("service/internal/s3shared/arn", "s3arn");
+    public static final GoDependency AWS_ARN = aws("aws/arn", "awsarn");
+
 
     public static final GoDependency REGEXP = SmithyGoDependency.stdlib("regexp");
 

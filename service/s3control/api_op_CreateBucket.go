@@ -171,6 +171,9 @@ func (c *Client) addOperationCreateBucketMiddlewares(stack *middleware.Stack, op
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = s3controlcust.AddUpdateOutpostARN(stack); err != nil {
+		return err
+	}
 	if err = smithyhttp.AddContentChecksumMiddleware(stack); err != nil {
 		return err
 	}
@@ -204,6 +207,18 @@ func (c *Client) addOperationCreateBucketMiddlewares(stack *middleware.Stack, op
 	if err = addEndpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
+	return nil
+}
+
+func (m *CreateBucketInput) GetARNMember() (*string, bool) {
+	if m.Bucket == nil {
+		return nil, false
+	}
+	return m.Bucket, true
+}
+
+func (m *CreateBucketInput) SetARNMember(v string) error {
+	m.Bucket = &v
 	return nil
 }
 
@@ -301,6 +316,8 @@ func (m *opCreateBucketResolveEndpointMiddleware) HandleSerialize(ctx context.Co
 			resolvedEndpoint.Headers.Get(k),
 		)
 	}
+
+	ctx = smithyhttp.DisableEndpointHostPrefix(ctx, true)
 
 	authSchemes, err := internalauth.GetAuthenticationSchemes(&resolvedEndpoint.Properties)
 	if err != nil {

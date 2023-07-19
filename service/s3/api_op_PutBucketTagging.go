@@ -318,6 +318,8 @@ func (m *opPutBucketTaggingResolveEndpointMiddleware) HandleSerialize(ctx contex
 		)
 	}
 
+	ctx = smithyhttp.DisableEndpointHostPrefix(ctx, true)
+
 	authSchemes, err := internalauth.GetAuthenticationSchemes(&resolvedEndpoint.Properties)
 	if err != nil {
 		var nfe *internalauth.NoAuthenticationSchemesFoundError
