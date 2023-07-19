@@ -1,3 +1,7 @@
+# v1.105.1 (2023-07-19)
+
+* **Documentation**: Amazon EC2 documentation updates.
+
 # v1.105.0 (2023-07-17)
 
 * **Feature**: Add Nitro TPM support on DescribeInstanceTypes

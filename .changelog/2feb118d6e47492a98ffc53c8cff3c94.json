@@ -1,8 +1,0 @@
-{
-    "id": "2feb118d-6e47-492a-98ff-c53c8cff3c94",
-    "type": "feature",
-    "description": "SDK and documentation updates for GetTemplateSummary API (unrecognized resources)",
-    "modules": [
-        "service/cloudformation"
-    ]
-}

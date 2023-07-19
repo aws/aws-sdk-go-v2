@@ -1,3 +1,7 @@
+# v1.19.0 (2023-07-19)
+
+* **Feature**: This release adds support for securely sharing with AWS service principals.
+
 # v1.18.5 (2023-07-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.31.0 (2023-07-19)
+
+* **Feature**: SDK and documentation updates for GetTemplateSummary API (unrecognized resources)
+
 # v1.30.1 (2023-07-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

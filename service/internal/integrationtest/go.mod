@@ -11,7 +11,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/athena v1.30.4
 	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.28.10
 	github.com/aws/aws-sdk-go-v2/service/batch v1.24.1
-	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.30.1
+	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.31.0
 	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.26.9
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.14.13
 	github.com/aws/aws-sdk-go-v2/service/cloudsearch v1.14.12
@@ -31,7 +31,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.17.4
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.22.0
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.20.1
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.105.0
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.105.1
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.18.14
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.28.1
 	github.com/aws/aws-sdk-go-v2/service/efs v1.20.4
@@ -83,7 +83,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.9.14
 	github.com/aws/aws-sdk-go-v2/service/waf v1.12.13
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.13.16
-	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.35.2
+	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.36.0
 	github.com/aws/aws-sdk-go-v2/service/workspaces v1.28.16
 	github.com/aws/smithy-go v1.13.5
 	github.com/google/go-cmp v0.5.8

@@ -1,3 +1,22 @@
+# Release (2023-07-19)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.31.0](service/cloudformation/CHANGELOG.md#v1310-2023-07-19)
+  * **Feature**: SDK and documentation updates for GetTemplateSummary API (unrecognized resources)
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.105.1](service/ec2/CHANGELOG.md#v11051-2023-07-19)
+  * **Documentation**: Amazon EC2 documentation updates.
+* `github.com/aws/aws-sdk-go-v2/service/grafana`: [v1.14.0](service/grafana/CHANGELOG.md#v1140-2023-07-19)
+  * **Feature**: Amazon Managed Grafana now supports grafanaVersion update for existing workspaces with UpdateWorkspaceConfiguration API. DescribeWorkspaceConfiguration API additionally returns grafanaVersion. A new ListVersions API lists available versions or, if given a workspaceId, the versions it can upgrade to.
+* `github.com/aws/aws-sdk-go-v2/service/medicalimaging`: [v1.0.0](service/medicalimaging/CHANGELOG.md#v100-2023-07-19)
+  * **Release**: New AWS service client module
+  * **Feature**: General Availability (GA) release of AWS Health Imaging, enabling customers to store, transform, and analyze medical imaging data at petabyte-scale.
+* `github.com/aws/aws-sdk-go-v2/service/ram`: [v1.19.0](service/ram/CHANGELOG.md#v1190-2023-07-19)
+  * **Feature**: This release adds support for securely sharing with AWS service principals.
+* `github.com/aws/aws-sdk-go-v2/service/ssmsap`: [v1.3.0](service/ssmsap/CHANGELOG.md#v130-2023-07-19)
+  * **Feature**: Added support for SAP Hana High Availability discovery (primary and secondary nodes) and Backint agent installation with SSM for SAP.
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.36.0](service/wafv2/CHANGELOG.md#v1360-2023-07-19)
+  * **Feature**: Added the URI path to the custom aggregation keys that you can specify for a rate-based rule.
+
 # Release (2023-07-18)
 
 ## Module Highlights

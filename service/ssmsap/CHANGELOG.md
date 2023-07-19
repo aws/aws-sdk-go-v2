@@ -1,3 +1,7 @@
+# v1.3.0 (2023-07-19)
+
+* **Feature**: Added support for SAP Hana High Availability discovery (primary and secondary nodes) and Backint agent installation with SSM for SAP.
+
 # v1.2.13 (2023-07-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

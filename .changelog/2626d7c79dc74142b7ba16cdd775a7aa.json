@@ -1,8 +1,0 @@
-{
-    "id": "2626d7c7-9dc7-4142-b7ba-16cdd775a7aa",
-    "type": "feature",
-    "description": "Added the URI path to the custom aggregation keys that you can specify for a rate-based rule.",
-    "modules": [
-        "service/wafv2"
-    ]
-}
