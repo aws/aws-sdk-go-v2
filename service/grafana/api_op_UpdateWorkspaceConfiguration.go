@@ -43,6 +43,12 @@ type UpdateWorkspaceConfigurationInput struct {
 	// This member is required.
 	WorkspaceId *string
 
+	// Specifies the version of Grafana to support in the new workspace. Can only be
+	// used to upgrade (for example, from 8.4 to 9.4), not downgrade (for example, from
+	// 9.4 to 8.4). To know what versions are available to upgrade to for a specific
+	// workspace, see the ListVersions operation.
+	GrafanaVersion *string
+
 	noSmithyDocumentSerde
 }
 

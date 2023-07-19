@@ -62,7 +62,7 @@ type GetResourceShareAssociationsInput struct {
 	// Specifies the ID of the principal whose resource shares you want to retrieve.
 	// This can be an Amazon Web Services account ID, an organization ID, an
 	// organizational unit ID, or the Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of an individual IAM user or role. You cannot specify this parameter if the
+	// of an individual IAM role or user. You cannot specify this parameter if the
 	// association type is RESOURCE .
 	Principal *string
 

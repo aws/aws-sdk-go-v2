@@ -15,9 +15,9 @@ import (
 // virtual private gateway in a VPC. After the operation completes, the subnet or
 // gateway uses the routes in the new route table. For more information about route
 // tables, see Route tables (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html)
-// in the Amazon Virtual Private Cloud User Guide. You can also use this operation
-// to change which table is the main route table in the VPC. Specify the main route
-// table's association ID and the route table ID of the new main route table.
+// in the Amazon VPC User Guide. You can also use this operation to change which
+// table is the main route table in the VPC. Specify the main route table's
+// association ID and the route table ID of the new main route table.
 func (c *Client) ReplaceRouteTableAssociation(ctx context.Context, params *ReplaceRouteTableAssociationInput, optFns ...func(*Options)) (*ReplaceRouteTableAssociationOutput, error) {
 	if params == nil {
 		params = &ReplaceRouteTableAssociationInput{}

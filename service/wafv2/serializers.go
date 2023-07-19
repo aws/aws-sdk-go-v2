@@ -4306,6 +4306,13 @@ func awsAwsjson11_serializeDocumentRateBasedStatementCustomKey(v *types.RateBase
 		}
 	}
 
+	if v.UriPath != nil {
+		ok := object.Key("UriPath")
+		if err := awsAwsjson11_serializeDocumentRateLimitUriPath(v.UriPath, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -4413,6 +4420,20 @@ func awsAwsjson11_serializeDocumentRateLimitQueryArgument(v *types.RateLimitQuer
 }
 
 func awsAwsjson11_serializeDocumentRateLimitQueryString(v *types.RateLimitQueryString, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TextTransformations != nil {
+		ok := object.Key("TextTransformations")
+		if err := awsAwsjson11_serializeDocumentTextTransformations(v.TextTransformations, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRateLimitUriPath(v *types.RateLimitUriPath, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

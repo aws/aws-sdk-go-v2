@@ -14,7 +14,7 @@ import (
 
 // Describes one or more of your DHCP options sets. For more information, see DHCP
 // options sets (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html)
-// in the Amazon Virtual Private Cloud User Guide.
+// in the Amazon VPC User Guide.
 func (c *Client) DescribeDhcpOptions(ctx context.Context, params *DescribeDhcpOptionsInput, optFns ...func(*Options)) (*DescribeDhcpOptionsOutput, error) {
 	if params == nil {
 		params = &DescribeDhcpOptionsInput{}
@@ -42,7 +42,7 @@ type DescribeDhcpOptionsInput struct {
 	// UnauthorizedOperation .
 	DryRun *bool
 
-	// One or more filters.
+	// The filters.
 	//   - dhcp-options-id - The ID of a DHCP options set.
 	//   - key - The key for one of the options (for example, domain-name ).
 	//   - value - The value for one of the options.

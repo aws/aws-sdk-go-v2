@@ -52,8 +52,8 @@ type ModifyInstanceMetadataOptionsInput struct {
 	// value of disabled , you cannot access your instance metadata.
 	HttpEndpoint types.InstanceMetadataEndpointState
 
-	// Enables or disables the IPv6 endpoint for the instance metadata service. This
-	// setting applies only if you have enabled the HTTP metadata endpoint.
+	// Enables or disables the IPv6 endpoint for the instance metadata service.
+	// Applies only if you enabled the HTTP metadata endpoint.
 	HttpProtocolIpv6 types.InstanceMetadataProtocolState
 
 	// The desired HTTP PUT response hop limit for instance metadata requests. The

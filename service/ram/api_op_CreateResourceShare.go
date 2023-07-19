@@ -83,6 +83,10 @@ type CreateResourceShareInput struct {
 	// resource share.
 	ResourceArns []string
 
+	// Specifies from which source accounts the service principal has access to the
+	// resources in this resource share.
+	Sources []string
+
 	// Specifies one or more tags to attach to the resource share itself. It doesn't
 	// attach the tags to the resources associated with the resource share.
 	Tags []types.Tag

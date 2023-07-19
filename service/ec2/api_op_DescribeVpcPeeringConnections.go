@@ -42,7 +42,7 @@ type DescribeVpcPeeringConnectionsInput struct {
 	// UnauthorizedOperation .
 	DryRun *bool
 
-	// One or more filters.
+	// The filters.
 	//   - accepter-vpc-info.cidr-block - The IPv4 CIDR block of the accepter VPC.
 	//   - accepter-vpc-info.owner-id - The ID of the Amazon Web Services account that
 	//   owns the accepter VPC.
@@ -76,7 +76,7 @@ type DescribeVpcPeeringConnectionsInput struct {
 	// the end of the items returned by the previous request.
 	NextToken *string
 
-	// One or more VPC peering connection IDs. Default: Describes all your VPC peering
+	// The IDs of the VPC peering connections. Default: Describes all your VPC peering
 	// connections.
 	VpcPeeringConnectionIds []string
 

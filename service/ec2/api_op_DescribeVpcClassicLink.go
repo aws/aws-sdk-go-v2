@@ -11,10 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the ClassicLink status of one or more VPCs. We are retiring
-// EC2-Classic. We recommend that you migrate from EC2-Classic to a VPC. For more
-// information, see Migrate from EC2-Classic to a VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html)
-// in the Amazon Elastic Compute Cloud User Guide.
+// This action is deprecated. Describes the ClassicLink status of the specified
+// VPCs.
 func (c *Client) DescribeVpcClassicLink(ctx context.Context, params *DescribeVpcClassicLinkInput, optFns ...func(*Options)) (*DescribeVpcClassicLinkOutput, error) {
 	if params == nil {
 		params = &DescribeVpcClassicLinkInput{}
@@ -38,7 +36,7 @@ type DescribeVpcClassicLinkInput struct {
 	// UnauthorizedOperation .
 	DryRun *bool
 
-	// One or more filters.
+	// The filters.
 	//   - is-classic-link-enabled - Whether the VPC is enabled for ClassicLink ( true
 	//   | false ).
 	//   - tag : - The key/value combination of a tag assigned to the resource. Use the
@@ -49,7 +47,7 @@ type DescribeVpcClassicLinkInput struct {
 	//   all resources assigned a tag with a specific key, regardless of the tag value.
 	Filters []types.Filter
 
-	// One or more VPCs for which you want to describe the ClassicLink status.
+	// The VPCs for which you want to describe the ClassicLink status.
 	VpcIds []string
 
 	noSmithyDocumentSerde
@@ -57,7 +55,7 @@ type DescribeVpcClassicLinkInput struct {
 
 type DescribeVpcClassicLinkOutput struct {
 
-	// The ClassicLink status of one or more VPCs.
+	// The ClassicLink status of the VPCs.
 	Vpcs []types.VpcClassicLink
 
 	// Metadata pertaining to the operation's result.

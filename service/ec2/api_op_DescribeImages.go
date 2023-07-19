@@ -64,7 +64,8 @@ type DescribeImagesInput struct {
 	ExecutableUsers []string
 
 	// The filters.
-	//   - architecture - The image architecture ( i386 | x86_64 | arm64 ).
+	//   - architecture - The image architecture ( i386 | x86_64 | arm64 | x86_64_mac |
+	//   arm64_mac ).
 	//   - block-device-mapping.delete-on-termination - A Boolean value that indicates
 	//   whether the Amazon EBS volume is deleted on instance termination.
 	//   - block-device-mapping.device-name - The device name specified in the block

@@ -16,9 +16,8 @@ import (
 	"time"
 )
 
-// Describes one or more of your subnets. For more information, see Your VPC and
-// subnets (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html) in
-// the Amazon Virtual Private Cloud User Guide.
+// Describes one or more of your subnets. For more information, see Subnets (https://docs.aws.amazon.com/vpc/latest/userguide/configure-subnets.html)
+// in the Amazon VPC User Guide.
 func (c *Client) DescribeSubnets(ctx context.Context, params *DescribeSubnetsInput, optFns ...func(*Options)) (*DescribeSubnetsOutput, error) {
 	if params == nil {
 		params = &DescribeSubnetsInput{}
@@ -42,7 +41,7 @@ type DescribeSubnetsInput struct {
 	// UnauthorizedOperation .
 	DryRun *bool
 
-	// One or more filters.
+	// The filters.
 	//   - availability-zone - The Availability Zone for the subnet. You can also use
 	//   availabilityZone as the filter name.
 	//   - availability-zone-id - The ID of the Availability Zone for the subnet. You
@@ -111,7 +110,7 @@ type DescribeSubnetsInput struct {
 	// the end of the items returned by the previous request.
 	NextToken *string
 
-	// One or more subnet IDs. Default: Describes all your subnets.
+	// The IDs of the subnets. Default: Describes all your subnets.
 	SubnetIds []string
 
 	noSmithyDocumentSerde

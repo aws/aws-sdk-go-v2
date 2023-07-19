@@ -71,6 +71,10 @@ type AssociateResourceShareInput struct {
 	// only principals.
 	ResourceArns []string
 
+	// Specifies from which source accounts the service principal has access to the
+	// resources in this resource share.
+	Sources []string
+
 	noSmithyDocumentSerde
 }
 

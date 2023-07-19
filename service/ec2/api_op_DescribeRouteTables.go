@@ -17,7 +17,7 @@ import (
 // route table, it is implicitly associated with the main route table. This command
 // does not return the subnet ID for implicit associations. For more information,
 // see Route tables (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html)
-// in the Amazon Virtual Private Cloud User Guide.
+// in the Amazon VPC User Guide.
 func (c *Client) DescribeRouteTables(ctx context.Context, params *DescribeRouteTablesInput, optFns ...func(*Options)) (*DescribeRouteTablesOutput, error) {
 	if params == nil {
 		params = &DescribeRouteTablesInput{}
@@ -41,7 +41,7 @@ type DescribeRouteTablesInput struct {
 	// UnauthorizedOperation .
 	DryRun *bool
 
-	// One or more filters.
+	// The filters.
 	//   - association.route-table-association-id - The ID of an association ID for the
 	//   route table.
 	//   - association.route-table-id - The ID of the route table involved in the
@@ -95,7 +95,7 @@ type DescribeRouteTablesInput struct {
 	// the end of the items returned by the previous request.
 	NextToken *string
 
-	// One or more route table IDs. Default: Describes all your route tables.
+	// The IDs of the route tables. Default: Describes all your route tables.
 	RouteTableIds []string
 
 	noSmithyDocumentSerde

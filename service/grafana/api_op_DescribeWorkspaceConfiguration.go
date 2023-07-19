@@ -48,6 +48,9 @@ type DescribeWorkspaceConfigurationOutput struct {
 	// This member is required.
 	Configuration *string
 
+	// The supported Grafana version for the workspace.
+	GrafanaVersion *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

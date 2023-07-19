@@ -36,10 +36,10 @@ type DescribeEgressOnlyInternetGatewaysInput struct {
 	// UnauthorizedOperation .
 	DryRun *bool
 
-	// One or more egress-only internet gateway IDs.
+	// The IDs of the egress-only internet gateways.
 	EgressOnlyInternetGatewayIds []string
 
-	// One or more filters.
+	// The filters.
 	//   - tag : - The key/value combination of a tag assigned to the resource. Use the
 	//   tag key in the filter name and the tag value as the filter value. For example,
 	//   to find all resources that have a tag with the key Owner and the value TeamA ,

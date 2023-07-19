@@ -480,8 +480,8 @@ type Condition struct {
 
 // The filter to use to identify the subset of cookies to inspect in a web
 // request. You must specify exactly one setting: either All , IncludedCookies , or
-// ExcludedCookies . Example JSON: "MatchPattern": { "IncludedCookies":
-// {"KeyToInclude1", "KeyToInclude2", "KeyToInclude3"} }
+// ExcludedCookies . Example JSON: "MatchPattern": { "IncludedCookies": [
+// "session-id-time", "session-id" ] }
 type CookieMatchPattern struct {
 
 	// Inspect all cookies.
@@ -508,8 +508,8 @@ type Cookies struct {
 
 	// The filter to use to identify the subset of cookies to inspect in a web
 	// request. You must specify exactly one setting: either All , IncludedCookies , or
-	// ExcludedCookies . Example JSON: "MatchPattern": { "IncludedCookies":
-	// {"KeyToInclude1", "KeyToInclude2", "KeyToInclude3"} }
+	// ExcludedCookies . Example JSON: "MatchPattern": { "IncludedCookies": [
+	// "session-id-time", "session-id" ] }
 	//
 	// This member is required.
 	MatchPattern *CookieMatchPattern
@@ -940,8 +940,8 @@ type GeoMatchStatement struct {
 
 // The filter to use to identify the subset of headers to inspect in a web
 // request. You must specify exactly one setting: either All , IncludedHeaders , or
-// ExcludedHeaders . Example JSON: "MatchPattern": { "ExcludedHeaders":
-// {"KeyToExclude1", "KeyToExclude2"} }
+// ExcludedHeaders . Example JSON: "MatchPattern": { "ExcludedHeaders": [
+// "KeyToExclude1", "KeyToExclude2" ] }
 type HeaderMatchPattern struct {
 
 	// Inspect all headers.
@@ -993,8 +993,8 @@ type Headers struct {
 
 	// The filter to use to identify the subset of headers to inspect in a web
 	// request. You must specify exactly one setting: either All , IncludedHeaders , or
-	// ExcludedHeaders . Example JSON: "MatchPattern": { "ExcludedHeaders":
-	// {"KeyToExclude1", "KeyToExclude2"} }
+	// ExcludedHeaders . Example JSON: "MatchPattern": { "ExcludedHeaders": [
+	// "KeyToExclude1", "KeyToExclude2" ] }
 	//
 	// This member is required.
 	MatchPattern *HeaderMatchPattern
@@ -2202,6 +2202,11 @@ type RateBasedStatementCustomKey struct {
 	// your custom key, then each string fully defines an aggregation instance.
 	QueryString *RateLimitQueryString
 
+	// Use the request's URI path as an aggregate key. Each distinct URI path
+	// contributes to the aggregation instance. If you use just the URI path as your
+	// custom key, then each URI path fully defines an aggregation instance.
+	UriPath *RateLimitUriPath
+
 	noSmithyDocumentSerde
 }
 
@@ -2364,6 +2369,27 @@ type RateLimitQueryArgument struct {
 // the query string as your custom key, then each string fully defines an
 // aggregation instance.
 type RateLimitQueryString struct {
+
+	// Text transformations eliminate some of the unusual formatting that attackers
+	// use in web requests in an effort to bypass detection. Text transformations are
+	// used in rule match statements, to transform the FieldToMatch request component
+	// before inspecting it, and they're used in rate-based rule statements, to
+	// transform request components before using them as custom aggregation keys. If
+	// you specify one or more transformations to apply, WAF performs all
+	// transformations on the specified content, starting from the lowest priority
+	// setting, and then uses the component contents.
+	//
+	// This member is required.
+	TextTransformations []TextTransformation
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the request's URI path as an aggregate key for a rate-based rule.
+// Each distinct URI path contributes to the aggregation instance. If you use just
+// the URI path as your custom key, then each URI path fully defines an aggregation
+// instance.
+type RateLimitUriPath struct {
 
 	// Text transformations eliminate some of the unusual formatting that attackers
 	// use in web requests in an effort to bypass detection. Text transformations are

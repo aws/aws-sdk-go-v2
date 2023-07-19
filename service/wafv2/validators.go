@@ -2399,6 +2399,11 @@ func validateRateBasedStatementCustomKey(v *types.RateBasedStatementCustomKey) e
 			invalidParams.AddNested("LabelNamespace", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.UriPath != nil {
+		if err := validateRateLimitUriPath(v.UriPath); err != nil {
+			invalidParams.AddNested("UriPath", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2509,6 +2514,25 @@ func validateRateLimitQueryString(v *types.RateLimitQueryString) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RateLimitQueryString"}
+	if v.TextTransformations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TextTransformations"))
+	} else if v.TextTransformations != nil {
+		if err := validateTextTransformations(v.TextTransformations); err != nil {
+			invalidParams.AddNested("TextTransformations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRateLimitUriPath(v *types.RateLimitUriPath) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RateLimitUriPath"}
 	if v.TextTransformations == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TextTransformations"))
 	} else if v.TextTransformations != nil {

@@ -18848,6 +18848,48 @@ func awsAwsquery_deserializeDocumentUnprocessedTypeConfigurationsUnwrapped(v *[]
 	*v = sv
 	return nil
 }
+func awsAwsquery_deserializeDocumentWarnings(v **types.Warnings, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.Warnings
+	if *v == nil {
+		sv = &types.Warnings{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("UnrecognizedResourceTypes", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentResourceTypes(&sv.UnrecognizedResourceTypes, nodeDecoder); err != nil {
+				return err
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsquery_deserializeOpDocumentActivateOrganizationsAccessOutput(v **ActivateOrganizationsAccessOutput, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -21453,6 +21495,12 @@ func awsAwsquery_deserializeOpDocumentGetTemplateSummaryOutput(v **GetTemplateSu
 			{
 				xtv := string(val)
 				sv.Version = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("Warnings", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentWarnings(&sv.Warnings, nodeDecoder); err != nil {
+				return err
 			}
 
 		default:

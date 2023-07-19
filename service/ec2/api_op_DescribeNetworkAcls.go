@@ -13,8 +13,8 @@ import (
 )
 
 // Describes one or more of your network ACLs. For more information, see Network
-// ACLs (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ACLs.html) in the
-// Amazon Virtual Private Cloud User Guide.
+// ACLs (https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html) in
+// the Amazon VPC User Guide.
 func (c *Client) DescribeNetworkAcls(ctx context.Context, params *DescribeNetworkAclsInput, optFns ...func(*Options)) (*DescribeNetworkAclsOutput, error) {
 	if params == nil {
 		params = &DescribeNetworkAclsInput{}
@@ -38,7 +38,7 @@ type DescribeNetworkAclsInput struct {
 	// UnauthorizedOperation .
 	DryRun *bool
 
-	// One or more filters.
+	// The filters.
 	//   - association.association-id - The ID of an association ID for the ACL.
 	//   - association.network-acl-id - The ID of the network ACL involved in the
 	//   association.
@@ -75,7 +75,7 @@ type DescribeNetworkAclsInput struct {
 	// .
 	MaxResults *int32
 
-	// One or more network ACL IDs. Default: Describes all your network ACLs.
+	// The IDs of the network ACLs. Default: Describes all your network ACLs.
 	NetworkAclIds []string
 
 	// The token returned from a previous paginated request. Pagination continues from

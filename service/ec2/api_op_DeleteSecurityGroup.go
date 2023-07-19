@@ -11,12 +11,8 @@ import (
 )
 
 // Deletes a security group. If you attempt to delete a security group that is
-// associated with an instance, or is referenced by another security group, the
-// operation fails with InvalidGroup.InUse in EC2-Classic or DependencyViolation
-// in EC2-VPC. We are retiring EC2-Classic. We recommend that you migrate from
-// EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to a
-// VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html) in
-// the Amazon Elastic Compute Cloud User Guide.
+// associated with an instance or network interface or is referenced by another
+// security group, the operation fails with DependencyViolation .
 func (c *Client) DeleteSecurityGroup(ctx context.Context, params *DeleteSecurityGroupInput, optFns ...func(*Options)) (*DeleteSecurityGroupOutput, error) {
 	if params == nil {
 		params = &DeleteSecurityGroupInput{}
@@ -40,12 +36,12 @@ type DeleteSecurityGroupInput struct {
 	// UnauthorizedOperation .
 	DryRun *bool
 
-	// The ID of the security group. Required for a nondefault VPC.
+	// The ID of the security group.
 	GroupId *string
 
-	// [EC2-Classic, default VPC] The name of the security group. You can specify
-	// either the security group name or the security group ID. For security groups in
-	// a nondefault VPC, you must specify the security group ID.
+	// [Default VPC] The name of the security group. You can specify either the
+	// security group name or the security group ID. For security groups in a
+	// nondefault VPC, you must specify the security group ID.
 	GroupName *string
 
 	noSmithyDocumentSerde

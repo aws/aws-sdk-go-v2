@@ -1,0 +1,8 @@
+{
+    "id": "bdc5dbf6-adee-4f55-95df-70f8a61b1e68",
+    "type": "feature",
+    "description": "Amazon Managed Grafana now supports grafanaVersion update for existing workspaces with UpdateWorkspaceConfiguration API. DescribeWorkspaceConfiguration API additionally returns grafanaVersion. A new ListVersions API lists available versions or, if given a workspaceId, the versions it can upgrade to.",
+    "modules": [
+        "service/grafana"
+    ]
+}

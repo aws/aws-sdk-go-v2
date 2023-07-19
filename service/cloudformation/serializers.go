@@ -4888,6 +4888,18 @@ func awsAwsquery_serializeDocumentTags(v []types.Tag, value query.Value) error {
 	return nil
 }
 
+func awsAwsquery_serializeDocumentTemplateSummaryConfig(v *types.TemplateSummaryConfig, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.TreatUnrecognizedResourceTypesAsWarnings != nil {
+		objectKey := object.Key("TreatUnrecognizedResourceTypesAsWarnings")
+		objectKey.Boolean(*v.TreatUnrecognizedResourceTypesAsWarnings)
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeDocumentTypeConfigurationIdentifier(v *types.TypeConfigurationIdentifier, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -6104,6 +6116,13 @@ func awsAwsquery_serializeOpDocumentGetTemplateSummaryInput(v *GetTemplateSummar
 	if v.TemplateBody != nil {
 		objectKey := object.Key("TemplateBody")
 		objectKey.String(*v.TemplateBody)
+	}
+
+	if v.TemplateSummaryConfig != nil {
+		objectKey := object.Key("TemplateSummaryConfig")
+		if err := awsAwsquery_serializeDocumentTemplateSummaryConfig(v.TemplateSummaryConfig, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.TemplateURL != nil {

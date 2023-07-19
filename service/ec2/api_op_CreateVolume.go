@@ -42,7 +42,8 @@ func (c *Client) CreateVolume(ctx context.Context, params *CreateVolumeInput, op
 
 type CreateVolumeInput struct {
 
-	// The Availability Zone in which to create the volume.
+	// The ID of the Availability Zone in which to create the volume. For example,
+	// us-east-1a .
 	//
 	// This member is required.
 	AvailabilityZone *string

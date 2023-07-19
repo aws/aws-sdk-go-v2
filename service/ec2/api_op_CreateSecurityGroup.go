@@ -16,12 +16,9 @@ import (
 // Amazon EC2 security groups (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html)
 // in the Amazon Elastic Compute Cloud User Guide and Security groups for your VPC (https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html)
 // in the Amazon Virtual Private Cloud User Guide. When you create a security
-// group, you specify a friendly name of your choice. You can have a security group
-// for use in EC2-Classic with the same name as a security group for use in a VPC.
-// However, you can't have two security groups for use in EC2-Classic with the same
-// name or two security groups for use in a VPC with the same name. You have a
-// default security group for use in EC2-Classic and a default security group for
-// use in your VPC. If you don't specify a security group when you launch an
+// group, you specify a friendly name of your choice. You can't have two security
+// groups for the same VPC with the same name. You have a default security group
+// for use in your VPC. If you don't specify a security group when you launch an
 // instance, the instance is launched into the appropriate default security group.
 // A default security group includes a default rule that grants instances
 // unrestricted network access to each other. You can add or remove rules from your
@@ -29,9 +26,7 @@ import (
 // AuthorizeSecurityGroupEgress , RevokeSecurityGroupIngress , and
 // RevokeSecurityGroupEgress . For more information about VPC security group
 // limits, see Amazon VPC Limits (https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html)
-// . We are retiring EC2-Classic. We recommend that you migrate from EC2-Classic to
-// a VPC. For more information, see Migrate from EC2-Classic to a VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html)
-// in the Amazon Elastic Compute Cloud User Guide.
+// .
 func (c *Client) CreateSecurityGroup(ctx context.Context, params *CreateSecurityGroupInput, optFns ...func(*Options)) (*CreateSecurityGroupOutput, error) {
 	if params == nil {
 		params = &CreateSecurityGroupInput{}
@@ -50,15 +45,14 @@ func (c *Client) CreateSecurityGroup(ctx context.Context, params *CreateSecurity
 type CreateSecurityGroupInput struct {
 
 	// A description for the security group. Constraints: Up to 255 characters in
-	// length Constraints for EC2-Classic: ASCII characters Constraints for EC2-VPC:
-	// a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=&;{}!$*
+	// length Valid characters: a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=&;{}!$*
 	//
 	// This member is required.
 	Description *string
 
 	// The name of the security group. Constraints: Up to 255 characters in length.
-	// Cannot start with sg- . Constraints for EC2-Classic: ASCII characters
-	// Constraints for EC2-VPC: a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=&;{}!$*
+	// Cannot start with sg- . Valid characters: a-z, A-Z, 0-9, spaces, and
+	// ._-:/()#,@[]+=&;{}!$*
 	//
 	// This member is required.
 	GroupName *string
@@ -72,7 +66,7 @@ type CreateSecurityGroupInput struct {
 	// The tags to assign to the security group.
 	TagSpecifications []types.TagSpecification
 
-	// [EC2-VPC] The ID of the VPC. Required for EC2-VPC.
+	// The ID of the VPC. Required for a nondefault VPC.
 	VpcId *string
 
 	noSmithyDocumentSerde

@@ -171,6 +171,13 @@ func awsRestjson1_serializeOpDocumentAssociateResourceShareInput(v *AssociateRes
 		ok.String(*v.ResourceShareArn)
 	}
 
+	if v.Sources != nil {
+		ok := object.Key("sources")
+		if err := awsRestjson1_serializeDocumentSourceArnOrAccountList(v.Sources, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -526,6 +533,13 @@ func awsRestjson1_serializeOpDocumentCreateResourceShareInput(v *CreateResourceS
 		}
 	}
 
+	if v.Sources != nil {
+		ok := object.Key("sources")
+		if err := awsRestjson1_serializeDocumentSourceArnOrAccountList(v.Sources, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("tags")
 		if err := awsRestjson1_serializeDocumentTagList(v.Tags, ok); err != nil {
@@ -793,6 +807,13 @@ func awsRestjson1_serializeOpDocumentDisassociateResourceShareInput(v *Disassoci
 	if v.ResourceShareArn != nil {
 		ok := object.Key("resourceShareArn")
 		ok.String(*v.ResourceShareArn)
+	}
+
+	if v.Sources != nil {
+		ok := object.Key("sources")
+		if err := awsRestjson1_serializeDocumentSourceArnOrAccountList(v.Sources, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -2839,6 +2860,17 @@ func awsRestjson1_serializeDocumentResourceShareArnList(v []string, value smithy
 }
 
 func awsRestjson1_serializeDocumentResourceShareInvitationArnList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSourceArnOrAccountList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 

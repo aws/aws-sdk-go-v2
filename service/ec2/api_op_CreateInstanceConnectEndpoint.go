@@ -13,8 +13,8 @@ import (
 )
 
 // Creates an EC2 Instance Connect Endpoint. An EC2 Instance Connect Endpoint
-// allows you to connect to a resource, without requiring the resource to have a
-// public IPv4 address. For more information, see Connect to your resources
+// allows you to connect to an instance, without requiring the instance to have a
+// public IPv4 address. For more information, see Connect to your instances
 // without requiring a public IPv4 address using EC2 Instance Connect Endpoint (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Connect-using-EC2-Instance-Connect-Endpoint.html)
 // in the Amazon EC2 User Guide.
 func (c *Client) CreateInstanceConnectEndpoint(ctx context.Context, params *CreateInstanceConnectEndpointInput, optFns ...func(*Options)) (*CreateInstanceConnectEndpointOutput, error) {

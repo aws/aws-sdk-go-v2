@@ -13,17 +13,10 @@ import (
 
 // Creates a default VPC with a size /16 IPv4 CIDR block and a default subnet in
 // each Availability Zone. For more information about the components of a default
-// VPC, see Default VPC and default subnets (https://docs.aws.amazon.com/vpc/latest/userguide/default-vpc.html)
-// in the Amazon Virtual Private Cloud User Guide. You cannot specify the
-// components of the default VPC yourself. If you deleted your previous default
-// VPC, you can create a default VPC. You cannot have more than one default VPC per
-// Region. If your account supports EC2-Classic, you cannot use this action to
-// create a default VPC in a Region that supports EC2-Classic. If you want a
-// default VPC in a Region that supports EC2-Classic, see "I really want a default
-// VPC for my existing EC2 account. Is that possible?" in the Default VPCs FAQ (http://aws.amazon.com/vpc/faqs/#Default_VPCs)
-// . We are retiring EC2-Classic. We recommend that you migrate from EC2-Classic to
-// a VPC. For more information, see Migrate from EC2-Classic to a VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html)
-// in the Amazon Elastic Compute Cloud User Guide.
+// VPC, see Default VPCs (https://docs.aws.amazon.com/vpc/latest/userguide/default-vpc.html)
+// in the Amazon VPC User Guide. You cannot specify the components of the default
+// VPC yourself. If you deleted your previous default VPC, you can create a default
+// VPC. You cannot have more than one default VPC per Region.
 func (c *Client) CreateDefaultVpc(ctx context.Context, params *CreateDefaultVpcInput, optFns ...func(*Options)) (*CreateDefaultVpcOutput, error) {
 	if params == nil {
 		params = &CreateDefaultVpcInput{}

@@ -19,6 +19,9 @@ type Application struct {
 	// The components of the application.
 	Components []string
 
+	// The latest discovery result for the application.
+	DiscoveryStatus ApplicationDiscoveryStatus
+
 	// The ID of the application.
 	Id *string
 
@@ -77,11 +80,54 @@ type ApplicationSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the properties of the associated host.
+type AssociatedHost struct {
+
+	// The ID of the Amazon EC2 instance.
+	Ec2InstanceId *string
+
+	// The name of the host.
+	Hostname *string
+
+	// The version of the operating system.
+	OsVersion *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration parameters for AWS Backint Agent for SAP HANA. You can backup
+// your SAP HANA database with AWS Backup or Amazon S3.
+type BackintConfig struct {
+
+	// AWS service for your database backup.
+	//
+	// This member is required.
+	BackintMode BackintMode
+
+	//
+	//
+	// This member is required.
+	EnsureNoBackupInProcess *bool
+
+	noSmithyDocumentSerde
+}
+
 // The SAP component of your application.
 type Component struct {
 
 	// The ID of the application.
 	ApplicationId *string
+
+	// The Amazon Resource Name (ARN) of the component.
+	Arn *string
+
+	// The associated host of the component.
+	AssociatedHost *AssociatedHost
+
+	// The child components of a highly available environment. For example, in a
+	// highly available SAP on AWS workload, the child component consists of the
+	// primary and secondar instances.
+	ChildComponents []string
 
 	// The ID of the component.
 	ComponentId *string
@@ -92,14 +138,35 @@ type Component struct {
 	// The SAP HANA databases of the component.
 	Databases []string
 
+	// The SAP HANA version of the component.
+	HdbVersion *string
+
 	// The hosts of the component.
+	//
+	// Deprecated: This shape is no longer used. Please use AssociatedHost.
 	Hosts []Host
 
 	// The time at which the component was last updated.
 	LastUpdated *time.Time
 
+	// The parent component of a highly available environment. For example, in a
+	// highly available SAP on AWS workload, the parent component consists of the
+	// entire setup, including the child components.
+	ParentComponent *string
+
 	// The primary host of the component.
+	//
+	// Deprecated: This shape is no longer used. Please use AssociatedHost.
 	PrimaryHost *string
+
+	// Details of the SAP HANA system replication for the component.
+	Resilience *Resilience
+
+	// The hostname of the component.
+	SapHostname *string
+
+	// The kernel version of the component.
+	SapKernelVersion *string
 
 	// The status of the component.
 	Status ComponentStatus
@@ -112,6 +179,9 @@ type ComponentSummary struct {
 
 	// The ID of the application.
 	ApplicationId *string
+
+	// The Amazon Resource Name (ARN) of the component summary.
+	Arn *string
 
 	// The ID of the component.
 	ComponentId *string
@@ -215,6 +285,9 @@ type Filter struct {
 // Describes the properties of the Dedicated Host.
 type Host struct {
 
+	// The ID of Amazon EC2 instance.
+	EC2InstanceId *string
+
 	// The IP address of the Dedicated Host.
 	HostIp *string
 
@@ -226,6 +299,9 @@ type Host struct {
 
 	// The instance ID of the instance on the Dedicated Host.
 	InstanceId *string
+
+	// The version of the operating system.
+	OsVersion *string
 
 	noSmithyDocumentSerde
 }
@@ -265,6 +341,24 @@ type Operation struct {
 
 	// The type of the operation.
 	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// Details of the SAP HANA system replication for the instance.
+type Resilience struct {
+
+	// The cluster status of the component.
+	ClusterStatus ClusterStatus
+
+	// The operation mode of the component.
+	HsrOperationMode OperationMode
+
+	// The replication mode of the component.
+	HsrReplicationMode ReplicationMode
+
+	// The tier of the component.
+	HsrTier *string
 
 	noSmithyDocumentSerde
 }

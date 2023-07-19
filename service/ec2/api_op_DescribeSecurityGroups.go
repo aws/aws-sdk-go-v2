@@ -19,14 +19,7 @@ import (
 	"time"
 )
 
-// Describes the specified security groups or all of your security groups. A
-// security group is for use with instances either in the EC2-Classic platform or
-// in a specific VPC. For more information, see Amazon EC2 security groups (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html)
-// in the Amazon Elastic Compute Cloud User Guide and Security groups for your VPC (https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html)
-// in the Amazon Virtual Private Cloud User Guide. We are retiring EC2-Classic. We
-// recommend that you migrate from EC2-Classic to a VPC. For more information, see
-// Migrate from EC2-Classic to a VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html)
-// in the Amazon Elastic Compute Cloud User Guide.
+// Describes the specified security groups or all of your security groups.
 func (c *Client) DescribeSecurityGroups(ctx context.Context, params *DescribeSecurityGroupsInput, optFns ...func(*Options)) (*DescribeSecurityGroupsOutput, error) {
 	if params == nil {
 		params = &DescribeSecurityGroupsInput{}
@@ -106,10 +99,9 @@ type DescribeSecurityGroupsInput struct {
 	// VPC. Default: Describes all of your security groups.
 	GroupIds []string
 
-	// [EC2-Classic and default VPC only] The names of the security groups. You can
-	// specify either the security group name or the security group ID. For security
-	// groups in a nondefault VPC, use the group-name filter to describe security
-	// groups by name. Default: Describes all of your security groups.
+	// [Default VPC] The names of the security groups. You can specify either the
+	// security group name or the security group ID. Default: Describes all of your
+	// security groups.
 	GroupNames []string
 
 	// The maximum number of items to return for this request. To get the next page of

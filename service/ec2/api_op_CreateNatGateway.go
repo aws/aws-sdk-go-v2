@@ -23,7 +23,7 @@ import (
 // pool of allowlisted IPv4 addresses, preserving private IPv4 addresses, and
 // communicating between overlapping networks. For more information, see NAT
 // gateways (https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html)
-// in the Amazon Virtual Private Cloud User Guide.
+// in the Amazon VPC User Guide.
 func (c *Client) CreateNatGateway(ctx context.Context, params *CreateNatGatewayInput, optFns ...func(*Options)) (*CreateNatGatewayOutput, error) {
 	if params == nil {
 		params = &CreateNatGatewayInput{}
@@ -71,20 +71,19 @@ type CreateNatGatewayInput struct {
 	// address, a private IPv4 address will be automatically assigned.
 	PrivateIpAddress *string
 
-	// Secondary EIP allocation IDs. For more information about secondary addresses,
-	// see Create a NAT gateway (https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating)
-	// in the Amazon Virtual Private Cloud User Guide.
+	// Secondary EIP allocation IDs. For more information, see Create a NAT gateway (https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating)
+	// in the Amazon VPC User Guide.
 	SecondaryAllocationIds []string
 
 	// [Private NAT gateway only] The number of secondary private IPv4 addresses you
 	// want to assign to the NAT gateway. For more information about secondary
 	// addresses, see Create a NAT gateway (https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating)
-	// in the Amazon Virtual Private Cloud User Guide.
+	// in the Amazon VPC User Guide.
 	SecondaryPrivateIpAddressCount *int32
 
 	// Secondary private IPv4 addresses. For more information about secondary
 	// addresses, see Create a NAT gateway (https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-creating)
-	// in the Amazon Virtual Private Cloud User Guide.
+	// in the Amazon VPC User Guide.
 	SecondaryPrivateIpAddresses []string
 
 	// The tags to assign to the NAT gateway.

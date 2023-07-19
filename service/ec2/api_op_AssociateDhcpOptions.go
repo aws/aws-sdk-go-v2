@@ -18,7 +18,7 @@ import (
 // on how frequently the instance renews its DHCP lease. You can explicitly renew
 // the lease using the operating system on the instance. For more information, see
 // DHCP options sets (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html)
-// in the Amazon Virtual Private Cloud User Guide.
+// in the Amazon VPC User Guide.
 func (c *Client) AssociateDhcpOptions(ctx context.Context, params *AssociateDhcpOptionsInput, optFns ...func(*Options)) (*AssociateDhcpOptionsOutput, error) {
 	if params == nil {
 		params = &AssociateDhcpOptionsInput{}

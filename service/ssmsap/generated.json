@@ -22,6 +22,7 @@
         "api_op_ListTagsForResource.go",
         "api_op_PutResourcePermission.go",
         "api_op_RegisterApplication.go",
+        "api_op_StartApplicationRefresh.go",
         "api_op_TagResource.go",
         "api_op_UntagResource.go",
         "api_op_UpdateApplicationSettings.go",

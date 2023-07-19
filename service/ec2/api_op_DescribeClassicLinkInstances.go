@@ -12,13 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes one or more of your linked EC2-Classic instances. This request only
-// returns information about EC2-Classic instances linked to a VPC through
-// ClassicLink. You cannot use this request to return information about other
-// instances. We are retiring EC2-Classic. We recommend that you migrate from
-// EC2-Classic to a VPC. For more information, see Migrate from EC2-Classic to a
-// VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html) in
-// the Amazon Elastic Compute Cloud User Guide.
+// This action is deprecated. Describes one or more of your linked EC2-Classic
+// instances. This request only returns information about EC2-Classic instances
+// linked to a VPC through ClassicLink. You cannot use this request to return
+// information about other instances.
 func (c *Client) DescribeClassicLinkInstances(ctx context.Context, params *DescribeClassicLinkInstancesInput, optFns ...func(*Options)) (*DescribeClassicLinkInstancesOutput, error) {
 	if params == nil {
 		params = &DescribeClassicLinkInstancesInput{}
@@ -42,7 +39,7 @@ type DescribeClassicLinkInstancesInput struct {
 	// UnauthorizedOperation .
 	DryRun *bool
 
-	// One or more filters.
+	// The filters.
 	//   - group-id - The ID of a VPC security group that's associated with the
 	//   instance.
 	//   - instance-id - The ID of the instance.
@@ -52,11 +49,10 @@ type DescribeClassicLinkInstancesInput struct {
 	//   specify tag:Owner for the filter name and TeamA for the filter value.
 	//   - tag-key - The key of a tag assigned to the resource. Use this filter to find
 	//   all resources assigned a tag with a specific key, regardless of the tag value.
-	//   - vpc-id - The ID of the VPC to which the instance is linked. vpc-id - The ID
-	//   of the VPC that the instance is linked to.
+	//   - vpc-id - The ID of the VPC to which the instance is linked.
 	Filters []types.Filter
 
-	// One or more instance IDs. Must be instances linked to a VPC through ClassicLink.
+	// The instance IDs. Must be instances linked to a VPC through ClassicLink.
 	InstanceIds []string
 
 	// The maximum number of items to return for this request. To get the next page of

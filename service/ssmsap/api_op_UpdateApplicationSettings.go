@@ -35,6 +35,9 @@ type UpdateApplicationSettingsInput struct {
 	// This member is required.
 	ApplicationId *string
 
+	// Installation of AWS Backint Agent for SAP HANA.
+	Backint *types.BackintConfig
+
 	// The credentials to be added or updated.
 	CredentialsToAddOrUpdate []types.ApplicationCredential
 

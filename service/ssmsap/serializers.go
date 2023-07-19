@@ -1094,6 +1094,74 @@ func awsRestjson1_serializeOpDocumentRegisterApplicationInput(v *RegisterApplica
 	return nil
 }
 
+type awsRestjson1_serializeOpStartApplicationRefresh struct {
+}
+
+func (*awsRestjson1_serializeOpStartApplicationRefresh) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpStartApplicationRefresh) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StartApplicationRefreshInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/start-application-refresh")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentStartApplicationRefreshInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsStartApplicationRefreshInput(v *StartApplicationRefreshInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentStartApplicationRefreshInput(v *StartApplicationRefreshInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ApplicationId != nil {
+		ok := object.Key("ApplicationId")
+		ok.String(*v.ApplicationId)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpTagResource struct {
 }
 
@@ -1306,6 +1374,13 @@ func awsRestjson1_serializeOpDocumentUpdateApplicationSettingsInput(v *UpdateApp
 		ok.String(*v.ApplicationId)
 	}
 
+	if v.Backint != nil {
+		ok := object.Key("Backint")
+		if err := awsRestjson1_serializeDocumentBackintConfig(v.Backint, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.CredentialsToAddOrUpdate != nil {
 		ok := object.Key("CredentialsToAddOrUpdate")
 		if err := awsRestjson1_serializeDocumentApplicationCredentialList(v.CredentialsToAddOrUpdate, ok); err != nil {
@@ -1355,6 +1430,23 @@ func awsRestjson1_serializeDocumentApplicationCredentialList(v []types.Applicati
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentBackintConfig(v *types.BackintConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.BackintMode) > 0 {
+		ok := object.Key("BackintMode")
+		ok.String(string(v.BackintMode))
+	}
+
+	if v.EnsureNoBackupInProcess != nil {
+		ok := object.Key("EnsureNoBackupInProcess")
+		ok.Boolean(*v.EnsureNoBackupInProcess)
+	}
+
 	return nil
 }
 

@@ -2044,6 +2044,17 @@ type TemplateParameter struct {
 	noSmithyDocumentSerde
 }
 
+// Options for the GetTemplateSummary API action.
+type TemplateSummaryConfig struct {
+
+	// If set to True , any unrecognized resource types generate warnings and not an
+	// error. Any unrecognized resource types are returned in the Warnings output
+	// parameter.
+	TreatUnrecognizedResourceTypesAsWarnings *bool
+
+	noSmithyDocumentSerde
+}
+
 // Detailed information concerning the specification of a CloudFormation extension
 // in a given account and Region. For more information, see Configuring extensions
 // at the account level (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration)
@@ -2263,6 +2274,17 @@ type TypeVersionSummary struct {
 	// the end of the Amazon Resource Name (ARN) assigned to the extension version when
 	// it's registered.
 	VersionId *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains any warnings returned by the GetTemplateSummary API action.
+type Warnings struct {
+
+	// A list of all of the unrecognized resource types. This is only returned if the
+	// TemplateSummaryConfig parameter has the TreatUnrecognizedResourceTypesAsWarning
+	// configuration set to True .
+	UnrecognizedResourceTypes []string
 
 	noSmithyDocumentSerde
 }

@@ -190,6 +190,26 @@ func (m *validateOpRegisterApplication) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartApplicationRefresh struct {
+}
+
+func (*validateOpStartApplicationRefresh) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartApplicationRefresh) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartApplicationRefreshInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartApplicationRefreshInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -286,6 +306,10 @@ func addOpRegisterApplicationValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpRegisterApplication{}, middleware.After)
 }
 
+func addOpStartApplicationRefreshValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartApplicationRefresh{}, middleware.After)
+}
+
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
 }
@@ -328,6 +352,24 @@ func validateApplicationCredentialList(v []types.ApplicationCredential) error {
 		if err := validateApplicationCredential(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBackintConfig(v *types.BackintConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BackintConfig"}
+	if len(v.BackintMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("BackintMode"))
+	}
+	if v.EnsureNoBackupInProcess == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnsureNoBackupInProcess"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -536,6 +578,21 @@ func validateOpRegisterApplicationInput(v *RegisterApplicationInput) error {
 	}
 }
 
+func validateOpStartApplicationRefreshInput(v *StartApplicationRefreshInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartApplicationRefreshInput"}
+	if v.ApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpTagResourceInput(v *TagResourceInput) error {
 	if v == nil {
 		return nil
@@ -588,6 +645,11 @@ func validateOpUpdateApplicationSettingsInput(v *UpdateApplicationSettingsInput)
 	if v.CredentialsToRemove != nil {
 		if err := validateApplicationCredentialList(v.CredentialsToRemove); err != nil {
 			invalidParams.AddNested("CredentialsToRemove", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Backint != nil {
+		if err := validateBackintConfig(v.Backint); err != nil {
+			invalidParams.AddNested("Backint", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

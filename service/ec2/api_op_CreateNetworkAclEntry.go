@@ -22,8 +22,8 @@ import (
 // easier to add a rule between existing ones without having to renumber the rules.
 // After you add an entry, you can't modify it; you must either replace it, or
 // create an entry and delete the old one. For more information about network ACLs,
-// see Network ACLs (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ACLs.html)
-// in the Amazon Virtual Private Cloud User Guide.
+// see Network ACLs (https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html)
+// in the Amazon VPC User Guide.
 func (c *Client) CreateNetworkAclEntry(ctx context.Context, params *CreateNetworkAclEntryInput, optFns ...func(*Options)) (*CreateNetworkAclEntryOutput, error) {
 	if params == nil {
 		params = &CreateNetworkAclEntryInput{}

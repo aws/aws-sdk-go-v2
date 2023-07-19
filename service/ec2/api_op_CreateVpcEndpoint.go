@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a VPC endpoint for a specified service. An endpoint enables you to
-// create a private connection between your VPC and the service. The service may be
-// provided by Amazon Web Services, an Amazon Web Services Marketplace Partner, or
-// another Amazon Web Services account. For more information, see the Amazon Web
-// Services PrivateLink Guide (https://docs.aws.amazon.com/vpc/latest/privatelink/)
+// Creates a VPC endpoint. A VPC endpoint provides a private connection between
+// the specified VPC and the specified endpoint service. You can use an endpoint
+// service provided by Amazon Web Services, an Amazon Web Services Marketplace
+// Partner, or another Amazon Web Services account. For more information, see the
+// Amazon Web Services PrivateLink User Guide (https://docs.aws.amazon.com/vpc/latest/privatelink/)
 // .
 func (c *Client) CreateVpcEndpoint(ctx context.Context, params *CreateVpcEndpointInput, optFns ...func(*Options)) (*CreateVpcEndpointOutput, error) {
 	if params == nil {
@@ -34,12 +34,12 @@ func (c *Client) CreateVpcEndpoint(ctx context.Context, params *CreateVpcEndpoin
 
 type CreateVpcEndpointInput struct {
 
-	// The service name.
+	// The name of the endpoint service.
 	//
 	// This member is required.
 	ServiceName *string
 
-	// The ID of the VPC for the endpoint.
+	// The ID of the VPC.
 	//
 	// This member is required.
 	VpcId *string

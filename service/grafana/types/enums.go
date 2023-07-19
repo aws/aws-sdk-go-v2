@@ -274,6 +274,10 @@ const (
 	WorkspaceStatusUpgradeFailed WorkspaceStatus = "UPGRADE_FAILED"
 	// Failed to remove enterprise license from workspace.
 	WorkspaceStatusLicenseRemovalFailed WorkspaceStatus = "LICENSE_REMOVAL_FAILED"
+	// Workspace version is being updated.
+	WorkspaceStatusVersionUpdating WorkspaceStatus = "VERSION_UPDATING"
+	// Workspace version update failed.
+	WorkspaceStatusVersionUpdateFailed WorkspaceStatus = "VERSION_UPDATE_FAILED"
 )
 
 // Values returns all known values for WorkspaceStatus. Note that this can be
@@ -292,5 +296,7 @@ func (WorkspaceStatus) Values() []WorkspaceStatus {
 		"UPDATE_FAILED",
 		"UPGRADE_FAILED",
 		"LICENSE_REMOVAL_FAILED",
+		"VERSION_UPDATING",
+		"VERSION_UPDATE_FAILED",
 	}
 }

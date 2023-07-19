@@ -13,11 +13,10 @@ import (
 
 // Associates Elastic IP addresses (EIPs) and private IPv4 addresses with a public
 // NAT gateway. For more information, see Work with NAT gateways (https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-working-with)
-// in the Amazon Virtual Private Cloud User Guide. By default, you can associate up
-// to 2 Elastic IP addresses per public NAT gateway. You can increase the limit by
-// requesting a quota adjustment. For more information, see Elastic IP address
-// quotas (https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-eips)
-// in the Amazon Virtual Private Cloud User Guide.
+// in the Amazon VPC User Guide. By default, you can associate up to 2 Elastic IP
+// addresses per public NAT gateway. You can increase the limit by requesting a
+// quota adjustment. For more information, see Elastic IP address quotas (https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-eips)
+// in the Amazon VPC User Guide.
 func (c *Client) AssociateNatGatewayAddress(ctx context.Context, params *AssociateNatGatewayAddressInput, optFns ...func(*Options)) (*AssociateNatGatewayAddressOutput, error) {
 	if params == nil {
 		params = &AssociateNatGatewayAddressInput{}
@@ -40,7 +39,7 @@ type AssociateNatGatewayAddressInput struct {
 	// This member is required.
 	AllocationIds []string
 
-	// The NAT gateway ID.
+	// The ID of the NAT gateway.
 	//
 	// This member is required.
 	NatGatewayId *string
@@ -62,7 +61,7 @@ type AssociateNatGatewayAddressOutput struct {
 	// The IP addresses.
 	NatGatewayAddresses []types.NatGatewayAddress
 
-	// The NAT gateway ID.
+	// The ID of the NAT gateway.
 	NatGatewayId *string
 
 	// Metadata pertaining to the operation's result.

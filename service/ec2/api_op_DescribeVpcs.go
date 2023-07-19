@@ -42,7 +42,7 @@ type DescribeVpcsInput struct {
 	// UnauthorizedOperation .
 	DryRun *bool
 
-	// One or more filters.
+	// The filters.
 	//   - cidr - The primary IPv4 CIDR block of the VPC. The CIDR block you specify
 	//   must exactly match the VPC's CIDR block for information to be returned for the
 	//   VPC. Must contain the slash followed by one or two digits (for example, /28 ).
@@ -83,7 +83,7 @@ type DescribeVpcsInput struct {
 	// the end of the items returned by the previous request.
 	NextToken *string
 
-	// One or more VPC IDs. Default: Describes all your VPCs.
+	// The IDs of the VPCs. Default: Describes all your VPCs.
 	VpcIds []string
 
 	noSmithyDocumentSerde

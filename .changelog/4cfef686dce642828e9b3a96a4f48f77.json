@@ -1,0 +1,8 @@
+{
+    "id": "4cfef686-dce6-4282-8e9b-3a96a4f48f77",
+    "type": "feature",
+    "description": "General Availability (GA) release of AWS Health Imaging, enabling customers to store, transform, and analyze medical imaging data at petabyte-scale.",
+    "modules": [
+        "service/medicalimaging"
+    ]
+}

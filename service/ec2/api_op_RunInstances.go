@@ -198,12 +198,7 @@ type RunInstancesInput struct {
 	InstanceMarketOptions *types.InstanceMarketOptionsRequest
 
 	// The instance type. For more information, see Instance types (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html)
-	// in the Amazon EC2 User Guide. When you change your EBS-backed instance type,
-	// instance restart or replacement behavior depends on the instance type
-	// compatibility between the old and new types. An instance that's backed by an
-	// instance store volume is always replaced. For more information, see Change the
-	// instance type (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-resize.html)
-	// in the Amazon EC2 User Guide. Default: m1.small
+	// in the Amazon EC2 User Guide.
 	InstanceType types.InstanceType
 
 	// The number of IPv6 addresses to associate with the primary network interface.
@@ -260,7 +255,8 @@ type RunInstancesInput struct {
 	Placement *types.Placement
 
 	// The options for the instance hostname. The default values are inherited from
-	// the subnet.
+	// the subnet. Applies only if creating a network interface, not attaching an
+	// existing one.
 	PrivateDnsNameOptions *types.PrivateDnsNameOptionsRequest
 
 	// The primary IPv4 address. You must specify a value from the IPv4 address range

@@ -1,0 +1,8 @@
+{
+    "id": "65689a5b-8ee7-4326-9e23-f1e46a417a96",
+    "type": "feature",
+    "description": "This release adds support for securely sharing with AWS service principals.",
+    "modules": [
+        "service/ram"
+    ]
+}

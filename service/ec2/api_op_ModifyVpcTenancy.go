@@ -18,7 +18,7 @@ import (
 // unless you specify otherwise during launch. The tenancy of any existing
 // instances in the VPC is not affected. For more information, see Dedicated
 // Instances (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html)
-// in the Amazon Elastic Compute Cloud User Guide.
+// in the Amazon EC2 User Guide.
 func (c *Client) ModifyVpcTenancy(ctx context.Context, params *ModifyVpcTenancyInput, optFns ...func(*Options)) (*ModifyVpcTenancyOutput, error) {
 	if params == nil {
 		params = &ModifyVpcTenancyInput{}

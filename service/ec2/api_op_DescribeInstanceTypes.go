@@ -42,8 +42,8 @@ type DescribeInstanceTypesInput struct {
 	//   recovery is supported ( true | false ).
 	//   - bare-metal - Indicates whether it is a bare metal instance type ( true |
 	//   false ).
-	//   - burstable-performance-supported - Indicates whether it is a burstable
-	//   performance instance type ( true | false ).
+	//   - burstable-performance-supported - Indicates whether the instance type is a
+	//   burstable performance T instance type ( true | false ).
 	//   - current-generation - Indicates whether this instance type is the latest
 	//   generation instance type of an instance family ( true | false ).
 	//   - ebs-info.ebs-optimized-info.baseline-bandwidth-in-mbps - The baseline
@@ -106,6 +106,11 @@ type DescribeInstanceTypesInput struct {
 	//   interfaces per instance.
 	//   - network-info.network-performance - The network performance (for example, "25
 	//   Gigabit").
+	//   - nitro-enclaves-support - Indicates whether Nitro Enclaves is supported (
+	//   supported | unsupported ).
+	//   - nitro-tpm-support - Indicates whether NitroTPM is supported ( supported |
+	//   unsupported ).
+	//   - nitro-tpm-info.supported-versions - The supported NitroTPM version ( 2.0 ).
 	//   - processor-info.supported-architecture - The CPU architecture ( arm64 | i386
 	//   | x86_64 ).
 	//   - processor-info.sustained-clock-speed-in-ghz - The CPU clock speed, in GHz.
@@ -146,11 +151,6 @@ type DescribeInstanceTypesInput struct {
 type DescribeInstanceTypesOutput struct {
 
 	// The instance type. For more information, see Instance types (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html)
-	// in the Amazon EC2 User Guide. When you change your EBS-backed instance type,
-	// instance restart or replacement behavior depends on the instance type
-	// compatibility between the old and new types. An instance that's backed by an
-	// instance store volume is always replaced. For more information, see Change the
-	// instance type (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-resize.html)
 	// in the Amazon EC2 User Guide.
 	InstanceTypes []types.InstanceTypeInfo
 

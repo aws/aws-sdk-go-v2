@@ -67,6 +67,10 @@ type DisassociateResourceShareInput struct {
 	// associated with the resource share.
 	ResourceArns []string
 
+	// Specifies from which source accounts the service principal no longer has access
+	// to the resources in this resource share.
+	Sources []string
+
 	noSmithyDocumentSerde
 }
 

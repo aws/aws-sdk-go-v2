@@ -81,8 +81,8 @@ type CreateWorkspaceInput struct {
 	// This value conforms to the media type: application/json
 	Configuration *string
 
-	// Specifies the version of Grafana to support in the new workspace. Supported
-	// values are 8.4 and 9.4 .
+	// Specifies the version of Grafana to support in the new workspace. To get a list
+	// of supported version, use the ListVersions operation.
 	GrafanaVersion *string
 
 	// Configuration for network access to your workspace. When this is configured,
@@ -106,7 +106,8 @@ type CreateWorkspaceInput struct {
 	Tags map[string]string
 
 	// The configuration settings for an Amazon VPC that contains data sources for
-	// your Grafana workspace to connect to.
+	// your Grafana workspace to connect to. Connecting to a private VPC is not yet
+	// available in the Asia Pacific (Seoul) Region (ap-northeast-2).
 	VpcConfiguration *types.VpcConfiguration
 
 	// This parameter is for internal use only, and should not be used.

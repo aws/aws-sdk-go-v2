@@ -1383,7 +1383,7 @@ type CidrBlock struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the ClassicLink DNS support status of a VPC.
+// Deprecated. Describes the ClassicLink DNS support status of a VPC.
 type ClassicLinkDnsSupport struct {
 
 	// Indicates whether ClassicLink DNS support is enabled for the VPC.
@@ -1395,13 +1395,10 @@ type ClassicLinkDnsSupport struct {
 	noSmithyDocumentSerde
 }
 
-// We are retiring EC2-Classic. We recommend that you migrate from EC2-Classic to
-// a VPC. For more information, see Migrate from EC2-Classic to a VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html)
-// in the Amazon Elastic Compute Cloud User Guide. Describes a linked EC2-Classic
-// instance.
+// Deprecated. Describes a linked EC2-Classic instance.
 type ClassicLinkInstance struct {
 
-	// A list of security groups.
+	// The security groups.
 	Groups []GroupIdentifier
 
 	// The ID of the instance.
@@ -2628,16 +2625,16 @@ type DhcpConfiguration struct {
 	// The name of a DHCP option.
 	Key *string
 
-	// One or more values for the DHCP option.
+	// The values for the DHCP option.
 	Values []AttributeValue
 
 	noSmithyDocumentSerde
 }
 
-// Describes a set of DHCP options.
+// The set of DHCP options.
 type DhcpOptions struct {
 
-	// One or more DHCP options in the set.
+	// The DHCP options in the set.
 	DhcpConfigurations []DhcpConfiguration
 
 	// The ID of the set of DHCP options.
@@ -6235,20 +6232,26 @@ type InstancePrivateIpAddress struct {
 }
 
 // The attributes for the instance types. When you specify instance attributes,
-// Amazon EC2 will identify instance types with these attributes. When you specify
-// multiple attributes, you get instance types that satisfy all of the specified
-// attributes. If you specify multiple values for an attribute, you get instance
-// types that satisfy any of the specified values. To limit the list of instance
-// types from which Amazon EC2 can identify matching instance types, you can use
-// one of the following parameters, but not both in the same request:
+// Amazon EC2 will identify instance types with these attributes. You must specify
+// VCpuCount and MemoryMiB . All other attributes are optional. Any unspecified
+// optional attribute is set to its default. When you specify multiple attributes,
+// you get instance types that satisfy all of the specified attributes. If you
+// specify multiple values for an attribute, you get instance types that satisfy
+// any of the specified values. To limit the list of instance types from which
+// Amazon EC2 can identify matching instance types, you can use one of the
+// following parameters, but not both in the same request:
 //   - AllowedInstanceTypes - The instance types to include in the list. All other
 //     instance types are ignored, even if they match your specified attributes.
 //   - ExcludedInstanceTypes - The instance types to exclude from the list, even if
 //     they match your specified attributes.
 //
-// You must specify VCpuCount and MemoryMiB . All other attributes are optional.
-// Any unspecified optional attribute is set to its default. For more information,
-// see Attribute-based instance type selection for EC2 Fleet (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html)
+// If you specify InstanceRequirements , you can't specify InstanceType .
+// Attribute-based instance type selection is only supported when using Auto
+// Scaling groups, EC2 Fleet, and Spot Fleet to launch instances. If you plan to
+// use the launch template in the launch instance wizard (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-instance-wizard.html)
+// or with the RunInstances API (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html)
+// , you can't specify InstanceRequirements . For more information, see
+// Attribute-based instance type selection for EC2 Fleet (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html)
 // , Attribute-based instance type selection for Spot Fleet (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-attribute-based-instance-type-selection.html)
 // , and Spot placement score (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-placement-score.html)
 // in the Amazon EC2 User Guide.
@@ -6432,20 +6435,28 @@ type InstanceRequirements struct {
 }
 
 // The attributes for the instance types. When you specify instance attributes,
-// Amazon EC2 will identify instance types with these attributes. When you specify
-// multiple attributes, you get instance types that satisfy all of the specified
-// attributes. If you specify multiple values for an attribute, you get instance
-// types that satisfy any of the specified values. To limit the list of instance
-// types from which Amazon EC2 can identify matching instance types, you can use
-// one of the following parameters, but not both in the same request:
+// Amazon EC2 will identify instance types with these attributes. You must specify
+// VCpuCount and MemoryMiB . All other attributes are optional. Any unspecified
+// optional attribute is set to its default. When you specify multiple attributes,
+// you get instance types that satisfy all of the specified attributes. If you
+// specify multiple values for an attribute, you get instance types that satisfy
+// any of the specified values. To limit the list of instance types from which
+// Amazon EC2 can identify matching instance types, you can use one of the
+// following parameters, but not both in the same request:
 //   - AllowedInstanceTypes - The instance types to include in the list. All other
 //     instance types are ignored, even if they match your specified attributes.
 //   - ExcludedInstanceTypes - The instance types to exclude from the list, even if
 //     they match your specified attributes.
 //
-// You must specify VCpuCount and MemoryMiB . All other attributes are optional.
-// Any unspecified optional attribute is set to its default. For more information,
-// see Attribute-based instance type selection for EC2 Fleet (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html)
+// If you specify InstanceRequirements , you can't specify InstanceType .
+// Attribute-based instance type selection is only supported when using Auto
+// Scaling groups, EC2 Fleet, and Spot Fleet to launch instances. If you plan to
+// use the launch template in the launch instance wizard (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-instance-wizard.html)
+// , or with the RunInstances (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html)
+// API or AWS::EC2::Instance (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html)
+// Amazon Web Services CloudFormation resource, you can't specify
+// InstanceRequirements . For more information, see Attribute-based instance type
+// selection for EC2 Fleet (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html)
 // , Attribute-based instance type selection for Spot Fleet (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-attribute-based-instance-type-selection.html)
 // , and Spot placement score (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-placement-score.html)
 // in the Amazon EC2 User Guide.
@@ -6584,8 +6595,9 @@ type InstanceRequirementsRequest struct {
 	// or maximum limits
 	MemoryGiBPerVCpu *MemoryGiBPerVCpuRequest
 
-	// The minimum and maximum amount of network bandwidth, in gigabits per second
-	// (Gbps). Default: No minimum or maximum limits
+	// The minimum and maximum amount of baseline network bandwidth, in gigabits per
+	// second (Gbps). For more information, see Amazon EC2 instance network bandwidth (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-network-bandwidth.html)
+	// in the Amazon EC2 User Guide. Default: No minimum or maximum limits
 	NetworkBandwidthGbps *NetworkBandwidthGbpsRequest
 
 	// The minimum and maximum number of network interfaces. Default: No minimum or
@@ -6837,7 +6849,9 @@ type InstanceTypeInfo struct {
 	// Indicates whether the instance is a bare metal instance type.
 	BareMetal *bool
 
-	// Indicates whether the instance type is a burstable performance instance type.
+	// Indicates whether the instance type is a burstable performance T instance type.
+	// For more information, see Burstable performance instances (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html)
+	// .
 	BurstablePerformanceSupported *bool
 
 	// Indicates whether the instance type is current generation.
@@ -7692,21 +7706,21 @@ type IpPermission struct {
 
 	// The IP protocol name ( tcp , udp , icmp , icmpv6 ) or number (see Protocol
 	// Numbers (http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml)
-	// ). [VPC only] Use -1 to specify all protocols. When authorizing security group
-	// rules, specifying -1 or a protocol number other than tcp , udp , icmp , or
-	// icmpv6 allows traffic on all ports, regardless of any port range you specify.
-	// For tcp , udp , and icmp , you must specify a port range. For icmpv6 , the port
-	// range is optional; if you omit the port range, traffic for all types and codes
-	// is allowed.
+	// ). Use -1 to specify all protocols. When authorizing security group rules,
+	// specifying -1 or a protocol number other than tcp , udp , icmp , or icmpv6
+	// allows traffic on all ports, regardless of any port range you specify. For tcp ,
+	// udp , and icmp , you must specify a port range. For icmpv6 , the port range is
+	// optional; if you omit the port range, traffic for all types and codes is
+	// allowed.
 	IpProtocol *string
 
 	// The IPv4 ranges.
 	IpRanges []IpRange
 
-	// [VPC only] The IPv6 ranges.
+	// The IPv6 ranges.
 	Ipv6Ranges []Ipv6Range
 
-	// [VPC only] The prefix list IDs.
+	// The prefix list IDs.
 	PrefixListIds []PrefixListId
 
 	// If the protocol is TCP or UDP, this is the end of the port range. If the
@@ -7833,7 +7847,7 @@ type Ipv6PrefixSpecificationResponse struct {
 	noSmithyDocumentSerde
 }
 
-// [EC2-VPC only] Describes an IPv6 range.
+// Describes an IPv6 range.
 type Ipv6Range struct {
 
 	// The IPv6 CIDR range. You can either specify a CIDR range or a source security
@@ -8130,7 +8144,9 @@ type LaunchTemplateConfig struct {
 // The CPU options for the instance.
 type LaunchTemplateCpuOptions struct {
 
-	// Indicates whether the instance is enabled for AMD SEV-SNP.
+	// Indicates whether the instance is enabled for AMD SEV-SNP. For more
+	// information, see AMD SEV-SNP (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/sev-snp.html)
+	// .
 	AmdSevSnp AmdSevSnpSpecification
 
 	// The number of CPU cores for the instance.
@@ -8147,7 +8163,8 @@ type LaunchTemplateCpuOptions struct {
 type LaunchTemplateCpuOptionsRequest struct {
 
 	// Indicates whether to enable the instance for AMD SEV-SNP. AMD SEV-SNP is
-	// supported with M6a, R6a, and C6a instance types only.
+	// supported with M6a, R6a, and C6a instance types only. For more information, see
+	// AMD SEV-SNP (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/sev-snp.html) .
 	AmdSevSnp AmdSevSnpSpecification
 
 	// The number of CPU cores for the instance.
@@ -9743,7 +9760,7 @@ type NetworkAcl struct {
 	// Any associations between the network ACL and one or more subnets
 	Associations []NetworkAclAssociation
 
-	// One or more entries (rules) in the network ACL.
+	// The entries (rules) in the network ACL.
 	Entries []NetworkAclEntry
 
 	// Indicates whether this is the default network ACL for the VPC.
@@ -10364,7 +10381,7 @@ type NewDhcpConfiguration struct {
 	// The name of a DHCP option.
 	Key *string
 
-	// One or more values for the DHCP option.
+	// The values for the DHCP option.
 	Values []string
 
 	noSmithyDocumentSerde
@@ -10687,43 +10704,33 @@ type PeeringAttachmentStatus struct {
 	noSmithyDocumentSerde
 }
 
-// We are retiring EC2-Classic. We recommend that you migrate from EC2-Classic to
-// a VPC. For more information, see Migrate from EC2-Classic to a VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html)
-// in the Amazon Elastic Compute Cloud User Guide. Describes the VPC peering
-// connection options.
+// Describes the VPC peering connection options.
 type PeeringConnectionOptions struct {
 
 	// If true, the public DNS hostnames of instances in the specified VPC resolve to
 	// private IP addresses when queried from instances in the peer VPC.
 	AllowDnsResolutionFromRemoteVpc *bool
 
-	// If true, enables outbound communication from an EC2-Classic instance that's
-	// linked to a local VPC using ClassicLink to instances in a peer VPC.
+	// Deprecated.
 	AllowEgressFromLocalClassicLinkToRemoteVpc *bool
 
-	// If true, enables outbound communication from instances in a local VPC to an
-	// EC2-Classic instance that's linked to a peer VPC using ClassicLink.
+	// Deprecated.
 	AllowEgressFromLocalVpcToRemoteClassicLink *bool
 
 	noSmithyDocumentSerde
 }
 
-// We are retiring EC2-Classic. We recommend that you migrate from EC2-Classic to
-// a VPC. For more information, see Migrate from EC2-Classic to a VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html)
-// in the Amazon Elastic Compute Cloud User Guide. The VPC peering connection
-// options.
+// The VPC peering connection options.
 type PeeringConnectionOptionsRequest struct {
 
 	// If true, enables a local VPC to resolve public DNS hostnames to private IP
 	// addresses when queried from instances in the peer VPC.
 	AllowDnsResolutionFromRemoteVpc *bool
 
-	// If true, enables outbound communication from an EC2-Classic instance that's
-	// linked to a local VPC using ClassicLink to instances in a peer VPC.
+	// Deprecated.
 	AllowEgressFromLocalClassicLinkToRemoteVpc *bool
 
-	// If true, enables outbound communication from instances in a local VPC to an
-	// EC2-Classic instance that's linked to a peer VPC using ClassicLink.
+	// Deprecated.
 	AllowEgressFromLocalVpcToRemoteClassicLink *bool
 
 	noSmithyDocumentSerde
@@ -11632,8 +11639,30 @@ type RequestLaunchTemplateData struct {
 	InstanceMarketOptions *LaunchTemplateInstanceMarketOptionsRequest
 
 	// The attributes for the instance types. When you specify instance attributes,
-	// Amazon EC2 will identify instance types with these attributes. If you specify
-	// InstanceRequirements , you can't specify InstanceType .
+	// Amazon EC2 will identify instance types with these attributes. You must specify
+	// VCpuCount and MemoryMiB . All other attributes are optional. Any unspecified
+	// optional attribute is set to its default. When you specify multiple attributes,
+	// you get instance types that satisfy all of the specified attributes. If you
+	// specify multiple values for an attribute, you get instance types that satisfy
+	// any of the specified values. To limit the list of instance types from which
+	// Amazon EC2 can identify matching instance types, you can use one of the
+	// following parameters, but not both in the same request:
+	//   - AllowedInstanceTypes - The instance types to include in the list. All other
+	//   instance types are ignored, even if they match your specified attributes.
+	//   - ExcludedInstanceTypes - The instance types to exclude from the list, even if
+	//   they match your specified attributes.
+	// If you specify InstanceRequirements , you can't specify InstanceType .
+	// Attribute-based instance type selection is only supported when using Auto
+	// Scaling groups, EC2 Fleet, and Spot Fleet to launch instances. If you plan to
+	// use the launch template in the launch instance wizard (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-instance-wizard.html)
+	// , or with the RunInstances (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html)
+	// API or AWS::EC2::Instance (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-instance.html)
+	// Amazon Web Services CloudFormation resource, you can't specify
+	// InstanceRequirements . For more information, see Attribute-based instance type
+	// selection for EC2 Fleet (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-attribute-based-instance-type-selection.html)
+	// , Attribute-based instance type selection for Spot Fleet (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-attribute-based-instance-type-selection.html)
+	// , and Spot placement score (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-placement-score.html)
+	// in the Amazon EC2 User Guide.
 	InstanceRequirements *InstanceRequirementsRequest
 
 	// The instance type. For more information, see Instance types (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html)
@@ -12896,7 +12925,7 @@ type SecurityGroup struct {
 	// The inbound rules associated with the security group.
 	IpPermissions []IpPermission
 
-	// [VPC only] The outbound rules associated with the security group.
+	// The outbound rules associated with the security group.
 	IpPermissionsEgress []IpPermission
 
 	// The Amazon Web Services account ID of the owner of the security group.
@@ -12905,7 +12934,7 @@ type SecurityGroup struct {
 	// Any tags assigned to the security group.
 	Tags []Tag
 
-	// [VPC only] The ID of the VPC for the security group.
+	// The ID of the VPC for the security group.
 	VpcId *string
 
 	noSmithyDocumentSerde
@@ -16157,10 +16186,7 @@ type UserData struct {
 	noSmithyDocumentSerde
 }
 
-// Describes a security group and Amazon Web Services account ID pair. We are
-// retiring EC2-Classic. We recommend that you migrate from EC2-Classic to a VPC.
-// For more information, see Migrate from EC2-Classic to a VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html)
-// in the Amazon Elastic Compute Cloud User Guide.
+// Describes a security group and Amazon Web Services account ID pair.
 type UserIdGroupPair struct {
 
 	// A description for the security group rule that references this user ID group
@@ -16171,10 +16197,10 @@ type UserIdGroupPair struct {
 	// The ID of the security group.
 	GroupId *string
 
-	// The name of the security group. In a request, use this parameter for a security
-	// group in EC2-Classic or a default VPC only. For a security group in a nondefault
-	// VPC, use the security group ID. For a referenced security group in another VPC,
-	// this value is not returned if the referenced security group is deleted.
+	// [Default VPC] The name of the security group. For a security group in a
+	// nondefault VPC, use the security group ID. For a referenced security group in
+	// another VPC, this value is not returned if the referenced security group is
+	// deleted.
 	GroupName *string
 
 	// The status of a VPC peering connection, if applicable.
@@ -16183,8 +16209,7 @@ type UserIdGroupPair struct {
 	// The ID of an Amazon Web Services account. For a referenced security group in
 	// another VPC, the account ID of the referenced security group is returned in the
 	// response. If the referenced security group is deleted, this value is not
-	// returned. [EC2-Classic] Required when adding or removing rules that reference a
-	// security group in another Amazon Web Services account.
+	// returned.
 	UserId *string
 
 	// The ID of the VPC for the referenced security group, if applicable.
@@ -17024,10 +17049,7 @@ type VpcCidrBlockState struct {
 	noSmithyDocumentSerde
 }
 
-// We are retiring EC2-Classic. We recommend that you migrate from EC2-Classic to
-// a VPC. For more information, see Migrate from EC2-Classic to a VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html)
-// in the Amazon Elastic Compute Cloud User Guide. Describes whether a VPC is
-// enabled for ClassicLink.
+// Deprecated. Describes whether a VPC is enabled for ClassicLink.
 type VpcClassicLink struct {
 
 	// Indicates whether the VPC is enabled for ClassicLink.
@@ -17195,22 +17217,17 @@ type VpcPeeringConnection struct {
 	noSmithyDocumentSerde
 }
 
-// We are retiring EC2-Classic. We recommend that you migrate from EC2-Classic to
-// a VPC. For more information, see Migrate from EC2-Classic to a VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html)
-// in the Amazon Elastic Compute Cloud User Guide. Describes the VPC peering
-// connection options.
+// Describes the VPC peering connection options.
 type VpcPeeringConnectionOptionsDescription struct {
 
 	// Indicates whether a local VPC can resolve public DNS hostnames to private IP
 	// addresses when queried from instances in a peer VPC.
 	AllowDnsResolutionFromRemoteVpc *bool
 
-	// Indicates whether a local ClassicLink connection can communicate with the peer
-	// VPC over the VPC peering connection.
+	// Deprecated.
 	AllowEgressFromLocalClassicLinkToRemoteVpc *bool
 
-	// Indicates whether a local VPC can communicate with a ClassicLink connection in
-	// the peer VPC over the VPC peering connection.
+	// Deprecated.
 	AllowEgressFromLocalVpcToRemoteClassicLink *bool
 
 	noSmithyDocumentSerde

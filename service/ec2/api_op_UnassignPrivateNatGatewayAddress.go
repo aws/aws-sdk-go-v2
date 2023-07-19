@@ -14,14 +14,14 @@ import (
 // Unassigns secondary private IPv4 addresses from a private NAT gateway. You
 // cannot unassign your primary private IP. For more information, see Edit
 // secondary IP address associations (https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-edit-secondary)
-// in the Amazon Virtual Private Cloud User Guide. While unassigning is in
-// progress, you cannot assign/unassign additional IP addresses while the
-// connections are being drained. You are, however, allowed to delete the NAT
-// gateway. A private IP address will only be released at the end of
-// MaxDrainDurationSeconds. The private IP addresses stay associated and support
-// the existing connections but do not support any new connections (new connections
-// are distributed across the remaining assigned private IP address). After the
-// existing connections drain out, the private IP addresses get released.
+// in the Amazon VPC User Guide. While unassigning is in progress, you cannot
+// assign/unassign additional IP addresses while the connections are being drained.
+// You are, however, allowed to delete the NAT gateway. A private IP address will
+// only be released at the end of MaxDrainDurationSeconds. The private IP addresses
+// stay associated and support the existing connections, but do not support any new
+// connections (new connections are distributed across the remaining assigned
+// private IP address). After the existing connections drain out, the private IP
+// addresses are released.
 func (c *Client) UnassignPrivateNatGatewayAddress(ctx context.Context, params *UnassignPrivateNatGatewayAddressInput, optFns ...func(*Options)) (*UnassignPrivateNatGatewayAddressOutput, error) {
 	if params == nil {
 		params = &UnassignPrivateNatGatewayAddressInput{}
@@ -39,7 +39,7 @@ func (c *Client) UnassignPrivateNatGatewayAddress(ctx context.Context, params *U
 
 type UnassignPrivateNatGatewayAddressInput struct {
 
-	// The NAT gateway ID.
+	// The ID of the NAT gateway.
 	//
 	// This member is required.
 	NatGatewayId *string
@@ -67,7 +67,7 @@ type UnassignPrivateNatGatewayAddressOutput struct {
 	// Information about the NAT gateway IP addresses.
 	NatGatewayAddresses []types.NatGatewayAddress
 
-	// The NAT gateway ID.
+	// The ID of the NAT gateway.
 	NatGatewayId *string
 
 	// Metadata pertaining to the operation's result.

@@ -68,6 +68,9 @@ type GetTemplateSummaryInput struct {
 	// following parameters: StackName , StackSetName , TemplateBody , or TemplateURL .
 	TemplateBody *string
 
+	// Specifies options for the GetTemplateSummary API action.
+	TemplateSummaryConfig *types.TemplateSummaryConfig
+
 	// Location of file containing the template body. The URL must point to a template
 	// (max size: 460,800 bytes) that's located in an Amazon S3 bucket or a Systems
 	// Manager document. For more information about templates, see Template anatomy (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html)
@@ -120,6 +123,9 @@ type GetTemplateSummaryOutput struct {
 	// The Amazon Web Services template format version, which identifies the
 	// capabilities of the template.
 	Version *string
+
+	// An object containing any warnings returned.
+	Warnings *types.Warnings
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

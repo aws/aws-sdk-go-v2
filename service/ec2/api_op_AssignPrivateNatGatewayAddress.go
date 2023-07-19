@@ -13,7 +13,7 @@ import (
 
 // Assigns one or more private IPv4 addresses to a private NAT gateway. For more
 // information, see Work with NAT gateways (https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-working-with)
-// in the Amazon Virtual Private Cloud User Guide.
+// in the Amazon VPC User Guide.
 func (c *Client) AssignPrivateNatGatewayAddress(ctx context.Context, params *AssignPrivateNatGatewayAddressInput, optFns ...func(*Options)) (*AssignPrivateNatGatewayAddressOutput, error) {
 	if params == nil {
 		params = &AssignPrivateNatGatewayAddressInput{}
@@ -31,7 +31,7 @@ func (c *Client) AssignPrivateNatGatewayAddress(ctx context.Context, params *Ass
 
 type AssignPrivateNatGatewayAddressInput struct {
 
-	// The NAT gateway ID.
+	// The ID of the NAT gateway.
 	//
 	// This member is required.
 	NatGatewayId *string
@@ -57,7 +57,7 @@ type AssignPrivateNatGatewayAddressOutput struct {
 	// NAT gateway IP addresses.
 	NatGatewayAddresses []types.NatGatewayAddress
 
-	// The NAT gateway ID.
+	// The ID of the NAT gateway.
 	NatGatewayId *string
 
 	// Metadata pertaining to the operation's result.

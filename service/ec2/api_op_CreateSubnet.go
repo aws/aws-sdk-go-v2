@@ -28,7 +28,7 @@ import (
 // address. It's therefore possible to have a subnet with no running instances
 // (they're all stopped), but no remaining IP addresses available. For more
 // information, see Subnets (https://docs.aws.amazon.com/vpc/latest/userguide/configure-subnets.html)
-// in the Amazon Virtual Private Cloud User Guide.
+// in the Amazon VPC User Guide.
 func (c *Client) CreateSubnet(ctx context.Context, params *CreateSubnetInput, optFns ...func(*Options)) (*CreateSubnetOutput, error) {
 	if params == nil {
 		params = &CreateSubnetInput{}
@@ -56,10 +56,9 @@ type CreateSubnetInput struct {
 	// do not necessarily select a different zone for each subnet. To create a subnet
 	// in a Local Zone, set this value to the Local Zone ID, for example
 	// us-west-2-lax-1a . For information about the Regions that support Local Zones,
-	// see Available Regions (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-available-regions)
-	// in the Amazon Elastic Compute Cloud User Guide. To create a subnet in an
-	// Outpost, set this value to the Availability Zone for the Outpost and specify the
-	// Outpost ARN.
+	// see Local Zones locations (http://aws.amazon.com/about-aws/global-infrastructure/localzones/locations/)
+	// . To create a subnet in an Outpost, set this value to the Availability Zone for
+	// the Outpost and specify the Outpost ARN.
 	AvailabilityZone *string
 
 	// The AZ ID or the Local Zone ID of the subnet.

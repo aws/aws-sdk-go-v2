@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// [VPC only] Updates the description of an egress (outbound) security group rule.
-// You can replace an existing description, or add a description to a rule that did
-// not have one previously. You can remove a description for a security group rule
-// by omitting the description parameter in the request.
+// Updates the description of an egress (outbound) security group rule. You can
+// replace an existing description, or add a description to a rule that did not
+// have one previously. You can remove a description for a security group rule by
+// omitting the description parameter in the request.
 func (c *Client) UpdateSecurityGroupRuleDescriptionsEgress(ctx context.Context, params *UpdateSecurityGroupRuleDescriptionsEgressInput, optFns ...func(*Options)) (*UpdateSecurityGroupRuleDescriptionsEgressOutput, error) {
 	if params == nil {
 		params = &UpdateSecurityGroupRuleDescriptionsEgressInput{}
@@ -44,7 +44,7 @@ type UpdateSecurityGroupRuleDescriptionsEgressInput struct {
 	GroupId *string
 
 	// [Default VPC] The name of the security group. You must specify either the
-	// security group ID or the security group name in the request.
+	// security group ID or the security group name.
 	GroupName *string
 
 	// The IP permissions for the security group rule. You must specify either the IP

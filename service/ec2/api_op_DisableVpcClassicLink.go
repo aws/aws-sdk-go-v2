@@ -10,11 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disables ClassicLink for a VPC. You cannot disable ClassicLink for a VPC that
-// has EC2-Classic instances linked to it. We are retiring EC2-Classic. We
-// recommend that you migrate from EC2-Classic to a VPC. For more information, see
-// Migrate from EC2-Classic to a VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html)
-// in the Amazon Elastic Compute Cloud User Guide.
+// This action is deprecated. Disables ClassicLink for a VPC. You cannot disable
+// ClassicLink for a VPC that has EC2-Classic instances linked to it.
 func (c *Client) DisableVpcClassicLink(ctx context.Context, params *DisableVpcClassicLinkInput, optFns ...func(*Options)) (*DisableVpcClassicLinkOutput, error) {
 	if params == nil {
 		params = &DisableVpcClassicLinkInput{}

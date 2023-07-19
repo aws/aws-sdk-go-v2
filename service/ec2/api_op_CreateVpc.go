@@ -11,19 +11,19 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a VPC with the specified CIDR blocks. For more information, see VPC
-// CIDR blocks (https://docs.aws.amazon.com/vpc/latest/userguide/configure-your-vpc.html#vpc-cidr-blocks)
-// in the Amazon Virtual Private Cloud User Guide. You can optionally request an
-// IPv6 CIDR block for the VPC. You can request an Amazon-provided IPv6 CIDR block
-// from Amazon's pool of IPv6 addresses, or an IPv6 CIDR block from an IPv6 address
-// pool that you provisioned through bring your own IP addresses ( BYOIP (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html)
+// Creates a VPC with the specified CIDR blocks. For more information, see IP
+// addressing for your VPCs and subnets (https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html)
+// in the Amazon VPC User Guide. You can optionally request an IPv6 CIDR block for
+// the VPC. You can request an Amazon-provided IPv6 CIDR block from Amazon's pool
+// of IPv6 addresses, or an IPv6 CIDR block from an IPv6 address pool that you
+// provisioned through bring your own IP addresses ( BYOIP (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html)
 // ). By default, each instance that you launch in the VPC has the default DHCP
 // options, which include only a default DNS server that we provide
 // (AmazonProvidedDNS). For more information, see DHCP option sets (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html)
-// in the Amazon Virtual Private Cloud User Guide. You can specify the instance
-// tenancy value for the VPC when you create it. You can't change this value for
-// the VPC after you create it. For more information, see Dedicated Instances (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html)
-// in the Amazon Elastic Compute Cloud User Guide.
+// in the Amazon VPC User Guide. You can specify the instance tenancy value for the
+// VPC when you create it. You can't change this value for the VPC after you create
+// it. For more information, see Dedicated Instances (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html)
+// in the Amazon EC2 User Guide.
 func (c *Client) CreateVpc(ctx context.Context, params *CreateVpcInput, optFns ...func(*Options)) (*CreateVpcOutput, error) {
 	if params == nil {
 		params = &CreateVpcInput{}

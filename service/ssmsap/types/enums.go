@@ -2,6 +2,30 @@
 
 package types
 
+type ApplicationDiscoveryStatus string
+
+// Enum values for ApplicationDiscoveryStatus
+const (
+	ApplicationDiscoveryStatusSuccess            ApplicationDiscoveryStatus = "SUCCESS"
+	ApplicationDiscoveryStatusRegistrationFailed ApplicationDiscoveryStatus = "REGISTRATION_FAILED"
+	ApplicationDiscoveryStatusRefreshFailed      ApplicationDiscoveryStatus = "REFRESH_FAILED"
+	ApplicationDiscoveryStatusRegistering        ApplicationDiscoveryStatus = "REGISTERING"
+	ApplicationDiscoveryStatusDeleting           ApplicationDiscoveryStatus = "DELETING"
+)
+
+// Values returns all known values for ApplicationDiscoveryStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ApplicationDiscoveryStatus) Values() []ApplicationDiscoveryStatus {
+	return []ApplicationDiscoveryStatus{
+		"SUCCESS",
+		"REGISTRATION_FAILED",
+		"REFRESH_FAILED",
+		"REGISTERING",
+		"DELETING",
+	}
+}
+
 type ApplicationStatus string
 
 // Enum values for ApplicationStatus
@@ -48,11 +72,57 @@ func (ApplicationType) Values() []ApplicationType {
 	}
 }
 
+type BackintMode string
+
+// Enum values for BackintMode
+const (
+	BackintModeAWSBackup BackintMode = "AWSBackup"
+)
+
+// Values returns all known values for BackintMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (BackintMode) Values() []BackintMode {
+	return []BackintMode{
+		"AWSBackup",
+	}
+}
+
+type ClusterStatus string
+
+// Enum values for ClusterStatus
+const (
+	ClusterStatusOnline      ClusterStatus = "ONLINE"
+	ClusterStatusStandby     ClusterStatus = "STANDBY"
+	ClusterStatusMaintenance ClusterStatus = "MAINTENANCE"
+	ClusterStatusOffline     ClusterStatus = "OFFLINE"
+	ClusterStatusNone        ClusterStatus = "NONE"
+)
+
+// Values returns all known values for ClusterStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ClusterStatus) Values() []ClusterStatus {
+	return []ClusterStatus{
+		"ONLINE",
+		"STANDBY",
+		"MAINTENANCE",
+		"OFFLINE",
+		"NONE",
+	}
+}
+
 type ComponentStatus string
 
 // Enum values for ComponentStatus
 const (
-	ComponentStatusActivated ComponentStatus = "ACTIVATED"
+	ComponentStatusActivated        ComponentStatus = "ACTIVATED"
+	ComponentStatusStarting         ComponentStatus = "STARTING"
+	ComponentStatusStopped          ComponentStatus = "STOPPED"
+	ComponentStatusStopping         ComponentStatus = "STOPPING"
+	ComponentStatusRunning          ComponentStatus = "RUNNING"
+	ComponentStatusRunningWithError ComponentStatus = "RUNNING_WITH_ERROR"
+	ComponentStatusUndefined        ComponentStatus = "UNDEFINED"
 )
 
 // Values returns all known values for ComponentStatus. Note that this can be
@@ -61,6 +131,12 @@ const (
 func (ComponentStatus) Values() []ComponentStatus {
 	return []ComponentStatus{
 		"ACTIVATED",
+		"STARTING",
+		"STOPPED",
+		"STOPPING",
+		"RUNNING",
+		"RUNNING_WITH_ERROR",
+		"UNDEFINED",
 	}
 }
 
@@ -68,7 +144,8 @@ type ComponentType string
 
 // Enum values for ComponentType
 const (
-	ComponentTypeHana ComponentType = "HANA"
+	ComponentTypeHana     ComponentType = "HANA"
+	ComponentTypeHanaNode ComponentType = "HANA_NODE"
 )
 
 // Values returns all known values for ComponentType. Note that this can be
@@ -77,6 +154,7 @@ const (
 func (ComponentType) Values() []ComponentType {
 	return []ComponentType{
 		"HANA",
+		"HANA_NODE",
 	}
 }
 
@@ -105,6 +183,7 @@ const (
 	DatabaseStatusStopped  DatabaseStatus = "STOPPED"
 	DatabaseStatusWarning  DatabaseStatus = "WARNING"
 	DatabaseStatusUnknown  DatabaseStatus = "UNKNOWN"
+	DatabaseStatusError    DatabaseStatus = "ERROR"
 )
 
 // Values returns all known values for DatabaseStatus. Note that this can be
@@ -117,6 +196,7 @@ func (DatabaseStatus) Values() []DatabaseStatus {
 		"STOPPED",
 		"WARNING",
 		"UNKNOWN",
+		"ERROR",
 	}
 }
 
@@ -180,6 +260,30 @@ func (HostRole) Values() []HostRole {
 	}
 }
 
+type OperationMode string
+
+// Enum values for OperationMode
+const (
+	OperationModePrimary             OperationMode = "PRIMARY"
+	OperationModeLogreplay           OperationMode = "LOGREPLAY"
+	OperationModeDeltaDatashipping   OperationMode = "DELTA_DATASHIPPING"
+	OperationModeLogreplayReadaccess OperationMode = "LOGREPLAY_READACCESS"
+	OperationModeNone                OperationMode = "NONE"
+)
+
+// Values returns all known values for OperationMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OperationMode) Values() []OperationMode {
+	return []OperationMode{
+		"PRIMARY",
+		"LOGREPLAY",
+		"DELTA_DATASHIPPING",
+		"LOGREPLAY_READACCESS",
+		"NONE",
+	}
+}
+
 type OperationStatus string
 
 // Enum values for OperationStatus
@@ -213,5 +317,29 @@ const (
 func (PermissionActionType) Values() []PermissionActionType {
 	return []PermissionActionType{
 		"RESTORE",
+	}
+}
+
+type ReplicationMode string
+
+// Enum values for ReplicationMode
+const (
+	ReplicationModePrimary ReplicationMode = "PRIMARY"
+	ReplicationModeNone    ReplicationMode = "NONE"
+	ReplicationModeSync    ReplicationMode = "SYNC"
+	ReplicationModeSyncmem ReplicationMode = "SYNCMEM"
+	ReplicationModeAsync   ReplicationMode = "ASYNC"
+)
+
+// Values returns all known values for ReplicationMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ReplicationMode) Values() []ReplicationMode {
+	return []ReplicationMode{
+		"PRIMARY",
+		"NONE",
+		"SYNC",
+		"SYNCMEM",
+		"ASYNC",
 	}
 }

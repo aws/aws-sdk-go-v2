@@ -1057,6 +1057,9 @@ func awsRestjson1_deserializeOpErrorCreateResourceShare(response *smithyhttp.Res
 	case strings.EqualFold("ServiceUnavailableException", errorCode):
 		return awsRestjson1_deserializeErrorServiceUnavailableException(response, errorBody)
 
+	case strings.EqualFold("TagLimitExceededException", errorCode):
+		return awsRestjson1_deserializeErrorTagLimitExceededException(response, errorBody)
+
 	case strings.EqualFold("TagPolicyViolationException", errorCode):
 		return awsRestjson1_deserializeErrorTagPolicyViolationException(response, errorBody)
 

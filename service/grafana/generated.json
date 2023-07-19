@@ -19,6 +19,7 @@
         "api_op_DisassociateLicense.go",
         "api_op_ListPermissions.go",
         "api_op_ListTagsForResource.go",
+        "api_op_ListVersions.go",
         "api_op_ListWorkspaces.go",
         "api_op_TagResource.go",
         "api_op_UntagResource.go",

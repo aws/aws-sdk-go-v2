@@ -12012,6 +12012,11 @@ func awsAwsjson11_deserializeDocumentRateBasedStatementCustomKey(v **types.RateB
 				return err
 			}
 
+		case "UriPath":
+			if err := awsAwsjson11_deserializeDocumentRateLimitUriPath(&sv.UriPath, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -12384,6 +12389,42 @@ func awsAwsjson11_deserializeDocumentRateLimitQueryString(v **types.RateLimitQue
 	var sv *types.RateLimitQueryString
 	if *v == nil {
 		sv = &types.RateLimitQueryString{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "TextTransformations":
+			if err := awsAwsjson11_deserializeDocumentTextTransformations(&sv.TextTransformations, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRateLimitUriPath(v **types.RateLimitUriPath, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RateLimitUriPath
+	if *v == nil {
+		sv = &types.RateLimitUriPath{}
 	} else {
 		sv = *v
 	}

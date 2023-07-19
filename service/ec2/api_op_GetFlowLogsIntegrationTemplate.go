@@ -21,6 +21,9 @@ import (
 //   - Create a table partitioned between two timestamps in the past
 //   - Create a set of named queries in Athena that you can use to get started
 //     quickly
+//
+// GetFlowLogsIntegrationTemplate does not support integration between Amazon Web
+// Services Transit Gateway Flow Logs and Amazon Athena.
 func (c *Client) GetFlowLogsIntegrationTemplate(ctx context.Context, params *GetFlowLogsIntegrationTemplateInput, optFns ...func(*Options)) (*GetFlowLogsIntegrationTemplateOutput, error) {
 	if params == nil {
 		params = &GetFlowLogsIntegrationTemplateInput{}

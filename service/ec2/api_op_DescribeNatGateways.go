@@ -42,7 +42,7 @@ type DescribeNatGatewaysInput struct {
 	// UnauthorizedOperation .
 	DryRun *bool
 
-	// One or more filters.
+	// The filters.
 	//   - nat-gateway-id - The ID of the NAT gateway.
 	//   - state - The state of the NAT gateway ( pending | failed | available |
 	//   deleting | deleted ).
@@ -62,7 +62,7 @@ type DescribeNatGatewaysInput struct {
 	// .
 	MaxResults *int32
 
-	// One or more NAT gateway IDs.
+	// The IDs of the NAT gateways.
 	NatGatewayIds []string
 
 	// The token returned from a previous paginated request. Pagination continues from
