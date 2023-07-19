@@ -554,7 +554,7 @@ func (r *resolver) ResolveEndpoint(
 														}, nil
 													}
 												}
-												return endpoint, fmt.Errorf("no rules matched these parameters. This is a bug, %#v", params)
+												return endpoint, fmt.Errorf("Endpoint resolution failed. Invalid operation or environment input.")
 											}
 											uriString := func() string {
 												var out strings.Builder
@@ -634,7 +634,7 @@ func (r *resolver) ResolveEndpoint(
 														}, nil
 													}
 												}
-												return endpoint, fmt.Errorf("no rules matched these parameters. This is a bug, %#v", params)
+												return endpoint, fmt.Errorf("Endpoint resolution failed. Invalid operation or environment input.")
 											}
 											uriString := func() string {
 												var out strings.Builder
@@ -1798,12 +1798,12 @@ func (r *resolver) ResolveEndpoint(
 									}
 								}
 							}
-							return endpoint, fmt.Errorf("no rules matched these parameters. This is a bug, %#v", params)
+							return endpoint, fmt.Errorf("Endpoint resolution failed. Invalid operation or environment input.")
 						}
 						return endpoint, fmt.Errorf("endpoint rule error, %s", "Path-style addressing cannot be used with S3 Accelerate")
 					}
 					return endpoint, fmt.Errorf("endpoint rule error, %s", "A valid partition could not be determined")
-					return endpoint, fmt.Errorf("no rules matched these parameters. This is a bug, %#v", params)
+					return endpoint, fmt.Errorf("Endpoint resolution failed. Invalid operation or environment input.")
 				}
 			}
 			if awsrulesfn.IsVirtualHostableS3Bucket(_Bucket, false) {
@@ -3382,7 +3382,7 @@ func (r *resolver) ResolveEndpoint(
 								}
 							}
 						}
-						return endpoint, fmt.Errorf("no rules matched these parameters. This is a bug, %#v", params)
+						return endpoint, fmt.Errorf("Endpoint resolution failed. Invalid operation or environment input.")
 					}
 					return endpoint, fmt.Errorf("endpoint rule error, %s", "Invalid region: region was not a valid DNS name.")
 				}
@@ -3940,7 +3940,7 @@ func (r *resolver) ResolveEndpoint(
 																						}, nil
 																					}
 																				}
-																				return endpoint, fmt.Errorf("no rules matched these parameters. This is a bug, %#v", params)
+																				return endpoint, fmt.Errorf("Endpoint resolution failed. Invalid operation or environment input.")
 																			}
 																			return endpoint, fmt.Errorf("endpoint rule error, %s", func() string {
 																				var out strings.Builder
@@ -3999,7 +3999,7 @@ func (r *resolver) ResolveEndpoint(
 											}
 											return endpoint, fmt.Errorf("endpoint rule error, %s", "Invalid ARN: bucket ARN is missing a region")
 										}
-										return endpoint, fmt.Errorf("no rules matched these parameters. This is a bug, %#v", params)
+										return endpoint, fmt.Errorf("Endpoint resolution failed. Invalid operation or environment input.")
 									}
 									if rulesfn.IsValidHostLabel(_accessPointName, true) {
 										if _UseDualStack == true {
@@ -5376,12 +5376,12 @@ func (r *resolver) ResolveEndpoint(
 							}
 						}
 					}
-					return endpoint, fmt.Errorf("no rules matched these parameters. This is a bug, %#v", params)
+					return endpoint, fmt.Errorf("Endpoint resolution failed. Invalid operation or environment input.")
 				}
 				return endpoint, fmt.Errorf("endpoint rule error, %s", "Path-style addressing cannot be used with S3 Accelerate")
 			}
 			return endpoint, fmt.Errorf("endpoint rule error, %s", "A valid partition could not be determined")
-			return endpoint, fmt.Errorf("no rules matched these parameters. This is a bug, %#v", params)
+			return endpoint, fmt.Errorf("Endpoint resolution failed. Invalid operation or environment input.")
 		}
 		if exprVal := params.UseObjectLambdaEndpoint; exprVal != nil {
 			_UseObjectLambdaEndpoint := *exprVal
@@ -6908,13 +6908,13 @@ func (r *resolver) ResolveEndpoint(
 							}
 						}
 					}
-					return endpoint, fmt.Errorf("no rules matched these parameters. This is a bug, %#v", params)
+					return endpoint, fmt.Errorf("Endpoint resolution failed. Invalid operation or environment input.")
 				}
 				return endpoint, fmt.Errorf("endpoint rule error, %s", "Invalid region: region was not a valid DNS name.")
 			}
 			return endpoint, fmt.Errorf("endpoint rule error, %s", "A valid partition could not be determined")
 		}
-		return endpoint, fmt.Errorf("no rules matched these parameters. This is a bug, %#v", params)
+		return endpoint, fmt.Errorf("Endpoint resolution failed. Invalid operation or environment input.")
 	}
 	return endpoint, fmt.Errorf("endpoint rule error, %s", "A region must be set when sending requests to S3.")
 }

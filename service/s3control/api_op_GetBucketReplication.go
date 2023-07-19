@@ -12,6 +12,7 @@ import (
 	internalauth "github.com/aws/aws-sdk-go-v2/internal/auth"
 	s3controlcust "github.com/aws/aws-sdk-go-v2/service/s3control/internal/customizations"
 	"github.com/aws/aws-sdk-go-v2/service/s3control/types"
+	smithy "github.com/aws/smithy-go"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
@@ -150,6 +151,12 @@ func (c *Client) addOperationGetBucketReplicationMiddlewares(stack *middleware.S
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = s3controlcust.AddUpdateOutpostARN(stack); err != nil {
+		return err
+	}
+	if err = addEndpointPrefix_opGetBucketReplicationMiddleware(stack); err != nil {
+		return err
+	}
 	if err = addGetBucketReplicationResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -181,6 +188,59 @@ func (c *Client) addOperationGetBucketReplicationMiddlewares(stack *middleware.S
 		return err
 	}
 	return nil
+}
+
+func (m *GetBucketReplicationInput) GetARNMember() (*string, bool) {
+	if m.Bucket == nil {
+		return nil, false
+	}
+	return m.Bucket, true
+}
+
+func (m *GetBucketReplicationInput) SetARNMember(v string) error {
+	m.Bucket = &v
+	return nil
+}
+
+type endpointPrefix_opGetBucketReplicationMiddleware struct {
+}
+
+func (*endpointPrefix_opGetBucketReplicationMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opGetBucketReplicationMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleSerialize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	input, ok := in.Parameters.(*GetBucketReplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input type %T", in.Parameters)
+	}
+
+	var prefix strings.Builder
+	if input.AccountId == nil {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("AccountId forms part of the endpoint host and so may not be nil")}
+	} else if !smithyhttp.ValidHostLabel(*input.AccountId) {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("AccountId forms part of the endpoint host and so must match \"[a-zA-Z0-9-]{1,63}\", but was \"%s\"", *input.AccountId)}
+	} else {
+		prefix.WriteString(*input.AccountId)
+	}
+	prefix.WriteString(".")
+	req.URL.Host = prefix.String() + req.URL.Host
+
+	return next.HandleSerialize(ctx, in)
+}
+func addEndpointPrefix_opGetBucketReplicationMiddleware(stack *middleware.Stack) error {
+	return stack.Serialize.Insert(&endpointPrefix_opGetBucketReplicationMiddleware{}, `OperationSerializer`, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opGetBucketReplication(region string) *awsmiddleware.RegisterServiceMetadata {
@@ -291,6 +351,8 @@ func (m *opGetBucketReplicationResolveEndpointMiddleware) HandleSerialize(ctx co
 			resolvedEndpoint.Headers.Get(k),
 		)
 	}
+
+	ctx = smithyhttp.DisableEndpointHostPrefix(ctx, true)
 
 	authSchemes, err := internalauth.GetAuthenticationSchemes(&resolvedEndpoint.Properties)
 	if err != nil {

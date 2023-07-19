@@ -859,7 +859,7 @@ func (r *resolver) ResolveEndpoint(
 							}
 							return endpoint, fmt.Errorf("endpoint rule error, %s", "Invalid ARN: The Outpost Id was not set")
 						}
-						return endpoint, fmt.Errorf("no rules matched these parameters. This is a bug, %#v", params)
+						return endpoint, fmt.Errorf("Endpoint resolution failed. Invalid operation or environment input.")
 					}
 				}
 				return endpoint, fmt.Errorf("endpoint rule error, %s", "Invalid ARN: No ARN type specified")
@@ -1108,7 +1108,7 @@ func (r *resolver) ResolveEndpoint(
 							}
 							return endpoint, fmt.Errorf("endpoint rule error, %s", "Invalid ARN: The Outpost Id was not set")
 						}
-						return endpoint, fmt.Errorf("no rules matched these parameters. This is a bug, %#v", params)
+						return endpoint, fmt.Errorf("Endpoint resolution failed. Invalid operation or environment input.")
 					}
 				}
 				return endpoint, fmt.Errorf("endpoint rule error, %s", "Invalid ARN: No ARN type specified")
@@ -1542,7 +1542,7 @@ func (r *resolver) ResolveEndpoint(
 						}, nil
 					}
 				}
-				return endpoint, fmt.Errorf("no rules matched these parameters. This is a bug, %#v", params)
+				return endpoint, fmt.Errorf("Endpoint resolution failed. Invalid operation or environment input.")
 			}
 			return endpoint, fmt.Errorf("endpoint rule error, %s", "Invalid region: region was not a valid DNS name.")
 		}
