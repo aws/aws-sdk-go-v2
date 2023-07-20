@@ -1,3 +1,7 @@
+# v1.5.0 (2023-07-20.2)
+
+* **Feature**: This release adds the ability to assign a case to a queue or user.
+
 # v1.4.3 (2023-07-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "35bcfaf7-70d1-4653-b5da-2255da25d620",
-    "type": "feature",
-    "description": "This release adds support for updating and deleting spaces and projects in Amazon CodeCatalyst. It also adds support for creating, getting, and deleting source repositories in CodeCatalyst projects.",
-    "modules": [
-        "service/codecatalyst"
-    ]
-}

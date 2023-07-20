@@ -1,8 +1,0 @@
-{
-    "id": "c78117aa-b6ce-411a-8eb2-9f2da7ed31e5",
-    "type": "feature",
-    "description": "Cross account support for SageMaker Feature Store",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

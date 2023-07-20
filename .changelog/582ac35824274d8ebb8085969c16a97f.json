@@ -1,8 +1,0 @@
-{
-    "id": "582ac358-2427-4d8e-bb80-85969c16a97f",
-    "type": "feature",
-    "description": "Improve performance of S3 clients by simplifying and optimizing endpoint resolution.",
-    "modules": [
-        "service/s3"
-    ]
-}

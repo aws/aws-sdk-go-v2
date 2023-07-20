@@ -1,3 +1,7 @@
+# v1.18.0 (2023-07-20.2)
+
+* **Feature**: This release adds support for Route 53 On Outposts, a new feature that allows customers to run Route 53 Resolver and Resolver endpoints locally on their Outposts.
+
 # v1.17.14 (2023-07-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

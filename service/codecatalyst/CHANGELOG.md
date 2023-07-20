@@ -1,3 +1,7 @@
+# v1.4.0 (2023-07-20.2)
+
+* **Feature**: This release adds support for updating and deleting spaces and projects in Amazon CodeCatalyst. It also adds support for creating, getting, and deleting source repositories in CodeCatalyst projects.
+
 # v1.3.3 (2023-07-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

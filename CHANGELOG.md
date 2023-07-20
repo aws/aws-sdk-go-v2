@@ -1,3 +1,23 @@
+# Release (2023-07-20.2)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/codecatalyst`: [v1.4.0](service/codecatalyst/CHANGELOG.md#v140-2023-07-202)
+  * **Feature**: This release adds support for updating and deleting spaces and projects in Amazon CodeCatalyst. It also adds support for creating, getting, and deleting source repositories in CodeCatalyst projects.
+* `github.com/aws/aws-sdk-go-v2/service/connectcases`: [v1.5.0](service/connectcases/CHANGELOG.md#v150-2023-07-202)
+  * **Feature**: This release adds the ability to assign a case to a queue or user.
+* `github.com/aws/aws-sdk-go-v2/service/lexmodelsv2`: [v1.31.0](service/lexmodelsv2/CHANGELOG.md#v1310-2023-07-202)
+  * **Feature**: This release updates type for Channel field in SessionSpecification and UtteranceSpecification
+* `github.com/aws/aws-sdk-go-v2/service/route53resolver`: [v1.18.0](service/route53resolver/CHANGELOG.md#v1180-2023-07-202)
+  * **Feature**: This release adds support for Route 53 On Outposts, a new feature that allows customers to run Route 53 Resolver and Resolver endpoints locally on their Outposts.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.93.0](service/sagemaker/CHANGELOG.md#v1930-2023-07-202)
+  * **Feature**: Cross account support for SageMaker Feature Store
+* `github.com/aws/aws-sdk-go-v2/service/sagemakerfeaturestoreruntime`: [v1.16.0](service/sagemakerfeaturestoreruntime/CHANGELOG.md#v1160-2023-07-202)
+  * **Feature**: Cross account support for SageMaker Feature Store
+* `github.com/aws/aws-sdk-go-v2/service/securitylake`: [v1.5.0](service/securitylake/CHANGELOG.md#v150-2023-07-202)
+  * **Feature**: Adding support for Tags on Create and Resource Tagging API.
+* `github.com/aws/aws-sdk-go-v2/service/transcribe`: [v1.27.0](service/transcribe/CHANGELOG.md#v1270-2023-07-202)
+  * **Feature**: Added API argument --toxicity-detection to startTranscriptionJob API, which allows users to view toxicity scores of submitted audio.
+
 # Release (2023-07-20)
 
 ## Module Highlights

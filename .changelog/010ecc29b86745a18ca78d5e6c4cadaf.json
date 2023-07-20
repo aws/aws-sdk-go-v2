@@ -1,8 +1,0 @@
-{
-    "id": "010ecc29-b867-45a1-8ca7-8d5e6c4cadaf",
-    "type": "feature",
-    "description": "This release updates type for Channel field in SessionSpecification and UtteranceSpecification",
-    "modules": [
-        "service/lexmodelsv2"
-    ]
-}

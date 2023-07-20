@@ -1,3 +1,7 @@
+# v1.16.0 (2023-07-20.2)
+
+* **Feature**: Cross account support for SageMaker Feature Store
+
 # v1.15.1 (2023-07-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

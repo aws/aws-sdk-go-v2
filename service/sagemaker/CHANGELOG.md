@@ -1,3 +1,7 @@
+# v1.93.0 (2023-07-20.2)
+
+* **Feature**: Cross account support for SageMaker Feature Store
+
 # v1.92.0 (2023-07-13)
 
 * **Feature**: Amazon SageMaker Canvas adds WorkspeceSettings support for CanvasAppSettings

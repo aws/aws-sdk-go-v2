@@ -1,8 +1,0 @@
-{
-    "id": "1c3fa3a4-1c90-49e6-869e-90f52fd689f6",
-    "type": "feature",
-    "description": "Cross account support for SageMaker Feature Store",
-    "modules": [
-        "service/sagemakerfeaturestoreruntime"
-    ]
-}

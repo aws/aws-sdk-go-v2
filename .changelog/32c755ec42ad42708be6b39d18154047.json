@@ -1,8 +1,0 @@
-{
-    "id": "32c755ec-42ad-4270-8be6-b39d18154047",
-    "type": "feature",
-    "description": "This release adds support for Route 53 On Outposts, a new feature that allows customers to run Route 53 Resolver and Resolver endpoints locally on their Outposts.",
-    "modules": [
-        "service/route53resolver"
-    ]
-}

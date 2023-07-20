@@ -1,3 +1,7 @@
+# v1.31.0 (2023-07-20.2)
+
+* **Feature**: This release updates type for Channel field in SessionSpecification and UtteranceSpecification
+
 # v1.30.0 (2023-07-18)
 
 * **Feature**: This release adds support for Lex Developers to view analytics for their bots.

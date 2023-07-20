@@ -1,3 +1,7 @@
+# v1.5.0 (2023-07-20.2)
+
+* **Feature**: Adding support for Tags on Create and Resource Tagging API.
+
 # v1.4.4 (2023-07-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions
