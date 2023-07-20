@@ -381,8 +381,6 @@ func (m *opCreateBucketResolveEndpointMiddleware) HandleSerialize(ctx context.Co
 		}
 	}
 
-	ctx = smithyhttp.DisableEndpointHostPrefix(ctx, true)
-
 	return next.HandleSerialize(ctx, in)
 }
 
