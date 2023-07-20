@@ -776,6 +776,100 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.route53resolver#CreateOutpostResolver": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53resolver#CreateOutpostResolverRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.route53resolver#CreateOutpostResolverResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53resolver#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an Route 53 Resolver on an Outpost.</p>"
+            }
+        },
+        "com.amazonaws.route53resolver#CreateOutpostResolverRequest": {
+            "type": "structure",
+            "members": {
+                "CreatorRequestId": {
+                    "target": "com.amazonaws.route53resolver#CreatorRequestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique string that identifies the request \n\t\tand that allows failed requests to be retried without the risk of running the operation twice. </p>\n         <p>\n            <code>CreatorRequestId</code> can be any unique string, for example, a date/time stamp.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.route53resolver#OutpostResolverName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A friendly name that lets you easily find a configuration in the \n\t\tResolver dashboard in the Route 53 console.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstanceCount": {
+                    "target": "com.amazonaws.route53resolver#InstanceCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Number of Amazon EC2 instances for the\n\t\tResolver on Outpost. \n\t\tThe default and minimal value is 4.</p>"
+                    }
+                },
+                "PreferredInstanceType": {
+                    "target": "com.amazonaws.route53resolver#OutpostInstanceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\tThe Amazon EC2 instance type. If you specify this, you must also specify a value for the <code>OutpostArn</code>.\n\t</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OutpostArn": {
+                    "target": "com.amazonaws.route53resolver#OutpostArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Outpost. If you specify this, you must also specify a value for the <code>PreferredInstanceType</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.route53resolver#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tA string that helps identify the Route 53 Resolvers on Outpost.\n\t\t</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.route53resolver#CreateOutpostResolverResponse": {
+            "type": "structure",
+            "members": {
+                "OutpostResolver": {
+                    "target": "com.amazonaws.route53resolver#OutpostResolver",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the <code>CreateOutpostResolver</code>\n\t\trequest, including the status of the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.route53resolver#CreateResolverEndpoint": {
             "type": "operation",
             "input": {
@@ -857,7 +951,19 @@
                 "ResolverEndpointType": {
                     "target": "com.amazonaws.route53resolver#ResolverEndpointType",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n\t\t\tFor the endpoint type you can choose either IPv4, IPv6. or dual-stack.\n\t\t\tA dual-stack endpoint means that it will resolve via both IPv4 and IPv6. This\n\t\t\tendpoint type is applied to all IP addresses.\n\t\t</p>"
+                        "smithy.api#documentation": "<p>\n\t\t\tFor the endpoint type you can choose either IPv4, IPv6, or dual-stack.\n\t\t\tA dual-stack endpoint means that it will resolve via both IPv4 and IPv6. This\n\t\t\tendpoint type is applied to all IP addresses.\n\t\t</p>"
+                    }
+                },
+                "OutpostArn": {
+                    "target": "com.amazonaws.route53resolver#OutpostArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Outpost. If you specify this, you must also specify a\n\t\t\tvalue for the <code>PreferredInstanceType</code>. </p>"
+                    }
+                },
+                "PreferredInstanceType": {
+                    "target": "com.amazonaws.route53resolver#OutpostInstanceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The  instance type. If you specify this, you must also specify a value for the <code>OutpostArn</code>.</p>"
                     }
                 }
             },
@@ -1038,7 +1144,7 @@
                 "TargetIps": {
                     "target": "com.amazonaws.route53resolver#TargetList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IPs that you want Resolver to forward DNS queries to. You can specify only IPv4 addresses. Separate IP addresses with a space.</p>\n         <p>\n            <code>TargetIps</code> is available only when the value of <code>Rule type</code> is <code>FORWARD</code>.</p>"
+                        "smithy.api#documentation": "<p>The IPs that you want Resolver to forward DNS queries to. You can specify either Ipv4 or Ipv6 addresses but not both in the same rule. Separate IP addresses with a space.</p>\n         <p>\n            <code>TargetIps</code> is available only when the value of <code>Rule type</code> is <code>FORWARD</code>.</p>"
                     }
                 },
                 "ResolverEndpointId": {
@@ -1255,6 +1361,67 @@
                     "target": "com.amazonaws.route53resolver#FirewallRule",
                     "traits": {
                         "smithy.api#documentation": "<p>The specification for the firewall rule that you just deleted.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.route53resolver#DeleteOutpostResolver": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53resolver#DeleteOutpostResolverRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.route53resolver#DeleteOutpostResolverResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53resolver#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a Resolver on the Outpost.</p>"
+            }
+        },
+        "com.amazonaws.route53resolver#DeleteOutpostResolverRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.route53resolver#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique string that identifies the Resolver on the Outpost.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.route53resolver#DeleteOutpostResolverResponse": {
+            "type": "structure",
+            "members": {
+                "OutpostResolver": {
+                    "target": "com.amazonaws.route53resolver#OutpostResolver",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the <code>DeleteOutpostResolver</code> \n\t\trequest, including the status of the request.</p>"
                     }
                 }
             },
@@ -2673,6 +2840,64 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.route53resolver#GetOutpostResolver": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53resolver#GetOutpostResolverRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.route53resolver#GetOutpostResolverResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53resolver#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets information about a specified Resolver on the Outpost, such as its instance count and\n\t\t\ttype, name, and the current status of the Resolver.</p>"
+            }
+        },
+        "com.amazonaws.route53resolver#GetOutpostResolverRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.route53resolver#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Resolver on the Outpost.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.route53resolver#GetOutpostResolverResponse": {
+            "type": "structure",
+            "members": {
+                "OutpostResolver": {
+                    "target": "com.amazonaws.route53resolver#OutpostResolver",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the <code>GetOutpostResolver</code>\n\t\trequest, including the status of the request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.route53resolver#GetResolverConfig": {
             "type": "operation",
             "input": {
@@ -3291,6 +3516,9 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.route53resolver#InstanceCount": {
+            "type": "integer"
+        },
         "com.amazonaws.route53resolver#InternalServiceErrorException": {
             "type": "structure",
             "members": {
@@ -3534,6 +3762,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "UPDATING"
+                    }
+                },
+                "UpdateFailed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATE_FAILED"
                     }
                 }
             }
@@ -4114,6 +4348,87 @@
                     "target": "com.amazonaws.route53resolver#FirewallRules",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of the rules that you have defined.  </p>\n         <p>This might be a partial list of the firewall rules that you've defined. For information,\n\t\t\tsee <code>MaxResults</code>. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.route53resolver#ListOutpostResolvers": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53resolver#ListOutpostResolversRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.route53resolver#ListOutpostResolversResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53resolver#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all the Resolvers on Outposts that were created using the current Amazon Web Services account.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "OutpostResolvers",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.route53resolver#ListOutpostResolversRequest": {
+            "type": "structure",
+            "members": {
+                "OutpostArn": {
+                    "target": "com.amazonaws.route53resolver#OutpostArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Outpost.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.route53resolver#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of Resolvers on the Outpost that you want to return in the response to a\n\t\t\t\t<code>ListOutpostResolver</code> request. If you don't specify a value for\n\t\t\t\t<code>MaxResults</code>, the request returns up to 100 Resolvers.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.route53resolver#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For the first <code>ListOutpostResolver</code> request, omit this value.</p>\n         <p></p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.route53resolver#ListOutpostResolversResponse": {
+            "type": "structure",
+            "members": {
+                "OutpostResolvers": {
+                    "target": "com.amazonaws.route53resolver#OutpostResolverList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Resolvers on Outposts that were created by using the current Amazon Web Services account, \n\t\tand that match the specified filters, if any.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.route53resolver#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If more than <code>MaxResults</code> Resolvers match the specified criteria, you can submit another \n\t\t<code>ListOutpostResolver</code> request to get the next group of results. In the next request, specify the value of <code>NextToken</code> from the previous response.</p>"
                     }
                 }
             },
@@ -4988,6 +5303,170 @@
         "com.amazonaws.route53resolver#NextToken": {
             "type": "string"
         },
+        "com.amazonaws.route53resolver#OutpostArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^arn:aws([a-z-]+)?:outposts:[a-z\\d-]+:\\d{12}:outpost/op-[a-f0-9]{17}$"
+            }
+        },
+        "com.amazonaws.route53resolver#OutpostInstanceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.route53resolver#OutpostResolver": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.route53resolver#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN (Amazon Resource Name) for the Resolver on an Outpost.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.route53resolver#Rfc3339TimeString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the Outpost Resolver was created, in Unix time format and Coordinated Universal Time (UTC).</p>"
+                    }
+                },
+                "ModificationTime": {
+                    "target": "com.amazonaws.route53resolver#Rfc3339TimeString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the Outpost Resolver was modified, in Unix time format and Coordinated Universal Time (UTC).</p>"
+                    }
+                },
+                "CreatorRequestId": {
+                    "target": "com.amazonaws.route53resolver#CreatorRequestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique string that identifies the request that created the Resolver endpoint. \n\t\tThe <code>CreatorRequestId</code> allows failed requests to be retried without the risk of running the operation twice.</p>"
+                    }
+                },
+                "Id": {
+                    "target": "com.amazonaws.route53resolver#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Resolver on Outpost.</p>"
+                    }
+                },
+                "InstanceCount": {
+                    "target": "com.amazonaws.route53resolver#InstanceCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Amazon EC2 instance count for the Resolver on the Outpost.</p>"
+                    }
+                },
+                "PreferredInstanceType": {
+                    "target": "com.amazonaws.route53resolver#OutpostInstanceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe Amazon EC2 instance type.\n\t\t</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.route53resolver#OutpostResolverName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the Resolver.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.route53resolver#OutpostResolverStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Status of the Resolver.</p>"
+                    }
+                },
+                "StatusMessage": {
+                    "target": "com.amazonaws.route53resolver#OutpostResolverStatusMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A detailed description of the Resolver.</p>"
+                    }
+                },
+                "OutpostArn": {
+                    "target": "com.amazonaws.route53resolver#OutpostArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN (Amazon Resource Name) for the Outpost.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A complex type that contains settings for an existing Resolver on an Outpost.</p>"
+            }
+        },
+        "com.amazonaws.route53resolver#OutpostResolverList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.route53resolver#OutpostResolver"
+            }
+        },
+        "com.amazonaws.route53resolver#OutpostResolverName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.route53resolver#OutpostResolverStatus": {
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                },
+                "OPERATIONAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OPERATIONAL"
+                    }
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "ACTION_NEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTION_NEEDED"
+                    }
+                },
+                "FAILED_CREATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED_CREATION"
+                    }
+                },
+                "FAILED_DELETION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED_DELETION"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.route53resolver#OutpostResolverStatusMessage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 4096
+                }
+            }
+        },
         "com.amazonaws.route53resolver#Port": {
             "type": "integer",
             "traits": {
@@ -5111,7 +5590,7 @@
                 "ResolverQueryLogConfigPolicy": {
                     "target": "com.amazonaws.route53resolver#ResolverQueryLogConfigPolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>An Identity and Access Management policy statement that lists the query logging configurations that you want to share with another Amazon Web Services account \n\t\t\tand the operations that you want the account to be able to perform. You can specify the following operations in the <code>Actions</code> section \n\t\t\tof the statement:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>route53resolver:AssociateResolverQueryLogConfig</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>route53resolver:DisassociateResolverQueryLogConfig</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>route53resolver:ListResolverQueryLogConfigAssociations</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>route53resolver:ListResolverQueryLogConfigs</code>\n               </p>\n            </li>\n         </ul>\n         <p>In the <code>Resource</code> section of the statement, you specify the ARNs for the query logging configurations that you want to share \n\t\t\twith the account that you specified in <code>Arn</code>. </p>",
+                        "smithy.api#documentation": "<p>An Identity and Access Management policy statement that lists the query logging configurations that you want to share with another Amazon Web Services account \n\t\t\tand the operations that you want the account to be able to perform. You can specify the following operations in the <code>Actions</code> section \n\t\t\tof the statement:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>route53resolver:AssociateResolverQueryLogConfig</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>route53resolver:DisassociateResolverQueryLogConfig</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>route53resolver:ListResolverQueryLogConfigs</code>\n               </p>\n            </li>\n         </ul>\n         <p>In the <code>Resource</code> section of the statement, you specify the ARNs for the query logging configurations that you want to share \n\t\t\twith the account that you specified in <code>Arn</code>. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5440,6 +5919,18 @@
                     "target": "com.amazonaws.route53resolver#ResolverEndpointType",
                     "traits": {
                         "smithy.api#documentation": "<p>\n\t\t\tThe Resolver endpoint IP address type.\n\t\t</p>"
+                    }
+                },
+                "OutpostArn": {
+                    "target": "com.amazonaws.route53resolver#OutpostArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN (Amazon Resource Name) for the Outpost.</p>"
+                    }
+                },
+                "PreferredInstanceType": {
+                    "target": "com.amazonaws.route53resolver#OutpostInstanceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe Amazon EC2 instance type.\n\t\t</p>"
                     }
                 }
             },
@@ -5834,7 +6325,7 @@
                 "TargetIps": {
                     "target": "com.amazonaws.route53resolver#TargetList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array that contains the IP addresses and ports that an outbound endpoint forwards DNS queries to. Typically, \n\t\t\tthese are the IP addresses of DNS resolvers on your network. Specify IPv4 addresses. IPv6 is not supported.</p>"
+                        "smithy.api#documentation": "<p>An array that contains the IP addresses and ports that an outbound endpoint forwards DNS queries to. Typically, \n\t\t\tthese are the IP addresses of DNS resolvers on your network. </p>"
                     }
                 },
                 "ResolverEndpointId": {
@@ -6143,6 +6634,9 @@
                     "target": "com.amazonaws.route53resolver#CreateFirewallRuleGroup"
                 },
                 {
+                    "target": "com.amazonaws.route53resolver#CreateOutpostResolver"
+                },
+                {
                     "target": "com.amazonaws.route53resolver#CreateResolverEndpoint"
                 },
                 {
@@ -6159,6 +6653,9 @@
                 },
                 {
                     "target": "com.amazonaws.route53resolver#DeleteFirewallRuleGroup"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#DeleteOutpostResolver"
                 },
                 {
                     "target": "com.amazonaws.route53resolver#DeleteResolverEndpoint"
@@ -6195,6 +6692,9 @@
                 },
                 {
                     "target": "com.amazonaws.route53resolver#GetFirewallRuleGroupPolicy"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#GetOutpostResolver"
                 },
                 {
                     "target": "com.amazonaws.route53resolver#GetResolverConfig"
@@ -6243,6 +6743,9 @@
                 },
                 {
                     "target": "com.amazonaws.route53resolver#ListFirewallRules"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#ListOutpostResolvers"
                 },
                 {
                     "target": "com.amazonaws.route53resolver#ListResolverConfigs"
@@ -6297,6 +6800,9 @@
                 },
                 {
                     "target": "com.amazonaws.route53resolver#UpdateFirewallRuleGroupAssociation"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#UpdateOutpostResolver"
                 },
                 {
                     "target": "com.amazonaws.route53resolver#UpdateResolverConfig"
@@ -6569,44 +7075,6 @@
                                                                     "conditions": [],
                                                                     "type": "tree",
                                                                     "rules": [
-                                                                        {
-                                                                            "conditions": [
-                                                                                {
-                                                                                    "fn": "stringEquals",
-                                                                                    "argv": [
-                                                                                        {
-                                                                                            "ref": "Region"
-                                                                                        },
-                                                                                        "us-gov-east-1"
-                                                                                    ]
-                                                                                }
-                                                                            ],
-                                                                            "endpoint": {
-                                                                                "url": "https://route53resolver.us-gov-east-1.amazonaws.com",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        },
-                                                                        {
-                                                                            "conditions": [
-                                                                                {
-                                                                                    "fn": "stringEquals",
-                                                                                    "argv": [
-                                                                                        {
-                                                                                            "ref": "Region"
-                                                                                        },
-                                                                                        "us-gov-west-1"
-                                                                                    ]
-                                                                                }
-                                                                            ],
-                                                                            "endpoint": {
-                                                                                "url": "https://route53resolver.us-gov-west-1.amazonaws.com",
-                                                                                "properties": {},
-                                                                                "headers": {}
-                                                                            },
-                                                                            "type": "endpoint"
-                                                                        },
                                                                         {
                                                                             "conditions": [],
                                                                             "endpoint": {
@@ -7119,19 +7587,6 @@
                             }
                         },
                         {
-                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://route53resolver.us-gov-east-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-gov-east-1",
-                                "UseFIPS": true,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
                             "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
@@ -7141,19 +7596,6 @@
                             "params": {
                                 "Region": "us-gov-west-1",
                                 "UseFIPS": false,
-                                "UseDualStack": false
-                            }
-                        },
-                        {
-                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://route53resolver.us-gov-west-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "Region": "us-gov-west-1",
-                                "UseFIPS": true,
                                 "UseDualStack": false
                             }
                         },
@@ -7168,6 +7610,19 @@
                                 "Region": "us-gov-east-1",
                                 "UseFIPS": true,
                                 "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://route53resolver-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7377,6 +7832,18 @@
                     "min": 1,
                     "max": 512
                 }
+            }
+        },
+        "com.amazonaws.route53resolver#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.route53resolver#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Fulfilling the request would cause one or more quotas to be exceeded.</p>",
+                "smithy.api#error": "client"
             }
         },
         "com.amazonaws.route53resolver#ShareStatus": {
@@ -8083,6 +8550,88 @@
                 }
             }
         },
+        "com.amazonaws.route53resolver#UpdateOutpostResolver": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53resolver#UpdateOutpostResolverRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.route53resolver#UpdateOutpostResolverResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53resolver#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>You can use <code>UpdateOutpostResolver</code> to  update the instance count, type, or  name of a Resolver on an Outpost.</p>"
+            }
+        },
+        "com.amazonaws.route53resolver#UpdateOutpostResolverRequest": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.route53resolver#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique string that identifies Resolver on an Outpost.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.route53resolver#OutpostResolverName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the Resolver on the Outpost.</p>"
+                    }
+                },
+                "InstanceCount": {
+                    "target": "com.amazonaws.route53resolver#InstanceCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon EC2 instance count for a Resolver on the Outpost.</p>"
+                    }
+                },
+                "PreferredInstanceType": {
+                    "target": "com.amazonaws.route53resolver#OutpostInstanceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tAmazon EC2 instance type.\n\t\t</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.route53resolver#UpdateOutpostResolverResponse": {
+            "type": "structure",
+            "members": {
+                "OutpostResolver": {
+                    "target": "com.amazonaws.route53resolver#OutpostResolver",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The response to an <code>UpdateOutpostResolver</code> request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.route53resolver#UpdateResolverConfig": {
             "type": "operation",
             "input": {
@@ -8276,13 +8825,13 @@
                 "ResolverEndpointType": {
                     "target": "com.amazonaws.route53resolver#ResolverEndpointType",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n\t\t\tSpecifies the endpoint type for what type of IP address the endpoint uses to forward DNS queries.\n\t\t</p>"
+                        "smithy.api#documentation": "<p>\n\t\t\tSpecifies the endpoint type for what type of IP address the endpoint uses to forward DNS queries.\n\t\t</p>\n         <p>Updating to <code>IPV6</code> type isn't currently supported.</p>"
                     }
                 },
                 "UpdateIpAddresses": {
                     "target": "com.amazonaws.route53resolver#UpdateIpAddresses",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n\t\t\tUpdates the Resolver endpoint type to IpV4, Ipv6, or dual-stack.\n\t\t</p>"
+                        "smithy.api#documentation": "<p>\n\t\t\tSpecifies the IPv6 address when you update the Resolver endpoint from IPv4 to dual-stack. \n\t\t\tIf you don't specify an IPv6 address, one will be automatically chosen from your subnet.\n\t\t</p>"
                     }
                 }
             },

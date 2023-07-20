@@ -298,7 +298,7 @@
                     "glue:CreateTable",
                     "glue:CreateDatabase"
                 ],
-                "smithy.api#documentation": "<p>Adds a natively supported Amazon Web Service as an Amazon Security Lake source. Enables\n         source types for member accounts in required Amazon Web Services Regions, based on the\n         parameters you specify. You can choose any source type in any Region for either accounts\n         that are part of a trusted organization or standalone accounts. Once you add an Amazon Web Service as a source, Security Lake starts collecting logs and events from it, </p>\n         <p>You can use this API only to enable natively supported Amazon Web Services as a\n         source. Use <code>CreateCustomLogSource</code> to enable data collection from a custom\n         source.</p>",
+                "smithy.api#documentation": "<p>Adds a natively supported Amazon Web Service as an Amazon Security Lake source. Enables\n         source types for member accounts in required Amazon Web Services Regions, based on the\n         parameters you specify. You can choose any source type in any Region for either accounts\n         that are part of a trusted organization or standalone accounts. Once you add an Amazon Web Service as a source, Security Lake starts collecting logs and events from it.</p>\n         <p>You can use this API only to enable natively supported Amazon Web Services as a\n         source. Use <code>CreateCustomLogSource</code> to enable data collection from a custom\n         source.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v1/datalake/logsources/aws",
@@ -494,7 +494,7 @@
                     "lambda:CreateFunction",
                     "lambda:CreateEventSourceMapping"
                 ],
-                "smithy.api#documentation": "<p>Initializes an Amazon Security Lake instance with the provided (or default) configuration. You\n         can enable Security Lake in Amazon Web Services Regions with customized settings before enabling\n         log collection in Regions. By default, the <code>CreateDataLake</code> Security Lake in all\n         Regions. To specify particular Regions, configure these Regions using the\n            <code>configurations</code> parameter. If you have already enabled Security Lake in a Region\n         when you call this command, the command will update the Region if you provide new\n         configuration parameters. If you have not already enabled Security Lake in the Region when you\n         call this API, it will set up the data lake in the Region with the specified\n         configurations.</p>\n         <p>When you enable Security Lake, it starts ingesting security data after the\n            <code>CreateAwsLogSource</code> call. This includes ingesting security data from\n         sources, storing data, and making data accessible to subscribers. Security Lake also enables\n         all the existing settings and resources that it stores or maintains for your Amazon Web Services account in the current Region, including security log and event data. For\n         more information, see the <a href=\"https://docs.aws.amazon.com/security-lake/latest/userguide/what-is-security-lake.html\">Amazon Security Lake User\n            Guide</a>.</p>",
+                "smithy.api#documentation": "<p>Initializes an Amazon Security Lake instance with the provided (or default) configuration. You\n         can enable Security Lake in Amazon Web Services Regions with customized settings before enabling\n         log collection in Regions. To specify particular Regions, configure these Regions using the\n            <code>configurations</code> parameter. If you have already enabled Security Lake in a Region\n         when you call this command, the command will update the Region if you provide new\n         configuration parameters. If you have not already enabled Security Lake in the Region when you\n         call this API, it will set up the data lake in the Region with the specified\n         configurations.</p>\n         <p>When you enable Security Lake, it starts ingesting security data after the\n            <code>CreateAwsLogSource</code> call. This includes ingesting security data from\n         sources, storing data, and making data accessible to subscribers. Security Lake also enables\n         all the existing settings and resources that it stores or maintains for your Amazon Web Services account in the current Region, including security log and event data. For\n         more information, see the <a href=\"https://docs.aws.amazon.com/security-lake/latest/userguide/what-is-security-lake.html\">Amazon Security Lake User\n            Guide</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v1/datalake",
@@ -653,6 +653,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) used to create and update the Glue table.\n         This table contains partitions generated by the ingestion and normalization of\n          Amazon Web Services log sources and custom sources.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.securitylake#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects, one for each tag to associate with the data lake configuration. For each tag, you must specify both a tag key and a tag value. A tag \n         value cannot be null, but it can be an empty string.</p>"
                     }
                 }
             },
@@ -857,6 +863,12 @@
                     "target": "com.amazonaws.securitylake#AccessTypeList",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon S3 or Lake Formation access type.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.securitylake#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects, one for each tag to associate with the subscriber. For each tag, you must specify both a tag key and a tag value. A tag \n         value cannot be null, but it can be an empty string.</p>"
                     }
                 }
             },
@@ -1178,7 +1190,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The details for a Security Lake exception</p>"
+                "smithy.api#documentation": "<p>The details for an Amazon Security Lake exception.</p>"
             }
         },
         "com.amazonaws.securitylake#DataLakeExceptionList": {
@@ -1745,7 +1757,7 @@
             ],
             "traits": {
                 "aws.iam#actionPermissionDescription": "Grants permission to remove the automatic enablement of Amazon Security Lake access for new organization accounts",
-                "smithy.api#documentation": "<p>Removes automatic the enablement of configuration settings for new member accounts (but\n         retains the settings for the delegated administrator) from Amazon Security Lake. You must run this\n         API using the credentials of the delegated administrator. When you run this API, new member\n         accounts that are added after the organization enables Security Lake won't contribute to the\n         data lake.</p>",
+                "smithy.api#documentation": "<p>Turns off automatic enablement of Amazon Security Lake for member accounts that are added to an organization in Organizations. Only the delegated \n         Security Lake administrator for an organization can perform this operation. If the delegated Security Lake administrator performs this operation, new member\n         accounts won't automatically contribute data to the data lake.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v1/datalake/organization/configuration/delete",
@@ -1759,7 +1771,7 @@
                 "autoEnableNewAccount": {
                     "target": "com.amazonaws.securitylake#DataLakeAutoEnableNewAccountConfigurationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Removes the automatic enablement of configuration settings for new member accounts in\n         Security Lake.</p>",
+                        "smithy.api#documentation": "<p>Turns off automatic enablement of Security Lake for member accounts that are added to an organization.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2378,7 +2390,7 @@
                 "targetRoleArn": {
                     "target": "com.amazonaws.securitylake#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the EventBridge API destinations IAM role that you\n         created. For more information about ARNs and how to use them in policies, see <a href=\"https://docs.aws.amazon.com//security-lake/latest/userguide/subscriber-data-access.html\">Managing data access</a> and <a href=\"https://docs.aws.amazon.com/security-lake/latest/userguide/security-iam-awsmanpol.html\">Amazon Web Services\n            Managed Policies</a> in the Amazon Security Lake User Guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the EventBridge API destinations IAM role that you\n         created. For more information about ARNs and how to use them in policies, see <a href=\"https://docs.aws.amazon.com//security-lake/latest/userguide/subscriber-data-access.html\">Managing data access</a> and <a href=\"https://docs.aws.amazon.com/security-lake/latest/userguide/security-iam-awsmanpol.html\">Amazon Web Services\n            Managed Policies</a> in the <i>Amazon Security Lake User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2522,7 +2534,7 @@
             ],
             "traits": {
                 "aws.iam#actionPermissionDescription": "Grants permission to get information about the security data lake",
-                "smithy.api#documentation": "<p>Retrieves the Amazon Security Lake configuration object for the specified Amazon Web Services account ID. You can use the <code>ListDataLakes</code> API to know whether\n         Security Lake is enabled for any region.</p>",
+                "smithy.api#documentation": "<p>Retrieves the Amazon Security Lake configuration object for the specified Amazon Web Services Regions. You can use this operation to determine whether\n         Security Lake is enabled for a Region.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/v1/datalakes",
@@ -2751,6 +2763,74 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.securitylake#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.securitylake#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.securitylake#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.securitylake#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.securitylake#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.securitylake#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.securitylake#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.securitylake#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.securitylake#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the tags (keys and values) that are associated with an Amazon Security Lake resource: a subscriber, or the data lake configuration for \n         your Amazon Web Services account in a particular Amazon Web Services Region.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v1/tags/{resourceArn}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.securitylake#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.securitylake#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Security Lake resource to retrieve the tags for.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.securitylake#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "tags": {
+                    "target": "com.amazonaws.securitylake#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects, one for each tag (key and value) that’s associated with the Amazon Security Lake resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.securitylake#LogSource": {
             "type": "structure",
             "members": {
@@ -2789,18 +2869,18 @@
                 "awsLogSource": {
                     "target": "com.amazonaws.securitylake#AwsLogSourceResource",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon Security Lake supports log and event collection for natively supported Amazon Web Services.</p>"
+                        "smithy.api#documentation": "<p>Amazon Security Lake supports log and event collection for natively supported Amazon Web Services. For more information, see the <a href=\"https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html\">Amazon Security Lake User Guide</a>.</p>"
                     }
                 },
                 "customLogSource": {
                     "target": "com.amazonaws.securitylake#CustomLogSourceResource",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon Security Lake supports custom source types. For a detailed list, see the Amazon Security Lake\n         User Guide.</p>"
+                        "smithy.api#documentation": "<p>Amazon Security Lake supports custom source types. For more information, see the <a href=\"https://docs.aws.amazon.com/security-lake/latest/userguide/custom-sources.html\">Amazon Security Lake User Guide</a>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The supported source types from which logs and events are collected in Amazon Security Lake.\n         For the list of supported Amazon Web Services, see the <a href=\"https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html\">Amazon Security Lake User Guide</a>.</p>"
+                "smithy.api#documentation": "<p>The supported source types from which logs and events are collected in Amazon Security Lake.\n         For a list of supported Amazon Web Services, see the <a href=\"https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html\">Amazon Security Lake User Guide</a>.</p>"
             }
         },
         "com.amazonaws.securitylake#LogSourceResourceList": {
@@ -3029,7 +3109,16 @@
                     "target": "com.amazonaws.securitylake#ListDataLakeExceptions"
                 },
                 {
+                    "target": "com.amazonaws.securitylake#ListTagsForResource"
+                },
+                {
                     "target": "com.amazonaws.securitylake#RegisterDataLakeDelegatedAdministrator"
+                },
+                {
+                    "target": "com.amazonaws.securitylake#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.securitylake#UntagResource"
                 },
                 {
                     "target": "com.amazonaws.securitylake#UpdateDataLakeExceptionSubscription"
@@ -3438,8 +3527,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "Region": "us-gov-east-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -3451,8 +3540,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "Region": "us-gov-east-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -3464,8 +3553,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "Region": "us-gov-east-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -3477,8 +3566,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "Region": "us-gov-east-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -3490,8 +3579,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "Region": "cn-north-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -3503,8 +3592,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "Region": "cn-north-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -3516,8 +3605,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "Region": "cn-north-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -3529,8 +3618,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "Region": "cn-north-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -3540,8 +3629,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "Region": "us-iso-east-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
@@ -3553,8 +3642,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "Region": "us-iso-east-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
@@ -3564,8 +3653,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "Region": "us-iso-east-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
@@ -3577,8 +3666,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "Region": "us-iso-east-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
@@ -3590,8 +3679,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "Region": "us-east-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -3603,8 +3692,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "Region": "us-east-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -3616,8 +3705,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "Region": "us-east-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -3629,8 +3718,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "Region": "us-east-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -3640,8 +3729,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -3653,8 +3742,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": true
+                                "UseFIPS": true,
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -3664,8 +3753,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -3677,8 +3766,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "Region": "us-isob-east-1",
-                                "UseFIPS": false
+                                "UseFIPS": false,
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -3690,8 +3779,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "Region": "us-east-1",
                                 "UseFIPS": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -3702,8 +3791,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "Region": "us-east-1",
                                 "UseFIPS": true,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -3714,8 +3803,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "Region": "us-east-1",
                                 "UseFIPS": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         }
@@ -3838,7 +3927,7 @@
                 "sources": {
                     "target": "com.amazonaws.securitylake#LogSourceResourceList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon Security Lake supports log and event collection for natively supported Amazon Web Services. For more information, see the Amazon Security Lake User Guide.</p>",
+                        "smithy.api#documentation": "<p>Amazon Security Lake supports log and event collection for natively supported Amazon Web Services. For more information, see the <a href=\"https://docs.aws.amazon.com/security-lake/latest/userguide/source-management.html\">Amazon Security Lake User Guide</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3944,6 +4033,138 @@
                 "smithy.api#pattern": "^[a-z\\-]*$"
             }
         },
+        "com.amazonaws.securitylake#Tag": {
+            "type": "structure",
+            "members": {
+                "key": {
+                    "target": "com.amazonaws.securitylake#TagKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The  name of the tag. This is a general label that acts as a category for a more specific tag value (<code>value</code>).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.securitylake#TagValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value that’s associated with the specified tag key (<code>key</code>). This value acts as a descriptor for the tag key. A tag value cannot be \n         null, but it can be an empty string.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A <i>tag</i> is a label that you can define and associate with Amazon Web Services resources, including certain types of Amazon Security Lake resources. \n         Tags can help you identify, categorize, and manage resources in different ways, such as by owner, environment, or other criteria. You can associate tags with \n         the following types of Security Lake resources: subscribers, and the data lake configuration for your Amazon Web Services account in individual Amazon Web Services Regions.</p>\n         <p>A resource can have up to 50 tags. Each tag consists of a required <i>tag key</i> and an associated <i>tag value</i>. A \n         <i>tag key</i> is a general label that acts as a category for a more specific tag value. Each tag key must be unique and it can have only one tag \n         value. A <i>tag value</i> acts as a descriptor for a tag key. Tag keys and values are case sensitive. They can contain letters, numbers, spaces, \n         or the following symbols: _ . : / = + @ -</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/security-lake/latest/userguide/tagging-resources.html\">Tagging Amazon Security Lake resources</a> in \n         the <i>Amazon Security Lake User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.securitylake#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.securitylake#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securitylake#TagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.securitylake#TagList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securitylake#Tag"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.securitylake#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.securitylake#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.securitylake#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.securitylake#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.securitylake#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.securitylake#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.securitylake#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.securitylake#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.securitylake#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds or updates one or more tags that are associated with an Amazon Security Lake resource: a subscriber, or the data lake configuration for your \n         Amazon Web Services account in a particular Amazon Web Services Region. A <i>tag</i> is a label that you can define and associate with \n         Amazon Web Services resources. Each tag consists of a required <i>tag key</i> and an associated <i>tag value</i>. A \n         <i>tag key</i> is a general label that acts as a category for a more specific tag value. A <i>tag value</i> acts as a \n         descriptor for a tag key. Tags can help you identify, categorize, and manage resources in different ways, such as by owner, environment, or other \n         criteria. For more information, see \n         <a href=\"https://docs.aws.amazon.com/security-lake/latest/userguide/tagging-resources.html\">Tagging Amazon Security Lake resources</a> in the \n         <i>Amazon Security Lake User Guide</i>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/tags/{resourceArn}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.securitylake#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.securitylake#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Security Lake resource to add or update the tags for.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.securitylake#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects, one for each tag (key and value) to associate with the Amazon Security Lake resource. For each tag, you must \n         specify both a tag key and a tag value. A tag value cannot be null, but it can be an empty string.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.securitylake#TagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.securitylake#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
         "com.amazonaws.securitylake#ThrottlingException": {
             "type": "structure",
             "members": {
@@ -3983,6 +4204,75 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+            }
+        },
+        "com.amazonaws.securitylake#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.securitylake#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.securitylake#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.securitylake#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.securitylake#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.securitylake#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.securitylake#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.securitylake#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.securitylake#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes one or more tags (keys and values) from an Amazon Security Lake resource: a subscriber, or the data lake configuration for your \n         Amazon Web Services account in a particular Amazon Web Services Region.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/v1/tags/{resourceArn}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.securitylake#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.securitylake#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Security Lake resource to remove one or more tags from.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tagKeys": {
+                    "target": "com.amazonaws.securitylake#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of one or more tag keys. For each value in the list, specify the tag key for a tag to remove from the Amazon Security Lake resource.</p>",
+                        "smithy.api#httpQuery": "tagKeys",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.securitylake#UntagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.securitylake#UpdateDataLake": {

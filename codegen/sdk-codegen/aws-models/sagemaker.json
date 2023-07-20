@@ -7997,7 +7997,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Create a new <code>FeatureGroup</code>. A <code>FeatureGroup</code> is a group of\n            <code>Features</code> defined in the <code>FeatureStore</code> to describe a\n            <code>Record</code>. </p>\n         <p>The <code>FeatureGroup</code> defines the schema and features contained in the\n         FeatureGroup. A <code>FeatureGroup</code> definition is composed of a list of\n            <code>Features</code>, a <code>RecordIdentifierFeatureName</code>, an\n            <code>EventTimeFeatureName</code> and configurations for its <code>OnlineStore</code>\n         and <code>OfflineStore</code>. Check <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html\">Amazon Web Services service quotas</a> to see\n         the <code>FeatureGroup</code>s quota for your Amazon Web Services account.</p>\n         <important>\n            <p>You must include at least one of <code>OnlineStoreConfig</code> and\n               <code>OfflineStoreConfig</code> to create a <code>FeatureGroup</code>.</p>\n         </important>"
+                "smithy.api#documentation": "<p>Create a new <code>FeatureGroup</code>. A <code>FeatureGroup</code> is a group of\n            <code>Features</code> defined in the <code>FeatureStore</code> to describe a\n            <code>Record</code>. </p>\n         <p>The <code>FeatureGroup</code> defines the schema and features contained in the\n         FeatureGroup. A <code>FeatureGroup</code> definition is composed of a list of\n            <code>Features</code>, a <code>RecordIdentifierFeatureName</code>, an\n            <code>EventTimeFeatureName</code> and configurations for its <code>OnlineStore</code>\n         and <code>OfflineStore</code>. Check <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html\">Amazon Web Services service\n            quotas</a> to see the <code>FeatureGroup</code>s quota for your Amazon Web Services\n         account.</p>\n         <important>\n            <p>You must include at least one of <code>OnlineStoreConfig</code> and\n               <code>OfflineStoreConfig</code> to create a <code>FeatureGroup</code>.</p>\n         </important>"
             }
         },
         "com.amazonaws.sagemaker#CreateFeatureGroupRequest": {
@@ -8006,7 +8006,7 @@
                 "FeatureGroupName": {
                     "target": "com.amazonaws.sagemaker#FeatureGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the <code>FeatureGroup</code>. The name must be unique within an Amazon Web Services Region\n         in an Amazon Web Services account. The name:</p>\n         <ul>\n            <li>\n               <p>Must start and end with an alphanumeric character.</p>\n            </li>\n            <li>\n               <p>Can only contain alphanumeric character and hyphens. Spaces are not allowed.\n            </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The name of the <code>FeatureGroup</code>. The name must be unique within an Amazon Web Services Region in an Amazon Web Services account. The name:</p>\n         <ul>\n            <li>\n               <p>Must start and end with an alphanumeric character.</p>\n            </li>\n            <li>\n               <p>Can only contain alphanumeric character and hyphens. Spaces are not allowed.\n            </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8034,13 +8034,13 @@
                 "OnlineStoreConfig": {
                     "target": "com.amazonaws.sagemaker#OnlineStoreConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>You can turn the <code>OnlineStore</code> on or off by specifying <code>True</code> for\n         the <code>EnableOnlineStore</code> flag in <code>OnlineStoreConfig</code>.</p>\n         <p>You can also include an Amazon Web Services KMS key ID (<code>KMSKeyId</code>) for at-rest encryption of\n         the <code>OnlineStore</code>.</p>\n         <p>The default value is <code>False</code>.</p>"
+                        "smithy.api#documentation": "<p>You can turn the <code>OnlineStore</code> on or off by specifying <code>True</code> for\n         the <code>EnableOnlineStore</code> flag in <code>OnlineStoreConfig</code>.</p>\n         <p>You can also include an Amazon Web Services KMS key ID (<code>KMSKeyId</code>) for\n         at-rest encryption of the <code>OnlineStore</code>.</p>\n         <p>The default value is <code>False</code>.</p>"
                     }
                 },
                 "OfflineStoreConfig": {
                     "target": "com.amazonaws.sagemaker#OfflineStoreConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Use this to configure an <code>OfflineFeatureStore</code>. This parameter allows you to\n         specify:</p>\n         <ul>\n            <li>\n               <p>The Amazon Simple Storage Service (Amazon S3) location of an\n                  <code>OfflineStore</code>.</p>\n            </li>\n            <li>\n               <p>A configuration for an Amazon Web Services Glue or Amazon Web Services Hive data catalog. </p>\n            </li>\n            <li>\n               <p>An KMS encryption key to encrypt the Amazon S3 location used for\n               <code>OfflineStore</code>. If KMS encryption key is not specified, by default we encrypt all data at rest using \n               Amazon Web Services KMS key. By defining your <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-key.html\">bucket-level key</a> for SSE, \n               you can reduce Amazon Web Services KMS requests costs by up to 99 percent.</p>\n            </li>\n            <li>\n               <p>Format for the offline store table. Supported formats are Glue (Default) and <a href=\"https://iceberg.apache.org/\">Apache Iceberg</a>.</p>\n            </li>\n         </ul>\n         <p>To learn more about this parameter, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_OfflineStoreConfig.html\">OfflineStoreConfig</a>.</p>"
+                        "smithy.api#documentation": "<p>Use this to configure an <code>OfflineFeatureStore</code>. This parameter allows you to\n         specify:</p>\n         <ul>\n            <li>\n               <p>The Amazon Simple Storage Service (Amazon S3) location of an\n                  <code>OfflineStore</code>.</p>\n            </li>\n            <li>\n               <p>A configuration for an Amazon Web Services Glue or Amazon Web Services Hive data\n               catalog. </p>\n            </li>\n            <li>\n               <p>An KMS encryption key to encrypt the Amazon S3 location used for\n                  <code>OfflineStore</code>. If KMS encryption key is not specified, by default we\n               encrypt all data at rest using Amazon Web Services KMS key. By defining your <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-key.html\">bucket-level\n                  key</a> for SSE, you can reduce Amazon Web Services KMS requests costs by up to\n               99 percent.</p>\n            </li>\n            <li>\n               <p>Format for the offline store table. Supported formats are Glue (Default) and\n                  <a href=\"https://iceberg.apache.org/\">Apache Iceberg</a>.</p>\n            </li>\n         </ul>\n         <p>To learn more about this parameter, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_OfflineStoreConfig.html\">OfflineStoreConfig</a>.</p>"
                     }
                 },
                 "RoleArn": {
@@ -11176,6 +11176,23 @@
         "com.amazonaws.sagemaker#CreationTime": {
             "type": "timestamp"
         },
+        "com.amazonaws.sagemaker#CrossAccountFilterOption": {
+            "type": "enum",
+            "members": {
+                "SAME_ACCOUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SameAccount"
+                    }
+                },
+                "CROSS_ACCOUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CrossAccount"
+                    }
+                }
+            }
+        },
         "com.amazonaws.sagemaker#CsvContentType": {
             "type": "string",
             "traits": {
@@ -12438,7 +12455,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Delete the <code>FeatureGroup</code> and any data that was written to the\n            <code>OnlineStore</code> of the <code>FeatureGroup</code>. Data cannot be accessed from\n         the <code>OnlineStore</code> immediately after <code>DeleteFeatureGroup</code> is called. </p>\n         <p>Data written into the <code>OfflineStore</code> will not be deleted. The Amazon Web Services Glue\n         database and tables that are automatically created for your <code>OfflineStore</code> are\n         not deleted. </p>"
+                "smithy.api#documentation": "<p>Delete the <code>FeatureGroup</code> and any data that was written to the\n            <code>OnlineStore</code> of the <code>FeatureGroup</code>. Data cannot be accessed from\n         the <code>OnlineStore</code> immediately after <code>DeleteFeatureGroup</code> is called. </p>\n         <p>Data written into the <code>OfflineStore</code> will not be deleted. The Amazon Web Services Glue database and tables that are automatically created for your\n            <code>OfflineStore</code> are not deleted. </p>"
             }
         },
         "com.amazonaws.sagemaker#DeleteFeatureGroupRequest": {
@@ -16083,9 +16100,9 @@
             "type": "structure",
             "members": {
                 "FeatureGroupName": {
-                    "target": "com.amazonaws.sagemaker#FeatureGroupName",
+                    "target": "com.amazonaws.sagemaker#FeatureGroupNameOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the <code>FeatureGroup</code> you want described. </p>",
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the <code>FeatureGroup</code> you want\n         described. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -16106,7 +16123,7 @@
                 "FeatureGroupArn": {
                     "target": "com.amazonaws.sagemaker#FeatureGroupArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the <code>FeatureGroup</code>.  </p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the <code>FeatureGroup</code>. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -16127,14 +16144,14 @@
                 "EventTimeFeatureName": {
                     "target": "com.amazonaws.sagemaker#FeatureName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the feature that stores the <code>EventTime</code> of a Record in a\n         <code>FeatureGroup</code>.</p>\n         <p> An <code>EventTime</code> is a point in time when a new event occurs that\n         corresponds to the creation or update of a <code>Record</code> in a\n            <code>FeatureGroup</code>. All <code>Records</code> in the <code>FeatureGroup</code>\n         have a corresponding <code>EventTime</code>.</p>",
+                        "smithy.api#documentation": "<p>The name of the feature that stores the <code>EventTime</code> of a Record in a\n            <code>FeatureGroup</code>.</p>\n         <p> An <code>EventTime</code> is a point in time when a new event occurs that corresponds\n         to the creation or update of a <code>Record</code> in a <code>FeatureGroup</code>. All\n            <code>Records</code> in the <code>FeatureGroup</code> have a corresponding\n            <code>EventTime</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "FeatureDefinitions": {
                     "target": "com.amazonaws.sagemaker#FeatureDefinitions",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of the <code>Features</code> in the <code>FeatureGroup</code>. \n         Each feature is defined by a <code>FeatureName</code> and <code>FeatureType</code>.</p>",
+                        "smithy.api#documentation": "<p>A list of the <code>Features</code> in the <code>FeatureGroup</code>. Each feature is\n         defined by a <code>FeatureName</code> and <code>FeatureType</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -16160,13 +16177,13 @@
                 "OfflineStoreConfig": {
                     "target": "com.amazonaws.sagemaker#OfflineStoreConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration of the offline store. It includes the following configurations:</p>\n         <ul>\n            <li>\n               <p>Amazon S3 location of the offline store.</p>\n            </li>\n            <li>\n               <p>Configuration of the Glue data catalog.</p>\n            </li>\n            <li>\n               <p>Table format of the offline store.</p>\n            </li>\n            <li>\n               <p>Option to disable the automatic creation of a Glue table for the offline store.</p>\n            </li>\n            <li>\n               <p>Encryption configuration.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The configuration of the offline store. It includes the following configurations:</p>\n         <ul>\n            <li>\n               <p>Amazon S3 location of the offline store.</p>\n            </li>\n            <li>\n               <p>Configuration of the Glue data catalog.</p>\n            </li>\n            <li>\n               <p>Table format of the offline store.</p>\n            </li>\n            <li>\n               <p>Option to disable the automatic creation of a Glue table for the offline\n               store.</p>\n            </li>\n            <li>\n               <p>Encryption configuration.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "RoleArn": {
                     "target": "com.amazonaws.sagemaker#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM execution role used to persist data into the OfflineStore if an OfflineStoreConfig is provided.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM execution role used to persist data into the\n         OfflineStore if an OfflineStoreConfig is provided.</p>"
                     }
                 },
                 "FeatureGroupStatus": {
@@ -16238,9 +16255,9 @@
             "type": "structure",
             "members": {
                 "FeatureGroupName": {
-                    "target": "com.amazonaws.sagemaker#FeatureGroupName",
+                    "target": "com.amazonaws.sagemaker#FeatureGroupNameOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the feature group containing the feature.</p>",
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the feature group containing the\n         feature.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -16297,7 +16314,7 @@
                 "LastModifiedTime": {
                     "target": "com.amazonaws.sagemaker#LastModifiedTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>A timestamp indicating when the metadata for the feature group was modified. For example, if you add a parameter describing the feature, the timestamp changes to reflect the last time you </p>",
+                        "smithy.api#documentation": "<p>A timestamp indicating when the metadata for the feature group was modified. For\n         example, if you add a parameter describing the feature, the timestamp changes to reflect\n         the last time you </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -23744,13 +23761,13 @@
                 "RecordIdentifierFeatureName": {
                     "target": "com.amazonaws.sagemaker#FeatureName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the <code>Feature</code> whose value uniquely identifies a\n      <code>Record</code> defined in the <code>FeatureGroup</code>\n            <code>FeatureDefinitions</code>.</p>"
+                        "smithy.api#documentation": "<p>The name of the <code>Feature</code> whose value uniquely identifies a\n            <code>Record</code> defined in the <code>FeatureGroup</code>\n            <code>FeatureDefinitions</code>.</p>"
                     }
                 },
                 "EventTimeFeatureName": {
                     "target": "com.amazonaws.sagemaker#FeatureName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the feature that stores the <code>EventTime</code> of a Record in a\n         <code>FeatureGroup</code>.</p>\n         <p>A <code>EventTime</code> is point in time when a new event\n         occurs that corresponds to the creation or update of a <code>Record</code> in\n         <code>FeatureGroup</code>. All <code>Records</code> in the <code>FeatureGroup</code>\n         must have a corresponding <code>EventTime</code>.</p>"
+                        "smithy.api#documentation": "<p>The name of the feature that stores the <code>EventTime</code> of a Record in a\n            <code>FeatureGroup</code>.</p>\n         <p>A <code>EventTime</code> is point in time when a new event occurs that corresponds to\n         the creation or update of a <code>Record</code> in <code>FeatureGroup</code>. All\n            <code>Records</code> in the <code>FeatureGroup</code> must have a corresponding\n            <code>EventTime</code>.</p>"
                     }
                 },
                 "FeatureDefinitions": {
@@ -23801,7 +23818,7 @@
                 "FailureReason": {
                     "target": "com.amazonaws.sagemaker#FailureReason",
                     "traits": {
-                        "smithy.api#documentation": "<p>The reason that the <code>FeatureGroup</code> failed to \n         be replicated in the <code>OfflineStore</code>. This is \n         failure may be due to a failure to create a <code>FeatureGroup</code> in\n         or delete a <code>FeatureGroup</code> from the <code>OfflineStore</code>.</p>"
+                        "smithy.api#documentation": "<p>The reason that the <code>FeatureGroup</code> failed to be replicated in the\n            <code>OfflineStore</code>. This is failure may be due to a failure to create a\n            <code>FeatureGroup</code> in or delete a <code>FeatureGroup</code> from the\n            <code>OfflineStore</code>.</p>"
                     }
                 },
                 "Description": {
@@ -23818,7 +23835,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Amazon SageMaker Feature Store stores features in a collection called Feature Group. \n         A Feature Group can be visualized as a table which has rows, \n         with a unique identifier for each row where each column in the table is a feature. \n         In principle, a Feature Group is composed of features and values per features.</p>"
+                "smithy.api#documentation": "<p>Amazon SageMaker Feature Store stores features in a collection called Feature Group. A\n         Feature Group can be visualized as a table which has rows, with a unique identifier for\n         each row where each column in the table is a feature. In principle, a Feature Group is\n         composed of features and values per features.</p>"
             }
         },
         "com.amazonaws.sagemaker#FeatureGroupArn": {
@@ -23857,6 +23874,16 @@
                     "min": 1,
                     "max": 64
                 }
+            }
+        },
+        "com.amazonaws.sagemaker#FeatureGroupNameOrArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:feature-group\\/)?([a-zA-Z0-9]([_-]*[a-zA-Z0-9]){0,63})$"
             }
         },
         "com.amazonaws.sagemaker#FeatureGroupSortBy": {
@@ -23966,7 +23993,7 @@
                 "CreationTime": {
                     "target": "com.amazonaws.sagemaker#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>A timestamp indicating the time of creation time of the <code>FeatureGroup</code>.</p>",
+                        "smithy.api#documentation": "<p>A timestamp indicating the time of creation time of the\n         <code>FeatureGroup</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -23984,7 +24011,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The name, Arn, <code>CreationTime</code>, <code>FeatureGroup</code> values,\n            <code>LastUpdatedTime</code> and <code>EnableOnlineStorage</code> status of a\n            <code>FeatureGroup</code>.</p>"
+                "smithy.api#documentation": "<p>The name, ARN, <code>CreationTime</code>, <code>FeatureGroup</code> values,\n            <code>LastUpdatedTime</code> and <code>EnableOnlineStorage</code> status of a\n            <code>FeatureGroup</code>.</p>"
             }
         },
         "com.amazonaws.sagemaker#FeatureMetadata": {
@@ -24040,7 +24067,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The metadata for a feature. It can either be metadata that you specify, or metadata that is updated automatically.</p>"
+                "smithy.api#documentation": "<p>The metadata for a feature. It can either be metadata that you specify, or metadata that\n         is updated automatically.</p>"
             }
         },
         "com.amazonaws.sagemaker#FeatureName": {
@@ -32037,7 +32064,7 @@
                 "OfflineStoreStatusEquals": {
                     "target": "com.amazonaws.sagemaker#OfflineStoreStatusValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>An <code>OfflineStore</code> status. Filters by <code>OfflineStore</code> status. </p>"
+                        "smithy.api#documentation": "<p>An <code>OfflineStore</code> status. Filters by <code>OfflineStore</code> status.\n      </p>"
                     }
                 },
                 "CreationTimeAfter": {
@@ -35655,6 +35682,94 @@
                     "target": "com.amazonaws.sagemaker#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>If the result of the previous <code>ListCompilationJobs</code> request was truncated,\n            the response includes a <code>NextToken</code>. To retrieve the next set of model\n            compilation jobs, use the token in the next request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sagemaker#ListResourceCatalogs": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#ListResourceCatalogsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#ListResourceCatalogsResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Lists Amazon SageMaker Catalogs based on given filters and orders. The maximum number of\n                <code>ResourceCatalog</code>s viewable is 1000. </p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "ResourceCatalogs",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#ListResourceCatalogsRequest": {
+            "type": "structure",
+            "members": {
+                "NameContains": {
+                    "target": "com.amazonaws.sagemaker#ResourceCatalogName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A string that partially matches one or more <code>ResourceCatalog</code>s names.\n            Filters <code>ResourceCatalog</code> by name. </p>"
+                    }
+                },
+                "CreationTimeAfter": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Use this parameter to search for <code>ResourceCatalog</code>s created after a\n            specific date and time. </p>"
+                    }
+                },
+                "CreationTimeBefore": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Use this parameter to search for <code>ResourceCatalog</code>s created before a\n            specific date and time. </p>"
+                    }
+                },
+                "SortOrder": {
+                    "target": "com.amazonaws.sagemaker#ResourceCatalogSortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The order in which the resource catalogs are listed. </p>"
+                    }
+                },
+                "SortBy": {
+                    "target": "com.amazonaws.sagemaker#ResourceCatalogSortBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The value on which the resource catalog list is sorted. </p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.sagemaker#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The maximum number of results returned by <code>ListResourceCatalogs</code>. </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sagemaker#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A token to resume pagination of <code>ListResourceCatalogs</code> results. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemaker#ListResourceCatalogsResponse": {
+            "type": "structure",
+            "members": {
+                "ResourceCatalogs": {
+                    "target": "com.amazonaws.sagemaker#ResourceCatalogList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A list of the requested <code>ResourceCatalog</code>s. </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sagemaker#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A token to resume pagination of <code>ListResourceCatalogs</code> results. </p>"
                     }
                 }
             },
@@ -41662,7 +41777,7 @@
                     "target": "com.amazonaws.sagemaker#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Set to <code>True</code> to disable the automatic creation of an Amazon Web Services Glue table when\n       configuring an <code>OfflineStore</code>. If set to <code>False</code>, Feature Store will name the \n         <code>OfflineStore</code> Glue table following \n         <a href=\"https://docs.aws.amazon.com/athena/latest/ug/tables-databases-columns-names.html\">Athena's naming recommendations</a>.</p>\n         <p>The default value is <code>False</code>.</p>"
+                        "smithy.api#documentation": "<p>Set to <code>True</code> to disable the automatic creation of an Amazon Web Services Glue\n         table when configuring an <code>OfflineStore</code>. If set to <code>False</code>, Feature\n         Store will name the <code>OfflineStore</code> Glue table following <a href=\"https://docs.aws.amazon.com/athena/latest/ug/tables-databases-columns-names.html\">Athena's\n            naming recommendations</a>.</p>\n         <p>The default value is <code>False</code>.</p>"
                     }
                 },
                 "DataCatalogConfig": {
@@ -41679,7 +41794,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration of an <code>OfflineStore</code>.</p>\n         <p>Provide an <code>OfflineStoreConfig</code> in a request to\n            <code>CreateFeatureGroup</code> to create an <code>OfflineStore</code>.</p>\n         <p>To encrypt an <code>OfflineStore</code> using at rest data encryption, specify Amazon Web Services Key\n         Management Service (KMS) key ID, or <code>KMSKeyId</code>, in\n         <code>S3StorageConfig</code>.</p>"
+                "smithy.api#documentation": "<p>The configuration of an <code>OfflineStore</code>.</p>\n         <p>Provide an <code>OfflineStoreConfig</code> in a request to\n            <code>CreateFeatureGroup</code> to create an <code>OfflineStore</code>.</p>\n         <p>To encrypt an <code>OfflineStore</code> using at rest data encryption, specify Amazon Web Services Key Management Service (KMS) key ID, or <code>KMSKeyId</code>, in\n            <code>S3StorageConfig</code>.</p>"
             }
         },
         "com.amazonaws.sagemaker#OfflineStoreStatus": {
@@ -41878,7 +41993,7 @@
                     "target": "com.amazonaws.sagemaker#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Turn <code>OnlineStore</code> off by specifying <code>False</code> \n      for the <code>EnableOnlineStore</code> flag. Turn <code>OnlineStore</code> \n      on by specifying <code>True</code> \n      for the <code>EnableOnlineStore</code> flag. </p>\n         <p>The default value is <code>False</code>.</p>"
+                        "smithy.api#documentation": "<p>Turn <code>OnlineStore</code> off by specifying <code>False</code> for the\n            <code>EnableOnlineStore</code> flag. Turn <code>OnlineStore</code> on by specifying\n            <code>True</code> for the <code>EnableOnlineStore</code> flag. </p>\n         <p>The default value is <code>False</code>.</p>"
                     }
                 },
                 "TtlDuration": {
@@ -41912,7 +42027,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.sagemaker#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services Key Management Service (KMS) key ARN that SageMaker Feature Store uses\n         to encrypt the Amazon S3 objects at rest using Amazon S3 server-side encryption.</p>\n         <p>The caller (either user or IAM role) of <code>CreateFeatureGroup</code> must have\n         below permissions to the <code>OnlineStore</code>\n            <code>KmsKeyId</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>\"kms:Encrypt\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:Decrypt\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:DescribeKey\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:CreateGrant\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:RetireGrant\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:ReEncryptFrom\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:ReEncryptTo\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:GenerateDataKey\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:ListAliases\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:ListGrants\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:RevokeGrant\"</code>\n               </p>\n            </li>\n         </ul>\n         <p>The caller (either user or IAM role) to all DataPlane operations\n            (<code>PutRecord</code>, <code>GetRecord</code>, <code>DeleteRecord</code>) must have\n         the following permissions to the <code>KmsKeyId</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>\"kms:Decrypt\"</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Key Management Service (KMS) key ARN that SageMaker Feature Store\n         uses to encrypt the Amazon S3 objects at rest using Amazon S3 server-side\n         encryption.</p>\n         <p>The caller (either user or IAM role) of <code>CreateFeatureGroup</code> must have below\n         permissions to the <code>OnlineStore</code>\n            <code>KmsKeyId</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>\"kms:Encrypt\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:Decrypt\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:DescribeKey\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:CreateGrant\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:RetireGrant\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:ReEncryptFrom\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:ReEncryptTo\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:GenerateDataKey\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:ListAliases\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:ListGrants\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"kms:RevokeGrant\"</code>\n               </p>\n            </li>\n         </ul>\n         <p>The caller (either user or IAM role) to all DataPlane operations\n         (<code>PutRecord</code>, <code>GetRecord</code>, <code>DeleteRecord</code>) must have the\n         following permissions to the <code>KmsKeyId</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>\"kms:Decrypt\"</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -47622,6 +47737,104 @@
                 "smithy.api#pattern": "^arn:aws[a-z-]*:sagemaker:[a-z0-9-]*:[0-9]{12}:.+$"
             }
         },
+        "com.amazonaws.sagemaker#ResourceCatalog": {
+            "type": "structure",
+            "members": {
+                "ResourceCatalogArn": {
+                    "target": "com.amazonaws.sagemaker#ResourceCatalogArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the <code>ResourceCatalog</code>. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceCatalogName": {
+                    "target": "com.amazonaws.sagemaker#ResourceCatalogName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The name of the <code>ResourceCatalog</code>. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.sagemaker#ResourceCatalogDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A free form description of the <code>ResourceCatalog</code>. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.sagemaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The time the <code>ResourceCatalog</code> was created. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> A resource catalog containing all of the resources of a specific resource type within\n            a resource owner account. For an example on sharing the Amazon SageMaker Feature Store\n                <code>DefaultFeatureGroupCatalog</code>, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/feature-store-cross-account-discoverability-share-sagemaker-catalog.html\">Share Amazon SageMaker Catalog resource type</a> in the Amazon SageMaker Developer Guide.\n        </p>"
+            }
+        },
+        "com.amazonaws.sagemaker#ResourceCatalogArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:sagemaker-catalog/"
+            }
+        },
+        "com.amazonaws.sagemaker#ResourceCatalogDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#ResourceCatalogList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#ResourceCatalog"
+            }
+        },
+        "com.amazonaws.sagemaker#ResourceCatalogName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#ResourceCatalogSortBy": {
+            "type": "enum",
+            "members": {
+                "CREATION_TIME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CreationTime"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#ResourceCatalogSortOrder": {
+            "type": "enum",
+            "members": {
+                "ASCENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Ascending"
+                    }
+                },
+                "DESCENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Descending"
+                    }
+                }
+            }
+        },
         "com.amazonaws.sagemaker#ResourceConfig": {
             "type": "structure",
             "members": {
@@ -48320,14 +48533,14 @@
                 "S3Uri": {
                     "target": "com.amazonaws.sagemaker#S3Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>The S3 URI, or location in Amazon S3, of <code>OfflineStore</code>.</p>\n         <p>S3 URIs have a format similar to the following: <code>s3://example-bucket/prefix/</code>.</p>",
+                        "smithy.api#documentation": "<p>The S3 URI, or location in Amazon S3, of <code>OfflineStore</code>.</p>\n         <p>S3 URIs have a format similar to the following:\n         <code>s3://example-bucket/prefix/</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "KmsKeyId": {
                     "target": "com.amazonaws.sagemaker#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services Key Management Service (KMS) key ARN of the key used to encrypt any objects\n         written into the <code>OfflineStore</code> S3 location.</p>\n         <p>The IAM <code>roleARN</code> that is passed as a parameter to\n            <code>CreateFeatureGroup</code> must have below permissions to the\n         <code>KmsKeyId</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>\"kms:GenerateDataKey\"</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Key Management Service (KMS) key ARN of the key used to encrypt\n         any objects written into the <code>OfflineStore</code> S3 location.</p>\n         <p>The IAM <code>roleARN</code> that is passed as a parameter to\n            <code>CreateFeatureGroup</code> must have below permissions to the\n         <code>KmsKeyId</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>\"kms:GenerateDataKey\"</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "ResolvedOutputS3Uri": {
@@ -48338,7 +48551,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The Amazon Simple Storage (Amazon S3) location and and security configuration for <code>OfflineStore</code>.</p>"
+                "smithy.api#documentation": "<p>The Amazon Simple Storage (Amazon S3) location and and security configuration for\n            <code>OfflineStore</code>.</p>"
             }
         },
         "com.amazonaws.sagemaker#S3Uri": {
@@ -49041,6 +49254,9 @@
                 },
                 {
                     "target": "com.amazonaws.sagemaker#ListProjects"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#ListResourceCatalogs"
                 },
                 {
                     "target": "com.amazonaws.sagemaker#ListSpaces"
@@ -50615,6 +50831,12 @@
                     "target": "com.amazonaws.sagemaker#MaxResults",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of results to return.</p>"
+                    }
+                },
+                "CrossAccountFilterOption": {
+                    "target": "com.amazonaws.sagemaker#CrossAccountFilterOption",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      A cross account filter option. When the value is <code>\"CrossAccount\"</code> the \n      search results will only include resources made discoverable to you from other \n      accounts. When the value is <code>\"SameAccount\"</code> or <code>null</code> the \n      search results will only include resources from your account. Default is \n      <code>null</code>. For more information on searching for resources made \n      discoverable to your account, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/feature-store-cross-account-discoverability-use.html\">\n        Search discoverable resources</a> in the SageMaker Developer Guide.\n      The maximum number of <code>ResourceCatalog</code>s viewable is 1000.\n    </p>"
                     }
                 }
             },
@@ -57225,16 +57447,16 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the feature group.</p>"
+                "smithy.api#documentation": "<p>Updates the feature group by either adding features or updating the online store\n         configuration. Use one of the following request parameters at a time while using the\n            <code>UpdateFeatureGroup</code> API.</p>\n         <p>You can add features for your feature group using the <code>FeatureAdditions</code>\n         request parameter. Features cannot be removed from a feature group.</p>\n         <p>You can update the online store configuration by using the\n            <code>OnlineStoreConfig</code> request parameter. If a <code>TtlDuration</code> is\n         specified, the default <code>TtlDuration</code> applies for all records added to the\n         feature group <i>after the feature group is updated</i>. If a record level\n            <code>TtlDuration</code> exists from using the <code>PutRecord</code> API, the record\n         level <code>TtlDuration</code> applies to that record instead of the default\n            <code>TtlDuration</code>.</p>"
             }
         },
         "com.amazonaws.sagemaker#UpdateFeatureGroupRequest": {
             "type": "structure",
             "members": {
                 "FeatureGroupName": {
-                    "target": "com.amazonaws.sagemaker#FeatureGroupName",
+                    "target": "com.amazonaws.sagemaker#FeatureGroupNameOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the feature group that you're updating.</p>",
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the feature group that you're updating.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -57291,9 +57513,9 @@
             "type": "structure",
             "members": {
                 "FeatureGroupName": {
-                    "target": "com.amazonaws.sagemaker#FeatureGroupName",
+                    "target": "com.amazonaws.sagemaker#FeatureGroupNameOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the feature group containing the feature that you're updating.</p>",
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the feature group containing the feature that \n         you're updating.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -57319,7 +57541,7 @@
                 "ParameterRemovals": {
                     "target": "com.amazonaws.sagemaker#FeatureParameterRemovals",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of parameter keys that you can specify to remove parameters that describe your feature.</p>"
+                        "smithy.api#documentation": "<p>A list of parameter keys that you can specify to remove parameters that describe your\n         feature.</p>"
                     }
                 }
             },

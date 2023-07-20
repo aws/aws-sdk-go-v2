@@ -412,6 +412,15 @@
         "com.amazonaws.lexmodelsv2#AnalyticsBinValue": {
             "type": "long"
         },
+        "com.amazonaws.lexmodelsv2#AnalyticsChannel": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
         "com.amazonaws.lexmodelsv2#AnalyticsCommonFilterName": {
             "type": "enum",
             "members": {
@@ -1983,7 +1992,7 @@
                 "name": {
                     "target": "com.amazonaws.lexmodelsv2#AnalyticsUtteranceMetricName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The metric that you requested.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Count</code> – The number of utterances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Missed</code> – The number of utterances that Amazon Lex failed to recognize.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Detected</code> – The number of utterances that Amazon Lex managed to detect.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UtteranceTimeStamp</code> – The date and time of the utterance.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The metric that you requested.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Count</code> – The number of utterances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Missed</code> – The number of utterances that Amazon Lex failed to recognize.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Detected</code> – The number of utterances that Amazon Lex managed to detect.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UtteranceTimestamp</code> – The date and time of the utterance.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "statistic": {
@@ -2817,29 +2826,6 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The target Amazon S3 location for the test set execution using a bot alias.</p>"
-            }
-        },
-        "com.amazonaws.lexmodelsv2#BotChannelType": {
-            "type": "enum",
-            "members": {
-                "Facebook": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "Facebook"
-                    }
-                },
-                "Slack": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "Slack"
-                    }
-                },
-                "TwilioSms": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "TwilioSms"
-                    }
-                }
             }
         },
         "com.amazonaws.lexmodelsv2#BotExportSpecification": {
@@ -14722,7 +14708,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves summary metrics for the intent stages in your bot. The following fields are required:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>metrics</code> – A list of <a href=\"https://docs.aws.amazon.com/lexv2/latest/APIReference/API_AnalyticsIntentStageMetric.html\">AnalyticsIntentStageMetric</a> objects. In each object, use the <code>name</code> field to specify the metric to calculate, the <code>statistic</code> field to specify whether to calculate the <code>Sum</code>, <code>Average</code>, or <code>Max</code> number, and the <code>order</code> field to specify whether to sort the results in <code>Ascending</code> or <code>Descending</code> order.</p>\n            </li>\n            <li>\n               <p>\n                  <code>startDateTime</code> and <code>endDateTime</code> – Define a time range for which you want to retrieve results.</p>\n            </li>\n         </ul>\n         <p>Of the optional fields, you can organize the results in the following ways:</p>\n         <ul>\n            <li>\n               <p>Use the <code>filters</code> field to filter the results, the <code>groupBy</code> field to specify categories by which to group the results, and the <code>binBy</code> field to specify time intervals by which to group the results.</p>\n            </li>\n            <li>\n               <p>Use the <code>maxResults</code> field to limit the number of results to return in a single response and the <code>nextToken</code> field to return the next batch of results if the response does not return the full set of results.</p>\n            </li>\n         </ul>\n         <p>Note that an <code>order</code> field exists in both <code>binBy</code> and <code>metrics</code>. You can only specify one <code>order</code> in a given request.</p>",
+                "smithy.api#documentation": "<p>Retrieves summary metrics for the stages within intents in your bot. The following fields are required:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>metrics</code> – A list of <a href=\"https://docs.aws.amazon.com/lexv2/latest/APIReference/API_AnalyticsIntentStageMetric.html\">AnalyticsIntentStageMetric</a> objects. In each object, use the <code>name</code> field to specify the metric to calculate, the <code>statistic</code> field to specify whether to calculate the <code>Sum</code>, <code>Average</code>, or <code>Max</code> number, and the <code>order</code> field to specify whether to sort the results in <code>Ascending</code> or <code>Descending</code> order.</p>\n            </li>\n            <li>\n               <p>\n                  <code>startDateTime</code> and <code>endDateTime</code> – Define a time range for which you want to retrieve results.</p>\n            </li>\n         </ul>\n         <p>Of the optional fields, you can organize the results in the following ways:</p>\n         <ul>\n            <li>\n               <p>Use the <code>filters</code> field to filter the results, the <code>groupBy</code> field to specify categories by which to group the results, and the <code>binBy</code> field to specify time intervals by which to group the results.</p>\n            </li>\n            <li>\n               <p>Use the <code>maxResults</code> field to limit the number of results to return in a single response and the <code>nextToken</code> field to return the next batch of results if the response does not return the full set of results.</p>\n            </li>\n         </ul>\n         <p>Note that an <code>order</code> field exists in both <code>binBy</code> and <code>metrics</code>. You can only specify one <code>order</code> in a given request.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/bots/{botId}/analytics/intentstagemetrics",
@@ -16050,7 +16036,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a list of metadata for individual user utterances to your bot. The <code>startDateTime</code> and <code>endDateTime</code> fields are required. These fields define a time range for which you want to retrieve results. Of the optional fields, you can organize the results in the following ways:</p>\n         <ul>\n            <li>\n               <p>Use the <code>filters</code> field to filter the results and the <code>sortBy</code> field to specify the values by which to sort the results.</p>\n            </li>\n            <li>\n               <p>Use the <code>maxResults</code> field to limit the number of results to return in a single response and the <code>nextToken</code> field to return the next batch of results if the response does not return the full set of results.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<note>\n            <p>To use this API operation, your IAM role must have permissions to\n            perform the <a href=\"https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListAggregatedUtterances.html\">ListAggregatedUtterances</a> operation, which provides access to\n            utterance-related analytics. See <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/monitoring-utterances.html\">Viewing utterance\n               statistics</a> for the IAM policy to apply to the IAM role.</p>\n         </note>\n         <p>Retrieves a list of metadata for individual user utterances to your bot. The following fields are required:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>startDateTime</code> and <code>endDateTime</code> – Define a time range for which you want to retrieve results.</p>\n            </li>\n         </ul>\n         <p>Of the optional fields, you can organize the results in the following ways:</p>\n         <ul>\n            <li>\n               <p>Use the <code>filters</code> field to filter the results and the <code>sortBy</code> field to specify the values by which to sort the results.</p>\n            </li>\n            <li>\n               <p>Use the <code>maxResults</code> field to limit the number of results to return in a single response and the <code>nextToken</code> field to return the next batch of results if the response does not return the full set of results.</p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/bots/{botId}/analytics/utterances",
@@ -16169,7 +16155,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves summary metrics for the utterances in your bot. The following fields are required:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>metrics</code> – A list of <a href=\"https://docs.aws.amazon.com/lexv2/latest/APIReference/API_AnalyticsUtteranceMetric.html\">AnalyticsUtteranceMetric</a> objects. In each object, use the <code>name</code> field to specify the metric to calculate, the <code>statistic</code> field to specify whether to calculate the <code>Sum</code>, <code>Average</code>, or <code>Max</code> number, and the <code>order</code> field to specify whether to sort the results in <code>Ascending</code> or <code>Descending</code> order.</p>\n            </li>\n            <li>\n               <p>\n                  <code>startDateTime</code> and <code>endDateTime</code> – Define a time range for which you want to retrieve results.</p>\n            </li>\n         </ul>\n         <p>Of the optional fields, you can organize the results in the following ways:</p>\n         <ul>\n            <li>\n               <p>Use the <code>filters</code> field to filter the results, the <code>groupBy</code> field to specify categories by which to group the results, and the <code>binBy</code> field to specify time intervals by which to group the results.</p>\n            </li>\n            <li>\n               <p>Use the <code>maxResults</code> field to limit the number of results to return in a single response and the <code>nextToken</code> field to return the next batch of results if the response does not return the full set of results.</p>\n            </li>\n         </ul>\n         <p>Note that an <code>order</code> field exists in both <code>binBy</code> and <code>metrics</code>. Currently, you can specify it in either field, but not in both.</p>",
+                "smithy.api#documentation": "<note>\n            <p>To use this API operation, your IAM role must have permissions to\n            perform the <a href=\"https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListAggregatedUtterances.html\">ListAggregatedUtterances</a> operation, which provides access to\n            utterance-related analytics. See <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/monitoring-utterances.html\">Viewing utterance\n               statistics</a> for the IAM policy to apply to the IAM role.</p>\n         </note>\n         <p>Retrieves summary metrics for the utterances in your bot. The following fields are required:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>metrics</code> – A list of <a href=\"https://docs.aws.amazon.com/lexv2/latest/APIReference/API_AnalyticsUtteranceMetric.html\">AnalyticsUtteranceMetric</a> objects. In each object, use the <code>name</code> field to specify the metric to calculate, the <code>statistic</code> field to specify whether to calculate the <code>Sum</code>, <code>Average</code>, or <code>Max</code> number, and the <code>order</code> field to specify whether to sort the results in <code>Ascending</code> or <code>Descending</code> order.</p>\n            </li>\n            <li>\n               <p>\n                  <code>startDateTime</code> and <code>endDateTime</code> – Define a time range for which you want to retrieve results.</p>\n            </li>\n         </ul>\n         <p>Of the optional fields, you can organize the results in the following ways:</p>\n         <ul>\n            <li>\n               <p>Use the <code>filters</code> field to filter the results, the <code>groupBy</code> field to specify categories by which to group the results, and the <code>binBy</code> field to specify time intervals by which to group the results.</p>\n            </li>\n            <li>\n               <p>Use the <code>maxResults</code> field to limit the number of results to return in a single response and the <code>nextToken</code> field to return the next batch of results if the response does not return the full set of results.</p>\n            </li>\n         </ul>\n         <p>Note that an <code>order</code> field exists in both <code>binBy</code> and <code>metrics</code>. Currently, you can specify it in either field, but not in both.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/bots/{botId}/analytics/utterancemetrics",
@@ -17724,7 +17710,7 @@
                     }
                 },
                 "channel": {
-                    "target": "com.amazonaws.lexmodelsv2#BotChannelType",
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsChannel",
                     "traits": {
                         "smithy.api#documentation": "<p>The channel that is integrated with the bot that the session was held with.</p>"
                     }
@@ -22737,7 +22723,7 @@
                 "name": {
                     "target": "com.amazonaws.lexmodelsv2#AnalyticsUtteranceSortByName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The measure by which to sort the utterance analytics data.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Count</code> – The number of utterances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UtteranceTimeStamp</code> – The date and time of the utterance.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The measure by which to sort the utterance analytics data.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Count</code> – The number of utterances.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UtteranceTimestamp</code> – The date and time of the utterance.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -22850,7 +22836,7 @@
                     }
                 },
                 "channel": {
-                    "target": "com.amazonaws.lexmodelsv2#BotChannelType",
+                    "target": "com.amazonaws.lexmodelsv2#AnalyticsChannel",
                     "traits": {
                         "smithy.api#documentation": "<p>The channel that is integrated with the bot that the utterance was made to.</p>"
                     }

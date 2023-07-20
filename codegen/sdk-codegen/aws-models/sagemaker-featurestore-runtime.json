@@ -821,9 +821,9 @@
             "type": "structure",
             "members": {
                 "FeatureGroupName": {
-                    "target": "com.amazonaws.sagemakerfeaturestoreruntime#FeatureGroupName",
+                    "target": "com.amazonaws.sagemakerfeaturestoreruntime#FeatureGroupNameOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>A <code>FeatureGroupName</code> containing Records you are retrieving in a batch.</p>",
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the <code>FeatureGroup</code> containing the\n         records you are retrieving in a batch.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -863,14 +863,14 @@
                 "Identifiers": {
                     "target": "com.amazonaws.sagemakerfeaturestoreruntime#BatchGetRecordIdentifiers",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <code>FeatureGroup</code> names, with their corresponding\n            <code>RecordIdentifier</code> value, and Feature name that have been requested to be\n         retrieved in batch.</p>",
+                        "smithy.api#documentation": "<p>A list containing the name or Amazon Resource Name (ARN) of the\n            <code>FeatureGroup</code>, the list of names of <code>Feature</code>s to be retrieved,\n         and the corresponding <code>RecordIdentifier</code> values as strings.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ExpirationTimeResponse": {
                     "target": "com.amazonaws.sagemakerfeaturestoreruntime#ExpirationTimeResponse",
                     "traits": {
-                        "smithy.api#documentation": "<p>Parameter to request <code>ExpiresAt</code> in response. If <code>Enabled</code>,\n         <code>BatchGetRecord</code> will return the value of <code>ExpiresAt</code>, if it is\n         not null. If <code>Disabled</code> and null, <code>BatchGetRecord</code> will return\n         null.</p>"
+                        "smithy.api#documentation": "<p>Parameter to request <code>ExpiresAt</code> in response. If <code>Enabled</code>,\n            <code>BatchGetRecord</code> will return the value of <code>ExpiresAt</code>, if it is\n         not null. If <code>Disabled</code> and null, <code>BatchGetRecord</code> will return\n         null.</p>"
                     }
                 }
             },
@@ -939,7 +939,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The output of Records that have been retrieved in a batch.</p>"
+                "smithy.api#documentation": "<p>The output of records that have been retrieved in a batch.</p>"
             }
         },
         "com.amazonaws.sagemakerfeaturestoreruntime#BatchGetRecordResultDetails": {
@@ -976,7 +976,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a <code>Record</code> from a <code>FeatureGroup</code> in the\n            <code>OnlineStore</code>. Feature Store supports both <code>SoftDelete</code> and\n            <code>HardDelete</code>. For <code>SoftDelete</code> (default), feature columns are\n         set to <code>null</code> and the record is no longer retrievable by <code>GetRecord</code>\n         or <code>BatchGetRecord</code>. For <code>HardDelete</code>, the complete\n            <code>Record</code> is removed from the <code>OnlineStore</code>. In both cases, Feature\n         Store appends the deleted record marker to the <code>OfflineStore</code> with feature\n         values set to <code>null</code>, <code>is_deleted</code> value set to <code>True</code>,\n         and <code>EventTime</code> set to the delete input <code>EventTime</code>.</p>\n         <p>Note that the <code>EventTime</code> specified in <code>DeleteRecord</code> should be\n         set later than the <code>EventTime</code> of the existing record in the\n            <code>OnlineStore</code> for that <code>RecordIdentifer</code>. If it is not, the\n         deletion does not occur:</p>\n         <ul>\n            <li>\n               <p>For <code>SoftDelete</code>, the existing (undeleted) record remains in the\n                  <code>OnlineStore</code>, though the delete record marker is still written to the\n                  <code>OfflineStore</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>HardDelete</code> returns <code>EventTime</code>: <code>400\n                  ValidationException</code> to indicate that the delete operation failed. No delete\n               record marker is written to the <code>OfflineStore</code>.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Deletes a <code>Record</code> from a <code>FeatureGroup</code> in the\n            <code>OnlineStore</code>. Feature Store supports both <code>SoftDelete</code> and\n            <code>HardDelete</code>. For <code>SoftDelete</code> (default), feature columns are set\n         to <code>null</code> and the record is no longer retrievable by <code>GetRecord</code> or\n            <code>BatchGetRecord</code>. For <code>HardDelete</code>, the complete\n            <code>Record</code> is removed from the <code>OnlineStore</code>. In both cases, Feature\n         Store appends the deleted record marker to the <code>OfflineStore</code> with feature\n         values set to <code>null</code>, <code>is_deleted</code> value set to <code>True</code>,\n         and <code>EventTime</code> set to the delete input <code>EventTime</code>.</p>\n         <p>Note that the <code>EventTime</code> specified in <code>DeleteRecord</code> should be\n         set later than the <code>EventTime</code> of the existing record in the\n            <code>OnlineStore</code> for that <code>RecordIdentifer</code>. If it is not, the\n         deletion does not occur:</p>\n         <ul>\n            <li>\n               <p>For <code>SoftDelete</code>, the existing (undeleted) record remains in the\n                  <code>OnlineStore</code>, though the delete record marker is still written to the\n                  <code>OfflineStore</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>HardDelete</code> returns <code>EventTime</code>: <code>400\n                  ValidationException</code> to indicate that the delete operation failed. No delete\n               record marker is written to the <code>OfflineStore</code>.</p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/FeatureGroup/{FeatureGroupName}",
@@ -988,9 +988,9 @@
             "type": "structure",
             "members": {
                 "FeatureGroupName": {
-                    "target": "com.amazonaws.sagemakerfeaturestoreruntime#FeatureGroupName",
+                    "target": "com.amazonaws.sagemakerfeaturestoreruntime#FeatureGroupNameOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the feature group to delete the record from. </p>",
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the feature group to delete the record from.\n      </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1067,14 +1067,14 @@
         "com.amazonaws.sagemakerfeaturestoreruntime#ExpiresAt": {
             "type": "string"
         },
-        "com.amazonaws.sagemakerfeaturestoreruntime#FeatureGroupName": {
+        "com.amazonaws.sagemakerfeaturestoreruntime#FeatureGroupNameOrArn": {
             "type": "string",
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 64
+                    "max": 150
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9]([-_]*[a-zA-Z0-9]){0,63}$"
+                "smithy.api#pattern": "^(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:feature-group/)?([a-zA-Z0-9]([-_]*[a-zA-Z0-9]){0,63})$"
             }
         },
         "com.amazonaws.sagemakerfeaturestoreruntime#FeatureName": {
@@ -1158,9 +1158,9 @@
             "type": "structure",
             "members": {
                 "FeatureGroupName": {
-                    "target": "com.amazonaws.sagemakerfeaturestoreruntime#FeatureGroupName",
+                    "target": "com.amazonaws.sagemakerfeaturestoreruntime#FeatureGroupNameOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the feature group from which you want to retrieve a record.</p>",
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the feature group from which you want to\n         retrieve a record.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1183,7 +1183,7 @@
                 "ExpirationTimeResponse": {
                     "target": "com.amazonaws.sagemakerfeaturestoreruntime#ExpirationTimeResponse",
                     "traits": {
-                        "smithy.api#documentation": "<p>Parameter to request <code>ExpiresAt</code> in response. If <code>Enabled</code>,\n         <code>BatchGetRecord</code> will return the value of <code>ExpiresAt</code>, if it is\n         not null. If <code>Disabled</code> and null, <code>BatchGetRecord</code> will return\n         null.</p>",
+                        "smithy.api#documentation": "<p>Parameter to request <code>ExpiresAt</code> in response. If <code>Enabled</code>,\n            <code>GetRecord</code> will return the value of <code>ExpiresAt</code>, if it is not\n         null. If <code>Disabled</code> and null, <code>GetRecord</code> will return null.</p>",
                         "smithy.api#httpQuery": "ExpirationTimeResponse"
                     }
                 }
@@ -1257,7 +1257,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Used for data ingestion into the <code>FeatureStore</code>. The <code>PutRecord</code>\n         API writes to both the <code>OnlineStore</code> and <code>OfflineStore</code>. If the\n         record is the latest record for the <code>recordIdentifier</code>, the record is written to\n         both the <code>OnlineStore</code> and <code>OfflineStore</code>. If the record is a\n         historic record, it is written only to the <code>OfflineStore</code>.</p>",
+                "smithy.api#documentation": "<p>The <code>PutRecord</code> API is used to ingest a list of <code>Records</code> into\n         your feature group. </p>\n         <p>If a new record’s <code>EventTime</code> is greater, the new record is written to both\n         the <code>OnlineStore</code> and <code>OfflineStore</code>. Otherwise, the record is a\n         historic record and it is written only to the <code>OfflineStore</code>. </p>\n         <p>You can specify the ingestion to be applied to the <code>OnlineStore</code>,\n            <code>OfflineStore</code>, or both by using the <code>TargetStores</code> request\n         parameter. </p>\n         <p>You can set the ingested record to expire at a given time to live (TTL) duration after\n         the record’s event time, <code>ExpiresAt</code> = <code>EventTime</code> +\n            <code>TtlDuration</code>, by specifying the <code>TtlDuration</code> parameter. A record\n         level <code>TtlDuration</code> is set when specifying the <code>TtlDuration</code>\n         parameter using the <code>PutRecord</code> API call. If the input <code>TtlDuration</code>\n         is <code>null</code> or unspecified, <code>TtlDuration</code> is set to the default feature\n         group level <code>TtlDuration</code>. A record level <code>TtlDuration</code> supersedes\n         the group level <code>TtlDuration</code>.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/FeatureGroup/{FeatureGroupName}",
@@ -1269,9 +1269,9 @@
             "type": "structure",
             "members": {
                 "FeatureGroupName": {
-                    "target": "com.amazonaws.sagemakerfeaturestoreruntime#FeatureGroupName",
+                    "target": "com.amazonaws.sagemakerfeaturestoreruntime#FeatureGroupNameOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the feature group that you want to insert the record into.</p>",
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of the feature group that you want to insert the\n         record into.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
