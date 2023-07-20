@@ -312,18 +312,7 @@ var defaultPartitions = endpoints.Partitions{
 				SignatureVersions: []string{"v4"},
 			},
 		},
-		RegionRegex:       partitionRegexp.AwsUsGov,
-		IsRegionalized:    false,
-		PartitionEndpoint: "aws-us-gov-global",
-		Endpoints: endpoints.Endpoints{
-			endpoints.EndpointKey{
-				Region: "aws-us-gov-global",
-			}: endpoints.Endpoint{
-				Hostname: "savingsplans.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "us-gov-west-1",
-				},
-			},
-		},
+		RegionRegex:    partitionRegexp.AwsUsGov,
+		IsRegionalized: true,
 	},
 }
