@@ -4,6 +4,7 @@ package eventbridge
 
 import (
 	"context"
+	"fmt"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/defaults"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
@@ -46,8 +47,6 @@ func New(options Options, optFns ...func(*Options)) *Client {
 	resolveHTTPClient(&options)
 
 	resolveHTTPSignerV4(&options)
-
-	resolveDefaultEndpointConfiguration(&options)
 
 	resolveHTTPSignerV4a(&options)
 
@@ -93,8 +92,11 @@ type Options struct {
 
 	// The service endpoint resolver.
 	//
-	// Deprecated: EndpointResolver and WithEndpointResolver are deprecated. See
-	// EndpointResolverV2 and WithEndpointResolverV2
+	// Deprecated: EndpointResolver and WithEndpointResolver are deprecated. Providing
+	// a value for this field will likely prevent you from using any endpoint-related
+	// service features released after the introduction of EndpointResolverV2 and
+	// BaseEndpoint. To migrate an EndpointResolver implementation that uses a custom
+	// endpoint, set the client option BaseEndpoint instead.
 	EndpointResolver EndpointResolver
 
 	// Resolves the endpoint used for a particular service. This should be used over
@@ -162,8 +164,11 @@ func WithAPIOptions(optFns ...func(*middleware.Stack) error) func(*Options) {
 	}
 }
 
-// EndpointResolver and WithEndpointResolver are deprecated. See
-// EndpointResolverV2 and WithEndpointResolverV2
+// EndpointResolver and WithEndpointResolver are deprecated. Providing a value for
+// this field will likely prevent you from using any endpoint-related service
+// features released after the introduction of EndpointResolverV2 and BaseEndpoint.
+// To migrate an EndpointResolver implementation that uses a custom endpoint, set
+// the client option BaseEndpoint instead.
 func WithEndpointResolver(v EndpointResolver) func(*Options) {
 	return func(o *Options) {
 		o.EndpointResolver = v
@@ -194,6 +199,8 @@ func (c *Client) invokeOperation(ctx context.Context, opID string, params interf
 	ctx = middleware.ClearStackValues(ctx)
 	stack := middleware.NewStack(opID, smithyhttp.NewStackRequest)
 	options := c.options.Copy()
+	resolveEndpointResolverV2(&options)
+
 	for _, fn := range optFns {
 		fn(&options)
 	}
@@ -203,8 +210,6 @@ func (c *Client) invokeOperation(ctx context.Context, opID string, params interf
 	finalizeClientEndpointResolverOptions(&options)
 
 	resolveCredentialProvider(&options)
-
-	finalizeEndpointResolverV2(&options)
 
 	for _, fn := range stackFns {
 		if err := fn(stack, options); err != nil {
@@ -231,6 +236,30 @@ func (c *Client) invokeOperation(ctx context.Context, opID string, params interf
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+type LegacyEndpointContextSetter struct {
+	LegacyResolver EndpointResolver
+}
+
+func (*LegacyEndpointContextSetter) ID() string {
+	return "LegacyEndpointContextSetter"
+}
+
+func (m *LegacyEndpointContextSetter) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.LegacyResolver != nil {
+		ctx = awsmiddleware.SetRequiresLegacyEndpoints(ctx, true)
+	}
+
+	return next.HandleInitialize(ctx, in)
+
+}
+func addLegacyEndpointContextSetter(stack *middleware.Stack, o Options) error {
+	return stack.Initialize.Add(&LegacyEndpointContextSetter{
+		LegacyResolver: o.EndpointResolver,
+	}, middleware.Before)
+}
 
 func resolveDefaultLogger(o *Options) {
 	if o.Logger != nil {
@@ -274,7 +303,6 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 	resolveAWSRetryerProvider(cfg, &opts)
 	resolveAWSRetryMaxAttempts(cfg, &opts)
 	resolveAWSRetryMode(cfg, &opts)
-	resolveAWSEndpointResolver(cfg, &opts)
 	resolveUseDualStackEndpoint(cfg, &opts)
 	resolveUseFIPSEndpoint(cfg, &opts)
 	return New(opts, optFns...)
@@ -523,4 +551,33 @@ func addRequestResponseLogging(stack *middleware.Stack, o Options) error {
 		LogResponse:         o.ClientLogMode.IsResponse(),
 		LogResponseWithBody: o.ClientLogMode.IsResponseWithBody(),
 	}, middleware.After)
+}
+
+type EndpointDisableHTTPSMiddleware struct {
+	EndpointDisableHTTPS bool
+}
+
+func (*EndpointDisableHTTPSMiddleware) ID() string {
+	return "EndpointDisableHTTPSMiddleware"
+}
+
+func (m *EndpointDisableHTTPSMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	if m.EndpointDisableHTTPS && !smithyhttp.GetHostnameImmutable(ctx) {
+		req.URL.Scheme = "http"
+	}
+
+	return next.HandleSerialize(ctx, in)
+
+}
+func addEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
+	return stack.Serialize.Insert(&EndpointDisableHTTPSMiddleware{
+		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
+	}, "ResolveEndpointV2", middleware.After)
 }

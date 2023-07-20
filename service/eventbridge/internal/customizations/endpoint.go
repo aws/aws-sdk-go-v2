@@ -49,6 +49,11 @@ func (u *updateEndpoint) ID() string {
 }
 
 func (u *updateEndpoint) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (out middleware.SerializeOutput, metadata middleware.Metadata, err error) {
+	if !awsmiddleware.GetRequiresLegacyEndpoints(ctx) {
+		return next.HandleSerialize(ctx, in)
+	}
+	
+	
 	// If getEndpointIDFromInput is nil but the middleware got attached just skip to the next handler
 	if u.getEndpointIDFromInput == nil {
 		return next.HandleSerialize(ctx, in)
