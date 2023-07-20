@@ -12,7 +12,7 @@ import (
 
 func TestConfigs_SharedConfigOptions(t *testing.T) {
 	var options LoadOptions
-	optFns := []func(*LoadOptions) error{
+	optFns := []LoadOptionsFunc{
 		WithSharedConfigProfile("profile-name"),
 		WithSharedConfigFiles([]string{"creds-file"}),
 	}
@@ -91,7 +91,7 @@ func TestConfigs_AppendFromLoaders(t *testing.T) {
 
 func TestConfigs_ResolveAWSConfig(t *testing.T) {
 	var options LoadOptions
-	optFns := []func(*LoadOptions) error{
+	optFns := []LoadOptionsFunc{
 		WithRegion("mock-region"),
 		WithCredentialsProvider(credentials.StaticCredentialsProvider{
 			Value: aws.Credentials{

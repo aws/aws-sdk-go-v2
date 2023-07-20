@@ -409,7 +409,7 @@ func TestSharedConfigCredentialSource(t *testing.T) {
 
 			var credChain []string
 
-			loadOptions := []func(*LoadOptions) error{
+			loadOptions := []LoadOptionsFunc{
 				WithEndpointResolverWithOptions(endpointResolver),
 				WithAPIOptions([]func(*middleware.Stack) error{
 					func(stack *middleware.Stack) error {
@@ -574,7 +574,7 @@ func TestResolveCredentialsIMDSClient(t *testing.T) {
 				httpClient = stubErrorClient{err: fmt.Errorf("expected HTTP client error")}
 			}
 
-			opts := []func(*LoadOptions) error{
+			opts := []LoadOptionsFunc{
 				WithRetryer(func() aws.Retryer { return aws.NopRetryer{} }),
 				WithHTTPClient(httpClient),
 			}

@@ -179,7 +179,7 @@ func (cs configs) ResolveConfig(f func(configs []interface{}) error) error {
 // The default configuration sources are:
 // * Environment Variables
 // * Shared Configuration and Shared Credentials files.
-func LoadDefaultConfig(ctx context.Context, optFns ...func(*LoadOptions) error) (cfg aws.Config, err error) {
+func LoadDefaultConfig(ctx context.Context, optFns ...LoadOptionsFunc) (cfg aws.Config, err error) {
 	var options LoadOptions
 	for _, optFn := range optFns {
 		if err := optFn(&options); err != nil {

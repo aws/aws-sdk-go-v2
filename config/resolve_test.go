@@ -102,7 +102,7 @@ func TestResolveCustomCABundle_ErrorCustomClient(t *testing.T) {
 
 func TestResolveRegion(t *testing.T) {
 	var options LoadOptions
-	optFns := []func(options *LoadOptions) error{
+	optFns := []LoadOptionsFunc{
 		WithRegion("ignored-region"),
 
 		WithRegion("mock-region"),
@@ -127,7 +127,7 @@ func TestResolveRegion(t *testing.T) {
 
 func TestResolveAppID(t *testing.T) {
 	var options LoadOptions
-	optFns := []func(options *LoadOptions) error{
+	optFns := []LoadOptionsFunc{
 		WithAppID("1234"),
 
 		WithAppID("5678"),
@@ -152,7 +152,7 @@ func TestResolveAppID(t *testing.T) {
 
 func TestResolveCredentialsProvider(t *testing.T) {
 	var options LoadOptions
-	optFns := []func(options *LoadOptions) error{
+	optFns := []LoadOptionsFunc{
 		WithCredentialsProvider(credentials.StaticCredentialsProvider{
 			Value: aws.Credentials{
 				AccessKeyID:     "AKID",
