@@ -28611,9 +28611,9 @@ func awsRestjson1_deserializeDocumentSessionSpecification(v **types.SessionSpeci
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected BotChannelType to be of type string, got %T instead", value)
+					return fmt.Errorf("expected AnalyticsChannel to be of type string, got %T instead", value)
 				}
-				sv.Channel = types.BotChannelType(jtv)
+				sv.Channel = ptr.String(jtv)
 			}
 
 		case "conversationDurationSeconds":
@@ -32725,9 +32725,9 @@ func awsRestjson1_deserializeDocumentUtteranceSpecification(v **types.UtteranceS
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected BotChannelType to be of type string, got %T instead", value)
+					return fmt.Errorf("expected AnalyticsChannel to be of type string, got %T instead", value)
 				}
-				sv.Channel = types.BotChannelType(jtv)
+				sv.Channel = ptr.String(jtv)
 			}
 
 		case "conversationEndTime":

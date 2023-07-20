@@ -30,7 +30,8 @@ func (c *Client) DescribeFeatureMetadata(ctx context.Context, params *DescribeFe
 
 type DescribeFeatureMetadataInput struct {
 
-	// The name of the feature group containing the feature.
+	// The name or Amazon Resource Name (ARN) of the feature group containing the
+	// feature.
 	//
 	// This member is required.
 	FeatureGroupName *string

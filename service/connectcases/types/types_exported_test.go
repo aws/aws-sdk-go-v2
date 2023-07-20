@@ -20,6 +20,9 @@ func ExampleCaseFilter_outputUsage() {
 	case *types.CaseFilterMemberNot:
 		_ = v.Value // Value is types.CaseFilter
 
+	case *types.CaseFilterMemberOrAll:
+		_ = v.Value // Value is []types.CaseFilter
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -76,6 +79,9 @@ func ExampleFieldValueUnion_outputUsage() {
 	case *types.FieldValueUnionMemberDoubleValue:
 		_ = v.Value // Value is float64
 
+	case *types.FieldValueUnionMemberEmptyValue:
+		_ = v.Value // Value is types.EmptyFieldValue
+
 	case *types.FieldValueUnionMemberStringValue:
 		_ = v.Value // Value is string
 
@@ -88,6 +94,7 @@ func ExampleFieldValueUnion_outputUsage() {
 	}
 }
 
+var _ *types.EmptyFieldValue
 var _ *string
 var _ *bool
 var _ *float64

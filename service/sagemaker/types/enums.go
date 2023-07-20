@@ -1370,6 +1370,24 @@ func (ContentClassifier) Values() []ContentClassifier {
 	}
 }
 
+type CrossAccountFilterOption string
+
+// Enum values for CrossAccountFilterOption
+const (
+	CrossAccountFilterOptionSameAccount  CrossAccountFilterOption = "SameAccount"
+	CrossAccountFilterOptionCrossAccount CrossAccountFilterOption = "CrossAccount"
+)
+
+// Values returns all known values for CrossAccountFilterOption. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CrossAccountFilterOption) Values() []CrossAccountFilterOption {
+	return []CrossAccountFilterOption{
+		"SameAccount",
+		"CrossAccount",
+	}
+}
+
 type DataDistributionType string
 
 // Enum values for DataDistributionType
@@ -4653,6 +4671,40 @@ func (RepositoryAccessMode) Values() []RepositoryAccessMode {
 	return []RepositoryAccessMode{
 		"Platform",
 		"Vpc",
+	}
+}
+
+type ResourceCatalogSortBy string
+
+// Enum values for ResourceCatalogSortBy
+const (
+	ResourceCatalogSortByCreationTime ResourceCatalogSortBy = "CreationTime"
+)
+
+// Values returns all known values for ResourceCatalogSortBy. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceCatalogSortBy) Values() []ResourceCatalogSortBy {
+	return []ResourceCatalogSortBy{
+		"CreationTime",
+	}
+}
+
+type ResourceCatalogSortOrder string
+
+// Enum values for ResourceCatalogSortOrder
+const (
+	ResourceCatalogSortOrderAscending  ResourceCatalogSortOrder = "Ascending"
+	ResourceCatalogSortOrderDescending ResourceCatalogSortOrder = "Descending"
+)
+
+// Values returns all known values for ResourceCatalogSortOrder. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceCatalogSortOrder) Values() []ResourceCatalogSortOrder {
+	return []ResourceCatalogSortOrder{
+		"Ascending",
+		"Descending",
 	}
 }
 

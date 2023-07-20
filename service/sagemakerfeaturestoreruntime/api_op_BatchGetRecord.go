@@ -29,8 +29,9 @@ func (c *Client) BatchGetRecord(ctx context.Context, params *BatchGetRecordInput
 
 type BatchGetRecordInput struct {
 
-	// A list of FeatureGroup names, with their corresponding RecordIdentifier value,
-	// and Feature name that have been requested to be retrieved in batch.
+	// A list containing the name or Amazon Resource Name (ARN) of the FeatureGroup ,
+	// the list of names of Feature s to be retrieved, and the corresponding
+	// RecordIdentifier values as strings.
 	//
 	// This member is required.
 	Identifiers []types.BatchGetRecordIdentifier

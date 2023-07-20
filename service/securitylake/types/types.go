@@ -194,7 +194,7 @@ type DataLakeEncryptionConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The details for a Security Lake exception
+// The details for an Amazon Security Lake exception.
 type DataLakeException struct {
 
 	// The underlying exception of a Security Lake exception.
@@ -455,7 +455,7 @@ type LogSource struct {
 }
 
 // The supported source types from which logs and events are collected in Amazon
-// Security Lake. For the list of supported Amazon Web Services, see the Amazon
+// Security Lake. For a list of supported Amazon Web Services, see the Amazon
 // Security Lake User Guide (https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html)
 // .
 //
@@ -468,7 +468,9 @@ type LogSourceResource interface {
 }
 
 // Amazon Security Lake supports log and event collection for natively supported
-// Amazon Web Services.
+// Amazon Web Services. For more information, see the Amazon Security Lake User
+// Guide (https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html)
+// .
 type LogSourceResourceMemberAwsLogSource struct {
 	Value AwsLogSourceResource
 
@@ -477,8 +479,9 @@ type LogSourceResourceMemberAwsLogSource struct {
 
 func (*LogSourceResourceMemberAwsLogSource) isLogSourceResource() {}
 
-// Amazon Security Lake supports custom source types. For a detailed list, see the
-// Amazon Security Lake User Guide.
+// Amazon Security Lake supports custom source types. For more information, see
+// the Amazon Security Lake User Guide (https://docs.aws.amazon.com/security-lake/latest/userguide/custom-sources.html)
+// .
 type LogSourceResourceMemberCustomLogSource struct {
 	Value CustomLogSourceResource
 
@@ -529,7 +532,8 @@ type SubscriberResource struct {
 
 	// Amazon Security Lake supports log and event collection for natively supported
 	// Amazon Web Services. For more information, see the Amazon Security Lake User
-	// Guide.
+	// Guide (https://docs.aws.amazon.com/security-lake/latest/userguide/source-management.html)
+	// .
 	//
 	// This member is required.
 	Sources []LogSourceResource
@@ -591,6 +595,38 @@ type SubscriberResource struct {
 
 	// The date and time when the subscriber was last updated.
 	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// A tag is a label that you can define and associate with Amazon Web Services
+// resources, including certain types of Amazon Security Lake resources. Tags can
+// help you identify, categorize, and manage resources in different ways, such as
+// by owner, environment, or other criteria. You can associate tags with the
+// following types of Security Lake resources: subscribers, and the data lake
+// configuration for your Amazon Web Services account in individual Amazon Web
+// Services Regions. A resource can have up to 50 tags. Each tag consists of a
+// required tag key and an associated tag value. A tag key is a general label that
+// acts as a category for a more specific tag value. Each tag key must be unique
+// and it can have only one tag value. A tag value acts as a descriptor for a tag
+// key. Tag keys and values are case sensitive. They can contain letters, numbers,
+// spaces, or the following symbols: _ . : / = + @ - For more information, see
+// Tagging Amazon Security Lake resources (https://docs.aws.amazon.com/security-lake/latest/userguide/tagging-resources.html)
+// in the Amazon Security Lake User Guide.
+type Tag struct {
+
+	// The name of the tag. This is a general label that acts as a category for a more
+	// specific tag value ( value ).
+	//
+	// This member is required.
+	Key *string
+
+	// The value that’s associated with the specified tag key ( key ). This value acts
+	// as a descriptor for the tag key. A tag value cannot be null, but it can be an
+	// empty string.
+	//
+	// This member is required.
+	Value *string
 
 	noSmithyDocumentSerde
 }

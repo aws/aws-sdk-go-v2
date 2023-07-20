@@ -238,6 +238,7 @@
         "api_op_ListPipelines.go",
         "api_op_ListProcessingJobs.go",
         "api_op_ListProjects.go",
+        "api_op_ListResourceCatalogs.go",
         "api_op_ListSpaces.go",
         "api_op_ListStageDevices.go",
         "api_op_ListStudioLifecycleConfigs.go",

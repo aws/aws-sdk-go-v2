@@ -2797,6 +2797,44 @@ func awsAwsjson11_serializeDocumentTagList(v []types.Tag, value smithyjson.Value
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentToxicityCategories(v []types.ToxicityCategory, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentToxicityDetection(v []types.ToxicityDetectionSettings, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentToxicityDetectionSettings(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentToxicityDetectionSettings(v *types.ToxicityDetectionSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ToxicityCategories != nil {
+		ok := object.Key("ToxicityCategories")
+		if err := awsAwsjson11_serializeDocumentToxicityCategories(v.ToxicityCategories, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentTranscriptFilter(v *types.TranscriptFilter, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3670,6 +3708,13 @@ func awsAwsjson11_serializeOpDocumentStartTranscriptionJobInput(v *StartTranscri
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ToxicityDetection != nil {
+		ok := object.Key("ToxicityDetection")
+		if err := awsAwsjson11_serializeDocumentToxicityDetection(v.ToxicityDetection, ok); err != nil {
 			return err
 		}
 	}

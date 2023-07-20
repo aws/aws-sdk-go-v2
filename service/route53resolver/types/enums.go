@@ -216,6 +216,7 @@ const (
 	IpAddressStatusDeleting               IpAddressStatus = "DELETING"
 	IpAddressStatusDeleteFailedFasExpired IpAddressStatus = "DELETE_FAILED_FAS_EXPIRED"
 	IpAddressStatusUpdating               IpAddressStatus = "UPDATING"
+	IpAddressStatusUpdateFailed           IpAddressStatus = "UPDATE_FAILED"
 )
 
 // Values returns all known values for IpAddressStatus. Note that this can be
@@ -234,6 +235,7 @@ func (IpAddressStatus) Values() []IpAddressStatus {
 		"DELETING",
 		"DELETE_FAILED_FAS_EXPIRED",
 		"UPDATING",
+		"UPDATE_FAILED",
 	}
 }
 
@@ -252,6 +254,34 @@ func (MutationProtectionStatus) Values() []MutationProtectionStatus {
 	return []MutationProtectionStatus{
 		"ENABLED",
 		"DISABLED",
+	}
+}
+
+type OutpostResolverStatus string
+
+// Enum values for OutpostResolverStatus
+const (
+	OutpostResolverStatusCreating       OutpostResolverStatus = "CREATING"
+	OutpostResolverStatusOperational    OutpostResolverStatus = "OPERATIONAL"
+	OutpostResolverStatusUpdating       OutpostResolverStatus = "UPDATING"
+	OutpostResolverStatusDeleting       OutpostResolverStatus = "DELETING"
+	OutpostResolverStatusActionNeeded   OutpostResolverStatus = "ACTION_NEEDED"
+	OutpostResolverStatusFailedCreation OutpostResolverStatus = "FAILED_CREATION"
+	OutpostResolverStatusFailedDeletion OutpostResolverStatus = "FAILED_DELETION"
+)
+
+// Values returns all known values for OutpostResolverStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OutpostResolverStatus) Values() []OutpostResolverStatus {
+	return []OutpostResolverStatus{
+		"CREATING",
+		"OPERATIONAL",
+		"UPDATING",
+		"DELETING",
+		"ACTION_NEEDED",
+		"FAILED_CREATION",
+		"FAILED_DELETION",
 	}
 }
 

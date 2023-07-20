@@ -250,7 +250,7 @@ type EventLogEntry struct {
 	// The IP address of the user whose actions are recorded in the event.
 	SourceIpAddress *string
 
-	//
+	// The user agent whose actions are recorded in the event.
 	UserAgent *string
 
 	noSmithyDocumentSerde
@@ -284,19 +284,20 @@ type ExecuteCommandSessionConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Information about a filter used to limit results of a query.
 type Filter struct {
 
-	//
+	// A key that can be used to sort results.
 	//
 	// This member is required.
 	Key *string
 
-	//
+	// The values of the key.
 	//
 	// This member is required.
 	Values []string
 
-	//
+	// The operator used to compare the fields.
 	ComparisonOperator *string
 
 	noSmithyDocumentSerde
@@ -431,7 +432,7 @@ type ProjectListFilter struct {
 	// This member is required.
 	Key FilterKey
 
-	// The value of the key.
+	// The values of the key.
 	//
 	// This member is required.
 	Values []string
@@ -498,7 +499,7 @@ type SpaceSummary struct {
 // Information about a user whose activity is recorded in an event for a space.
 type UserIdentity struct {
 
-	//
+	// The ID of the Amazon CodeCatalyst service principal.
 	//
 	// This member is required.
 	PrincipalId *string

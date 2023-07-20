@@ -40,7 +40,8 @@ type BatchGetRecordError struct {
 // batch.
 type BatchGetRecordIdentifier struct {
 
-	// A FeatureGroupName containing Records you are retrieving in a batch.
+	// The name or Amazon Resource Name (ARN) of the FeatureGroup containing the
+	// records you are retrieving in a batch.
 	//
 	// This member is required.
 	FeatureGroupName *string
@@ -57,7 +58,7 @@ type BatchGetRecordIdentifier struct {
 	noSmithyDocumentSerde
 }
 
-// The output of Records that have been retrieved in a batch.
+// The output of records that have been retrieved in a batch.
 type BatchGetRecordResultDetail struct {
 
 	// The FeatureGroupName containing Records you retrieved in a batch.

@@ -29,7 +29,8 @@ func (c *Client) UpdateFeatureMetadata(ctx context.Context, params *UpdateFeatur
 
 type UpdateFeatureMetadataInput struct {
 
-	// The name of the feature group containing the feature that you're updating.
+	// The name or Amazon Resource Name (ARN) of the feature group containing the
+	// feature that you're updating.
 	//
 	// This member is required.
 	FeatureGroupName *string

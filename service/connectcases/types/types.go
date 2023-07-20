@@ -38,6 +38,7 @@ type CaseEventIncludedData struct {
 //	CaseFilterMemberAndAll
 //	CaseFilterMemberField
 //	CaseFilterMemberNot
+//	CaseFilterMemberOrAll
 type CaseFilter interface {
 	isCaseFilter()
 }
@@ -68,6 +69,15 @@ type CaseFilterMemberNot struct {
 }
 
 func (*CaseFilterMemberNot) isCaseFilter() {}
+
+// Provides "or all" filtering.
+type CaseFilterMemberOrAll struct {
+	Value []CaseFilter
+
+	noSmithyDocumentSerde
+}
+
+func (*CaseFilterMemberOrAll) isCaseFilter() {}
 
 // Case summary information.
 type CaseSummary struct {
@@ -169,6 +179,13 @@ type DomainSummary struct {
 	// This member is required.
 	Name *string
 
+	noSmithyDocumentSerde
+}
+
+// An empty value. You cannot set EmptyFieldValue on a field that is required on a
+// case template. This structure will never have any data members. It signifies an
+// empty value on a case field.
+type EmptyFieldValue struct {
 	noSmithyDocumentSerde
 }
 
@@ -420,6 +437,7 @@ type FieldValue struct {
 //
 //	FieldValueUnionMemberBooleanValue
 //	FieldValueUnionMemberDoubleValue
+//	FieldValueUnionMemberEmptyValue
 //	FieldValueUnionMemberStringValue
 type FieldValueUnion interface {
 	isFieldValueUnion()
@@ -444,6 +462,15 @@ type FieldValueUnionMemberDoubleValue struct {
 }
 
 func (*FieldValueUnionMemberDoubleValue) isFieldValueUnion() {}
+
+// An empty value.
+type FieldValueUnionMemberEmptyValue struct {
+	Value EmptyFieldValue
+
+	noSmithyDocumentSerde
+}
+
+func (*FieldValueUnionMemberEmptyValue) isFieldValueUnion() {}
 
 // String value type.
 type FieldValueUnionMemberStringValue struct {

@@ -898,6 +898,38 @@ func validateTagList(v []types.Tag) error {
 	}
 }
 
+func validateToxicityDetection(v []types.ToxicityDetectionSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ToxicityDetection"}
+	for i := range v {
+		if err := validateToxicityDetectionSettings(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateToxicityDetectionSettings(v *types.ToxicityDetectionSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ToxicityDetectionSettings"}
+	if v.ToxicityCategories == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ToxicityCategories"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTranscriptFilter(v *types.TranscriptFilter) error {
 	if v == nil {
 		return nil
@@ -1375,6 +1407,11 @@ func validateOpStartTranscriptionJobInput(v *StartTranscriptionJobInput) error {
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ToxicityDetection != nil {
+		if err := validateToxicityDetection(v.ToxicityDetection); err != nil {
+			invalidParams.AddNested("ToxicityDetection", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

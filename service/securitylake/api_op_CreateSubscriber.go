@@ -54,6 +54,11 @@ type CreateSubscriberInput struct {
 	// The description for your subscriber account in Security Lake.
 	SubscriberDescription *string
 
+	// An array of objects, one for each tag to associate with the subscriber. For
+	// each tag, you must specify both a tag key and a tag value. A tag value cannot be
+	// null, but it can be an empty string.
+	Tags []types.Tag
+
 	noSmithyDocumentSerde
 }
 

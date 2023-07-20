@@ -264,6 +264,13 @@ type StartTranscriptionJobInput struct {
 	// .
 	Tags []types.Tag
 
+	// Enables toxic speech detection in your transcript. If you include
+	// ToxicityDetection in your request, you must also include ToxicityCategories .
+	// For information on the types of toxic speech Amazon Transcribe can detect, see
+	// Detecting toxic speech (https://docs.aws.amazon.com/transcribe/latest/dg/toxic-language.html)
+	// .
+	ToxicityDetection []types.ToxicityDetectionSettings
+
 	noSmithyDocumentSerde
 }
 

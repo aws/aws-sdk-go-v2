@@ -1162,6 +1162,19 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+// Contains ToxicityCategories , which is a required parameter if you want to
+// enable toxicity detection ( ToxicityDetection ) in your transcription request.
+type ToxicityDetectionSettings struct {
+
+	// If you include ToxicityDetection in your transcription request, you must also
+	// include ToxicityCategories . The only accepted value for this parameter is ALL .
+	//
+	// This member is required.
+	ToxicityCategories []ToxicityCategory
+
+	noSmithyDocumentSerde
+}
+
 // Provides you with the Amazon S3 URI you can use to access your transcript.
 type Transcript struct {
 
@@ -1358,6 +1371,10 @@ type TranscriptionJob struct {
 	// transcription job.
 	Tags []Tag
 
+	// Provides information about the toxicity detection settings applied to your
+	// transcription.
+	ToxicityDetection []ToxicityDetectionSettings
+
 	// Provides you with the Amazon S3 URI you can use to access your transcript.
 	Transcript *Transcript
 
@@ -1441,6 +1458,10 @@ type TranscriptionJobSummary struct {
 	// 2022-05-04T12:32:58.789000-07:00 represents a transcription job that started
 	// processing at 12:32 PM UTC-7 on May 4, 2022.
 	StartTime *time.Time
+
+	// Indicates whether toxicity detection was enabled for the specified
+	// transcription job.
+	ToxicityDetection []ToxicityDetectionSettings
 
 	// The name of the transcription job. Job names are case sensitive and must be
 	// unique within an Amazon Web Services account.

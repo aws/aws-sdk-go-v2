@@ -511,6 +511,49 @@ type IpAddressUpdate struct {
 	noSmithyDocumentSerde
 }
 
+// A complex type that contains settings for an existing Resolver on an Outpost.
+type OutpostResolver struct {
+
+	// The ARN (Amazon Resource Name) for the Resolver on an Outpost.
+	Arn *string
+
+	// The date and time that the Outpost Resolver was created, in Unix time format
+	// and Coordinated Universal Time (UTC).
+	CreationTime *string
+
+	// A unique string that identifies the request that created the Resolver endpoint.
+	// The CreatorRequestId allows failed requests to be retried without the risk of
+	// running the operation twice.
+	CreatorRequestId *string
+
+	// The ID of the Resolver on Outpost.
+	Id *string
+
+	// Amazon EC2 instance count for the Resolver on the Outpost.
+	InstanceCount *int32
+
+	// The date and time that the Outpost Resolver was modified, in Unix time format
+	// and Coordinated Universal Time (UTC).
+	ModificationTime *string
+
+	// Name of the Resolver.
+	Name *string
+
+	// The ARN (Amazon Resource Name) for the Outpost.
+	OutpostArn *string
+
+	// The Amazon EC2 instance type.
+	PreferredInstanceType *string
+
+	// Status of the Resolver.
+	Status OutpostResolverStatus
+
+	// A detailed description of the Resolver.
+	StatusMessage *string
+
+	noSmithyDocumentSerde
+}
+
 // A complex type that contains information about a Resolver configuration for a
 // VPC.
 type ResolverConfig struct {
@@ -608,6 +651,12 @@ type ResolverEndpoint struct {
 	// CreateResolverEndpoint (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_CreateResolverEndpoint.html)
 	// request.
 	Name *string
+
+	// The ARN (Amazon Resource Name) for the Outpost.
+	OutpostArn *string
+
+	// The Amazon EC2 instance type.
+	PreferredInstanceType *string
 
 	// The Resolver endpoint IP address type.
 	ResolverEndpointType ResolverEndpointType
@@ -829,7 +878,7 @@ type ResolverRule struct {
 
 	// An array that contains the IP addresses and ports that an outbound endpoint
 	// forwards DNS queries to. Typically, these are the IP addresses of DNS resolvers
-	// on your network. Specify IPv4 addresses. IPv6 is not supported.
+	// on your network.
 	TargetIps []TargetAddress
 
 	noSmithyDocumentSerde

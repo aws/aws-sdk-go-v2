@@ -7601,6 +7601,112 @@ func awsAwsjson11_deserializeDocumentTagList(v *[]types.Tag, value interface{}) 
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentToxicityCategories(v *[]types.ToxicityCategory, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ToxicityCategory
+	if *v == nil {
+		cv = []types.ToxicityCategory{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ToxicityCategory
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ToxicityCategory to be of type string, got %T instead", value)
+			}
+			col = types.ToxicityCategory(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentToxicityDetection(v *[]types.ToxicityDetectionSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ToxicityDetectionSettings
+	if *v == nil {
+		cv = []types.ToxicityDetectionSettings{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ToxicityDetectionSettings
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentToxicityDetectionSettings(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentToxicityDetectionSettings(v **types.ToxicityDetectionSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ToxicityDetectionSettings
+	if *v == nil {
+		sv = &types.ToxicityDetectionSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ToxicityCategories":
+			if err := awsAwsjson11_deserializeDocumentToxicityCategories(&sv.ToxicityCategories, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentTranscript(v **types.Transcript, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7935,6 +8041,11 @@ func awsAwsjson11_deserializeDocumentTranscriptionJob(v **types.TranscriptionJob
 				return err
 			}
 
+		case "ToxicityDetection":
+			if err := awsAwsjson11_deserializeDocumentToxicityDetection(&sv.ToxicityDetection, value); err != nil {
+				return err
+			}
+
 		case "Transcript":
 			if err := awsAwsjson11_deserializeDocumentTranscript(&sv.Transcript, value); err != nil {
 				return err
@@ -8163,6 +8274,11 @@ func awsAwsjson11_deserializeDocumentTranscriptionJobSummary(v **types.Transcrip
 					return fmt.Errorf("expected DateTime to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "ToxicityDetection":
+			if err := awsAwsjson11_deserializeDocumentToxicityDetection(&sv.ToxicityDetection, value); err != nil {
+				return err
 			}
 
 		case "TranscriptionJobName":

@@ -2541,6 +2541,12 @@ func awsRestjson1_serializeDocumentCaseFilter(v types.CaseFilter, value smithyjs
 			return err
 		}
 
+	case *types.CaseFilterMemberOrAll:
+		av := object.Key("orAll")
+		if err := awsRestjson1_serializeDocumentCaseFilterList(uv.Value, av); err != nil {
+			return err
+		}
+
 	default:
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
@@ -2626,6 +2632,13 @@ func awsRestjson1_serializeDocumentContactFilter(v *types.ContactFilter, value s
 		ok := object.Key("contactArn")
 		ok.String(*v.ContactArn)
 	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEmptyFieldValue(v *types.EmptyFieldValue, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
 
 	return nil
 }
@@ -2878,6 +2891,12 @@ func awsRestjson1_serializeDocumentFieldValueUnion(v types.FieldValueUnion, valu
 		default:
 			av.Double(uv.Value)
 
+		}
+
+	case *types.FieldValueUnionMemberEmptyValue:
+		av := object.Key("emptyValue")
+		if err := awsRestjson1_serializeDocumentEmptyFieldValue(&uv.Value, av); err != nil {
+			return err
 		}
 
 	case *types.FieldValueUnionMemberStringValue:

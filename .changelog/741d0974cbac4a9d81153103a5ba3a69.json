@@ -1,0 +1,8 @@
+{
+    "id": "741d0974-cbac-4a9d-8115-3103a5ba3a69",
+    "type": "feature",
+    "description": "This release adds the ability to assign a case to a queue or user.",
+    "modules": [
+        "service/connectcases"
+    ]
+}

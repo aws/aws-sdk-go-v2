@@ -31,7 +31,8 @@ func (c *Client) GetRecord(ctx context.Context, params *GetRecordInput, optFns .
 
 type GetRecordInput struct {
 
-	// The name of the feature group from which you want to retrieve a record.
+	// The name or Amazon Resource Name (ARN) of the feature group from which you want
+	// to retrieve a record.
 	//
 	// This member is required.
 	FeatureGroupName *string
@@ -42,9 +43,9 @@ type GetRecordInput struct {
 	// This member is required.
 	RecordIdentifierValueAsString *string
 
-	// Parameter to request ExpiresAt in response. If Enabled , BatchGetRecord will
-	// return the value of ExpiresAt , if it is not null. If Disabled and null,
-	// BatchGetRecord will return null.
+	// Parameter to request ExpiresAt in response. If Enabled , GetRecord will return
+	// the value of ExpiresAt , if it is not null. If Disabled and null, GetRecord
+	// will return null.
 	ExpirationTimeResponse types.ExpirationTimeResponse
 
 	// List of names of Features to be retrieved. If not specified, the latest value

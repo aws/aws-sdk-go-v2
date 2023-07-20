@@ -896,7 +896,7 @@ func awsRestjson1_deserializeDocumentBatchGetRecordIdentifier(v **types.BatchGet
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected FeatureGroupName to be of type string, got %T instead", value)
+					return fmt.Errorf("expected FeatureGroupNameOrArn to be of type string, got %T instead", value)
 				}
 				sv.FeatureGroupName = ptr.String(jtv)
 			}

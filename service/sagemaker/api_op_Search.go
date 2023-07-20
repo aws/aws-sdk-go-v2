@@ -41,6 +41,16 @@ type SearchInput struct {
 	// This member is required.
 	Resource types.ResourceType
 
+	// A cross account filter option. When the value is "CrossAccount" the search
+	// results will only include resources made discoverable to you from other
+	// accounts. When the value is "SameAccount" or null the search results will only
+	// include resources from your account. Default is null . For more information on
+	// searching for resources made discoverable to your account, see Search
+	// discoverable resources (https://docs.aws.amazon.com/sagemaker/latest/dg/feature-store-cross-account-discoverability-use.html)
+	// in the SageMaker Developer Guide. The maximum number of ResourceCatalog s
+	// viewable is 1000.
+	CrossAccountFilterOption types.CrossAccountFilterOption
+
 	// The maximum number of results to return.
 	MaxResults *int32
 

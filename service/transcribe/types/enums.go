@@ -409,6 +409,22 @@ func (SubtitleFormat) Values() []SubtitleFormat {
 	}
 }
 
+type ToxicityCategory string
+
+// Enum values for ToxicityCategory
+const (
+	ToxicityCategoryAll ToxicityCategory = "ALL"
+)
+
+// Values returns all known values for ToxicityCategory. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ToxicityCategory) Values() []ToxicityCategory {
+	return []ToxicityCategory{
+		"ALL",
+	}
+}
+
 type TranscriptFilterType string
 
 // Enum values for TranscriptFilterType

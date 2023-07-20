@@ -1,0 +1,8 @@
+{
+    "id": "14c181da-1dcf-458e-8b19-5408084b150a",
+    "type": "feature",
+    "description": "Added API argument --toxicity-detection to startTranscriptionJob API, which allows users to view toxicity scores of submitted audio.",
+    "modules": [
+        "service/transcribe"
+    ]
+}

@@ -49,7 +49,8 @@ type DeleteRecordInput struct {
 	// This member is required.
 	EventTime *string
 
-	// The name of the feature group to delete the record from.
+	// The name or Amazon Resource Name (ARN) of the feature group to delete the
+	// record from.
 	//
 	// This member is required.
 	FeatureGroupName *string

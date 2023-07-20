@@ -4492,7 +4492,7 @@ type FeatureGroup struct {
 	noSmithyDocumentSerde
 }
 
-// The name, Arn, CreationTime , FeatureGroup values, LastUpdatedTime and
+// The name, ARN, CreationTime , FeatureGroup values, LastUpdatedTime and
 // EnableOnlineStorage status of a FeatureGroup .
 type FeatureGroupSummary struct {
 
@@ -11979,6 +11979,36 @@ type ResolvedAttributes struct {
 
 	// The problem type.
 	ProblemType ProblemType
+
+	noSmithyDocumentSerde
+}
+
+// A resource catalog containing all of the resources of a specific resource type
+// within a resource owner account. For an example on sharing the Amazon SageMaker
+// Feature Store DefaultFeatureGroupCatalog , see Share Amazon SageMaker Catalog
+// resource type (https://docs.aws.amazon.com/sagemaker/latest/APIReference/feature-store-cross-account-discoverability-share-sagemaker-catalog.html)
+// in the Amazon SageMaker Developer Guide.
+type ResourceCatalog struct {
+
+	// The time the ResourceCatalog was created.
+	//
+	// This member is required.
+	CreationTime *time.Time
+
+	// A free form description of the ResourceCatalog .
+	//
+	// This member is required.
+	Description *string
+
+	// The Amazon Resource Name (ARN) of the ResourceCatalog .
+	//
+	// This member is required.
+	ResourceCatalogArn *string
+
+	// The name of the ResourceCatalog .
+	//
+	// This member is required.
+	ResourceCatalogName *string
 
 	noSmithyDocumentSerde
 }

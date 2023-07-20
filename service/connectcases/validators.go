@@ -785,6 +785,11 @@ func validateCaseFilter(v types.CaseFilter) error {
 			invalidParams.AddNested("[not]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.CaseFilterMemberOrAll:
+		if err := validateCaseFilterList(uv.Value); err != nil {
+			invalidParams.AddNested("[orAll]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

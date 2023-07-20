@@ -90,6 +90,26 @@ func (m *validateOpCreateSourceRepositoryBranch) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateSourceRepository struct {
+}
+
+func (*validateOpCreateSourceRepository) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateSourceRepository) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateSourceRepositoryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateSourceRepositoryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteAccessToken struct {
 }
 
@@ -125,6 +145,66 @@ func (m *validateOpDeleteDevEnvironment) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteDevEnvironmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteProject struct {
+}
+
+func (*validateOpDeleteProject) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteProject) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteProjectInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteProjectInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteSourceRepository struct {
+}
+
+func (*validateOpDeleteSourceRepository) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteSourceRepository) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteSourceRepositoryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteSourceRepositoryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteSpace struct {
+}
+
+func (*validateOpDeleteSpace) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteSpace) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteSpaceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteSpaceInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -185,6 +265,26 @@ func (m *validateOpGetSourceRepositoryCloneUrls) HandleInitialize(ctx context.Co
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetSourceRepositoryCloneUrlsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetSourceRepository struct {
+}
+
+func (*validateOpGetSourceRepository) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetSourceRepository) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetSourceRepositoryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetSourceRepositoryInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -450,6 +550,46 @@ func (m *validateOpUpdateDevEnvironment) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateProject struct {
+}
+
+func (*validateOpUpdateProject) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateProject) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateProjectInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateProjectInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateSpace struct {
+}
+
+func (*validateOpUpdateSpace) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateSpace) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateSpaceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateSpaceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpCreateAccessTokenValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAccessToken{}, middleware.After)
 }
@@ -466,12 +606,28 @@ func addOpCreateSourceRepositoryBranchValidationMiddleware(stack *middleware.Sta
 	return stack.Initialize.Add(&validateOpCreateSourceRepositoryBranch{}, middleware.After)
 }
 
+func addOpCreateSourceRepositoryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateSourceRepository{}, middleware.After)
+}
+
 func addOpDeleteAccessTokenValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAccessToken{}, middleware.After)
 }
 
 func addOpDeleteDevEnvironmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDevEnvironment{}, middleware.After)
+}
+
+func addOpDeleteProjectValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteProject{}, middleware.After)
+}
+
+func addOpDeleteSourceRepositoryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteSourceRepository{}, middleware.After)
+}
+
+func addOpDeleteSpaceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteSpace{}, middleware.After)
 }
 
 func addOpGetDevEnvironmentValidationMiddleware(stack *middleware.Stack) error {
@@ -484,6 +640,10 @@ func addOpGetProjectValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetSourceRepositoryCloneUrlsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetSourceRepositoryCloneUrls{}, middleware.After)
+}
+
+func addOpGetSourceRepositoryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetSourceRepository{}, middleware.After)
 }
 
 func addOpGetSpaceValidationMiddleware(stack *middleware.Stack) error {
@@ -536,6 +696,14 @@ func addOpStopDevEnvironmentSessionValidationMiddleware(stack *middleware.Stack)
 
 func addOpUpdateDevEnvironmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateDevEnvironment{}, middleware.After)
+}
+
+func addOpUpdateProjectValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateProject{}, middleware.After)
+}
+
+func addOpUpdateSpaceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateSpace{}, middleware.After)
 }
 
 func validateDevEnvironmentSessionConfiguration(v *types.DevEnvironmentSessionConfiguration) error {
@@ -780,6 +948,27 @@ func validateOpCreateSourceRepositoryBranchInput(v *CreateSourceRepositoryBranch
 	}
 }
 
+func validateOpCreateSourceRepositoryInput(v *CreateSourceRepositoryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateSourceRepositoryInput"}
+	if v.SpaceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SpaceName"))
+	}
+	if v.ProjectName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectName"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteAccessTokenInput(v *DeleteAccessTokenInput) error {
 	if v == nil {
 		return nil
@@ -808,6 +997,60 @@ func validateOpDeleteDevEnvironmentInput(v *DeleteDevEnvironmentInput) error {
 	}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteProjectInput(v *DeleteProjectInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteProjectInput"}
+	if v.SpaceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SpaceName"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteSourceRepositoryInput(v *DeleteSourceRepositoryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteSourceRepositoryInput"}
+	if v.SpaceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SpaceName"))
+	}
+	if v.ProjectName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectName"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteSpaceInput(v *DeleteSpaceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteSpaceInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -868,6 +1111,27 @@ func validateOpGetSourceRepositoryCloneUrlsInput(v *GetSourceRepositoryCloneUrls
 	}
 	if v.SourceRepositoryName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceRepositoryName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetSourceRepositoryInput(v *GetSourceRepositoryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetSourceRepositoryInput"}
+	if v.SpaceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SpaceName"))
+	}
+	if v.ProjectName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectName"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1137,6 +1401,39 @@ func validateOpUpdateDevEnvironmentInput(v *UpdateDevEnvironmentInput) error {
 	}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateProjectInput(v *UpdateProjectInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateProjectInput"}
+	if v.SpaceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SpaceName"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateSpaceInput(v *UpdateSpaceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateSpaceInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

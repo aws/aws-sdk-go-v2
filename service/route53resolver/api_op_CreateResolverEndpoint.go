@@ -71,7 +71,15 @@ type CreateResolverEndpointInput struct {
 	// dashboard in the Route 53 console.
 	Name *string
 
-	// For the endpoint type you can choose either IPv4, IPv6. or dual-stack. A
+	// The Amazon Resource Name (ARN) of the Outpost. If you specify this, you must
+	// also specify a value for the PreferredInstanceType .
+	OutpostArn *string
+
+	// The instance type. If you specify this, you must also specify a value for the
+	// OutpostArn .
+	PreferredInstanceType *string
+
+	// For the endpoint type you can choose either IPv4, IPv6, or dual-stack. A
 	// dual-stack endpoint means that it will resolve via both IPv4 and IPv6. This
 	// endpoint type is applied to all IP addresses.
 	ResolverEndpointType types.ResolverEndpointType

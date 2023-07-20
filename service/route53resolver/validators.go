@@ -150,6 +150,26 @@ func (m *validateOpCreateFirewallRule) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateOutpostResolver struct {
+}
+
+func (*validateOpCreateOutpostResolver) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateOutpostResolver) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateOutpostResolverInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateOutpostResolverInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateResolverEndpoint struct {
 }
 
@@ -265,6 +285,26 @@ func (m *validateOpDeleteFirewallRule) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteFirewallRuleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteOutpostResolver struct {
+}
+
+func (*validateOpDeleteOutpostResolver) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteOutpostResolver) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteOutpostResolverInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteOutpostResolverInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -505,6 +545,26 @@ func (m *validateOpGetFirewallRuleGroupPolicy) HandleInitialize(ctx context.Cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetFirewallRuleGroupPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetOutpostResolver struct {
+}
+
+func (*validateOpGetOutpostResolver) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetOutpostResolver) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetOutpostResolverInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetOutpostResolverInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -970,6 +1030,26 @@ func (m *validateOpUpdateFirewallRule) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateOutpostResolver struct {
+}
+
+func (*validateOpUpdateOutpostResolver) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateOutpostResolver) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateOutpostResolverInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateOutpostResolverInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateResolverConfig struct {
 }
 
@@ -1078,6 +1158,10 @@ func addOpCreateFirewallRuleValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpCreateFirewallRule{}, middleware.After)
 }
 
+func addOpCreateOutpostResolverValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateOutpostResolver{}, middleware.After)
+}
+
 func addOpCreateResolverEndpointValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateResolverEndpoint{}, middleware.After)
 }
@@ -1100,6 +1184,10 @@ func addOpDeleteFirewallRuleGroupValidationMiddleware(stack *middleware.Stack) e
 
 func addOpDeleteFirewallRuleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteFirewallRule{}, middleware.After)
+}
+
+func addOpDeleteOutpostResolverValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteOutpostResolver{}, middleware.After)
 }
 
 func addOpDeleteResolverEndpointValidationMiddleware(stack *middleware.Stack) error {
@@ -1148,6 +1236,10 @@ func addOpGetFirewallRuleGroupValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpGetFirewallRuleGroupPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetFirewallRuleGroupPolicy{}, middleware.After)
+}
+
+func addOpGetOutpostResolverValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetOutpostResolver{}, middleware.After)
 }
 
 func addOpGetResolverConfigValidationMiddleware(stack *middleware.Stack) error {
@@ -1240,6 +1332,10 @@ func addOpUpdateFirewallRuleGroupAssociationValidationMiddleware(stack *middlewa
 
 func addOpUpdateFirewallRuleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateFirewallRule{}, middleware.After)
+}
+
+func addOpUpdateOutpostResolverValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateOutpostResolver{}, middleware.After)
 }
 
 func addOpUpdateResolverConfigValidationMiddleware(stack *middleware.Stack) error {
@@ -1522,6 +1618,35 @@ func validateOpCreateFirewallRuleInput(v *CreateFirewallRuleInput) error {
 	}
 }
 
+func validateOpCreateOutpostResolverInput(v *CreateOutpostResolverInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateOutpostResolverInput"}
+	if v.CreatorRequestId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CreatorRequestId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.PreferredInstanceType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PreferredInstanceType"))
+	}
+	if v.OutpostArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutpostArn"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateResolverEndpointInput(v *CreateResolverEndpointInput) error {
 	if v == nil {
 		return nil
@@ -1647,6 +1772,21 @@ func validateOpDeleteFirewallRuleInput(v *DeleteFirewallRuleInput) error {
 	}
 	if v.FirewallDomainListId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FirewallDomainListId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteOutpostResolverInput(v *DeleteOutpostResolverInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteOutpostResolverInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1836,6 +1976,21 @@ func validateOpGetFirewallRuleGroupPolicyInput(v *GetFirewallRuleGroupPolicyInpu
 	invalidParams := smithy.InvalidParamsError{Context: "GetFirewallRuleGroupPolicyInput"}
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetOutpostResolverInput(v *GetOutpostResolverInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetOutpostResolverInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2218,6 +2373,21 @@ func validateOpUpdateFirewallRuleInput(v *UpdateFirewallRuleInput) error {
 	}
 	if v.FirewallDomainListId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FirewallDomainListId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateOutpostResolverInput(v *UpdateOutpostResolverInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateOutpostResolverInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

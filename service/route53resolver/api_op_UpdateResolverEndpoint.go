@@ -40,10 +40,12 @@ type UpdateResolverEndpointInput struct {
 	Name *string
 
 	// Specifies the endpoint type for what type of IP address the endpoint uses to
-	// forward DNS queries.
+	// forward DNS queries. Updating to IPV6 type isn't currently supported.
 	ResolverEndpointType types.ResolverEndpointType
 
-	// Updates the Resolver endpoint type to IpV4, Ipv6, or dual-stack.
+	// Specifies the IPv6 address when you update the Resolver endpoint from IPv4 to
+	// dual-stack. If you don't specify an IPv6 address, one will be automatically
+	// chosen from your subnet.
 	UpdateIpAddresses []types.UpdateIpAddress
 
 	noSmithyDocumentSerde

@@ -32,7 +32,7 @@ func (c *Client) DescribeFeatureGroup(ctx context.Context, params *DescribeFeatu
 
 type DescribeFeatureGroupInput struct {
 
-	// The name of the FeatureGroup you want described.
+	// The name or Amazon Resource Name (ARN) of the FeatureGroup you want described.
 	//
 	// This member is required.
 	FeatureGroupName *string

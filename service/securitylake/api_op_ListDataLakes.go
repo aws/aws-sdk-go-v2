@@ -12,8 +12,8 @@ import (
 )
 
 // Retrieves the Amazon Security Lake configuration object for the specified
-// Amazon Web Services account ID. You can use the ListDataLakes API to know
-// whether Security Lake is enabled for any region.
+// Amazon Web Services Regions. You can use this operation to determine whether
+// Security Lake is enabled for a Region.
 func (c *Client) ListDataLakes(ctx context.Context, params *ListDataLakesInput, optFns ...func(*Options)) (*ListDataLakesOutput, error) {
 	if params == nil {
 		params = &ListDataLakesInput{}

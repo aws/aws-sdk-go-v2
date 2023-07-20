@@ -932,7 +932,7 @@ type AnalyticsUtteranceMetricResult struct {
 	//   - Count – The number of utterances.
 	//   - Missed – The number of utterances that Amazon Lex failed to recognize.
 	//   - Detected – The number of utterances that Amazon Lex managed to detect.
-	//   - UtteranceTimeStamp – The date and time of the utterance.
+	//   - UtteranceTimestamp – The date and time of the utterance.
 	Name AnalyticsUtteranceMetricName
 
 	// The summary statistic that you requested to calculate.
@@ -3543,7 +3543,7 @@ type SessionSpecification struct {
 	BotVersion *string
 
 	// The channel that is integrated with the bot that the session was held with.
-	Channel BotChannelType
+	Channel *string
 
 	// The duration of the conversation in seconds. A conversation is defined as a
 	// unique combination of a sessionId and an originatingRequestId .
@@ -4728,7 +4728,7 @@ type UtteranceDataSortBy struct {
 
 	// The measure by which to sort the utterance analytics data.
 	//   - Count – The number of utterances.
-	//   - UtteranceTimeStamp – The date and time of the utterance.
+	//   - UtteranceTimestamp – The date and time of the utterance.
 	//
 	// This member is required.
 	Name AnalyticsUtteranceSortByName
@@ -4813,7 +4813,7 @@ type UtteranceSpecification struct {
 	BotVersion *string
 
 	// The channel that is integrated with the bot that the utterance was made to.
-	Channel BotChannelType
+	Channel *string
 
 	// The date and time when the conversation in which the utterance took place
 	// ended. A conversation is defined as a unique combination of a sessionId and an

@@ -13,8 +13,12 @@ import (
 	"time"
 )
 
-// Retrieves summary metrics for the utterances in your bot. The following fields
-// are required:
+// To use this API operation, your IAM role must have permissions to perform the
+// ListAggregatedUtterances (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListAggregatedUtterances.html)
+// operation, which provides access to utterance-related analytics. See Viewing
+// utterance statistics (https://docs.aws.amazon.com/lexv2/latest/dg/monitoring-utterances.html)
+// for the IAM policy to apply to the IAM role. Retrieves summary metrics for the
+// utterances in your bot. The following fields are required:
 //   - metrics – A list of AnalyticsUtteranceMetric (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_AnalyticsUtteranceMetric.html)
 //     objects. In each object, use the name field to specify the metric to
 //     calculate, the statistic field to specify whether to calculate the Sum ,

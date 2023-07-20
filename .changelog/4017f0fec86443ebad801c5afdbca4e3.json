@@ -1,0 +1,8 @@
+{
+    "id": "4017f0fe-c864-43eb-ad80-1c5afdbca4e3",
+    "type": "feature",
+    "description": "Adding support for Tags on Create and Resource Tagging API.",
+    "modules": [
+        "service/securitylake"
+    ]
+}

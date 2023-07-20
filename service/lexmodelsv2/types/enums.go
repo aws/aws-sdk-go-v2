@@ -632,26 +632,6 @@ func (BotAliasStatus) Values() []BotAliasStatus {
 	}
 }
 
-type BotChannelType string
-
-// Enum values for BotChannelType
-const (
-	BotChannelTypeFacebook  BotChannelType = "Facebook"
-	BotChannelTypeSlack     BotChannelType = "Slack"
-	BotChannelTypeTwilioSms BotChannelType = "TwilioSms"
-)
-
-// Values returns all known values for BotChannelType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
-func (BotChannelType) Values() []BotChannelType {
-	return []BotChannelType{
-		"Facebook",
-		"Slack",
-		"TwilioSms",
-	}
-}
-
 type BotFilterName string
 
 // Enum values for BotFilterName

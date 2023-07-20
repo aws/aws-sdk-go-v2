@@ -5440,6 +5440,37 @@ func awsRestjson1_deserializeDocumentDomainSummaryList(v *[]types.DomainSummary,
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentEmptyFieldValue(v **types.EmptyFieldValue, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EmptyFieldValue
+	if *v == nil {
+		sv = &types.EmptyFieldValue{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentEventBridgeConfiguration(v **types.EventBridgeConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6217,6 +6248,16 @@ loop:
 				}
 			}
 			uv = &types.FieldValueUnionMemberDoubleValue{Value: mv}
+			break loop
+
+		case "emptyValue":
+			var mv types.EmptyFieldValue
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentEmptyFieldValue(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.FieldValueUnionMemberEmptyValue{Value: mv}
 			break loop
 
 		case "stringValue":
