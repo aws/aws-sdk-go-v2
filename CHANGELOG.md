@@ -1,3 +1,9 @@
+# Release (2023-07-20)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/savingsplans`: [v1.12.14](service/savingsplans/CHANGELOG.md#v11214-2023-07-20)
+  * **Documentation**: Savings Plans endpoints update
+
 # Release (2023-07-19)
 
 ## Module Highlights

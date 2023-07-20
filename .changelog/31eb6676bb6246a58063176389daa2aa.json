@@ -1,8 +1,0 @@
-{
-    "id": "31eb6676-bb62-46a5-8063-176389daa2aa",
-    "type": "documentation",
-    "description": "Savings Plans endpoints update",
-    "modules": [
-        "service/savingsplans"
-    ]
-}
