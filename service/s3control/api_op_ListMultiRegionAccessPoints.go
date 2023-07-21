@@ -91,7 +91,7 @@ func (c *Client) addOperationListMultiRegionAccessPointsMiddlewares(stack *middl
 	if err != nil {
 		return err
 	}
-	if err = addLegacyEndpointContextSetter(stack, options); err != nil {
+	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
 		return err
 	}
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
@@ -166,7 +166,7 @@ func (c *Client) addOperationListMultiRegionAccessPointsMiddlewares(stack *middl
 	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
-	if err = addEndpointDisableHTTPSMiddleware(stack, options); err != nil {
+	if err = addendpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
 	return nil
@@ -397,8 +397,6 @@ func (m *opListMultiRegionAccessPointsResolveEndpointMiddleware) HandleSerialize
 		)
 	}
 
-	ctx = smithyhttp.DisableEndpointHostPrefix(ctx, true)
-
 	authSchemes, err := internalauth.GetAuthenticationSchemes(&resolvedEndpoint.Properties)
 	if err != nil {
 		var nfe *internalauth.NoAuthenticationSchemesFoundError
@@ -462,6 +460,8 @@ func (m *opListMultiRegionAccessPointsResolveEndpointMiddleware) HandleSerialize
 			break
 		}
 	}
+
+	ctx = smithyhttp.DisableEndpointHostPrefix(ctx, true)
 
 	return next.HandleSerialize(ctx, in)
 }

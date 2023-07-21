@@ -47,7 +47,7 @@ public class EndpointDisableHttps implements GoIntegration {
 
         private final List<RuntimeClientPlugin> runtimeClientPlugins = new ArrayList<>();
 
-        public static final String MIDDLEWARE_ID = "EndpointDisableHTTPSMiddleware";
+        public static final String MIDDLEWARE_ID = "endpointDisableHTTPSMiddleware";
         public static final String MIDDLEWARE_ADDER = String.format("add%s", MIDDLEWARE_ID);
 
         /**

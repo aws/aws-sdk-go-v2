@@ -178,7 +178,7 @@ func (c *Client) addOperationListObjectsMiddlewares(stack *middleware.Stack, opt
 	if err != nil {
 		return err
 	}
-	if err = addLegacyEndpointContextSetter(stack, options); err != nil {
+	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
 		return err
 	}
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
@@ -250,7 +250,7 @@ func (c *Client) addOperationListObjectsMiddlewares(stack *middleware.Stack, opt
 	if err = addRequestResponseLogging(stack, options); err != nil {
 		return err
 	}
-	if err = addEndpointDisableHTTPSMiddleware(stack, options); err != nil {
+	if err = addendpointDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addSerializeImmutableHostnameBucketMiddleware(stack, options); err != nil {
@@ -351,8 +351,6 @@ func (m *opListObjectsResolveEndpointMiddleware) HandleSerialize(ctx context.Con
 			resolvedEndpoint.Headers.Get(k),
 		)
 	}
-
-	ctx = smithyhttp.DisableEndpointHostPrefix(ctx, true)
 
 	authSchemes, err := internalauth.GetAuthenticationSchemes(&resolvedEndpoint.Properties)
 	if err != nil {

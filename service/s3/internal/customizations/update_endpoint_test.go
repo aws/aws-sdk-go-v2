@@ -873,7 +873,9 @@ func TestEndpointWithARN(t *testing.T) {
 				Region:       "us-west-2",
 				UseARNRegion: true,
 			},
-			expectedErr: "FIPS region not allowed in ARN",
+			expectedReqURL:        "https://myendpoint-123456789012.s3-accesspoint.fips-us-east-1.amazonaws.com/testkey?x-id=GetObject",
+			expectedSigningName:   "s3",
+			expectedSigningRegion: "fips-us-east-1",
 		},
 		"Invalid AccessPoint ARN with FIPS pseudo-region (suffix)": {
 			bucket: "arn:aws:s3:us-east-1-fips:123456789012:accesspoint:myendpoint",
@@ -881,7 +883,9 @@ func TestEndpointWithARN(t *testing.T) {
 				Region:       "us-west-2",
 				UseARNRegion: true,
 			},
-			expectedErr: "FIPS region not allowed in ARN",
+			expectedReqURL:        "https://myendpoint-123456789012.s3-accesspoint.us-east-1-fips.amazonaws.com/testkey?x-id=GetObject",
+			expectedSigningName:   "s3",
+			expectedSigningRegion: "us-east-1-fips",
 		},
 		"Invalid Outpost AccessPoint ARN with FIPS pseudo-region (prefix)": {
 			bucket: "arn:aws:s3-outposts:fips-us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
@@ -889,7 +893,9 @@ func TestEndpointWithARN(t *testing.T) {
 				Region:       "us-west-2",
 				UseARNRegion: true,
 			},
-			expectedErr: "FIPS region not allowed in ARN",
+			expectedReqURL:        "https://myaccesspoint-123456789012.op-01234567890123456.s3-outposts.fips-us-east-1.amazonaws.com/testkey?x-id=GetObject",
+			expectedSigningName:   "s3-outposts",
+			expectedSigningRegion: "fips-us-east-1",
 		},
 		"Invalid Outpost AccessPoint ARN with FIPS pseudo-region (suffix)": {
 			bucket: "arn:aws:s3-outposts:us-east-1-fips:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
@@ -897,7 +903,9 @@ func TestEndpointWithARN(t *testing.T) {
 				Region:       "us-west-2",
 				UseARNRegion: true,
 			},
-			expectedErr: "FIPS region not allowed in ARN",
+			expectedReqURL:        "https://myaccesspoint-123456789012.op-01234567890123456.s3-outposts.us-east-1-fips.amazonaws.com/testkey?x-id=GetObject",
+			expectedSigningName:   "s3-outposts",
+			expectedSigningRegion: "us-east-1-fips",
 		},
 		"Invalid Object Lambda ARN with FIPS pseudo-region (prefix)": {
 			bucket: "arn:aws:s3-object-lambda:fips-us-east-1:123456789012:accesspoint/myap",
@@ -905,7 +913,9 @@ func TestEndpointWithARN(t *testing.T) {
 				Region:       "us-west-2",
 				UseARNRegion: true,
 			},
-			expectedErr: "FIPS region not allowed in ARN",
+			expectedReqURL:        "https://myap-123456789012.s3-object-lambda.fips-us-east-1.amazonaws.com/testkey?x-id=GetObject",
+			expectedSigningName:   "s3-object-lambda",
+			expectedSigningRegion: "fips-us-east-1",
 		},
 		"Invalid Object Lambda ARN with FIPS pseudo-region (suffix)": {
 			bucket: "arn:aws:s3-object-lambda:us-east-1-fips:123456789012:accesspoint/myap",
@@ -913,8 +923,9 @@ func TestEndpointWithARN(t *testing.T) {
 				Region:       "us-west-2",
 				UseARNRegion: true,
 			},
-			expectedErr: "FIPS region not allowed in ARN",
-		},
+			expectedReqURL:        "https://myap-123456789012.s3-object-lambda.us-east-1-fips.amazonaws.com/testkey?x-id=GetObject",
+			expectedSigningName:   "s3-object-lambda",
+			expectedSigningRegion: "us-east-1-fips"},
 	}
 
 	for name, c := range cases {
