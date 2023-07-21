@@ -1,3 +1,7 @@
+# v1.47.0 (2023-07-21)
+
+* **Feature**: Adds support for the DBSystemID parameter of CreateDBInstance to RDS Custom for Oracle.
+
 # v1.46.2 (2023-07-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

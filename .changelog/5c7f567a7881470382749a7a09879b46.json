@@ -1,8 +1,0 @@
-{
-    "id": "5c7f567a-7881-4703-8274-9a7a09879b46",
-    "type": "documentation",
-    "description": "Fixed VolumeEncryptionKey descriptions",
-    "modules": [
-        "service/workspaces"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "9185cac4-487a-4675-8085-d334804b99df",
-    "type": "feature",
-    "description": "Adds support for the DBSystemID parameter of CreateDBInstance to RDS Custom for Oracle.",
-    "modules": [
-        "service/rds"
-    ]
-}

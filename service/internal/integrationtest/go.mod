@@ -46,7 +46,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.16.15
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.20.1
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.14.14
-	github.com/aws/aws-sdk-go-v2/service/glue v1.55.0
+	github.com/aws/aws-sdk-go-v2/service/glue v1.56.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.17.3
 	github.com/aws/aws-sdk-go-v2/service/iam v1.21.1
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.13.13
@@ -60,7 +60,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.14.13
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.12.13
 	github.com/aws/aws-sdk-go-v2/service/polly v1.26.3
-	github.com/aws/aws-sdk-go-v2/service/rds v1.46.2
+	github.com/aws/aws-sdk-go-v2/service/rds v1.47.0
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.28.1
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.29.3
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.28.4
@@ -84,7 +84,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/waf v1.12.13
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.13.16
 	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.36.0
-	github.com/aws/aws-sdk-go-v2/service/workspaces v1.28.16
+	github.com/aws/aws-sdk-go-v2/service/workspaces v1.28.17
 	github.com/aws/smithy-go v1.13.5
 	github.com/google/go-cmp v0.5.8
 )

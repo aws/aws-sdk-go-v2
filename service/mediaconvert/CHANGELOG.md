@@ -1,3 +1,7 @@
+# v1.39.0 (2023-07-21)
+
+* **Feature**: This release includes improvements to Preserve 444 handling, compatibility of HEVC sources without frame rates, and general improvements to MP4 outputs.
+
 # v1.38.2 (2023-07-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

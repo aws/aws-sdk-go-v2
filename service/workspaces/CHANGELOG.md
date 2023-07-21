@@ -1,3 +1,7 @@
+# v1.28.17 (2023-07-21)
+
+* **Documentation**: Fixed VolumeEncryptionKey descriptions
+
 # v1.28.16 (2023-07-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

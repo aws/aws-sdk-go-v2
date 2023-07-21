@@ -1,3 +1,15 @@
+# Release (2023-07-21)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.56.0](service/glue/CHANGELOG.md#v1560-2023-07-21)
+  * **Feature**: This release adds support for AWS Glue Crawler with Apache Hudi Tables, allowing Crawlers to discover Hudi Tables in S3 and register them in Glue Data Catalog for query engines to query against.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.39.0](service/mediaconvert/CHANGELOG.md#v1390-2023-07-21)
+  * **Feature**: This release includes improvements to Preserve 444 handling, compatibility of HEVC sources without frame rates, and general improvements to MP4 outputs.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.47.0](service/rds/CHANGELOG.md#v1470-2023-07-21)
+  * **Feature**: Adds support for the DBSystemID parameter of CreateDBInstance to RDS Custom for Oracle.
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.28.17](service/workspaces/CHANGELOG.md#v12817-2023-07-21)
+  * **Documentation**: Fixed VolumeEncryptionKey descriptions
+
 # Release (2023-07-20.2)
 
 ## Module Highlights

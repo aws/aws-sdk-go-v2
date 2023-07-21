@@ -1,3 +1,7 @@
+# v1.56.0 (2023-07-21)
+
+* **Feature**: This release adds support for AWS Glue Crawler with Apache Hudi Tables, allowing Crawlers to discover Hudi Tables in S3 and register them in Glue Data Catalog for query engines to query against.
+
 # v1.55.0 (2023-07-17)
 
 * **Feature**: Adding new supported permission type flags to get-unfiltered endpoints that callers may pass to indicate support for enforcing Lake Formation fine-grained access control on nested column attributes.

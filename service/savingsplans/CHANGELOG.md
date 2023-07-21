@@ -1,3 +1,7 @@
+# v1.12.15 (2023-07-21)
+
+* No change notes available for this release.
+
 # v1.12.14 (2023-07-20)
 
 * **Documentation**: Savings Plans endpoints update
