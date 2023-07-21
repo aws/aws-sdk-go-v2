@@ -43,10 +43,20 @@ func (m *serializeImmutableHostnameBucketMiddleware) HandleSerialize(
 		return next.HandleSerialize(ctx, in)
 	}
 
-	if bucket, ok := bucketFromInput(in.Parameters); ok && awsrulesfn.ParseARN(bucket) == nil {
-		request.URL.Path = path.Join(request.URL.Path, bucket)
-		request.URL.RawPath = path.Join(request.URL.RawPath, httpbinding.EscapePath(bucket, true))
+	bucket, ok := bucketFromInput(in.Parameters)
+	if !ok {
+		return next.HandleSerialize(ctx, in)
 	}
+
+	parsedBucket := awsrulesfn.ParseARN(bucket)
+
+	// disallow ARN buckets except for MRAP arns
+	if parsedBucket != nil && len(parsedBucket.Region) > 0 {
+		return next.HandleSerialize(ctx, in)
+	}
+
+	request.URL.Path = path.Join(request.URL.Path, bucket)
+	request.URL.RawPath = path.Join(request.URL.RawPath, httpbinding.EscapePath(bucket, true))
 
 	return next.HandleSerialize(ctx, in)
 }
