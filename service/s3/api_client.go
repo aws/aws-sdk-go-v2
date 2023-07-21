@@ -276,15 +276,15 @@ func (c *Client) invokeOperation(ctx context.Context, opID string, params interf
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
 
-type LegacyEndpointContextSetter struct {
+type legacyEndpointContextSetter struct {
 	LegacyResolver EndpointResolver
 }
 
-func (*LegacyEndpointContextSetter) ID() string {
-	return "LegacyEndpointContextSetter"
+func (*legacyEndpointContextSetter) ID() string {
+	return "legacyEndpointContextSetter"
 }
 
-func (m *LegacyEndpointContextSetter) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+func (m *legacyEndpointContextSetter) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
 	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
 ) {
 	if m.LegacyResolver != nil {
@@ -294,8 +294,8 @@ func (m *LegacyEndpointContextSetter) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 
 }
-func addLegacyEndpointContextSetter(stack *middleware.Stack, o Options) error {
-	return stack.Initialize.Add(&LegacyEndpointContextSetter{
+func addlegacyEndpointContextSetter(stack *middleware.Stack, o Options) error {
+	return stack.Initialize.Add(&legacyEndpointContextSetter{
 		LegacyResolver: o.EndpointResolver,
 	}, middleware.Before)
 }
@@ -840,15 +840,15 @@ func addRequestResponseLogging(stack *middleware.Stack, o Options) error {
 	}, middleware.After)
 }
 
-type EndpointDisableHTTPSMiddleware struct {
+type endpointDisableHTTPSMiddleware struct {
 	EndpointDisableHTTPS bool
 }
 
-func (*EndpointDisableHTTPSMiddleware) ID() string {
-	return "EndpointDisableHTTPSMiddleware"
+func (*endpointDisableHTTPSMiddleware) ID() string {
+	return "endpointDisableHTTPSMiddleware"
 }
 
-func (m *EndpointDisableHTTPSMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *endpointDisableHTTPSMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	req, ok := in.Request.(*smithyhttp.Request)
@@ -863,8 +863,8 @@ func (m *EndpointDisableHTTPSMiddleware) HandleSerialize(ctx context.Context, in
 	return next.HandleSerialize(ctx, in)
 
 }
-func addEndpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
-	return stack.Serialize.Insert(&EndpointDisableHTTPSMiddleware{
+func addendpointDisableHTTPSMiddleware(stack *middleware.Stack, o Options) error {
+	return stack.Serialize.Insert(&endpointDisableHTTPSMiddleware{
 		EndpointDisableHTTPS: o.EndpointOptions.DisableHTTPS,
 	}, "ResolveEndpointV2", middleware.After)
 }

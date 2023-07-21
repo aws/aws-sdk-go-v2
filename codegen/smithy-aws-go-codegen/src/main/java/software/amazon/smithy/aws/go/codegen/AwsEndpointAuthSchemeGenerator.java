@@ -25,6 +25,7 @@ import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.model.Model;
+import software.amazon.smithy.model.shapes.OperationShape;
 import software.amazon.smithy.model.shapes.ServiceShape;
 
 
@@ -36,7 +37,9 @@ import software.amazon.smithy.model.shapes.ServiceShape;
 public class AwsEndpointAuthSchemeGenerator implements GoIntegration {
 
     @Override
-    public void renderPostEndpointResolutionHook(GoSettings settings, GoWriter writer, Model model) {
+    public void renderPostEndpointResolutionHook(
+        GoSettings settings, GoWriter writer, Model model, Optional<OperationShape> operation
+    ) {
         ServiceShape serviceShape = settings.getService(model);
         writer.write(
             """
