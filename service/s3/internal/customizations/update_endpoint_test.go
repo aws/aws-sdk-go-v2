@@ -1443,10 +1443,8 @@ func TestMultiRegionAccessPoints_UpdateEndpoint(t *testing.T) {
 				Region:                         "us-west-2",
 				DisableMultiRegionAccessPoints: false,
 			},
-			bucket:                "arn:aws:s3:us-west-2:123456789012:accesspoint:mfzwi23gnjvgw.mrap",
-			expectedReqURL:        "https://mfzwi23gnjvgw.mrap-123456789012.s3-accesspoint.us-west-2.amazonaws.com/",
-			expectedSigningName:   "s3",
-			expectedSigningRegion: "us-west-2",
+			bucket:      "arn:aws:s3:us-west-2:123456789012:accesspoint:mfzwi23gnjvgw.mrap",
+			expectedErr: "Invalid ARN: The access point name may only contain a-z, A-Z, 0-9 and `-`.",
 		},
 	}
 
