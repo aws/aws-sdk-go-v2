@@ -1,0 +1,8 @@
+{
+    "id": "121053e3-4770-402b-b72d-4cf2c1057b2e",
+    "type": "feature",
+    "description": "Add `middleware.WithHeaderComment` API, which explicitly re-adds behavior that was previously unintentially possible through `middleware.AddUserAgentKey`.",
+    "modules": [
+        "aws/middleware"
+    ]
+}
