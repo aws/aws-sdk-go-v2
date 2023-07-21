@@ -205,50 +205,53 @@ type CreateDBInstanceInput struct {
 	// setting doesn't apply to RDS Custom DB instances.
 	DBClusterIdentifier *string
 
-	// The meaning of this parameter differs depending on the database engine. Amazon
-	// Aurora MySQL The name of the database to create when the primary DB instance of
-	// the Aurora MySQL DB cluster is created. If you don't specify a value, Amazon RDS
-	// doesn't create a database in the DB cluster. Constraints:
-	//   - Must contain 1 to 64 alphanumeric characters.
-	//   - Can't be a word reserved by the database engine.
-	// Amazon Aurora PostgreSQL The name of the database to create when the primary DB
-	// instance of the Aurora PostgreSQL DB cluster is created. Default: postgres
-	// Constraints:
-	//   - Must contain 1 to 63 alphanumeric characters.
-	//   - Must begin with a letter. Subsequent characters can be letters,
-	//   underscores, or digits (0 to 9).
-	//   - Can't be a word reserved by the database engine.
-	// Amazon RDS Custom for Oracle The Oracle System ID (SID) of the created RDS
-	// Custom DB instance. Default: ORCL Constraints:
-	//   - Must contain 1 to 8 alphanumeric characters.
-	//   - Must contain a letter.
-	//   - Can't be a word reserved by the database engine.
-	// Amazon RDS Custom for SQL Server Not applicable. Must be null. RDS for MariaDB
-	// The name of the database to create when the DB instance is created. If you don't
-	// specify a value, Amazon RDS doesn't create a database in the DB instance.
+	// The meaning of this parameter differs according to the database engine you use.
+	// MySQL The name of the database to create when the DB instance is created. If
+	// this parameter isn't specified, no database is created in the DB instance.
 	// Constraints:
 	//   - Must contain 1 to 64 letters or numbers.
 	//   - Must begin with a letter. Subsequent characters can be letters,
 	//   underscores, or digits (0-9).
-	//   - Can't be a word reserved by the database engine.
-	// RDS for MySQL The name of the database to create when the DB instance is
-	// created. If you don't specify a value, Amazon RDS doesn't create a database in
-	// the DB instance. Constraints:
+	//   - Can't be a word reserved by the specified database engine
+	// MariaDB The name of the database to create when the DB instance is created. If
+	// this parameter isn't specified, no database is created in the DB instance.
+	// Constraints:
 	//   - Must contain 1 to 64 letters or numbers.
 	//   - Must begin with a letter. Subsequent characters can be letters,
 	//   underscores, or digits (0-9).
-	//   - Can't be a word reserved by the database engine.
-	// RDS for Oracle The Oracle System ID (SID) of the created DB instance. Default:
-	// ORCL Constraints:
-	//   - Can't be longer than 8 characters.
-	//   - Can't be a word reserved by the database engine, such as the string NULL .
-	// RDS for PostgreSQL The name of the database to create when the DB instance is
-	// created. Default: postgres Constraints:
+	//   - Can't be a word reserved by the specified database engine
+	// PostgreSQL The name of the database to create when the DB instance is created.
+	// If this parameter isn't specified, a database named postgres is created in the
+	// DB instance. Constraints:
 	//   - Must contain 1 to 63 letters, numbers, or underscores.
 	//   - Must begin with a letter. Subsequent characters can be letters,
 	//   underscores, or digits (0-9).
-	//   - Can't be a word reserved by the database engine.
-	// RDS for SQL Server Not applicable. Must be null.
+	//   - Can't be a word reserved by the specified database engine
+	// Oracle The Oracle System ID (SID) of the created DB instance. If you don't
+	// specify a value, the default value is ORCL . You can't specify the string null ,
+	// or any other reserved word, for DBName . Default: ORCL Constraints:
+	//   - Can't be longer than 8 characters
+	// Amazon RDS Custom for Oracle The Oracle System ID (SID) of the created RDS
+	// Custom DB instance. If you don't specify a value, the default value is ORCL for
+	// non-CDBs and RDSCDB for CDBs. Default: ORCL Constraints:
+	//   - It must contain 1 to 8 alphanumeric characters.
+	//   - It must contain a letter.
+	//   - It can't be a word reserved by the database engine.
+	// Amazon RDS Custom for SQL Server Not applicable. Must be null. SQL Server Not
+	// applicable. Must be null. Amazon Aurora MySQL The name of the database to create
+	// when the primary DB instance of the Aurora MySQL DB cluster is created. If this
+	// parameter isn't specified for an Aurora MySQL DB cluster, no database is created
+	// in the DB cluster. Constraints:
+	//   - It must contain 1 to 64 alphanumeric characters.
+	//   - It can't be a word reserved by the database engine.
+	// Amazon Aurora PostgreSQL The name of the database to create when the primary DB
+	// instance of the Aurora PostgreSQL DB cluster is created. If this parameter isn't
+	// specified for an Aurora PostgreSQL DB cluster, a database named postgres is
+	// created in the DB cluster. Constraints:
+	//   - It must contain 1 to 63 alphanumeric characters.
+	//   - It must begin with a letter. Subsequent characters can be letters,
+	//   underscores, or digits (0 to 9).
+	//   - It can't be a word reserved by the database engine.
 	DBName *string
 
 	// The name of the DB parameter group to associate with this DB instance. If you
@@ -270,6 +273,13 @@ type CreateDBInstanceInput struct {
 	//   - Must not be default .
 	// Example: mydbsubnetgroup
 	DBSubnetGroupName *string
+
+	// The Oracle system identifier (SID), which is the name of the Oracle database
+	// instance that manages your database files. In this context, the term "Oracle
+	// database instance" refers exclusively to the system global area (SGA) and Oracle
+	// background processes. If you don't specify a SID, the value defaults to RDSCDB .
+	// The Oracle SID is also the name of your CDB.
+	DBSystemId *string
 
 	// Specifies whether the DB instance has deletion protection enabled. The database
 	// can't be deleted when deletion protection is enabled. By default, deletion

@@ -182,12 +182,19 @@ var defaultPartitions = endpoints.Partitions{
 				SignatureVersions: []string{"v4"},
 			},
 		},
-		RegionRegex:       partitionRegexp.AwsCn,
-		IsRegionalized:    false,
-		PartitionEndpoint: "aws-cn",
+		RegionRegex:    partitionRegexp.AwsCn,
+		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
 			endpoints.EndpointKey{
-				Region: "aws-cn",
+				Region: "cn-north-1",
+			}: endpoints.Endpoint{
+				Hostname: "savingsplans.cn-north-1.amazonaws.com.cn",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "cn-north-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "cn-northwest-1",
 			}: endpoints.Endpoint{
 				Hostname: "savingsplans.cn-northwest-1.amazonaws.com.cn",
 				CredentialScope: endpoints.CredentialScope{

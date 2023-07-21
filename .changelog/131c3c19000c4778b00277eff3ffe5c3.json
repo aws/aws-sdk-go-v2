@@ -1,0 +1,8 @@
+{
+    "id": "131c3c19-000c-4778-b002-77eff3ffe5c3",
+    "type": "feature",
+    "description": "This release includes improvements to Preserve 444 handling, compatibility of HEVC sources without frame rates, and general improvements to MP4 outputs.",
+    "modules": [
+        "service/mediaconvert"
+    ]
+}

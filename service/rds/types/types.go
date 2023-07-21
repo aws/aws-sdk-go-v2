@@ -109,32 +109,32 @@ type AvailableProcessorFeature struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the details about a blue/green deployment. For more information, see
-// Using Amazon RDS Blue/Green Deployments for database updates (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html)
+// Details about a blue/green deployment. For more information, see Using Amazon
+// RDS Blue/Green Deployments for database updates (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html)
 // in the Amazon RDS User Guide and Using Amazon RDS Blue/Green Deployments for
 // database updates (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html)
 // in the Amazon Aurora User Guide.
 type BlueGreenDeployment struct {
 
-	// The system-generated identifier of the blue/green deployment.
+	// The unique identifier of the blue/green deployment.
 	BlueGreenDeploymentIdentifier *string
 
 	// The user-supplied name of the blue/green deployment.
 	BlueGreenDeploymentName *string
 
-	// Specifies the time when the blue/green deployment was created, in Universal
-	// Coordinated Time (UTC).
+	// The time when the blue/green deployment was created, in Universal Coordinated
+	// Time (UTC).
 	CreateTime *time.Time
 
-	// Specifies the time when the blue/green deployment was deleted, in Universal
-	// Coordinated Time (UTC).
+	// The time when the blue/green deployment was deleted, in Universal Coordinated
+	// Time (UTC).
 	DeleteTime *time.Time
 
 	// The source database for the blue/green deployment. Before switchover, the
 	// source database is the production database in the blue environment.
 	Source *string
 
-	// The status of the blue/green deployment. Values:
+	// The status of the blue/green deployment. Valid Values:
 	//   - PROVISIONING - Resources are being created in the green environment.
 	//   - AVAILABLE - Resources are available in the green environment.
 	//   - SWITCHOVER_IN_PROGRESS - The deployment is being switched from the blue
@@ -168,8 +168,8 @@ type BlueGreenDeployment struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the details about a task for a blue/green deployment. For more
-// information, see Using Amazon RDS Blue/Green Deployments for database updates (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html)
+// Details about a task for a blue/green deployment. For more information, see
+// Using Amazon RDS Blue/Green Deployments for database updates (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html)
 // in the Amazon RDS User Guide and Using Amazon RDS Blue/Green Deployments for
 // database updates (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html)
 // in the Amazon Aurora User Guide.
@@ -178,8 +178,8 @@ type BlueGreenDeploymentTask struct {
 	// The name of the blue/green deployment task.
 	Name *string
 
-	// The status of the blue/green deployment task. Values:
-	//   - PENDING - The resources are being prepared for deployment.
+	// The status of the blue/green deployment task. Valid Values:
+	//   - PENDING - The resource is being prepared for deployment.
 	//   - IN_PROGRESS - The resource is being deployed.
 	//   - COMPLETED - The resource has been deployed.
 	//   - FAILED - Deployment of the resource failed.
@@ -1315,12 +1315,10 @@ type DBInstance struct {
 	// in the Amazon RDS User Guide.
 	DBInstanceStatus *string
 
-	// The meaning of this parameter differs depending on the database engine.
-	//   - For RDS for MariaDB, Microsoft SQL Server, MySQL, and PostgreSQL - The name
-	//   of the initial database specified for this DB instance when it was created, if
-	//   one was provided. This same name is returned for the life of the DB instance.
-	//   - For RDS for Oracle - The Oracle System ID (SID) of the created DB instance.
-	//   This value is only returned when the object returned is an Oracle DB instance.
+	// Contains the initial database name that you provided (if required) when you
+	// created the DB instance. This name is returned for the life of your DB instance.
+	// For an RDS for Oracle CDB instance, the name identifies the PDB rather than the
+	// CDB.
 	DBName *string
 
 	// The list of DB parameter groups applied to this DB instance.
@@ -2041,6 +2039,11 @@ type DBSnapshot struct {
 
 	// Specifies the identifier for the DB snapshot.
 	DBSnapshotIdentifier *string
+
+	// The Oracle system identifier (SID), which is the name of the Oracle database
+	// instance that manages your database files. The Oracle SID is also the name of
+	// your CDB.
+	DBSystemId *string
 
 	// The identifier for the source DB instance, which can't be changed and which is
 	// unique to an Amazon Web Services Region.

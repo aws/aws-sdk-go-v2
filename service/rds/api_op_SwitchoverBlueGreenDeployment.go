@@ -36,15 +36,15 @@ func (c *Client) SwitchoverBlueGreenDeployment(ctx context.Context, params *Swit
 
 type SwitchoverBlueGreenDeploymentInput struct {
 
-	// The blue/green deployment identifier. Constraints:
+	// The unique identifier of the blue/green deployment. Constraints:
 	//   - Must match an existing blue/green deployment identifier.
 	//
 	// This member is required.
 	BlueGreenDeploymentIdentifier *string
 
-	// The amount of time, in seconds, for the switchover to complete. The default is
-	// 300. If the switchover takes longer than the specified duration, then any
-	// changes are rolled back, and no changes are made to the environments.
+	// The amount of time, in seconds, for the switchover to complete. Default: 300 If
+	// the switchover takes longer than the specified duration, then any changes are
+	// rolled back, and no changes are made to the environments.
 	SwitchoverTimeout *int32
 
 	noSmithyDocumentSerde
@@ -52,8 +52,8 @@ type SwitchoverBlueGreenDeploymentInput struct {
 
 type SwitchoverBlueGreenDeploymentOutput struct {
 
-	// Contains the details about a blue/green deployment. For more information, see
-	// Using Amazon RDS Blue/Green Deployments for database updates (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html)
+	// Details about a blue/green deployment. For more information, see Using Amazon
+	// RDS Blue/Green Deployments for database updates (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html)
 	// in the Amazon RDS User Guide and Using Amazon RDS Blue/Green Deployments for
 	// database updates (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html)
 	// in the Amazon Aurora User Guide.

@@ -32505,6 +32505,19 @@ func awsAwsquery_deserializeDocumentDBSnapshot(v **types.DBSnapshot, decoder smi
 				sv.DBSnapshotIdentifier = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("DBSystemId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DBSystemId = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("Encrypted", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {

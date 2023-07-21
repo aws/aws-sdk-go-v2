@@ -10541,6 +10541,11 @@ func awsAwsquery_serializeOpDocumentCreateDBInstanceInput(v *CreateDBInstanceInp
 		objectKey.String(*v.DBSubnetGroupName)
 	}
 
+	if v.DBSystemId != nil {
+		objectKey := object.Key("DBSystemId")
+		objectKey.String(*v.DBSystemId)
+	}
+
 	if v.DeletionProtection != nil {
 		objectKey := object.Key("DeletionProtection")
 		objectKey.Boolean(*v.DeletionProtection)

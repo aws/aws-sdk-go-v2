@@ -776,8 +776,8 @@ type Workspace struct {
 	// Indicates whether the data stored on the user volume is encrypted.
 	UserVolumeEncryptionEnabled *bool
 
-	// The symmetric KMS key used to encrypt data stored on your WorkSpace. Amazon
-	// WorkSpaces does not support asymmetric KMS keys.
+	// The ARN of the symmetric KMS key used to encrypt data stored on your WorkSpace.
+	// Amazon WorkSpaces does not support asymmetric KMS keys.
 	VolumeEncryptionKey *string
 
 	// The identifier of the WorkSpace.
@@ -1119,8 +1119,8 @@ type WorkspaceRequest struct {
 	// Indicates whether the data stored on the user volume is encrypted.
 	UserVolumeEncryptionEnabled *bool
 
-	// The symmetric KMS key used to encrypt data stored on your WorkSpace. Amazon
-	// WorkSpaces does not support asymmetric KMS keys.
+	// The ARN of the symmetric KMS key used to encrypt data stored on your WorkSpace.
+	// Amazon WorkSpaces does not support asymmetric KMS keys.
 	VolumeEncryptionKey *string
 
 	// The WorkSpace properties.

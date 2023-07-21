@@ -13011,6 +13011,13 @@ func awsAwsjson11_serializeDocumentCrawlerTargets(v *types.CrawlerTargets, value
 		}
 	}
 
+	if v.HudiTargets != nil {
+		ok := object.Key("HudiTargets")
+		if err := awsAwsjson11_serializeDocumentHudiTargetList(v.HudiTargets, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.IcebergTargets != nil {
 		ok := object.Key("IcebergTargets")
 		if err := awsAwsjson11_serializeDocumentIcebergTargetList(v.IcebergTargets, ok); err != nil {
@@ -14881,6 +14888,50 @@ func awsAwsjson11_serializeDocumentGovernedCatalogTarget(v *types.GovernedCatalo
 		ok.String(*v.Table)
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentHudiTarget(v *types.HudiTarget, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ConnectionName != nil {
+		ok := object.Key("ConnectionName")
+		ok.String(*v.ConnectionName)
+	}
+
+	if v.Exclusions != nil {
+		ok := object.Key("Exclusions")
+		if err := awsAwsjson11_serializeDocumentPathList(v.Exclusions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaximumTraversalDepth != nil {
+		ok := object.Key("MaximumTraversalDepth")
+		ok.Integer(*v.MaximumTraversalDepth)
+	}
+
+	if v.Paths != nil {
+		ok := object.Key("Paths")
+		if err := awsAwsjson11_serializeDocumentPathList(v.Paths, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentHudiTargetList(v []types.HudiTarget, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentHudiTarget(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
