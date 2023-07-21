@@ -2301,7 +2301,7 @@
                 "BlueGreenDeploymentIdentifier": {
                     "target": "com.amazonaws.rds#BlueGreenDeploymentIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The system-generated identifier of the blue/green deployment.</p>"
+                        "smithy.api#documentation": "<p>The unique identifier of the blue/green deployment.</p>"
                     }
                 },
                 "BlueGreenDeploymentName": {
@@ -2337,7 +2337,7 @@
                 "Status": {
                     "target": "com.amazonaws.rds#BlueGreenDeploymentStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the blue/green deployment.</p>\n         <p>Values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PROVISIONING</code> - Resources are being created in the green environment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AVAILABLE</code> - Resources are available in the green environment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SWITCHOVER_IN_PROGRESS</code> - The deployment is being switched from the blue environment to the \n                    green environment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SWITCHOVER_COMPLETED</code> - Switchover from the blue environment to the green environment is complete.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INVALID_CONFIGURATION</code> - Resources in the green environment are invalid, so switchover isn't possible.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SWITCHOVER_FAILED</code> - Switchover was attempted but failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETING</code> - The blue/green deployment is being deleted.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The status of the blue/green deployment.</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PROVISIONING</code> - Resources are being created in the green environment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AVAILABLE</code> - Resources are available in the green environment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SWITCHOVER_IN_PROGRESS</code> - The deployment is being switched from the blue environment to the \n                    green environment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SWITCHOVER_COMPLETED</code> - Switchover from the blue environment to the green environment is complete.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INVALID_CONFIGURATION</code> - Resources in the green environment are invalid, so switchover isn't possible.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SWITCHOVER_FAILED</code> - Switchover was attempted but failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETING</code> - The blue/green deployment is being deleted.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "StatusDetails": {
@@ -2349,13 +2349,13 @@
                 "CreateTime": {
                     "target": "com.amazonaws.rds#TStamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the time when the blue/green deployment was created, in Universal Coordinated Time (UTC).</p>"
+                        "smithy.api#documentation": "<p>The time when the blue/green deployment was created, in Universal Coordinated Time\n            (UTC).</p>"
                     }
                 },
                 "DeleteTime": {
                     "target": "com.amazonaws.rds#TStamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the time when the blue/green deployment was deleted, in Universal Coordinated Time (UTC).</p>"
+                        "smithy.api#documentation": "<p>The time when the blue/green deployment was deleted, in Universal Coordinated Time\n            (UTC).</p>"
                     }
                 },
                 "TagList": {
@@ -2363,7 +2363,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the details about a blue/green deployment.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html\">Using Amazon RDS Blue/Green Deployments \n            for database updates</a> in the <i>Amazon RDS User Guide</i> and \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html\">\n                Using Amazon RDS Blue/Green Deployments for database updates</a> in the <i>Amazon Aurora \n            User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Details about a blue/green deployment.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html\">Using Amazon RDS\n                Blue/Green Deployments for database updates</a> in the <i>Amazon RDS User\n                Guide</i> and <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html\">Using Amazon RDS\n                Blue/Green Deployments for database updates</a> in the <i>Amazon Aurora\n                User Guide</i>.</p>"
             }
         },
         "com.amazonaws.rds#BlueGreenDeploymentAlreadyExistsFault": {
@@ -2444,12 +2444,12 @@
                 "Status": {
                     "target": "com.amazonaws.rds#BlueGreenDeploymentTaskStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the blue/green deployment task.</p>\n         <p>Values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PENDING</code> - The resources are being prepared for deployment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IN_PROGRESS</code> - The resource is being deployed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>COMPLETED</code> - The resource has been deployed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> - Deployment of the resource failed.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The status of the blue/green deployment task.</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PENDING</code> - The resource is being prepared for deployment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IN_PROGRESS</code> - The resource is being deployed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>COMPLETED</code> - The resource has been deployed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> - Deployment of the resource failed.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the details about a task for a blue/green deployment.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html\">Using Amazon RDS Blue/Green Deployments \n            for database updates</a> in the <i>Amazon RDS User Guide</i> and \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html\">\n            Using Amazon RDS Blue/Green Deployments for database updates</a> in the <i>Amazon Aurora \n            User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Details about a task for a blue/green deployment.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html\">Using Amazon RDS\n                Blue/Green Deployments for database updates</a> in the <i>Amazon RDS User\n                Guide</i> and <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html\">Using Amazon RDS\n                Blue/Green Deployments for database updates</a> in the <i>Amazon Aurora\n                User Guide</i>.</p>"
             }
         },
         "com.amazonaws.rds#BlueGreenDeploymentTaskList": {
@@ -4116,7 +4116,7 @@
                 "DBName": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The meaning of this parameter differs depending on the database engine.</p>\n         <dl>\n            <dt>Amazon Aurora MySQL</dt>\n            <dd>\n               <p>The name of the database to create when the primary DB instance of the Aurora MySQL DB cluster is\n                created. If you don't specify a value, Amazon RDS doesn't create a database in the DB cluster.</p>\n               <p>Constraints:</p>\n               <ul>\n                  <li>\n                     <p>Must contain 1 to 64 alphanumeric characters.</p>\n                  </li>\n                  <li>\n                     <p>Can't be a word reserved by the database engine.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>Amazon Aurora PostgreSQL</dt>\n            <dd>\n               <p>The name of the database to create when the primary DB instance of the Aurora PostgreSQL DB cluster is\n                  created.</p>\n               <p>Default: <code>postgres</code>\n               </p>\n               <p>Constraints:</p>\n               <ul>\n                  <li>\n                     <p>Must contain 1 to 63 alphanumeric characters.</p>\n                  </li>\n                  <li>\n                     <p>Must begin with a letter.\n                          Subsequent characters can be letters, underscores, or digits\n                          (0 to 9).</p>\n                  </li>\n                  <li>\n                     <p>Can't be a word reserved by the database engine.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>Amazon RDS Custom for Oracle</dt>\n            <dd>\n               <p>The Oracle System ID (SID) of the created RDS Custom DB instance.</p>\n               <p>Default: <code>ORCL</code>\n               </p>\n               <p>Constraints:</p>\n               <ul>\n                  <li>\n                     <p>Must contain 1 to 8 alphanumeric characters.</p>\n                  </li>\n                  <li>\n                     <p>Must contain a letter.</p>\n                  </li>\n                  <li>\n                     <p>Can't be a word reserved by the database engine.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>Amazon RDS Custom for SQL Server</dt>\n            <dd>\n               <p>Not applicable. Must be null.</p>\n            </dd>\n            <dt>RDS for MariaDB</dt>\n            <dd>\n               <p>The name of the database to create when the DB instance is created. If you don't specify a value, Amazon RDS doesn't create a database in the DB instance.</p>\n               <p>Constraints:</p>\n               <ul>\n                  <li>\n                     <p>Must contain 1 to 64 letters or numbers.</p>\n                  </li>\n                  <li>\n                     <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).</p>\n                  </li>\n                  <li>\n                     <p>Can't be a word reserved by the database engine.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>RDS for MySQL</dt>\n            <dd>\n               <p>The name of the database to create when the DB instance is created. If you don't specify a value, Amazon RDS doesn't create a database in the DB instance.</p>\n               <p>Constraints:</p>\n               <ul>\n                  <li>\n                     <p>Must contain 1 to 64 letters or numbers.</p>\n                  </li>\n                  <li>\n                     <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).</p>\n                  </li>\n                  <li>\n                     <p>Can't be a word reserved by the database engine.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>RDS for Oracle</dt>\n            <dd>\n               <p>The Oracle System ID (SID) of the created DB instance.</p>\n               <p>Default: <code>ORCL</code>\n               </p>\n               <p>Constraints:</p>\n               <ul>\n                  <li>\n                     <p>Can't be longer than 8 characters.</p>\n                  </li>\n                  <li>\n                     <p>Can't be a word reserved by the database engine, such as the string <code>NULL</code>.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>RDS for PostgreSQL</dt>\n            <dd>\n               <p>The name of the database to create when the DB instance is created.</p>\n               <p>Default: <code>postgres</code>\n               </p>\n               <p>Constraints:</p>\n               <ul>\n                  <li>\n                     <p>Must contain 1 to 63 letters, numbers, or underscores.</p>\n                  </li>\n                  <li>\n                     <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).</p>\n                  </li>\n                  <li>\n                     <p>Can't be a word reserved by the database engine.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>RDS for SQL Server</dt>\n            <dd>\n               <p>Not applicable. Must be null.</p>\n            </dd>\n         </dl>"
+                        "smithy.api#documentation": "<p>The meaning of this parameter differs according to the database engine you use.</p>\n         <p>\n            <b>MySQL</b>\n         </p>\n         <p>The name of the database to create when the DB instance is created. If this parameter isn't specified, no database is created in the DB instance.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain 1 to 64 letters or numbers.</p>\n            </li>\n            <li>\n               <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).</p>\n            </li>\n            <li>\n               <p>Can't be a word reserved by the specified database engine</p>\n            </li>\n         </ul>\n         <p>\n            <b>MariaDB</b>\n         </p>\n         <p>The name of the database to create when the DB instance is created. If this parameter isn't specified, no database is created in the DB instance.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain 1 to 64 letters or numbers.</p>\n            </li>\n            <li>\n               <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).</p>\n            </li>\n            <li>\n               <p>Can't be a word reserved by the specified database engine</p>\n            </li>\n         </ul>\n         <p>\n            <b>PostgreSQL</b>\n         </p>\n         <p>The name of the database to create when the DB instance is created. If this parameter isn't specified, a database named <code>postgres</code> \n          is created in the DB instance.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain 1 to 63 letters, numbers, or underscores.</p>\n            </li>\n            <li>\n               <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).</p>\n            </li>\n            <li>\n               <p>Can't be a word reserved by the specified database engine</p>\n            </li>\n         </ul>\n         <p>\n            <b>Oracle</b>\n         </p>\n         <p>The Oracle System ID (SID) of the created DB instance. If you don't specify a value, \n            the default value is <code>ORCL</code>. You can't specify the \n            string <code>null</code>, or any other reserved word, for <code>DBName</code>.</p>\n         <p>Default: <code>ORCL</code>\n         </p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Can't be longer than 8 characters</p>\n            </li>\n         </ul>\n         <p>\n            <b>Amazon RDS Custom for Oracle</b>\n         </p>\n         <p>The Oracle System ID (SID) of the created RDS Custom DB instance.\n          If you don't specify a value, the default value is <code>ORCL</code> for non-CDBs and\n            <code>RDSCDB</code> for CDBs.</p>\n         <p>Default: <code>ORCL</code>\n         </p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>It must contain 1 to 8 alphanumeric characters.</p>\n            </li>\n            <li>\n               <p>It must contain a letter.</p>\n            </li>\n            <li>\n               <p>It can't be a word reserved by the database engine.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Amazon RDS Custom for SQL Server</b>\n         </p>\n         <p>Not applicable. Must be null.</p>\n         <p>\n            <b>SQL Server</b>\n         </p>\n         <p>Not applicable. Must be null.</p>\n         <p>\n            <b>Amazon Aurora MySQL</b>\n         </p>\n         <p>The name of the database to create when the primary DB instance of the Aurora MySQL DB cluster is\n          created. If this parameter isn't specified for an Aurora MySQL DB cluster, no database is created \n          in the DB cluster.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>It must contain 1 to 64 alphanumeric characters.</p>\n            </li>\n            <li>\n               <p>It can't be a word reserved by the database engine.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Amazon Aurora PostgreSQL</b>\n         </p>\n         <p>The name of the database to create when the primary DB instance of the Aurora PostgreSQL DB cluster is\n          created. If this parameter isn't specified for an Aurora PostgreSQL DB cluster, \n          a database named <code>postgres</code> is created in the DB cluster.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>It must contain 1 to 63 alphanumeric characters.</p>\n            </li>\n            <li>\n               <p>It must begin with a letter.\n                  Subsequent characters can be letters, underscores, or digits\n                  (0 to 9).</p>\n            </li>\n            <li>\n               <p>It can't be a word reserved by the\n                  database engine.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "DBInstanceIdentifier": {
@@ -4468,6 +4468,12 @@
                     "target": "com.amazonaws.rds#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The CA certificate identifier to use for the DB instance's server certificate.</p>\n         <p>This setting doesn't apply to RDS Custom DB instances.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html\">Using SSL/TLS to encrypt a connection to a DB \n            instance</a> in the <i>Amazon RDS User Guide</i> and \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html\">\n            Using SSL/TLS to encrypt a connection to a DB cluster</a> in the <i>Amazon Aurora \n            User Guide</i>.</p>"
+                    }
+                },
+                "DBSystemId": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Oracle system identifier (SID), which is the name of the Oracle database instance that \n            manages your database files. In this context, the term \"Oracle database instance\" refers exclusively \n            to the system global area (SGA) and Oracle background processes. If you don't specify a SID, \n            the value defaults to <code>RDSCDB</code>. The Oracle SID is also the name of your CDB.</p>"
                     }
                 }
             },
@@ -7284,7 +7290,7 @@
                 "DBName": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The meaning of this parameter differs depending on the database engine.</p>\n         <ul>\n            <li>\n               <p>For RDS for MariaDB, Microsoft SQL Server, MySQL, and PostgreSQL - The name of the initial database specified for this DB instance when it was created, if one was provided. This same name is returned for the life of the DB instance.</p>\n            </li>\n            <li>\n               <p>For RDS for Oracle - The Oracle System ID (SID) of the created DB instance. This value is only returned when the object returned is an Oracle DB instance.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Contains the initial database name that you provided (if required) when you created\n            the DB instance. This name is returned for the life of your DB instance. For an RDS for\n            Oracle CDB instance, the name identifies the PDB rather than the CDB.</p>"
                     }
                 },
                 "Endpoint": {
@@ -9371,6 +9377,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the storage throughput for the DB snapshot.</p>"
                     }
+                },
+                "DBSystemId": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Oracle system identifier (SID), which is the name of the Oracle database instance that \n            manages your database files. The Oracle SID is also the name of your CDB.</p>"
+                    }
                 }
             },
             "traits": {
@@ -9714,7 +9726,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a blue/green deployment.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html\">Using Amazon RDS Blue/Green Deployments \n            for database updates</a> in the <i>Amazon RDS User Guide</i> and \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html\">\n                Using Amazon RDS Blue/Green Deployments for database updates</a> in the <i>Amazon Aurora \n                    User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Deletes a blue/green deployment.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html\">Using Amazon RDS\n                Blue/Green Deployments for database updates</a> in the <i>Amazon RDS User\n                Guide</i> and <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html\">Using Amazon RDS\n                Blue/Green Deployments for database updates</a> in the <i>Amazon Aurora\n                User Guide</i>.</p>"
             }
         },
         "com.amazonaws.rds#DeleteBlueGreenDeploymentRequest": {
@@ -9723,14 +9735,14 @@
                 "BlueGreenDeploymentIdentifier": {
                     "target": "com.amazonaws.rds#BlueGreenDeploymentIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The blue/green deployment identifier of the deployment to be deleted. This parameter isn't case-sensitive.</p>\n         <p>Constraints:\n        </p>\n         <ul>\n            <li>\n               <p>Must match an existing blue/green deployment identifier.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The unique identifier of the blue/green deployment to delete. This parameter isn't\n            case-sensitive.</p>\n         <p>Constraints:\n        </p>\n         <ul>\n            <li>\n               <p>Must match an existing blue/green deployment identifier.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "DeleteTarget": {
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that indicates whether to delete the resources in the green environment. You\n            can't specify this option if the blue/green deployment <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_BlueGreenDeployment.html\">status</a>\n            is <code>SWITCHOVER_COMPLETED</code>.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether to delete the resources in the green environment. You can't specify\n            this option if the blue/green deployment <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_BlueGreenDeployment.html\">status</a> is\n                <code>SWITCHOVER_COMPLETED</code>.</p>"
                     }
                 }
             },
@@ -10575,7 +10587,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns information about blue/green deployments.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html\">Using Amazon RDS Blue/Green Deployments \n            for database updates</a> in the <i>Amazon RDS User Guide</i> and \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html\">\n            Using Amazon RDS Blue/Green Deployments for database updates</a> in the <i>Amazon Aurora \n            User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Describes one or more blue/green deployments.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html\">Using Amazon RDS Blue/Green Deployments \n            for database updates</a> in the <i>Amazon RDS User Guide</i> and \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html\">\n            Using Amazon RDS Blue/Green Deployments for database updates</a> in the <i>Amazon Aurora \n            User Guide</i>.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "Marker",
                     "outputToken": "Marker",
@@ -10590,25 +10602,25 @@
                 "BlueGreenDeploymentIdentifier": {
                     "target": "com.amazonaws.rds#BlueGreenDeploymentIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The blue/green deployment identifier. If this parameter is specified, information from only the \n            specific blue/green deployment is returned. This parameter isn't case-sensitive.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>If supplied, must match an existing blue/green deployment identifier.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The blue/green deployment identifier. If you specify this parameter, the response only\n            includes information about the specific blue/green deployment. This parameter isn't\n            case-sensitive.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must match an existing blue/green deployment identifier.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Filters": {
                     "target": "com.amazonaws.rds#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A filter that specifies one or more blue/green deployments to describe.</p>\n         <p>Supported filters:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>blue-green-deployment-identifier</code> - Accepts system-generated\n                    identifiers for blue/green deployments. The results list only includes\n                    information about the blue/green deployments with the specified\n                    identifiers.</p>\n            </li>\n            <li>\n               <p>\n                  <code>blue-green-deployment-name</code> - Accepts user-supplied names for blue/green deployments. \n                    The results list only includes information about the blue/green deployments with the \n                    specified names.</p>\n            </li>\n            <li>\n               <p>\n                  <code>source</code> - Accepts source databases for a blue/green deployment. \n                    The results list only includes information about the blue/green deployments with \n                    the specified source databases.</p>\n            </li>\n            <li>\n               <p>\n                  <code>target</code> - Accepts target databases for a blue/green deployment. \n                    The results list only includes information about the blue/green deployments with \n                    the specified target databases.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A filter that specifies one or more blue/green deployments to describe.</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>blue-green-deployment-identifier</code> - Accepts system-generated\n                    identifiers for blue/green deployments. The results list only includes\n                    information about the blue/green deployments with the specified\n                    identifiers.</p>\n            </li>\n            <li>\n               <p>\n                  <code>blue-green-deployment-name</code> - Accepts user-supplied names for blue/green deployments. \n                    The results list only includes information about the blue/green deployments with the \n                    specified names.</p>\n            </li>\n            <li>\n               <p>\n                  <code>source</code> - Accepts source databases for a blue/green deployment. \n                    The results list only includes information about the blue/green deployments with \n                    the specified source databases.</p>\n            </li>\n            <li>\n               <p>\n                  <code>target</code> - Accepts target databases for a blue/green deployment. \n                    The results list only includes information about the blue/green deployments with \n                    the specified target databases.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Marker": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional pagination token provided by a previous <code>DescribeBlueGreenDeployments</code> request.\n            If this parameter is specified, the response includes only records beyond the marker,\n            up to the value specified by <code>MaxRecords</code>.</p>"
+                        "smithy.api#documentation": "<p>An optional pagination token provided by a previous\n                <code>DescribeBlueGreenDeployments</code> request. If you specify this parameter,\n            the response only includes records beyond the marker, up to the value specified by\n                <code>MaxRecords</code>.</p>"
                     }
                 },
                 "MaxRecords": {
                     "target": "com.amazonaws.rds#MaxRecords",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of records to include in the response.\n            If more records exist than the specified <code>MaxRecords</code> value,\n            a pagination token called a marker is included in the response so you can retrieve the remaining results.</p>\n         <p>Default: 100</p>\n         <p>Constraints: Minimum 20, maximum 100.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of records to include in the response.\n            If more records exist than the specified <code>MaxRecords</code> value,\n            a pagination token called a marker is included in the response so you can retrieve the remaining results.</p>\n         <p>Default: 100</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must be a minimum of 20.</p>\n            </li>\n            <li>\n               <p>Can't exceed 100.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -10622,13 +10634,13 @@
                 "BlueGreenDeployments": {
                     "target": "com.amazonaws.rds#BlueGreenDeploymentList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains a list of blue/green deployments for the user.</p>"
+                        "smithy.api#documentation": "<p>A list of blue/green deployments in the current account and Amazon Web Services Region.</p>"
                     }
                 },
                 "Marker": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A pagination token that can be used in a later DescribeBlueGreenDeployments request.</p>"
+                        "smithy.api#documentation": "<p>A pagination token that can be used in a later\n                <code>DescribeBlueGreenDeployments</code> request.</p>"
                     }
                 }
             },
@@ -23113,7 +23125,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Switches over a blue/green deployment.</p>\n         <p>Before you switch over, production traffic is routed to the databases in the blue environment. \n            After you switch over, production traffic is routed to the databases in the green environment.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html\">Using Amazon RDS Blue/Green Deployments \n            for database updates</a> in the <i>Amazon RDS User Guide</i> and \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html\">\n            Using Amazon RDS Blue/Green Deployments for database updates</a> in the <i>Amazon Aurora \n            User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Switches over a blue/green deployment.</p>\n         <p>Before you switch over, production traffic is routed to the databases in the blue environment. \n            After you switch over, production traffic is routed to the databases in the green environment.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html\">Using Amazon RDS\n                Blue/Green Deployments for database updates</a> in the <i>Amazon RDS User\n                Guide</i> and <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html\">Using Amazon RDS\n                Blue/Green Deployments for database updates</a> in the <i>Amazon Aurora\n                User Guide</i>.</p>"
             }
         },
         "com.amazonaws.rds#SwitchoverBlueGreenDeploymentRequest": {
@@ -23122,14 +23134,14 @@
                 "BlueGreenDeploymentIdentifier": {
                     "target": "com.amazonaws.rds#BlueGreenDeploymentIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The blue/green deployment identifier.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must match an existing blue/green deployment identifier.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The unique identifier of the blue/green deployment.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must match an existing blue/green deployment identifier.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "SwitchoverTimeout": {
                     "target": "com.amazonaws.rds#SwitchoverTimeout",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of time, in seconds, for the switchover to complete. The default is 300.</p>\n         <p>If the switchover takes longer than the specified duration, then any changes are rolled back, \n           and no changes are made to the environments.</p>"
+                        "smithy.api#documentation": "<p>The amount of time, in seconds, for the switchover to complete.</p>\n         <p>Default: 300</p>\n         <p>If the switchover takes longer than the specified duration, then any changes are rolled back, \n           and no changes are made to the environments.</p>"
                     }
                 }
             },

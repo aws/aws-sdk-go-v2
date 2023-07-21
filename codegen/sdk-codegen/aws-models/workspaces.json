@@ -239,6 +239,9 @@
                         "smithy.api#documentation": "<p>The identifier of the connection alias association. You use the connection identifier in\n         the DNS TXT record when you're configuring your DNS routing policies. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workspaces#AssociateIpGroups": {
@@ -297,7 +300,10 @@
         },
         "com.amazonaws.workspaces#AssociateIpGroupsResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.workspaces#AssociationStatus": {
             "type": "enum",
@@ -387,7 +393,10 @@
         },
         "com.amazonaws.workspaces#AuthorizeIpRulesResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.workspaces#AwsAccount": {
             "type": "string",
@@ -1043,6 +1052,9 @@
                         "smithy.api#documentation": "<p>The identifier of the image.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workspaces#CreateConnectClientAddIn": {
@@ -1112,6 +1124,9 @@
                         "smithy.api#documentation": "<p>The client add-in identifier.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workspaces#CreateConnectionAlias": {
@@ -1176,6 +1191,9 @@
                         "smithy.api#documentation": "<p>The identifier of the connection alias.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workspaces#CreateIpGroup": {
@@ -1249,6 +1267,9 @@
                         "smithy.api#documentation": "<p>The identifier of the group.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workspaces#CreateStandbyWorkspaces": {
@@ -1317,6 +1338,9 @@
                         "smithy.api#documentation": "<p>Information about the standby WorkSpace that was created.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workspaces#CreateTags": {
@@ -1366,7 +1390,10 @@
         },
         "com.amazonaws.workspaces#CreateTagsResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.workspaces#CreateUpdatedWorkspaceImage": {
             "type": "operation",
@@ -1447,6 +1474,9 @@
                         "smithy.api#documentation": "<p>The identifier of the new updated WorkSpace image.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workspaces#CreateWorkspaceBundle": {
@@ -1537,6 +1567,9 @@
                 "WorkspaceBundle": {
                     "target": "com.amazonaws.workspaces#WorkspaceBundle"
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workspaces#CreateWorkspaceImage": {
@@ -1660,6 +1693,9 @@
                         "smithy.api#documentation": "<p>The identifier of the Amazon Web Services account that owns the image.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workspaces#CreateWorkspaces": {
@@ -1712,6 +1748,9 @@
                         "smithy.api#documentation": "<p>Information about the WorkSpaces that were created.</p>\n         <p>Because this operation is asynchronous, the identifier returned is not immediately\n         available for use with other operations. For example, if you call <a>DescribeWorkspaces</a> before the WorkSpace is created, the information returned\n         can be incomplete.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workspaces#DedicatedTenancyCidrRangeList": {
@@ -1996,7 +2035,10 @@
         },
         "com.amazonaws.workspaces#DeleteClientBrandingResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.workspaces#DeleteConnectClientAddIn": {
             "type": "operation",
@@ -2045,7 +2087,10 @@
         },
         "com.amazonaws.workspaces#DeleteConnectClientAddInResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.workspaces#DeleteConnectionAlias": {
             "type": "operation",
@@ -2096,7 +2141,10 @@
         },
         "com.amazonaws.workspaces#DeleteConnectionAliasResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.workspaces#DeleteIpGroup": {
             "type": "operation",
@@ -2141,7 +2189,10 @@
         },
         "com.amazonaws.workspaces#DeleteIpGroupResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.workspaces#DeleteTags": {
             "type": "operation",
@@ -2187,7 +2238,10 @@
         },
         "com.amazonaws.workspaces#DeleteTagsResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.workspaces#DeleteWorkspaceBundle": {
             "type": "operation",
@@ -2231,7 +2285,10 @@
         },
         "com.amazonaws.workspaces#DeleteWorkspaceBundleResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.workspaces#DeleteWorkspaceImage": {
             "type": "operation",
@@ -2273,7 +2330,10 @@
         },
         "com.amazonaws.workspaces#DeleteWorkspaceImageResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.workspaces#DeregisterWorkspaceDirectory": {
             "type": "operation",
@@ -2321,7 +2381,10 @@
         },
         "com.amazonaws.workspaces#DeregisterWorkspaceDirectoryResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.workspaces#DescribeAccount": {
             "type": "operation",
@@ -2386,6 +2449,9 @@
                         "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are\n         no more results to return. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workspaces#DescribeAccountRequest": {
@@ -2410,6 +2476,9 @@
                         "smithy.api#documentation": "<p>The IP address range, specified as an IPv4 CIDR block, used for the management network\n         interface.</p>\n         <p>The management network interface is connected to a secure Amazon WorkSpaces management\n         network. It is used for interactive streaming of the WorkSpace desktop to Amazon WorkSpaces\n         clients, and to allow Amazon WorkSpaces to manage the WorkSpace.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workspaces#DescribeClientBranding": {
@@ -2489,6 +2558,9 @@
                         "smithy.api#documentation": "<p>The branding information for Web access.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workspaces#DescribeClientProperties": {
@@ -2538,6 +2610,9 @@
                         "smithy.api#documentation": "<p>Information about the specified Amazon WorkSpaces clients.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workspaces#DescribeConnectClientAddIns": {
@@ -2605,6 +2680,9 @@
                         "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are\n         no more results to return. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workspaces#DescribeConnectionAliasPermissions": {
@@ -2681,6 +2759,9 @@
                         "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are\n         no more results to return. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workspaces#DescribeConnectionAliases": {
@@ -2753,6 +2834,9 @@
                         "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are\n         no more results to return. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workspaces#DescribeIpGroups": {
@@ -2816,6 +2900,9 @@
                         "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are\n         no more results to return. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workspaces#DescribeTags": {
@@ -2859,6 +2946,9 @@
                         "smithy.api#documentation": "<p>The tags.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workspaces#DescribeWorkspaceBundles": {
@@ -2924,6 +3014,9 @@
                         "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are no more \n         results to return. This token is valid for one day and must be used within that time\n         frame.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workspaces#DescribeWorkspaceDirectories": {
@@ -2989,6 +3082,9 @@
                         "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are\n         no more results to return. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workspaces#DescribeWorkspaceImagePermissions": {
@@ -3062,6 +3158,9 @@
                         "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are\n         no more results to return. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workspaces#DescribeWorkspaceImages": {
@@ -3128,6 +3227,9 @@
                         "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are\n         no more results to return. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workspaces#DescribeWorkspaceSnapshots": {
@@ -3183,6 +3285,9 @@
                         "smithy.api#documentation": "<p>Information about the snapshots that can be used to restore a WorkSpace. These snapshots\n         include both the root volume and the user volume.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workspaces#DescribeWorkspaces": {
@@ -3263,6 +3368,9 @@
                         "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are\n         no more results to return. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workspaces#DescribeWorkspacesRequest": {
@@ -3324,6 +3432,9 @@
                         "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are\n         no more results to return. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workspaces#Description": {
@@ -3406,7 +3517,10 @@
         },
         "com.amazonaws.workspaces#DisassociateConnectionAliasResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.workspaces#DisassociateIpGroups": {
             "type": "operation",
@@ -3458,7 +3572,10 @@
         },
         "com.amazonaws.workspaces#DisassociateIpGroupsResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.workspaces#DnsIpAddresses": {
             "type": "list",
@@ -3754,6 +3871,9 @@
                         "smithy.api#documentation": "<p>The branding information configured for web access.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workspaces#ImportWorkspaceImage": {
@@ -3845,6 +3965,9 @@
                         "smithy.api#documentation": "<p>The identifier of the WorkSpace image.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workspaces#InvalidParameterValuesException": {
@@ -4131,6 +4254,9 @@
                         "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is null when there are\n         no more results to return. </p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workspaces#LogUploadEnum": {
@@ -4243,6 +4369,9 @@
                         "smithy.api#documentation": "<p>The new identifier of the WorkSpace that is being migrated. If the migration does not\n         succeed, the target WorkSpace ID will not be used, and the WorkSpace will still have the\n         original WorkSpace ID.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workspaces#ModificationResourceEnum": {
@@ -4362,7 +4491,10 @@
         },
         "com.amazonaws.workspaces#ModifyAccountResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.workspaces#ModifyCertificateBasedAuthProperties": {
             "type": "operation",
@@ -4419,7 +4551,10 @@
         },
         "com.amazonaws.workspaces#ModifyCertificateBasedAuthPropertiesResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.workspaces#ModifyClientProperties": {
             "type": "operation",
@@ -4468,7 +4603,10 @@
         },
         "com.amazonaws.workspaces#ModifyClientPropertiesResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.workspaces#ModifySamlProperties": {
             "type": "operation",
@@ -4525,7 +4663,10 @@
         },
         "com.amazonaws.workspaces#ModifySamlPropertiesResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.workspaces#ModifySelfservicePermissions": {
             "type": "operation",
@@ -4574,7 +4715,10 @@
         },
         "com.amazonaws.workspaces#ModifySelfservicePermissionsResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.workspaces#ModifyWorkspaceAccessProperties": {
             "type": "operation",
@@ -4620,7 +4764,10 @@
         },
         "com.amazonaws.workspaces#ModifyWorkspaceAccessPropertiesResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.workspaces#ModifyWorkspaceCreationProperties": {
             "type": "operation",
@@ -4672,7 +4819,10 @@
         },
         "com.amazonaws.workspaces#ModifyWorkspaceCreationPropertiesResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.workspaces#ModifyWorkspaceProperties": {
             "type": "operation",
@@ -4733,7 +4883,10 @@
         },
         "com.amazonaws.workspaces#ModifyWorkspacePropertiesResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.workspaces#ModifyWorkspaceState": {
             "type": "operation",
@@ -4785,7 +4938,10 @@
         },
         "com.amazonaws.workspaces#ModifyWorkspaceStateResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.workspaces#NonEmptyString": {
             "type": "string",
@@ -4997,6 +5153,9 @@
                         "smithy.api#documentation": "<p>Information about the WorkSpaces that could not be rebooted.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workspaces#RebuildRequest": {
@@ -5067,6 +5226,9 @@
                         "smithy.api#documentation": "<p>Information about the WorkSpace that could not be rebuilt.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workspaces#ReconnectEnum": {
@@ -5182,7 +5344,10 @@
         },
         "com.amazonaws.workspaces#RegisterWorkspaceDirectoryResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.workspaces#RegistrationCode": {
             "type": "string",
@@ -5379,7 +5544,10 @@
         },
         "com.amazonaws.workspaces#RestoreWorkspaceResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.workspaces#RevokeIpRules": {
             "type": "operation",
@@ -5431,7 +5599,10 @@
         },
         "com.amazonaws.workspaces#RevokeIpRulesResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.workspaces#RootStorage": {
             "type": "structure",
@@ -5722,6 +5893,9 @@
                         "smithy.api#documentation": "<p>Information about the WorkSpaces that could not be started.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workspaces#StopRequest": {
@@ -5786,6 +5960,9 @@
                         "smithy.api#documentation": "<p>Information about the WorkSpaces that could not be stopped.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workspaces#SubnetId": {
@@ -5958,6 +6135,9 @@
                         "smithy.api#documentation": "<p>Information about the WorkSpaces that could not be terminated.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.workspaces#Timestamp": {
@@ -6046,7 +6226,10 @@
         },
         "com.amazonaws.workspaces#UpdateConnectClientAddInResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.workspaces#UpdateConnectionAliasPermission": {
             "type": "operation",
@@ -6107,7 +6290,10 @@
         },
         "com.amazonaws.workspaces#UpdateConnectionAliasPermissionResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.workspaces#UpdateDescription": {
             "type": "string",
@@ -6192,7 +6378,10 @@
         },
         "com.amazonaws.workspaces#UpdateRulesOfIpGroupResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.workspaces#UpdateWorkspaceBundle": {
             "type": "operation",
@@ -6245,7 +6434,10 @@
         },
         "com.amazonaws.workspaces#UpdateWorkspaceBundleResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.workspaces#UpdateWorkspaceImagePermission": {
             "type": "operation",
@@ -6307,7 +6499,10 @@
         },
         "com.amazonaws.workspaces#UpdateWorkspaceImagePermissionResult": {
             "type": "structure",
-            "members": {}
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.workspaces#UserName": {
             "type": "string",
@@ -6404,7 +6599,7 @@
                 "VolumeEncryptionKey": {
                     "target": "com.amazonaws.workspaces#VolumeEncryptionKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The symmetric KMS key used to encrypt data stored on your WorkSpace.\n         Amazon WorkSpaces does not support asymmetric KMS keys.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the symmetric KMS key used to encrypt data stored on your WorkSpace.\n         Amazon WorkSpaces does not support asymmetric KMS keys.</p>"
                     }
                 },
                 "UserVolumeEncryptionEnabled": {
@@ -7177,7 +7372,7 @@
                 "VolumeEncryptionKey": {
                     "target": "com.amazonaws.workspaces#VolumeEncryptionKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The symmetric KMS key used to encrypt data stored on your WorkSpace.\n         Amazon WorkSpaces does not support asymmetric KMS keys.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the symmetric KMS key used to encrypt data stored on your WorkSpace.\n         Amazon WorkSpaces does not support asymmetric KMS keys.</p>"
                     }
                 },
                 "UserVolumeEncryptionEnabled": {
