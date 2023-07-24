@@ -1311,12 +1311,7 @@ func TestMultiRegionAccessPoints_UpdateEndpoint(t *testing.T) {
 				Region: "ap-north-1",
 			},
 			bucket:         "arn:aws-cn:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
-			expectedReqURL: "https://mfzwi23gnjvgw.mrap.accesspoint.s3-global.amazonaws.com.cn/",
-			expectedHeader: map[string]string{
-				v4a.AmzRegionSetKey: "*",
-			},
-			expectedSigningName:   "s3",
-			expectedSigningRegion: "*",
+			expectedErr: "Client was configured for partition `aws` but bucket referred to partition `aws-cn`",
 		},
 		"region as us-west-2 with mrap disabled": {
 			options: s3.Options{
